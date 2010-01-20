@@ -321,53 +321,53 @@ is:
                     nouser: "Tel ekki lengur að {{point_name}} sé ógagnlegt"
         priority:
             new:
-                name: "{{user_name}} first suggested {{priority_name}}"
-                noself: "{{user_name}} first suggested this priority"
-                nouser: "Suggested {{priority_name}} as a new priority"
+                name: "{{user_name}} er höfundur {{priority_name}}"
+                noself: "{{user_name}} er höfundur þessa forgangsmáls"
+                nouser: "Lagði fram {{priority_name}} sem nýtt forgangsmál"
             debut:
                 name: 
-                    known: "{{priority_name}} debuted on the charts at #{{position}}"
-                    unknown: "{{priority_name}} debuted on the charts"
+                    known: "{{priority_name}} er nýtt á lista í #{{position}}"
+                    unknown: "{{priority_name}} er nýtt á lista"
                 noself: 
-                    known: "Debuted on the charts at #{{position}}"
-                    unknown: "Debuted on the charts"
+                    known: "Er nýtt á lista í #{{position}}"
+                    unknown: "Er nýtt á lista"
             flagged:
-                name: "{{user_name}} flagged {{priority_name}} for review"
-                noself: "{{user_name}} flagged this priority for review"
-                nouser: "Flagged {{priority_name}} for review"
+                name: "{{user_name}} er merkt {{priority_name}} til yfirlestrar"
+                noself: "{{user_name}} merkti forgangsmál til yfirlestrar"
+                nouser: "Merkti {{priority_name}} til yfirlestrar"
             buried:
-                name: "{{user_name}} buried {{priority_name}}.  It's probably obvious why."
-                noself: "{{user_name}} buried this priority.  It will no longer show up in the rankings.  It's probably obvious why."
-                nouser: "Buried {{priority_name}}.  It's probably obvious why."
+                name: "{{user_name}} jarðaði {{priority_name}}.  Ástæðan er líklega augljós."
+                noself: "{{user_name}} jarðaði þetta forgangsmál. Það mun ekki lengur birtast í listum. Ástæðan er líklega augljós."
+                nouser: "Jarðaði {{priority_name}}.  Ástæðan er líklega augljós."
             renamed:
-                name: "{{user_name}} renamed {{priority_name}}"
-                noself: "{{user_name}} renamed this priority {{priority_name}}"
-                nouser: "Renamed {{priority_name}}"
+                name: "{{user_name}} endurnefndi {{priority_name}}"
+                noself: "{{user_name}} endurnefndi þetta forgangsmál {{priority_name}}"
+                nouser: "Endurnefndi {{priority_name}}"
             acquisition:
                 proposal:
-                    name: "{{user_name}} proposed {{new_priority_name}} acquire {{priority_name}}"
-                    link: "{{user_name}} proposed {{new_priority_name}} <a href='{{proposal_url}}'>acquire</a> {{priority_name}}"
-                    nouser: "Proposed {{new_priority_name}} <a href='{{proposal_url}}'>acquire</a> {{priority_name}}"
+                    name: "{{user_name}} lagði til að {{new_priority_name}} yfirtæki {{priority_name}}"
+                    link: "{{user_name}} lagði til að {{new_priority_name}} <a href='{{proposal_url}}'>yfirtæki</a> {{priority_name}}"
+                    nouser: "Lagt er til að {{new_priority_name}} <a href='{{proposal_url}}'>yfirtaki</a> {{priority_name}}"
                     novote:
-                        name: "{{user_name}} voted against {{new_priority_name}} acquiring {{priority_name}}"
-                        nouser: "Voted against {{new_priority_name}} acquiring {{priority_name}}"
+                        name: "{{user_name}} er á móti því að {{new_priority_name}} yfirtaki {{priority_name}}"
+                        nouser: "Er á móti því að {{new_priority_name}} yfirtaki {{priority_name}}"
                     approved:
-                        name: "{{new_priority_name}} acquired {{priority_name}}"
+                        name: "{{new_priority_name}} yfirtók {{priority_name}}"
                     declined:
-                        name: "{{new_priority_name}} failed to acquire {{priority_name}}"
+                        name: "{{new_priority_name}} tókst ekki að yfirtaka {{priority_name}}"
                     deleted:
-                        name: "{{user_name}} decided not to hold a vote on {{new_priority_name}} acquiring {{priority_name}}"
-                        nouser: "Decided not to hold a vote on {{new_priority_name}} acquiring {{priority_name}}"
+                        name: "{{user_name}} ákvaða að halda ekki kosningu um hvort {{new_priority_name}} yfirtæki {{priority_name}}"
+                        nouser: "Ákvað að halda ekki kosningu um hvort {{new_priority_name}} yfirtæki {{priority_name}}"
             comment:
                 new:
-                    name: "{{user_name}} left a comment on {{priority_name}}"
-                    noself: "{{user_name}} posted a comment"
-                    nouser: "Left a comment on {{priority_name}}"
+                    name: "{{user_name}} tók þátt í umræðum um {{priority_name}}"
+                    noself: "{{user_name}} tók þátt í umræðum"
+                    nouser: "Tók þátt í umræðum um {{priority_name}}"
             first:
                 endorsed:
-                    name: "{{priority_name}} is {{user_name}} new #1 priority"
-                    noself: "This is {{user_name}} new #1 priority"
-                    nouser: "New #1 priority: {{priority_name}}"
+                    name: "{{priority_name}} er {{user_name}} nýtt #1 forgangsmál"
+                    noself: "Þetta er nú {{user_name}} nýtt #1 forgangsmál"
+                    nouser: "Nýtt #1 forgangsmál: {{priority_name}}"
                 opposed:
                     name: "Opposing {{priority_name}} is {{user_name}} new #1 priority"
                     noself: "Opposing this is {{user_name}} new #1 priority"
