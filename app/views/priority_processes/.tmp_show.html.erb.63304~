@@ -1,0 +1,134 @@
+<h1><%=h @process.info_1.capitalize %></h1>
+<%=h @process.info_2 %>
+<br>
+<%=h @process.info_3 %>
+<br>
+<br>
+<i><%=t :rate_the_importance_of_this_law_proposal %></i>
+    <br>
+    <%= render :partial => "ratings/rate", :locals => { :asset => @process } %>
+	<br>
+		<a href="http://www.facebook.com/share.php?u=http://<%=request.host.downprocess != 'localhost' ? request.host.downprocess : 'beint.lydraedi.is'%>/processes/<%=@process.id%>" onclick="return fbs_click('http://<%=request.host.downprocess != 'localhost' ? request.host.downprocess : 'beint.lydraedi.is'%>/processes/<%=@process.id%>')" target="_blank" class="fb_share_link"><%=t :share_on_facebook%></a>
+	<br><br>
+
+    <% stage_sequence_number = 0 %>
+    <% process_documents = @process.get_all_process_documents_by_stage(stage_sequence_number) %>
+    <% discussions = @process.get_all_discussions_by_stage(stage_sequence_number) %>
+    <% if process_documents==[] and discussions==[] %>
+	    <% stage_sequence_number = 1 %>
+	    <% process_documents = @process.get_all_process_documents_by_stage(stage_sequence_number) %>
+	    <% discussions = @process.get_all_discussions_by_stage(stage_sequence_number) %>
+    <% end %>
+    <% while process_documents!=[] or discussions!=[] %>
+	    <% if stage_sequence_number!= 0 %>
+		    <h2><%="#{stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
+	    <% end %>
+	    <% if process_documents.length!=0 %>
+	      <table>
+	        <tr>
+	            <td colspan=4>
+	                <h3><%=t :althingi_process_documents %></h3>
+	            </td>
+	        </tr>
+	        <th>
+	            <%=t :althingi_release_date %>
+	        </th>
+	        <th>
+	            <%=t :althingi_law_document %>
+	        </th>
+	        <th>
+	            <%=t :althingi_process_document_type %>
+	        </th>
+	        <th>
+	            <%=t :althingi_presenter %>
+	        </th>
+	        <th>
+	            <span style="color: #348017;"><b><%=t :public_vote_status %></b></span>
+	        </th>
+	        <th>
+	            <span style="color: #348017;"><b><%=t :public_versions %></b></span>
+	        </th>
+	        <% process_documents.each do |document| %>
+	        <tr>
+	            <td>
+	                <%=document.external_date.strftime("%d.%m.%Y") %>
+	            </td>
+	            <td>
+            		<%= link_to document.external_id, document.external_link,{:target=>"_blank"}%>
+	            </td>
+	            <td>
+	                <%=document.external_type %>
+	            </td>
+	            <td>
+	                <%=document.external_author %>
+	            </td>
+	            <td width="240px" align="center">
+	                <%=get_vote_status_for_document(document) %>
+	            </td>
+	            <td width="230px" align="center">
+	                <%=get_internal_process_documents_links(document) %>
+	            </td>
+	        </tr>
+	        <% end %>
+		  </table>
+	    <% end %>
+	    <br>
+	    <% if discussions.length!=0 %>
+	      <table>
+	        <tr>
+	            <td colspan=4>
+	                <h3><%=t :althingi_discussion %></h3>
+	            </td>
+	        </tr>
+	        <th>
+	            <%=t :althingi_time_of_discussion %>
+	        </th>
+	        <th>
+	            <%=t :althingi_date_of_discussion %>
+	        </th>
+	        <th>
+	            <%=t :althingi_type_of_discussion %>
+	        </th>
+	        <th>
+	            <%=t :althingi_meeting %>
+	        </th>
+	        <% discussions.each do |discussion| %>
+	        <tr>
+	            <td>
+	            	<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%>
+	                <br>
+	            	<%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
+	            </td>
+	            <td>
+	                <%=discussion.meeting_date.strftime("%d.%m.%Y") %>
+	            </td>
+	            <td>
+	                <%=discussion.meeting_type %>
+	            </td>
+	            <td>
+	            	<%=link_to discussion.meeting_info, discussion.meeting_url,{:target => "_blank"}%>
+	            </td>
+	        </tr>
+			<% if discussion.process_speech_videos.has_any? %>
+				<tr>
+					<td colspan=2>
+						<%= render :partial => "process_discussion_videos", :locals => {:discussion=> discussion} %>
+					</td>
+				</tr>
+	        <% end %>
+           <% end %>
+		  </table>
+	    <% end %>
+	    <% stage_sequence_number+=1 %>
+	    <% process_documents = @process.get_all_process_documents_by_stage(stage_sequence_number) %>
+	    <% discussions = @process.get_all_discussions_by_stage(stage_sequence_number) %>
+	    <br>
+	    <br>
+    <% end %>
+	<br>
+    <b><%=t :external_link %></b>
+    <%=link_to h(@process.external_link), @process.external_link, {:target => "_blank"}%>
+    <br><br>
+    <% if @i_am_admin %>
+	    <%= link_to t(:edit), edit_process_path(@process) %> |<%= link_to t(:back), processes_path %>
+    <% end %>

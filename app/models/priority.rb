@@ -35,7 +35,7 @@ class Priority < ActiveRecord::Base
   named_scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
   named_scope :tagged, :conditions => "(priorities.cached_issue_list is not null and priorities.cached_issue_list <> '')"
   named_scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
-  
+
   named_scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
   
   belongs_to :user
@@ -69,6 +69,8 @@ class Priority < ActiveRecord::Base
   has_many :declined_changes, :class_name => "Change", :conditions => "status = 'declined'", :order => "updated_at desc"
   has_many :changes_with_deleted, :class_name => "Change", :order => "updated_at desc", :dependent => :destroy
 
+  has_many :priority_processes
+
   belongs_to :change # if there is currently a pending change, it will be attached
   
   acts_as_taggable_on :issues
@@ -77,8 +79,8 @@ class Priority < ActiveRecord::Base
   
   liquid_methods :id, :name, :show_url, :value_name
   
-  validates_length_of :name, :within => 3..60
-  validates_uniqueness_of :name
+  #validates_length_of :name, :within => 3..60
+  #validates_uniqueness_of :name
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
@@ -117,6 +119,10 @@ class Priority < ActiveRecord::Base
   def to_param
     "#{id}-#{name.parameterize_full}"
   end  
+  
+  def priority_process_root_node
+    PriorityProcess.find :first, :conditions=>"root_node = 1 AND priority_id = #{self.id}"
+  end
   
   def endorse(user,request=nil,partner=nil,referral=nil)
     return false if not user

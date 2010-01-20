@@ -167,6 +167,17 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
+  map.resources :priority_processes
+  map.resources :process_speech_master_videos
+  map.resources :process_speech_videos
+  map.resources :process_discussions
+  map.resources :process_documents
+  map.resources :process_types
+  map.resources :process_document_elements
+  map.resources :process_documents
+  map.resources :process_document_types
+  map.resources :process_document_states
+
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => "priorities"
 

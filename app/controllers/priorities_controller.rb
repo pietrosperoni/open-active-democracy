@@ -328,6 +328,7 @@ class PrioritiesController < ApplicationController
       flash[:notice] = t('priorities.deleted')
     end
     @page_title = @priority.name
+    @priority_process = @priority.priority_process_root_node
     point_ids = []
     if @priority.up_points_count > 0
       @endorser_points = @priority.points.published.by_endorser_helpfulness.find(:all, :limit => 3)
