@@ -144,60 +144,60 @@ is:
         comment:
             participant:
                 name: 
-                    one: "{{user_name}} commented on {{discussion_name}}"
-                    other: "{{user_name}} left {{count}} comments on {{discussion_name}}"
+                    one: "{{user_name}} tjáði sig um {{discussion_name}}"
+                    other: "{{user_name}} tjáði {{count}} sig um {{discussion_name}}"
                 nouser: 
-                    one: "Commented on {{discussion_name}}"
-                    other: "Left {{count}} comments on {{discussion_name}}"        
+                    one: "Tjáði sig um {{discussion_name}}"
+                    other: "Tjáði {{count}} sig um {{discussion_name}}"        
         discussion:
             following:
                 new:
-                    name: "{{user_name}} is following the discussion on {{discussion_name}}"
-                    nouser: "Following the discussion on {{discussion_name}}"
+                    name: "{{user_name}} fylgist með umræðum um {{discussion_name}}"
+                    nouser: "Fylgist með umræðum um {{discussion_name}}"
                 delete:
-                    name: "{{user_name}} stopped following the discussion on {{discussion_name}}"
-                    nouser: "Stopped following the discussion on {{discussion_name}}"
+                    name: "{{user_name}} hætti að fylgjast með umræðum um {{discussion_name}}"
+                    nouser: "Hætti að fylgjast með umræðum um {{discussion_name}}"
         endorsement:
             new:
                 name: 
-                    known: "{{user_name}} endorsed {{priority_name}} at priority #{{position}}"
-                    unknown: "{{user_name}} endorsed {{priority_name}}"
+                    known: "{{user_name}} styður {{priority_name}} og er það í forgangi #{{position}}"
+                    unknown: "{{user_name}} styður {{priority_name}}"
                 noself:
-                    known: "{{user_name}} endorsed at priority #{{position}}"
-                    unknown: "{{user_name}} endorsed"                
+                    known: "{{user_name}} styður í forgangi #{{position}}"
+                    unknown: "{{user_name}} styður"                
                 nouser: 
-                    known: "Endorsed {{priority_name}} at priority #{{position}}"
-                    unknown: "Endorsed {{priority_name}}"
+                    known: "Styður {{priority_name}} í forgangi #{{position}}"
+                    unknown: "Styður {{priority_name}}"
                 ad:
                     name: 
-                        known: "{{user_name}} endorsed {{priority_name}} at priority #{{position}} due to {{ad_user}} ad"
-                        unknown: "{{user_name}} endorsed {{priority_name}} due to {{ad_user}} ad"
+                        known: "{{user_name}} styður {{priority_name}} í forgangi #{{position}} fyrir tilstuðlan {{ad_user}} auglýsingar"
+                        unknown: "{{user_name}} styður {{priority_name}} fyrir tilstuðlan {{ad_user}} auglýsingar"
                     link: 
-                        known: "{{user_name}} endorsed {{priority_name}} at priority #{{position}} due to <a href='{{ad_url}}'>{{ad_user}} ad</a>"
-                        unknown: "{{user_name}} endorsed {{priority_name}} due to <a href='{{ad_url}}'>{{ad_user}} ad</a>"                         
+                        known: "{{user_name}} styður {{priority_name}} í forgangi #{{position}} fyrir tilstuðlan <a href='{{ad_url}}'>{{ad_user}} auglýsingar</a>"
+                        unknown: "{{user_name}} styður {{priority_name}} fyrir tilstuðlan <a href='{{ad_url}}'>{{ad_user}} auglýsingar</a>"                         
                     noself:
-                        known: "{{user_name}} endorsed at priority #{{position}} due to <a href='{{ad_url}}'>{{ad_user}} ad</a>"
-                        unknown: "{{user_name}} endorsed due to <a href='{{ad_url}}'>{{ad_user}} ad</a>"                
+                        known: "{{user_name}} styðjur í forgangi #{{position}} fyrir tilstuðlan <a href='{{ad_url}}'>{{ad_user}} auglýsingar</a>"
+                        unknown: "{{user_name}} styður fyrir tilstuðlan <a href='{{ad_url}}'>{{ad_user}} auglýsingar</a>"                
                     nouser: 
-                        known: "Endorsed {{priority_name}} at priority #{{position}} due to <a href='{{ad_url}}'>{{ad_user}} ad</a>"
-                        unknown: "Endorsed {{priority_name}} due to <a href='{{ad_url}}'>{{ad_user}} ad</a>"          
+                        known: "Styður {{priority_name}} í forgangi #{{position}} fyrir tilstuðlan <a href='{{ad_url}}'>{{ad_user}} auglýsingar</a>"
+                        unknown: "Styður {{priority_name}} fyrir tilstuðlan <a href='{{ad_url}}'>{{ad_user}} auglýsingar</a>"          
             delete:
-                name: "{{user_name}} no longer endorses {{priority_name}}"
-                noself: "{{user_name}} no longer endorses"
-                nouser: "Stopped endorsing {{priority_name}}"
+                name: "{{user_name}} styður ekki lengur {{priority_name}}"
+                noself: "{{user_name}} styður ekki lengur"
+                nouser: "Styður ekki lengur {{priority_name}}"
             replaced:
-                name: "{{user_name}} endorsed {{new_priority_name}} instead of {{priority_name}}"
-                noself: "{{user_name}} endorsed {{new_priority_name}} instead"
-                nouser: "Endorsed {{new_priority_name}} instead of {{priority_name}}"
+                name: "{{user_name}} styður {{new_priority_name}} í stað {{priority_name}}"
+                noself: "{{user_name}} styður {{new_priority_name}} í stað"
+                nouser: "Styður {{new_priority_name}} í stað {{priority_name}}"
                 implicit:
-                    name: "{{user_name}} is now endorsing {{new_priority_name}} because {{priority_name}} was acquired"
-                    nouser: "Now endorsing {{new_priority_name}} because {{priority_name}} was acquired"
+                    name: "{{user_name}} styður nú {{new_priority_name}} vegna þess að {{priority_name}} var yfirtekið"
+                    nouser: "Styður nú {{new_priority_name}} vegna þess að {{priority_name}} var yfirtekið"
             flipped:
-                name: "{{user_name}} endorsed {{new_priority_name}} instead of opposing {{priority_name}}"
-                nouser: "Endorsed {{new_priority_name}} instead of opposing {{priority_name}}"
+                name: "{{user_name}} styður {{new_priority_name}} í stað þess að vera á móti {{priority_name}}"
+                nouser: "Styður {{new_priority_name}} í stað þess að vera á móti {{priority_name}}"
                 implicit:
-                    name: "{{user_name}} is now endorsing {{new_priority_name}} because it acquired the opposers of {{priority_name}}"
-                    nouser: "Now endorsing {{new_priority_name}} because it acquired the opposers of {{priority_name}}"
+                    name: "{{user_name}} styður nú {{new_priority_name}} vegna þess að það er nú stutt af þeim sem voru á móti {{priority_name}}"
+                    nouser: "Styður nú {{new_priority_name}} vegna þess að það er nú stutt af þeim sem voru á móti {{priority_name}}"
         following:
             new:
                 name: "{{user_name}} is now following {{other_user_name}}"
