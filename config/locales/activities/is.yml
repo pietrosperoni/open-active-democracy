@@ -131,16 +131,16 @@ is:
             partner:
                 user:
                     recruited:
-                        name: "{{user_name}} earned {{capital}}{{currency_short_name}} for recruiting {{other_user_name}} to {{government_name}} through {{partner_url}}"
-                        nouser: "Earned {{capital}}{{currency_short_name}} for recruiting {{other_user_name}} to {{government_name}} through {{partner_url}}"           
+                        name: "{{user_name}} vann sér inn {{capital}}{{currency_short_name}} með því að fá  {{other_user_name}} til liðs við {{government_name}} í gegnum {{partner_url}}"
+                        nouser: "Vann sér inn {{capital}}{{currency_short_name}} með því að fá {{other_user_name}} til liðs við {{government_name}} í gegnum {{partner_url}}"           
             legislators:
                 added:
-                    name: "{{user_name}} earned {{capital}}{{currency_short_name}} for adding legislators to their account"
-                    nouser: "Earned {{capital}}{{currency_short_name}} for adding legislators to their account"              
+                    name: "{{user_name}} vann sér inn {{capital}}{{currency_short_name}} með því að fá þingmann með sér í lið"
+                    nouser: "Vann {{capital}}{{currency_short_name}} með því að fá þingmann með sér í lið"              
             warning:
-                name: "{{user_name}} lost {{capital}}{{currency_short_name}} for violating the site rules"
-                link: "{{user_name}} lost {{capital}}{{currency_short_name}} for violating the <a href='/about/rules'>site rules</a>"
-                nouser: "Lost {{capital}}{{currency_short_name}} for violating the site rules"
+                name: "{{user_name}} missti {{capital}}{{currency_short_name}} fyrir brot á reglum okkar"
+                link: "{{user_name}} missti {{capital}}{{currency_short_name}} fyrir brot á <a href='/about/rules'>reglum okkar</a>"
+                nouser: "Missti {{capital}}{{currency_short_name}} fyrir brot á reglum okkar"
         comment:
             participant:
                 name: 
