@@ -369,53 +369,53 @@ is:
                     noself: "Þetta er nú {{user_name}} nýtt #1 forgangsmál"
                     nouser: "Nýtt #1 forgangsmál: {{priority_name}}"
                 opposed:
-                    name: "Opposing {{priority_name}} is {{user_name}} new #1 priority"
-                    noself: "Opposing this is {{user_name}} new #1 priority"
-                    nouser: "New #1 priority: Opposing {{priority_name}}"                    
+                    name: "Andstaða við {{priority_name}} er {{user_name}} nýtt #1 forgangsmál"
+                    noself: "Andstaða við þetta er nú {{user_name}} nýtt #1 forgangsmál"
+                    nouser: "Nýtt #1 forgangsmál: Á móti {{priority_name}}"                    
             rising:
-                name: "{{priority_name}} is the fastest rising priority"
-                noself: "This is the fastest rising priority"
+                name: "{{priority_name}} hækkar nú hraðast allra forgangsmála"
+                noself: "Þetta hækkar nú hraðast allra forgangsmála"
             obama_status:
                 successful:
-                    name: "{{priority_name}} was completed successfully"
-                    noself: "Completed successfully"
+                    name: "{{priority_name}} tókst að fullu"
+                    noself: "Tókst fullkomlega"
                 compromised:
-                    name: "{{priority_name}} was completed with a compromise"
-                    noself: "Completed with a compromise"
+                    name: "{{priority_name}} tókst en þó með breytingum"
+                    noself: "Tókst með breytingum"
                 failed:
-                    name: "{{priority_name}} failed"
-                    noself: "This priority failed"
+                    name: "{{priority_name}} mistókst"
+                    noself: "Þetta forgangsmál mistókst"
                 intheworks:
-                    name: "{{priority_name}} is in the works"
-                    noself: "This priority is in the works"
+                    name: "{{priority_name}} er í vinnslu"
+                    noself: "Þetta forgangsmál er í vinnslu"
             tag:
                 first:
-                    name: "{{priority_name}} is the new #1 priority in {{tag_name}}"
-                    noself: "This is the new #1 priority in {{tag_name}}"
+                    name: "{{priority_name}} er nýtt forgangsmál #1 í {{tag_name}}"
+                    noself: "Þetta er nýtt forgangsmál #1 í {{tag_name}}"
                 controversial:
-                    name: "{{priority_name}} is the most controversial priority in {{tag_name}}"
-                    noself: "This is the most controversial priority in {{tag_name}}"                    
+                    name: "{{priority_name}} er umdeildasta forgangsmálið í {{tag_name}}"
+                    noself: "Þetta er umdeildasta forgangsmálið í {{tag_name}}"                    
                 rising:
-                    name: "{{priority_name}} is the fastest rising priority in {{tag_name}}"
-                    noself: "This is the fastest rising priority in {{tag_name}}"                    
+                    name: "{{priority_name}} er það forgangsmál sem hækkar hraðast í {{tag_name}}"
+                    noself: "Þetta er það forgangsmál sem hækkar hraðast í {{tag_name}}"                    
                 obama:
                     first:
-                        name: "{{priority_name}} is the new #1 priority on {{official_user_name}} {{tag_name}} agenda"
-                        noself: "This is the new #1 priority on {{official_user_name}} {{tag_name}} agenda"
+                        name: "{{priority_name}} er nýtt #1 forgangsmál í {{official_user_name}} {{tag_name}} málaflokki"
+                        noself: "Þetta er nýtt #1 forgangsmál í {{official_user_name}} {{tag_name}} málaflokki"
         user:
             new:
-                name: "{{user_name}} joined {{government_name}}"
-                nouser: "Joined {{government_name}}"
+                name: "{{user_name}} er skráður í {{government_name}}"
+                nouser: "Skráður í {{government_name}}"
             recruited:
-                name: "{{user_name}} recruited {{other_user_name}} to {{government_name}}" 
-                nouser: "{{user_name}} recruited {{other_user_name}} to {{government_name}}" 
+                name: "{{user_name}} fékk {{other_user_name}} með í {{government_name}}" 
+                nouser: "{{user_name}} fékk {{other_user_name}} með í {{government_name}}" 
                 partner:
-                    name: "{{user_name}} recruited {{other_user_name}} to {{government_name}} through {{partner_url}}" 
-                    nouser: "Recruited {{other_user_name}} to {{government_name}} through {{partner_url}}" 
+                    name: "{{user_name}} fékk {{other_user_name}} með í {{government_name}} í gegnum {{partner_url}}" 
+                    nouser: "Fékk {{other_user_name}} með í {{government_name}} gegnum {{partner_url}}" 
             debut:
                 name:
-                    known: "{{user_name}} debuted on the most influential chart at #{{position}}"
-                    unknown: "{{user_name}} debuted on the most influential chart"
+                    known: "{{user_name}} birtist í fyrst skipti á lista yfir áhrifamestu í #{{position}}"
+                    unknown: "{{user_name}} birtist í fyrsta skipti á lista yfir áhrifamestu"
                 nouser:
                     known: "Frumsýning á staðsetningu á áhrifamestu töflunni, #{{position}}"
                     unknown: "Frumsýning á áhrifamestu töflunni"
