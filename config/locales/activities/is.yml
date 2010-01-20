@@ -135,8 +135,8 @@ is:
                         nouser: "Vann sér inn {{capital}}{{currency_short_name}} með því að fá {{other_user_name}} til liðs við {{government_name}} í gegnum {{partner_url}}"           
             legislators:
                 added:
-                    name: "{{user_name}} vann sér inn {{capital}}{{currency_short_name}} með því að fá þingmann með sér í lið"
-                    nouser: "Vann {{capital}}{{currency_short_name}} með því að fá þingmann með sér í lið"              
+                    name: "{{user_name}} vann sér inn {{capital}}{{currency_short_name}} með því að fá kosinn fulltrúa með sér í lið"
+                    nouser: "Vann {{capital}}{{currency_short_name}} með því að fá kosinn fulltrúa með sér í lið"              
             warning:
                 name: "{{user_name}} missti {{capital}}{{currency_short_name}} fyrir brot á reglum okkar"
                 link: "{{user_name}} missti {{capital}}{{currency_short_name}} fyrir brot á <a href='/about/rules'>reglum okkar</a>"
