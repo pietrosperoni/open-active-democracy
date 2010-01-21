@@ -1,4 +1,4 @@
-# Copyright (C) 2008,2009,2010,2010 Róbert Viðar Bjarnason
+# Copyright (C) 2008,2009,2010 Róbert Viðar Bjarnason
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -360,7 +360,7 @@ class AlthingiCrawler < ProcessCrawler
       new_parent_header_element.set_content_type_for_header
       new_parent_header_element.save
       elements << new_parent_header_element
-      
+
       next_sibling = paragraph.next_sibling
       all_content_until_next_header = ""
       all_content_until_next_header_text_only = ""
@@ -602,28 +602,23 @@ class AlthingiCrawler < ProcessCrawler
      info_2 = "#{mnr}. mál þingsályktunartillaga" 
    end
    info_3 = "#{ltg}. löggjafarþingi." 
-   
-   branch = Branch.find_by_name("Mál frá Alþingi")
-   unless branch
-     branch = Branch.new
-     branch.name = "Mál frá Alþingi"
-     branch.save
-   end
+
+   tags_to_collect = []
 
    if process_type == PROCESS_TYPE_LOG
+     tags_to_collect << "lagafrumvörp"
      unless current_user = User.find_by_email("lagafrumvorp@skuggathing.is")
        current_user=User.new
          current_user.email = "lagafrumvorp@skuggathing.is"
-         current_user.login = "Lagafrumvörp"
-         current_user.branch = branch
+         current_user.login = "Lagafrumvörp frá Alþingi"
        current_user.save(false)
      end
    elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
+     tags_to_collect << "þingsályktunartillögur"
      unless current_user = User.find_by_email("thingsalyktunartillaga@skuggathing.is")
        current_user=User.new
        current_user.email = "thingsalyktunartillaga@skuggathing.is"
-       current_user.login = "Þingsályktunartillaga"
-       current_user.branch = branch
+       current_user.login = "Þingsályktunartillögur frá Alþingi"
        current_user.save(false)
      end
    end
@@ -638,7 +633,7 @@ class AlthingiCrawler < ProcessCrawler
    current_priority.name = (html_doc/"h1.FyrirsognStorSv").text.strip
    current_priority.user = current_user
    current_priority.ip_address = "127.0.0.1"
-   current_priority.issue_list = current_user.login   
+   current_priority.issue_list = get_millivis(html_doc,tags_to_collect)
 
    puts "***************************************** New Process *****************************************"
    puts "Process info 1: "+(html_doc/"h1.FyrirsognStorSv").text.strip
@@ -931,6 +926,23 @@ class AlthingiCrawler < ProcessCrawler
     get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=138&mnr=76", "fjármálaráðherra", "stjórnarfrumvarp", 
                 "Ríkisábyrgð á lántöku Tryggingarsjóðs innstæðueigenda og fjárfesta (Icesave-reikningar)", PROCESS_TYPE_LOG)
   end
+  
+  def get_millivis(html_doc,tags_to_collect)
+    millivis_addr = html_doc.xpath("/html/body/table/tr[2]/td/table/tr/td[2]/div/p/a[1]")[0]['href']
+    html_doc = Nokogiri::HTML(open(URI.encode("http://www.althingi.is#{millivis_addr}")))
+    (html_doc/"div.FyrirsognMidSv").each do |top|
+       if top.text.index("Efnisorð")
+         next_sibling = top.next_sibling
+         while (next_sibling.inspect[0..6]=="<a href")
+           puts next_sibling.inspect[0..6]
+           tags_to_collect << next_sibling.text.gsub(", "," og ")
+           next_sibling=next_sibling.next_sibling.next_sibling.next_sibling
+         end
+       end
+     end
+     puts tags_to_collect.inspect
+     tags_to_collect.join(", ")
+  end
 end
 
 @current_government = Government.last
@@ -940,9 +952,9 @@ if @current_government
 end
 
 acrawler = AlthingiCrawler.new
-acrawler.update_icesave
-#acrawler.update_all_processes(PROCESS_TYPE_LOG)
-#acrawler.update_all_processes(PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
+#acrawler.update_icesave
+acrawler.update_all_processes(PROCESS_TYPE_LOG)
+acrawler.update_all_processes(PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
 
 #acrawler.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=135&mnr=107", "PRESENTER", "ID", "NAME", PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
 #acrawler.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=135&mnr=62", "PRESENTER", "ID", "NAME", PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
