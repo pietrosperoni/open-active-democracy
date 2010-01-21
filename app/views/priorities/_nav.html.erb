@@ -61,7 +61,14 @@
 				<%= link_to t('menu.news.name'), activities_priority_url(@priority) %>
 			</span>
 		</li>
-		<li class="tab9 mega">
+		<% unless @priority.priority_processes.empty? %>
+			<li class="tab9">
+				<span class="tab_header">
+					<%= link_to t('menu.processes.name'), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
+				</span>
+			</li>
+		<% end %>
+		<li class="tab11 mega">
 			<span class="tab_header action">
 				<%= link_to t('menu.priorities.action'), new_priority_point_path(@priority) %>
 			</span>

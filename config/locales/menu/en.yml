@@ -241,6 +241,8 @@ en:
                 agenda_opposed: "Opposed"
             branch:
                 name: "{{branch_name}} priorities"
+        processes:
+                name: "Processes"
         points:
             name: "Talking points"
         settings:

@@ -102,4 +102,15 @@ class PriorityProcessesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def show_all_for_priority
+    @priority = Priority.find(params[:id])    
+    @priority_process = @priority.priority_process_root_node
+    @page_title = t('processes.show_all.title', :priority_name => @priority.name) 
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @document }
+    end
+  end
+
 end

@@ -23,7 +23,7 @@ module PriorityProcessesHelper
       else
         author = "#{t(:author)}: unknown"
       end
-      "#{link_to author, {:controller=>"process_documents", :action=>"show", :id=>document.id}, {:class=>"participateLinkLarger"}} <br>"
+      "<a href=\"/process_documents/show/#{document.to_param}\">#{author}"
     end
   end
   

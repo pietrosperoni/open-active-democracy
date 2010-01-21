@@ -19,6 +19,10 @@ class ProcessDocument < ActiveRecord::Base
   belongs_to :process_document_type
 
   has_many :process_document_elements
+    
+  def to_param
+    "#{id}-#{self.priority_process.priority.name.parameterize_full}-#{external_type.parameterize_full}"
+  end 
 
   def has_change_proposal_for_sequence_number?(sequence_number)
     ProcessDocumentElement.find(:first, :conditions => ["process_document_id = ? AND sequence_number = ? AND original_version = 0",self.id,sequence_number])

@@ -22,7 +22,7 @@ class PriorityProcess < ActiveRecord::Base
 
   acts_as_rateable
   acts_as_tree
-
+  
   def get_all_process_documents_by_stage(stage_sequence_number)
     process_documents.find(:all, :conditions=>["stage_sequence_number = ?",stage_sequence_number], :order=>"sequence_number")
   end
