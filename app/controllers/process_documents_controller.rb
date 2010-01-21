@@ -31,7 +31,7 @@ class ProcessDocumentsController < ApplicationController
   # GET /process_documents/1
   # GET /process_documents/1.xml
   def show
-    @document = ProcessDocument.find(params[:id])
+    @document = ProcessDocument.find(params[:id], :include => [:process_document_elements])
     respond_to do |format|
       format.html
       format.xml  { render :xml => @document }

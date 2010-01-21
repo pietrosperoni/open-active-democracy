@@ -9,7 +9,7 @@
         </small>
         <br>
         <% if session[:user_id] %>
-        <h1><%=t :main_header %><%=t :for_user %><%=User.find(session[:user_id]).full_name %></h1>
+        <h1><%=t :main_header %><%=t :for_user %><%=User.find(session[:user_id]).login %></h1>
         <%else %>
         <h1><%=t :main_header %></h1>
         <%end %>

@@ -32,7 +32,7 @@
 	            <% end %>
             <% else %>
 	            <% if change_proposal.user %>
-		            <% change_proposal_author = change_proposal.user.full_name %>
+		            <% change_proposal_author = change_proposal.user.login %>
 		            <% change_proposal_title = t(:view_change_proposal) %>
 	            <% else %>
 		            <% change_proposal_author = t(:system_import) %>
@@ -57,7 +57,7 @@
             <% if change_proposal.id == change_target.id %>
 	            <td>
 	                <%=t :selected %>
-	            </td>
+	            </td> 
             <% else %>
 	            <td>
 	            </td>

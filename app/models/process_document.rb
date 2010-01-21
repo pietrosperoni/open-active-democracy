@@ -34,4 +34,8 @@ class ProcessDocument < ActiveRecord::Base
     end
     proposals
   end
+  
+  def template_name
+    self.process_document_type.template_name
+  end
 end

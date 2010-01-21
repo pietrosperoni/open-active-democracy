@@ -19,7 +19,7 @@ module PriorityProcessesHelper
       if document.original_version
         author = "<b>#{t(:see_and_vote_for_this_process_document_here)}</b>" #TODO: Remove hack
       elsif document.user
-        author = "#{t(:author)}: #{document.user.full_name}"
+        author = "#{t(:author)}: #{document.user.login}"
       else
         author = "#{t(:author)}: unknown"
       end
