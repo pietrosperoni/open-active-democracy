@@ -1,3 +1,0 @@
-<meta name="title" content="<%= my_process.external_info_1 %>" />
-<meta name="description" content="<%=my_process.external_info_1%> <%=my_process.external_info_2%> / <%=my_process.external_info_3%>" />
-<link rel="image_src" href="<%=request.ssl? ? "https" : "http"%>://<%=request.host.downcase%>/images/althingi_logo_sm.gif" />
