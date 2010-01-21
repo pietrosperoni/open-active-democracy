@@ -42,4 +42,9 @@ class ProcessDocument < ActiveRecord::Base
   def template_name
     self.process_document_type.template_name
   end
+  
+  def get_process_document_link
+    #TODO: Remove this hack and use more Rails for this link generation
+    "<a href=\"/process_documents/show/#{to_param}\">#{external_type}</a>"
+  end
 end
