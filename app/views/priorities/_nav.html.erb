@@ -67,6 +67,20 @@
 					<%= link_to t('menu.processes.name'), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
 				</span>
 			</li>
+			<% if has_process_documents? %>
+				<li class="tab10 mega"">
+					<span class="tab_header">
+						<%= link_to t('menu.process_documents.name'), :controller=>"process_documents", :action=>"show_all_for_priority", :id=>@priority %>
+					</span>
+					<div class="tab_body">
+						<% @priority.priority_processes.each do |process| %>
+	 					  <% process.process_documents.each do |document| %>
+ 						    <%= "<a href=\"/process_documents/show/#{document.to_param}\">#{document.external_type}" %><br/>
+						  <% end %>
+						<% end %>
+					</div>				
+				</li>
+ 	      <% end %>
 		<% end %>
 		<li class="tab11 mega">
 			<span class="tab_header action">

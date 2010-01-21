@@ -243,6 +243,8 @@ en:
                 name: "{{branch_name}} priorities"
         processes:
                 name: "Processes"
+        process_documents:
+                name: "Process Documents"
         points:
             name: "Talking points"
         settings:
