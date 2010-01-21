@@ -46,8 +46,8 @@ class Tag < ActiveRecord::Base
   
   def update_slug
     self.slug = self.to_url
-    self.title = self.name.titleize unless self.attribute_present?("title")
-  end  
+    self.title = self.name unless self.attribute_present?("title")
+  end
   
   def to_url
     "#{name.parameterize_full[0..60]}"
