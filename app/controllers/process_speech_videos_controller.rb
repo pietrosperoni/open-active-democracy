@@ -44,12 +44,14 @@ class ProcessSpeechVideosController < ApplicationController
       a = params[:clip_info][0..params[:clip_info].index("speech.flv")-2]
       id_s = a[a.rindex("/")+1..a.length]
       @process_speech_video = ProcessSpeechVideo.find(id_s.to_i)
+      @priority = @process_speech_video.process_discussion.priority_process.priority
       render :update do |page|  
         page.replace_html "process_speech_detail", :partial => "video_detail", :locals => {:process_speech_video=> @process_speech_video }  
         page.visual_effect :highlight, "process_speech_detail",  {:restorecolor=>"#ffffff", :startcolor=>"#cccccc", :endcolor=>"#ffffff"}  
       end
     else
       @process_speech_video = ProcessSpeechVideo.find(params[:id])
+      @priority = @process_speech_video.process_discussion.priority_process.priority
       respond_to do |format|
         format.html # show.html.erb
         format.xml  { render :xml => @process_speech_video }

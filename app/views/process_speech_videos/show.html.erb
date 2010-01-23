@@ -47,15 +47,9 @@ jQuery('div.clips a:first')<%=Array.new(my_pos,".next()").join%>.click();
 //jQuery("div.clips a:eq(3)").click(<%=my_pos%>);
 }); 
 </script>
-<p>
-   <a href="/processes/<%=@process_speech_video.process_discussion.process.id%>">
-   	<h2 class="participateLink"><%=h t(:process) %>: <%=h @process_speech_video.process_discussion.process.external_info_1 %></h2></a>
-	<%=h @process_speech_video.process_discussion.process.external_info_2 %> <%=h @process_speech_video.process_discussion.process.external_info_3 %> 
-<% if @process_speech_video.process_discussion.stage_sequence_number > 0 %>
-   - <%=@process_speech_video.process_discussion.stage_sequence_number%>. <%=t(:stage_sequence_discussion)%>
-<% end %>
 
-</p>
+<%= render :partial => "priorities/header" %>
+<%= render :partial => "priorities/nav" %>
 
 <table>
 	<tr>
