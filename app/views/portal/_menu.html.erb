@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <td>
+            <a href="#" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="portlets-menu"><span class="ui-icon ui-icon-triangle-1-s"></span>Add portlet</a>
+            <div id="portlets" class="hidden">
+                <ul>
+                    <% PortletTemplateCategory.by_weight.all.each do |template_category| %>
+                    <li>
+                        <a href="#"><%=template_category.name %></a>
+                        <ul>
+                            <% template_category.portlet_templates.each do |portlet_template| %>
+                            <li>
+                                <a href="#"><%=portlet_template.name %>-<%=portlet_template.id %></a>
+                            </li>
+                            <%end %>
+                        </ul>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>

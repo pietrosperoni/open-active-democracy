@@ -1,4 +1,9 @@
 en:
+    comments:
+        full:
+            show: "Show"
+        full:
+            hide: "Hide"
     unch: "UNCH"
     nochange: "no change"
     buried: "delisted"

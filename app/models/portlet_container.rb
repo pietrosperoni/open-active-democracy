@@ -13,5 +13,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-module ProcessSpeechMasterVideosHelper
+class PortletContainer < ActiveRecord::Base
+  has_many :portlets do
+    def in_column_order(css_column,portlet_container_id)
+      Portlet.find :all, :include=>[:portlet_position,:portlet_container], :conditions=>["portlet_positions.css_column = ? AND portlets.portlet_container_id = ?",css_column,portlet_container_id], 
+                                    :order=>"portlet_positions.css_position"
+    end
+  end
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100119011637) do
+ActiveRecord::Schema.define(:version => 20100123175540) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -731,6 +731,50 @@ ActiveRecord::Schema.define(:version => 20100119011637) do
   add_index "points", ["revision_id"], :name => "index_points_on_revision_id"
   add_index "points", ["status"], :name => "index_points_on_status"
   add_index "points", ["user_id"], :name => "index_points_on_user_id"
+
+  create_table "portlet_containers", :force => true do |t|
+    t.string   "title"
+    t.integer  "weight"
+    t.integer  "user_id"
+    t.boolean  "default_admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "portlet_positions", :force => true do |t|
+    t.integer  "portlet_id"
+    t.integer  "css_column"
+    t.integer  "css_position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "portlet_template_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "portlet_templates", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.integer  "portlet_template_category_id"
+    t.string   "locals_data_function"
+    t.string   "partial_name"
+    t.text     "description"
+    t.integer  "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "column_count",                 :default => 1
+  end
+
+  create_table "portlets", :force => true do |t|
+    t.integer  "portlet_template_id"
+    t.integer  "portlet_container_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "priorities", :force => true do |t|
     t.integer  "position",                               :default => 0,     :null => false

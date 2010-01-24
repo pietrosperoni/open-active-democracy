@@ -204,6 +204,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/issues/:slug/:action', :controller => "issues"
   map.connect '/issues/:slug/:action.:format', :controller => "issues"  
 
+  map.connect '/portal', :controller => 'portal', :action => 'index'
+
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

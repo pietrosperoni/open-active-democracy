@@ -13,5 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-module ProcessSpeechMasterVideosHelper
+class Portlet < ActiveRecord::Base
+  belongs_to :portlet_template
+  belongs_to :portlet_container
+  has_one :portlet_position, :dependent => :destroy
 end

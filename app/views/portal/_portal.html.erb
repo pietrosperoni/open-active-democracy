@@ -1,0 +1,5 @@
+<% ["1","2","3"].each do |id_name|%>
+  <div id="<%=id_name%>" class="column ui-sortable" unselectable="on" style="-moz-user-select: none;">
+    <%= render(:partial => "column", :locals=>{:column_number=>id_name.to_i}) %>
+  </div>
+<% end %>
