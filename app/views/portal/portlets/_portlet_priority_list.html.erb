@@ -1,17 +1,25 @@
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-<% for priority in portlet_locals[:priorities] %>
-	<% if portlet_locals[:priorities] %>
-		<% endorsement = portlet_locals[:endorsements].detect {|e| e.priority_id == priority.id } %>
+<% if portlet_locals[:priorities].any? %>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= t('rank') %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
+			<td></td>
+			<td align="right" width="100%"><%= rss_url(@rss_url) %></td>	
+		</tr>
+	<% for priority in portlet_locals[:priorities] %>
+		<% if portlet_locals[:endorsements] %>
+			<% endorsement = portlet_locals[:endorsements].detect {|e| e.priority_id == priority.id } %>
+		<% end %>
+		<tr>
+			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
+			<td valign="top" style="padding-left: 8px;" colspan="3">
+			<div id="priority_<%= priority.id %>" class="priority_listing">
+				<%= render :partial => "portal/portlets/priorities_listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
+			</div>
+			</td>
+		</tr>
 	<% end %>
-	<tr><td valign="top"></td>
-		<td valign="top" style="padding-left: 8px;" colspan="2">
-		<div class="priority_added">
-		<nobr><%=time_ago(priority.created_at) %></nobr>
-		</div>
-		<div id="priority_<%= priority.id %>" class="priority_listing">
-			<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
-		</div>
-		</td>
-	</tr>
+	</table>
 <% end %>
-</table>
+<%= link_to "#{t('more')}...", portlet_locals[:more] %>

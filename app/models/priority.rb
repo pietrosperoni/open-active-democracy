@@ -38,8 +38,7 @@ class Priority < ActiveRecord::Base
 
   named_scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
   
-  named_scope :five, :limit=>5
-  named_scope :three, :limit=>3
+  named_scope :item_limit, lambda{|limit| {:limit=>limit}}  
   
   belongs_to :user
   

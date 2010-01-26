@@ -934,7 +934,6 @@ class AlthingiCrawler < ProcessCrawler
        if top.text.index("Efnisorð")
          next_sibling = top.next_sibling
          while (next_sibling.inspect[0..6]=="<a href")
-           puts next_sibling.inspect[0..6]
            tags_to_collect << next_sibling.text.gsub(", "," og ")
            next_sibling=next_sibling.next_sibling.next_sibling.next_sibling
          end

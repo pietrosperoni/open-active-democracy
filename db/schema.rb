@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100123175540) do
+ActiveRecord::Schema.define(:version => 20100125214959) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -758,7 +758,6 @@ ActiveRecord::Schema.define(:version => 20100123175540) do
 
   create_table "portlet_templates", :force => true do |t|
     t.string   "name"
-    t.string   "title"
     t.integer  "portlet_template_category_id"
     t.string   "locals_data_function"
     t.string   "partial_name"
@@ -767,6 +766,8 @@ ActiveRecord::Schema.define(:version => 20100123175540) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "column_count",                 :default => 1
+    t.boolean  "caching_disabled",             :default => false
+    t.integer  "item_limit"
   end
 
   create_table "portlets", :force => true do |t|

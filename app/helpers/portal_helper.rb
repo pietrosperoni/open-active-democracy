@@ -19,15 +19,50 @@ module PortalHelper
     page << "setup_columns();"
   end
 
-  def setup_priorities_three_newest
-    @priorities=Priority.published.three.newest
-    {:page_title=>t('priorities.newest.title', :target => current_government.target), 
+  def setup_priorities_newest(limit)
+    @priorities=Priority.published.newest.item_limit limit
+    {:page_title=>t('priorities.newest.name'), :more=>newest_priorities_url,
      :priorities=>@priorities, :endorsements=>get_endorsements}
   end
 
-  def setup_priorities_three_top
-    @priorities=Priority.published.three.top_rank
-    {:page_title=>t('priorities.top.title', :target => current_government.target), 
+  def setup_priorities_top(limit)
+    @priorities=Priority.published.top_rank.item_limit limit
+    {:page_title=>t('priorities.top.name'), :more=>top_priorities_url, 
+     :priorities=>@priorities, :endorsements=>get_endorsements}
+  end
+
+  def setup_priorities_rising(limit)
+    @priorities= Priority.published.rising.item_limit limit
+    {:page_title=>t('priorities.rising.name'), :more=>rising_priorities_url,
+     :priorities=>@priorities, :endorsements=>get_endorsements}
+  end
+
+
+  def setup_priorities_falling(limit)
+    @priorities= Priority.published.falling.item_limit limit
+    {:page_title=>t('priorities.falling.name'), :more=>falling_priorities_url,
+     :priorities=>@priorities, :endorsements=>get_endorsements}
+  end
+
+  def setup_priorities_controversial(limit)
+    @priorities= Priority.published.controversial.item_limit limit
+    {:page_title=>t('priorities.controversial.name'), :more=>controversial_priorities_url,
+     :priorities=>@priorities, :endorsements=>get_endorsements}
+  end
+
+  def setup_priorities_finished(limit)
+    @priorities= Priority.published.finished.by_most_recent_status_change.item_limit limit
+    {:page_title=>t('priorities.finished.name'), :more=>finished_priorities_url,
+     :priorities=>@priorities, :endorsements=>get_endorsements}
+  end
+
+  def setup_priorities_random(limit)
+    if User.adapter == 'postgresql'
+      @priorities = Priority.published.paginate :order => "RANDOM()", :page => 1, :per_page => limit
+    else
+      @priorities = Priority.published.paginate :order => "rand()", :page => 1, :per_page => limit
+    end
+    {:page_title=>t('priorities.random.name'), :more=>random_priorities_url,
      :priorities=>@priorities, :endorsements=>get_endorsements}
   end
 

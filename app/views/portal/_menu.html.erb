@@ -6,11 +6,11 @@
                 <ul>
                     <% PortletTemplateCategory.by_weight.all.each do |template_category| %>
                     <li>
-                        <a href="#"><%=template_category.name %></a>
+                        <a href="#"><%=t(template_category.name) %></a>
                         <ul>
                             <% template_category.portlet_templates.each do |portlet_template| %>
                             <li>
-                                <a href="#"><%=portlet_template.name %>-<%=portlet_template.id %></a>
+                                <a href="#"><%=t(portlet_template.name) %>-<%=portlet_template.id %></a>
                             </li>
                             <%end %>
                         </ul>
