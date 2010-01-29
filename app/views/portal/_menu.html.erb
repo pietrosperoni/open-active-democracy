@@ -1,3 +1,5 @@
+<%# Copyright (C) 2009,2010 Róbert Viðar Bjarnason %>
+<%# License: http://www.gnu.org/licenses/agpl-3.0.txt %>
 <table>
     <tr>
         <td>
@@ -6,11 +8,11 @@
                 <ul>
                     <% PortletTemplateCategory.by_weight.all.each do |template_category| %>
                     <li>
-                        <a href="#"><%=t(template_category.name) %></a>
+                        <a href="#"><%=t(template_category.name).titleize %></a>
                         <ul>
                             <% template_category.portlet_templates.each do |portlet_template| %>
                             <li>
-                                <a href="#"><%=t(portlet_template.name) %>-<%=portlet_template.id %></a>
+                                <a href="#"><%=t(portlet_template.name).titleize %>-<%=portlet_template.id %></a>
                             </li>
                             <%end %>
                         </ul>

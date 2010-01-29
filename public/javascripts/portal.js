@@ -104,6 +104,8 @@ function setup_columns(){
 	
 	jQuery(".column").sortable({
 		connectWith: '.column',
+		scroll: true,
+		handle : ".portlet-header",
 		update: savelayout
 	});
 	

@@ -1,3 +1,5 @@
+<%# Copyright (C) 2009,2010 Róbert Viðar Bjarnason %>
+<%# License: http://www.gnu.org/licenses/agpl-3.0.txt %>
 <% if @portlet_container %>
   <% @portlet_container.portlets.in_column_order(column_number, @portlet_container.id).each do |portlet|%>
     <% partial_name = portlet.portlet_template.partial_name %>
