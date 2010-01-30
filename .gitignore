@@ -12,3 +12,4 @@ solr/index
 .tmp*
 *.sql
 public/production/*
+workers/video/config/worker.yml
