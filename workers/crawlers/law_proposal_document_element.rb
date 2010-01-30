@@ -339,7 +339,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
           end          
           next_sibling = next_sibling.next_sibling
         end
-      elsif not process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
+      else # not process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
         while next_sibling and next_sibling.inspect[0..3]!="<div" and next_sibling.inspect[0..7]!="<b> <div"
           puts "SIBLING " + next_sibling.inspect
           unless skip_tokens(next_sibling)

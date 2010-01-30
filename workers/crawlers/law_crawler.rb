@@ -1,3 +1,25 @@
+# Copyright (C) 2008,2009,2010 Róbert Viðar Bjarnason
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#TODO:
+# Fix when document has "uppprentun" in the type name - this causes an extra copy of the whole proposal to be added as one element at the beginning
+# e.g. http://www.althingi.is/altext/138/s/0003.html
+# 
+# Implement law_document_element.rb for parsing actual passed laws, currently law_proposal_document_element.rb only covers law proposals not the final 
+# version of the document that is in a completly different html format.
+
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
