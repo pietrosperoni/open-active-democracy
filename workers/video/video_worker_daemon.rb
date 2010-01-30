@@ -149,7 +149,7 @@ class VideoWorker
     unless @worker_config["only_get_masters"] and @worker_config["only_get_masters"]==true
       info "process_discussion"
       run_counter = 0
-      while process_discussion
+      while process_discussion_items
         info "poll_for_work process_discussion run counter: #{run_counter+=1}"
       end
       info "process_modify_durations"
@@ -246,7 +246,7 @@ class VideoWorker
     end
   end
 
-  def process_discussion
+  def process_discussion_items
     process_discussion = ProcessDiscussion.find(:first, :conditions=>["in_video_processing = 0 AND video_processing_complete = 0 AND meeting_date > ?",DateTime.parse("10/01/2008")], :order=>"meeting_date ASC", :lock=>true)
     if process_discussion
       process_discussion.in_video_processing = true

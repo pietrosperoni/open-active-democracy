@@ -9,7 +9,7 @@ RAILS_ENV='development'
 require '../../config/boot'
 require "#{RAILS_ROOT}/config/environment"
 
-require 'althingi_process_document_element'
+require 'law_proposal_document_element'
 require 'process_parser'
 require 'tags_parser'
 
@@ -71,7 +71,7 @@ if @current_government
 end
 
 acrawler = AlthingiCrawler.new
-#acrawler.update_icesave
+acrawler.update_icesave
 acrawler.update_all_processes(PROCESS_TYPE_LOG)
 acrawler.update_all_processes(PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
 

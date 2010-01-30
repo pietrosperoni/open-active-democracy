@@ -2,18 +2,6 @@ class ProcessParser
 
   @@stage_sequence_number = @@discussion_sequence_number = @@process_document_sequence_number = 0
 
-  def self.remove_not_needed_divs(html)
-    new_html = ""
-    split_html = html.split("\n")
-    split_html.each_with_index do |line,i|
-      if (line.index("<div style") and line.index("text-align:center") and line.index("</div>") and split_html[i-3].index(". gr.</div>")) and not line.index(". gr.")
-        line=line.gsub("div","span")
-      end
-      new_html+=line+"\n"
-    end
-    new_html
-  end
-  
   def self.get_stage_sequence_number(txt, process_type)
     if process_type == PROCESS_TYPE_LOG
       re1='(\\d+)'  # Integer Number 1
@@ -37,7 +25,7 @@ class ProcessParser
     end
   end
   
-  def self.process_process_documents(next_sibling,current_process)
+  def self.process_documents(next_sibling,current_process,process_document_type,process_type)
     tr_count = 3
     while next_sibling.at("tr[#{tr_count}]/td[1]")
       process_document = ProcessDocument.new
@@ -62,9 +50,9 @@ class ProcessParser
       unless oldpd = ProcessDocument.find_by_external_link(process_document.external_link)
         puts "EXTERNAL_TYPE: #{process_document.external_type} STAT3: #{process_document.external_type[0..3]}"
         if process_document.external_type.index("frumvarp") or process_document.external_type.index("lög")
-          document = get_document(process_document, process_document.priority_process_id, process_document.id, process_document.external_link)
+          document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
         elsif process_document.external_type.downcase.index("þingsályktun") or process_document.external_type.downcase.index("stjórnartillaga")
-          document = get_thingsalyktun_document(process_document, process_document.priority_process_id, process_document.id, process_document.external_link)
+          document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
         end         
         if document
           unless old_process = PriorityProcess.find(:first, :conditions=>["priority_id = ? AND stage_sequence_number = ?",
@@ -86,7 +74,7 @@ class ProcessParser
     end     
   end
   
-  def self.process_process_discussion(next_sibling,current_process)
+  def self.process_discussion(next_sibling,current_process)
     tr_count = 3
     while next_sibling.at("tr[#{tr_count}]/td[1]")
       process_discussion = ProcessDiscussion.new
@@ -208,11 +196,11 @@ class ProcessParser
       puts current_priority.inspect
     end
        
-    unless process_type = ProcessType.find_by_process_type("Althingi Process")
-      process_type = ProcessType.new
-      process_type.process_type = "Althingi Process"
-      process_type.template_name = "icelandic_parliament"
-      process_type.save
+    unless process_type_record = ProcessType.find_by_process_type("Althingi Process")
+      process_type_record = ProcessType.new
+      process_type_record.process_type = "Althingi Process"
+      process_type_record.template_name = "icelandic_parliament"
+      process_type_record.save
     end
     
     unless process_document_type = ProcessDocumentType.find_by_process_document_type("Althingi Process")
@@ -222,8 +210,10 @@ class ProcessParser
       process_document_type.save
     end
     
+    @@stage_sequence_number = 0
+    
     current_process = PriorityProcess.new
-    current_process.process_type_id=process_type.id
+    current_process.process_type_id=process_type_record.id
     current_process.root_node = true
     current_process.parent_id = nil
     current_process.priority_id = current_priority.id
@@ -238,7 +228,7 @@ class ProcessParser
       puts "============"
       #@@stage_sequence_number = 0
       if next_sibling.at("tr[1]/td[1]").text=="Þingskjöl"
-        process_process_documents(next_sibling,current_process)
+        process_documents(next_sibling,current_process,process_document_type,process_type)
       end
     else
      (html_doc/"h2.FyrirsognMidSv").each do |row|
@@ -255,9 +245,9 @@ class ProcessParser
             puts next_sibling.at("tr[1]/td[1]").text
             puts "============"
             if next_sibling.at("tr[1]/td[1]").text=="Þingskjöl"
-              process_process_documents(next_sibling,current_process)
+              process_documents(next_sibling,current_process,process_document_type,process_type)
             elsif (next_sibling.at("tr[1]/td[1]").inner_html)=="Umræða"
-              process_process_discussion(next_sibling,current_process)
+              process_discussion(next_sibling,current_process)
             end
             puts "++++++++++++"
           end
@@ -266,7 +256,7 @@ class ProcessParser
         puts "---------------------"
         old_process = current_process
         current_process = PriorityProcess.new
-        current_process.process_type_id=process_type.id
+        current_process.process_type_id=process_type_record.id
         current_process.root_node = false
         current_process.parent_id = old_process.id
         current_process.priority_id = current_priority.id
