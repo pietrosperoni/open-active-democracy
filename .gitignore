@@ -13,3 +13,7 @@ solr/index
 *.sql
 public/production/*
 workers/video/config/worker.yml
+private/*
+*.log
+*.output
+*.pid
