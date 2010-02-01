@@ -152,7 +152,7 @@ class VideoWorker
     end
     unless @worker_config["skip_masters"] and @worker_config["skip_masters"]==true
       info "process_master"
-      #MasterProcessing.process_master(@shell,@logger,@worker_config)
+      MasterProcessing.process_master(@shell,@logger,@worker_config)
     end
     unless @worker_config["only_get_masters"] and @worker_config["only_get_masters"]==true
       info "process_speech"
