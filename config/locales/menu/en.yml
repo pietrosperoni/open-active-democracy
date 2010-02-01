@@ -249,6 +249,12 @@ en:
                 name: "Process Discussions"
         points:
             name: "Talking points"
+        portal:
+            add_portlet: "Add portlet"
+            choose: "Choose an option"
+            delete_portlet: "Delete portlet"
+            delete_are_you_sure: "Are you sure you want to delete this Portlet?"
+            cancel: "Cancel"
         settings:
             name: "Settings"
             account: "Your account"

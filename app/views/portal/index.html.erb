@@ -232,8 +232,8 @@
 </style>
 <script type="text/javascript">
     	    jQuery(function(){
-    			setup_portal_menu(<%=@portlet_container ? @portlet_container.id : -1%>);
-    			setup_portal_dialogues();
+    			setup_portal_menu(<%=@portlet_container ? @portlet_container.id : -1%>,'<%=t('menu.portal.choose')%>');
+    			setup_portal_dialogues('<%=t('menu.portal.delete_portlet')%>','<%=t('menu.portal.cancel')%>');
     			setup_columns();
     		});
     	

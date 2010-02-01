@@ -249,6 +249,12 @@ is:
                 name: "Þingumræður"
         points:
             name: "Rök"
+        portal:
+            add_portlet: "Bæta við boxi á þessa síðu"
+            choose: "Veldu"
+            delete_portlet: "Eyða boxi"
+            delete_are_you_sure: "Ertu viss um að þú viljir eyða þessu boxi, þú getur alltaf bætt því við aftur?"
+            cancel: "Hætta við"
         settings:
             name: "Stillingar"
             account: "Þinn aðgangur"

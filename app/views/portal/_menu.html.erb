@@ -3,7 +3,7 @@
 <table>
     <tr>
         <td>
-            <a href="#" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="portlets-menu"><span class="ui-icon ui-icon-triangle-1-s"></span>Add portlet</a>
+            <a href="#" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="portlets-menu"><span class="ui-icon ui-icon-triangle-1-s"></span><%=t('menu.portal.add_portlet')%></a>
             <div id="portlets" class="hidden">
                 <ul>
                     <% PortletTemplateCategory.by_weight.all.each do |template_category| %>

@@ -1,4 +1,4 @@
-function setup_portal_menu(container_id)
+function setup_portal_menu(container_id,crumDefaultTxt)
 {
 	if (container_id!=-1)
 	{
@@ -11,6 +11,7 @@ function setup_portal_menu(container_id)
         backLink: false,
         dispatchType: 1,
         flyOut: false,
+		crumbDefaultText: crumDefaultTxt,
         chooseItem: function(item){
             // edit this for your own custom function/callback:
             jQuery.ajax({
@@ -26,8 +27,8 @@ function setup_portal_menu(container_id)
     });
 
 }
-	        
-function setup_portal_dialogues(){
+			
+function setup_portal_dialogues(delPortletLabel, cancelLabel){
 	var name = jQuery("#name"), allFields = jQuery([]).add(name), tips = jQuery("#validateTips");
 	
 	function updateTips(t){
@@ -60,34 +61,33 @@ function setup_portal_dialogues(){
 		
 	}
 	
+	var buttons = {};
+	buttons[delPortletLabel] = function(){
+		jQuery.ajax({
+			url: "/portal/delete_portlet/" + id_url,
+			cache: false,
+			type: "POST",
+			data: ({
+				portlet_id: global_portlet_id_to_delete
+			}),
+			dataType: "script"
+		});
+	};
+	buttons[cancelLabel] = function(){
+		jQuery(this).dialog('close');
+	};
+	
 	jQuery("#delete-portlet-dialog").dialog({
 		bgiframe: true,
 		autoOpen: false,
 		height: 100,
 		modal: true,
-		buttons: {
-			'Delete portlet': function(){
-				jQuery.ajax({
-					url: "/portal/delete_portlet/" + id_url,
-					cache: false,
-					type: "POST",
-					data: ({
-						portlet_id: global_portlet_id_to_delete
-					}),
-					dataType: "script"
-				});
-				
-				jQuery(this).dialog('close');
-			},
-			Cancel: function(){
-				jQuery(this).dialog('close');
-			}
-		},
+		buttons: buttons,
 		close: function(){
 			allFields.val('').removeClass('ui-state-error');
 		}
-	});	
-}    
+	});
+}
 
 jQuery.ajaxSetup({ 
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
