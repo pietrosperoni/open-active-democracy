@@ -70,7 +70,7 @@
 			<% if has_process_documents? %>
 				<li class="tab10 mega">
 					<span class="tab_header">
-						<%= link_to t('menu.process_documents.name'), :controller=>"process_documents", :action=>"show_all_for_priority", :id=>@priority %>
+						<%= link_to t('menu.process_documents.name'), "#" %>
 					</span>
 					<div class="tab_body">
 						<% @priority.priority_processes.each do |process| %>
@@ -80,9 +80,26 @@
 						<% end %>
 					</div>				
 				</li>
- 	      <% end %>
+   	        <% end %>
+			<% if has_process_discussions? %>
+				<li class="tab11 mega">
+					<span class="tab_header">
+						<%= link_to t('menu.process_discussions.name'), "#" %>
+					</span>
+					<div class="tab_body">
+						<% @priority.priority_processes.each do |process| -%>
+	 					  <% process.process_discussions.each do |discussion| -%>
+					  	    <% video = discussion.process_speech_videos.get_first_published -%>
+						    <% if video %>
+		 					  <%=link_to video.get_menu_title, :controller=>"process_speech_videos", :action=>"show", :id=>video.id%> <br/>
+							<% end %>
+ 						  <% end %>
+						<% end %>
+					</div>				
+				</li>
+   	        <% end %>
 		<% end %>
-		<li class="tab11 mega">
+		<li class="tab12 mega">
 			<span class="tab_header action">
 				<%= link_to t('menu.priorities.action'), new_priority_point_path(@priority) %>
 			</span>

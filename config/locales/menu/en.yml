@@ -245,6 +245,8 @@ en:
                 name: "Processes"
         process_documents:
                 name: "Process Documents"
+        process_discussions:
+                name: "Process Discussions"
         points:
             name: "Talking points"
         settings:

@@ -245,6 +245,8 @@ is:
                 name: "Þingferill"
         process_documents:
                 name: "Þingskjöl"
+        process_discussions:
+                name: "Þingumræður"
         points:
             name: "Rök"
         settings:

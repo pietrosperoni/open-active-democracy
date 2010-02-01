@@ -7,6 +7,8 @@ is:
            title: "Þingferill"
       process_documents:
            title: "Þingskjöl"
+      process_discussions:
+           title: "Þingumræður"
   about_us: "Um þessa vefsíðu"
   no_search_results: "Engar ræður fundust"
   search_results_for: "Niðurstöður ræðu leitar fyrir"

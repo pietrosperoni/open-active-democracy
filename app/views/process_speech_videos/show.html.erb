@@ -7,8 +7,9 @@
 
 <% my_pos = -1 %>
 <% count=0 %>
-<% total_length = @process_speech_video.process_discussion.process_speech_videos.get_all_published.length %>
-<% @process_speech_video.process_discussion.process_speech_videos.get_all_published.each do |video| %>
+<% all_processed = @process_speech_video.process_discussion.process_speech_videos.get_all_published %>
+<% total_length = all_processed.length %>
+<% all_processed.each do |video| %>
 	<% my_pos = count if video.id==@process_speech_video.id %>
 	<% count += 1 %>
 <% end %>

@@ -7,6 +7,8 @@ en:
            title: "Process"
       process_documents:
            title: "Process Documents"
+      process_discussions:
+           title: "Process Discussions"
   search_results_for: "Search results for"
   votes_for_this_document: "Votes for this document"
   speeches: "speeches"

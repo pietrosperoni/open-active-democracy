@@ -87,6 +87,10 @@ class ProcessSpeechVideo < ActiveRecord::Base
   def video_share_url
     "/"+ENV['RAILS_ENV']+"/process_speech_videos/#{self.id}/speech.flv"
   end
+    
+  def get_menu_title
+    "#{self.process_discussion.meeting_date.strftime("%d/%m/%y")} #{self.process_discussion.from_time.strftime("%H:%M")}-#{self.process_discussion.to_time.strftime("%H:%M")}"
+  end
 
   def video_share_swf_player_url(host)
     "http://#{host}/swf/flowplayer.swf?config={%22clip%22:{%22url%22:%22http://#{host}/production/process_speech_videos/#{self.id}/speech.flv%22,%22embedded%22:true}}"
