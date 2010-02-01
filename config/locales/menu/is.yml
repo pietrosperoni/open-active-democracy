@@ -241,6 +241,10 @@ is:
                 agenda_opposed: "Á móti"
             branch:
                 name: "{{branch_name}} forgangsatriði"
+        processes:
+                name: "Þingferli"
+        process_documents:
+                name: "Þingskjöl"
         points:
             name: "Rök"
         settings:
