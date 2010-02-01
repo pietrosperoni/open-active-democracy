@@ -32,6 +32,8 @@ class ApplicationController < ActionController::Base
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
 
+  filter_parameter_logging :password, :password_confirmation
+
   layout :get_layout
 
   # See ActionController::RequestForgeryProtection for details
