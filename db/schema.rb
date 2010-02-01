@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100127180733) do
+ActiveRecord::Schema.define(:version => 20100201164521) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -741,6 +741,8 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.datetime "updated_at"
   end
 
+  add_index "portlet_containers", ["user_id"], :name => "index_portlet_containers_on_user_id"
+
   create_table "portlet_positions", :force => true do |t|
     t.integer  "portlet_id"
     t.integer  "css_column"
@@ -748,6 +750,8 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "portlet_positions", ["portlet_id"], :name => "index_portlet_positions_on_portlet_id"
 
   create_table "portlet_template_categories", :force => true do |t|
     t.string   "name"
@@ -770,12 +774,17 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.integer  "item_limit"
   end
 
+  add_index "portlet_templates", ["portlet_template_category_id"], :name => "index_portlet_templates_on_portlet_template_category_id"
+
   create_table "portlets", :force => true do |t|
     t.integer  "portlet_template_id"
     t.integer  "portlet_container_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "portlets", ["portlet_container_id"], :name => "index_portlets_on_portlet_container_id"
+  add_index "portlets", ["portlet_template_id"], :name => "index_portlets_on_portlet_template_id"
 
   create_table "priorities", :force => true do |t|
     t.integer  "position",                               :default => 0,     :null => false
@@ -868,6 +877,8 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.boolean  "archived",              :default => false
   end
 
+  add_index "priority_processes", ["process_type_id"], :name => "index_priority_processes_on_process_type_id"
+
   create_table "process_discussions", :force => true do |t|
     t.datetime "meeting_date"
     t.string   "external_id"
@@ -891,6 +902,9 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.boolean  "has_modified_durations",      :default => false
   end
 
+  add_index "process_discussions", ["priority_process_id"], :name => "index_process_discussions_on_priority_process_id"
+  add_index "process_discussions", ["transcript_url"], :name => "index_process_discussions_on_transcript_url"
+
   create_table "process_document_elements", :force => true do |t|
     t.integer  "sequence_number"
     t.integer  "process_document_id"
@@ -904,6 +918,9 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.integer  "content_type"
     t.boolean  "original_version"
   end
+
+  add_index "process_document_elements", ["process_document_id"], :name => "index_process_document_elements_on_process_document_id"
+  add_index "process_document_elements", ["user_id"], :name => "index_process_document_elements_on_user_id"
 
   create_table "process_document_states", :force => true do |t|
     t.string   "state"
@@ -942,6 +959,10 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.string   "external_type"
   end
 
+  add_index "process_documents", ["priority_process_id"], :name => "index_process_documents_on_priority_process_id"
+  add_index "process_documents", ["process_document_state_id"], :name => "index_process_documents_on_process_document_state_id"
+  add_index "process_documents", ["process_document_type_id"], :name => "index_process_documents_on_process_document_type_id"
+
   create_table "process_speech_master_videos", :force => true do |t|
     t.string   "url"
     t.datetime "created_at"
@@ -969,6 +990,9 @@ ActiveRecord::Schema.define(:version => 20100127180733) do
     t.integer  "modified_duration_s"
     t.boolean  "has_checked_duration",           :default => false
   end
+
+  add_index "process_speech_videos", ["process_discussion_id"], :name => "index_process_speech_videos_on_process_discussion_id"
+  add_index "process_speech_videos", ["process_speech_master_video_id"], :name => "index_process_speech_videos_on_process_speech_master_video_id"
 
   create_table "process_types", :force => true do |t|
     t.string   "process_type"
