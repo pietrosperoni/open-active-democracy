@@ -13,13 +13,47 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class MasterProcessing
+class VideoProcessing
   @@shell = nil
-  @@logger = nil
+  @@logger = nil  
+  @@worker_config = nil
 
-  def self.process_master(shell,logger)
+  def self.check_load_and_wait
+    loop do
+      break if load_avg[0] < @@worker_config["max_load_average"]
+      info("Load Average #{load_avg[0]}, #{load_avg[1]}, #{load_avg[2]}")      
+      info("Load average too high pausing for #{SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN}")
+      sleep(SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN)
+    end
+  end
+
+  def self.ensure_mysql_connection
+    unless ActiveRecord::Base.connection.active?
+      unless ActiveRecord::Base.connection.reconnect!
+        error("Couldn't reestablish connection to MYSQL")
+      end
+    end
+  end
+
+  def self.load_avg
+    results = ""
+    IO.popen("cat /proc/loadavg") do |pipe|
+      pipe.each("\r") do |line|
+        results = line
+        $defout.flush
+      end
+    end
+    results.split[0..2].map{|e| e.to_f}
+  end
+end
+
+class MasterProcessing < VideoProcessing
+
+  def self.process_master(shell,logger,worker_config)
     @@logger=logger
     @@shell = shell
+    @@worker_config = worker_config
+
     master_video = ProcessSpeechMasterVideo.find(:first, :conditions=>"published = 0 AND in_processing = 0 AND url != ''", :lock=>true, :order=>"url")
     if master_video
       master_video.in_processing = true
@@ -54,13 +88,5 @@ class MasterProcessing
      #{master_video_filename} -o #{master_video_flv_tmp_filename}")
     @@shell.execute("mv #{master_video_flv_tmp_filename} #{master_video_flv_filename}")
     @@shell.execute("rm #{master_video_filename}")
-  end
-  
-  def self.ensure_mysql_connection
-    unless ActiveRecord::Base.connection.active?
-      unless ActiveRecord::Base.connection.reconnect!
-        error("Couldn't reestablish connection to MYSQL")
-      end
-    end
-  end
+  end  
 end

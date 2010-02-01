@@ -13,13 +13,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class SpeechVideoProcessing
-  @@shell = nil
-  @@logger = nil
+class SpeechVideoProcessing < VideoProcessing
 
-  def self.process_speech(shell,logger)
+  def self.process_speech(shell,logger,worker_config)
     @@logger = logger
     @@shell = shell
+    @@worker_config = worker_config
     found = false
     ProcessSpeechMasterVideo.find(:all, :conditions=>"published = 1 AND in_processing = 0 AND url != ''", :order=>"url", :lock=>true).each do |master_video|
       master_video.in_processing = true

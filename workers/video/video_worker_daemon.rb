@@ -30,6 +30,14 @@ require "#{RAILS_ROOT}/config/environment"
 
 include Sys
 
+MASTER_TEST_MAX_COUNTER = 500000
+MIN_FREE_SPACE_GB = 10
+SLEEP_WAITING_FOR_FREE_SPACE_TIME = 120
+SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN = 120
+SLEEP_WAITING_BETWEEN_RUNS = 5
+EMAIL_REPORTING_INTERVALS = 86000
+LINK_PREFIX = "http://www.althingi.is/altext/"
+
 require 'discussion_processing'
 require 'master_processing'
 require 'speech_video_processing'
@@ -38,14 +46,6 @@ f = File.open( File.dirname(__FILE__) + '/config/worker.yml')
 worker_config = YAML.load(f)
 ENV['RAILS_ENV'] = worker_config['rails_env']
 config = YAML::load(File.open(File.dirname(__FILE__) + "/../../config/database.yml"))
-
-MASTER_TEST_MAX_COUNTER = 500000
-MIN_FREE_SPACE_GB = 10
-SLEEP_WAITING_FOR_FREE_SPACE_TIME = 120
-SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN = 120
-SLEEP_WAITING_BETWEEN_RUNS = 5
-EMAIL_REPORTING_INTERVALS = 86000
-LINK_PREFIX = "http://www.althingi.is/altext/"
 
 class VideoWorker
   def initialize(config)
@@ -94,15 +94,6 @@ class VideoWorker
       end
     end
     results.split[0..2].map{|e| e.to_f}
-  end
-
-  def check_load_and_wait
-    loop do
-      break if load_avg[0] < @worker_config["max_load_average"]
-      info("Load Average #{load_avg[0]}, #{load_avg[1]}, #{load_avg[2]}")      
-      info("Load average too high pausing for #{SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN}")
-      sleep(SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN)
-    end
   end
 
   def run
@@ -161,12 +152,12 @@ class VideoWorker
     end
     unless @worker_config["skip_masters"] and @worker_config["skip_masters"]==true
       info "process_master"
-      MasterProcessing.process_master(@shell,@logger)
+      #MasterProcessing.process_master(@shell,@logger,@worker_config)
     end
     unless @worker_config["only_get_masters"] and @worker_config["only_get_masters"]==true
       info "process_speech"
       run_counter = 0
-      while SpeechVideoProcessing.process_speech(@shell,@logger)
+      while SpeechVideoProcessing.process_speech(@shell,@logger,@worker_config)
         info "poll_for_work process_speech run counter: #{run_counter+=1}"
       end
     end
