@@ -1,4 +1,3 @@
-<%= javascript_include_tag 'jquery-1.3.1.min' %>
 <%= javascript_include_tag 'flowplayer-3.0.3.min' %>
 <%= javascript_include_tag 'flowplayer.playlist-3.0.2.min' %>
 <%= javascript_include_tag 'jquery.mousewheel' %>
@@ -26,7 +25,8 @@ jQuery(function() {
         prev:'a.up'
     }); 
     // setup player  
-    $f("player", "/swf/flowplayer-3.0.3.swf", { 
+    $f("player", {src: "/swf/flowplayer-3.0.3.swf", wmode: 'opaque'}, {
+	wmode: 'transparent',
 	clip: {
         onBegin: function(clip) {
 			if (globalFirstClip==true) {
