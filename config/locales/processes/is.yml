@@ -2,6 +2,11 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 is:
+  processes:
+      show_all:
+           title: "Þingferill"
+      process_documents:
+           title: "Þingskjöl"
   about_us: "Um þessa vefsíðu"
   no_search_results: "Engar ræður fundust"
   search_results_for: "Niðurstöður ræðu leitar fyrir"
@@ -119,7 +124,6 @@ is:
   view_change_proposal: "Skoða breytingatillögu"
   view_original: "Skoða upphaflegu útgáfu"
   listing_processes: "Öll lagafrumvörp og þingsályktunartillögur frá yfirstandandi þingi"
-  processes: "Mál"
   external_name: "Upphaflegt nafn"
   stage_sequence_discussion: "umræða"
   althingi_process_documents: "Þingskjöl"

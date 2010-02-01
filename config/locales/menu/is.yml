@@ -242,7 +242,7 @@ is:
             branch:
                 name: "{{branch_name}} forgangsatriði"
         processes:
-                name: "Þingferli"
+                name: "Þingferill"
         process_documents:
                 name: "Þingskjöl"
         points:
