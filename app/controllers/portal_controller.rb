@@ -71,15 +71,20 @@ class PortalController < ApplicationController
   end
   
   def save_positions
-    #redirect_to :no_access and return unless @i_am_admin
-    PortletPosition.transaction do
-      params.each do |key,value|
-         if key.index("portlet_id")
-           dp = PortletPosition.find_by_portlet_id(key.split("-")[1].to_i)
-           dp.css_column = value.split("|")[0].to_i
-           dp.css_position = value.split("|")[1].to_i
-           dp.save
-         end
+    if current_user
+      PortletPosition.transaction do
+        params.each do |key,value|
+          next unless key.index("portlet_id")
+          portlet_id = key.split("-")[1].to_i
+          unless Portlet.find(portlet_id, :include=>:portlet_container).portlet_container.default_admin and not current_user.is_admin?
+            dp = PortletPosition.find_by_portlet_id(portlet_id)
+            dp.css_column = value.split("|")[0].to_i
+            dp.css_position = value.split("|")[1].to_i
+            dp.save
+          else
+            RAILS_DEFAULT_LOGGER.error("Regular user trying to save admin portlet positions")
+          end
+        end
       end
     end
     render :nothing=>true
@@ -109,7 +114,7 @@ class PortalController < ApplicationController
   end
 
   def setup_portal
-    if (current_user.is_admin? and current_user.id == 1) or not current_user.is_logged_in?
+    if not current_user or (current_user.is_admin? and current_user.id == 1) or not logged_in?
       @portlet_container = default_container
     else
       @portlet_container = user_container

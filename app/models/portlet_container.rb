@@ -20,4 +20,16 @@ class PortletContainer < ActiveRecord::Base
                                     :order=>"portlet_positions.css_position"
     end
   end
+  
+  def clone_from_default(default)
+    default.portlets.each do |portlet|
+      new_portlet = portlet.clone
+      new_portlet.portlet_container_id = self.id
+      new_portlet.save
+      portlet_position = PortletPosition.find_by_portlet_id(portlet.id)
+      new_portlet_position = portlet_position.clone
+      new_portlet_position.portlet_id = new_portlet.id
+      new_portlet_position.save
+    end    
+  end
 end
