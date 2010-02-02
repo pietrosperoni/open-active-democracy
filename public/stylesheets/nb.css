@@ -1315,3 +1315,8 @@ ul#priority_menu li.tab9 div.tab_body {
 	position: absolute;
 }
 /* end color picker */
+
+
+.brbox {
+	border: 1px solid #000000;
+}

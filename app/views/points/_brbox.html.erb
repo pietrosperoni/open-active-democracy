@@ -1,0 +1,8 @@
+
+<% points.each do |point| %>
+<div class="atridi">
+	<div id="votebar<%=id %>_<%=point.id %>" <% if logged_in? %>onclick="showSlider('votebar<%=id %>_<%=point.id %>', <%=point.id %>);" <% end %>class="einkunn"><img src="/images/Gefa_einkunn.png" alt="" /><%=point.calculate_importance%></div>
+	<div class="facebook"><img src="/images/Facebook.png" alt="" /></div>
+	<p><%= point.name %></p>
+</div>
+<% end %>
