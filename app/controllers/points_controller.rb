@@ -48,15 +48,12 @@ class PointsController < ApplicationController
 
 
   def for_and_against
-  	if params[:id] and params[:value] and logged_in?
-  		PointImportanceScore.update_or_create(params[:id], current_user.id, params[:value])	
-  	end
-  	
   	@page_title = t('points.for_and_against.title', :government_name => current_government.name)
-  	@points_new_up = Point.published.five.up.by_recently_created :include => :priority
-  	@points_new_down = Point.published.five.down.by_recently_created :include => :priority
-  	@points_top_up = Point.published.five.up.top :include => :priority
-  	@points_top_down = Point.published.five.down.top :include => :priority
+    @priority=Priority.find(params[:id])
+  	@points_new_up = @priority.points.published.by_recently_created.up.five
+  	@points_new_down = @priority.points.published.by_recently_created.down.five
+  	@points_top_up = @priority.points.published.by_helpfulness.up.five
+  	@points_top_down = @priority.points.published.by_helpfulness.down.five
   	# @rss_url = url_for :only_path => false, :format => "rss"
   	respond_to do |format|
   		format.html { render :action => "for_and_against" }
