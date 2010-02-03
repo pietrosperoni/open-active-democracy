@@ -17,7 +17,7 @@
 <div id="backgroundwrap">
 	<div id="header">
 		<div id="branding">
-			<%= link_to current_government.name, {:controller=>"/"}, :class=>"site_title" %>
+			<%= link_to current_government.name, "/", :id=>"site_title" %>
 		</div>
 		<%= flash_div :warning, :notice, :error %>
 
