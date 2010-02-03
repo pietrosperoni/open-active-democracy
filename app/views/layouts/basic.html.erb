@@ -17,7 +17,7 @@
 <div id="backgroundwrap">
 	<div id="header">
 		<div id="branding">
-			<a id="site_title" href="#">Skuggaþing</a>
+			<%= link_to current_government.name, :controller=>:portal, :id=>"site_title" %>
 		</div>
 		<%= flash_div :warning, :notice, :error %>
 
