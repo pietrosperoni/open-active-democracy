@@ -1,18 +1,6 @@
-#Haus div
-{
-height: 79px !important;
-}
-
-
-#haegri
+#point_right
 {
 margin-left: 12px;
-}
-
-.frumvarpid
-{
-/* "hack" which would be nice to get rid of */
-height: 9em;
 }
 
 /* Containers
@@ -257,11 +245,46 @@ height: 1.7em;
 	right:880px;
 }
 
+.sub_header .below_line
+{
+	color: gray;
+	margin: 3px 0 3px 5px;
+	font-size:10px;
+	font-weight:normal;
+	padding:0;
+	text-align: right;
+}
+
+div.facebook 
+{
+	float: left;
+	padding-left: 3px;
+	padding-top: 8px;
+	padding-right: 6px;
+}
+
+div h3, div h2, div p
+{
+	color: #333;
+}
+
+p
+{
+	padding-bottom: 2px;
+	padding-top: 4px;
+	line-height: 130%;
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+	font-size:11px;
+	color: #333333; /* don't use just black, it won't look good */
+}
+
+#sub_header, #Ja, #Nei, #SkilaAudu
+{
+	background-color: #FFF;
+}
 
 /* Clear Floated Elements
 ----------------------------------------------------------------------------------------------------*/
-
-
 .clear {
 	clear: both;
 	display: block;
