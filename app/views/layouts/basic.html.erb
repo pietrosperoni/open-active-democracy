@@ -14,66 +14,67 @@
 
 <%= blurb("header") %>
 
-<div id="backgroundwrap" align="center">
-	<div id="contentwrap">
-		<div id="maincontent">
-
-			<%= flash_div :warning, :notice, :error %>
-
-			<%= render :partial => "shared/menu" %>
-
-			<%= render :partial => "ads/pick" %>
-		
-			<div id="content_text">
-				<%= yield :layout %>
-			</div>
-
+<div id="backgroundwrap">
+	<div id="header">
+		<div id="branding">
+			<p id="site_title">Skuggaþing</p>
 		</div>
-		<div id="sidebar">
+		<%= flash_div :warning, :notice, :error %>
 
-			<% if logged_in? and current_user.warnings_count > 0 %>
-			<div id="warning"><%= t('warnings.name', :count => current_user.warnings_count) %></div>
-			<% end %>	
+		<%= render :partial => "ads/pick" %>
+	</div>
+	<div id="contentwrap">
+		
+		<%= render :partial => "shared/menu" %>
+		
+		<div id="content_text">
+			<%= yield :layout %>
+		</div>
 
-			<div id="top_right_column">
-	
-				<% if current_government.is_searchable? %>
-				<%= render :partial => "shared/search" %>
-				<% end %>
-	
-				<% if logged_in? %>
-				<%= render :partial => "shared/notifications" %>
-				<% else %>
-				<%= render :partial => "shared/login" %>
-				<% end %>
-	
-			</div>
+	</div>
+	<div id="sidebar">
+
+		<% if logged_in? and current_user.warnings_count > 0 %>
+		<div id="warning"><%= t('warnings.name', :count => current_user.warnings_count) %></div>
+		<% end %>	
+
+		<div id="top_right_column">
+
+			<% if current_government.is_searchable? %>
+			<%= render :partial => "shared/search" %>
+			<% end %>
 
 			<% if logged_in? %>
-	
-			<div id="priority_column">
-				<%= render :partial => "shared/your_priorities" %>
-			</div>
-	
-			<%= render :partial => "shared/activated" %>
-	
+			<%= render :partial => "shared/notifications" %>
 			<% else %>
-
-			<div id="intro"><%= blurb("intro") %></div>
-			<% if current_government.short_name == 'wh2' %>
-			<%= render :partial => "shared/buzz" %>
-			<% end %>
-
-			<% end %>
-
-			<% if current_partner %>
-			<div id="partner_image">
-				Partnership with:<br/>
-				<%= render :partial => "partners/logo" %>
-			</div>
+			<%= render :partial => "shared/login" %>
 			<% end %>
 
 		</div>
+
+		<% if logged_in? %>
+
+		<div id="priority_column">
+			<%= render :partial => "shared/your_priorities" %>
+		</div>
+
+		<%= render :partial => "shared/activated" %>
+
+		<% else %>
+
+		<div id="intro"><%= blurb("intro") %></div>
+		<% if current_government.short_name == 'wh2' %>
+		<%= render :partial => "shared/buzz" %>
+		<% end %>
+
+		<% end %>
+
+		<% if current_partner %>
+		<div id="partner_image">
+			Partnership with:<br/>
+			<%= render :partial => "partners/logo" %>
+		</div>
+		<% end %>
 
 	</div>
 	<div class="push">
