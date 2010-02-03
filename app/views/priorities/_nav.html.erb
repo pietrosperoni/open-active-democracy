@@ -37,6 +37,12 @@
 					<p>
 				</div>
 			</li>
+		<% else %>
+			<li class="tab5">
+				<span class="tab_header">
+					<%= link_to t('points.top_points.new_point_short'), new_priority_point_path(@priority)+"?support=1" , :title => t('menu.briefing.add_point.title'), :class => "qtip_left" %><br/>
+				</span>
+			</li>
 		<% end %>
 		<li class="tab6">
 			<span class="tab_header">
