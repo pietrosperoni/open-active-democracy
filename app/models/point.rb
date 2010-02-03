@@ -11,7 +11,7 @@ class Point < ActiveRecord::Base
   named_scope :by_recently_created, :order => "points.created_at desc"
   named_scope :by_recently_updated, :order => "points.updated_at desc"  
   named_scope :revised, :conditions => "revisions_count > 1"
-  named_scope :top, :order => "points.importance_score"
+  named_scope :top, :order => "points.score desc"
   named_scope :five, :limit => 5
 
   belongs_to :user
