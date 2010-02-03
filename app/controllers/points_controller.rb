@@ -166,7 +166,7 @@ class PointsController < ApplicationController
             flash[:user_action_to_publish] = UserPublisher.create_point(facebook_session, @point, @priority)
           end          
           @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
-          format.html { redirect_to(@point) }
+          format.html { redirect_to(top_points_priority_url(@priority)) }
         end
       else
         format.html { render :action => "new" }

@@ -1,8 +1,11 @@
 class PrioritiesController < ApplicationController
 
-  before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, :tag, :tag_save, :opposed, :endorsed, :destroy]
+  before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
+                                           :tag, :tag_save, :opposed, :endorsed, :destroy]
   before_filter :admin_required, :only => [:bury, :successful, :compromised, :intheworks, :failed]
-  before_filter :load_endorsement, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, :endorser_documents, :neutral_documents, :everyone_documents]
+  before_filter :load_endorsement, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, 
+                                             :opposed_top_points, :endorsed_top_points, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
+                                             :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
 
   # GET /priorities
@@ -454,6 +457,38 @@ class PrioritiesController < ApplicationController
       format.json { render :json => @points.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end
   end  
+
+  def opposed_top_points
+    @page_title = t('priorities.opposer_points.title', :priority_name => @priority.name)
+    @point_value = -1
+    if params[:by_newest]
+      @points = @priority.points.published.down_value.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
+    else
+      @points = @priority.points.published.down_value.by_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
+    end
+    get_qualities
+    respond_to do |format|
+      format.html { render :action => "points" }
+      format.xml { render :xml => @points.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @points.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
+  
+  def endorsed_top_points
+    @page_title = t('priorities.endorser_points.title', :priority_name => @priority.name)
+    @point_value = 1
+    if params[:by_newest]
+      @points = @priority.points.published.up_value.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
+    else
+      @points = @priority.points.published.up_value.by_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
+    end
+    get_qualities
+    respond_to do |format|
+      format.html { render :action => "points" }
+      format.xml { render :xml => @points.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @points.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
 
   def top_points
     @page_title = t('priorities.top_points.title', :priority_name => @priority.name) 
