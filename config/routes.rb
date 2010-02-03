@@ -70,7 +70,7 @@ ActionController::Routing::Routes.draw do |map|
       :tag => :post, 
       :tag_save => :put, 
       :points => :get, 
-      :opposer_points => :get, :endorser_points => :get, :neutral_points => :get, :everyone_points => :get, 
+      :opposer_points => :get, :endorser_points => :get, :neutral_points => :get, :everyone_points => :get, :top_points => :get,
       :opposer_documents => :get, :endorser_documents => :get, :neutral_documents => :get, :everyone_documents => :get,      
       :comments => :get, 
       :documents => :get },

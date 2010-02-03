@@ -2,7 +2,7 @@ class PrioritiesController < ApplicationController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, :tag, :tag_save, :opposed, :endorsed, :destroy]
   before_filter :admin_required, :only => [:bury, :successful, :compromised, :intheworks, :failed]
-  before_filter :load_endorsement, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, :discussions, :everyone_points, :documents, :opposer_documents, :endorser_documents, :neutral_documents, :everyone_documents]
+  before_filter :load_endorsement, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
 
   # GET /priorities
@@ -450,6 +450,21 @@ class PrioritiesController < ApplicationController
     get_qualities
     respond_to do |format|
       format.html { render :action => "points" }
+      format.xml { render :xml => @points.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @points.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end  
+
+  def top_points
+    @page_title = t('priorities.top_points.title', :priority_name => @priority.name) 
+    @point_value = 0 
+    @points_new_up = @priority.points.published.by_recently_created.up_value.five
+    @points_new_down = @priority.points.published.by_recently_created.down_value.five
+    @points_top_up = @priority.points.published.by_helpfulness.up_value.five
+    @points_top_down = @priority.points.published.by_helpfulness.down_value.five
+    get_qualities([@points_new_up,@points_new_down,@points_top_up,@points_top_down])
+    respond_to do |format|
+      format.html { render :action => "top_points" }
       format.xml { render :xml => @points.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @points.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end
@@ -952,7 +967,13 @@ class PrioritiesController < ApplicationController
       end
     end    
 
-    def get_qualities
+    def get_qualities(multi_points=nil)
+      if multi_points
+        @points=[]
+        multi_points.each do |points|
+          @points+=points
+        end
+      end
       if not @points.empty?
         @qualities = nil
         if logged_in? # pull all their qualities on the priorities shown
