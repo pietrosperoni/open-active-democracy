@@ -1,6 +1,12 @@
 <% points.each do |point| %>
-<div class="atridi">
+<div class="point_item">
 <div class="facebook"><img src="/images/Facebook.png" alt="" /></div>
 <p><%= point.name %></p>
+<p><%=truncate(point.content, :omission => "... (more)", :length => 55)%></p>
+<p><div class="point_qualities">
+	<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
+</div>
+</p>
+</p>
 </div>
 <% end %>
