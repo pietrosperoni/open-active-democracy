@@ -407,7 +407,7 @@ class PrioritiesController < ApplicationController
       @endorsements = Endorsement.find(:all, :conditions => ["priority_id in (?) and user_id = ? and status='active'", @relationships.collect {|other_priority, relationship| other_priority.id},current_user.id])
     end    
     respond_to do |format|
-      format.html
+      format.html { render :action => "show_with_processes" }
       format.xml { render :xml => @priority.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priority.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end
