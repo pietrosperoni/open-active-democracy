@@ -166,7 +166,7 @@ class PointsController < ApplicationController
             flash[:user_action_to_publish] = UserPublisher.create_point(facebook_session, @point, @priority)
           end          
           @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
-          format.html { redirect_to(@point) }
+          format.html { redirect_to(top_points_priority_url(@priority)) }
         end
       else
         format.html { render :action => "new" }
@@ -236,6 +236,7 @@ class PointsController < ApplicationController
             page.replace_html 'point_' + @point.id.to_s + '_helpful_button', render(:partial => "points/button", :locals => {:point => @point, :quality => @quality })
             page.replace_html 'point_' + @point.id.to_s + '_helpful_chart', render(:partial => "documents/helpful_chart", :locals => {:document => @point })            
           elsif params[:region] = "point_inline"
+#            page.select("point_" + @point.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) ) }                       
             page.replace_html 'point_' + @point.id.to_s + '_quality', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
           end
         end        
@@ -258,6 +259,7 @@ class PointsController < ApplicationController
             page.replace_html 'point_' + @point.id.to_s + '_helpful_button', render(:partial => "points/button", :locals => {:point => @point, :quality => @quality })
             page.replace_html 'point_' + @point.id.to_s + '_helpful_chart', render(:partial => "documents/helpful_chart", :locals => {:document => @point })            
           elsif params[:region] = "point_inline"
+#            page.select("point_" + @point.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) ) }
             page.replace_html 'point_' + @point.id.to_s + '_quality', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
           end          
         end       

@@ -1,3 +1,80 @@
+*
+{
+padding: 0;
+margin: 0;
+}
+ 
+ 
+div h3, div h2, div p
+{
+color: #333;
+}
+
+div.facebook
+{
+float: left;
+padding-left: 3px;
+padding-top: 8px;
+padding-right: 6px;
+}
+ 
+ 
+ 
+h2
+{
+font-size: 1.3em;
+border-bottom:1px solid #CCCCCC;
+font-weight:bold;
+padding-top: 15px;
+padding-bottom: 5px;
+margin-right: 23px;
+}
+ 
+h3
+{
+font-size: 0.8em;
+height: 1.5em;
+border-bottom:1px solid #CCCCCC;
+font-weight:bold;
+padding-top: 15px;
+display:block;
+margin:0;
+}
+ 
+h4
+{
+font-size: 0.8em;
+height: 1.5em;
+border-bottom:1px solid #CCCCCC;
+font-weight:bold;
+padding-top: 15px;
+display:block;
+margin:0;
+}
+ 
+ 
+ 
+.Atkvaedi img
+{
+margin-top: 16px;
+margin-left: 7px;
+padding-bottom: 7px;
+}
+ 
+.Atkvaedi
+{
+background-color: #FFF !important;
+}
+ 
+ 
+.point_item {
+clear:both;
+}
+ 
+.container_12 {
+clear:both;
+}
+
 #point_right
 {
 margin-left: 12px;
@@ -12,12 +89,20 @@ margin-left: 12px;
 
 }
 
+.container_13 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+
+}
+
 /* Grid >> Global
 ----------------------------------------------------------------------------------------------------*/
 .grid_1,
 .grid_2,
 .grid_3,
 .grid_4,
+.grid_41,
 .grid_5,
 .grid_6,
 .grid_7,
@@ -67,6 +152,9 @@ height: 1.7em;
 }
     .container_12 .grid_4 {
 	width:310px;
+}
+    .container_13 .grid_41 {
+	width:360px;
 }
     .container_12 .grid_5 {
 	width:380px;
