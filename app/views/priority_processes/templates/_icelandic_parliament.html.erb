@@ -4,9 +4,9 @@
 	<% process_documents = current_process.process_documents %>
 	<% discussions = current_process.process_discussions %>
 	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
-	<p id="althingi_external_link">
+	<p class="althingi_external_link">
 		<em><%=t :external_link %></em>
-		<%=link_to h(current_process.external_link), current_process.external_link, {:target => "_blank"}%>
+		<%=link_to h(current_process.priority.external_link), current_process.external_link, {:target => "_blank"}%>
 	</p>
 	<% unless process_documents.empty? %>
 	<div id="althingi_process_documents">
