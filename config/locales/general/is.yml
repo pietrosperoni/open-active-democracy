@@ -1064,6 +1064,7 @@ is:
             add_point_for_endorse: "Setja inn rök með Já"
             add_point_for_oppose: "Setja inn rök með Nei"
             new_point_short: "Ný rök"
+            all_best_points: "Öll bestu rök"
     priorities:
         name: "forgangsmál"
         deleted: "Þessu forgangsmáli var eytt"

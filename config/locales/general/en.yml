@@ -1066,6 +1066,7 @@ en:
             add_point_for_endorse: "Add your point for endorse"
             add_point_for_oppose: "Add your point for oppose"
             new_point_short: "New point"
+            all_best_points: "All best points"
     priorities:
         name: "priorities"
         deleted: "That priority was deleted"
