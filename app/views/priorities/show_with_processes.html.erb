@@ -10,10 +10,10 @@
 	<%= render :partial => "nav" %>
 <% end %>
 <p>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		
-		<td valign="top" width="200">
+		<td valign="top">
 			
 			<% if @priority.has_change? %>
 				<%= render :partial => "changes/show", :locals => {:change => @priority.change}%>
@@ -24,9 +24,9 @@
 			
 			<% if @priority.points_count == 0 %>
 				<%= t('points.priority.intro', :new_point_url => new_priority_point_path(@priority))%>
-			<% else %>				
-				<div id="" class="container_12">
-					<div class="grid_4">
+			<% else %>
+				<div id="" class="container_13">
+					<div class="grid_41">
 						<div class="sub_header">
 							<h4><%=t('points.top_points.best_points_for_endorse')%></h4>
 							<p class="below_line"><%=link_to(t('points.top_points.all_best_points_for_endorse'), endorsed_top_points_priority_url(@priority))%> | 
@@ -37,7 +37,7 @@
 						</div>
 					</div>
 				    
-					<div id="point_right" class="grid_4">
+					<div id="point_right" class="grid_41">
 						<div class="sub_header">
 							<h4><%=t('points.top_points.best_points_for_oppose')%></h4>
 							<p class="below_line"><%=link_to(t('points.top_points.all_best_points_for_oppose'), opposed_top_points_priority_url(@priority))%> | 
@@ -50,8 +50,8 @@
 					</div>
 				</div>
 				  
-				<div id="" class="container_12">
-					<div id="" class="grid_4">
+				<div id="" class="container_13">
+					<div id="" class="grid_41">
 						<div class="sub_header">
 							<h4><%=t('points.top_points.newest_points_for_endorse')%></h4>
 							<p class="below_line"><%=link_to(t('points.top_points.all_newest_points_for_endorse'), endorsed_top_points_priority_url(@priority,:by_newest=>true))%> | 
@@ -62,7 +62,7 @@
 						</div>
 					</div>
 				    
-					<div id="point_right" class="grid_4">
+					<div id="point_right" class="grid_41">
 						<div class="sub_header">
 							<h4><%=t('points.top_points.newest_points_for_oppose')%></h4>
 							<p class="below_line"><%=link_to(t('points.top_points.all_newest_points_for_oppose'), opposed_top_points_priority_url(@priority,:by_newest=>true))%> |
@@ -73,6 +73,7 @@
 						</div>
 					</div>
 				</div>
+				<p>XX</p>
 				<% if @endorsement and @endorsement.is_down? %>
 					<% if @priority.down_documents_count > 0 %>
 						<%= render :partial => "priorities/documents", :locals => {:documents => @opposer_documents, :document_value => -1}%>
@@ -161,7 +162,7 @@
 			<% end %>
 		</td>	
 		
-		<td valign="top" width="160" style="padding-left: 0px;">
+		<td valign="top" width="160" style="padding-left: 20px;">
 			<%= render :partial => "left_nav" %>
 		</td>		
 	
