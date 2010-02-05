@@ -10,6 +10,7 @@
 <%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
 <%= stylesheet_link_tag "newstuff" %>
+<%= javascript_include_tag "skuggathing" %>
 </head>
 <body>
 

@@ -5,6 +5,7 @@
 	<% process_documents = current_process.process_documents %>
 	<% discussions = current_process.process_discussions %>
 	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
+	<p>(Smelltu hér til að sjá umræðu málsins)</p>
 	<%=link_to h(current_process.priority.external_link), current_process.external_link, {:target => "_blank", :class => "extlink"}%>
 	<% unless process_documents.empty? %>
 	<div class="althingi_process_documents">
