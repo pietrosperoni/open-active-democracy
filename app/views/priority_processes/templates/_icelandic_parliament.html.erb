@@ -31,7 +31,7 @@
 			</thead>
 			<tbody>
 				<% process_documents.each do |document| %>
-				<tr class="<%= cycle("even", "odd") -%>">
+				<tr class="<%= cycle("even", "odd", :name => "zebra") -%>">
 					<td>
 						<%=document.external_date.strftime("%d.%m.%Y") %>
 					</td>
@@ -51,6 +51,7 @@
 			</tbody>
 		<% end %>
 		</table>
+		<% reset_cycle("zebra") %>
 	</div>
 	<% end %>
 	<% unless discussions.empty? %>
@@ -75,7 +76,7 @@
 			</thead>
 			<tbody>
 			<% discussions.each do |discussion| %>
-				<tr class="<%= cycle("even", "odd") -%>">
+				<tr class="<%= cycle("even", "odd", :name => "zebra") -%>">
 					<td>
 						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
 						<%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
@@ -100,6 +101,7 @@
 			<% end #discussions -%>
 			</tbody>
 		</table>
+		<% reset_cycle("zebra") %>
 	</div>
 	<% end %>
 		
