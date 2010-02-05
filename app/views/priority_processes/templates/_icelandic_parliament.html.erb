@@ -54,9 +54,9 @@
 		<% end %>
 		</table>
 	</div>
-	<div id="althingi_discussion">
-		<% end %>
-		<% unless discussions.empty? %>
+	<% end %>
+	<% unless discussions.empty? %>
+		<div id="althingi_discussion">
 		<h3><%=t :althingi_discussion %></h3>
 		<table>
 			<thead>
@@ -79,7 +79,8 @@
 			<% discussions.each do |discussion| %>
 				<tr>
 					<td>
-						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - <%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
+						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
+						<%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
 					</td>
 					<td>
 						<%=discussion.meeting_date.strftime("%d.%m.%Y") %>
@@ -97,8 +98,8 @@
 						<%= render :partial => "priority_processes/process_discussion_videos", :locals => {:discussion=> discussion} %>
 					</td>
 				</tr>
-				<% end #videos %>
-				<% end #discussions %>
+				<% end #videos -%>
+			<% end #discussions -%>
 			</tbody>
 		</table>
 	</div>
