@@ -299,7 +299,7 @@ ul#priority_menu li.tab9 div.tab_body {
 /* Þingferlar */
 .althingi_process_container {  width: 540px; margin: 1em 0em !important; padding: 0.5em 0em !important; border-bottom: 3px solid #e5e5e5 !important; }
 .althingi_process_container h3 { background: #f5f5f5 !important; margin: 0px; margin-top: 1em; }
-.althingi_process_container h2 { display: inline-block !important; width: 100px !important; clear: left !important; padding: 0.5em !important; margin: 0px; }
+.althingi_process_container h2 { display: inline-block !important; width: 100px !important; clear: left !important; padding: 0.5em; padding-top: 0em; margin: 0px; }
 .althingi_process_container a.extlink { display: inline-block; float: right; padding: 0.5em; }
 .althingi_process_container table { width: 540px !important; border: 1px solid #f5f5f5; border-collapse: separate !important; border-spacing: 0 !important; }
 .althingi_process_container table tr.even td { background: #f5f5f5; }
