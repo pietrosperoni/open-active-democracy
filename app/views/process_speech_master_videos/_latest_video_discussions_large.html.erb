@@ -1,13 +1,14 @@
+<% @latest_speech_discussions = ProcessSpeechMasterVideo.get_latest_twenty %>
 <% if @latest_speech_discussions.length > 0 %>
 <%= javascript_include_tag 'jquery.mousewheel' %>
 <%= javascript_include_tag 'jquery.scrollable-1.0.1.min' %>
-<%= stylesheet_link_tag 'vertical_video_speeches_scroller' %>
+<%= stylesheet_link_tag 'vertical_video_speeches_scroller_large' %>
 <h1><%=t :newly_processed_speeches %></h1>
 <!-- navigator -->
 <div class="navi"></div>
 <!-- root element -->
 <a class="prev"></a>
-<div class="scrollable">
+<div class="scrollable_videos_large">
     <div id="latest_video_discussion_thumbs">
 		<% @latest_speech_discussions.each do |process_discussion| %>
         <div onclick="window.location = 'http://<%=request.host.downcase%>/process_speech_videos/<%=process_discussion.process_speech_videos.get_first_published.id%>'">
@@ -32,7 +33,7 @@
 <script type="text/javascript">
     jQuery.noConflict();
     jQuery(function(){
-        jQuery("div.scrollable").scrollable({
+        jQuery("div.scrollable_videos_large").scrollable({
             size: 4,
             items: '#latest_video_discussion_thumbs',
             hoverClass: 'hover'

@@ -98,8 +98,8 @@ class SpeechVideoProcessing < VideoProcessing
             croptop = 30
             cropbottom = 190
           else
-            croptop = 130
-            cropbottom = 90
+            croptop = 120
+            cropbottom = 100
           end
           @@shell.execute("ffmpeg -i #{speech_video_filename} -an -croptop #{croptop} -cropbottom #{cropbottom} -cropright 150 -cropleft 238\
              -ss #{[time/3600, time/60 % 60, time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} -an -r 1 -vframes 1 -y #{speech_video_path}#{filename}")

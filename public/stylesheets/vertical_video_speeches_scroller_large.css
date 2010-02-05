@@ -1,7 +1,7 @@
 /* single item */ 
 
 /* root element for the whole scrollable setup */
-div.scrollable {  
+div.scrollable_videos_large {  
 	position:relative;
 	overflow:hidden;
 	width: 600px;	 
@@ -68,7 +68,7 @@ a.prev, a.next {
 }
 
 /* this makes it possible to add next button beside scrollable */
-div.scrollable {
+div.scrollable_videos_large {
 	float:left;		
 }
 

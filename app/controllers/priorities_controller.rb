@@ -335,14 +335,6 @@ class PrioritiesController < ApplicationController
     end
     @page_title = @priority.name
     @priority_process = @priority.priority_process_root_node
-    if @priority_process
-      @latest_speech_discussions = []
-      ProcessSpeechVideo.find(:all, :conditions=>"published = 1", :limit=>20, :select => 'DISTINCT(process_discussion_id)', 
-                           :include=>"process_discussion", :order=>"updated_at DESC").each do |process_discussion_include|
-        process_discussion = process_discussion_include.process_discussion
-        @latest_speech_discussions << process_discussion #if process_discussion.priority_process.priority.id == @priority.id  # if process_discussion.process_speech_videos.all_done?
-      end
-    end
     point_ids = []
     if @priority.up_points_count > 0
       @endorser_points = @priority.points.published.by_endorser_helpfulness.find(:all, :limit => 3)

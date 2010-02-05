@@ -9,6 +9,7 @@ en:
            title: "Process Documents"
       process_discussions:
            title: "Process Discussions"
+      newly_processed_speeches_about_priority: "Newly processed speeches about this priority"
   search_results_for: "Search results for"
   votes_for_this_document: "Votes for this document"
   speeches: "speeches"

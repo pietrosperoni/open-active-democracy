@@ -9,6 +9,7 @@ is:
            title: "Þingskjöl"
       process_discussions:
            title: "Þingumræður"
+      newly_processed_speeches_about_priority: "Nýjustu umræður um þetta mál í þessu kerfi"
   about_us: "Um þessa vefsíðu"
   no_search_results: "Engar ræður fundust"
   search_results_for: "Niðurstöður ræðu leitar fyrir"
