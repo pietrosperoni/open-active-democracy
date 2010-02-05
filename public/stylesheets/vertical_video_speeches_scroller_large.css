@@ -1,11 +1,15 @@
 /* single item */ 
 
 /* root element for the whole scrollable setup */
-div.scrollable {  
+div.scrollable_videos_large {  
 	position:relative;
 	overflow:hidden;
-	width: 700px;	 
-	height:250px;	
+	width: 600px;	 
+	height:220px;	
+}
+
+#latest_video_discussion_thumbs h3 {
+	color: #999;
 }
 
 /* 
@@ -64,7 +68,7 @@ a.prev, a.next {
 }
 
 /* this makes it possible to add next button beside scrollable */
-div.scrollable {
+div.scrollable_videos_large {
 	float:left;		
 }
 

@@ -1,15 +1,13 @@
 <% current_process = @priority_process %>
 <% while current_process %>
+<div class="althingi_process_container">
 	<% puts current_process %>
 	<% process_documents = current_process.process_documents %>
 	<% discussions = current_process.process_discussions %>
 	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
-	<p class="althingi_external_link">
-		<em><%=t :external_link %></em>
-		<%=link_to h(current_process.priority.external_link), current_process.external_link, {:target => "_blank"}%>
-	</p>
+	<%=link_to h(current_process.priority.external_link), current_process.external_link, {:target => "_blank", :class => "extlink"}%>
 	<% unless process_documents.empty? %>
-	<div id="althingi_process_documents">
+	<div class="althingi_process_documents">
 		<h3><%=t :althingi_process_documents %></h3>
 		<table>
 			<thead>
@@ -54,9 +52,9 @@
 		<% end %>
 		</table>
 	</div>
-	<div id="althingi_discussion">
-		<% end %>
-		<% unless discussions.empty? %>
+	<% end %>
+	<% unless discussions.empty? %>
+		<div class="althingi_discussion">
 		<h3><%=t :althingi_discussion %></h3>
 		<table>
 			<thead>
@@ -79,7 +77,8 @@
 			<% discussions.each do |discussion| %>
 				<tr>
 					<td>
-						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - <%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
+						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
+						<%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
 					</td>
 					<td>
 						<%=discussion.meeting_date.strftime("%d.%m.%Y") %>
@@ -97,8 +96,8 @@
 						<%= render :partial => "priority_processes/process_discussion_videos", :locals => {:discussion=> discussion} %>
 					</td>
 				</tr>
-				<% end #videos %>
-				<% end #discussions %>
+				<% end #videos -%>
+			<% end #discussions -%>
 			</tbody>
 		</table>
 	</div>
@@ -109,4 +108,5 @@
 	<% else %>
 	<% current_process = nil %>
 	<% end %>
+</div>
 <% end %>

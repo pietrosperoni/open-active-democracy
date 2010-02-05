@@ -7,7 +7,7 @@
 <%= render :partial => "shared/head" %>
 <%= render :partial => "shared/javascripts" %>
 <%= render :partial => "shared/css" %>
-<%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
+<% # render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
 </head>
 <body>

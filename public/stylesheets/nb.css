@@ -13,6 +13,9 @@ h1 { font-size: 1.5em; line-height: 1.7em; }
 h2 { font-size: 1.2em; font-weight: bold; }
 h3 { font-weight: bold; }
 
+table tr th { font-weight: bold; padding-right: 0.5em; }
+
+
 #backgroundwrap {
 	width: 960px;
 	margin: 0px auto;
@@ -295,11 +298,3 @@ ul#priority_menu li.tab9 div.tab_body {
 	width:150px;
 }
 
-/* Þingferlar */
-.althingi_process_container { border: 2px solid #f00; }
-.althingi_process_documents { background: #f5f5f5; }
-.althingi_process_documents h3 { margin: 0px; }
-.althingi_process_documents table, #althingi_process_documents table * { margin: 0px; padding: 0px; }
-.althingi_process_documents tbody { background-color: #fff; }
-.althingi_process_documents .althingi_process_h2 h2 { display: inline-block; margin: none; }
-.althingi_process_documents .althingi_process_h2 p { display: inline; text-align: right; float: right; }
