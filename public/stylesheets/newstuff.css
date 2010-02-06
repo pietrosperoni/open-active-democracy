@@ -312,3 +312,13 @@ ul#priority_menu li.tab9 div.tab_body {
 
 /* Meta-græjan */
 div.meta { width: 120px !important; }
+
+/* Rök og drasl */
+.comment_link_add, .small { font-size: 1em !important; }
+.point_byline { font-size: 1em !important; }
+.tag_button { font-size: 1em !important; }
+.container_12 { position: relative; padding-bottom: 1em; border-bottom: 3px solid #ccc; }
+.grid_6 { width: 340px; }
+.container_12 .against { position: absolute; top: 0px; left: 365px; }
+.container_12.newpoints { margin-top: 1em; }
+.point_item h3 { margin: 1em 0px 0px 0px !important; }
