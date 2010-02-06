@@ -21,7 +21,7 @@ class ProcessSpeechVideo < ActiveRecord::Base
   
   acts_as_rateable  
 
-  def get_image_tag(padding_direction="top", image_size="tiny")
+  def get_image_tag(padding_direction="top", image_size="smaller")
     speech_video_path = "/"+ENV['RAILS_ENV']+"/process_speech_videos/#{self.id}/"
     tiny_filename = "#{speech_video_path}#{image_size}_thumb_#{rand(5-2)+2}.png"
     ancenstor_number = self.ancestors.length
