@@ -309,3 +309,6 @@ ul#priority_menu li.tab9 div.tab_body {
 /* Hliðarstikan */
 #search_priorities form input { width: 170px; font-size: 10px; }
 #your_priorities table { width: 200px;}
+
+/* Meta-græjan */
+div.meta { width: 120px !important; }

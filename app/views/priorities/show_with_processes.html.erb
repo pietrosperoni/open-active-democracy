@@ -22,6 +22,10 @@
 				<p>
 			<% end %>
 			
+			<% if @priority_process %>
+			  <%= render :partial => "process_speech_master_videos/latest_video_discussions_medium" %>
+			<% end %>
+			
 			<% if @priority.points_count == 0 %>
 				<%= t('points.priority.intro', :new_point_url => new_priority_point_path(@priority))%>
 			<% else %>
@@ -78,13 +82,11 @@
 			<% if @priority_process %>
 				<table height="100%" width="100%">
 				<tr><td>
-			  <%= render :partial => "process_speech_master_videos/latest_video_discussions_large" %>
 			  <%= render :partial => "priority_processes/templates/#{@priority_process.process_type.template_name}" %>
 				</td></tr>
 				</table>
 			<% end %>
 			<p/>
-			<h2><%=t('documents.title')%></h2>
 			<% if @endorsement and @endorsement.is_down? %>
 				<% if @priority.down_documents_count > 0 %>
 					<%= render :partial => "priorities/documents", :locals => {:documents => @opposer_documents, :document_value => -1}%>
