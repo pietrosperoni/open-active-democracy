@@ -13,6 +13,7 @@ h3 { font-weight: bold; }
 
 table tr th { font-weight: bold; padding-right: 0.5em; }
 
+hr { border-top: 3px solid #e5e5e5; }
 
 #backgroundwrap {
 	width: 960px !important;
