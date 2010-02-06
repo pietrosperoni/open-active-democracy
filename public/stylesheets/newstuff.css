@@ -19,7 +19,7 @@ table tr th { font-weight: bold; padding-right: 0.5em; }
 	margin: 0px auto;
 }
 #sidebar {
-	width: 240px;
+	width: 220px;
 	float: right;
 	overflow: hidden;
 	
@@ -318,7 +318,7 @@ div.meta { width: 120px !important; }
 .point_byline { font-size: 1em !important; }
 .tag_button { font-size: 1em !important; }
 .container_12 { position: relative; padding-bottom: 1em; border-bottom: 3px solid #ccc; }
-.grid_6 { width: 340px; }
-.container_12 .against { position: absolute; top: 0px; left: 365px; }
+.container_12 td { width: 340px; vertical-align: top; }
+.container_12 td.against { padding-left: 1em; }
 .container_12.newpoints { margin-top: 1em; }
 .point_item h3 { margin: 1em 0px 0px 0px !important; }
