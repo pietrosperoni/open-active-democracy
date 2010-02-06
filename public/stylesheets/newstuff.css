@@ -26,9 +26,10 @@ table tr th { font-weight: bold; padding-right: 0.5em; }
 }
 
 #contentwrap {
-	width: 720px;
+	width: 710px;
 	float: left;
 	position: relative;
+	padding: 0px 00px 0px 0px !important;
 }
 
 #branding {
@@ -68,7 +69,7 @@ table tr th { font-weight: bold; padding-right: 0.5em; }
 	text-decoration: none;
 }
 #nav {
-	background-color: #e5e5e5;
+	background-color: #f0f0f0;
 	margin-top: 0.5em;
 	font-size: 1.5em;
 	z-index: -1;
@@ -82,7 +83,7 @@ ul#menu, ul#priority_menu {
 	list-style-type: none;
 }
 ul#priority_menu {
-	background-color: #e5e5e5;
+	background-color: #f0f0f0;
 	text-align: center;
 }
 ul#menu li, ul#menu_sub li, ul#menu_third li, ul#priority_menu li { 
@@ -103,7 +104,7 @@ ul#menu li, ul#menu_sub li, ul#menu_third li, ul#priority_menu li {
 .tab_body {
 	line-height: 1.4em;
 	display: none;
-	background-color: #e5e5e5;
+	background-color: #f0f0f0;
 }
 
 ul#menu li .tab_header {
@@ -191,7 +192,7 @@ ul#menu li.tab7 div.tab_body {
 ul#menu li .tab_body {
 	border: 1px solid #666;
 	border-top: 0px;
-	background: #e5e5e5;
+	background: #f0f0f0;
 }
 
 /* second nav */
@@ -200,7 +201,7 @@ ul#menu li .tab_body {
 	font-size: 1.2em;	
 }
 ul#menu_sub { 
-	background-color: #e5e5e5;
+	background-color: #f0f0f0;
 	text-align: left;
 	margin: 0px;
 	margin-top: 0.5em; 
@@ -223,7 +224,7 @@ ul#menu_sub li.mega .tab_header a {
 
 /* third nav */
 #nav_third {
-	background-color: #e5e5e5;
+	background-color: #f0f0f0;
 	margin-top: 0.5em;
 	z-index: -1;	
 	font-size: 1.1em;
@@ -297,10 +298,14 @@ ul#priority_menu li.tab9 div.tab_body {
 }
 
 /* Þingferlar */
-.althingi_process_container {  width: 540px; margin: 1em 0em !important; padding: 0.5em 0em !important; border-bottom: 3px solid #e5e5e5 !important; }
+.althingi_process_container {  width: 550px; margin: 1em 0em !important; padding: 0.5em 0em !important; border-bottom: 3px solid #e5e5e5 !important; }
 .althingi_process_container h3 { background: #f5f5f5 !important; margin: 0px; margin-top: 1em; }
 .althingi_process_container h2 { display: inline !important; width: 200px !important; clear: left !important; padding: 0.5em; padding-top: 0em; margin: 0px; }
 .althingi_process_container p { display: inline; }
 .althingi_process_container a.extlink { display: inline-block; float: right; padding: 0.5em; }
-.althingi_process_container table { width: 540px !important; border: 1px solid #f5f5f5; border-collapse: separate !important; border-spacing: 0 !important; }
+.althingi_process_container table { width: 550px !important; border: 1px solid #f5f5f5; border-collapse: separate !important; border-spacing: 0 !important; }
 .althingi_process_container table tr.even td { background: #f5f5f5; }
+
+/* Hliðarstikan */
+#search_priorities form input { width: 170px; font-size: 10px; }
+#your_priorities table { width: 200px;}
