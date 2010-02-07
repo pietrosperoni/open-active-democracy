@@ -77,7 +77,8 @@
 			</thead>
 			<tbody>
 			<% discussions.each do |discussion| %>
-				<tr class="<%= cycle("even", "odd", :name => "zebra") -%>">
+			    <% cycle_class = cycle("even", "odd", :name => "zebra") -%>
+				<tr class="<%=cycle_class-%>">
 					<td>
 						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
 						<%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
@@ -93,7 +94,7 @@
 					</td>
 				</tr>
 				<% if discussion.process_speech_videos.has_any? %>
-				<tr>
+				<tr class="<%=cycle_class-%>">
 					<td colspan=4>
 						<%= render :partial => "priority_processes/process_discussion_videos", :locals => {:discussion=> discussion} %>
 					</td>

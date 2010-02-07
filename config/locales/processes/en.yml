@@ -3,6 +3,11 @@
 
 en:
   processes:
+      name: "Processes Name"
+      all_latest_video_discussion: "All latest video discussions"
+      most_popular_videos: "Most popular videos"      
+      latest_processes: "Latest processes"
+      latest_process_documents: "Latest Process Documents"      
       shows_all:
            title: "Process"
       process_documents:

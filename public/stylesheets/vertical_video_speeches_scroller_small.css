@@ -4,8 +4,8 @@
 div.scrollable_small {  
 	position:relative;
 	overflow:hidden;
-	width: 649px; 
-	height:62px;	
+	width: 487px; 
+	height:62px;
 }
 
 #latest_videos_thumbs h3 {
@@ -80,7 +80,7 @@ a.prev, a.next, a.prevPage, a.nextPage {
 	height:18px;
 	background:url(/images/scroller/left.png) no-repeat;
 	float:left;
-	margin:17px 10px;
+	margin:5px 5px;
 	cursor:pointer;
 }
 
@@ -107,7 +107,7 @@ a.next, a.nextPage {
 
 /* position and dimensions of the navigator */
 div.navi {
-	margin-left:350px;
+	margin-left:250px;
 	width:200px;
 	height:20px;
 }
