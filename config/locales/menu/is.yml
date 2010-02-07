@@ -2,8 +2,8 @@ is:
     menu:
         logout: "Útskráning"
         about:
-            name: "Hugmyndaráðuneytið"
-            site: "Um Hugmyndaráðuneytið"
+            name: "Skuggaþing"
+            site: "Um Skuggaþing"
             faq: "Spurt & Svarað"
             rules: "Reglur fyrir vefinn"
             privacy: "Reglur um friðhelgi"
