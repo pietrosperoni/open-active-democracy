@@ -34,7 +34,7 @@
 <a class="next<%=@latest_speech_discussions.length<5 ? "disabled" : ""%>"></a>
 <table width="100%">
     <tr align="left">
-        <td align="left" style="padding-left:130px">
+        <td align="left" style="padding-left:70px">
             <% form_tag("/process_speech_videos/search?priority_id=#{@priority.id}") do -%>
             <b><%=label_tag t(:search_by_person) %></b>
             <%=text_field_tag 'search_query' %>
@@ -47,7 +47,7 @@
     jQuery.noConflict();
     jQuery(function(){
         jQuery("div.scrollable_medium").scrollable({
-            size: 4,
+            size: 3,
             items: '#latest_video_discussion_thumbs',
             hoverClass: 'hover'
         });

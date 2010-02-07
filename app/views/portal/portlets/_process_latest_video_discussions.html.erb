@@ -13,7 +13,6 @@
 		<% @latest_speech_discussions.each do |process_discussion| %>
         <div onclick="window.location = '/process_speech_videos/<%=process_discussion.process_speech_videos.get_first_published.id%>'">
             <img src="<%=process_discussion.process_speech_videos.get_random_published.get_playlist_image_url("small")%>" />
-            <img src="<%=process_discussion.process_speech_videos.get_random_published.get_playlist_image_url("small")%>" />
 			<h3><%=latest_video_speech_title(process_discussion.process_speech_videos.get_random_published) %></h3>
             <p>
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
@@ -45,7 +44,7 @@
 </script>
 <table width="100%">
     <tr align="left">
-        <td align="left" style="padding-left:110px;padding-top:10px;">
+        <td align="left" style="padding-left:45px;padding-top:7px;">
             <% form_tag('/process_speech_videos/search') do -%>
             <b><%=label_tag t(:search_by_person) %></b>
             <%=text_field_tag 'search_query' %><%= submit_tag t(:search) -%>

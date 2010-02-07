@@ -4,7 +4,7 @@
 div.scrollable_medium {  
 	position:relative;
 	overflow:hidden;
-	width: 645px; 
+	width: 484px; 
 	height:120px;	
 }
 
@@ -80,7 +80,7 @@ a.prev, a.next, a.prevPage, a.nextPage {
 	height:18px;
 	background:url(/images/scroller/left.png) no-repeat;
 	float:left;
-	margin:55px 10px;
+	margin:55px 5px;
 	cursor:pointer;
 }
 
@@ -107,7 +107,7 @@ a.next, a.nextPage {
 
 /* position and dimensions of the navigator */
 div.navi {
-	margin-left:350px;
+	margin-left:250px;
 	width:200px;
 	height:20px;
 }
