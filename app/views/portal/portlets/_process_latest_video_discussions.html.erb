@@ -1,6 +1,5 @@
+<% cache(["portlets_process_latest_video_discussions",I18n.locale], :expires_in => 5.minutes) do %>
 <% @latest_speech_discussions = ProcessSpeechMasterVideo.get_latest_twenty %>
-<% @latest_speech_discussions += @latest_speech_discussions%>
-<% @latest_speech_discussions += @latest_speech_discussions%>
 <% if @latest_speech_discussions.length > 0 %>
 <%= javascript_include_tag 'jquery.mousewheel' %>
 <%= javascript_include_tag 'jquery.scrollable-1.0.1.min' %>
@@ -54,4 +53,5 @@
         </td>
     </tr>
 </table>
+<% end %>
 <% end %>
