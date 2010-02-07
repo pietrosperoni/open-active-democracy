@@ -8,11 +8,15 @@ jQuery(document).ready(function() {
 			jQuery(this).siblings("div").slideDown();
 			jQuery(this).parent().addClass("shown");
 			jQuery(this).parent().removeClass("hidden");
+			jQuery(this).siblings().children("span.showorhide").text("fela");
+			jQuery(this).children("span.showorhide").text("fela");
 		}
 		else {
 			jQuery(this).siblings("div").slideUp();
 			jQuery(this).parent().addClass("hidden");
 			jQuery(this).parent().removeClass("shown");
+			jQuery(this).siblings().children("span.showorhide").text("sjá");
+			jQuery(this).children("span.showorhide").text("sjá");
 		}
 	});
 });
