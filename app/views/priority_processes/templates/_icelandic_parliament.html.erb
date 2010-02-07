@@ -5,6 +5,7 @@
 	<% process_documents = current_process.process_documents %>
 	<% discussions = current_process.process_discussions %>
 	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
+	<p>(Smelltu hér til að sjá <%= current_process.stage_sequence_number %> umræðu málsins)</p>
 	<%=link_to h(current_process.priority.external_link), current_process.external_link, {:target => "_blank", :class => "extlink"}%>
 	<% unless process_documents.empty? %>
 	<div class="althingi_process_documents">
@@ -31,7 +32,7 @@
 			</thead>
 			<tbody>
 				<% process_documents.each do |document| %>
-				<tr>
+				<tr class="<%= cycle("even", "odd", :name => "zebra") -%>">
 					<td>
 						<%=document.external_date.strftime("%d.%m.%Y") %>
 					</td>
@@ -51,6 +52,7 @@
 			</tbody>
 		<% end %>
 		</table>
+		<% reset_cycle("zebra") %>
 	</div>
 	<% end %>
 	<% unless discussions.empty? %>
@@ -75,7 +77,7 @@
 			</thead>
 			<tbody>
 			<% discussions.each do |discussion| %>
-				<tr>
+				<tr class="<%= cycle("even", "odd", :name => "zebra") -%>">
 					<td>
 						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
 						<%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
@@ -100,6 +102,7 @@
 			<% end #discussions -%>
 			</tbody>
 		</table>
+		<% reset_cycle("zebra") %>
 	</div>
 	<% end %>
 		
