@@ -102,14 +102,14 @@
 					<%= render :partial => "priorities/documents", :locals => {:documents => @neutral_documents, :document_value => 2}%>
 				<% end %>										
 			<% else %>
-				<% if @priority.up_points_count > 0 %>
-					<%= render :partial => "priorities/points", :locals => {:points => @endorser_points, :point_value => 1, :qualities => @qualities}%>
-				<% end %>				
-				<% if @priority.down_points_count > 0 %>
-					<%= render :partial => "priorities/points", :locals => {:points => @opposer_points, :point_value => -1, :qualities => @qualities}%>
-				<% end %>
-				<% if @priority.neutral_points_count > 0 %>
-					<%= render :partial => "priorities/points", :locals => {:points => @neutral_points, :point_value => 2, :qualities => @qualities}%>
+				<% if @priority.up_documents_count > 0 %>
+					<%= render :partial => "priorities/documents", :locals => {:documents => @endorser_documents, :document_value => 1}%>
+				<% end %>		
+				<% if @priority.down_documents_count > 0 %>
+					<%= render :partial => "priorities/documents", :locals => {:documents => @opposer_documents, :document_value => -1}%>
+				<% end %>								
+				<% if @priority.neutral_documents_count > 0 %>
+					<%= render :partial => "priorities/documents", :locals => {:documents => @neutral_documents, :document_value => 2}%>
 				<% end %>
 			<% end %>
 			
