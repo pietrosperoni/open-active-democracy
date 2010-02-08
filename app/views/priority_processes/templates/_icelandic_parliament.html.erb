@@ -1,7 +1,6 @@
 <% current_process = @priority_process %>
 <% while current_process %>
 <div class="althingi_process_container">
-	<% puts current_process %>
 	<% process_documents = current_process.process_documents %>
 	<% discussions = current_process.process_discussions %>
 	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
