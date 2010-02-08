@@ -40,7 +40,8 @@ class ProcessSpeechMasterVideo < ActiveRecord::Base
     ProcessSpeechVideo.find(:all, :conditions=>"published = 1", :limit=>20, :select => 'DISTINCT(process_discussion_id)', 
                          :include=>"process_discussion", :order=>"updated_at DESC").each do |process_discussion_include|
       process_discussion = process_discussion_include.process_discussion
-      @latest_speech_discussions << process_discussion unless priority and (process_discussion.priority_process.priority.id != priority.id)
+      @latest_speech_discussions << process_discussion unless (priority and (process_discussion.priority_process.priority.id != priority.id)) or 
+                                    not process_discussion.process_speech_videos.all_done?
     end
     @latest_speech_discussions
   end

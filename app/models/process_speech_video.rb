@@ -112,6 +112,10 @@ class ProcessSpeechVideo < ActiveRecord::Base
     self.process_discussion.priority_process
   end
   
+  def self.top_20
+    self.find_by_sql("select process_speech_videos.id, process_speech_videos.title, avg(rating) AS avg_rating, count(rating) AS count_rating from process_speech_videos LEFT JOIN ratings ON ratings.rateable_id = process_speech_videos.id GROUP BY rateable_id ORDER BY avg_rating DESC, count_rating DESC limit 20")
+  end
+  
   private
 
   def time_to_seconds(time)

@@ -1,7 +1,4 @@
 <% @latest_speech_discussions = ProcessSpeechMasterVideo.get_latest_twenty(@priority) %>
-<% @latest_speech_discussions += @latest_speech_discussions%>
-<% @latest_speech_discussions += @latest_speech_discussions%>
-<% @latest_speech_discussions += @latest_speech_discussions%>
 <% if @latest_speech_discussions.length > 0 %>
 <%= javascript_include_tag 'jquery.mousewheel' %>
 <%= javascript_include_tag 'jquery.scrollable-1.0.1.min' %>
@@ -16,7 +13,7 @@
 <div class="scrollable_medium">
     <div id="latest_video_discussion_thumbs">
 		<% @latest_speech_discussions.each do |process_discussion| %>
-        <div onclick="window.location = 'http://<%=request.host.downcase%>/process_speech_videos/<%=process_discussion.process_speech_videos.get_first_published.id%>'">
+        <div onclick="window.location = '/process_speech_videos/<%=process_discussion.process_speech_videos.get_first_published.id%>'">
             <img src="<%=process_discussion.process_speech_videos.get_random_published.get_playlist_image_url("small")%>" />
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
