@@ -67,7 +67,7 @@ class SpeechVideoProcessing < VideoProcessing
       inpoint_s = inpoint_ms/1000
       @@shell.execute("ffmpeg -ss #{[inpoint_s/3600, inpoint_s/60 % 60, inpoint_s % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} \
                        -t #{[duration_s/3600, duration_s/60 % 60, duration_s % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} \
-                       -i #{master_video_filename} #{speech_video_first_tmp_filename}")
+                       -i #{master_video_filename} -acodec copy -vcodec copy #{speech_video_first_tmp_filename}")
     end
 #    @@shell.execute("flvtool2 -M -c -a -k -m #{cut_points.inspect.gsub(" ","").gsub("\"","\\\"")} #{master_video_filename}")
 
