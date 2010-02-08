@@ -5,7 +5,7 @@ is:
   processes:
       name: "Alþingi"
       all_latest_video_discussions: "Nýustu vídeó ræður í þessu kerfi"
-      most_popular_videos: "Vinsælustu ræðurnar"      
+      most_popular_videos: "Bestu ræðurnar"      
       latest_processes: "Nýjustu umræður"
       latest_process_documents: "Nýjustu þingskjöl"      
       show_all:
