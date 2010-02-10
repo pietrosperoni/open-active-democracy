@@ -527,7 +527,7 @@ del {
 	padding-top: 9px;
 }
 .priority_name, .priority_name_add {
-  	font-size: 1.4em;
+  	font-size: 1.1em;
 	font-weight: bold;
 	margin-bottom: 2px;	
 	line-height: 1em;
@@ -1054,7 +1054,7 @@ del {
 	padding: 0px 0px 3px 0px;
 }
 #nav {
-	padding: 5px 5px 2px 5px;
+/*	padding: 5px 5px 2px 5px;*/
 	font-size: 1.3em;
 	z-index: -1;
 }
@@ -1171,7 +1171,7 @@ ul#menu li.tab7 div.tab_body {
 #nav_sub {
 	z-index: -1;	
 	font-size: 1.2em;	
-	padding: 0px 0px 2px 10px;
+	padding: 0px 0px 2px 0px;
 	margin: 1px 0px 0px 0px;
 }
 ul#menu_sub { 
@@ -1195,6 +1195,7 @@ ul#menu_sub li.mega .tab_header a {
 /* second nav */
 
 /* third nav */
+/*
 #nav_third {
 	z-index: -1;	
 	padding: 0px 0px 2px 10px;
@@ -1219,6 +1220,8 @@ ul#menu_third li.mega .tab_header a {
 	text-decoration: none;	
 	background: transparent url('/images/mega_down_arrow.gif') center right no-repeat;	
 }
+*/
+
 /* third nav */
 
 /* priority nav */
