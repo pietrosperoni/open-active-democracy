@@ -81,7 +81,7 @@
 				<tr class="<%=cycle_class-%>">
 					<td>
 						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
-						<%=link_to t(:listen), discussion.listen_url, {:target => "_blank"} %>
+						<%=link_to t(:listen), "http://www.althingi.is"+discussion.listen_url, {:target => "_blank"} %>
 					</td>
 					<td>
 						<%=discussion.meeting_date.strftime("%d.%m.%Y") %>

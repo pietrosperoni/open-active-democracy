@@ -89,41 +89,6 @@ AutoHtml.add_filter(:redcloth) do |text|
   end
 end
 
-class String
-  def parameterize_full
-    str=self.to_s.gsub("Ð","D").gsub("Þ","Th").gsub("Æ","Ae").gsub("ð","d").gsub("þ","th").gsub("æ","ae")
-    accents = {
-      ['á','à','â','ä','ã'] => 'a',
-      ['Ã','Ä','Â','À','Á'] => 'A',
-      ['é','è','ê','ë'] => 'e',
-      ['Ë','É','È','Ê'] => 'E',
-      ['í','ì','î','ï'] => 'i',
-      ['Í','Î','Ì','Ï'] => 'I',
-      ['ó','ò','ô','ö','õ'] => 'o',
-      ['Õ','Ö','Ô','Ò','Ó'] => 'O',
-      ['ú','ù','û','ü'] => 'u',
-      ['Ú','Û','Ù','Ü'] => 'U',
-      ['Ý'] => 'Y',
-      ['ý'] => 'y',
-      ['ç'] => 'c', ['Ç'] => 'C',
-      ['ñ'] => 'n', ['Ñ'] => 'N'
-    }
-    accents.each do |ac,rep|
-      ac.each do |s|
-        str = str.gsub(s, rep)
-      end
-    end
-    str = str.gsub(/[^a-zA-Z0-9 ]/,"")
-    str = str.gsub(/[ ]+/," ")
-    str = str.gsub(/ /,"-")
-    str = str.downcase
-  end
-  
-  def downcase_is
-    self.to_s.gsub("Ð","ð").gsub("Þ","þ").gsub("Æ","æ").gsub("Á","á").gsub("É","é").gsub("Í","í").gsub("Ý","ý").gsub("Ú","ú").gsub("Ó","ó").gsub("Ö","ö").downcase
-  end
-end
-
 # RAILS 2.3.2
 # this is a temporary hack to get around the fact that rails puts memorystore in front of memcached
 # won't freeze the objects any more
