@@ -19,7 +19,7 @@ class ProcessSpeechVideosController < ApplicationController
   
   def search
     @priority_filter = params[:priority_id] ? "priority_filter_#{params[:priority_id]}" : "no_priority_filter"
-    @search_query = params[:search_query].downcase
+    @search_query = params[:search_query].downcase_is
       #TODO: Do the rejection with mysql
     unless fragment_exist?(["process_video_search", @priority_filter, @search_query.gsub(".",""), I18n.locale])
       if params[:priority_id]
