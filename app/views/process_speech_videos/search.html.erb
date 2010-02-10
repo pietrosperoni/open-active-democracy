@@ -1,3 +1,7 @@
+<% cache(["process_video_search", @priority_filter, @search_query.gsub(".",""), I18n.locale], :expires_in => 30.minutes) do -%>
+<%= javascript_include_tag 'jquery.cluetip' %>
+<%= stylesheet_link_tag 'jquery.cluetip' %>
+
 <h1><%=t :search_results_for%>: <%=params[:search_query] %> <%= params[:priority_id] ? "- #{Priority.find(params[:priority_id]).name}" : ""%></h1>
 <% if  @process_speech_videos.length > 0%>
 	<% @process_speech_videos.group_by(&:get_process).sort {|a,b| a[0].process_discussions.find(:last).meeting_date <=> b[0].process_discussions.find(:last).meeting_date}.each do |my_process,videos| %>
@@ -7,7 +11,7 @@
 		    	<% counter = 0 %>
 		        <% videos.each do |video| %>
 		          <td>
-		            <%=video.get_image_tag("small") %>
+		            <%=video.get_image_tag("nopadding", "smaller","results_video_#{video.id}_#{video.process_discussion.id}",true)%>
 		          </td>
 				  <% counter += 1 %>
 				  <% if counter>7%>
@@ -17,7 +21,20 @@
 		        <% end %>
 		    </tr>
 		</table>
+		<script type="text/javascript">
+		    jQuery(function(){
+		 	  <% videos.each do |video| %>
+		        jQuery("a.results_video_<%=video.id%>_<%=video.process_discussion.id%>").cluetip({
+					splitTitle: "|",
+					clickThrough: true,
+					arrows: true,
+					positionBy: 'mouse'
+				});
+			  <% end %>
+		    });
+		</script>
 	<% end %>
 <% else %>
 <%=t :no_search_results%>
+<% end %>
 <% end %>
