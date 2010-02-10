@@ -348,7 +348,11 @@ div.meta { width: 120px !important; }
 .container_12 td.against, .container_13 td.against { padding-left: 1em; }
 .container_12.newpoints { margin-top: 1em; }
 .point_item h3 { margin: 1em 0px 0px 0px !important; }
- 
+
+.container_13 .grid_41 {
+width:260px !important;
+}
+
  /* Below line for Rok */
  
  h2
@@ -424,3 +428,13 @@ padding-top:3px;
 border: 1px solid #f5f5f5;
 margin: 0 !important;
 }
+
+/* 4 col fix for Mal - Rok */
+
+
+/*
+#yfirsyn
+{
+background: red;
+}
+*/
