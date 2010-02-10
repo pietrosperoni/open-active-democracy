@@ -1,5 +1,5 @@
 <% cache(["portlets_process_most_popular_videos",I18n.locale], :expires_in => 5.minutes) do -%>
-<%= javascript_include_tag 'jquery.cluetip.min' %>
+<%= javascript_include_tag 'jquery.cluetip' %>
 <%= stylesheet_link_tag 'jquery.cluetip' %>
 <% @top_videos = ProcessSpeechVideo.top(9) %>
 <% if @top_videos.length > 0 %>
