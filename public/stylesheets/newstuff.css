@@ -27,7 +27,8 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #contentwrap {
-	width: 710px;
+	width: 720px;
+	margin-left: 7px;
 	float: left;
 	position: relative;
 	padding: 0px 00px 0px 0px !important;
@@ -39,12 +40,21 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #branding a {
-	padding: 10px 15px;
+	background-color: #e5e5e5;
+	color: #e5e5e5;
+/*	padding: 10px 15px;
 	display: block;
 	font-weight: bold;
 	color: #fff;
 	text-decoration: none;
+*/}
+
+#branding a  img
+{
+padding: 0 !important;
+margin: 0 !important;
 }
+
 
 #content_text {
 	padding: 15px 0px 15px 0px;
@@ -323,3 +333,69 @@ div.meta { width: 120px !important; }
 .container_12 td.against, .container_13 td.against { padding-left: 1em; }
 .container_12.newpoints { margin-top: 1em; }
 .point_item h3 { margin: 1em 0px 0px 0px !important; }
+ 
+ /* Below line for Rok */
+ 
+ h2
+{
+font-size: 1em;
+height: 1.5em;
+border-bottom:1px solid #CCCCCC;
+font-weight:bold;
+padding-top: 15px;
+display:block;
+margin:0;	
+}
+
+.below_line
+ {
+color: gray;
+margin: 3px 0 3px 5px;
+font-size:10px;
+font-weight:normal;
+padding:0;
+text-align: right;
+ }
+ 
+ /* Mal header */
+#hp_intro a, h1 #hp_intro {
+  color:#333;
+  font-size: 15px;
+  line-height: 120% !important;
+}
+
+.intro
+{
+  color:#333;
+  font-size: 14px;
+  line-height: 120% !important;
+}
+
+
+/* More stuff */
+
+.point_content_detail p
+{
+font-size: 0.8em;
+line-height: 100% !important;
+}
+
+.point_item p a
+{
+font-size: 12px !Important;	
+font-weight: bold !important;
+}
+
+/* Login box items */
+
+.email input, .password input, .submit input
+{
+margin-top: 3px;
+width: 80px; 
+}
+
+.submit input
+{
+margin-top: 3px;
+width: 120px; 
+}

@@ -224,6 +224,7 @@ h4 {
 	background-color: #3b5998;
 	font-size: 1.2em;
 	padding: 5px;
+	margin-top: 15px;
 	text-align: center;
 	border-right: solid 1px #0e1f5b;
 	border-bottom: solid 1px #0e1f5b;	
@@ -505,9 +506,11 @@ del {
 	margin-right: 5px;
 }
 .heading {
-	font-size: 0.8em;
-	text-transform:uppercase;
-	margin-bottom: 0px;
+	font-size: 12px;
+/*	text-transform:uppercase;*/
+	color: #333 !important;
+	margin-bottom:3px;
+	font-weight: bold !Important;
 }
 .happening_heading {
 	font-weight: bold;
