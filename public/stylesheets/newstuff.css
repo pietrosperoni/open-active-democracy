@@ -325,3 +325,6 @@ div.meta { width: 120px !important; }
 .container_12 td.against, .container_13 td.against { padding-left: 1em; }
 .container_12.newpoints { margin-top: 1em; }
 .point_item h3 { margin: 1em 0px 0px 0px !important; }
+
+/* Stjörnugjöf */
+.star-rating_smaller li.current-rating, .star-rating_smaller li a:hover, .star-rating_smaller{ background-image: url(/images/star_rating_smaller.png) !important; }
