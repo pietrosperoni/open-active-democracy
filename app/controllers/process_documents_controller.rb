@@ -31,10 +31,10 @@ class ProcessDocumentsController < ApplicationController
   # GET /process_documents/1
   # GET /process_documents/1.xml
   def show
-    @document = ProcessDocument.find(params[:id], :include => [:process_document_elements])
+    @document = ProcessDocument.find(params[:id])
+    @priority = @document.priority_process.priority
     unless fragment_exist?(@document)
       @document.reload(:include => [:process_document_elements])
-      @priority = @document.priority_process.priority
       @page_title = t('processes.process_documents.title', :priority_name => @priority.name) 
     end
     respond_to do |format|
