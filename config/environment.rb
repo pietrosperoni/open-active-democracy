@@ -90,7 +90,7 @@ AutoHtml.add_filter(:redcloth) do |text|
 end
 
 class String
- def parameterize_full
+  def parameterize_full
     str=self.to_s.gsub("Ð","D").gsub("Þ","Th").gsub("Æ","Ae").gsub("ð","d").gsub("þ","th").gsub("æ","ae")
     accents = {
       ['á','à','â','ä','ã'] => 'a',
@@ -117,6 +117,10 @@ class String
     str = str.gsub(/[ ]+/," ")
     str = str.gsub(/ /,"-")
     str = str.downcase
+  end
+  
+  def downcase_is
+    self.to_s.gsub("Ð","ð").gsub("Þ","þ").gsub("Æ","æ").gsub("Á","á").gsub("É","é").gsub("Í","í").gsub("Ý","ý").gsub("Ú","ú").gsub("Ó","ó").gsub("Ö","ö").downcase
   end
 end
 
