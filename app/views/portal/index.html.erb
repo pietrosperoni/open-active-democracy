@@ -31,7 +31,7 @@
 <div id="main-dialogues-div">
     <%= render(:partial=>'portal/dialogues') %>
 </div>
-<%= render :partial => "priorities/form" %>
+<%= render :partial => "priorities/form", :locals=>{:info_text=>true} %>
 <div id="portal-menu-div">
     <%= render(:partial=>'portal/menu') %>
 </div>

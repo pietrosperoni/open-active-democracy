@@ -1,4 +1,4 @@
-<% if params[:q] %>
+<% if params[:q] or info_text %>
 	<p><%= t('priorities.new.suggest') %></p>
 <% end %>
 <% form_for(Priority.new) do |f| %>
