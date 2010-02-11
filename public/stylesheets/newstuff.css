@@ -327,4 +327,4 @@ div.meta { width: 120px !important; }
 .point_item h3 { margin: 1em 0px 0px 0px !important; }
 
 /* Stjörnugjöf */
-.star-rating_smaller li.current-rating, .star-rating_smaller li a:hover, .star-rating_smaller{ background-image: url(/images/star_rating_smaller.png) !important; }
+.star-rating_smaller li.current-rating, .star-rating_smaller li a:hover, .star-rating_smaller{ background-image: url(/images/star_rating_smaller_w.png) !important; }
