@@ -96,7 +96,11 @@ h4 {
 	margin-bottom: 0px;
 }
 #priority_name {
-	font-size: 1.5em;
+	font-size: 16px;
+	height: 24px;
+	width: 330px;
+	margin-left: 0px !Important;
+	margin-right: 10px !Important;
 }
 #user_name {
 	font-size: 1.3em;
@@ -158,8 +162,8 @@ h4 {
 }
 .suggest_button {
 	outline:none;	
-	font-size: 1.1em;
-	padding: 5px 10px 5px 10px;
+	font-size: 14px;
+	padding: 5px 10px 6px 10px;
 	font-weight: bold;
 	letter-spacing: 0.5px;
 	text-align:center;
@@ -322,7 +326,7 @@ h4 {
 }
 
 #hp_intro {
-	font-size: 1.6em;
+	font-size: 16px;
 	font-weight: bold;
 	margin-bottom: 4px;
 	line-height: 22px;
@@ -524,10 +528,10 @@ del {
 }
 .priority_listing {
 	margin-bottom: 4px;
-	padding-top: 9px;
+	padding-top: 5px;
 }
 .priority_name, .priority_name_add {
-  	font-size: 1.1em;
+  	font-size: 12px;
 	font-weight: bold;
 	margin-bottom: 2px;	
 	line-height: 1em;
@@ -540,9 +544,10 @@ del {
 .priority_add  {
 	font-weight: bold;
 	text-transform: uppercase;
-	font-size: 0.7em;
+	font-size: 10px;
 	padding: 0px 1px 0px 2px;
 	margin-right: 3px;
+	margin-top: 3px;
 }
 .partner_logo {
 	padding: 10px;
@@ -724,8 +729,9 @@ del {
 }
 
 .priority_position {
-	font-size: 1.8em;
-	padding-top: 9px;
+	font-size: 16px;
+	font-weight: bold;
+	padding-top: 13px;
 }
 .priority_added {
 	padding-top: 10px;
@@ -776,12 +782,12 @@ del {
 	top: 11px;	
 }
 .position_new {
-	font-size: 0.8em;	
+	font-size: 11px;;	
 	font-weight: bold;
 	text-align: center;
 	position: relative;
 	top: 9px;	
-	padding-top: 3px;	
+	padding-top: 4px;	
 }
 .priority_rank_detail {
 	margin-bottom: 5px;
