@@ -5,6 +5,6 @@
 	<%= f.text_field :name, :size => 40, :maxlength => 60, :autocomplete =>"off" %>	
 	<%= f.submit t('priorities.new.submit'), :class => "suggest_button" %>
 <% end %>
-<% if params[:q] or info_text %>
+<% if params[:q] %>
 	<p><%= t('priorities.new.suggest') %></p>
 <% end %>
