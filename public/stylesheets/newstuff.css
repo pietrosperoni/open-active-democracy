@@ -472,3 +472,19 @@ background: red;
 {
 letter-spacing: normal !important;
 }
+
+
+.tab_body 
+{
+border: 1px solid #7a7878 !important;
+margin-top: 2px !important;
+}
+
+
+ul#menu li.mega .tab_header a:hover, ul#menu li.mega.hovering .tab_header a, ul#menu_sub li.mega .tab_header a:hover, ul#menu_sub li.mega.hovering .tab_header a, ul#menu_third li.mega .tab_header a:hover, ul#menu_third li.mega.hovering .tab_header a, ul#priority_menu li.mega .tab_header a:hover, ul#priority_menu li.hovering .tab_header a {
+-moz-background-clip:border !important;
+-moz-background-inline-policy:continuous !important;
+-moz-background-origin:padding !important;
+background: #7a7878 none repeat scroll 0 0 !important;
+color:#FFFFFF;
+}
