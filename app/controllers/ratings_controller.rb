@@ -62,7 +62,7 @@ class RatingsController < ApplicationController
       
     # This means the user is doing something funky...naughty naughty...  
     if bad_class  
-      redirect_to home_url  
+      redirect_to :controller=>"portal"  
       return false  
     end
     true  

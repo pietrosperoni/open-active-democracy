@@ -956,9 +956,9 @@ class User < ActiveRecord::Base
     return if fb_session.expired?
     name = fb_session.user.name
     # check for existing account with this name
-    if User.find_by_login(name)
-     name = name + " FB"
-    end
+#    if User.find_by_login(name)
+#     name = name + " FB"
+#    end
     u = User.new(
      :login => name,
      :first_name => fb_session.user.first_name,
