@@ -42,7 +42,7 @@ class SpeechVideoProcessing < VideoProcessing
       return false
     end
   end
-  
+
   def self.convert_all_speeches_to_flash(master_video)
     master_video_filename = "#{RAILS_ROOT}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.flv"
     cut_points = []

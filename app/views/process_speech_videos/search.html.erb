@@ -1,4 +1,9 @@
 <% cache(["process_video_search", @priority_filter, @search_query.gsub(".",""), I18n.locale], :expires_in => 30.minutes) do -%>
+<% if @priority %>
+	<%= render :partial => "/priorities/header" %>
+	<%= render :partial => "/priorities/nav" %>
+<% end %>
+
 <%= javascript_include_tag 'jquery.cluetip' %>
 <%= stylesheet_link_tag 'jquery.cluetip' %>
 
