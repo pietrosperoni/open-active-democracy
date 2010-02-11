@@ -6,6 +6,11 @@ html, body {
 a {
 	color: #000;
 }
+a:hover { text-decoration: none; }
+
+#contentwrap a { text-decoration: underline; }
+#contentwrap a:hover { color: #333; }
+#toolbar a, #priority_menu a { border-bottom: none; }
 
 h1 { font-size: 1.7em; line-height: 2em; }
 h2 { font-size: 1.5em; font-weight: bold; }
@@ -76,7 +81,7 @@ hr { border-top: 3px solid #e5e5e5; }
 	z-index: -1;
 }
 
-#footer { clear: both; }
+#footer { clear: both; width: 960px; }
 
 ul#menu, ul#priority_menu {
 	text-align: left; 
@@ -303,7 +308,7 @@ ul#priority_menu li.tab9 div.tab_body {
 .althingi_process_container h3 { background: #f5f5f5 !important; margin: 0px; margin-top: 1em; }
 .althingi_process_container h2 { display: inline !important; width: 200px !important; clear: left !important; padding: 0.5em; padding-top: 0em; margin: 0px; }
 .althingi_process_container p { display: inline; }
-.althingi_process_container a.extlink { display: inline-block; float: right; padding: 0.5em; }
+.althingi_process_container a.extlink { display: inline-block; float: right; padding: 0.5em; padding-bottom: 0px; margin-bottom: 0px; }
 .althingi_process_container table { width: 550px !important; border: 1px solid #f5f5f5; border-collapse: separate !important; border-spacing: 0 !important; }
 .althingi_process_container table tr.even td { background: #f5f5f5; }
 
