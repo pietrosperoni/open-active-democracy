@@ -151,6 +151,8 @@ ul#menu li .tab_header a {
 	padding: 3px 13px 3px 10px; 
 	margin-right: 0px; 
 	text-decoration: none;
+	letter-spacing: normal !important;
+	font-weight: normal !important;
 }
 
 ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_third li.hovering div.tab_body { 
@@ -232,6 +234,8 @@ ul#menu_sub li .tab_header a {
 	padding: 3px 10px; 
 	margin: 0px;
 	text-decoration: none;
+	letter-spacing: normal !important;
+	font-weight: normal !important;
 }
 
 ul#menu_sub li {
@@ -265,6 +269,8 @@ ul#menu_third li .tab_header a {
 	padding: 3px 8px; 
 	margin-right: 0px; 
 	text-decoration: none;
+	letter-spacing: normal !important;
+	font-weight: normal !important;
 }
 
 ul#menu_third li{ 
@@ -460,3 +466,9 @@ background: red;
 }
 */
 
+
+
+.tab_body a
+{
+letter-spacing: normal !important;
+}
