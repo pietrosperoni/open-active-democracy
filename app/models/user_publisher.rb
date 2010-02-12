@@ -12,7 +12,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   
   def endorsement_template
     one_line_story_template "{*actor*} studdi <a href='{*priority_url*}'>{*priority_name*}</a> í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>"
-    short_story_template "{*actor*} studdi <a href='{*priority_url*}'>{*priority_name*}</a>  í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>", render(:partial => "priority")
+    short_story_template "{*actor*} studdi <a href='{*priority_url*}'>{*priority_name*}</a> í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>", render(:partial => "priority")
     action_links action_link("Skoða betur","{*priority_url*}")
   end
 
@@ -26,8 +26,8 @@ class UserPublisher < Facebooker::Rails::Publisher
   end
   
   def opposition_template
-    one_line_story_template "{*actor*} er á mót <a href='{*priority_url*}'>{*priority_name*}</a> í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>"
-    short_story_template "{*actor*} opposed <a href='{*priority_url*}'>{*priority_name*}</a>  í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>", render(:partial => "priority")
+    one_line_story_template "{*actor*} er á móti <a href='{*priority_url*}'>{*priority_name*}</a> í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>"
+    short_story_template "{*actor*} er á móti <a href='{*priority_url*}'>{*priority_name*}</a> í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>", render(:partial => "priority")
     action_links action_link("Skoða betur","{*priority_url*}")
   end
 
