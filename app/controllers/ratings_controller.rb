@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
 class RatingsController < ApplicationController
+  before_filter :login_required
   before_filter :get_class_by_name
 
   def rate
