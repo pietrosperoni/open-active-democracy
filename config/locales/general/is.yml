@@ -310,9 +310,9 @@ is:
                 title: "Leita í umræðuefnum hjá {{government_name}}" 
                 results: "Þessi rök fundust tengd leitarorðinu '{{query}}'" 
         points:
-            title: "Mál þín án umræðuefna" 
+            title: "Mál þín án raka" 
             needed:
-                empty: "All of your priorities have at least one talking point supporting your position." 
+                empty: "Öll þín mál hafa að minnsta kosti ein rök sem styðja þitt mál." 
         documents:
             title: "Mál þín án skjala" 
             needed:
@@ -1107,7 +1107,7 @@ is:
             name: "þín mál"
             title: "þín mál hjá {{government_name}}"
             prompt: "Bæta máli á skrána þína"
-            heading: "Mál {{user_name}}"
+            heading: "{{user_name}}"
             outro: "Þú getur líka fylgst með <a href='/news/your_priority_activities'>virkni</a> og <a href='/news/your_priority_discussions'>umræðum</a> um þín mál."            
         yours_finished:
             name: "Mál þín sem er lokið"
@@ -1198,7 +1198,7 @@ is:
             blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgangsmáli til að bæta þínu við."
             success: "Takk fyrir að bæta {{priority_name}} við"
             submit: "Búa til nýtt mál"
-            suggest: "Er eitthvað mál sem þér finnst að Alþingi ætti að taka upp? Smelltu því inn hér fyrir ofan. Skýr framsetning eykur undirtektir."
+            suggest: "Er eitthvað mál sem þér finnst að Alþingi ætti að taka upp?"
             click:
                 one: "Smelltu á <span class='priority_add'>STYÐJA</span> ef þetta mál hér neðar styður enn ásetning þinn."
                 other: "Smelltu á <span class='priority_add'>ENDORSE</span> ef eitthvert þessara mála styður ásetning þinn."
