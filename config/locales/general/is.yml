@@ -1387,7 +1387,7 @@ is:
             one: "{{position}}. mál, stutt af 1 aðila og {{oppose_count}} er/eru á móti."
             other: "{{position}}. mál, stutt af {{count}} aðila/aðilum og {{oppose_count}} er/eru á móti."
     tags:
-        title: "Öll {{tags_name}}"
+        title: "Allir flokkar"
         new:
             name: "Ný {{tags_name}}"
             title: "Bæta við {{tags_name}}"
