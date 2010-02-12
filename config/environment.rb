@@ -23,6 +23,7 @@ Rails::Initializer.run do |config|
   config.gem 'liquid'
   config.gem 'dweinand-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com/'
   config.gem 'facebooker', :version => '1.0.62'
+  config.gem 'newrelic_rpm'
   config.gem 'hoptoad_notifier'
   #config.gem 'curb', :version => '0.1.4'
   
