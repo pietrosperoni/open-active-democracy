@@ -885,7 +885,7 @@ is:
         your_priorities_created_obama:
             title: "Hvað {{official_user_name}} er að gera í málum sem þú hefur stofnað"
         your_priorities_created_changes:
-            title: "S&Y virkni í forgansmálum sem þú hefur stofnað"
+            title: "S&Y virkni í forganfsmálum sem þú hefur stofnað"
         your_priorities_created_discussions:
             title: "Umræður um mál sem þú hefur stofnað"
         your_priorities_created_points:
@@ -983,7 +983,7 @@ is:
         source: "Uppruni:"
         supporting: "Styð {{priority_name}}"
         priority:
-            intro: "Vinsamlegast segðu okkur afhverju við ættum að styðja eða vera á móti þessu máli með því að <a href='{{new_point_url}}'>bæta við rökum</a>. Þú getur líka lagt til annað forgansmál í stað þessa."
+            intro: "Vinsamlegast segðu okkur afhverju við ættum að styðja eða vera á móti þessu máli með því að <a href='{{new_point_url}}'>bæta við rökum</a>. Þú getur líka lagt til annað forgangsmál í stað þessa."
         intro:
             endorsed:
                 first: "Rök sem styðja {{priority_name}}:"
@@ -1195,18 +1195,18 @@ is:
             success: "Eyði varanlega {{priority_name}}. Þetta getur tekið nokkrar mínútur en það er háð hversu margir eru með eða á móti og þarf að fjarlægja."
         new:
             need_account: "First þarftu að fylla út þetta stutta form og samþykkja reglurnar, síðan geturðu byrjað að bæta þínum málum við {{target}}."
-            blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgansmáli til að bæta þínu við."
+            blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgangsmáli til að bæta þínu við."
             success: "Takk fyrir að bæta {{priority_name}} við"
             submit: "Búa til nýtt mál"
-            suggest: "Brennur eitthvað mál á þér? Smelltu því inn hér fyrir ofan. Skýr framsetning eykur undirtektir."
+            suggest: "Er eitthvað mál sem þér finnst að Alþingi ætti að taka upp? Smelltu því inn hér fyrir ofan. Skýr framsetning eykur undirtektir."
             click:
                 one: "Smelltu á <span class='priority_add'>STYÐJA</span> ef þetta mál hér neðar styður enn ásetning þinn."
                 other: "Smelltu á <span class='priority_add'>ENDORSE</span> ef eitthvert þessara mála styður ásetning þinn."
             check:
                 name: "Málið sem þú bættir við:"
                 one: "Áður en við bætum þínu mál við, vinsamlegast athugaðu hvort <b>{{priority_name}}</b> virki frekar. Stuðningur þin vegur þyngra í samfloti með öðrum."
-                other: "Áður en við bætum þínu máli við, vinsamlegast athugaðu hvort eitthvert annað forgansmál virki frekar.  Stuðningur þin vegur þyngra í samfloti með öðrum."
-        recent_activity: "Hvað er að gerast í þessu forgansmáli"
+                other: "Áður en við bætum þínu máli við, vinsamlegast athugaðu hvort eitthvert annað forgangsmál virki frekar.  Stuðningur þin vegur þyngra í samfloti með öðrum."
+        recent_activity: "Hvað er að gerast í þessu forgangsmáli"
         buried: "{{priority_name}} hefur grafist undir, Það mun ekki lengur sjást á listum."
         successful: "{{priority_name}} er nú merkt að hafi verið lokið og hafi tekist"
         failed: "{{priority_name}} er nú merkt að hafi verið lokað og hafi mistekist"
@@ -1370,7 +1370,7 @@ is:
             is_mergeable:
                 label: "Bræða mál þín öðrum með sömu meiningu"
             is_newsletter_subscribed: 
-                label: "Senda upplýsingar um þín forgansmál vikulega í tölvupósti til þín"
+                label: "Senda upplýsingar um þín forgangsmál vikulega í tölvupósti til þín"
             other_sites:
                 label: "Notendanafn/nöfn þín á vinsælum vefsíðum"
             submit: "Vista breytingarnar þínar"             
@@ -1416,7 +1416,7 @@ is:
             title: "Mál {{tag_name}} þíns tengslanets"
         obama:
             title: "mál {{official_user_name}} {{tag_name}}"
-            intro: "Þetta er málefnaskrá {{official_user_name}} fyrir {{tag_name}} skv. forgansröð meðlima"
+            intro: "Þetta er málefnaskrá {{official_user_name}} fyrir {{tag_name}} skv. forgangsröð meðlima"
         not_obama:
             title: "Mál {{tag_name}} EKKI á málefnaskrá {{official_user_name}}"
             intro: "Þetta eru {{tag_name}} mál meðlima okkar sem eru EKKI á málefnaskrá {{official_user_name}}"
