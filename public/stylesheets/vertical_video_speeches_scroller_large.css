@@ -50,6 +50,7 @@ a.prev, a.next {
 #latest_video_discussion_thumbs img { 
 	padding-left:40px;
 	padding-top:5px;
+	padding-bottom: 10px;
 } 
 
 #latest_video_discussion_thumbs p { 
