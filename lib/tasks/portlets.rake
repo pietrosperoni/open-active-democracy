@@ -140,7 +140,7 @@ namespace :portlets do
     p.portlet_template_category_id=pc4.id
     p.locals_data_function=nil
     p.partial_name = "news_discussions"
-    p.item_limit = 7
+    p.item_limit = 3
     p.weight = 1
     p.save
     

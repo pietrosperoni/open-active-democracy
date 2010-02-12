@@ -19,8 +19,8 @@
 <div id="backgroundwrap">
 	<div id="header">
 		<div id="branding">
-			<a href="/"><img border="0" src="http://localhost:3000/images/skuggathing.png" width="310" height="79" alt="Skuggaþing" /></a>
-		</div>
+		<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal" %>
+	</div>
 		<%= flash_div :warning, :notice, :error %>
 
 		<%= render :partial => "ads/pick" %>

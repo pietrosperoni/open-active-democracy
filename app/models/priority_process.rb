@@ -32,19 +32,13 @@ class PriorityProcess < ActiveRecord::Base
   end
   
   def self.latest_updated_priorities(limit)
-    last_weeks_discussion = ProcessDiscussion.find(:all, :conditions=>["created_at >= ?",Time.now-1.weeks])
-    last_weeks_documents = ProcessDocument.find(:all, :conditions=>["created_at >= ?",Time.now-1.weeks])
-
+    last_weeks_discussion = ProcessDiscussion.find(:all, :conditions=>["created_at >= ?",Time.now-1.weeks], :order=>"created_at DESC")
+    last_weeks_documents = ProcessDocument.find(:all, :conditions=>["created_at >= ?",Time.now-1.weeks], :order=>"created_at DESC")
+    @processes_changed_past_7_days = []
     if not last_weeks_discussion.empty? or not last_weeks_documents.empty?
-      @processes_changed_past_7_days = []
-      last_weeks_discussion.each do |d|
-        @processes_changed_past_7_days << d.priority_process
-      end
-      last_weeks_documents.each do |d|
-        @processes_changed_past_7_days << d.priority_process
-      end
-      @processes_changed_past_7_days = @processes_changed_past_7_days.uniq.sort_by { |x| [-x.rating, -x.ratings.size] }
+      @processes_changed_past_7_days = last_weeks_discussion += last_weeks_documents
+      @processes_changed_past_7_days = @processes_changed_past_7_days.map {|p| p.priority_process.priority }.uniq[0..limit]
     end
-    @processes_changed_past_7_days.map {|p| p.priority }.uniq[0..limit]
+    @processes_changed_past_7_days
   end
 end
