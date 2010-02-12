@@ -201,7 +201,7 @@ is:
             endorsers:
                 name: "Meðmælendur"
                 one: "1 meðmælandi"
-                other: "{{count}} meðmælendur"
+                other: "{{count}} með"
             opposers:
                 name: "Á móti"
                 one: "1 á móti"

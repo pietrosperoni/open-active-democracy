@@ -13,7 +13,7 @@
 	    <div id="latest_videos_thumbs">
 			<% @all_speech_videos.each do |process_video| %>
 	        <div onclick="window.location = '/process_speech_videos/<%=process_video.id%>'">
-	            <img src="<%=process_video.get_playlist_image_url("smaller")%>" />
+	            <img width="80px" height="50px" src="<%=process_video.get_playlist_image_url("smaller")%>" />
 	        </div>
 	        <% end %>
 	    </div>
