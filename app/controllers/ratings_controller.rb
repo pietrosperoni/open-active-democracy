@@ -33,7 +33,7 @@ class RatingsController < ApplicationController
     end
            
     render :update do |page|  
-      if session[:user_id]
+      if @user
         if params[:smaller_comments]!=nil
           page.replace_html "star-ratings-block-#{rateable.id}_#{rateable.class.name}", :partial => "rate_smaller_comments", :locals => { :asset => rateable }        
           page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
