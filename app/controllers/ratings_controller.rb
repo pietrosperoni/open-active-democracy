@@ -25,8 +25,8 @@ class RatingsController < ApplicationController
     end
     if @user
       rateable = @rateable_class.find(params[:id])
-      Rating.delete_all(["rateable_type = ? AND rateable_id = ? AND user_id = ?", @rateable_class.base_class.to_s, params[:id], @user.user_id]) 
-      rateable.add_rating Rating.new(:rating => params[:rating], :user_id => @user.user_id)      
+      Rating.delete_all(["rateable_type = ? AND rateable_id = ? AND user_id = ?", @rateable_class.base_class.to_s, params[:id], @user.id]) 
+      rateable.add_rating Rating.new(:rating => params[:rating], :user_id => @user.id)      
       rateable.process_document.touch  if params[:rateable_type]=="ProcessDocumentElement"
     else
       RAILS_DEFAULT_LOGGER.info("user is not logged in")
