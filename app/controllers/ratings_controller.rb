@@ -16,8 +16,13 @@
 class RatingsController < ApplicationController
   before_filter :get_class_by_name
 
-  def rate 
-    if logged_in?
+  def rate
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    elsif logged_in?
+      @user = current_user
+    end
+    if @user
       rateable = @rateable_class.find(params[:id])
       Rating.delete_all(["rateable_type = ? AND rateable_id = ? AND user_id = ?", @rateable_class.base_class.to_s, params[:id], session[:user_id]])  
       rateable.add_rating Rating.new(:rating => params[:rating], :user_id => session[:user_id])      
