@@ -310,9 +310,9 @@ is:
                 title: "Leita í umræðuefnum hjá {{government_name}}" 
                 results: "Þessi rök fundust tengd leitarorðinu '{{query}}'" 
         points:
-            title: "Mál þín án umræðuefna" 
+            title: "Mál þín án raka" 
             needed:
-                empty: "All of your priorities have at least one talking point supporting your position." 
+                empty: "Öll þín mál hafa að minnsta kosti ein rök sem styðja þitt mál." 
         documents:
             title: "Mál þín án skjala" 
             needed:
