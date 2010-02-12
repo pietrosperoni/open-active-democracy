@@ -1107,7 +1107,7 @@ is:
             name: "þín mál"
             title: "þín mál hjá {{government_name}}"
             prompt: "Bæta máli á skrána þína"
-            heading: "Mál {{user_name}}"
+            heading: "Mál: {{user_name}}"
             outro: "Þú getur líka fylgst með <a href='/news/your_priority_activities'>virkni</a> og <a href='/news/your_priority_discussions'>umræðum</a> um þín mál."            
         yours_finished:
             name: "Mál þín sem er lokið"
