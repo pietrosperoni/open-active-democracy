@@ -200,7 +200,7 @@ is:
                 confirm: "Þú ert um það bil að merkja þetta mál til endurskoðunar hjá umsjónarmanni síðunnar. Ef það er ekki ljóst afhverju þú ert að merkja það, vinsamlegast setjið á fréttaveituna til að það sé hægt að gera viðeigandi ráðstafanir."
             endorsers:
                 name: "Meðmælendur"
-                one: "1 meðmælandi"
+                one: "1 með"
                 other: "{{count}} með"
             opposers:
                 name: "Á móti"
