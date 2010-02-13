@@ -43,7 +43,7 @@ is:
             all_documents: "Öll skjöl"
             all_activity: "Öll virkni"
             research:
-                name: "Leggja til við rannsókn"
+                name: "Órökstudd mál"
                 needed: "Mál vantar {{points_name}} eða {{documents_name}}"
                 points_needed: "Mál verða að innihalda rök"
                 documents_needed: "Mál verða að innihalda skjöl"
