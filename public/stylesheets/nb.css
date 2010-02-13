@@ -723,7 +723,7 @@ del {
 	border-left: solid 1px #d9dfea;
 }
 .facebook_button a {
-	color: #FFF;
+	color: #FFF !important;
 	letter-spacing: 0.5px;
 }
 
@@ -1364,3 +1364,5 @@ ul#priority_menu li.tab9 div.tab_body {
 .brbox {
 	border: 1px solid #000000;
 }
+
+

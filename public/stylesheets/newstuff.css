@@ -3,7 +3,7 @@ html, body {
 }
 
 a {
-	color: #533;
+	color: #500;
 }
 a:hover 
 { 
@@ -12,7 +12,7 @@ a:hover
 
 #footer a, #contentwrap a 
 { 
-color: #533;
+color: #500;
 }
 
 #footer a:hover, #contentwrap a:hover { color: #333; }
@@ -628,4 +628,14 @@ padding:7px 5px 3px 8px;
 {
 color: #533;
 border-bottom: 1px dotted #977;
+}
+
+
+#point_right {
+margin-left:12px;
+min-height: 260px;
+}
+
+td {
+vertical-align: top !important;	
 }
