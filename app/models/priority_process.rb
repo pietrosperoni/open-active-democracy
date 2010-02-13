@@ -41,4 +41,13 @@ class PriorityProcess < ActiveRecord::Base
     end
     @processes_changed_past_7_days
   end
+
+  def last_changed_at
+    discussion = ProcessDiscussion.find(:first, :conditions=>["priority_process_id = ?",self.id], :order=>"meeting_date DESC")
+    document = ProcessDocument.find(:first, :conditions=>["priority_process_id = ?",self.id], :order=>"external_date DESC")
+    last=Time.now-5.years  
+    last=discussion.meeting_date if discussion and discussion.meeting_date > last
+    last=document.external_date if document and document.external_date > last
+    last
+  end
 end
