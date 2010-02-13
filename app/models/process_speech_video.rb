@@ -101,11 +101,11 @@ class ProcessSpeechVideo < ActiveRecord::Base
   end
 
   def video_share_width
-    "420"
+    "640"
   end
 
   def video_share_height
-    "247"
+    "376"
   end
 
   def video_content_type
