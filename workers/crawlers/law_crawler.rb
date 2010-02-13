@@ -99,7 +99,6 @@ if @current_government
 end
 
 acrawler = AlthingiCrawler.new
-acrawler.update_icesave1
 acrawler.update_icesave
 acrawler.update_all_processes(PROCESS_TYPE_LOG)
 acrawler.update_all_processes(PROCESS_TYPE_THINGSALYKTUNARTILLAGA)

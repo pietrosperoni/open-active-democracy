@@ -27,8 +27,8 @@ class ProcessDocument < ActiveRecord::Base
     "#{id}-#{self.priority_process.priority.name.parameterize_full}-#{external_type.parameterize_full}"
   end 
 
-  def has_change_proposal_for_sequence_number?(sequence_number)
-    ProcessDocumentElement.find(:first, :conditions => ["process_document_id = ? AND sequence_number = ? AND original_version = 0",self.id,sequence_number])
+  def has_change_proposal_for_sequence_number?(sequence_number,original_version=false)
+    ProcessDocumentElement.find(:first, :conditions => ["process_document_id = ? AND sequence_number = ? AND original_version = ?",self.id,sequence_number,original_version])
   end
 
   def get_all_change_proposals_for_sequence_number(sequence_number)
