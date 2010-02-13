@@ -50,7 +50,7 @@ is:
             heading: "Fréttir frá öðrum miðlum"
     status:
         failed: "mistókst"
-        successful: "tókst"
+        successful: "afgreitt"
         intheworks: "í vinnslu"
         compromised: "milli tveggja elda"
         unknown: "óþekkt"
