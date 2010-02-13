@@ -39,12 +39,9 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #branding {
-<<<<<<< HEAD
 	font-size: 2em;
 	background-color: #fff;
-=======
 	background-color: #e5e5e5 !important;
->>>>>>> rvb/odd-merge
 }
 
 #branding a {
