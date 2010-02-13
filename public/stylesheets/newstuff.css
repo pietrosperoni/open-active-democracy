@@ -641,3 +641,36 @@ vertical-align: top !important;
 #latest_video_discussion_thumbs h3 {
 color:#ddd !important;
 }
+
+
+.suggest_button, .yellow_button {
+background-color:#FFFF99;
+border:2px solid #FFCC00 !important;
+}
+
+
+.suggest_button:hover, .yellow_button:hover, .grey_button_wide:hover {
+border:2px solid #13499B !important;
+}
+
+
+#priority_name {
+font-size:14px;
+height:20px;
+margin-left:0 !important;
+margin-right:10px !important;
+width:330px;
+}
+
+
+.suggest_button {
+font-size:13px;
+font-weight:bold;
+letter-spacing:0.3px;
+outline-color:-moz-use-text-color;
+outline-style:none;
+outline-width:medium;
+padding: 4px 10px 5px;
+text-align:center;
+}
+
