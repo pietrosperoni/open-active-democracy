@@ -55,7 +55,7 @@ module PortalHelper
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>nil}
   end
   
-  def setup_priorities_process_icesave
+  def setup_priorities_process_icesave(limit)
     @priorities = [Priority.find(1), Priority.find(147),Priority.find(93)]
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>nil}    
   end
