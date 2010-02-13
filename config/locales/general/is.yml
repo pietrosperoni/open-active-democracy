@@ -1621,7 +1621,7 @@ is:
         discussions:
             title: "Setja {{government_name}} umræður á vefsvæðið þitt"
         preview:
-            label: "Það mun lita svona út, nema með letri og litum vefsæðisins þíns:"    
+            label: "Það mun lita svona út, nema með letri og litum vefsvæðisins þíns:"    
         new:
             submit: "Uppfæra kóða"
             code:
