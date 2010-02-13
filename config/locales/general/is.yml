@@ -1348,7 +1348,7 @@ is:
             last_name:
                 label: "Eftirnafn"
             login:
-                label: "Hvernig viltu að aðrir sjái þig á síðunni?"
+                label: "Hvernig viltu þekkjast á vefnum?"
                 example: "(Má vera nafn eða dulnefni)"
             email:
                 label: "Netfang"
