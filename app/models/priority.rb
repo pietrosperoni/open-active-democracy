@@ -557,7 +557,7 @@ class Priority < ActiveRecord::Base
     if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
       stage_txt = "#{I18n.t :waits_for_discussion}"
     else
-      stage_txt = "#{priority_process.stage_sequence_number} #{I18n.t :stage_sequence_discussion}"
+      stage_txt = "#{priority_process.stage_sequence_number} #{I18n.t :parliment_stage_sequence_discussion}"
     end
     "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
   end
