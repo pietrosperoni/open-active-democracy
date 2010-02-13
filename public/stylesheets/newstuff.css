@@ -19,8 +19,8 @@ color: #333;
 #footer a:hover, #contentwrap a:hover { color: #333; }
 #toolbar a, #priority_menu a { border-bottom: none; }
 
-h1 { font-size: 1.7em; line-height: 2em; }
-h2 { font-size: 1.5em; font-weight: bold; }
+h1 { font-size: 14px; line-height: 2em; }
+h2 { font-size: 12px; font-weight: bold; }
 h3 { font-weight: bold; }
 
 table tr th { font-weight: bold; padding-right: 0.5em; }
@@ -674,7 +674,7 @@ letter-spacing:0.3px;
 outline-color:-moz-use-text-color;
 outline-style:none;
 outline-width:medium;
-padding: 4px 10px 5px;
+padding: 4px 10px 4px;
 text-align:center;
 }
 
