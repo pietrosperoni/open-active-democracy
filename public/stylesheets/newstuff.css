@@ -3,11 +3,18 @@ html, body {
 }
 
 a {
-	color: #000;
+	color: #533;
 }
-a:hover { text-decoration: none; }
+a:hover 
+{ 
+	text-decoration: under-line;
+}
 
-#footer a, #contentwrap a { text-decoration: underline; }
+#footer a, #contentwrap a 
+{ 
+color: #533;
+}
+
 #footer a:hover, #contentwrap a:hover { color: #333; }
 #toolbar a, #priority_menu a { border-bottom: none; }
 
@@ -615,4 +622,10 @@ padding-left:18px;
 font-size:11px;
 line-height:1.4em;
 padding:7px 5px 3px 8px;
+}
+
+#right_column_priorities a, #notification_box a, #next_steps_box a, #notification_box ol a, #next_steps_box  ol a, #not_activated a 
+{
+color: #533;
+border-bottom: 1px dotted #977;
 }
