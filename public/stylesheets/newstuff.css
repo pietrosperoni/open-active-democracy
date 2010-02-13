@@ -3,7 +3,8 @@ html, body {
 }
 
 a {
-	color: #500;
+	color: #666 !important;
+font-weight: bold;
 }
 a:hover 
 { 
@@ -12,7 +13,8 @@ a:hover
 
 #footer a, #contentwrap a 
 { 
-color: #500;
+color: #666 !important;
+font-weight: bold;
 }
 
 #footer a:hover, #contentwrap a:hover { color: #333; }
@@ -638,4 +640,9 @@ min-height: 260px;
 
 td {
 vertical-align: top !important;	
+}
+
+
+#latest_video_discussion_thumbs h3 {
+color:#ddd !important;
 }
