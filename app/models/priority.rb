@@ -559,7 +559,7 @@ class Priority < ActiveRecord::Base
     else
       stage_txt = "#{priority_process.stage_sequence_number} #{I18n.t :stage_sequence_discussion}"
     end
-    "#{stage_txt} #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
+    "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
   end
   
   private
