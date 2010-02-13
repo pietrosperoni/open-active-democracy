@@ -238,7 +238,7 @@ ul#menu_sub {
 	background-color: #fff;
 	text-align: left;
 	margin: 0px;
-	margin-top: 0px; 
+	margin-top: 10px; 
 	list-style-type: none;
 	padding: 0px 10px 2px 0px;
 }
@@ -570,4 +570,16 @@ color:#444444;
 input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifier_wrap, .change_vote_now, .idleField {
 background-color:#fff;
 border:2px solid #DDDDDD;
+}
+
+
+.flash_error, #not_activated_header, #warning, .fieldWithErrors input, #errorExplanation h2 {
+background-color:#ccc;
+color:#eee;
+font-weight:bold;
+}
+
+#user_name {
+font-size:14px;
+padding:8px 0 8px 8px;
 }
