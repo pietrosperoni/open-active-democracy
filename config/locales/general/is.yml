@@ -821,10 +821,10 @@ is:
             name: "Nýjasta virkni fyrir rök"
             title: "Nýjasta virkni í {{briefing_name}} hjá {{government_name}}"
         activities:
-            name: "Allt sem er að gerast"
-            title: "Allt sem er að gerast hjá {{government_name}}"
+            name: "Öll virkni"
+            title: "Öll virkni {{government_name}}"
         obama:
-            title: "Hvað {{official_user_name}} er að gera hjá {{government_name}}"
+            title: "Hvað {{official_user_name}} er að gerast hjá {{government_name}}"
         capital:
             name: "Karma punktar"
             title: "{{currency_name}} hjá {{government_name}}"
@@ -1198,7 +1198,7 @@ is:
             blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgangsmáli til að bæta þínu við."
             success: "Takk fyrir að bæta {{priority_name}} við"
             submit: "Búa til nýtt mál"
-            suggest: "Er eitthvað mál sem þér finnst að Alþingi ætti að taka upp?"
+            suggest: "Ertu með mál sem Alþingi ætti að taka fyrir? Settu það inn hér."
             click:
                 one: "Smelltu á <span class='priority_add'>STYÐJA</span> ef þetta mál hér neðar styður enn ásetning þinn."
                 other: "Smelltu á <span class='priority_add'>ENDORSE</span> ef eitthvert þessara mála styður ásetning þinn."
