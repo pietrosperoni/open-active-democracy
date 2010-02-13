@@ -1,4 +1,4 @@
-<% cache(["icelandic_parliment_priority_processes_main",I18n.locale,@priority_process.priority.id,@show_only_last_process ? "only_last_process" : "all_processes"], :expires_in => 15.minutes) do %>
+<% cache(["icelandic_parliment_priority_processes_main",I18n.locale,@priority_process.priority.id,@show_only_last_process ? "only_last_process" : "all_processes"], :expires_in => 1.hour) do %>
 <% current_process = @priority_process %>
 <% processes = [] %>
 <% while current_process %>
