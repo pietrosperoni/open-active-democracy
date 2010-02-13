@@ -11,3 +11,5 @@ background: red !important;
 	font-size: 1.7em;
 	line-height: 2em;
 }
+
+#branding p { position: absolute; left: 52px; top: 30px; font-size: 11px; color: #666; }
