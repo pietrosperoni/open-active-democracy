@@ -331,7 +331,7 @@ ul#priority_menu li.hovering div.tab_body {
 }
 
 ul#priority_menu li.tab5 div.tab_body {
-	width:90px;
+	width:150px;
 }
 
 ul#priority_menu li.tab4 div.tab_body {
@@ -339,7 +339,7 @@ ul#priority_menu li.tab4 div.tab_body {
 }
 
 ul#priority_menu li.tab5 div.tab_body {
-	width:120px;
+	width:150px;
 }
 
 ul#priority_menu li.tab6 div.tab_body {
@@ -382,10 +382,6 @@ div.meta { width: 120px !important; }
 .container_12.newpoints { margin-top: 1em; }
 .point_item h3 { margin: 1em 0px 0px 0px !important; }
 
-/* Stjörnugjöf */
-.star-rating_smaller li.current-rating, .star-rating_smaller li a:hover, .star-rating_smaller{ background-image: url(/images/star_rating_smaller.png) !important; background-color: #333 !important; }
-
-#process_speech_detail .star-rating_smaller li.current-rating, #process_speech_detail .star-rating_smaller li a:hover, #process_speech_detail .star-rating_smaller { background-image: url(/images/star_rating_smaller_w.png) !important; background-color: #fff !important; }
 
 /* Menjú */
 .tab_body { text-align: left; padding: 0.5em; padding-bottom: 0em; }
