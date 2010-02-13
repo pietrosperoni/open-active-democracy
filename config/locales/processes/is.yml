@@ -6,6 +6,7 @@ is:
   time_in: "eftir"
   time_ago: " síðan"
   processes:
+      icesave_portlet: "Icesave mál"
       only_last_process: "Nýjasta umræða frá Alþingi"
       show_all_processes: "Smelltu til að sjá allar umræður"
       name: "Alþingi"
