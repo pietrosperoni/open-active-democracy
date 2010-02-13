@@ -8,7 +8,7 @@ Hjálpaðu okkur að stækka! Þú getur flutt inn Google og Facebook tengiliði
 
 Finndu fólk sem þú þekkir: {{ user.root_url }}network/find?utm_source=signup&utm_medium=email
 
-Þú vinnur þér inn 5{{ government.currency_short_name }} fyrir hvern sem skráir sig eftir hvatningu frá þér.  Hvað er  {{ government.currency_short_name }}?  Það stendur fyrir "{{ government.currency_name | downcase  }}" 
+Þú vinnur þér inn 5{{ government.currency_short_name }} fyrir hvern sem skráir sig eftir hvatningu frá þér.  Hvað eru  {{ government.currency_short_name }}?  Það stendur fyrir "{{ government.currency_name | downcase  }}" 
 og er leið til að sjá hversu áhrifamikil(l) þú ert á  {{ government.name }}.  Því fleiri sem finnast þínar uppfærslur og rök gagnleg, því fleiri {{ government.currency_short_name }} vinnurðu þér inn sem þú getur m.a. notað til að kaupa auglýsingar fyrir þau mál sem þú vilt koma á framfæri.  
 
 Meira um þetta {{ government.currency_name | downcase }} hér: {{ user.root_url }}about/faq#pc
@@ -18,4 +18,4 @@ Meira um þetta {{ government.currency_name | downcase }} hér: {{ user.root_url
 http://{{ government.base_url }}
 
 ---
-Þetta er sjálfvirk tilkynning frá  {{ government.name }} send á {{ user.email }}.  Ef þú vilt ekki fá tölvupósta frá  {{ government.name }}, þá geturðu breytt tölvupóststillingunum þínum hér: {{ user.unsubscribe_url }}
+Þetta er sjálfvirk tilkynning {{ government.name }} send á {{ recipient.email }}.  Ef þú vilt ekki fá svona bréf, breyttu þá póststillingunum þínum hér: {{ recipient.unsubscribe_url }}

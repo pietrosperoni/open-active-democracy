@@ -548,18 +548,23 @@ class Priority < ActiveRecord::Base
   end
 
   def latest_priority_process_at
-    priority_process = PriorityProcess.find_by_priority_id(self, :order=>"created_at DESC")
-    if priority_process
-      time = priority_process.last_changed_at
-    else
-      time = Time.now-5.years
+    latest_priority_process_txt = Rails.cache.read("latest_priority_process_at_#{self.id}")
+    unless latest_priority_process_txt      
+      priority_process = PriorityProcess.find_by_priority_id(self, :order=>"created_at DESC")
+      if priority_process
+        time = priority_process.last_changed_at
+      else
+        time = Time.now-5.years
+      end
+      if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
+        stage_txt = "#{I18n.t :waits_for_discussion}"
+      else
+        stage_txt = "#{priority_process.stage_sequence_number} #{I18n.t :parliment_stage_sequence_discussion}"
+      end
+      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
+      Rails.cache.write("latest_priority_process_at_#{self.id}", latest_priority_process_txt, :expires_in => 1.hour)
     end
-    if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
-      stage_txt = "#{I18n.t :waits_for_discussion}"
-    else
-      stage_txt = "#{priority_process.stage_sequence_number} #{I18n.t :parliment_stage_sequence_discussion}"
-    end
-    "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
+    latest_priority_process_txt
   end
   
   private
