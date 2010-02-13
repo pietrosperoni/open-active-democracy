@@ -3,8 +3,7 @@ html, body {
 }
 
 a {
-	color: #666 !important;
-font-weight: bold;
+	color: #333;
 }
 a:hover 
 { 
@@ -13,8 +12,8 @@ a:hover
 
 #footer a, #contentwrap a 
 { 
-color: #666 !important;
-font-weight: bold;
+color: #3 ;
+
 }
 
 #footer a:hover, #contentwrap a:hover { color: #333; }
