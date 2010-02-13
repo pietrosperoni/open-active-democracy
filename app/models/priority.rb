@@ -547,19 +547,41 @@ class Priority < ActiveRecord::Base
     self.short_url = open('http://is.gd/create.php?longurl=' + show_url, "UserAgent" => "Ruby-ShortLinkCreator").read[/http:\/\/is\.gd\/\w+(?=" onselect)/]
   end
 
+
+
+    return @current_government if @current_government
+    @current_government = Rails.cache.read('government')
+    if not @current_government
+      @current_government = Government.last
+      if @current_government
+        @current_government.update_counts
+        Rails.cache.write('government', @current_government, :expires_in => 15.minutes) 
+      else
+        return nil
+      end
+    end
+    Government.current = @current_government
+
+
+
   def latest_priority_process_at
-    priority_process = PriorityProcess.find_by_priority_id(self, :order=>"created_at DESC")
-    if priority_process
-      time = priority_process.last_changed_at
-    else
-      time = Time.now-5.years
+    latest_priority_process_txt = Rails.cache.read('latest_priority_process_at')
+    unless latest_priority_process_txt      
+      priority_process = PriorityProcess.find_by_priority_id(self, :order=>"created_at DESC")
+      if priority_process
+        time = priority_process.last_changed_at
+      else
+        time = Time.now-5.years
+      end
+      if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
+        stage_txt = "#{I18n.t :waits_for_discussion}"
+      else
+        stage_txt = "#{priority_process.stage_sequence_number} #{I18n.t :parliment_stage_sequence_discussion}"
+      end
+      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
+      Rails.cache.write('latest_priority_process_at', latest_priority_process_txt, :expires_in => 1.hour)
     end
-    if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
-      stage_txt = "#{I18n.t :waits_for_discussion}"
-    else
-      stage_txt = "#{priority_process.stage_sequence_number} #{I18n.t :parliment_stage_sequence_discussion}"
-    end
-    "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
+    latest_priority_process_txt
   end
   
   private
