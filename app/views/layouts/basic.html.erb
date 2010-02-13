@@ -11,7 +11,7 @@
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
 <%= stylesheet_link_tag "newstuff" %>
 <%= stylesheet_link_tag "gnew" %>
-<%= javascript_include_tag "skuggathing" %>
+<%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
 </head>
 <body>
 
