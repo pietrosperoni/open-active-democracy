@@ -210,22 +210,22 @@ is:
       long: "%A, %e. %B %Y, %H:%M"
   datetime:
     distance_in_words:
-      half_a_minute: "hálf mínúta"
+      half_a_minute: "hálf mín"
       less_than_x_seconds:
-        one: "minna en 1 sekúnda"
-        other: "minna en {{count}} sekúndur"
+        one: "minna en 1 sek."
+        other: "minna en {{count}} sek."
       x_seconds:
-        one: "1 sekúnda"
-        other: "{{count}} sekúndur"
+        one: "1 sek."
+        other: "{{count}} sek."
       less_than_x_minutes:
-        one: "minna en 1 mínúta"
-        other: "minna en {{count}} mínúta"
+        one: "minna en 1 mín"
+        other: "minna en {{count}} mín"
       x_minutes:
-        one: "1 mínúta"
-        other: "{{count}} mínútur"
+        one: "1 mín"
+        other: "{{count}} mín"
       about_x_hours:
-        one: "um 1 kl."
-        other: "um {{count}} kl."
+        one: "um 1 klst."
+        other: "um {{count}} klst."
       x_days:
         one: "1 dagur"
         other: "{{count}} dagar"
