@@ -1566,8 +1566,8 @@ is:
                 twitter: "Twitter"
                 facebook: "Facebook"
                 options: "eða <b>skráðu þig strax inn</b> með:"
-            intro: "<b><a href='{{signup_url}}'>Gerstu meðlimur</a></b> eða <a href='#' id='login_link'>skráðu þig inn með {{government_name}}</a>."
-            forgot: "Ég hef gleymt lykilorðinu mínu"
+            intro: "<b><a href='{{signup_url}}'>Nýskráning</a></b> eða <a href='#' id='login_link'>innskráning {{government_name}}</a>."
+            forgot: "Gleymt lykilorð"
             email:
                 label: "Netfang"
             password:
