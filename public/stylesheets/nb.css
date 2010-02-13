@@ -1278,14 +1278,27 @@ ul#priority_menu li.tab5 div.tab_body {
 }
 
 ul#priority_menu li.tab6 div.tab_body {
-	width:110px;
+	width:210px;
 }
+
 ul#priority_menu li.tab7 div.tab_body {
-	width:150px;
+	width:230px;
 }
 
 ul#priority_menu li.tab9 div.tab_body {
-	width:150px;
+	width:230px;
+}
+
+ul#priority_menu li.tab10 div.tab_body {
+	width:230px;
+}
+
+ul#priority_menu li.tab11 div.tab_body {
+	width:220px;
+}
+
+ul#priority_menu li.tab12 div.tab_body {
+	width:220px;
 }
 
 /* end priority nav */
