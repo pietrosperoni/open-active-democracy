@@ -13,11 +13,11 @@ Engar auglýsingar inni núna.
 		
 		<% if ad.status == 'active' and not shown_active %>
 		<% shown_active = true %>
-		<div class="heading">Currently running ads</div>
+		<div class="heading">Virkar auglýsingar</div>
 		<% elsif ad.status != 'active' and not shown_past %>
 		<p>
 		<% shown_past = true %>
-		<div class="heading">Past ads</div>
+		<div class="heading">Gamlar auglýsingar</div>
 		<% end %>
 		
 		<%= render :partial => "ads/show_inline", :locals => {:ad => ad}%>
