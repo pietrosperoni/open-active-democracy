@@ -983,7 +983,7 @@ is:
         source: "Uppruni:"
         supporting: "Styð {{priority_name}}"
         priority:
-            intro: "Vinsamlegast segðu okkur afhverju við ættum að styðja eða vera á móti þessu máli með því að <a href='{{new_point_url}}'>bæta við rökum</a>. Þú getur líka lagt til annað forgangsmál í stað þessa."
+            intro: "Vinsamlegast segðu okkur afhverju við ættum að styðja eða vera á móti þessu máli með því að <a href='{{new_point_url}}' style='text-decoration: underline;'>bæta við rökum</a>. Þú getur líka lagt til annað forgangsmál í stað þessa."
         intro:
             endorsed:
                 first: "Rök sem styðja {{priority_name}}:"
