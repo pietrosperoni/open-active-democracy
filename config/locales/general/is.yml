@@ -398,7 +398,7 @@ is:
             label: "fallandi/stígandi" 
         gainers_24hr: 
             title: "Mál þessara notenda hafa risið hraðast síðustu 24 tíma" 
-            intro: "Ímyndaðu þér að mál fólks séu verðbréfasöfn svipað og sameignarsjóður. Imagine each person's priorities are a portfolio of stocks like a mutual fund.  Þessi síða er uppfærð á miðnæti og sýnir það fólk hvurs mál risu mest í stigagjöfinni á síðustu 24 tímum." 
+            intro: "Ímyndaðu þér að mál fólks séu verðbréfasöfn svipað og sameignarsjóður.  Þessi síða er uppfærð á miðnæti og sýnir það fólk hvurs mál risu mest í stigagjöfinni á síðustu 24 tímum." 
         gainers_7days: 
             title: "Mál þessara notenda hafa risið hraðast í þessari viku" 
             intro: "Ýmindaðu þér að mál fólks séu verðbréfasöfn svipað og sameignarsjóður.  Þessi síða er uppfærð á miðnæti og sýnir það fólk hvurs mál risu mest í stigagjöfinni í þessari viku." 
