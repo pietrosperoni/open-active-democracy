@@ -17,21 +17,31 @@
 	</div>
 
 	<div class="field">
+		<div class="field_label">
+			<table width="30%">
+				<tr>
+					<td align="left">
+						Til stuðnings <%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>						
+					</td>
+					<td align="left">
+						Á móti <%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="field">
 	    <div class="field_label"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
 		<div class="field_box">
 	    <%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
 		</div>
 	</div>				
-
+	
 	<div class="field">
 		<div class="field_label"><%= t('points.new.website.label') %></div>
 		<div class="field_box">
 			<%= f.text_field :website, :size => 50 %>	
-		</div>
-	</div>
-	<div class="field">
-		<div class="field_label">
-			<%= t('points.new.position.label', :priority_name => link_to(@priority.name, @priority), :support_radio => f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil"), :oppose_radio => f.radio_button(:value, -1, :checked=>(params[:support] ?  "nil" : "checked")))%>
 		</div>
 	</div>
 	
