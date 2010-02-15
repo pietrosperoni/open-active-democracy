@@ -320,6 +320,11 @@ h4 {
 	letter-spacing: 0;
 	line-height: 1.4em;
 }
+
+#notification_show a {
+	text-decoration: underline;
+}
+
 .notification_show_message {
 	margin-top: 2px;
 }
