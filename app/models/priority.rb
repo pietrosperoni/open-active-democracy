@@ -79,7 +79,7 @@ class Priority < ActiveRecord::Base
   
   acts_as_taggable_on :issues
   acts_as_list
-  acts_as_solr :fields => [ :name, :cached_issue_list, :is_published ]
+  acts_as_solr :fields => [ :name, :cached_issue_list, :is_published, :external_presenter, :external_id ]
   
   liquid_methods :id, :name, :show_url, :value_name
   
