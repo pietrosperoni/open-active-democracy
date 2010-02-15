@@ -678,4 +678,12 @@ text-align:center;
 width:700px !important;
 }
 
+#top_points_table p {
+	padding-bottom: 2px;
+	padding-top: 4px;
+	line-height: 130%;
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+	font-size:11px;
+	color: #333333;
+}
 

@@ -19,7 +19,7 @@
 				<%= link_to t('points.edit.name'), new_point_revision_url(point), :title => t('points.edit.title') %>
 			</span>
 		</div>
-		<p><%=truncate(point.content, :length => 165)%></p>
+		<p><%=point.content%></p>
 		<div class="point_qualities">
 			<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
 		</div>

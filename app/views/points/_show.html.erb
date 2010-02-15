@@ -3,6 +3,7 @@
 <% if point.is_down? %>
 	<span class="opposed"><%= t('oppose.ed')%></span>
 <% end %>
+<br>
 <%= link_to_unless_current h(point.name), point %>
 </div>
 <% if point.has_other_priority? %>
