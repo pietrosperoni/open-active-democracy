@@ -676,6 +676,7 @@ del {
 .point_byline {
 	font-style: italic;
 	font-size: 0.8em;
+	line-height: 120%;
 }
 .point_content p, .point_content_detail p {
 	margin-top: 3px;

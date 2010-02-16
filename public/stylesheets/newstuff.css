@@ -687,3 +687,10 @@ width:700px !important;
 	color: #333333;
 }
 
+.tag_button_hack {
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+	font-size:11px !important;
+	font-style: italic;
+	color: #333333;
+}
+

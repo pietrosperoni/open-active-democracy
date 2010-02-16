@@ -1292,9 +1292,9 @@ is:
             other: "{{count}} endurskoðun/anir"
         title: "Endurskoðanir"
         user: "{{user_name}} endurskoðun"
-        byline: "eftir {{author_sentence}}"
+        byline: "{{author_sentence}}"
         revised: "endurskoðað {{time_ago}}"
-        added: "bætt við {{time_ago}}"
+        added: "{{time_ago}}."
         activity:
             name: "Virkni tengd þessari endurskoðun"
         word_count:
