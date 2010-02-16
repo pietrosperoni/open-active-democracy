@@ -507,7 +507,7 @@ is:
             submit: "Senda athugasemd"
         flag:
             confirm: "Er þessi athugasemd frá {{user_name}} persónuleg árás eða brot á reglum síðunnar?"
-            title: "Flagga þessa athugasemd til endurskoðunar"
+            title: "Tilkynna óviðeigandi ummæli!"
             number:
                 one: "1 flagg"
                 other: "{{count}} flögg"
