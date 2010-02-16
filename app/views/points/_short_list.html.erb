@@ -6,9 +6,7 @@
 	<div class="point_item">
 		<h3><%=numbering ? "#{i+1}. " : ""%><%= link_to_unless_current h(point.name), point %></h3>
 		<div class="point_byline">
-			<%= t('revisions.byline', :author_sentence => point.author_sentence) %>
-			<br />
-			<%= t('revisions.added', :time_ago => time_ago(point.created_at)) %>
+			<%= t('revisions.byline', :author_sentence => point.author_sentence) %> <%= t('revisions.added', :time_ago => time_ago(point.created_at)) %>
 			<span class="point_edit">
 				<% if point.discussions_count > 0 %>
 					<%= link_to t('comments.discussions.name', :count => point.discussions_count), discussions_point_url(point) %>
