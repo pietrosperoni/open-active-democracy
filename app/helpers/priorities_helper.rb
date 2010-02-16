@@ -22,11 +22,11 @@ module PrioritiesHelper
     found
   end
   
-  def get_points_number_text(points_count, total_points)
+  def get_points_number_text(points_count, total_points,new_points=false)
     if points_count>0
       "<span style=\"color:#666;font-size:0.75em;\">(#{points_count} af #{total_points})</span>"
     else
-      "<span style=\"color:#666;font-size:0.75em;\">(#{t :no_points})</span>"
+      "<span style=\"color:#666;font-size:0.75em;\">(#{new_points ? t(:new_points) : t(:no_points)})</span>"
     end
   end
 end

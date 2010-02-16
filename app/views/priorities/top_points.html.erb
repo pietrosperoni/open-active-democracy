@@ -28,7 +28,7 @@
 	<tr>
 		<td id="" class="grid_6">
 			<div class="sub_header">
-				<h2><%=t('points.top_points.newest_points_for_endorse')%> <%=get_points_number_text(@points_new_up.length,@total_up_points)%></h2>
+				<h2><%=t('points.top_points.newest_points_for_endorse')%> <%=get_points_number_text(@points_new_up.length,@total_up_points_new,true)%></h2>
 				<p class="below_line"><%=link_to(t('points.top_points.all_newest_points_for_endorse'), endorsed_top_points_priority_url(@priority,:by_newest=>true))%> | 
 				<%=link_to(t('points.top_points.add_point_for_endorse'), new_priority_point_path(@priority,:support=>true))%></p>
 			</div>
@@ -38,7 +38,7 @@
 		</td>
 		<td id="point_right" class="grid_6 against">
 			<div class="sub_header">
-				<h2><%=t('points.top_points.newest_points_for_oppose')%> <%=get_points_number_text(@points_new_down.length,@total_down_points)%></h2>
+				<h2><%=t('points.top_points.newest_points_for_oppose')%> <%=get_points_number_text(@points_new_down.length,@total_down_points_new,true)%></h2>
 				<p class="below_line"><%=link_to(t('points.top_points.all_newest_points_for_oppose'), opposed_top_points_priority_url(@priority,:by_newest=>true))%> | 
 				<%=link_to(t('points.top_points.add_point_for_oppose'), new_priority_point_path(@priority,:support=>false))%></p>
 			</div>
