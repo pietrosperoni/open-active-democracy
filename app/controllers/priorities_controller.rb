@@ -493,6 +493,8 @@ class PrioritiesController < ApplicationController
     @points_new_down = @priority.points.published.by_recently_created.down_value.five
     @points_top_up = @priority.points.published.by_helpfulness.up_value.five
     @points_top_down = @priority.points.published.by_helpfulness.down_value.five
+    @total_up_points = @priority.points.published.up_value.count
+    @total_down_points = @priority.points.published.down_value.count
     get_qualities([@points_new_up,@points_new_down,@points_top_up,@points_top_down])
     respond_to do |format|
       format.html { render :action => "top_points" }
