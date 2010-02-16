@@ -694,3 +694,17 @@ width:700px !important;
 	color: #333333;
 }
 
+.point_item h3 {
+color: #333333 !important;	
+font-family:"lucida grande",tahoma,verdana,arial,sans-serif !important;
+font-size: 12px !important;
+font-weight: bold !important;
+}
+
+.point_item_hacky a {
+font-family:"lucida grande",tahoma,verdana,arial,sans-serif !important;
+color:#333333 !important;
+font-size: 12px !important;
+font-weight: bold !important;
+}
+
