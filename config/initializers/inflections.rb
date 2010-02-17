@@ -9,8 +9,8 @@ ActiveSupport::Inflector.inflections do |inflect|
 #   inflect.uncountable %w( fish sheep )
   inflect.irregular 'flokkur', 'flokkar'
   inflect.irregular 'athugasemd', 'athugasemdir'
-  inflect.irregular 'stuðningsmaður', 'stuðningsmönnum'
-  inflect.irregular 'andstæðingi', 'andstæðingum'
+  inflect.irregular 'stuðningsmann', 'stuðningsmenn'
+  inflect.irregular 'andstæðing', 'andstæðingum'
 end
 
 class String

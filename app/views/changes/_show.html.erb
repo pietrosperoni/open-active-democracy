@@ -11,11 +11,11 @@ með <%= render :partial => "priorities/endorsement_count", :locals => {:priorit
 	
 <% if change.is_active? %>
 	<% if change.is_endorsers? %>
-	  <%= pluralize(change.priority.up_endorsements_count,"stuðningsmaður") %>
+	  <%= pluralize(change.priority.up_endorsements_count,"stuðningsmann") %>
 	<% end %>
 	<% if change.is_endorsers? and change.is_opposers? %>og<% end %>
 	<% if change.is_opposers? %>
-	  <%= pluralize(change.new_priority.down_endorsements_count,"andstæðingi") %>
+	  <%= pluralize(change.new_priority.down_endorsements_count,"andstæðing") %>
 	<% end %>
 <% else %>
 	<% if change.is_endorsers? %>

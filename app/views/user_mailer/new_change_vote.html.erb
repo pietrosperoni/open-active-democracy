@@ -2,20 +2,20 @@ Hæ <%= h(@recipient.real_name) %>,
 
 <%= @sender.name %> lagði til að að "<%= @change.new_priority.name %>" með 
 <% if @change.is_endorsers? %>
-<%= pluralize(@change.new_priority.up_endorsements_count,"stuðningsmaður") %>
+<%= pluralize(@change.new_priority.up_endorsements_count,"stuðningsmann") %>
 <% end %>
 <% if @change.is_endorsers? and @change.is_opposers? %> og <% end %>
 <% if @change.is_opposers? %>
-<%= pluralize(@change.new_priority.down_endorsements_count,"andstæðingi") %>
+<%= pluralize(@change.new_priority.down_endorsements_count,"andstæðing") %>
 <% end %> taki yfir 
 <% if @change.is_active? %>
 <% if @change.is_endorsers? %>
-<%= pluralize(@change.priority.up_endorsements_count,"stuðningsmaður") %>
+<%= pluralize(@change.priority.up_endorsements_count,"stuðningsmann") %>
 <% end %>
 <% if @change.is_endorsers? and @change.is_opposers? %> og 
 <% end %>
 <% if @change.is_opposers? %>
-<%= pluralize(@change.priority.down_endorsements_count,"andstæðingi") %>
+<%= pluralize(@change.priority.down_endorsements_count,"andstæðing") %>
 <% end %>
 <% else %>
 <% if @change.is_endorsers? %>stuðningsmönnum
