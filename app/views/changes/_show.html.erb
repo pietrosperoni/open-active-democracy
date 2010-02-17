@@ -6,7 +6,7 @@
 
 <%= link_to change.user.name, change.user %> lagði til yfirtöku fyrir <%= time_ago(change.created_at) %>:<br/>
 <div class="change_name_first"><%= link_to h(change.new_priority.name), change.new_priority %></div>
-með <%= render :partial => "priorities/endorsement_count", :locals => {:priority => change.new_priority }%>
+<%= render :partial => "priorities/endorsement_count", :locals => {:priority => change.new_priority }%>
 <br/>ætti að <%= link_to "yfirtaka", priority_change_url(change.priority,change) %> 
 	
 <% if change.is_active? %>
