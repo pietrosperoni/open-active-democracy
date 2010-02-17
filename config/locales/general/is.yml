@@ -59,7 +59,7 @@ is:
         html: "<span class='pc'>{{capital}}{{currency_short_name}}</span>"
     endorse: 
         name: "styðja"
-        ed: "stutt"
+        ed: "með"
         capitalize: "Styðja"
         plural: "styðja"
         people: "Stuðningsmenn"
