@@ -117,7 +117,7 @@
 		</li>
 		<% if logged_in? %>
 		<li class="tab3 mega">
-			<span class="tab_header"><% if logged_in? and current_user.endorsements_count > 0 %><%= link_to current_government.briefing_name, your_priorities_points_url %><% else %><%= link_to current_government.briefing_name, newest_points_url %><% end %></span>
+			<span class="tab_header"><% if false and logged_in? and current_user.endorsements_count > 0 %><%= link_to current_government.briefing_name, your_priorities_points_url %><% else %><%= link_to current_government.briefing_name, newest_points_url %><% end %></span>
 			<div class="tab_body">
 
 				<div class="tab_subhead"><%= link_to t('menu.points.name'), your_priorities_points_url %> (<%= number_with_delimiter(current_government.points_count) %>)</div>
