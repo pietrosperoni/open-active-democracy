@@ -1028,7 +1028,7 @@ is:
             position:
                 label: "Eru {{support_radio}} þessi rök til stuðnings eða {{oppose_radio}} á móti {{priority_name}}?"
             name:
-                label: "Taktu saman yfirlit yfir þín rök<span class='small'>60 characters</span>"
+                label: "Taktu saman yfirlit yfir þín rök <span class='small'>60 stafir</span>"
             other_priority_name:
                 label: "Tengdu þetta öðrum rökum <span class='small'>Byrjaðu bara að slá inn nafn</span>"
                 example: "Þú ræður hvort þú tengir við annað mál. Ef skoðun þín er andstæð, geturðu tengt við betra mál. EÐA, ef skoðun þín styður eða er hlutlaus, geturðu lagt áherslu á nákvæmara eða tengdara mál."
