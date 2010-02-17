@@ -11,11 +11,11 @@ með <%= render :partial => "priorities/endorsement_count", :locals => {:priorit
 	
 <% if change.is_active? %>
 	<% if change.is_endorsers? %>
-	  <%= change.priority.up_endorsements_count %> stutt
+	  <%= pluralize(change.priority.up_endorsements_count,"stuðningsmaður") %>
 	<% end %>
 	<% if change.is_endorsers? and change.is_opposers? %>og<% end %>
 	<% if change.is_opposers? %>
-	  <%= change.priority.down_endorsements_count %> á móti
+	  <%= pluralize(change.new_priority.down_endorsements_count,"andstæðingi") %>
 	<% end %>
 <% else %>
 	<% if change.is_endorsers? %>
@@ -26,7 +26,7 @@ með <%= render :partial => "priorities/endorsement_count", :locals => {:priorit
 	  á móti
 	<% end %>
 <% end %>
-af <b><%= link_to h(change.priority.name), change.priority %></b>
+frá <b><%= link_to h(change.priority.name), change.priority %></b>
 <% if change.is_flip?%>
 	breyti 
 	<% if change.is_endorsers? %>

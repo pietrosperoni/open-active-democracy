@@ -5,7 +5,8 @@ Hæ <%= h(@recipient.real_name) %>,
 <%= pluralize(@change.new_priority.up_endorsements_count,"stuðningsmaður") %>
 <% end %>
 <% if @change.is_endorsers? and @change.is_opposers? %> og <% end %>
-<% if @change.is_opposers? %><%= pluralize(@change.new_priority.down_endorsements_count,"andstæðingi") %>
+<% if @change.is_opposers? %>
+<%= pluralize(@change.new_priority.down_endorsements_count,"andstæðingi") %>
 <% end %> taki yfir 
 <% if @change.is_active? %>
 <% if @change.is_endorsers? %>
@@ -22,7 +23,8 @@ Hæ <%= h(@recipient.real_name) %>,
 <% if @change.is_endorsers? and @change.is_opposers? %> og 
 <% end %><% if @change.is_opposers? %>andstæðingum 
 <% end %>
-<% end %> af "<%= h(@change.priority.name) %>"
+<% end %> 
+frá "<%= h(@change.priority.name) %>"
 <% if @change.is_flip?%> breyti  
 <% if @change.is_endorsers? %>stuðningsmönnum í andstæðinga
 <% end %>
