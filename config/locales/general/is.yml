@@ -70,7 +70,7 @@ is:
             title: "Fjarlægja af forgangslistanum mínum"
     oppose:
         name: "á móti"
-        ed: "andstæðingur"
+        ed: "á móti"
         capitalize: "Á móti"
         plural: "á móti"
         people: "Andstæðingar"
@@ -353,8 +353,8 @@ is:
                         other: "{{count}} stuðningsmenn með <span class='pc'>{{capital}}{{currency_short_name}}</span>" 
                 opposers:
                     label:
-                        one: "1 andstæðingur með <span class='pc'>{{capital}}{{currency_short_name}}</span>" 
-                        other: "{{count}} andstæðingar með <span class='pc'>{{capital}}{{currency_short_name}}</span>" 
+                        one: "1 á móti með <span class='pc'>{{capital}}{{currency_short_name}}</span>" 
+                        other: "{{count}} á móti með <span class='pc'>{{capital}}{{currency_short_name}}</span>" 
             content:
                 label: "Útskýrður fyrir öðrum af hverju þeir ættu að kjósa með yfirtökunni:" 
                 note: "ATH! Ef 500 stafir duga ekki ættirðu að nota rök hins málsins til að lista atriði fyrir atriði af hverju það mál er gott. Þú ættir einungis að nota þennan reit til að verja yfirtökuna sjálfa." 
@@ -1178,8 +1178,8 @@ is:
             title: "{{number}} aðili/ar eru á móti {{priority_name}}"
             limit: "Sýni einungis 500 efstu andstæðingana"
             branch:
-                one: "1 {{branch_name}} er á móti"
-                other: "{{count}} andstæðingur/ar eru {{branch_name}}"            
+                one: "1 {{branch_name}} á móti"
+                other: "{{count}} á móti {{branch_name}}"            
         change:
             already_active: "Þú getur ekki breytt nafni máls eftir að einhver hefur stutt það."
             flagged: "{{priority_name}} var flaggað til endurskoðunar af {{admin_name}}"
