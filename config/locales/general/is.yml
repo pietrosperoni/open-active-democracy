@@ -208,8 +208,8 @@ is:
             seen: "Sýnt {{seen_count}} af {{total_count}} meðlimum nú þegar<br/>{{user_name}} varði <span class='pc'>{{cost}}{{currency_short_name}}</span> eða <span class='pc'>{{per_user_cost}}{{currency_short_name}}</span> á meðlim"
             current_position: "Þessi auglýsing er í {{position}}. sæti.  Þú getur séð allar auglýsingar sem eru í gangi <a href='{{ads_url}}'>hér</a>."
             endorsed:
-                one: "1 studdi"
-                other: "{{count}} studdu"
+                one: "1 með"
+                other: "{{count}} með"
             opposed:
                 one: "1 á móti"
                 other: "{{count}} á móti"

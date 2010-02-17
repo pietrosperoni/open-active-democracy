@@ -7,19 +7,19 @@
 <%= link_to change.user.name, change.user %> lagði til yfirtöku fyrir <%= time_ago(change.created_at) %>:<br/>
 <div class="change_name_first"><%= link_to h(change.new_priority.name), change.new_priority %></div>
 með <%= render :partial => "priorities/endorsement_count", :locals => {:priority => change.new_priority }%>
-<br/>ætti að yfirtaka <%= link_to "acquire", priority_change_url(change.priority,change) %> 
+<br/>ætti að <%= link_to "yfirtaka", priority_change_url(change.priority,change) %> 
 	
 <% if change.is_active? %>
 	<% if change.is_endorsers? %>
-	  stutt
+	  <%= change.priority.up_endorsements_count %> stutt
 	<% end %>
 	<% if change.is_endorsers? and change.is_opposers? %>og<% end %>
 	<% if change.is_opposers? %>
-	  á móti
+	  <%= change.priority.down_endorsements_count %> á móti
 	<% end %>
 <% else %>
 	<% if change.is_endorsers? %>
-	  stutt
+	  með
 	<% end %>
 	<% if change.is_endorsers? and change.is_opposers? %>og<% end %>
 	<% if change.is_opposers? %>
@@ -30,10 +30,10 @@ af <b><%= link_to h(change.priority.name), change.priority %></b>
 <% if change.is_flip?%>
 	breyti 
 	<% if change.is_endorsers? %>
-  	 stutt í á móti
+  	 með í á móti
 	<% end %>
 	<% if change.is_endorsers? and change.is_opposers? %>og<% end %>
 	<% if change.is_opposers? %>
-	 stutt í á móti
+	 með í á móti
 	<% end %>
 <% end %>
