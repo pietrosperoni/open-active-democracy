@@ -132,10 +132,10 @@
 		</li>
 		<% if logged_in? %>
 		<li class="tab3 mega">
-			<span class="tab_header"><%= link_to current_government.briefing_name, "" %></span>
+			<span class="tab_header"><%= link_to current_government.briefing_name, "#" %></span>
 			<div class="tab_body">
 
-				<div class="tab_subhead"><%= link_to t('menu.points.name'), your_priorities_points_url %> (<%= number_with_delimiter(current_government.points_count) %>)</div>
+				<div class="tab_subhead"><%= link_to t('menu.points.name'), newest_points_url %> (<%= number_with_delimiter(current_government.points_count) %>)</div>
 				<div class="tab_sublinks">
 					<%= link_to t('menu.briefing.yours'), points_url %>
 					&middot; <%= link_to t('menu.briefing.your_priorities'), your_priorities_points_url %>
@@ -143,7 +143,7 @@
 					&middot; <%= link_to t('menu.briefing.revised'), revised_points_url %>
 				</div>
 			
-				<div class="tab_subhead"><%= link_to t('menu.documents.name'), your_priorities_documents_url %> (<%= number_with_delimiter(current_government.documents_count) %>)</div>
+				<div class="tab_subhead"><%= link_to t('menu.documents.name'), newest_documents_url %> (<%= number_with_delimiter(current_government.documents_count) %>)</div>
 				<div class="tab_sublinks">
 					<%= link_to t('menu.briefing.yours'), documents_url %>
 					&middot; <%= link_to t('menu.briefing.your_priorities'), your_priorities_documents_url %>
