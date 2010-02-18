@@ -242,11 +242,11 @@ is:
             branch:
                 name: "{{branch_name}} mál"
         processes:
-                name: "Þingferill"
+                name: "Ferill"
         process_documents:
-                name: "Þingskjöl"
+                name: "Skjöl"
         process_discussions:
-                name: "Þingumræður"
+                name: "Þingræður"
         points:
             name: "Rök"
         portal:
