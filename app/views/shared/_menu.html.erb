@@ -40,7 +40,7 @@
 		</li>
 		<% end %>
 		<li class="tab2 mega">
-			<span class="tab_header"><%= link_to t('menu.priorities.name'), :controller => "priorities", :action => current_government.homepage.index("/") ? "top" : current_government.homepage %></span>
+			<span class="tab_header"><%= link_to t('menu.priorities.name'), "#" %></span>
 			<div class="tab_body">
 
 				<div class="tab_subhead">
@@ -132,7 +132,7 @@
 		</li>
 		<% if logged_in? %>
 		<li class="tab3 mega">
-			<span class="tab_header"><% if false and logged_in? and current_user.endorsements_count > 0 %><%= link_to current_government.briefing_name, your_priorities_points_url %><% else %><%= link_to current_government.briefing_name, newest_points_url %><% end %></span>
+			<span class="tab_header"><%= link_to current_government.briefing_name, "" %></span>
 			<div class="tab_body">
 
 				<div class="tab_subhead"><%= link_to t('menu.points.name'), your_priorities_points_url %> (<%= number_with_delimiter(current_government.points_count) %>)</div>
@@ -171,7 +171,7 @@
 		<% end %>
 		<% if logged_in? %>
 		<li class="tab4 mega">
-			<span class="tab_header"><%= link_to t('menu.news.name'), :controller => "news", :action => "discussions" %></span>
+			<span class="tab_header"><%= link_to t('menu.news.name'), "#" %></span>
 			<div class="tab_body">
 				
 				<div class="tab_subhead"><%= link_to t('menu.news.discussions'), :controller => "news", :action => "discussions" %></div>
@@ -250,7 +250,7 @@
 		</li>
 		<% end %>
 		<li class="tab5 mega">
-			<span class="tab_header"><%= link_to t('menu.network.name'), :controller => "network" %></span>
+			<span class="tab_header"><%= link_to t('menu.network.name'), "#" %></span>
 			<div class="tab_body">				
 				<div class="tab_subhead"><%= link_to t('menu.network.meet'), :controller => "network" %> (<%= number_with_delimiter(current_government.users_count) %>)</div>
 				<div class="tab_sublinks">
@@ -331,7 +331,7 @@
 		<% if logged_in? %>
 		<li class="tab6 mega">
 			<span class="tab_header">
-				<%= link_to t('menu.settings.name'), settings_url %>
+				<%= link_to t('menu.settings.name'), "#" %>
 			</span>
 			<div class="tab_body">
 				<div class="tab_subhead">
@@ -399,7 +399,7 @@
 		<% end %>
 		<li class="tab7 mega">
 			<span class="tab_header">
-				<%= link_to t('menu.about.name'), :controller => "about" %>
+				<%= link_to t('menu.about.name'), "#" %>
 			</span>
 			<div class="tab_body">
 				<div class="tab_subhead"><%= link_to t('menu.about.site'), :controller => "about" %></div>
