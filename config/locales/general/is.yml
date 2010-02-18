@@ -1407,13 +1407,13 @@ is:
         errors:
             header_message: "Það komu upp vandamál við að vista {{tags_name}}"
         show:
-            title: "{{tag_name}} mál"
-            empty: "Engin mál til staðar {{tag_name}}"
+            title: "{{tag_name}}"
+            empty: "Engin mál til staðar fyrir {{tag_name}}"
             gone: "{{tags_name}} er ekki til"
         yours:
-            title: "Þín {{tag_name}} mál"
+            title: "Þín {{tag_name}}"
         network:
-            title: "Mál {{tag_name}} þíns tengslanets"
+            title: "{{tag_name}} þíns tengslanets"
         obama:
             title: "mál {{official_user_name}} {{tag_name}}"
             intro: "Þetta er málefnaskrá {{official_user_name}} fyrir {{tag_name}} skv. forgangsröð meðlima"
@@ -1424,21 +1424,21 @@ is:
             title: "mál {{tag_name}} sem {{official_user_name}} er á móti"
             intro: "Þetta eru mál meðlima {{tag_name}} sem {{official_user_name}} er á móti"
         rising:
-            title: "Rísandi {{tag_name}} mál"
+            title: "Rísandi {{tag_name}}"
         falling:
-            title: "Fallandi {{tag_name}} mál"
+            title: "Fallandi {{tag_name}}"
         controversial:
-            title: "Umdeild {{tag_name}} mál"
+            title: "Umdeild {{tag_name}}"
         random:
-            title: "Slembin {{tag_name}} mál"
+            title: "Slembin {{tag_name}}"
         finished:
-            title: "Lokuð {{tag_name}} mál"
+            title: "Lokið {{tag_name}}"
         yours_finished:
-            title: "Þín lokuðu {{tag_name}} mál"
+            title: "Þín lokuðu {{tag_name}}"
         yours_created:
             title: "{{tag_name}} Mál sem þú stofnaðir"
         newest: 
-            title: "Ný {{tag_name}} mál"
+            title: "Ný {{tag_name}}"
         discussions:
             title: "Umræður um {{tag_name}}"
         documents:
