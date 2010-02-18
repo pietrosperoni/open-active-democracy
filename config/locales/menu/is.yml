@@ -44,7 +44,7 @@ is:
             all_activity: "Öll virkni"
             research:
                 name: "Órökstudd mál"
-                needed: "Mál vantar {{points_name}} eða {{documents_name}}"
+                needed: "Mál sem vantar {{points_name}} eða {{documents_name}}"
                 points_needed: "Mál verða að innihalda rök"
                 documents_needed: "Mál verða að innihalda skjöl"
                 contributors:

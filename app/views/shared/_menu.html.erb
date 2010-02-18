@@ -46,19 +46,19 @@
 				<div class="tab_subhead">
 					<%= link_to "Lagafrumvörp", "/issues/lagafrumvorp" %>
 				</div>
-				<div class="tab_sublinks">
+				<div class="tab_sublinks"></div>
 				<br>
 				
 				<div class="tab_subhead">
 					<%= link_to "Þingsályktunartillögur", "/issues/thingsalyktunartillogur" %>
 				</div>
-				<div class="tab_sublinks">
+				<div class="tab_sublinks"></div>
 				<br>
 
 				<div class="tab_subhead">
 					<%= link_to "Mál frá almenningi", "/issues/fra-almenningi" %>
 				</div>
-				<div class="tab_sublinks">
+				<div class="tab_sublinks"></div>
 				<br>
 
 				<div class="tab_subhead">
@@ -114,7 +114,6 @@
 						</div>
 				
 					<% end %>
-				
 				<% end %>
 				
 				<% if current_government.has_official? %>
@@ -127,7 +126,6 @@
 					&middot; <%= link_to t('menu.priorities.official.agenda_opposed'), obama_opposed_priorities_url %>					
 					</div>
 				<% end %>
-				
 			</div>
 		</li>
 		<% if logged_in? %>
