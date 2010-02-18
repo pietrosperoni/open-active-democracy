@@ -48,7 +48,7 @@ class PriorityProcess < ActiveRecord::Base
         else
           compare_time_b = b.external_date
         end
-        compare_time_a<=>compare_time_b
+        compare_time_b<=>compare_time_a
       end
       @processes_changed_past_7_days = @processes_changed_past_7_days.map {|p| p.priority_process.priority }.uniq[0..limit]
     end
