@@ -1259,6 +1259,7 @@ is:
                     short: "engin breyting í þessari viku"
         top_points:
             title: "Bestu rök"
+            title_long: "Bestu rök í máli: {{priority_name}}"
     prioritizer:
         index:
             title: "{{government_name}} röðun mála"
