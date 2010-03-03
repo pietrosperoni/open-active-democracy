@@ -148,7 +148,7 @@ class Revision < ActiveRecord::Base
     s += " [hlutlaust]" if is_neutral?    
     s += "\r\nTil stuðnings " + point.other_priority.name if point.has_other_priority?
     s += "\r\n" + content
-    s += "\r\nSource: " + website_link if has_website?
+    s += "\r\nUppruni: " + website_link if has_website?
     return s
   end  
   
