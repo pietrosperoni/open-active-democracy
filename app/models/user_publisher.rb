@@ -27,11 +27,10 @@ class UserPublisher < Facebooker::Rails::Publisher
     send_as :publish_stream
     message = "#{facebook_session.user.name} studdi málið #{priority.name} á Skuggaþingi. "+create_bottom_text(priority)
     from facebook_session.user
-    target facebook_session.user
+    #target facebook_session.user
     message ''
     attachment :name => priority.name, :href => priority.show_url, :description => message
     action_links [ :text => 'Rökræða mál', :href => "#{priority.show_url}/top_points"]
-#    data :priority_url => priority.show_url, :priority_name => priority.name, :position => endorsement.position, :government_url => Government.current.homepage_url, :government_name => Government.current.name, :endorsers => priority.up_endorsements_count, :opposers => priority.down_endorsements_count, :rank => priority.position
   end
 
   def opposition_template
@@ -43,10 +42,13 @@ class UserPublisher < Facebooker::Rails::Publisher
   # To send a registered template, you need to create a method to set the data
   # The publisher will look up the template id from the facebook_templates table
   def opposition(facebook_session, endorsement, priority)
-    send_as :user_action
+    send_as :publish_stream
+    message = "#{facebook_session.user.name} er á móti málinu #{priority.name} á Skuggaþingi. "+create_bottom_text(priority)
     from facebook_session.user
-    story_size SHORT # ONE_LINE, SHORT or FULL
-    data :priority_url => priority.show_url, :priority_name => priority.name, :position => endorsement.position, :government_url => Government.current.homepage_url, :government_name => Government.current.name, :endorsers => priority.up_endorsements_count, :opposers => priority.down_endorsements_count, :rank => priority.position
+    #target facebook_session.user
+    message ''
+    attachment :name => priority.name, :href => priority.show_url, :description => message
+    action_links [ :text => 'Rökræða mál', :href => "#{priority.show_url}/top_points"]
   end  
   
   def comment_template
