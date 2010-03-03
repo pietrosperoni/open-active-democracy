@@ -65,9 +65,9 @@ is:
                 one: "1 endurskoðun"
                 other: "{{count}} endurskoðanir"
             documents:
-                name: "Skrár"
-                one: "1 skrá"
-                other: "{{count}} skrár"
+                name: "Skjöl"
+                one: "1 skjal"
+                other: "{{count}} skjöl"
             priorities:
                 name: "Mál"
                 one: "1 mál"

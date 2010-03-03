@@ -612,7 +612,7 @@ is:
                 content:
                     label: "Af hverju gerðirðu þessa breytingu?"
                 position:
-                    label: "Is this document {{support_radio}} in support {{neutral_radio}} neutral or {{oppose_radio}} in opposition to {{priority_name}}?"
+                    label: "Er þetta skjal {{support_radio}} með {{neutral_radio}} hlutlaust eða {{oppose_radio}} á móti máli {{priority_name}}?"
                 submit: "Vista skjal"
                 name:
                     label: "Titill <span class='small'>60 stafir</span>"
