@@ -19,12 +19,15 @@ class UserPublisher < Facebooker::Rails::Publisher
   # To send a registered template, you need to create a method to set the data
   # The publisher will look up the template id from the facebook_templates table
   def endorsement(facebook_session, endorsement, priority)
-    send_as :user_action
+    message = "#{facebook_session.user.name} studdi #{priority.name} á Skuggaþingi"
+    send_as :publish_stream
     from facebook_session.user
-    story_size SHORT # ONE_LINE, SHORT or FULL
-    data :priority_url => priority.show_url, :priority_name => priority.name, :position => endorsement.position, :government_url => Government.current.homepage_url, :government_name => Government.current.name, :endorsers => priority.up_endorsements_count, :opposers => priority.down_endorsements_count, :rank => priority.position
+    target facebook_session.user
+    message message
+    action_links [ :text => 'Skoða #{priority.name}', :href => priority.show_url]
+#    data :priority_url => priority.show_url, :priority_name => priority.name, :position => endorsement.position, :government_url => Government.current.homepage_url, :government_name => Government.current.name, :endorsers => priority.up_endorsements_count, :opposers => priority.down_endorsements_count, :rank => priority.position
   end
-  
+
   def opposition_template
     one_line_story_template "{*actor*} er á móti <a href='{*priority_url*}'>{*priority_name*}</a> í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>"
     short_story_template "{*actor*} er á móti <a href='{*priority_url*}'>{*priority_name*}</a> í mikilvægisröð {*position*} á <a href='{*government_url*}'>{*government_name*}</a>", render(:partial => "priority")
