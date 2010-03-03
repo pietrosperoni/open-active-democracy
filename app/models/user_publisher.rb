@@ -23,7 +23,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   # The publisher will look up the template id from the facebook_templates table
   def endorsement(facebook_session, endorsement, priority)
     send_as :publish_stream
-    message = "#{facebook_session.user.name} studdi málið #{priority.name} á Skuggaþingi<br>"+create_bottom_text(priority)
+    message = "#{facebook_session.user.name} studdi málið #{priority.name} á Skuggaþingi. "+create_bottom_text(priority)
     from facebook_session.user
     target facebook_session.user
     message ''
