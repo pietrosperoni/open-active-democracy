@@ -17,7 +17,9 @@ class UserPublisher < Facebooker::Rails::Publisher
   end
 
   def create_bottom_text(priority)
-    "Þetta mál er núna númer #{priority.position} og #{priority.up_endorsements_count} með og #{priority.down_endorsements_count} á móti"
+    er_up_text = priority.up_endorsements_count > 1 ? "eru" : "er"
+    er_down_text = priority.down_endorsements_count > 1 ? "eru" : "er"
+    "Þetta mál er núna númer #{priority.position}, #{priority.up_endorsements_count} #{er_up_text} með og #{priority.down_endorsements_count} #{er_down_text} á móti."
   end
   # To send a registered template, you need to create a method to set the data
   # The publisher will look up the template id from the facebook_templates table
