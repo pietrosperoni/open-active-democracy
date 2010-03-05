@@ -1,6 +1,6 @@
 set :application, "open-active-democracy"
 set :domain, "skuggathing.is"
-set :selected_branch, "odd-merge"
+set :selected_branch, "master"
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
 set :deploy_to, "/home/robert/sites/#{application}/#{selected_branch}"
