@@ -100,7 +100,7 @@ class Revision < ActiveRecord::Base
     point.name = self.name
     point.other_priority = self.other_priority
     point.author_sentence = point.user.login
-    point.author_sentence += ", edited by " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
+    point.author_sentence += ", breytingar " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
     point.published_at = Time.now
     point.save_with_validation(false)
     user.increment!(:point_revisions_count)    
@@ -149,11 +149,11 @@ class Revision < ActiveRecord::Base
   
   def text
     s = point.name
-    s += " [opposed]" if is_down?
-    s += " [neutral]" if is_neutral?    
-    s += "\r\nIn support of " + point.other_priority.name if point.has_other_priority?
+    s += " [á móti]" if is_down?
+    s += " [hlutlaust]" if is_neutral?    
+    s += "\r\nTil stuðnings " + point.other_priority.name if point.has_other_priority?
     s += "\r\n" + content
-    s += "\r\nSource: " + website_link if has_website?
+    s += "\r\nUppruni: " + website_link if has_website?
     return s
   end  
   
