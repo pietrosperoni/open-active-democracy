@@ -1,15 +1,6 @@
 <% cache(["icelandic_parliment_priority_processes_main",I18n.locale,@priority_process.priority.id,@show_only_last_process ? "only_last_process" : "all_processes"], :expires_in => 1.hour) do %>
 <% @total_discussions = ProcessDiscussion.count(:include=>[:priority_process],:conditions=>["priority_id = ?",@priority.id]) %>
-<% current_process = @priority_process %>
-<% processes = [] %>
-<% while current_process %>
-    <% processes<<current_process %>
-	<% unless current_process.children.empty? %>
-		<% current_process = current_process.children.first %>
-	<% else %>
-	<% current_process = nil %>
-	<% end %>
-<% end %>
+<% processes = PriorityProcess.find_all_by_priority_id(@priority.id,:order=>"stage_sequence_number") %>
 <% if @show_only_last_process %>
   <% processes = [processes.last] %>
   <h2><%=t "processes.only_last_process"%></h2>
