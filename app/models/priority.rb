@@ -186,7 +186,7 @@ class Priority < ActiveRecord::Base
   end
   
   def is_buried?
-    status == 'falið'
+    status == 'grafið undir'
   end
   
   def is_top?
