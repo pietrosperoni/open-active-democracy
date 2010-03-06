@@ -238,15 +238,15 @@ class Priority < ActiveRecord::Base
   
   def value_name 
     if is_failed?
-      'has failed'
+      'mistókst'
     elsif is_successful?
-      'was successful'
+      'tókst'
     elsif is_compromised?
-      'is finished with a compromise'
+      'tókst með málamiðlun'
     elsif is_intheworks?
-      'is in the works'
+      'er í vinnslu'
     else
-      'has not been finished yet'
+      'hefur ekki verið afgreitt'
     end
   end
   
