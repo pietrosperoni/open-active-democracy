@@ -1,6 +1,6 @@
 is:
-    prev_t: "til baka"
-    next_t: "áfram"
+    prev_t: "« til baka"
+    next_t: "áfram »"
     issues:
         name: "Þema"
         list:
