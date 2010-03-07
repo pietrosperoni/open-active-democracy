@@ -39,8 +39,9 @@ class DocumentRevision < ActiveRecord::Base
   before_save :update_word_count
   
   before_save :truncate_user_agent
+  
   def truncate_user_agent
-    self.user_agent = self.user_agent[0..149] # some user agents are longer than 150 chars!
+    self.user_agent = self.user_agent[0..149] if self.user_agent # some user agents are longer than 150 chars!
   end  
   
   def do_publish
