@@ -24,15 +24,6 @@ namespace :utils do
       system("rm /home/robert/#{filename}.gz")
   end
 
-  desc "Backup"
-  task(:backup => :environment) do
-      filename = "beint.lydraedi.is_#{Time.new.strftime("%d%m%y_%H%M%S")}.sql"
-      system("mysqldump -u robert --force odd_master > /home/robert/#{filename}")
-      system("gzip /home/robert/#{filename}")
-      system("scp /home/robert/#{filename}.gz robert@where.is:backups/#{filename}.gz")
-      system("rm /home/robert/#{filename}.gz")
-  end
-
   desc "Delete Fully Processed Masters"
   task(:delete_fullly_processed_masters => :environment) do
       masters = ProcessSpeechMasterVideo.find(:all)
