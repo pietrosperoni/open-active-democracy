@@ -47,7 +47,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
         end
         new_html+=line+"\n"
       end
-    rescue
+    rescue Timeout::Error
       new_html=html
     end
     new_html
