@@ -9,10 +9,14 @@
 
 
 .priority_add {
-padding: 2px !important;
+padding: 1px !important;
 }
 
 .priority_add_link
 {
 }
 	
+div .priority_listing
+{
+/*float: left;*/
+}	

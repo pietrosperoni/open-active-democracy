@@ -549,7 +549,7 @@ del {
   	font-size: 12px;
 	font-weight: bold;
 	margin-bottom: 2px;	
-	line-height: 1em;
+/*	line-height: 1em; */
 }
 .priority_name_related {
   	font-size: 1.1em;
