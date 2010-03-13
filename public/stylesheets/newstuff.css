@@ -665,6 +665,11 @@ vertical-align: top !important;
 color:#ddd !important;
 }
 
+/* Overriding width:20000em located somewhere */
+#latest_video_discussion_thumbs {
+width: 530px !important;
+float: left !important;
+}
 
 .suggest_button, .yellow_button {
 background-color:#FFFF99;
