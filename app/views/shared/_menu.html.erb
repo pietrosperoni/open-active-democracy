@@ -444,10 +444,10 @@
 	
 </div>
 </div>
-
 <% if nav == 1 %>
 	<%= render :partial => "issues/nav" %>
-<% elsif nav == 2 %>
+<% elsif nav == 2 and not ["show","discussions","endorsers","opposers",
+		                   "top_points","activities"].include?(action_name) %>
 	<%= render :partial => "priorities/browse_nav" %>
 <% elsif nav == 3 %>
 	<%= render :partial => "briefing/nav" %>

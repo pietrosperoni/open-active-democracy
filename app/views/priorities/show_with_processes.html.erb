@@ -1,7 +1,6 @@
 <%= render :partial => "header" %>
 
 <link href="/stylesheets/points_layout.css" rel="stylesheet" type="text/css" />
-
 <% if @priority.replaced? %>
 	<div id="hp_subhead">
 		<%= t('priorities.replaced', :priority_name => link_to(@priority.change.new_priority.name, @priority.change.new_priority))%>
