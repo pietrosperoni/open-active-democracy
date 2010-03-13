@@ -51,7 +51,7 @@ is:
         column:
             heading: "Fréttir frá öðrum miðlum"
     status:
-        failed: "mistókst"
+        failed: "fellt"
         successful: "afgreitt"
         intheworks: "í vinnslu"
         compromised: "milli tveggja elda"
@@ -328,10 +328,10 @@ is:
             document: "Opna umræðu um þetta skjal" 
             profile: "Setja skilaboð á korktöflu í notandaupplýsingasvæði {{user_name}}" 
             priority_discussion: "Opna umræðu um þetta mál" 
-            priority: "Hvað er að gerast varðandi þetta mál?" 
+            priority: "Settu inn athugasemd um þetta mál" 
             priority_dropdown: "Senda á mál: (valkvæmt)" 
             discussion: "Opna umræðu" 
-            submit: "Setja skilaboð á korktöflu" 
+            submit: "Senda inn athugasemd" 
     changes:
         empty: "Engar tillögur um yfirtöku" 
         show:
@@ -369,7 +369,7 @@ is:
         destroy: "Fjarlægði yfirtöku" 
         results: "Niðurstöður kosningar" 
         approved: "SAMÞYKKT" 
-        failed: "MISTÓKST" 
+        failed: "FELLT" 
         failing: "ER AÐ MISTAKAST" 
         passing: "ER AÐ TAKAST" 
         start_voting: 

@@ -58,7 +58,7 @@
 						</td>
 					</tr>
 				</table>
-				  
+
 				<table id="" class="container_13">
 					<tr>
 					<td id="" class="grid_41">
@@ -82,7 +82,24 @@
 					</td>
 					</tr>
 				</table>
-			<% end %>		
+			<% end %>
+
+			<% latest_discussions = @priority.activities.discussions.by_recently_updated.item_limit(1)%>
+
+			<% if logged_in? %>
+				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
+			<% end %>
+						
+			<% if latest_discussions and not latest_discussions.empty? %>
+				Nýjusta umræða:<br>
+				<% for activity in latest_discussions %>
+					<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
+				<% end %>
+				<%= link_to 'Allar athugasemdir almennings', discussions_priority_url(@priority) %><br>
+				<hr>
+			<% end %>
+
+			
 			<% if @priority_process %>
 			  <%= render :partial => "process_speech_master_videos/latest_video_discussions_medium" %>
 			<% end %>
@@ -158,11 +175,7 @@
 			
 			<% end %>		
 			<p>
-			<% if logged_in? %>
-				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
-			<% else %>
-				<div class="heading"><%= t('priorities.recent_activity')%></div>
-			<% end %>
+			<div class="heading"><%= t('priorities.recent_activity')%></div>
 			<div id="activities">
 			<% for activity in @activities %>
 			<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>

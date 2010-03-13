@@ -238,7 +238,7 @@ class Priority < ActiveRecord::Base
   
   def value_name 
     if is_failed?
-      'mistókst'
+      'fellt'
     elsif is_successful?
       'tókst'
     elsif is_compromised?

@@ -13,7 +13,7 @@ is:
   processes:
       icesave_portlet: "Icesave mál"
       only_last_process: "Nýjasta umræða frá Alþingi"
-      show_all_processes: "Smelltu til að sjá allar umræður"
+      show_all_processes: "Allar Alþingisumræður"
       name: "Alþingi"
       all_latest_video_discussions: "Nýjustu myndskeið"
       most_popular_videos: "Bestu ræðurnar"      
