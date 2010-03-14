@@ -1352,7 +1352,7 @@ is:
                 label: "Eftirnafn"
             login:
                 label: "Hvernig viltu þekkjast á vefnum?"
-                example: "(Má vera nafn eða dulnefni)"
+                example: ""
             email:
                 label: "Netfang"
                 example: "(Aldrei birt án leyfis frá þér)"
