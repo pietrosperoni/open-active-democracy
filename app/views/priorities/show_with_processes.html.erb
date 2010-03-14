@@ -91,7 +91,7 @@
 			<% end %>
 						
 			<% if latest_discussions and not latest_discussions.empty? %>
-				Nýjusta umræða:<br>
+				Nýjasta umræða:<br>
 				<% for activity in latest_discussions %>
 					<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
 				<% end %>
