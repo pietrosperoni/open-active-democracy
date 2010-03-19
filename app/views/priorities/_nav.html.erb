@@ -143,3 +143,18 @@
 	</ul>
 </div>
 </div>
+
+<div id="endorse_oppose">
+
+							<div id="priority_<%= @priority.id.to_s %>_button">
+								<%= render :partial => "priorities/button", :locals => {:priority => @priority, :endorsement => @endorsement}%>
+							</div>
+							
+							<span class="yes_and_no_points_link_hacky add_point_for yellow_button">
+								<%=link_to(t('points.top_points.add_point_for_endorse'), new_priority_point_path(@priority,:support=>true))%>
+							</span>
+
+							<span class="yes_and_no_points_link_hacky add_point_against yellow_button">
+								<%=link_to(t('points.top_points.add_point_for_oppose'), new_priority_point_path(@priority,:support=>false))%>
+							</span>
+</div>

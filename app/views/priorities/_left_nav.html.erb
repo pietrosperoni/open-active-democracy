@@ -1,11 +1,15 @@
+<!--
 <% if ['published','draft'].include?(@priority.status) %>
 <div id="priority_<%= @priority.id.to_s %>_position">
 	<%= render :partial => "endorsements/position", :locals => {:endorsement => @endorsement }%>
 </div>
+
 <div id="priority_<%= @priority.id.to_s %>_button">
 	<%= render :partial => "priorities/button", :locals => {:priority => @priority, :endorsement => @endorsement}%>
 </div>
+
 <% end %>
+-->
 
 <% if ['show','priorities'].include?(params[:action])%>
 <%= render :partial => "shared/addthis" %>		
