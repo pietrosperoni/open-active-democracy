@@ -346,16 +346,16 @@
 					<%= link_to t('menu.settings.emails'), signups_settings_url %>
 				</div>
 				
-				<% if logged_in? and current_user.is_admin? %>
+				<% if logged_in? and current_user.is_admin? and Partner.current %>
 					<div class="tab_subhead">
-						<%= link_to t('menu.partner.name'), edit_partner_url(current_user.partner) %>
+s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.currentv) %>
 					</div>
 				<% end %>
 				<div class="tab_sublinks">
-				<% if logged_in? and current_user.is_admin? %>
-					<%= link_to t('menu.partner.account'), edit_partner_url(current_user.partner) %>
-					&middot; <%= link_to t('menu.partner.logo'), picture_partner_path(current_user.partner) %>
-					&middot; <%= link_to t('menu.partner.email'), email_partner_path(current_user.partner) %>
+				<% if logged_in? and current_user.is_admin? and Partner.current %>
+					<%= link_to t('menu.partner.account'), edit_partner_url(Partner.current) %>
+					&middot; <%= link_to t('menu.partner.logo'), picture_partner_path(Partner.current) %>
+					&middot; <%= link_to t('menu.partner.email'), email_partner_path(Partner.current) %>
 				<% end %>
 				</div>
 				
