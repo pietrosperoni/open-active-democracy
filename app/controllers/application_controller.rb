@@ -68,6 +68,8 @@ class ApplicationController < ActionController::Base
   def current_partner
     return nil if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'dev'
     @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+    Partner.current = @current_partner
+    return @current_partner
   end
   
   def current_user_endorsements

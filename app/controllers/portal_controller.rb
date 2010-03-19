@@ -94,23 +94,27 @@ class PortalController < ApplicationController
   private
 
   def default_container
-    portlet_container = PortletContainer.find_by_default_admin(true)
+    portlet_container = PortletContainer.filtered.find_by_default_admin(true)
     unless  portlet_container
-      portlet_container = PortletContainer.new
-      portlet_container.default_admin = true
-      portlet_container.user_id = current_user.id
-      portlet_container.save
+      if current_user
+        portlet_container = PortletContainer.new
+        portlet_container.default_admin = true
+        portlet_container.user_id = current_user.id
+        portlet_container.save
+      end
     end
     portlet_container
   end
 
   def user_container
-    portlet_container = PortletContainer.find_by_user_id(current_user.id)
+    portlet_container = PortletContainer.filtered.find_by_user_id(current_user.id)
     unless portlet_container
-      portlet_container = PortletContainer.new
-      portlet_container.user_id = current_user.id
-      portlet_container.save
-      portlet_container.clone_from_default(default_container)
+      if current_user
+        portlet_container = PortletContainer.new
+        portlet_container.user_id = current_user.id
+        portlet_container.save
+        portlet_container.clone_from_default(default_container)
+      end
     end
     portlet_container
   end

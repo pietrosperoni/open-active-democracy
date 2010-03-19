@@ -6,7 +6,7 @@ class IssuesController < ApplicationController
   def index
     @page_title = current_government.tags_name.pluralize.titleize
     if request.format != 'html' or current_government.tags_page == 'list'
-      @issues = Tag.most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
+      @issues = Tag.filtered.most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
     end
     respond_to do |format|
       format.html {
@@ -76,7 +76,7 @@ class IssuesController < ApplicationController
   
   def network
     @page_title = t('tags.network.title', :tag_name => @tag_names.titleize, :target => current_government.target)
-    @tag_priorities = Priority.published.tagged_with(@tag_names, :on => :issues)
+    @tag_priorities = Priority.published.filtered.tagged_with(@tag_names, :on => :issues)
     if @user.followings_count > 0
       @priorities = Endorsement.active.find(:all, 
         :select => "endorsements.priority_id, sum((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value) as score, count(*) as endorsements_number, priorities.*", 
@@ -213,7 +213,7 @@ class IssuesController < ApplicationController
   def discussions
     @page_title = t('tags.discussions.title', :tag_name => @tag_names.titleize, :target => current_government.target)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues)
-    @activities = Activity.active.discussions.for_all_users.by_recently_updated.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page], :per_page => 10
+    @activities = Activity.active.filtered.discussions.for_all_users.by_recently_updated.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page], :per_page => 10
     respond_to do |format|
       format.html
       format.xml { render :xml => @activities.to_xml(:include => :comments, :except => NB_CONFIG['api_exclude_fields']) }
@@ -231,7 +231,7 @@ class IssuesController < ApplicationController
       format.json { render :json => @documents.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
     end        
   end  
-  
+
   def points
     @page_title = t('tags.points.title', :tag_name => @tag_names.titleize, :target => current_government.target)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues)

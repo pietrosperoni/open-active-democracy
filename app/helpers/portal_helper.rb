@@ -20,33 +20,33 @@ module PortalHelper
   end
 
   def setup_priorities_newest(limit)
-    get_cached_priorities("Priority.published.newest.item_limit(#{limit})")
+    get_cached_priorities("Priority.published.filtered.newest.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>newest_priorities_url}
   end
 
   def setup_priorities_top(limit)
-    get_cached_priorities("Priority.published.top_rank.item_limit(#{limit})")
+    get_cached_priorities("Priority.published.filtered.top_rank.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>top_priorities_url}
   end
 
   def setup_priorities_rising(limit)
-    get_cached_priorities("Priority.published.rising.item_limit(#{limit})")
+    get_cached_priorities("Priority.published.filtered.rising.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>rising_priorities_url}
   end
 
 
   def setup_priorities_falling(limit)
-    get_cached_priorities("Priority.published.falling.item_limit(#{limit})")
+    get_cached_priorities("Priority.published.filtered.falling.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>falling_priorities_url}
   end
 
   def setup_priorities_controversial(limit)
-    get_cached_priorities("Priority.published.controversial.item_limit(#{limit})")
+    get_cached_priorities("Priority.published.filtered.controversial.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>controversial_priorities_url}
   end
 
   def setup_priorities_finished(limit)
-    get_cached_priorities("Priority.published.finished.by_most_recent_status_change.item_limit(#{limit})")
+    get_cached_priorities("Priority.published.filtered.finished.by_most_recent_status_change.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>finished_priorities_url}
   end
 
@@ -62,9 +62,9 @@ module PortalHelper
 
   def setup_priorities_random(limit)
     if User.adapter == 'postgresql'
-      @priorities = Priority.published.paginate :order => "RANDOM()", :page => 1, :per_page => limit
+      @priorities = Priority.published.filtered.paginate :order => "RANDOM()", :page => 1, :per_page => limit
     else
-      @priorities = Priority.published.paginate :order => "rand()", :page => 1, :per_page => limit
+      @priorities = Priority.published.filtered.paginate :order => "rand()", :page => 1, :per_page => limit
     end
     {:more=>random_priorities_url, :priorities=>@priorities, :endorsements=>get_endorsements}
   end

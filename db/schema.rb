@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100217015727) do
+ActiveRecord::Schema.define(:version => 20100319200714) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -678,7 +678,7 @@ ActiveRecord::Schema.define(:version => 20100217015727) do
     t.integer  "height",       :limit => 8
     t.integer  "width",        :limit => 8
     t.string   "content_type", :limit => 100
-    t.binary   "data"
+    t.binary   "data",         :limit => 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -724,6 +724,7 @@ ActiveRecord::Schema.define(:version => 20100217015727) do
     t.float    "opposer_score",                           :default => 0.0
     t.float    "neutral_score",                           :default => 0.0
     t.text     "content_html"
+    t.integer  "partner_id"
   end
 
   add_index "points", ["other_priority_id"], :name => "index_points_on_other_priority_id"
@@ -739,6 +740,7 @@ ActiveRecord::Schema.define(:version => 20100217015727) do
     t.boolean  "default_admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "partner_id"
   end
 
   add_index "portlet_containers", ["user_id"], :name => "index_portlet_containers_on_user_id"
@@ -835,6 +837,7 @@ ActiveRecord::Schema.define(:version => 20100217015727) do
     t.string   "external_presenter"
     t.string   "external_id"
     t.string   "external_name"
+    t.integer  "partner_id"
   end
 
   add_index "priorities", ["obama_status"], :name => "index_priorities_on_obama_status"
@@ -1129,6 +1132,7 @@ ActiveRecord::Schema.define(:version => 20100217015727) do
     t.integer  "documents_count",                          :default => 0
     t.string   "prompt",                    :limit => 100
     t.string   "slug",                      :limit => 60
+    t.integer  "partner_id"
   end
 
   add_index "tags", ["slug"], :name => "index_tags_on_slug"

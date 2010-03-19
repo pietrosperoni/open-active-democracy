@@ -21,6 +21,8 @@ class PortletContainer < ActiveRecord::Base
     end
   end
   
+  acts_as_set_partner :table_name=>"portlet_containers"
+  
   def clone_from_default(default)
     default.portlets.each do |portlet|
       new_portlet = portlet.clone
