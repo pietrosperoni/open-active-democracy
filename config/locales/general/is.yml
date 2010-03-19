@@ -1200,7 +1200,7 @@ is:
             blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgangsmáli til að bæta þínu við."
             success: "Takk fyrir að bæta {{priority_name}} við"
             submit: "Búa til nýtt mál"
-            suggest: "Ertu með mál sem Alþingi ætti að taka fyrir? Settu það inn hér."
+            suggest: "Ertu með mál sem ætti að taka fyrir? Settu það inn hér."
             click:
                 one: "Smelltu á <span class='priority_add'>STYÐJA</span> ef þetta mál hér neðar styður enn ásetning þinn."
                 other: "Smelltu á <span class='priority_add'>ENDORSE</span> ef eitthvert þessara mála styður ásetning þinn."

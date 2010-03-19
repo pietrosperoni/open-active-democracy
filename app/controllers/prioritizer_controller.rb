@@ -122,15 +122,15 @@ class PrioritizerController < ApplicationController
     def new_single
       if User.adapter == 'postgresql'
         if current_user.endorsements_count > 3
-          @priority = Priority.published.find(:all, :conditions => ["id not in (?)",current_priority_ids], :order => "RANDOM()", :limit => 1)[0]
+          @priority = Priority.published.filtered.find(:all, :conditions => ["id not in (?)",current_priority_ids], :order => "RANDOM()", :limit => 1)[0]
         else
-          @priority = Priority.published.find(:all, :conditions => ["position <= ?",Endorsement.max_position], :order => "RANDOM()", :limit => 1)[0]
+          @priority = Priority.published.filtered.find(:all, :conditions => ["position <= ?",Endorsement.max_position], :order => "RANDOM()", :limit => 1)[0]
         end
       else
         if current_user.endorsements_count > 3
-          @priority = Priority.published.find(:all, :conditions => ["id not in (?)",current_priority_ids], :order => "rand()", :limit => 1)[0]
+          @priority = Priority.published.filtered.find(:all, :conditions => ["id not in (?)",current_priority_ids], :order => "rand()", :limit => 1)[0]
         else
-          @priority = Priority.published.find(:all, :conditions => ["position <= ?",Endorsement.max_position], :order => "rand()", :limit => 1)[0]
+          @priority = Priority.published.filtered.find(:all, :conditions => ["position <= ?",Endorsement.max_position], :order => "rand()", :limit => 1)[0]
         end
       end
     end

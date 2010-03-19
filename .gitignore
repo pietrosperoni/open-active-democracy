@@ -18,6 +18,7 @@ public/development
 public/production
 workers/video/config/worker.yml
 private/*
+public/system
 *.log
 *.output
 *.pid

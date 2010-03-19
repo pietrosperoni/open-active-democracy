@@ -22,8 +22,17 @@
 
 <div id="backgroundwrap">
 	<div id="header">
-		<div id="branding">
+		<div id="branding" style="height: 52px">
+		<% if current_partner %>
+		<div id="partner_image" style="float: left">
+			<%= render :partial => "partners/logo" %>
+		</div>
+		<div id="parent_image" style="float: right">
+			<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is" %>
+		</div>
+		<% else %>
 		<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal" %>
+		<% end %>
 	</div>
 		<%= flash_div :warning, :notice, :error %>
 
@@ -73,13 +82,6 @@
 		<%= render :partial => "shared/buzz" %>
 		<% end %>
 
-		<% end %>
-
-		<% if current_partner %>
-		<div id="partner_image">
-			Partnership with:<br/>
-			<%= render :partial => "partners/logo" %>
-		</div>
 		<% end %>
 
 	</div>

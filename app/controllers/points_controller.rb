@@ -5,7 +5,7 @@ class PointsController < ApplicationController
  
   def index
     @page_title = t('points.yours.title', :government_name => current_government.name)
-    @points = Point.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @points = Point.filtered.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
     get_qualities
     respond_to do |format|
       format.html { render :action => "index" }
@@ -16,7 +16,7 @@ class PointsController < ApplicationController
   
   def newest
     @page_title = t('points.newest.title', :government_name => current_government.name)
-    @points = Point.published.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @points = Point.filtered.published.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     @rss_url = url_for :only_path => false, :format => "rss"
     get_qualities
     respond_to do |format|

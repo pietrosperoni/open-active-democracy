@@ -3,8 +3,8 @@
 development:
   adapter: mysql
   database: nb
-  username: 
-  password:
+  username: rails_user
+  password: bjahdh69
   reconnect: true
   host: localhost
   timeout: 5000

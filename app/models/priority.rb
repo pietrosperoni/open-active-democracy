@@ -4,6 +4,8 @@ class Priority < ActiveRecord::Base
   
   include ActionView::Helpers::DateHelper
 
+  acts_as_set_partner :table_name=>"priorities"
+
   if Government.current and Government.current.is_suppress_empty_priorities?
     named_scope :published, :conditions => "priorities.status = 'published' and priorities.position > 0 and endorsements_count > 0"
   else
@@ -43,6 +45,7 @@ class Priority < ActiveRecord::Base
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}  
   
   belongs_to :user
+  belongs_to :partner
   
   has_many :relationships, :dependent => :destroy
   has_many :incoming_relationships, :foreign_key => :other_priority_id, :class_name => "Relationship", :dependent => :destroy
@@ -116,7 +119,7 @@ class Priority < ActiveRecord::Base
   event :deactivate do
     transitions :from => [:draft, :published, :buried], :to => :inactive
   end
-  
+    
   cattr_reader :per_page
   @@per_page = 25
   
@@ -588,5 +591,4 @@ class Priority < ActiveRecord::Base
     # should probably send an email notification to the person who submitted it
     # but not doing anything for now.
   end
-  
 end

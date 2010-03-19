@@ -114,7 +114,7 @@ class Government < ActiveRecord::Base
   
   def update_counts
     self.users_count = User.count
-    self.priorities_count = Priority.published.count
+    self.priorities_count = Priority.published.filtered.count
     self.endorsements_count = Endorsement.active_and_inactive.count
     self.partners_count = Partner.active.count
     self.points_count = Point.published.count

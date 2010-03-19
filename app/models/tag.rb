@@ -1,7 +1,9 @@
 class Tag < ActiveRecord::Base
 
   extend ActiveSupport::Memoizable
-
+  
+  acts_as_set_partner :table_name=>"tags"
+  
   named_scope :by_endorsers_count, :order => "tags.up_endorsers_count desc"
 
   named_scope :alphabetical, :order => "tags.name asc"
@@ -82,12 +84,12 @@ class Tag < ActiveRecord::Base
   end
   
   def published_priority_ids
-    Priority.published.tagged_with(self.name, :on => :issues).collect{|p| p.id}
+    Priority.published.filtered.tagged_with(self.name, :on => :issues).collect{|p| p.id}
   end
   memoize :published_priority_ids  
   
   def calculate_discussions_count
-    Activity.active.discussions.for_all_users.by_recently_updated.count(:conditions => ["priority_id in (?)",published_priority_ids])
+    Activity.active.filtered.discussions.for_all_users.by_recently_updated.count(:conditions => ["priority_id in (?)",published_priority_ids])
   end
   
   def calculate_points_count

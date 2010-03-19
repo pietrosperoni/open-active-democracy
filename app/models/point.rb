@@ -1,5 +1,7 @@
 class Point < ActiveRecord::Base
 
+  acts_as_set_partner :table_name=>"points"
+
   named_scope :published, :conditions => "points.status = 'published'"
   named_scope :by_helpfulness, :order => "points.score desc"
   named_scope :by_endorser_helpfulness, :conditions => "points.endorser_score > 0", :order => "points.endorser_score desc"
