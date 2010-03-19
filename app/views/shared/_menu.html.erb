@@ -348,7 +348,7 @@
 				
 				<% if logged_in? and current_user.is_admin? and Partner.current %>
 					<div class="tab_subhead">
-s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.currentv) %>
+s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
 					</div>
 				<% end %>
 				<div class="tab_sublinks">
