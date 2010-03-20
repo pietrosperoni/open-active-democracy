@@ -2,17 +2,51 @@
 <% if @tag_names %>
 	<%= hidden_field_tag :tag_names, @tag_names %>
 <% end %>
-<table>
+<table width="100%">
 	<tr>
 		<td>
 			<%= f.text_field :name, :size => 40, :maxlength => 60, :autocomplete =>"off" %>		
+			<% if params[:q] %>
+				<br><%= t('priorities.new.suggest') %>
+			<% end %>
 		</td>
 		<td>
-			<%= f.submit t('priorities.new.submit'), :class => "suggest_button" %>	
+			<table width="100%">
+				<tr>
+					<% if Partner.current and Partner.current.custom_tag_checkbox %>
+						<td>
+							Flokkar:
+						</td>
+						<td>
+							<%=Partner.current.custom_tag_checkbox%>? <%= check_box_tag 'custom_checkbox', Partner.current.custom_tag_checkbox%>
+						</td>
+					<% else %>
+						<td colspan="2">
+							Flokkar:
+						</td>
+					<% end %>
+				</tr>
+				<tr>
+					<% if Partner.current and Partner.current.custom_tag_dropdown_1 %>
+						<td>
+							<%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%>
+						</td>
+					<% end %>
+					<% if Partner.current and Partner.current.custom_tag_dropdown_2 %>
+						<td>
+							<%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%>
+						</td>
+					<% end %>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<%= text_field_tag :custom_tags %>		
+						<span class="tiny_info"><br>Settu inn flokka og notaðu kommu á milli (flokkur 1,flokkur 2, flokkur 3)</span>
+						<%= f.submit t('priorities.new.submit'), :class => "suggest_button" %>	
+					</td>
+				</tr>
+			</table>
 		</td>
 	</tr>	
 </table>
-<% end %>
-<% if params[:q] %>
-	<p><%= t('priorities.new.suggest') %></p>
 <% end %>

@@ -127,6 +127,15 @@ class Partner < ActiveRecord::Base
     return wu    
   end
   
+  def custom_tag_dropdown_options(option)
+    options = send("custom_tag_dropdown_#{option}")
+    out = ""
+    options.split(",").each do |o|
+      out+="<option>#{o}</option>"
+    end
+    out
+  end
+  
   private
   def do_delete
     deleted_at = Time.now

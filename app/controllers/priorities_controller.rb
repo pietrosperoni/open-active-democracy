@@ -651,6 +651,19 @@ class PrioritiesController < ApplicationController
       format.html # new.html.erb
     end    
   end
+  
+  def create_tags(priority)
+    tags = []
+    tags << params[:custom_tag_option_1] if params[:custom_tag_option_1]
+    tags << params[:custom_tag_option_2] if params[:custom_tag_option_2]
+    tags << params[:custom_checkbox] if params[:custom_checkbox]
+    tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
+    tags += Partner.current.default_tags.split(",").collect {|t| t.strip} if Partner.current and Partner.current.default_tags
+    tags << "frá almenningi" unless Partner.current
+    unless tags.empty?
+      priority.issue_list = tags.join(",")
+    end
+  end
 
   # POST /priorities
   # POST /priorities.xml
@@ -658,7 +671,7 @@ class PrioritiesController < ApplicationController
     @tag_names = params[:tag_names]
     @priority = Priority.new
     @priority.name = params[:q] if params[:q]
-    @priority.issue_list = "frá almenningi" unless Partner.current
+    create_tags(@priority)
     if not logged_in?
       flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
       session[:query] = params[:priority][:name] if params[:priority]
@@ -671,7 +684,7 @@ class PrioritiesController < ApplicationController
       @priority.name = params[:finalized].strip
       @priority.user = current_user
       @priority.ip_address = request.remote_ip
-      @priority.issue_list = "frá almenningi" unless Partner.current
+      create_tags(@priority)
       @saved = @priority.save
     else
       # see if it already exists
@@ -690,7 +703,7 @@ class PrioritiesController < ApplicationController
         @priorities = @priority_results.docs
         if @priorities.any? # found some matches in search, let's show them and bale out of the rest of this
           @priority = Priority.new(params[:priority])
-          @priority.issue_list = "frá almenningi"
+          create_tags(@priority)
           get_endorsements
           respond_to do |format|
             format.html { render :action => "new"}
@@ -705,8 +718,8 @@ class PrioritiesController < ApplicationController
         @priority.name = params[:priority][:name].strip
         @priority.user = current_user
         @priority.ip_address = request.remote_ip
-        @priority.issue_list = "frá almenningi" unless Partner.current
-        @saved = @priority.save      
+        create_tags(@priority)
+        @saved = @priority.save
       end
     end
     @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
