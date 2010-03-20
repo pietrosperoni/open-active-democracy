@@ -344,7 +344,11 @@
 					<% end %>
 					<%= link_to t('menu.settings.emails'), signups_settings_url %>
 				</div>
-				
+				<% if logged_in? and current_user.is_admin? and Partner.current %>
+					<div class="tab_subhead">
+						<%= link_to t('menu.partner.become'), partners_url %>						
+					</div>
+				<% end %>
 				<% if logged_in? and current_user.is_admin? and Partner.current %>
 					<div class="tab_subhead">
 s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
