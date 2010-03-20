@@ -18,7 +18,8 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 DB_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/database.yml")
-ENV['DOMAIN'] = DB_CONFIG[RAILS_ENV]['domain']
+ENV['DOMAIN'] = "skuggathing.is"
+
 if ENV['DOMAIN']
   config.action_controller.session = {:domain => '.' + ENV['DOMAIN']}
 end
