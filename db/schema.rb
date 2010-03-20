@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100319200714) do
+ActiveRecord::Schema.define(:version => 20100320155854) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20100319200714) do
     t.datetime "updated_at"
     t.datetime "finished_at"
     t.integer  "position",                       :default => 0
+    t.integer  "partner_id"
   end
 
   add_index "ads", ["priority_id"], :name => "ads_priority_id_index"
@@ -399,6 +400,7 @@ ActiveRecord::Schema.define(:version => 20100319200714) do
     t.float    "endorser_score",                         :default => 0.0
     t.float    "opposer_score",                          :default => 0.0
     t.float    "neutral_score",                          :default => 0.0
+    t.integer  "partner_id"
   end
 
   add_index "documents", ["priority_id"], :name => "index_documents_on_priority_id"
