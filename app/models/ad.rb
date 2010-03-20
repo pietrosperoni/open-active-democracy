@@ -1,5 +1,7 @@
 class Ad < ActiveRecord::Base
 
+  acts_as_set_partner :table_name=>"ads"
+
   named_scope :active, :conditions => "ads.status = 'active'"
   named_scope :inactive, :conditions => "ads.status in ('inactive','finished')"
   named_scope :finished, :conditions => "ads.status = 'finished'"
