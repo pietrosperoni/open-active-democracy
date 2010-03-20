@@ -73,6 +73,10 @@ class EndorsementsController < ApplicationController
               @activity = ActivityOppositionDelete.find_by_priority_id_and_user_id(@priority.id,current_user.id, :order => "created_at desc")
             end          
             page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
+          elsif params[:region] == 'priority_subs'
+            page.replace_html 'priority_' + @priority.id.to_s + "_button",render(:partial => "priorities/button_subs", :locals => {:priority => @priority, :endorsement => nil})
+            page.replace 'endorser_link', render(:partial => "priorities/endorser_link") 
+            page.replace 'opposer_link', render(:partial => "priorities/opposer_link")             
           elsif ['priority_inline'].include?(params[:region])
             page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority})) }
             page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => nil, :region => params[:region]}))}
