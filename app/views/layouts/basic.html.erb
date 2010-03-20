@@ -43,9 +43,9 @@
 		<div id="parent_image" style="float: right">
 			<% Partner.with_logo.all.each do |partner| %>
 			<% if RAILS_ENV=="development"%>
-			  <%= link_to image_tag(partner.logo.url(:icon_53_8)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
+			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
 			<% else %>
-			  <%= link_to image_tag(partner.logo.url(:icon_53_8)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
+			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
 			<% end %>
 			<br>
 		<% end %>
