@@ -804,6 +804,10 @@ class PrioritiesController < ApplicationController
             if @activity and not params[:no_activites]
               page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
             end
+          elsif params[:region] == 'priority_subs'
+            page.replace_html 'priority_' + @priority.id.to_s + "_button",render(:partial => "priorities/button_subs", :locals => {:priority => @priority, :endorsement => @endorsement})
+            page.replace 'endorser_link', render(:partial => "priorities/endorser_link") 
+            page.replace 'opposer_link', render(:partial => "priorities/opposer_link")
           elsif params[:region] == 'priority_inline'
             page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority})) }            
             page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}
@@ -814,6 +818,8 @@ class PrioritiesController < ApplicationController
           elsif params[:region] == 'ad_top' and @ad
             page.replace 'notification_show', render(:partial => "ads/pick")
             page << 'jQuery("#notification_show").corners();'
+          else
+            page << "alert('aaaa');"
           end
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
           page.visual_effect :highlight, 'your_priorities'
