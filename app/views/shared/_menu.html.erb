@@ -139,7 +139,7 @@
 					&middot; <%= link_to t('menu.briefing.revised'), revised_points_url %>
 				</div>
 			
-				<div class="tab_subhead"><%= link_to t('menu.documents.name'), newest_documents_url %> (<%= number_with_delimiter(Document.published.filtered.countt) %>)</div>
+				<div class="tab_subhead"><%= link_to t('menu.documents.name'), newest_documents_url %> (<%= number_with_delimiter(Document.published.filtered.count) %>)</div>
 				<div class="tab_sublinks">
 					<%= link_to t('menu.briefing.yours'), documents_url %>
 					&middot; <%= link_to t('menu.briefing.your_priorities'), your_priorities_documents_url %>
