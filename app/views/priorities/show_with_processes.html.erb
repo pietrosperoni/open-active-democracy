@@ -8,12 +8,13 @@
 <% else %>
 	<%= render :partial => "nav" %>
 <% end %>
+
 <p>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		
-		<td valign="top">
-			
+		<td valign="top" class="add_note">
+			<p class="top_p">
 			<% if @priority.has_change? %>
 				<%= render :partial => "changes/show", :locals => {:change => @priority.change}%>
 				<p>
@@ -24,13 +25,12 @@
 			<% if @priority.points_count == 0 %>
 				<%= t('points.priority.intro', :new_point_url => new_priority_point_path(@priority))%>
 			<% else %>
+			
+			</p>
 				<table id="" class="container_13">
 					<tr>
 						<td class="grid_41">
 							<center>
-								<span class="yes_and_no_points_link_hacky">
-									<%=link_to(t('points.top_points.add_point_for_endorse'), new_priority_point_path(@priority,:support=>true))%>
-								</span>
 							</center>
 							<div class="sub_header">
 								<h2><%=t('points.top_points.best_points_for_endorse')%></h2>
@@ -43,9 +43,6 @@
 				    
 						<td id="point_right" class="grid_41">
 							<center>
-								<span class="yes_and_no_points_link_hacky">
-									<%=link_to(t('points.top_points.add_point_for_oppose'), new_priority_point_path(@priority,:support=>false))%>
-								</span>
 							</center>
 							<div class="sub_header">
 								<h2><%=t('points.top_points.best_points_for_oppose')%></h2>
@@ -188,7 +185,22 @@
 		</td>	
 		
 		<td valign="top" width="160">
+
+						<div class="priorities_adjustments">
+							<% if ['published','draft'].include?(@priority.status) %>
+							<div id="priority_<%= @priority.id.to_s %>_position">
+								<%= render :partial => "endorsements/position", :locals => {:endorsement => @endorsement }%>
+							</div>
+
+
+							<% end %>
+							
+						</div>
+
+
+			<div class="content_left_nav">
 			<%= render :partial => "left_nav" %>
+			</div>
 		</td>		
 	
 	</tr>

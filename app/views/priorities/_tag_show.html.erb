@@ -6,7 +6,6 @@
 	<span class="tag_count"><%= tag.priorities_count %></span>
 	<% end %>
 
-
 <% elsif priority.attribute_present?("cached_issue_list") %>
 
 	<%= tags_sentence(priority.cached_issue_list) %>

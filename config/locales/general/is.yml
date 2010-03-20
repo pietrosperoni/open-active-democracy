@@ -31,7 +31,7 @@ is:
     doit: "JÁ"
     dont: "NEI"
     rank: "Staða"
-    or: "EÐA"
+    or: "eða"
     check_uncheck: "Merkja/Afmerkja allt"
     processing: "Í vinnslu..."
     skip: 
@@ -45,8 +45,8 @@ is:
         mo: "Mn"
     feeds:
         rss: "RSS straumur"
-        activity: "Virkni straumur"
-        discussions: "Umræðu straumur"
+        activity: "Virkni"
+        discussions: "Umræða"
         via: "um {{source}}"
         column:
             heading: "Fréttir frá öðrum miðlum"
@@ -62,23 +62,23 @@ is:
     endorse: 
         name: "styðja"
         ed: "með"
-        capitalize: "Styðja"
+        capitalize: "Ég styð"
         plural: "styðja"
         people: "Stuðningsmenn"
         title: "Ég styð þetta, bæta á forgangslistann minn"
         ing: "Styður"
-        you: "ÞÚ STUDDIR"
+        you: "Þú styður"
         delete:
             title: "Fjarlægja af forgangslistanum mínum"
     oppose:
         name: "á móti"
         ed: "á móti"
-        capitalize: "Á móti"
+        capitalize: "Ég er á móti"
         plural: "á móti"
         people: "Andstæðingar"
         title: "Ég er á móti þessu og vil bæta þessari afstöðu minni á forgangslistann minn."
         ing: "Andstæðingur"
-        you: "ÞÚ VARST Á MÓTI"
+        you: "Þú ert á móti"
         delete:
             title: "Fjarlægja af forgangslistanum mínum"
     follow:
@@ -642,7 +642,7 @@ is:
         delete:
             title: "Smelltu á X-ið til að fjarlægja þetta mál"
         position:
-            yours: "{{position}}. mál þitt."
+            yours: "Þetta er {{position}}. mál þitt."
             title: "Smelltu á númerið til að breyta staðsetningu þess á listanum þínum. Þú getur endurraðað með því að draga og sleppa nöfnum."
     facebook:
         synced: "Aðgangurinn þinn er núna samstilltur við Facebook. Til að tengjast héðan í frá dugir einfaldlega að smella á stóra bláa Facebook hnappinn."
@@ -1063,8 +1063,8 @@ is:
             all_best_points_for_oppose: "Öll rök með Nei"
             all_newest_points_for_endorse: "Öll ný rök með Já"
             all_newest_points_for_oppose: "Öll ný rök með Nei"
-            add_point_for_endorse: "Settu inn ný rök með Já"
-            add_point_for_oppose: "Settu inn ný rök með Nei"
+            add_point_for_endorse: "Skrifa rök með"
+            add_point_for_oppose: "Skrifa rök á móti"
             new_point_short: "Ný rök"
             all_best_points: "Öll bestu rök"
     priorities:
@@ -1352,7 +1352,7 @@ is:
                 label: "Eftirnafn"
             login:
                 label: "Hvernig viltu þekkjast á vefnum?"
-                example: "(Má vera nafn eða dulnefni)"
+                example: ""
             email:
                 label: "Netfang"
                 example: "(Aldrei birt án leyfis frá þér)"

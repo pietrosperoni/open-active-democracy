@@ -1,3 +1,58 @@
+.top_p {
+margin-top: 20px; 
+}
+
+
+/* Default link color */
+
+a {
+color:#3B5998 !Important;
+}
+
+/* 
+Font sizes to use
+16px - 13px - 11px
+*/
+
+/* Font coordination */
+
+#nav {
+font-size:13px !important;
+}
+
+ul#priority_menu li .tab_header a {
+font-size:11px !Important;
+}
+
+h2 {
+font-size:13px !Important;
+padding-bottom: 0px !Important;
+}
+
+.point_item p a {
+font-size:12px !important;
+}
+
+.point_byline {
+font-size:11px !Important;
+font-style:normal !important;
+color: #999;
+}
+
+.tag_button_hack {
+font-size:11px !important;
+font-style:normal !important;
+color: #999;
+line-height: 150%;
+}
+
+#content_text {
+font-size:11px !important;
+}
+
+.yes_and_no_points_link_hacky a {
+font-size:11px !important;
+}
 
 #hp_intro {
 	font-size: 1em;
@@ -20,3 +75,254 @@ div .priority_listing
 {
 /*float: left;*/
 }	
+
+.priority_name_link
+{
+display: inline !important;
+/*float:left !important;*/
+padding-right: 5px;
+padding-top: 1px !important; 
+}
+
+.priority_add {
+padding-top:0px !important;
+padding-bottom:0px !important;
+padding-left:2px !important;
+padding-right:2px !important;
+font-size: 9px !important;
+font-weight: bold !important;
+}
+
+div#content_text table 
+{
+}
+
+
+#addthis, #addthis a, #priority_short_url
+ {
+font-size: 11px !Important;
+}
+
+#priority_short_url
+ {
+margin-bottom: 10px;
+}
+
+.qtip_left
+{
+width: 100px !important;
+}
+
+.priorities h3 
+{
+font-size: 16px !Important;
+}
+
+div.content_left_nav 
+{
+/*margin-top: 33px;
+border-left: 1px solid #333 !Important;	*/
+}
+
+.suggest_button, .yellow_button {
+background-color:#FFFF99;
+border:1px solid #FFCC00 !important;
+width:94px;
+}
+
+.endorse_or
+{
+display: none;	
+}
+
+.endorse
+{
+position: absolute;
+left: 0px;
+float: left;
+}
+
+.oppose
+{
+position: absolute;
+left: 273px;
+float: left;
+}
+
+.add_point_for
+{
+position: absolute;
+left: 110px;
+top: -10px;
+float: left;
+width: 112px;
+}
+
+.add_point_against
+{
+position: absolute;
+left: 383px;
+top: -10px;
+float: left;
+width: 112px;
+}
+
+
+#endorse_oppose_top_points .add_point_against
+{
+left: 475px;
+}
+
+#endorse_oppose_top_points .oppose
+{
+left: 365px;
+}
+
+#endorse_oppose_top_points .red_button_priority
+{
+left: 365px;
+}
+
+
+.add_point_for a, .add_point_against a
+{
+font-weight: bold !important;
+text-decoration: none;
+}
+
+.green_button_priority, .red_button_priority
+{
+border:1px solid #FFCC00 !important;
+background: #00529B !Important;
+width:100px;
+position: absolute;
+left: 0px;
+float: left;
+top: 0px;
+}
+
+#endorse_oppose
+{
+position: relative !Important;
+}
+
+#hide #endorse_oppose
+{
+display:none;
+}
+
+
+#endorse_oppose_top_points
+{
+position: relative !Important;
+}
+
+
+.green_button_priority .text
+{
+font-size: 12px !important;
+}
+
+.green_button_priority, .red_button_priority {
+padding:2px 1px 1px !important;
+}
+
+.red_button_priority
+{
+background: #EE3423 !Important;
+left: 270px;
+}
+
+
+.green_button_priority .big_x a
+{
+color: #EE3423 !important;
+font-weight: bold; 
+font-size: 11px !important;
+}
+
+.red_button_priority .big_x a
+{
+color: #00529B !important;
+font-weight: bold; 
+font-size: 11px !important;
+}
+
+.priorities_adjustments
+{
+position: relative !important;	
+margin-bottom: 15px;
+}
+
+.priorities_adjustments p, .priorities_adjustments form
+
+{
+float:right;
+/*
+position:relative;
+right:-168px;
+*/
+}
+
+#priority_submit
+{
+width: 124px !important;	
+}
+
+.test
+ {
+background-color: red !important;
+width: 200px !Important;
+height: 200px !IMportant;
+
+
+}
+
+#first_points
+{
+width: 550px !important;
+background: red !important;
+float:left;
+}
+
+.add_note p
+{
+/* margin-top: 20px !important; */
+}
+
+.add_note p
+{
+}
+
+.add_note
+{
+padding-right: 10px;
+}
+
+.margin-top
+{
+margin-top: 30px;
+}
+
+.blurb b
+{
+font-size: 13px;	
+}
+
+
+#priority_nav, #priority_nav1, #priority_menu	
+{
+	width: 710px !Important;
+}
+
+ul#menu li, ul#menu_sub li, ul#menu_third li, ul#priority_menu li {
+display:inline-block;
+*display:inline;
+left:0;
+position:relative;
+top:0;
+}
+
+#new_user_form .suggest_button, #new_user_form .yellow_button {
+width:174px;
+}

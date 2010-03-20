@@ -11,6 +11,7 @@
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
 <%= stylesheet_link_tag "newstuff" %>
 <%= stylesheet_link_tag "gnew" %>
+<%= stylesheet_link_tag "partners" %>
 <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
 <% if controller_name == "facebook" %>
 <%= stylesheet_link_tag "fb_invite_hack.css" %>
@@ -18,13 +19,14 @@
 </head>
 <body>
 
+
 <%= blurb("header") %>
 
 <div id="backgroundwrap">
 	<div id="header">
 		<div id="branding" style="height: 52px">
 		<% if current_partner %>
-		<div id="partner_image" style="float: left">
+		<div id="partner_image">
 			<%= render :partial => "partners/logo" %>
 		</div>
 		<div id="parent_image" style="float: right">

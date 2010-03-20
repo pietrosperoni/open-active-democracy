@@ -1,9 +1,13 @@
 <%= render :partial => "priorities/header" %>
 <%= render :partial => "priorities/nav" %>
-<p>
-<br>
+
+<table border="0" cellspacing="0" cellpadding="0" class="margin-top">
+	<tr>
+		
+		<td valign="top">
+
 <%= blurb('point_new')%>
-<br>
+
 <% form_for :point, :url => priority_points_path(@priority)  do |f| %>
   <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 	<div class="field">
@@ -58,3 +62,5 @@
 	<%= f.submit t('points.new.submit'), :id => "submit", :class => "yellow_button" %>
 
 <% end %>
+
+</td></tr></table>
