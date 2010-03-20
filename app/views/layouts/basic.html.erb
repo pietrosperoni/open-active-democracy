@@ -30,7 +30,11 @@
 			<%= render :partial => "partners/logo" %>
 		</div>
 		<div id="parent_image" style="float: right">
-			<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is" %>
+			<% if RAILS_ENV=="development"%>
+				<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is", :port=>3000 %>
+			<% else %>
+				<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is" %>
+			<% end %>
 		</div>
 		<% else %>
 		<div id="parent_image" style="float: left">
