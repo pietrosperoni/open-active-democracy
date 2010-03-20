@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
  
   def index
     @page_title = t('document.yours.title')
-    @documents = Document.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @documents = Document.published.filtered.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
       format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
   
   def newest
     @page_title = t('document.newest.title')
-    @documents = Document.published.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @documents = Document.published.filtered.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     @rss_url = url_for :only_path => false, :format => "rss"
     respond_to do |format|
       format.html { render :action => "index" }

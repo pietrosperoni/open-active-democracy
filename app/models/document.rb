@@ -1,5 +1,7 @@
 class Document < ActiveRecord::Base
 
+  acts_as_set_partner :table_name=>"documents"
+
   named_scope :published, :conditions => "documents.status = 'published'"
   named_scope :by_helpfulness, :order => "documents.score desc"
   named_scope :by_endorser_helpfulness, :conditions => "documents.endorser_score > 0", :order => "documents.endorser_score desc"

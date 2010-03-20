@@ -485,7 +485,7 @@ class User < ActiveRecord::Base
   
   def pick_ad(current_priority_ids)
   	shown = 0
-  	for ad in Ad.active.most_paid.all
+  	for ad in Ad.active.filtered.most_paid.all
   		if shown == 0 and not current_priority_ids.include?(ad.priority_id)
   			shown_ad = ad.shown_ads.find_by_user_id(self.id)
   			if shown_ad and not shown_ad.has_response? and shown_ad.seen_count < 4
