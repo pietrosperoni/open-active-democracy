@@ -4,11 +4,8 @@
 <% end %>
 <table width="100%">
 	<tr>
-		<td>
+		<td>Nafn á máli:<br>
 			<%= f.text_field :name, :size => 40, :maxlength => 60, :autocomplete =>"off" %>		
-			<% if params[:q] %>
-				<br><%= t('priorities.new.suggest') %>
-			<% end %>
 		</td>
 		<td>
 			<table width="100%">
@@ -42,11 +39,61 @@
 					<td colspan="2">
 						<%= text_field_tag :custom_tags %>		
 						<span class="tiny_info"><br>Settu inn flokka og notaðu kommu á milli (flokkur 1,flokkur 2, flokkur 3)</span>
-						<%= f.submit t('priorities.new.submit'), :class => "suggest_button" %>	
 					</td>
 				</tr>
 			</table>
 		</td>
 	</tr>	
 </table>
+
+<table border="0" cellspacing="0" cellpadding="0" class="margin-top">
+	<tr>
+		
+		<td valign="top">
+
+<%= blurb('point_new')%>
+
+  <%= error_messages_for @point, :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') if @point %>
+	<div class="field">
+ 		<div class="field_label">
+			<span class="red">* </span> <%=t('points.new.name.label') %> 
+		</div>
+		<div class="field_box">
+ 			<%= text_field_tag "point[name]", "", :size => 50, :maxlength => 60 %>
+		</div>
+	</div>
+
+	<div class="field">
+		<div class="field_label">
+			<table width="35%">
+				<tr>
+					<td align="left">
+						Já, til stuðnings <%= radio_button_tag("point[value]", 1, true) %>						
+					</td>
+					<td align="left">
+						Nei, á móti <%= radio_button_tag("point[value]", -1) %>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="field">
+	    <div class="field_label"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+		<div class="field_box">
+	    <%= text_area_tag "point[content]", "", :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
+		</div>
+	</div>				
+	
+	<div class="field">
+		<div class="field_label"><%= t('points.new.website.label') %></div>
+		<div class="field_box">
+			<%= text_field_tag "point[website]", "", :size => 50 %>	
+		</div>
+	</div>
+		
+	<%= f.submit t('priorities.new.submit'), :class => "suggest_button" %>	
+
+</td></tr></table>
+
 <% end %>

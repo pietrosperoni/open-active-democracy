@@ -732,25 +732,33 @@ class PrioritiesController < ApplicationController
       @priority.issue_list = @tag_names 
       @priority.save
     end
+    
+    if @saved
+      @point = Point.new(params[:point])
+      @point.user = current_user
+      @point.priority_id = @priority.id
+      @point_saved = @point.save
+    end
+    
+    if @point_saved
+      if Revision.create_from_point(@point.id,request)
+        session[:goal] = 'point'
+        if facebook_session
+          flash[:user_action_to_publish] = UserPublisher.create_point(facebook_session, @point, @priority)
+        end          
+        @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
+      end      
+    end
+    
     respond_to do |format|
-      if @saved
+      if @saved and @point_saved
         format.html { 
           flash[:notice] = t('priorities.new.success', :priority_name => @priority.name)
-          if @priority.endorsements_count < 2
-            redirect_to(new_priority_point_url(@priority))
-          else
-            redirect_to(@priority)
-          end
+          redirect_to(@priority)
         }
         format.js {
           render :update do |page|
-            if @priority.endorsements_count < 2
-              page.redirect_to new_priority_point_url(@priority)
-            else
-              page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-              page.visual_effect :highlight, 'your_priorities'
-              page['right_priority_box'].value = ''
-            end
+            page.redirect_to @priority
           end
         }        
       else
