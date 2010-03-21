@@ -151,9 +151,9 @@ is:
             new: "Ný síða"
             current: "Núverandi síða"
         partner:
-            name: "Félaga stillingar"
-            become: "Gerast félagi"
-            account: "Félaga aðild"
+            name: "Stillingar samstarfsaðila"
+            become: "Gerast samstarfsaðili"
+            account: "Aðild samstarfsaðila"
             email: "Tölvupóstlisti"
             logo: "Merki"
         priorities:

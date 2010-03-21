@@ -499,9 +499,10 @@ margin: 0 !important;
 
 #portlets-menu
 {
-margin-left: -3px;
+margin-right: 4px;
 margin-top: 3px;
 margin-bottom: 3px;
+float: right !important;
 }
 
 #main-dialogues-div p
