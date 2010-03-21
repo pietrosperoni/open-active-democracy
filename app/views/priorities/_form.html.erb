@@ -1,4 +1,9 @@
-<% form_for(Priority.new) do |f| %>
+<% if params[:notice] %>
+<%=  params[:notice] %>
+<% end %>
+
+
+<% form_for(@priority,:action=>"create") do |f| %>
 <% if @tag_names %>
 	<%= hidden_field_tag :tag_names, @tag_names %>
 <% end %>
@@ -53,7 +58,7 @@
 
 <%= blurb('point_new')%>
 
-  <%= error_messages_for @point, :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') if @point %>
+  <%= error_messages_for Point, :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') if @point %>
 	<div class="field">
  		<div class="field_label">
 			<span class="red">* </span> <%=t('points.new.name.label') %> 
