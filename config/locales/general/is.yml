@@ -924,9 +924,9 @@ is:
             success: "Stillingar vistaðar"
             emails: "Senda stillingaskrá í tölvupósti"
         new:
-            title: "Gerast meðeigandi í {{government_name}}"
-            success: "Takk fyrir að gerast meðeigandi með okkur!"
-            submit: "Gerstu meðeigandi"
+            title: "Gerast samstarfsaðili Skuggaþings"
+            success: "Takk fyrir að gerast samstarfsaðili Skuggaþings"
+            submit: "Gerstu samstarfsaðili"
             short_name:
                 limit: "færri en 20 stafir"
             name:

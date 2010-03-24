@@ -271,17 +271,12 @@ width: 124px !important;
 
 .test
  {
-background-color: red !important;
-width: 200px !Important;
-height: 200px !IMportant;
-
 
 }
 
 #first_points
 {
 width: 550px !important;
-background: red !important;
 float:left;
 }
 
@@ -326,3 +321,12 @@ top:0;
 #new_user_form .suggest_button, #new_user_form .yellow_button {
 width:174px;
 }
+
+/* Portlet stuff */
+
+table#add_portlet
+{
+	width: 700px; 
+}
+	
+
