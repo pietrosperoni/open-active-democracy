@@ -1,5 +1,5 @@
 .top_p {
-margin-top: 20px; 
+/*margin-top: 20px; */
 }
 
 
@@ -55,7 +55,7 @@ font-size:11px !important;
 }
 
 #hp_intro {
-	font-size: 1em;
+	font-size: 16px;
 	line-height: 2em;
 }
 
@@ -116,6 +116,12 @@ width: 100px !important;
 .priorities h3 
 {
 font-size: 16px !Important;
+}
+
+h3 
+{
+font-size: 16px !Important;
+padding-bottom: 9px;
 }
 
 div.content_left_nav 
@@ -193,7 +199,6 @@ text-decoration: none;
 .green_button_priority, .red_button_priority
 {
 border:1px solid #FFCC00 !important;
-background: #00529B !Important;
 width:100px;
 position: absolute;
 left: 0px;
@@ -255,10 +260,9 @@ margin-bottom: 15px;
 }
 
 .priorities_adjustments p, .priorities_adjustments form
-
 {
-float:right;
 /*
+float:right;
 position:relative;
 right:-168px;
 */
@@ -326,7 +330,122 @@ width:174px;
 
 table#add_portlet
 {
-	width: 700px; 
+	float:right;
 }
 	
+#new_button .button-to
+{
+	width: 500px;
+	float: left;
+	padding-bottom: 0px; 
+}
 
+.button-to
+{
+	padding-bottom: 10px; 
+}
+
+
+.button-to input
+{
+	background-color:#FFFF99;
+	border:1px solid #FFCC00;
+	margin-bottom: 10px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default 
+{
+background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50% 50% #9B9DA0 !important;
+}
+	
+.partner_image img
+{
+width: 90px !important; 
+}
+
+#br_hack br
+{
+display: none !important;
+}
+
+.red
+{
+color:#BC0000;
+font-size: 20px;
+top: 5px !Important; 
+position: relative;
+}
+
+.field {
+margin-bottom:1px;
+}
+
+#point_value_1, #point_value_-1 
+{
+border: none;	
+}
+
+#point_opposes
+{
+margin-top: 5px;	
+}
+
+.priority_position {
+font-size:11px !Important;
+}
+
+.column_id_1 .portlet
+{
+	margin-left: 0px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.column_id_2 .portlet
+{
+	margin-left: 0px;
+	margin-right: -10px;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.column_id_2 .portlet {
+margin:0 -10px 10px 0;
+}
+gnew.c...9440565 (line 405)
+.ui-corner-all {
+-moz-border-radius:1px 1px 1px 1px;
+}
+
+.ui-widget-content {
+border:1px solid #DDD !Important;
+}
+
+#header
+{
+border-bottom: 1px solid #ddd;	
+border-left: 1px solid #ddd;	
+border-right: 1px solid #ddd;	
+}
+
+#activities {
+border:0px solid #DDDDDD !important;
+margin-bottom: 10px;
+}
+
+.activity_border, .activity_hidden {
+border:1px solid #ddd !Important;
+margin-bottom: 10px;
+margin-left: 0px;
+}
+
+#activities {
+right:0px !Important; 
+}
+
+
+.althingi_process_container shown
+{
+border:1px solid #ddd !Important;
+}

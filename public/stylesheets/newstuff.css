@@ -173,6 +173,7 @@ ul#menu li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
+	border: solid 1px #ddd;
 }
 
 ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_third li.hovering div.tab_body { 
@@ -256,6 +257,7 @@ ul#menu_sub li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
+	border: 1px solid #ddd;
 }
 
 ul#menu_sub li {
@@ -291,6 +293,8 @@ ul#menu_third li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
+		border: 1px solid #ddd;
+
 }
 
 ul#menu_third li{ 
@@ -390,7 +394,11 @@ div.meta { width: 120px !important; }
 .comment_link_add, .small { font-size: 11px !important; }
 /*.point_byline { font-size: 1em !important; }*/
 #point_1_quality{font-size: 11px !important;}
-.tag_button { font-size: 1em !important; }
+
+.tag_button 
+{ 
+	font-size: 10px !important; 
+}
 .container_12, .container_13 
 { 
 /*	position: relative; */
@@ -439,15 +447,10 @@ text-align: right;
  /* Mal header */
 #hp_intro a, h1 #hp_intro {
   color:#333;
-  font-size: 13px;
+  font-size: 16px !important;
   line-height: 120% !important;
 }
 
-
-#hp_intro {
-font-size:14px !important;
-line-height:2em !important;
-}
 
 
 .intro
@@ -490,17 +493,17 @@ width: 120px;
 #nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a, #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_1 li.tab1 .tab_header a, #nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a, #nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a, #nav_sub_8 li.tab8 .tab_header a, #nav_sub_9 li.tab9 .tab_header a, #nav_sub_10 li.tab10 .tab_header a, #nav_third_1 li.tab1 .tab_header a, #nav_third_2 li.tab2 .tab_header a, #nav_third_3 li.tab3 .tab_header a, #nav_third_4 li.tab4 .tab_header a, #nav_third_5 li.tab5 .tab_header a, #nav_third_6 li.tab6 .tab_header a, #nav_third_7 li.tab7 .tab_header a, #nav_third_8 li.tab8 .tab_header a, #nav_third_9 li.tab9 .tab_header a, #nav_third_10 li.tab10 .tab_header a {
 background-color:#fff !important;
 color:#000000;
-font-weight:bold;
+font-weight:bold !important;
 padding-top:2px !important;
 padding-bottom:2px !important;
-border: 1px solid #f5f5f5;
+border: 1px solid #fff;
 margin: 0 !important;
 }
 
 #portlets-menu
 {
-margin-right: 4px;
-margin-top: 3px;
+margin-right: 1px;
+margin-top: -2px;
 margin-bottom: 3px;
 float: right !important;
 }
@@ -576,8 +579,10 @@ font-size:11px !important;
 
 #intro, #buzz_box, #not_activated, #notification_show, #errorExplanation, .bulletin_form, .change_vote_now, #contacts, #contacts_small, .invite_text, .notice {
 background-color:#fff;
-border: 2px solid #eee !important;
+border: 1px solid #ddd !important;
 color:#444444;
+margin-bottom: 10px;
+margin-top: 15px;
 }
 
 #login, #intro, #buzz_box {
@@ -592,7 +597,7 @@ padding:10px 10px 5px 15px;
 
 #priority_column{
 background-color:#fff !important;
-border: 2px solid #eee !important;
+border: 1px solid #ddd !important;
 font-size:11px;
 color:#444444;
 }
@@ -653,6 +658,7 @@ padding:7px 5px 3px 8px;
 #right_column_priorities a, #notification_box a, #next_steps_box a, #notification_box ol a, #next_steps_box  ol a, #not_activated a 
 {
 color: #533;
+padding-left: 3px;
 /*border-bottom: 1px dotted #977;*/
 }
 
@@ -688,13 +694,49 @@ border:2px solid #13499B !important;
 
 
 #priority_name {
-font-size:14px;
+font-size:13px;
 height:20px;
 margin-left:0 !important;
 margin-right:10px !important;
-width:330px;
+width:424px;
+border: 1px solid #ccc !important;
 }
 
+#point_name, #custom_tags, #point_website
+{
+font-size:13px;
+height:20px;
+margin-left:0 !important;
+margin-right:10px !important;
+width:424px !important;
+border: 1px solid #ccc !important;
+}
+
+#pointContent
+{
+font-size:13px;
+margin-left:0 !important;
+margin-right:10px !important;
+border: 1px solid #ddd !important;
+}
+
+#custom_tags {
+font-size:13px;
+height:20px;
+width:230px;
+}
+
+#your_priority, .form_header
+{
+padding-bottom: 2px; 
+}
+
+
+.form_header
+{
+font-size: 13px; 
+font-weight: bold;
+}
 
 .suggest_button {
 font-size:13px;
@@ -772,7 +814,7 @@ padding-bottom:0px !important;
 }
 
 .point_name {
-font-size:14px !important;
+font-size:13px !important;
 }
 
 .profile_name {
@@ -785,7 +827,7 @@ font-size: 13px !important;
 
 .priority_name, .priority_name_add {
 /*float:left;*/
-margin-right:7px;
+margin-right:1px;
 /*margin-top:3px;*/
 }
 
@@ -802,6 +844,19 @@ margin-right:7px;
 	margin-top: 3px;
 }
 
-.tiny_info {
-	font-size: 8px;
+.tiny_info, #tiny_info 
+{
+	font-size: 11px;
+	padding-top: 1px;
+	padding-bottom:9px;
+}
+
+.tiny_info_no_pad
+{
+	padding-bottom:1px;
+}
+
+.custom_tag select
+{
+	margin-left: 5px;
 }

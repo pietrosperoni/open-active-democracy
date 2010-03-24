@@ -9,10 +9,6 @@ div.scrollable_videos_large {
 	padding-left: 10px;
 }
 
-#latest_video_discussion_thumbs h3 {
-	color: #999;
-}
-
 /* 
 	root element for scrollable items. It is 
 	absolutely positioned with large width. 
@@ -30,6 +26,13 @@ a.prev, a.next {
 	margin-top:118px;	
 }
 
+#latest_video_discussion_thumbs h3 {
+	font-size: 11px !Important;
+	font-weight: normal !important;
+	color: #ccc;
+	padding-bottom: 2px !important; 
+	margin-bottom: 0px !Important;
+}
 
 #latest_video_discussion_thumbs div { 
     float:left; 
@@ -42,10 +45,6 @@ a.prev, a.next {
 	font-size: 10px;
 } 
 
-#latest_video_discussion_thumbs h3 { 
-	font-size: 10px;
-	font-weight: bold;
-} 
 
 #latest_video_discussion_thumbs img { 
 	padding-left:40px;

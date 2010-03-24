@@ -6,58 +6,63 @@
 		
 		<td valign="top">
 
-<%= blurb('point_new')%>
+<!--<%= blurb('point_new')%>-->
+
+	<div  class="form_header">Bæta við rökum: <span class="red">* </span> </div>
 
 <% form_for :point, :url => priority_points_path(@priority)  do |f| %>
   <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 	<div class="field">
- 		<div class="field_label">
-			<span class="red">* </span> <%=t('points.new.name.label') %> 
-		</div>
 		<div class="field_box">
  			<%= f.text_field :name, :size => 50, :maxlength => 60 %>
 		</div>
+			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þín mál þá eru góð rök lykilatriði</div>
 	</div>
 
 	<div class="field">
 		<div class="field_label">
-			<table width="35%">
-				<tr>
-					<td align="left">
-						Já, til stuðnings <%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>						
-					</td>
-					<td align="left">
-						Nei, á móti <%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %>
-					</td>
-				</tr>
-			</table>
+			<div id="point_supports" class="form_header">
+
+				<%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>	 Já, þessi rök styðja málið					
+			</div>			
+			<div id="point_opposes" class="form_header">
+				<%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %> Nei, þessi rök eru á móti málinu
+			</div>
 		</div>
 	</div>
+			<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður mál eða ekki</div>
 
-	<div class="field">
-	    <div class="field_label"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+
+	<div class="field form_header">
+	    <div class="field_label form_header"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
 		<div class="field_box">
 	    <%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
 		</div>
+
 	</div>				
+					<div class="tiny_info_no_pad">Aðrir munu geta breytt því sem þú skrifar en við höldum breytingaskrá, á svipaðan hátt og Wikipedia.</div> 
+			<div class="tiny_info">Stutt og skýr rök um einn lið virka best, þú getur alltaf bætt við fleiri rökum.</div>
 	
-	<div class="field">
+	<div class="field form_header">
 		<div class="field_label"><%= t('points.new.website.label') %></div>
 		<div class="field_box">
 			<%= f.text_field :website, :size => 50 %>	
 		</div>
 	</div>
+					<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir mál þitt.</div>
+
 	
-	<div class="field">
+	<div class="field form_header">
 		<div class="field_label">
 			<%= t('points.new.other_priority_name.label') %>
 		</div>
 		<div class="field_box">
 			<%= f.text_field :other_priority_name, :size => 50, :autocomplete => "off" %>			
-			<%= t('points.new.other_priority_name.example')%>
+<!--			<%= t('points.new.other_priority_name.example')%>-->
 		</div>
 		
 	</div>
+					<div class="tiny_info">Þú ræður hvort þú tengir við annað mál. Ef skoðun þín er andstæð, geturðu tengt við betra mál. EÐA, ef skoðun þín styður eða er hlutlaus, geturðu lagt áherslu á nákvæmara eða tengdara mál.</div>
 	
 	<%= f.submit t('points.new.submit'), :id => "submit", :class => "yellow_button" %>
 
