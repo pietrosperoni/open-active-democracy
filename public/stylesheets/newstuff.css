@@ -181,6 +181,7 @@ ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_
 	padding: 10px 10px 2px 10px;	
 	margin-top: 1px;
 	z-index: 10;
+
 }
 
 ul#menu li.mega .tab_header a {
@@ -375,7 +376,6 @@ ul#priority_menu li.tab9 div.tab_body {
 
 .althingi_process_container a
 {
-border-bottom: 1px dotted #997777;	
 }
 
 .althingi_process_container table { width: 550px !important; border: 1px solid #f5f5f5; border-collapse: separate !important; border-spacing: 0 !important; }

@@ -110,7 +110,7 @@ margin-bottom: 10px;
 
 .qtip_left
 {
-width: 100px !important;
+/*width: 100px !important;*/
 }
 
 .priorities h3 
@@ -445,7 +445,39 @@ right:0px !Important;
 }
 
 
-.althingi_process_container shown
+.althingi_process_container
 {
 border:1px solid #ddd !Important;
+}
+
+a.next, a.nextPage {
+left:0px !Important;
+top:0px !Important;
+}
+
+.grey_button_wide {
+margin-bottom: 5px;
+}
+
+.heading
+{
+margin-top: 10px; 
+}
+	
+	
+#althingi_video_discussions
+{
+margin-top: 10px;
+border:1px solid #ddd !Important;
+}
+
+h5
+{
+font-size: 11px !important; 
+font-weight: bold;
+}
+
+.position_nochange 
+{
+padding-top: 4px;
 }
