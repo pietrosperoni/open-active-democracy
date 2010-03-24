@@ -451,7 +451,7 @@ s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
 <% elsif nav == 2 and not ["show","discussions","endorsers","opposers",
 		                   "top_points","activities","new"].include?(action_name) %>
 	<%= render :partial => "priorities/browse_nav" %>
-<% elsif nav == 3 %>
+<% elsif nav == 3 and not ["new"].include?(action_name) %>
 	<%= render :partial => "briefing/nav" %>
 <% elsif nav == 4 %>
 	<%= render :partial => "news/nav" %>
