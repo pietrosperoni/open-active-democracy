@@ -571,13 +571,14 @@ del {
 .priority_remove {
 	font-weight: bold;
 	text-transform: uppercase;
-	font-size: 0.7em;
+	font-size: 9px;
 	padding: 1px 2px 1px 3px;
 	margin: 0px 3px 0px 0px;
 }
 
 .priority_remove a {
 	font-weight: normal;
+	color: #fff !important;
 }
 
 .priority_remove_oppose {
@@ -589,6 +590,7 @@ del {
 }
 .priority_remove_oppose a {
 	font-weight: normal;
+	color: #fff !important;
 }
 
 .yellow_button {
@@ -818,9 +820,6 @@ del {
 	font-size: 0.9em;
 }
 
-.priority_endorsement_count a {
-	border-bottom:1px dotted #aaa;
-}
 
 .table_header {
 	font-size: 0.8em;

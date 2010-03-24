@@ -40,7 +40,7 @@
 		<div id="parent_image" style="float: left">
 			<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal" %>
 		</div>
-		<div id="parent_image" style="float: right">
+		<div id="parent_image" style="float: right" class="partner_image">
 			<% Partner.with_logo.all.each do |partner| %>
 			<% if RAILS_ENV=="development"%>
 			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>

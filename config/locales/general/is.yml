@@ -30,7 +30,7 @@ is:
     last_updated: "Síðast uppfært {{time_ago}}"
     doit: "JÁ"
     dont: "NEI"
-    rank: "Staða"
+    rank: "#"
     or: "eða"
     check_uncheck: "Merkja/Afmerkja allt"
     processing: "Í vinnslu..."
@@ -1196,7 +1196,7 @@ is:
         destroy:
             success: "Eyði varanlega {{priority_name}}. Þetta getur tekið nokkrar mínútur en það er háð hversu margir eru með eða á móti og þarf að fjarlægja."
         new:
-            need_account: "First þarftu að fylla út þetta stutta form og samþykkja reglurnar, síðan geturðu byrjað að bæta þínum málum við {{target}}."
+            need_account: "Til að taka þátt á Skuggaþingi þá þarftu að vera innskráður, nýskráning er öllum heimil."
             blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgangsmáli til að bæta þínu við."
             success: "Takk fyrir að bæta {{priority_name}} við"
             submit: "Búa til nýtt mál"

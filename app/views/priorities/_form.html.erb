@@ -7,98 +7,85 @@
 <% if @tag_names %>
 	<%= hidden_field_tag :tag_names, @tag_names %>
 <% end %>
-<table width="100%">
-	<tr>
-		<td>Nafn á máli:<br>
-			<%= f.text_field :name, :size => 40, :maxlength => 60, :autocomplete =>"off" %>		
-		</td>
-		<td>
-			<table width="100%">
-				<tr>
+
+<h3>Búa til nýtt mál á Skuggaþingi</h3>
+		
+		<div id="your_priority" class="form_header">Hvert er málið? <span class="red">* </span> </div>
+			<%= f.text_field :name, :maxlength => 60, :autocomplete =>"off" %>
+			<div class="tiny_info">Gott er að orða mál skýrt, þá er auðveldara fyrir aðra að taka afstöðu til þess</div>			
+		
 					<% if Partner.current and Partner.current.custom_tag_checkbox %>
-						<td>
-							Flokkar:
-						</td>
-						<td>
+						
+							<div  class="form_header">Flokkar sem mál á að birtast í:</div>
+						
 							<%=Partner.current.custom_tag_checkbox%>? <%= check_box_tag 'custom_checkbox', Partner.current.custom_tag_checkbox%>
-						</td>
+						
 					<% else %>
-						<td colspan="2">
-							Flokkar:
-						</td>
+						
+							<div  class="form_header">Flokkar sem mál á að birtast í:</div>
+						
 					<% end %>
-				</tr>
-				<tr>
+				
 					<% if Partner.current and Partner.current.custom_tag_dropdown_1 %>
-						<td>
+						<span class="custom_tag">
 							<%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%>
-						</td>
+						</span>
 					<% end %>
 					<% if Partner.current and Partner.current.custom_tag_dropdown_2 %>
-						<td>
+						<span class="custom_tag">						
 							<%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%>
-						</td>
+						</span>		
+					</div>
 					<% end %>
-				</tr>
-				<tr>
-					<td colspan="2">
+				
+						<span class="custom_tag">						
 						<%= text_field_tag :custom_tags %>		
-						<span class="tiny_info"><br>Settu inn flokka og notaðu kommu á milli (flokkur 1,flokkur 2, flokkur 3)</span>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>	
-</table>
+						</span>				
+						
+						<div class="tiny_info"  id="br_hack"><br>Skrifaðu flokka og notaðu kommu á milli (flokkur, annar, þriðji)</div>
 
-<table border="0" cellspacing="0" cellpadding="0" class="margin-top">
-	<tr>
-		
-		<td valign="top">
-
-<%= blurb('point_new')%>
+							<div  class="form_header">Bæta við rökum: <span class="red">* </span> </div>
+<!--<%= blurb('point_new')%>-->
 
   <%= error_messages_for Point, :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') if @point %>
 	<div class="field">
- 		<div class="field_label">
-			<span class="red">* </span> <%=t('points.new.name.label') %> 
-		</div>
 		<div class="field_box">
  			<%= text_field_tag "point[name]", "", :size => 50, :maxlength => 60 %>
 		</div>
-	</div>
-
-	<div class="field">
-		<div class="field_label">
-			<table width="35%">
-				<tr>
-					<td align="left">
-						Já, til stuðnings <%= radio_button_tag("point[value]", 1, true) %>						
-					</td>
-					<td align="left">
-						Nei, á móti <%= radio_button_tag("point[value]", -1) %>
-					</td>
-				</tr>
-			</table>
+ 		<div class="field_label">
+			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þín mál þá eru góð rök lykilatriði</div>
 		</div>
 	</div>
+	<div class="field form_header">
+		<div class="field_label">
+			<div id="point_supports">
+			<%= radio_button_tag("point[value]", 1, true) %> Já, þessi rök styðja málið					
+			</div>
+			
+			<div id="point_opposes">
+			<%= radio_button_tag("point[value]", -1) %> Nei, þessi rök eru á móti málinu
+			</div>
+			</div>
+			</div>
+		<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður mál eða ekki</div>
 
 	<div class="field">
-	    <div class="field_label"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+	    <div class="field_label form_header"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
 		<div class="field_box">
 	    <%= text_area_tag "point[content]", "", :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
 		</div>
+			<div class="tiny_info_no_pad">Aðrir munu geta breytt því sem þú skrifar en við höldum breytingaskrá, á svipaðan hátt og Wikipedia.</div> 
+			<div class="tiny_info">Stutt og skýr rök um einn lið virka best, þú getur alltaf bætt við fleiri rökum.</div>
 	</div>				
 	
 	<div class="field">
-		<div class="field_label"><%= t('points.new.website.label') %></div>
+		<div class="field_label form_header"><%= t('points.new.website.label') %></div>
 		<div class="field_box">
 			<%= text_field_tag "point[website]", "", :size => 50 %>	
 		</div>
+		<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir mál þitt.</div>
 	</div>
 		
 	<%= f.submit t('priorities.new.submit'), :class => "suggest_button" %>	
-
-</td></tr></table>
 
 <% end %>
