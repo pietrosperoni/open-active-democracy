@@ -15,3 +15,4 @@
 <div id="priority_<%= @priority.id %>_name">
 	<h1><%= render :partial => "priorities/name", :locals => { :priority => @priority } %></h1>
 </div>
+<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>

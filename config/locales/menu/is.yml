@@ -100,7 +100,7 @@ is:
             sent: "Send boð"
             notifications: "Tilkynningar"
         network:
-            name: "Samskiptanet"
+            name: "Fólk"
             yours: "Samskiptanetið þitt"
             facebook: "Finndu Facebook vini þína"
             grow: "Ræktaður samskiptanetið þitt"
@@ -138,7 +138,7 @@ is:
             everything: "Allt"
             your_priorities: "Þinn forgangur"
             your_activity: "Þín virkni"
-            network: "Samskiptanet"
+            network: "Fólk"
             your_network: "Þitt samskiptanet"
             followers: "Fylgjendur"
             your_followers: "Þínir fylgjendur"
