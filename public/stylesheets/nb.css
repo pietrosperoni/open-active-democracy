@@ -778,7 +778,7 @@ del {
 	color: #000033;
 	text-align: center;		
 	position: relative;
-	top: 12px;	
+	top: 13px;	
 }
 .position_up {
 	background-image: url("/images/green_up.gif");
@@ -790,7 +790,7 @@ del {
 	color: #000033;	
 	text-align: center;	
 	position: relative;
-	top: 7px;
+	top: 9px;
 }
 .position_nochange {
 	font-size: 0.8em;
