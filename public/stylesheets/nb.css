@@ -773,24 +773,24 @@ del {
 	background-repeat: no-repeat;
 	background-position: bottom center;	
 	width: 15px;
-	padding-bottom: 4px;	
+	padding-bottom: 6px;	
 	font-size: 0.8em;
 	color: #000033;
 	text-align: center;		
 	position: relative;
-	top: 13px;	
+	top: 14px;	
 }
 .position_up {
 	background-image: url("/images/green_up.gif");
 	background-repeat: no-repeat;
 	background-position: top center;
 	width: 15px;
-	padding-top: 5px;
+	padding-top: 7px;
 	font-size: 0.8em;
 	color: #000033;	
 	text-align: center;	
 	position: relative;
-	top: 9px;
+	top: 7px;
 }
 .position_nochange {
 	font-size: 0.8em;
@@ -858,7 +858,7 @@ del {
 }
 
 .comment_list {
-	padding: 2px 0px 15px 29px;
+	padding: 2px 9px 15px 9px;
 }
 .comment_list_detail {
 	padding: 2px 0px 0px 23px;
