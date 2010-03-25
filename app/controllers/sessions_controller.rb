@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    RAILS_DEFAULT_LOGGER.debug("BLAH -5: #{session[:return_to]}")
     self.current_user = User.authenticate(params[:email], params[:password])
     respond_to do |format|
         format.html {
@@ -28,8 +29,11 @@ class SessionsController < ApplicationController
           end          
         }
         format.js {
+          RAILS_DEFAULT_LOGGER.debug("BLAH -4: #{session[:return_to]}")
           if logged_in?
+            RAILS_DEFAULT_LOGGER.debug("BLAH -3: #{session[:return_to]}")
             if session[:priority_id] # they were trying to endorse a priority, so let's go ahead and add it and take htem to their priorities page immediately
+              RAILS_DEFAULT_LOGGER.debug("BLAH -2: #{session[:return_to]}")
               @priority = Priority.find(session[:priority_id])
               @value = session[:value].to_i
               if @priority
@@ -42,10 +46,12 @@ class SessionsController < ApplicationController
               session[:priority_id] = nil
               session[:value] = nil
             end            
+            RAILS_DEFAULT_LOGGER.debug("BLAH -1: #{session[:return_to]}")
             flash[:notice] = t('sessions.create.success', :user_name => current_user.name) 
             current_user.remember_me unless current_user.remember_token?
             cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
-            redirect_from_facebox(request.env['HTTP_REFERER'] || '/')
+            RAILS_DEFAULT_LOGGER.debug("BLAH: #{session[:return_to]}")
+            redirect_from_facebox(session[:return_to] ? session[:return_to] : "/")
           else
             if params[:region] == 'inline'
               render :update do |page|

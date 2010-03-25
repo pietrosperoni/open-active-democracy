@@ -69,6 +69,7 @@ module AuthenticatedSystem
     # to access the requested action.  For example, a popup window might
     # simply close itself.
     def access_denied
+      RAILS_DEFAULT_LOGGER.info("IN ACCESS DENIED #{request.request_uri}")
       flash[:error] = I18n.t('sessions.please_login')
       respond_to do |format|
         format.html do
@@ -89,15 +90,19 @@ module AuthenticatedSystem
     #
     # We can return to this location by calling #redirect_back_or_default.
     def store_location
+      RAILS_DEFAULT_LOGGER.info("IN STORE LOCATION #{request.request_uri}")
       session[:return_to] = request.request_uri
+      RAILS_DEFAULT_LOGGER.info("IN STORE LOCATION session #{session[:return_to]}")
     end
     
     def store_previous_location
+      RAILS_DEFAULT_LOGGER.info("IN STORE PREVIOUS LOCATION #{request.request_uri}")
       session[:return_to] = request.env['HTTP_REFERER'] || '/'    
     end
     
     def get_previous_location(default='/')
-      session[:return_to] = nil       
+      RAILS_DEFAULT_LOGGER.info("IN GET PREVIOUS LOCATION #{request.request_uri} SETTING TO NIL")
+      #session[:return_to] = nil       
       return session[:return_to] || default     
     end
 
