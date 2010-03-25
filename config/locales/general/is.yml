@@ -500,7 +500,7 @@ is:
         permalink: "Tengja varanlega"
         show: "sýna"
         people: "Fólk sem gerir athugasemdir"
-        add: "Bæta við athugasemdir"
+        add: "Bæta við athugasemdum"
         participate_intro: "Ef þú vilt taka þátt, <a href='{{signup_url}}'>vinsamlegast gerstu áskrifandi</a>.  Aðild er ókeypis og þú getur líka tengst í gegnum Facebook."
         edit:
             title: "Breyti athugasemd"

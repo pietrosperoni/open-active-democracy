@@ -194,7 +194,6 @@ ul#menu .tab_body {
 	position: absolute;
 	top: 20px;
 	left: 0px;
-	z-index: -1000;
 }
 ul#menu_sub .tab_body, ul#menu_third .tab_body {
 	position: absolute;
@@ -365,7 +364,12 @@ ul#priority_menu li.tab9 div.tab_body {
 }
 
 /* Þingferlar */
-.althingi_process_container {  width: 550px; margin: 1em 0em !important; padding: 0.5em 0em !important; border-bottom: 3px solid #e5e5e5 !important; }
+	.althingi_process_container 
+{  
+	width: 550px; 
+	margin: 1em 0em !important; 
+	padding: 0 10px 10px 10px !important; 
+	border-bottom: 3px solid #e5e5e5 !important; }
 
 .althingi_process_container h3 { background: #f5f5f5 !important; margin: 0px; margin-top: 1em; }
 
@@ -829,6 +833,8 @@ font-size: 13px !important;
 .priority_name, .priority_name_add {
 /*float:left;*/
 margin-right:1px;
+margin-bottom: 0px;
+font-size: 13px !Important;
 /*margin-top:3px;*/
 }
 
