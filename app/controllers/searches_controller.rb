@@ -10,13 +10,13 @@ class SearchesController < ApplicationController
         flash.now[:error] = t('briefing.search.blank')
       else
         
-        @priority_results = Priority.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 25
+        @priority_results = Priority.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 25
         @priorities = @priority_results.docs
         
-        @document_results = Document.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @document_results = Document.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @documents = @document_results.docs
         
-        @point_results = Point.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @point_results = Point.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @points = @point_results.docs                
 
         get_endorsements        
@@ -26,7 +26,7 @@ class SearchesController < ApplicationController
       format.html
       format.xml { render :xml => @priorities.to_xml(:except => [:user_agent,:ip_address,:referrer]) }
       format.json { render :json => @priorities.to_json(:except => [:user_agent,:ip_address,:referrer]) }
-    end    
+    end
   end
   
   def points
@@ -38,13 +38,13 @@ class SearchesController < ApplicationController
       if query.blank?
         flash.now[:error] = t('briefing.search.blank')
       else
-        @priority_results = Priority.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @priority_results = Priority.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @priorities = @priority_results.docs
         
-        @document_results = Document.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @document_results = Document.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @documents = @document_results.docs
         
-        @point_results = Point.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 15
+        @point_results = Point.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 15
         @points = @point_results.docs
         @qualities = nil
         if logged_in? and @points.any? # pull all their qualities on the points shown
@@ -68,13 +68,13 @@ class SearchesController < ApplicationController
         flash.now[:error] = t('briefing.search.blank')
       else      
         @page_title = t('briefing.search.documents.results', :briefing_name => current_government.briefing_name, :query => query)
-        @priority_results = Priority.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @priority_results = Priority.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @priorities = @priority_results.docs
         
-        @document_results = Document.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 15
+        @document_results = Document.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 15
         @documents = @document_results.docs
         
-        @point_results = Point.find_by_solr "(" + params[:q] + ") AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @point_results = Point.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @points = @point_results.docs
       end
     end
