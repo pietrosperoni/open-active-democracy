@@ -330,15 +330,29 @@ width:174px;
 
 table#add_portlet
 {
+/*
 	float:right;
+	margin-top: -23px;
+	*/
 }
 	
 #new_button .button-to
 {
-	width: 500px;
 	float: left;
 	padding-bottom: 0px; 
 }
+
+#new_button
+{
+	margin-left: 3px;
+}
+
+#new_button input, #new_button div  
+{
+	width: 184px !important;
+	height: 25px;
+}
+
 
 .button-to
 {
@@ -350,7 +364,6 @@ table#add_portlet
 {
 	background-color:#FFFF99;
 	border:1px solid #FFCC00;
-	margin-bottom: 10px;
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default 
@@ -499,7 +512,6 @@ width:100% !important;
 h3 {
 padding-bottom: 0 !Important;
 padding-top: 5px !Important;
-padding-left: 5px !Important;
 }
 
 .point_other a
@@ -512,4 +524,95 @@ font-size: 13px !Important;
 {
 font-size: 13px !Important;	
 font-weight: bold;
+}
+
+#portal_header 
+{
+margin-top: -5px !Important;
+}
+
+#main-portal-div
+{
+}
+
+#portal_header .radio
+{
+display:none !important;
+}
+
+#portal_header div, #portal_header input
+{
+	display:inline !important;
+	float: left;
+}
+
+#portal-menu-div
+{
+	float:right;
+	width: 190px !important;
+}
+
+#new_button
+{
+	width: 190px !important;	
+	margin-right: 47px !Important;
+}
+
+#new_button input
+{
+font-size: 12px !Important;
+font-weight: normal !important;
+/* If want the same background as new portlet button
+background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50% 50% #9B9DA0 !important;
+*/
+}
+
+#google_search 
+{
+	margin-right: 48px;
+}
+
+
+#google_search .searchbox
+{
+	width: 190px !important;
+	display:inline !important;
+	float: left;
+	border:1px solid #ddd;
+	height: 17px;
+}
+
+#google_search .button
+{
+	margin-left: 4px; 
+	border:1px solid #ddd;
+	height: 25px;
+	width: 40px !important;
+}
+
+#portlets-menu {
+width:150px;
+}
+
+#add_portlet a
+{
+font-size: 12px !Important;
+font-weight: normal !important
+}
+
+
+
+input
+{
+	display:inline !important;
+}
+
+.extras
+{
+padding-left: 7px ! important;
+}
+
+.blurb
+{
+padding-top: 10px ! important;
 }

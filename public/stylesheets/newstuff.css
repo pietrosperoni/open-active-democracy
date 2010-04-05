@@ -423,7 +423,7 @@ div.meta { width: 120px !important; }
 
 /* cell width in rok plus oppose/endorse */
 .container_13 .grid_41 {
-width:255px !important;
+width:262px !important;
 }
 
  /* Below line for Rok */
@@ -507,9 +507,7 @@ margin: 0 !important;
 
 #portlets-menu
 {
-margin-right: 1px;
-margin-top: -2px;
-margin-bottom: 3px;
+height: 14px;
 float: right !important;
 }
 
@@ -834,6 +832,7 @@ font-size: 13px !important;
 /*float:left;*/
 margin-right:1px;
 font-size: 13px !Important;
+padding-bottom: 2px;
 /*margin-top:3px;*/
 }
 
@@ -864,5 +863,7 @@ font-size: 13px !Important;
 
 .custom_tag select
 {
+/*
 	margin-left: 5px;
+*/
 }
