@@ -429,7 +429,7 @@ margin:0 0px 10px 0;
 
 .column_id_2 .portlet, .column_id_1 .portlet  
 {
-width: 320px !important;
+/*width: 350px !important;*/
 }
 
 
@@ -621,4 +621,8 @@ padding-left: 7px ! important;
 .blurb
 {
 padding-top: 10px ! important;
+}
+
+ul#menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
+background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F0F0F0 !important;
 }
