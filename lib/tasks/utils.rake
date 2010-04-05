@@ -1,3 +1,5 @@
+require 'fastercsv'
+
 def create_tags(row)
   tags = []
   tags << row[1]
@@ -23,8 +25,10 @@ def create_priority_from_row(row,current_user)
       @priority.user = current_user
       @priority.ip_address = "127.0.0.1"
       @priority.issue_list = priority_tags
+      puts @priority.inspect
       @saved = @priority.save
-      
+      puts @saved
+
       if @saved
         @point = Point.new
         @point.user = current_user
@@ -32,9 +36,10 @@ def create_priority_from_row(row,current_user)
         @point.content = point_text
         @point.name = point_name
         @point.website = point_link if point_link and point_link != ""
+        puts @point.inspect
         @point_saved = @point.save
       end
-      
+      puts @point_saved
       if @point_saved
         if Revision.create_from_point(@point.id,nil)
           @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
@@ -42,8 +47,9 @@ def create_priority_from_row(row,current_user)
       end
       raise "rollback" if not @point_saved or not @saved
     end
-  rescue
+  rescue => e
     puts "ROLLBACK ERROR ON IMPORT"
+    puts e.message
   end    
 end
 

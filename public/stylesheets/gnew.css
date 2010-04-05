@@ -424,9 +424,15 @@ font-size:11px !Important;
 }
 
 .column_id_2 .portlet {
-margin:0 -10px 10px 0;
+margin:0 0px 10px 0;
 }
-gnew.c...9440565 (line 405)
+
+.column_id_2 .portlet, .column_id_1 .portlet  
+{
+width: 320px !important;
+}
+
+
 .ui-corner-all {
 -moz-border-radius:1px 1px 1px 1px;
 }
