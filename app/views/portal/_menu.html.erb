@@ -5,16 +5,18 @@
             <div id="portlets" class="hidden">
                 <ul>
                     <% PortletTemplateCategory.by_weight.all.each do |template_category| %>
-                    <li>
-                        <a href="#"><%=t(template_category.name).titleize %></a>
-                        <ul>
-                            <% template_category.portlet_templates.each do |portlet_template| %>
-                            <li>
-                                <a href="#"><%=t(portlet_template.name).titleize %>-<%=portlet_template.id %></a>
-                            </li>
-                            <%end %>
-                        </ul>
-                    </li>
+						<% unless template_category.partner_id and Partner.current and Partner.current.id != template_category.partner_id %>
+		                    <li>
+		                        <a href="#"><%=t(template_category.name).titleize %></a>
+		                        <ul>
+		                            <% template_category.portlet_templates.each do |portlet_template| %>
+		                            <li>
+		                                <a href="#"><%=t(portlet_template.name).titleize %>-<%=portlet_template.id %></a>
+		                            </li>
+		                            <%end %>
+		                        </ul>
+		                    </li>
+	                    <% end %>
                     <% end %>
                 </ul>
             </div>

@@ -1,3 +1,52 @@
+def create_tags(row)
+  tags = []
+  tags << row[1]
+  tags << row[2]
+  tags << row[3]
+  tags << row[4]
+  tags << row[5]
+  tags << row[6]
+  tags.join(",")
+end
+
+def create_priority_from_row(row,current_user)
+  priority_name = row[0]
+  priority_tags = create_tags(row)
+  point_name = row[7]
+  point_text = row[8]
+  point_link = row[9]
+  
+  begin
+    Priority.transaction do
+      @priority = Priority.new
+      @priority.name = priority_name
+      @priority.user = current_user
+      @priority.ip_address = "127.0.0.1"
+      @priority.issue_list = priority_tags
+      @saved = @priority.save
+      
+      if @saved
+        @point = Point.new
+        @point.user = current_user
+        @point.priority_id = @priority.id
+        @point.content = point_text
+        @point.name = point_name
+        @point.website = point_link if point_link and point_link != ""
+        @point_saved = @point.save
+      end
+      
+      if @point_saved
+        if Revision.create_from_point(@point.id,nil)
+          @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
+        end      
+      end
+      raise "rollback" if not @point_saved or not @saved
+    end
+  rescue
+    puts "ROLLBACK ERROR ON IMPORT"
+  end    
+end
+
 namespace :utils do
   desc "Archive processes"
   task(:archive_processes => :environment) do
@@ -67,5 +116,19 @@ namespace :utils do
           end
         end
       end
+  end
+
+  desc "Import priorities"
+  task(:import_priorities => :environment) do
+    unless current_user = User.find_by_email("island@skuggathing.is")
+      current_user=User.new
+      current_user.email = "island@skuggathing.is"
+      current_user.login = "Island.is"
+      current_user.save(false)
+    end
+    f = File.open(ENV['csv_email_file'])
+    FasterCSV.parse(f.read) do |row|
+      create_priority_from_row(row, current_user)  
+    end
   end
 end

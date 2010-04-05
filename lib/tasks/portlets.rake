@@ -226,7 +226,22 @@ namespace :portlets do
     p.save    
   end
 
-  desc "initialize2"
-  task(:initialize2 => :environment) do    
+  desc "initialize island.is"
+  task(:initialize_island_is => :environment) do
+    partner = Partner.find_by_short_name("island")
+    unless PortletTemplateCategory.find_by_name("partners.island_is.name")
+      pc=PortletTemplateCategory.new
+      pc.name="partners.island_is.name"
+      pc.weight = 1
+      pc.partner_id = partner.id
+      pc.save
+  
+      p=PortletTemplate.new
+      p.name="partners.island_is.name"
+      p.portlet_template_category_id=pc.id
+      p.partial_name = "island_is_landshlutar"
+      p.weight = 1
+      p.save  
+    end
   end
 end

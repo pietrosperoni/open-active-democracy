@@ -170,8 +170,13 @@ class Revision < ActiveRecord::Base
   end  
   
   def request=(request)
-    self.ip_address = request.remote_ip
-    self.user_agent = request.env['HTTP_USER_AGENT']
+    if request
+      self.ip_address = request.remote_ip
+      self.user_agent = request.env['HTTP_USER_AGENT']
+    else
+      self.ip_address = "127.0.0.1"
+      self.user_agent = "Import"
+    end
   end
   
   def Revision.create_from_point(point_id, request)
