@@ -120,6 +120,11 @@ namespace :utils do
 
   desc "Import priorities"
   task(:import_priorities => :environment) do
+    @current_government = Government.last
+    if @current_government
+      @current_government.update_counts
+      Government.current = @current_government
+    end
     unless current_user = User.find_by_email("island@skuggathing.is")
       current_user=User.new
       current_user.email = "island@skuggathing.is"
