@@ -126,7 +126,7 @@ namespace :utils do
       current_user.login = "Island.is"
       current_user.save(false)
     end
-    f = File.open(ENV['csv_email_file'])
+    f = File.open(ENV['csv_import_file'])
     FasterCSV.parse(f.read) do |row|
       create_priority_from_row(row, current_user)  
     end
