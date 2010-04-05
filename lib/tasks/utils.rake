@@ -12,10 +12,10 @@ def create_tags(row)
 end
 
 def create_priority_from_row(row,current_user,partner)
-  priority_name = row[0]
+  priority_name = row[0].mb_chars.slice(0..59)
   priority_tags = create_tags(row)
-  point_name = row[7]
-  point_text = row[8]
+  point_name = row[7].mb_chars.slice(0..59)
+  point_text = row[8].mb_chars.slice(0..499)
   point_link = row[9]
   
   begin
