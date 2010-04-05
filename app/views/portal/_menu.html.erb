@@ -5,7 +5,7 @@
             <div id="portlets" class="hidden">
                 <ul>
                     <% PortletTemplateCategory.by_weight.all.each do |template_category| %>
-						<% unless template_category.partner_id and Partner.current and Partner.current.id != template_category.partner_id %>
+						<% if not template_category.partner_id or (Partner.current and Partner.current.id == template_category.partner_id) %>
 		                    <li>
 		                        <a href="#"><%=t(template_category.name).titleize %></a>
 		                        <ul>
