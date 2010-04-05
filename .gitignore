@@ -14,6 +14,7 @@ solr/*.pid
 *.sql
 public/production/*
 public/development/*
+public/system/*
 public/development
 public/production
 workers/video/config/worker.yml
