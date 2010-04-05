@@ -11,7 +11,7 @@ def create_tags(row)
   tags.join(",")
 end
 
-def create_priority_from_row(row,current_user)
+def create_priority_from_row(row,current_user,partner)
   priority_name = row[0]
   priority_tags = create_tags(row)
   point_name = row[7]
@@ -25,6 +25,7 @@ def create_priority_from_row(row,current_user)
       @priority.user = current_user
       @priority.ip_address = "127.0.0.1"
       @priority.issue_list = priority_tags
+      @priority.partner_id = partner.id
       puts @priority.inspect
       @saved = @priority.save
       puts @saved
@@ -36,6 +37,7 @@ def create_priority_from_row(row,current_user)
         @point.content = point_text
         @point.name = point_name
         @point.website = point_link if point_link and point_link != ""
+        @point.partner_id = partner.id
         puts @point.inspect
         @point_saved = @point.save
       end
@@ -138,8 +140,10 @@ namespace :utils do
       current_user.save(false)
     end
     f = File.open(ENV['csv_import_file'])
+    partner = Partner.find_by_short_name(ENV['partner_short_name'])
     FasterCSV.parse(f.read) do |row|
-      create_priority_from_row(row, current_user)  
+      puts row.inspect
+      create_priority_from_row(row, current_user, partner)  
     end
   end
 end
