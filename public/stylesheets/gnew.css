@@ -618,9 +618,12 @@ input
 padding-left: 7px ! important;
 }
 
+
 .blurb
 {
+/* Creates white space above header
 padding-top: 10px ! important;
+*/
 }
 
 ul#menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
@@ -672,9 +675,14 @@ margin-bottom: 4px;
 width: 100px;
 }
 
+#scroll_in_portal img {
+padding-left: 5px; 
+}
+
+
 
 .search_box input {
-height: 18px !Important;
+height: 17px !Important;
 }
 
 .focusField
