@@ -29,7 +29,7 @@
 		<div id="partner_image">
 			<%= render :partial => "partners/logo" %>
 		</div>
-		<div id="parent_image" style="float: right">
+		<div id="parent_image" class="logo_small" style="float: right">
 			<% if RAILS_ENV=="development"%>
 				<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is", :port=>3000 %>
 			<% else %>
@@ -37,7 +37,7 @@
 			<% end %>
 		</div>
 		<% else %>
-		<div id="parent_image" style="float: left">
+		<div id="parent_image" class="logo" style="float: left">
 			<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal" %>
 		</div>
 		<div id="parent_image" style="float: right" class="partner_image">
@@ -47,7 +47,7 @@
 			<% else %>
 			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
 			<% end %>
-			<br>
+		
 		<% end %>
 		</div>
 		<% end %>

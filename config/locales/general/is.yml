@@ -915,6 +915,8 @@ is:
         saved: "Vistaði {{page_name}}"
         destroy: "Eyddi {{page_name}}"
     partners:
+        island_is:
+            name: "Mál eftir landshlutum"
         picture:
             title: "Upphlaða merki meðeigenda"
         intro: "Þinn hópur eða stofnun getur líka tengst okkar tengslaneti.  <a href='/partners'>Frekari upplýsingar</a>."

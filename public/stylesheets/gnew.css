@@ -317,6 +317,7 @@ font-size: 13px;
 ul#menu li, ul#menu_sub li, ul#menu_third li, ul#priority_menu li {
 display:inline-block;
 *display:inline;
+height: 28px;
 left:0;
 position:relative;
 top:0;
@@ -373,7 +374,18 @@ background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50
 	
 .partner_image img
 {
-width: 90px !important; 
+/*width: 90px !important; */
+}
+
+.partner_image a
+{
+margin-top: 7px !Important;
+}
+
+.logo_small a
+{
+margin-top: 10px !Important;
+margin-right: 4px;
 }
 
 #br_hack br
@@ -627,7 +639,7 @@ padding-top: 10px ! important;
 }
 
 ul#menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
-background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F0F0F0 !important;
+background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F0F0F0;
 }
 
 
@@ -663,6 +675,7 @@ float:right;
 
 #scroll_in_portal ul.left {
 float:right;
+margin-top:17px;
 }
 
 #scroll_in_portal ul {
@@ -688,4 +701,9 @@ height: 17px !Important;
 .focusField
 {
 border: 1px solid red;	
+}
+
+.logo a
+{	
+	padding: 10px 15px;
 }

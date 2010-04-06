@@ -74,7 +74,6 @@ h4 {
 }
 
 #branding a {
-	padding: 10px 15px;
 	display: block;
 	font-weight: bold;
 }
@@ -1197,7 +1196,7 @@ ul#menu li.tab7 div.tab_body {
 #nav_sub {
 	z-index: -1;	
 	font-size: 1.2em;	
-	padding: 0px 0px 2px 0px;
+/*	padding: 0px 0px 2px 0px; */
 	margin: 1px 0px 0px 0px;
 }
 ul#menu_sub { 
