@@ -607,7 +607,7 @@ color:#444444;
 
 input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifier_wrap, .change_vote_now, .idleField {
 background-color:#fff;
-border:2px solid #DDDDDD;
+border:1px solid #DDDDDD;
 }
 
 

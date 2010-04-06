@@ -554,8 +554,8 @@ display:none !important;
 
 #portal-menu-div
 {
-	float:right;
 	width: 190px !important;
+	padding-left:12px;
 }
 
 #new_button
@@ -592,7 +592,7 @@ background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50
 {
 	margin-left: 4px; 
 	border:1px solid #ddd;
-	height: 25px;
+	height: 25px !important;
 	width: 40px !important;
 }
 
@@ -625,4 +625,59 @@ padding-top: 10px ! important;
 
 ul#menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
 background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F0F0F0 !important;
+}
+
+
+/*
+#scroll_in_portal_wrapper
+{
+	height: 310px;
+	width: 365px;
+	padding-right: 15px;
+	background: green !IMportant;
+}
+
+
+#scroll_in_portal
+{
+	overflow:auto;
+	height: 285px;
+	margin-right: 4px;
+	margin-bottom: 2px;
+	background: red !IMportant;
+}
+*/
+#scroll_in_portal li {
+font-size:13px;
+font-family:"lucida grande",tahoma,arial,helvetica,sans-serif !important;
+line-height: 130%;
+width: 100px;
+}
+
+#scroll_in_portal ul.right {
+float:right;
+}
+
+#scroll_in_portal ul.left {
+float:right;
+}
+
+#scroll_in_portal ul {
+list-style: none;
+width: 35%;
+margin-bottom: 4px;
+}
+
+#scroll_in_portal .right {
+width: 100px;
+}
+
+
+.search_box input {
+height: 18px !Important;
+}
+
+.focusField
+{
+border: 1px solid red;	
 }
