@@ -4,11 +4,7 @@
 # Code is not reloaded between requests
 config.cache_classes = true
 
-if ENV['MEMCACHE_SERVERS']
-  config.cache_store = :mem_cache_store, ENV['MEMCACHE_SERVERS'], { :namespace => ENV['MEMCACHE_NAMESPACE']}
-else
-  config.cache_store = :mem_cache_store, 'localhost:11222'
-end
+config.cache_store = :mem_cache_store, 'localhost:11222'
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
