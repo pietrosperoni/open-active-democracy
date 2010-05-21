@@ -17,9 +17,9 @@
 					<% if Partner.current and Partner.current.custom_tag_checkbox %>
 						
 							<div  class="form_header">Flokkar sem mál á að birtast í:</div>
-<!--						
+						
 							<%=Partner.current.custom_tag_checkbox%>? <%= check_box_tag 'custom_checkbox', Partner.current.custom_tag_checkbox%>
--->						
+						
 					<% else %>
 						
 							<div  class="form_header">Flokkar sem mál á að birtast í:</div>
@@ -32,12 +32,12 @@
 							<%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%>
 						</span>
 					<% end %>
-<!--
+
 					<% if Partner.current and Partner.current.custom_tag_dropdown_2 %>
 						<span class="custom_tag">						
 							<%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%>
 						</span>		
--->
+
 					</div>
 					<% end %>
 				
