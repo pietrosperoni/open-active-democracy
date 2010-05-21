@@ -56,7 +56,7 @@ font-size:11px !important;
 
 #hp_intro {
 	font-size: 16px;
-	line-height: 120% !Important;
+	line-height: 160% !Important;
 }
 
 #branding p { position: absolute; left: 52px; top: 30px; font-size: 11px; color: #666; }
@@ -305,7 +305,7 @@ margin-top: 30px;
 
 .blurb b
 {
-font-size: 13px;	
+
 }
 
 
@@ -314,13 +314,21 @@ font-size: 13px;
 	width: 710px !Important;
 }
 
-ul#menu li, ul#menu_sub li, ul#menu_third li, ul#priority_menu li {
+ul#menu li, ul#menu_sub li, ul#menu_third li {
 display:inline-block;
 *display:inline;
-height: 28px;
+height: 22px;
 left:0;
 position:relative;
 top:0;
+}
+
+ul#priority_menu li {
+display:inline-block;
+left:0;
+position:relative;
+top:0;
+border: 1px solid #ddd;
 }
 
 #new_user_form .suggest_button, #new_user_form .yellow_button {
@@ -369,7 +377,9 @@ table#add_portlet
 
 .ui-state-default, .ui-widget-content .ui-state-default 
 {
-background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50% 50% #9B9DA0 !important;
+background:url("none") repeat-x scroll 50% 50% #f0f0f0 !important;
+border: 1px solid #ddd !important;
+/*background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50% 50% #9B9DA0 !important;*/
 }
 	
 .partner_image img
@@ -385,7 +395,7 @@ margin-top: 7px !Important;
 .logo_small a
 {
 margin-top: 10px !Important;
-margin-right: 4px;
+margin-right: 6px;
 }
 
 #br_hack br
@@ -417,31 +427,6 @@ margin-top: 5px;
 
 .priority_position {
 font-size:11px !Important;
-}
-
-.column_id_1 .portlet
-{
-	margin-left: 0px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	margin-top: 0px;
-}
-
-.column_id_2 .portlet
-{
-	margin-left: 0px;
-	margin-right: -10px;
-	margin-bottom: 10px;
-	margin-top: 0px;
-}
-
-.column_id_2 .portlet {
-margin:0 0px 10px 0;
-}
-
-.column_id_2 .portlet, .column_id_1 .portlet  
-{
-/*width: 350px !important;*/
 }
 
 
@@ -512,12 +497,12 @@ padding-left: 5px;
 
 .position_nochange 
 {
-padding-top: 4px;
+padding-top: 2px;
 }
 
 .priority_tags
 {
-padding-bottom: 2px; 	
+padding-bottom: 4px; 	
 }
 
 h2 {
@@ -544,13 +529,49 @@ font-size: 13px !Important;
 font-weight: bold;
 }
 
+.point_other
+{
+padding-bottom: 3px;
+}
+
+.point_name
+{
+padding-bottom: 1px;
+}
+
+.point_byline
+{
+padding-bottom: 2px;
+}
+
+.point_content
+{
+padding-bottom: 3px;
+}
+
+.point_qualities
+{
+padding-bottom: 3px;
+}
+
+.point_source
+{
+padding-bottom: 3px;
+}
+
+.point_content p, .point_content_detail p {
+margin-bottom:0px;
+margin-top:0px;
+}
+
 #portal_header 
 {
-margin-top: -5px !Important;
+margin-top: -10px !Important;
 }
 
 #main-portal-div
 {
+margin-top: 30px !important;
 }
 
 #portal_header .radio
@@ -580,6 +601,7 @@ display:none !important;
 {
 font-size: 12px !Important;
 font-weight: normal !important;
+font-family:helvetica,arial,sans-serif !important;
 /* If want the same background as new portlet button
 background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50% 50% #9B9DA0 !important;
 */
@@ -615,7 +637,9 @@ width:150px;
 #add_portlet a
 {
 font-size: 12px !Important;
-font-weight: normal !important
+font-weight: normal !important;
+font-family:helvetica,arial,sans-serif !important;
+line-height:130% !important;
 }
 
 
@@ -627,7 +651,7 @@ input
 
 .extras
 {
-padding-left: 7px ! important;
+padding-left: 0px ! important;
 }
 
 
@@ -638,10 +662,19 @@ padding-top: 10px ! important;
 */
 }
 
-ul#menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
-background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F0F0F0;
+#blurb_faq p
+{
+margin-bottom: 10px;
 }
 
+#blurb_faq ul
+{
+margin-top: 0px;
+margin-bottom: 10px;
+list-style-position: inside;
+margin-left: 3px; 
+
+}
 
 /*
 #scroll_in_portal_wrapper
@@ -706,4 +739,29 @@ border: 1px solid red;
 .logo a
 {	
 	padding: 10px 15px;
+}
+
+#toolbar a
+{
+color: #5272b5 !important;	
+}
+
+
+ul#menu li .tab_header a, ul#menu li.hovering div.tab_body, ul#menu_sub li .tab_header a, ul#menu_sub li.hovering div.tab_body, ul#menu_third li .tab_header a, ul#menu_third li.hovering div.tab_body, ul#priority_menu li.hovering div.tab_body {
+background-color:#F8F8F8;
+}
+
+ul#menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
+background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F8f8f8;
+}
+
+.change, #blurb_ad_new, #blurb_acquisition_new, .edit_priority
+{
+	margin-top: 18px;
+}
+
+#priority_nav1 li.tab1 .tab_header a, #priority_nav1 li.tab1.mega .tab_header a, #priority_nav2 li.tab2 .tab_header a, #priority_nav2 li.tab2.mega .tab_header a, #priority_nav3 li.tab3 .tab_header a, #priority_nav3 li.tab3.mega .tab_header a, #priority_nav4 li.tab4 .tab_header a, #priority_nav4 li.tab4.mega .tab_header a, #priority_nav5 li.tab5 .tab_header a, #priority_nav5 li.tab5.mega .tab_header a, #priority_nav6 li.tab6 .tab_header a, #priority_nav6 li.tab6.mega .tab_header a, #priority_nav7 li.tab7 .tab_header a, #priority_nav7 li.tab7.mega .tab_header a, #priority_nav8 li.tab8 .tab_header a, #priority_nav8 li.tab8.mega .tab_header a, #priority_nav9 li.tab9 .tab_header a, #priority_nav9 li.tab9.mega .tab_header a, #priority_nav10 li.tab10 .tab_header a, #priority_nav10 li.tab10.mega .tab_header a {
+background-color:#F8F8F8;
+color:#D61A1A;
+padding-top:3px;
 }

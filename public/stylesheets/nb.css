@@ -146,6 +146,7 @@ h4 {
 
 #user_login_search {
 	width: 125px;
+	height: 22px;
 }
 #q_top {
 	width: 175px;
@@ -155,6 +156,7 @@ h4 {
 }
 .magnifier_wrap {
 	background-color: #fff;
+	margin-top: -2px;
 }
 .magnifier_wrap input {
 	border: none;
@@ -291,8 +293,9 @@ h4 {
 .comment_x {
 	position: relative;	
 	float: right; 
+	top: 2px;
 	bottom: 4px;
-	margin-right: 4px;
+	margin-right: 2px;
 }
 .x {
 	font-size: 7px;
@@ -306,7 +309,7 @@ h4 {
 	margin: 0px 4px 0px 2px;
 }
 .comment_x a, .endorsement_x a, .activity_x a {
-	font-size: 0.9em;
+	font-size: 13px;
 }
 .endorsement_row {
 	margin-right: 4px;
@@ -729,6 +732,7 @@ del {
 	border-bottom: solid 1px #0e1f5b;	
 	border-top: solid 1px #d9dfea;
 	border-left: solid 1px #d9dfea;
+	width: 138px;
 }
 .facebook_button a {
 	color: #FFF !important;
@@ -777,7 +781,7 @@ del {
 	color: #000033;
 	text-align: center;		
 	position: relative;
-	top: 14px;	
+	top: 13px;	
 }
 .position_up {
 	background-image: url("/images/green_up.gif");
@@ -875,11 +879,15 @@ del {
 	margin-top: 1px;
 }
 .comment_endorses {
-	border-left: solid 1px #009933;
+	border: 1px solid #ddd;
 }
 
 .comment_opposes {
-	border-left: solid 1px #cc0000;
+	border: 1px solid #ddd;
+}
+
+.comment {
+	border: 1px solid #ddd;
 }
 .comment_content {
 	padding: 0px 10px 0px 0px;
@@ -899,6 +907,7 @@ del {
 	margin-top: 1px;
 	padding: 0px 0px 0px 7px;	
 	letter-spacing: 0.5px;	
+	border: 1px solid #ddd;
 }
 .comment_flag {
 	font-size: 0.8em;
@@ -940,6 +949,11 @@ del {
 	font-size: 8px;
 	line-height: 9px;
 }
+
+.priority_chart {
+margin-right: 5px !important;
+}
+
 .chart_label {
 	padding-left: 2px;
 }
@@ -1333,9 +1347,10 @@ ul#priority_menu li.tab12 div.tab_body {
 	font-size: 0.95em;	
 }
 .profile_small {
-	font-size: 0.95em;
-	margin-top: 2px;
+	font-size: 11px;
+	margin-top: 5px;
 	padding: 0px 0px 4px 0px;
+	margin-bottom: 3px;
 }
 .profile_pc a {
 	font-size: 10px;

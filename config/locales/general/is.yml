@@ -64,7 +64,7 @@ is:
         ed: "með"
         capitalize: "Ég styð"
         plural: "styðja"
-        people: "Stuðningsmenn"
+        people: "Með&nbsp;&nbsp;&nbsp;"
         title: "Ég styð þetta, bæta á forgangslistann minn"
         ing: "Styður"
         you: "Þú styður"
@@ -75,7 +75,7 @@ is:
         ed: "á móti"
         capitalize: "Ég er á móti"
         plural: "á móti"
-        people: "Andstæðingar"
+        people: "Á móti"
         title: "Ég er á móti þessu og vil bæta þessari afstöðu minni á forgangslistann minn."
         ing: "Andstæðingur"
         you: "Þú ert á móti"
@@ -397,7 +397,7 @@ is:
         change: "Breyta" 
         issues: 
             title: "Virkustu {{tags_name}} hjá {{government_name}}" 
-            label: "fallandi/stígandi" 
+            label: "fallandi / stígandi" 
         gainers_24hr: 
             title: "Mál þessara notenda hafa risið hraðast síðustu 24 tíma" 
             intro: "Ímyndaðu þér að mál fólks séu verðbréfasöfn svipað og sameignarsjóður.  Þessi síða er uppfærð á miðnæti og sýnir það fólk hvurs mál risu mest í stigagjöfinni á síðustu 24 tímum." 

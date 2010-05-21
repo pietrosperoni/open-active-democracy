@@ -1,5 +1,5 @@
 html, body {
-	font-family: Helvetica,Arial,sans-serif;
+	font-family: "lucida grande",tahoma,Helvetica, arial,sans-serif !important;
 }
 
 a {
@@ -35,25 +35,24 @@ hr { border-top: 3px solid #e5e5e5; }
 	width: 220px;
 	float: right;
 	overflow: hidden;
+	padding-right: 4px;
 	
 }
 
 #contentwrap {
 	width: 720px;
-	margin-left: 7px;
+	margin-left: 4px;
 	float: left;
 	position: relative;
-	padding: 0px 00px 0px 0px !important;
+	padding: 0px 0px 0px 0px !important;
 }
 
 #branding {
-	font-size: 2em;
-	background-color: #fff;
-	background-color: #e5e5e5 !important;
+	background-color: #f0f0f0 !important;
 }
 
 #branding a {
-	background-color: #e5e5e5 !important;
+	background-color: #f0f0f0 !important;
 	color: #e5e5e5 !important;
 /*	padding: 10px 15px;
 	display: block;
@@ -71,10 +70,8 @@ border: none 0px #fff !important;
 
 
 #content_text {
-	padding: 15px 0px 15px 0px;
+	padding: 14px 0px 15px 0px;
 /*	letter-spacing: 0; */
-	line-height: 1.2em !important;
-	font-size: 12px !Important;
 }
 
 #facebox {
@@ -90,7 +87,9 @@ border: none 0px #fff !important;
 #toolbar {
 	padding: 0px 0px 3px 0px;
 	background-color: #fff !important;
+	font-family:Helvetica,arial,sans-serif !important;
 }
+
 #nav a {
 	text-decoration: none;
 }
@@ -105,15 +104,16 @@ border: none 0px #fff !important;
 
 ul#menu, ul#priority_menu {
 	text-align: left; 
-	margin: 0px; 
-	margin-bottom: 10px;
+	margin: 0px;
+	padding-bottom: 1px !important; 
 	list-style-type: none;
-	height: 21px;
+/*	height: 21px;*/
 }
 ul#priority_menu {
 /*	background-color: #f0f0f0; */
 	text-align: left;
-	margin-bottom: 4px !important;
+	margin-bottom: 8px !important;
+	margin-top: 3px;
 }
 
 
@@ -135,7 +135,7 @@ ul#menu li, ul#menu_sub li, ul#menu_third li, ul#priority_menu li {
 	font-weight: bold;
 }
 .tab_subhead {
-	font-size: 1.1em;
+	font-size: 13px;
 }
 .tab_sublinks {
 	margin-bottom: 10px;
@@ -280,11 +280,13 @@ ul#menu_sub li.mega .tab_header a {
 	background-color: #fff;
 /*	margin-top: 4px; */
 	z-index: -1;	
-	font-size: 1.1em;
+	font-size: 13px;
+	margin-top: 2px;
 }
 ul#menu_third {
 	text-align: left; 
 	margin: 0px; 
+	margin-top: 5px;
 	list-style-type: none;
 	padding: 0px 10px 0px 0px; 
 	background-color: #fff !important;
@@ -432,13 +434,13 @@ width:262px !important;
  
  h2
 {
-font-size: 1em;
+font-size: 13px;
 /* Might damage something somewhere
 height: 1.5em;
 */
 border-bottom:1px solid #CCCCCC;
 font-weight:bold;
-padding-top: 15px;
+padding-top: 5px;
 display:block;
 margin:0;	
 }
@@ -501,7 +503,7 @@ width: 120px;
 /* Selected item in navigation, I think */
 #nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a, #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_1 li.tab1 .tab_header a, #nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a, #nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a, #nav_sub_8 li.tab8 .tab_header a, #nav_sub_9 li.tab9 .tab_header a, #nav_sub_10 li.tab10 .tab_header a, #nav_third_1 li.tab1 .tab_header a, #nav_third_2 li.tab2 .tab_header a, #nav_third_3 li.tab3 .tab_header a, #nav_third_4 li.tab4 .tab_header a, #nav_third_5 li.tab5 .tab_header a, #nav_third_6 li.tab6 .tab_header a, #nav_third_7 li.tab7 .tab_header a, #nav_third_8 li.tab8 .tab_header a, #nav_third_9 li.tab9 .tab_header a, #nav_third_10 li.tab10 .tab_header a {
 background-color:#fff !important;
-color:#000000;
+color:#000000 !important;
 font-weight:bold !important;
 padding-top:2px !important;
 padding-bottom:2px !important;
@@ -564,8 +566,8 @@ color:#FFFFFF !important;
 
 
 #priority_nav1 li.tab1 .tab_header a, #priority_nav1 li.tab1.mega .tab_header a, #priority_nav2 li.tab2 .tab_header a, #priority_nav2 li.tab2.mega .tab_header a, #priority_nav3 li.tab3 .tab_header a, #priority_nav3 li.tab3.mega .tab_header a, #priority_nav4 li.tab4 .tab_header a, #priority_nav4 li.tab4.mega .tab_header a, #priority_nav5 li.tab5 .tab_header a, #priority_nav5 li.tab5.mega .tab_header a, #priority_nav6 li.tab6 .tab_header a, #priority_nav6 li.tab6.mega .tab_header a, #priority_nav7 li.tab7 .tab_header a, #priority_nav7 li.tab7.mega .tab_header a, #priority_nav8 li.tab8 .tab_header a, #priority_nav8 li.tab8.mega .tab_header a, #priority_nav9 li.tab9 .tab_header a, #priority_nav9 li.tab9.mega .tab_header a, #priority_nav10 li.tab10 .tab_header a, #priority_nav10 li.tab10.mega .tab_header a {
-	padding-top:3px;
-	padding-bottom: 3px;
+	padding-top:0px;
+	padding-bottom: 0px;
 }
 
 
@@ -627,7 +629,7 @@ border-right: 1px solid #eee;
 #user_name {
 font-size:12px;
 padding:8px 0 8px 8px;
-background-color:#ccc;
+background-color:#f0f0f0;
 border-bottom:1px solid #EEEEEE !important;
 }
 
@@ -764,13 +766,13 @@ width:700px !important;
 	padding-bottom: 2px;
 	padding-top: 4px;
 	line-height: 130%;
-	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+	font-family:"lucida grande",tahoma,arial,sans-serif;
 	font-size:11px;
 	color: #333333;
 }
 
 .tag_button_hack {
-	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+	font-family:"lucida grande",tahoma,arial,sans-serif;
 	font-size:11px !important;
 	font-style: italic;
 	color: #333333;
@@ -778,26 +780,22 @@ width:700px !important;
 
 .point_item h3 {
 color: #333333 !important;	
-font-family:"lucida grande",tahoma,verdana,arial,sans-serif !important;
 font-size: 12px !important;
 font-weight: bold !important;
 }
 
 .point_item_hacky a {
-font-family:"lucida grande",tahoma,verdana,arial,sans-serif !important;
 font-size: 12px !important;
 font-weight: bold !important;
 }
 
 .for_and_against_hacky {
-font-family:"lucida grande",tahoma,verdana,arial,sans-serif !important;
 color:#333333 !important;
 font-size: 10px !important;
 font-weight: normal !important;
 }
 
 .yes_and_no_points_link_hacky a {
-	font-family:"lucida grande",tahoma,verdana,arial,sans-serif !important;
 	color:#333333 !important;
 	font-size: 12px !important;
 	font-weight: normal !important;
@@ -812,7 +810,7 @@ font-weight: normal !important;
 ul#priority_menu li {
 padding:2px 0 !important;
 margin-right: 4px !Important;
-	background-color: #f0f0f0 !important;
+	background-color: #F8F8F8 !important;
 }
 
 .icon {
@@ -836,7 +834,8 @@ font-size: 13px !important;
 /*float:left;*/
 margin-right:1px;
 font-size: 13px !Important;
-padding-bottom: 2px;
+font-family:helvetica,arial,sans-serif !important;
+padding-bottom: 0px;
 /*margin-top:3px;*/
 }
 
@@ -850,7 +849,8 @@ padding-bottom: 2px;
 
 
 .pagination {
-	margin-top: 3px;
+	margin-top: -1px;
+	margin-bottom: 5px;
 }
 
 .tiny_info, #tiny_info 

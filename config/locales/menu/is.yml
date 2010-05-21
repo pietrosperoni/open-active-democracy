@@ -78,7 +78,7 @@ is:
                 other: "{{count}} rök"
         charts:
             name: "Línurit og tölfræði"
-            active_issues: "Virkasta {{tags_name}}"
+            active_issues: "Virkustu {{tags_name}}"
             rising: "Rísandi mál á dagskrá"
             falling: "Fallandi mál á dagskrá"
         color_schemes:
