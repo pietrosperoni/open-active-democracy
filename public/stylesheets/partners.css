@@ -3,3 +3,15 @@ margin:9px 0 0 11px;
 float: left;
 }
 
+.partner_image {
+height: 52px;
+}
+
+.partner_image a{
+display: inline !important;
+float: right !important;
+}
+
+.partner_image img{
+float: right !important;
+}
