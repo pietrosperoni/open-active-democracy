@@ -11,7 +11,7 @@ module ActsAsSolr
         elsif ENV['WEBSOLR_URL']
           url = ENV['WEBSOLR_URL']
         else
-          url = 'http://localhost:8983/solr'
+          url = 'http://localhost:8989/solr'
         end
         connection = Solr::Connection.new(url)
         return connection.send(request)
