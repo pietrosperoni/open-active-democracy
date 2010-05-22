@@ -749,7 +749,7 @@ is:
             facebook: "Bjóða Facebook vinum"
     install:
         new:
-            heading: "Velkomin á Skuggaþing"
+            heading: "Velkomin á Skuggaborg"
         admin_user:
             heading: "Búðu til stjórnanda aðgang"
             submit: "Vistaðu aðgangsupplýsingarnar þínar"
@@ -793,7 +793,7 @@ is:
             loggedin: "Þú getur líka orðið sendiherra og unnið þér inn <span class='pc'>5{{currency_short_name}}</span> fyrir hver einstakling sem þú nælir í. Byrjaðu með því einfaldlega að <a href='{{import_url}}'>flytja inn Google, Yahoo, Windows Live eða Facebook tengiliði þína</a>."
         twitterers: 
             title: "Tístarar (Twitterers) hjá {{government_name}}"
-            intro: "Ef þú vilt láta bæta þér við, smelltu þá á þennan hnapp og fylgdu Twitter upplýsingunum til að samþykkja {{government_name}}/Skuggaþing."
+            intro: "Ef þú vilt láta bæta þér við, smelltu þá á þennan hnapp og fylgdu Twitter upplýsingunum til að samþykkja {{government_name}}/Skuggaborg."
         newest: 
             name: "Nýjir meðlimir"
             title: "Nýjir meðlimir hjá {{government_name}}"
@@ -926,8 +926,8 @@ is:
             success: "Stillingar vistaðar"
             emails: "Senda stillingaskrá í tölvupósti"
         new:
-            title: "Gerast samstarfsaðili Skuggaþings"
-            success: "Takk fyrir að gerast samstarfsaðili Skuggaþings"
+            title: "Gerast samstarfsaðili Skuggaborgs"
+            success: "Takk fyrir að gerast samstarfsaðili Skuggaborgs"
             submit: "Gerstu samstarfsaðili"
             short_name:
                 limit: "færri en 20 stafir"
@@ -1198,7 +1198,7 @@ is:
         destroy:
             success: "Eyði varanlega {{priority_name}}. Þetta getur tekið nokkrar mínútur en það er háð hversu margir eru með eða á móti og þarf að fjarlægja."
         new:
-            need_account: "Til að taka þátt á Skuggaþingi þá þarftu að vera innskráður, nýskráning er öllum heimil."
+            need_account: "Til að taka þátt á Skuggaborg þá þarftu að vera innskráður, nýskráning er öllum heimil."
             blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgangsmáli til að bæta þínu við."
             success: "Takk fyrir að bæta {{priority_name}} við"
             submit: "Búa til nýtt mál"

@@ -30,7 +30,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   # The publisher will look up the template id from the facebook_templates table
   def endorsement(facebook_session, endorsement, priority)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} studdi málið #{priority.name} á Skuggaþingi. "+create_bottom_text(priority)
+    txt_message = "#{facebook_session.user.name} studdi málið #{priority.name} á Skuggaborg. "+create_bottom_text(priority)
     from facebook_session.user
     message ''
     attachment :name => priority.name, :href => priority.show_url, :description => txt_message
@@ -47,7 +47,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   # The publisher will look up the template id from the facebook_templates table
   def opposition(facebook_session, endorsement, priority)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} er á móti málinu #{priority.name} á Skuggaþingi. "+create_bottom_text(priority)
+    txt_message = "#{facebook_session.user.name} er á móti málinu #{priority.name} á Skuggaborg. "+create_bottom_text(priority)
     from facebook_session.user
     #target facebook_session.user
     message ''
@@ -78,7 +78,7 @@ class UserPublisher < Facebooker::Rails::Publisher
       object_name = activity.name
     end
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} skrifaði athugasemd við #{object_name} á Skuggaþingi: #{truncate(comment.content, :length => 400)}"
+    txt_message = "#{facebook_session.user.name} skrifaði athugasemd við #{object_name} á Skuggaborg: #{truncate(comment.content, :length => 400)}"
     from facebook_session.user
     message ''
     attachment :name => object_name, :href => object_url, :description => txt_message
@@ -94,7 +94,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   
   def point(facebook_session, point, priority)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} bætti við rökum við #{priority.name} á Skuggaþingi: #{point.name_with_type} - #{point.content}"
+    txt_message = "#{facebook_session.user.name} bætti við rökum við #{priority.name} á Skuggaborg: #{point.name_with_type} - #{point.content}"
     from facebook_session.user
     message ''
     attachment :name => point.name_with_type, :href => point.show_url, :description => txt_message
@@ -110,7 +110,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   
   def document(facebook_session, document, priority)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} bætti við skjali við #{priority.name} á Skuggaþingi: #{document.name_with_type} - #{truncate(document.content, :length => 400)}"
+    txt_message = "#{facebook_session.user.name} bætti við skjali við #{priority.name} á Skuggaborg: #{document.name_with_type} - #{truncate(document.content, :length => 400)}"
     from facebook_session.user
     message ''
     attachment :name => document.name_with_type, :href => document.show_url, :description => txt_message

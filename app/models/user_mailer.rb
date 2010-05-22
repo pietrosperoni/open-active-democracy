@@ -49,7 +49,7 @@ class UserMailer < ActionMailer::Base
   
   def new_change_vote(sender,recipient,vote)
     setup_notification(recipient)
-    @subject = "Skuggaþings atkvæðagreiðsla vegna: " + vote.change.priority.name
+    @subject = "Skuggaborgs atkvæðagreiðsla vegna: " + vote.change.priority.name
     @body[:vote] = vote
     @body[:change] = vote.change
     @body[:recipient] = recipient

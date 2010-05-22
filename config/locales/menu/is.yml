@@ -2,8 +2,8 @@ is:
     menu:
         logout: "Útskráning"
         about:
-            name: "Skuggaþing"
-            site: "Um Skuggaþing"
+            name: "Skuggaborg"
+            site: "Um Skuggaborg"
             faq: "Spurt & Svarað"
             rules: "Reglur fyrir vefinn"
             privacy: "Reglur um friðhelgi"
