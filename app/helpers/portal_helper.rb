@@ -72,7 +72,7 @@ module PortalHelper
   private
   
   def get_cached_priorities(code_function)
-    key = code_function.gsub("(","").gsub(")","")
+    key = code_function.gsub("(","").gsub(")","")+"partner#{Partner.current_id}"
     @priorities = Rails.cache.read(key)
     if not @priorities
       eval("@priorities = #{code_function}")
