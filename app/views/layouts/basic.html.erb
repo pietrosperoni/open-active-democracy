@@ -16,6 +16,15 @@
 <% if controller_name == "facebook" %>
 <%= stylesheet_link_tag "fb_invite_hack.css" %>
 <% end %>
+<map name="Map" id="Map">
+  <area shape="rect" coords="2,2,35,38" href="http://framsokn.skuggaborg.is/portal" alt="Framsóknarflokkurinn" />
+  <area shape="rect" coords="40,1,84,39" href="http://sjalfstaedisflokkur.skuggaborg.is/portal" alt="Sjálfstæðisflokkurinn" />
+  <area shape="rect" coords="84,2,121,37" href="http://reykjavikurframbod.skuggaborg.is/portal" alt="Reykjavíkurframboðið" />
+  <area shape="rect" coords="123,0,165,39" href="http://frjalslyndir.skuggaborg.is/portal" alt="Frjálslyndi flokkurinn" />
+  <area shape="rect" coords="202,1,241,38" href="http://samfylking.skuggaborg.is/portal" alt="Samfylkingin" />
+  <area shape="rect" coords="165,2,202,37" href="http://vinstrigraen.skuggaborg.is/portal" alt="Vinstri hreyfingin grænt framboð" />
+  <area shape="rect" coords="241,0,275,37" href="http://besti.skuggaborg.is/portal" alt="Besti flokkurinn" />
+</map>
 </head>
 <body>
 
@@ -29,6 +38,7 @@
 		<div id="partner_image">
 			<%= render :partial => "partners/logo" %>
 		</div>
+		
 		<div id="parent_image" class="logo_small" style="float: right">
 			<% if RAILS_ENV=="development"%>
 				<%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3000 %>
@@ -40,6 +50,8 @@
 		<div id="parent_image" class="logo" style="float: left">
 			<%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal" %>
 		</div>
+		
+		
 		<div id="parent_image" style="float: right" class="partner_image">
 			<% Partner.with_logo.all.each do |partner| %>
 			<% if RAILS_ENV=="development"%>
@@ -51,6 +63,10 @@
 		<% end %>
 		</div>
 		<% end %>
+		<div id="party_logos">
+			<img src="/images/party_logos.png" width="273" height="38" border="0" usemap="#Map" />
+
+		</div>
 	</div>
 		<%= flash_div :warning, :notice, :error %>
 
@@ -101,6 +117,7 @@
 		<% end %>
 
 		<% end %>
+		<%= render :partial => "shared/skuggathing" %>
 
 	</div>
 	<div class="push">
