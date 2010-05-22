@@ -75,7 +75,7 @@ namespace :utils do
 
   desc "Backup"
   task(:backup => :environment) do
-      filename = "skuggathing_#{Time.new.strftime("%d%m%y_%H%M%S")}.sql"
+      filename = "skuggaborg_#{Time.new.strftime("%d%m%y_%H%M%S")}.sql"
       system("mysqldump -u robert --password=X --force odd_dev_2 > /home/robert/#{filename}")
       system("gzip /home/robert/#{filename}")
       system("scp /home/robert/#{filename}.gz robert@where.is:backups/#{filename}.gz")

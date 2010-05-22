@@ -28,7 +28,7 @@ config.action_mailer.raise_delivery_errors = false
 #  :password => ENV['SENDGRID_PASSWORD']
 #}
 
-ENV['DOMAIN'] = "skuggathing.is"
+ENV['DOMAIN'] = "skuggaborg.is"
 
 if ENV['DOMAIN']
   config.action_controller.session = {:domain => '.' + ENV['DOMAIN']}
