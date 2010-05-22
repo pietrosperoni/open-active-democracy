@@ -243,5 +243,5 @@ namespace :portlets do
 #      p.weight = 1
 #      p.save  
 #    end
-#  end
+  end
 end
