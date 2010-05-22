@@ -28,10 +28,10 @@ config.action_mailer.raise_delivery_errors = false
 #  :password => ENV['SENDGRID_PASSWORD']
 #}
 
-ENV['DOMAIN'] = "skuggaborg.is"
-
-if ENV['DOMAIN']
-  config.action_controller.session = {:domain => '.' + ENV['DOMAIN']}
+if ActionController::Base.session
+  ActionController::Base.session[:domain] = '.skuggaborg.is'
+else
+  ActionController::Base.session = { :domain => '.skuggaborg.is' }
 end
 
 if ENV['S3_ACCESS_KEY_ID']
