@@ -21,10 +21,10 @@ namespace :portlets do
     pc4.weight = 4
     pc4.save
     
-    pc5=PortletTemplateCategory.new
-    pc5.name="processes.name"
-    pc5.weight = 4
-    pc5.save
+#    pc5=PortletTemplateCategory.new
+#    pc5.name="processes.name"
+#    pc5.weight = 4
+#    pc5.save
 
     p=PortletTemplate.new
     p.name="priorities.newest.name"
@@ -180,68 +180,68 @@ namespace :portlets do
     p.weight = 5
     p.save    
 
-    p=PortletTemplate.new
-    p.name="processes.all_latest_video_discussions"
-    p.portlet_template_category_id=pc5.id
-    p.locals_data_function=nil
-    p.partial_name = "process_latest_video_discussions"
-    p.item_limit = 20
-    p.weight = 1
-    p.save    
-
-    p=PortletTemplate.new
-    p.name="processes.most_popular_videos"
-    p.portlet_template_category_id=pc5.id
-    p.locals_data_function=nil
-    p.partial_name = "process_most_popular_videos"
-    p.item_limit = 10
-    p.weight = 2
-    p.save    
-
-    p=PortletTemplate.new
-    p.name="processes.latest_processes"
-    p.portlet_template_category_id=pc5.id
-    p.locals_data_function = "setup_priorities_latest_processes"
-    p.partial_name = "priority_list"
-    p.item_limit = 3
-    p.weight = 3
-    p.save    
-
-    p=PortletTemplate.new
-    p.name="processes.latest_process_documents"
-    p.portlet_template_category_id=pc5.id
-    p.locals_data_function=nil
-    p.partial_name = "process_latest_documents"
-    p.item_limit = 5
-    p.weight = 4
-    p.save
-
-    p=PortletTemplate.new
-    p.name="processes.icesave_portlet"
-    p.portlet_template_category_id=pc5.id
-    p.locals_data_function="setup_priorities_process_icesave"
-    p.partial_name = "priority_list"
-    p.item_limit = 3
-    p.weight = 5
-    p.save    
-  end
-
-  desc "initialize island.is"
-  task(:initialize_island_is => :environment) do
-    partner = Partner.find_by_short_name("island")
-    unless PortletTemplateCategory.find_by_name("partners.island_is.name")
-      pc=PortletTemplateCategory.new
-      pc.name="partners.island_is.name"
-      pc.weight = 1
-      pc.partner_id = partner.id
-      pc.save
-  
-      p=PortletTemplate.new
-      p.name="partners.island_is.name"
-      p.portlet_template_category_id=pc.id
-      p.partial_name = "island_is_landshlutar"
-      p.weight = 1
-      p.save  
-    end
-  end
+#    p=PortletTemplate.new
+#    p.name="processes.all_latest_video_discussions"
+#    p.portlet_template_category_id=pc5.id
+#    p.locals_data_function=nil
+#    p.partial_name = "process_latest_video_discussions"
+#    p.item_limit = 20
+#    p.weight = 1
+#    p.save    
+#
+#    p=PortletTemplate.new
+#    p.name="processes.most_popular_videos"
+#    p.portlet_template_category_id=pc5.id
+#    p.locals_data_function=nil
+#    p.partial_name = "process_most_popular_videos"
+#    p.item_limit = 10
+#    p.weight = 2
+#    p.save    
+#
+#    p=PortletTemplate.new
+#    p.name="processes.latest_processes"
+#    p.portlet_template_category_id=pc5.id
+#    p.locals_data_function = "setup_priorities_latest_processes"
+#    p.partial_name = "priority_list"
+#    p.item_limit = 3
+#    p.weight = 3
+#    p.save    
+#
+#    p=PortletTemplate.new
+#    p.name="processes.latest_process_documents"
+#    p.portlet_template_category_id=pc5.id
+#    p.locals_data_function=nil
+#    p.partial_name = "process_latest_documents"
+#    p.item_limit = 5
+#    p.weight = 4
+#    p.save
+#
+#    p=PortletTemplate.new
+#    p.name="processes.icesave_portlet"
+#    p.portlet_template_category_id=pc5.id
+#    p.locals_data_function="setup_priorities_process_icesave"
+#    p.partial_name = "priority_list"
+#    p.item_limit = 3
+#    p.weight = 5
+#    p.save    
+#  end
+#
+#  desc "initialize island.is"
+#  task(:initialize_island_is => :environment) do
+#    partner = Partner.find_by_short_name("island")
+#    unless PortletTemplateCategory.find_by_name("partners.island_is.name")
+#      pc=PortletTemplateCategory.new
+#      pc.name="partners.island_is.name"
+#      pc.weight = 1
+#      pc.partner_id = partner.id
+#      pc.save
+#  
+#      p=PortletTemplate.new
+#      p.name="partners.island_is.name"
+#      p.portlet_template_category_id=pc.id
+#      p.partial_name = "island_is_landshlutar"
+#      p.weight = 1
+#      p.save  
+#    end
+#  end
 end
