@@ -14,7 +14,7 @@
 			<%= f.text_field :name, :maxlength => 60, :autocomplete =>"off" %>
 			<div class="tiny_info">Gott er að orða mál skýrt, þá er auðveldara fyrir aðra að taka afstöðu til þess</div>			
 		
-					<% if Partner.current and Partner.current.custom_tag_checkbox %>
+					<% if Partner.current and Partner.current.custom_tag_checkbox and Partner.current.custom_tag_checkbox!="" %>
 						
 							<div  class="form_header">Flokkar sem mál á að birtast í:</div>
 						
@@ -27,13 +27,13 @@
 					<% end %>
 
 
-					<% if Partner.current and Partner.current.custom_tag_dropdown_1 %>
+					<% if Partner.current and Partner.current.custom_tag_dropdown_1 and Partner.current.custom_tag_dropdown_1!="" %>
 						<span class="custom_tag">
 							<%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%>
 						</span>
 					<% end %>
 
-					<% if Partner.current and Partner.current.custom_tag_dropdown_2 %>
+					<% if Partner.current and Partner.current.custom_tag_dropdown_2 and Partner.current.custom_tag_dropdown_2!="" %>
 						<span class="custom_tag">						
 							<%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%>
 						</span>		
