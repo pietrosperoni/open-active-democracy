@@ -90,9 +90,16 @@ class Partner < ActiveRecord::Base
   def self.current  
     Thread.current[:partner]  
   end  
-  
-  def self.current=(partner)  
-    raise(ArgumentError,"Invalid partner. Expected an object of class 'Partner', got #{partner.inspect}") unless partner.is_a?(Partner)
+
+  def self.current_id
+    if Thread.current[:partner]
+      Thread.current[:partner].id
+    else
+      "nopartner"
+    end
+  end
+
+  def self.current=(partner)
     Thread.current[:partner] = partner
   end
 
