@@ -1,5 +1,5 @@
 <% if current_partner.has_website? and current_partner.has_logo? %>
-	<a href="<%= current_partner.website_link %>"><%= image_tag current_partner.logo.url(:icon_214_32), :border => 0 %></a>		
+	<a target="_blank" href="<%= current_partner.website_link %>"><%= image_tag current_partner.logo.url(:icon_214_32), :border => 0 %></a>		
 <% elsif current_partner.has_logo? and not current_partner.has_website? %>
 	<%= image_tag current_partner.logo.url(:icon_214_32), :border => 0 %>
 <% elsif logged_in? and current_user.partner_id == current_partner.id %>
