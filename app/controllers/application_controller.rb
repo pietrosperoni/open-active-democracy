@@ -225,7 +225,7 @@ class ApplicationController < ActionController::Base
     reset_session    
     flash[:error] = t('application.fb_session_expired')
     respond_to do |format|
-      format.html { redirect_to request.referrer||'/' }
+      format.html { redirect_to '/portal/' }
       format.js { redirect_from_facebox(request.referrer||'/') }
     end    
   end
