@@ -81,12 +81,12 @@ class AlthingiCrawler < ProcessCrawler
   end
 
   def update_icesave
-    ProcessParser.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=138&mnr=76", "fjármálaráðherra", "stjórnarfrumvarp", 
+    ProcessParser.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=138&mnr=76", "fjárhugmyndaráðherra", "stjórnarfrumvarp", 
                 "Ríkisábyrgð á lántöku Tryggingarsjóðs innstæðueigenda og fjárfesta (Icesave-reikningar)", PROCESS_TYPE_LOG)
   end  
 
   def update_icesave1
-    ProcessParser.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=137&mnr=136", "fjármálaráðherra", "stjórnarfrumvarp", 
+    ProcessParser.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=137&mnr=136", "fjárhugmyndaráðherra", "stjórnarfrumvarp", 
                 "Ríkisábyrgð á lántöku Tryggingarsjóðs innstæðueigenda og fjárfesta (Icesave-samningar)", PROCESS_TYPE_LOG)
   end  
 

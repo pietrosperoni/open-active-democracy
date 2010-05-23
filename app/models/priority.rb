@@ -245,7 +245,7 @@ class Priority < ActiveRecord::Base
     elsif is_successful?
       'tókst'
     elsif is_compromised?
-      'tókst með málamiðlun'
+      'tókst með hugmyndamiðlun'
     elsif is_intheworks?
       'er í vinnslu'
     else

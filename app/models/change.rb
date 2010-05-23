@@ -33,13 +33,13 @@ class Change < ActiveRecord::Base
       errors.add(:base, "Þá átt ekki nógu marga " + Government.current.currency_name.downcase + " til að leggja til yfirtöku.")
     end
     if new_priority == priority
-      errors.add(:base, "Þú getur ekki lagt til yfirtöku á sama máli.")
+      errors.add(:base, "Þú getur ekki lagt til yfirtöku á sama hugmynd.")
     end
     if not is_endorsers and not is_opposers
       errors.add(:base, "Þú verður að velja að minnsta kosti annað hvort stuðningsmenn eða anstæðinga fyrir þessa yfirtöku.")
     end
     if priority.has_change?
-      errors.add(:base, "Þetta mál er þegar með yfirtöku í gangi, vinsamlegast bíddu eftir að kosning um hana klárist.")
+      errors.add(:base, "Þetta hugmynd er þegar með yfirtöku í gangi, vinsamlegast bíddu eftir að kosning um hana klárist.")
     end
   end
   

@@ -2537,7 +2537,7 @@ commit 56330c50696402761ce671e87e57121ccde57ab4
 Author: Stefan Vignir <stebbiv@gmail.com>
 Date:   Tue Feb 2 21:41:09 2010 +0000
 
-    Nei, þetta er tiltekt í html-kóða fyrir ferli mála.
+    Nei, þetta er tiltekt í html-kóða fyrir ferli hugmynda.
     Hitt var fjarlæging á töflu-layouti í basic.html.erb
 
 commit 3922ac26502c4dd3a7c9e00f02a0c76f9ea5b2c2
@@ -2550,7 +2550,7 @@ commit 41b6cd0198ae0772618a5e9ae4f9223e1ef6b7f7
 Author: Stefan Vignir <stebbiv@gmail.com>
 Date:   Tue Feb 2 21:25:32 2010 +0000
 
-    Tekið til í html-kóða fyrir ferli mála.
+    Tekið til í html-kóða fyrir ferli hugmynda.
 
 commit bb07f889423d9b03754dc3cf1392f11284e7327d
 Author: rbjarnason <robert@decyphermedia.com>

@@ -16,21 +16,21 @@
 		<div class="field_box">
  			<%= f.text_field :name, :size => 50, :maxlength => 60 %>
 		</div>
-			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þín mál þá eru góð rök lykilatriði</div>
+			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þín hugmynd þá eru góð rök lykilatriði</div>
 	</div>
 
 	<div class="field">
 		<div class="field_label">
 			<div id="point_supports" class="form_header">
 
-				<%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>	 Já, þessi rök styðja málið					
+				<%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>	 Já, þessi rök styðja hugmyndin					
 			</div>			
 			<div id="point_opposes" class="form_header">
-				<%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %> Nei, þessi rök eru á móti málinu
+				<%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %> Nei, þessi rök eru á móti hugmyndnu
 			</div>
 		</div>
 	</div>
-			<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður mál eða ekki</div>
+			<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður hugmynd eða ekki</div>
 
 
 	<div class="field form_header">
@@ -49,7 +49,7 @@
 			<%= f.text_field :website, :size => 50 %>	
 		</div>
 	</div>
-					<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir mál þitt.</div>
+					<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir hugmynd þitt.</div>
 
 	
 	<div class="field form_header">
@@ -62,7 +62,7 @@
 		</div>
 		
 	</div>
-					<div class="tiny_info">Þú ræður hvort þú tengir við annað mál. Ef skoðun þín er andstæð, geturðu tengt við betra mál. EÐA, ef skoðun þín styður eða er hlutlaus, geturðu lagt áherslu á nákvæmara eða tengdara mál.</div>
+					<div class="tiny_info">Þú ræður hvort þú tengir við annað hugmynd. Ef skoðun þín er andstæð, geturðu tengt við betra hugmynd. EÐA, ef skoðun þín styður eða er hlutlaus, geturðu lagt áherslu á nákvæmara eða tengdara hugmynd.</div>
 	
 	<%= f.submit t('points.new.submit'), :id => "submit", :class => "yellow_button" %>
 

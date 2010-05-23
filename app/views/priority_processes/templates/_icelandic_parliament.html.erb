@@ -25,7 +25,7 @@
 	<% discussions = current_process.process_discussions %>
 	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
 	<% if i==0 %>
-	  <%=link_to 'Málið á Alþingi', current_process.priority.external_link, {:target => "_blank", :class => "extlink"}%>
+	  <%=link_to 'Hugmyndin á Alþingi', current_process.priority.external_link, {:target => "_blank", :class => "extlink"}%>
 	<% end %>
 	<% unless process_documents.empty? %>
 	<div class="althingi_process_documents">

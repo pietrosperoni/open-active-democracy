@@ -160,9 +160,9 @@ class ProcessParser
     mnr = ur_params["mnr"]
     
     if process_type == PROCESS_TYPE_LOG
-      info_2 = "#{mnr}. mál lagafrumvarp"
+      info_2 = "#{mnr}. hugmynd lagafrumvarp"
     elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-      info_2 = "#{mnr}. mál þingsályktunartillaga" 
+      info_2 = "#{mnr}. hugmynd þingsályktunartillaga" 
     end
     info_3 = "#{ltg}. löggjafarþingi." 
     

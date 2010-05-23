@@ -6,9 +6,9 @@ Hæ <%= h(@recipient.real_name) %>,
 Þeirra rök eru: <%= @change.content %>
 <% end -%>
 
-Ertu sammála þessu?
+Ertu samhugmynda þessu?
 
-JÁ, ég <% if @vote.is_up? -%>styð<% else -%>er á móti<% end -%> nýja málið: "<%= @change.new_priority.name %>."  
+JÁ, ég <% if @vote.is_up? -%>styð<% else -%>er á móti<% end -%> nýja hugmyndin: "<%= @change.new_priority.name %>."  
 Smelltu hér til að samþykkja: <%= @root_url %>vote/yes/<%= @vote.code %>?utm_source=vote&utm_medium=email
 
 NEI, ég vil halda áfram að <% if (@vote.is_up? and @change.is_flip?) or (@vote.is_down? and not @change.is_flip?) -%>vera á móti<% else -%>styðja<% end -%>: "<%= @change.priority.name %>."  
@@ -17,7 +17,7 @@ Smelltu hér til að synja: <%= @root_url %>vote/no/<%= @vote.code %>?utm_source
 Ef þú vilt ræða þessa tillögu og sjá stöðuna í kosningunni farðu þá á: 
 <%= @root_url %>vote/maybe/<%= @vote.code %>?utm_source=vote&utm_medium=email
 
-Ef þú kýst ekki innan <%= @change.time_left %>, og ef málið fær amk. 70% atkvæða, þá mun <% if @vote.is_up? -%>þinn stuðningur<% else -%>þín mótstaða<% end -%> vera sameinaður nýja málinu.  
+Ef þú kýst ekki innan <%= @change.time_left %>, og ef hugmyndin fær amk. 70% atkvæða, þá mun <% if @vote.is_up? -%>þinn stuðningur<% else -%>þín mótstaða<% end -%> vera sameinaður nýja hugmyndnu.  
 Ef þessi tillaga fær ekki meira en 70% meirihluta kosningu þá mun <% if @vote.is_up? -%>þinn stuðningur<% else -%>þín mótstaða<% end -%> vera óbreytt(ur). Nánari upplýsingar er að finna á: <%= @root_url %>about/faq#merge
 
 Takk fyrir að taka þátt.

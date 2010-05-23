@@ -743,7 +743,7 @@ class PrioritiesController < ApplicationController
       raise "rollback" if not @point_saved or not @saved
     rescue
       RAILS_DEFAULT_LOGGER.info("ROLLBACK ERROR")
-      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á máli og rök"
+      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á hugmynd og rök"
     end
     
     respond_to do |format|

@@ -28,13 +28,13 @@ is:
         briefing:
             name: "Upplýsingastöð"
             yours: "Þitt"
-            your_priorities: "Þín mál"
+            your_priorities: "Þín hugmynd"
             all: "Allt"
             revised: "Yfirfarið"
             helpful_to: "Gagnlegt til að:"
             add_point: 
                 name: "Bæta við rökum"
-                title: "Geturðu lagt fram sannfærandi rök með eða á móti þessu máli í færri en 500 stöfum"
+                title: "Geturðu lagt fram sannfærandi rök með eða á móti þessari hugmynd í færri en 500 stöfum"
             add_document: 
                 name: "Bæta við skjali"
                 title: "Skjöl gera þér kleift að útvíkka hugmyndirnar þínar og vinna með öðrum á svipaðan máta og wiki síður bjóða"
@@ -43,10 +43,10 @@ is:
             all_documents: "Öll skjöl"
             all_activity: "Öll virkni"
             research:
-                name: "Órökstudd mál"
-                needed: "Mál sem vantar {{points_name}} eða {{documents_name}}"
-                points_needed: "Mál verða að innihalda rök"
-                documents_needed: "Mál verða að innihalda skjöl"
+                name: "Órökstudd hugmynd"
+                needed: "Hugmynd sem vantar {{points_name}} eða {{documents_name}}"
+                points_needed: "Hugmynd verða að innihalda rök"
+                documents_needed: "Hugmynd verða að innihalda skjöl"
                 contributors:
                     name: "Meðhöfundar"
                     one: "Hitta meðhöfund"
@@ -69,9 +69,9 @@ is:
                 one: "1 skjal"
                 other: "{{count}} skjöl"
             priorities:
-                name: "Mál"
-                one: "1 mál"
-                other: "{{count}} mál"
+                name: "Hugmynd"
+                one: "1 hugmynd"
+                other: "{{count}} hugmynd"
             points:
                 name: "Rök"
                 one: "1 rök"
@@ -79,8 +79,8 @@ is:
         charts:
             name: "Línurit og tölfræði"
             active_issues: "Virkustu {{tags_name}}"
-            rising: "Rísandi mál á dagskrá"
-            falling: "Fallandi mál á dagskrá"
+            rising: "Rísandi hugmynd á dagskrá"
+            falling: "Fallandi hugmynd á dagskrá"
         color_schemes:
             theme: "Veldu þema"
             advanced: "Þróaðra valkerfi"
@@ -157,47 +157,47 @@ is:
             email: "Tölvupóstlisti"
             logo: "Merki"
         priorities:
-            name: "Mál"
-            consider: "Mál til athugunar"
-            quiz: "Könnun á máli"
+            name: "Hugmynd"
+            consider: "Hugmynd til athugunar"
+            quiz: "Könnun á hugmynd"
             action: "Aðgerð"
             add_ad: 
-                name: "Kaupa auglýsingu fyrir þetta mál"
-                title: "Verja hluta af {{currency_name}} til að koma þessu máli fremst í röðina til íhugunar fyrir alla."
+                name: "Kaupa auglýsingu fyrir þetta hugmynd"
+                title: "Verja hluta af {{currency_name}} til að koma þessari hugmynd fremst í röðina til íhugunar fyrir alla."
             add_proposal:
                 name: "Leggja til yfirtöku"
-                title: "Er annað mál sem ætti að sameina þessu"
+                title: "Er annað hugmynd sem ætti að sameina þessu"
             edit:
-                name: "Breyta þessu máli"
-                title: "Breyta þessu máli"
+                name: "Breyta þessari hugmynd"
+                title: "Breyta þessari hugmynd"
             bury:
                 name: "Fjarlægja úr uppröðun"
-                title: "Fjarlægja þetta mál úr þessari uppröðun"
-                confirm: "Þú ert við það að aflista þetta mál úr uppröðunarlistanum: {{priority_name}}. Einungis gera það fyrir atriði sem eru óheiðarleg, misbjóðandi eða fáránleg"
+                title: "Fjarlægja þetta hugmynd úr þessari uppröðun"
+                confirm: "Þú ert við það að aflista þetta hugmynd úr uppröðunarlistanum: {{priority_name}}. Einungis gera það fyrir atriði sem eru óheiðarleg, misbjóðandi eða fáránleg"
             delete:
-                name: "Eyða þessu máli"
-                title: "Eyða þessu máli varanlega"
+                name: "Eyða þessari hugmynd"
+                title: "Eyða þessari hugmynd varanlega"
                 confirm: "Ertu viss að þú viljir eyða {{priority_name}} varanlega?"
             successful:
                 name: "Merkja þetta árangursríkt"
-                title: "Merkja þetta mál klárað og árangursríkt"
-                confirm: "Þú ert að merkja eftirfarandi mál klárað og árangursríkt: {{priority_name}}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef málið hefur fjölda meðmæla"
+                title: "Merkja þetta hugmynd klárað og árangursríkt"
+                confirm: "Þú ert að merkja eftirfarandi hugmynd klárað og árangursríkt: {{priority_name}}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef hugmyndin hefur fjölda meðmæla"
             compromised:
                 name: "Merkja að þessu sé ógnað"
                 title: "Merkja þetta klárað en ógnað"
-                confirm: "Þú ert að merkja eftirfarandi mál klárað en ógnað: {{priority_name}}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef málið hefur fjölda meðmæla"
+                confirm: "Þú ert að merkja eftirfarandi hugmynd klárað en ógnað: {{priority_name}}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef hugmyndin hefur fjölda meðmæla"
             intheworks:
                 name: "Merkja í vinnslu"
-                title: "Merkja að þetta mál sé í vinnslu"
-                confirm: "Þú ert að merkja við þetta mál að það sé í vinnslu: {{priority_name}}."
+                title: "Merkja að þetta hugmynd sé í vinnslu"
+                confirm: "Þú ert að merkja við þetta hugmynd að það sé í vinnslu: {{priority_name}}."
             failed:
                 name: "Merkja sem mistök"
-                title: "Merkja þetta mál sem lokið og misheppnað"
-                confirm: "Merkja þetta mál sem lokið og misheppnað: {{priority_name}}. Vinsamlegast sýnið biðlund, vinnslan gæti tekið eina eða tvær mínútur ef þetta mál hefur marga meðmælendur"
+                title: "Merkja þetta hugmynd sem lokið og misheppnað"
+                confirm: "Merkja þetta hugmynd sem lokið og misheppnað: {{priority_name}}. Vinsamlegast sýnið biðlund, vinnslan gæti tekið eina eða tvær mínútur ef þetta hugmynd hefur marga meðmælendur"
             flag:
                 name: "Tilkynna óviðeigandi ummæli!"
-                title: "Er ástæða til að umsjónarmaður síðunnar myndi líta á þetta mál? Láta einnig vita í athugasemdum um málið ef það er ekki augljóst hvað vandamálið er."
-                confirm: "Þú ert um það bil að tilkynna um óviðeigandi ummæli til umsjónarmanni síðunnar. Ef það er ekki augljóst afhverju þú ert að tilkynna þetta, þá vinsamlegast setjið inn athugasemd um málið svo það sé hægt að gera viðeigandi ráðstafanir."
+                title: "Er ástæða til að umsjónarmaður síðunnar myndi líta á þetta hugmynd? Láta einnig vita í athugasemdum um hugmyndin ef það er ekki augljóst hvað vandahugmyndin er."
+                confirm: "Þú ert um það bil að tilkynna um óviðeigandi ummæli til umsjónarmanni síðunnar. Ef það er ekki augljóst afhverju þú ert að tilkynna þetta, þá vinsamlegast setjið inn athugasemd um hugmyndin svo það sé hægt að gera viðeigandi ráðstafanir."
             endorsers:
                 name: "Meðmælendur"
                 one: "1 með"
@@ -211,7 +211,7 @@ is:
                 one: "1 óyfirlýst"
                 other: "{{count}} óyfirlýst"
             everyone:
-                name: "Mál allra"
+                name: "Hugmynd allra"
                 short: "Allir"
                 overview: "Yfirsýn"
                 top: "Efst"
@@ -223,24 +223,24 @@ is:
                 random: "Tilviljanakennt"
                 finished: "Lokið"
             network:
-                name: "Mál samskiptanetsins þíns"
+                name: "Hugmynd samskiptanetsins þíns"
                 short: "Samskiptanetið þitt"
             yours: 
-                name: "Þín mál"
+                name: "Þín hugmynd"
                 short: "Þín"
                 active: "Virk"
                 top: "Hæst einkun"
                 lowest: "Lægst einkun"
                 ads: "Auglýsingar sem þú keyptir"
                 finished: "Lokið"
-                created: "Mál sem þú bjóst til"
+                created: "Hugmynd sem þú bjóst til"
             official:
-                name: "{{official_user_name}} mál"
+                name: "{{official_user_name}} hugmynd"
                 agenda_endorsed: "Mælt með"
                 agenda_not: "Ekki á dagskrá"
                 agenda_opposed: "Á móti"
             branch:
-                name: "{{branch_name}} mál"
+                name: "{{branch_name}} hugmynd"
         processes:
                 name: "Ferill"
         process_documents:
@@ -299,21 +299,21 @@ is:
         next_steps:
             intro: "{{government_name}} býður upp á ýmsa möguleika:"
             outro: ""
-            legislators: "Tengdu þín mál þinginu"
-            legislators: "Tengdu þín mál þinginu"
+            legislators: "Tengdu þín hugmynd þinginu"
+            legislators: "Tengdu þín hugmynd þinginu"
             branches: "Hvaða hópi áttu mest sameiginlegt með:"
             people_you_know: "Finndu vini þína"
             facebook_friends: "Bjóddu Facebook vinum"
             invite: "Bjóddu vinum að vera með"
             picture: "Settu inn mynd af þér"
             bio: "Settu inn upplýsingar um þig"
-            points: "Rökstyddu málin þín"
-            comments: "Skoðaðu umræður um þín mál"
+            points: "Rökstyddu hugmyndn þín"
+            comments: "Skoðaðu umræður um þín hugmynd"
         widgets:
             name: "Smáforrit fyrir síðuna þína"
             priorities: 
-                short: "Mál"
-                name: "Smáforrit fyrir mál"
+                short: "Hugmynd"
+                name: "Smáforrit fyrir hugmynd"
             points: 
                 short: "Rök"
                 name: "Smáforrit fyrir rök"
