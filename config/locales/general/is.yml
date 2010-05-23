@@ -1201,7 +1201,7 @@ is:
             need_account: "Til að taka þátt á Skuggaborg þá þarftu að vera innskráður, nýskráning er öllum heimil."
             blank: "Vinsamlegast skráðu málið þitt eða smelltu á stuðningshnappinn undir hverju forgangsmáli til að bæta þínu við."
             success: "Takk fyrir að bæta {{priority_name}} við"
-            submit: "Búa til nýtt mál"
+            submit: "Nýtt mál"
             suggest: "Ertu með mál sem ætti að taka fyrir? Settu það inn hér."
             click:
                 one: "Smelltu á <span class='priority_add'>STYÐJA</span> ef þetta mál hér neðar styður enn ásetning þinn."
