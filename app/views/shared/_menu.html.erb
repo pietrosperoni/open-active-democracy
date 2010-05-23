@@ -42,23 +42,6 @@
 		<li class="tab2 mega">
 			<span class="tab_header"><%= link_to t('menu.priorities.name'), "#" %></span>
 			<div class="tab_body">
-				<% unless Partner.current %>
-				<div class="tab_subhead">
-					<%= link_to "Lagafrumvörp", "/issues/lagafrumvorp" %>
-				</div>
-				<div class="tab_sublinks"></div>
-
-				<div class="tab_subhead">
-					<%= link_to "Þingsályktunartillögur", "/issues/thingsalyktunartillogur" %>
-				</div>
-				<div class="tab_sublinks"></div>
-
-				<div class="tab_subhead">
-					<%= link_to "Mál frá almenningi", "/issues/fra-almenningi" %>
-				</div>
-				<div class="tab_sublinks"></div>
-				<% end %>
-
 				<div class="tab_subhead">
 					<%= link_to t('menu.priorities.everyone.name'), top_priorities_url %> (<%= number_with_delimiter(Priority.published.filtered.count) %>)
 				</div>
