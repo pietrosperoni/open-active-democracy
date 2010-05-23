@@ -2,8 +2,6 @@ class Partner < ActiveRecord::Base
 
   require 'paperclip'
   
-  attr_reader :name_variations
-  
   named_scope :active, :conditions => "status in ('pending','active')"
   
   named_scope :with_logo, :conditions => "logo_file_name is not null"
@@ -25,8 +23,6 @@ class Partner < ActiveRecord::Base
     
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :passive, :column => :status
-
-  after_initialize :setup_name_variations
   
   state :passive
   state :pending
@@ -149,16 +145,16 @@ class Partner < ActiveRecord::Base
     out
   end
   
+  def name_variations
+    if self.name_variations_data and self.name_variations_data!=""
+      self.name_variations_data.split(",")
+    else
+      ["missing","missing","missing","missing","missing","missing","missing","missing","missing"]
+    end
+  end
+  
   private
   def do_delete
     deleted_at = Time.now
-  end
-  
-  def setup_name_variations
-    if self.name_variations_data
-      @name_variations = self.name_variations_data.split(",")
-    else
-      @name_variations = ["missing","missing","missing","missing","missing","missing","missing","missing","missing"]
-    end
-  end
+  end  
 end
