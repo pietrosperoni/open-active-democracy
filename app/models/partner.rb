@@ -157,6 +157,8 @@ class Partner < ActiveRecord::Base
   def setup_name_variations
     if self.name_variations_data
       @name_variations = self.name_variations_data.split(",")
+    else
+      @name_variations = ["missing","missing","missing","missing","missing","missing","missing","missing","missing"]
     end
   end
 end
