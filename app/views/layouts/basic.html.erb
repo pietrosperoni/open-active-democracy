@@ -60,9 +60,9 @@
                 <%= render :partial => "shared/menu" %>
 				<% if current_partner %>
 					<div id="partner_respect_text">
-						Þessi síða er ætluð stuðningsfólki <%= current_partner.name_variations[1] %>, þessi síða er samt sem áður opinn öllum þannig að við biðjum þig
+						Þessi síða er ætluð stuðningsfólki <%= current_partner.name_variations[2] %>, þessi síða er samt sem áður opinn öllum þannig að við biðjum þig
 						að sýna þá virðingu að setja ekki inn hugmyndir hér nema þær tengist stefnumálum <%= current_partner.name_variations[2] %>.  Til að setja inn 
-						hugmyndir sem eru ekki tengdir flokkunum vinsamlegast notaðu aðalsíðu <%=link_to "skuggaborg.is", :url="http://skuggaborg.is/" %>.
+						hugmyndir sem eru ekki tengdir flokkunum vinsamlegast notaðu aðalsíðu <%=link_to "skuggaborg.is", :url=>"http://skuggaborg.is/" %>.
 					</div>
 				<% end %>
                 <div id="content_text">
