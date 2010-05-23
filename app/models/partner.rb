@@ -23,6 +23,8 @@ class Partner < ActiveRecord::Base
     
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :passive, :column => :status
+
+  after_initialize :setup_name_variations
   
   state :passive
   state :pending
@@ -150,4 +152,9 @@ class Partner < ActiveRecord::Base
     deleted_at = Time.now
   end
   
+  def setup_name_variations
+    if self.name_variations_data
+      @name_variations = self.name_variations_data.split(",")
+    end
+  end
 end
