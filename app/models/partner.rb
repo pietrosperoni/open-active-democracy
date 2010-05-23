@@ -2,6 +2,8 @@ class Partner < ActiveRecord::Base
 
   require 'paperclip'
   
+  attr_reader :name_variations
+  
   named_scope :active, :conditions => "status in ('pending','active')"
   
   named_scope :with_logo, :conditions => "logo_file_name is not null"
