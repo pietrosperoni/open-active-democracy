@@ -650,6 +650,7 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
 
   create_table "partners", :force => true do |t|
     t.string   "name",                  :limit => 60
+    t.string   "name_variations_data",  :limit => 300
     t.string   "short_name",            :limit => 20
     t.integer  "picture_id"
     t.integer  "is_optin",              :limit => 1,  :default => 0,         :null => false
