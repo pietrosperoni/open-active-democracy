@@ -871,3 +871,8 @@ padding-bottom: 0px;
 	margin-left: 5px;
 */
 }
+
+.portlet-content .priority_added
+{
+padding-top: 0px !important
+}
