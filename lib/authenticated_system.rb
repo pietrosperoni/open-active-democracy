@@ -164,5 +164,5 @@ module AuthenticatedSystem
         return false
       end
     end
-
 end
+
