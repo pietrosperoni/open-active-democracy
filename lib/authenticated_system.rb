@@ -130,8 +130,8 @@ module AuthenticatedSystem
     
     # Called from #current_user. Then try to login from facebook
     def login_from_facebook
-      RAILS_DEFAULT_LOGGER.info("LOGIN: fbuid #{facebook_session.user.uid}")
       if facebook_session
+        RAILS_DEFAULT_LOGGER.info("LOGIN: fbuid #{facebook_session.user.uid}")
         if u = User.find_by_facebook_uid(facebook_session.user.uid)
           RAILS_DEFAULT_LOGGER.info("LOGIN: FOUND ONE")          
           return u
