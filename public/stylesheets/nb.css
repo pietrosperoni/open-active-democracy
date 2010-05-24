@@ -545,7 +545,7 @@ del {
 }
 .priority_listing {
 	margin-bottom: 4px;
-	padding-top: 5px;
+	padding-bottom: 5px;
 }
 .priority_name, .priority_name_add {
   	font-size: 12px;
