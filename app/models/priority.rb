@@ -542,11 +542,7 @@ class Priority < ActiveRecord::Base
   end  
   
   def show_url
-    if Partner.current
-      "http://#{Partner.current.short_name}.skuggaborg.is/" + 'priorities/' + to_param
-    else
-      Government.current.homepage_url + 'priorities/' + to_param
-    end
+    Government.current.homepage_url + 'priorities/' + to_param
   end
   
   # this uses http://is.gd
