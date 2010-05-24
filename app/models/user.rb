@@ -959,7 +959,7 @@ class User < ActiveRecord::Base
 #    if User.find_by_login(name)
 #     name = name + " FB"
 #    end
-    RAILS_DEFAULT_LOGGER.info("ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
+    RAILS_DEFAULT_LOGGER.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
     u = User.new(
      :login => name,
      :first_name => fb_session.user.first_name,
