@@ -1109,7 +1109,7 @@ is:
             title: "Ómerkt (eða óflokkuð) hugmynd"
         yours:
             name: "þín hugmynd"
-            title: "þín hugmynd hjá {{government_name}}"
+            title: "Þín hugmynd hjá {{government_name}}"
             prompt: "Bæta hugmynd á skrána þína"
             heading: "{{user_name}}"
             outro: "Þú getur líka fylgst með <a href='/news/your_priority_activities'>virkni</a> og <a href='/news/your_priority_discussions'>umræðum</a> um þína hugmynd."            
@@ -1127,8 +1127,8 @@ is:
         yours_lowest:
             title: "Þín hugmynd sem lægsta einkun hefur hjá meðlimum {{government_name}}"
         network:
-            name: "Hugmynd samskiptanetsins þíns"
-            title: "Hugmynd samskiptanetsins þíns"
+            name: "Hugmyndir samskiptanetsins þíns"
+            title: "Hugmyndir samskiptanetsins þíns"
             intro: 
                 none: "Það er enginn í samskiptanetinu þínu því þú ert ekki að fylgjast með neinum."
                 one: "Hér eru einungis þínar hugmyndir og þess aðila í <a href='{{url}}'>þínu samskiptaneti</a>, ekki allt {{government_name}}."
