@@ -1092,8 +1092,8 @@ is:
             short: "Umdeilt:"
             title: "Umdeildustu hugmyndirnar"
         finished:
-            name: "Hugmyndum sem er lokið"
-            title: "Hugmyndum sem er lokið"
+            name: "Hugmyndir sem er lokið"
+            title: "Hugmyndir sem er lokið"
             heading: "Nýlega lokið"
             see_all: "Sjá öll <a href='{{url}}'>hugmynd sem er lokið</a>"
             empty: "Hérna verða hugmyndir sem hefur verið lokið hvort sem er með eða án árangurs."

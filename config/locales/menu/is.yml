@@ -69,9 +69,9 @@ is:
                 one: "1 skjal"
                 other: "{{count}} skjöl"
             priorities:
-                name: "Hugmynd"
+                name: "Hugmyndir"
                 one: "1 hugmynd"
-                other: "{{count}} hugmynd"
+                other: "{{count}} hugmyndir"
             points:
                 name: "Rök"
                 one: "1 rök"
@@ -157,7 +157,7 @@ is:
             email: "Tölvupóstlisti"
             logo: "Merki"
         priorities:
-            name: "Hugmynd"
+            name: "Hugmyndir"
             consider: "Hugmynd til athugunar"
             quiz: "Könnun á hugmynd"
             action: "Aðgerð"
@@ -211,7 +211,7 @@ is:
                 one: "1 óyfirlýst"
                 other: "{{count}} óyfirlýst"
             everyone:
-                name: "Hugmynd allra"
+                name: "Hugmyndir allra"
                 short: "Allir"
                 overview: "Yfirsýn"
                 top: "Efst"
