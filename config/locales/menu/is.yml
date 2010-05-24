@@ -220,7 +220,7 @@ is:
                 rising: "Rísandi"
                 falling: "Fallandi"
                 new: "Nýtt"
-                random: "Tilviljanakennt"
+                random: "Handahóf"
                 finished: "Lokið"
             network:
                 name: "Hugmynd samskiptanetsins þíns"

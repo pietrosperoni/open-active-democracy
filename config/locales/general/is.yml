@@ -871,7 +871,7 @@ is:
         your_priority_activities:
             title: "Hvað er að gerast í hugmyndunum þínum?"
         your_priority_discussions:
-            title: "Umræður um þín hugmynd"
+            title: "Umræður um þína hugmynd"
         your_priority_obama:
             title: "Hvað {{official_user_name}} er að gera í þínum hugmyndum"
         your_priority_points:
@@ -1620,7 +1620,7 @@ is:
         index:
             title: "Widgets for your blog or website"
         priorities:
-            title: "Setja {{government_name}} hugmynd á vefsvæðið þitt"
+            title: "Setja hugmynd af {{government_name}} á vefsvæðið þitt"
         points:
             title: "Setja {{government_name}} rök á vefsvæðið þitt"
         discussions:
