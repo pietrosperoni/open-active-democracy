@@ -185,9 +185,9 @@ class User < ActiveRecord::Base
   
   def give_partner_credit
     return unless partner_referral
-    ActivityPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral)
-    ActivityCapitalPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral, :capital => CapitalPartnerUserRecruited.create(:recipient => partner_referral.owner, :amount => 2, :capitalizable => self))
-    partner_referral.owner.increment!(:referrals_count)
+#    ActivityPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral)
+#    ActivityCapitalPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral, :capital => CapitalPartnerUserRecruited.create(:recipient => partner_referral.owner, :amount => 2, :capitalizable => self))
+#    partner_referral.owner.increment!(:referrals_count)
   end
   
   def give_user_credit
