@@ -129,10 +129,13 @@ module AuthenticatedSystem
     
     # Called from #current_user. Then try to login from facebook
     def login_from_facebook
+      RAILS_DEFAULT_LOGGER.info("LOGIN: fbuid #{facebook_session.user.uid}")
       if facebook_session
         if u = User.find_by_facebook_uid(facebook_session.user.uid)
+          RAILS_DEFAULT_LOGGER.info("LOGIN: FOUND ONE")          
           return u
         end
+        RAILS_DEFAULT_LOGGER.info("LOGIN: About to create")          
         u = User.create_from_facebook(facebook_session,current_partner,request)
         if u
           session[:goal] = 'signup'
