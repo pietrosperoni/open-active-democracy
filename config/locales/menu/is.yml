@@ -28,7 +28,7 @@ is:
         briefing:
             name: "Upplýsingastöð"
             yours: "Þitt"
-            your_priorities: "Þín hugmynd"
+            your_priorities: "Þínar hugmyndir"
             all: "Allt"
             revised: "Yfirfarið"
             helpful_to: "Gagnlegt til að:"
@@ -226,7 +226,7 @@ is:
                 name: "Hugmynd samskiptanetsins þíns"
                 short: "Samskiptanetið þitt"
             yours: 
-                name: "Þín hugmynd"
+                name: "Þínar hugmyndir"
                 short: "Þín"
                 active: "Virk"
                 top: "Hæst einkun"

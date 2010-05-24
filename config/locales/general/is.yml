@@ -1101,15 +1101,15 @@ is:
             name: "Hugmyndir af handahófi"
             title: "Hugmyndir af handahófi fyrir {{target}}"
         newest:
-            name: "Ný hugmynd"
+            name: "Nýjustu hugmyndirnar"
             title: "Nýjustu hugmyndirnar fyrir {{target}}"
             added: "Bætt við"
         untagged:
             name: "Ómerkt hugmynd"
             title: "Ómerkt (eða óflokkuð) hugmynd"
         yours:
-            name: "þín hugmynd"
-            title: "þín hugmynd hjá {{government_name}}"
+            name: "þínar hugmyndir"
+            title: "þínar hugmyndir hjá {{government_name}}"
             prompt: "Bæta hugmynd á skrána þína"
             heading: "{{user_name}}"
             outro: "Þú getur líka fylgst með <a href='/news/your_priority_activities'>virkni</a> og <a href='/news/your_priority_discussions'>umræðum</a> um þína hugmynd."            
@@ -1123,12 +1123,12 @@ is:
             intro: "Hérna eru hugmynd sem þú stofnaðir geymd svo þú getur auðveldlega vísað í þær og fylgst með framgangi þeirra."
             outro: "Þú getur einnig fylgst með allri <a href='/news/your_priorities_created_activities'>virkni</a> og <a href='/news/your_priorities_created_discussions'>umræðum</a> um hugmynd sem þú hefur stofnað."
         yours_top:
-            title: "Þín hugmynd sem hæsta einkun hefur hjá meðlimum {{government_name}}"
+            title: "Þínar hugmyndir sem hæsta einkun hefur hjá meðlimum {{government_name}}"
         yours_lowest:
-            title: "Þín hugmynd sem lægsta einkun hefur hjá meðlimum {{government_name}}"
+            title: "Þínar hugmyndir sem lægsta einkun hefur hjá meðlimum {{government_name}}"
         network:
-            name: "Hugmynd samskiptanetsins þíns"
-            title: "Hugmynd samskiptanetsins þíns"
+            name: "Hugmyndir samskiptanetsins þíns"
+            title: "Hugmyndir samskiptanetsins þíns"
             intro: 
                 none: "Það er enginn í samskiptanetinu þínu því þú ert ekki að fylgjast með neinum."
                 one: "Hér eru einungis þínar hugmyndir og þess aðila í <a href='{{url}}'>þínu samskiptaneti</a>, ekki allt {{government_name}}."
@@ -1136,7 +1136,7 @@ is:
         yours_ads:
             title: "Þínar auglýsingar"
         consider:
-            title: "Hugmynd sem þú ættir að skoða"
+            title: "Hugmyndir sem þú ættir að skoða"
             need_endorsements: "Þú þarft að styðja nokkrar hugmynd áður en við getum mælt með öðrum hugmyndum fyrir þig að skoða. Hér eru nokkrar hugmyndir af handahófi til að byrja með."
         ads:
             title: "Auglýsingar í gangi hjá {{government_name}}"
