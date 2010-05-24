@@ -74,7 +74,7 @@ is:
                 name: "{{sender_name}} merkti við {{priority_name}} fyrir yfirferð"
                 link:
                     one: "merkt við 1 hugmynd"
-                    other: "merkt við {{count}} hugmynd"
+                    other: "merkt við {{count}} hugmyndir"
             finished:
                 link:
                     one: "1 hugmynd lokið"
