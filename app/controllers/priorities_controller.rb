@@ -659,7 +659,7 @@ class PrioritiesController < ApplicationController
     tags << params[:custom_checkbox] if params[:custom_checkbox]
     tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
     tags += Partner.current.default_tags.split(",").collect {|t| t.strip} if Partner.current and Partner.current.default_tags
-    tags << "frá almenningi" unless Partner.current
+    tags << "utan flokka" unless Partner.current
     unless tags.empty?
       priority.issue_list = tags.join(",")
     end
