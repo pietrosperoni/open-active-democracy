@@ -30,7 +30,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   # The publisher will look up the template id from the facebook_templates table
   def endorsement(facebook_session, endorsement, priority)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} studdi hugmyndin #{priority.name} á Skuggaborg. "+create_bottom_text(priority)
+    txt_message = "#{facebook_session.user.name} studdi hugmyndina #{priority.name} á Skuggaborg. "+create_bottom_text(priority)
     from facebook_session.user
     message ''
     attachment :name => priority.name, :href => priority.show_url, :description => txt_message
@@ -47,7 +47,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   # The publisher will look up the template id from the facebook_templates table
   def opposition(facebook_session, endorsement, priority)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} er á móti hugmyndnu #{priority.name} á Skuggaborg. "+create_bottom_text(priority)
+    txt_message = "#{facebook_session.user.name} er á móti hugmyndinni #{priority.name} á Skuggaborg. "+create_bottom_text(priority)
     from facebook_session.user
     #target facebook_session.user
     message ''

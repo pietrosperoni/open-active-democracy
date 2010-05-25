@@ -652,7 +652,7 @@ class User < ActiveRecord::Base
   end
   
   def has_picture?
-    attribute_present?("picture_id")
+    attribute_present?("picture_id") or attribute_present?("buddy_icon_file_name") 
   end
   
   def has_referral?
@@ -956,9 +956,9 @@ class User < ActiveRecord::Base
     return if fb_session.expired?
     name = fb_session.user.name
     # check for existing account with this name
-#    if User.find_by_login(name)
-#     name = name + " FB"
-#    end
+    if User.find_by_login(name)
+     name = name + "FB(#{rand(6553)})"
+    end
     RAILS_DEFAULT_LOGGER.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
     u = User.new(
      :login => name,
