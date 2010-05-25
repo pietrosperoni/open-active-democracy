@@ -24,8 +24,7 @@
   <area shape="rect" coords="162,0,200,39" href="http://heidarleiki.skuggaborg.is/portal" alt="Framboð um heiðarleika og almannahagsmuni/" />
   <area shape="rect" coords="200,0,236,38" href="http://samfylkingin.skuggaborg.is/portal" alt="Samfylkingin" />
   <area shape="rect" coords="236,0,276,38" href="http://vinstrigraen.skuggaborg.is/portal" alt="Vinstri hreyfingin grænt framboð" />
-  <area shape="rect" coords="276,0,308,38" href="http://besti.skuggaborg.is/portal" alt="Besti flokkurinn" />
-
+  <area shape="rect" coords="276,0,308,38" href="http://allskonar.bestiflokkurinn.is" alt="Besti flokkurinn" />
         </map>
     </head>
     <body>
@@ -57,11 +56,7 @@ s								<% end %>
 		                        <% if RAILS_ENV=="development" %>
 		        	                <%= link_to image_tag(partner.logo.url(:icon_107_16)), :controller=>"portal", :host=>"#{partner.short_name}.skuggaborg.is", :port=>3000 %>
 		                        <% else %>
-								    <% if partner.short_name=="besti"%>
-									    <a href="http://allskonar.bestiflokkurinn.is/" target='_top'><%=image_tag(partner.logo.url(:icon_107_16))%></a>
-									<% else %>
-			            	            <%= link_to image_tag(partner.logo.url(:icon_107_16)), :controller=>"portal", :host=>"#{partner.short_name}.skuggaborg.is" %>
-	s								<% end %>
+		            	            <%= link_to image_tag(partner.logo.url(:icon_107_16)), :controller=>"portal", :host=>"#{partner.short_name}.skuggaborg.is" %>
 		                        <% end %>
 	                        <% end %>
 	                    </div>
