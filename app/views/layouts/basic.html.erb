@@ -41,7 +41,11 @@
 	                        <% if RAILS_ENV=="development" %>
 		                        <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3000 %>
 	                        <% else %>
-	    	                    <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is" %>
+							    <% if current_partner.short_name=="besti"%>
+  	    	                      <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is", :target=>"_blank" %>
+								<% else %>
+  	    	                      <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is" %>
+								<% end %>
 	                        <% end %>
 	                    </div>
                     <% else %>
