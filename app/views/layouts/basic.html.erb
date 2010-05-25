@@ -57,7 +57,11 @@ s								<% end %>
 		                        <% if RAILS_ENV=="development" %>
 		        	                <%= link_to image_tag(partner.logo.url(:icon_107_16)), :controller=>"portal", :host=>"#{partner.short_name}.skuggaborg.is", :port=>3000 %>
 		                        <% else %>
-		            	            <%= link_to image_tag(partner.logo.url(:icon_107_16)), :controller=>"portal", :host=>"#{partner.short_name}.skuggaborg.is" %>
+								    <% if partner.short_name=="besti"%>
+									    <a href="http://allskonar.bestiflokkurinn.is/" target='_top'><%=image_tag(partner.logo.url(:icon_107_16))%></a>
+									<% else %>
+			            	            <%= link_to image_tag(partner.logo.url(:icon_107_16)), :controller=>"portal", :host=>"#{partner.short_name}.skuggaborg.is" %>
+	s								<% end %>
 		                        <% end %>
 	                        <% end %>
 	                    </div>
