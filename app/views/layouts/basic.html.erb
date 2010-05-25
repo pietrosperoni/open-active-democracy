@@ -42,7 +42,7 @@
 		                        <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3000 %>
 	                        <% else %>
 							    <% if current_partner.short_name=="besti"%>
-  	    	                      <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is", :target=>"_blank" %>
+								  <a href="#" onclick="window.location = 'http://skuggaborg.is'"><%=image_tag("skuggaborg_logo.png")%></a>
 								<% else %>
   	    	                      <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is" %>
 								<% end %>
