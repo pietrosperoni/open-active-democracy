@@ -39,9 +39,9 @@
 	                    </div>
 	                    <div id="parent_image" class="logo_small" style="float: right">
 	                        <% if RAILS_ENV=="development" %>
-		                        <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3000 %>
+		                        <%= link_to image_tag("skuggaborg_logo_small.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3000 %>
 	                        <% else %>
-	    	                    <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal", :host=>"skuggaborg.is" %>
+	    	                    <%= link_to image_tag("skuggaborg_logo_small.png"), :controller=>"portal", :host=>"skuggaborg.is" %>
 	                        <% end %>
 	                    </div>
                     <% else %>
