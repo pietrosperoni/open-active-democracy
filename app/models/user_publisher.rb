@@ -20,7 +20,9 @@ class UserPublisher < Facebooker::Rails::Publisher
     if priority
       er_up_text = priority.up_endorsements_count > 1 ? "eru" : "er"
       er_down_text = priority.down_endorsements_count > 1 ? "eru" : "er"
-      "Þetta hugmynd er núna númer #{priority.position}, #{priority.up_endorsements_count} #{er_up_text} með og #{priority.down_endorsements_count} #{er_down_text} á móti."
+      er_up_text = "eru" if priority.up_endorsements_count == 0
+      er_down_text = "eru" if priority.down_endorsements_count == 0
+      "Þessi hugmynd er núna númer #{priority.position}, #{priority.up_endorsements_count} #{er_up_text} með og #{priority.down_endorsements_count} #{er_down_text} á móti."
     else
       ""
     end

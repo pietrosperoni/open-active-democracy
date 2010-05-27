@@ -39,7 +39,7 @@ class Change < ActiveRecord::Base
       errors.add(:base, "Þú verður að velja að minnsta kosti annað hvort stuðningsmenn eða anstæðinga fyrir þessa yfirtöku.")
     end
     if priority.has_change?
-      errors.add(:base, "Þetta hugmynd er þegar með yfirtöku í gangi, vinsamlegast bíddu eftir að kosning um hana klárist.")
+      errors.add(:base, "Þessi hugmynd er þegar með yfirtöku í gangi, vinsamlegast bíddu eftir að kosning um hana klárist.")
     end
   end
   
