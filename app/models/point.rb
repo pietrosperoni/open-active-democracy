@@ -50,7 +50,7 @@ class Point < ActiveRecord::Base
   before_destroy :remove_counts  
   
   validates_length_of :name, :within => 3..100
-  validates_uniqueness_of :name  
+  #validates_uniqueness_of :name
   # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
   #validates_length_of :content, :maximum => 1100, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
   
