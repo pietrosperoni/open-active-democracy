@@ -739,11 +739,11 @@ class PrioritiesController < ApplicationController
             @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
           end      
         end
+        raise "rollback" if not @point_saved or not @saved
       end
-      raise "rollback" if not @point_saved or not @saved
     rescue
       RAILS_DEFAULT_LOGGER.info("ROLLBACK ERROR")
-      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á hugmynd og rök"
+      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á hugmynd og rök - texti við rök má ekki vera of langur."
     end
     
     respond_to do |format|

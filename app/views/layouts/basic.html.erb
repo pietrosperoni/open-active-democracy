@@ -40,11 +40,7 @@
 	                        <% if RAILS_ENV=="development" %>
 		                        <%= link_to image_tag("skuggaborg_logo_small.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3000 %>
 	                        <% else %>
-							    <% if current_partner.short_name=="besti"%>
 								  <a href="http://skuggaborg.is/" target='_top'><%=image_tag("skuggaborg_logo_small.png")%></a>
-								<% else %>
-  	    	                      <%= link_to image_tag("skuggaborg_logo_small.png"), :controller=>"portal", :host=>"skuggaborg.is" %>
-								<% end %>
 	                        <% end %>
 	                    </div>
                     <% else %>
@@ -71,7 +67,11 @@
                 <%= render :partial => "shared/menu" %>
 				<% if current_partner %>
 					<div id="partner_respect_text">
-					Þessi síða er ætluð til umræðu um stefnumál <%= current_partner.name_variations[3] %>. Vinsamlegast settu bara hugmyndir hér sem þér finnst eiga erindi við <%= current_partner.name_variations[1] %>.
+					<% if current_partner.id==11 %>
+						Þessi síða er ætluð fyrir borgarbúa til að setja fram hugmyndir sem eiga erindi við meirihlutaviðræður Besta flokksins og Samfylkingarinnar. Vinsamlegast settu bara hugmyndir hér sem þér finnst eiga erindi við Betri Reykjavík. 
+					<% else %>
+						Þessi síða er ætluð til umræðu um stefnumál <%= current_partner.name_variations[3] %>. Vinsamlegast settu bara hugmyndir hér sem þér finnst eiga erindi við <%= current_partner.name_variations[1] %>.
+					<% end %>
 					</div>
 				<% end %>
                 <div id="content_text">
