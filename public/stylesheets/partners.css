@@ -21,9 +21,10 @@ float: right !important;
 {
 padding:6px 5px 8px;
 position:relative;
-left:396px;
 background-color: #ccc;
+float:right;
 }
+
 
 #skuggathing
 {
@@ -31,3 +32,13 @@ margin-top: 4px;
 border: 1px solid #ddd !important;
 padding:7px 5px 7px 15px;
 }
+
+
+
+#betri_reykjavik
+{
+float:left;
+padding-left:180px;
+padding-top:10px;
+}
+
