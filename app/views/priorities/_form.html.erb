@@ -3,7 +3,7 @@
 <% end %>
 
 
-<% form_for(@priority,:action=>"create") do |f| %>
+<% form_for(@priority, :url => { :action => "create" }) do |f| %>
 <% if @tag_names %>
 	<%= hidden_field_tag :tag_names, @tag_names %>
 <% end %>
