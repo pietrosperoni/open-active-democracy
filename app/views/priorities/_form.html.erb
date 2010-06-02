@@ -2,7 +2,7 @@
 <%=  params[:notice] %>
 <% end %>
 
-<form action="/priorities/create" method="post">
+<%=form_tag('/priorities/create', :method => :post)%>
 
 <% if @tag_names %>
 	<%= hidden_field_tag :tag_names, @tag_names %>
