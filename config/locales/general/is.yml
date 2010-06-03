@@ -652,7 +652,7 @@ is:
             connect: "Smelltu á þennan hnapp til að tengjast Facebook og finna vini þína."
             request:
                 button: "Já, ég vil taka þátt"
-                action: "Bjóddu Facebook vinum þínum að tengjast tengslanetinu þínu hjá {{government_name}}"
+                action: "Bjóddu Facebook vinum þínum að vera með í {{government_name}}"
             nomembers: "Engir af Facebook vinum þínum eru meðlimir í {{government_name}}."
             members: 
                 one: "1 Facebook vinur þinn er meðlimur í {{government_name}} og hefur verið bætt við <a href='{{network_url}}'>tengslanetið þitt</a>.<br/>Þú getur <a href='{{news_url}}'>fylgst með uppfærslum viðkomandi í fréttahlutanum</a>."
@@ -1470,7 +1470,7 @@ is:
             success: "Velkomin/n til {{government_name}}"
             submit_and_endorse: "Styðja og sækja um"
             submit_and_oppose: "Vera á móti og sækja um"
-            submit: "Tengjast tengslanetinu"
+            submit: "Skrá mig á Skuggaborg"
             login: "<b>Ertu þegar skráð/ur?</b>"
             validation:
                 login: "Vinsamlegast gefðu upp nafn sem þú vilt að verði notað á síðunni."
@@ -1587,26 +1587,26 @@ is:
         signup: 
             name: "Ég þarf {{government_name}} aðgang"
     vote:
-        approve: "Afstaða þín var færð yfir á {{priority_name}}"
-        decline: "Afstaða þín hefur ekki breytst."
+        approve: "Stuðningur/andstaða þín var færð yfir á {{priority_name}}"
+        decline: "Stuðningur/andstaða þín mun ekki breytast."
         error: "Fann ekki þetta atkvæði, athugaðu hvort tengillinn sé réttur og hafi ekki slitnað í sundur í tölvupóstforritinu þínu."
-        already_voted_yes: "Þú hefur þegar kosið með þessari yfirtöku. Afstaða þín var færð til {{priority_name}}"
-        already_voted_now: "Þú hefur þegar kosið á MÓTI þessari yfirtöku. Afstöðu þinni var ekki breytt"
-        implicit_approved: "Kosningu er lokið, tillagan var samþykkt og afstaða þín var færð undir þessa hugmynd"
-        implicit_declined: "Kosningu er lokið, tillagan var felld og afstaða þín fylgir áfram sömu hugmynd."
-        inactive: "Kosningu er lokið"
+        already_voted_yes: "Þú hefur þegar kosið með þessari yfirtöku. Stuðningur/andstaða þín var færð til {{priority_name}}"
+        already_voted_now: "Þú hefur þegar kosið á MÓTI þessari yfirtöku. Stuðningi/andstöðu þinni var ekki breytt"
+        implicit_approved: "Kosningu er lokið, tillagan var samþykkt og stuðningur/andstaða þín var færð undir þessa hugmynd"
+        implicit_declined: "Kosningu er lokið, tillagan var felld og stuðningi/andstöðu þinni verður áfram undir þessari hugmynd."
+        inactive: "Kosningatímbil útrunnið"
     votes:
         new:
             success: "Kaust"
             novote: "Einungis fólk sem var með eða á móti þessari hugmynd áður en kosning hófst fær að kjósa."
-            dontvote: "Ef þú kýst ekki innan {{time_left}} og tillagan fær a.m.k. 70% atkvæða, verður yfirtakan samþykkt og stuðningi þínum verður breytt í stuðning við {{priority_name}}. Ef það mistekst að ná 70% meirihluta muntu áfram styðja upprunalega málið"
-            cantvote: "Ef tillagan fær a.m.k. 70% atkvæða mun afstaða þín færast á {{priority_name}}. Ef það mistekst að ná 70% meirihluta, mun ekkert gerast."
+            dontvote: "Ef þú kýst ekki innan {{time_left}} og tillagan fær a.m.k. 70% atkvæða, verður yfirtakan samþykkt og stuðningi þínum verður breytt í {{priority_name}}. Ef það mistekst að ná 70% ofur-meirihluta, verður stuðningur þinn sá sami."
+            cantvote: "Ef tillagan fær a.m.k. 70% atkvæða mun hver sá sem ekki kaus verða breytt í {{priority_name}}. Ef það mistekst að ná 70% ofur-meirihluta, mun ekkert gerast."
             approve:
-                endorser: "JÁ, ég er fylgjandi yfirtökunni"
-                opposer: "JÁ, ég er á móti yfirtökunni"
+                endorser: "JÁ, ég er meðfylgjandi"
+                opposer: "JÁ, ég er á móti"
             decline:
-                endorser: "NEI, ég vil halda áfram að styðja upprunalega málið"
-                opposer: "NEI, ég vil halda áfram að vera á móti upprunalega málinu"
+                endorser: "NEI, ég vil halda áfram að styðja"
+                opposer: "NEI, ég vil halda áfram að vera á móti"
         show:
             approved: "Þú kaust já."
             declined: 
