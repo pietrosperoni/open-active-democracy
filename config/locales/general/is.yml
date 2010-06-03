@@ -1587,26 +1587,26 @@ is:
         signup: 
             name: "Ég þarf {{government_name}} aðgang"
     vote:
-        approve: "Stuðningur/andstaða þín var færð yfir á {{priority_name}}"
-        decline: "Stuðningur/andstaða þín mun ekki breytast."
+        approve: "Afstaða þín var færð yfir á {{priority_name}}"
+        decline: "Afstaða þín hefur ekki breytst."
         error: "Fann ekki þetta atkvæði, athugaðu hvort tengillinn sé réttur og hafi ekki slitnað í sundur í tölvupóstforritinu þínu."
-        already_voted_yes: "Þú hefur þegar kosið með þessari yfirtöku. Stuðningur/andstaða þín var færð til {{priority_name}}"
-        already_voted_now: "Þú hefur þegar kosið á MÓTI þessari yfirtöku. Stuðningi/andstöðu þinni var ekki breytt"
-        implicit_approved: "Kosningu er lokið, tillagan var samþykkt og stuðningur/andstaða þín var færð undir þessa hugmynd"
-        implicit_declined: "Kosningu er lokið, tillagan var felld og stuðningi/andstöðu þinni verður áfram undir þessari hugmynd."
-        inactive: "Kosningatímbil útrunnið"
+        already_voted_yes: "Þú hefur þegar kosið með þessari yfirtöku. Afstaða þín var færð til {{priority_name}}"
+        already_voted_now: "Þú hefur þegar kosið á MÓTI þessari yfirtöku. Afstöðu þinni var ekki breytt"
+        implicit_approved: "Kosningu er lokið, tillagan var samþykkt og afstaða þín var færð undir þessa hugmynd"
+        implicit_declined: "Kosningu er lokið, tillagan var felld og afstaða þín fylgir áfram sömu hugmynd."
+        inactive: "Kosningu er lokið"
     votes:
         new:
             success: "Kaust"
             novote: "Einungis fólk sem var með eða á móti þessari hugmynd áður en kosning hófst fær að kjósa."
-            dontvote: "Ef þú kýst ekki innan {{time_left}} og tillagan fær a.m.k. 70% atkvæða, verður yfirtakan samþykkt og stuðningi þínum verður breytt í {{priority_name}}. Ef það mistekst að ná 70% ofur-meirihluta, verður stuðningur þinn sá sami."
-            cantvote: "Ef tillagan fær a.m.k. 70% atkvæða mun hver sá sem ekki kaus verða breytt í {{priority_name}}. Ef það mistekst að ná 70% ofur-meirihluta, mun ekkert gerast."
+            dontvote: "Ef þú kýst ekki innan {{time_left}} og tillagan fær a.m.k. 70% atkvæða, verður yfirtakan samþykkt og stuðningi þínum verður breytt í stuðning við {{priority_name}}. Ef það mistekst að ná 70% meirihluta muntu áfram styðja upprunalega málið"
+            cantvote: "Ef tillagan fær a.m.k. 70% atkvæða mun afstaða þín færast á {{priority_name}}. Ef það mistekst að ná 70% meirihluta, mun ekkert gerast."
             approve:
-                endorser: "JÁ, ég er meðfylgjandi"
-                opposer: "JÁ, ég er á móti"
+                endorser: "JÁ, ég er fylgjandi yfirtökunni"
+                opposer: "JÁ, ég er á móti yfirtökunni"
             decline:
-                endorser: "NEI, ég vil halda áfram að styðja"
-                opposer: "NEI, ég vil halda áfram að vera á móti"
+                endorser: "NEI, ég vil halda áfram að styðja upprunalega málið"
+                opposer: "NEI, ég vil halda áfram að vera á móti upprunalega málinu"
         show:
             approved: "Þú kaust já."
             declined: 
