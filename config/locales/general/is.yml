@@ -344,7 +344,7 @@ is:
         new:
             already_proposed: "Fyrir er tillaga um yfirtöku frá {{priority_name}}" 
             success: "Yfirtaka á {{priority_name}} skilaði árangri.  {{admin_name}} mun yfirfara og skipuleggja kosningu." 
-            is_flip: "Skoðaðu þetta ef fylgjendur skipta um skoðun og gerast andstæðingar þessarar nýju hugmyndar (eða öfugt)" 
+            is_flip: "Hakaðu við hér ef samruninn er þess eðlis að fylgjendur þessarar hugmyndar skipta um skoðun og gerast andstæðingar þeirrar nýju." 
             new_priority:
                 label: "Hvaða hugmynd ætti að taka yfir {{priority_name}}?" 
             cost:
