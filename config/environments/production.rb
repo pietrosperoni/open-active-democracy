@@ -28,12 +28,12 @@ config.action_mailer.raise_delivery_errors = false
 #  :password => ENV['SENDGRID_PASSWORD']
 #}
 
-ENV['DOMAIN'] = "skuggaborg.is"
+ENV['DOMAIN'] = "hafnarfjordur-prufa.ibuar.is"
 
 if ActionController::Base.session
-  ActionController::Base.session[:domain] = '.skuggaborg.is'
+  ActionController::Base.session[:domain] = '.ibuar.is'
 else
-  ActionController::Base.session = { :domain => '.skuggaborg.is' }
+  ActionController::Base.session = { :domain => '.ibuar.is' }
 end
 
 if ENV['S3_ACCESS_KEY_ID']
