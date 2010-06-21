@@ -4,7 +4,7 @@
 # Code is not reloaded between requests
 config.cache_classes = true
 
-config.cache_store = :mem_cache_store, 'localhost:11222'
+config.cache_store = :mem_cache_store, 'localhost:11277'
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
