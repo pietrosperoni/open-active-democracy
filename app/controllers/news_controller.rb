@@ -53,11 +53,11 @@ class NewsController < ApplicationController
   
   def activities
     @page_title = t('news.activities.title', :government_name => current_government.name)
-    if @current_government.users_count > 5000 # only show the last 7 days worth    
-      @activities = Activity.active.filtered.for_all_users.last_seven_days.by_recently_created.paginate :page => params[:page]
-    else
-      @activities = Activity.active.filtered.for_all_users.by_recently_created.paginate :page => params[:page]      
-    end
+#    if @current_government.users_count > 5000 # only show the last 7 days worth    
+#      @activities = Activity.active.filtered.for_all_users.last_seven_days.by_recently_created.paginate :page => params[:page]
+#    else
+     @activities = Activity.active.filtered.for_all_users.by_recently_created.paginate :page => params[:page]      
+#    end
     @rss_url = url_for(:only_path => false, :format => "rss")    
     respond_to do |format|
       format.html { render :action => "activity_list" }
