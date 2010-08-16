@@ -1,22 +1,20 @@
-class Point < ActiveRecord::Base
+class Question < ActiveRecord::Base
 
-  acts_as_set_partner :table_name=>"points"
-
-  named_scope :published, :conditions => "points.status = 'published'"
-  named_scope :by_helpfulness, :order => "points.score desc"
-  named_scope :by_endorser_helpfulness, :conditions => "points.endorser_score > 0", :order => "points.endorser_score desc"
-  named_scope :by_neutral_helpfulness, :conditions => "points.neutral_score > 0", :order => "points.neutral_score desc"    
-  named_scope :by_opposer_helpfulness, :conditions => "points.opposer_score > 0", :order => "points.opposer_score desc"
-  named_scope :up, :conditions => "points.endorser_score > 0"
-  named_scope :neutral, :conditions => "points.neutral_score > 0"
-  named_scope :down, :conditions => "points.opposer_score > 0"    
-  named_scope :up_value, :conditions => "points.value > 0"
-  named_scope :neutral_value, :conditions => "points.value = 0"
-  named_scope :down_value, :conditions => "points.value < 0"    
-  named_scope :by_recently_created, :order => "points.created_at desc"
-  named_scope :by_recently_updated, :order => "points.updated_at desc"  
+  named_scope :published, :conditions => "questions.status = 'published'"
+  named_scope :by_helpfulness, :order => "questions.score desc"
+  named_scope :by_endorser_helpfulness, :conditions => "questions.endorser_score > 0", :order => "questions.endorser_score desc"
+  named_scope :by_neutral_helpfulness, :conditions => "questions.neutral_score > 0", :order => "questions.neutral_score desc"    
+  named_scope :by_opposer_helpfulness, :conditions => "questions.opposer_score > 0", :order => "questions.opposer_score desc"
+  named_scope :up, :conditions => "questions.endorser_score > 0"
+  named_scope :neutral, :conditions => "questions.neutral_score > 0"
+  named_scope :down, :conditions => "questions.opposer_score > 0"    
+  named_scope :up_value, :conditions => "questions.value > 0"
+  named_scope :neutral_value, :conditions => "questions.value = 0"
+  named_scope :down_value, :conditions => "questions.value < 0"    
+  named_scope :by_recently_created, :order => "questions.created_at desc"
+  named_scope :by_recently_updated, :order => "questions.updated_at desc"  
   named_scope :revised, :conditions => "revisions_count > 1"
-  named_scope :top, :order => "points.score desc"
+  named_scope :top, :order => "questions.score desc"
   named_scope :five, :limit => 5
 
   belongs_to :user
@@ -29,7 +27,7 @@ class Point < ActiveRecord::Base
   
   has_many :author_users, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User"
   
-  has_many :point_qualities, :order => "created_at desc", :dependent => :destroy
+  has_many :question_qualities, :order => "created_at desc", :dependent => :destroy
   has_many :helpfuls, :class_name => "PointQuality", :conditions => "value = true", :order => "created_at desc"
   has_many :unhelpfuls, :class_name => "PointQuality", :conditions => "value = false", :order => "created_at desc"
   
@@ -46,13 +44,13 @@ class Point < ActiveRecord::Base
     "#{id}-#{name.parameterize_full}"
   end  
   
-  after_destroy :delete_point_quality_activities
+  after_destroy :delete_question_quality_activities
   before_destroy :remove_counts  
   
   validates_length_of :name, :within => 3..100
   #validates_uniqueness_of :name
   # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  #validates_length_of :content, :maximum => 1100, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
+  #validates_length_of :content, :maximum => 1100, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("questions.new.errors.content_maximum")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
@@ -108,23 +106,23 @@ class Point < ActiveRecord::Base
   end
   
   def add_counts
-    priority.up_points_count += 1 if is_up?
-    priority.down_points_count += 1 if is_down?
-    priority.neutral_points_count += 1 if is_neutral?        
-    priority.points_count += 1
-    user.increment!(:points_count)    
+    priority.up_questions_count += 1 if is_up?
+    priority.down_questions_count += 1 if is_down?
+    priority.neutral_questions_count += 1 if is_neutral?        
+    priority.questions_count += 1
+    user.increment!(:questions_count)    
   end
   
   def remove_counts
-    priority.up_points_count -= 1 if is_up?
-    priority.down_points_count -= 1 if is_down?
-    priority.neutral_points_count -= 1 if is_neutral?        
-    priority.points_count -= 1
-    user.decrement!(:points_count)        
+    priority.up_questions_count -= 1 if is_up?
+    priority.down_questions_count -= 1 if is_down?
+    priority.neutral_questions_count -= 1 if is_neutral?        
+    priority.questions_count -= 1
+    user.decrement!(:questions_count)        
   end
   
-  def delete_point_quality_activities
-    qs = Activity.find(:all, :conditions => ["point_id = ? and type in ('ActivityPointHelpfulDelete','ActivityPointUnhelpfulDelete')",self.id])
+  def delete_question_quality_activities
+    qs = Activity.find(:all, :conditions => ["question_id = ? and type in ('ActivityPointHelpfulDelete','ActivityPointUnhelpfulDelete')",self.id])
     for q in qs
       q.destroy
     end
@@ -181,7 +179,7 @@ class Point < ActiveRecord::Base
     self.endorser_score = 0
     self.opposer_score = 0
     self.neutral_score = 0
-    for q in point_qualities.find(:all, :include => :user)
+    for q in question_qualities.find(:all, :include => :user)
       if q.is_helpful?
         vote = q.user.quality_factor
       else
@@ -233,7 +231,7 @@ class Point < ActiveRecord::Base
       capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => 1)
     end      
     if self.opposer_score < -0.5 and self.endorser_score < -0.5 and (old_opposer_score >= -0.5 or old_endorser_score >= -0.5)
-      # charge for a talking point that both opposers and endorsers found unhelpful
+      # charge for a talking question that both opposers and endorsers found unhelpful
       capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => -1)        
     end    
 
@@ -306,7 +304,7 @@ class Point < ActiveRecord::Base
   end
   
   def show_url
-    Government.current.homepage_url + 'points/' + to_param
+    Government.current.homepage_url + 'questions/' + to_param
   end  
   
   auto_html_for(:content) do
