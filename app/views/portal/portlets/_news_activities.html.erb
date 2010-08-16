@@ -1,5 +1,0 @@
-<% cache(["portlets_news_activities",I18n.locale,Partner.current_id], :expires_in => 1.minutes) do %>
-  <%=render(:partial=>"portal/portlets/activity_list", :locals=>{:portlet=>portlet,
-            :activities=>Activity.active.filtered.for_all_users.by_recently_created.item_limit(portlet.portlet_template.item_limit)}) %>
-  <%= link_to "#{t('more')}...", "/news/activities" %>
-<% end %>

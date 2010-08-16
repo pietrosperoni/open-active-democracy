@@ -293,7 +293,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.string   "currency_short_name",            :limit => 3,   :default => "pc"
     t.string   "homepage",                       :limit => 20,  :default => "top"
     t.integer  "priorities_count",                              :default => 0
-    t.integer  "points_count",                                  :default => 0
+    t.integer  "questions_count",                                  :default => 0
     t.integer  "documents_count",                               :default => 0
     t.integer  "users_count",                                   :default => 0
     t.integer  "contributors_count",                            :default => 0
@@ -405,7 +405,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.datetime "updated_at"
   end
 
-  create_table "points", :force => true do |t|
+  create_table "questions", :force => true do |t|
     t.integer  "revision_id"
     t.integer  "priority_id"
     t.integer  "other_priority_id"
@@ -425,67 +425,11 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.integer  "partner_id"
   end
 
-  add_index "points", ["other_priority_id"], :name => "index_points_on_other_priority_id"
-  add_index "points", ["priority_id"], :name => "index_points_on_priority_id"
-  add_index "points", ["revision_id"], :name => "index_points_on_revision_id"
-  add_index "points", ["status"], :name => "index_points_on_status"
-  add_index "points", ["user_id"], :name => "index_points_on_user_id"
-
-  create_table "portlet_containers", :force => true do |t|
-    t.string   "title"
-    t.integer  "weight"
-    t.integer  "user_id"
-    t.boolean  "default_admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "partner_id"
-  end
-
-  add_index "portlet_containers", ["user_id"], :name => "index_portlet_containers_on_user_id"
-
-  create_table "portlet_positions", :force => true do |t|
-    t.integer  "portlet_id"
-    t.integer  "css_column"
-    t.integer  "css_position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "portlet_positions", ["portlet_id"], :name => "index_portlet_positions_on_portlet_id"
-
-  create_table "portlet_template_categories", :force => true do |t|
-    t.string   "name"
-    t.integer  "weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "partner_id"
-  end
-
-  create_table "portlet_templates", :force => true do |t|
-    t.string   "name"
-    t.integer  "portlet_template_category_id"
-    t.string   "locals_data_function"
-    t.string   "partial_name"
-    t.text     "description"
-    t.integer  "weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "column_count",                 :default => 1
-    t.boolean  "caching_disabled",             :default => false
-    t.integer  "item_limit"
-  end
-
-  add_index "portlet_templates", ["portlet_template_category_id"], :name => "index_portlet_templates_on_portlet_template_category_id"
-
-  create_table "portlets", :force => true do |t|
-    t.integer  "portlet_template_id"
-    t.integer  "portlet_container_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "portlets", ["portlet_container_id"], :name => "index_portlets_on_portlet_container_id"
-  add_index "portlets", ["portlet_template_id"], :name => "index_portlets_on_portlet_template_id"
+  add_index "questions", ["other_priority_id"], :name => "index_questions_on_other_priority_id"
+  add_index "questions", ["priority_id"], :name => "index_questions_on_priority_id"
+  add_index "questions", ["revision_id"], :name => "index_questions_on_revision_id"
+  add_index "questions", ["status"], :name => "index_questions_on_status"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "priorities", :force => true do |t|
     t.integer  "user_id"
@@ -497,7 +441,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_issue_list"
-    t.integer  "points_count",                           :default => 0
+    t.integer  "questions_count",                           :default => 0
     t.integer  "discussions_count",                      :default => 0
     t.integer  "relationships_count",                    :default => 0
     t.integer  "changes_count",                          :default => 0
@@ -602,7 +546,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.string   "title",                     :limit => 60
     t.string   "description",               :limit => 200
     t.integer  "discussions_count",                        :default => 0
-    t.integer  "points_count",                             :default => 0
+    t.integer  "questions_count",                             :default => 0
     t.integer  "documents_count",                          :default => 0
     t.string   "prompt",                    :limit => 100
     t.string   "slug",                      :limit => 60
@@ -711,7 +655,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.string   "state",                         :limit => 50
     t.integer  "documents_count",                              :default => 0
     t.integer  "document_revisions_count",                     :default => 0
-    t.integer  "points_count",                                 :default => 0
+    t.integer  "questions_count",                                 :default => 0
     t.float    "index_24hr_change",                            :default => 0.0
     t.float    "index_7days_change",                           :default => 0.0
     t.float    "index_30days_change",                          :default => 0.0
