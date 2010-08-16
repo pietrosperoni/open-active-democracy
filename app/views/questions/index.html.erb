@@ -1,19 +1,15 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<% if not @points or @points.empty? %>
+<% if not @questions or @questions.empty? %>
 	<%= t('points.empty')%>
 <% else %>
-	<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @points} %>
-	<% for point in @points %>
-		<% quality = nil %>
-		<% if @qualities %>
-			<% quality = @qualities.detect {|e| e.point_id == point.id } %>
-		<% end %>				
-		<%= render :partial => "points/show_full", :locals => {:point => point, :quality => quality, :revision => nil}%>
+	<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @questions} %>
+	<% for question in @questions %>
+		<%= render :partial => "questions/show_full", :locals => {:question => question, :revision => nil}%>
 	<% end %>
 
 	<p>
-	<%= will_paginate(@points) %>
+	<%= will_paginate(@questions) %>
 
 <% end %>
 

@@ -16,8 +16,8 @@ class SearchesController < ApplicationController
         @document_results = Document.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @documents = @document_results.docs
         
-        @point_results = Point.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
-        @points = @point_results.docs                
+        @question_results = Question.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @questions = @question_results.docs                
 
         get_endorsements        
       end
@@ -31,7 +31,7 @@ class SearchesController < ApplicationController
   
   def points
     @page_title = t('briefing.search.points.title', :government_name => current_government.name, :briefing_name => current_government.briefing_name)
-    @points = nil
+    @questions = nil
     if params[:q]
       query = params[:q]
       @page_title = t('briefing.search.points.results', :briefing_name => current_government.briefing_name, :query => query)
@@ -44,11 +44,11 @@ class SearchesController < ApplicationController
         @document_results = Document.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
         @documents = @document_results.docs
         
-        @point_results = Point.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 15
-        @points = @point_results.docs
+        @question_results = Question.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 15
+        @questions = @question_results.docs
         @qualities = nil
-        if logged_in? and @points.any? # pull all their qualities on the points shown
-          @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id if c.class == Point},current_user.id])
+        if logged_in? and @questions.any? # pull all their qualities on the points shown
+          @qualities = QuestionQuality.find(:all, :conditions => ["question_id in (?) and user_id = ? ", @questions.collect {|c| c.id if c.class == Question},current_user.id])
         end    
       end  
     end
@@ -74,8 +74,8 @@ class SearchesController < ApplicationController
         @document_results = Document.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 15
         @documents = @document_results.docs
         
-        @point_results = Point.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
-        @points = @point_results.docs
+        @question_results = Question.find_by_solr "(" + params[:q] + "~) AND is_published:true", :offset => ((params[:page]||1).to_i-1)*25, :limit => 1
+        @questions = @question_results.docs
       end
     end
     respond_to do |format|

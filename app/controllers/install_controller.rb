@@ -34,8 +34,6 @@ class InstallController < ApplicationController
       ColorScheme.create(:input => "FFFFFF")
       # if running mysql, these tables should be MyISAM, not InnoDB.      
       if User.adapter == 'mysql'
-        Government.connection.execute("ALTER TABLE rankings ENGINE=MYISAM")
-        Government.connection.execute("ALTER TABLE user_rankings ENGINE=MYISAM")    
         Government.connection.execute("ALTER TABLE pictures ENGINE=MYISAM")      
       end
       redirect_to :action => "admin_user" and return
@@ -58,7 +56,6 @@ class InstallController < ApplicationController
       self.current_user = @user
       @user.is_admin = true
       @user.save_with_validation(false)
-      CapitalGovernmentNew.create(:recipient => @user, :amount => 5)   
       flash[:notice] = t('install.welcome.success_loggedin')
       redirect_to "/"         
     else

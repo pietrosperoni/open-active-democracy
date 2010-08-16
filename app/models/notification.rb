@@ -145,7 +145,7 @@ class NotificationComment < Notification
     if notifiable.activity.has_document?
       I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.document.name)
     elsif notifiable.activity.has_point?
-      I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.point.name)      
+      I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.question.name)      
     elsif notifiable.activity.has_priority?
       I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.priority.name)      
     elsif notifiable.activity.class == ActivityBulletinProfileNew
@@ -250,7 +250,7 @@ class NotificationProfileBulletin < Notification
   
 end
 
-class NotificationPointRevision < Notification
+class NotificationQuestionRevision < Notification
   
   def name
     I18n.t('notification.point.revision.name', :sender_name => sender.name, :point_name => notifiable.name)

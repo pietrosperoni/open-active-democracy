@@ -44,8 +44,8 @@ de:
             all_activity: "Alle Aktivitäten"     
             research:
                 name: "Weiterforschen"
-                needed: "Prioritäten, die {{points_name}} oder {{documents_name}} benötigen"
-                points_needed: "Prioritäten, die Argumentationshilfen benötigen"
+                needed: "Prioritäten, die {{questions_name}} oder {{documents_name}} benötigen"
+                questions_needed: "Prioritäten, die Argumentationshilfen benötigen"
                 documents_needed: "Prioritäten, die Dokumente benötigen"
                 contributors:
                     name: "Mitarbeiter"

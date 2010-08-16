@@ -3,8 +3,8 @@
 
 is:
   votes_counted: "atkvæði"
-  points_against: "Rök á móti"
-  points_for: "Rök með"
+  questions_against: "Rök á móti"
+  questions_for: "Rök með"
   no_points: "órökstutt"
   new_points: "engin ný rök"
   since: "síðan"

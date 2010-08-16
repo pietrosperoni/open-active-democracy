@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   require 'paperclip'
     
   named_scope :active, :conditions => "users.status in ('pending','active')"
-  named_scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
   named_scope :newsletter_subscribed, :conditions => "users.is_newsletter_subscribed = true and users.email is not null and users.email <> ''"
   named_scope :comments_unsubscribed, :conditions => "users.is_comments_subscribed = false"  
   named_scope :twitterers, :conditions => "users.twitter_login is not null and users.twitter_login <> ''"
@@ -22,8 +21,6 @@ class User < ActiveRecord::Base
   named_scope :no_branch, :conditions => "branch_id is null"
   named_scope :with_branch, :conditions => "branch_id is not null"
   
-  named_scope :by_capital, :order => "users.capitals_count desc, users.score desc"
-  named_scope :by_ranking, :conditions => "users.position > 0", :order => "users.position asc"  
   named_scope :by_talkative, :conditions => "users.comments_count > 0", :order => "users.comments_count desc"
   named_scope :by_twitter_count, :order => "users.twitter_count desc"
   named_scope :by_recently_created, :order => "users.created_at desc"
@@ -36,13 +33,6 @@ class User < ActiveRecord::Base
   named_scope :by_oldest_updated_at, :order => "users.updated_at asc"
   named_scope :by_twitter_crawled_at, :order => "users.twitter_crawled_at asc"
   
-  named_scope :by_24hr_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change desc"
-  named_scope :by_24hr_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change asc"  
-  named_scope :by_7days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change desc"
-  named_scope :by_7days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change asc"  
-  named_scope :by_30days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change desc"
-  named_scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
-
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
 
   belongs_to :picture
@@ -51,17 +41,14 @@ class User < ActiveRecord::Base
   validates_attachment_size :buddy_icon, :less_than => 5.megabytes
   validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif']
   
-  belongs_to :partner
   belongs_to :branch
   belongs_to :referral, :class_name => "User", :foreign_key => "referral_id"
-  belongs_to :partner_referral, :class_name => "Partner", :foreign_key => "partner_referral_id"
   belongs_to :top_endorsement, :class_name => "Endorsement", :foreign_key => "top_endorsement_id", :include => :priority  
 
   has_one :profile, :dependent => :destroy
 
   has_many :unsubscribes, :dependent => :destroy
   has_many :signups
-  has_many :partners, :through => :signups
     
   has_many :endorsements, :dependent => :destroy
   has_many :priorities, :conditions => "endorsements.status = 'active'", :through => :endorsements
@@ -70,7 +57,7 @@ class User < ActiveRecord::Base
   has_many :created_priorities, :class_name => "Priority"
   
   has_many :activities, :dependent => :destroy
-  has_many :points, :dependent => :destroy
+  has_many :questions, :dependent => :destroy
   has_many :point_revisions, :class_name => "Revision", :dependent => :destroy
   has_many :documents, :dependent => :destroy  
   has_many :document_revisions, :class_name => "DocumentRevision", :dependent => :destroy
@@ -131,17 +118,20 @@ class User < ActiveRecord::Base
   before_create :check_branch
   after_save :update_signups
   after_create :check_contacts
-  after_create :give_partner_credit
   after_create :give_user_credit
   after_create :new_user_signedup
   
   attr_protected :remember_token, :remember_token_expired_at, :activation_code, :salt, :crypted_password, :twitter_token, :twitter_secret
   
   # Virtual attribute for the unencrypted password
-  attr_accessor :password, :partner_ids  
+  attr_accessor :password
+  
+  def kt
+    "000000-0000"
+  end
   
   def new_user_signedup
-    ActivityUserNew.create(:user => self, :partner => partner)    
+    ActivityUserNew.create(:user => self)    
     resend_activation if self.has_email? and self.is_pending?
   end
   
@@ -183,13 +173,6 @@ class User < ActiveRecord::Base
     return true
   end
   
-  def give_partner_credit
-    return unless partner_referral
-#    ActivityPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral)
-#    ActivityCapitalPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral, :capital => CapitalPartnerUserRecruited.create(:recipient => partner_referral.owner, :amount => 2, :capitalizable => self))
-#    partner_referral.owner.increment!(:referrals_count)
-  end
-  
   def give_user_credit
     return unless referral
     ActivityInvitationAccepted.create(:other_user => referral, :user => self)
@@ -198,17 +181,6 @@ class User < ActiveRecord::Base
   end  
   
   def update_signups
-    unless partner_ids.nil?
-      self.signups.each do |s|
-        s.destroy unless partner_ids.include?(s.partner_id.to_s)
-        partner_ids.delete(s.partner_id.to_s)
-      end 
-      partner_ids.each do |p|
-        self.signups.create(:partner_id => p) unless p.blank?
-      end
-      reload
-      self.partner_ids = nil
-    end
   end
   
   # docs: http://www.vaporbase.com/postings/stateful_authentication
@@ -357,7 +329,7 @@ class User < ActiveRecord::Base
     self.document_revisions_count = document_revisions.published.size
     self.point_revisions_count = point_revisions.published.size      
     self.documents_count = documents.published.size
-    self.points_count = points.published.size
+    self.questions_count = points.published.size
     self.qualities_count = point_qualities.size + document_qualities.size
     return true
   end
@@ -401,7 +373,7 @@ class User < ActiveRecord::Base
     count = 0.1
     count += 1 if active? 
     count += 3 if recent_login?
-    count += 0.5 if points_count > 0
+    count += 0.5 if questions_count > 0
     count += up_issue_diversity
     count += 0.6 if constituents_count > 1
     count = count/6
@@ -479,13 +451,13 @@ class User < ActiveRecord::Base
   end
   
   def revisions_count
-    document_revisions_count+point_revisions_count-points_count-documents_count 
+    document_revisions_count+point_revisions_count-questions_count-documents_count 
   end
   memoize :revisions_count
   
   def pick_ad(current_priority_ids)
   	shown = 0
-  	for ad in Ad.active.filtered.most_paid.all
+  	for ad in Ad.active.most_paid.all
   		if shown == 0 and not current_priority_ids.include?(ad.priority_id)
   			shown_ad = ad.shown_ads.find_by_user_id(self.id)
   			if shown_ad and not shown_ad.has_response? and shown_ad.seen_count < 4
@@ -522,32 +494,6 @@ class User < ActiveRecord::Base
     Rails.cache.delete("views/user_priority_chart-#{self.id.to_s}-#{self.endorsements_count.to_s}")
   end
   
-  def recommend(limit=10)
-    return [] unless self.endorsements_count > 0
-    sql = "select relationships.percentage, priorities.id
-    from relationships,priorities
-    where relationships.other_priority_id = priorities.id and ("
-    if up_endorsements_count > 0
-      sql += "(relationships.priority_id in (#{endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.join(',')}) and relationships.type = 'RelationshipEndorserEndorsed')"
-    end
-    if up_endorsements_count > 0 and down_endorsements_count > 0
-      sql += " or "
-    end
-    if down_endorsements_count > 0
-      sql += "(relationships.priority_id in (#{endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.join(',')}) and relationships.type = 'RelationshipOpposerEndorsed')"
-    end
-    sql += ") and relationships.other_priority_id not in (select priority_id from endorsements where user_id = " + self.id.to_s + ")
-    and priorities.position > 25
-    and priorities.status = 'published'
-    group by priorities.id, relationships.percentage
-    order by relationships.percentage desc"
-    sql += " limit " + limit.to_s
-    
-    priority_ids = Priority.find_by_sql(sql).collect{|p|p.id}
-    Priority.find(priority_ids).paginate :per_page => limit, :page => 1
-  end
-  memoize :recommend
-
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
     u = find :first, :conditions => ["email = ? and status in ('active','pending')", email] # need to get the salt
@@ -607,18 +553,9 @@ class User < ActiveRecord::Base
     n = first_name + ' ' + last_name
     n
   end
-  
-  def is_partner?
-    attribute_present?("partner_id")
-  end
-  
+    
   def is_new?
     created_at > Time.now-(86400*7)
-  end
-  
-  def is_influential?
-    return false if position == 0
-    position < Endorsement.max_position 
   end
   
   # Returns true if the user has just been activated.
@@ -658,11 +595,7 @@ class User < ActiveRecord::Base
   def has_referral?
     attribute_present?("referral_id")
   end
-  
-  def has_partner_referral?
-    attribute_present?("partner_referral_id") and partner_referral_id != 1
-  end  
-  
+    
   def has_twitter?
     attribute_present?("twitter_token")
   end
@@ -952,7 +885,7 @@ class User < ActiveRecord::Base
     self.activate! if not self.activated?
   end  
   
-  def User.create_from_facebook(fb_session,partner,request)
+  def User.create_from_facebook(fb_session,request)
     return if fb_session.expired?
     name = fb_session.user.name
     # check for existing account with this name
@@ -965,7 +898,6 @@ class User < ActiveRecord::Base
      :first_name => fb_session.user.first_name,
      :last_name => fb_session.user.last_name,       
      :facebook_uid => fb_session.user.uid,
-     :partner_referral => partner,
      :request => request
     )
     
@@ -1016,11 +948,7 @@ class User < ActiveRecord::Base
   end  
   
   def root_url
-    if has_partner_referral?
-      return 'http://' + partner_referral.short_name + '.' + Government.current.base_url + '/'
-    else
-      return 'http://' + Government.current.base_url + '/'
-    end
+    return 'http://' + Government.current.base_url + '/'
   end
   
   def profile_url

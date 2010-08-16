@@ -3,7 +3,7 @@ class Revision < ActiveRecord::Base
   named_scope :published, :conditions => "revisions.status = 'published'"
   named_scope :by_recently_created, :order => "revisions.created_at desc"  
 
-  belongs_to :point  
+  belongs_to :question  
   belongs_to :user
   belongs_to :other_priority, :class_name => "Priority"
     
@@ -11,7 +11,7 @@ class Revision < ActiveRecord::Base
   has_many :notifications, :as => :notifiable, :dependent => :destroy
       
   # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  validates_length_of :content, :maximum => 516, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
+  validates_length_of :content, :maximum => 516, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("questions.new.errors.content_maximum")
   
   liquid_methods :id, :user, :url, :text
   
@@ -51,60 +51,59 @@ class Revision < ActiveRecord::Base
     self.auto_html_prepare
     begin
       Timeout::timeout(5) do   #times out after 5 seconds
-        self.content_diff = HTMLDiff.diff(RedCloth.new(point.content).to_html,RedCloth.new(self.content).to_html)
+        self.content_diff = HTMLDiff.diff(RedCloth.new(question.content).to_html,RedCloth.new(self.content).to_html)
       end
     rescue Timeout::Error
     end    
-    point.revisions_count += 1    
+    question.revisions_count += 1    
     changed = false
-    if point.revisions_count == 1
-      ActivityPointNew.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+    if question.revisions_count == 1
+      ActivityQuestionNew.create(:user => user, :question => question, :revision => self)
     else
-      if point.content != self.content # they changed content
+      if question.content != self.content # they changed content
         changed = true
-        ActivityPointRevisionContent.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+        ActivityQuestionRevisionContent.create(:user => user, :question => question, :revision => self)
       end
-      if point.website != self.website
+      if question.website != self.website
         changed = true
-        ActivityPointRevisionWebsite.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+        ActivityQuestionRevisionWebsite.create(:user => user, :question => question, :revision => self)
       end
-      if point.name != self.name
+      if question.name != self.name
         changed = true
-        ActivityPointRevisionName.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+        ActivityQuestionRevisionName.create(:user => user, :question => question, :revision => self)
       end
-      if point.other_priority_id != self.other_priority_id
+      if question.other_priority_id != self.other_priority_id
         changed = true
-        ActivityPointRevisionOtherPriority.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+        ActivityQuestionRevisionOtherPriority.create(:user => user, :question => question, :revision => self)
       end
-      if point.value != self.value
+      if question.value != self.value
         changed = true
         if self.is_up?
-          ActivityPointRevisionSupportive.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+          ActivityQuestionRevisionSupportive.create(:user => user,:question => question, :revision => self)
         elsif self.is_neutral?
-          ActivityPointRevisionNeutral.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+          ActivityQuestionRevisionNeutral.create(:user => user,  :question => question, :revision => self)
         elsif self.is_down?
-          ActivityPointRevisionOpposition.create(:user => user, :priority => point.priority, :point => point, :revision => self)
+          ActivityQuestionRevisionOpposition.create(:user => user, :question => question, :revision => self)
         end
       end      
     end    
     if changed
-      for a in point.author_users
+      for a in question.author_users
         if a.id != self.user_id
-          notifications << NotificationPointRevision.new(:sender => self.user, :recipient => a)    
+          notifications << NotificationQuestionRevision.new(:sender => self.user, :recipient => a)    
         end
       end
     end    
-    point.content = self.content
-    point.website = self.website
-    point.revision_id = self.id
-    point.value = self.value
-    point.name = self.name
-    point.other_priority = self.other_priority
-    point.author_sentence = point.user.login
-    point.author_sentence += ", breytingar " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
-    point.published_at = Time.now
-    point.save_with_validation(false)
-    user.increment!(:point_revisions_count)    
+    question.content = self.content
+    question.website = self.website
+    question.revision_id = self.id
+    question.value = self.value
+    question.name = self.name
+    question.author_sentence = question.user.login
+    question.author_sentence += ", breytingar " + question.editors.collect{|a| a[0].login}.to_sentence if question.editors.size > 0
+    question.published_at = Time.now
+    question.save_with_validation(false)
+    user.increment!(:question_revisions_count)    
   end
   
   def do_archive
@@ -112,8 +111,8 @@ class Revision < ActiveRecord::Base
   end
   
   def do_delete
-    point.decrement!(:revisions_count)
-    user.decrement!(:point_revisions_count)    
+    question.decrement!(:revisions_count)
+    user.decrement!(:question_revisions_count)    
   end
   
   def is_up?
@@ -149,10 +148,10 @@ class Revision < ActiveRecord::Base
   end
   
   def text
-    s = point.name
+    s = question.name
     s += " [á móti]" if is_down?
     s += " [hlutlaust]" if is_neutral?    
-    s += "\r\nTil stuðnings " + point.other_priority.name if point.has_other_priority?
+    s += "\r\nTil stuðnings " + question.other_priority.name if question.has_other_priority?
     s += "\r\n" + content
     s += "\r\nUppruni: " + website_link if has_website?
     return s
@@ -179,10 +178,10 @@ class Revision < ActiveRecord::Base
     end
   end
   
-  def Revision.create_from_point(point_id, request)
-    p = Point.find(point_id)
+  def Revision.create_from_question(question_id, request)
+    p = Question.find(question_id)
     r = Revision.new
-    r.point = p
+    r.question = p
     r.user = p.user
     r.value = p.value
     r.name = p.name
@@ -195,7 +194,7 @@ class Revision < ActiveRecord::Base
   end
   
   def url
-    'http://' + Government.current.base_url + '/points/' + point_id.to_s + '/revisions/' + id.to_s + '?utm_source=points_changed&utm_medium=email'
+    'http://' + Government.current.base_url + '/questions/' + question_id.to_s + '/revisions/' + id.to_s + '?utm_source=questions_changed&utm_medium=email'
   end  
   
   auto_html_for(:content) do

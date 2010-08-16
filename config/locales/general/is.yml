@@ -323,7 +323,7 @@ is:
             title: "{{number}} manns hafa lagt eitthvað til {{briefing_name}}"    
     bulletins:
         new:
-            name: "Hvað er að gerast?" 
+            name: "Ný umræða" 
             point: "Opna umræðu um þessi rök" 
             document: "Opna umræðu um þetta skjal" 
             profile: "Setja skilaboð á korktöflu í notandaupplýsingasvæði {{user_name}}" 
@@ -584,9 +584,9 @@ is:
         yours:
             title: "Þín skjöl"
         newest:
-            title: "Nýjustu skjölin"
+            title: "Nýjustu umsagnir"
         your_priorities:
-            title: "Nýjustu skjölin í þínum hugmyndum"
+            title: "Nýjustu umsagnir í þínum hugmyndum"
         revised:
             title: "Skjöl sem nýlega hafa verið yfirfarin"
         activity:
@@ -1001,7 +1001,7 @@ is:
         yours:
             title: "Þín rök"
         newest:
-            title: "Nýjustu rök"
+            title: "Nýjustu spurningar"
         your_priorities:
             title: "Rök hugmynda"
         revised:
@@ -1042,29 +1042,29 @@ is:
             name: "Breyta"
             title: "Geturðu bætt áherslur þessara raka?  Endilega gerðu breytingar!"
         update:
-            success: "Vistaði {{point_name}}"
+            success: "Vistaði "
         activity:
-            title: "Virkni varðandi {{point_name}}"
+            title: "Virkni varðandi "
         discussions:
-            title: "Umræða um {{point_name}}"
+            title: "Umræða um "
         destroy:
             access_denied: "Einungis höfundur getur eytt rökum"
         revision:
             show:
-                title: "{{user_name}} endurskoðun á {{point_name}}"
+                title: "{{user_name}} endurskoðun á "
             new:
-                title: "Farðu yfir {{point_name}}"
-                success: "Fór yfir {{point_name}}"
-            destroy: "Eyddi yfirferð á {{point_name}}"
+                title: "Farðu yfir "
+                success: "Fór yfir "
+            destroy: "Eyddi yfirferð á "
         top_points:
-            best_points_for_endorse: "Bestu rök með Já"
-            best_points_for_oppose: "Bestu rök með Nei"
-            newest_points_for_endorse: "Ný rök með Já"
-            newest_points_for_oppose: "Ný rök með Nei"
-            all_best_points_for_endorse: "Öll rök með Já"
-            all_best_points_for_oppose: "Öll rök með Nei"
-            all_newest_points_for_endorse: "Öll ný rök með Já"
-            all_newest_points_for_oppose: "Öll ný rök með Nei"
+            best_questions_for_endorse: "Bestu rök með Já"
+            best_questions_for_oppose: "Bestu rök með Nei"
+            newest_questions_for_endorse: "Ný rök með Já"
+            newest_questions_for_oppose: "Ný rök með Nei"
+            all_best_questions_for_endorse: "Öll rök með Já"
+            all_best_questions_for_oppose: "Öll rök með Nei"
+            all_newest_questions_for_endorse: "Öll ný rök með Já"
+            all_newest_questions_for_oppose: "Öll ný rök með Nei"
             add_point_for_endorse: "Skrifa rök með"
             add_point_for_oppose: "Skrifa rök á móti"
             new_point_short: "Ný rök"
@@ -1571,7 +1571,7 @@ is:
                 twitter: "Twitter"
                 facebook: "Facebook"
                 options: "eða <b>skráðu þig strax inn</b> með:"
-            intro: "<b><a href='{{signup_url}}'>Nýskráning</a></b> eða <a href='#' id='login_link'>innskráning {{government_name}}</a>."
+            intro: "<b><a href='{{signup_url}}'>Nýskráning</a></b> - Eða skráðu þig inn hér að neðan."
             forgot: "Gleymt lykilorð"
             email:
                 label: "Netfang"

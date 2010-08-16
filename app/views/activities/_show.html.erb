@@ -29,18 +29,6 @@
 			<%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
 		<% end %>
 		<span class="small"><%= time_ago(activity.created_at) %></span>
-
-		<% if activity.class != ActivityCommentParticipant %>
-			<% if activity.comments_count > 0 %>
-				<span class="comment_link" title="Settu inn athugasemd">
-				<%= link_to_unless_current pluralize(activity.comments_count, "athugasemd"), activity_comments_url(activity) %>
-				</span>
-			<% else %>
-				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="Settu inn athugasemd">	
-				<%= link_to_remote "Athugasemd", { :url => new_activity_comment_url(activity), :method => :get } %>
-				</span>
-			<% end %>
-		<% end %>
 	</div>
 
 	<% if activity.class != ActivityCommentParticipant and activity.class != ActivityBulletinProfileAuthor %>

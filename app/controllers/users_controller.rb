@@ -58,7 +58,6 @@ class UsersController < ApplicationController
     redirect_to '/' and return if check_for_suspension
     @page_title = t('users.signups.title', :user_name => @user.name)
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_notifications", :format => "rss", :c => @user.rss_code)
-    @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
   end
   
   def legislators
@@ -114,7 +113,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     @page_title = t('users.show.title', :user_name => @user.name, :government_name => current_government.name)
-    @priorities = @user.endorsements.active.by_position.find(:all, :include => :priority, :limit => 5)
+    @priorities = @user.endorsements.active.find(:all, :include => :priority, :limit => 5)
     @endorsements = nil
     get_following
     if logged_in? # pull all their endorsements on the priorities shown
@@ -132,7 +131,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])    
     redirect_to '/' and return if check_for_suspension
     @page_title = t('users.priorities.title', :user_name => @user.name.possessive, :government_name => current_government.name)
-    @priorities = @user.endorsements.active.by_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]  
+    @priorities = @user.endorsements.active.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]  
     @endorsements = nil
     get_following
     if logged_in? # pull all their endorsements on the priorities shown
@@ -217,14 +216,14 @@ class UsersController < ApplicationController
     redirect_to '/' and return if check_for_suspension
     get_following
     @page_title = t('users.points.title', :user_name => @user.name.possessive, :government_name => current_government.name)
-    @points = @user.points.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
-    if logged_in? and @points.any? # pull all their qualities on the points shown
-      @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
+    @questions = @user.points.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
+    if logged_in? and @questions.any? # pull all their qualities on the points shown
+      @qualities = QuestionQuality.find(:all, :conditions => ["question_id in (?) and user_id = ? ", @questions.collect {|c| c.id},current_user.id])
     end    
     respond_to do |format|
       format.html
-      format.xml { render :xml => @points.to_xml(:include => [:priority,:other_priority], :except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @points.to_json(:include => [:priority,:other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+      format.xml { render :xml => @questions.to_xml(:include => [:priority,:other_priority], :except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @questions.to_json(:include => [:priority,:other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end    
   end
   
@@ -260,7 +259,6 @@ class UsersController < ApplicationController
     @user = User.new(params[:user]) 
     @user.request = request
     @user.referral = @referral
-    @user.partner_referral = current_partner
     begin
       @user.save! #save first
       rescue ActiveRecord::RecordInvalid
@@ -276,9 +274,6 @@ class UsersController < ApplicationController
     end
     self.current_user = @user # automatically log them in
     
-    if current_partner and params[:signup]
-      @user.signups << Signup.create(:partner => current_partner, :is_optin => params[:signup][:is_optin], :ip_address => request.remote_ip)
-    end
       
     flash[:notice] = t('users.new.success', :government_name => current_government.name)
     if session[:query] 
@@ -430,29 +425,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def order
-    order = params[:your_priorities]
-    endorsements = Endorsement.find(:all, :conditions => ["id in (?)", params[:your_priorities]], :order => "position asc")
-    order.each_with_index do |id, position|
-      if id.any?
-        endorsement = endorsements.detect {|e| e.id == id.to_i }
-        new_position = (((session[:endorsement_page]||1)*25)-25)+position + 1
-        if endorsement and endorsement.position != new_position
-          endorsement.insert_at(new_position)
-          endorsements = Endorsement.find(:all, :conditions => ["id in (?)", params[:your_priorities]], :order => "position asc")
-        end
-      end
-    end
-    respond_to do |format|
-      format.js {
-        render :update do |page|
-          page.replace_html 'your_priorities_container', :partial => "priorities/yours"  
-          #page.replace_html 'your_priorities_container', order.inspect
-        end
-      }
-    end
-  end
-
   # PUT /users/1/suspend
   def suspend
     @user = User.find(params[:id])
@@ -468,23 +440,6 @@ class UsersController < ApplicationController
     redirect_to(@user)
   end
 
-  # this isn't actually used, but the current_user will endorse ALL of this user's priorities
-  def endorse
-    if not logged_in?
-      session[:endorse_user] = params[:id]
-      access_denied
-      return
-    end
-    @user = User.find(params[:id])
-    for e in @user.endorsements.active
-      e.priority.endorse(current_user,request,current_partner,@referral) if e.is_up?
-      e.priority.oppose(current_user,request,current_partner,@referral) if e.is_down?      
-    end
-    respond_to do |format|
-      format.js { redirect_from_facebox(user_path(@user)) }        
-    end    
-  end
-  
   def impersonate
     @user = User.find(params[:id])
     self.current_user = @user

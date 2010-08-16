@@ -123,20 +123,6 @@ class NetworkController < ApplicationController
     end
   end
   
-  def partners
-    if User.adapter == 'postgresql'
-      @partners = Partner.find(:all, :conditions => "logo_file_name is not null", :order => "RANDOM()")
-    else
-      @partners = Partner.find(:all, :conditions => "logo_file_name is not null", :order => "rand()")
-    end
-    @page_title = t('network.partners.title', :government_name => current_government.name)
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @partners.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @partners.to_json(:except => NB_CONFIG['api_exclude_fields']) }
-    end
-  end  
-
   private
   def setup
     @user = User.new

@@ -1,5 +1,5 @@
 <% if points and points.any? %>
-	<% @point_value = point_value %>
+	<% @question_value = point_value %>
 	<div class="heading_table">
 	<table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr><td>
@@ -26,10 +26,10 @@
 	<% for point in points %>
 		<% quality = nil %>
 		<% if qualities %>
-			<% quality = qualities.detect {|e| e.point_id == point.id } %>
+			<% quality = qualities.detect {|e| e.question_id == point.id } %>
 		<% end %>				
 		<div class="point_inline" id="point_<%= point.id %>">
-			<%= render :partial => "points/show", :locals => {:point => point, :quality => quality }%>
+			<%= render :partial => "questions/show", :locals => {:point => point, :quality => quality }%>
 		</div>
 	<% end %>
 

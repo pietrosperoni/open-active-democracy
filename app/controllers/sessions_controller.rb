@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
   def create
     RAILS_DEFAULT_LOGGER.debug("BLAH -5: #{session[:return_to]}")
     self.current_user = User.authenticate(params[:email], params[:password])
+    RAILS_DEFAULT_LOGGER.debug("BLAH -51: #{self.current_user}")
     respond_to do |format|
         format.html {
           if logged_in?
@@ -36,13 +37,6 @@ class SessionsController < ApplicationController
               RAILS_DEFAULT_LOGGER.debug("BLAH -2: #{session[:return_to]}")
               @priority = Priority.find(session[:priority_id])
               @value = session[:value].to_i
-              if @priority
-                if @value == 1
-                  @priority.endorse(current_user,request,current_partner,@referral)
-                else
-                  @priority.oppose(current_user,request,current_partner,@referral)
-                end
-              end  
               session[:priority_id] = nil
               session[:value] = nil
             end            

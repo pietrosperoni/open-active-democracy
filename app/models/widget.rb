@@ -37,7 +37,7 @@ class Widget < ActiveRecord::Base
     a << [ "discussions", I18n.t('news.discussions.name') ]
   end
   
-  def points_available
+  def questions_available
     [
       [ "index", I18n.t('points.yours.title') ],
       [ "your_priorities", I18n.t('points.your_priorities.title')  ],                         

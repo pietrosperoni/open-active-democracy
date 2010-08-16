@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100524024439) do
+ActiveRecord::Schema.define(:version => 20100816181627) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.integer  "change_id"
     t.integer  "other_user_id"
     t.integer  "tag_id"
-    t.integer  "point_id"
     t.integer  "revision_id"
     t.integer  "capital_id"
     t.integer  "ad_id"
@@ -34,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.integer  "position"
     t.integer  "followers_count",                    :default => 0
     t.datetime "changed_at"
+    t.integer  "question_id"
   end
 
   add_index "activities", ["activity_id"], :name => "activity_activity_id"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
   add_index "activities", ["document_id"], :name => "index_activities_on_document_id"
   add_index "activities", ["document_revision_id"], :name => "index_activities_on_document_revision_id"
   add_index "activities", ["is_user_only"], :name => "activity_is_user_only_index"
-  add_index "activities", ["point_id"], :name => "activity_point_id_index"
   add_index "activities", ["priority_id"], :name => "activity_priority_id_index"
   add_index "activities", ["revision_id"], :name => "index_activities_on_revision_id"
   add_index "activities", ["status"], :name => "activity_status_index"
@@ -203,25 +202,25 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.integer  "revision_id"
     t.integer  "priority_id"
     t.integer  "user_id"
-    t.integer  "value",                                  :default => 0
-    t.string   "status",                   :limit => 20
-    t.string   "name",                     :limit => 60
+    t.integer  "value",                           :default => 0
+    t.string   "status",            :limit => 20
+    t.string   "name",              :limit => 60
     t.string   "cached_issue_list"
     t.string   "author_sentence"
-    t.integer  "revisions_count",                        :default => 0
-    t.integer  "helpful_count",                          :default => 0
-    t.integer  "unhelpful_count",                        :default => 0
-    t.integer  "discussions_count",                      :default => 0
+    t.integer  "revisions_count",                 :default => 0
+    t.integer  "helpful_count",                   :default => 0
+    t.integer  "unhelpful_count",                 :default => 0
+    t.integer  "discussions_count",               :default => 0
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "content"
-    t.integer  "word_count",                             :default => 0
+    t.integer  "word_count",                      :default => 0
     t.text     "content_html"
-    t.float    "score",                                  :default => 0.0
-    t.float    "endorser_score",                         :default => 0.0
-    t.float    "opposer_score",                          :default => 0.0
-    t.float    "neutral_score",                          :default => 0.0
+    t.float    "score",                           :default => 0.0
+    t.float    "endorser_score",                  :default => 0.0
+    t.float    "opposer_score",                   :default => 0.0
+    t.float    "neutral_score",                   :default => 0.0
     t.integer  "partner_id"
   end
 
@@ -293,7 +292,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.string   "currency_short_name",            :limit => 3,   :default => "pc"
     t.string   "homepage",                       :limit => 20,  :default => "top"
     t.integer  "priorities_count",                              :default => 0
-    t.integer  "questions_count",                                  :default => 0
+    t.integer  "questions_count",                               :default => 0
     t.integer  "documents_count",                               :default => 0
     t.integer  "users_count",                                   :default => 0
     t.integer  "contributors_count",                            :default => 0
@@ -405,49 +404,23 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.datetime "updated_at"
   end
 
-  create_table "questions", :force => true do |t|
-    t.integer  "revision_id"
-    t.integer  "priority_id"
-    t.integer  "other_priority_id"
-    t.integer  "user_id"
-    t.integer  "value",                                   :default => 0
-    t.integer  "revisions_count",                         :default => 0
-    t.string   "status",                   :limit => 50
-    t.string   "name",                     :limit => 122
-    t.text     "content"
-    t.datetime "published_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "website"
-    t.string   "author_sentence"
-    t.integer  "discussions_count",                       :default => 0
-    t.text     "content_html"
-    t.integer  "partner_id"
-  end
-
-  add_index "questions", ["other_priority_id"], :name => "index_questions_on_other_priority_id"
-  add_index "questions", ["priority_id"], :name => "index_questions_on_priority_id"
-  add_index "questions", ["revision_id"], :name => "index_questions_on_revision_id"
-  add_index "questions", ["status"], :name => "index_questions_on_status"
-  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
-
   create_table "priorities", :force => true do |t|
     t.integer  "user_id"
-    t.string   "name",                    :limit => 250
-    t.string   "status",                  :limit => 50
-    t.string   "ip_address",              :limit => 16
+    t.string   "name",                :limit => 250
+    t.string   "status",              :limit => 50
+    t.string   "ip_address",          :limit => 16
     t.datetime "deleted_at"
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_issue_list"
-    t.integer  "questions_count",                           :default => 0
-    t.integer  "discussions_count",                      :default => 0
-    t.integer  "relationships_count",                    :default => 0
-    t.integer  "changes_count",                          :default => 0
+    t.integer  "questions_count",                    :default => 0
+    t.integer  "discussions_count",                  :default => 0
+    t.integer  "relationships_count",                :default => 0
+    t.integer  "changes_count",                      :default => 0
     t.datetime "status_changed_at"
-    t.integer  "documents_count",                        :default => 0
-    t.string   "short_url",               :limit => 20
+    t.integer  "documents_count",                    :default => 0
+    t.string   "short_url",           :limit => 20
     t.string   "external_info_1"
     t.string   "external_info_2"
     t.string   "external_info_3"
@@ -455,6 +428,7 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.string   "external_presenter"
     t.string   "external_id"
     t.string   "external_name"
+    t.text     "description"
   end
 
   add_index "priorities", ["status"], :name => "priorities_status_index"
@@ -470,6 +444,33 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
+  create_table "questions", :force => true do |t|
+    t.integer  "revision_id"
+    t.integer  "priority_id"
+    t.integer  "other_priority_id"
+    t.integer  "user_id"
+    t.integer  "value",                            :default => 0
+    t.integer  "revisions_count",                  :default => 0
+    t.string   "status",            :limit => 50
+    t.string   "name",              :limit => 122
+    t.text     "content"
+    t.datetime "published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "website"
+    t.string   "author_sentence"
+    t.integer  "discussions_count",                :default => 0
+    t.text     "content_html"
+    t.integer  "partner_id"
+    t.text     "answer"
+  end
+
+  add_index "questions", ["other_priority_id"], :name => "index_questions_on_other_priority_id"
+  add_index "questions", ["priority_id"], :name => "index_questions_on_priority_id"
+  add_index "questions", ["revision_id"], :name => "index_questions_on_revision_id"
+  add_index "questions", ["status"], :name => "index_questions_on_status"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
+
   create_table "relationships", :force => true do |t|
     t.integer  "priority_id"
     t.integer  "other_priority_id"
@@ -484,7 +485,6 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
   add_index "relationships", ["type"], :name => "relationships_type_index"
 
   create_table "revisions", :force => true do |t|
-    t.integer  "point_id"
     t.integer  "user_id"
     t.integer  "value",                            :default => 0, :null => false
     t.string   "status",            :limit => 50
@@ -499,10 +499,10 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.text     "content_diff"
     t.integer  "other_priority_id"
     t.text     "content_html"
+    t.integer  "question_id"
   end
 
   add_index "revisions", ["other_priority_id"], :name => "index_revisions_on_other_priority_id"
-  add_index "revisions", ["point_id"], :name => "index_revisions_on_point_id"
   add_index "revisions", ["status"], :name => "index_revisions_on_status"
   add_index "revisions", ["user_id"], :name => "index_revisions_on_user_id"
 
@@ -546,11 +546,12 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
     t.string   "title",                     :limit => 60
     t.string   "description",               :limit => 200
     t.integer  "discussions_count",                        :default => 0
-    t.integer  "questions_count",                             :default => 0
+    t.integer  "questions_count",                          :default => 0
     t.integer  "documents_count",                          :default => 0
     t.string   "prompt",                    :limit => 100
     t.string   "slug",                      :limit => 60
     t.integer  "partner_id"
+    t.integer  "weight",                                   :default => 0
   end
 
   add_index "tags", ["slug"], :name => "index_tags_on_slug"
@@ -595,95 +596,95 @@ ActiveRecord::Schema.define(:version => 20100524024439) do
   add_index "user_contacts", ["user_id"], :name => "user_contacts_user_id_index"
 
   create_table "users", :force => true do |t|
-    t.string   "login",                         :limit => 40
-    t.string   "email",                         :limit => 100
-    t.string   "crypted_password",              :limit => 40
-    t.string   "salt",                          :limit => 40
-    t.string   "first_name",                    :limit => 100
-    t.string   "last_name",                     :limit => 100
+    t.string   "login",                        :limit => 40
+    t.string   "email",                        :limit => 100
+    t.string   "crypted_password",             :limit => 40
+    t.string   "salt",                         :limit => 40
+    t.string   "first_name",                   :limit => 100
+    t.string   "last_name",                    :limit => 100
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "activated_at"
-    t.string   "activation_code",               :limit => 60
-    t.string   "remember_token",                :limit => 60
+    t.string   "activation_code",              :limit => 60
+    t.string   "remember_token",               :limit => 60
     t.datetime "remember_token_expires_at"
     t.integer  "picture_id"
-    t.string   "status",                        :limit => 30,  :default => "passive"
+    t.string   "status",                       :limit => 30,  :default => "passive"
     t.integer  "partner_id"
     t.datetime "deleted_at"
-    t.string   "ip_address",                    :limit => 16
+    t.string   "ip_address",                   :limit => 16
     t.datetime "loggedin_at"
-    t.string   "zip",                           :limit => 10
+    t.string   "zip",                          :limit => 10
     t.date     "birth_date"
-    t.string   "twitter_login",                 :limit => 15
-    t.string   "website",                       :limit => 150
-    t.boolean  "is_mergeable",                                 :default => true
+    t.string   "twitter_login",                :limit => 15
+    t.string   "website",                      :limit => 150
+    t.boolean  "is_mergeable",                                :default => true
     t.integer  "referral_id"
-    t.boolean  "is_subscribed",                                :default => true
-    t.string   "user_agent",                    :limit => 200
-    t.string   "referrer",                      :limit => 200
-    t.boolean  "is_comments_subscribed",                       :default => true
-    t.boolean  "is_votes_subscribed",                          :default => true
-    t.boolean  "is_newsletter_subscribed",                     :default => true
-    t.boolean  "is_tagger",                                    :default => false
-    t.integer  "up_issues_count",                              :default => 0
-    t.integer  "down_issues_count",                            :default => 0
-    t.integer  "comments_count",                               :default => 0
-    t.float    "score",                                        :default => 0.1
-    t.boolean  "is_point_changes_subscribed",                  :default => true
-    t.boolean  "is_messages_subscribed",                       :default => true
-    t.integer  "capitals_count",                               :default => 0
-    t.integer  "twitter_count",                                :default => 0
-    t.integer  "followers_count",                              :default => 0
-    t.integer  "followings_count",                             :default => 0
-    t.integer  "ignorers_count",                               :default => 0
-    t.integer  "ignorings_count",                              :default => 0
-    t.boolean  "is_followers_subscribed",                      :default => true
+    t.boolean  "is_subscribed",                               :default => true
+    t.string   "user_agent",                   :limit => 200
+    t.string   "referrer",                     :limit => 200
+    t.boolean  "is_comments_subscribed",                      :default => true
+    t.boolean  "is_votes_subscribed",                         :default => true
+    t.boolean  "is_newsletter_subscribed",                    :default => true
+    t.boolean  "is_tagger",                                   :default => false
+    t.integer  "up_issues_count",                             :default => 0
+    t.integer  "down_issues_count",                           :default => 0
+    t.integer  "comments_count",                              :default => 0
+    t.float    "score",                                       :default => 0.1
+    t.boolean  "is_point_changes_subscribed",                 :default => true
+    t.boolean  "is_messages_subscribed",                      :default => true
+    t.integer  "capitals_count",                              :default => 0
+    t.integer  "twitter_count",                               :default => 0
+    t.integer  "followers_count",                             :default => 0
+    t.integer  "followings_count",                            :default => 0
+    t.integer  "ignorers_count",                              :default => 0
+    t.integer  "ignorings_count",                             :default => 0
+    t.boolean  "is_followers_subscribed",                     :default => true
     t.integer  "partner_referral_id"
-    t.integer  "ads_count",                                    :default => 0
-    t.integer  "changes_count",                                :default => 0
-    t.string   "google_token",                  :limit => 30
+    t.integer  "ads_count",                                   :default => 0
+    t.integer  "changes_count",                               :default => 0
+    t.string   "google_token",                 :limit => 30
     t.integer  "top_endorsement_id"
-    t.boolean  "is_finished_subscribed",                       :default => true
-    t.integer  "contacts_count",                               :default => 0
-    t.integer  "contacts_members_count",                       :default => 0
-    t.integer  "contacts_invited_count",                       :default => 0
-    t.integer  "contacts_not_invited_count",                   :default => 0
+    t.boolean  "is_finished_subscribed",                      :default => true
+    t.integer  "contacts_count",                              :default => 0
+    t.integer  "contacts_members_count",                      :default => 0
+    t.integer  "contacts_invited_count",                      :default => 0
+    t.integer  "contacts_not_invited_count",                  :default => 0
     t.datetime "google_crawled_at"
-    t.integer  "facebook_uid",                  :limit => 8
-    t.string   "city",                          :limit => 80
-    t.string   "state",                         :limit => 50
-    t.integer  "documents_count",                              :default => 0
-    t.integer  "document_revisions_count",                     :default => 0
-    t.integer  "questions_count",                                 :default => 0
-    t.float    "index_24hr_change",                            :default => 0.0
-    t.float    "index_7days_change",                           :default => 0.0
-    t.float    "index_30days_change",                          :default => 0.0
-    t.integer  "received_notifications_count",                 :default => 0
-    t.integer  "unread_notifications_count",                   :default => 0
-    t.string   "rss_code",                      :limit => 40
-    t.integer  "point_revisions_count",                        :default => 0
-    t.integer  "qualities_count",                              :default => 0
-    t.integer  "constituents_count",                           :default => 0
-    t.string   "address",                       :limit => 100
-    t.integer  "warnings_count",                               :default => 0
+    t.integer  "facebook_uid",                 :limit => 8
+    t.string   "city",                         :limit => 80
+    t.string   "state",                        :limit => 50
+    t.integer  "documents_count",                             :default => 0
+    t.integer  "document_revisions_count",                    :default => 0
+    t.integer  "questions_count",                             :default => 0
+    t.float    "index_24hr_change",                           :default => 0.0
+    t.float    "index_7days_change",                          :default => 0.0
+    t.float    "index_30days_change",                         :default => 0.0
+    t.integer  "received_notifications_count",                :default => 0
+    t.integer  "unread_notifications_count",                  :default => 0
+    t.string   "rss_code",                     :limit => 40
+    t.integer  "point_revisions_count",                       :default => 0
+    t.integer  "qualities_count",                             :default => 0
+    t.integer  "constituents_count",                          :default => 0
+    t.string   "address",                      :limit => 100
+    t.integer  "warnings_count",                              :default => 0
     t.datetime "probation_at"
     t.datetime "suspended_at"
-    t.integer  "referrals_count",                              :default => 0
-    t.boolean  "is_admin",                                     :default => false
+    t.integer  "referrals_count",                             :default => 0
+    t.boolean  "is_admin",                                    :default => false
     t.integer  "branch_id"
     t.integer  "twitter_id"
-    t.string   "twitter_token",                 :limit => 64
-    t.string   "twitter_secret",                :limit => 64
+    t.string   "twitter_token",                :limit => 64
+    t.string   "twitter_secret",               :limit => 64
     t.datetime "twitter_crawled_at"
-    t.boolean  "is_admin_subscribed",                          :default => true
-    t.boolean  "is_branch_chosen",                             :default => false
+    t.boolean  "is_admin_subscribed",                         :default => true
+    t.boolean  "is_branch_chosen",                            :default => false
     t.string   "buddy_icon_file_name"
-    t.string   "buddy_icon_content_type",       :limit => 30
+    t.string   "buddy_icon_content_type",      :limit => 30
     t.integer  "buddy_icon_file_size"
     t.datetime "buddy_icon_updated_at"
-    t.boolean  "is_importing_contacts",                        :default => false
-    t.integer  "imported_contacts_count",                      :default => 0
+    t.boolean  "is_importing_contacts",                       :default => false
+    t.integer  "imported_contacts_count",                     :default => 0
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

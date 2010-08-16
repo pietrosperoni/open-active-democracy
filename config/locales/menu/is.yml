@@ -44,8 +44,8 @@ is:
             all_activity: "Öll virkni"
             research:
                 name: "Órökstudd hugmynd"
-                needed: "Hugmynd sem vantar {{points_name}} eða {{documents_name}}"
-                points_needed: "Hugmyndir verða að innihalda rök"
+                needed: "Hugmynd sem vantar {{questions_name}} eða {{documents_name}}"
+                questions_needed: "Hugmyndir verða að innihalda rök"
                 documents_needed: "Hugmyndir verða að innihalda skjöl"
                 contributors:
                     name: "Meðhöfundar"

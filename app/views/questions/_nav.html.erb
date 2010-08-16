@@ -4,33 +4,33 @@
 	<ul id="priority_menu">
 		<li class="tab1">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.full_text'), point_url(@point) %>
+				<%= link_to t('menu.briefing.full_text'), point_url(@question) %>
 			</span>
 		</li>
 		<li class="tab2">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.edit'), new_point_revision_url(@point) %>
+				<%= link_to t('menu.briefing.edit'), new_point_revision_url(@question) %>
 			</span>
 		</li>
 		<li class="tab3">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.revisions', :count => @point.revisions_count), point_revision_url(@point,@point.revision_id) %>
+				<%= link_to t('menu.briefing.revisions', :count => @question.revisions_count), point_revision_url(@question,@question.revision_id) %>
 			</span>
 		</li>	
 		<li class="tab4">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.discussions', :count => @point.discussions_count), discussions_point_url(@point) %>
+				<%= link_to t('menu.briefing.discussions', :count => @question.discussions_count), discussions_point_url(@question) %>
 			</span>
 		</li>	
 		<li class="tab5">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.all_activity'), activity_point_url(@point) %>
+				<%= link_to t('menu.briefing.all_activity'), activity_point_url(@question) %>
 			</span>
 		</li>	
-		<% if logged_in? and (@point.user_id == current_user.id or current_user.is_admin?) %>
+		<% if logged_in? and (@question.user_id == current_user.id or current_user.is_admin?) %>
 			<li class="tab6">
 				<span class="tab_header">
-					<%= link_to t('menu.briefing.delete.name'), point_path(@point), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>
+					<%= link_to t('menu.briefing.delete.name'), point_path(@question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>
 				</span>
 			</li>
 		<% end %>					

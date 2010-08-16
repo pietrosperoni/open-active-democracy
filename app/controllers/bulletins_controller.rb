@@ -32,12 +32,6 @@ class BulletinsController < ApplicationController
     @comment = @activity.comments.new(params[:comment])
     @comment.user = current_user
     @comment.request = request
-    if @activity.priority
-      # if this is related to a priority, check to see if they endorse it
-      e = @activity.priority.endorsements.active_and_inactive.find_by_user_id(@comment.user.id)
-      @comment.is_endorser = true if e and e.is_up?
-      @comment.is_opposer = true if e and e.is_down?
-    end    
     if @comment.save
       @activity.reload
       respond_to do |format|

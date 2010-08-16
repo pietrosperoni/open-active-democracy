@@ -1,71 +1,16 @@
-<%= render :partial => "priorities/header" %>
-<%= render :partial => "priorities/nav" %>
-
 <table border="0" cellspacing="0" cellpadding="0" class="margin-top">
 	<tr>
-		
 		<td valign="top">
-
-<!--<%= blurb('point_new')%>-->
-
-	<div  class="form_header">Bæta við rökum: <span class="red">* </span> </div>
-
-<% form_for :point, :url => priority_points_path(@priority)  do |f| %>
+	<div  class="form_header">Bæta við spurningu: <span class="red">* </span> </div>
+<% form_for :question, :url => "/questions/create"  do |f| %>
   <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
-	<div class="field">
-		<div class="field_box">
- 			<%= f.text_field :name, :size => 50, :maxlength => 60 %>
-		</div>
-			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þína hugmynd þá eru góð rök lykilatriði</div>
-	</div>
-
-	<div class="field">
-		<div class="field_label">
-			<div id="point_supports" class="form_header">
-
-				<%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>	 Já, þessi rök styðja hugmyndina					
-			</div>			
-			<div id="point_opposes" class="form_header">
-				<%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %> Nei, þessi rök eru á móti hugmyndinni
-			</div>
-		</div>
-	</div>
-			<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður hugmynd eða ekki</div>
-
-
 	<div class="field form_header">
-	    <div class="field_label form_header"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+	    <div class="field_label form_header">Spurning: <span id="pointContentDown"></span> <%= t('characters_left')%></div>
 		<div class="field_box">
-	    <%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
-		</div>
-
-	</div>				
-					<div class="tiny_info_no_pad">Aðrir munu geta breytt því sem þú skrifar en við höldum breytingaskrá, á svipaðan hátt og Wikipedia.</div> 
-			<div class="tiny_info">Stutt og skýr rök um einn lið virka best, þú getur alltaf bætt við fleiri rökum.</div>
-	
-	<div class="field form_header">
-		<div class="field_label"><%= t('points.new.website.label') %></div>
-		<div class="field_box">
-			<%= f.text_field :website, :size => 50 %>	
+	    <%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 200 %>
 		</div>
 	</div>
-					<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir hugmynd þitt.</div>
-
-	
-	<div class="field form_header">
-		<div class="field_label">
-			<%= t('points.new.other_priority_name.label') %>
-		</div>
-		<div class="field_box">
-			<%= f.text_field :other_priority_name, :size => 50, :autocomplete => "off" %>			
-<!--			<%= t('points.new.other_priority_name.example')%>-->
-		</div>
-		
-	</div>
-					<div class="tiny_info">Þú ræður hvort þú tengir við annað hugmynd. Ef skoðun þín er andstæð, geturðu tengt við betra hugmynd. EÐA, ef skoðun þín styður eða er hlutlaus, geturðu lagt áherslu á nákvæmara eða tengdara hugmynd.</div>
-	
-	<%= f.submit t('points.new.submit'), :id => "submit", :class => "yellow_button" %>
-
+	<%= f.submit "Send spurningu", :id => "submit", :class => "yellow_button" %>
 <% end %>
 
 </td></tr></table>

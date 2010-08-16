@@ -1,16 +1,8 @@
-<%= render :partial => "priorities/header" %>
-<%= render :partial => "priorities/nav" %>
-<p>
-<%= blurb('document_new')%>
-	<p>
-<% form_for :document, :url => priority_documents_path(@priority)  do |f| %>
+<% form_for :document, :url => "/documents/create"  do |f| %>
 	<%= f.error_messages %>
 <p>
 	<%= t('document.revision.new.name.label')%><br/>
    <%= f.text_field :name, :size => 50, :maxlength => 60 %>		
-</p>
-<p>
-<%= t('document.revision.new.position.label', :support_radio => f.radio_button(:value, 1), :neutral_radio => f.radio_button(:value, 0), :oppose_radio => f.radio_button(:value, -1), :priority_name => link_to(@priority.name, @priority)) %>
 </p>
 <p>
 <%= f.text_area :content, :rows => 10, :cols => 60 %>
@@ -29,4 +21,3 @@
 
 <% end %>
 <p>
-<%= blurb('textile')%>

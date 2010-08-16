@@ -15,7 +15,7 @@
 
 <% end %>
 
-<%= render :partial => "points/helpful_count", :locals => {:point => document} %>
+<%= render :partial => "questions/helpful_count", :locals => {:point => document} %>
 
 <% if document.discussions_count > 0 %>
 	<%= link_to t('comments.discussions.name', :count => document.discussions_count), document %>.

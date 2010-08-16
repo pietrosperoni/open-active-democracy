@@ -97,7 +97,7 @@ namespace :fix do
     for p in priorities
       p.update_attribute(:discussions_count,p.activities.discussions.for_all_users.active.size) if p.activities.discussions.for_all_users.active.size != p.discussions_count
     end
-    points = Point.find(:all)
+    points = Question.find(:all)
     for p in points
       p.update_attribute(:discussions_count,p.activities.discussions.for_all_users.active.size) if p.activities.discussions.for_all_users.active.size != p.discussions_count
     end
@@ -147,9 +147,9 @@ namespace :fix do
   desc "fix helpful counts"
   task :helpful_counts => :environment do
     Government.current = Government.all.last 
-    endorser_helpful_points = Point.find_by_sql("SELECT points.id, points.endorser_helpful_count, count(*) as number
+    endorser_helpful_points = Question.find_by_sql("SELECT points.id, points.endorser_helpful_count, count(*) as number
     FROM points INNER JOIN endorsements ON points.priority_id = endorsements.priority_id
-    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.point_id = points.id
+    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.question_id = points.id
     where endorsements.value  =1
     and point_qualities.value = true
     group by points.id, points.endorser_helpful_count
@@ -169,9 +169,9 @@ namespace :fix do
       doc.update_attribute("endorser_helpful_count",doc.number)
     end    
 
-    opposer_helpful_points = Point.find_by_sql("SELECT points.id, points.opposer_helpful_count, count(*) as number
+    opposer_helpful_points = Question.find_by_sql("SELECT points.id, points.opposer_helpful_count, count(*) as number
     FROM points INNER JOIN endorsements ON points.priority_id = endorsements.priority_id
-    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.point_id = points.id
+    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.question_id = points.id
     where endorsements.value = -1
     and point_qualities.value = true
     group by points.id, points.opposer_helpful_count
@@ -191,9 +191,9 @@ namespace :fix do
       doc.update_attribute("opposer_helpful_count",doc.number)
     end    
 
-    endorser_unhelpful_points = Point.find_by_sql("SELECT points.id, points.endorser_unhelpful_count, count(*) as number
+    endorser_unhelpful_points = Question.find_by_sql("SELECT points.id, points.endorser_unhelpful_count, count(*) as number
     FROM points INNER JOIN endorsements ON points.priority_id = endorsements.priority_id
-    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.point_id = points.id
+    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.question_id = points.id
     where endorsements.value = 1
     and point_qualities.value = false
     group by points.id, points.endorser_unhelpful_count
@@ -213,9 +213,9 @@ namespace :fix do
       doc.update_attribute("endorser_unhelpful_count",doc.number)
     end    
 
-    opposer_unhelpful_points = Point.find_by_sql("SELECT points.id, points.opposer_unhelpful_count, count(*) as number
+    opposer_unhelpful_points = Question.find_by_sql("SELECT points.id, points.opposer_unhelpful_count, count(*) as number
     FROM points INNER JOIN endorsements ON points.priority_id = endorsements.priority_id
-    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.point_id = points.id
+    	 INNER JOIN point_qualities ON point_qualities.user_id = endorsements.user_id AND point_qualities.question_id = points.id
     where endorsements.value = -1
     and point_qualities.value = false
     group by points.id, points.opposer_unhelpful_count
@@ -236,7 +236,7 @@ namespace :fix do
     end  
 
     #neutral counts
-    Point.connection.execute("update points
+    Question.connection.execute("update points
     set neutral_unhelpful_count = unhelpful_count - endorser_unhelpful_count - opposer_unhelpful_count,
     neutral_helpful_count =  helpful_count - endorser_helpful_count - opposer_helpful_count")
     Document.connection.execute("update documents
@@ -270,7 +270,7 @@ namespace :fix do
   desc "re-process doc & talking point diffs"
   task :diffs => :environment do
     Government.current = Government.all.last    
-    models = [Document,Point]
+    models = [Document,Question]
     for model in models
       for p in model.all
         revisions = p.revisions.by_recently_created
@@ -290,7 +290,7 @@ namespace :fix do
   desc "run the auto_html processing on all objects. used in case of changes to auto_html filtering rules"
   task :content_html => :environment do
     Government.current = Government.all.last    
-    models = [Comment,Message,Point,Revision,Document,DocumentRevision]
+    models = [Comment,Message,Question,Revision,Document,DocumentRevision]
     for model in models
       for p in model.all
         p.auto_html_prepare

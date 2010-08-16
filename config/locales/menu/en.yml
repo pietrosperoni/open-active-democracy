@@ -44,8 +44,8 @@ en:
             all_activity: "All activity"     
             research:
                 name: "Contribute research"
-                needed: "Priorities needing {{points_name}} or {{documents_name}}"
-                points_needed: "Priorities needing talking points"
+                needed: "Priorities needing {{questions_name}} or {{documents_name}}"
+                questions_needed: "Priorities needing talking points"
                 documents_needed: "Priorities needing documents"
                 contributors:
                     name: "Contributors"

@@ -1,6 +1,6 @@
 <%= render :partial => "header" %>
 
-<link href="/stylesheets/points_layout.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/questions_layout.css" rel="stylesheet" type="text/css" />
 <% if @priority.replaced? %>
 	<div id="hp_subhead">
 		<%= t('priorities.replaced', :priority_name => link_to(@priority.change.new_priority.name, @priority.change.new_priority))%>
@@ -22,7 +22,7 @@
 				<p>
 			<% end %>
 			
-			<% if @priority.points_count == 0 %>
+			<% if @priority.questions_count == 0 %>
 				<%= t('points.priority.intro', :new_point_url => new_priority_point_path(@priority))%>
 			<% else %>
 			
@@ -33,11 +33,11 @@
 							<center>
 							</center>
 							<div class="sub_header">
-								<h2><%=t('points.top_points.best_points_for_endorse')%></h2>
-								<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+								<h2><%=t('points.top_points.best_questions_for_endorse')%></h2>
+								<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_questions_priority_url(@priority))%></p>
 							</div>
 							<div id="pro_top">
-								<%= render :partial => "points/long_list", :locals => {:id => "pro_top", :point=>@priority.points.published.by_helpfulness.up_value.first } %>
+								<%= render :partial => "questions/long_list", :locals => {:id => "pro_top", :point=>@priority.points.published.by_helpfulness.up_value.first } %>
 							</div>
 						</td>
 				    
@@ -45,11 +45,11 @@
 							<center>
 							</center>
 							<div class="sub_header">
-								<h2><%=t('points.top_points.best_points_for_oppose')%></h2>
-								<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+								<h2><%=t('points.top_points.best_questions_for_oppose')%></h2>
+								<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_questions_priority_url(@priority))%></p>
 							</div>
 							<div id="con_top">
-								<%= render :partial => "points/long_list", :locals => {:id => "con_top", :point => @priority.points.published.by_helpfulness.down_value.first
+								<%= render :partial => "questions/long_list", :locals => {:id => "con_top", :point => @priority.points.published.by_helpfulness.down_value.first
 					} %>
 							</div>
 						</td>
@@ -60,21 +60,21 @@
 					<tr>
 					<td id="" class="grid_41">
 						<div class="sub_header">
-							<h2><%=t('points.top_points.newest_points_for_endorse')%></h2>
-							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+							<h2><%=t('points.top_points.newest_questions_for_endorse')%></h2>
+							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_questions_priority_url(@priority))%></p>
 						</div>
 						<div id="pro_new">
-							<%= render :partial => "points/long_list", :locals => {:id => "pro_new", :point => @priority.points.published.by_recently_created.up_value.first} %>
+							<%= render :partial => "questions/long_list", :locals => {:id => "pro_new", :point => @priority.points.published.by_recently_created.up_value.first} %>
 						</div>
 					</td>
 				    
 					<td id="point_right" class="grid_41">
 						<div class="sub_header">
-							<h2><%=t('points.top_points.newest_points_for_oppose')%></h2>
-							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+							<h2><%=t('points.top_points.newest_questions_for_oppose')%></h2>
+							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_questions_priority_url(@priority))%></p>
 						</div>
 						<div id="con_new">
-							<%= render :partial => "points/long_list", :locals => {:id => "con_new", :point => @priority.points.published.by_recently_created.down_value.first} %>
+							<%= render :partial => "questions/long_list", :locals => {:id => "con_new", :point => @priority.points.published.by_recently_created.down_value.first} %>
 						</div>
 					</td>
 					</tr>

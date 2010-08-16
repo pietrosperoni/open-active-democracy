@@ -19,7 +19,7 @@ class Tagging < ActiveRecord::Base
       tag.increment!(:webpages_count)
     elsif taggable.class == Priority
       tag.increment!(:priorities_count)
-      tag.update_counts # recalculate the discussions/points/documents
+      tag.update_counts # recalculate the discussions/questions/documents
       tag.save_with_validation(false)
     elsif taggable.class == Feed
       tag.increment!(:feeds_count)      
@@ -32,7 +32,7 @@ class Tagging < ActiveRecord::Base
       tag.decrement!(:webpages_count)
     elsif taggable.class == Priority
       tag.decrement!(:priorities_count)
-      tag.update_counts # recalculate the discussions/points/documents
+      tag.update_counts # recalculate the discussions/questions/documents
       tag.save_with_validation(false)
     elsif taggable.class == Feed
       tag.decrement!(:feeds_count)        

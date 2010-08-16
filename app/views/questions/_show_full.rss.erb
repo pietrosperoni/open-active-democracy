@@ -1,4 +1,4 @@
-<%= render :partial => "points/intro.html.erb", :locals => {:point => point}%>
+<%= render :partial => "questions/intro.html.erb", :locals => {:point => point}%>
 <%= point.content_html %>
 <% if point.has_website? %>
 	<%= t('points.source')%><a href="<%= point.website_link %>"><%= truncate(point.website_link,70) %></a>

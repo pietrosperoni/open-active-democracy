@@ -3,18 +3,18 @@ class BriefingController < ApplicationController
   before_filter :login_required, :except => [:index, :contributors]
 
   def index
-    redirect_to newest_points_url
+    redirect_to newest_questions_url
   end
   
    def points
      @page_title = t('briefing.points.title')
      if current_user.endorsements_count > 0    
        if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
-         @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_points_count = 0) or (priorities.id in (?) and priorities.down_points_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
+         @priorities = Priority.published.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_questions_count = 0) or (priorities.id in (?) and priorities.down_questions_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
        elsif current_user.up_endorsements_count > 0
-         @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_points_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
+         @priorities = Priority.published.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_questions_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
        elsif current_user.down_endorsements_count > 0
-         @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.down_points_count = 0)",current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
+         @priorities = Priority.published.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.down_questions_count = 0)",current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
        end
        @endorsements = nil
        if logged_in? # pull all their endorsements on the priorities shown
@@ -34,11 +34,11 @@ class BriefingController < ApplicationController
     @page_title = t('briefing.documents.title')
     if current_user.endorsements_count > 0    
       if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
-        @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_documents_count = 0) or (priorities.id in (?) and priorities.down_documents_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
+        @priorities = Priority.published.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_documents_count = 0) or (priorities.id in (?) and priorities.down_documents_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
       elsif current_user.up_endorsements_count > 0
-        @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_documents_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
+        @priorities = Priority.published.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_documents_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
       elsif current_user.down_endorsements_count > 0
-        @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.down_documents_count = 0)",current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
+        @priorities = Priority.published.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.down_documents_count = 0)",current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
       end
       @endorsements = nil
       if logged_in? # pull all their endorsements on the priorities shown

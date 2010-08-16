@@ -43,7 +43,7 @@
 			<span class="tab_header"><%= link_to t('menu.priorities.name'), "#" %></span>
 			<div class="tab_body">
 				<div class="tab_subhead">
-					<%= link_to t('menu.priorities.everyone.name'), top_priorities_url %> (<%= number_with_delimiter(Priority.published.filtered.count) %>)
+					<%= link_to t('menu.priorities.everyone.name'), top_priorities_url %> (<%= number_with_delimiter(Priority.published.count) %>)
 				</div>
 				<div class="tab_sublinks">
 				<%= link_to t('menu.priorities.everyone.top'), top_priorities_url %>
@@ -114,15 +114,15 @@
 			<span class="tab_header"><%= link_to current_government.briefing_name, "#" %></span>
 			<div class="tab_body">
 
-				<div class="tab_subhead"><%= link_to t('menu.points.name'), newest_points_url %> (<%= number_with_delimiter(Point.published.filtered.count) %>)</div>
+				<div class="tab_subhead"><%= link_to t('menu.points.name'), newest_questions_url %> (<%= number_with_delimiter(Question.published.count) %>)</div>
 				<div class="tab_sublinks">
-					<%= link_to t('menu.briefing.yours'), points_url %>
-					&middot; <%= link_to t('menu.briefing.your_priorities'), your_priorities_points_url %>
-					&middot; <%= link_to t('menu.briefing.all'), newest_points_url %>
-					&middot; <%= link_to t('menu.briefing.revised'), revised_points_url %>
+					<%= link_to t('menu.briefing.yours'), questions_url %>
+					&middot; <%= link_to t('menu.briefing.your_priorities'), your_priorities_questions_url %>
+					&middot; <%= link_to t('menu.briefing.all'), newest_questions_url %>
+					&middot; <%= link_to t('menu.briefing.revised'), revised_questions_url %>
 				</div>
 			
-				<div class="tab_subhead"><%= link_to t('menu.documents.name'), newest_documents_url %> (<%= number_with_delimiter(Document.published.filtered.count) %>)</div>
+				<div class="tab_subhead"><%= link_to t('menu.documents.name'), newest_documents_url %> (<%= number_with_delimiter(Document.published.count) %>)</div>
 				<div class="tab_sublinks">
 					<%= link_to t('menu.briefing.yours'), documents_url %>
 					&middot; <%= link_to t('menu.briefing.your_priorities'), your_priorities_documents_url %>
@@ -131,7 +131,7 @@
 				</div>
 			
 				<div class="tab_sublinks">
-						<%= t('menu.briefing.research.needed', :points_name => link_to(t('menu.documents.name').downcase, :controller => "briefing", :action => "documents"), :documents_name => link_to(t('points.name'), :controller => "briefing", :action => "points")) %><br/>
+						<%= t('menu.briefing.research.needed', :questions_name => link_to(t('menu.documents.name').downcase, :controller => "briefing", :action => "documents"), :documents_name => link_to(t('points.name'), :controller => "briefing", :action => "points")) %><br/>
 					<% if current_government.contributors_count > 0 %>
 						<%= link_to t('menu.briefing.research.contributors', :count => number_with_delimiter(current_government.contributors_count)), :controller => "briefing", :action => "contributors" %>
 					<% end %>						
@@ -144,7 +144,7 @@
 		</li>
 		<% else %>
 		<li class="tab3">
-			<span class="tab_header"><%= link_to current_government.briefing_name, newest_points_url %></span>
+			<span class="tab_header"><%= link_to current_government.briefing_name, newest_questions_url %></span>
 		</li>
 		<% end %>
 		<% if logged_in? %>
@@ -332,18 +332,6 @@
 						<%= link_to t('menu.partner.become'), partners_url %>						
 					</div>
 				<% end %>
-				<% if logged_in? and current_user.is_admin? and Partner.current %>
-					<div class="tab_subhead">
-s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
-					</div>
-				<% end %>
-				<div class="tab_sublinks">
-				<% if logged_in? and current_user.is_admin? and Partner.current %>
-					<%= link_to t('menu.partner.account'), edit_partner_url(Partner.current) %>
-					&middot; <%= link_to t('menu.partner.logo'), picture_partner_path(Partner.current) %>
-					&middot; <%= link_to t('menu.partner.email'), email_partner_path(Partner.current) %>
-				<% end %>
-				</div>
 				
 				<% if current_user.is_admin? %>
 					<div class="tab_subhead">

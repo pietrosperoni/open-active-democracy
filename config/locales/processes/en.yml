@@ -3,8 +3,8 @@
 
 en:
   votes_counted: "atkvæði"
-  points_against: "Points against"
-  points_for: "Points for"
+  questions_against: "Points against"
+  questions_for: "Points for"
   no_points: "no talking points"
   new_points: "no new points"
   time_in: "in"

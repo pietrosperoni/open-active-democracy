@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   require_dependency "activity.rb"
   require_dependency "blast.rb" 
   require_dependency "relationship.rb"   
-  require_dependency "capital.rb"
 
   rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
   rescue_from Facebooker::Session::SessionExpired, :with => :fb_session_expired 
@@ -17,7 +16,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   
   # Make these methods visible to views as well
-  helper_method :facebook_session, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :current_branches, :facebook_session, :is_robot?, :js_help
+  helper_method :facebook_session, :government_cache, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :current_branches, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
   before_filter :check_subdomain
@@ -43,9 +42,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def get_layout
-    return false if not is_robot? and not current_government
-    return "basic" if not current_government
-    return current_government.layout 
+    return "esb"
   end
 
   def current_government
@@ -62,23 +59,6 @@ class ApplicationController < ActionController::Base
     end
     Government.current = @current_government
     return @current_government
-  end
-  
-  # Will either fetch the current partner or return nil if there's no subdomain
-  def current_partner
-    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'dev'
-      @current_partner = nil
-      Partner.current = @current_partner
-      return nil
-    else
-      @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
-      Partner.current = @current_partner
-      return @current_partner
-    end
-  end
-  
-  def current_user_endorsements
-		@current_user_endorsements ||= current_user.endorsements.active.by_position.paginate(:include => :priority, :page => session[:endorsement_page], :per_page => 25)
   end
   
   def current_priority_ids
@@ -132,13 +112,6 @@ class ApplicationController < ActionController::Base
     return unless logged_in? and session[:priority_id]
     @priority = Priority.find(session[:priority_id])
     @value = session[:value].to_i
-    if @priority
-      if @value == 1
-        @priority.endorse(current_user,request,current_partner,@referral)
-      else
-        @priority.oppose(current_user,request,current_partner,@referral)
-      end
-    end  
     session[:priority_id] = nil
     session[:value] = nil
   end
@@ -171,10 +144,6 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => "install"
       return
     end
-    if not current_partner and RAILS_ENV == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
-      redirect_to 'http://' + current_government.base_url + request.path_info
-      return
-    end    
   end
   
   def check_referral

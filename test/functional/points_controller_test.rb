@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class PointsControllerTest < ActionController::TestCase
+class QuestionsControllerTest < ActionController::TestCase
   def test_should_get_index
     get :index
     assert_response :success
-    assert_not_nil assigns(:points)
+    assert_not_nil assigns(:questions)
   end
 
   def test_should_get_new
@@ -13,7 +13,7 @@ class PointsControllerTest < ActionController::TestCase
   end
 
   def test_should_create_point
-    assert_difference('Point.count') do
+    assert_difference('Question.count') do
       post :create, :point => { }
     end
 
@@ -36,10 +36,10 @@ class PointsControllerTest < ActionController::TestCase
   end
 
   def test_should_destroy_point
-    assert_difference('Point.count', -1) do
+    assert_difference('Question.count', -1) do
       delete :destroy, :id => points(:one).id
     end
 
-    assert_redirected_to points_path
+    assert_redirected_to questions_path
   end
 end

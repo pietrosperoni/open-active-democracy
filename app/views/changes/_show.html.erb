@@ -1,7 +1,6 @@
 <div class="change" id="change_<%= change.id %>">
 <div class="change_user_pic">
 	<%= render :partial => "users/pic", :locals => {:user => change.user }%>
-	<div class="pc_under"><%= t('pc.name', :capital => change.user.capitals_count, :currency_short_name => current_government.currency_short_name) %></div>
 </div>
 
 <%= link_to change.user.name, change.user %> lagði til yfirtöku fyrir <%= time_ago(change.created_at) %>:<br/>

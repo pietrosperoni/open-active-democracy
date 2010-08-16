@@ -1,7 +1,7 @@
 <% points.each_with_index do |point,i| %>
 	<% quality = nil %>
 	<% if @qualities %>
-		<% quality = @qualities.detect {|e| e.point_id == point.id } %>
+		<% quality = @qualities.detect {|e| e.question_id == point.id } %>
 	<% end %>				
 	<div class="point_item">
 		<h3 class="point_item_hacky"><%=numbering ? "#{i+1}. " : ""%><%= link_to_unless_current h(point.name), point %></h3>
@@ -19,7 +19,7 @@
 		</div>
 		<p><%=point.content%></p>
 		<div class="point_qualities">
-			<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
+			<%= render :partial => "questions/button_small", :locals => {:point => point, :quality => quality} %>
 		</div>
 	</div>
 <% end %>

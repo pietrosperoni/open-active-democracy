@@ -1,15 +1,13 @@
 class Activity < ActiveRecord::Base
-  
-  acts_as_set_partner :table_name=>"activities"
-  
+    
   named_scope :active, :conditions => "activities.status = 'active'"
   named_scope :deleted, :conditions => "activities.status = 'deleted'", :order => "updated_at desc"
   named_scope :for_all_users, :conditions => "is_user_only=false"
 
   named_scope :discussions, :conditions => "activities.comments_count > 0"
   named_scope :changes, :conditions => "change_id is not null"
-  named_scope :points, :conditions => "type like 'ActivityPoint%'", :order => "activities.created_at desc"
-  named_scope :points_and_docs, :conditions => "type like 'ActivityPoint%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
+  named_scope :questions, :conditions => "type like 'ActivityQuestion%'", :order => "activities.created_at desc"
+  named_scope :questions_and_docs, :conditions => "type like 'ActivityQuestion%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
   named_scope :capital, :conditions => "type like '%Capital%'"
   named_scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
   
@@ -24,7 +22,6 @@ class Activity < ActiveRecord::Base
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
   
   belongs_to :user
-  belongs_to :partner
   
   belongs_to :other_user, :class_name => "User", :foreign_key => "other_user_id"
   belongs_to :priority
@@ -32,7 +29,7 @@ class Activity < ActiveRecord::Base
   belongs_to :change
   belongs_to :vote
   belongs_to :tag
-  belongs_to :point
+  belongs_to :question
   belongs_to :revision
   belongs_to :document
   belongs_to :document_revision
@@ -104,8 +101,8 @@ class Activity < ActiveRecord::Base
     attribute_present?("other_user_id")
   end  
   
-  def has_point?
-    attribute_present?("point_id")
+  def has_question?
+    attribute_present?("question_id")
   end
   
   def has_change?
@@ -191,20 +188,6 @@ end
 class ActivityCapitalUserRecruited < Activity
   def name
     I18n.t('activity.capital.user.recruited.name', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
-  end
-end
-
-class ActivityPartnerUserRecruited < Activity
-  
-  def name
-    I18n.t('activity.user.recruited.partner.name', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :partner_url => partner.short_name + '.' + Government.current.base_url)  
-  end
-  
-end
-
-class ActivityCapitalPartnerUserRecruited < Activity
-  def name
-    I18n.t('activity.capital.partner.user.recruited.name', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :partner_url => partner.short_name + '.' + Government.current.base_url)      
   end
 end
 
@@ -329,12 +312,6 @@ end
 class ActivityOppositionFlippedImplicit < Activity
   def name
     I18n.t('activity.endorsement.flipped.implicit.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name) 
-  end
-end
-
-class ActivityPartnerNew < Activity
-  def name
-    I18n.t('activity.partner.new.name', :partner_name => partner.name)
   end
 end
 
@@ -500,91 +477,91 @@ class ActivityPriorityRenamed < Activity
   end
 end
 
-class ActivityPointNew < Activity
+class ActivityQuestionNew < Activity
   
   def name
-    I18n.t('activity.point.new.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)      
+    I18n.t('activity.question.new.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)      
   end
   
 end
 
-class ActivityPointDeleted < Activity
+class ActivityQuestionDeleted < Activity
   def name
-    I18n.t('activity.point.deleted.name', :user_name => user.name, :point_name => point.name)      
+    I18n.t('activity.question.deleted.name', :user_name => user.name, :point_name => point.name)      
   end
 end
 
-class ActivityPointRevisionContent < Activity
+class ActivityQuestionRevisionContent < Activity
   def name
-    I18n.t('activity.point.revision.content.name', :user_name => user.name, :point_name => point.name)      
+    I18n.t('activity.question.revision.content.name', :user_name => user.name, :point_name => point.name)      
   end
 end
 
-class ActivityPointRevisionName < Activity
+class ActivityQuestionRevisionName < Activity
   def name
-    I18n.t('activity.point.revision.name', :user_name => user.name, :point_name => point.name)
+    I18n.t('activity.question.revision.name', :user_name => user.name, :point_name => point.name)
   end
 end
 
-class ActivityPointRevisionOtherPriority < Activity
+class ActivityQuestionRevisionOtherPriority < Activity
   def name
     if revision.has_other_priority?
-      I18n.t('activity.point.revision.link.new.name', :user_name => user.name, :point_name => point.name, :priority_name => revision.other_priority.name)
+      I18n.t('activity.question.revision.link.new.name', :user_name => user.name, :point_name => point.name, :priority_name => revision.other_priority.name)
     else
-      I18n.t('activity.point.revision.link.deleted.name', :user_name => user.name, :point_name => point.name)
+      I18n.t('activity.question.revision.link.deleted.name', :user_name => user.name, :point_name => point.name)
     end
   end
 end
 
-class ActivityPointRevisionWebsite < Activity
+class ActivityQuestionRevisionWebsite < Activity
   def name
     if revision.has_website?
-      I18n.t('activity.point.revision.website.new.name', :user_name => user.name, :point_name => point.name)
+      I18n.t('activity.question.revision.website.new.name', :user_name => user.name, :point_name => point.name)
     else
-      I18n.t('activity.point.revision.website.deleted.name', :user_name => user.name, :point_name => point.name)
+      I18n.t('activity.question.revision.website.deleted.name', :user_name => user.name, :point_name => point.name)
     end
   end
 end
 
-class ActivityPointRevisionSupportive < Activity
+class ActivityQuestionRevisionSupportive < Activity
   def name
-    I18n.t('activity.point.revision.supportive.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
+    I18n.t('activity.question.revision.supportive.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
   end
 end
 
-class ActivityPointRevisionNeutral < Activity
+class ActivityQuestionRevisionNeutral < Activity
   def name
-    I18n.t('activity.point.revision.neutral.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
+    I18n.t('activity.question.revision.neutral.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
   end
 end
 
-class ActivityPointRevisionOpposition < Activity
+class ActivityQuestionRevisionOpposition < Activity
   def name
-    I18n.t('activity.point.revision.opposition.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
+    I18n.t('activity.question.revision.opposition.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
   end
 end
 
-class ActivityPointHelpful < Activity
+class ActivityQuestionHelpful < Activity
   def name
-    I18n.t('activity.point.helpful.name', :user_name => user.name, :point_name => point.name)    
+    I18n.t('activity.question.helpful.name', :user_name => user.name, :point_name => point.name)    
   end
 end
 
-class ActivityPointUnhelpful < Activity
+class ActivityQuestionUnhelpful < Activity
   def name
-    I18n.t('activity.point.unhelpful.name', :user_name => user.name, :point_name => point.name)    
+    I18n.t('activity.question.unhelpful.name', :user_name => user.name, :point_name => point.name)    
   end
 end
 
-class ActivityPointHelpfulDelete < Activity
+class ActivityQuestionHelpfulDelete < Activity
   def name
-    I18n.t('activity.point.helpful.delete.name', :user_name => user.name, :point_name => point.name)    
+    I18n.t('activity.question.helpful.delete.name', :user_name => user.name, :point_name => point.name)    
   end
 end
 
-class ActivityPointUnhelpfulDelete < Activity
+class ActivityQuestionUnhelpfulDelete < Activity
   def name
-    I18n.t('activity.point.unhelpful.delete.name', :user_name => user.name, :point_name => point.name)    
+    I18n.t('activity.question.unhelpful.delete.name', :user_name => user.name, :point_name => point.name)    
   end
 end
 
@@ -594,13 +571,7 @@ class ActivityUserPictureNew < Activity
   end
 end
 
-class ActivityPartnerPictureNew < Activity
-  def name
-    I18n.t('activity.partner.picture.new.name', :user_name => user.name, :partner_name => partner.name)
-  end
-end
-
-class ActivityCapitalPointHelpfulEveryone < Activity
+class ActivityCapitalQuestionHelpfulEveryone < Activity
   def name
     if capital.amount > 0
       I18n.t('activity.capital.point.helpful.everyone.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
@@ -610,7 +581,7 @@ class ActivityCapitalPointHelpfulEveryone < Activity
   end
 end
 
-class ActivityCapitalPointHelpfulEndorsers < Activity
+class ActivityCapitalQuestionHelpfulEndorsers < Activity
   def name
     if capital.amount > 0
       I18n.t('activity.capital.point.helpful.endorsers.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
@@ -620,7 +591,7 @@ class ActivityCapitalPointHelpfulEndorsers < Activity
   end
 end
 
-class ActivityCapitalPointHelpfulOpposers < Activity
+class ActivityCapitalQuestionHelpfulOpposers < Activity
   def name
     if capital.amount > 0
       I18n.t('activity.capital.point.helpful.opposers.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
@@ -630,7 +601,7 @@ class ActivityCapitalPointHelpfulOpposers < Activity
   end
 end
 
-class ActivityCapitalPointHelpfulUndeclareds < Activity
+class ActivityCapitalQuestionHelpfulUndeclareds < Activity
   def name
     if capital.amount > 0
       I18n.t('activity.capital.point.helpful.undeclareds.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
@@ -640,7 +611,7 @@ class ActivityCapitalPointHelpfulUndeclareds < Activity
   end
 end
 
-class ActivityCapitalPointHelpfulDeleted < Activity
+class ActivityCapitalQuestionHelpfulDeleted < Activity
   def name
       I18n.t('activity.capital.point.helpful.deleted.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)        
   end
@@ -806,68 +777,68 @@ end
 class ActivityDocumentNew < Activity
   
   def name
-    I18n.t('activity.point.new.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)
+    I18n.t('activity.question.new.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)
   end
   
 end
 
 class ActivityDocumentDeleted < Activity
   def name
-    I18n.t('activity.point.deleted.name', :user_name => user.name, :point_name => document.name)      
+    I18n.t('activity.question.deleted.name', :user_name => user.name, :point_name => document.name)      
   end
 end
 
 class ActivityDocumentRevisionContent < Activity
   def name
-    I18n.t('activity.point.revision.content.name', :user_name => user.name, :point_name => document.name)      
+    I18n.t('activity.question.revision.content.name', :user_name => user.name, :point_name => document.name)      
   end
 end
 
 class ActivityDocumentRevisionName < Activity
   def name
-    I18n.t('activity.point.revision.name', :user_name => user.name, :point_name => document.name)
+    I18n.t('activity.question.revision.name', :user_name => user.name, :point_name => document.name)
   end
 end
 
 class ActivityDocumentRevisionSupportive < Activity
   def name
-    I18n.t('activity.point.revision.supportive.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
+    I18n.t('activity.question.revision.supportive.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityDocumentRevisionNeutral < Activity
   def name
-    I18n.t('activity.point.revision.neutral.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
+    I18n.t('activity.question.revision.neutral.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityDocumentRevisionOpposition < Activity
   def name
-    I18n.t('activity.point.revision.opposition.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
+    I18n.t('activity.question.revision.opposition.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityDocumentHelpful < Activity
   def name
-    I18n.t('activity.point.helpful.name', :user_name => user.name, :point_name => document.name)    
+    I18n.t('activity.question.helpful.name', :user_name => user.name, :point_name => document.name)    
   end
 end
 
 class ActivityDocumentUnhelpful < Activity
   def name
-    I18n.t('activity.point.unhelpful.name', :user_name => user.name, :point_name => document.name)    
+    I18n.t('activity.question.unhelpful.name', :user_name => user.name, :point_name => document.name)    
   end
 end
 
 class ActivityDocumentHelpfulDelete < Activity
   def name
-    I18n.t('activity.point.helpful.delete.name', :user_name => user.name, :point_name => document.name)    
+    I18n.t('activity.question.helpful.delete.name', :user_name => user.name, :point_name => document.name)    
   end
 end
 
 class ActivityDocumentUnhelpfulDelete < Activity
   def name
-    I18n.t('activity.point.unhelpful.delete.name', :user_name => user.name, :point_name => document.name)    
+    I18n.t('activity.question.unhelpful.delete.name', :user_name => user.name, :point_name => document.name)    
   end
 end
 

@@ -12,10 +12,10 @@
 						<%= link_to t('menu.briefing.priorities', :count => @tag.priorities_count), :action => "show" %>
 					</span>
 				</li>
-				<% if @tag.points_count > 0 %>
+				<% if @tag.questions_count > 0 %>
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.points', :count => @tag.points_count), :action => "points" %>
+						<%= link_to t('menu.briefing.points', :count => @tag.questions_count), :action => "points" %>
 					</span>
 				</li>
 				<% end %>

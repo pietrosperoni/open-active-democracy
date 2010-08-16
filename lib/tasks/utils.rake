@@ -11,6 +11,8 @@ def create_tags(row)
   tags.join(",")
 end
 
+
+
 def create_priority_from_row(row,current_user,partner)
   priority_name = row[0].mb_chars.slice(0..59)
   priority_tags = create_tags(row)
@@ -31,24 +33,24 @@ def create_priority_from_row(row,current_user,partner)
       puts @saved
 
       if @saved
-        @point = Point.new
-        @point.user = current_user
-        @point.priority_id = @priority.id
-        @point.content = point_text
-        @point.name = point_name
-        @point.value = 1
-        @point.website = point_link if point_link and point_link != ""
-        @point.partner_id = partner.id
-        puts @point.inspect
-        @point_saved = @point.save
+        @question = Question.new
+        @question.user = current_user
+        @question.priority_id = @priority.id
+        @question.content = point_text
+        @question.name = point_name
+        @question.value = 1
+        @question.website = point_link if point_link and point_link != ""
+        @question.partner_id = partner.id
+        puts @question.inspect
+        @question_saved = @question.save
       end
-      puts @point_saved
-      if @point_saved
-        if Revision.create_from_point(@point.id,nil)
-          @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
+      puts @question_saved
+      if @question_saved
+        if Revision.create_from_point(@question.id,nil)
+          @quality = @question.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
         end      
       end
-      raise "rollback" if not @point_saved or not @saved
+      raise "rollback" if not @question_saved or not @saved
     end
   rescue => e
     puts "ROLLBACK ERROR ON IMPORT"
@@ -57,6 +59,50 @@ def create_priority_from_row(row,current_user,partner)
 end
 
 namespace :utils do
+  desc "Archive processes"
+  task(:create_esb_tags => :environment) do
+      Tag.destroy_all
+      ["Frjálst vöruflæði",
+      "Frjáls för vinnuafls",
+      "Staðfesturéttur og þjónustufrelsi",
+      "Frjáls för fjármagns",
+      "Opinber útboð",
+      "Félagaréttur",
+      "Hugverkaréttur",
+      "Samkeppnismál",
+      "Fjármálaþjónusta",
+      "Upplýsingatækni og fjölmiðlun",
+      "Landbúnaðar- og byggðastefna",
+      "Matvæla- og hreinlætismál",
+      "Fiskveiðar",
+      "Samgöngur",
+      "Orka",
+      "Skattamál",
+      "Gjaldmiðilssamstarf",
+      "Hagtölur",
+      "Félagsmála- og atvinnustefna",
+      "Iðnstefna",
+      "Evrópsk samgöngunet",
+      "Uppbyggingarstyrkir",
+      "Réttarvarsla og grundvallarréttindi",
+      "Dóms- og innanríkismál",
+      "Vísindi og rannsóknir",
+      "Menntun og menning",
+      "Umhverfismál",
+      "Neytenda- og heilsuvernd",
+      "Tollabandalag",
+      "Utanríkistengsl",
+      "Utanríkis-, öryggis- og varnarmál",
+      "Fjárhagslegt eftirlit",
+      "Framlagsmál",
+      "Stofnanir",
+      "Annað"].each_with_index do |t,i|
+        tag=Tag.new
+        tag.name = t
+        tag.weight = i
+        tag.save
+      end
+  end
   desc "Archive processes"
   task(:archive_processes => :environment) do
       if ENV['current_thing_id']

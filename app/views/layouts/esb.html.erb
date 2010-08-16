@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <title>Umsókn um aðild að Evrópusambandinu | Samráðsvettvangur almennings og stjórnvalda </title>
+        <%= render :partial => "shared/javascripts" %>
+        <%= stylesheet_link_tag "style" %>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <meta http-equiv="Content-Language" content="EN" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="dagny@blekhonnun.is" />
+        <meta name="distribution" content="Global" />
+        <meta name="copyright" content="" />
+        <meta name="robots" content="" />
+    </head>
+    <body>
+        <div id="Wrapper">
+            <!-- Haus -->
+            <div id="Header">
+                <!-- H�grasv��i � haus, geymir tilkynningar og t�knmyndir, g�tu or�i� fleiri �arna -->
+                <div id="Header-right">
+                    <p class="Notify">
+                        <span class="white">45</span>
+                        hreyfingar á málum
+                    </p>
+                    <p class="Resize">
+                        <%=image_tag "resize.gif" %>
+                    </p>
+                </div>
+                <div id="Search">
+                    <input value="leita" />
+                </div>
+            </div><!-- Vinstrid�lkur -->
+            <div id="LeftCol">
+                <!-- L�ppa me� iconum, �au m� setja � css skjali� l�ka ef vill -->
+                <ul>
+                    <li>
+                        <a href="/priorities/new"><%=image_tag "icon.gif" %>Nýtt umræðuefni</a>
+                    </li>
+                    <li>
+                        <a href="/questions/new"><%=image_tag "icon.gif" %>Senda inn spurningu</a>
+                    </li>
+                    <li>
+                        <a href="/documents/new"><%=image_tag "icon.gif" %>Leggja inn umsögn</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="">Dagbók aðalsamningamanns</a>
+                    </li>
+                    <li>
+                        <a href="">Ítarefni oflr.</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Mi�jusv��i -->
+            <div id="MainContent">
+                <!-- Haus � mi�jusv��i -->
+                <div id="Content_wrapper">
+                    <div id="Ddown">
+                        <select>
+                            <option>N&yacute;tt</option>
+                        </select>
+                    </div>
+                    <div id="Tabs">
+                        <ul>
+                            <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
+                                <a href="/priorities/newest">Umræður</a>
+                            </li>
+                            <li <%= controller_name=="questions" ? "class='active'" : "" %>>
+                                <a href="/questions/newest">Spurningar og svör</a>
+                            </li>
+                            <li <%= controller_name=="documents" ? "class='active'" : "" %>>
+                                <a href="/documents/newest">Umsagnir</a>
+                            </li>
+                            <li <%= controller_name=="news" ? "class='active'" : "" %>>
+                                <a href="/news/activities">Allt</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="Content">
+                    	<%=yield%>
+                    </div>
+                </div>
+            </div>
+            <!-- H�grid�lkur -->
+            <div id="RightCol">
+            	<%=flash[:notice]%><br>
+				<%=flash[:error]%>
+         	     <% if logged_in? %>
+                    <%= render :partial => "shared/user_info" %>
+                 <% else %>
+                    <%= render :partial => "shared/login" %>
+                 <% end %>
+                <!-- L�ppa me� titli -->
+                <ul>
+                    <li class="Header">
+                        Kaflar <a class="li-header-txt" href="#">breyta</a>
+                    </li>
+					<% Tag.find(:all, :order=>"weight").each do |tag|%>
+                    <li>
+                        <a href=""><%=tag.name%></a>
+                    </li>
+					<% end %>
+                </ul>
+            </div>
+            <!-- F�tur s��unnar -->
+            <div id="Footer">
+                <div id="Footer-right">
+                    <a href="#">Reglur</a>
+                    <a href="#">Hjálp</a>
+                    <a href="#">Osfr.</a>
+                </div>
+                <div id="Footer-left">
+                    <a href="#">Hafðu samband</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

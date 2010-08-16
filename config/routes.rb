@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
     :unsuspend => :put,
     :activities => :get,
     :comments => :get,
-    :points => :get,
+    :questions => :get,
     :discussions => :get,
     :capital => :get,
     :impersonate => :put,
@@ -69,7 +69,7 @@ ActionController::Routing::Routes.draw do |map|
       :create_short_url => :put,
       :tag => :post, 
       :tag_save => :put, 
-      :points => :get, 
+      :questions => :get, 
       :opposer_points => :get, :endorser_points => :get, :neutral_points => :get, :everyone_points => :get,
       :top_points => :get, :endorsed_points => :get, :opposed_top_points=> :get, :endorsed_top_points => :get,
       :opposer_documents => :get, :endorser_documents => :get, :neutral_documents => :get, :everyone_documents => :get,      
@@ -97,7 +97,7 @@ ActionController::Routing::Routes.draw do |map|
       priorities.resources :changes, :member => { :start => :put, :stop => :put, :approve => :put, :flip => :put, :activities => :get } do |changes|
         changes.resources :votes
       end
-      priorities.resources :points
+      priorities.resources :questions
       priorities.resources :documents
       priorities.resources :ads, :collection => {:preview => :post}, :member => {:skip => :post}
     end
@@ -107,7 +107,7 @@ ActionController::Routing::Routes.draw do |map|
       :collection => { :more => :get }, 
       :member => { :unhide => :get, :flag => :get, :not_abusive => :post, :abusive => :post }
   end 
-  map.resources :points, 
+  map.resources :questions, 
     :member => { :activity => :get, 
         :discussions => :get, 
         :quality => :post, 
@@ -130,7 +130,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :email_templates, :collection => {:preview => :put}  
   map.resources :color_schemes, :collection => {:preview => :put}  
   map.resources :governments, :member => {:apis => :get}
-  map.resources :widgets, :collection => {:priorities => :get, :discussions => :get, :points => :get, :preview_iframe => :get, :preview => :post}
+  map.resources :widgets, :collection => {:priorities => :get, :discussions => :get, :questions => :get, :preview_iframe => :get, :preview => :post}
   map.resources :bulletins, :member => {:add_inline => :post}
   map.resources :branches, :member => {:default => :post} do |branches|
     branches.resources :priorities, :controller => :branch_priorities, :as => "priorities", 
@@ -138,7 +138,7 @@ ActionController::Routing::Routes.draw do |map|
     branches.resources :users, :controller => :branch_users, :as => "users",
     :collection => { :talkative => :get, :twitterers => :get, :newest => :get, :ambassadors => :get}
   end
-  map.resources :searches, :collection => {:points => :get, :documents => :get}
+  map.resources :searches, :collection => {:questions => :get, :documents => :get}
   map.resources :signups, :endorsements, :passwords, :unsubscribes, :notifications, :pages, :about, :tags
   map.resource :session
   map.resources :delayed_jobs, :member => {:top => :get, :clear => :get}

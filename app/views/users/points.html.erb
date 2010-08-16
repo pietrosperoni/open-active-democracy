@@ -1,20 +1,20 @@
 <%= render :partial => "header" %>
 <p>
 
-<% if @points.empty? %>
+<% if @questions.empty? %>
 	<%= t('points.empty')%>
 <% else %>
 
-	<% for point in @points %>
+	<% for point in @questions %>
 		<% quality = nil %>
 		<% if @qualities %>
-			<% quality = @qualities.detect {|e| e.point_id == point.id } %>
+			<% quality = @qualities.detect {|e| e.question_id == point.id } %>
 		<% end %>				
-		<%= render :partial => "points/show_full", :locals => {:point => point, :quality => quality, :revision => nil}%>
+		<%= render :partial => "questions/show_full", :locals => {:point => point, :quality => quality, :revision => nil}%>
 
 	<% end %>
 	
 	<p>
-	<%= will_paginate(@points) %>
+	<%= will_paginate(@questions) %>
 	
 <% end %>

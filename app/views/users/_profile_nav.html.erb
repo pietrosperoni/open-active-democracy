@@ -39,13 +39,13 @@
 			</li>
 		<% end %>			
 
-		<% if @user.documents_count > 0 or @user.points_count > 0 %>		
+		<% if @user.documents_count > 0 or @user.questions_count > 0 %>		
 			<li class="tab5 mega">
 				<span class="tab_header">
-					<%= link_to current_government.briefing_name + " (" + (@user.points_count+@user.documents_count).to_s + ")", points_user_url(@user) %>
+					<%= link_to current_government.briefing_name + " (" + (@user.questions_count+@user.documents_count).to_s + ")", questions_user_url(@user) %>
 				</span>
 				<div class="tab_body">
-					<%= link_to t('menu.briefing.points', :count => @user.points_count), points_user_url(@user) %><br/>
+					<%= link_to t('menu.briefing.points', :count => @user.questions_count), questions_user_url(@user) %><br/>
 					<%= link_to t('menu.briefing.documents', :count => @user.documents_count), documents_user_url(@user) %>
 					<p>
 				</div>
@@ -56,7 +56,7 @@
 				<%= link_to t('menu.news.name'), activities_user_url(@user) %>
 			</span>
 			<div class="tab_body">
-				<%= link_to t('menu.briefing.discussions', :count => @user.points_count), discussions_user_url(@user) %><br/>
+				<%= link_to t('menu.briefing.discussions', :count => @user.questions_count), discussions_user_url(@user) %><br/>
 				<%= link_to current_government.currency_name.titleize, capital_user_url(@user) %><br/>
 				<%= link_to t('menu.priorities.everyone.ads'), ads_user_url(@user) %><br/>
 				<%= link_to t('menu.briefing.all_activity'), activities_user_url(@user) %>

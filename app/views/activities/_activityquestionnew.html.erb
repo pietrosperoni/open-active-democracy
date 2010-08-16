@@ -1,0 +1,4 @@
+<img src="/images/icons/comments_add.png" height="16" width="16" border="0" class="icon">
+<% if activity.question %>
+<%= link_to h(activity.user.login), activity.user %> added <%= link_to activity.question.content_html, activity.question %>. 
+<% end %>

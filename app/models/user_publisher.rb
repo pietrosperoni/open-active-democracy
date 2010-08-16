@@ -67,8 +67,8 @@ class UserPublisher < Facebooker::Rails::Publisher
   def comment(facebook_session, comment, activity)
     priority = activity.priority if activity.has_priority?
     if activity.has_point?
-      object_url = activity.point.show_url
-      object_name = activity.point.name
+      object_url = activity.question.show_url
+      object_name = activity.question.name
     elsif activity.has_document?
       object_url = activity.document.show_url
       object_name = activity.document.name
@@ -94,13 +94,13 @@ class UserPublisher < Facebooker::Rails::Publisher
 #    action_links action_link("Skoða betur","{*point_url*}")      
   end 
   
-  def point(facebook_session, point, priority)
+  def question(facebook_session, question)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} bætti við rökum við #{priority.name} á Skuggaborg: #{point.name_with_type} - #{point.content}"
+    txt_message = "#{facebook_session.user.name} bætti við spurningu: #{question.name_with_type} - #{question.content}"
     from facebook_session.user
     message ''
-    attachment :name => point.name_with_type, :href => point.show_url, :description => txt_message
-    action_links [ :text => 'Rökræða hugmynd', :href => "#{priority.show_url}/top_points"]
+    attachment :name => question.name_with_type, :href => question.show_url, :description => txt_message
+#    action_links [ :text => 'Rökræða hugmynd', :href => "#{priority.show_url}/top_points"]
 #    data :priority_url => priority.show_url, :priority_name => priority.name, :point_url => point.show_url, :government_url => Government.current.homepage_url, :government_name => Government.current.name, :body => point.content, :source => point.website_link, :title => point.name_with_type
   end
   
@@ -110,13 +110,13 @@ class UserPublisher < Facebooker::Rails::Publisher
 #    action_links action_link("Skoða betur","{*document_url*}")  
   end
   
-  def document(facebook_session, document, priority)
+  def document(facebook_session, document)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} bætti við skjali við #{priority.name} á Skuggaborg: #{document.name_with_type} - #{truncate(document.content, :length => 400)}"
+    txt_message = "#{facebook_session.user.name} bætti við umsögn: #{document.name_with_type} - #{truncate(document.content, :length => 400)}"
     from facebook_session.user
     message ''
     attachment :name => document.name_with_type, :href => document.show_url, :description => txt_message
-    action_links [ :text => 'Rökræða hugmynd', :href => "#{priority.show_url}/top_points"]
+#    action_links [ :text => 'Rökræða hugmynd', :href => "#{priority.show_url}/top_points"]
 #    data :priority_url => priority.show_url, :priority_name => priority.name, :document_url => document.show_url, :government_url => Government.current.homepage_url, :government_name => Government.current.name, :body => truncate(document.content, :length => 400), :title => document.name_with_type
   end  
   

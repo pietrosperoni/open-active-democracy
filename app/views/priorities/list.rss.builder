@@ -6,8 +6,7 @@ xml.rss :version => "2.0" do
     xml.link url_for
     for priority in @priorities
       xml.item do
-        xml.title '#' + priority.position.to_s + ' ' + priority.name
-        xml.description render :partial => "priorities/show", :locals => {:priority => priority}
+        xml.title + ' ' + priority.name
         xml.pubDate priority.created_at.to_s(:rfc822)
         xml.link priority_url(priority)
       end

@@ -4,7 +4,7 @@
 	<%= t('notification.comment.name', :sender_name => link_to(notification.sender.name, notification.sender), :comment_name => link_to(notification.notifiable.activity.document.name, activity_comments_url(notification.notifiable.activity) + '#' + notification.notifiable.id.to_s))%>
 
 <% elsif notification.notifiable.activity.has_point? %>
-	<%= t('notification.comment.name', :sender_name => link_to(notification.sender.name, notification.sender), :comment_name => link_to(notification.notifiable.activity.point.name, activity_comments_url(notification.notifiable.activity) + '#' + notification.notifiable.id.to_s))%>
+	<%= t('notification.comment.name', :sender_name => link_to(notification.sender.name, notification.sender), :comment_name => link_to(notification.notifiable.activity.question.name, activity_comments_url(notification.notifiable.activity) + '#' + notification.notifiable.id.to_s))%>
 <% elsif notification.notifiable.activity.has_priority? %>
 
 	<%= t('notification.comment.name', :sender_name => link_to(notification.sender.name, notification.sender), :comment_name => link_to(notification.notifiable.activity.priority.name, activity_comments_url(notification.notifiable.activity) + '#' + notification.notifiable.id.to_s))%>

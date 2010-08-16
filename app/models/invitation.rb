@@ -4,7 +4,6 @@ class Invitation < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
-  belongs_to :partner
   belongs_to :recipient, :class_name => "User", :foreign_key => "to_id"
 
   has_many :activities

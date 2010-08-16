@@ -4,9 +4,9 @@
 			<li class="tab1">
 				<span class="tab_header">
 					<% if logged_in? %>
-					<%= link_to t('menu.points.name'), points_url %>
+					<%= link_to t('menu.points.name'), questions_url %>
 					<% else %>
-					<%= link_to t('menu.points.name'), newest_points_url %>
+					<%= link_to t('menu.points.name'), newest_questions_url %>
 					<% end %>
 				</span>
 			</li>
@@ -35,8 +35,8 @@
 
 <% if ['points','revisions'].include?(params[:controller]) %>
 	<div id="nav_third">
-		<% if @point %>
-			<div id="nav_third_<% if logged_in? and current_user.id == @point.user_id %>1<% elsif ['revisions'].include?(params[:controller]) %>4<% else %>3<% end %>">
+		<% if @question %>
+			<div id="nav_third_<% if logged_in? and current_user.id == @question.user_id %>1<% elsif ['revisions'].include?(params[:controller]) %>4<% else %>3<% end %>">
 		<% else %>
 			<div id="nav_third_<% if ['index'].include?(params[:action]) %>1<% elsif ['your_priorities'].include?(params[:action]) %>2<% elsif ['newest'].include?(params[:action]) %>3<% elsif ['revised'].include?(params[:action]) %>4<% end %>">	
 		<% end %>
@@ -44,25 +44,25 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.yours'), points_url %>
+						<%= link_to t('menu.briefing.yours'), questions_url %>
 					</span>
 				</li>
 
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.your_priorities'), your_priorities_points_url %>
+						<%= link_to t('menu.briefing.your_priorities'), your_priorities_questions_url %>
 					</span>
 				</li>
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.all_points'), newest_points_url %>
+						<%= link_to t('menu.briefing.all_points'), newest_questions_url %>
 					</span>
 				</li>			
 
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.recently_revised'), revised_points_url %>
+						<%= link_to t('menu.briefing.recently_revised'), revised_questions_url %>
 					</span>
 				</li>
 
@@ -120,7 +120,7 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.research.points_needed'), :controller => "briefing", :action => "points" %>
+						<%= link_to t('menu.briefing.research.questions_needed'), :controller => "briefing", :action => "points" %>
 					</span>
 				</li>
 			

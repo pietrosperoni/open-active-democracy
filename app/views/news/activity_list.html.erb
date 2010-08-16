@@ -1,18 +1,6 @@
 <div id="hp_intro"><%= @page_title%></div>
 <p>
 
-<% if not logged_in? %>
-	<%= t('comments.participate_intro', :signup_url => new_user_url)%>
-	<p>
-<% end %>
-<% if logged_in? and (params[:action].include?("activities") or params[:action].include?("discussions")) %>
-	<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>	
-<% end %>
-
-<% if params[:action].include?("network") and logged_in? and current_following_ids.empty? %>
-	<%= blurb("your_network_intro") %>
-<% end %>
-
 <% if not @activities %>
 	<%= t('activities.empty')%>
 <% else %>

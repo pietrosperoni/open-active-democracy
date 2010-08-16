@@ -7,9 +7,6 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 <script type="text/javascript">
 var pageTracker = _gat._getTracker("<%= current_government.google_analytics_code %>");
 pageTracker._setDomainName(".<%= current_government.base_url %>");
-<% if current_partner %>
-pageTracker._setVar('<%= current_partner.short_name %>'); 
-<% end %>
 pageTracker._trackPageview();
 <% if session[:goal] %>
 pageTracker._trackPageview("/goal/<%= session[:goal] %>");

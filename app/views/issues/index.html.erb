@@ -7,8 +7,8 @@
 		</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
 		<div class="priority_action">
 			<a href="/issues/<%= issue.slug %>"><%= t('menu.briefing.priorities', :count => issue.priorities_count) %></a>
-			<% if issue.points_count > 0 %>	
-			&middot; <a href="/issues/<%= issue.slug %>/points"><%= t('menu.briefing.points', :count => issue.points_count) %></a>
+			<% if issue.questions_count > 0 %>	
+			&middot; <a href="/issues/<%= issue.slug %>/points"><%= t('menu.briefing.points', :count => issue.questions_count) %></a>
 			<% end %>
 			<% if issue.documents_count > 0 %>
 			&middot; <a href="/issues/<%= issue.slug %>/documents"><%= t('menu.briefing.documents', :count => issue.documents_count) %></a>

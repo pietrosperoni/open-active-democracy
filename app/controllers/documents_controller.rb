@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
  
   def index
     @page_title = t('document.yours.title')
-    @documents = Document.published.filtered.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @documents = Document.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
       format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
   
   def newest
     @page_title = t('document.newest.title')
-    @documents = Document.published.filtered.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @documents = Document.published.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     @rss_url = url_for :only_path => false, :format => "rss"
     respond_to do |format|
       format.html { render :action => "index" }
@@ -60,25 +60,10 @@ class DocumentsController < ApplicationController
     get_document
     if @document.is_deleted?
       flash[:error] = t('document.deleted')
-      redirect_to @document.priority and return
+      redirect_to "/" and return
     end
     @page_title = @document.name
-    @priority = @document.priority
-    if logged_in? 
-      @quality = @document.qualities.find_by_user_id(current_user.id) 
-    else
-      @quality = nil
-    end
     @documents = nil
-    if @priority
-      if @priority.down_documents_count > 1 and @document.is_down?
-        @documents = @priority.documents.published.down.by_recently_created.find(:all, :conditions => "id <> #{@document.id}", :include => :priority, :limit => 3)
-      elsif @priority.up_documents_count > 1 and @document.is_up?
-        @documents = @priority.documents.published.up.by_recently_created.find(:all, :conditions => "id <> #{@document.id}", :include => :priority, :limit => 3)
-      elsif @priority.neutral_documents_count > 1 and @document.is_neutral?
-        @documents = @priority.documents.published.neutral.by_recently_created.find(:all, :conditions => "id <> #{@document.id}", :include => :priority, :limit => 3)        
-      end
-    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml { render :xml => @document.to_xml(:include => :priority) }
@@ -124,10 +109,8 @@ class DocumentsController < ApplicationController
 
   # GET /priorities/1/documents/new
   def new
-    load_endorsement
-    @document = @priority.documents.new
-    @page_title =  t('document.new.title', :priority_name => @priority.name)
-    @document.value = @endorsement.value if @endorsement
+    @document = Document.new(params[:document])
+    @page_title =  t('document.new.title')
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -141,8 +124,7 @@ class DocumentsController < ApplicationController
 
   # POST /priorities/1/documents
   def create
-    @priority = Priority.find(params[:priority_id])    
-    @document = @priority.documents.new(params[:document])
+    @document = Document.new(params[:document])
     @document.user = current_user
     @saved = @document.save
     respond_to do |format|
@@ -153,7 +135,6 @@ class DocumentsController < ApplicationController
           if facebook_session
             flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document, @priority)
           end          
-          @quality = @document.qualities.find_or_create_by_user_id_and_value(current_user.id,1)
           format.html { redirect_to(@document) }
         end
       else
@@ -249,15 +230,7 @@ class DocumentsController < ApplicationController
     end
   end
   
-  private
-    def load_endorsement
-      @priority = Priority.find(params[:priority_id])    
-      @endorsement = nil
-      if logged_in? # pull all their endorsements on the priorities shown
-        @endorsement = @priority.endorsements.active.find_by_user_id(current_user.id)
-      end    
-    end  
-    
+  private    
     def get_document
       @document = Document.find(params[:id])
     end

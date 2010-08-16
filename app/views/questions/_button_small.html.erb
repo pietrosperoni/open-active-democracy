@@ -13,7 +13,7 @@
 	<% end %>
 <% end %>
 
-<%= render :partial => "points/helpful_count", :locals => {:point => point} %>
+<%= render :partial => "questions/helpful_count", :locals => {:point => point} %>
 
 <% if not quality and logged_in? %>
 	<br><%= t('helpful.question')%>

@@ -1,5 +1,5 @@
-<%= render :partial => "points/header" %>
-<%= render :partial => "points/nav" %>
+<%= render :partial => "questions/header" %>
+<%= render :partial => "questions/nav" %>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
 		
@@ -7,7 +7,7 @@
 			<p>
 			<%= blurb("point_revision_new")%>
 			<p>
-			<% form_for :revision, :url => point_revisions_path(@point)  do |f| %>
+			<% form_for :revision, :url => point_revisions_path(@question)  do |f| %>
 			  <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 			<p>
 		    <%= t('points.new.name.label')%><br />
@@ -48,9 +48,9 @@
 		</td>	
 		
 		<td valign="top" width="150" style="padding-left: 20px;">
-			<%= link_to t('document.revision.new.cancel'), @point %>
+			<%= link_to t('document.revision.new.cancel'), @question %>
 			<p>
-			<%= render :partial => "documents/authors", :locals => {:users => @point.authors } %>	
+			<%= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
 		</td>		
 	
 	</tr>

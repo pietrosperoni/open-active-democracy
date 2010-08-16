@@ -1,10 +1,12 @@
 <img src="/images/fugue/sticky_note_pin.png" height="16" width="16" border="0" class="icon">
-<% if activity.has_point? %>
-	<%= t('activity.bulletin.new.name.known', :user_name => link_to(activity.user.login, activity.user), :discussion_name => link_to(activity.point.name, activity.point))%>
+<% if activity.user %>
+<% if activity.has_question? %>
+	<%= t('activity.bulletin.new.name.known', :user_name => link_to(activity.user.login, activity.user), :discussion_name => link_to(activity.question.name, activity.question))%>
 <% elsif activity.has_document? %>
 	<%= t('activity.bulletin.new.name.known', :user_name => link_to(activity.user.login, activity.user), :discussion_name => link_to(activity.document.name, activity.document))%>
 <% elsif activity.has_priority? %>
 	<%= t('activity.bulletin.new.name.known', :user_name => link_to(activity.user.login, activity.user), :discussion_name => link_to(activity.priority.name, activity.priority))%>
 <% else %>
 	<%= t('activity.bulletin.new.name.unknown', :user_name => link_to(activity.user.login, activity.user))%>
+<% end %>
 <% end %>

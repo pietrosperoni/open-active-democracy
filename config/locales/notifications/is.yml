@@ -65,7 +65,7 @@ is:
                     other: "{{count}} yfirferð skjala"                
         point:
             revision:
-                name: "{{sender_name}} fór yfir {{point_name}}"
+                name: "{{sender_name}} fór yfir "
                 link:
                     one: "Yfirferð 1 umræðupunktar"
                     other: "Yfirferð {{count}} umræðupunkta"                

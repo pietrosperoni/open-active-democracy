@@ -1,6 +1,6 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<% form_tag(points_searches_path, :method => 'get') do %>
+<% form_tag(questions_searches_path, :method => 'get') do %>
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<td valign="middle"><%= text_field_tag "q", params[:q] %></td>
@@ -9,25 +9,25 @@
 </table>
 <% end %>
 <p>
-<% if @points %>
+<% if @questions %>
 	<%= render :partial => "nav" %>
 <% end %>
-<% if not @points %>
-<% elsif @points.empty? %>
+<% if not @questions %>
+<% elsif @questions.empty? %>
 	<%= t('briefing.search.empty') %>
 <% else %>
-	<% if @point_results.total_hits > 15 %>
-	<%= will_paginate WillPaginate::Collection.new((params[:page]||1),(15),@point_results.total_hits) -%>
+	<% if @question_results.total_hits > 15 %>
+	<%= will_paginate WillPaginate::Collection.new((params[:page]||1),(15),@question_results.total_hits) -%>
 	<p>
 	<% end %>
-	<% for point in @points %>
+	<% for point in @questions %>
 		<% quality = nil %>
 		<% if @qualities %>
-			<% quality = @qualities.detect {|e| e.point_id == point.id } %>
+			<% quality = @qualities.detect {|e| e.question_id == point.id } %>
 		<% end %>	
-		<%= render :partial => "points/show_full", :locals => {:point => point, :quality => quality, :revision => nil}%>
+		<%= render :partial => "questions/show_full", :locals => {:point => point, :quality => quality, :revision => nil}%>
 	<% end %>
 
 	<p>
-	<%= will_paginate WillPaginate::Collection.new((params[:page]||1),(15),@point_results.total_hits) -%>
+	<%= will_paginate WillPaginate::Collection.new((params[:page]||1),(15),@question_results.total_hits) -%>
 <% end %>

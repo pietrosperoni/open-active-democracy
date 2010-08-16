@@ -1,14 +1,14 @@
-<%= render :partial => "points/header" %>
-<%= render :partial => "points/nav" %>
+<%= render :partial => "questions/header" %>
+<%= render :partial => "questions/nav" %>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
 		
 		<td valign="top">
 
-			<% if @point.revision_id != @revision.id %>
+			<% if @question.revision_id != @revision.id %>
 			<p>
 			<div class="notice">
-				<%= t('points.show.clean.intro', :revision_url => point_revision_url(@point,@revision), :time_ago => time_ago(@revision.created_at)) %>
+				<%= t('points.show.clean.intro', :revision_url => point_revision_url(@question,@revision), :time_ago => time_ago(@revision.created_at)) %>
 			</div>
 			<% end %>
 

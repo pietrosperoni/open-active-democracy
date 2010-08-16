@@ -1,31 +1,37 @@
-<%= render :partial => "points/header" %>
-<%= render :partial => "points/nav" %>
-
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
 		
 		<td valign="top">
 			<div class="point_content_detail_container">
+			Spurning:<br>
 			<div class="point_content_detail">
-			<%= @point.content_html %>
+			<%= @question.content_html %>
 			</div>
-			<% if @point.has_website? %>
-				<div class="point_source">
-				<%= t('points.source')%> <a href="<%= @point.website_link %>"><%= truncate(@point.website_link,70) %></a>
-				</div>
+			<div class="point_content_detail">
+			<%if @question.answer %>
+			Svar:<br>
+			<%= @question.answer %>
+			<% else%>
+			  Ekkert svar er til við þessari spurningu eins og er.
 			<% end %>
+			<%=link_to "Breyta/Svara","/questions/edit/#{@question.id}" if current_user.is_admin?%>
+			</div>
+
 			</div>		
 			<p>
+				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>	
 			<div class="heading"><%= t('points.show.recent_activity')%></div>
-			<% for activity in @point.activities.active.by_recently_created.find(:all, :limit => 10) %>
+			<div id="activities">
+			<% for activity in @question.activities.active.by_recently_created.find(:all, :limit => 10) %>
 				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>
+			</div>
 			
 		</td>	
 		
 		<td valign="top" width="150" style="padding-left: 20px;">
-			<%= render :partial => "documents/authors", :locals => {:users => @point.authors } %>	
-			<%= render :partial => "points/left_nav" %>
+			<%= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
+			<%= render :partial => "questions/left_nav" %>
 		</td>		
 	
 	</tr>

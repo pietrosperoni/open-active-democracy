@@ -1,0 +1,12 @@
+<!-- Pers�nuuppl�singar -->
+<div id="Person">
+    <span class="Name"><%=current_user.name%></span>
+    <span class="Address"><%=current_user.address%>
+        <br/>
+        <%=current_user.kt%>
+    </span>
+</div>
+<div id="Settings">
+    <span class="Edit"><a href="">Breyta stillingum</a></span>
+    <span class="Logout"><a href="/sessions/destroy">Skrá út</a></span>
+</div>

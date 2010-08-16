@@ -18,9 +18,9 @@ module ApplicationHelper
   end
 
   def revisions_sentence(user)
-    return "" if user.points_count+user.documents_count+user.revisions_count == 0
+    return "" if user.questions_count+user.documents_count+user.revisions_count == 0
     r = []
-    r << link_to(t('menu.briefing.points', :count => user.points_count), points_user_url(user)) if user.points_count > 0 
+    r << link_to(t('menu.briefing.points', :count => user.questions_count), questions_user_url(user)) if user.questions_count > 0 
     r << link_to(t('menu.briefing.documents', :count => user.documents_count), documents_user_url(user)) if user.documents_count > 0     
     r << t('menu.briefing.revisions', :count => user.revisions_count) if user.revisions_count > 0
     t('document.revision.sentence', :sentence => r.to_sentence)
@@ -54,7 +54,7 @@ module ApplicationHelper
 				r << link_to(t('notification.contact.joined.link', :count => u[1]), :controller => "inbox", :action => "notifications")
 			elsif u[0] == 'NotificationDocumentRevision' 
 				r << link_to(t('notification.document.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
-			elsif u[0] == 'NotificationPointRevision' 
+			elsif u[0] == 'NotificationQuestionRevision' 
 				r << link_to(t('notification.point.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
 			elsif u[0] == 'NotificationPriorityFinished' 
 				r << link_to(t('notification.priority.finished.link', :count => u[1]), yours_finished_priorities_url)

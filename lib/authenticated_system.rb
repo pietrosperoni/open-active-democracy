@@ -137,7 +137,7 @@ module AuthenticatedSystem
           return u
         end
         RAILS_DEFAULT_LOGGER.info("LOGIN: About to create")          
-        u = User.create_from_facebook(facebook_session,current_partner,request)
+        u = User.create_from_facebook(facebook_session,request)
         if u
           session[:goal] = 'signup'
           return u

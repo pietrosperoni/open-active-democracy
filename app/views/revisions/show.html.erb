@@ -1,5 +1,5 @@
-<%= render :partial => "points/header" %>
-<%= render :partial => "points/nav" %>
+<%= render :partial => "questions/header" %>
+<%= render :partial => "questions/nav" %>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
 		
@@ -8,7 +8,7 @@
 			<% if @revision.attribute_present?("content_diff")%>
 				<p>
 				<div class="notice">
-					<%= t('points.show.intro', :clean_url => clean_point_revision_url(@point,@revision))%>
+					<%= t('points.show.intro', :clean_url => clean_point_revision_url(@question,@revision))%>
 				</div>
 				<p>
 				<div class="point_content_detail">
@@ -23,7 +23,7 @@
 			<% else %>
 			<p>
 			<div class="notice">
-				<%= t('revisions.errors.processing', :clean_url => clean_point_revision_url(@point,@revision))%>
+				<%= t('revisions.errors.processing', :clean_url => clean_point_revision_url(@question,@revision))%>
 			</div>
 			<% end %>
 			<p>
