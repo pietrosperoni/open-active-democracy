@@ -24,48 +24,7 @@ class QuestionsController < ApplicationController
       format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end
   end  
-  
-  def for_and_against
-  	@page_title = t('points.for_and_against.title', :government_name => current_government.name)
-    @priority=Priority.find(params[:id])
-  	@questions_new_up = @priority.points.published.by_recently_created.up_value.five
-  	@questions_new_down = @priority.points.published.by_recently_created.down_value.five
-  	@questions_top_up = @priority.points.published.by_helpfulness.up_value.five
-  	@questions_top_down = @priority.points.published.by_helpfulness.down_value.five
-  	# @rss_url = url_for :only_path => false, :format => "rss"
-  	respond_to do |format|
-  		format.html { render :action => "for_and_against" }
-  		#format.rss { render :template => "rss/points" }
-  		#format.xml { render :xml => @questions.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
-  		#format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
-  		format.js do
-  			render :update do |page|
-  				page.replace_html 'pro_top', :partial => "brbox", :locals => {:id => "pro_top", :questions => @questions_top_up}
-  				page.replace_html 'con_top', :partial => "brbox", :locals => {:id => "con_top", :questions => @questions_top_down}
-  				page.replace_html 'pro_new', :partial => "brbox", :locals => {:id => "pro_new", :questions => @questions_new_up}
-  				page.replace_html 'con_new', :partial => "brbox", :locals => {:id => "con_new", :questions => @questions_new_down}
-  			end
-  		end
-  	end
-  end  	
-
-  def all_points
-  	if params[:foragainst] == "yes"
-  		@questions_new = Question.published.up.by_recently_created :include => :priority
-  		@questions_top = Question.published.up.top :include => :priority
-  		@yesno = "J&aacute;"
-  	elsif params[:foragainst] == "no"
-  		@questions_new = Question.published.down.by_recently_created :include => :priority
-  		@questions_top = Question.published.down.top :include => :priority	
-  		@yesno = "Nei"
-  	end
-  	
-  	@page_title = t('points.for_and_against.title', :government_name => current_government.name)
-  	respond_to do |format|
-  		format.html { render :action => "all_points" }
-  	end
-  end
-  
+ 
   def your_priorities
     @page_title = t('points.your_priorities.title', :government_name => current_government.name)
     if current_user.endorsements_count > 0    

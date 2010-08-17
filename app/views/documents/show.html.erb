@@ -10,11 +10,6 @@
 				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>
 			
-		</td>	
-		
-		<td valign="top" width="150" style="padding-left: 20px;">
-			<%= render :partial => "documents/authors", :locals => {:users => @document.authors } %>	
-			<%= render :partial => "documents/left_nav" %>
 		</td>		
 	
 	</tr>

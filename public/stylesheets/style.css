@@ -83,7 +83,15 @@ a:hover {			color: #3399ff; text-decoration:underline; }
 	.Edit {			margin:0 0 0 8px;  }
 	.Logout {		margin:0 0 0 8px;   }
 	
-	
+/*   */	
+#activities {
+border:0px solid #DDDDDD !important;
+margin-bottom: 10px;
+position: relative;
+	right: 6px;
+	min-height: 20px;
+}
+
 	
 	
 /*		Classes				*/
