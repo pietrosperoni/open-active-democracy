@@ -1,5 +1,5 @@
 <img src="/images/fugue/sticky_note_pin.png" height="16" width="16" border="0" class="icon">
-<% if activity.has_point? %>
+<% if activity.has_question? %>
 	<%= t('activity.bulletin.new.nouser.known', :discussion_name => link_to(activity.question.name, activity.question)) %>
 <% elsif activity.has_document? %>
 	<%= t('activity.bulletin.new.nouser.known', :discussion_name => link_to(activity.document.name, activity.document)) %>

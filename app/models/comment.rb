@@ -48,7 +48,7 @@ class Comment < ActiveRecord::Base
       end
     end
     if self.activity.comments_count == 1 # this is the first comment, so need to update the discussions_count as appropriate
-      if self.activity.has_point? 
+      if self.activity.has_question? 
         Question.update_all("discussions_count = discussions_count + 1", "id=#{self.activity.question_id}")
       end
       if self.activity.has_document?
@@ -83,7 +83,7 @@ class Comment < ActiveRecord::Base
 
     self.user.decrement!("comments_count")
     if self.activity.comments_count == 0
-      if self.activity.has_point? and self.activity.question
+      if self.activity.has_question? and self.activity.question
         self.activity.question.decrement!(:discussions_count)
       end
       if self.activity.has_document? and self.activity.document
@@ -138,7 +138,7 @@ class Comment < ActiveRecord::Base
   end
   
   def parent_name 
-    if activity.has_point?
+    if activity.has_question?
       user.login + ' commented on ' + activity.question.name
     elsif activity.has_document?
       user.login + ' commented on ' + activity.document.name

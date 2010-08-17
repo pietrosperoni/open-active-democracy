@@ -187,12 +187,6 @@ class QuestionsController < ApplicationController
   def discussions
     @question = Question.find(params[:id])
     @page_title = t('points.discussions.title', :point_name => @question.name)
-    @priority = @question.priority
-    if logged_in? 
-      @quality = @question.point_qualities.find_by_user_id(current_user.id) 
-    else
-      @quality = nil
-    end
     @activities = @question.activities.active.discussions.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "activity" }

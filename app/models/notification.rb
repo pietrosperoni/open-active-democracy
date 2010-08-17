@@ -144,7 +144,7 @@ class NotificationComment < Notification
   def name
     if notifiable.activity.has_document?
       I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.document.name)
-    elsif notifiable.activity.has_point?
+    elsif notifiable.activity.has_question?
       I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.question.name)      
     elsif notifiable.activity.has_priority?
       I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.priority.name)      

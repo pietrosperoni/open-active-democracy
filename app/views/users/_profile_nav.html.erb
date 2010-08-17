@@ -15,13 +15,6 @@
 			</span>
 		</li>
 		<% end %>
-		<% if @user.endorsements_count > 5 %>
-		<li class="tab3">
-			<span class="tab_header">
-				<%= link_to t('menu.priorities.name') + " (" + @user.endorsements_count.to_s + ")", priorities_user_url(@user) %>
-			</span>
-		</li>
-		<% end %>
 		<% if @user.followings_count > 0 or @user.followers_count > 0 %>
 			<li class="tab4 mega">
 				<span class="tab_header">		
@@ -75,9 +68,6 @@
 				</span>
 				<div class="tab_body">
 					<%= link_to t('menu.profile.edit.name'), edit_user_url(@user) %><br/>
-					<% if current_government.is_legislators? %>
-						<%= link_to t('menu.profile.legislators.name'), legislators_user_url(@user) %><br/>
-					<% end %>
  					<%= link_to t('menu.profile.signups.name'), signups_user_url(@user) %><br/>
 					<% if @user.is_active? %>
 						<% if @user.is_pending? %>

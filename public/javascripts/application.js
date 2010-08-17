@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
 	
 	jQuery("abbr[class*=timeago]").timeago();	
 	jQuery(":input[type=textarea]").textCounting({lengthExceededClass: 'count_over'});
-	jQuery("input#priority_name, input#change_new_priority_name, input#point_other_priority_name, input#revision_other_priority_name, input#right_priority_box").autocomplete("/priorities.js");
+	//jQuery("input#priority_name, input#change_new_priority_name, input#point_other_priority_name, input#revision_other_priority_name, input#right_priority_box").autocomplete("/priorities.js");
 	jQuery("input#user_login_search, input#government_official_user_name").autocomplete("/users.js");
 	jQuery('#bulletin_content, #blurb_content, #message_content, #document_content, #email_template_content, #page_content').autoResize({extraSpace : 20})
 	

@@ -62,6 +62,9 @@
                     </div>
                     <div id="Tabs">
                         <ul>
+                            <li <%= controller_name=="news" ? "class='active'" : "" %>>
+                                <a href="/news/activities">Allt</a>
+                            </li>
                             <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
                                 <a href="/priorities/newest">Umræður</a>
                             </li>
@@ -70,9 +73,6 @@
                             </li>
                             <li <%= controller_name=="documents" ? "class='active'" : "" %>>
                                 <a href="/documents/newest">Umsagnir</a>
-                            </li>
-                            <li <%= controller_name=="news" ? "class='active'" : "" %>>
-                                <a href="/news/activities">Allt</a>
                             </li>
                         </ul>
                     </div>

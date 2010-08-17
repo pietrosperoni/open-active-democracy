@@ -14,7 +14,6 @@
 <div id="profile_name">
 	<% if params[:action] == 'show' %>
 		<span class="profile_name"><%= @user.name %></span>
-		<span class="profile_pc"><%= link_to @user.capitals_count.to_s + current_government.currency_short_name, capital_user_url(@user) %></span>
 	<% else %>
 		<span class="profile_name"><%= @page_title %></span>	
 	<% end %>
@@ -38,9 +37,6 @@
 	</span>
 	<% end %>
 	
-	<% if @user.position > 0 %>
-		<%= t('users.influential.name', :position => @user.position)%> &middot;
-	<% end %>	
 	<%= t('users.joined', :time_ago => time_ago(@user.created_at)) %>
 	<% if @user.attribute_present?("loggedin_at") %>
 		&middot; <%= t('users.last_visit', :time_ago => time_ago(@user.loggedin_at)) %>

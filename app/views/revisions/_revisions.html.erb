@@ -6,7 +6,7 @@
 		<%= render :partial => "users/pic", :locals => {:user => revision.user}%>
 	</td><td valign="top" style="padding-left: 5px;">
 		<% if revision.user.status == 'suspended' or revision.user.status == 'deleted' %><strike><% end %>
-		<%= link_to_unless_current t('revisions.user', :user_name => revision.user.name), point_revision_url(@question,revision) %>
+		<%= link_to_unless_current t('revisions.user', :user_name => revision.user.name), question_revision_url(@question,revision) %>
 		<% if revision.user.status == 'suspended' or revision.user.status == 'deleted' %></strike><% end %>		
 		<div class="profile_small"><%= time_ago(revision.created_at) %></div>
 	</td></tr>

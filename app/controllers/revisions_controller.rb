@@ -1,6 +1,6 @@
 class RevisionsController < ApplicationController
 
-  before_filter :get_point
+  before_filter :get_question
   before_filter :login_required, :except => [:show, :clean]
   before_filter :admin_required, :only => [:destroy, :update, :edit]
 
@@ -40,7 +40,6 @@ class RevisionsController < ApplicationController
     @revision.content = @question.content
     @revision.website = @question.website
     @revision.value = @question.value
-    @revision.other_priority = @question.other_priority
     @page_title = t('points.revision.new.title', :point_name => @question.name)    
     respond_to do |format|
       format.html # new.html.erb
@@ -67,12 +66,6 @@ class RevisionsController < ApplicationController
             @comment = activity.comments.new(params[:comment])
             @comment.user = current_user
             @comment.request = request
-            if activity.priority
-              # if this is related to a priority, check to see if they endorse it
-              e = activity.priority.endorsements.active_and_inactive.find_by_user_id(@comment.user.id)
-              @comment.is_endorser = true if e and e.is_up?
-              @comment.is_opposer = true if e and e.is_down?
-            end
             @comment.save_with_validation(false)            
           end
         end
@@ -110,9 +103,8 @@ class RevisionsController < ApplicationController
   end
   
   protected
-  def get_point
+  def get_question
     @question = Question.find(params[:question_id])
-    @priority = @question.priority
   end
   
 end

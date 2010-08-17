@@ -113,12 +113,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     @page_title = t('users.show.title', :user_name => @user.name, :government_name => current_government.name)
-    @priorities = @user.endorsements.active.find(:all, :include => :priority, :limit => 5)
-    @endorsements = nil
-    get_following
-    if logged_in? # pull all their endorsements on the priorities shown
-      @endorsements = Endorsement.find(:all, :conditions => ["priority_id in (?) and user_id = ? and status='active'", @priorities.collect {|c| c.priority_id},current_user.id])
-    end    
     @activities = @user.activities.active.by_recently_created.paginate :include => :user, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html

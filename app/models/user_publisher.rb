@@ -66,7 +66,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   
   def comment(facebook_session, comment, activity)
     priority = activity.priority if activity.has_priority?
-    if activity.has_point?
+    if activity.has_question?
       object_url = activity.question.show_url
       object_name = activity.question.name
     elsif activity.has_document?
