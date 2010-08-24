@@ -1,8 +1,7 @@
 <%=@priority.name%><br>
-<%=@priority.description%>
 	<div class="heading"><%= t('priorities.recent_activity')%></div>
 	<div id="activities">
-		<% for activity in @activities %>
+		<% @activities.each do |activity| %>
 			<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>
 		<% end %>
 	</div>

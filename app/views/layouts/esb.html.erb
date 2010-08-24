@@ -15,7 +15,7 @@
         <div id="Wrapper">
             <!-- Haus -->
             <div id="Header">
-                <!-- H�grasv��i � haus, geymir tilkynningar og t�knmyndir, g�tu or�i� fleiri �arna -->
+                <!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->
                 <div id="Header-right">
                     <p class="Notify">
                         <span class="white">45</span>
@@ -28,9 +28,9 @@
                 <div id="Search">
                     <input value="leita" />
                 </div>
-            </div><!-- Vinstrid�lkur -->
+            </div><!-- Vinstridálkur -->
             <div id="LeftCol">
-                <!-- L�ppa me� iconum, �au m� setja � css skjali� l�ka ef vill -->
+                <!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul>
                     <li>
                         <a href="/priorities/new"><%=image_tag "icon.gif" %>Nýtt umræðuefni</a>
@@ -50,10 +50,19 @@
                         <a href="">Ítarefni oflr.</a>
                     </li>
                 </ul>
+				<!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
+				<%=flash[:notice]%><br>
+				<%=flash[:error]%>
+         	     <% if logged_in? %>
+                    <%= render :partial => "shared/user_info" %>
+                 <% else %>
+                    <%= render :partial => "shared/login" %>
+                 <% end %>
+				
             </div>
-            <!-- Mi�jusv��i -->
+            <!-- Miðjusvæðið -->
             <div id="MainContent">
-                <!-- Haus � mi�jusv��i -->
+                <!-- Haus í miðjusvæði -->
                 <div id="Content_wrapper">
                     <div id="Ddown">
                         <select>
@@ -81,16 +90,10 @@
                     </div>
                 </div>
             </div>
-            <!-- H�grid�lkur -->
+            <!-- Hægridálkur -->
             <div id="RightCol">
-            	<%=flash[:notice]%><br>
-				<%=flash[:error]%>
-         	     <% if logged_in? %>
-                    <%= render :partial => "shared/user_info" %>
-                 <% else %>
-                    <%= render :partial => "shared/login" %>
-                 <% end %>
-                <!-- L�ppa me� titli -->
+            	
+                <!-- Lúppa með titli -->
                 <ul>
                     <li class="Header">
                         Kaflar <a class="li-header-txt" href="#">breyta</a>
