@@ -1,0 +1,313 @@
+<html>
+	<head>
+		<title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar</title>
+		<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta http-equiv="Content-Language" content="EN" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="dagny@blekhonnun.is" />
+
+		<meta name="distribution" content="Global" />
+		<meta name="copyright" content="" />
+		<meta name="robots" content="" />
+		
+		
+
+	</head>
+	<body>
+	
+	<div id="wrapper">
+	
+		<!-- Haus -->
+		<div id="header">
+			
+			<!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->
+
+			<div id="header-right">
+			
+				<img src="img/dagbok_adal.jpg" border="0" alt="" />
+			</div>
+			<div id="search"><input value="Leitarorð" class="input" /><input type="submit" value="leita" /></div>
+		</div>	
+		<!-- Vinstridálkur -->
+		
+	<div id="leftCol">
+		<!-- Persónuupplýsingar -->
+			<div id="person">
+
+				<span class="profile_image"><img src="img/profile01.jpg" border="1" alt="" /></span>
+				<span class="profile_name">Þórhallur Hallgrímur Jóhannsson</span>
+				<br />
+				<span class="profile_info">kt. 2807381923</span>
+			</div>
+			<div id="settings">
+				<span class="profile_edit"><a href="#"><img src="img/profile_edit.gif" border="0" alt="" /></a></span>
+				<span class="profile_logout"><a href="#"><img src="img/profile_logout.gif" border="0" alt="" /></a></span>
+
+				<div class="profile_actions">
+					<div class="actions_number">32</div>
+					<div class="actions_text">hreyfingar <br />á málum</div>
+				</div>
+			</div>	
+		<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
+		<ul class="action">
+			<li><a href=""><img src="img/icon.gif" align="top" border="0" alt="" /> Taka þátt í umræðu</a></li>
+			<li><a href=""><img src="img/icon.gif" align="top" border="0" alt="" /> Senda inn spurningu</a></li>
+			<li><a href=""><img src="img/icon.gif" align="top" border="0" alt="" /> Leggja inn umsögn</a></li>
+		</ul>
+
+		<!-- Lúppa með rss -->
+
+		<div class="left_box">
+		<img src="img/rss.gif" border="0" alt="" align="right" />
+
+		<h4>Frá samninganefnd</h4>
+		<ul>
+			<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+			<li><a href="#">consectetur adipiscing elit.</a></li>
+			<li><a href="#">Quisque sed enim sapien.</a></li>
+			<li><a href="#">Praesent a quam lectus, vitae</a></li>
+
+			<li><a href="#">interdum eros. Donec nec sem</a></li>
+		</ul>		
+		
+		</div>
+		
+		<div class="left_box">
+		<img src="img/rss.gif" border="0" alt="" align="right" />
+		<h4>Af vefnum</h4>
+		<ul>
+			<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+
+			<li><a href="#">consectetur adipiscing elit</a></li>
+			<li><a href="#">Quisque sed enim sapien.</a></li>
+			<li><a href="#">Praesent a quam lectus, vitae</a></li>
+			<li><a href="#">Interdum eros. Donec nec sem</a></li>
+		</ul>		
+		
+		</div>
+		
+		<div class="left_box">
+
+		<img src="img/facebook.gif" border="0" alt="" />
+		<ul>
+			<li>Þú getur tengt þig við Facebook aðganginn þinn eða sett inn mynd af þér beint á þennan vef</li>
+		</ul>		
+		
+		</div>
+		
+		
+		
+		</div>
+		<!-- Haus á miðjusvæði -->
+		<div id="tabs">
+
+				<ul id="right_tabs">
+					<li><a href="#">Staða samnings</a></li>
+					<li><a href="#">Ítarefni</a></li>
+				</ul>
+				<ul>
+					<li><a href="#">Allt</a></li>
+					<li class="active"><a href="#">Umræður</a></li>
+
+					<li><a href="#">Spurningar og svör</a></li>
+					<li><a href="#">Umsagnir</a></li>
+				</ul>
+		</div>
+		
+		<!-- Miðjusvæði -->
+		<div id="mainContent">
+		
+				<div id="subfilters">
+				
+					<a href="#">Nýtt</a>
+
+					<a href="#">Mín skrif</a>
+				</div>
+				
+				<!-- Aðal textasvæði -->
+				<div id="content">
+				
+				<!-- Entry box -->
+					<div class="entry_box">
+						<span class="entry_icons">
+							<img src="img/entry_email.gif" border="0" alt="" />
+
+							<img src="img/entry_bookmark.gif" border="0" alt="" />
+							<img src="img/entry_facebook.gif" border="0" alt="" />
+							<img src="img/entry_twitter.gif" border="0" alt="" />																				
+						</span>
+						<img src="img/profile01.jpg" border="0" alt="" align="left" />
+						<h4><a href="#">Leggja niður mötuneyti og gera samninga við veitingastaði</a></h4>
+						<span class="entry_profile"><a href="#">Sigurður Egilsson</a> - 4 tímar síðan - 10  - Landbúnaðar- og byggðastefna</span>
+
+						<p>Leggja niður mötuneyti á vegum borgarinnar - amk þar sem því er við komið og veitingastaðir nálægt. útbúa kort sem gilda á veitingastaði.. Leggja niður mötuneyti á vegum borgarinnar -</p>
+					</div>
+				<!-- Comment box -->	
+					<div class="comment_box">
+						<img src="img/profile03.gif" border="0" alt="" align="left" />
+						<span class="entry_profile"><a href="#">Samninganefnd</a> - 4 tímar síðan - 10</span>
+						<p>Farið verði í stórátak í vistvænum samgöngum í borginni í samvinnu við ríkið og hugsanlega með styrk frá ESB. Með vistvænum samgöngum er þá átt við gangangdi- og hjólandi vegfar-endur og almenningssamgöngur. <a href="#" class="readmore">Lesa meira</a></p>
+
+					</div>
+				
+				<!-- Comment box -->	
+					<div class="comment_box">
+						<img src="img/profile02.gif" border="0" alt="" align="left" />
+						<span class="entry_profile"><a href="#">Samninganefnd</a> - 4 tímar síðan - 10</span>
+						<p>Farið verði í stórátak í vistvænum samgöngum í borginni í samvinnu við ríkið og hugsanlega með styrk frá ESB. Með vistvænum samgöngum er þá átt við gangangdi- og hjólandi vegfar-endur og almenningssamgöngur. <a href="#" class="readmore">Lesa meira</a></p>
+					</div>
+
+					<!-- Comment box -->	
+					<div class="comment_box">
+						<img src="img/profile02.gif" border="0" alt="" align="left" />
+						<span class="entry_profile"><a href="#">Samninganefnd</a> - 4 tímar síðan - 10</span>
+						<p>Farið verði í stórátak í vistvænum samgöngum í borginni í samvinnu við ríkið og hugsanlega með styrk frá ESB. Með vistvænum samgöngum er þá átt við gangangdi- og hjólandi vegfar-endur og almenningssamgöngur. <a href="#" class="readmore">Lesa meira</a></p>
+					</div>
+					
+					<!-- Comment box -->	
+					<div class="answer_box">
+
+						<p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p>
+					</div>
+				
+					<!-- Entry box -->
+					<div class="entry_box">
+						<span class="entry_icons">
+							<img src="img/entry_email.gif" border="0" alt="" />
+							<img src="img/entry_bookmark.gif" border="0" alt="" />
+							<img src="img/entry_facebook.gif" border="0" alt="" />
+
+							<img src="img/entry_twitter.gif" border="0" alt="" />																				
+						</span>
+						<img src="img/profile01.jpg" border="0" alt="" align="left" />
+						<h4><a href="#">Leggja niður mötuneyti og gera samninga við veitingastaði</a></h4>
+						<span class="entry_profile"><a href="#">Sigurður Egilsson</a> - 4 tímar síðan - 10  - Landbúnaðar- og byggðastefna</span>
+						<p>Leggja niður mötuneyti á vegum borgarinnar - amk þar sem því er við komið og veitingastaðir nálægt. útbúa kort sem gilda á veitingastaði.. Leggja niður mötuneyti á vegum borgarinnar -</p>
+					</div>
+
+				<!-- Comment box -->	
+					<div class="comment_box">
+						<img src="img/profile03.gif" border="0" alt="" align="left" />
+						<span class="entry_profile"><a href="#">Samninganefnd</a> - 4 tímar síðan - 10</span>
+						<p>Farið verði í stórátak í vistvænum samgöngum í borginni í samvinnu við ríkið og hugsanlega með styrk frá ESB. Með vistvænum samgöngum er þá átt við gangangdi- og hjólandi vegfar-endur og almenningssamgöngur. <a href="#" class="readmore">Lesa meira</a></p>
+					</div>
+				
+				<!-- Comment box -->	
+					<div class="comment_box">
+
+						<img src="img/profile02.gif" border="0" alt="" align="left" />
+						<span class="entry_profile"><a href="#">Samninganefnd</a> - 4 tímar síðan - 10</span>
+						<p>Farið verði í stórátak í vistvænum samgöngum í borginni í samvinnu við ríkið og hugsanlega með styrk frá ESB. Með vistvænum samgöngum er þá átt við gangangdi- og hjólandi vegfar-endur og almenningssamgöngur. <a href="#" class="readmore">Lesa meira</a></p>
+					</div>
+					<!-- Comment box -->	
+					<div class="comment_box">
+						<img src="img/profile02.gif" border="0" alt="" align="left" />
+
+						<span class="entry_profile"><a href="#">Samninganefnd</a> - 4 tímar síðan - 10</span>
+						<p>Farið verði í stórátak í vistvænum samgöngum í borginni í samvinnu við ríkið og hugsanlega með styrk frá ESB. Með vistvænum samgöngum er þá átt við gangangdi- og hjólandi vegfar-endur og almenningssamgöngur. <a href="#" class="readmore">Lesa meira</a></p>
+					</div>
+					
+					<!-- Comment box -->	
+					<div class="answer_box">
+						<p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p>
+
+					</div>
+					
+					
+				<!-- Entry box -->
+				<div class="entry_box">
+						<span class="entry_icons">
+							<img src="img/entry_email.gif" border="0" alt="" />
+							<img src="img/entry_bookmark.gif" border="0" alt="" />
+							<img src="img/entry_facebook.gif" border="0" alt="" />
+							<img src="img/entry_twitter.gif" border="0" alt="" />																				
+						</span>
+
+						<img src="img/profile01.jpg" border="0" alt="" align="left" />
+						<h4><a href="#">Leggja niður mötuneyti og gera samninga við veitingastaði</a></h4>
+						<span class="entry_profile"><a href="#">Sigurður Egilsson</a> - 4 tímar síðan - 10  - Landbúnaðar- og byggðastefna</span>
+						<p>Leggja niður mötuneyti á vegum borgarinnar - amk þar sem því er við komið og veitingastaðir nálægt. útbúa kort sem gilda á veitingastaði.. Leggja niður mötuneyti á vegum borgarinnar -</p>
+					</div>
+
+				
+				</div>
+
+		</div>
+		</div>
+		
+		<!-- Hægridálkur -->
+		
+		<div id="rightCol">
+		
+		
+			<h4>Utan EES</h4>
+		
+		<ul>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Frjálst vöruflæði</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Frjáls för vinnuafls</a></li>
+
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Staðfesturéttur og þjónustufrelsi</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Frjáls för fjármagns</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Opinber útboð</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Félagaréttur</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Hugverkaréttur</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Samkeppnismál</a></li>
+
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Fjármálaþjónusta</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_utan">Upplýsingatækni og fjölmiðlun</a></li>
+		</ul>
+			<h4>Að hluta í EES</h4>
+		<ul>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Landbúnaðar- og byggðastefna</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Matvæla- og hreinlætismál</a></li>
+
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Fiskveiðar</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Samgöngur</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Orka</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Skattamál</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Gjaldmiðilssamstarf</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_hluta">Hagtölur</a></li>
+
+		</ul>
+		
+			<h4>Í EES</h4>
+		<ul>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Félagsmála- og atvinnustefna</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Iðnstefna</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Evrópsk samgöngunet</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Uppbyggingarstyrkir</a></li>
+
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Réttarvarsla og grundvallarréttindi</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Dóms- og innanríkismál</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Vísindi og rannsóknir</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Menntun og menning</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Umhverfismál</a></li>
+			<li><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Neytenda- og heilsuvernd</a></li>
+
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Tollabandalag</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Utanríkistengsl</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Utanríkis-, öryggis- og varnarmál</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Fjárhagslegt eftirlit</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Framlagsmál</a></li>
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Stofnanir</a></li>
+
+			<li><input type="checkbox" value="" class="chapter" /><img src="img/chapter_info.gif" border="0" alt="" align="right" /><a href="#" class="chapter_innan">Annað</a></li>
+		<li><input type="submit" value="Velja allt" /></li>
+		
+		
+		
+		</div>
+		<!-- Fótur síðunnar -->
+		<div id="footer">
+			<div id="footer-right"><a href="#">Reglur</a>  <a href="#">Hjálp</a>  <a href="#">Osfr.</a></div>
+
+			<div id="footer-left"><a href="#">Hafðu samband</a></div>
+			
+		
+		</div>
+	</div>
+	
+	</body>
+</html>

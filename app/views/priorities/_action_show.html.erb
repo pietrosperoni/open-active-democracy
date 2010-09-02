@@ -1,5 +1,5 @@
 <% if not ['inactive','buried'].include?(priority.status) %>
-	<div class="priority_actions">
+	<!-- <div class="priority_actions"> -->
 		<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :region => "priority_inline"} %>
-	</div>
+	<!-- </div> -->
 <% end %>

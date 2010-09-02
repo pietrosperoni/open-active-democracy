@@ -14,8 +14,8 @@ class NewsController < ApplicationController
   end
   
   def discussions
-    @page_title = t('news.discussions.title', :government_name => current_government.name)
-    @rss_url = url_for(:only_path => false, :action => "comments", :format => "rss")
+    # 020910 commented_out_aom: @page_title = t('news.discussions.title', :government_name => current_government.name)
+    # 020910 commented_out_aom: @rss_url = url_for(:only_path => false, :action => "comments", :format => "rss")
     if @current_government.users_count > 5000 # only show the last 7 days worth
       @activities = Activity.active.discussions.for_all_users.last_seven_days.by_recently_updated.paginate :page => params[:page], :per_page => 15
     else
@@ -30,7 +30,7 @@ class NewsController < ApplicationController
   end 
   
   def comments
-    @page_title = t('news.comments.title', :government_name => current_government.name)
+    # 020910 commented_out_aom: @page_title = t('news.comments.title', :government_name => current_government.name)
     @comments = Comment.published.last_three_days.by_recently_created.find(:all, :include => :activity).paginate :page => params[:page]
     respond_to do |format|
       format.rss { render :template => "rss/comments" }
@@ -40,9 +40,9 @@ class NewsController < ApplicationController
   end
   
   def points
-    @page_title = t('news.points.title', :government_name => current_government.name, :briefing_name => current_government.briefing_name)
+    # 020910 commented_out_aom: @page_title = t('news.points.title', :government_name => current_government.name, :briefing_name => current_government.briefing_name)
     @activities = Activity.active.questions_and_docs.for_all_users.paginate :page => params[:page]
-    @rss_url = url_for(:only_path => false, :format => "rss")
+    # 020910 commented_out_aom: @rss_url = url_for(:only_path => false, :format => "rss")
     respond_to do |format|
       format.html { render :action => "activity_list" }
       format.rss { render :template => "rss/activities" }       
@@ -52,13 +52,13 @@ class NewsController < ApplicationController
   end  
   
   def activities
-    @page_title = t('news.activities.title', :government_name => current_government.name)
+  # 020910 commented_out_aom:  @page_title = t('news.activities.title', :government_name => current_government.name)
 #    if @current_government.users_count > 5000 # only show the last 7 days worth    
 #      @activities = Activity.active.for_all_users.last_seven_days.by_recently_created.paginate :page => params[:page]
 #    else
      @activities = Activity.active.for_all_users.by_recently_created.paginate :page => params[:page]      
 #    end
-    @rss_url = url_for(:only_path => false, :format => "rss")    
+    # 020910 commented_out_aom: @rss_url = url_for(:only_path => false, :format => "rss")    
     respond_to do |format|
       format.html { render :action => "activity_list" }
       format.rss { render :template => "rss/activities" }         

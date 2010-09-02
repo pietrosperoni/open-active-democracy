@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Umsókn um aðild að Evrópusambandinu | Samráðsvettvangur almennings og stjórnvalda </title>
+        <title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar </title>
         <%= render :partial => "shared/javascripts" %>
         <%= stylesheet_link_tag "style" %>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -15,76 +15,97 @@
         <div id="Wrapper">
             <!-- Haus -->
             <div id="Header">
-                <!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->
-                <div id="Header-right">
-                    <p class="Notify">
-                        <span class="white">45</span>
-                        hreyfingar á málum
-                    </p>
-                    <p class="Resize">
-                        <%=image_tag "resize.gif" %>
-                    </p>
-                </div>
-                <div id="Search">
-                    <input value="leita" />
-                </div>
-            </div><!-- Vinstridálkur -->
+                <!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->         
+			    <div id="header-right"><%= link_to image_tag("esb_dagbok_adal.jpg", :border => 0), :controller => "import", :action => "" %></div>
+				<div id="search"><input value="Leitarorð" class="input" /><input type="submit" value="leita" /></div>				    
+            </div>
+			<!-- Vinstridálkur -->
             <div id="LeftCol">
-                <!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
-                <ul>
-                    <li>
-                        <a href="/priorities/new"><%=image_tag "icon.gif" %>Nýtt umræðuefni</a>
-                    </li>
-                    <li>
-                        <a href="/questions/new"><%=image_tag "icon.gif" %>Senda inn spurningu</a>
-                    </li>
-                    <li>
-                        <a href="/documents/new"><%=image_tag "icon.gif" %>Leggja inn umsögn</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="">Dagbók aðalsamningamanns</a>
-                    </li>
-                    <li>
-                        <a href="">Ítarefni oflr.</a>
-                    </li>
-                </ul>
-				<!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
+                <!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
 				<%=flash[:notice]%><br>
-				<%=flash[:error]%>
-         	     <% if logged_in? %>
+				<%=flash[:error]%>				
+				<!-- Persónuupplýsingar -->
+				<div id="person">
+				 <% if logged_in? %>
                     <%= render :partial => "shared/user_info" %>
                  <% else %>
                     <%= render :partial => "shared/login" %>
-                 <% end %>
-				
+                 <% end %> 
+				</div>
+				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
+                <ul class="action">
+                    <li>
+                        <a href="/priorities/new"><%=image_tag "icon.gif" %> Taka þátt í umræðu</a>
+                    </li>
+                    <li>
+                        <a href="/questions/new"><%=image_tag "icon.gif" %> Senda inn spurningu</a>
+                    </li>
+                    <li>
+                        <a href="/documents/new"><%=image_tag "icon.gif" %> Leggja inn umsögn</a>
+                    </li>
+                </ul>
+				<!-- Lúppa með rss -->
+				<div class="left_box">
+					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
+					<h4>Frá samninganefnd</h4>
+					<ul>
+						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+						<li><a href="#">consectetur adipiscing elit.</a></li>
+						<li><a href="#">Quisque sed enim sapien.</a></li>
+						<li><a href="#">Praesent a quam lectus, vitae</a></li>
+						<li><a href="#">interdum eros. Donec nec sem</a></li>
+					</ul>		
+				</div>
+				<div class="left_box">
+					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
+					<h4>Af vefnum</h4>
+					<ul>
+						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+						<li><a href="#">consectetur adipiscing elit</a></li>
+						<li><a href="#">Quisque sed enim sapien.</a></li>
+						<li><a href="#">Praesent a quam lectus, vitae</a></li>
+						<li><a href="#">Interdum eros. Donec nec sem</a></li>
+					</ul>		
+				</div>
+				<div class="left_box">	
+					<%= link_to image_tag("facebook.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
+					<ul>
+						<li>Þú getur tengt þig við Facebook aðganginn þinn eða sett inn mynd af þér beint á þennan vef</li>
+					</ul>		
+				</div>
             </div>
+			<!-- Haus á miðjusvæði -->
+			<div id="tabs">
+				<ul id="right_tabs">
+					<li><a href="#">Staða samnings</a></li>
+					<li><a href="#">Ítarefni</a></li>
+				</ul>
+				<ul>
+                     <li <%= controller_name=="news" ? "class='active'" : "" %>>
+                     	<a href="/news/activities">Allt</a>
+                     </li>
+                     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
+                        <a href="/priorities/newest">Umræður</a>
+                     </li>
+                     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
+                        <a href="/questions/newest">Spurningar og svör</a>
+                     </li>
+                     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
+                         <a href="/documents/newest">Umsagnir</a>
+                     </li>
+                 </ul>
+              </div>
+						
             <!-- Miðjusvæðið -->
             <div id="MainContent">
-                <!-- Haus í miðjusvæði -->
+             
+			 	<div id="subfilters">				
+					<a href="#">Nýtt</a>
+					<a href="#">Mín skrif</a>
+				</div>
+			 
                 <div id="Content_wrapper">
-                    <div id="Ddown">
-                        <select>
-                            <option>N&yacute;tt</option>
-                        </select>
-                    </div>
-                    <div id="Tabs">
-                        <ul>
-                            <li <%= controller_name=="news" ? "class='active'" : "" %>>
-                                <a href="/news/activities">Allt</a>
-                            </li>
-                            <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-                                <a href="/priorities/newest">Umræður</a>
-                            </li>
-                            <li <%= controller_name=="questions" ? "class='active'" : "" %>>
-                                <a href="/questions/newest">Spurningar og svör</a>
-                            </li>
-                            <li <%= controller_name=="documents" ? "class='active'" : "" %>>
-                                <a href="/documents/newest">Umsagnir</a>
-                            </li>
-                        </ul>
-                    </div>
+                   
                     <div id="Content">
                     	<%=yield%>
                     </div>
@@ -93,19 +114,24 @@
             <!-- Hægridálkur -->
             <div id="RightCol">
             	
+				 <!-- TODO -->
+				<font color=red>aom todo: skipta upp köflum í:</font>
+				<h4>Utan EES</h4>
+				<h4>Að hluta í EES</h4>
+				<h4>Í EES</h4>
+				
                 <!-- Lúppa með titli -->
-                <ul>
-                    <li class="Header">
-                        Kaflar <a class="li-header-txt" href="#">breyta</a>
-                    </li>
-					<% Tag.find(:all, :order=>"weight").each do |tag|%>
-                    <li>
-                        <a href=""><%=tag.name%></a>
+                <ul>          
+					<% Tag.find(:all, :order=>"weight").each do |tag|%>	
+					<li>
+                        <input type="checkbox" value="" class="chapter" />
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<a href=""><%=tag.name%></a>
                     </li>
 					<% end %>
                 </ul>
             </div>
-            <!-- F�tur s��unnar -->
+            <!-- Fótur síðunnar -->
             <div id="Footer">
                 <div id="Footer-right">
                     <a href="#">Reglur</a>

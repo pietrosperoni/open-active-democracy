@@ -1,13 +1,29 @@
 <!-- Pers�nuuppl�singar -->
 <div id="Person">
-    <span class="Name"><%=current_user.name%></span>
-    <span class="Address"><%=current_user.address%>
-        <br/>
-        <%=current_user.kt%>
-    </span>
+	<!-- TODO profile image -->
+	<font color="red">todo aom: vantar mynd</font>  <br/>
+	<span class="profile_image"><%= link_to image_tag("", :border => 0), :controller => "import", :action => "" %></span>
+    <span class="profile_name"><%=current_user.name%></span>
+    <!-- <span class="Address"><%=current_user.address%> -->
+    <br/>
+    <span class="profile_info"><%=current_user.kt%></span>
 </div>
 <div id="Settings">
-    <span class="Edit"><a href="/settings">Breyta stillingum</a></span> 
+    <span class="profile_edit">
+    	<a href="#"><%= link_to image_tag("esb_profile_edit.gif", :border => 0), :controller => "import", :action => "" %></a>
+	</span>
+	<span class="profile_logout">
+		<a href="#"><%= link_to image_tag("esb_profile_logout.gif", :border => 0), :controller => "import", :action => "" %></a>
+	</span>
+	<div class="profile_actions">
+		<div class="actions_number">32</div>
+		<div class="actions_text">hreyfingar <br />á málum</div>
+	</div>
+	<!-- <span class="Edit"><a href="/settings">Breyta stillingum</a></span> 
 	<span class="Edit"><a href="/settings/picture">Breyta mynd</a></span>
-    <span class="Logout"><a href="/sessions/destroy">Skrá út</a></span>
+    <span class="Logout"><a href="/sessions/destroy">Skrá út</a></span> -->
 </div>
+
+
+
+
