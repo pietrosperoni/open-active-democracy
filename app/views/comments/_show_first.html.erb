@@ -22,17 +22,22 @@
 			<%= link_to_remote t('comments.show'),{ :url => unhide_activity_comment_url(comment.activity_id,comment), :method => :get }  %>
 		</div>
 	<% else %>
-	<!-- Comment box -->	
-	COMMENT hÉR
-	<div class="comment_box">
-		<%= render :partial => "users/pic", :locals => {:user => comment.user}%>	
-		<span class="entry_profile"><a href="#">Samninganefnd</a> - <%= time_ago(comment.created_at) %> - 10</span>
-		<p>Innihaldið hér: <%= comment.content_html %><a href="#" class="readmore">Lesa meira</a></p>
+	<!-- Entry box -->
+	<div class="entry_box">
+		<span class="entry_icons">
+			<%=image_tag "esb_entry_email.gif" %> 
+			<%=image_tag "esb_entry_bookmark.gif" %> 
+			<%=image_tag "esb_entry_facebook.gif" %> 
+			<%=image_tag "esb_entry_twitter.gif" %> 																			
+		</span>
+		<%= render :partial => "users/pic", :locals => {:user => comment.user}%> 
+		<h4><a href="#"><font color="red">Heiti umræðu</font></a></h4>
+		<span class="entry_profile">
+			<%= link_to h(comment.user.login), comment.user %> - <%= time_ago(comment.created_at) %> - <font color="red">Númer</font>  - <font color="red">Kafli</font>
+		</span>
+		<p><%= comment.content_html %></p>
 	</div>
-		
-		
-		
-
+	
 	<% end %>
 	
 </div>

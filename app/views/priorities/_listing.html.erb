@@ -1,26 +1,11 @@
-<!-- Entry box -->
-<div class="entry_box">
-	<span class="entry_icons">
-		<%=image_tag "esb_entry_email.gif" %> 
-		<%=image_tag "esb_entry_bookmark.gif" %> 
-		<%=image_tag "esb_entry_facebook.gif" %> 
-		<%=image_tag "esb_entry_twitter.gif" %> 																			
-	</span>
-	<font color ="red">todo aom: profile img</font><img src="img/profile01.jpg" border="0" alt="" align="left" />
-	<h4><a href="#"><%= link_to_unless_current h(priority.name), priority, :class => "priority_name_link" %></a></h4>
-	<span class="entry_profile">
-		<a href="#">
-			<% @activities = priority.activities.active.for_all_users.by_recently_updated :include => :user %>
-		</a> 
-		- <%= time_ago(priority.created_at) %> <%= render :partial => "priorities/action_show", :locals => {:priority => priority }%> 
-		- <%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
-	</span>
-	<div id="activities">
+
 	<% @activities = priority.activities.active.for_all_users.by_recently_updated :include => :user %>
 	<% for activity in @activities %>
 		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>
 	<% end %>
-	</div>
-		
-</div>
+	
+	<!-- Comment box -->
+	<div class="answer_box">
+		<p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p>
+	</div> 
 

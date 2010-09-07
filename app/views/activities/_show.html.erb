@@ -20,17 +20,6 @@
 	</div>
 <% else %>
 
-	<div class="activity" id="activity_<%= activity.id %>">
-		<div class="activity_x">
-		<% if logged_in? and (current_user.is_admin? or current_user.id == activity.user_id) %>
-		<%= link_to_remote 'x', { :url => activity_url(activity.id),:method => :delete, :confirm => 'Eyða frá þessari síðu?'}%><% end %>
-		</div>
-		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}") do %> 
-			<%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
-		<% end %>
-		<span class="small"><%= time_ago(activity.created_at) %></span>
-	</div>
-
 	<% if activity.class != ActivityCommentParticipant and activity.class != ActivityBulletinProfileAuthor %>
 		<%= render :partial => "activities/comments", :locals => {:activity => activity} %>
 	<% end %>
