@@ -9,7 +9,7 @@
 		<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
 		
 		<%= render :partial => "comments/show_first", :locals => {:comment => @comments.first} %>
-		<% render :partial => "comments/show", :locals => {:comment => @comments.last} if @comments.length > 1 %>
+		<%= render :partial => "comments/show", :locals => {:comment => @comments.last} if @comments.length > 1 %>
 
 		<% if @comments.length > 2 %>
 			<div class="comment_more">

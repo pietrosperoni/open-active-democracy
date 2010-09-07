@@ -23,7 +23,7 @@
 		</div>
 	<% else %>
 	<!-- Comment box -->	
-	COMMENT hÉR
+	
 	<div class="comment_box">
 		<%= render :partial => "users/pic", :locals => {:user => comment.user}%>	
 		<span class="entry_profile"><a href="#">Samninganefnd</a> - <%= time_ago(comment.created_at) %> - 10</span>
