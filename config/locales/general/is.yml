@@ -1631,3 +1631,8 @@ is:
             submit: "Uppfæra kóða"
             code:
                 label: "Klipptu og límdu þenna kóða inn í HTML kóðann á síðunni þinni"
+    esb:
+        add: "Taka þátt í umræðunni"
+        send: "Senda"
+        more: "Lesa meira"
+     

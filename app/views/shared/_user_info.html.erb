@@ -1,8 +1,8 @@
 <!-- Pers�nuuppl�singar -->
 <div id="Person">
-	<!-- TODO profile image -->
-	<font color="red">todo aom: vantar mynd</font>  <br/>
-	<span class="profile_image"><%= link_to image_tag("", :border => 0), :controller => "import", :action => "" %></span>
+	<!-- TODO profile image --><br/>
+	<span class="profile_image"><%= render :partial => "users/pic_48", :locals => {:user => current_user}%> 
+	</span>
     <span class="profile_name"><%=current_user.name%></span>
     <!-- <span class="Address"><%=current_user.address%> -->
     <br/>

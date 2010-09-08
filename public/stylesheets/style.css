@@ -21,7 +21,7 @@ a, a:visited {					color: #003399; text-decoration:none; }
 
 a:hover {			color: #3399ff; text-decoration:underline; }
 
-img { border: 0;}
+img { border: 0; padding-right: 5px; }
 
 /*		Structure ID's 	*/
 

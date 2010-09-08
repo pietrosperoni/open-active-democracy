@@ -16,11 +16,12 @@
 			<%= link_to_remote "Sýna #{(activity.comments_count-3).to_s} fleiri athugasemdir", { :url => more_activity_comments_url(activity), :method => :get } %>
 			</div>
 		<% end %>
-				
-		<% if @comments.length > 0 and activity.class != ActivityCommentParticipant %>
-			<% #= render :partial => "comments/new_inline_small", :locals => {:activity => activity, :comment => Comment.new} %>	
+
+		 <% if @comments.length > 0 and activity.class != ActivityCommentParticipant %>
+			<%= render :partial => "comments/new_inline", :locals => {:activity => activity, :comment => Comment.new} %>
 		<% end %>
 	
 	<% end %>
 	
+
 </div>

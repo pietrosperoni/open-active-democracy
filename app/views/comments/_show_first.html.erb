@@ -1,7 +1,7 @@
 <% if comment %>
-<a name="<%= comment.id %>"></a>
-<div id="comment_<%= comment.id.to_s %>" class="comment<% if comment.is_endorser? %>_endorses<% elsif comment.is_opposer? %>_opposes<% end %>">
-	
+<!-- <a name="<%= comment.id %>"></a> -->
+<!-- <div id="comment_<%= comment.id.to_s %>" class="comment<% if comment.is_endorser? %>_endorses<% elsif comment.is_opposer? %>_opposes<% end %>">
+	-->
 	<% if comment.status == 'abusive' %>
 		<div class="comment_hidden">
 			<%= t('comments.abusive')%>
@@ -30,17 +30,20 @@
 			<%=image_tag "esb_entry_facebook.gif" %> 
 			<%=image_tag "esb_entry_twitter.gif" %> 																			
 		</span>
-		<%= render :partial => "users/pic", :locals => {:user => comment.user}%> 
-		<h4><a href="#"><font color="red">heiti kafla</font></a></h4>
+		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
+		<h4><a href="#"><%= comment.activity.priority.name %></a></h4>
 		<span class="entry_profile">
-			<%= link_to h(comment.user.login), comment.user %> - <%= time_ago(comment.created_at) %> - <font color="red">Númer</font>  - <font color="red">Kafli</font>
+			<%= link_to h(comment.user.login), comment.user %> 
+			- <%= time_ago(comment.created_at) %> 
+			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
+			- <%= render :partial => "priorities/tag_show", :locals => { :priority => comment.activity.priority }%>
 		</span>
-		<p><%= comment.content_html %></p>
+		<p><div class="comment_content" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
 	</div>
 	
 	<% end %>
 	
-</div>
+<!-- </div> -->
 <% end %>
 
 <%= render :partial => "comments/flagged", :locals => {:comment => comment} %>

@@ -1,11 +1,4 @@
-
-	<% @activities = priority.activities.active.for_all_users.by_recently_updated :include => :user %>
-	<% for activity in @activities %>
-		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>
-	<% end %>
-	
-	<!-- Comment box -->
-	<div class="answer_box">
-		<p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p>
-	</div> 
-
+<% @activities = priority.activities.active.for_all_users.by_recently_updated :include => :user %>
+<% for activity in @activities %>
+	<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>
+<% end %>	
