@@ -13,7 +13,7 @@
 
 		<% if @comments.length > 2 %>
 			<div class="comment_more">
-			<%= link_to_remote "Sýna #{(activity.comments_count-3).to_s} fleiri athugasemdir", { :url => more_activity_comments_url(activity), :method => :get } %>
+			<%= link_to_remote "Sýna #{(activity.comments_count-2).to_s} fleiri athugasemdir", { :url => more_activity_comments_url(activity), :method => :get } %>
 			</div>
 		<% end %>
 
@@ -23,5 +23,4 @@
 	
 	<% end %>
 	
-
 </div>

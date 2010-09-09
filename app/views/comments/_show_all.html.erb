@@ -1,3 +1,4 @@
+<%= render :partial => "comments/show_first", :locals => {:comment => comments.first} %>
 <% for comment in @comments %>
-	<%= render :partial => "comments/show", :locals => {:comment => comment} %>
+	<%= render :partial => "comments/show", :locals => {:comment => @comment} %>
 <% end %>
