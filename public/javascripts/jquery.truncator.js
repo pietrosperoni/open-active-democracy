@@ -22,8 +22,9 @@
 
       truncated_node.insertAfter(full_node);
       
-      findNodeForMore(truncated_node).append(' (<a href="#show more content">'+opts.more+'</a>)');
-      findNodeForLess(full_node).append(' (<a href="#show less content">'+opts.less+'</a>)');
+	  //'Show more/less text',format edited by aom 10092010
+      findNodeForMore(truncated_node).append('... <a href="#show more content">'+opts.more+'</a>');
+      findNodeForLess(full_node).append(' <a href="#show less content">'+opts.less+'</a>');
       
       truncated_node.find('a:last').click(function() {
         truncated_node.hide(); full_node.show(); return false;

@@ -38,6 +38,8 @@
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
 			- <%= render :partial => "priorities/tag_show", :locals => { :priority => comment.activity.priority }%>
 		</span>
+			<!-- max_length for comment_content is defined in shared/_javascripts - 
+		possible to have different max_lentgh in _show and in _show_first /aom 10092010 -->
 		<p><div class="comment_content" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
 	</div>
 	

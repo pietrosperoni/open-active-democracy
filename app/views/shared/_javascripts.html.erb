@@ -19,6 +19,7 @@ jQuery(document).ready(function() {
 	jQuery("input#user_login_search").DefaultValue("<%= t('searches.member.submit') %>");
 	jQuery("input#right_priority_box").DefaultValue("<%= t('priorities.yours.prompt') %>") 
 	jQuery(".comment_content").truncate({max_length: 176, more: "<%= t('esb.more') %>", less: "<%= t('comments.full.hide') %>"});
+	jQuery(".comment_content_2").truncate({max_length: 186, more: "<%= t('esb.more') %>", less: "<%= t('comments.full.hide') %>"});
 	<%= render :partial => "shared/javascripts_reloadable" %>
 });
 </script>

@@ -19,7 +19,6 @@
 		<%= link_to_remote "show",{ :url => unhide_activity_url(activity), :method => :get }  %>
 	</div>
 <% else %>
-
 	<% if activity.class != ActivityCommentParticipant and activity.class != ActivityBulletinProfileAuthor %>
 		<%= render :partial => "activities/comments", :locals => {:activity => activity} %>
 	<% end %>
