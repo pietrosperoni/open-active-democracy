@@ -11,7 +11,12 @@
 		<%= render :partial => "comments/show_first", :locals => {:comment => @comments.first} %>
 		<%= render :partial => "comments/show", :locals => {:comment => @comments.last} if @comments.length > 1 %>
 
-		<% if @comments.length > 2 %>
+		
+		<% if @comments.length > 10 %>
+			<div class="comment_more">
+			<%= link_to "Sýna #{(activity.comments_count-2).to_s} fleiri athugasemdir", activity.priority, :class => "priority_name_link" %>
+			</div>
+		<% elsif @comments.length > 2 %>
 			<div class="comment_more">
 			<%= link_to_remote "Sýna #{(activity.comments_count-2).to_s} fleiri athugasemdir", { :url => more_activity_comments_url(activity), :method => :get } %>
 			</div>

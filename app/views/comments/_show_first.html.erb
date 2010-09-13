@@ -1,7 +1,7 @@
 <% if comment %>
-<!-- <a name="<%= comment.id %>"></a> -->
-<!-- <div id="comment_<%= comment.id.to_s %>" class="comment<% if comment.is_endorser? %>_endorses<% elsif comment.is_opposer? %>_opposes<% end %>">
-	-->
+    <a name="<%= comment.id %>"></a>
+    <div id="comment_<%= comment.id.to_s %>" class="comment<% if comment.is_endorser? %>_endorses<% elsif comment.is_opposer? %>_opposes<% end %>">
+
 	<% if comment.status == 'abusive' %>
 		<div class="comment_hidden">
 			<%= t('comments.abusive')%>
@@ -31,7 +31,7 @@
 			<%=image_tag "esb_entry_twitter.gif" %> 																			
 		</span>
 		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
-		<h4><a href="#"><%= comment.activity.priority.name %></a></h4>
+		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link" %></h4>
 		<span class="entry_profile">
 			<%= link_to h(comment.user.login), comment.user %> 
 			- <%= time_ago(comment.created_at) %> 
@@ -41,6 +41,9 @@
 			<!-- max_length for comment_content is defined in shared/_javascripts - 
 		possible to have different max_lentgh in _show and in _show_first /aom 10092010 -->
 		<p><div class="comment_content" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
+		<% if logged_in? and comment == @comments.last and (current_user.is_admin? or current_user.id == comment.user_id) %>
+			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')} %>
+		<% end %>
 	</div>
 	
 	<% end %>
@@ -48,4 +51,4 @@
 <!-- </div> -->
 <% end %>
 
-<%= render :partial => "comments/flagged", :locals => {:comment => comment} %>
+<%#= render :partial => "comments/flagged", :locals => {:comment => comment} %>

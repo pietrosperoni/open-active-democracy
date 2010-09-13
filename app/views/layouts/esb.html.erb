@@ -124,7 +124,6 @@
                 <ul>          
 					<% Tag.find(:all, :order=>"weight").each do |tag|%>	
 					<li>
-                        <input type="checkbox" value="" class="chapter" />
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
 						<a href=""><%=tag.name%></a>
                     </li>

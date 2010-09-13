@@ -496,7 +496,7 @@ is:
             confirm: "Fjarlægja þessa athugasemd?"
         full:
             show: "sýna alla athugasemdina"
-            hide: "fela alla athugasemdina"
+            hide: "sýna athugasemdina minnkada"
         permalink: "Tengja varanlega"
         show: "sýna"
         people: "Fólk sem gerir athugasemdir"
@@ -1635,4 +1635,6 @@ is:
         add: "Taka þátt í umræðunni"
         send: "Senda"
         more: "Lesa meira"
+        comment:
+            delete: "Eyða"
      

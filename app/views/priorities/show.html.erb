@@ -2,7 +2,7 @@
 	<div class="heading"><%= t('priorities.recent_activity')%></div>
 	<div id="activities">
 		<% @activities.each do |activity| %>
-			<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>
+			<%= render :partial => "activities/show_single", :locals => {:activity => activity, :suffix => "_noself"} %>
 		<% end %>
 	</div>
 </div>
