@@ -1,9 +1,9 @@
-<div id="hp_intro"><%= @page_title %></div>
+<!-- <div id="hp_intro"><%= @page_title %></div> -->
 <p>
 <% if not @questions or @questions.empty? %>
 	<%= t('points.empty')%>
 <% else %>
-	<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @questions} %>
+	<%#= render :partial => "shared/paginate_with_feed", :locals => {:collection => @questions} %>
 	<% for question in @questions %>
 		<%= render :partial => "questions/show_full", :locals => {:question => question, :revision => nil}%>
 	<% end %>

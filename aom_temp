@@ -1,0 +1,8 @@
+
+
+
+<%= link_to_remote t('dont'), { :url => quality_point_path(point, :region => "point_inline", :value => false), :loading=>"update('#{t('unhelpful.ing')}')" }, :class => "quality_unhelpful_link", :title => t('unhelpful.title') %>
+
+
+
+<%= link_to t('menu.priorities.delete.name'), @priority, :title => t('menu.priorities.delete.title'), :confirm => t('menu.priorities.delete.confirm', :priority_name => @priority.name), :method => :delete %><br/>

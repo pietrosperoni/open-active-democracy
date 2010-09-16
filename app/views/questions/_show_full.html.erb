@@ -1,4 +1,45 @@
 <div class="point" id="<%= question.id %>">
+<div class="entry_box">
+		<span class="entry_icons">
+			<%= link_to image_tag("esb_entry_email.gif", :border => 0), "#", :title => t('esb.mouseover.entry.email') %> 
+			<%= link_to image_tag("esb_entry_bookmark.gif", :border => 0), "#", :title => t('esb.mouseover.entry.bookmark') %>
+			<%= link_to image_tag("esb_entry_facebook.gif", :border => 0), "#", :title => t('esb.mouseover.entry.facebook') %>
+			<%= link_to image_tag("esb_entry_twitter.gif", :border => 0), "#", :title => t('esb.mouseover.entry.twitter') %>
+		</span>
+		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
+		<h4><%= link_to_unless_current h(question.content), question, :title => t('esb.mouseover.question.title') %></h4>
+		<span class="entry_profile">
+			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> &middot; <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>
+
+			<%= link_to h(question.user.login), question.user, :title => t('esb.mouseover.comment.user') %> 
+			- <%= time_ago(question.created_at) %>   
+			- <%#= render :partial => "question/tag_show", :locals => { :question => comment.activity.priority }%>
+		</span>
+		
+		<!-- TODO max_length for question ... see how comment_content is defined in shared/_javascripts - 
+		see comments/show .... -->
+		
+		<% if revision %>
+			<%= revision.content_diff %>
+    	<% else %>
+			<%= question.content_html %>
+		<% end %>
+		
+		<% if question.discussions_count == 0 %>
+			<%= link_to t('comments.discuss.name'), discussions_question_url(question) %>
+		<% else %>
+			<%= link_to t('comments.discussions.name', :count => question.discussions_count), discussions_question_url(question) %>
+		<% end %>
+		or 
+		<%= link_to t('points.edit.name'), new_question_revision_url(question), :title => t('points.edit.title') %>
+		
+		<!--TODO "delete" funtion, see comments/show_all 14.09 2010 aom -->
+		
+</div>
+</div>
+
+<!-- commented out 14.09 2010 aom 
+<div class="point" id="<%= question.id %>">
 	<div class="point_name">
 	<%= link_to_unless_current h(question.content), question %>
 	</div>
@@ -21,4 +62,5 @@
 		<%= question.content_html %>
 	<% end %>
 	</div>
-</div>
+</div> 
+-->

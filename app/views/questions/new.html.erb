@@ -1,16 +1,86 @@
-<table border="0" cellspacing="0" cellpadding="0" class="margin-top">
-	<tr>
-		<td valign="top">
-	<div  class="form_header">Bæta við spurningu: <span class="red">* </span> </div>
-<% form_for :question, :url => "/questions/create"  do |f| %>
-  <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
-	<div class="field form_header">
-	    <div class="field_label form_header">Spurning: <span id="pointContentDown"></span> <%= t('characters_left')%></div>
-		<div class="field_box">
-	    <%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
-		</div>
-	</div>
-	<%= f.submit "Send spurningu", :id => "submit", :class => "yellow_button" %>
-<% end %>
+<!-- Aðal textasvæði -->
+<div id="content">
+		<h2>Senda inn spurningu til samninganefndar</h2>	
+		<p class="subtext">Athugaðu fyrst hvort þegar er komin fram sambærileg spurning. Leitarglugginn hér fyrir ofan er gagnlegur í slíkt.</p>
 
-</td></tr></table>
+		<% form_for :question, :url => "/questions/create"  do |f| %>
+  		<%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
+	
+			<!-- TODO, þessi input eru ekki virk ennþá -->
+			<h4>Hvað viltu spyrja? <span class="star">*</span></h4>
+			<p><input type="text" size="50" name="" /></p><br /><br />
+			<h4>Flokkur sem spurningin á heima í: <span class="star">*</span></h4>
+			<div class="addContent_kaflar">
+					<b>Í EES</b><br />
+					<input type="radio" name="addContent_kaflar" /> Félagaréttur<br />
+					<input type="radio" name="addContent_kaflar" /> Fjármálaþjónusta<br />
+					<input type="radio" name="addContent_kaflar" /> Frjáls för fjármagns<br />
+					<input type="radio" name="addContent_kaflar" /> Frjáls för vinnuafls<br />
+					<input type="radio" name="addContent_kaflar" /> Frjálst vöruflæði<br />
+					<input type="radio" name="addContent_kaflar" /> Hugverkaréttur<br />
+
+					<input type="radio" name="addContent_kaflar" /> Opinber útboð<br />
+					<input type="radio" name="addContent_kaflar" /> Samkeppnismál<br />
+					<input type="radio" name="addContent_kaflar" /> Staðfesturéttur og þjónustufrelsi<br />
+					<input type="radio" name="addContent_kaflar" /> Upplýsingatækni og fjölmiðlum<br />
+		</div>
+			<div class="addContent_kaflar">
+					<b>Að hluta í EES</b><br />
+					<input type="radio" name="addContent_kaflar" /> Evrópsk samgöngunet<br />
+					<input type="radio" name="addContent_kaflar" /> Félagsmála- og atvinnustefna<br />
+					<input type="radio" name="addContent_kaflar" /> Hagtölur<br />
+
+					<input type="radio" name="addContent_kaflar" /> Iðnstefna<br />
+					<input type="radio" name="addContent_kaflar" /> Matvæla- og hreinlætismál<br />
+					<input type="radio" name="addContent_kaflar" /> Menntun og menning<br />
+					<input type="radio" name="addContent_kaflar" /> Neytenda- og heilsuvernd<br />
+					<input type="radio" name="addContent_kaflar" /> Orka<br />
+
+					<input type="radio" name="addContent_kaflar" /> Samgöngur<br />
+					<input type="radio" name="addContent_kaflar" /> Umhverfismál<br />
+					<input type="radio" name="addContent_kaflar" /> Vísindi og rannsóknir<br />
+
+		</div>
+			<div class="addContent_kaflar">
+
+					<b>Utan EES</b><br />
+					<input type="radio" name="addContent_kaflar" /> Dóms- og innanríkismál<br />
+					<input type="radio" name="addContent_kaflar" /> Fiskveiðar<br />
+					<input type="radio" name="addContent_kaflar" /> Fjárhagslegt eftirlit<br />
+					<input type="radio" name="addContent_kaflar" /> Framlagsmál<br />
+
+					<input type="radio" name="addContent_kaflar" /> Gjaldmiðilssamstarf<br />
+					<input type="radio" name="addContent_kaflar" /> Landbúnaður og byggðastefna<br />
+					<input type="radio" name="addContent_kaflar" /> Réttarvarsla og grundvallarréttindi<br />
+					<input type="radio" name="addContent_kaflar" /> Skattamál<br />
+					<input type="radio" name="addContent_kaflar" /> Tollabandalag<br />
+
+					<input type="radio" name="addContent_kaflar" /> Uppbyggingarstyrkir<br />
+					<input type="radio" name="addContent_kaflar" /> Utanríkis-, öryggis- og varnamál<br />
+					<input type="radio" name="addContent_kaflar" /> Utanríkistengsl<br />
+
+		</div>
+			<!-- END INACTIVE INPUTS -->
+		
+			<b>Spurningin þín: <span class="star">*</span></b>
+			<div class="field form_header">
+	    		<div class="field_label form_header">Spurning: <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+				<div class="field_box">
+	    			<%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 7, :cols => 70, :maxLength => 500 %><br /><br />
+				</div>
+			</div>
+		
+			<b>Settu inn vefslóð sem tengist spurningunni:</b>
+			<input type="text" size="50" name="" value="http://" /><br />
+			<p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn <br /><br />		
+			<%= f.submit "Senda spurningu", :id => "submit", :class => "yellow_button" %>
+			</p>
+		
+		<% end %>		
+	
+</div>
+		
+		
+
+
+

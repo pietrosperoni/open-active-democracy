@@ -25,15 +25,15 @@
 	<!-- Entry box -->
 	<div class="entry_box">
 		<span class="entry_icons">
-			<%=image_tag "esb_entry_email.gif" %> 
-			<%=image_tag "esb_entry_bookmark.gif" %> 
-			<%=image_tag "esb_entry_facebook.gif" %> 
-			<%=image_tag "esb_entry_twitter.gif" %> 																			
+			<%= link_to image_tag("esb_entry_email.gif", :border => 0), "#", :title => t('esb.mouseover.entry.email') %> 
+			<%= link_to image_tag("esb_entry_bookmark.gif", :border => 0), "#", :title => t('esb.mouseover.entry.bookmark') %>
+			<%= link_to image_tag("esb_entry_facebook.gif", :border => 0), "#", :title => t('esb.mouseover.entry.facebook') %>
+			<%= link_to image_tag("esb_entry_twitter.gif", :border => 0), "#", :title => t('esb.mouseover.entry.twitter') %>
 		</span>
 		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
-		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link" %></h4>
+		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %></h4>
 		<span class="entry_profile">
-			<%= link_to h(comment.user.login), comment.user %> 
+			<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 
 			- <%= time_ago(comment.created_at) %> 
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
 			- <%= render :partial => "priorities/tag_show", :locals => { :priority => comment.activity.priority }%>
@@ -42,13 +42,13 @@
 		possible to have different max_lentgh in _show and in _show_first /aom 10092010 -->
 		<p><div class="comment_content" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
 		<% if logged_in? and comment == @comments.last and (current_user.is_admin? or current_user.id == comment.user_id) %>
-			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')} %>
+			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
 		<% end %>
 	</div>
 	
 	<% end %>
 	
-<!-- </div> -->
+</div>
 <% end %>
 
 <%#= render :partial => "comments/flagged", :locals => {:comment => comment} %>

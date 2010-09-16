@@ -3,6 +3,7 @@
         <title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar </title>
         <%= render :partial => "shared/javascripts" %>
         <%= stylesheet_link_tag "style" %>
+		<%= stylesheet_link_tag "style_skuggi" %>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <meta http-equiv="Content-Language" content="EN" />
         <meta name="keywords" content="" />
@@ -35,18 +36,18 @@
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul class="action">
                     <li>
-                        <a href="/priorities/new"><%=image_tag "icon.gif" %> Taka þátt í umræðu</a>
+                        <%= link_to t('esb.create.priority'), "../priorities/new" %>
                     </li>
                     <li>
-                        <a href="/questions/new"><%=image_tag "icon.gif" %> Senda inn spurningu</a>
+                         <%= link_to t('esb.create.question'), "../questions/new" %>
                     </li>
                     <li>
-                        <a href="/documents/new"><%=image_tag "icon.gif" %> Leggja inn umsögn</a>
+                         <%= link_to t('esb.create.document'), "../documents/new" %>
                     </li>
                 </ul>
 				<!-- Lúppa með rss -->
 				<div class="left_box">
-					<%= link_to image_tag("esb_rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
+					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
 					<h4>Frá samninganefnd</h4>
 					<ul>
 						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
@@ -112,8 +113,7 @@
                 </div>
             </div>
             <!-- Hægridálkur -->
-            <div id="RightCol">
-            	
+            <div id="RightCol">	
 				 <!-- TODO -->
 				<font color=red>aom todo: skipta upp köflum í:</font>
 				<h4>Utan EES</h4>

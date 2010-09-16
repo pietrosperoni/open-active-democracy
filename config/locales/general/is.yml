@@ -1632,9 +1632,33 @@ is:
             code:
                 label: "Klipptu og límdu þenna kóða inn í HTML kóðann á síðunni þinni"
     esb:
+        create:       
+            priority: "Taka þátt í umræðu" 
+            question: "Senda inn spurningu"
+            document: "Leggja inn umsögn"
         add: "Taka þátt í umræðunni"
         send: "Senda"
         more: "Lesa meira"
         comment:
             delete: "Eyða"
+            more: "Sýna allar athugasemdir"
+        mouseover:
+            logout: "Skrá mig út"
+            edituser: "Breyta uppýsingum"
+            subscribe: "Gerast áskrifandi XXX"
+            entry:
+                email: "Fá sendan tölvupóst xxxxx"
+                bookmark: "setja bókamerki hér xxxx"
+                facebook: "deila á FBxxxxxxx"
+                twitter: "deila á Twitter xxxxxx"
+            comment:
+                title: "Sjá umræðu í heild sinni xxxx"
+                user: "Nafn þess sem skrifaði þetta xxx"
+                tag : "Sjá meira úr þessum kafla xxxx"
+                more: " sjá meira af athugasemdinni xxxxx"
+                less: "sýna færri athugasemdir"
+                delete: "Fjarlægja þessa athugasemd"
+            question:
+                title: "Sjá allt um þessa spurningu xxxxxx"
+            
      

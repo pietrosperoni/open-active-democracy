@@ -10,15 +10,19 @@
 </div>
 <div id="Settings">
     <span class="profile_edit">
-    	<a href="#"><%= link_to image_tag("esb_profile_edit.gif", :border => 0), :controller => "import", :action => "" %></a>
+    	<%= link_to image_tag("esb_profile_edit.gif", :border => 0), "#", :controller => "import", :action => "", :title => t('esb.mouseover.edituser') %>
 	</span>
-	<span class="profile_logout">
-		<%= link_to image_tag("esb_profile_logout.gif", :border => 0), logout_path %>
+	<span class="profile_logout">		
+		<%= link_to image_tag("esb_profile_logout.gif", :border => 0), logout_path, :title => t('esb.mouseover.logout') %>
 	</span>
-	<div class="profile_actions">
+	<span class="profile_askrift">
+		<%= link_to image_tag("esb_profile_askrift.gif", :border => 0), "#", :title => t('esb.mouseover.subscribe')%>
+	</span>
+				
+	<!-- <div class="profile_actions">
 		<div class="actions_number">32</div>
 		<div class="actions_text">hreyfingar <br />á málum</div>
-	</div>
+	</div> -->
 	<!-- <span class="Edit"><a href="/settings">Breyta stillingum</a></span> 
 	<span class="Edit"><a href="/settings/picture">Breyta mynd</a></span>
     <span class="Logout"><a href="/sessions/destroy">Skrá út</a></span> -->

@@ -20,7 +20,7 @@
 	</div>
 <% else %>
 	<% if activity.class != ActivityCommentParticipant and activity.class != ActivityBulletinProfileAuthor %>
-		<%= render :partial => "activities/comments", :locals => {:activity => activity} %>
+		<%= render :partial => "activities/comments", :locals => {:activity => activity} %>		
 	<% end %>
 	
 <% end %>
