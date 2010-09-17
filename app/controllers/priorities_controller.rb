@@ -19,13 +19,25 @@ class PrioritiesController < ApplicationController
     redirect_to :action => "newest"
   end
   
+  def set_tag_filter
+    if params[:id] and params[:id]=="-1"
+      session[:selected_tag_name]=nil
+      redirect_to :action=>"newest"      
+    elsif params[:id] 
+      session[:selected_tag_name]=params[:id]
+      redirect_to :action=>"newest"
+    else
+      redirect_to :action=>"newest"
+    end
+  end
+  
   # GET /priorities/yours
   def yours
     @page_title = t('priorities.yours.title', :government_name => current_government.name)
     @priorities = @user.endorsements.active.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html 
-      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
+      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }
       format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
     end    
@@ -34,8 +46,12 @@ class PrioritiesController < ApplicationController
   # GET /priorities/newest
   def newest
     @page_title = t('priorities.newest.title', :target => current_government.target)
-    @rss_url = newest_priorities_url(:format => 'rss')     
-    @priorities = Priority.published.newest.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = newest_priorities_url(:format => 'rss')
+    if session[:selected_tag_name]
+      @priorities = Priority.published.newest.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
+    else
+      @priorities = Priority.published.newest.paginate :page => params[:page], :per_page => params[:per_page]
+    end
     respond_to do |format|
       format.html
       format.rss { render :action => "list" }

@@ -62,44 +62,33 @@ namespace :utils do
   desc "Archive processes"
   task(:create_esb_tags => :environment) do
       Tag.destroy_all
-      ["Frjálst vöruflæði",
-      "Frjáls för vinnuafls",
-      "Staðfesturéttur og þjónustufrelsi",
-      "Frjáls för fjármagns",
-      "Opinber útboð",
-      "Félagaréttur",
-      "Hugverkaréttur",
-      "Samkeppnismál",
-      "Fjármálaþjónusta",
-      "Upplýsingatækni og fjölmiðlun",
-      "Landbúnaðar- og byggðastefna",
-      "Matvæla- og hreinlætismál",
-      "Fiskveiðar",
-      "Samgöngur",
-      "Orka",
-      "Skattamál",
-      "Gjaldmiðilssamstarf",
-      "Hagtölur",
-      "Félagsmála- og atvinnustefna",
-      "Iðnstefna",
-      "Evrópsk samgöngunet",
-      "Uppbyggingarstyrkir",
-      "Réttarvarsla og grundvallarréttindi",
-      "Dóms- og innanríkismál",
-      "Vísindi og rannsóknir",
-      "Menntun og menning",
-      "Umhverfismál",
-      "Neytenda- og heilsuvernd",
-      "Tollabandalag",
-      "Utanríkistengsl",
-      "Utanríkis-, öryggis- og varnarmál",
-      "Fjárhagslegt eftirlit",
-      "Framlagsmál",
-      "Stofnanir",
-      "Annað"].each_with_index do |t,i|
+      ["Félagaréttur","Fjármálaþjónusta","Frjáls för fjármagns",
+       "Frjáls för vinnuafls","Frjálst vöruflæði","Hugverkaréttur",
+       "Opinber útboð","Samkeppnismál","Staðfesturéttur og þjónustufrelsi",
+       "Upplýsingatækni og fjölmiðlum"].each_with_index do |t,i|
         tag=Tag.new
         tag.name = t
         tag.weight = i
+        tag.tag_type = 1
+        tag.save
+      end
+      ["Evrópsk samgöngunet","Félagsmála- og atvinnustefna","Hagtölur",
+      "Iðnstefna","Matvæla- og hreinlætismál","Menntun og menning","Neytenda- og heilsuvernd",
+      "Orka","Samgöngur","Umhverfismál","Vísindi og rannsóknir"].each_with_index do |t,i|
+        tag=Tag.new
+        tag.name = t
+        tag.weight = i
+        tag.tag_type = 2
+        tag.save
+      end
+      ["Dóms- og innanríkismál","Fiskveiðar","Fjárhagslegt eftirlit",
+      "Framlagsmál","Gjaldmiðilssamstarf","Landbúnaður og byggðastefna","Réttarvarsla og grundvallarréttindi",
+      "Skattamál","Tollabandalag","Uppbyggingarstyrkir","Utanríkis-, öryggis- og varnamál",
+      "Utanríkistengsl"].each_with_index do |t,i|
+        tag=Tag.new
+        tag.name = t
+        tag.weight = i
+        tag.tag_type = 3
         tag.save
       end
   end

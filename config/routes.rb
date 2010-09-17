@@ -190,6 +190,8 @@ ActionController::Routing::Routes.draw do |map|
   map.unsubscribe '/unsubscribe', :controller => 'unsubscribes', :action => 'new'   
 
   # non restful routes
+  map.connect '/set_tag_filter/:tag_name', :controller => 'priorities', :action => 'set_tag_filter'
+  
   map.connect '/yours', :controller => 'priorities', :action => 'yours'
   map.connect '/hot', :controller => 'priorities', :action => 'hot'
   map.connect '/cold', :controller => 'priorities', :action => 'cold'

@@ -71,7 +71,7 @@
 				<div class="left_box">	
 					<%= link_to image_tag("facebook.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
 					<ul>
-						<li>Þú getur tengt þig við Facebook aðganginn þinn eða sett inn mynd af þér beint á þennan vef</li>
+						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér beint á þennan vef</li>
 					</ul>		
 				</div>
             </div>
@@ -99,6 +99,11 @@
 						
             <!-- Miðjusvæðið -->
             <div id="MainContent">
+            	<% if session[:selected_tag_name] %>
+            	<div id="selected_tag">
+	            	<%=session[:selected_tag_name] %>
+            	</div>		
+				<% end %>
              
 			 	<div id="subfilters">				
 					<a href="#">Nýtt</a>
@@ -115,17 +120,46 @@
             <!-- Hægridálkur -->
             <div id="RightCol">	
 				 <!-- TODO -->
-				<font color=red>aom todo: skipta upp köflum í:</font>
-				<h4>Utan EES</h4>
-				<h4>Að hluta í EES</h4>
-				<h4>Í EES</h4>
-				
                 <!-- Lúppa með titli -->
+				<% if session[:selected_tag_name]%>
+					<a href="/priorities/set_tag_filter/-1">Skoða alla kafla</a><br>
+				<% end %>
+				<h4>Utan EES</h4>
                 <ul>          
-					<% Tag.find(:all, :order=>"weight").each do |tag|%>	
+					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
-						<a href=""><%=tag.name%></a>
+						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
+							<a href="/priorities/set_tag_filter/<%=tag.name%>"><b><%=tag.name%></b></a>
+						<% else %>
+							<a href="/priorities/set_tag_filter/<%=tag.name%>"><%=tag.name%></a>
+						<% end %>
+                    </li>
+					<% end %>
+                </ul>
+				<h4>Að hluta í EES</h4>
+                <ul>          
+					<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
+					<li>
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
+							<a href="/priorities/set_tag_filter/<%=tag.name%>"><b><%=tag.name%></b></a>
+						<% else %>
+							<a href="/priorities/set_tag_filter/<%=tag.name%>"><%=tag.name%></a>
+						<% end %>
+                    </li>
+					<% end %>
+                </ul>
+				<h4>Í EES</h4>
+                <ul>          
+					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
+					<li>
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
+							<a href="/priorities/set_tag_filter/<%=tag.name%>"><b><%=tag.name%></b></a>
+						<% else %>
+							<a href="/priorities/set_tag_filter/<%=tag.name%>"><%=tag.name%></a>
+						<% end %>
                     </li>
 					<% end %>
                 </ul>

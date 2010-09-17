@@ -103,6 +103,7 @@ class CommentsController < ApplicationController
     @comment.request = request
 
     if @comment.save
+      @comments = @activity.comments.published.by_first_created
       respond_to do |format|
         format.html { 
           flash[:notice] = t('comments.new.success')
