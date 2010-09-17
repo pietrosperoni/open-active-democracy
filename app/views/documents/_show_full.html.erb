@@ -1,5 +1,5 @@
 <div class="point" id="<%= document.id %>">
-	<div class="point_name">
+	<div class="entry_box">
 	<% if revision %>
 		<%= link_to_unless_current h(revision.name), document_revision_url(document,revision) %>
 	<% else %>
