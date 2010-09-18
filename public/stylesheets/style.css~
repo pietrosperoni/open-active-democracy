@@ -68,7 +68,7 @@ ul {	list-style-type: none; }
 
 #tabs {				width:602px; float:left; margin-left: 10px; height:12px; }
 #tabs ul {			margin:0px; padding:0px; height:12px; }
-#tabs ul li {		list-style-type:none; display:inline; height:20px; padding:4px 10px; background-color: #cccccc; background-image:url('img/menu_bg.gif'); margin:0px 2px 0px 0; }
+#tabs ul li {		list-style-type:none; display:inline; height:20px; padding:4px 10px; background-color: #cccccc; background-image:url('img/menu_bg.gif'); margin:0px; }
 #tabs ul li.active {	color:#fff; background-color:#005297; background-image: none; }
 #tabs a {			color:#114170}
 #tabs li.active a {	color:#fff; }
@@ -76,8 +76,7 @@ ul {	list-style-type: none; }
 
 /*		Subfilters				*/
 #subfilters {		width: 590px; text-align:right; padding: 5px 10px 0 0;  }
-#subfilters a {         color: #999; border-left:1px solid #999; margin-left: 5px; padding-left: 8px;  }
-#subfilters b {	border-left:1px solid #999;margin-left: 5px; padding-left: 8px; }
+#subfilters a {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
 #subfilters a:hover {	color: #3399ff; text-decoration:underline; }
 
 /*		Entries				*/
