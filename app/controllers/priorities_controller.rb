@@ -1,7 +1,7 @@
 class PrioritiesController < ApplicationController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
-                                           :tag, :tag_save, :opposed, :endorsed, :destroy, :new]
+                                           :tag, :tag_save, :opposed, :endorsed, :destroy, :new, :set_subfilter]
   before_filter :admin_required, :only => [:bury, :successful, :compromised, :intheworks, :failed]
   before_filter :load_priority, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, 
                                              :opposed_top_points, :endorsed_top_points, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
@@ -16,18 +16,27 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities
   def index
-    redirect_to :action => "newest"
+    redirect_to "/umraedur"
+  end
+  
+  def set_subfilter
+    if params[:filter]=="-1"
+      session[:priorities_subfilter]=nil
+    else
+      session[:priorities_subfilter]=params[:filter]
+    end
+    redirect_to "/umraedur"          
   end
   
   def set_tag_filter
-    if params[:id] and params[:id]=="-1"
+    if params[:tag_name] and params[:tag_name]=="-1"
       session[:selected_tag_name]=nil
-      redirect_to :action=>"newest"      
-    elsif params[:id] 
-      session[:selected_tag_name]=params[:id]
-      redirect_to :action=>"newest"
+      redirect_to "/umraedur"      
+    elsif params[:tag_name] 
+      session[:selected_tag_name]=params[:tag_name]
+      redirect_to "/umraedur"
     else
-      redirect_to :action=>"newest"
+      redirect_to "/umraedur"
     end
   end
   
@@ -47,8 +56,10 @@ class PrioritiesController < ApplicationController
   def newest
     @page_title = t('priorities.newest.title', :target => current_government.target)
     @rss_url = newest_priorities_url(:format => 'rss')
-    if session[:selected_tag_name]
-      @priorities = Priority.published.newest.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
+    if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
+      @priorities = Priority.published.newest.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
+    elsif session[:selected_tag_name] and current_user
+      @priorities =  Priority.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
     else
       @priorities = Priority.published.newest.paginate :page => params[:page], :per_page => params[:per_page]
     end

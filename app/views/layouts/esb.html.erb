@@ -36,7 +36,7 @@
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul class="action">
                     <li>
-                        <%= link_to t('esb.create.priority'), "../priorities/new" %>
+                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
                     </li>
                     <li>
                          <%= link_to t('esb.create.question'), "../questions/new" %>
@@ -86,7 +86,7 @@
                      	<a href="/news/activities">Allt</a>
                      </li>
                      <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-                        <a href="/priorities/newest">Umræður</a>
+                        <a href="/umraedur">Umræður</a>
                      </li>
                      <li <%= controller_name=="questions" ? "class='active'" : "" %>>
                         <a href="/questions/newest">Spurningar og svör</a>
@@ -106,8 +106,11 @@
 				<% end %>
              
 			 	<div id="subfilters">				
-					<a href="#">Nýtt</a>
-					<a href="#">Mín skrif</a>
+					<% if controller_name=="priorities"%>
+						<%= render :partial=>"priorities/subfilters" %>
+					<% elsif controller_name=="questions"%>
+					<% elsif controller_name=="documents"%>
+					<% end %>
 				</div>
 			 
                 <div id="Content_wrapper">
@@ -122,7 +125,7 @@
 				 <!-- TODO -->
                 <!-- Lúppa með titli -->
 				<% if session[:selected_tag_name]%>
-					<a href="/priorities/set_tag_filter/-1">Skoða alla kafla</a><br>
+					<a href="/velja_kafla/-1">Skoða alla kafla</a><br>
 				<% end %>
 				<h4>Utan EES</h4>
                 <ul>          
@@ -130,9 +133,9 @@
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/priorities/set_tag_filter/<%=tag.name%>"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/priorities/set_tag_filter/<%=tag.name%>"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -143,9 +146,9 @@
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/priorities/set_tag_filter/<%=tag.name%>"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/priorities/set_tag_filter/<%=tag.name%>"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -156,9 +159,9 @@
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/priorities/set_tag_filter/<%=tag.name%>"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/priorities/set_tag_filter/<%=tag.name%>"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>

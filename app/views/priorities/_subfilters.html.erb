@@ -1,0 +1,23 @@
+<% if logged_in? %>
+	<% if session[:priorities_subfilter]==nil %>
+		<b>Allt</b>
+		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
+		 <%=link_to "Mín skrif", "/minar_umraedur" %>
+		<% end %>
+		<% if TagSubscription.count("user_id = #{current_user.id}")>0 %>
+		 <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar" %>
+	    <% end %>
+	<% elsif session[:priorities_subfilter]=="mine" %>
+		<%=link_to "Allt", "/allar_umraedur" %> 
+		<b>Mín skrif</b>
+		<% if TagSubscription.count("user_id = #{current_user.id}")>0 %>
+		  <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar" %>
+		 <% end %>
+	<% elsif session[:priorities_subfilter]=="my_chapters" %>
+		<%=link_to "Allt", "/allar_umraedur" %>
+		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
+		  <%=link_to "Mín skrif", "/minar_umraedur" %>
+		<% end %>
+		<b>Kaflar í áskrift</b>
+	<% end %>
+<% end %>

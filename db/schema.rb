@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100917121413) do
+ActiveRecord::Schema.define(:version => 20100918144503) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -517,6 +517,14 @@ ActiveRecord::Schema.define(:version => 20100917121413) do
   add_index "signups", ["partner_id"], :name => "signups_partner_id"
   add_index "signups", ["user_id"], :name => "signups_user_id"
 
+  create_table "tag_subscriptions", :id => false, :force => true do |t|
+    t.integer "user_id", :null => false
+    t.integer "tag_id",  :null => false
+  end
+
+  add_index "tag_subscriptions", ["tag_id"], :name => "index_tag_subscriptions_on_tag_id"
+  add_index "tag_subscriptions", ["user_id"], :name => "index_tag_subscriptions_on_user_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -686,6 +694,11 @@ ActiveRecord::Schema.define(:version => 20100917121413) do
     t.datetime "buddy_icon_updated_at"
     t.boolean  "is_importing_contacts",                       :default => false
     t.integer  "imported_contacts_count",                     :default => 0
+    t.boolean  "reports_enabled",                             :default => false
+    t.boolean  "reports_discussions",                         :default => false
+    t.boolean  "reports_questions",                           :default => false
+    t.boolean  "reports_documents",                           :default => false
+    t.integer  "reports_interval"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

@@ -2,6 +2,14 @@
 module ApplicationHelper
   include WillPaginate::ViewHelpers 
 
+  def subscribed_to_tag?(user_id,tag_id)
+    if TagSubscription.find(:first, :conditions=>["user_id = ? AND tag_id = ?",user_id,tag_id])
+      true
+    else
+      false
+    end
+  end
+
   def time_ago(time, options = {})
     if true or request.xhr?
       distance_of_time_in_words_to_now(time) + ' '+I18n.translate(:time_ago)

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse]
+  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions]
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
   
@@ -16,6 +16,33 @@ class UsersController < ApplicationController
       format.xml { render :xml => @users.to_xml(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @users.to_json(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
     end    
+  end
+  
+  def subscriptions
+    @subscription_user = current_user
+    if request.put?
+      TagSubscription.delete_all(["user_id = ?",current_user.id])
+      Tag.all.each do |tag|
+        tag_checkbox_id = "subscribe_to_tag_id_#{tag.id}"
+        if params[:user][tag_checkbox_id]
+          subscription = TagSubscription.new
+          subscription.user_id = current_user.id
+          subscription.tag_id = tag.id
+          subscription.save
+        end
+      end
+      RAILS_DEFAULT_LOGGER.info("Starting HASH #{params[:user].inspect}")
+      params[:user].each do |hash_value,x|
+        RAILS_DEFAULT_LOGGER.info(hash_value)
+        if hash_value.include?("to_tag_id")
+          RAILS_DEFAULT_LOGGER.info("DELETING: #{hash_value}")
+          params[:user].delete(hash_value)
+        end
+      end
+      RAILS_DEFAULT_LOGGER.info("After HASH #{params[:user].inspect}")
+      current_user.update_attributes(params[:user])
+      current_user.save
+    end
   end
   
   # render new.rhtml
