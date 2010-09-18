@@ -3,5 +3,6 @@
 <% elsif Facebooker.api_key and user.has_facebook? %>
 	<a href="<%= url_for user %>"><fb:profile-pic uid="<%= user.facebook_uid %>" size="small" width="35px" border="0" linked="false" /></fb:profile-pic></a>
 <% else %>
-	<%= image_tag current_government.buddy_icon.url(:icon_35), :size => "35x35", :border => 0, :align => "left" %>
+	<%= image_tag "missing.png", :size => "35x35", :border => 0, :align => "left" %>
+	<%#= image_tag current_government.buddy_icon.url(:icon_35), :size => "35x35", :border => 0, :align => "left" %>
 <% end %>
