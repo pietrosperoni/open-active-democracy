@@ -58,8 +58,10 @@ class PrioritiesController < ApplicationController
     @rss_url = newest_priorities_url(:format => 'rss')
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
       @priorities = Priority.published.newest.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
-    elsif session[:selected_tag_name] and current_user
+    elsif session[:priorities_subfilter] and session[:priorities_subfilter]=="my_chapters" and current_user
       @priorities =  Priority.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
+   elsif session[:selected_tag_name]
+      @priorities = Priority.published.newest.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
     else
       @priorities = Priority.published.newest.paginate :page => params[:page], :per_page => params[:per_page]
     end
