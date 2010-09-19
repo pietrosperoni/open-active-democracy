@@ -21,7 +21,7 @@
 				<% end %>
 
 				<% if @activity.comments_count > 0 %>
-					<%= render :partial => "comments/new_inline_small", :locals => {:activity => @activity, :comment => Comment.new} %>	
+					<%= render :partial => "comments/new_inline", :locals => {:activity => @activity, :comment => Comment.new} %>	
 				<% end %>
 
 			</div>
