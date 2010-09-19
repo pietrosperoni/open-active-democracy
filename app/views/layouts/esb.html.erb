@@ -58,7 +58,7 @@
 					</ul>		
 				</div>
 				<div class="left_box">
-					<%= link_to image_tag("esb_rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
+					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
 					<h4>Af vefnum</h4>
 					<ul>
 						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
@@ -131,11 +131,11 @@
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
-						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>" class="chapter_utan"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>" class="chapter_utan"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -144,11 +144,11 @@
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
 					<li>
-						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>" class="chapter_hluta"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>" class="chapter_hluta"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -157,11 +157,11 @@
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
 					<li>
-						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>" class="chapter_innan"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>" class="chapter_innan"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>

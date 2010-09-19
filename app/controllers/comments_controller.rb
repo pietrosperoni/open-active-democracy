@@ -79,7 +79,7 @@ class CommentsController < ApplicationController
       format.html # new.html.erb
       format.js {
         render :update do |page|
-          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => @comment, :activity => @activity})
+          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline_small", :locals => {:comment => @comment, :activity => @activity})
           page.remove 'comment_link_' + @activity.id.to_s
           page << render(:partial => "shared/javascripts_reloadable")
           page['comment_content_' + @activity.id.to_s].focus    
@@ -112,7 +112,7 @@ class CommentsController < ApplicationController
         format.js {
           render :update do |page|            
             page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments/show", :locals => {:comment => @comment, :activity => @activity})
-            page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "new_inline_small", :locals => {:comment => Comment.new, :activity => @activity})
+            page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
             if facebook_session
               page << fb_connect_stream_publish(UserPublisher.create_comment(facebook_session, @comment, @activity))
