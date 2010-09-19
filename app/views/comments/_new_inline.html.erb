@@ -1,6 +1,6 @@
 <!-- Comment box -->	
-<div class="answer_box">
-	<div class="comment_link_add" id="activity_<%=activity.id.to_s%>_comment_form">
+
+	<div class="comment_link_add answer_box" id="activity_<%=activity.id.to_s%>_comment_form">
 		<p>
 			<% form_remote_for comment, :url => activity_comments_path(activity), :loading=>"Form.Element.disable('comment-form-submit')" do |f| %>		
 			<%= f.error_messages %>
@@ -10,7 +10,6 @@
 	</div>
 	<div id="comment_error_<%= activity.id.to_s %>" class="comment_error"></div>
 	<% end %>
-</div>
 
 <script type="text/javascript">
 <!--

@@ -79,7 +79,7 @@ class CommentsController < ApplicationController
       format.html # new.html.erb
       format.js {
         render :update do |page|
-          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => @comment, :activity => @activity})
+          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline_small", :locals => {:comment => @comment, :activity => @activity})
           page.remove 'comment_link_' + @activity.id.to_s
           page << render(:partial => "shared/javascripts_reloadable")
           page['comment_content_' + @activity.id.to_s].focus    
