@@ -36,7 +36,7 @@
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul class="action">
                     <li>
-                        <%= link_to t('esb.create.priority'), "../priorities/new" %>
+                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
                     </li>
                     <li>
                          <%= link_to t('esb.create.question'), "../questions/new" %>
@@ -71,7 +71,7 @@
 				<div class="left_box">	
 					<%= link_to image_tag("facebook.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
 					<ul>
-						<li>Þú getur tengt þig við Facebook aðganginn þinn eða sett inn mynd af þér beint á þennan vef</li>
+						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér beint á þennan vef</li>
 					</ul>		
 				</div>
             </div>
@@ -86,7 +86,7 @@
                      	<a href="/news/activities">Allt</a>
                      </li>
                      <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-                        <a href="/priorities/newest">Umræður</a>
+                        <a href="/umraedur">Umræður</a>
                      </li>
                      <li <%= controller_name=="questions" ? "class='active'" : "" %>>
                         <a href="/questions/newest">Spurningar og svör</a>
@@ -99,10 +99,18 @@
 						
             <!-- Miðjusvæðið -->
             <div id="MainContent">
+            	<% if session[:selected_tag_name] %>
+            	<div id="selected_tag">
+	            	<%=session[:selected_tag_name] %>
+            	</div>		
+				<% end %>
              
 			 	<div id="subfilters">				
-					<a href="#">Nýtt</a>
-					<a href="#">Mín skrif</a>
+					<% if controller_name=="priorities"%>
+						<%= render :partial=>"priorities/subfilters" %>
+					<% elsif controller_name=="questions"%>
+					<% elsif controller_name=="documents"%>
+					<% end %>
 				</div>
 			 
                 <div id="Content_wrapper">
@@ -115,17 +123,46 @@
             <!-- Hægridálkur -->
             <div id="RightCol">	
 				 <!-- TODO -->
-				<font color=red>aom todo: skipta upp köflum í:</font>
-				<h4>Utan EES</h4>
-				<h4>Að hluta í EES</h4>
-				<h4>Í EES</h4>
-				
                 <!-- Lúppa með titli -->
+				<% if session[:selected_tag_name]%>
+					<a href="/velja_kafla/-1">Skoða alla kafla</a><br>
+				<% end %>
+				<h4>Utan EES</h4>
                 <ul>          
-					<% Tag.find(:all, :order=>"weight").each do |tag|%>	
+					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
-						<a href=""><%=tag.name%></a>
+						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
+							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
+						<% else %>
+							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+						<% end %>
+                    </li>
+					<% end %>
+                </ul>
+				<h4>Að hluta í EES</h4>
+                <ul>          
+					<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
+					<li>
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
+							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
+						<% else %>
+							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+						<% end %>
+                    </li>
+					<% end %>
+                </ul>
+				<h4>Í EES</h4>
+                <ul>          
+					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
+					<li>
+						<%= link_to image_tag("esb_chapter_info.gif", :align => "right", :border => 0), :controller => "import", :action => "" %>
+						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
+							<a href="/velja_kafla/<%=tag.name%>"><b><%=tag.name%></b></a>
+						<% else %>
+							<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+						<% end %>
                     </li>
 					<% end %>
                 </ul>

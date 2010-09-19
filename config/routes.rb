@@ -190,6 +190,15 @@ ActionController::Routing::Routes.draw do |map|
   map.unsubscribe '/unsubscribe', :controller => 'unsubscribes', :action => 'new'   
 
   # non restful routes
+  map.connect '/velja_kafla/:tag_name', :controller => 'priorities', :action => 'set_tag_filter'
+  map.connect '/askrift', :controller=>'users', :action=>'subscriptions'
+  map.connect '/umraedur', :controller=>'priorities', :action=>'newest'
+  map.connect '/taka_thatt', :controller=>'priorities', :action=>'new'
+  
+  map.connect '/minar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"mine"
+  map.connect '/minir_umraedu_kaflar', :controller => 'priorities', :action => 'set_subfilter', :filter=>"my_chapters"
+  map.connect '/allar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"-1"
+  
   map.connect '/yours', :controller => 'priorities', :action => 'yours'
   map.connect '/hot', :controller => 'priorities', :action => 'hot'
   map.connect '/cold', :controller => 'priorities', :action => 'cold'

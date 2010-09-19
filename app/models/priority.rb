@@ -11,8 +11,12 @@ class Priority < ActiveRecord::Base
 
   named_scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
   
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}  
-  
+  named_scope :item_limit, lambda{|limit| {:limit=>limit}} 
+
+  named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+
+  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+
   belongs_to :user
   
   has_many :relationships, :dependent => :destroy
