@@ -36,11 +36,23 @@
 			<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 
 			- <%= time_ago(comment.created_at) %> 
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
-			- <%= render :partial => "priorities/tag_show", :locals => { :priority => comment.activity.priority }%>
+			- <%= render :partial => "priorities/tag_show_esb", :locals => { :priority => comment.activity.priority }%>
 		</span>
-			<!-- max_length for comment_content is defined in shared/_javascripts - 
+					
+		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 
 		possible to have different max_lentgh in _show and in _show_first /aom 10092010 -->
-		<p><div class="comment_content" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
+		<!-- if call is from show_all (i.e. shortentext=0), then show all the text and 
+			skip class="comment_content" which adds js more/less feature /aom 20092010-->		
+		<!-- if shortentext is not defined then set to default = 1 /aom 20092010-->	
+		<% if !defined? shortentext%>
+			<% shortentext="1" %>
+		<% end %>	
+					
+		<% if shortentext == 0 %>
+			<p><div id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>	
+		<% else %>
+			<p><div class="comment_content" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
+		<% end %>
 		<% if logged_in? and comment == @comments.last and (current_user.is_admin? or current_user.id == comment.user_id) %>
 			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
 		<% end %>
