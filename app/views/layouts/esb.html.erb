@@ -36,10 +36,10 @@
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul class="action">
                     <li>
-                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
+                         <%= link_to t('esb.create.question'), "../questions/new" %>
                     </li>
                     <li>
-                         <%= link_to t('esb.create.question'), "../questions/new" %>
+                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
                     </li>
                     <li>
                          <%= link_to t('esb.create.document'), "../documents/new" %>
@@ -55,8 +55,11 @@
 						<li><a href="#">Quisque sed enim sapien.</a></li>
 						<li><a href="#">Praesent a quam lectus, vitae</a></li>
 						<li><a href="#">interdum eros. Donec nec sem</a></li>
+						<li><a href="#">Praesent a quam lectus, vitae</a></li>
+						<li><a href="#">interdum eros. Donec nec sem</a></li>
 					</ul>		
 				</div>
+<!--
 				<div class="left_box">
 					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
 					<h4>Af vefnum</h4>
@@ -68,6 +71,7 @@
 						<li><a href="#">Interdum eros. Donec nec sem</a></li>
 					</ul>		
 				</div>
+-->
 				<div class="left_box">	
 					<ul>
 						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
@@ -79,8 +83,8 @@
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
 				<ul id="right_tabs">
-					<li><a href="#">Staða samnings</a></li>
-					<li><a href="#">Ítarefni</a></li>
+					<li><a href="#">Staða viðræðna</a></li>
+					<li><a href="#">Nýtt efni</a></li>
 				</ul>
 				<ul>
 			<div id="left_tabs">
@@ -94,7 +98,7 @@
 					<a href="/questions/newest">Spurningar og svör</a>
 				     </li>
 				     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
-					 <a href="/documents/newest">Umsagnir</a>
+					 <a href="/documents/newest">Erindi</a>
 				     </li>
 			</div>
 				</ul>

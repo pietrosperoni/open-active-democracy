@@ -20,6 +20,7 @@ a:hover {			color: #3399ff; text-decoration:underline; }
 
 /*		Global 	*/
 ul {	list-style-type: none; }
+h4 {	font-size: 12px; }
 
 #selected_tag
 {
@@ -82,7 +83,7 @@ text-align: left;
 /* 		Text				*/
 
 #leftCol {			  }
-#leftCol ul {		margin:2px 0px 10px 0px; padding:10px 0px; }
+#leftCol ul {		margin:2px 0px 10px 0px; padding:4px 0px 10px 0px; }
 #leftCol ul.action li {	border-bottom: 1px solid #f1f1f1; padding: 5px 0px; }
 
 #rightCol h4 {		margin:0px; color: #666666; }
@@ -133,7 +134,7 @@ text-align: left;
 .answer_box {		margin-left: 55px; padding-bottom: 10px;  }
 .answer_box input {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 
-.addContent_kaflar {	width:193px; float:left; font-size: 90%; }
+.addContent_kaflar {	width:193px; float:left; font-size: 11px; }
 
 
 /*		Profile box				*/
@@ -193,6 +194,18 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 #content h2	 {		font-size:150%; margin-bottom:5px;  }
 #content h4	 {		font-size:110%; margin:0px;  }
 #content .subtext {	font-size: 90%; margin-bottom: 15px;   }
+
+#content .addContent_kaflar
+{
+padding-top: 10px;
+}
+
+
+.Tegund_Efnis
+{
+clear: both;
+}
+
 .star {				color:#ff0000;  }
 					
 					
