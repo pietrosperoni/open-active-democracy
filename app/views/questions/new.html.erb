@@ -1,48 +1,48 @@
 <!-- Aðal textasvæði -->
 <div id="content">
-		<h2>Senda inn spurningu til samninganefndar</h2>	
-		<p class="subtext">Athugaðu fyrst hvort þegar er komin fram sambærileg spurning. Leitarglugginn hér fyrir ofan er gagnlegur í slíkt.</p>
+		<h2><%= t('esb.question.send_long') %></h2>	
+		<p class="subtext"><%= t('esb.question.check') %></p>
 
 		<% form_for :question, :url => "/questions/create"  do |f| %>
   		<%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 	
-			<!-- TODO, þessi input eru ekki virk ennþá -->
-			<h4>Hvað viltu spyrja? <span class="star">*</span></h4>
-			<p><input type="text" size="50" name="" /></p><br /><br />
-<h4>Flokkur sem spurningin á heima í: <span class="star">*</span></h4>
-	<div class="addContent_kaflar">
-		<b>Utan EES</b><br />
+			<h4><%= t('esb.question.what') %> <span class="star">*</span></h4>
+			<%= text_field_tag "question[name]", nil, :size => 50, :maxlength => 50, :autocomplete =>"off" %><br /><br />
+
+		<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
+		<div class="addContent_kaflar">
+			<b><%= t('esb.tags.notin') %></b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
 			<% end %>			
-	</div>
-	<div class="addContent_kaflar">
-		<b>Að hluta í EES</b><br />
+		</div>
+		<div class="addContent_kaflar">
+			<b><%= t('esb.tags.partly') %></b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
 			<% end %>			
-	</div>
-	<div class="addContent_kaflar">
-		<b>Í EES</b><br />
-			<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>
+		</div>
+		<div class="addContent_kaflar">
+			<b><%= t('esb.tags.within') %></b><br />
+				<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
 			<% end %>			
-	</div>	
-			<!-- END INACTIVE INPUTS -->
-		
-			<b>Spurningin þín: <span class="star">*</span></b>
+		</div>	
+			
+			<b><%= t('esb.question.your_question') %> <span class="star">*</span></b>
 			<div class="field form_header">
-	    		<div class="field_label form_header">Spurning: <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+	    		<div class="field_label form_header"><%= t('esb.question.question') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
 				<div class="field_box">
 	    			<%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 7, :cols => 70, :maxLength => 500 %><br /><br />
 				</div>
 			</div>
 		
+			<!-- TODO AOM 210910
 			<b>Settu inn vefslóð sem tengist spurningunni:</b>
 			<input type="text" size="50" name="" value="http://" /><br />
 			<p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn <br /><br />		
 			<%= f.submit "Senda spurningu", :id => "submit", :class => "yellow_button" %>
-			</p>
+			</p> -->
 		
 		<% end %>		
 	
