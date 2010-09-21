@@ -8,6 +8,9 @@
 		</span>
 		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
 		<h4><%= link_to_unless_current h(question.content), question, :title => t('esb.mouseover.question.title') %></h4>
+		<% for tag in question.issues %>
+		    <a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+		<% end %>
 		<span class="entry_profile">
 			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> &middot; <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>
 

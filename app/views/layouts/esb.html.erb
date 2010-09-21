@@ -1,29 +1,29 @@
-<html>
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
         <title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar </title>
         <%= render :partial => "shared/javascripts" %>
         <%= stylesheet_link_tag "style" %>
-		<%= stylesheet_link_tag "style_skuggi" %>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<%= stylesheet_link_tag "style_skuggi" %>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
         <meta http-equiv="Content-Language" content="EN" />
         <meta name="keywords" content="" />
-        <meta name="author" content="dagny@blekhonnun.is" />
-        <meta name="distribution" content="Global" />
-        <meta name="copyright" content="" />
-        <meta name="robots" content="" />
-    </head>
+
+</head>
     <body>
         <div id="Wrapper">
             <!-- Haus -->
             <div id="Header">
                 <!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->         
 			    <div id="header-right"><%= link_to image_tag("esb_dagbok_adal.jpg", :border => 0), :controller => "import", :action => "" %></div>
-				<div id="search"><input value="Leitarorð" class="input" /><input type="submit" value="leita" /></div>				    
+				<div id="search"><input value="Leitarorð" class="input" /><input type="submit" value="leita" class="leita" /></div>				    
             </div>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
                 <!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
-				<%=flash[:notice]%><br>
+				<%=flash[:notice]%><b/>
 				<%=flash[:error]%>				
 				<!-- Persónuupplýsingar -->
 				<div id="person">
@@ -36,10 +36,10 @@
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul class="action">
                     <li>
-                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
+                         <%= link_to t('esb.create.question'), "../questions/new" %>
                     </li>
                     <li>
-                         <%= link_to t('esb.create.question'), "../questions/new" %>
+                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
                     </li>
                     <li>
                          <%= link_to t('esb.create.document'), "../documents/new" %>
@@ -55,8 +55,11 @@
 						<li><a href="#">Quisque sed enim sapien.</a></li>
 						<li><a href="#">Praesent a quam lectus, vitae</a></li>
 						<li><a href="#">interdum eros. Donec nec sem</a></li>
+						<li><a href="#">Praesent a quam lectus, vitae</a></li>
+						<li><a href="#">interdum eros. Donec nec sem</a></li>
 					</ul>		
 				</div>
+<!--
 				<div class="left_box">
 					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
 					<h4>Af vefnum</h4>
@@ -68,33 +71,37 @@
 						<li><a href="#">Interdum eros. Donec nec sem</a></li>
 					</ul>		
 				</div>
+-->
 				<div class="left_box">	
-					<%= link_to image_tag("facebook.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
 					<ul>
-						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér beint á þennan vef</li>
+						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
+											<%= link_to image_tag("facebook.gif", :border => 0, :align => "left"), :controller => "import", :action => "" %></li>
+
 					</ul>		
 				</div>
             </div>
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
 				<ul id="right_tabs">
-					<li><a href="#">Staða samnings</a></li>
-					<li><a href="#">Ítarefni</a></li>
+					<li><a href="#">Staða viðræðna</a></li>
+					<li><a href="#">Nýtt efni</a></li>
 				</ul>
 				<ul>
-                     <li <%= controller_name=="news" ? "class='active'" : "" %>>
-                     	<a href="/news/activities">Allt</a>
-                     </li>
-                     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-                        <a href="/umraedur">Umræður</a>
-                     </li>
-                     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
-                        <a href="/questions/newest">Spurningar og svör</a>
-                     </li>
-                     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
-                         <a href="/documents/newest">Umsagnir</a>
-                     </li>
-                 </ul>
+			<div id="left_tabs">
+				     <li <%= controller_name=="news" ? "class='active'" : "" %>>
+					<a href="/news/activities">Allt</a>
+				     </li>
+				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
+					<a href="/umraedur">Umræður</a>
+				     </li>
+				     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
+					<a href="/questions/newest">Spurningar og svör</a>
+				     </li>
+				     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
+					 <a href="/documents/newest">Erindi</a>
+				     </li>
+			</div>
+				</ul>
               </div>
 						
             <!-- Miðjusvæðið -->
@@ -125,7 +132,7 @@
 				 <!-- TODO -->
                 <!-- Lúppa með titli -->
 				<% if session[:selected_tag_name]%>
-					<a href="/velja_kafla/-1">Skoða alla kafla</a><br>
+					<a href="/velja_kafla/-1">Skoða alla kafla</a><b/>
 				<% end %>
 				<h4>Utan EES</h4>
                 <ul>          

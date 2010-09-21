@@ -94,6 +94,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(params[:question])
     @question.user = current_user
+    @question.issue_list = params[:custom_tag]
     @saved = @question.save
     respond_to do |format|
       if @saved

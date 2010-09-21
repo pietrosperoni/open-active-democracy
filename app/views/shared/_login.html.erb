@@ -5,6 +5,7 @@
 
 	<%= t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
 	<div id="login_form">
+
 	<% form_remote_for :session, :url => session_path(:region => "inline") do |f| -%>			
 			<ul>
 				<li><span class="profile_login_name"><%= t('sessions.new.email.label')%></span><input type="text" name="email" size="10" id="login_email"></li> 
