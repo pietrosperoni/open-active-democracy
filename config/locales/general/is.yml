@@ -1660,5 +1660,10 @@ is:
                 delete: "Fjarlægja þessa athugasemd"
             question:
                 title: "Sjá allt um þessa spurningu xxxxxx"
+        sessions:
+            new:
+                intro: "<a href='{{signup_url}}'>Nýskráning</a>"
+                id:
+                    label: "Kennitala"
             
      
