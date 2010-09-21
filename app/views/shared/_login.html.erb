@@ -1,20 +1,17 @@
+<div class="left_box">
+		Þessi vefur á að veita Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eleifend justo id ligula sollicitudin vel venenatis lacus consequat.
+</div>
 <div id="login">
 
 	<%= t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
 	<div id="login_form">
-		<p>
-	<% form_remote_for :session, :url => session_path(:region => "inline") do |f| -%>
-		<table border="0" cellspacing="0" cellpadding="0">
-			<tr><td class="email">
-				<input type="text" name="email" size="15" id="login_email"> <%= t('sessions.new.email.label')%>
-			</td></tr><tr><td class="password">
-				<input type="password" name="password" size="8" id="login_password"> <%= t('sessions.new.password.label')%>
-			</td></tr><tr>
-			<td class="submit">
-				<%= submit_tag t('sessions.new.submit'), :class => "yellow_button" %>
-			</td>
-			</tr>
-		</table>
+	<% form_remote_for :session, :url => session_path(:region => "inline") do |f| -%>			
+			<ul>
+				<li><span class="profile_login_name"><%= t('sessions.new.email.label')%></span><input type="text" name="email" size="10" id="login_email"></li> 
+				<li><span class="profile_login_id"><%= t('sessions.new.password.label')%></span><input type="password" name="password" size="10" id="login_password"></li>				 
+				<!-- <li><%= submit_tag t('sessions.new.submit'), :class => "yellow_button" %></li> -->
+				<li><input type="image" src="images/esb_login_submit.gif" value="submit"></li>
+			</ul>
 		<div id="login_message"></div>
 		<%= link_to t('sessions.new.forgot'), new_password_path %>	
 	<% end -%>
