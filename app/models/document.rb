@@ -1,4 +1,9 @@
 class Document < ActiveRecord::Base
+  named_scope :tagged, :conditions => "(documents.cached_issue_list is not null and documents.cached_issue_list <> '')"
+  named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+
+  acts_as_taggable_on :issues
 
   named_scope :published, :conditions => "documents.status = 'published'"
   named_scope :by_helpfulness, :order => "documents.score desc"

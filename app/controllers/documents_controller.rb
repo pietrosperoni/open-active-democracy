@@ -126,6 +126,7 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(params[:document])
     @document.user = current_user
+    @document.issue_list = params[:custom_tag]
     @saved = @document.save
     respond_to do |format|
       if @saved

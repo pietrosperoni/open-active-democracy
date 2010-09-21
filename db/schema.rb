@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918144503) do
+ActiveRecord::Schema.define(:version => 20100920221428) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -463,6 +463,7 @@ ActiveRecord::Schema.define(:version => 20100918144503) do
     t.text     "content_html"
     t.integer  "partner_id"
     t.text     "answer"
+    t.string   "cached_issue_list"
   end
 
   add_index "questions", ["other_priority_id"], :name => "index_questions_on_other_priority_id"
