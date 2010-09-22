@@ -8,7 +8,7 @@
 			<p>
 			<div id="activities">
 			<% for activity in @activities %>
-				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
+				<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>
 			</div>
 			<p>

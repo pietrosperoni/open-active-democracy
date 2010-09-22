@@ -21,7 +21,7 @@
 			<div id="activities">
 			<% for activity in @question.activities.active.by_recently_created.find(:all, :limit => 10) %>
 				<!-- TODO AOM 210910 -->
-				<%#= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
+				<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>
 			</div>
 			
