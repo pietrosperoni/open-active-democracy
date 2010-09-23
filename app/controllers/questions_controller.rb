@@ -117,6 +117,7 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     @question.issue_list = params[:custom_tag]
     @saved = @question.save
+    @activity = ActivityBulletinNew.create(:question_id=>@question.id, :user_id=>current_user.id)
     respond_to do |format|
       if @saved
         if Revision.create_from_question(@question.id,request)
@@ -245,9 +246,10 @@ class QuestionsController < ApplicationController
       return
     end
     @question.delete!
-    ActivityQuestionDeleted.create(:user => current_user, :point => @question)
+    # Commented out 230910 aom, because of an error point not defined ???
+    # ActivityQuestionDeleted.create(:user => current_user, :point => @question)
     respond_to do |format|
-      format.html { redirect_to(questions_url) }
+      format.html { redirect_to(questions_url) }   
     end
   end
   
