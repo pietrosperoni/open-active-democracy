@@ -5,7 +5,15 @@ class DocumentsController < ApplicationController
  
   def index
     @page_title = t('document.yours.title')
-    @documents = Document.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
+      @documents = Document.published.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
+    elsif session[:priorities_subfilter] and session[:priorities_subfilter]=="my_chapters" and current_user
+      @documents =  Document.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
+    elsif session[:selected_tag_name]
+      @documents = Document.published.by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
+    else
+      @documents = Document.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
+    end
     respond_to do |format|
       format.html
       format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }

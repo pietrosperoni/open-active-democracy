@@ -25,18 +25,18 @@ class PrioritiesController < ApplicationController
     else
       session[:priorities_subfilter]=params[:filter]
     end
-    redirect_to "/umraedur"          
+    redirect_to :controller=>params[:controller_name]          
   end
   
   def set_tag_filter
     if params[:tag_name] and params[:tag_name]=="-1"
       session[:selected_tag_name]=nil
-      redirect_to "/umraedur"      
+      redirect_to :controller=>params[:controller_name]    
     elsif params[:tag_name] 
       session[:selected_tag_name]=params[:tag_name]
-      redirect_to "/umraedur"
+      redirect_to :controller=>params[:controller_name]
     else
-      redirect_to "/umraedur"
+      redirect_to :controller=>params[:controller_name]
     end
   end
   

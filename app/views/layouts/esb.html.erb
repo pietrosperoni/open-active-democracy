@@ -113,11 +113,7 @@
 				<% end %>
              
 			 	<div id="subfilters">				
-					<% if controller_name=="priorities"%>
-						<%= render :partial=>"priorities/subfilters" %>
-					<% elsif controller_name=="questions"%>
-					<% elsif controller_name=="documents"%>
-					<% end %>
+					<%= render :partial=>"priorities/subfilters" %>
 				</div>
 			 
                 <div id="Content_wrapper">
@@ -132,7 +128,7 @@
 				 <!-- TODO -->
                 <!-- Lúppa með titli -->
 				<% if session[:selected_tag_name]%>
-					<a href="/velja_kafla/-1">Skoða alla kafla</a><b/>
+					<a href="/velja_kafla/-1?controller_name=<%=controller_name%>">Skoða alla kafla</a><b/>
 				<% end %>
 				<h4>Utan EES</h4>
                 <ul>          
@@ -140,9 +136,9 @@
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>" class="chapter_utan"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_utan"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>" class="chapter_utan"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_utan"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -153,9 +149,9 @@
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>" class="chapter_hluta"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_hluta"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>" class="chapter_hluta"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_hluta"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -166,9 +162,9 @@
 					<li>
 						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>" class="chapter_innan"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>" class="chapter_innan"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>

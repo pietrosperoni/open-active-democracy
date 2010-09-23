@@ -16,7 +16,7 @@
 			- <%= time_ago(question.created_at) %>   
 			- <%#= render :partial => "question/tag_show_esb", :locals => { :question => comment.activity.priority }%>
 			<% for tag in question.issues %>
-		   		<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
 			<% end %>
 		</span>
 		
