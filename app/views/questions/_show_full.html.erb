@@ -1,46 +1,94 @@
 <div class="point" id="<%= question.id %>">
-<div class="entry_box">
-		<span class="entry_icons">
-			<%= link_to image_tag("esb_entry_email.gif", :border => 0), "#", :title => t('esb.mouseover.entry.email') %> 
-			<%= link_to image_tag("esb_entry_bookmark.gif", :border => 0), "#", :title => t('esb.mouseover.entry.bookmark') %>
-			<%= link_to image_tag("esb_entry_facebook.gif", :border => 0), "#", :title => t('esb.mouseover.entry.facebook') %>
-			<%= link_to image_tag("esb_entry_twitter.gif", :border => 0), "#", :title => t('esb.mouseover.entry.twitter') %>
-		</span>
-		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
-		<h4><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %></h4>
-	
-		<span class="entry_profile">
-			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> &middot; <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>
 
-			<%= link_to h(question.user.login), question.user, :title => t('esb.mouseover.comment.user') %> 
-			- <%= time_ago(question.created_at) %>   
-			- <%#= render :partial => "question/tag_show_esb", :locals => { :question => comment.activity.priority }%>
+	<!-- Entry box --> 
+	<div class="entry_box"> 
+		<!-- TODO AOM 220910 send the relevant variables to entry_icons-->
+		<%= render :partial => "shared/entry_icons", :locals => {:content => question.content}%> 
+		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
+		<h5><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %></h5> 
+		
+		<span class="entry_profile">
+			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> &middot; 
+			- <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>
+			<!-- TODO --> <font color="red">- 3 álit (todo)</font> 
+			- 
 			<% for tag in question.issues %>
 		   		<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
 			<% end %>
-		</span>
-		
-		<!-- TODO max_length for question ... see how comment_content is defined in shared/_javascripts - 
-		see comments/show .... -->
-		
+		</span> 
+		<p>
+		<!-- max_length for question, see how comment_content is defined in shared/_javascripts - see also comments/show -->
 		<% if revision %>
-			<%= revision.content_diff %>
+			<div class="comment_content" id="comment_content_<%= question.id.to_s %>">
+				<%= revision.content_diff %>
+			</div>
     	<% else %>
-			<%= question.content_html %>
+			<div class="comment_content" id="comment_content_<%= question.id.to_s %>">
+				<%= question.content_html %>
+			</div>
 		<% end %>
 		
-		<% if question.discussions_count == 0 %>
-			<%= link_to t('comments.discuss.name'), discussions_question_url(question) %>
-		<% else %>
-			<%= link_to t('comments.discussions.name', :count => question.discussions_count), discussions_question_url(question) %>
+		<!-- Edit or delete if there is no answer nor any comments-->		
+		<% if logged_in? and question.activities.count == 1 and !question.answer and (current_user.is_admin? or current_user.id == comment.user_id) %>
+			<%=link_to "Breyta","/questions/edit/#{question.id}" %>	
+			<%#=link_to "Eyða","/questions/edit/#{question.id}" %>
+			<%= link_to_remote t('esb.comment.delete'), { :url => "/questions/delete/#{question.id}",:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
+	
 		<% end %>
-		or 
-		<%= link_to t('points.edit.name'), new_question_revision_url(question), :title => t('points.edit.title') %>
+	</div>
+	
+	<!-- Do we need this? aom 230910 --> 
+	<%#= link_to h(question.user.login), question.user, :title => t('esb.mouseover.comment.user') %> 
+	<!-- Not used -->
+	<%# = time_ago(question.created_at) %> 
 		
-		<!--TODO "delete" funtion, see comments/show_all 14.09 2010 aom -->
+	
+	<!-- Comment box - 'Official Reply' box! -->	
+	<div class="comment_box_samn"> 
+		<img src="img/profile02.gif" border="0" class="comment_profile" alt="" align="left" /> 
+		<span class="entry_profile">TODO Samninganefnd - 2 min síðan</span> 
+		<p>						
+			<%if question.answer %>
+				<div class="comment_content" id="comment_content_<%= question.answer.id.to_s %>">
+					<%= question.answer %>
+				</div>				
+			<% else%>
+			  	Ekkert svar er til við þessari spurningu eins og er.
+			<% end %>
+				<%=link_to "Breyta/Svara","/questions/edit/#{question.id}" if current_user.is_admin?%>		
+		</p> 
+	</div> 
+				
+	<!-- Show More comments--> 
+	<div class="comment_box"> 
+		<p><a href="#">Sýna 12 athugasemdir í viðbót</a></p> 
+	</div> 
+				
+	<!-- Comment box -->	
 		
+	<div class="comment_box"> 
+	<% @activities = question.activities.active.for_all_users.by_recently_updated :include => :user %>
+	<% activity = @activities.first %>
+	<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
+
+	<%#= render :partial => "comments_questions/show", :locals => {:comment => @comments.last} if @comments.length > 1 %>
+	
+	<!-- TODO Hve mörg komment/umræður ?? -->
+	<% for activity in @activities %>
+		<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself"} %>
+	<% end %>
+	</div> 
+								
+	<!-- Answer box -->	
+	<div class="answer_box"> 
+		<p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p> 
+	</div> 
+
 </div>
-</div>
+
+
+
+
 
 <!-- commented out 14.09 2010 aom 
 <div class="point" id="<%= question.id %>">
@@ -68,3 +116,18 @@
 	</div>
 </div> 
 -->
+
+
+
+
+
+
+				
+							
+
+					
+					
+
+					
+					
+				
