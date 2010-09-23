@@ -1,5 +1,5 @@
 <!-- TODO aom, exception handling and use: tags_sentence(priority.cached_issue_list) from _tag_show -->
 <% for tag in priority.issues %>
-	<a href="/velja_kafla/<%=tag.name%>"><%=tag.name%></a>
+	<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
 <% end %>
 				

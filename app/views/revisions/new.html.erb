@@ -1,9 +1,6 @@
 <%= render :partial => "questions/header" %>
 <%= render :partial => "questions/nav" %>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr>
-		
-		<td valign="top">
+
 			<p>
 			<% form_for :revision, :url => question_revisions_path(@question)  do |f| %>
 			  <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
@@ -25,13 +22,6 @@
 
 			<% end %>
 			
-		</td>	
-		
-		<td valign="top" width="150" style="padding-left: 20px;">
 			<%= link_to t('document.revision.new.cancel'), @question %>
 			<p>
 			<%= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
-		</td>		
-	
-	</tr>
-</table>

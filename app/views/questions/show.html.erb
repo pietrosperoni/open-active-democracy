@@ -1,7 +1,4 @@
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr>
-		
-		<td valign="top">
+			<%= @question.name %>
 			<div class="point_content_detail_container">
 			Spurning:<br>
 			<div class="point_content_detail">
@@ -23,16 +20,10 @@
 			<div class="heading"><%= t('points.show.recent_activity')%></div>
 			<div id="activities">
 			<% for activity in @question.activities.active.by_recently_created.find(:all, :limit => 10) %>
-				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
+				<!-- TODO AOM 210910 -->
+				<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>
 			</div>
 			
-		</td>	
-		
-		<td valign="top" width="150" style="padding-left: 20px;">
-			<%= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
-			<%= render :partial => "questions/left_nav" %>
-		</td>		
-	
-	</tr>
-</table>
+			<%#= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
+			<%#= render :partial => "questions/left_nav" %>

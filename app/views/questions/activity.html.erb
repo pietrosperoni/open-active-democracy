@@ -1,8 +1,4 @@
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr>
-		
-		<td valign="top">
-			
+
 			<% if logged_in? and params[:action] == 'discussions' %>
 				<p>
 				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>				
@@ -12,17 +8,10 @@
 			<p>
 			<div id="activities">
 			<% for activity in @activities %>
-				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
+				<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>
 			</div>
 			<p>
 			<%= will_paginate(@activities) %>
 			
-		</td>	
-		
-		<td valign="top" width="150" style="padding-left: 20px;">
 			<%= render :partial => "revisions/revisions" %>
-		</td>		
-	
-	</tr>
-</table>

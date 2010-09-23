@@ -194,6 +194,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/askrift', :controller=>'users', :action=>'subscriptions'
   map.connect '/umraedur', :controller=>'priorities', :action=>'newest'
   map.connect '/taka_thatt', :controller=>'priorities', :action=>'new'
+   map.connect '/senda_spurningu', :controller=>'questions', :action=>'new'
+    map.connect '/senda_erindi', :controller=>'documents', :action=>'new'
   
   map.connect '/minar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"mine"
   map.connect '/minir_umraedu_kaflar', :controller => 'priorities', :action => 'set_subfilter', :filter=>"my_chapters"

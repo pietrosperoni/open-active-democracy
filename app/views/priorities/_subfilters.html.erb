@@ -2,21 +2,21 @@
 	<% if session[:priorities_subfilter]==nil %>
 		<b>Allt</b>
 		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
-		 <%=link_to "Mín skrif", "/minar_umraedur" %>
+		 <%=link_to "Mín skrif", "/minar_umraedur?controller_name=#{controller_name}" %>
 		<% end %>
 		<% if TagSubscription.count("user_id = #{current_user.id}")>0 %>
-		 <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar" %>
+		 <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar?controller_name=#{controller_name}" %>
 	    <% end %>
 	<% elsif session[:priorities_subfilter]=="mine" %>
-		<%=link_to "Allt", "/allar_umraedur" %> 
+		<%=link_to "Allt", "/allar_umraedur?controller_name=#{controller_name}" %> 
 		<b>Mín skrif</b>
 		<% if TagSubscription.count("user_id = #{current_user.id}")>0 %>
-		  <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar" %>
+		  <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar?controller_name=#{controller_name}" %>
 		 <% end %>
 	<% elsif session[:priorities_subfilter]=="my_chapters" %>
-		<%=link_to "Allt", "/allar_umraedur" %>
+		<%=link_to "Allt", "/allar_umraedur?controller_name=#{controller_name}" %>
 		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
-		  <%=link_to "Mín skrif", "/minar_umraedur" %>
+		  <%=link_to "Mín skrif", "/minar_umraedur?controller_name=#{controller_name}" %>
 		<% end %>
 		<b>Kaflar í áskrift</b>
 	<% end %>

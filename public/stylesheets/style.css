@@ -1,17 +1,14 @@
+
 /* 		Dagny Reykjalin - dagny@blekhonnun.is */
 
 
 /* 		Main 			*/
 
-*		 { 			margin:0; padding:0; }
-
 body  	{			background-color:#fff; background-image: url('img/bg-grey.jpg'); background-repeat: repeat-x;
 					font-family: "Lucida Grande", Arial, Helvetica, sans-serif; font-size: 0.7em; 
-margin: 0;
-padding: 0;
-text-align: center; /* for pre IE6 browsers */
- }
-
+					padding:0px; margin:0px; 
+					 }
+*		 { 			margin:0; padding:0; }
 p {					margin:0px; }
 
 a, a:visited {		color: #003399; text-decoration:none; }
@@ -20,31 +17,16 @@ a:hover {			color: #3399ff; text-decoration:underline; }
 
 /*		Global 	*/
 ul {	list-style-type: none; }
-h4 {	font-size: 12px; }
 
-#selected_tag
-{
-	float: left;
-	padding-left:8px;
-	padding-top:3px;
-	font-size: 11px;
-	font-weight: bold;
-}
-
-.comment_content_display_value, input 
-{
-	border: 1px solid #999;
-	margin-bottom: 3px;
-}
+h1 {				font-size: 150%;  }
+h2 {				font-size: 140%;  }
+h3 {				font-size: 120%;  }
+h4 {				font-size: 110%;  }
+h5 {				font-size: 100%;  }
 
 /*		Structure ID's 	*/
 
-
-#wrapper  {			
-width: 1000px; 
-margin: 0 auto;
-text-align: left; 
-}
+#wrapper  {			width: 1000px; padding:0px; margin:0px auto;  }
 
 /*		Header */
 #header  {			width: 100%; height: 90px;
@@ -53,8 +35,7 @@ text-align: left;
 #search input.input {			height: 21px;  margin-right: 2px; margin-top: 1px; padding: 2px 3px 0;} 
 #search input.leita {			height: 21px;  padding-left: 3px; padding-right: 5px;}
 
-
-#header-right {		float:right; width: 200px; margin-top: 0px;   }
+#header-right {		float:right; width: 200px; margin-top: 0px; padding-right:20px;    }
 #header-right p {	margin-bottom: 5px; }					
 					
 					
@@ -65,13 +46,11 @@ text-align: left;
 #mainContent {		width:600px;  margin: 5px 0 0 10px;
 					float:left; line-height:150%; 
 					border: 1px solid #bcbcbc; border-left: 1px dashed #bcbcbc;  }
-
-#mainContent {margin: 0px 0 0 10px !ie}
-
+					
 #content {			padding:5px; margin-top:10px;  }
 					
 					
-					/* Content boxiÃ°*/
+					/* Content boxið*/
 
 #rightCol {			width: 205px; float:left; margin:  0 0 0 5px;   }
 					
@@ -83,38 +62,33 @@ text-align: left;
 /* 		Text				*/
 
 #leftCol {			  }
-#leftCol ul {		margin:2px 0px 10px 0px; padding:4px 0px 10px 0px; }
-#leftCol ul.action li {	border-bottom: 1px solid #f1f1f1; padding: 5px 0px; }
+#leftCol ul {		margin:2px 0px 10px 0px; padding:10px 0px; }
+#leftCol ul.action li {	border-bottom: 1px solid #e2e2e2; padding: 4px 0 5px 15px; font-size: 110%;  background-color: #f1f1f1; margin-bottom:3px; }
 
 #rightCol h4 {		margin:0px; color: #666666; }
 #rightCol ul {		margin:2px 0px 10px 0px; padding:0px; font-size:11px; }
-#rightCol ul {		margin:2px 0px 10px 0px; padding:0px; font-size:11px; }
 #rightCol ul li {	list-style-type: none; }
-#rightCol ul li img {	margin:0 1px 0 0;  }
-#rightCol ul li.header {	font-weight: bold; color: #999999; margin-top:12px; border-bottom: 1px solid #e2e2e2;}
+#rightCol ul li img {	margin:0px 2px 2px 0; vertical-align: middle;}
+#rightCol ul li.header {	font-weight: normal; color: #990000; margin-top:12px; border-bottom: 1px solid #e2e2e2;}
+.chapter_sel {	 background-image:url('img/chapter_sel.gif'); }
 #rightCol ul li input {	margin:0 2px 0 0px;  }
 #rightCol .chapter_submit {		margin: 10px 0 0 0;  }
-#rightCol  ul img {	
-	padding-top: 1px;
-}
+
+
 
 #tabs {				width:602px; float:left; margin-left: 10px; height:12px; }
-#tabs ul {			margin:0px; padding:0px; height:12px;}
-
-#tabs ul li {		list-style-type:none; display:inline; height:20px; padding:4px 10px; background-color: #cccccc; background-image:url('img/menu_bg.gif'); margin:0px 0px 0px 0; }
-#tabs ul li { margin:0px 2px 0px 0 !ie; }
-
+#tabs ul {			margin:0px; padding:0px; height:12px; }
+#tabs ul li {		list-style-type:none; display:inline; height:20px; padding:4px 10px; background-color: #cccccc; background-image:url('img/menu_bg.gif'); margin:0px; }
 #tabs ul li.active {	color:#fff; background-color:#005297; background-image: none; }
 #tabs a {			color:#114170}
 #tabs li.active a {	color:#fff; }
-
 #right_tabs {		float:right; }
-#left_tabs li{		 margin:0px 3px 0px 0 !important; }
 
 /*		Subfilters				*/
-#subfilters {		width: 590px; text-align:right; padding: 5px 10px 0 0;  }
-#subfilters a {         color: #999; border-left:1px solid #999; margin-left: 5px; padding-left: 8px;  }
-#subfilters b {			border-left:1px solid #999;margin-left: 5px; padding-left: 8px; }
+#subCatName {		float:left; text-align:left; margin:7px 5px 0 7px; font-weight: bold;  color: #333;   }
+
+#subfilters {		text-align:right; padding: 5px 10px 0 0;  }
+#subfilters a {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
 #subfilters a:hover {	color: #3399ff; text-decoration:underline; }
 
 /*		Entries				*/
@@ -122,19 +96,27 @@ text-align: left;
 .entry_box h4 {		margin:0px; }
 .entry_box img {	margin: 0px 5px 0px 0px; }
 .entry_profile {	color:#999; }
-.entry_icons {		float:right; margin-right:10px;  }
-.entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 9px;  }
+.entry_icons {		float:right; margin-right:4px;  }
+.entry_icons img {	margin:0 1px; padding:0px;  }
+.entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 90%;  }
+.entry_profile {	 }
 
-.comment_box {		background-color: #e9eced; line-height: 120%; padding:5px; margin: 0px 5px 10px 55px;  }
-.comment_box img {	border: 1px solid #c0c9cd; margin: 0px 5px 0px 0px; }
+.comment_box {		background-color: #e9eced; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; }
+.comment_box_samn {	border:2px solid #cbd4d7; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; }
 .comment_box a:hover {	color: #1461ac;  }
+.comment_profile {	margin: 0px 5px 0px 0px;}
+.comment_box img {	margin-right:5px;}
+.comment_report {	margin:0px; right; }
+
+
+
 
 .readmore {			margin: 0 2px;  }
 
-.answer_box {		margin-left: 55px; padding-bottom: 10px;  }
+.answer_box {		margin-left: 10px; padding-bottom: 10px;  }
 .answer_box input {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 
-.addContent_kaflar {	width:193px; float:left; font-size: 11px; }
+.addContent_kaflar {	width:193px; float:left; font-size: 90%; }
 
 
 /*		Profile box				*/
@@ -160,12 +142,13 @@ text-align: left;
 	
 /*		RSS feed boxes			*/
 	
-.rss_box h4 {		margin:5px 0 0 0; color: #666666; padding:0px;  }
+.rss_box h4 {		margin:0px; color: #666666; padding:0px;  }
 .rss_box ul {		border-bottom: 1px solid #e9e9e9; margin:0px; padding:0px; }		
 .rss_box li {		list-style-image:url('img/rss_list.gif'); padding: 0px; margin-left: 12px; font-size: 95%; }
 .rss_more {			width: 100%; text-align:right;  }
 
-.left_box p {	margin: 5px 0px 0px 0px;  }	
+.left_box {			margin-bottom: 10px;  }
+.left_box p {		margin: 5px 0px 0px 0px;  }	
 .left_box input {	margin-bottom: 4px; 	}
 
 
@@ -175,7 +158,7 @@ text-align: left;
 	
 /*		Chapters - right column			*/
 	
-a.chapter_utan, li.chapter_utan {		color: #c57947;} /* RED */
+a.chapter_utan, li.chapter_utan {		color: #c57947; margin: 0 0 2px 0} /* RED */
 a.chapter_hluta, li.chapter_hluta {		color: #c39a44;} /* Yellow */
 a.chapter_innan,  li.chapter_innan {		color: #5b925d;} /* Green */
 	
@@ -194,30 +177,5 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 #content h2	 {		font-size:150%; margin-bottom:5px;  }
 #content h4	 {		font-size:110%; margin:0px;  }
 #content .subtext {	font-size: 90%; margin-bottom: 15px;   }
-
-#content .addContent_kaflar
-{
-padding-top: 10px;
-}
-
-
-.Tegund_Efnis
-{
-clear: both;
-}
-
 .star {				color:#ff0000;  }
 					
-					
-/* Left column */
-
-.facebook
-{
-float: left !important;
-}
-
-.profile_image img
-{
-border: 1px solid #E9ECED;
-}
-
