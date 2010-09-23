@@ -29,12 +29,12 @@
 		<% end %>
 		
 		<!-- Edit or delete if there is no answer nor any comments-->		
-		<% if logged_in? and question.activities.count == 1 and !question.answer and (current_user.is_admin? or current_user.id == comment.user_id) %>
-			<%=link_to "Breyta","/questions/edit/#{question.id}" %>	
-			<%#=link_to "Eyða","/questions/edit/#{question.id}" %>
-			<%= link_to_remote t('esb.comment.delete'), { :url => "/questions/delete/#{question.id}",:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
-	
+
+		<% if logged_in? and question.discussions_count == 0 and !question.answer and (current_user.is_admin? or current_user.id == question.user_id) %>
+			<%= link_to t('points.edit.name'), new_question_revision_url(question), :title => t('points.edit.title') %>
+			<%= link_to t('menu.briefing.delete.name'), question_path(question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
 		<% end %>
+		
 	</div>
 	
 	<!-- Do we need this? aom 230910 --> 
@@ -55,7 +55,7 @@
 			<% else%>
 			  	Ekkert svar er til við þessari spurningu eins og er.
 			<% end %>
-				<%=link_to "Breyta/Svara","/questions/edit/#{question.id}" if current_user.is_admin?%>		
+				<%=link_to "Þú ert Admin og mátt Breyta/Svara hér","/questions/edit/#{question.id}" if current_user.is_admin?%>		
 		</p> 
 	</div> 
 				
