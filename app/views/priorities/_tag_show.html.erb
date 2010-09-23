@@ -2,7 +2,7 @@
 <% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
 
 <% for tag in priority.issues %>
-<span class="tag_name"><%= link_to tag.title, :controller => "velja_kafla", :slug => tag.slug %></span>
+<span class="tag_name"><a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a></span>
 <span class="tag_count"><%= tag.priorities_count %></span>
 <% end %>
 

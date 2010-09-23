@@ -6,6 +6,11 @@
 		<%= link_to_unless_current h(document.name), document %>
 	<% end %>
 	</div>
+			- <%= time_ago(document.created_at) %>   
+			- <%#= render :partial => "question/tag_show_esb", :locals => { :question => comment.activity.priority }%>
+			<% for tag in document.issues %>
+		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
+			<% end %>	
 	<div class="point_byline">
 		<%= t('revisions.word_count', :count => document.word_count) %> <%= t('revisions.byline', :author_sentence => document.author_sentence) %><% if revision %>, <%= t('revisions.revised', :time_ago => time_ago(revision.created_at)) %> <%= t('revisions.byline', :author_sentence => link_to(revision.user.name, revision.user)) %><% else %>, <%= t('revisions.added', :time_ago => time_ago(document.created_at)) %><% end %>.
 	</div>
