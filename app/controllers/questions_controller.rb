@@ -117,6 +117,7 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     @question.issue_list = params[:custom_tag]
     @saved = @question.save
+    @activity = ActivityBulletinNew.create(:question_id=>@question.id, :user_id=>current_user.id)
     respond_to do |format|
       if @saved
         if Revision.create_from_question(@question.id,request)

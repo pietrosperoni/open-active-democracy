@@ -41,8 +41,7 @@
 	<%#= link_to h(question.user.login), question.user, :title => t('esb.mouseover.comment.user') %> 
 	<!-- Not used -->
 	<%# = time_ago(question.created_at) %> 
-		
-	
+			
 	<!-- Comment box - 'Official Reply' box! -->	
 	<div class="comment_box_samn"> 
 		<img src="img/profile02.gif" border="0" class="comment_profile" alt="" align="left" /> 
@@ -58,31 +57,24 @@
 				<%=link_to "Þú ert Admin og mátt Breyta/Svara hér","/questions/edit/#{question.id}" if current_user.is_admin?%>		
 		</p> 
 	</div> 
-				
-	<!-- Show More comments--> 
-	<div class="comment_box"> 
-		<p><a href="#">Sýna 12 athugasemdir í viðbót</a></p> 
-	</div> 
-				
-	<!-- Comment box -->	
-		
-	<div class="comment_box"> 
+								
+	<!-- Comment box -->			
+	
 	<% @activities = question.activities.active.for_all_users.by_recently_updated :include => :user %>
 	<% activity = @activities.first %>
 	<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
-
-	<%#= render :partial => "comments_questions/show", :locals => {:comment => @comments.last} if @comments.length > 1 %>
 	
 	<!-- TODO Hve mörg komment/umræður ?? -->
 	<% for activity in @activities %>
 		<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself"} %>
 	<% end %>
-	</div> 
-								
-	<!-- Answer box -->	
-	<div class="answer_box"> 
-		<p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p> 
-	</div> 
+	
+	<!-- Show More comments: see activties/comments_questions  
+	<div class="comment_box"> <p><a href="#">Sýna 12 athugasemdir í viðbót</a></p> </div> 
+	--> 
+									
+	<!-- Answer box: see activities/comments_questions -->	
+	<!-- <p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p> --> 
 
 </div>
 
