@@ -21,12 +21,11 @@
 			</div>
 		<% end %>
 		
-		<div class="answer_box"> 
 		<!-- deleted from if statement: ' @comments.length > 0 and ' 230910 aom-->
-		<% if activity.class != ActivityCommentParticipant %>
-			<%= render :partial => "comments_questions/new_inline", :locals => {:activity => activity, :comment => Comment.new} %>
-		<% end %>
 		
 	<% end %>
+		<% if activity.class == ActivityBulletinNew %>
+			<%= render :partial => "comments_questions/new_inline", :locals => {:activity => activity, :comment => Comment.new} %>
+		<% end %>
 	
 </div>

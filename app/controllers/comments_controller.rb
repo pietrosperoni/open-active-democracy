@@ -51,8 +51,13 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments/show_all")
-          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+          if @activity.priority_id
+            page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments/show_all")
+            page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+          elsif @activity.question_id
+            page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments_questions/show_all")
+            page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+          end
           page << "jQuery('#comment_content_#{@activity.id.to_s}').autoResize({extraSpace : 20});"
         end
       }
@@ -110,9 +115,14 @@ class CommentsController < ApplicationController
           redirect_to(activity_comments_path(@activity)) 
         }
         format.js {
-          render :update do |page|            
-            page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments/show", :locals => {:comment => @comment, :activity => @activity})
-            page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+          render :update do |page|
+            if @activity.priority_id
+              page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments/show", :locals => {:comment => @comment, :activity => @activity})
+              page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+            elsif @activity.question_id
+              page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/show", :locals => {:comment => @comment, :activity => @activity})
+              page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+            end
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
             if facebook_session
               page << fb_connect_stream_publish(UserPublisher.create_comment(facebook_session, @comment, @activity))
