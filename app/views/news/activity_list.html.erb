@@ -1,16 +1,28 @@
 <div id="hp_intro"><%= @page_title%></div>
 <p>
-
 <% if not @activities %>
 	<%= t('activities.empty')%>
 <% else %>
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @activities} %>
 <div id="activities">
+
+<!-- Priorities -->
+
 <% for activity in @activities %>
+
+	<% if activity.priority_id %>
+    	<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>  <BR>		
+	<% elsif activity.question_id %>
+        <%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself"} %>
+	<% else #make check for documents %>
+		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %> 
+	<% end %>
+
+
 	<% if ['your_activity','your_capital','your_changes'].include?(params[:action]) %>
-		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_nouser"} %>
+		<%#= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_nouser"} %>
 	<% else %>
-		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
+		<%#= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
 	<% end %>
 <% end %>
 </div>

@@ -1,3 +1,4 @@
+
 <% if activity.comments_count > 0 %>
 	<div id="activity_<%= activity.id %>_comments" class="comment_list">
 <% else %>
@@ -5,7 +6,7 @@
 <% end %>
 
 	<% if activity.comments_count > 0 %>
-	
+
 		<% if !defined? all%>
 			<% all ="0" %>
 		<% end %>						
