@@ -1,17 +1,35 @@
 <div class="point" id="<%= document.id %>">
 	<div class="entry_box">
-	<% if revision %>
-		<%= link_to_unless_current h(revision.name), document_revision_url(document,revision) %>
-	<% else %>
-		<%= link_to_unless_current h(document.name), document %>
-	<% end %>
-	</div>
-			- <%= time_ago(document.created_at) %>   
-			- <%#= render :partial => "question/tag_show_esb", :locals => { :question => comment.activity.priority }%>
+		<%= render :partial => "shared/entry_icons", :locals => {:content => document.content}%> 
+		<%= render :partial => "users/pic_48", :locals => {:user => document.user}%> 
+		
+		<% if revision %>
+			<h4><%= link_to_unless_current h(revision.name), document_revision_url(document,revision) %></h4>
+		<% else %>
+			<h4><%= link_to_unless_current h(document.name), document %></h4>
+		<% end %>
+			
+		<span class="entry_profile">
+			<%= t('revisions.byline', :author_sentence => document.author_sentence) %>
+			- <%= t('revisions.added', :time_ago => time_ago(document.created_at)) %>
+			<%#= t('revisions.word_count', :count => document.word_count) %>
 			<% for tag in document.issues %>
 		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
-			<% end %>	
-	<div class="point_byline">
-		<%= t('revisions.word_count', :count => document.word_count) %> <%= t('revisions.byline', :author_sentence => document.author_sentence) %><% if revision %>, <%= t('revisions.revised', :time_ago => time_ago(revision.created_at)) %> <%= t('revisions.byline', :author_sentence => link_to(revision.user.name, revision.user)) %><% else %>, <%= t('revisions.added', :time_ago => time_ago(document.created_at)) %><% end %>.
+			<% end %>
+		</span> 
+
+		<% if revision %>
+			<div class="comment_content" id="comment_content_<%= document.id.to_s %>">
+				<%= revision.content_diff %>
+			</div>
+    	<% else %>
+			<div class="comment_content" id="comment_content_<%= document.id.to_s %>">
+				<%= document.content_html %>
+			</div>
+		<% end %>
+
 	</div>
+		
 </div>
+
+		

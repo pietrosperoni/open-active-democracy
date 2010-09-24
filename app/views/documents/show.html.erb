@@ -1,16 +1,40 @@
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr>
-		
-		<td valign="top">
 
-			<%= @document.content_html %>
-						
-			<div class="heading">Recent activity on this document</div>
-			<% for activity in @document.activities.active.by_recently_created.find(:all, :limit => 10) %>
-				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
-			<% end %>
+<div class="entry_box">
+		<%= render :partial => "shared/entry_icons", :locals => {:content => @document.content}%> 
+		<%= render :partial => "users/pic_48", :locals => {:user => @document.user}%> 
+		
+		<% if @revision %>
+			<h4><%= link_to_unless_current h(@revision.name), document_revision_url(@document,@revision) %></h4>
+		<% else %>
+			<h4><%= link_to_unless_current h(@document.name), @document %></h4>
+		<% end %>
 			
-		</td>		
-	
-	</tr>
-</table>
+		<span class="entry_profile">
+			<%= t('revisions.byline', :author_sentence => @document.author_sentence) %>
+			- <%= t('revisions.added', :time_ago => time_ago(@document.created_at)) %>
+			<%#= t('revisions.word_count', :count => document.word_count) %>
+			<% @document.issues %>
+			<% for tag in @document.issues %>
+			
+		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
+			<% end %>
+		</span> 
+
+		<% if @revision %>
+			<div id="comment_content_<%= @document.id.to_s %>">
+				<%= @revision.content_diff %>
+			</div>
+    	<% else %>
+			<div id="comment_content_<%= @document.id.to_s %>">
+				<%= @document.content_html %>
+			</div>
+		<% end %>
+
+	</div>
+			
+						
+			<!-- No activites div class="heading">Recent activity on this document</div> -->
+			<%# for activity in @document.activities.active.by_recently_created.find(:all, :limit => 10) %>
+				<%#= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
+			<%# end %>
+			

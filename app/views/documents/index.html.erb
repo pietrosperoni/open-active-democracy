@@ -3,7 +3,7 @@
 <% if not @documents or @documents.empty? %>
 	<%= t('document.empty')%>
 <% else %>
-	<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
+	<%#= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
 	<% for document in @documents %>
 		<% quality = nil %>
 		<% if @qualities %>
