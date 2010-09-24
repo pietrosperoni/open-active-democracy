@@ -46,6 +46,12 @@ h5 {				font-size: 100%;  }
 #mainContent {		width:600px;  margin: 5px 0 0 10px;
 					float:left; line-height:150%; 
 					border: 1px solid #bcbcbc; border-left: 1px dashed #bcbcbc;  }
+
+#mainContentExpanded {		width: 817px;
+					 margin: 5px 0 0 10px;
+					float:left; line-height:150%; 
+					border: 1px solid #bcbcbc; border-left: 1px dashed #bcbcbc; }
+
 					
 #content {			padding:5px; margin-top:10px;  }
 					

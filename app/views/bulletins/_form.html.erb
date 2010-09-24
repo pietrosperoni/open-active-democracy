@@ -13,9 +13,9 @@
 				<%= t('bulletins.new.priority') %>
 			<% end %>
 		<% elsif params[:action].include?("discussions") %>
-		<%= t('bulletins.new.discussion') %>
+			<%= t('bulletins.new.discussion') %>
 		<% else %>
-		<%= t('bulletins.new.name') %>
+			<%= t('bulletins.new.name') %>
 		<% end %>
 	</div>
 	<% form_remote_for comment, :url => bulletins_url, :loading=>"Form.Element.disable('bulletin-form-submit')" do |f| %>		
