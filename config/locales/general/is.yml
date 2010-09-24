@@ -496,7 +496,7 @@ is:
             confirm: "Fjarlægja þessa athugasemd?"
         full:
             show: "sýna alla athugasemdina"
-            hide: "sýna athugasemdina minnkada"
+            hide: "sýna minna"
         permalink: "Tengja varanlega"
         show: "sýna"
         people: "Fólk sem gerir athugasemdir"
@@ -1651,6 +1651,7 @@ is:
                 bookmark: "setja bókamerki hér xxxx"
                 facebook: "deila á FBxxxxxxx"
                 twitter: "deila á Twitter xxxxxx"
+                report: "Report ..... xxxxxx"
             comment:
                 title: "Sjá umræðu í heild sinni xxxx"
                 user: "Nafn þess sem skrifaði þetta xxx"
