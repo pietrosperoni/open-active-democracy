@@ -1,5 +1,7 @@
 class SearchesController < ApplicationController
   
+  layout "esb_search"
+  
   def index
     @page_title = t('searches.index.title', :government_name => current_government.name)
     if params[:q]
