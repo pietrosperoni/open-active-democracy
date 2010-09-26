@@ -9,6 +9,7 @@ config/database.yml*
 config/facebooker.yml
 config/s3.yml
 db/sphinx/*
+config/development.sphinx.conf
 solr/index
 solr/*.pid
 .tmp*
