@@ -15,7 +15,7 @@ Leitarniðurstöður fyrir <%=@query%><br>
 					<tr>				
 						<td>
 						<%= result.excerpts.name %><br>
-				    	<%= render :partial => "activities/show", :locals => {:activity => Activity.find(:first, :conditions=>["priority_id=?",result.id]), :suffix => "_noself"} %>  <BR>		
+				    	<%= render :partial => "activities/show", :locals => {:activity => Activity.find(:first, :conditions=>["priority_id=? AND type='ActivityBulletinNew'",result.id]), :suffix => "_noself"} %>  <BR>		
 						</td>
 					</tr>
 				  <% elsif result.class == Question %>
