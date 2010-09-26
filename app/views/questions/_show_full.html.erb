@@ -52,7 +52,7 @@
 			<% else%>
 			  	Ekkert svar er til við þessari spurningu eins og er.
 			<% end %>
-				<%=link_to "Þú ert Admin og mátt Breyta/Svara hér","/questions/edit/#{question.id}" if current_user.is_admin?%>		
+				<%=link_to "Þú ert Admin og mátt Breyta/Svara hér","/questions/edit/#{question.id}" if logged_in? and current_user.is_admin?%>		
 		</p> 
 	</div> 
 								
