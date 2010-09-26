@@ -53,6 +53,8 @@ Leitarniðurstöður fyrir <%=@query%><br>
 		
 		<td width="25%">
 			<% unless not @facets or @facets.empty?%>
+	            <div id="RightCol">	
+
 				<div>
 					<div> 
 						<h3><%= link_to "Allt", "/leita?q=#{@query}"%></h3>
@@ -80,6 +82,7 @@ Leitarniðurstöður fyrir <%=@query%><br>
 						</div> 
 					</div> 
 				<% end %>
+            </div>
 			<% else %>
 			  Engir kaflar fundust
 			<% end %>			
