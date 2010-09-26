@@ -9,9 +9,7 @@
 		
 		<span class="entry_profile">
 			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> &middot; 
-			- <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>
-			<!-- TODO --> <font color="red">- 3 álit (todo)</font> 
-			- 
+			- <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>			
 			<% for tag in question.issues %>
 		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
 			<% end %>
@@ -60,12 +58,12 @@
 								
 	<!-- Comment box -->			
 	
-	<% @activities = question.activities.active.for_all_users.by_recently_updated :include => :user %>
-	<% activity = @activities.first %>
+	<% activities = question.activities.active.for_all_users.by_recently_updated :include => :user %>
+	<% activity = activities.first %>
 	<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
 	
 	<!-- TODO Hve mörg komment/umræður ?? -->
-	<% for activity in @activities %>
+	<% for activity in activities %>
 		<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself"} %>
 	<% end %>
 	

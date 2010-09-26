@@ -5,11 +5,7 @@
 <% else %>
 	<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
 	<% for document in @documents %>
-		<% quality = nil %>
-		<% if @qualities %>
-			<% quality = @qualities.detect {|e| e.document_id == document.id } %>
-		<% end %>				
-		<%= render :partial => "documents/show_full", :locals => {:document => document, :quality => quality, :revision => nil}%>
+		<%= render :partial => "documents/show_full", :locals => {:document => document, :quality => nil, :revision => nil}%>
 	<% end %>
 
 	<p>

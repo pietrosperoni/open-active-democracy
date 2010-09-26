@@ -1,29 +1,71 @@
-			<%= @question.name %>
-			<div class="point_content_detail_container">
-			Spurning:<br>
-			<div class="point_content_detail">
-			<%= @question.content_html %>
-			</div>
-			<div class="point_content_detail">
-			<%if @question.answer %>
-			Svar:<br>
-			<%= @question.answer %>
-			<% else%>
-			  Ekkert svar er til við þessari spurningu eins og er.
-			<% end %>
-			<%=link_to "Breyta/Svara","/questions/edit/#{@question.id}" if current_user.is_admin?%>
-			</div>
-
-			</div>		
-			<p>
-				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>	
-			<div class="heading"><%= t('points.show.recent_activity')%></div>
-			<div id="activities">
-			<% for activity in @question.activities.active.by_recently_created.find(:all, :limit => 10) %>
-				<!-- TODO AOM 210910 -->
-				<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself" }%>
-			<% end %>
-			</div>
+<!-- Show a single question with its answer and all comments -->			
+<h4><%= @question.name %></h4>
+	
+<div class="entry_box"> 
+		<!-- TODO AOM 220910 send the relevant variables to entry_icons-->
+		<%= render :partial => "shared/entry_icons", :locals => {:content => @question.content}%> 
+		<%= render :partial => "users/pic_48", :locals => {:user => @question.user}%> 
 			
-			<%#= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
-			<%#= render :partial => "questions/left_nav" %>
+		<span class="entry_profile">
+			<%= t('revisions.byline', :author_sentence => @question.author_sentence) %> &middot; 
+			- <%= t('revisions.added', :time_ago => time_ago(@question.created_at)) %>
+			<!-- TODO --> <font color="red">- 3 álit (todo)</font> 
+			- 
+			<% for tag in @question.issues %>
+		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
+			<% end %>
+		</span> 
+		
+		<!-- max_length for question, see how comment_content is defined in shared/_javascripts - see also comments/show -->
+		<% if @revision %>
+			<div class="comment_content" id="comment_content_<%= @question.id.to_s %>">
+				<%= @revision.content_diff %>
+			</div>
+    	<% else %>
+			<div class="comment_content" id="comment_content_<%= @question.id.to_s %>">
+				<%= @question.content_html %>
+			</div>
+		<% end %>
+		
+			<!-- Edit or delete if there is no answer nor any comments-->		
+
+		<% if logged_in? and @question.discussions_count == 0 and !@question.answer and (current_user.is_admin? or current_user.id == @question.user_id) %>
+			<%= link_to t('points.edit.name'), new_question_revision_url(@question), :title => t('points.edit.title') %>
+			<%= link_to t('menu.briefing.delete.name'), question_path(@question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
+		<% end %>
+</div>	
+
+<div class="comment_box_samn"> 
+		<img src="img/profile02.gif" border="0" class="comment_profile" alt="" align="left" /> 
+		<span class="entry_profile"><font color = "red">TODO Samninganefnd - 2 min síðan</font></span> 
+		<p>						
+			<%if @question.answer %>
+				<div class="comment_content" id="comment_content_<%= @question.answer.id.to_s %>">
+					<%= @question.answer %>
+				</div>				
+			<% else%>
+			  	Ekkert svar er til við þessari spurningu eins og er.
+			<% end %>
+				<%=link_to "Þú ert Admin og mátt Breyta/Svara hér","/questions/edit/#{@question.id}" if current_user.is_admin?%>		
+		</p> 
+</div> 
+
+<div class="heading"><%= t('points.show.recent_activity')%></div>
+<div id="activities">
+	<% @activities = @question.activities.active.for_all_users.by_recently_updated :include => :user %>
+	<% activity = @activities.first %>
+	<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
+	
+	<% for activity in @question.activities.active.by_recently_created.find(:all, :limit => 10) %>
+			<%#= render :partial => "comments_questions/show_all", :locals => {:comment => @comment, :suffix => "_noself"}%>
+			<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself", :all => "1" }%>
+	<% end %>
+</div>
+			
+	<!-- Commented out aom 240910 -->
+	<%#= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>	
+	<%#= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
+	<%#= render :partial => "questions/left_nav" %>
+	
+
+	

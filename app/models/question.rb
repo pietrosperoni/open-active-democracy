@@ -19,7 +19,12 @@ class Question < ActiveRecord::Base
   
   has_many :author_users, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User"
   
-  acts_as_solr :fields => [ :name, :content, :is_published ]
+  define_index do
+    indexes name
+    indexes content
+    indexes answer
+    indexes cached_issue_list, :facet=>true
+  end
 
   liquid_methods :id, :user, :text
   

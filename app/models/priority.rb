@@ -27,9 +27,14 @@ class Priority < ActiveRecord::Base
   has_many :notifications, :as => :notifiable, :dependent => :destroy
   
   acts_as_taggable_on :issues
-  acts_as_solr :fields => [ :name, :cached_issue_list, :is_published ]
+#  acts_as_solr :fields => [ :name, :cached_issue_list, :is_published ]
   
   liquid_methods :id, :name, :show_url, :value_name
+
+  define_index do
+    indexes name
+    indexes cached_issue_list, :facet=>true
+  end
   
   #validates_length_of :name, :within => 3..60
   #validates_uniqueness_of :name

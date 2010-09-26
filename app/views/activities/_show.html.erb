@@ -1,30 +1,5 @@
-<% if params[:action] == 'your_discussions' and activity.class == ActivityCommentParticipant %>
-	<%= render :partial => "activities/show", :locals => {:activity => activity.activity, :suffix => ""}%>
-<% else %>
 <div id="activity_and_comments_<%= activity.id %>" class="activity_border">
-
-<% if activity.user and activity.user.status == 'deleted' and params[:action] != 'unhide' %>
-	<div class="activity_hidden" id="activity_hidden_<%= activity.id.to_s %>">
-		Hidden because <%= activity.user.name %> deleted their account.
-		<%= link_to_remote "show",{ :url => unhide_activity_url(activity), :method => :get }  %>
-	</div>	
-<% elsif activity.user and activity.user.status == 'suspended' and params[:action] != 'unhide' %>
-	<div class="activity_hidden" id="activity_hidden_<%= activity.id.to_s %>">
-		Hidden because <%= activity.user.name.possessive %> account was suspended.
-		<%= link_to_remote "show",{ :url => unhide_activity_url(activity), :method => :get }  %>
-	</div>		
-<% elsif logged_in? and activity.user and current_ignoring_ids.include?(activity.user_id) and params[:action] != 'unhide' %>
-	<div class="activity_hidden" id="activity_hidden_<%= activity.id.to_s %>">
-		Hidden because you are ignoring <%= link_to activity.user.name, activity.user %>.
-		<%= link_to_remote "show",{ :url => unhide_activity_url(activity), :method => :get }  %>
-	</div>
-<% else %>
 	<% if activity.class != ActivityCommentParticipant and activity.class != ActivityBulletinProfileAuthor %>
 		<%= render :partial => "activities/comments", :locals => {:activity => activity} %>		
 	<% end %>
-	
-<% end %>
-
 </div>
-
-<% end %>
