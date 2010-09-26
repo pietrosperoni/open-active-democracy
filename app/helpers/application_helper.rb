@@ -2,6 +2,20 @@
 module ApplicationHelper
   include WillPaginate::ViewHelpers 
 
+  def translate_facet_option(option)
+    if option=="Comment"
+      "Athugasemdir"
+    elsif option=="Question"
+      "Spurningar og Svör"
+    elsif option=="Priority"
+      "Umræðuefni"
+    elsif option=="Document"
+      "Erindi"
+    else
+      option
+    end
+  end
+
   def subscribed_to_tag?(user_id,tag_id)
     if TagSubscription.find(:first, :conditions=>["user_id = ? AND tag_id = ?",user_id,tag_id])
       true

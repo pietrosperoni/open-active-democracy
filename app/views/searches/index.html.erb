@@ -72,7 +72,8 @@ Leitarniðurstöður fyrir <%=@query%><br>
 							<ul>
 								<% facet_options.each do |option, count| %>
 									<% next if option==nil or option=="" %>
-									<li><%= link_to "#{option} (#{count})",
+									<% translated_option = translate_facet_option(option) %>
+									<li><%= link_to "#{translated_option} (#{count})",
 									:params => {facet => option, :q=>@query, :page => 1} %></li>
 								<% end %>
 							</ul> 
