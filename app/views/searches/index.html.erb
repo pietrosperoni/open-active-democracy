@@ -1,43 +1,89 @@
-<div id="hp_intro"><%= @page_title %></div>
-<p>
-<% form_tag(searches_path, :method => 'get') do %>
-<table cellpadding="0" cellspacing="0">
-<tr>
-	<td valign="middle"><%= text_field_tag "q", params[:q] %></td>
-	<td valign="middle" style="padding-left:5px;"><%= submit_tag t('searches.new.submit'), :class => "yellow_button" %></td>
-</tr>
-</table>
-<% end %>
-<p>
-<% if @priorities %>
-	<%= render :partial => "nav" %>
-<% end %>
-<% if not @priorities %>
-<% elsif @priorities.empty? %>
-	<%= t('briefing.search.empty') %>
+<% if @error %>
+ <%=@error%>
 <% else %>
-	<table border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= t('rank') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
-			<td style="padding-left: 7px; padding-bottom: 2px;"><%= will_paginate WillPaginate::Collection.new((params[:page]||1),(25),@priority_results.total_hits) -%></td>	
-		</tr>			
-	<% for priority in @priorities %>
-		<% if @endorsements %>
-			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
-		<% end %>
-		<tr>
-			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-			<td valign="top" style="padding-left: 8px;">
-			<div id="priority_<%= priority.id %>" class="priority_listing">
-				<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
-			</div>
-			</td>
-		</tr>
-	<% end %>
+Leitarniðurstöður fyrir <%=@query%><br>
 
-	</table>
+<table width="100%">
+	<tr valign="top">	
+		<td width="75%">
+			<% unless @search_results.empty? %>
+				<%=will_paginate @search_results %>
+				
+				<table width="100%">
+				<% @search_results.each do |result|%>
+				  <% if result.class == Priority %>
+					<tr>				
+						<td>
+						<%= result.excerpts.name %><br>
+				    	<%= render :partial => "activities/show", :locals => {:activity => Activity.find(:first, :conditions=>["priority_id=?",result.id]), :suffix => "_noself"} %>  <BR>		
+						</td>
+					</tr>
+				  <% elsif result.class == Question %>
+					<tr>				
+						<td>
+						<%= result.excerpts.name %><br>
+						<%= result.excerpts.content %><br>
+						<%= result.excerpts.answer %><br>
+				  	    <%= render :partial => "questions/show_full", :locals => {:question => result, :revision => nil}%>
+						</td>
+					</tr>
+				  <% elsif result.class == Document %>
+					<tr>				
+						<td>
+						<%= result.excerpts.name %><br>
+						<%= result.excerpts.content %><br>
+						<%= render :partial => "documents/show_full", :locals => {:document => result, :quality => nil, :revision => nil}%>
+						</td>
+					</tr>
+				  <% elsif result.class == Comment%>
+						<%= result.excerpts.content %><br>				  	
+				  		<% if result.activity.priority_id %>
+					    	<%= render :partial => "activities/show", :locals => {:activity => result.activity, :suffix => "_noself"} %>
+						<% elsif result.activity.question_id  %>
+					  	    <%= render :partial => "questions/show_full", :locals => {:question => result.activity.question, :revision => nil}%>
+						<% end %>
+				  <% end %>
+				<% end %>
+				</table>
+				<%=will_paginate @search_results%>
+			<% else %>
+			   No search results for <%=@query %>
+			<% end %>
+		</td>
+		
+		<td width="25%">
+			<% unless not @facets or @facets.empty?%>
+				<div>
+					<div> 
+						<h3><%= link_to "Allt", "/leita?q=#{@query}"%></h3>
+					</div>
+				</div>
+						
+				<% @facets.each do |facet, facet_options| %>
+					<div>
+						<div> 
+							<% if facet.to_s=="class" %>
+							<h3>Tegund</h3> 
+							<% elsif facet.to_s=="cached_issue_list" %>
+							<h3>Kaflar</h3> 
+							<% else %>
+							<h3><%=facet%></h3> 
+							<% end %>
+							<ul>
+								<% facet_options.each do |option, count| %>
+									<% next if option==nil or option=="" %>
+									<li><%= link_to "#{option} (#{count})",
+									:params => {facet => option, :q=>@query, :page => 1} %></li>
+								<% end %>
+							</ul> 
+						</div> 
+					</div> 
+				<% end %>
+			<% else %>
+			  Engir kaflar fundust
+			<% end %>			
+		</td>
+	</tr>
+</table>
 
-	<%= will_paginate WillPaginate::Collection.new((params[:page]||1),(25),@priority_results.total_hits) -%>
 <% end %>

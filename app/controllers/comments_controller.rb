@@ -106,6 +106,13 @@ class CommentsController < ApplicationController
     @comment = @activity.comments.new(params[:comment])
     @comment.user = current_user
     @comment.request = request
+    if @activity.priority_id
+      @comment.cached_issue_list = @activity.priority.cached_issue_list
+    elsif @activity.question_id
+      @comment.cached_issue_list = @activity.question.cached_issue_list
+    elsif @activity.document_id
+      @comment.cached_issue_list = @activity.document.cached_issue_list
+    end
 
     if @comment.save
       @comments = @activity.comments.published.by_first_created
@@ -122,6 +129,9 @@ class CommentsController < ApplicationController
             elsif @activity.question_id
               page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/show", :locals => {:comment => @comment, :activity => @activity})
               page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+            elsif @activity.document_id
+              page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/show", :locals => {:comment => @comment, :activity => @activity})
+              page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
             end
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
             if facebook_session

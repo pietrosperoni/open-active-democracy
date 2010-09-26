@@ -17,6 +17,11 @@ class Comment < ActiveRecord::Base
   validates_presence_of :content
   
   liquid_methods :id, :activity_id, :content, :user, :activity, :show_url
+
+  define_index do
+    indexes content
+    indexes cached_issue_list, :facet=>true
+  end
   
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :published, :column => :status

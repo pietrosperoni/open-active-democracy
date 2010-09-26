@@ -36,6 +36,12 @@ class Document < ActiveRecord::Base
   liquid_methods :id, :text, :user
   
   acts_as_solr :fields => [ :name, :content, :priority_name, :is_published ]
+
+  define_index do
+    indexes name
+    indexes content
+    indexes cached_issue_list, :facet=>true
+  end
   
   cattr_reader :per_page
   @@per_page = 25

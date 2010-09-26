@@ -143,7 +143,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resources :delayed_jobs, :member => {:top => :get, :clear => :get}
   
-  # The priority is based upon order of creation: first created -> highest priority.
+  # The priority is based upon order of creation: first created -> highest priority.s
 
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
@@ -194,8 +194,10 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/askrift', :controller=>'users', :action=>'subscriptions'
   map.connect '/umraedur', :controller=>'priorities', :action=>'newest'
   map.connect '/taka_thatt', :controller=>'priorities', :action=>'new'
-   map.connect '/senda_spurningu', :controller=>'questions', :action=>'new'
-    map.connect '/senda_erindi', :controller=>'documents', :action=>'new'
+  map.connect '/senda_spurningu', :controller=>'questions', :action=>'new'
+  map.connect '/senda_erindi', :controller=>'documents', :action=>'new'
+
+  map.connect '/leita', :controller=>'searches', :action=>'index'
   
   map.connect '/minar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"mine"
   map.connect '/minir_umraedu_kaflar', :controller => 'priorities', :action => 'set_subfilter', :filter=>"my_chapters"
