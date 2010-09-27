@@ -14,33 +14,35 @@ Leitarniðurstöður fyrir <%=@query%><br>
 				  <% if result.class == Priority %>
 					<tr>				
 						<td>
-						<%= result.excerpts.name %><br>
-				    	<%= render :partial => "activities/show", :locals => {:activity => Activity.find(:first, :conditions=>["priority_id=? AND type='ActivityBulletinNew'",result.id]), :suffix => "_noself"} %>  <BR>		
+						Umræðuefni: <%= result.excerpts.name %><br>
+						<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.id %><br><br>
 						</td>
 					</tr>
 				  <% elsif result.class == Question %>
 					<tr>				
 						<td>
-						<%= result.excerpts.name %><br>
-						<%= result.excerpts.content %><br>
-						<%= result.excerpts.answer %><br>
-				  	    <%= render :partial => "questions/show_full", :locals => {:question => result, :revision => nil}%>
+						Nafn: <%= result.excerpts.name %><br>
+						Spurning: <%= result.excerpts.content %><br>
+						Svar: <%= result.excerpts.answer %><br>
+						<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.id %><br><br>
 						</td>
 					</tr>
 				  <% elsif result.class == Document %>
 					<tr>				
 						<td>
+						Erindi: 
 						<%= result.excerpts.name %><br>
 						<%= result.excerpts.content %><br>
-						<%= render :partial => "documents/show_full", :locals => {:document => result, :quality => nil, :revision => nil}%>
+						<%= link_to "Skoða erindi", :controller=>"documents", :action=>"show", :id=>result.id %><br><br>
 						</td>
 					</tr>
 				  <% elsif result.class == Comment%>
+				  		Athugasemd: 
 						<%= result.excerpts.content %><br>				  	
 				  		<% if result.activity.priority_id %>
-					    	<%= render :partial => "activities/show", :locals => {:activity => result.activity, :suffix => "_noself"} %>
+							<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %><br><br>
 						<% elsif result.activity.question_id  %>
-					  	    <%= render :partial => "questions/show_full", :locals => {:question => result.activity.question, :revision => nil}%>
+							<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.activity.question_id %><br><br>
 						<% end %>
 				  <% end %>
 				<% end %>
