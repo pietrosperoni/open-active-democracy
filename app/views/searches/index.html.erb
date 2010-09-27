@@ -82,8 +82,11 @@ Tegund: <%=translate_facet_option(params[:class])%>
 								<% facet_options.each do |option, count| %>
 									<% next if option==nil or option=="" %>
 									<% translated_option = translate_facet_option(option) %>
-									<li><%= link_to "#{translated_option} (#{count})",
-									:params => {facet => option, :q=>@query, :page => 1} %></li>
+									<% if translated_option==params[:cached_issue_list] or option==params[:class]%>
+										<li><b><%= link_to "#{translated_option} (#{count})", :params => {facet => option, :q=>@query, :page => 1} %></b></li>
+									<% else %>
+										<li><%= link_to "#{translated_option} (#{count})", :params => {facet => option, :q=>@query, :page => 1} %></li>
+									<% end %>
 								<% end %>
 							</ul> 
 						</div> 
