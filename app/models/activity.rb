@@ -20,6 +20,12 @@ class Activity < ActiveRecord::Base
   named_scope :by_recently_created, :order => "activities.created_at desc"    
 
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
+
+  named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+
+  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+
+  acts_as_taggable_on :issues
   
   belongs_to :user
   

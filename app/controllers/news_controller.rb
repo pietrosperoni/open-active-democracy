@@ -4,7 +4,7 @@ class NewsController < ApplicationController
   before_filter :check_for_user, :only => [:your_discussions, :your_priority_discussions, :your_network_discussions, :your_priorities_created_discussions]
 
   def index
-    redirect_to :action => "discussions"
+    redirect_to :action => "activities"
     return
   end
   
@@ -52,13 +52,16 @@ class NewsController < ApplicationController
   end  
   
   def activities
-  # 020910 commented_out_aom:  @page_title = t('news.activities.title', :government_name => current_government.name)
-#    if @current_government.users_count > 5000 # only show the last 7 days worth    
-#      @activities = Activity.active.for_all_users.last_seven_days.by_recently_created.paginate :page => params[:page]
-#    else
-     @activities = Activity.active.for_all_users.by_recently_created.paginate :page => params[:page]      
-#    end
-    # 020910 commented_out_aom: @rss_url = url_for(:only_path => false, :format => "rss")    
+    if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
+      @activities = Activity.active.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]
+    elsif session[:priorities_subfilter] and session[:priorities_subfilter]=="my_chapters" and current_user
+      @activities =  Activity.active.by_recently_created.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
+    elsif session[:selected_tag_name]
+      @activities = Activity.active.for_all_users.by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
+    else
+      @activities = Activity.active.for_all_users.by_recently_created.paginate :page => params[:page]
+    end
+
     respond_to do |format|
       format.html { render :action => "activity_list" }
       format.rss { render :template => "rss/activities" }         
