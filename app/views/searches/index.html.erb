@@ -2,6 +2,11 @@
  <%=@error%>
 <% else %>
 Leitarniðurstöður fyrir <%=@query%><br>
+<% if params[:cached_issue_list] %>
+Kafli: <%=params[:cached_issue_list]%>
+<% elsif params[:class] %>
+Tegund: <%=translate_facet_option(params[:class])%>
+<% end %>
 
 <table width="100%">
 	<tr valign="top">	
