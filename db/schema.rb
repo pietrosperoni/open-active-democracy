@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100926220440) do
+ActiveRecord::Schema.define(:version => 20100927115328) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -34,10 +34,12 @@ ActiveRecord::Schema.define(:version => 20100926220440) do
     t.integer  "followers_count",                    :default => 0
     t.datetime "changed_at"
     t.integer  "question_id"
+    t.string   "cached_issue_list"
   end
 
   add_index "activities", ["activity_id"], :name => "activity_activity_id"
   add_index "activities", ["ad_id"], :name => "activities_ad_id_index"
+  add_index "activities", ["cached_issue_list"], :name => "index_activities_on_cached_issue_list"
   add_index "activities", ["change_id"], :name => "activities_change_id_index"
   add_index "activities", ["changed_at"], :name => "index_activities_on_changed_at"
   add_index "activities", ["created_at"], :name => "created_at"
@@ -45,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20100926220440) do
   add_index "activities", ["document_revision_id"], :name => "index_activities_on_document_revision_id"
   add_index "activities", ["is_user_only"], :name => "activity_is_user_only_index"
   add_index "activities", ["priority_id"], :name => "activity_priority_id_index"
+  add_index "activities", ["question_id"], :name => "index_activities_on_question_id"
   add_index "activities", ["revision_id"], :name => "index_activities_on_revision_id"
   add_index "activities", ["status"], :name => "activity_status_index"
   add_index "activities", ["type"], :name => "activity_type_index"
@@ -161,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20100926220440) do
   end
 
   add_index "comments", ["activity_id"], :name => "comments_activity_id"
+  add_index "comments", ["cached_issue_list"], :name => "index_comments_on_cached_issue_list"
   add_index "comments", ["status", "activity_id"], :name => "index_comments_on_status_and_activity_id"
   add_index "comments", ["status"], :name => "comments_status"
   add_index "comments", ["user_id"], :name => "comments_user_id"
@@ -467,6 +471,7 @@ ActiveRecord::Schema.define(:version => 20100926220440) do
     t.string   "cached_issue_list"
   end
 
+  add_index "questions", ["cached_issue_list"], :name => "index_questions_on_cached_issue_list"
   add_index "questions", ["other_priority_id"], :name => "index_questions_on_other_priority_id"
   add_index "questions", ["priority_id"], :name => "index_questions_on_priority_id"
   add_index "questions", ["revision_id"], :name => "index_questions_on_revision_id"
@@ -566,7 +571,20 @@ ActiveRecord::Schema.define(:version => 20100926220440) do
   end
 
   add_index "tags", ["slug"], :name => "index_tags_on_slug"
+  add_index "tags", ["tag_type"], :name => "index_tags_on_tag_type"
   add_index "tags", ["top_priority_id"], :name => "tag_top_priority_id_index"
+  add_index "tags", ["weight"], :name => "index_tags_on_weight"
+
+  create_table "treaty_documents", :force => true do |t|
+    t.integer  "chapter",               :null => false
+    t.integer  "document_content_type", :null => false
+    t.integer  "negotiation_status",    :null => false
+    t.integer  "document_type",         :null => false
+    t.string   "title",                 :null => false
+    t.string   "url",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "unsubscribes", :force => true do |t|
     t.integer  "user_id"
