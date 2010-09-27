@@ -8,7 +8,13 @@ class SearchesController < ApplicationController
       @query = params[:q]
       @page_title = t('searches.results', :government_name => current_government.name, :query => @query)
       @facets = ThinkingSphinx.facets params[:q], :all_facets => true, :page => params[:page]
-      @search_results = ThinkingSphinx.search params[:q], :page => params[:page], :retry_stale => true
+      if params[:cached_issue_list]
+        @search_results = @facets.for(:cached_issue_list_facet=>params[:cached_issue_list].to_crc32)
+      elsif params[:class]
+        @search_results = @facets.for(:class=>params[:class].to_s)
+      else
+        @search_results = ThinkingSphinx.search params[:q], :page => params[:page], :retry_stale => true
+      end
     end
     respond_to do |format|
       format.html
