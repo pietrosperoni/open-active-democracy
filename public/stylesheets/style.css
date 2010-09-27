@@ -10,6 +10,7 @@ body  	{			background-color:#fff; background-image: url('img/bg-grey.jpg'); back
 					 }
 *		 { 			margin:0; padding:0; }
 p {					margin:0px; }
+td {					font-size: 0.7em;; }
 
 a, a:visited {		color: #003399; text-decoration:none; }
 
@@ -186,4 +187,4 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 #content .subtext {	font-size: 10px; margin-bottom: 15px;   }
 .star {				color:#ff0000;  }
 					
-.match { font-weight: bold; }
+.match { color:#c00;}
