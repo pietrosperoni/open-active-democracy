@@ -1,5 +1,7 @@
 class TreatyDocument < ActiveRecord::Base
 
+  MAXIMUM_NUMBER_OF_DOCUMENTS = 15
+
   NEGOTIATION_STAGES = [
                      {:id=>1, :name=>"Rikjaradstefna"},
                      {:id=>2, :name=>"Fyrri rynifundur: afstada ESB"},
@@ -60,6 +62,4 @@ class TreatyDocument < ActiveRecord::Base
       end
     end
   end
-
-
 end
