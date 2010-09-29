@@ -2,14 +2,11 @@ class TreatyDocumentsController < ApplicationController
   
   layout "esb_treaty_documents"
   
-  def TreatyDocumentsController
-    
-  end
   def index
-     #@all_documents =  TreatyDocument.all.group_by(&:chapter) 
-     respond_to do |format|
-        format.html { render :action => "index" }
-    end   
-  end  
+  end
+
+  def show
+    @all_treaty_documents_for_chapter_and_status = TreatyDocument.find(:all, :conditions=>["chapter = ? AND negotiation_status = ?",params[:chapter_id], params[:negotiation_status]])
+  end
 end
 

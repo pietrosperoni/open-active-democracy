@@ -1,5 +1,5 @@
 class TreatyDocument < ActiveRecord::Base
- 
+
   NEGOTIATION_STAGES = [
                      {:id=>1, :name=>"Rikjaradstefna"},
                      {:id=>2, :name=>"Fyrri rynifundur: afstada ESB"},
@@ -50,5 +50,16 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>34, :name=>"Stofnanir", :negotiation_stages=>NEGOTIATION_STAGES},                        
                {:id=>35, :name=>"Annað", :negotiation_stages=>NEGOTIATION_STAGES}              
         ]
+
+
+  def print_all
+    TreatyDocument::TREATY_ARRAY.each do |chapter|
+      puts chapter[:name]
+      chapter[:negotiation_stages].each do |negotion_stage|
+        puts negotion_stage[:name]
+      end
+    end
+  end
+
 
 end
