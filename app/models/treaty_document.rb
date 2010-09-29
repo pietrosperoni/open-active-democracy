@@ -1,6 +1,5 @@
 class TreatyDocument < ActiveRecord::Base
-<<<<<<< HEAD
-  
+ 
   NEGOTIATION_STAGES = [
                      {:id=>1, :name=>"Rikjaradstefna"},
                      {:id=>2, :name=>"Fyrri rynifundur: afstada ESB"},
@@ -51,15 +50,5 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>34, :name=>"Stofnanir", :negotiation_stages=>NEGOTIATION_STAGES},                        
                {:id=>35, :name=>"Annað", :negotiation_stages=>NEGOTIATION_STAGES}              
         ]
-=======
 
-NEGOTIATION_STAGES = [
-                      {:id=>1, :name=>Rikjaradstefna},
-            {:id=>2, :name=>"Fyrri rynifundur: afstada ESB"}
-           ]
-TREATY_ARRAY = [
-                {:id=>1, :name=>"Frjálst vöruflæði", :negotiation_stages=>NEGOTIATION_STAGES},
-                {:id=>2, :name=>"Frjáls för vinnuafls", :negotiation_stages=>NEGOTIATION_STAGES}
-         ]
->>>>>>> rvb/esb
 end
