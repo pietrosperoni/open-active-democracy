@@ -1,1 +1,14 @@
-<%= render :partial => "show", :locals => {} %>		
+<table>
+<% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
+	<tr>
+		<td>
+			<%= chapter[:name] %>
+		</td>
+		<% chapter[:negotiation_stages].each do |stage| %>
+		<td>
+			<%=stage[:name]%>
+		</td>
+		<% end %>
+	</tr>
+<% end %>
+</table> 
