@@ -28,9 +28,7 @@
             </div>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
-                <!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
-				<%=flash[:notice]%><b/>
-				<%=flash[:error]%>				
+             
 				<!-- Persónuupplýsingar -->
 				<div id="person">
 				 <% if logged_in? %>
@@ -123,7 +121,8 @@
 				</div>
 			 
                 <div id="Content_wrapper">
-                   
+             	<%=flash[:notice]%><b/>
+				<%=flash[:error]%>	      
                     <div id="Content">
                     	<%=yield%>
                     </div>
