@@ -1,5 +1,7 @@
 class TreatyDocument < ActiveRecord::Base
-  
+
+  MAXIMUM_NUMBER_OF_DOCUMENTS = 15
+
   NEGOTIATION_STAGES = [
                      {:id=>1, :name=>"Rikjaradstefna"},
                      {:id=>2, :name=>"Fyrri rynifundur: afstada ESB"},
@@ -51,6 +53,7 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>35, :name=>"Annað", :negotiation_stages=>NEGOTIATION_STAGES}              
         ]
 
+
   def print_all
     TreatyDocument::TREATY_ARRAY.each do |chapter|
       puts chapter[:name]
@@ -59,5 +62,4 @@ class TreatyDocument < ActiveRecord::Base
       end
     end
   end
-
 end

@@ -16,6 +16,7 @@
 		</td>
 		<% chapter[:negotiation_stages].each do |stage| %>
 		<td>
+			<span style="color:<%=%>"></span>
 			<% count = TreatyDocument.count(:conditions=>"chapter = #{chapter[:id]} AND negotiation_status = #{stage[:id]}") %>
 			<% if count>0 %>
 				<%= link_to count, :action=>"show", :chapter_id=>chapter[:id], :negotiation_status=>stage[:id]%>
