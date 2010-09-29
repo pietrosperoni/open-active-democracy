@@ -56,7 +56,7 @@ class DocumentRevision < ActiveRecord::Base
     document.revisions_count += 1    
     changed = false
     if document.revisions_count == 1
-      ActivityDocumentNew.create(:user => user, :priority => document.priority, :document => document, :document_revision => self)
+      ActivityDocumentNew.create(:user => user, :priority => document.priority, :document => document, :document_revision => self, :issue_list=>document.cached_issue_list)
     else
       if document.content != self.content # they changed content
         changed = true

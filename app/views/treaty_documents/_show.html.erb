@@ -2,9 +2,13 @@ WORK IN PROGRESS
 
 TEST TAFLA
 
-<%= TreatyDocument::NEGOTIATION_STAGES[1].id %>
+<%= TreatyDocument::NEGOTIATION_STAGES[1] %><br>
+
+ÚR TREATY TOFLU: <%= TreatyDocument::TREATY_ARRAY[2][:name] %>
+
+<br>
 <% TreatyDocument::NEGOTIATION_STAGES.each do |stage| %>  
-	<%= stage['id'] %>
+	<%#= stage['id'] %>
 <% end %>
 
 <table border="0"> 
@@ -12,8 +16,8 @@ TEST TAFLA
   
 <!-- TreatyDocument::TREATY_ARRAY.each do |chapter| -->
 <% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
-	<%#= chapter.name %>
-	<%# chapter.negotiation_stages.each do |stage| %>
+	<%= chapter.name %>
+	<% chapter.negotiation_stages.each do |stage| %>
 	<td>
 		<%#= chapter.name %>
 	</td>

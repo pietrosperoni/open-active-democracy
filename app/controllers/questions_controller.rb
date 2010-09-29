@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
       @questions = Question.published.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
     elsif session[:priorities_subfilter] and session[:priorities_subfilter]=="my_chapters" and current_user
-      @questions =  Question.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
+      @questions =  Question.published.by_recently_created.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
     elsif session[:selected_tag_name]
       @questions = Question.published.by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
     else
@@ -117,7 +117,7 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     @question.issue_list = params[:custom_tag]
     @saved = @question.save
-    @activity = ActivityBulletinNew.create(:question_id=>@question.id, :user_id=>current_user.id)
+    @activity = ActivityBulletinNew.create(:question_id=>@question.id, :user_id=>current_user.id, :issue_list=>@question.cached_issue_list)
     respond_to do |format|
       if @saved
         if Revision.create_from_question(@question.id,request)
