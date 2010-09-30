@@ -80,7 +80,7 @@
 -->
 				<div class="left_box">	
 					<ul>
-						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
+						<li>engdu við Facebook eða <a href="/settings/picture">settu  inn mynd</a> af þér.
 											<%= link_to image_tag("facebook.gif", :border => 0, :align => "left"), :controller => "import", :action => "" %></li>
 
 					</ul>		
@@ -97,11 +97,11 @@
 				     <li <%= controller_name=="news" ? "class='active'" : "" %>>
 					<a href="/news/activities?r=1">Allt</a>
 				     </li>
-				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-					<a href="/priorities/newest?r=1">Umræður</a>
-				     </li>
 				     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
 					<a href="/questions/newest?r=1">Spurningar og svör</a>
+				     </li>
+				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
+					<a href="/priorities/newest?r=1">Umræður</a>
 				     </li>
 				     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
 					 <a href="/documents/newest?r=1">Erindi</a>
