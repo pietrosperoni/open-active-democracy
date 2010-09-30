@@ -152,15 +152,15 @@ class PrioritiesController < ApplicationController
   # POST /priorities
   # POST /priorities.xml
   def create
-    @priority = Priority.new
-    @priority.name = params[:q] if params[:q]
+    @priority = Priority.new(params[:priority])
+    #@priority.name = params[:q] if params[:q]
     if not logged_in?
       flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
       session[:query] = params[:priority][:name] if params[:priority]
       access_denied
       return
     end
-    @priority = Priority.new
+    #@priority = Priority.new
     @priority.name = params[:priority][:name].strip
     @priority.description = params[:priority][:description].strip
     @priority.user = current_user
@@ -179,15 +179,8 @@ class PrioritiesController < ApplicationController
 
     respond_to do |format|
       if @saved and @comment_saved
-        format.html { 
-          flash[:notice] = t('priorities.new.success', :priority_name => @priority.name)
-          redirect_to(@priority)
-        }
-        format.js {
-          render :update do |page|
-            page.redirect_to @priority
-          end
-        }        
+        flash[:notice] = t('priorities.new.success', :priority_name => @priority.name)
+        format.html { redirect_to(@priority) }    
       else
         flash[:notice] = "Gat ekki geymt.  Þú verður að setja inn umræðuefni og útskýringu"
         format.html { redirect_to :controller => "priorities", :action => "new", :notice=>flash[:notice] }
