@@ -3,8 +3,8 @@
 	<% form_for :document, :url => "/documents/create"  do |f| %>
 	<%= f.error_messages %>
 	
-	<h2>Leggja inn umsögn til samninganefndar</h2>	
-	<p class="subtext">Umsagnir eru....</p>
+	<h2>Leggja inn erindi til samninganefndar</h2>	
+	<p class="subtext">Erindi eru....</p>
 
 	<h4>Titill umsagnar <span class="star">*</span></h4>
 	<p>				
@@ -16,19 +16,19 @@
 		<div class="addContent_kaflar">
 			<b><%= t('esb.tags.notin') %></b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
+				<input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name%><br /></span>	
 			<% end %>			
 		</div>
 		<div class="addContent_kaflar">
 			<b><%= t('esb.tags.partly') %></b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
+				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>
 			<% end %>			
 		</div>
 		<div class="addContent_kaflar">
 			<b><%= t('esb.tags.within') %></b><br />
 				<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
+				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>
 			<% end %>			
 		</div>		
 	<br />

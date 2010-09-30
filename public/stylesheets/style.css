@@ -139,7 +139,11 @@ h5 {				font-size: 11px;  }
 
 input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 
-.addContent_kaflar {	width:193px; float:left; font-size: 10px; }
+.addContent_kaflar input {	border: none; float: left; clear: both; margin-top: 2px;}
+
+.addContent_kaflar {	width:193px; float:left; font-size: 10px; line-height: 180%; height: auto;}
+
+.Chapter_name { line-height: 200%;}
 
 
 /*		Profile box				*/
