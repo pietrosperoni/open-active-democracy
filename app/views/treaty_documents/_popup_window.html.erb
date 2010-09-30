@@ -13,7 +13,9 @@
 		      draggable: true,
 		      resizeable: true,
 			  open: function() {
-	        	jQuery("#treaty_document_window").load("/treaty_documents/show?chapter_id="+chapter_id+"&negotiation_status="+status_id);},
+			  	jQuery('<img class="spinner_classy" src="/images/spinner.gif" style="float: right; padding-right:25px;" />').insertAfter('.ui-dialog-title');
+	        	jQuery("#treaty_document_window").load("/treaty_documents/show?chapter_id="+chapter_id+"&negotiation_status="+status_id, function() {jQuery('.spinner_classy').hide();});
+				},
 			  close: function(){
 			  		jQuery("#treaty_document_window").dialog("destroy");
 			  	}
