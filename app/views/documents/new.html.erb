@@ -9,7 +9,7 @@
 	<h4>Titill umsagnar <span class="star">*</span></h4>
 	<p>				
 		<%= t('document.revision.new.name.label')%><br/>
-   		<%= f.text_field :name, :size => 50, :maxlength => 60 %>		
+   		<%= f.text_field :name, :size => 50, :maxlength => 500 %>		
 	</p>
 	<br />
 		<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
@@ -32,16 +32,18 @@
 			<% end %>			
 		</div>		
 	<br />
-	<b>Umsögnin þín: <span class="star">*</span></b>
+	<b>Umsögnin þín: <span class="star">*</span></b><br />
 	<%= f.text_area :content, :rows => 18, :cols => 70 %>
 	<br /><br />
 				
-	<b>Settu inn vefslóð sem tengist umsögninni:</b>
+	<!-- <b>Settu inn vefslóð sem tengist umsögninni:</b> -->
 
-	<input type="text" size="50" name="" value="http://" /><br />
-	<p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn <br /><br />
-		<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
-		<div id="errors" class="error"><%= f.error_messages %></div>
-	</p>
+	<!-- <input type="text" size="50" name="" value="http://" /><br /> -->
+	<!-- <p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn</p> --> 
+	<br /><br />
+	
+	<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
+	<div id="errors" class="error"><%= f.error_messages %></div>
+	
 <% end %>	
 </div>

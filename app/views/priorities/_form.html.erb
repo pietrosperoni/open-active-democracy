@@ -1,16 +1,20 @@
 <% if params[:notice] %>
-<%= params[:notice] %>
+	<%= params[:notice] %>
 <% end %>
-<%=form_tag('/priorities/create', :method => :post) %>
-<h3>Setja inn nýtt umræðuefni</h3>
-<div id="your_priority" class="form_header">
-    <%= t('esb.priority.whatis') %> <span class="red">* </span>
-</div>
-<%= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
-<br>
 
-<!-- Tengt kafla: <span class="custom_tag"><%=select_tag "custom_tag", "#{Tag.all_dropdown_options}" %></span> -->
-<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
+<% form_for :priority, :url => "/priorities/create"  do |f| %>
+	<%= f.error_messages %>
+
+	<h2>Setja inn nýtt umræðuefni</h2>
+	<h4><%= t('esb.priority.whatis') %> <span class="star">*</span></h4>
+	<p>				
+		<%= t('document.revision.new.name.label')%><br/>
+   		<%= f.text_field :name, :size => 50, :maxlength => 500 %>		
+	</p>
+	<%#= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
+	<!-- Tengt kafla: <span class="custom_tag"><%=select_tag "custom_tag", "#{Tag.all_dropdown_options}" %></span> -->
+	<br />
+	<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
 	<div class="addContent_kaflar">
 		<b><%= t('esb.tags.notin') %></b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>
@@ -29,15 +33,17 @@
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
 			<% end %>			
 	</div>	
+	<br />
+    <b><%= t('esb.priority.description') %> <span class="star">*</span></b><br />
+    <%= f.text_area :description, :rows => 18, :cols => 70 %>
+	<%#= text_area_tag "priority[description]", "", :button => 'submit', :size => 500, :maxLength => 500 %>
+    <br /><br />
+
+	<!-- TODO aom, add web-tag 210910-->
+
+	<%#= submit_tag "Búa til umræðuefni", :class => "suggest_button" %>
+	<%= f.submit "Búa til umræðuefni", :id => "submit", :class => "yellow_button" %>
+	<div id="errors" class="error"><%= f.error_messages %></div>
 	
-<div class="field">
-   <b><%= t('esb.priority.description') %> <span class="star">*</span></b>
-    <div class="field_box">
-        <%= text_area_tag "priority[description]", "", :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
-    </div>
+<% end %>	
 </div>
-
-<!-- TODO aom, add web-tag 210910-->
-
-<%= submit_tag "Búa til umræðuefni", :class => "suggest_button" %>
-</form>

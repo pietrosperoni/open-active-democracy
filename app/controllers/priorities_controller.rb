@@ -152,15 +152,15 @@ class PrioritiesController < ApplicationController
   # POST /priorities
   # POST /priorities.xml
   def create
-    @priority = Priority.new(params[:priority])
-    #@priority.name = params[:q] if params[:q]
+    @priority = Priority.new()
+    @priority.name = params[:q] if params[:q]
     if not logged_in?
       flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
       session[:query] = params[:priority][:name] if params[:priority]
       access_denied
       return
     end
-    #@priority = Priority.new
+    @priority = Priority.new
     @priority.name = params[:priority][:name].strip
     @priority.description = params[:priority][:description].strip
     @priority.user = current_user
