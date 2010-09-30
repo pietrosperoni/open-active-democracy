@@ -6,7 +6,10 @@ class TreatyDocumentsController < ApplicationController
   end
 
   def show
+    @chapter_name = TreatyDocument::TREATY_ARRAY.find {|c| c[:id]==params[:chapter_id].to_i}[:name]
+    @stage_name = TreatyDocument::NEGOTIATION_STAGES.find {|c| c[:id]==params[:negotiation_status].to_i}[:name]
     @all_treaty_documents_for_chapter_and_status = TreatyDocument.find(:all, :conditions=>["chapter = ? AND negotiation_status = ?",params[:chapter_id], params[:negotiation_status]])
+    render :layout=>false
   end
 end
 

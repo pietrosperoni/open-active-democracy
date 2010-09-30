@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
   before_filter :check_referral, :unless => [:is_robot?]
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
+  
+  before_filter :check_for_reset_filters
 
   filter_parameter_logging :password, :password_confirmation
 
@@ -40,6 +42,13 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery #:secret => 'd0451bc51967070c0872c2865d2651e1'
 
   protected
+  
+  def check_for_reset_filters
+    if params[:r]
+      session[:priorities_subfilter]=nil
+      session[:selected_tag_name]=nil
+    end
+  end
   
   def get_layout
     return "esb"
