@@ -4,7 +4,7 @@ class TreatyDocument < ActiveRecord::Base
 
   NEGOTIATION_STAGES = [
                      {:id=>1, :name=>"Rikjaradstefna"},
-                     {:id=>2, :name=>"Fyrri rynifundur: afstada ESB"},
+                     {:id=>2, :name=>"Fyrri rýnifundur: afstada ESB"},
                      {:id=>3, :name=>"Seinni rýnifundur: afstaða Íslands"},
                      {:id=>4, :name=>"Niðurstaða rýnifunda"},
                      {:id=>5, :name=>"Samningsafstaða ESB"},

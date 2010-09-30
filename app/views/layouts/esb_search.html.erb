@@ -95,16 +95,16 @@
 				<ul>
 			<div id="left_tabs">
 				     <li <%= controller_name=="news" ? "class='active'" : "" %>>
-					<a href="/news/activities">Allt</a>
+					<a href="/news/activities?r=1">Allt</a>
 				     </li>
 				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-					<a href="/umraedur">Umræður</a>
+					<a href="/priorities/newest?r=1">Umræður</a>
 				     </li>
 				     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
-					<a href="/questions/newest">Spurningar og svör</a>
+					<a href="/questions/newest?r=1">Spurningar og svör</a>
 				     </li>
 				     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
-					 <a href="/documents/newest">Erindi</a>
+					 <a href="/documents/newest?r=1">Erindi</a>
 				     </li>
 			</div>
 				</ul>
