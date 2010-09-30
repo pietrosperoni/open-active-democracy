@@ -1,4 +1,37 @@
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+ 
 namespace :esb do
+  desc "Crawl treaty documents"
+  task(:crawl_treaty_documents => :environment) do
+    html_doc = Nokogiri::HTML(open('http://eu.mfa.is/test/skrap'))
+    main_div = html_doc.at("div.boxbody")
+    ActiveRecord::Base.transaction do
+      TreatyDocument.destroy_all
+      main_div.elements.search("a").each do |element|
+        if element.attributes["class"] and element.attributes["class"].value[0..0] == "K"
+          puts url = element.attributes["href"].to_s
+          puts element.attributes["class"].to_s
+          puts title = element.children.to_s
+          types = element.attributes["class"].value.split(" ")
+          puts types
+          puts chapter_id = types[0][1..types[0].length]
+          puts content_type_id = types[1][1..types[1].length]
+          puts status_id = types[2][1..types[2].length]
+          t=TreatyDocument.new
+          t.chapter = chapter_id.to_i
+          t.document_content_type = content_type_id.to_i
+          t.negotiation_status = status_id.to_i
+          t.title = title
+          t.document_type = 3
+          t.url = url
+          t.save
+        end
+      end
+    end
+  end
+
   desc "Create esb tags"
   task(:create_tags => :environment) do
       Tag.destroy_all
