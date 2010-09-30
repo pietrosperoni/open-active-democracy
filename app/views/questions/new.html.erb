@@ -1,13 +1,19 @@
 <!-- Aðal textasvæði -->
 <div id="content">
-		<h2><%= t('esb.question.send_long') %></h2>	
-		<p class="subtext"><%= t('esb.question.check') %></p>
-
+		
 		<% form_for :question, :url => "/questions/create"  do |f| %>
   		<%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 	
-			<h4><%= t('esb.question.what') %> <span class="star">*</span></h4>
-			<%= text_field_tag "question[name]", nil, :size => 50, :maxlength => 50, :autocomplete =>"off" %><br /><br />
+		<h2><%= t('esb.question.send_long') %></h2>	
+		<p class="subtext"><%= t('esb.question.check') %></p>
+
+	
+		<h4><%= t('esb.question.what') %> <span class="star">*</span></h4>			
+		<p>				
+		<%= t('document.revision.new.name.label')%><br/>
+   		<%= f.text_field :name, :size => 50, :maxlength => 500 %>		
+		</p>
+		<br />
 
 		<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
 		<div class="addContent_kaflar">
@@ -28,14 +34,16 @@
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/>  <span class="Chapter_name"><%=tag.name%><br />	</span>
 			<% end %>			
 		</div>	
+			<br />
+			<b><%= t('esb.question.your_question') %> <span class="star">*</span></b><br />
+			<%= f.text_area :content, :rows => 18, :cols => 70 %>
 			
-			<b><%= t('esb.question.your_question') %> <span class="star">*</span></b>
-			<div class="field form_header">
-	    		<div class="field_label form_header"><%= t('esb.question.question') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+			<!-- <div class="field form_header">
+	    		<div class="field_label form_header"><%#= t('esb.question.question') %> <span id="pointContentDown"></span> <%#= t('characters_left')%></div>
 				<div class="field_box">
-	    			<%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 7, :cols => 70, :maxLength => 500 %><br /><br />
+	    			<%#= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 7, :cols => 70, :maxLength => 500 %><br /><br />
 				</div>
-			</div>
+			</div> --> 
 		
 			<!-- TODO AOM 210910
 			<b>Settu inn vefslóð sem tengist spurningunni:</b>
@@ -44,7 +52,7 @@
 			</p> -->
 		
 			<%= f.submit "Senda spurningu", :id => "submit", :class => "yellow_button" %>
-		
+			<div id="errors" class="error"><%= f.error_messages %></div>
 		<% end %>		
 	
 </div>

@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-        <title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar </title>
+        <title> <%= t('esb.title') %> </title>
         <%= render :partial => "shared/javascripts" %>
         <%= stylesheet_link_tag "style" %>
 	<%= stylesheet_link_tag "style_skuggi" %>
@@ -28,9 +28,11 @@
             </div>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
-                <!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
-				<%=flash[:notice]%><b/>
-				<%=flash[:error]%>				
+             	
+				<div class="left_box">
+					 <%= t('esb.intro') %>
+				</div>
+				
 				<!-- Persónuupplýsingar -->
 				<div id="person">
 				 <% if logged_in? %>
@@ -123,7 +125,8 @@
 				</div>
 			 
                 <div id="Content_wrapper">
-                   
+             	<%=flash[:notice]%><b/>
+				<%=flash[:error]%>	      
                     <div id="Content">
                     	<%=yield%>
                     </div>
