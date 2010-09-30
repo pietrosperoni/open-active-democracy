@@ -25,7 +25,7 @@
 				<span style="color:#fff">
 			<% end %>
 				<% if count>0 %>
-					<%= link_to count, :action=>"show", :chapter_id=>chapter[:id], :negotiation_status=>stage[:id]%>
+					<a href="#" onclick="showTreatyDocumentWindow(<%=chapter[:id]%>,<%=stage[:id]%>)"><%=count%></a>
 				<% else %>
 					<%=count%>
 				<% end %>

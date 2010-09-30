@@ -5,6 +5,9 @@
         <%= stylesheet_link_tag "style" %>
 		<%= stylesheet_link_tag "style_skuggi" %>
 		<%= stylesheet_link_tag "style_gg" %>
+		<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+
+		<%= javascript_include_tag "jquery-ui-1.7.2.custom.min" %>
 
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
@@ -131,10 +134,9 @@
 		<div id="footer"> 
 			<div id="footer-right"><a href="#">Reglur</a>  <a href="#">Hjálp</a>  <a href="#">Osfr.</a></div> 
 			<div id="footer-left"><a href="#">Hafðu samband</a></div> 
-			
-		
 		</div> 
 	
+	<%=render :partial=>"treaty_documents/popup_window" %>
 	</div> 
 	</body> 
 </html> 
