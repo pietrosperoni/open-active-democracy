@@ -1668,7 +1668,7 @@ is:
                     label: "Kennitala"
         tags:
             notin: "Utan EES"
-            partly: "Að hluta í EES"
+            partly: "Að mestu leyti í EES"
             within: "Í EES"
         priority:
             whatis: "Hvert er umræðuefnið?"
