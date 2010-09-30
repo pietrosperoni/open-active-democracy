@@ -1,0 +1,555 @@
+
+TEST TAFLA: 
+
+<table border="0"> 
+  <tr> 
+  
+<!-- TreatyDocument::TREATY_ARRAY.each do |chapter| -->
+<% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
+	<%#= chapter.name %>
+	<%# chapter.negotiation_stages.each do |stage| %>
+	<td>
+		<%#= chapter.name %>
+	</td>
+	<%#end %>
+<% end %>
+  </tr> 
+</table> 
+
+<!-- til ad telja hvad eru morg document -->
+<%# TreatyDocument.count(["chapter = ? AND negotiation_stage = ?",chapter.id, stage.id])%>
+<!-- til ad visa i undirsidue fyrir popup -->
+<%#= link_to_remote "", :controller=>"treaty_documents", :action=>"show", :chapter_id=>chapter.id, :negotiation_stage=>stage.id %>
+
+HTML TAFLA
+<table border="0"> 
+  <tr> 
+    <td></td> 
+    <td colspan="12"><img src="/images/esb_treaty.png" alt=" " width="472" height="102" /></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">1. Frjálst vöruflæði</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">2. Frjáls för vinnuafls</td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">3. Staðfesturéttur og þjónustufrelsi</td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">4. Frjáls för fjármagns</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x4"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">5. Opinber útboð</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x4"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">6. Félagaréttur</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">7. Hugverkaréttur</td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">8. Samkeppnismál</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">9. Fjármálaþjónusta</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x3"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">10. Upplýsingatækni og fjölmiðlun</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">11. Landbúnaðar- og byggðastefna</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">12. Matvæla- og hreinlætismál</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x3"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">13. Fiskveiðar</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">14. Samgöngur</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x3"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">15. Orka</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">16. Skattamál</td> 
+    <td class="files_x4"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">17. Gjaldmiðilssamstarf</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x3"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">18. Hagtölur</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">19. Félagsmála- og atvinnustefna</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x3"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">20. Iðnstefna</td> 
+    <td class="files_x4"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">21. Evrópsk samgöngunet</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">22. Uppbyggingarstyrkir</td> 
+    <td class="files_x4"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x3"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">23. Réttarvarsla og grundvallarréttindi</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">24. Dóms- og innanríkismál</td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">25. Vísindi og rannsóknir</td> 
+    <td class="files_x4"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">26. Menntun og menning</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x2"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">27. Umhverfismál</td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">28. Neytenda- og heilsuvernd</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x3"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">29. Tollabandalag</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">30. Utanríkistengsl</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x3"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">31. Utanríkis-, öryggis- og varnarmál</td> 
+    <td class="files_x2"></td> 
+    <td class="files_x4"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">32. Fjárhagslegt eftirlit</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">33. Framlagsmál</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x2"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">34. Stofnanir</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x3"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+  <tr> 
+    <td class="td_Underline">35. Annað</td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="files_x1"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td class="merkt"></td> 
+    <td></td> 
+  </tr> 
+</table> 

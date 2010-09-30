@@ -1,0 +1,26 @@
+<div id="treaty_document_window" title="Staða viðræðna" style="display: none;"></div>
+
+<script type="text/javascript">
+ function showTreatyDocumentWindow(chapter_id,status_id)
+ {
+ 	jQuery.ajaxSetup({cache: false});
+	var dialogOpts = {
+		      modal: true,
+		      bgiframe: true,
+		      autoOpen: false,
+		      height: 400,
+		      width: 400,
+		      draggable: true,
+		      resizeable: true,
+			  open: function() {
+	        	jQuery("#treaty_document_window").load("/treaty_documents/show?chapter_id="+chapter_id+"&negotiation_status="+status_id);},
+			  close: function(){
+			  		jQuery("#treaty_document_window").dialog("destroy");
+			  	}
+    };
+	jQuery("#treaty_document_window").dialog(dialogOpts);
+	jQuery('#treaty_document_window').empty();
+    jQuery("#treaty_document_window").dialog("open");
+ }
+</script>
+

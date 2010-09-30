@@ -1,0 +1,37 @@
+<table>
+	<tr>
+		<td>
+		</td>
+		<% TreatyDocument::TREATY_ARRAY[0][:negotiation_stages].each do |stage| %>
+		<td>
+			<%=stage[:name]%>
+		</td>
+		<% end %>
+	</tr>
+
+<% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
+	<tr>
+		<td>
+			<%= chapter[:name] %>
+		</td>
+		<% chapter[:negotiation_stages].each do |stage| %>
+		<td>
+			<% count = TreatyDocument.count(:conditions=>"chapter = #{chapter[:id]} AND negotiation_status = #{stage[:id]}") %>
+			<% if count > 0 and count < TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS %>
+				<span style="color:<%=GrayScaleColor.from_fraction(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f).html %>">
+			<% elsif count > 0 %>
+				<span style="color:#000">
+			<% else %>
+				<span style="color:#fff">
+			<% end %>
+				<% if count>0 %>
+					<a href="#" onclick="showTreatyDocumentWindow(<%=chapter[:id]%>,<%=stage[:id]%>)"><%=count%></a>
+				<% else %>
+					<%=count%>
+				<% end %>
+			</span>
+		</td>
+		<% end %>
+	</tr>
+<% end %>
+</table> 
