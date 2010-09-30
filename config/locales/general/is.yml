@@ -1635,7 +1635,7 @@ is:
         create:       
             priority: "Taka þátt í umræðu" 
             question: "Senda inn spurningu"
-            document: "Leggja inn umsögn"
+            document: "Leggja inn erindi"
         add: "Taka þátt í umræðunni"
         send: "Senda"
         more: "Lesa meira"
