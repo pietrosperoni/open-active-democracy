@@ -3,45 +3,47 @@
 	<% form_for :document, :url => "/documents/create"  do |f| %>
 	<%= f.error_messages %>
 	
-	<h2>Leggja inn umsögn til samninganefndar</h2>	
-	<p class="subtext">Umsagnir eru....</p>
+	<h2>Leggja inn erindi til samninganefndar</h2>	
+	<p class="subtext">Erindi eru....</p>
 
 	<h4>Titill umsagnar <span class="star">*</span></h4>
 	<p>				
 		<%= t('document.revision.new.name.label')%><br/>
-   		<%= f.text_field :name, :size => 50, :maxlength => 60 %>		
+   		<%= f.text_field :name, :size => 50, :maxlength => 500 %>		
 	</p>
 	<br />
 		<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
 		<div class="addContent_kaflar">
 			<b><%= t('esb.tags.notin') %></b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
+				<input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name%><br /></span>	
 			<% end %>			
 		</div>
 		<div class="addContent_kaflar">
 			<b><%= t('esb.tags.partly') %></b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
+				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>
 			<% end %>			
 		</div>
 		<div class="addContent_kaflar">
 			<b><%= t('esb.tags.within') %></b><br />
 				<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <%=tag.name%><br />	
+				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>
 			<% end %>			
 		</div>		
 	<br />
-	<b>Umsögnin þín: <span class="star">*</span></b>
+	<b>Umsögnin þín: <span class="star">*</span></b><br />
 	<%= f.text_area :content, :rows => 18, :cols => 70 %>
 	<br /><br />
 				
-	<b>Settu inn vefslóð sem tengist umsögninni:</b>
+	<!-- <b>Settu inn vefslóð sem tengist umsögninni:</b> -->
 
-	<input type="text" size="50" name="" value="http://" /><br />
-	<p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn <br /><br />
-		<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
-		<div id="errors" class="error"><%= f.error_messages %></div>
-	</p>
+	<!-- <input type="text" size="50" name="" value="http://" /><br /> -->
+	<!-- <p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn</p> --> 
+	<br /><br />
+	
+	<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
+	<div id="errors" class="error"><%= f.error_messages %></div>
+	
 <% end %>	
 </div>

@@ -1632,10 +1632,12 @@ is:
             code:
                 label: "Klipptu og límdu þenna kóða inn í HTML kóðann á síðunni þinni"
     esb:
+        title: "Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar"
+        intro: "Hér birtast gögn samningaviðræðna Íslands um aðild að ESB þar sem hægt er að spyrja spurninga, taka þátt í umræðum og senda erindi til samninganefndar Íslands. Lesa meira ... (þá fer notandinn inn á síðu sem inniheldur nánari lýsingu, fyrirvara o.fl. )"        
         create:       
             priority: "Taka þátt í umræðu" 
             question: "Senda inn spurningu"
-            document: "Leggja inn umsögn"
+            document: "Leggja inn erindi"
         add: "Taka þátt í umræðunni"
         send: "Senda"
         more: "Lesa meira"
@@ -1668,7 +1670,7 @@ is:
                     label: "Kennitala"
         tags:
             notin: "Utan EES"
-            partly: "Að hluta í EES"
+            partly: "Að mestu leyti í EES"
             within: "Í EES"
         priority:
             whatis: "Hvert er umræðuefnið?"

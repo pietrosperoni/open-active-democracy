@@ -1,4 +1,4 @@
-<% if comment %>
+<% if comment.content != "" %>
 <a name="<%= comment.id %>"></a>
 <div id="comment_<%= comment.id.to_s %>" class="comment<% if comment.is_endorser? %>_endorses<% elsif comment.is_opposer? %>_opposes<% end %>">
 	
@@ -28,7 +28,8 @@
 		<span class="entry_profile">
 		<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
 			 - <%= time_ago(comment.created_at) %> 
-			 - <%# = render :partial => "questions/action_show", :locals => {:question => comment.activity.question }%>
+			 <%# = render :partial => "questions/action_show", :locals => {:question => comment.activity.question }%>
+			 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0), "#", :title => t('esb.mouseover.entry.report') %>
 		</span>
 		
 		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 
@@ -41,9 +42,9 @@
 		<% end %>		
 				
 		<% if shortentext == 0 %>
-			<p><div id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>	
+			<div id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div>	
 		<% else %>
-			<p><div class="comment_content_2" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
+			<div class="comment_content_2" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div>
 		<% end %>
 			
 		<% if logged_in? and comment == @comments.last and (current_user.is_admin? or current_user.id == comment.user_id) %>
@@ -52,6 +53,6 @@
 		
 	</div>		
 	<% end %>
-	<%#= render :partial => "comments/flagged", :locals => {:comment => comment} %>
+	
 </div>
 <% end %>

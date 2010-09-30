@@ -1,0 +1,26 @@
+.merkt, .files_x1 , .files_x2, .files_x3, .files_x4
+{
+	width: 34px;
+} 
+
+.merkt {
+	border: 1px solid #eee !important;
+} 
+.files_x1 {
+	background-color: #CCC !important;
+}
+.files_x2 {
+	background-color: #999 !important;
+}
+.files_x3 {
+	background-color: #666 !important;
+}
+.files_x4 {
+	background-color: #444 !important;
+}
+
+.profile_image
+{
+border: 1px #669 solid;
+
+}

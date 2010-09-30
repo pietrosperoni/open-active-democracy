@@ -78,7 +78,97 @@ namespace :esb do
     t.title = "Skýrsla um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
     t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
     t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
  
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 1
+    t.document_content_type = 1
+    t.negotiation_status = 1
+    t.document_type = 1
+    t.title = "önnur skýrsla í fyrsta kafla og á fyrsta stigi"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
     t=TreatyDocument.new
     t.chapter = 2
     t.document_content_type = 2
@@ -89,6 +179,35 @@ namespace :esb do
     t.save
 
     t=TreatyDocument.new
+    t.chapter = 2
+    t.document_content_type = 2
+    t.negotiation_status = 2
+    t.document_type = 2
+    t.title = "Skýrsla 2 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+
+    t=TreatyDocument.new
+    t.chapter = 2
+    t.document_content_type = 2
+    t.negotiation_status = 2
+    t.document_type = 2
+    t.title = "Skýrsla 2 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+
+    t=TreatyDocument.new
+    t.chapter = 2
+    t.document_content_type = 2
+    t.negotiation_status = 2
+    t.document_type = 2
+    t.title = "Skýrsla 2 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+
+
+    
+    t=TreatyDocument.new
     t.chapter = 3
     t.document_content_type = 3
     t.negotiation_status = 3
@@ -96,5 +215,141 @@ namespace :esb do
     t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
     t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
     t.save
+    
+     t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 7
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 8
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 8
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 8
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+    t=TreatyDocument.new
+    t.chapter = 8
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+     t=TreatyDocument.new
+    t.chapter = 8
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
+     t=TreatyDocument.new
+    t.chapter = 8
+    t.document_content_type = 3
+    t.negotiation_status = 3
+    t.document_type = 3
+    t.title = "Skýrsla 3 um aukið samstarf Norðurlandanna og Eystrasaltsríkjanna (á ensku)"
+    t.url = "http://www.utanrikisraduneyti.is/media/Skyrslur/NB8-Wise-Men-Report.pdf"
+    t.save
+    
   end
 end

@@ -3,5 +3,5 @@ Viðræðustig: <%=@stage_name%><br>
 <br>
 Skjöl:<br>
 <% @all_treaty_documents_for_chapter_and_status.each do |document|%>
-  <%=link_to document.title, document.url, :target => "_blank" %>
+  <%=link_to document.title, document.url, :target => "_blank" %></br>
 <% end %>

@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-        <title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar </title>
+        <title> <%= t('esb.title') %> </title>
         <%= render :partial => "shared/javascripts" %>
         <%= stylesheet_link_tag "style" %>
 	<%= stylesheet_link_tag "style_skuggi" %>
@@ -28,9 +28,11 @@
             </div>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
-                <!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
-				<%=flash[:notice]%><b/>
-				<%=flash[:error]%>				
+             	
+				<div class="left_box">
+					 <%= t('esb.intro') %>
+				</div>
+				
 				<!-- Persónuupplýsingar -->
 				<div id="person">
 				 <% if logged_in? %>
@@ -80,7 +82,7 @@
 -->
 				<div class="left_box">	
 					<ul>
-						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
+						<li>engdu við Facebook eða <a href="/settings/picture">settu  inn mynd</a> af þér.
 											<%= link_to image_tag("facebook.gif", :border => 0, :align => "left"), :controller => "import", :action => "" %></li>
 
 					</ul>		
@@ -97,11 +99,11 @@
 				     <li <%= controller_name=="news" ? "class='active'" : "" %>>
 					<a href="/news/activities?r=1">Allt</a>
 				     </li>
-				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-					<a href="/priorities/newest?r=1">Umræður</a>
-				     </li>
 				     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
 					<a href="/questions/newest?r=1">Spurningar og svör</a>
+				     </li>
+				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
+					<a href="/priorities/newest?r=1">Umræður</a>
 				     </li>
 				     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
 					 <a href="/documents/newest?r=1">Erindi</a>
@@ -123,7 +125,8 @@
 				</div>
 			 
                 <div id="Content_wrapper">
-                   
+             	<%=flash[:notice]%><b/>
+				<%=flash[:error]%>	      
                     <div id="Content">
                     	<%=yield%>
                     </div>

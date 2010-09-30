@@ -126,7 +126,7 @@ class QuestionsController < ApplicationController
           if facebook_session
             flash[:user_action_to_publish] = UserPublisher.create_question(facebook_session, @question)
           end          
-          format.html { redirect_to("/questions/") }
+          format.html { redirect_to(@question) }
         end
       else
         format.html { render :action => "new" }

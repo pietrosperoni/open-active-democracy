@@ -5,7 +5,7 @@
 			<%= render :partial => "activities/show_single", :locals => {:activity => activity, :suffix => "_noself"} %>
 		<% end %>
 	</div>
-</div>
+
 <div id="priorities_sidebar">
 	<% if @activities.total_pages > 1 %>
 		<%= will_paginate(@activities, :params => {:action => "activities"} ) %>

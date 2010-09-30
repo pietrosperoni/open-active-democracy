@@ -2,26 +2,31 @@
 	<tr>
 		<td>
 		</td>
-		<% TreatyDocument::TREATY_ARRAY[0][:negotiation_stages].each do |stage| %>
+		<td colspan="12"><img src="/images/esb_treaty.png" alt=" " width="472" height="102" /></td> 
+		<!-- 
+		<%# TreatyDocument::TREATY_ARRAY[0][:negotiation_stages].each do |stage| %>
 		<td>
-			<%=stage[:name]%>
-		</td>
-		<% end %>
+			<%#=stage[:name]%>
+		</td>-->
+		<% #end %>
 	</tr>
 
 <% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
 	<tr>
-		<td>
+		
+		<td class="td_Underline">
 			<%= chapter[:name] %>
 		</td>
+		
 		<% chapter[:negotiation_stages].each do |stage| %>
-		<td>
+			
 			<% count = TreatyDocument.count(:conditions=>"chapter = #{chapter[:id]} AND negotiation_status = #{stage[:id]}") %>
 			<% if count > 0 and count < TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS %>
-				<span style="color:<%=GrayScaleColor.from_fraction(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f).html %>">
+				<td style="background-color:<%= GrayScaleColor.from_fraction(1-(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f)).html %>">
 			<% elsif count > 0 %>
-				<span style="color:#000">
+				<td class="files_max">
 			<% else %>
+				<td class="merkt">
 				<span style="color:#fff">
 			<% end %>
 				<% if count>0 %>
