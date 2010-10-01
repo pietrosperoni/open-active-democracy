@@ -91,9 +91,9 @@
 		<div class="left_box">
 
 		<img src="img/facebook.gif" border="0" alt="" />
-		<ul>
-			<li>Þú getur tengt þig við Facebook aðganginn þinn eða sett inn mynd af þér beint á þennan vef</li>
-		</ul>		
+<%= link_to image_tag("facebook.gif", :border => 0, :align => "left", :class => "facebook_img"), :controller => "import", :action => "" %>	
+
+Þú getur tengt þig við Facebook aðganginn þinn eða sett inn mynd af þér beint á þennan vef	
 		
 		</div>
 		

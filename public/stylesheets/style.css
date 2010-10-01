@@ -67,7 +67,7 @@ h5 {				font-size: 11px;  }
 					border: 1px solid #bcbcbc; border-left: 1px dashed #bcbcbc; }
 
 					
-#content {			padding:5px; margin-top:10px;  }
+#content {			padding:5px; margin-top:25px;  }
 					
 					
 					/* Content boxið*/
@@ -76,7 +76,10 @@ h5 {				font-size: 11px;  }
 					
 #footer {			clear:both; width:970px;  margin: auto;    }
 #footer-left {		padding-top:5px; margin-left: 185px; margin-bottom:20px;}
-#footer-right {		float:right; margin-right:190px;  margin-bottom:20px; padding-top:5px;} 
+#footer-right {		float:right; margin-right:193px;  margin-bottom:20px; padding-top:5px;} 
+#footer-right a {	padding: 0 8px 0 8px;} 
+ 
+
  
 /* 		Text				*/
 
@@ -178,7 +181,7 @@ input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 .rss_box li {		list-style-image:url('img/rss_list.gif'); padding: 0px; margin-left: 12px; font-size: 10px; }
 .rss_more {			width: 100%; text-align:right;  }
 
-.left_box {			margin-bottom: 10px;  }
+.left_box {			margin-bottom: 10px;}
 .left_box p {		margin: 5px 0px 0px 0px;  }	
 .left_box input {	margin-bottom: 4px; 	}
 
@@ -217,3 +220,4 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 .profile_image {border: none !Important;}
 .entry_box img, .comment_box img { border: 1px #669 solid; }
 .entry_box span img { border: none !Important; }
+.facebook_img { padding: 3px 5px 5px 0; float: left;}

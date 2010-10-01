@@ -81,12 +81,11 @@
 				</div>
 -->
 				<div class="left_box">	
-					<ul>
-						<li>Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
-											<%= link_to image_tag("facebook.gif", :border => 0, :align => "left"), :controller => "import", :action => "" %></li>
 
-					</ul>		
-				</div>
+Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
+<%= link_to image_tag("facebook.gif", :border => 0, :align => "left", :class => "facebook_img"), :controller => "import", :action => "" %>	
+
+</div>
             </div>
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
@@ -114,7 +113,7 @@
 
 		<!-- Miðjusvæði --> 
 		<div id="mainContentExpanded"> 
-				<div id="subCatName"><h3>Staða samnings og fjöldi umræðna</h3></div> 
+				<div id="subCatName"><h3>Staða viðræðna og skjöl þeirra</h3></div> 
 
 				<!-- Aðal textasvæði --> 
 				<div id="content"> 
@@ -126,8 +125,13 @@
 				
 		<!-- Fótur síðunnar --> 
 		<div id="footer"> 
-			<div id="footer-right"><a href="#">Reglur</a>  <a href="#">Hjálp</a>  <a href="#">Osfr.</a></div> 
-			<div id="footer-left"><a href="#">Hafðu samband</a></div> 
+			<div id="footer-right">  
+				<a href="#">Reglur</a> |   
+				<a href="#">Hjálp</a> |
+				<a href="#">Hafðu samband</a> | 
+				<a href="http://www.utanrikisraduneyti.is/">Utanríkisráðuneytið</a> - <a href="utn@utn.is">utn@utn.is</a>
+			</div> 
+			<div id="footer-left"></div> 
 		</div> 
 	
 	<%=render :partial=>"treaty_documents/popup_window" %>

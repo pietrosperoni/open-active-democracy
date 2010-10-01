@@ -9,7 +9,7 @@ namespace :esb do
     main_div = html_doc.at("div.boxbody")
     ActiveRecord::Base.transaction do
       TreatyDocument.destroy_all
-      main_div.elements.search("a").each do |element|
+      main_div.children.search("a").each do |element|
         if element.attributes["class"] and element.attributes["class"].value[0..0] == "K"
           puts url = element.attributes["href"].to_s
           puts element.attributes["class"].to_s

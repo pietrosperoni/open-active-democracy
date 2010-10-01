@@ -81,11 +81,9 @@
 				</div>
 -->
 				<div class="left_box">	
-					<ul>
-						<li>engdu við Facebook eða <a href="/settings/picture">settu  inn mynd</a> af þér.
-											<%= link_to image_tag("facebook.gif", :border => 0, :align => "left"), :controller => "import", :action => "" %></li>
-
-					</ul>		
+<%= link_to image_tag("facebook.gif", :border => 0, :align => "left", :class => "facebook_img"), :controller => "import", :action => "" %>	
+Tengdu við Facebook eða <a href="/settings/picture">settu  inn mynd</a> af þér.
+											
 				</div>
             </div>
 			<!-- Haus á miðjusvæði -->
@@ -181,13 +179,15 @@
             </div>
             <!-- Fótur síðunnar -->
             <div id="Footer">
-                <div id="Footer-right">
-                    <a href="#">Reglur</a>
-                    <a href="#">Hjálp</a>
-                    <a href="#">Osfr.</a>
+			<div id="footer-right">  
+				<a href="#">Reglur</a> |   
+				<a href="#">Hjálp</a> |
+				<a href="#">Hafðu samband</a> | 
+				<a href="http://www.utanrikisraduneyti.is/">Utanríkisráðuneytið</a> |
+				<a href="utn@utn.is">utn@utn.is</a>
+			</div> 
                 </div>
                 <div id="Footer-left">
-                    <a href="#">Hafðu samband</a>
                 </div>
             </div>
         </div>

@@ -16,7 +16,6 @@ class TreatyDocument < ActiveRecord::Base
                      {:id=>11, :name=>"Lokun kafla"}
           ]
   TREATY_ARRAY = [
-               {:id=>0, :name=>"Annad", :negotiation_stages=>NEGOTIATION_STAGES},
                {:id=>1, :name=>"Frjálst vöruflæði", :negotiation_stages=>NEGOTIATION_STAGES},
                {:id=>2, :name=>"Frjáls för vinnuafls", :negotiation_stages=>NEGOTIATION_STAGES},
                {:id=>3, :name=>"Staðfesturéttur og þjónustufrelsi", :negotiation_stages=>NEGOTIATION_STAGES},
@@ -51,7 +50,8 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>32, :name=>"Fjárhagslegt eftirlit", :negotiation_stages=>NEGOTIATION_STAGES},                         
                {:id=>33, :name=>"Framlagsmál", :negotiation_stages=>NEGOTIATION_STAGES},                         
                {:id=>34, :name=>"Stofnanir", :negotiation_stages=>NEGOTIATION_STAGES},                        
-               {:id=>35, :name=>"Annað", :negotiation_stages=>NEGOTIATION_STAGES}              
+               {:id=>35, :name=>"Annað", :negotiation_stages=>NEGOTIATION_STAGES},              
+               {:id=>0, :name=>"Eldra efni", :negotiation_stages=>NEGOTIATION_STAGES}
         ]
 
 
