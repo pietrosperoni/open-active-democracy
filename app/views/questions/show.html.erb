@@ -7,12 +7,11 @@
 		<%= render :partial => "users/pic_48", :locals => {:user => @question.user}%> 
 			
 		<span class="entry_profile">
-			<%= t('revisions.byline', :author_sentence => @question.author_sentence) %> &middot; 
+			<%= t('revisions.byline', :author_sentence => @question.author_sentence) %>
 			- <%= t('revisions.added', :time_ago => time_ago(@question.created_at)) %>
-			<!-- TODO --> <font color="red">- 3 álit (todo)</font> 
-			- 
+		 
 			<% for tag in @question.issues %>
-		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
+		   	-	<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
 			<% end %>
 		</span> 
 		
@@ -35,20 +34,8 @@
 		<% end %>
 </div>	
 
-<div class="comment_box_samn"> 
-		<img src="img/profile02.gif" border="0" class="comment_profile" alt="" align="left" /> 
-		<span class="entry_profile"><font color = "red">TODO Samninganefnd - 2 min síðan</font></span> 
-		<p>						
-			<%if @question.answer %>
-				<div class="comment_content" id="comment_content_<%= @question.answer.id.to_s %>">
-					<%= @question.answer %>
-				</div>				
-			<% else%>
-			  	Ekkert svar er til við þessari spurningu eins og er.
-			<% end %>
-				<%=link_to "Þú ert Admin og mátt Breyta/Svara hér","/questions/edit/#{@question.id}" if current_user.is_admin?%>		
-		</p> 
-</div> 
+<!-- Comment box - 'Official Reply' box! -->	
+<%= render :partial => "questions/show_answer", :locals => {:question => @question, :suffix => "_noself"} %>
 
 <div class="heading"><%= t('points.show.recent_activity')%></div>
 <div id="activities">
