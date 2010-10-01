@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   
   def set_email
     @user = current_user
+    flash[:notice]=nil
     if request.put?
       @user.email = params[:user][:email]
       if @user.save

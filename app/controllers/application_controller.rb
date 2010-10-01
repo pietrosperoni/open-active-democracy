@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_if_not_logged_in
     store_location
-    unless logged_in
+    unless logged_in?
       redirect_to DB_CONFIG[RAILS_ENV]['rsk_url']
     end
   end
