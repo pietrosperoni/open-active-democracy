@@ -29,7 +29,7 @@
 		<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
 			 - <%= time_ago(comment.created_at) %> 
 			 <%# = render :partial => "questions/action_show", :locals => {:question => comment.activity.question }%>
-			 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0), "#", :title => t('esb.mouseover.entry.report') %>
+			 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"), "#", :title => t('esb.mouseover.entry.report') %>
 		</span>
 		
 		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 

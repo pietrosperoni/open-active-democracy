@@ -76,11 +76,13 @@
 					</ul>		
 				</div>
 -->
-				<div class="left_box">	
-<%= link_to image_tag("facebook.gif", :border => 0, :align => "left", :class => "facebook_img"), :controller => "import", :action => "" %>	
-Tengdu við Facebook eða <a href="/settings/picture">settu  inn mynd</a> af þér.
-											
-				</div>
+				
+				 <% if logged_in? %>
+					<div class="left_box">	
+					<%= link_to image_tag("facebook.gif", :border => 0, :align => "left", :class => "facebook_img"), :controller => "import", :action => "" %>	
+					Tengdu við Facebook eða <a href="/settings/picture">settu inn mynd</a> af þér.
+					</div>
+				 <% end %>
             </div>
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
