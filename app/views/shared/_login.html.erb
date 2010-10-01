@@ -1,8 +1,14 @@
 <div class="left_box">
 </div>
 <div id="login">
-
-	<%= t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
+	
+	<div class="left_box">
+		<%= t('esb.intro') %>
+	</div>
+	
+	<%= link_to image_tag("login_island.jpg", :border => 0), "#"%>
+	
+	<%#= t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
 	<div id="login_form">
 
 	<% form_remote_for :session, :url => session_path(:region => "inline") do |f| -%>			
