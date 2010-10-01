@@ -1,5 +1,6 @@
 class AddAdminsInDb < ActiveRecord::Migration
   def self.up
+    User.destroy_all
     create_table "admins", :force => true do |t|
       t.integer "national_identity", :null => false
     end    
