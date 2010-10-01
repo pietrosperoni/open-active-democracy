@@ -21,22 +21,19 @@ class ApplicationController < ActionController::Base
   # switch to the right database for this government
   before_filter :show_login_status
   before_filter :check_subdomain
-  
+
+  before_filter :check_if_email_is_set
+  skip_before_filter :check_if_email_is_set, :only=>["set_email"]
+
   before_filter :set_facebook_session, :unless => [:no_facebook?]
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
   before_filter :check_facebook, :unless => [:is_robot?]
     
-  before_filter :check_blast_click, :unless => [:is_robot?]
-  before_filter :check_priority, :unless => [:is_robot?]
-  before_filter :check_referral, :unless => [:is_robot?]
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   
   before_filter :check_for_reset_filters
   
-  before_filter :check_if_email_is_set
-  skip_before_filter :check_if_email_is_set, :only=>["set_email"]
-
   filter_parameter_logging :password, :password_confirmation
 
   layout :get_layout
