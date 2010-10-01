@@ -128,6 +128,7 @@ class PrioritiesController < ApplicationController
   # GET /priorities/new
   # GET /priorities/new.xml
   def new
+    redirect_if_not_logged_in
     if not params[:q].blank? and not @priorities and current_government.is_searchable?
       @priority_results = Priority.find_by_solr "(" + params[:q] + ") AND is_published:true", :limit => 25
       @priorities = @priority_results.docs      

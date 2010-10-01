@@ -6,37 +6,5 @@
 		<%= t('esb.intro') %>
 	</div>
 	
-	<%= link_to image_tag("login_island.jpg", :border => 0), "#"%>
-	
-	<%#= t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
-	<div id="login_form">
-
-	<% form_remote_for :session, :url => session_path(:region => "inline") do |f| -%>			
-			<ul>
-				<li><span class="profile_login_name"><%= t('sessions.new.email.label')%></span><input type="text" name="email" size="10" id="login_email"></li> 
-				<li><span class="profile_login_id"><%= t('sessions.new.password.label')%></span><input type="password" name="password" size="10" id="login_password"></li>				 
-				<!-- <li><%= submit_tag t('sessions.new.submit'), :class => "yellow_button" %></li> -->
-				<li><input type="image" src="images/login_submit.gif" value="submit"></li>
-			</ul>
-		<div id="login_message"></div>
-		<%= link_to t('sessions.new.forgot'), new_password_path %>	
-	<% end -%>
-	</div>
-
-	<% if current_government.has_facebook_enabled? or current_government.has_twitter_enabled? %>
-	<p>
-	<% end %>
-
-	<% if current_government.has_facebook_enabled? %>
-		<div style="margin-bottom: 5px;">
-		<a href="#" onclick="FB.Connect.requireSession(function(){window.location.href=window.location.href=window.location.href;}); return false;"><%= image_tag("facebook_signin.png", :border => 0)%></a>
-		</div>
-	<% end %>
-	
-	<% if current_government.has_twitter_enabled? %>
-		<div style="margin-bottom: 5px;">
-		<%= link_to image_tag("twitter_signin.png", :border => 0), :controller => "twitter", :action => "create" %>
-		</div>
-	<% end %>
-	
+	<%= link_to image_tag("login_island.jpg", :border => 0), "/sessions/login_to_rsk_auth"%>
 </div>

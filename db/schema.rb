@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100927115328) do
+ActiveRecord::Schema.define(:version => 20101001190231) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -53,6 +53,12 @@ ActiveRecord::Schema.define(:version => 20100927115328) do
   add_index "activities", ["type"], :name => "activity_type_index"
   add_index "activities", ["user_id"], :name => "activity_user_id_index"
   add_index "activities", ["vote_id"], :name => "activities_vote_id_index"
+
+  create_table "admins", :force => true do |t|
+    t.integer "national_identity", :null => false
+  end
+
+  add_index "admins", ["national_identity"], :name => "index_admins_on_national_identity"
 
   create_table "blasts", :force => true do |t|
     t.integer  "user_id"
@@ -719,9 +725,11 @@ ActiveRecord::Schema.define(:version => 20100927115328) do
     t.boolean  "reports_questions",                           :default => false
     t.boolean  "reports_documents",                           :default => false
     t.integer  "reports_interval"
+    t.string   "national_identity",                                                  :null => false
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
+  add_index "users", ["national_identity"], :name => "index_users_on_national_identity", :unique => true
   add_index "users", ["partner_id"], :name => "user_partner_id"
   add_index "users", ["rss_code"], :name => "index_users_on_rss_code"
   add_index "users", ["status"], :name => "status"

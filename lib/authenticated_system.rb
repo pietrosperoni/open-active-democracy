@@ -9,7 +9,7 @@ module AuthenticatedSystem
     # Accesses the current user from the session. 
     # Future calls avoid the database because nil is not equal to false.
     def current_user
-      @current_user ||= (login_from_session || login_from_facebook || login_from_basic_auth || login_from_cookie) unless @current_user == false
+      @current_user ||= (login_from_session || login_from_cookie) unless @current_user == false
     end
 
     # Store the given user id in the session.
@@ -125,25 +125,6 @@ module AuthenticatedSystem
       if session[:user_id]
         u = User.find_by_id(session[:user_id])
         self.current_user = u 
-      end
-    end
-    
-    # Called from #current_user. Then try to login from facebook
-    def login_from_facebook
-      if facebook_session
-        RAILS_DEFAULT_LOGGER.info("LOGIN: fbuid #{facebook_session.user.uid}")
-        if u = User.find_by_facebook_uid(facebook_session.user.uid)
-          RAILS_DEFAULT_LOGGER.info("LOGIN: FOUND ONE")          
-          return u
-        end
-        RAILS_DEFAULT_LOGGER.info("LOGIN: About to create")          
-        u = User.create_from_facebook(facebook_session,request)
-        if u
-          session[:goal] = 'signup'
-          return u
-        else
-          return false
-        end
       end
     end
     

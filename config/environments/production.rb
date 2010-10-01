@@ -30,6 +30,8 @@ config.action_mailer.raise_delivery_errors = false
 
 ENV['DOMAIN'] = "skuggaborg.is"
 
+DB_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/database.yml")
+
 if ActionController::Base.session
   ActionController::Base.session[:domain] = '.skuggaborg.is'
 else

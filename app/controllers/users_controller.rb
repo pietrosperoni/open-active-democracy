@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions]
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
+  skip_before_filter :check_if_email_is_set, :only=>["set_email"]
   
   def index
     if params[:q]
@@ -16,6 +17,19 @@ class UsersController < ApplicationController
       format.xml { render :xml => @users.to_xml(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @users.to_json(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
     end    
+  end
+  
+  def set_email
+    @user = current_user
+    if request.put?
+      @user.email = params[:user][:email]
+      if @user.save
+        redirect_back_or_default('/')
+      else
+        flash[:notice]="Töluvpóstfang ekki samþykkt"
+        redirect_to "/set_email"
+      end
+    end
   end
   
   def subscriptions

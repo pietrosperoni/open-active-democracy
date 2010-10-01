@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
   helper_method :facebook_session, :government_cache, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :current_branches, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
+  before_filter :show_login_status
   before_filter :check_subdomain
   
   before_filter :set_facebook_session, :unless => [:no_facebook?]
@@ -32,6 +33,9 @@ class ApplicationController < ActionController::Base
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   
   before_filter :check_for_reset_filters
+  
+  before_filter :check_if_email_is_set
+  skip_before_filter :check_if_email_is_set, :only=>["set_email"]
 
   filter_parameter_logging :password, :password_confirmation
 
@@ -42,6 +46,32 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery #:secret => 'd0451bc51967070c0872c2865d2651e1'
 
   protected
+
+  def show_login_status
+    if logged_in?
+      RAILS_DEFAULT_LOGGER.info("Logged in as #{current_user.name}")
+    else
+      RAILS_DEFAULT_LOGGER.info("Not logged in")
+    end
+  end
+
+  def redirect_if_not_logged_in
+    store_location
+    unless logged_in
+      redirect_to DB_CONFIG[RAILS_ENV]['rsk_url']
+    end
+  end
+
+  def check_if_email_is_set
+    RAILS_DEFAULT_LOGGER.debug(action_name)
+    if logged_in?
+      unless current_user.email
+        redirect_to "/set_email"
+        return false
+      end
+    end
+    return true
+  end
   
   def check_for_reset_filters
     if params[:r]

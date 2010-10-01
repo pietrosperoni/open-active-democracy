@@ -198,6 +198,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/senda_erindi', :controller=>'documents', :action=>'new'
 
   map.connect '/leita', :controller=>'searches', :action=>'index'
+  map.connect '/skraning', :controller=>'sessions', :action=>'create'
   
   map.connect '/minar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"mine"
   map.connect '/minir_umraedu_kaflar', :controller => 'priorities', :action => 'set_subfilter', :filter=>"my_chapters"
@@ -219,6 +220,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/issues/:slug/:action.:format', :controller => "issues"  
 
   map.connect '/portal', :controller => 'portal', :action => 'index'
+  map.connect '/set_email', :controller=>'users', :action=>'set_email'
 
   # See how all your routes lay out with "rake routes"
 
