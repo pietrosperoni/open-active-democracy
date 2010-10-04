@@ -1,12 +1,9 @@
 class Tag < ActiveRecord::Base
 
   extend ActiveSupport::Memoizable
-    
-  named_scope :by_endorsers_count, :order => "tags.up_endorsers_count desc"
 
   named_scope :alphabetical, :order => "tags.name asc"
   
-  named_scope :most_webpages, :conditions => "tags.webpages_count > 0", :order => "tags.webpages_count desc"  
   named_scope :most_feeds, :conditions => "tags.feeds_count > 0", :order => "tags.feeds_count desc"   
 
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
@@ -14,7 +11,6 @@ class Tag < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :taggings
   has_many :priorities, :through => :taggings, :source => :priority, :conditions => "taggings.taggable_type = 'Priority'"
-  has_many :webpages, :through => :taggings, :source => :webpage, :conditions => "taggings.taggable_type = 'Webpage'"
   has_many :feeds, :through => :taggings, :source => :feed, :conditions => "taggings.taggable_type = 'Feed'"
                               
   validates_presence_of :name

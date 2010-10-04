@@ -1,6 +1,6 @@
 <% if comment %>
 <a name="<%= comment.id %>"></a>
-<div id="comment_<%= comment.id.to_s %>" class="comment<% if comment.is_endorser? %>_endorses<% elsif comment.is_opposer? %>_opposes<% end %>">
+<div id="comment_<%= comment.id.to_s %>" class="comment_endorses">
 	
 	<% if comment.status == 'abusive' %>
 		<div class="comment_hidden">

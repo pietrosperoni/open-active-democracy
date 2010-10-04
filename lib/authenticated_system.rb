@@ -74,7 +74,7 @@ module AuthenticatedSystem
       respond_to do |format|
         format.html do
           store_location
-          redirect_to new_session_path
+          redirect_to DB_CONFIG[RAILS_ENV]['rsk_url']
         end
         format.js do
           store_previous_location

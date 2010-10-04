@@ -55,7 +55,10 @@
                 </ul>
 				<!-- Lúppa með rss -->
 				<div class="left_box">
-					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
+				 <% if logged_in? %>
+					 <%= render :partial=>"shared/facebook" %>
+				 <% end %>
+
 					<h4>Frá samninganefnd</h4>
 					<ul>
 						<li><a href="#">Lorem ipsum dolor sit amet</a></li>

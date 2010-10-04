@@ -46,41 +46,6 @@ class QuestionsController < ApplicationController
     end
   end  
  
-  def your_priorities
-    @page_title = t('points.your_priorities.title', :government_name => current_government.name)
-    if current_user.endorsements_count > 0    
-      if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
-        @questions = Question.published.by_recently_created.paginate :conditions => ["(points.priority_id in (?) and points.endorser_helpful_count > 0) or (points.priority_id in (?) and points.opposer_helpful_count > 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
-      elsif current_user.up_endorsements_count > 0
-        @questions = Question.published.by_recently_created.paginate :conditions => ["points.priority_id in (?) and points.endorser_helpful_count > 0",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
-      elsif current_user.down_endorsements_count > 0
-        @questions = Question.published.by_recently_created.paginate :conditions => ["points.priority_id in (?) and points.opposer_helpful_count > 0",current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
-      end
-      get_qualities      
-    else
-      @questions = nil
-    end
-    respond_to do |format|
-      format.html { render :action => "index" }
-      format.xml { render :xml => @questions.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
-    end    
-  end 
- 
-  def revised
-    @page_title = t('points.revised.title', :government_name => current_government.name)
-    @revisions = Revision.published.by_recently_created.find(:all, :include => :point, :conditions => "points.revisions_count > 1").paginate :page => params[:page], :per_page => params[:per_page]
-    @qualities = nil
-    if logged_in? and @revisions.any? # pull all their qualities on the points shown
-      @qualities = QuestionQuality.find(:all, :conditions => ["question_id in (?) and user_id = ? ", @revisions.collect {|c| c.question_id},current_user.id])
-    end    
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @revisions.to_xml(:include => [:point, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @revisions.to_json(:include => [:point, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
-    end    
-  end 
- 
   # GET /questions/1
   def show
     @question = Question.find(params[:id])
@@ -176,50 +141,6 @@ class QuestionsController < ApplicationController
       format.json { render :json => @activities.to_json(:include => :comments, :except => NB_CONFIG['api_exclude_fields']) }
     end
   end  
-  
-  # POST /questions/1/quality
-  def quality
-    @question = Question.find(params[:id])
-    @quality = @question.point_qualities.find_or_create_by_user_id_and_value(current_user.id,params[:value])
-    @question.reload    
-    respond_to do |format|
-      format.js {
-        render :update do |page|
-          if params[:region] == "point_detail"
-            page.replace_html 'point_' + @question.id.to_s + '_helpful_button', render(:partial => "questions/button", :locals => {:point => @question, :quality => @quality })
-            page.replace_html 'point_' + @question.id.to_s + '_helpful_chart', render(:partial => "documents/helpful_chart", :locals => {:document => @question })            
-          elsif params[:region] = "point_inline"
-#            page.select("point_" + @question.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "questions/button_small", :locals => {:point => @question, :quality => @quality, :priority => @question.priority}) ) }                       
-            page.replace_html 'point_' + @question.id.to_s + '_quality', render(:partial => "questions/button_small", :locals => {:point => @question, :quality => @quality, :priority => @question.priority}) 
-          end
-        end        
-      }
-    end
-  end  
-  
-  # POST /questions/1/unquality
-  def unquality
-    @question = Question.find(params[:id])
-    @qualities = @question.point_qualities.find(:all, :conditions => ["user_id = ?",current_user.id])
-    for quality in @qualities
-      quality.destroy
-    end
-    @question.reload
-    respond_to do |format|
-      format.js {
-        render :update do |page|
-          if params[:region] == "point_detail"
-            page.replace_html 'point_' + @question.id.to_s + '_helpful_button', render(:partial => "questions/button", :locals => {:point => @question, :quality => @quality })
-            page.replace_html 'point_' + @question.id.to_s + '_helpful_chart', render(:partial => "documents/helpful_chart", :locals => {:document => @question })            
-          elsif params[:region] = "point_inline"
-#            page.select("point_" + @question.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "questions/button_small", :locals => {:point => @question, :quality => @quality, :priority => @question.priority}) ) }
-            page.replace_html 'point_' + @question.id.to_s + '_quality', render(:partial => "questions/button_small", :locals => {:point => @question, :quality => @quality, :priority => @question.priority}) 
-          end          
-        end       
-      }
-    end
-  end  
-  
   # GET /questions/1/unhide
   def unhide
     @question = Question.find(params[:id])
