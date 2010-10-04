@@ -51,15 +51,16 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
+          update_div_name = 'activity_' + @activity.id.to_s + '_comments'
           if @activity.priority_id
-            page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments/show_all")
-            page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+            page.replace_html update_div_name, render(:partial => "comments/show_all")
+            page.insert_html :bottom, update_div_name, render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
           elsif @activity.question_id
-            page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments_questions/show_all")
-            page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+            page.replace_html update_div_name, render(:partial => "comments_questions/show_all")
+            page.insert_html :bottom, update_div_name, render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
           end
           page << "jQuery('#comment_content_#{@activity.id.to_s}').autoResize({extraSpace : 20});"
-          page << "FB.XFBML.parse($('##{'activity_' + @activity.id.to_s + '_comments'}');"
+          page << "FB.XFBML.parse(document.getElementById('#{update_div_name}'));"
         end
       }
     end
