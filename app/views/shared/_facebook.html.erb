@@ -1,7 +1,9 @@
 <div class="left_box">
+	<% unless facebook_session %>
 	<a href="#" onclick="FB.Connect.requireSession(function(){window.location.href=window.location.href=window.location.href;}); return false;">
 		<%= image_tag("facebook_signin.png", :border => 0)%>
 	</a>
 	Tengdu við Facebook eða <a href="/settings/picture">settu inn mynd</a> af þér.
+	<% end %>
 </div>
 
