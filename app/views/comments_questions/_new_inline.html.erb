@@ -1,5 +1,5 @@
+<% if logged_in? %>
 <!-- Comment box -->	
-
 	<div class="comment_link_add answer_box" id="activity_<%=activity.id.to_s%>_comment_form">
 		<p>
 			<% form_remote_for comment, :url => activity_comments_path(activity), :loading=>"Form.Element.disable('comment-form-submit')" do |f| %>		
@@ -17,3 +17,4 @@
 	jQuery('#comment_content_<%=activity.id.to_s%>').DefaultValue("<%= t('esb.add')%>");
 //-->
 </script>
+<% end %>
