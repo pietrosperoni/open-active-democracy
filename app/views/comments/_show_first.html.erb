@@ -24,7 +24,7 @@
 	<% else %>
 	<!-- Entry box -->
 	<div class="entry_box">
-		<%= render :partial => "shared/entry_icons", :locals => {:content => comment.activity.priority.description}%> 
+		<%= render :partial => "shared/entry_icons", :locals => {:content => comment.activity.priority.description, :action_item=>comment.activity.priority}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
 		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %></h4>
 		<span class="entry_profile">
@@ -33,7 +33,7 @@
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
 			- <%= render :partial => "priorities/tag_show_esb", :locals => { :priority => comment.activity.priority }%>
 		</span>
-					
+
 		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 
 		possible to have different max_lentgh in _show and in _show_first /aom 10092010 -->
 		<!-- if call is from show_all (i.e. shortentext=0), then show all the text and 

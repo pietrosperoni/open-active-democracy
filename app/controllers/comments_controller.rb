@@ -171,7 +171,7 @@ class CommentsController < ApplicationController
           if current_user.is_admin?
             page.insert_html :after, 'comment_' + @comment.id.to_s, render(:partial => "comments/flagged", :locals => {:comment => @comment})
           else
-            page.insert_html :top, 'comment_content_' + @comment.id.to_s, "<div class='red'>Thanks for flagging this comment for review.</div>"
+            page.insert_html :top, 'comment_content_' + @comment.id.to_s, "<div class='red'>Takk fyrir að vekja athygli okkar á þessari athugasemd.</div>"
           end
         end        
       }

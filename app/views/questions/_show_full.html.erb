@@ -2,8 +2,7 @@
 
 	<!-- Entry box --> 
 	<div class="entry_box"> 
-		<!-- TODO AOM 220910 send the relevant variables to entry_icons-->
-		<%= render :partial => "shared/entry_icons", :locals => {:content => question.content}%> 
+		<%= render :partial => "shared/entry_icons", :locals => {:content => question.content, :action_item=>question}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
 		<h5><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %></h5> 
 		
