@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20101001190231) do
     t.integer "national_identity", :null => false
   end
 
-  #add_index "admins", ["national_identity"], :name => "index_admins_on_national_identity"
+  add_index "admins", ["national_identity"], :name => "index_admins_on_national_identity"
 
   create_table "blasts", :force => true do |t|
     t.integer  "user_id"
