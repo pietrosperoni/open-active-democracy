@@ -59,6 +59,7 @@ class CommentsController < ApplicationController
             page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
           end
           page << "jQuery('#comment_content_#{@activity.id.to_s}').autoResize({extraSpace : 20});"
+          page << "FB.XFBML.parse($('##{'activity_' + @activity.id.to_s + '_comments'}');"
         end
       }
     end
