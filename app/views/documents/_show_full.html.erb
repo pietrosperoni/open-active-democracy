@@ -1,6 +1,6 @@
 <div class="point" id="<%= document.id %>">
 	<div class="entry_box">
-		<%= render :partial => "shared/entry_icons", :locals => {:content => document.content}%> 
+		<%= render :partial => "shared/entry_icons", :locals => {:content => document.content, :action_item=>document}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => document.user}%> 
 		
 		<% if revision %>
