@@ -11,5 +11,9 @@ class TreatyDocumentsController < ApplicationController
     @all_treaty_documents_for_chapter_and_status = TreatyDocument.find(:all, :conditions=>["chapter = ? AND negotiation_status = ?",params[:chapter_id], params[:negotiation_status]])
     render :layout=>false
   end
+  
+  def newest
+    @documents = TreatyDocument.find(:all, :limit=>20, :order=>"id DESC")
+  end
 end
 

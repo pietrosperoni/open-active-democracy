@@ -83,18 +83,11 @@
 					</ul>		
 				</div>
 -->
-				<div class="left_box">	
-
-Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
-<%= link_to image_tag("facebook.gif", :border => 0, :align => "left", :class => "facebook_img"), :controller => "import", :action => "" %>	
-
-</div>
-            </div>
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
 				<ul id="right_tabs">
 					<li><%= link_to "Staða viðræðna", :controller=>"treaty_documents", :action=>"" %></li>
-					<li><a href="#">Nýtt efni</a></li>
+					<li><%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %></li>
 				</ul>
 				<ul>
 			<div id="left_tabs">
