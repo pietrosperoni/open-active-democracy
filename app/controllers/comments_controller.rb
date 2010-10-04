@@ -60,7 +60,9 @@ class CommentsController < ApplicationController
             page.insert_html :bottom, update_div_name, render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
           end
           page << "jQuery('#comment_content_#{@activity.id.to_s}').autoResize({extraSpace : 20});"
-          page << "FB.XFBML.parse(document.getElementById('#{update_div_name}'));"
+          if facebook_session
+            page << "FB.init();"
+          end
         end
       }
     end
@@ -137,6 +139,7 @@ class CommentsController < ApplicationController
             end
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
             if facebook_session
+              page << "FB.init();"
               page << fb_connect_stream_publish(UserPublisher.create_comment(facebook_session, @comment, @activity))
             end
           end     
