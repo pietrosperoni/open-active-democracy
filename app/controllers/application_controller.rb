@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
   include FaceboxRender
   
   require_dependency "activity.rb"
-  require_dependency "blast.rb" 
-  require_dependency "relationship.rb"   
 
   rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
   rescue_from Facebooker::Session::SessionExpired, :with => :fb_session_expired 
@@ -232,7 +230,7 @@ class ApplicationController < ActionController::Base
     reset_session    
     flash[:error] = t('application.fb_session_expired')
     respond_to do |format|
-      format.html { redirect_to '/portal/' }
+      format.html { redirect_to '/' }
       format.js { redirect_from_facebox(request.referrer||'/') }
     end    
   end
