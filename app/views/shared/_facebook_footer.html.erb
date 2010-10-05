@@ -4,4 +4,9 @@
 		<%= fb_connect_stream_publish(@user_action_to_publish) if @user_action_to_publish %>
   		<%= yield :fb_connect %>
 	<% end %>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	FB.init();
+});
+</script>
 <% end %>
