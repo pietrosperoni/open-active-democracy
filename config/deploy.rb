@@ -1,4 +1,4 @@
-require 'vendor/plugins/thinking_sphinx/recipes/thinking_sphinx'
+require 'vendor/plugins/thinking-sphinx/recipes/thinking_sphinx'
 
 set :application, "open-active-democracy"
 set :domain, "p.vidraedur.is"
