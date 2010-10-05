@@ -21,7 +21,7 @@ task :before_update_code, :roles => [:app] do
 end
 
 task :after_update_code, :roles => [:app] do
-  symlink_sphinx_indexes
+#  symlink_sphinx_indexes
   thinking_sphinx.configure
   thinking_sphinx.start
 end
