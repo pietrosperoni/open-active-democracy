@@ -40,8 +40,9 @@
 		<!-- deleted from if statement: ' @comments.length > 0 and ' 230910 aom-->
 		
 	<% end %>
-		<% if activity.class == ActivityBulletinNew %>
-			<%= render :partial => "comments_questions/new_inline", :locals => {:activity => activity, :comment => Comment.new} %>
-		<% end %>
-	
+		<% if activity.question.answer!=nil and activity.question.answer.length>10 %>
+			<% if activity.class == ActivityBulletinNew %>
+				<%= render :partial => "comments_questions/new_inline", :locals => {:activity => activity, :comment => Comment.new} %>
+			<% end %>
+		<% end %>	
 </div>

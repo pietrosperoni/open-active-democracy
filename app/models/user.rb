@@ -433,6 +433,7 @@ class User < ActiveRecord::Base
           raise "User could not be saved"
         end
       end
+      RAILS_DEFAULT_LOGGER.info("RSK Login successful for #{u.inspect} #{response.inspect}")
       return u
     rescue  => ex
       RAILS_DEFAULT_LOGGER.error(ex.to_s+"\n\n"+ex.backtrace.to_s)

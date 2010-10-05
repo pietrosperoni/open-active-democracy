@@ -180,7 +180,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :process_document_states
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "priorities"
+  map.root :controller => "news", :action=>"activities"
 
   # restful_authentication routes
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil

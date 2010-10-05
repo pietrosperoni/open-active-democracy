@@ -31,6 +31,12 @@
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>
 			<% end %>			
 		</div>		
+		<div class="addContent_kaflar">
+			<b>Annað</b><br />
+				<% Tag.find(:all, :conditions=>"tag_type =4", :order=>"weight").each do |tag|%>
+				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>
+			<% end %>			
+		</div>		
 	<br />
 	<b>Umsögnin þín: <span class="star">*</span></b><br />
 	<%= f.text_area :content, :rows => 18, :cols => 70 %>

@@ -3,7 +3,7 @@
 	
 <div class="entry_box"> 
 		<!-- TODO AOM 220910 send the relevant variables to entry_icons-->
-		<%= render :partial => "shared/entry_icons", :locals => {:content => @question.content, @question}%> 
+		<%= render :partial => "shared/entry_icons", :locals => {:content => @question.content, :action_item=>@question}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => @question.user}%> 
 			
 		<span class="entry_profile">
@@ -29,7 +29,6 @@
 			<!-- Edit or delete if there is no answer nor any comments-->		
 
 		<% if logged_in? and @question.discussions_count == 0 and !@question.answer and (current_user.is_admin? or current_user.id == @question.user_id) %>
-			<%= link_to t('points.edit.name'), new_question_revision_url(@question), :title => t('points.edit.title') %>
 			<%= link_to t('menu.briefing.delete.name'), question_path(@question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
 		<% end %>
 </div>	
@@ -37,7 +36,6 @@
 <!-- Comment box - 'Official Reply' box! -->	
 <%= render :partial => "questions/show_answer", :locals => {:question => @question, :suffix => "_noself"} %>
 
-<div class="heading"><%= t('points.show.recent_activity')%></div>
 <div id="activities">
 	<% @activities = @question.activities.active.for_all_users.by_recently_updated :include => :user %>
 	<% activity = @activities.first %>

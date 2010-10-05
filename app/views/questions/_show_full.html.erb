@@ -28,7 +28,6 @@
 		<!-- Edit or delete if there is no answer nor any comments-->		
 
 		<% if logged_in? and question.discussions_count == 0 and !question.answer and (current_user.is_admin? or current_user.id == question.user_id) %>
-			<%= link_to t('points.edit.name'), new_question_revision_url(question), :title => t('points.edit.title') %>
 			<%= link_to t('menu.briefing.delete.name'), question_path(question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
 		<% end %>
 		
