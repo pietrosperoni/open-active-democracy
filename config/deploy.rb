@@ -22,8 +22,6 @@ end
 
 task :after_update_code, :roles => [:app] do
 #  symlink_sphinx_indexes
-  thinking_sphinx.configure
-  thinking_sphinx.start
 end
 
 task :after_update_code do
@@ -34,6 +32,8 @@ task :after_update_code do
   run "rm #{deploy_to}/#{shared_dir}/system/system"
   run "ln -s #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -s #{deploy_to}/#{shared_dir}/private #{current_release}/private"
+  thinking_sphinx.configure
+  thinking_sphinx.start
   #run "rm -f #{current_path}"
 end
 
