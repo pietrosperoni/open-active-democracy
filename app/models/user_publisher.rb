@@ -112,7 +112,7 @@ class UserPublisher < Facebooker::Rails::Publisher
   
   def document(facebook_session, document)
     send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} bætti við umsögn: #{document.name_with_type} - #{truncate(document.content, :length => 400)}"
+    txt_message = "#{facebook_session.user.name} bætti við erindi: #{document.name} - #{truncate(document.content, :length => 400)}"
     from facebook_session.user
     message ''
     attachment :name => document.name_with_type, :href => document.show_url, :description => txt_message
