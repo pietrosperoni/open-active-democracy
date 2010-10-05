@@ -1,6 +1,6 @@
 <% if comment %>
 <a name="<%= comment.id %>"></a>
-<div id="comment_<%= comment.id.to_s %>" class="comment<% if comment.is_endorser? %>_endorses<% elsif comment.is_opposer? %>_opposes<% end %>">
+<div id="comment_<%= comment.id.to_s %>" class="comment_endorses">
 	
 	<% if comment.status == 'abusive' %>
 		<div class="comment_hidden">
@@ -29,7 +29,9 @@
 		<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
 			 - <%= time_ago(comment.created_at) %> 
 			 - <%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>
-			 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"), "#", :title => t('esb.mouseover.entry.report') %>
+	       <% if logged_in? and current_user.id != comment.user_id  %>
+			 <%= link_to_remote image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"), { :url => flag_activity_comment_url(comment.activity_id,comment),:method => :get, :confirm => t('comments.flag.confirm', :user_name => comment.user.name)}, :title => t('esb.mouseover.entry.report') %>
+		   <% end %>
 		</span>
 		
 		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 
@@ -51,9 +53,8 @@
 		<% if logged_in? and comment == @comments.last and (current_user.is_admin? or current_user.id == comment.user_id) %>
 			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
 		<% end %>
-		
 	</div>		
+	<%= render :partial => "comments/flagged", :locals => {:comment => comment} %>
 	<% end %>
-	<%#= render :partial => "comments/flagged", :locals => {:comment => comment} %>
 </div>
 <% end %>

@@ -19,7 +19,7 @@ class InstallController < ApplicationController
   
   # new single government mode installs will redirect here if there's no government set
   def index
-    redirect_to :action => "admin_user" if current_government
+    redirect_to "/" if current_government
     @government = Government.new
   end
 
@@ -31,12 +31,11 @@ class InstallController < ApplicationController
     @government.email = @government.admin_email
     @government.layout = "basic"
     if @government.save
-      ColorScheme.create(:input => "FFFFFF")
       # if running mysql, these tables should be MyISAM, not InnoDB.      
       if User.adapter == 'mysql'
         Government.connection.execute("ALTER TABLE pictures ENGINE=MYISAM")      
       end
-      redirect_to :action => "admin_user" and return
+      redirect_to "/" and return
     else
       render :action => "index"
     end

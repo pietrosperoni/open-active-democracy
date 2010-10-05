@@ -51,14 +51,16 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
+          update_div_name = 'activity_' + @activity.id.to_s + '_comments'
           if @activity.priority_id
-            page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments/show_all")
-            page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+            page.replace_html update_div_name, render(:partial => "comments/show_all")
+            page.insert_html :bottom, update_div_name, render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
           elsif @activity.question_id
-            page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments_questions/show_all")
-            page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+            page.replace_html update_div_name, render(:partial => "comments_questions/show_all")
+            page.insert_html :bottom, update_div_name, render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
           end
           page << "jQuery('#comment_content_#{@activity.id.to_s}').autoResize({extraSpace : 20});"
+          page << "FB.init();"
         end
       }
     end
@@ -134,6 +136,7 @@ class CommentsController < ApplicationController
               page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
             end
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
+            page << "FB.init();"
             if facebook_session
               page << fb_connect_stream_publish(UserPublisher.create_comment(facebook_session, @comment, @activity))
             end
@@ -168,7 +171,7 @@ class CommentsController < ApplicationController
           if current_user.is_admin?
             page.insert_html :after, 'comment_' + @comment.id.to_s, render(:partial => "comments/flagged", :locals => {:comment => @comment})
           else
-            page.insert_html :top, 'comment_content_' + @comment.id.to_s, "<div class='red'>Thanks for flagging this comment for review.</div>"
+            page.insert_html :top, 'comment_content_' + @comment.id.to_s, "<div class='red'>Takk fyrir að vekja athygli okkar á þessari athugasemd.</div>"
           end
         end        
       }

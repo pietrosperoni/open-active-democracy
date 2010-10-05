@@ -1,7 +1,7 @@
 <!-- <div id="hp_intro"><%= @page_title %></div> -->
 <p>
 <% if not @questions or @questions.empty? %>
-	<%= t('points.empty')%>
+	Engar spurningar fundust.
 <% else %>
 	<%#= render :partial => "shared/paginate_with_feed", :locals => {:collection => @questions} %>
 	<% for question in @questions %>

@@ -40,18 +40,6 @@ class PrioritiesController < ApplicationController
     end
   end
   
-  # GET /priorities/yours
-  def yours
-    @page_title = t('priorities.yours.title', :government_name => current_government.name)
-    @priorities = @user.endorsements.active.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
-    respond_to do |format|
-      format.html 
-      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }
-      format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
-    end    
-  end
-
   # GET /priorities/newest
   def newest
     @page_title = t('priorities.newest.title', :target => current_government.target)

@@ -55,7 +55,10 @@
                 </ul>
 				<!-- Lúppa með rss -->
 				<div class="left_box">
-					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
+				 <% if logged_in? %>
+					 <%= render :partial=>"shared/facebook" %>
+				 <% end %>
+
 					<h4>Frá samninganefnd</h4>
 					<ul>
 						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
@@ -82,16 +85,15 @@
 -->
 				<div class="left_box">	
 
-Þú getur tengt þig við Facebook aðganginn þinn eða <a href="/settings/picture">sett inn mynd</a> af þér.
-<%= link_to image_tag("facebook.gif", :border => 0, :align => "left", :class => "facebook_img"), :controller => "import", :action => "" %>	
-
 </div>
             </div>
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
 				<ul id="right_tabs">
-					<li class="active">Staða Viðræðna</li>
-					<li><a href="#">Nýtt efni</a></li>
+
+					<li class="active"><%= link_to "Staða viðræðna", :controller=>"treaty_documents" %></li>
+					<li><%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %></li>
+
 				</ul>
 				<ul>
 			<div id="left_tabs">
@@ -136,6 +138,7 @@
 	
 	<%=render :partial=>"treaty_documents/popup_window" %>
 	</div> 
+     <%= render :partial => "shared/facebook_footer" %>
 	</body> 
 </html> 
 

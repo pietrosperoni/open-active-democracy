@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
   include FaceboxRender
   
   require_dependency "activity.rb"
-  require_dependency "blast.rb" 
-  require_dependency "relationship.rb"   
 
   rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
   rescue_from Facebooker::Session::SessionExpired, :with => :fb_session_expired 
@@ -83,12 +81,12 @@ class ApplicationController < ActionController::Base
 
   def current_government
     return @current_government if @current_government
-    @current_government = Rails.cache.read('government')
+#    @current_government = Rails.cache.read('government')
     if not @current_government
       @current_government = Government.last
       if @current_government
         @current_government.update_counts
-        Rails.cache.write('government', @current_government, :expires_in => 15.minutes) 
+#        Rails.cache.write('government', @current_government, :expires_in => 15.minutes) 
       else
         return nil
       end
@@ -232,7 +230,7 @@ class ApplicationController < ActionController::Base
     reset_session    
     flash[:error] = t('application.fb_session_expired')
     respond_to do |format|
-      format.html { redirect_to '/portal/' }
+      format.html { redirect_to '/' }
       format.js { redirect_from_facebox(request.referrer||'/') }
     end    
   end

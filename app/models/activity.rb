@@ -5,16 +5,8 @@ class Activity < ActiveRecord::Base
   named_scope :for_all_users, :conditions => "is_user_only=false"
 
   named_scope :discussions, :conditions => "activities.comments_count > 0"
-  named_scope :changes, :conditions => "change_id is not null"
   named_scope :questions, :conditions => "type like 'ActivityQuestion%'", :order => "activities.created_at desc"
   named_scope :questions_and_docs, :conditions => "type like 'ActivityQuestion%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
-  named_scope :capital, :conditions => "type like '%Capital%'"
-  named_scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
-  
-  named_scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
-  named_scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
-  named_scope :last_thirty_days, :conditions => "activities.changed_at > '#{Time.now-30.days}'"    
-  named_scope :last_24_hours, :conditions => "created_at > '#{Time.now-24.hours}')"  
   
   named_scope :by_recently_updated, :order => "activities.changed_at desc"  
   named_scope :by_recently_created, :order => "activities.created_at desc"    
@@ -32,15 +24,11 @@ class Activity < ActiveRecord::Base
   belongs_to :other_user, :class_name => "User", :foreign_key => "other_user_id"
   belongs_to :priority
   belongs_to :activity
-  belongs_to :change
-  belongs_to :vote
   belongs_to :tag
   belongs_to :question
   belongs_to :revision
   belongs_to :document
   belongs_to :document_revision
-  belongs_to :capital
-  belongs_to :ad
   
   has_many :comments, :order => "comments.created_at asc", :dependent => :destroy
   has_many :published_comments, :class_name => "Comment", :foreign_key => "activity_id", :conditions => "comments.status = 'published'", :order => "comments.created_at asc"
@@ -110,15 +98,7 @@ class Activity < ActiveRecord::Base
   def has_question?
     attribute_present?("question_id")
   end
-  
-  def has_change?
-    attribute_present?("change_id")
-  end
-  
-  def has_capital?
-    attribute_present?("capital_id")
-  end  
-  
+    
   def has_revision?
     attribute_present?("revision_id")
   end    
@@ -130,10 +110,6 @@ class Activity < ActiveRecord::Base
   def has_document_revision?
     attribute_present?("document_revision_id")
   end  
-  
-  def has_ad?
-    attribute_present?("ad_id") and ad
-  end
   
   def has_comments?
     comments_count > 0

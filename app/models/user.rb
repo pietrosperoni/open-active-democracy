@@ -238,7 +238,7 @@ class User < ActiveRecord::Base
   end
   
   def is_admin?
-    Admin.find(:first, :conditions=>{:national_identity=>self.national_identity})
+    self.is_admin
   end
   
   def most_recent_activity
