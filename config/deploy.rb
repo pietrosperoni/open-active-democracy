@@ -1,3 +1,5 @@
+require 'vendor/plugins/thinking_sphinx/recipes/thinking_sphinx'
+
 set :application, "open-active-democracy"
 set :domain, "p.vidraedur.is"
 set :selected_branch, "esb"
@@ -14,7 +16,18 @@ role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
+task :before_update_code, :roles => [:app] do
+  thinking_sphinx.stop
+end
+
+task :after_update_code, :roles => [:app] do
+  symlink_sphinx_indexes
+  thinking_sphinx.configure
+  thinking_sphinx.start
+end
+
 task :after_update_code do
+  run "ln -nfs #{deploy_to}/#{shared_dir}/db/sphinx #{current_release}/db/sphinx"
   run "ln -s #{deploy_to}/#{shared_dir}/config/database.yml #{current_release}/config/database.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
