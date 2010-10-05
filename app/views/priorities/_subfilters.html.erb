@@ -1,4 +1,5 @@
 <% if logged_in? %>
+  <% unless action_name=="new" or action_name=="show" %>
 	<% if session[:priorities_subfilter]==nil %>
 		<b>Allt</b>
 		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
@@ -20,4 +21,5 @@
 		<% end %>
 		<b>Kaflar í áskrift</b>
 	<% end %>
+  <% end %>
 <% end %>
