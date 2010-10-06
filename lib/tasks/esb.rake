@@ -64,6 +64,13 @@ namespace :esb do
         tag.tag_type = 3
         tag.save
       end
+      ["Stofnanir","Annað"].each_with_index do |t,i|
+        tag=Tag.new
+        tag.name = t
+        tag.weight = i
+        tag.tag_type = 4
+        tag.save
+      end
   end
 
   desc "Create dummy treaty test data"

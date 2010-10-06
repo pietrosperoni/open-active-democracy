@@ -142,7 +142,7 @@ class DocumentsController < ApplicationController
           session[:goal] = 'document'
           flash[:notice] = t('document.new.success', :document_name => @document.name)
           if facebook_session
-            flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document, @priority)
+            flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document)
           end          
           format.html { redirect_to(@document) }
         end

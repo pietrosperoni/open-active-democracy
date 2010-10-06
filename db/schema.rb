@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20101001190231) do
     t.integer "national_identity", :null => false
   end
 
-  add_index "admins", ["national_identity"], :name => "index_admins_on_national_identity"
+  #add_index "admins", ["national_identity"], :name => "index_admins_on_national_identity"
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -531,7 +531,12 @@ ActiveRecord::Schema.define(:version => 20101001190231) do
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
+<<<<<<< HEAD
+  #add_index "users", ["national_identity"], :name => "index_users_on_national_identity", :unique => true
+  add_index "users", ["partner_id"], :name => "user_partner_id"
+=======
   add_index "users", ["national_identity"], :name => "index_users_on_national_identity", :unique => true
+>>>>>>> rvb/esb
   add_index "users", ["rss_code"], :name => "index_users_on_rss_code"
   add_index "users", ["status"], :name => "status"
   add_index "users", ["twitter_id"], :name => "index_users_on_twitter_id"

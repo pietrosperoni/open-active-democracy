@@ -238,7 +238,7 @@ class User < ActiveRecord::Base
   end
   
   def is_admin?
-    Admin.find(:first, :conditions=>{:national_identity=>self.national_identity})
+    self.is_admin
   end
   
   def most_recent_activity
@@ -433,6 +433,7 @@ class User < ActiveRecord::Base
           raise "User could not be saved"
         end
       end
+      RAILS_DEFAULT_LOGGER.info("RSK Login successful for #{u.inspect} #{response.inspect}")
       return u
     rescue  => ex
       RAILS_DEFAULT_LOGGER.error(ex.to_s+"\n\n"+ex.backtrace.to_s)
