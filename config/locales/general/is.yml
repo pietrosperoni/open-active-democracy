@@ -1331,7 +1331,7 @@ is:
         destroy: "Aðgangi þínum hefur verið eytt. Far vel!"
         picture:
             title: "Þín mynd"
-            upload: "Sækja þína mynda"
+            upload: "Sækja þína mynd"
         legislators:
             title: "Þínir löggjafar"
             found_all: "Fann og bætti við þínum löggjöfum"
@@ -1470,7 +1470,7 @@ is:
             success: "Velkomin/n til {{government_name}}"
             submit_and_endorse: "Styðja og sækja um"
             submit_and_oppose: "Vera á móti og sækja um"
-            submit: "Skrá mig á Skuggaborg"
+            submit: "Skrá netfang og halda áfram"
             login: "<b>Ertu þegar skráð/ur?</b>"
             validation:
                 login: "Vinsamlegast gefðu upp nafn sem þú vilt að verði notað á síðunni."
@@ -1632,7 +1632,7 @@ is:
             code:
                 label: "Klipptu og límdu þenna kóða inn í HTML kóðann á síðunni þinni"
     esb:
-        title: "Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar"
+        title: "Samningaviðræður Íslands við ESB | Gagnvirkur vefur fyrir Íslendinga"
         intro: "Hér birtast gögn samningaviðræðna Íslands um aðild að ESB þar sem hægt er að spyrja spurninga, taka þátt í umræðum og senda erindi til samninganefndar Íslands. Lesa meira..."        
         create:       
             priority: "Taka þátt í umræðu" 
@@ -1650,10 +1650,10 @@ is:
             subscribe: "Gerast áskrifandi XXX"
             entry:
                 email: "Fá sendan tölvupóst xxxxx"
-                bookmark: "setja bókamerki hér xxxx"
-                facebook: "deila á FBxxxxxxx"
-                twitter: "deila á Twitter xxxxxx"
-                report: "Report ..... xxxxxx"
+                bookmark: "Fylgjast með þessu máli"
+                facebook: "Deila á Facebook"
+                twitter: "Deila á Twitter"
+                report: "Tilkynninga óviðeigandi efni"
             comment:
                 title: "Sjá umræðu í heild sinni xxxx"
                 user: "Nafn þess sem skrifaði þetta xxx"
