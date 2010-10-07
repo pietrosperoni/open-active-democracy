@@ -1646,7 +1646,7 @@ is:
             more: "Sýna allar athugasemdir"
         mouseover:
             logout: "Skrá mig út"
-            edituser: "Breyta uppýsingum"
+            edituser: "Breyta eigin stillingum: Mynd, netfangi og Facebook tengingu"
             subscribe: "Gerast áskrifandi XXX"
             entry:
                 email: "Fá sendan tölvupóst xxxxx"
