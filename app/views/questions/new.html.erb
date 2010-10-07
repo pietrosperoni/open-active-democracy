@@ -1,18 +1,14 @@
-<!-- Aðal textasvæði -->
-<div id="content">
 		
 		<% form_for :question, :url => "/questions/create"  do |f| %>
   		<%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 	
 		<h2><%= t('esb.question.send_long') %></h2>	
-		<p class="subtext"><%= t('esb.question.check') %></p>
-
-	
-		<h4><%= t('esb.question.what') %> <span class="star">*</span></h4>			
-		<p>				
-		<%= t('document.revision.new.name.label')%><br/>
+		<div class="description"><%= t('esb.question.check') %></div>	
+		<h3><%= t('esb.question.what') %> <span class="star">*</span></h3>			
+						
+		<h4><%= t('document.revision.new.name.label')%><br/></h4>
    		<%= f.text_field :name, :size => 60, :maxlength => 60 %>		
-		</p>
+		
 		<br />
 
 		<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
@@ -60,8 +56,7 @@
 			<%= f.submit "Senda spurningu", :id => "submit", :class => "yellow_button" %>
 			<div id="errors" class="error"><%= f.error_messages %></div>
 		<% end %>		
-	
-</div>
+
 		
 		
 

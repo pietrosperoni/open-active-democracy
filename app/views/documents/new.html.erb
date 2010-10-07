@@ -1,16 +1,14 @@
-<div id="content">
-	
 	<% form_for :document, :url => "/documents/create"  do |f| %>
 	<%= f.error_messages %>
 	
 	<h2>Leggja inn erindi til samninganefndar</h2>	
-	<p class="subtext">Erindi eru....</p>
+	<div class="description">Erindi eru....</div>
 
-	<h4>Titill erindis <span class="star">*</span></h4>
-	<p>				
+	<h3>Titill erindis <span class="star">*</span></h3>
+	<h4>				
 		<%= t('document.revision.new.name.label')%><br/>
    		<%= f.text_field :name, :size => 50, :maxlength => 500 %>		
-	</p>
+	</h4>
 	<br />
 		<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
 		<div class="addContent_kaflar">
@@ -52,4 +50,4 @@
 	<div id="errors" class="error"><%= f.error_messages %></div>
 	
 <% end %>	
-</div>
+
