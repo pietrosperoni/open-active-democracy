@@ -1,10 +1,10 @@
-Hæ {{ recipient.first_name | capitalize }},
+Sæl(l) {{ recipient.first_name | capitalize }},
 
-Þetta er önnur viðvörun.  Þú braust reglur Skuggaborgar.  Þú hefur misst 10% (eða 1{{ government.currency_short_name }}, hvort sem er meira) af þínum {{ government.currency_name | downcase }}.  Vinsamlegast hættu að brjóta reglurnar!
+Þetta er önnur viðvörun til þín fyrir að brjóta reglur vefsins "Samningaviðræður Íslands við ESB". Athugasemd þinni var eytt. 
 
 Skoðaðu reglurnar: {{ recipient.root_url }}about/rules
 
-Við þriðju viðvörun þá ferðu á skilorð, tapar 30% (eða 3{{ government.currency_short_name }}, hvort sem er meira) af þínum {{ government.currency_name | downcase }} og munt ekki geta sett neitt á vefinn í viku. 
+Við þriðju viðvörun þá verða tekin af þér réttindi til að setja efni á vefinn í viku. 
 
 Við fjórðu viðvörun þá verður þú bannaður á vefnum. 
 
@@ -12,5 +12,6 @@ Hér er athugasemdin sem orsakaði þetta bréf. Ef þú hefur einhverjar spurni
 
 "{{ notifiable.content }}"
 
+
 ---
-Þetta er sjálfvirk tilkynning {{ government.name }} send á {{ recipient.email }}.  
+Þetta er sjálfvirk tilkynning frá {{ government.name }} sem send er á {{ recipient.email }}.  

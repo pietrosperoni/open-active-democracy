@@ -114,7 +114,7 @@ h5 {				font-size: 11px;  }
 
 #subfilters {		text-align:right; padding: 5px 10px 0 0;  }
 #subfilters a {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
-#subfilters a:hover {	color: #3399ff; text-decoration:underline; }
+#subfilters a:hover, #subfilters b {	color: #3399ff; text-decoration:underline; }
 
 /*		Entries				*/
 .entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 5px; padding:10px 0 10px 6px; border-top: 1px solid #f1f1f1;   width: 580px;}
@@ -127,16 +127,21 @@ h5 {				font-size: 11px;  }
 .entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 10px;  }
 .entry_profile {	 }
 
-.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; height: 34px !ie;}
+.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 35px; height: 34px !ie;}
 .comment_box_samn {	border:1px solid #cbd4d7; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; }
 .comment_box a:hover {	color: #1461ac;  }
 .comment_profile {	margin: 0px 5px 0px 0px;}
-.comment_box img {	margin-right:5px;}
+.comment_box img {	margin-right:5px; border: none !Important}
 .comment_report {	margin:0px; right; }
 
-.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 10px; width: 14em;border-bottom: 1px solid #e2e2e2;}
+.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 32px; width: 14em;border-bottom: 1px solid #e2e2e2;}
 
 .comment_error { display:none; }
+
+.new_comment
+{
+margin-left: 22px;
+}
 
 .readmore {			margin: 0 2px;  }
 
@@ -194,7 +199,7 @@ input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 
 #login {	}
 .login_field {		float:right; clear:both;  }	
-	
+
 	
 /*		Chapters - right column			*/
 	
@@ -203,6 +208,20 @@ a.chapter_hluta, a:visited.chapter_hluta, li.chapter_hluta {		color: #c39a44;} /
 a.chapter_innan,  a:visited.chapter_innan, li.chapter_innan {		color: #5b925d;} /* Green */
 	
 input.chapter {		margin:0px 1px 0px 0px; padding:0px; }	
+	
+	
+/* Status Id's */
+
+#contentStatusLeft { 	float:left;width: 250px; }
+#contentNav {}
+#contentChapters { 		margin-top:20px; line-height:120%; }
+	#contentChapters div.selected {	background-color: #c7d8eb; width:100%; }
+#contentStatusFrame { 	width: 529px;  margin-left: 250px; padding:10px; 
+						border:3px solid #c7d8eb; background-color: #e9eced; }
+.contentFrameCol {		float:left;  width:48%; }
+.contentFrameColRight { margin-left: 50%; width:50%; }
+
+
 	
 /*		Other Classes				*/
 
@@ -227,3 +246,20 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 .entry_box img, .comment_box img { border: 1px #669 solid; }
 .entry_box span img { border: none !Important; }
 .facebook_img { padding: 3px 5px 5px 0; float: left;}
+
+
+.FB_profile_pic
+{
+float:left;	
+padding: 3px 5px 5px 0; 
+}
+
+.addthis_toolbox
+{
+width: 80px;
+}
+
+.pagination
+{
+float:right;	
+}
