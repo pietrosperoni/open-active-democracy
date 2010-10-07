@@ -13,8 +13,12 @@ var addthis_config = {
 					<% end %>
 				<% end %>
 			<% end %>
-			<a class="addthis_button_facebook" title="Senda á Facebook" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>"></a>
-			<a class="addthis_button_twitter" title="Senda á Twitter" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>"></a>
+			<a class="addthis_button_facebook" title="Senda á Facebook" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>">
+				<%=image_tag("esb_entry_facebook.gif", :border => 0)%>
+			</a>
+			<a  class="addthis_button_twitter" title="Senda á Twitter" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>">
+				<%=image_tag("esb_entry_twitter.gif", :border => 0)%>
+			</a>
 			<% if action_item.instance_of?(Priority) %>
 				<%= link_to image_tag("entry_report.gif", :border => 0, :style=>"float:right;"), flag_inappropriate_priority_url(action_item), :title => t('esb.mouseover.entry.report'), :confirm => t('menu.priorities.flag.confirm'), :method => :put %>
 			<% elsif action_item.instance_of?(Question) %>
