@@ -127,16 +127,21 @@ h5 {				font-size: 11px;  }
 .entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 10px;  }
 .entry_profile {	 }
 
-.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; height: 34px !ie;}
+.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 35px; height: 34px !ie;}
 .comment_box_samn {	border:1px solid #cbd4d7; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; }
 .comment_box a:hover {	color: #1461ac;  }
 .comment_profile {	margin: 0px 5px 0px 0px;}
 .comment_box img {	margin-right:5px; border: none !Important}
 .comment_report {	margin:0px; right; }
 
-.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 10px; width: 14em;border-bottom: 1px solid #e2e2e2;}
+.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 32px; width: 14em;border-bottom: 1px solid #e2e2e2;}
 
 .comment_error { display:none; }
+
+.new_comment
+{
+margin-left: 22px;
+}
 
 .readmore {			margin: 0 2px;  }
 
@@ -194,7 +199,7 @@ input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 
 #login {	}
 .login_field {		float:right; clear:both;  }	
-	
+
 	
 /*		Chapters - right column			*/
 	
@@ -235,3 +240,12 @@ float:left;
 padding: 3px 5px 5px 0; 
 }
 
+.addthis_toolbox
+{
+width: 80px;
+}
+
+.pagination
+{
+float:right;	
+}
