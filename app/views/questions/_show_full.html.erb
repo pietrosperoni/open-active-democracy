@@ -1,5 +1,6 @@
+<% if controller_name=="news" and question.answer==nil -%>
+<% else %>
 <div class="point" id="<%= question.id %>">
-
 	<!-- Entry box --> 
 	<div class="entry_box"> 
 		<%= render :partial => "shared/entry_icons", :locals => {:content => question.content, :action_item=>question}%> 
@@ -60,7 +61,7 @@
 	<!-- <p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p> --> 
 
 </div>
-
+<% end %>
 
 
 

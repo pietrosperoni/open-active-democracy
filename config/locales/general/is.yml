@@ -1200,7 +1200,7 @@ is:
         new:
             need_account: "Til að taka þátt á Skuggaborg þá þarftu að vera innskráður, nýskráning er öllum heimil."
             blank: "Vinsamlegast skráðu hugmyndina þína eða smelltu á stuðningshnappinn undir hverrri hugmynd til að bæta þínu við."
-            success: "Takk fyrir að bæta {{priority_name}} við"
+            success: "Takk fyrir að bæta við: {{priority_name}} "
             submit: "Ný hugmynd"
             suggest: "Ertu með hugmynd sem ætti að taka fyrir? Settu það inn hér."
             click:

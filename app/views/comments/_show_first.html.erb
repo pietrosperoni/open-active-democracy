@@ -24,7 +24,12 @@
 	<% else %>
 	<!-- Entry box -->
 	<div class="entry_box">
-		<%= render :partial => "shared/entry_icons", :locals => {:content => comment.activity.priority.description, :action_item=>comment.activity.priority}%> 
+		<% if logged_in? %>
+		<%   @following = comment.activity.followings.find_by_user_id(current_user.id)%>
+		<% else %>
+		<%   @following = nil%>
+		<% end %>
+		<%= render :partial => "shared/entry_icons", :locals => {:content => comment.activity.priority.description, :action_item=>comment.activity.priority, :following=>@following, :activity=>comment.activity}%>
 		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
 		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %></h4>
 		<span class="entry_profile">
@@ -51,9 +56,7 @@
 		<% if logged_in? and comment == @comments.last and (current_user.is_admin? or current_user.id == comment.user_id) %>
 			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
 		<% end %>
-	</div>
-	
-	<% end %>
-	
+	</div>	
+	<% end %>	
 </div>
 <% end %>

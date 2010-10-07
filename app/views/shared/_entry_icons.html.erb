@@ -1,13 +1,31 @@
-<!-- TODO AOM 220910 activate these links.. send variables needed, f.x. :content => question.content  -->
+<script type="text/javascript">
+var addthis_config = {
+     ui_language: "fr"
+}
+</script>
+
 <span class="entry_icons">
-		<%= link_to image_tag("esb_entry_bookmark.gif", :border => 0), "#", :title => t('esb.mouseover.entry.bookmark') %>
-		<%= link_to image_tag("esb_entry_facebook.gif", :border => 0), "#", :title => t('esb.mouseover.entry.facebook') %>
-		<%= link_to image_tag("esb_entry_twitter.gif", :border => 0), "#", :title => t('esb.mouseover.entry.twitter') %>
-		<% if action_item.instance_of?(Priority) %>
-		<%= link_to image_tag("entry_report.gif", :border => 0), flag_inappropriate_priority_url(action_item), :title => t('esb.mouseover.entry.report'), :confirm => t('menu.priorities.flag.confirm'), :method => :put %>
-		<% elsif action_item.instance_of?(Question) %>
-		  <%= link_to image_tag("entry_report.gif", :border => 0), "#", :title => t('esb.mouseover.entry.report') %>
-		<% elsif action_item.instance_of?(Document) %>
-		  <%= link_to image_tag("entry_report.gif", :border => 0), "#", :title => t('esb.mouseover.entry.report') %>
-		<% end %>
+		<div class="addthis_toolbox addthis_default_style">
+			<% unless action_item.instance_of?(Document) %>
+				<% if action_item.instance_of?(Priority) %>
+					<% if logged_in? %>
+						<%=render :partial=>"shared/follow_icons", :locals => {:activity => activity, :following => following}%>
+					<% end %>
+				<% end %>
+			<% end %>
+			<a class="addthis_button_facebook" title="Senda á Facebook" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>">
+				<%=image_tag("esb_entry_facebook.gif", :border => 0)%>
+			</a>
+			<a  class="addthis_button_twitter" title="Senda á Twitter" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>">
+				<%=image_tag("esb_entry_twitter.gif", :border => 0)%>
+			</a>
+			<% if action_item.instance_of?(Priority) %>
+				<%= link_to image_tag("entry_report.gif", :border => 0, :style=>"float:right;"), flag_inappropriate_priority_url(action_item), :title => t('esb.mouseover.entry.report'), :confirm => t('menu.priorities.flag.confirm'), :method => :put %>
+			<% elsif action_item.instance_of?(Question) %>
+			  <%= link_to image_tag("entry_report.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
+			<% elsif action_item.instance_of?(Document) %>
+			  <%= link_to image_tag("entry_report.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
+			<% end %>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4cad2bb74f7d4e97"></script>
 </span>

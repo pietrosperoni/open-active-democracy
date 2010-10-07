@@ -5,19 +5,18 @@ class SettingsController < ApplicationController
 
   # GET /settings
   def index
-    @page_title = t('settings.index.title', :government_name => current_government.name)
+    redirect_to :action=>"picture"
   end
 
   # PUT /settings
   def update
+    @user = current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = t('settings.saved')
-        format.html { 
-          redirect_to(settings_url) 
-        }
+        format.html { render :action => "picture" }
       else
-        format.html { render :action => "index" }
+        format.html { render :action => "picture" }
       end
     end
   end
@@ -30,14 +29,14 @@ class SettingsController < ApplicationController
 
   # GET /settings/picture
   def picture
+    @user = current_user
     @page_title = t('settings.picture.title')
   end
 
-  def picture_save
+  def picture_save    
     @user = current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        ActivityUserPictureNew.create(:user => @user)   
         flash[:notice] = t('pictures.success')
         format.html { redirect_to(:action => :picture) }
       else

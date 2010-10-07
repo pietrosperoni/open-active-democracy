@@ -1,4 +1,4 @@
-Hæ {{ recipient.first_name | capitalize }},
+Hæ {{ recipient.login }},
 
 {{ sender.name }} kom með athugasemd um {{ notifiable.activity.name }}:
 
@@ -10,5 +10,5 @@ Hér er svarað: {{ notifiable.show_url }}
 
 
 ---
-Þetta er sjálfvirk tilkynning {{ government.name }} send á {{ recipient.email }}.  
-Ef þú vilt ekki fá svona bréf, breyttu þá póststillingunum þínum hér: {{ recipient.unsubscribe_url }}
+Þetta er sjálfvirk tilkynning send á {{ recipient.email }}.  
+Ef þú vilt ekki fá svona bréf, breyttu þá póststillingunum þínum hér: LINK
