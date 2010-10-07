@@ -47,11 +47,11 @@ class Comment < ActiveRecord::Base
     self.activity.comments_count += 1
     self.activity.save_with_validation(false)
     self.user.increment!("comments_count")
-    #for u in activity.followers
-      #if u.id != self.user_id and not Following.find_by_user_id_and_other_user_id_and_value(u.id,self.user_id,-1)
-        #notifications << NotificationComment.new(:sender => self.user, :recipient => u)
-      #end
-    #end
+    for u in activity.followers
+      if u.id != self.user_id and not Following.find_by_user_id_and_other_user_id_and_value(u.id,self.user_id,-1)
+        notifications << NotificationComment.new(:sender => self.user, :recipient => u)
+      end
+    end
     if self.activity.comments_count == 1 # this is the first comment, so need to update the discussions_count as appropriate
       if self.activity.has_question? 
         Question.update_all("discussions_count = discussions_count + 1", "id=#{self.activity.question_id}")

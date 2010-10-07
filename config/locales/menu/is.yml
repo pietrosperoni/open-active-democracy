@@ -197,7 +197,7 @@ is:
             flag:
                 name: "Tilkynna óviðeigandi ummæli!"
                 title: "Er ástæða til að umsjónarmaður síðunnar líti á þessa hugmynd? Láta einnig vita í athugasemdum um hugmyndir ef það er ekki augljóst hvað vandamálið er."
-                confirm: "Þú ert um það bil að tilkynna um óviðeigandi ummæli til umsjónarmanni síðunnar. Ef það er ekki augljóst afhverju þú ert að tilkynna þetta, þá vinsamlegast setjið inn athugasemd um hugmyndina svo það sé hægt að gera viðeigandi ráðstafanir."
+                confirm: "Þú ert um það bil að tilkynna um óviðeigandi ummæli til umsjónarmanni síðunnar. Ef það er ekki augljóst afhverju þú ert að tilkynna þetta, þá vinsamlegast setjið inn athugasemd svo það sé hægt að gera viðeigandi ráðstafanir."
             endorsers:
                 name: "Meðmælendur"
                 one: "1 með"
