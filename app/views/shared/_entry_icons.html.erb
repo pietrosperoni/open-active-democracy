@@ -1,6 +1,8 @@
 <!-- TODO AOM 220910 activate these links.. send variables needed, f.x. :content => question.content  -->
 <span class="entry_icons">
-		<%= link_to image_tag("esb_entry_bookmark.gif", :border => 0), "#", :title => t('esb.mouseover.entry.bookmark') %>
+		<% unless action_item.instance_of?(Document) %>
+			<%= link_to image_tag("esb_entry_bookmark.gif", :border => 0), "#", :title => t('esb.mouseover.entry.bookmark') %>
+		<% end %>
 		<%= link_to image_tag("esb_entry_facebook.gif", :border => 0), "#", :title => t('esb.mouseover.entry.facebook') %>
 		<%= link_to image_tag("esb_entry_twitter.gif", :border => 0), "#", :title => t('esb.mouseover.entry.twitter') %>
 		<% if action_item.instance_of?(Priority) %>

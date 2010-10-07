@@ -30,10 +30,11 @@ class SettingsController < ApplicationController
 
   # GET /settings/picture
   def picture
+    @user = current_user
     @page_title = t('settings.picture.title')
   end
 
-  def picture_save
+  def picture_save    
     @user = current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
