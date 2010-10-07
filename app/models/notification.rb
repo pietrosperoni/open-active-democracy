@@ -96,11 +96,7 @@ class Notification < ActiveRecord::Base
     self.processed_at = Time.now
     if is_recipient_subscribed? and recipient.has_email? and recipient.is_active?
       self.sent_at = Time.now
-      if self.class == NotificationChangeVote
-        UserMailer.deliver_new_change_vote(sender,recipient,notifiable)
-      else
-        UserMailer.deliver_notification(self,sender,recipient,notifiable)
-      end
+      UserMailer.deliver_notification(self,sender,recipient,notifiable)
     end
     #if recipient.has_facebook?
     #  self.sent_at = Time.now

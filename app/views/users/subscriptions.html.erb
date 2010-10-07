@@ -52,6 +52,10 @@
                 <%= f.check_box :reports_documents %> Umsagnir
                 <br/>
             </div>
+		    <div class="Tegund_Efnis Askrift">
+                <h4>Fá sendan tölvupóst með athugasemdum við umræður sem þú hefur sérstaklega valið að fylgjast með í tölvupósti?:</h4>
+				<%= f.check_box :is_comments_subscribed %><br> 
+            </div>
             <div class="Tidni_Askriftar Askrift">
                 <h4>Hversu oft viltu fá póst? <span class="star">*</span></h4>
                 <%= f.radio_button :reports_interval, 1 %> Daglega
