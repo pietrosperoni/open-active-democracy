@@ -2,10 +2,12 @@
 	<div class="comment_box_samn"> 
 		<img src="/images/logo_litid_sogsvor.png" border="0" class="comment_profile" alt="" align="left" /> 
 		<span class="entry_profile">Samninganefnd</span> 
-		
+		<%# if question.answered_at %>
+			<%#= time_ago(question.answered_at) %>
+		<%# end %>		
 		<p>						
 			<%if question.answer %>
-				<div class="comment_content" id="comment_content_<%= question.answer.id.to_s %>">
+			 	<div class="comment_content" id="comment_content_<%= question.answer.id.to_s %>">
 					<%= question.answer %>
 				</div>				
 			<% else%>

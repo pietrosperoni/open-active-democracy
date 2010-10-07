@@ -9,7 +9,7 @@
 	<h4><%= t('esb.priority.whatis') %> <span class="star">*</span></h4>
 	<p>				
 		<%= t('document.revision.new.name.label')%><br/>
-   		<%= f.text_field :name, :size => 50, :maxlength => 500 %>		
+   		<%= f.text_field :name, :size => 60, :maxlength => 60 %>		
 	</p>
 	<%#= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
 	<!-- Tengt kafla: <span class="custom_tag"><%=select_tag "custom_tag", "#{Tag.all_dropdown_options}" %></span> -->
@@ -43,7 +43,8 @@
     <b><%= t('esb.priority.description') %> <span class="star">*</span></b><br />
     <%= f.text_area :description, :rows => 18, :cols => 70 %>
 	<%#= text_area_tag "priority[description]", "", :button => 'submit', :size => 500, :maxLength => 500 %>
-    <br /><br />
+    
+	<br /><br />
 
 	<!-- TODO aom, add web-tag 210910-->
 
