@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
 
   # GET /settings
   def index
-    @page_title = t('settings.index.title', :government_name => current_government.name)
+    redirect_to :action=>"picture"
   end
 
   # PUT /settings
