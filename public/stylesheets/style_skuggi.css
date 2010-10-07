@@ -70,12 +70,13 @@ min-height: 20px;
 
 }
 
-/* Rök og drasl */
+/* Rök */
 .comment_link_add, .small { font-size: 11px !important; }
 
 .comment_content {
 	padding: 0px 10px 0px 0px;
 	overflow:hidden; 
+	width: 570px;
 }
 .comment_content p {
 font-size: 12px !important;
