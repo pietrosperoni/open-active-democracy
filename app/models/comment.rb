@@ -48,7 +48,7 @@ class Comment < ActiveRecord::Base
     self.activity.save_with_validation(false)
     self.user.increment!("comments_count")
     for u in activity.followers
-      if u.id != self.user_id and not Following.find_by_user_id_and_other_user_id_and_value(u.id,self.user_id,-1)
+      if u.id != self.user_id
         notifications << NotificationComment.new(:sender => self.user, :recipient => u)
       end
     end
