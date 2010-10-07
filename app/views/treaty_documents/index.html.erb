@@ -15,7 +15,7 @@
 	<tr>
 		
 		<td class="td_Underline">
-			<%= chapter[:name] %>
+			<%= link_to chapter[:name], :controller=>"treaty_documents", :action=>"show_chapter", :id=>chapter[:id] %></li>
 		</td>
 		
 		<% chapter[:negotiation_stages].each do |stage| %>
