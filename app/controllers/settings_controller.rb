@@ -14,9 +14,7 @@ class SettingsController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = t('settings.saved')
-        format.html { 
-          redirect_to(settings_url) 
-        }
+        format.html { render :action => "picture" }
       else
         format.html { render :action => "picture" }
       end
