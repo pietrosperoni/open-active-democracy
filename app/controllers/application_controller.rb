@@ -80,6 +80,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_government
+    if RAILS_ENV=="development"
+      self.current_user = User.first
+    end
     return @current_government if @current_government
 #    @current_government = Rails.cache.read('government')
     if not @current_government

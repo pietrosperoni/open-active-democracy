@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101001190231) do
+ActiveRecord::Schema.define(:version => 20101007120432) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20101001190231) do
     t.integer "national_identity", :null => false
   end
 
-  #add_index "admins", ["national_identity"], :name => "index_admins_on_national_identity"
+  add_index "admins", ["national_identity"], :name => "index_admins_on_national_identity"
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -400,20 +400,20 @@ ActiveRecord::Schema.define(:version => 20101001190231) do
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", :force => true do |t|
-    t.string   "name",                      :limit => 60
+    t.string   "name",              :limit => 60
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "top_priority_id"
-    t.integer  "priorities_count",                         :default => 0
-    t.integer  "feeds_count",                              :default => 0
-    t.string   "title",                     :limit => 60
-    t.string   "description",               :limit => 200
-    t.integer  "discussions_count",                        :default => 0
-    t.integer  "questions_count",                          :default => 0
-    t.integer  "documents_count",                          :default => 0
-    t.string   "prompt",                    :limit => 100
-    t.string   "slug",                      :limit => 60
-    t.integer  "weight",                                   :default => 0
+    t.integer  "priorities_count",                 :default => 0
+    t.integer  "feeds_count",                      :default => 0
+    t.string   "title",             :limit => 60
+    t.string   "description",       :limit => 200
+    t.integer  "discussions_count",                :default => 0
+    t.integer  "questions_count",                  :default => 0
+    t.integer  "documents_count",                  :default => 0
+    t.string   "prompt",            :limit => 100
+    t.string   "slug",              :limit => 60
+    t.integer  "weight",                           :default => 0
     t.integer  "tag_type"
   end
 
@@ -456,88 +456,86 @@ ActiveRecord::Schema.define(:version => 20101001190231) do
   add_index "user_contacts", ["user_id"], :name => "user_contacts_user_id_index"
 
   create_table "users", :force => true do |t|
-    t.string   "login",                        :limit => 40
-    t.string   "email",                        :limit => 100
-    t.string   "crypted_password",             :limit => 40
-    t.string   "salt",                         :limit => 40
-    t.string   "first_name",                   :limit => 100
-    t.string   "last_name",                    :limit => 100
+    t.string   "login",                      :limit => 40
+    t.string   "email",                      :limit => 100
+    t.string   "crypted_password",           :limit => 40
+    t.string   "salt",                       :limit => 40
+    t.string   "first_name",                 :limit => 100
+    t.string   "last_name",                  :limit => 100
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "activated_at"
-    t.string   "activation_code",              :limit => 60
-    t.string   "remember_token",               :limit => 60
+    t.string   "activation_code",            :limit => 60
+    t.string   "remember_token",             :limit => 60
     t.datetime "remember_token_expires_at"
     t.integer  "picture_id"
-    t.string   "status",                       :limit => 30,  :default => "passive"
+    t.string   "status",                     :limit => 30,  :default => "passive"
     t.datetime "deleted_at"
-    t.string   "ip_address",                   :limit => 16
+    t.string   "ip_address",                 :limit => 16
     t.datetime "loggedin_at"
-    t.string   "zip",                          :limit => 10
+    t.string   "zip",                        :limit => 10
     t.date     "birth_date"
-    t.string   "twitter_login",                :limit => 15
-    t.string   "website",                      :limit => 150
-    t.boolean  "is_mergeable",                                :default => true
+    t.string   "twitter_login",              :limit => 15
+    t.string   "website",                    :limit => 150
+    t.boolean  "is_mergeable",                              :default => true
     t.integer  "referral_id"
-    t.boolean  "is_subscribed",                               :default => true
-    t.string   "user_agent",                   :limit => 200
-    t.string   "referrer",                     :limit => 200
-    t.boolean  "is_tagger",                                   :default => false
-    t.integer  "comments_count",                              :default => 0
-    t.float    "score",                                       :default => 0.1
-    t.integer  "twitter_count",                               :default => 0
-    t.integer  "ignorers_count",                              :default => 0
-    t.integer  "ignorings_count",                             :default => 0
+    t.boolean  "is_subscribed",                             :default => true
+    t.string   "user_agent",                 :limit => 200
+    t.string   "referrer",                   :limit => 200
+    t.boolean  "is_tagger",                                 :default => false
+    t.integer  "comments_count",                            :default => 0
+    t.float    "score",                                     :default => 0.1
+    t.integer  "twitter_count",                             :default => 0
+    t.integer  "ignorers_count",                            :default => 0
+    t.integer  "ignorings_count",                           :default => 0
     t.integer  "partner_referral_id"
-    t.integer  "ads_count",                                   :default => 0
-    t.integer  "changes_count",                               :default => 0
-    t.string   "google_token",                 :limit => 30
-    t.integer  "contacts_count",                              :default => 0
-    t.integer  "contacts_members_count",                      :default => 0
-    t.integer  "contacts_invited_count",                      :default => 0
-    t.integer  "contacts_not_invited_count",                  :default => 0
+    t.integer  "ads_count",                                 :default => 0
+    t.integer  "changes_count",                             :default => 0
+    t.string   "google_token",               :limit => 30
+    t.integer  "contacts_count",                            :default => 0
+    t.integer  "contacts_members_count",                    :default => 0
+    t.integer  "contacts_invited_count",                    :default => 0
+    t.integer  "contacts_not_invited_count",                :default => 0
     t.datetime "google_crawled_at"
-    t.integer  "facebook_uid",                 :limit => 8
-    t.string   "city",                         :limit => 80
-    t.string   "state",                        :limit => 50
-    t.integer  "documents_count",                             :default => 0
-    t.integer  "document_revisions_count",                    :default => 0
-    t.integer  "questions_count",                             :default => 0
-    t.string   "rss_code",                     :limit => 40
-    t.integer  "point_revisions_count",                       :default => 0
-    t.string   "address",                      :limit => 100
-    t.integer  "warnings_count",                              :default => 0
+    t.integer  "facebook_uid",               :limit => 8
+    t.string   "city",                       :limit => 80
+    t.string   "state",                      :limit => 50
+    t.integer  "documents_count",                           :default => 0
+    t.integer  "document_revisions_count",                  :default => 0
+    t.integer  "questions_count",                           :default => 0
+    t.string   "rss_code",                   :limit => 40
+    t.integer  "point_revisions_count",                     :default => 0
+    t.string   "address",                    :limit => 100
+    t.integer  "warnings_count",                            :default => 0
     t.datetime "probation_at"
     t.datetime "suspended_at"
-    t.integer  "referrals_count",                             :default => 0
-    t.boolean  "is_admin",                                    :default => false
+    t.integer  "referrals_count",                           :default => 0
+    t.boolean  "is_admin",                                  :default => false
     t.integer  "branch_id"
     t.integer  "twitter_id"
-    t.string   "twitter_token",                :limit => 64
-    t.string   "twitter_secret",               :limit => 64
+    t.string   "twitter_token",              :limit => 64
+    t.string   "twitter_secret",             :limit => 64
     t.datetime "twitter_crawled_at"
     t.string   "buddy_icon_file_name"
-    t.string   "buddy_icon_content_type",      :limit => 30
+    t.string   "buddy_icon_content_type",    :limit => 30
     t.integer  "buddy_icon_file_size"
     t.datetime "buddy_icon_updated_at"
-    t.boolean  "is_importing_contacts",                       :default => false
-    t.integer  "imported_contacts_count",                     :default => 0
-    t.boolean  "reports_enabled",                             :default => false
-    t.boolean  "reports_discussions",                         :default => false
-    t.boolean  "reports_questions",                           :default => false
-    t.boolean  "reports_documents",                           :default => false
+    t.boolean  "is_importing_contacts",                     :default => false
+    t.integer  "imported_contacts_count",                   :default => 0
+    t.boolean  "reports_enabled",                           :default => false
+    t.boolean  "reports_discussions",                       :default => false
+    t.boolean  "reports_questions",                         :default => false
+    t.boolean  "reports_documents",                         :default => false
     t.integer  "reports_interval"
-    t.string   "national_identity",                                                  :null => false
+    t.string   "national_identity",                                                :null => false
+    t.boolean  "have_sent_welcome",                         :default => false
+    t.boolean  "is_comments_subscribed",                    :default => true
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
-<<<<<<< HEAD
-  #add_index "users", ["national_identity"], :name => "index_users_on_national_identity", :unique => true
-  add_index "users", ["partner_id"], :name => "user_partner_id"
-=======
   add_index "users", ["national_identity"], :name => "index_users_on_national_identity", :unique => true
->>>>>>> rvb/esb
   add_index "users", ["rss_code"], :name => "index_users_on_rss_code"
   add_index "users", ["status"], :name => "status"
   add_index "users", ["twitter_id"], :name => "index_users_on_twitter_id"
+
 end

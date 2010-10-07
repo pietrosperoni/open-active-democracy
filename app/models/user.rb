@@ -195,6 +195,12 @@ class User < ActiveRecord::Base
     make_activation_code
     UserMailer.deliver_welcome(self)    
   end
+
+  def send_welcome
+    unless self.have_sent_welcome
+      UserMailer.deliver_welcome(self)    
+    end
+  end
   
   def to_param
     "#{id}-#{login.parameterize_full}"

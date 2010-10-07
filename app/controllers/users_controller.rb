@@ -24,7 +24,9 @@ class UsersController < ApplicationController
     flash[:notice]=nil
     if request.put?
       @user.email = params[:user][:email]
+      @user.have_sent_welcome = true
       if @user.save
+        @user.send_welcome
         redirect_back_or_default('/')
       else
         flash[:notice]="Töluvpóstfang ekki samþykkt"

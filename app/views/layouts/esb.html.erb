@@ -114,9 +114,11 @@
             	</div>		
 				<% end %>
              
-			 	<div id="subfilters">				
-					<%= render :partial=>"priorities/subfilters" %>
-				</div>
+			 	<% unless controller_name=="users" or controller_name=="settings" %>
+				 	<div id="subfilters">				
+						<%= render :partial=>"priorities/subfilters" %>
+					</div>
+				<% end %>
 			 
                 <div id="Content_wrapper">
              	<%=flash[:notice]%><b/>
