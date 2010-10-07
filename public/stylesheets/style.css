@@ -131,7 +131,7 @@ h5 {				font-size: 11px;  }
 .comment_box_samn {	border:1px solid #cbd4d7; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; }
 .comment_box a:hover {	color: #1461ac;  }
 .comment_profile {	margin: 0px 5px 0px 0px;}
-.comment_box img {	margin-right:5px;}
+.comment_box img {	margin-right:5px; border: none !Important}
 .comment_report {	margin:0px; right; }
 
 .comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 10px; width: 14em;border-bottom: 1px solid #e2e2e2;}
@@ -227,3 +227,11 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 .entry_box img, .comment_box img { border: 1px #669 solid; }
 .entry_box span img { border: none !Important; }
 .facebook_img { padding: 3px 5px 5px 0; float: left;}
+
+
+fb:profile-pic.fb_profile_pic_rendered, fb:profile-pic.fb_profile_pic_rendered[facebook-logo="true"]
+{
+float:left;	
+padding: 3px 5px 5px 0; 
+}
+

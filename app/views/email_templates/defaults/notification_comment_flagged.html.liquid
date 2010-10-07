@@ -1,12 +1,12 @@
-Hello {{ recipient.first_name.capitalize }},
+{{ recipient.first_name.capitalize }},
 
-{{ sender.name }} flagged a comment by {{ notifiable.user.name }}.  Here is the comment in question:
+{{ sender.name }} merkti innlegg sem óviðeigandi. Það kom frá {{ notifiable.user.name }}.  Hér getur þú séð athugasemdina:
 
 {{ notifiable.content }}
 
-Here's the full thread: {{ recipient.root_url }}activities/{{ notifiable.activity_id}}/comments
+Hér er þráðurinn í heild: {{ recipient.root_url }}activities/{{ notifiable.activity_id}}/comments
 
-You should review it and decide whether it violates the rules and {{ notifiable.user.name }} should be issued a warning.
+Þú þarft að skoða þetta og ákveða hvort það brýtur reglur vefsins og ef svo er þá mun  {{ notifiable.user.name }} fá senda viðvörun
 
 ---
-This is an automated notification from {{ government.name }} sent to {{ recipient.email }}.
+Þetta er sjálfvirk tilkkynning frá {{ government.name }} sem er send á {{ recipient.email }}.
