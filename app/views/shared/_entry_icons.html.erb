@@ -3,6 +3,17 @@
 		<% unless action_item.instance_of?(Document) %>
 			<%= link_to image_tag("esb_entry_bookmark.gif", :border => 0), "#", :title => t('esb.mouseover.entry.bookmark') %>
 		<% end %>
+		<!-- AddThis Button BEGIN -->
+		<div class="addthis_toolbox addthis_default_style">
+			<a class="addthis_button_preferred_1"></a>
+			<a class="addthis_button_preferred_2"></a>
+			<a class="addthis_button_preferred_3"></a>
+			<a class="addthis_button_preferred_4"></a>
+			<a class="addthis_button_compact"></a>
+		</div>
+		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4cad2bb74f7d4e97"></script>
+<!-- AddThis Button END -->
+
 		<%= link_to image_tag("esb_entry_facebook.gif", :border => 0), "#", :title => t('esb.mouseover.entry.facebook') %>
 		<%= link_to image_tag("esb_entry_twitter.gif", :border => 0), "#", :title => t('esb.mouseover.entry.twitter') %>
 		<% if action_item.instance_of?(Priority) %>

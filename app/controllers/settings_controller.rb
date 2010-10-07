@@ -10,6 +10,7 @@ class SettingsController < ApplicationController
 
   # PUT /settings
   def update
+    @user = current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = t('settings.saved')
@@ -17,7 +18,7 @@ class SettingsController < ApplicationController
           redirect_to(settings_url) 
         }
       else
-        format.html { render :action => "index" }
+        format.html { render :action => "picture" }
       end
     end
   end
@@ -38,7 +39,6 @@ class SettingsController < ApplicationController
     @user = current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        ActivityUserPictureNew.create(:user => @user)   
         flash[:notice] = t('pictures.success')
         format.html { redirect_to(:action => :picture) }
       else
