@@ -1,0 +1,26 @@
+		<div id="contentStatusLeft"> 
+		<div id="contentNav"><a href="#">< aftur í töflu</a></div> 
+		<div id="contentChapters"> 
+									
+			<% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
+
+			<div><%= link_to chapter[:name], :controller=>"treaty_documents", :action=>"show_chapter", :id=>chapter[:id] %></div>
+			
+			<% end %>
+		</div> 
+</div> 
+		<div id="contentStatusFrame"> 
+					
+		<h3><%=@chapter_name%></h3> 			
+				<div class="contentFrameCol">
+					<%=@chapter_desc%> 											
+				</div>
+				<div class="contentFrameColRight">			
+					<%=@chapter_desc%> 											
+				</div> 
+</div> 
+
+					
+					
+					
+											

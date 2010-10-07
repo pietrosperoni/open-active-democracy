@@ -55,6 +55,45 @@ class TreatyDocument < ActiveRecord::Base
         ]
 
 
+  TREATY_CHAPTER_DESCRIPTION = [
+                     {:id=>1, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                      {:id=>2, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                       {:id=>3, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                        {:id=>4, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                         {:id=>5, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                          {:id=>6, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                           {:id=>7, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                            {:id=>8, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                             {:id=>9, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                              {:id=>10, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                               {:id=>11, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                {:id=>12, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
+                          {:id=>13, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                           {:id=>14, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                            {:id=>15, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                             {:id=>16, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                              {:id=>17, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                               {:id=>18, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                {:id=>19, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                 {:id=>20, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                  {:id=>21, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                   {:id=>22, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                    {:id=>23, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                     {:id=>24, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                      {:id=>25, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                       {:id=>26, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                        {:id=>27, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                         {:id=>28, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                          {:id=>29, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                           {:id=>30, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                            {:id=>31, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                             {:id=>32, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                              {:id=>33, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
+                                               {:id=>34, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
+                                               {:id=>35, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
+                     {:id=>0, :desc=>"asdf fdsa asdf fda<br><br>fdslfkldsk fdkslfdskf lds<b>"} 
+                     ]
+
   def print_all
     TreatyDocument::TREATY_ARRAY.each do |chapter|
       puts chapter[:name]

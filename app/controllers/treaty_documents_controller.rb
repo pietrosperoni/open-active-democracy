@@ -15,5 +15,11 @@ class TreatyDocumentsController < ApplicationController
   def newest
     @documents = TreatyDocument.find(:all, :limit=>20, :order=>"id DESC")
   end
+  
+  def show_chapter
+    @chapter_name = TreatyDocument::TREATY_ARRAY.find {|c| c[:id]==params[:id].to_i}[:name]
+    @chapter_desc = TreatyDocument::TREATY_CHAPTER_DESCRIPTION.find {|c| c[:id]==params[:id].to_i}[:desc]
+  end
+  
 end
 

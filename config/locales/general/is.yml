@@ -1685,6 +1685,5 @@ is:
             web: "Settu inn vefslóð sem tengist spurningunni:"
             web_optional: "Vefslóðin er valkvæm, þú þarft ekki að setja hana inn" 
             send_short: "Senda spurningu"
-        document:
-            
-     
+
+           
