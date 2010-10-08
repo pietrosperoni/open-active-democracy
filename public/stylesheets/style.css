@@ -117,7 +117,7 @@ h5 {				font-size: 11px;  }
 #subfilters b {	 color: #666;}
 
 /*		Entries				*/
-.entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 5px; padding:10px 0 10px 6px; border-top: 1px solid #f1f1f1;   width: 580px;}
+.entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 5px; padding:10px 0 10px 6px; border-top: 1px solid #f1f1f1;   width: 584px;}
 .entry_box h4 {		margin:0px;}
 .entry_box h5 {		width: 570px;}
 .entry_box img {	margin: 0px 5px 0px 0px; }
@@ -127,7 +127,7 @@ h5 {				font-size: 11px;  }
 .entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 10px;  }
 .entry_profile {	 }
 
-.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 35px; height: 34px !ie;}
+.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 60px; height: 34px !ie;}
 .comment_box_samn {	border:1px solid #cbd4d7; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; }
 .comment_box a:hover {	color: #1461ac;  }
 .comment_profile {	margin: 0px 5px 0px 0px;}
@@ -251,7 +251,7 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 .FB_profile_pic
 {
 float:left;	
-padding: 3px 5px 5px 0; 
+/*padding: 3px 5px 5px 0; */
 }
 
 .addthis_toolbox
