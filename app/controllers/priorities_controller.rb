@@ -121,7 +121,7 @@ class PrioritiesController < ApplicationController
       @priority_results = Priority.find_by_solr "(" + params[:q] + ") AND is_published:true", :limit => 25
       @priorities = @priority_results.docs      
     end
-    
+    @action = "new"
     @priority = Priority.new unless @priority
 
     respond_to do |format|

@@ -39,13 +39,13 @@
 				</div>
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul class="action">
-                    <li>
+                    <li <%= controller_name=="questions" && @action == "new" ? "class='active'" : "" %>>
                          <%= link_to t('esb.create.question'), "/senda_spurningu" %>
                     </li>
-                    <li>
+                    <li <%= controller_name=="priorities" && @action == "new" ? "class='active'" : "" %>>
                         <%= link_to t('esb.create.priority'), "/taka_thatt" %>
                     </li>
-                    <li>
+                    <li <%= controller_name=="documents" && @action == "new" ? "class='active'" : "" %>>
                          <%= link_to t('esb.create.document'), "/senda_erindi" %>
                     </li>
                 </ul>
@@ -108,16 +108,17 @@
 						
             <!-- Miðjusvæðið -->
             <div id="MainContent">
-            	<% if session[:selected_tag_name] %>
-            	<div id="selected_tag">
-	            	<%=session[:selected_tag_name] %>
-            	</div>		
-				<% end %>
-             
+            	 
 			 	<% unless controller_name=="users" or controller_name=="settings" %>
 				 	<div id="subfilters">				
 						<%= render :partial=>"priorities/subfilters" %>
 					</div>
+				<% end %>
+				
+				<% if session[:selected_tag_name] %>
+            	<h2>
+	            	<%=session[:selected_tag_name] %>
+            	</h2>		
 				<% end %>
 			 
                 <div id="Content_wrapper">

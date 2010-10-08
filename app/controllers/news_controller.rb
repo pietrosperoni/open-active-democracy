@@ -61,7 +61,8 @@ class NewsController < ApplicationController
     else
       @activities = Activity.active.for_all_users.by_recently_created.paginate :page => params[:page]
     end
-
+       
+    
     respond_to do |format|
       format.html { render :action => "activity_list" }
       format.rss { render :template => "rss/activities" }         

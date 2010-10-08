@@ -117,6 +117,7 @@ class DocumentsController < ApplicationController
 
   # GET /priorities/1/documents/new
   def new
+    @action = "new"
     @document = Document.new(params[:document])
     @page_title =  t('document.new.title')
     respond_to do |format|

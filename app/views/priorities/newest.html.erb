@@ -1,3 +1,7 @@
+<% if session[:selected_tag_name] && @priorities.count < 1 %>
+			<%= t('esb.empty_chapter')%>
+<% end %>	
+
 <% for priority in @priorities %>
 <div id="priority_<%= priority.id %>" class="priority_listing">
 			<%= render :partial => "priorities/listing", :locals => {:priority => priority, :value => 0} %>

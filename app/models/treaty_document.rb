@@ -94,7 +94,7 @@ class TreatyDocument < ActiveRecord::Base
                {:name=>"Eldra efni", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"}
         ]
 
-#not in use!!!
+# in use!!!
   TREATY_CHAPTER_DESCRIPTION = [
                      {:id=>1, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
                       {:id=>2, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 

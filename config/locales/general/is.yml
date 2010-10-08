@@ -1685,5 +1685,6 @@ is:
             web: "Settu inn vefslóð sem tengist spurningunni:"
             web_optional: "Vefslóðin er valkvæm, þú þarft ekki að setja hana inn" 
             send_short: "Senda spurningu"
+        empty_chapter: "Ekkert efni fellur undir þær skilgreiningar sem þú hefur valið. Prófaðu að skoða alla kafla eða veldu Allt hér fyrir ofan til að sjá efni sem þú leitar að."
 
            

@@ -1,5 +1,5 @@
 		<div id="contentStatusLeft"> 
-		<div id="contentNav"><a href="#">< aftur í töflu</a></div> 
+		<div id="contentNav"><%= link_to "< aftur í töflu", :controller=>"treaty_documents" %></div> 
 		<div id="contentChapters"> 
 									
 			<% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
