@@ -134,13 +134,13 @@ h5 {				font-size: 11px;  }
 .comment_box img {	margin-right:5px; border: none !Important}
 .comment_report {	margin:0px; right; }
 
-.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 32px; width: 14em;border-bottom: 1px solid #e2e2e2;}
+.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 60px; width: 14em;border-bottom: 1px solid #e2e2e2;}
 
 .comment_error { display:none; }
 
 .new_comment
 {
-margin-left: 22px;
+margin-left: 50px;
 }
 
 .readmore {			margin: 0 2px;  }
