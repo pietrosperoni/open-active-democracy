@@ -131,7 +131,7 @@ class TreatyDocument < ActiveRecord::Base
                                               {:id=>33, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
                                                {:id=>34, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
                                                {:id=>35, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
-                     {:id=>0, :desc=>"asdf fdsa asdf fda<br><br>fdslfkldsk fdkslfdskf lds<b>"} 
+                     {:id=>0, :desc=>"asdf fdsa asdf fda<br><br>fdslfkldsk fdkslfdskf lds"} 
                      ]
 
   def print_all
