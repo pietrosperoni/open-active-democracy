@@ -4,7 +4,12 @@
 									
 			<% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
 
-			<div><%= link_to chapter[:name], :controller=>"treaty_documents", :action=>"show_chapter", :id=>chapter[:id] %></div>
+			<div
+			<% if chapter[:name] == @chapter_name %>
+				class="selected"
+			<% end %>
+			>
+			<%= link_to chapter[:name], :controller=>"treaty_documents", :action=>"show_chapter", :id=>chapter[:id] %></div>
 			
 			<% end %>
 		</div> 

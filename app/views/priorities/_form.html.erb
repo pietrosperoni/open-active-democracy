@@ -1,16 +1,17 @@
 <% if params[:notice] %>
 	<%= params[:notice] %>
 <% end %>
-
 <% form_for :priority, :url => "/priorities/create"  do |f| %>
 	<%= f.error_messages %>
 
 	<h2>Setja inn nýtt umræðuefni</h2>
-	<h4><%= t('esb.priority.whatis') %> <span class="star">*</span></h4>
-	<p>				
-		<%= t('document.revision.new.name.label')%><br/>
+	<h3><%= t('esb.priority.whatis') %> <span class="star">*</span></h3>
+	<h4>				
+		<%= t('document.revision.new.name.label')%>
+	</h4>	
+		<br/>
    		<%= f.text_field :name, :size => 60, :maxlength => 60 %>		
-	</p>
+	
 	<%#= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
 	<!-- Tengt kafla: <span class="custom_tag"><%=select_tag "custom_tag", "#{Tag.all_dropdown_options}" %></span> -->
 	<br />
