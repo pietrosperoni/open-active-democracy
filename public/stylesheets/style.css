@@ -112,9 +112,9 @@ h5 {				font-size: 11px;  }
 /*		Subfilters				*/
 #subCatName {		float:left; text-align:left; margin:7px 5px 0 7px; font-weight: bold;  color: #333;   }
 
-#subfilters {		text-align:right; padding: 5px 10px 0 0;  }
-#subfilters a {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
-#subfilters a:hover, #subfilters b {	color: #3399ff; text-decoration:underline; }
+#subfilters {		text-align:right; padding: 5px 10px 0 0;  float: right; width: 250px;}
+#subfilters a, #subfilters b {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
+#subfilters b {	 color: #666;}
 
 /*		Entries				*/
 .entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 5px; padding:10px 0 10px 6px; border-top: 1px solid #f1f1f1;   width: 580px;}
@@ -123,7 +123,7 @@ h5 {				font-size: 11px;  }
 .entry_box img {	margin: 0px 5px 0px 0px; }
 .entry_profile {	color:#999; font-size: 11px;}
 .entry_icons {		float:right; margin-right:4px;  }
-.entry_icons img {	margin:0 1px; padding:0px;  }
+.entry_icons img {	margin:0 1px; padding:0px; float:right !Important;}
 .entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 10px;  }
 .entry_profile {	 }
 
