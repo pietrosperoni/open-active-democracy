@@ -54,7 +54,47 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>0, :name=>"Eldra efni", :negotiation_stages=>NEGOTIATION_STAGES}
         ]
 
+#using name as index
+ TREATY_CHAPTER_DESCRIPTION_BYNAME = [
+               {:name=>"Frjálst vöruflæði", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Frjáls för vinnuafls", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Staðfesturéttur og þjónustufrelsi", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Frjáls för fjármagns", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Opinber útboð", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Félagaréttur", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Hugverkaréttur", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Samkeppnismál", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Fjármálaþjónusta", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+               {:name=>"Upplýsingatækni og fjölmiðlun", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
+               {:name=>"Landbúnaðar- og byggðastefna", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Matvæla- og hreinlætismál", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Fiskveiðar", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},                        
+               {:name=>"Samgöngur", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},                         
+               {:name=>"Orka", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},                        
+               {:name=>"Skattamál", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},                         
+               {:name=>"Gjaldmiðilssamstarf", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},                         
+               {:name=>"Hagtölur", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Félagsmála- og atvinnustefna", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Iðnstefna", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Evrópsk samgöngunet", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Uppbyggingarstyrkir", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Réttarvarsla og grundvallarréttindi", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Dóms- og innanríkismál", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Vísindi og rannsóknir", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Menntun og menning", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Umhverfismál", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Neytenda- og heilsuvernd", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Tollabandalag", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Utanríkistengsl", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Utanríkis-, öryggis- og varnarmál", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Fjárhagslegt eftirlit", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Framlagsmál", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                         
+               {:name=>"Stofnanir", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },                        
+               {:name=>"Annað", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},              
+               {:name=>"Eldra efni", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"}
+        ]
 
+#not in use!!!
   TREATY_CHAPTER_DESCRIPTION = [
                      {:id=>1, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
                       {:id=>2, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
