@@ -123,7 +123,7 @@ h5 {				font-size: 11px;  }
 .entry_box img {	margin: 0px 5px 0px 0px; }
 .entry_profile {	color:#999; font-size: 11px;}
 .entry_icons {		float:right; margin-right:4px;  }
-.entry_icons img {	margin:0 1px; padding:0px;  }
+.entry_icons img {	margin:0 1px; padding:0px; float:right !Important;}
 .entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 10px;  }
 .entry_profile {	 }
 
