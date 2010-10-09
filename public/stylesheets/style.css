@@ -95,7 +95,8 @@ h5 {				font-size: 11px;  }
 .chapter_sel {	 background-image:url('img/chapter_sel.gif'); }
 #rightCol ul li input {	margin:0 2px 0 0px;  }
 #rightCol .chapter_submit {		margin: 10px 0 0 0;  }
-
+#RightCol b {font-weight: normal;}
+#RightCol b b {font-weight: bold;}
 
 
 #tabs {				width:602px; float:left; margin-left: 10px; padding-right: 2px !ie; height:12px; margin-bottom: -5px !ie;}
@@ -204,7 +205,7 @@ input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 /*		Chapters - right column			*/
 	
 a.chapter_utan, a:visited.chapter_utan, li.chapter_utan {		color: #c57947; margin: 0 0 2px 0} /* Red */
-a.chapter_hluta, a:visited.chapter_hluta, li.chapter_hluta {		color: #c39a44;} /* Yellow */
+a.chapter_hluta, a:visited.chapter_hluta, li.chapter_hluta {	/*color: #c39a44; */color: #ba8a28;} /* Yellow */
 a.chapter_innan,  a:visited.chapter_innan, li.chapter_innan {		color: #5b925d;} /* Green */
 	
 input.chapter {		margin:0px 1px 0px 0px; padding:0px; }	
