@@ -31,7 +31,7 @@ a:hover {			color: #3399ff; text-decoration:underline; }
 ul {	list-style-type: none; }
 
 h1 {				font-size: 14px;  }
-h2 {				font-size: 13px;  }
+h2 {				font-size: 13px;  padding-left:6px; padding-top:4px;}
 h3 {				font-size: 12px;  }
 h4 {				font-size: 11px;  }
 h5 {				font-size: 11px;  }
@@ -252,6 +252,7 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 {
 float:left;	
 /*padding: 3px 5px 5px 0; */
+margin-right: 3px;
 }
 
 .addthis_toolbox
@@ -262,4 +263,10 @@ width: 80px;
 .pagination
 {
 float:right;	
+}
+
+/* Dirty fixes for <b> problem */
+#Content p b 
+{
+font-weight: normal;	
 }
