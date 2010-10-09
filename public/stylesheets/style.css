@@ -117,7 +117,7 @@ h5 {				font-size: 11px;  }
 #subfilters b {	 color: #666;}
 
 /*		Entries				*/
-.entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 1px; padding:15px 0 0px 6px; border-top: 1px solid #f1f1f1;   width: 584px;}
+.entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 1px; padding:15px 0 0px 6px; /*border-top: 1px solid #f1f1f1;*/   width: 584px;}
 .entry_box h4 {		margin:0px;}
 .entry_box h5 {		width: 570px;}
 .entry_box img {	margin: 0px 5px 0px 0px; }
@@ -303,3 +303,16 @@ width: 200px;
 border: 1px #669 solid;
 
 }
+
+.priority_listing
+{
+border-bottom: 1px solid #F1F1F1;	
+}
+
+.point
+{
+border-bottom: 1px solid #F1F1F1;	
+padding-bottom: 3px;
+}
+
+
