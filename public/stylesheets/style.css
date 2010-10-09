@@ -316,4 +316,7 @@ border-bottom: 1px solid #F1F1F1;
 padding-bottom: 3px;
 }
 
-
+#activities b br
+{
+display: none;
+}
