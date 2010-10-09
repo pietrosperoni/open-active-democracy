@@ -11,6 +11,8 @@ class Activity < ActiveRecord::Base
   named_scope :by_recently_updated, :order => "activities.changed_at desc"  
   named_scope :by_recently_created, :order => "activities.created_at desc"    
 
+  named_scope :no_unanswered_questions, :include=>:question, :conditions=>"questions.answer IS NOT NULL"
+
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
 
   named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
