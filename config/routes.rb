@@ -203,6 +203,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/minar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"mine"
   map.connect '/minir_umraedu_kaflar', :controller => 'priorities', :action => 'set_subfilter', :filter=>"my_chapters"
   map.connect '/allar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"-1"
+  map.connect '/svaradar_spurningar', :controller => 'questions', :action => 'set_subfilter', :filter=>"answered"
+  map.connect '/osvaradar_spurningar', :controller => 'questions', :action => 'set_subfilter', :filter=>"unanswered"
   
   map.connect '/yours', :controller => 'priorities', :action => 'yours'
   map.connect '/hot', :controller => 'priorities', :action => 'hot'

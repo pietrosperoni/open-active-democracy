@@ -72,6 +72,7 @@ class ApplicationController < ActionController::Base
     if params[:r]
       session[:priorities_subfilter]=nil
       session[:selected_tag_name]=nil
+      session[:questions_subfilter]=nil
     end
   end
   

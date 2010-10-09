@@ -3,6 +3,8 @@ class Question < ActiveRecord::Base
   named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
   named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
 
+  named_scope :by_subfilter, lambda{|filter| filter==nil ? nil : filter=="answered" ? {:conditions=>"answer IS NOT NULL"} : {:conditions=>"answer IS NULL"} }
+
   acts_as_taggable_on :issues
 
   named_scope :published, :conditions => "questions.status = 'published'"

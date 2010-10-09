@@ -22,6 +22,7 @@ class PrioritiesController < ApplicationController
   def set_subfilter
     if params[:filter]=="-1"
       session[:priorities_subfilter]=nil
+      session[:questions_subfilter]=nil
     else
       session[:priorities_subfilter]=params[:filter]
     end

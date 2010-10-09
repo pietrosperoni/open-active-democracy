@@ -1,6 +1,19 @@
 <% if logged_in? %>
   <% unless action_name=="new" or action_name=="show" %>
-
+<% if controller_name == "questions" %>
+	<% if session[:questions_subfilter]=="answered" %>
+	    <%=link_to "Allt", "/questions?r=1" %> 
+		<b>Svaraðar spurningar</b>
+	    <%=link_to "Ósvaraðar spurningar", "/osvaradar_spurningar" %>
+	<% elsif session[:questions_subfilter]=="unanswered" %>
+	    <%=link_to "Allt", "/questions?r=1" %> 
+	    <%=link_to "Svaraðar spurningar", "/svaradar_spurningar" %>
+		<b>Ósvaraðar spurningar</b>
+	<% else %>
+	    <%=link_to "Ósvaraðar spurningar", "/osvaradar_spurningar" %>
+	    <%=link_to "Svaraðar spurningar", "/svaradar_spurningar" %>
+	<% end %>
+<% end %>
 <% if session[:priorities_subfilter]==nil %>
 <!--			<b>Allt</b> -->
 		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
@@ -10,13 +23,13 @@
 		 <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar?controller_name=#{controller_name}" %>
 	    <% end %>
 	<% elsif session[:priorities_subfilter]=="mine" %>
-		<%=link_to "Allt", "/allar_umraedur?controller_name=#{controller_name}" %> 
+		<%=link_to "Allt", "/allar_umraedur?controller_name=#{controller_name}" unless controller_name == "questions" and session[:priorities_subfilter]%> 
 		<b>Mín skrif</b>
 		<% if TagSubscription.count("user_id = #{current_user.id}")>0 %>
 		  <%=link_to "Kaflar í áskrift", "/minir_umraedu_kaflar?controller_name=#{controller_name}" %>
 		 <% end %>
 	<% elsif session[:priorities_subfilter]=="my_chapters" %>
-		<%=link_to "Allt", "/allar_umraedur?controller_name=#{controller_name}" %>
+		<%=link_to "Allt", "/allar_umraedur?controller_name=#{controller_name}" unless controller_name == "questions" and session[:priorities_subfilter]%>
 		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
 		  <%=link_to "Mín skrif", "/minar_umraedur?controller_name=#{controller_name}" %>
 		<% end %>

@@ -3,16 +3,25 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :index, :destroy, :update_importance]
   before_filter :admin_required, :only => [:edit, :update]
  
+ def set_subfilter
+    if params[:filter]=="-1"
+      session[:questions_subfilter]=nil
+    else
+      session[:questions_subfilter]=params[:filter]
+    end
+    redirect_to :action=>:index
+  end
+ 
   def index
     @page_title = t('points.yours.title', :government_name => current_government.name)
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
-      @questions = Question.published.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
+      @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
     elsif session[:priorities_subfilter] and session[:priorities_subfilter]=="my_chapters" and current_user
-      @questions =  Question.published.by_recently_created.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
+      @questions =  Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
     elsif session[:selected_tag_name]
-      @questions = Question.published.by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
+      @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
     else
-      @questions = Question.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
+      @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     end
     respond_to do |format|
       format.html { render :action => "index" }
