@@ -7,7 +7,7 @@ is:
                     nouser: "Upplýsingar voru settar inn á síðu {{other_user_name}} "
             new:
                 name:
-                    known: "{{user_name}} setti inn upplýsingar á {{discussion_name}}"
+                    known: "{{discussion_name}}"
                     unknown: "{{user_name}} setti inn upplýsingar "
                 nouser:
                     known: "Setti upplýsingar inn á {{discussion_name}}"
