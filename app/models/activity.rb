@@ -62,6 +62,26 @@ class Activity < ActiveRecord::Base
     transitions :from => :deleted, :to => :active
   end
 
+  def multi_name
+    if priority_id
+      self.priority.name
+    elsif question_id
+      self.question.name
+    elsif document_id
+      self.document.name
+    end
+  end
+
+  def multi_name
+    if priority_id
+      self.priority.show_url
+    elsif question_id
+      self.question.show_url
+    elsif document_id
+      self.document.show_url
+    end
+  end
+
   def do_delete
     # go through and mark all the comments as deleted
     for comment in published_comments
