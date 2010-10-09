@@ -53,13 +53,13 @@ class NewsController < ApplicationController
   
   def activities
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
-      @activities = Activity.active.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]
+      @activities = Activity.active.no_unanswered_questions.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]
     elsif session[:priorities_subfilter] and session[:priorities_subfilter]=="my_chapters" and current_user
-      @activities =  Activity.active.by_recently_created.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
+      @activities =  Activity.active.no_unanswered_questions.by_recently_created.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
     elsif session[:selected_tag_name]
-      @activities = Activity.active.for_all_users.by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
+      @activities = Activity.active.no_unanswered_questions.for_all_users.by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
     else
-      @activities = Activity.active.for_all_users.by_recently_created.paginate :page => params[:page]
+      @activities = Activity.active.no_unanswered_questions.for_all_users.by_recently_created.paginate :page => params[:page]
     end
        
     

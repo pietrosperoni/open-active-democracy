@@ -148,7 +148,7 @@ margin-left: 50px;
 
 .answer_box {		margin-left: 11px; padding-bottom: 10px;  }
 
-input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
+input, textarea {	border: 1px solid #9da7c1; padding:0px 5px;   }
 
 #question_content, #priority_description { height: 80px;}
 #document_content { height: 380px;}

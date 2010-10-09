@@ -11,6 +11,8 @@ class Activity < ActiveRecord::Base
   named_scope :by_recently_updated, :order => "activities.changed_at desc"  
   named_scope :by_recently_created, :order => "activities.created_at desc"    
 
+  named_scope :no_unanswered_questions, :conditions=>"unanswered_question = 0 AND (priority_id IS NOT NULL OR question_id IS NOT NULL OR document_id IS NOT NULL)"
+
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
 
   named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
@@ -58,6 +60,32 @@ class Activity < ActiveRecord::Base
   
   event :undelete do
     transitions :from => :deleted, :to => :active
+  end
+
+  def multi_name
+    return "test x"
+    if priority_id
+      self.priority.name
+    elsif question_id
+      self.question.name
+    elsif document_id
+      self.document.name
+    else
+      "#{self.inspect}"
+    end
+  end
+
+  def multi_name
+    return "test m"
+    if priority_id
+      self.priority.show_url
+    elsif question_id
+      self.question.show_url
+    elsif document_id
+      self.document.show_url
+    else
+      "#{self.inspect}"
+    end
   end
 
   def do_delete

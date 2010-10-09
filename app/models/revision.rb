@@ -58,7 +58,7 @@ class Revision < ActiveRecord::Base
     question.revisions_count += 1    
     changed = false
     if question.revisions_count == 1
-      ActivityQuestionNew.create(:user => user, :question => question, :revision => self, :issue_list=>question.cached_issue_list)
+      ActivityQuestionNew.create(:user => user, :question => question, :revision => self, :issue_list=>question.cached_issue_list,:unanswered_question=>true)
     else
       if question.content != self.content # they changed content
         changed = true

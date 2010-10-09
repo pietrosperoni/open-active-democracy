@@ -5,6 +5,9 @@
         <%= stylesheet_link_tag "style" %>
 		<%= stylesheet_link_tag "style_skuggi" %>
 		<%= stylesheet_link_tag "style_gg" %>
+		<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+
+		<%= javascript_include_tag "jquery-ui-1.7.2.custom.min" %>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 
@@ -102,7 +105,7 @@
             	 
 			 	<% unless controller_name=="users" or controller_name=="settings" %>
 				 	<div id="subfilters">				
-						<%= render :partial=>"priorities/subfilters" %>
+						<%= render :partial=>"shared/subfilters" %>
 					</div>
 				<% end %>
 				
@@ -132,7 +135,7 @@
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
-						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller=>"treaty_documents", :action=>"show_chapter", :id=>tag.id %>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.name%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
 							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_utan"><b><%=tag.name%></b></a>
 						<% else %>
@@ -145,7 +148,7 @@
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
 					<li>
-						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.name%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
 							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_hluta"><b><%=tag.name%></b></a>
 						<% else %>
@@ -158,7 +161,7 @@
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
 					<li>
-						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.name%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
 							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><b><%=tag.name%></b></a>
 						<% else %>
@@ -171,7 +174,7 @@
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>	
 					<li>
-						<%= link_to image_tag("esb_chapter_info.gif", :align => "left", :border => 0), :controller => "import", :action => "" %>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.name%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
 							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><b><%=tag.name%></b></a>
 						<% else %>
@@ -190,6 +193,7 @@
 		<script type="text/javascript">
 			jQuery("input#search-id").DefaultValue("Leitarorð...");
 		</script>
+		<%=render :partial=>"treaty_documents/popup_window" %>
         <%= render :partial => "shared/facebook_footer" %>
     </body>
 </html>
