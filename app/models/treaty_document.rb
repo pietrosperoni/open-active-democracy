@@ -54,9 +54,8 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>0, :name=>"Eldra efni", :negotiation_stages=>NEGOTIATION_STAGES}
         ]
 
-#using name as index
- TREATY_CHAPTER_DESCRIPTION_BYNAME = [
-               {:name=>"Frjálst vöruflæði", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
+ TREATY_CHAPTER_DESCRIPTION = [
+               {:name=>"Frjálst vöruflæði", :desc=>"<h1>Frjálst vöruflæði</h1>Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði ESB og Evrópska efnahagssvæðisins (EES). Uppistaðan í þessum kafla ESB löggjafarinnar er hin samræmda regluskrá ESB um framleiddar vörur, sem skylt er að innleiða í löggjöf umsóknarríkisins. Gerðar eru kröfur á að umsóknarríki sýni fram á að það búi yfir nauðsynlegum stjórnsýslulegum styrk til að gera viðvart um hömlur gegn frjálsum vöruviðskiptum og til að hrinda í framkvæmd fylgiaðgerðum á borð við staðla, uppruna og gæðavottun, löggildingu mælitækja, markaðseftirlit og fleira."},
                {:name=>"Frjáls för vinnuafls", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
                {:name=>"Staðfesturéttur og þjónustufrelsi", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
                {:name=>"Frjáls för fjármagns", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},
@@ -93,46 +92,6 @@ class TreatyDocument < ActiveRecord::Base
                {:name=>"Annað", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"},              
                {:name=>"Eldra efni", :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti"}
         ]
-
-# in use!!!
-  TREATY_CHAPTER_DESCRIPTION = [
-                     {:id=>1, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                      {:id=>2, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                       {:id=>3, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                        {:id=>4, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                         {:id=>5, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                          {:id=>6, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                           {:id=>7, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                            {:id=>8, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                             {:id=>9, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                              {:id=>10, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                               {:id=>11, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                {:id=>12, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
-                          {:id=>13, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                           {:id=>14, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                            {:id=>15, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                             {:id=>16, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                              {:id=>17, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                               {:id=>18, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                {:id=>19, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                 {:id=>20, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                  {:id=>21, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                   {:id=>22, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                    {:id=>23, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                     {:id=>24, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                      {:id=>25, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                       {:id=>26, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                        {:id=>27, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                         {:id=>28, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                          {:id=>29, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                           {:id=>30, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                            {:id=>31, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                             {:id=>32, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                              {:id=>33, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" }, 
-                                               {:id=>34, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
-                                               {:id=>35, :desc=>"dummytextidummy textidummy textidummy textidummy textidummy texti" },
-                     {:id=>0, :desc=>"asdf fdsa asdf fda<br><br>fdslfkldsk fdkslfdskf lds"} 
-                     ]
 
   def print_all
     TreatyDocument::TREATY_ARRAY.each do |chapter|
