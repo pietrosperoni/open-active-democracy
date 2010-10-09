@@ -1,7 +1,8 @@
 <% if logged_in? %>
   <% unless action_name=="new" or action_name=="show" %>
-	<% if session[:priorities_subfilter]==nil %>
-		<b>Allt</b>
+
+<% if session[:priorities_subfilter]==nil %>
+<!--			<b>Allt</b> -->
 		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
 		 <%=link_to "Mín skrif", "/minar_umraedur?controller_name=#{controller_name}" %>
 		<% end %>

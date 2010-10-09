@@ -76,7 +76,7 @@ min-height: 20px;
 .comment_content {
 	padding: 0px 10px 0px 0px;
 	overflow:hidden; 
-	width: 570px !ie;
+/*	width: 570px !ie;*/
 }
 .comment_content p {
 font-size: 12px !important;

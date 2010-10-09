@@ -124,9 +124,10 @@
             <div id="RightCol">	
 				 <!-- TODO -->
                 <!-- Lúppa með titli -->
-				<% if session[:selected_tag_name]%>
+<!--				<% if session[:selected_tag_name]%>
 					<a href="/velja_kafla/-1?controller_name=<%=controller_name%>">Skoða alla kafla</a><b/>
 				<% end %>
+-->
 				<h4>Utan EES</h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
