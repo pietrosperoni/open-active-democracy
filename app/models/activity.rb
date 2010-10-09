@@ -63,6 +63,7 @@ class Activity < ActiveRecord::Base
   end
 
   def multi_name
+    return "test x"
     if priority_id
       self.priority.name
     elsif question_id
@@ -75,6 +76,7 @@ class Activity < ActiveRecord::Base
   end
 
   def multi_name
+    return "test m"
     if priority_id
       self.priority.show_url
     elsif question_id
