@@ -65,7 +65,6 @@ class QuestionsController < ApplicationController
 
   # GET /priorities/1/questions/new
   def new
-    @action = new
     @question = Question.new
     @page_title = t('points.new.title')
     respond_to do |format|
@@ -83,7 +82,7 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     @question.issue_list = params[:custom_tag]
     @saved = @question.save
-    @activity = ActivityBulletinNew.create(:question_id=>@question.id, :user_id=>current_user.id, :issue_list=>@question.cached_issue_list)
+    @activity = ActivityBulletinNew.create(:question_id=>@question.id, :user_id=>current_user.id, :issue_list=>@question.cached_issue_list,:unanswered_question=>true)
     respond_to do |format|
       if @saved
         if Revision.create_from_question(@question.id,request)
@@ -105,6 +104,14 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     respond_to do |format|
       if @question.update_attributes(params[:question])
+        if @question.answer!=nil
+          @question.answered_at = Time.now
+          @question.save
+          Activity.find_all_by_question_id(@question.id).each do |a|
+            a.unanswered_question=false
+            a.save
+          end
+        end
         flash[:notice] = t('points.update.success', :question_name => @question.name)
         format.html { redirect_to(@question) }
       else

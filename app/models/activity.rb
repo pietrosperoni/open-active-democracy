@@ -11,7 +11,7 @@ class Activity < ActiveRecord::Base
   named_scope :by_recently_updated, :order => "activities.changed_at desc"  
   named_scope :by_recently_created, :order => "activities.created_at desc"    
 
-  named_scope :no_unanswered_questions, :include=>:question, :conditions=>"questions.answer IS NOT NULL"
+  named_scope :no_unanswered_questions, :conditions=>"unanswered_question = 0 AND (priority_id IS NOT NULL OR question_id IS NOT NULL OR document_id IS NOT NULL)"
 
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
 
