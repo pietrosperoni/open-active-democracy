@@ -1,0 +1,14 @@
+          <!-- Haus -->
+            <div id="Header">
+                <!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->         
+			    <div id="header-right">
+			    	<%= link_to image_tag("esb_dagbok_adal.jpg", :border => 0), :controller => "", :action => "" %>
+				</div>
+				<div id="search">
+				<%=form_tag "/leita", :method=>"get"%>
+					<input id="search-id" type="text" name="q"/>
+					<input type="submit" value="leita" class="leita" />
+				</form>					
+				</div>				    
+            </div>
+			
