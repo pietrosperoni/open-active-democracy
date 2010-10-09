@@ -69,6 +69,8 @@ class Activity < ActiveRecord::Base
       self.question.name
     elsif document_id
       self.document.name
+    else
+      "#{self.inspect}"
     end
   end
 
@@ -79,6 +81,8 @@ class Activity < ActiveRecord::Base
       self.question.show_url
     elsif document_id
       self.document.show_url
+    else
+      "#{self.inspect}"
     end
   end
 
