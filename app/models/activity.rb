@@ -64,24 +64,24 @@ class Activity < ActiveRecord::Base
 
   def multi_name
     return "test x"
-    if priority_id
+    if self.priority_id
       self.priority.name
-    elsif question_id
+    elsif self.question_id
       self.question.name
-    elsif document_id
+    elsif self.document_id
       self.document.name
     else
       "#{self.inspect}"
     end
   end
 
-  def multi_name
+  def show_multi_url
     return "test m"
-    if priority_id
+    if self.priority_id
       self.priority.show_url
-    elsif question_id
+    elsif self.question_id
       self.question.show_url
-    elsif document_id
+    elsif self.document_id
       self.document.show_url
     else
       "#{self.inspect}"
