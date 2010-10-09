@@ -16,16 +16,7 @@
     <body>
         <div id="Wrapper">
             <!-- Haus -->
-            <div id="Header">
-                <!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->         
-			    <div id="header-right"><%= link_to image_tag("esb_dagbok_adal.jpg", :border => 0), :controller => "import", :action => "" %></div>
-				<div id="search">
-				<%=form_tag "/leita", :method=>"get"%>
-					<input id="search-id" type="text" name="q"/>
-					<input type="submit" value="leita" class="leita" />
-				</form>					
-				</div>				    
-            </div>
+            <%= render :partial => "shared/esb_header" %>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
                 <!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
@@ -111,7 +102,8 @@
               </div>
 						
             <!-- Miðjusvæðið -->
-            <div id="MainContent">
+			<div id="mainContentExpanded"> 
+            
             	<% if session[:selected_tag_name] %>
             	<div id="selected_tag">
 	            	<%=session[:selected_tag_name] %>
@@ -126,16 +118,7 @@
                 </div>
             </div>
             <!-- Fótur síðunnar -->
-            <div id="Footer">
-                <div id="Footer-right">
-                    <a href="#">Reglur</a>
-                    <a href="#">Hjálp</a>
-                    <a href="#">Osfr.</a>
-                </div>
-                <div id="Footer-left">
-                    <a href="#">Hafðu samband</a>
-                </div>
-            </div>
+            <%= render :partial => "shared/esb_footer" %>
         </div>
 		<script type="text/javascript">
 			jQuery("input#search-id").DefaultValue("Leitarorð...");

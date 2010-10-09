@@ -18,16 +18,7 @@
 	<body> 
         <div id="Wrapper">
             <!-- Haus -->
-            <div id="Header">
-                <!-- Hægrasvæði í haus, geymir tilkynningar og táknmyndir, gætu orðið fleiri þarna -->         
-			    <div id="header-right"><%= link_to image_tag("esb_dagbok_adal.jpg", :border => 0), :controller => "import", :action => "" %></div>
-				<div id="search">
-				<%=form_tag "/leita", :method=>"get"%>
-					<input id="search-id" type="text" name="q"/>
-					<input type="submit" value="leita" class="leita" />
-				</form>					
-				</div>				    
-            </div>
+            <%= render :partial => "shared/esb_header" %>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
 			
@@ -133,15 +124,7 @@
 		</div>		
 				
 		<!-- Fótur síðunnar --> 
-		<div id="footer"> 
-			<div id="footer-right">  
-				<a href="#">Reglur</a> |   
-				<a href="#">Hjálp</a> |
-				<a href="#">Hafðu samband</a> | 
-				<a href="http://www.utanrikisraduneyti.is/">Utanríkisráðuneytið</a> - <a href="utn@utn.is">utn@utn.is</a>
-			</div> 
-			<div id="footer-left"></div> 
-		</div> 
+		<%= render :partial => "shared/esb_footer" %>
 	
 	<%=render :partial=>"treaty_documents/popup_window" %>
 	</div> 
