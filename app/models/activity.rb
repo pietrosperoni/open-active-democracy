@@ -420,8 +420,8 @@ end
 class ActivityBulletinNew < Activity
   
   def name
-    if point
-      I18n.t('activity.bulletin.new.name.known', :user_name => user.name, :discussion_name => point.name)         
+    if question
+      I18n.t('activity.bulletin.new.name.known', :user_name => user.name, :discussion_name => question.name)         
     elsif document
       I18n.t('activity.bulletin.new.name.known', :user_name => user.name, :discussion_name => document.name)
     elsif priority
