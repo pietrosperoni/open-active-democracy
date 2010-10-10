@@ -95,7 +95,7 @@ h5 {				font-size: 11px;  }
 .chapter_sel {	 background-image:url('img/chapter_sel.gif'); }
 #rightCol ul li input {	margin:0 2px 0 0px;  }
 #rightCol .chapter_submit {		margin: 10px 0 0 0;  }
-#RightCol b {font-weight: normal !important;}
+#RightCol b {font-weight: normal}
 #RightCol b b {font-weight: bold; font-weight: normal !important !ie;}
 #empty {}
 
@@ -136,6 +136,9 @@ h5 {				font-size: 11px;  }
 .comment_profile {	margin: 0px 5px 0px 0px;}
 .comment_box img {	margin-right:5px; border: none !Important}
 .comment_report {	margin:0px; right; }
+
+/* Maybe superfluous */
+.comment_content b { font-weight: normal;}
 
 .comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 60px; width: 14em;border-bottom: 1px solid #e2e2e2;}
 
