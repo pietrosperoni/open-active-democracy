@@ -140,7 +140,7 @@ is:
       template:
         header:
           one:   "1 villa varð til þess að {{model}} gat ekki verið vistað" 
-          other:  "{{count}} villur urðu til þess að {{model}} gat ekki verið vistað" 
+          other:  "{{count}} villur urðu til þess að {{model}} gat ekki vistað breytingar." 
         # The variable :count is also available
         body: "Upp komu vandamál með eftirfarandi svæði:"
         # Append your own errors here or at the model/attributes scope.

@@ -194,7 +194,7 @@ is:
         rules: "{{government_name}} Reglur"
         privacy: "{{government_name}} reglur um friðhelgi"
     activities:
-        empty: "Engir viðburðir hér enn."
+        empty: "Engar færslur hér."
     admin:
         impersonate: "Þú ert skráð(ur) inn sem {{user_name}}"
         logo: "Breyta merki fyrir {{government_name}}"
