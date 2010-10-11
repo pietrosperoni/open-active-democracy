@@ -33,10 +33,15 @@
 		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
 		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %></h4>
 		<span class="entry_profile">
-			<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 
+			<%#= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 
+			<%= h(comment.user.login) %>
 			- <%= time_ago(comment.created_at) %> 
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
-			- <%= render :partial => "priorities/tag_show_esb", :locals => { :priority => comment.activity.priority }%>
+			- <%= render :partial => "priorities/tag_show_esb", :locals => { :priority => comment.activity.priority }%>	
+			
+			<% if controller_name=="news" %>
+			 - Umræður
+			 <% end %>
 		</span>
 
 		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 

@@ -26,9 +26,10 @@
 	<div class="comment_box">
 		<%= render :partial => "users/pic_35", :locals => {:user => comment.user}%>	
 		<span class="entry_profile">
-		<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
+		<%#= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
+		<%= h(comment.user.login) %>
 			 - <%= time_ago(comment.created_at) %> 
-			 - <%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>
+			  <%#= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>
 	       <% if logged_in? and current_user.id != comment.user_id  %>
 			 <%= link_to_remote image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"), { :url => flag_activity_comment_url(comment.activity_id,comment),:method => :get, :confirm => t('comments.flag.confirm', :user_name => comment.user.name)}, :title => t('esb.mouseover.entry.report') %>
 		   <% end %>
