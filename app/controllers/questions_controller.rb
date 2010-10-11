@@ -65,7 +65,7 @@ class QuestionsController < ApplicationController
 
   # GET /priorities/1/questions/new
   def new
-    @action = new
+    @action = "new"
     @question = Question.new
     @page_title = t('points.new.title')
     respond_to do |format|

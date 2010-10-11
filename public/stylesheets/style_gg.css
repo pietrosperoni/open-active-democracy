@@ -1,3 +1,15 @@
+input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifier_wrap, .change_vote_now, .idleField {
+background-color:#fff;
+border:1px solid #DDDDDD;	
+}
+
+textarea, .idleField_big {
+background-color:#fff;
+border:1px solid #DDDDDD;	
+width: 500px;
+height: 120px;
+}
+
 .merkt, .files_x1 , .files_x2, .files_x3, .files_x4
 {
 	width: 34px;

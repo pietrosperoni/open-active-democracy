@@ -36,9 +36,17 @@
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/>  <span class="Chapter_name"><%=tag.name%><br />	</span>
 			<% end %>			
 		</div>	
+		
+		<b><%= t('esb.priority.description') %><span class="star">*</span></b>  (<span id="pointContentDown" class="">487</span> stafir eftir) <!-- <span class="star">*</span></div> -->
+	    
+		<div class="field_box">
+	    <%= f.text_area :content, :maxlength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
+		</div>
+		
+		
 			<br />
-			<b><%= t('esb.question.your_question') %> <span class="star">*</span></b><br />
-			<%= f.text_area :content, :rows => 18, :cols => 70, :maxlength => 500 %>
+			<!-- <b><%#= t('esb.question.your_question') %> <span class="star">*</span></b><br />-->
+			<%#= f.text_area :content, :rows => 18, :cols => 70, :maxlength => 500 %>
 			
 			<!-- <div class="field form_header">
 	    		<div class="field_label form_header"><%#= t('esb.question.question') %> <span id="pointContentDown"></span> <%#= t('characters_left')%></div>

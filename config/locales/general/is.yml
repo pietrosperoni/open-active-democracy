@@ -1675,7 +1675,7 @@ is:
         priority:
             whatis: "Hvert er umræðuefnið?"
             tag: "Flokkur sem umræðuefnið á heima í:"
-            description: "Nánari lýsing á umræðuefninu þínu (mest 500 stafir):"
+            description: "Nánari lýsing á umræðuefninu þínu:"
         question:
             send_long: "Senda inn spurningu til samninganefndar"
             check: "Athugaðu fyrst hvort þegar er komin fram sambærileg spurning. Leitarglugginn hér fyrir ofan er gagnlegur í slíkt."
