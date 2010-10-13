@@ -116,7 +116,7 @@
 				<% end %>
 			 
                 <div id="Content_wrapper">
-             	<%=flash[:notice]%><b/>
+             	<%=flash[:notice]%>
 				<%=flash[:error]%>	      
                     <div id="Content">
                     	<%=yield%>
@@ -127,10 +127,12 @@
             <div id="RightCol">	
 				 <!-- TODO -->
                 <!-- Lúppa með titli -->
-<!--				<% if session[:selected_tag_name]%>
-					<a href="/velja_kafla/-1?controller_name=<%=controller_name%>">Skoða alla kafla</a><b/>
+				<% if session[:selected_tag_name]%>
+				<div class="AllaKafla">
+					<a href="/velja_kafla/-1?controller_name=<%=controller_name%>">Sjá alla kafla</a><b/>
+				</div>
 				<% end %>
--->
+
 				<h4>Utan EES</h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
