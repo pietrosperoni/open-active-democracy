@@ -35,14 +35,21 @@
 			<% end %>			
 	</div>	
 	<div class="addContent_kaflar annad">
-		<b>Annað<br />
+		<b>Annað</b><br />
 			<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>	
 			<% end %>			
 	</div>	
-	<br />
-    <b><%= t('esb.priority.description') %> <span class="star">*</span></b><br />
-    <%= f.text_area :description, :rows => 18, :cols => 70 %>
+	
+	<br/><br/>
+    <b><%= t('esb.priority.description') %><span class="star">*</span></b>  (<span id="pointContentDown" class="">487</span> stafir eftir) <!-- <span class="star">*</span></div> -->
+	
+			<div class="field_box">
+	    	<%= f.text_area :description, :maxlength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
+			</div>
+			
+	
+	<%#= f.text_area :description, :rows => 18, :cols => 70 %>
 	<%#= text_area_tag "priority[description]", "", :button => 'submit', :size => 500, :maxLength => 500 %>
     
 	<br /><br />

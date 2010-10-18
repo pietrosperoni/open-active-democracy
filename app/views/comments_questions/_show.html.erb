@@ -26,7 +26,8 @@
 	<div class="comment_box">
 		<%= render :partial => "users/pic_35", :locals => {:user => comment.user}%>	
 		<span class="entry_profile">
-		<%= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
+		<%#= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
+			link_to h(comment.user.login)
 			 - <%= time_ago(comment.created_at) %> 
 			 <%# = render :partial => "questions/action_show", :locals => {:question => comment.activity.question }%>
 	         <% if logged_in?  and current_user.id != comment.user_id  %>

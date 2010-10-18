@@ -6,11 +6,14 @@
 		<h5><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %></h5> 
 		
 		<span class="entry_profile">
-			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> &middot; 
+			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> 
 			- <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>			
 			<% for tag in question.issues %>
-		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
+		   		- <a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><b><%=tag.name%></b></a>
 			<% end %>
+			<% if controller_name=="news" %>
+			 - Spurning
+			 <% end %>
 		</span> 
 		<p>
 		<!-- max_length for question, see how comment_content is defined in shared/_javascripts - see also comments/show -->

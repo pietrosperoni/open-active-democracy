@@ -74,6 +74,7 @@ class QuestionsController < ApplicationController
 
   # GET /priorities/1/questions/new
   def new
+    @action = "new"
     @question = Question.new
     @page_title = t('points.new.title')
     respond_to do |format|
@@ -96,7 +97,7 @@ class QuestionsController < ApplicationController
       if @saved
         if Revision.create_from_question(@question.id,request)
           session[:goal] = 'point'
-          flash[:notice] = t('points.new.success')
+          flash[:notice] = t('esb.question.success')
           if facebook_session
             flash[:user_action_to_publish] = UserPublisher.create_question(facebook_session, @question)
           end          
