@@ -10,6 +10,15 @@
     <%= f.text_area :answer, :rows=>10 %>
   </p>
   <p>
+    <%= f.text_area :answer %>
+	
+	<%# TODO , like in comments:   f.text_area :answer, :size => "60x1", :class=>"comment_content_display_value", :id => "comment_content_#{question.id.to_s}" %>
+
+    <%= f.text_area :answer, :rows=>10 %>
+  </p>
+  <p>
+>>>>>>> rvb/esb
+>>>>>>> asta/esb:app/views/questions/edit.html.erb
     <%= f.submit "Update" %>
   </p>
 <% end %>

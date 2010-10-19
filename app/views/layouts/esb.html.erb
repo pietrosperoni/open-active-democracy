@@ -135,7 +135,7 @@
 -->
 				<h4>Utan EES</h4>
                 <ul>          
-					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
+					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
 					<li>
 						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.name%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
@@ -161,7 +161,7 @@
                 </ul>
 				<h4>Í EES</h4>
                 <ul>          
-					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
+					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
 						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.name%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>

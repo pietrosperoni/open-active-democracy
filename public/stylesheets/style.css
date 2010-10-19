@@ -98,10 +98,12 @@ h5 {				font-size: 11px;  }
 .chapter_sel {	 background-image:url('img/chapter_sel.gif'); }
 #rightCol ul li input {	margin:0 2px 0 0px;  }
 #rightCol .chapter_submit {		margin: 10px 0 0 0;  }
+
+/*
 #RightCol b {font-weight: normal}
 #RightCol b b {font-weight: bold; font-weight: normal !important !ie;}
 #empty {}
-
+*/
 
 #tabs {				width:602px; float:left; margin-left: 10px; padding-right: 2px !ie; height:12px; margin-bottom: -5px !ie;}
 #empty {}
@@ -354,4 +356,16 @@ width:68px;
 .AllaKafla a
 {
 
+}
+
+input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifier_wrap, .change_vote_now, .idleField {
+background-color:#fff;
+border:1px solid #DDDDDD;	
+}
+
+textarea, .idleField_big {
+background-color:#fff;
+border:1px solid #DDDDDD;	
+width: 500px;
+height: 120px;
 }
