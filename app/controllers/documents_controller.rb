@@ -142,9 +142,10 @@ class DocumentsController < ApplicationController
         if DocumentRevision.create_from_document(@document.id,request)
           session[:goal] = 'document'
           flash[:notice] = t('document.new.success', :document_name => @document.name)
-          if facebook_session
-            flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document)
-          end          
+          if current_facebook_user and params[:send_to_facebook]
+            current_facebook_user.fetch
+            UserPublisher.create_document(current_facebook_user, @document)
+          end
           format.html { redirect_to(@document) }
         end
       else
