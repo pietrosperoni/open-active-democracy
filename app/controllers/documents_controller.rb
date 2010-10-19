@@ -1,9 +1,13 @@
 class DocumentsController < ApplicationController
   
-  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :index, :your_priorities, :destroy]
+  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy]
   before_filter :admin_required, :only => [:edit, :update]
  
   def index
+    redirect_to :action=>"newest"
+  end
+  
+  def newest
     @page_title = t('document.yours.title')
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
       @documents = Document.published.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
@@ -16,18 +20,6 @@ class DocumentsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @documents.to_json(:except => NB_CONFIG['api_exclude_fields']) }
-    end
-  end
-  
-  def newest
-    @page_title = t('document.newest.title')
-    @documents = Document.published.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
-    @rss_url = url_for :only_path => false, :format => "rss"
-    respond_to do |format|
-      format.html { render :action => "index" }
-      format.rss { render :template => "rss/documents" }      
       format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @documents.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end
