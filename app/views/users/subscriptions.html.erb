@@ -9,7 +9,8 @@
             <p class="subtext">
                 H&eacute;r a&eth; ne&eth;an &thorn;&uacute; getur vali&eth; um a&eth; fylgjast me&eth; &aacute;kve&eth;num k&ouml;flum vi&eth;r&aelig;&eth;nanna. &THORN;&uacute; getur vali&eth; hvort &thorn;&uacute; f&aelig;r&eth; &aacute;skriftina &iacute; p&oacute;sti e&eth;a hvort &thorn;&uacute; vilt bara fylgjast me&eth; m&ouml;rgum k&ouml;flum &iacute; einu h&eacute;r &aacute; vefnum. .
             </p>
-	    
+
+<!--
             <div class="Form_askriftar Askrift">
                 <h4>Form áskriftar: <span class="star">*</span></h4>
 			<%= f.radio_button :reports_enabled, true %> Fá skýrslur í pósti og fylgjast með mörgum köflum í einu á vefnum
@@ -17,13 +18,13 @@
 			<%= f.radio_button :reports_enabled, false %> Engan póst, fylgjast bara með mörgum köflum í einu á vefnum
                 <br/>
             </div>
-	    
+-->	    
             <h4 class="Askrift">Kaflar sem þú vilt fylgjast með: <span class="star">*</span></h4>
             <div class="addContent_kaflar">
                 <b>Utan EES</b>
                 <br/>
 				<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
-					<%= check_box_tag "user[subscribe_to_tag_id_#{tag.id}]", "yes", subscribed_to_tag?(@subscription_user.id, tag.id) %><%=tag.name%>
+					<%= check_box_tag "user[subscribe_to_tag_id_#{tag.id}]", "yes", subscribed_to_tag?(@subscription_user.id, tag.id) %><span class="Chapter_name"><%=tag.name%></span>
 	                <br/>
 				<% end %>
             </div>
@@ -31,7 +32,7 @@
                 <b>A&eth; mestu leyti &iacute; EES</b>
                 <br/>
 				<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
-					<%= check_box_tag "user[subscribe_to_tag_id_#{tag.id}]", "yes", subscribed_to_tag?(@subscription_user.id, tag.id) %><%=tag.name%>
+					<%= check_box_tag "user[subscribe_to_tag_id_#{tag.id}]", "yes", subscribed_to_tag?(@subscription_user.id, tag.id) %><span class="Chapter_name"><%=tag.name%></span>
 	                <br/>
 				<% end %>
             </div>
@@ -39,7 +40,15 @@
                 <b>&Iacute; EES</b>
                 <br/>
 				<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
-					<%= check_box_tag "user[subscribe_to_tag_id_#{tag.id}]", "yes", subscribed_to_tag?(@subscription_user.id, tag.id) %><%=tag.name%>
+					<%= check_box_tag "user[subscribe_to_tag_id_#{tag.id}]", "yes", subscribed_to_tag?(@subscription_user.id, tag.id) %><span class="Chapter_name"><%=tag.name%></span>
+	                <br/>
+				<% end %>
+            </div>
+            <div class="addContent_kaflar Askrift">
+                <b>Annað</b>
+                <br/>
+				<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>	
+					<%= check_box_tag "user[subscribe_to_tag_id_#{tag.id}]", "yes", subscribed_to_tag?(@subscription_user.id, tag.id) %><span class="Chapter_name"><%=tag.name%></span>
 	                <br/>
 				<% end %>
             </div>
@@ -52,6 +61,8 @@
                 <%= f.check_box :reports_documents %> Umsagnir
                 <br/>
             </div>
+
+<!--
 		    <div class="Tegund_Efnis Askrift">
                 <h4>Fá sendan tölvupóst með athugasemdum við umræður sem þú hefur sérstaklega valið að fylgjast með í tölvupósti?:</h4>
 				<%= f.check_box :is_comments_subscribed %><br> 
@@ -63,8 +74,9 @@
                 <%= f.radio_button :reports_interval, 2 %> Vikulega
                 <br/>
             </div>
+-->
             <div class="Gerast_askrifandi Askrift">
-                <%= f.submit "Gerast áskrifandi" %>
+                <%= f.submit "Uppfæra áskrift" %>
             </div>
         </div>
     </div>

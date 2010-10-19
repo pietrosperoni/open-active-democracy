@@ -1,4 +1,4 @@
-<h1>Answering question</h1>
+<h1>Svara spurningu</h1>
 
 <% form_for(@question) do |f| %>
 <%# form_remote_for comment, :url => activity_comments_path(activity), :loading=>"Form.Element.disable('comment-form-submit')" do |f| %>		
@@ -7,10 +7,16 @@
 
   <p>
     <%= f.label :answer %><br />
+<<<<<<< HEAD
     <%= f.text_area :answer %>
 	
 	<%# TODO , like in comments:   f.text_area :answer, :size => "60x1", :class=>"comment_content_display_value", :id => "comment_content_#{question.id.to_s}" %>
 
+=======
+    <%= f.text_area :answer, :rows=>10 %>
+  </p>
+  <p>
+>>>>>>> rvb/esb
     <%= f.submit "Update" %>
   </p>
 <% end %>

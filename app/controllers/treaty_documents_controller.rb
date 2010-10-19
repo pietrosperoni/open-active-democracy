@@ -19,9 +19,9 @@ class TreatyDocumentsController < ApplicationController
   end
   
   def show_chapter
-    @active = "show"
-    @chapter_name = TreatyDocument::TREATY_ARRAY.find {|c| c[:id]==params[:id].to_i}[:name]
-    @chapter_desc = TreatyDocument::TREATY_CHAPTER_DESCRIPTION.find {|c| c[:id]==params[:id].to_i}[:desc]
+    @active = "show_chapter"
+    @chapter_desc = TreatyDocument::TREATY_CHAPTER_DESCRIPTION.find {|c| c[:name]==params[:chapter_name]}[:desc]
+    render :layout=>false
   end
   
 end

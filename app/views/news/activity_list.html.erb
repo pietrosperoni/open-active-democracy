@@ -6,7 +6,6 @@
 <% elsif @activities.count < 1  %>
 	<%= t('activities.empty')%>
 <% else %>
-
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @activities} %>
 <div id="activities">
 <% for activity in @activities %>

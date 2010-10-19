@@ -59,6 +59,7 @@ class UsersController < ApplicationController
       RAILS_DEFAULT_LOGGER.info("After HASH #{params[:user].inspect}")
       current_user.update_attributes(params[:user])
       current_user.save
+      redirect_to "/"
     end
   end
   

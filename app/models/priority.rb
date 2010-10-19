@@ -125,7 +125,6 @@ class Priority < ActiveRecord::Base
   private
   def do_publish
     self.published_at = Time.now
-    ActivityPriorityNew.create(:user => user, :priority => self, :issue_list=>self.cached_issue_list)    
   end
   
   def do_delete

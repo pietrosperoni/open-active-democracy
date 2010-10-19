@@ -162,7 +162,15 @@ class Comment < ActiveRecord::Base
   end
   
   def show_url
-    Government.current.homepage_url + 'activities/' + activity_id.to_s + '/comments#' + id.to_s
+    if activity.priority_id
+      activity.priority.show_url
+    elsif activity.question_id
+      activity.question.show_url
+    elsif activity.document_id
+      activity.document.show_url
+    else
+      "Fann ekki slóð"
+    end
   end
   
   auto_html_for(:content) do

@@ -31,7 +31,7 @@ a:hover {			color: #3399ff; text-decoration:underline; }
 ul {	list-style-type: none; }
 
 h1 {				font-size: 14px;  }
-h2 {				font-size: 13px;  }
+h2 {				font-size: 13px;  padding-left:6px; padding-top:4px;}
 h3 {				font-size: 12px;  }
 h4 {				font-size: 11px;  }
 h5 {				font-size: 11px;  }
@@ -42,8 +42,7 @@ h5 {				font-size: 11px;  }
  width: 1000px; padding:0px; margin:0px auto; text-align: left;
 }
 
-/*		Header */
-#header  {			width: 100%; height: 90px;
+/*		Header */#header  {			width: 100%; height: 90px;
 					background-image: url('img/top-banner.png'); background-repeat: no-repeat;  	}
 #search {			float:right; margin:45px 18px 0px 0px; margin-right: 10px !ie;  }
 #search input.input {			height: 21px;  margin-right: 2px; margin-top: 1px; padding: 2px 3px 0;} 
@@ -67,7 +66,7 @@ h5 {				font-size: 11px;  }
 					border: 1px solid #bcbcbc; border-left: 1px dashed #bcbcbc; }
 
 					
-#content {			padding:5px; margin-top:25px;  }
+#content {			padding:5px; margin-top:5px;  }
 					
 					
 					/* Content boxið*/
@@ -99,10 +98,13 @@ h5 {				font-size: 11px;  }
 .chapter_sel {	 background-image:url('img/chapter_sel.gif'); }
 #rightCol ul li input {	margin:0 2px 0 0px;  }
 #rightCol .chapter_submit {		margin: 10px 0 0 0;  }
-
+#RightCol b {font-weight: normal}
+#RightCol b b {font-weight: bold; font-weight: normal !important !ie;}
+#empty {}
 
 
 #tabs {				width:602px; float:left; margin-left: 10px; padding-right: 2px !ie; height:12px; margin-bottom: -5px !ie;}
+#empty {}
 #tabs ul {			margin:0px; padding:0px; height:12px; }
 #tabs ul li {		list-style-type:none; display:inline; height:20px; padding:4px 10px; background-color: #cccccc; background-image:url('img/menu_bg.gif'); margin:0px; }
 #tabs ul li.active {	color:#fff; background-color:#005297; background-image: none; }
@@ -119,42 +121,46 @@ h5 {				font-size: 11px;  }
 /*		Subfilters				*/
 #subCatName {		float:left; text-align:left; margin:7px 5px 0 7px; font-weight: bold;  color: #333;   }
 
-#subfilters {		text-align:right; padding: 5px 10px 0 0;  }
-#subfilters a {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
-#subfilters a:hover, #subfilters b {	color: #3399ff; text-decoration:underline; }
+#subfilters {		text-align:right; padding: 5px 10px 0 0;  margin-left:350px; width: 250px;}
+#subfilters {		text-align:right; padding: 5px 10px 0 0;  margin-left:340px; width: 250px;}
+#subfilters a, #subfilters b {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
+#subfilters b {	 color: #666;}
 
 /*		Entries				*/
-.entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 5px; padding:10px 0 10px 6px; border-top: 1px solid #f1f1f1;   width: 580px;}
+.entry_box {		min-height: 43px; height: 37px !ie; line-height: 150%; margin-bottom: 1px; padding:15px 0 0px 6px; /*border-top: 1px solid #f1f1f1;*/   width: 584px;}
 .entry_box h4 {		margin:0px;}
-.entry_box h5 {		width: 570px;}
+.entry_box h5 {		width: 520px;}
 .entry_box img {	margin: 0px 5px 0px 0px; }
 .entry_profile {	color:#999; font-size: 11px;}
 .entry_icons {		float:right; margin-right:4px;  }
-.entry_icons img {	margin:0 1px; padding:0px;  }
+.entry_icons img {	margin:0 1px; padding:0px; float:right !Important;}
 .entry_cat {		font-weight: bold; color: #999; text-transform: uppercase; font-size: 10px;  }
 .entry_profile {	 }
 
-.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 35px; height: 34px !ie;}
-.comment_box_samn {	border:1px solid #cbd4d7; line-height: 120%; padding:5px; margin: 0px 5px 10px 10px; }
+.comment_box {		background-color: #F1F1F1; border-left:1px solid #ECECEC; border-right:1px solid #ECECEC;  border-bottom:1px solid #E2E2E2; min-height: 34px; line-height: 120%; padding:5px; margin: 0px 5px 10px 60px; height: 34px !ie;}
+.comment_box_samn {	border:1px solid #cbd4d7; line-height: 120%; padding:5px; margin: 0px 5px 10px 60px; }
 .comment_box a:hover {	color: #1461ac;  }
 .comment_profile {	margin: 0px 5px 0px 0px;}
 .comment_box img {	margin-right:5px; border: none !Important}
 .comment_report {	margin:0px; right; }
 
-.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 32px; width: 14em;border-bottom: 1px solid #e2e2e2;}
+/* Maybe superfluous */
+.comment_content b { font-weight: normal;}
+
+.comment_more {		background-color: #e9eced; min-height: 14px; padding:1px 4px 2px 6px; margin: 0px 0px 8px 60px; width: 14em;border-bottom: 1px solid #e2e2e2;}
 
 .comment_error { display:none; }
 
 .new_comment
 {
-margin-left: 22px;
+margin-left: 50px;
 }
 
 .readmore {			margin: 0 2px;  }
 
-.answer_box {		margin-left: 10px; padding-bottom: 10px;  }
+.answer_box {		margin-left: 11px; padding-bottom: 10px;  }
 
-input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
+input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;  font-family: sans-serif; font-size: 13px;  }
 
 #question_content, #priority_description { height: 80px;}
 #document_content { height: 380px;}
@@ -164,6 +170,8 @@ input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 .addContent_kaflar {	width:193px; float:left; font-size: 10px; line-height: 180%; height: auto;}
 
 .addContent_kaflar b{ font-size: 11px; font-weight: normal;}
+
+.annad { width: 570px;}
 
 .Chapter_name { line-height: 200%;}
 
@@ -211,7 +219,7 @@ input, textarea {	border: 1px solid #9da7c1; height:18px; padding:0px 5px;   }
 /*		Chapters - right column			*/
 	
 a.chapter_utan, a:visited.chapter_utan, li.chapter_utan {		color: #c57947; margin: 0 0 2px 0} /* Red */
-a.chapter_hluta, a:visited.chapter_hluta, li.chapter_hluta {		color: #c39a44;} /* Yellow */
+a.chapter_hluta, a:visited.chapter_hluta, li.chapter_hluta {	/*color: #c39a44; */color: #ba8a28;} /* Yellow */
 a.chapter_innan,  a:visited.chapter_innan, li.chapter_innan {		color: #5b925d;} /* Green */
 	
 input.chapter {		margin:0px 1px 0px 0px; padding:0px; }	
@@ -258,7 +266,8 @@ input.chapter {		margin:0px 1px 0px 0px; padding:0px; }
 .FB_profile_pic
 {
 float:left;	
-padding: 3px 5px 5px 0; 
+/*padding: 3px 5px 5px 0; */
+margin-right: 5px;
 }
 
 .addthis_toolbox
@@ -269,4 +278,79 @@ width: 80px;
 .pagination
 {
 float:right;	
+}
+
+/* Dirty fixes for <b> problem */
+#Content p b 
+{
+font-weight: normal;	
+}
+
+#activities b br
+{
+display: none;
+}
+
+
+
+.merkt, .files_x1 , .files_x2, .files_x3, .files_x4
+{
+	width: 36px;
+} 
+
+.tom
+{
+width: 200px;
+}
+
+.merkt {
+	border: 1px solid #eee !important;
+} 
+.files_x1 {
+	background-color: #CCC !important;
+}
+.files_x2 {
+	background-color: #999 !important;
+}
+.files_x3 {
+	background-color: #666 !important;
+}
+.files_x4 {
+	background-color: #444 !important;
+}
+
+.profile_image
+{
+border: 1px #669 solid;
+
+}
+
+.priority_listing
+{
+border-bottom: 1px solid #F1F1F1;	
+}
+
+.point
+{
+border-bottom: 1px solid #F1F1F1;	
+padding-bottom: 3px;
+}
+
+
+
+.AllaKafla {
+background-color:#CCCCCC;
+height:15px;
+margin-bottom:7px;
+margin-top:-16px;
+padding-bottom:3px;
+padding-left:10px;
+padding-top:4px;
+width:68px;
+
+}
+
+.AllaKafla a
+{
+
 }
