@@ -122,9 +122,13 @@ module AuthenticatedSystem
     # if they connected to facebook while they were logged in to the site, it will automatically add the facebook uid to their existing account
     def login_from_session
       RAILS_DEFAULT_LOGGER.info("LOGIN: FROM SESSION")
-      if session[:user_id]
-        u = User.find_by_id(session[:user_id])
-        self.current_user = u 
+      begin
+        if session[:user_id]
+          u = User.find_by_id(session[:user_id])
+          self.current_user = u 
+        end
+      rescue
+        reset_session
       end
     end
     
