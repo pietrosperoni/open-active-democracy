@@ -98,9 +98,10 @@ class QuestionsController < ApplicationController
         if Revision.create_from_question(@question.id,request)
           session[:goal] = 'point'
           flash[:notice] = t('esb.question.success')
-          if facebook_session
-            flash[:user_action_to_publish] = UserPublisher.create_question(facebook_session, @question)
-          end          
+          if current_facebook_user and params[:send_to_facebook]
+            current_facebook_user.fetch
+            UserPublisher.create_question(current_facebook_user, @question)
+          end
           format.html { redirect_to(@question) }
         end
       else

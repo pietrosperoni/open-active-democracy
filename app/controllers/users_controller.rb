@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions]
+  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
   skip_before_filter :check_if_email_is_set, :only=>["set_email"]
@@ -17,6 +17,14 @@ class UsersController < ApplicationController
       format.xml { render :xml => @users.to_xml(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @users.to_json(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
     end    
+  end
+  
+  def disable_facebook
+#    @user = current_user
+#    @user.facebook_uid=nil
+#    @user.save(false)
+#    fb_cookie_destroy
+    redirect_to '/'
   end
   
   def set_email

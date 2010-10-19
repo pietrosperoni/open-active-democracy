@@ -1,9 +1,11 @@
 <div class="left_box">
-	<% unless facebook_session %>
-	<a href="#" onclick="FB.Connect.requireSession(function(){window.location.href=window.location.href=window.location.href;}); return false;">
-		<%= image_tag("facebook_signin.png", :border => 0)%>
-	</a>
-	Tengdu við Facebook eða <a href="/settings/picture">settu inn mynd</a> af þér.
-	<% end %>
+<% if current_facebook_user %>
+	<%= fb_logout_link("Aftengjast Facebook", "/disable_facebook") %>
+<% else %>
+  	<%= fb_login_and_redirect "/", :perms=>"publish_stream"%>
+	Tengdu við Facebook
+	<% unless current_user.buddy_icon %>
+	eða <a href="/settings/picture">settu inn mynd</a> af þér.
+ 	<% end %>
+<% end %>
 </div>
-

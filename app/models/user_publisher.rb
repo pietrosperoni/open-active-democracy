@@ -1,4 +1,4 @@
-class UserPublisher < Facebooker::Rails::Publisher
+class UserPublisher
 
   # The new message templates are supported as well
   # First, create a method that contains your templates:
@@ -64,7 +64,7 @@ class UserPublisher < Facebooker::Rails::Publisher
 #    action_links action_link("Svara","{*comment_url*}")      
   end
   
-  def comment(facebook_session, comment, activity)
+  def self.create_comment(current_facebook_user, comment, activity)
     priority = activity.priority if activity.has_priority?
     if activity.has_question?
       object_url = activity.question.show_url
@@ -79,13 +79,13 @@ class UserPublisher < Facebooker::Rails::Publisher
       object_url = comment.show_url
       object_name = activity.name
     end
-    send_as :publish_stream
-    txt_message = "#{facebook_session.user.name} skrifaði athugasemd við #{object_name} á Skuggaborg: #{truncate(comment.content, :length => 400)}"
-    from facebook_session.user
-    message ''
-    attachment :name => object_name, :href => object_url, :description => txt_message
-    action_links [ :text => 'Svara', :href => comment.show_url]
-    #data :object_url => object_url, :object_name => object_name, :comment_url => comment.show_url, :government_url => Government.current.homepage_url, :government_name => Government.current.name, :short_comment_body => truncate(comment.content, :length => 400), :comment_body => comment.content
+    name = "#{object_name}"
+    description = comment.content
+    current_facebook_user.fetch
+    current_facebook_user.feed_create(
+    Mogli::Post.new(:name => name,
+                    :link=>object_url,
+                    :description=>description))
   end
 
   def point_template
