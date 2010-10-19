@@ -38,7 +38,7 @@
 		<b>Annað</b><br />
 
 	<div class="addContent_kaflar annad">
-		<b>Annað<br />
+		<b>Annað</b><br />
 
 			<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>
 				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>	
