@@ -11,9 +11,7 @@
 <% for activity in @activities %>
 
 	<% if activity.priority_id %>
-		
     	<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>  
-		
 	<% elsif activity.class == ActivityQuestionNew %>
   	    
 		<%= render :partial => "questions/show_full", :locals => {:question => activity.question, :revision => nil}%>

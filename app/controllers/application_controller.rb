@@ -5,11 +5,12 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
   include FaceboxRender
-  
+
+  include Facebooker2::Rails::Controller
+
   require_dependency "activity.rb"
 
   rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
-  rescue_from Facebooker::Session::SessionExpired, :with => :fb_session_expired 
 
   helper :all # include all helpers, all the time
   
@@ -23,7 +24,7 @@ class ApplicationController < ActionController::Base
   before_filter :check_if_email_is_set
   skip_before_filter :check_if_email_is_set, :only=>["set_email"]
 
-  before_filter :set_facebook_session, :unless => [:no_facebook?]
+  #before_filter :set_facebook_session, :unless => [:no_facebook?]
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
   before_filter :check_facebook, :unless => [:is_robot?]
     
@@ -53,7 +54,11 @@ class ApplicationController < ActionController::Base
   def redirect_if_not_logged_in
     store_location
     unless logged_in?
-      redirect_to DB_CONFIG[RAILS_ENV]['rsk_url']
+      if RAILS_ENV=="development"
+        current_user = User.find(1)
+      else
+        redirect_to DB_CONFIG[RAILS_ENV]['rsk_url']
+      end
     end
   end
 
@@ -194,30 +199,28 @@ class ApplicationController < ActionController::Base
   
   # if they're logged in with a wh2 account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
-    return unless Facebooker.api_key
-    if logged_in? and facebook_session and not current_user.has_facebook?
-      return if facebook_session.user.uid == 55714215 and current_user.id != 1 # this is jim, don't add his facebook to everyone's account!
+    if logged_in? and current_facebook_user
       @user = User.find(current_user.id)
-      if not @user.update_with_facebook(facebook_session)
+      if not @user.update_with_facebook(current_facebook_user.id)
         return
       end
       if not @user.activated?
         @user.activate!
       end      
       @current_user = User.find(current_user.id)
-      flash.now[:notice] = t('facebook.synced', :government_name => current_government.name)
-    end      
+    end
   end
-  
+
   def is_robot?
     return true if request.format == 'rss' or params[:controller] == 'pictures'
     request.user_agent =~ /\b(Baidu|Gigabot|Googlebot|libwww-perl|lwp-trivial|msnbot|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)\b/i
   end
   
   def no_facebook?
-    return false if Facebooker.api_key
-    return true if is_robot?
-    return true
+    return false
+#    return false if Facebooker.api_key
+#    return true if is_robot?
+#    return true
   end
   
   def bad_token

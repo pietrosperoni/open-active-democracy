@@ -33,6 +33,13 @@ class SettingsController < ApplicationController
     @page_title = t('settings.picture.title')
   end
 
+  def picture_destroy
+    @user = current_user
+    @user.buddy_icon = nil
+    @user.save(false)
+    redirect_to :action => "picture"
+  end
+
   def picture_save    
     @user = current_user
     respond_to do |format|

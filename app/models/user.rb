@@ -294,6 +294,10 @@ class User < ActiveRecord::Base
     return login
   end
   
+  def facebook_id
+    self.facebook_uid
+  end
+  
   def is_new?
     created_at > Time.now-(86400*7)
   end
@@ -447,30 +451,19 @@ class User < ActiveRecord::Base
     end
   end
 
-def update_with_facebook(fb_session)
-  return if fb_session.expired?
-  self.facebook_uid = fb_session.user.uid
+def update_with_facebook(facebook_user_id)
+  self.facebook_uid = facebook_user_id
   # need to do some checking on whether this facebook_uid is already attached to a diff account
-  check_existing_facebook = User.active.find(:all, :conditions => ["facebook_uid = ? and id <> ?",self.facebook_uid,self.id])
-  if check_existing_facebook.any?
-    for e in check_existing_facebook
-      e.remove_facebook
-      e.save_with_validation(false)
-    end
-  end
-  if fb_session.user.current_location
-    self.zip = fb_session.user.current_location.zip if fb_session.user.current_location.zip and fb_session.user.current_location.zip.any? and not self.attribute_present?("zip")
-    self.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any? and not self.attribute_present?("city")
-    self.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any? and not self.attribute_present?("state")
+  User.active.find(:all, :conditions => ["facebook_uid = ? and id <> ?",self.facebook_uid,self.id]).each do |e|
+    e.remove_facebook
+    e.save_with_validation(false)
   end
   self.save_with_validation(false)
   return true
 end
 
 def remove_facebook
-  return unless has_facebook?
   self.facebook_uid = nil
-  # i don't think this does everything necessary to zap facebook from their account
 end  
 
 def make_rss_code
