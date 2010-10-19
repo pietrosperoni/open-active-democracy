@@ -126,7 +126,7 @@ class Government < ActiveRecord::Base
   
   def has_facebook_enabled?
     return false unless is_facebook?
-    return true if Facebooker.api_key
+    return true #if Facebooker.api_key
   end
   
   def has_windows_enabled?

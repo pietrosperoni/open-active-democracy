@@ -182,6 +182,8 @@ ActionController::Routing::Routes.draw do |map|
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => "news", :action=>"activities"
 
+  map.connect '/destroy_picture', :controller=>"settings", :action=>"picture_destroy"
+
   # restful_authentication routes
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   map.signup '/signup', :controller => 'users', :action => 'new'
@@ -211,7 +213,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/cold', :controller => 'priorities', :action => 'cold'
   map.connect '/new', :controller => 'priorities', :action => 'new'        
   map.connect '/controversial', :controller => 'priorities', :action => 'controversial'
-   
+
   map.connect '/vote/:action/:code', :controller => "vote"
   map.connect '/splash', :controller => 'splash', :action => 'index'
   map.connect '/issues', :controller => "issues"
@@ -223,6 +225,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/portal', :controller => 'portal', :action => 'index'
   map.connect '/set_email', :controller=>'users', :action=>'set_email'
+  map.connect '/disable_facebook', :controller=>'users', :action=>'disable_facebook'
 
   # See how all your routes lay out with "rake routes"
 

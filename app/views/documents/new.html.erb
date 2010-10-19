@@ -51,6 +51,9 @@
 	<!-- <input type="text" size="50" name="" value="http://" /><br /> -->
 	<!-- <p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn</p> --> 
 	<br /><br />
+     <% if current_facebook_user %>
+       Senda erindi á Facebook líka? <%= check_box_tag "send_to_facebook", "yes", false %><br>
+	<% end %>
 	
 	<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
 	<div id="errors" class="error"><%= f.error_messages %></div>

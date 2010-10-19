@@ -166,6 +166,10 @@ class PrioritiesController < ApplicationController
       @comment.cached_issue_list = @priority.cached_issue_list
       @comment_saved = @comment.save
     end
+    if current_facebook_user and params[:send_to_facebook]
+      current_facebook_user.fetch
+      UserPublisher.create_priority(current_facebook_user, @priority)
+    end
 
     respond_to do |format|
       if @saved and @comment_saved

@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
 
 <%= image_tag @user.buddy_icon.url(:icon_96), :border => 0 %>
-
+<%= link_to "Eyða mynd", "/destroy_picture" %>
 <% form_for(@user, :url => {:action => "picture_save" }, :html => {:multipart => true}) do |f| %>
 <%= f.error_messages %>
 <div class="field">
