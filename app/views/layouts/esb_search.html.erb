@@ -19,10 +19,7 @@
             <%= render :partial => "shared/esb_header" %>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
-                <!-- AOM obs: ekki viss hvar næstu tvær línur eiga að vera -->
-				<%=flash[:notice]%>
-				<%=flash[:error]%>				
-				<!-- Persónuupplýsingar -->
+                <!-- Persónuupplýsingar -->
 				<div id="person">
 				 <% if logged_in? %>
                     <%= render :partial => "shared/user_info" %>
@@ -104,6 +101,7 @@
             <!-- Miðjusvæðið -->
 			<div id="mainContentExpanded"> 
             
+			
             	<% if session[:selected_tag_name] %>
             	<div id="selected_tag">
 	            	<%=session[:selected_tag_name] %>
@@ -111,7 +109,11 @@
 				<% end %>
 			 
                 <div id="Content_wrapper">
-                   
+            		
+					<%=flash[:notice]%>
+					<%=flash[:error]%>				
+				
+					       
                     <div id="Content">
                     	<%=yield%>
                     </div>

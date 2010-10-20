@@ -9,16 +9,13 @@
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @activities} %>
 <div id="activities">
 <% for activity in @activities %>
-
 	<% if activity.priority_id %>
     	<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>  
 	<% elsif activity.class == ActivityQuestionNew %>
-  	    
-		<%= render :partial => "questions/show_full", :locals => {:question => activity.question, :revision => nil}%>
+  	   	<%= render :partial => "questions/show_full", :locals => {:question => activity.question, :revision => nil}%>
 
 	<% elsif activity.class == ActivityDocumentNew %>
 		<%= render :partial => "documents/show_full", :locals => {:document => activity.document, :quality => nil, :revision => nil}%>
-
 	<% end %>
 <% end %>
 </div>
