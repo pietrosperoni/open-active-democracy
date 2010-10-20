@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
  
  def set_subfilter
     if params[:filter]=="-1"
-      session[:questions_subfilter]=nil
+      session[:questions_subfilter]="answered"
     else
       session[:questions_subfilter]=params[:filter]
     end
@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
   end
  
   def index
+    session[:questions_subfilter]="answered" unless session[:questions_subfilter]
     @page_title = t('points.yours.title', :government_name => current_government.name)
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
       @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
