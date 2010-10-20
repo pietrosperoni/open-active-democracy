@@ -32,7 +32,7 @@
 		<% end %>
 		<%= render :partial => "shared/entry_icons", :locals => {:content => comment.activity.priority.description, :action_item=>comment.activity.priority, :following=>@following, :activity=>comment.activity}%>
 		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
-		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %> <% if current_user.is_admin? %>(<%= comment.created_at.strftime("%d.%m.%Y") %>)<% end %>
+		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %> <% if current_user and current_user.is_admin? %>(<%= comment.created_at.strftime("%d.%m.%Y") %>)<% end %>
 </h4>
 		
 		<span class="entry_profile">
