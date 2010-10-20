@@ -69,9 +69,7 @@
 						<li><a href="#">Interdum eros. Donec nec sem</a></li>
 					</ul>		
 				</div>
--->
-				
-				
+-->				
 				 <% if logged_in? %>
 					 <%= render :partial=>"shared/facebook" %>
 				 <% end %>
@@ -80,7 +78,7 @@
 			<div id="tabs">
 				<ul id="right_tabs">
 					<li><%= link_to "Staða viðræðna", :controller=>"treaty_documents" %></li>
-					<li><%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %></li>
+					<li><%= link_to "Nýjustu skjöl viðræðna", :controller=>"treaty_documents", :action=>"newest" %></li>
 				</ul>
 				<ul>
 			<div id="left_tabs">
@@ -188,8 +186,7 @@
             </div>
             <!-- Fótur síðunnar -->
             <%= render :partial => "shared/esb_footer" %>
-			
-			
+						
             </div>
         </div>
 		<script type="text/javascript">
