@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   
   before_filter :check_for_reset_filters
+  before_filter  :set_p3p
   
   filter_parameter_logging :password, :password_confirmation
 
@@ -42,6 +43,10 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery #:secret => 'd0451bc51967070c0872c2865d2651e1'
 
   protected
+
+  def set_p3p
+    response.headers["P3P"]='CP="CAO PSA OUR"'
+  end
 
   def show_login_status
     if logged_in?
