@@ -1,69 +1,66 @@
 <% if @error %>
-<%=@error%>
+ <%=@error%>
 <% else %>
-<h2>Leitarniðurstöður fyrir <%=@query%></h2><br>
+Leitarniðurstöður fyrir <%=@query%><br>
 <% if params[:cached_issue_list] %>
-<h4>Kafli: <%=params[:cached_issue_list]%></h4>
+Kafli: <%=params[:cached_issue_list]%>
 <% elsif params[:class] %>
-<h4>Tegund: <%=translate_facet_option(params[:class])%></h4>
+Tegund: <%=translate_facet_option(params[:class])%>
 <% end %>
 
-<div> 
-	<% unless @search_results.empty? %>
-			<%=will_paginate @search_results %>
-			<div>
-			<% @search_results.each do |result|%>
-			<!-- PRITORITY --> 
-			<% if result.class == Priority %>
-				<div class="comment_box">
-					<%#= render :partial => "users/pic_35", :locals => {:user => result.activity.comment.user}%>	
-					<span class="entry_profile">
-					<%= h(result.activity.comment.user.login) %>
-			 - <%= time_ago(result.activity.comment.created_at) %> 
-			 	</span>
-				Umræðuefni: <%= result.excerpts.name %><br>
-						<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.id %><br>	
-			</div>
-	
-			<% elsif result.class == Question %>
-			<div>
-				<h4> Spurning og svar - <%= time_ago(result.excerpts.created_at) %></h4> 				
-				<h3><%= h(result.excerpts.name) %></h3><nobr>
-				Spurning: <%= result.excerpts.content %><br>
-				Svar: <%= result.excerpts.answer %><br>
-				<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.id %>
-			</div>
-			
-			<% elsif result.class == Document %>
-			<div>				
-				<h3><%= result.excerpts.name %><br></h3>
-				<%= result.excerpts.content %><br>
-				<%= link_to "Skoða erindi", :controller=>"documents", :action=>"show", :id=>result.id %><br><br>
-			</div>
-			<% elsif result.class == Comment%>
-				  	<h5>Athugasemd:</h5> 
-					<%= result.excerpts.content %><br>				  	
-				  	<% if result.activity.priority_id %>
-						<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %><br><br>
-					<% elsif result.activity.question_id  %>
-						<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.activity.question_id %><br><br>
-					<% end %>
-			<% end %>
+<table width="100%">
+	<tr valign="top">	
+		<td width="75%">
+			<% unless @search_results.empty? %>
+				<%=will_paginate @search_results %>
 				
-				
-				
+				<table width="100%">
+				<% @search_results.each do |result|%>
+				  <% if result.class == Priority %>
+					<tr>				
+						<td>
+						Umræðuefni: <%= result.excerpts.name %><br>
+						<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.id %><br><br>
+						</td>
+					</tr>
+				  <% elsif result.class == Question %>
+					<tr>				
+						<td>
+						Nafn: <%= result.excerpts.name %><br>
+						Spurning: <%= result.excerpts.content %><br>
+						Svar: <%= result.excerpts.answer %><br>
+						<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.id %><br><br>
+						</td>
+					</tr>
+				  <% elsif result.class == Document %>
+					<tr>				
+						<td>
+						Erindi: 
+						<%= result.excerpts.name %><br>
+						<%= result.excerpts.content %><br>
+						<%= link_to "Skoða erindi", :controller=>"documents", :action=>"show", :id=>result.id %><br><br>
+						</td>
+					</tr>
+				  <% elsif result.class == Comment%>
+				  		Athugasemd: 
+						<%= result.excerpts.content %><br>				  	
+				  		<% if result.activity.priority_id %>
+							<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %><br><br>
+						<% elsif result.activity.question_id  %>
+							<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.activity.question_id %><br><br>
+						<% end %>
+				  <% end %>
 				<% end %>
-				</div> 
-				
+				</table>
 				<%=will_paginate @search_results%>
 			<% else %>
 			   No search results for <%=@query %>
 			<% end %>
-		</div> 
+		</td>
 		
-
-<% unless not @facets or @facets.empty?%>
-<div id="RightCol">	
+		<td width="25%">
+			<% unless not @facets or @facets.empty?%>
+	            <div id="RightCol">	
 
 				<div>
 					<div> 
@@ -95,9 +92,12 @@
 						</div> 
 					</div> 
 				<% end %>
-</div>
-			
-<% else %>
-	Engir kaflar fundust
-<% end %>			
+            </div>
+			<% else %>
+			  Engir kaflar fundust
+			<% end %>			
+		</td>
+	</tr>
+</table>
+
 <% end %>
