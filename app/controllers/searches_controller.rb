@@ -9,7 +9,7 @@ class SearchesController < ApplicationController
       @page_title = t('searches.results', :government_name => current_government.name, :query => @query)
       @facets = ThinkingSphinx.facets params[:q], :all_facets => true, :page => params[:page]
       if params[:cached_issue_list]
-        @search_results = @facets.for(:cached_issue_list_facet=>params[:cached_issue_list].to_crc32)
+        @search_results = @facets.for(:cached_issue_list=>params[:cached_issue_list])
       elsif params[:class]
         @search_results = @facets.for(:class=>params[:class].to_s)
       else
