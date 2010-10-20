@@ -333,7 +333,7 @@
 					</div>
 				<% end %>
 				
-				<% if current_user.is_admin? %>
+				<% if logged_in? and current_user.is_admin? %>
 					<div class="tab_subhead">
 						<%= link_to t('menu.admin.name'), edit_government_url(current_government) %>
 					</div>
