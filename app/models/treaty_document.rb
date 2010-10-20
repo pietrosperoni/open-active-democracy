@@ -51,7 +51,7 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>33, :name=>"Framlagsmál", :negotiation_stages=>NEGOTIATION_STAGES},                         
                {:id=>34, :name=>"Stofnanir", :negotiation_stages=>NEGOTIATION_STAGES},                        
                {:id=>35, :name=>"Annað", :negotiation_stages=>NEGOTIATION_STAGES},              
-               {:id=>0, :name=>"Eldra efni", :negotiation_stages=>NEGOTIATION_STAGES}
+               {:id=>36, :name=>"Eldra efni", :negotiation_stages=>NEGOTIATION_STAGES}
         ]
 
  TREATY_CHAPTER_DESCRIPTION = [

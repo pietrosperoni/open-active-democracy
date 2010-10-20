@@ -15,7 +15,7 @@
 	<tr>
 		
 		<td class="td_Underline">
-			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=chapter[:name]%>')"><%=chapter[:name]%></a>
+			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=chapter[:name]%>')"><%=chapter[:id]%>. <%=chapter[:name]%></a>
 		</td>
 		
 		<% chapter[:negotiation_stages].each do |stage| %>
