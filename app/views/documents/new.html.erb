@@ -1,4 +1,4 @@
-	<% form_for :document, :url => "/documents/create"  do |f| %>
+	<% form_for :document, :url => "/documents/create", :html=>{:id=>"document_form"}  do |f| %>
 	<%= f.error_messages %>
 	
 	<h2>Leggja inn erindi til samninganefndar</h2>	
@@ -59,4 +59,42 @@
 	<div id="errors" class="error"><%= f.error_messages %></div>
 	
 <% end %>	
+<style type="text/css">
+label.error { float: right; color: red; padding-left: .5em; vertical-align: top; }
+</style>
+
+<script type="text/javascript"> 
+jQuery().ready(function() {	
+	// validate signup form on keyup and submit
+	jQuery("#document_form").validate({
+		rules: {
+			'document[name]': {
+				required: true,
+				minlength: 5,
+				maxlength: 60,
+			},
+			custom_tag: "required",
+			'document[content]': {
+				required: true,
+				minlength: 10
+			},
+
+		},
+		messages: {
+			custom_tag: {
+				required: "Veldu flokk",
+			},
+			'document[name]': {
+				required: "Settu inn titil fyrir erindi",
+				minlength: "Minnst 5 bókstafir",
+				maxlength: "Mest 60 bókstafir"
+			},
+			'document[content]': {
+				required: "Settu inn erindi",
+				minlength: "Minnst 10 bókstafir"
+			}
+		}
+	});	
+});
+</script> 
 

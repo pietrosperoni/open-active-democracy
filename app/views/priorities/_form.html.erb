@@ -1,7 +1,7 @@
 <% if params[:notice] %>
 	<%= params[:notice] %>
 <% end %>
-<% form_for :priority, :url => "/priorities/create"  do |f| %>
+<% form_for :priority, :url => "/priorities/create", :html=>{:id=>"priority_form"}  do |f| %>
 	<%= f.error_messages %>
 
 	<h2>Setja inn nýtt umræðuefni</h2>
@@ -68,3 +68,44 @@
 	<div id="errors" class="error"><%= f.error_messages %></div>
 	
 <% end %>	
+
+<style type="text/css">
+label.error { float: right; color: red; padding-left: .5em; vertical-align: top; }
+</style>
+
+<script type="text/javascript"> 
+jQuery().ready(function() {	
+	// validate signup form on keyup and submit
+	jQuery("#priority_form").validate({
+		rules: {
+			'priority[name]': {
+				required: true,
+				minlength: 5,
+				maxlength: 60,
+			},
+			custom_tag: "required",
+			'priority[description]': {
+				required: true,
+				minlength: 10,
+				maxlength: 1000,
+			},
+
+		},
+		messages: {
+			custom_tag: {
+				required: "Veldu flokk",
+			},
+			'priority[name]': {
+				required: "Settu inn titil fyrir umræðuefni",
+				minlength: "Minnst 5 bókstafir",
+				maxlength: "Mest 60 bókstafir"
+			},
+			'priority[description]': {
+				required: "Settu inn lýsingu á umræðuefni",
+				minlength: "Minnst 10 bókstafir",
+				maxlength: "Mest 500 bókstafir"
+			}
+		}
+	});	
+});
+</script> 
