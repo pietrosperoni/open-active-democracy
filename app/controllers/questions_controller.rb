@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
  
   before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy, :update_importance]
   before_filter :admin_required, :only => [:edit, :update]
-  before_filter :set_default_subfilter
+ # before_filter :set_default_subfilter
  
  def set_subfilter
     if params[:filter]=="-1"
@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
   end
  
   def index
+    RAILS_DEFAULT_LOGGER.info(session[:questions_subfilter])
     @page_title = t('points.yours.title', :government_name => current_government.name)
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
       @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
@@ -38,25 +39,19 @@ class QuestionsController < ApplicationController
   end
   
   def newest
-    @page_title = t('points.newest.title', :government_name => current_government.name)
+    RAILS_DEFAULT_LOGGER.info(session[:questions_subfilter])
+    @page_title = t('points.yours.title', :government_name => current_government.name)
     if session[:priorities_subfilter] and session[:priorities_subfilter]=="mine" and current_user
-      RAILS_DEFAULT_LOGGER.info("Selecting mine")
-      @questions = Question.published.by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
+      @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.by_user_id(current_user.id).paginate :page => params[:page], :per_page => params[:per_page]      
     elsif session[:priorities_subfilter] and session[:priorities_subfilter]=="my_chapters" and current_user
-      RAILS_DEFAULT_LOGGER.info("Selecting my chapters")
-      @questions =  Question.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
+      @questions =  Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.tagged_with(TagSubscription.find_all_by_user_id(current_user.id).collect {|sub| sub.tag.name},:on=>:issues).paginate :page => params[:page], :per_page => params[:per_page]
     elsif session[:selected_tag_name]
-      RAILS_DEFAULT_LOGGER.info("Selecting tag name")
-      @questions = Question.published.by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
+      @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.by_tag_name(session[:selected_tag_name]).paginate :page => params[:page], :per_page => params[:per_page]
     else
-      RAILS_DEFAULT_LOGGER.info("Selecting all")
-      @questions = Question.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
+      @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     end
-    
-    @rss_url = url_for :only_path => false, :format => "rss"
     respond_to do |format|
       format.html { render :action => "index" }
-      format.rss { render :template => "rss/points" }
       format.xml { render :xml => @questions.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end
