@@ -4,9 +4,11 @@
 		<%= render :partial => "users/pic_48", :locals => {:user => document.user}%> 
 		
 		<% if revision %>
-			<h4><%= link_to_unless_current h(revision.name), document_revision_url(document,revision) %></h4>
+			<h4><%= link_to_unless_current h(revision.name), document_revision_url(document,revision) %><% if document.user.is_admin? %>(<%= document.created_at.strftime("%d.%m.%Y") %>)<% end %>
+</h4>
 		<% else %>
-			<h4><%= link_to_unless_current h(document.name), document %></h4>
+			<h4><%= link_to_unless_current h(document.name), document %><% if comment.user.is_admin? %>(<%= document.created_at.strftime("%d.%m.%Y") %>)<% end %>
+</h4>
 		<% end %>
 			
 		<span class="entry_profile">

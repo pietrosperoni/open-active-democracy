@@ -1,5 +1,6 @@
 <% if comment %>
     <a name="<%= comment.id %>"></a>
+	
     <div id="comment_<%= comment.id.to_s %>" class="comment_endorses">
 
 	<% if comment.status == 'abusive' %>
@@ -31,13 +32,17 @@
 		<% end %>
 		<%= render :partial => "shared/entry_icons", :locals => {:content => comment.activity.priority.description, :action_item=>comment.activity.priority, :following=>@following, :activity=>comment.activity}%>
 		<%= render :partial => "users/pic_48", :locals => {:user => comment.user}%> 
-		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %></h4>
+		<h4><%= link_to_unless_current h(comment.activity.priority.name), comment.activity.priority, :class => "priority_name_link", :title => t('esb.mouseover.comment.title') %> <% if comment.user.is_admin? %>(<%= comment.created_at.strftime("%d.%m.%Y") %>)<% end %>
+</h4>
+		
 		<span class="entry_profile">
 			<%#= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 
 			<%= h(comment.user.login) %>
 			- <%= time_ago(comment.created_at) %> 
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
 			- <%= render :partial => "priorities/tag_show_esb", :locals => { :priority => comment.activity.priority }%>	
+			
+			
 			
 			<% if controller_name=="news" %>
 			 - Umræður

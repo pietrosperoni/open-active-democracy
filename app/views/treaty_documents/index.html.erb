@@ -2,7 +2,7 @@
 	<tr>
 		<td>
 		</td>
-		<td colspan="12"><img src="/images/esb_treaty.png" alt=" " width="414" height="102" /></td> 
+		<td colspan="10"><img src="/images/esb_treaty.png" alt=" " width="414" height="102" /></td> 
 		<!-- 
 		<%# TreatyDocument::TREATY_ARRAY[0][:negotiation_stages].each do |stage| %>
 		<td>
@@ -12,10 +12,9 @@
 	</tr>
 
 <% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
-	<tr>
-		
+	<tr>	
 		<td class="td_Underline">
-			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=chapter[:name]%>')"><%=chapter[:name]%></a>
+			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=chapter[:name]%>')"><%=chapter[:id]%>. <%=chapter[:name]%></a>
 		</td>
 		
 		<% chapter[:negotiation_stages].each do |stage| %>

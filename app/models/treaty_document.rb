@@ -3,17 +3,15 @@ class TreatyDocument < ActiveRecord::Base
   MAXIMUM_NUMBER_OF_DOCUMENTS = 15
 
   NEGOTIATION_STAGES = [
-                     {:id=>1, :name=>"Rikjaradstefna"},
-                     {:id=>2, :name=>"Fyrri rýnifundur: afstada ESB"},
-                     {:id=>3, :name=>"Seinni rýnifundur: afstaða Íslands"},
-                     {:id=>4, :name=>"Niðurstaða rýnifunda"},
-                     {:id=>5, :name=>"Samningsafstaða ESB"},
-                     {:id=>6, :name=>"Samningsafstaða Íslands"},
-                     {:id=>7, :name=>"Benchmark skilyrði"},
-                     {:id=>8, :name=>"Opnun kafla"},
-                     {:id=>9, :name=>"Samningar"},
-                     {:id=>10, :name=>"Benchmark Closing"},
-                     {:id=>11, :name=>"Lokun kafla"}
+                     {:id=>1, :name=>"Umsóknarferli"},
+                     {:id=>2, :name=>"Rikjaradstefna"},
+                     {:id=>3, :name=>"Rýnivinna"},
+                     {:id=>4, :name=>"Viðmið fyrir opnun kafla"},
+                     {:id=>5, :name=>"Samningsafstaða Íslands"},
+                     {:id=>6, :name=>"Samningsafstaða ESB"},
+                     {:id=>7, :name=>"Opnun kafla"},
+                     {:id=>8, :name=>"Viðmð fyrir lokun kafla"},
+                     {:id=>9, :name=>"Aðildarsamningur"}
           ]
   TREATY_ARRAY = [
                {:id=>1, :name=>"Frjálst vöruflæði", :negotiation_stages=>NEGOTIATION_STAGES},
@@ -51,7 +49,7 @@ class TreatyDocument < ActiveRecord::Base
                {:id=>33, :name=>"Framlagsmál", :negotiation_stages=>NEGOTIATION_STAGES},                         
                {:id=>34, :name=>"Stofnanir", :negotiation_stages=>NEGOTIATION_STAGES},                        
                {:id=>35, :name=>"Annað", :negotiation_stages=>NEGOTIATION_STAGES},              
-               {:id=>0, :name=>"Eldra efni", :negotiation_stages=>NEGOTIATION_STAGES}
+               {:id=>36, :name=>"Eldra efni", :negotiation_stages=>NEGOTIATION_STAGES}
         ]
 
  TREATY_CHAPTER_DESCRIPTION = [
