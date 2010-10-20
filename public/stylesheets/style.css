@@ -123,8 +123,7 @@ h5 {				font-size: 11px;  }
 /*		Subfilters				*/
 #subCatName {		float:left; text-align:left; margin:7px 5px 0 7px; font-weight: bold;  color: #333;   }
 
-#subfilters {		text-align:right; padding: 5px 10px 0 0;  margin-left:350px; width: 250px;}
-#subfilters {		text-align:right; padding: 5px 10px 0 0;  margin-left:340px; width: 250px;}
+#subfilters {		text-align:right; padding: 5px 10px 0 0;  /*margin-left:340px; width: 255px;*/}
 #subfilters a, #subfilters b {		color: #999; margin-left: 5px; border-left:1px solid #999; padding-left: 8px;  }
 #subfilters b {	 color: #666;}
 
@@ -363,7 +362,7 @@ background-color:#fff;
 border:1px solid #DDDDDD;	
 }
 
-textarea, .idleField_big {
+.idleField_big {
 background-color:#fff;
 border:1px solid #DDDDDD;	
 width: 500px;
