@@ -1,141 +1,99 @@
-<html xmlns="http://www.w3.org/1999/xhtml"> 
- <head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
         <title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar </title>
         <%= render :partial => "shared/javascripts" %>
         <%= stylesheet_link_tag "style" %>
-		<%= stylesheet_link_tag "style_skuggi" %>
-		<%= stylesheet_link_tag "style_gg" %>
-		<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
-
-		<%= javascript_include_tag "jquery-ui-1.7.2.custom.min" %>
-
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+        <%= stylesheet_link_tag "style_skuggi" %>
+        <%= stylesheet_link_tag "style_gg" %>
+        <%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
+        <%= javascript_include_tag "jquery-ui-1.7.2.custom.min" %>
+        <%= javascript_include_tag "jquery.jgfeed-min" %>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
         <meta http-equiv="Content-Language" content="EN" />
         <meta name="keywords" content="" />
-
-</head>
-	<body> 
+    </head>
+    <body>
         <div id="Wrapper">
-            <!-- Haus -->
-            <%= render :partial => "shared/esb_header" %>
-			<!-- Vinstridálkur -->
+            <!-- Haus --><%= render :partial => "shared/esb_header" %>
+            <!-- Vinstridálkur -->
             <div id="LeftCol">
-			
-				<!-- Persónuupplýsingar -->
-				<div id="person">
-				 <% if logged_in? %>
+                <!-- Persónuupplýsingar -->
+                <div id="person">
+                    <% if logged_in? %>
                     <%= render :partial => "shared/user_info" %>
-                 <% else %>
+                    <% else %>
                     <%= render :partial => "shared/login" %>
-                 <% end %> 
-				</div>
-				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
+                    <% end %>
+                </div>
+                <!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
                 <ul class="action">
                     <li>
-                         <%= link_to t('esb.create.question'), "/senda_spurningu" %>
+                        <%= link_to t('esb.create.question'), "/senda_spurningu" %>
                     </li>
                     <li>
                         <%= link_to t('esb.create.priority'), "/taka_thatt" %>
                     </li>
                     <li>
-                         <%= link_to t('esb.create.document'), "/senda_erindi" %>
+                        <%= link_to t('esb.create.document'), "/senda_erindi" %>
                     </li>
                 </ul>
-				<!-- Lúppa með rss -->
-				<div class="left_box">
-				 <% if logged_in? %>
-					 <%= render :partial=>"shared/facebook" %>
-				 <% end %>
-
-					<h4>Frá samninganefnd</h4>
-					<ul>
-						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
-						<li><a href="#">consectetur adipiscing elit.</a></li>
-						<li><a href="#">Quisque sed enim sapien.</a></li>
-						<li><a href="#">Praesent a quam lectus, vitae</a></li>
-						<li><a href="#">interdum eros. Donec nec sem</a></li>
-						<li><a href="#">Praesent a quam lectus, vitae</a></li>
-						<li><a href="#">interdum eros. Donec nec sem</a></li>
-					</ul>		
-				</div>
-<!--
-				<div class="left_box">
-					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
-					<h4>Af vefnum</h4>
-					<ul>
-						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
-						<li><a href="#">consectetur adipiscing elit</a></li>
-						<li><a href="#">Quisque sed enim sapien.</a></li>
-						<li><a href="#">Praesent a quam lectus, vitae</a></li>
-						<li><a href="#">Interdum eros. Donec nec sem</a></li>
-					</ul>		
-				</div>
--->
-				<div class="left_box">	
-
-</div>
+                <!-- Lúppa með rss -->
+                <div class="left_box">
+                    <% if logged_in? %>
+                    <%= render :partial=>"shared/facebook" %>
+                    <% end %>
+                </div>
+                <div class="left_box">
+                    <%= render :partial=>"shared/utn_rss" %>
+                </div>
+                <div class="left_box">
+                </div>
             </div>
-			<!-- Haus á miðjusvæði -->
-			<div id="tabs">
-				<ul id="right_tabs">
-
-					<li <%= controller_name=="treaty_documents" && @active!="newest" ? "class='active'" : "" %>>
-						<%= link_to "Staða viðræðna", :controller=>"treaty_documents" %></li>
-					<li <%= @active=="newest" ? "class='active'" : "" %>>
-						<%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %></li>
-
-				</ul>
-				<ul>
-			<div id="left_tabs">
-				     <li <%= controller_name=="news" ? "class='active'" : "" %>>
-					<a href="/news/activities?r=1">Allt</a>
-				     </li>
-				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-					<a href="/priorities/newest?r=1">Umræður</a>
-				     </li>
-				     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
-					<a href="/questions/newest?r=1">Spurningar og svör</a>
-				     </li>
-				     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
-					 <a href="/documents/newest?r=1">Erindi</a>
-				     </li>
-			</div>
-				</ul>
-              </div>
-
-		<!-- Miðjusvæði --> 
-		<div id="mainContentExpanded"> 
-				<h2>Staða viðræðna og skjöl þeirra</h2> 
-
-				<!-- <div id="subfilters"> 
-					<a href="#">Formleg ESB röðun</a> 
-					<a href="#">Staða samnings</a> 
-					<a href="#">Gengi samnings</a>					
-				</div> --> 
-
-
-				<!-- Aðal textasvæði --> 
-				<div id="content"> 
-				
-				<%=yield%>
-				
-				</div> 
-		</div>		
-				
-		<!-- Fótur síðunnar --> 
-		<%= render :partial => "shared/esb_footer" %>
-	
-	<%=render :partial=>"treaty_documents/popup_window" %>
-	</div> 
-     <%= render :partial => "shared/facebook_footer" %>
-	</body> 
-</html> 
-
-
-
-
- 
-
-
-
+            <!-- Haus á miðjusvæði -->
+            <div id="tabs">
+                <ul id="right_tabs">
+                    <li<%= controller_name=="treaty_documents" && @active!="newest" ? "class='active'" : "" %>>
+                        <%= link_to "Staða viðræðna", :controller=>"treaty_documents" %>
+                    </li>
+                    <li<%= @active=="newest" ? "class='active'" : "" %>>
+                        <%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %>
+                    </li>
+                </ul>
+                <ul>
+                    <div id="left_tabs">
+                        <li<%= controller_name=="news" ? "class='active'" : "" %>>
+                            <a href="/news/activities?r=1">Allt</a>
+                        </li>
+                        <li<%= controller_name=="priorities" ? "class='active'" : "" %>>
+                            <a href="/priorities/newest?r=1">Umræður</a>
+                        </li>
+                        <li<%= controller_name=="questions" ? "class='active'" : "" %>>
+                            <a href="/questions/newest?r=1">Spurningar og svör</a>
+                        </li>
+                        <li<%= controller_name=="documents" ? "class='active'" : "" %>>
+                            <a href="/documents/newest?r=1">Erindi</a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <!-- Miðjusvæði -->
+            <div id="mainContentExpanded">
+                <h2>Staða viðræðna og skjöl þeirra</h2>
+                <!-- <div id="subfilters">
+                <a href="#">Formleg ESB röðun</a>
+                <a href="#">Staða samnings</a>
+                <a href="#">Gengi samnings</a>
+                </div> -->
+                <!-- Aðal textasvæði -->
+                <div id="content">
+                    <%=yield %>
+                </div>
+            </div>
+            <!-- Fótur síðunnar -->
+            <%= render :partial => "shared/esb_footer" %>
+            <%=render :partial=>"treaty_documents/popup_window" %>
+        </div>
+        <%= render :partial => "shared/facebook_footer" %>
+    </body>
+</html>

@@ -9,6 +9,7 @@
 
 		<%= javascript_include_tag "jquery-ui-1.7.2.custom.min" %>
 		<%= javascript_include_tag "jquery.validate.min" %>
+		<%= javascript_include_tag "jquery.jgfeed-min" %>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 
@@ -45,35 +46,14 @@
                     </li>
                 </ul>
 				<!-- Lúppa með rss -->
-				<div class="left_box">
-					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
-					<h4>Frá samninganefnd</h4>
-					<ul>
-						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
-						<li><a href="#">consectetur adipiscing elit.</a></li>
-						<li><a href="#">Quisque sed enim sapien.</a></li>
-						<li><a href="#">Praesent a quam lectus, vitae</a></li>
-						<li><a href="#">interdum eros. Donec nec sem</a></li>
-						<li><a href="#">Praesent a quam lectus, vitae</a></li>
-						<li><a href="#">interdum eros. Donec nec sem</a></li>
-					</ul>		
-				</div>
-<!--
-				<div class="left_box">
-					<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), :controller => "import", :action => "" %>
-					<h4>Af vefnum</h4>
-					<ul>
-						<li><a href="#">Lorem ipsum dolor sit amet</a></li>
-						<li><a href="#">consectetur adipiscing elit</a></li>
-						<li><a href="#">Quisque sed enim sapien.</a></li>
-						<li><a href="#">Praesent a quam lectus, vitae</a></li>
-						<li><a href="#">Interdum eros. Donec nec sem</a></li>
-					</ul>		
-				</div>
--->				
 				 <% if logged_in? %>
+                <div class="left_box">
 					 <%= render :partial=>"shared/facebook" %>
+                </div>
 				 <% end %>
+                <div class="left_box">
+                    <%= render :partial=>"shared/utn_rss" %>
+                </div>
             </div>
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">

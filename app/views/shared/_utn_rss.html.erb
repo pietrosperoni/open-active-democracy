@@ -1,0 +1,25 @@
+<%= link_to image_tag("rss.gif", :border => 0, :align => "right"), "http://esb.utn.is/hlidarval/frettir/rss.xml" %>
+<h4>Frá samninganefnd</h4>
+<div id="utn_rss">
+	
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+jQuery.jGFeed('http://esb.utn.is/hlidarval/frettir/rss.xml',
+function(feeds){
+  // Check for errors
+  if(!feeds){
+    // there was an error
+    return false;
+  }
+  // do whatever you want with feeds here
+  for(var i=0; i<feeds.entries.length; i++){
+    var entry = feeds.entries[i];
+    // Entry title
+    jQuery("#utn_rss").append("<h2 class='rss_heading'><a target='_blank' href='" + entry.link+ " '>" + entry.title + "</a></h2><p class='rss_description'>" + entry.contentSnippet + "</p>");
+  }
+}, 3);
+});
+</script> 
+
