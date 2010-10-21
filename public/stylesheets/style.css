@@ -728,6 +728,7 @@ input.chapter
 .entry_box img, .comment_box img
 {
 	border: 1px #669 solid;
+	float:left;
 }
 .entry_box span img
 {
