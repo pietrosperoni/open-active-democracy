@@ -538,15 +538,27 @@ input, textarea
 {
 	clear: both;
 	margin: 10px 0 0 0;
+	height: 20px;
 }
 .profile_edit img
 {
 	margin: 5px 0 0 0px;
 }
+
+.profile_edit
+{
+float:left;
+}
+
 .profile_logout img
 {
 	margin: 5px 0 0 3px;
 }
+.profile_logout
+{
+float:left;
+}
+
 .profile_askrift
 {
 	margin-left: 15px;
@@ -831,4 +843,16 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 .fb_link img {
 border:1px solid #666699;
 float:left;
+}
+
+.facebook
+{
+float: right;	
+}
+
+.fb_profile_pic_rendered
+{
+float:left;
+margin-right:7px;
+margin-right:-3px !ie !important;
 }

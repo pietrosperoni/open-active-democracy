@@ -44,7 +44,7 @@ is:
         wk: "Vk"
         mo: "Mn"
     feeds:
-        rss: "RSS straumur"
+        rss: ""
         activity: "Virkni"
         discussions: "Umræða"
         via: "um {{source}}"
