@@ -1,7 +1,8 @@
 <div id="hp_intro">
 	<%= @page_title %>
 </div>
-<p>	
+<p>
+
 <% if current_government.has_buddy_icon? %>
 	<table border="0" cellspacing="0" cellpading="0">
 		<tr><td><%= image_tag current_government.buddy_icon.url(:icon_96), :border => 0 %></td>

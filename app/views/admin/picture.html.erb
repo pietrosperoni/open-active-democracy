@@ -7,10 +7,10 @@
 <% end %>
 
 <% form_for(current_government, :url => {:action => "picture_save" }, :html => {:multipart => true}) do |f| %>
-<%= f.error_messages %>
 
-<%= f.file_field :logo %><br/>
-<span class="small"><%= t('pictures.must') %></span>
+	<%= f.error_messages %>
+	<%= f.file_field :logo %><br/>
+	<span class="small"><%= t('pictures.must') %></span>
 
-<p><%= submit_tag t('pictures.submit'), :class => "yellow_button" %></p>
+	<p><%= submit_tag t('pictures.submit'), :class => "yellow_button" %></p>
 <% end %>

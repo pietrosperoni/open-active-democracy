@@ -1,23 +1,34 @@
-<div id="hp_intro"><%= @page_title %></div>
+<h2>Stillingar<%#= @page_title %></h2>
 
-<%= image_tag @user.buddy_icon.url(:icon_96), :border => 0 %>
-<%= link_to "Eyða mynd", "/destroy_picture" %>
 <% form_for(@user, :url => {:action => "picture_save" }, :html => {:multipart => true}) do |f| %>
 <%= f.error_messages %>
+
 <div class="field">
-	<div class="field_label">
+	<h3>
 		<%= t('settings.edit.email.label')%>
-	</div>
+	</h3>
 	<div class="field_box">
 		<%= f.text_field :email %>
 	</div>
-	<div class="small"><%= t('settings.edit.email.example')%></div>
+	<div class="small"><%= t('settings.edit.email.example')%></div><br>
 </div>
-<p><label for="picture"><%= t('settings.picture.upload')%></label>
-<p>
-<%= f.file_field :buddy_icon %><br/>
-<span class="small"><%= t('pictures.must') %></span>
 
-<p><%= submit_tag "Breyta stillingum", :class => "yellow_button" %></p>
+<div> 
+	<h3>
+		Mynd
+	</h3>
+	<p><%= render :partial => "users/pic_48", :locals => {:user => @user}%></p>
+	<br/>
+	<%#= image_tag @user.buddy_icon.url(:icon_48), :border => 0 %>
+	<%if @user.has_picture? %>
+		<br><br><%= link_to "Eyða mynd", "/destroy_picture" %>
+	<%end%>
+	<br/>
+	<p><br/><label for="picture"><%= t('settings.picture.upload')%></label></p>
+	<%= f.file_field :buddy_icon %><br/>
+	<span class="small"><%= t('pictures.must') %></span>
+</div>
+<br>
+<p><%= submit_tag "Breyta stillingum", :class => "yellow_button browse" %></p>
 <% end %>
 
