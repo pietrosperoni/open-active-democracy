@@ -1,5 +1,6 @@
 <script type="text/javascript">
 <!--
+	var t;
 	function liveUpdate()
 	{
 	      jQuery.ajax({
@@ -7,9 +8,9 @@
 	                    url : '<%=update_url%>',
 	                    dataType : 'script'
 	                 });
-	
+		t=setTimeout("liveUpdate()",30000);
 	}
 	
-	var holdTheInterval = setInterval(liveUpdate, 30000);
+	t = setTimeout("liveUpdate()",30000);
 -->
 </script>
