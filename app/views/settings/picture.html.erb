@@ -17,15 +17,18 @@
 	<h3>
 		Mynd
 	</h3>
-	<%= render :partial => "users/pic_48", :locals => {:user => @user}%>
+	<p><%= render :partial => "users/pic_48", :locals => {:user => @user}%></p>
 	<br/>
 	<%#= image_tag @user.buddy_icon.url(:icon_48), :border => 0 %>
-	<%= link_to "Eyða mynd", "/destroy_picture" %><br/>
-	<label for="picture"><%= t('settings.picture.upload')%></label><br/>
+	<%if @user.has_picture? %>
+		<br><br><%= link_to "Eyða mynd", "/destroy_picture" %>
+	<%end%>
+	<br/>
+	<p><br/><label for="picture"><%= t('settings.picture.upload')%></label></p>
 	<%= f.file_field :buddy_icon %><br/>
 	<span class="small"><%= t('pictures.must') %></span>
 </div>
 <br>
-<p><%= submit_tag "Breyta stillingum", :class => "yellow_button" %></p>
+<p><%= submit_tag "Breyta stillingum", :class => "yellow_button browse" %></p>
 <% end %>
 
