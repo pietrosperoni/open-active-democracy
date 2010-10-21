@@ -1,5 +1,10 @@
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
 <div id="documents_div">
+	
+		<% if @documents.count == 0 %>
+		<%= t('esb.empty_chapter')%>
+	<% end %>
+	
 <%= render :partial => "newest" %>
 </div>
 <%= will_paginate(@documents) %>

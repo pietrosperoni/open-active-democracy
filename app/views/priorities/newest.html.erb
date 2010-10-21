@@ -1,5 +1,8 @@
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @priorities} %>
 <div id="priorities_div">
+	<% if @priorities.count == 0 %>
+		<%= t('esb.empty_chapter')%>
+	<% end %>
 	<%=render :partial=>"newest"%>
 </div>
 <%= will_paginate @priorities %>

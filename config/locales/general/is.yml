@@ -1331,7 +1331,7 @@ is:
         destroy: "Aðgangi þínum hefur verið eytt. Far vel!"
         picture:
             title: "Þín mynd"
-            upload: "Sækja þína mynd"
+            upload: "Sækja nýja mynd"
         legislators:
             title: "Þínir löggjafar"
             found_all: "Fann og bætti við þínum löggjöfum"
@@ -1686,6 +1686,6 @@ is:
             web_optional: "Vefslóðin er valkvæm, þú þarft ekki að setja hana inn" 
             send_short: "Senda spurningu"
             success: "Takk fyrir að leggja inn spurningu."
-        empty_chapter: "Ekkert efni fellur undir þær skilgreiningar sem þú hefur valið. Prófaðu að skoða alla kafla eða veldu Allt hér fyrir ofan til að sjá efni sem þú leitar að."
+        empty_chapter: "Ekkert efni fellur undir þær skilgreiningar sem þú hefur valið. <br> Prófaðu að skoða alla kafla eða veldu Allt hér fyrir ofan til að sjá efni sem þú leitar að."
 
            
