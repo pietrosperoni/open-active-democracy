@@ -70,7 +70,8 @@ class NewsController < ApplicationController
     RAILS_DEFAULT_LOGGER.info(@activities)
 
     respond_to do |format|
-       format.js {
+      format.html { render :action => "activity_list" }
+      format.js {
         render :update do |page|
           unless @activities.empty?
             page.insert_html :top, "activities", render(:partial => "activity_list" )
@@ -78,7 +79,6 @@ class NewsController < ApplicationController
           end
         end
       }
-      format.html { render :action => "activity_list" }
       format.rss { render :template => "rss/activities" }         
       format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }

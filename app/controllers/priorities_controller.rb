@@ -61,7 +61,8 @@ class PrioritiesController < ApplicationController
     end
     
     respond_to do |format|
-       format.js {
+      format.html
+      format.js {
         render :update do |page|
           unless @priorities.empty?
             page.insert_html :top, "priorities_div", render(:partial => "newest" )
@@ -69,7 +70,6 @@ class PrioritiesController < ApplicationController
           end
         end
       }
-      format.html
       format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
       format.xml { render :xml => @priorities.to_xml(:except => NB_CONFIG['api_exclude_fields']) }

@@ -39,7 +39,8 @@ class QuestionsController < ApplicationController
     @rss_url = newest_questions_url(:format => 'rss')
     
     respond_to do |format|
-       format.js {
+      format.html { render :action => "index" }
+      format.js {
         render :update do |page|
           unless false#@activities.empty?
           page.insert_html :top, "questions", render(:partial => "index" )
@@ -48,7 +49,6 @@ class QuestionsController < ApplicationController
         end
       }
       format.rss { render :action => "list" }
-      format.html { render :action => "index" }
       format.xml { render :xml => @questions.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end
@@ -74,7 +74,8 @@ class QuestionsController < ApplicationController
     @rss_url = newest_questions_url(:format => 'rss')
     
     respond_to do |format|
-       format.js {
+      format.html { render :action => "index" }
+      format.js {
         render :update do |page|
           unless @questions.empty?
             page.insert_html :top, "questions_div", render(:partial => "index" )
@@ -83,7 +84,6 @@ class QuestionsController < ApplicationController
         end
       }
       format.rss { render :action => "list" }
-      format.html { render :action => "index" }
       format.xml { render :xml => @questions.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end
