@@ -508,7 +508,7 @@ is:
             success: "Vistuð athugasemd"
             submit: "Senda athugasemd"
         flag:
-            confirm: "Er þessi athugasemd frá {{user_name}} persónuleg árás eða brot á reglum síðunnar?"
+            confirm: "Er þessi athugasemd frá {{user_name}} persónuleg árás eða brot á reglum síðunnar? Með því að smella á Ok þá sendirðu tilkynningu til umsjónarmanns vefsins um þessa athugasemd."
             title: "Tilkynna óviðeigandi ummæli!"
             number:
                 one: "1 flagg"
@@ -1582,7 +1582,7 @@ is:
             failed: "Þú ert EKKI skráð/ur inn, vinsamlegast athugaðu notendanafn og lykilorð eða smelltu á 'Gleymt lykilorð' til að fá nýtt."  
             failed_twitter: "Innskráning gegnum Twitter mistókst."
             try_again: "Obbobbobb, reyndu aftur."
-        destroy: "Aftengjast. Vonandi sjáum við þig fljótlega aftur."
+        destroy: "Notandi aftengdur."
         please_login: "Vinsamlegast skráðu þig inn fyrst."
         signup: 
             name: "Ég þarf {{government_name}} aðgang"
@@ -1647,22 +1647,22 @@ is:
         mouseover:
             logout: "Skrá mig út"
             edituser: "Breyta eigin stillingum: Mynd, netfangi og Facebook tengingu"
-            subscribe: "Gerast áskrifandi XXX"
+            subscribe: "Gerast áskrifandi"
             entry:
-                email: "Fá sendan tölvupóst xxxxx"
+                email: "Senda tölvupóst til vinar með þessu máli"
                 bookmark: "Fylgjast með þessu máli"
                 facebook: "Deila á Facebook"
                 twitter: "Deila á Twitter"
-                report: "Tilkynninga óviðeigandi efni"
+                report: "Tilkynna óviðeigandi efni"
             comment:
-                title: "Sjá umræðu í heild sinni xxxx"
-                user: "Nafn þess sem skrifaði þetta xxx"
-                tag : "Sjá meira úr þessum kafla xxxx"
-                more: " sjá meira af athugasemdinni xxxxx"
+                title: "Sjá umræðu í heild"
+                user: "Nafn þess sem skrifaði þetta"
+                tag : "Sjá meira úr þessum kafla"
+                more: " sjá meira af athugasemdinni"
                 less: "sýna færri athugasemdir"
                 delete: "Fjarlægja þessa athugasemd"
             question:
-                title: "Sjá allt um þessa spurningu xxxxxx"
+                title: "Sjá allt um þessa spurningu"
         sessions:
             new:
                 intro: "<a href='{{signup_url}}'>Nýskráning</a>"

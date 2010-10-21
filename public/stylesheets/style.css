@@ -421,6 +421,7 @@ h5
 .comment_report
 {
 	margin: 0px;
+	float: right;
 }
 .comment_content b
 {
@@ -855,4 +856,32 @@ float: right;
 float:left;
 margin-right:7px;
 margin-right:-3px !ie !important;
+}
+
+/*
+label.error {
+bottom:250px;
+font-size:16px;
+font-weight:bold;
+margin-left:240px;
+position:absolute;
+vertical-align:top;
+}
+*/
+
+.comment_submit
+{
+margin-top: 3px;	
+}
+
+.search_results #left
+{
+float:left;	
+width: 600px;
+}
+
+.search_results #right
+{
+float:right;	
+width: 600px;
 }

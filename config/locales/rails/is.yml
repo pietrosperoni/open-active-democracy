@@ -139,7 +139,7 @@ is:
         even: "þarf að vera jöfn tala" 
       template:
         header:
-          one:   "1 villa varð til þess að {{model}} gat ekki verið vistað" 
+          one:   "Ekki var hægt að vista {{model}}" 
           other:  "{{count}} villur urðu til þess að {{model}} gat ekki vistað breytingar." 
         # The variable :count is also available
         body: "Upp komu vandamál með eftirfarandi svæði:"
