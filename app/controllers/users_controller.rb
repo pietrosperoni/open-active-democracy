@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
-  before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
+  before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password, :show]
   skip_before_filter :check_if_email_is_set, :only=>["set_email"]
   
   def index
