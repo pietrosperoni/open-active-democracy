@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   
   before_filter :check_for_reset_filters
-  before_filter  :set_p3p
+ # before_filter  :set_p3p
   
   filter_parameter_logging :password, :password_confirmation
 
