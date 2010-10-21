@@ -26,14 +26,6 @@ class DocumentsController < ApplicationController
     @rss_url = newest_documents_url(:format => 'rss')
 
     respond_to do |format|
-       format.js {
-        render :update do |page|
-          unless @documents.empty?
-            page.insert_html :top, "documents_div", render(:partial => "newest" )
-            page << "FB.XFBML.parse(document.getElementById('documents_div'));"
-          end
-        end
-      }
       format.html
       format.rss { render :action => "list" }
       format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }

@@ -1,6 +1,7 @@
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
-<div id="documents_div"></div>
+<div id="documents_div">
 <%= render :partial => "newest" %>
+</div>
 <%= will_paginate(@documents) %>
 
-<%#render :partial=>"shared/live_update", :locals=>{:update_url=>"/documents/newest"}%>
+<%=render :partial=>"shared/live_update", :locals=>{:update_url=>"/documents/newest"}%>
