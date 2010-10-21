@@ -18,8 +18,24 @@ class DocumentsController < ApplicationController
     else
       @documents = Document.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     end
+    if request.format.js?
+      @documents=process_display_array(@documents)
+    else
+      reset_displayed_array(@documents)
+    end
+    @rss_url = newest_documents_url(:format => 'rss')
+
     respond_to do |format|
+       format.js {
+        render :update do |page|
+          unless @documents.empty?
+            page.insert_html :top, "documents_div", render(:partial => "newest" )
+            page << "FB.XFBML.parse(document.getElementById('documents_div'));"
+          end
+        end
+      }
       format.html
+      format.rss { render :action => "list" }
       format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @documents.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end

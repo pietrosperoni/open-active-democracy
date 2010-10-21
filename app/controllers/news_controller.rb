@@ -61,8 +61,23 @@ class NewsController < ApplicationController
     else
       @activities = Activity.active.no_unanswered_questions.for_all_users.by_recently_created.paginate :page => params[:page]
     end
+    if request.format.js?
+      @activities=process_display_array(@activities)
+    else
+      reset_displayed_array(@activities)
+    end
+    @rss_url = "/news/activities.rss"
+    RAILS_DEFAULT_LOGGER.info(@activities)
 
     respond_to do |format|
+       format.js {
+        render :update do |page|
+          unless @activities.empty?
+            page.insert_html :top, "activities", render(:partial => "activity_list" )
+            page << "FB.XFBML.parse(document.getElementById('activities'));"
+          end
+        end
+      }
       format.html { render :action => "activity_list" }
       format.rss { render :template => "rss/activities" }         
       format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
@@ -470,11 +485,12 @@ class NewsController < ApplicationController
       format.html { render :action => "activity_list" }
       format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
-    end    
+    end
   end
   
   private
-  def check_for_user
+  
+    def check_for_user
     if params[:user_id]
       @user = User.find(params[:user_id])
     elsif logged_in?

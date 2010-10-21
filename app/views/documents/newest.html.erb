@@ -1,14 +1,6 @@
-<!-- <div id="hp_intro"><%#= @page_title %></div> -->
-<p>
-<% if not @documents or @documents.empty? %>
-	Engin erindi fundust.
-<% else %>
-	<%#= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
-	<% for document in @documents %>
-		<%= render :partial => "documents/show_full", :locals => {:document => document, :quality => nil, :revision => nil}%>
-	<% end %>
+<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
+<div id="documents_div"></div>
+<%= render :partial => "newest" %>
+<%= will_paginate(@documents) %>
 
-	<p>
-	<%= will_paginate(@documents) %>
-
-<% end %>
+<%=render :partial=>"shared/live_update", :locals=>{:update_url=>"/documents/newest"}%>

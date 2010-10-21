@@ -1,14 +1,6 @@
-<% if session[:selected_tag_name] && @priorities.count < 1 %>
-			<%= t('esb.empty_chapter')%>
-<% end %>	
-
-<% for priority in @priorities %>
-<div id="priority_<%= priority.id %>" class="priority_listing">
-			<%= render :partial => "priorities/listing", :locals => {:priority => priority, :value => 0} %>
+<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @priorities} %>
+<div id="priorities_div">
+	<%=render :partial=>"newest"%>
 </div>
-<% end %>
 <%= will_paginate @priorities %>
-
-
-
-
+<%=render :partial=>"shared/live_update", :locals=>{:update_url=>"/priorities/newest"}%>

@@ -1,0 +1,13 @@
+<script type="text/javascript">
+	function liveUpdate()
+	{
+	      jQuery.ajax({
+	                    method: 'get',
+	                    url : '<%=update_url%>',
+	                    dataType : 'script'
+	                 });
+	
+	}
+	
+	var holdTheInterval = setInterval(liveUpdate, 2500);
+</script>

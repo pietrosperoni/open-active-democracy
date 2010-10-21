@@ -54,7 +54,21 @@ class PrioritiesController < ApplicationController
     else
       @priorities = Priority.published.newest.paginate :page => params[:page], :per_page => params[:per_page]
     end
+    if request.format.js?
+      @priorities=process_display_array(@priorities)
+    else
+      reset_displayed_array(@priorities)
+    end
+    
     respond_to do |format|
+       format.js {
+        render :update do |page|
+          unless @priorities.empty?
+            page.insert_html :top, "priorities_div", render(:partial => "newest" )
+            page << "FB.XFBML.parse(document.getElementById('priorities_div'));"
+          end
+        end
+      }
       format.html
       format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      

@@ -1,15 +1,6 @@
-<!-- <div id="hp_intro"><%= @page_title %></div> -->
-<p>
-<% if not @questions or @questions.empty? %>
-	Engar spurningar fundust.
-<% else %>
-	<%#= render :partial => "shared/paginate_with_feed", :locals => {:collection => @questions} %>
-	<% for question in @questions %>
-		<%= render :partial => "questions/show_full", :locals => {:question => question, :revision => nil}%>
-	<% end %>
-
-	<p>
-	<%= will_paginate(@questions) %>
-
-<% end %>
-
+<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @questions} %>
+<div id="questions_div">
+	<%= render :partial=>"index" %>
+</div>
+<%= will_paginate(@questions) %>
+<%=render :partial=>"shared/live_update", :locals=>{:update_url=>"/questions/newest"}%>

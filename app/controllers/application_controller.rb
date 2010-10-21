@@ -187,6 +187,30 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def process_display_array(activities)
+    unless activities.empty?
+      class_type=activities.first.class
+      found_array = Rails.cache.read("dl_#{session[:session_id]}_#{class_type}")
+      if found_array
+        activities = activities.delete_if {|a| found_array.include?(a.id)}
+        write_array = (found_array+activities.map {|x| x.id}).uniq
+      else
+        write_array = activities.map {|x| x.id}
+      end
+      if found_array!=write_array
+        Rails.cache.write("dl_#{session[:session_id]}_#{class_type}", write_array, :expires_in => 12.hours)
+      end
+    end
+    activities
+  end
+  
+  def reset_displayed_array(activities)
+    unless activities.empty?
+      class_type=activities.first.class
+      Rails.cache.write("dl_#{session[:session_id]}_#{class_type}", activities.map {|x| x.id}, :expires_in => 12.hours) 
+    end
+  end
+
   def check_subdomain
     if not current_government
       redirect_to :controller => "install"
@@ -203,7 +227,7 @@ class ApplicationController < ActionController::Base
   end  
   
   # if they're logged in with a wh2 account, AND connected with facebook, but don't have their facebook uid added to their account yet
-  def check_facebook 
+  def check_facebook
     if logged_in? and current_facebook_user
       @user = User.find(current_user.id)
       if not @user.update_with_facebook(current_facebook_user.id)

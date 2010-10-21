@@ -1,0 +1,5 @@
+<% for priority in @priorities %>
+<div id="priority_<%= priority.id %>" class="priority_listing">
+	<%= render :partial => "priorities/listing", :locals => {:priority => priority, :value => 0} %>
+</div>
+<% end %>

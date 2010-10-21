@@ -31,7 +31,23 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     end
+    if request.format.js?
+      @questions=process_display_array(@questions)
+    else
+      reset_displayed_array(@questions)
+    end
+    @rss_url = newest_questions_url(:format => 'rss')
+    
     respond_to do |format|
+       format.js {
+        render :update do |page|
+          unless false#@activities.empty?
+          page.insert_html :top, "questions", render(:partial => "index" )
+          page << "FB.XFBML.parse(document.getElementById('questions'));"
+          end
+        end
+      }
+      format.rss { render :action => "list" }
       format.html { render :action => "index" }
       format.xml { render :xml => @questions.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -50,7 +66,23 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.published.by_subfilter(session[:questions_subfilter]).by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     end
+    if request.format.js?
+      @questions=process_display_array(@questions)
+    else
+      reset_displayed_array(@questions)
+    end
+    @rss_url = newest_questions_url(:format => 'rss')
+    
     respond_to do |format|
+       format.js {
+        render :update do |page|
+          unless @questions.empty?
+            page.insert_html :top, "questions_div", render(:partial => "index" )
+            page << "FB.XFBML.parse(document.getElementById('questions_div'));"
+          end
+        end
+      }
+      format.rss { render :action => "list" }
       format.html { render :action => "index" }
       format.xml { render :xml => @questions.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @questions.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
