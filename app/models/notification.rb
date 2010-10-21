@@ -130,7 +130,7 @@ class NotificationChangeProposed < Notification
   end
   
   def is_recipient_subscribed?
-    recipient.is_admin_subscribed?
+    true #recipient.is_admin_subscribed?
   end
   
 end
@@ -168,7 +168,7 @@ class NotificationCommentFlagged < Notification
   end
   
   def is_recipient_subscribed?
-    recipient.is_admin_subscribed?
+    true #recipient.is_admin_subscribed?
   end  
   
 end
@@ -181,7 +181,7 @@ class NotificationContactJoined < Notification
   end
   
   def is_recipient_subscribed?
-    recipient.is_admin_subscribed?
+    true #recipient.is_admin_subscribed?
   end  
   
 end
@@ -229,7 +229,7 @@ class NotificationPriorityFlagged < Notification
   end
   
   def is_recipient_subscribed?
-    recipient.is_admin_subscribed?
+    true #recipient.is_admin_subscribed?
   end  
   
 end
