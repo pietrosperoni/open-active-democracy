@@ -6,6 +6,7 @@
         <%= f.error_messages %>
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value", :id => "comment_content_#{activity.id.to_s}" %>
                     <br>
+		    <div class="senda_a_facebook">test
                 	<% if current_facebook_user %>
                     Senda á Facebook?<%= check_box_tag "send_to_facebook", "yes", false %>
 					<% end %>
@@ -15,6 +16,7 @@
 				  <span id = "loading_span_<%=activity.id%>" style = "display: none;">
 				    <%= image_tag("submit-loader.gif")%>
 				  </span>
+			</div>
         <% end %>
     </p>
 </div>
