@@ -60,7 +60,7 @@
 			<p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn <br /><br />					
 			</p> -->
              <% if current_facebook_user %>
-               Senda spurningu á Facebook líka? <%= check_box_tag "send_to_facebook", "yes", false %><br>
+               Senda á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %><br>
 			<% end %>
 			<%= f.submit "Senda spurningu", :id => "submit", :class => "yellow_button" %>
 			<div id="errors" class="error"><%= f.error_messages %></div>
