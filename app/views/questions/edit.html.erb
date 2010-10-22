@@ -1,4 +1,4 @@
-<h1>Svara spurningu</h1>
+<h2>Svara spurningu</h2>
 
 <% form_for(@question) do |f| %>
 <%# form_remote_for comment, :url => activity_comments_path(activity), :loading=>"Form.Element.disable('comment-form-submit')" do |f| %>		
@@ -6,17 +6,17 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label "Svar við " %><i><%= @question.name%></i><br />
+    <%= f.label "Spurningin er: " %><i><%= @question.name%></i><br />
 	 <%= f.text_area :answer, :maxlength => 500, :class => 'idleField_big' %>
     <%#= f.text_area :answer, :rows=>10 %>
   </p>
    <p>
-    <%= f.submit "Update" %>
+    <%= f.submit "Vista svar" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Skoða', @question %> |
+<%= link_to 'Til baka', questions_path %>
 
 
 

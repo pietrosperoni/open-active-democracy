@@ -617,7 +617,7 @@ is:
                     label: "Er þetta skjal {{support_radio}} með {{neutral_radio}} hlutlaust eða {{oppose_radio}} á móti hugmynd {{priority_name}}?"
                 submit: "Vista skjal"
                 name:
-                    label: "Titill <span class='small'>60 stafir</span>"
+                    label: "Fyrirsögn <span class='small'>(60 stafir)</span>"
                 cancel: "Hætta við þennan yfirlestur"
                 intro:
                     endorse: "Einungis fólk sem styður {{priority_name}} ætti að lesa yfir þetta skjal. Skjöl eiga að vera samvinna fólks sem er sammála í meginatriðum þannig að ef þú ert ósammála, vinsamlegast <a href='{{new_document_url}}'>byrjaðu á nýju skjali</a> bættu við skoðanir þínar þar."
@@ -1674,8 +1674,8 @@ is:
             within: "Í EES"
         priority:
             whatis: "Hvert er umræðuefnið?"
-            tag: "Flokkur sem umræðuefnið á heima í:"
-            description: "Nánari lýsing á umræðuefninu þínu:"
+            tag: "Veldu kafla:"
+            description: "Nánar:"
         question:
             send_long: "Senda inn spurningu til samninganefndar"
             check: "Athugaðu fyrst hvort þegar er komin fram sambærileg spurning. Leitarglugginn hér fyrir ofan er gagnlegur í slíkt."
