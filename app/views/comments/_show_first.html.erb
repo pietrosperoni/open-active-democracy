@@ -1,8 +1,6 @@
 <% if comment %>
     <a name="<%= comment.id %>"></a>
-	
     <div id="comment_<%= comment.id.to_s %>" class="comment_endorses">
-
 	<% if comment.status == 'abusive' %>
 		<div class="comment_hidden">
 			<%= t('comments.abusive')%>
@@ -36,19 +34,11 @@
 			- <%= time_ago(comment.created_at) %> 
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
 			- <%= render :partial => "priorities/tag_show_esb", :locals => { :priority => comment.activity.priority }%>	
-			
-			
-			
 			<% if controller_name=="news" %>
 			 - Umræður
 			 <% end %>
 		</span>
 
-		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 
-		possible to have different max_lentgh in _show and in _show_first /aom 10092010 -->
-		<!-- if call is from show_all (i.e. shortentext=0), then show all the text and 
-			skip class="comment_content" which adds js more/less feature /aom 20092010-->		
-		<!-- if shortentext is not defined then set to default = 1 /aom 20092010-->	
 		<% if !defined? shortentext%>
 			<% shortentext="1" %>
 		<% end %>	

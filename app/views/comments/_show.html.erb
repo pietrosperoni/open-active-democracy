@@ -1,7 +1,6 @@
 <% if comment %>
 <a name="<%= comment.id %>"></a>
-<div id="comment_<%= comment.id.to_s %>" class="comment_endorses">
-	
+<div id="comment_<%= comment.id.to_s %>" class="comment_endorses">	
 	<% if comment.status == 'abusive' %>
 		<div class="comment_hidden">
 			<%= t('comments.abusive')%>
@@ -21,20 +20,13 @@
 	<div class="comment_box">
 		<%= render :partial => "users/pic_35", :locals => {:user => comment.user}%>	
 		<span class="entry_profile">
-		<%#= link_to h(comment.user.login), comment.user, :title => t('esb.mouseover.comment.user') %> 	
 		<%= h(comment.user.login) %>
 			 - <%= time_ago(comment.created_at) %> 
-			  <%#= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>
 	       <% if logged_in? and current_user.id != comment.user_id  %>
 			 <%= link_to_remote image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"), { :url => flag_activity_comment_url(comment.activity_id,comment),:method => :get, :confirm => t('comments.flag.confirm', :user_name => comment.user.name)}, :title => t('esb.mouseover.entry.report') %>
 		   <% end %>
 		</span>
 		
-		<!-- max_length for comment_content_2 is defined in shared/_javascripts - 
-		possible to have different max_lentgh in _show and in _show_first /aom 10092010 -->
-		<!-- if call is from show_all (i.e. shortentext=0), then show all the text and 
-			skip class="comment_content" which adds js more/less feature /aom 20092010-->		
-		<!-- if shortentext is not defined then set to default = 1 /aom 20092010-->	
 		<% if !defined? shortentext%>
 			<% shortentext="1" %>
 		<% end %>		

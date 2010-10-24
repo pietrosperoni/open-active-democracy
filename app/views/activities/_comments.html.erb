@@ -2,17 +2,10 @@
 	<div id="activity_<%= activity.id %>_comments" class="comment_list">
 <% else %>
 	<div id="activity_<%= activity.id %>_comments" class="comment_list_empty">
-		
 <% end %>
-
 	<% if activity.comments_count > 0 %>
-
 		<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
-		
 		<%= render :partial => "comments/show_first", :locals => {:comment => @comments.first} %>
-		<%= render :partial => "comments/show", :locals => {:comment => @comments.last} if @comments.length > 1 %>
-
-		
 		<% if @comments.length > 10 %>
 			<div class="comment_more">
 			<%= link_to t('esb.comment.more')+" (#{(activity.comments_count-1).to_s})", activity.priority, :class => "priority_name_link" %>
@@ -22,11 +15,10 @@
 			<%= link_to_remote t('esb.comment.more')+" (#{(activity.comments_count-1).to_s})", { :url => more_activity_comments_url(activity), :method => :get } %>
 			</div>
 		<% end %>
-
+		<% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>
+		<%= render :partial => "comments/show", :locals => {:comment => comments_without_abuse.last} if comments_without_abuse.length > 1 %>		
 		 <% if @comments.length > 0 and activity.class != ActivityCommentParticipant %>
 			<%= render :partial => "comments/new_inline", :locals => {:activity => activity, :comment => Comment.new} %>
-		<% end %>
-	
+		<% end %>	
 	<% end %>
-	
 </div>
