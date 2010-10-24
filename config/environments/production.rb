@@ -28,7 +28,7 @@ config.action_mailer.raise_delivery_errors = false
 #  :password => ENV['SENDGRID_PASSWORD']
 #}
 
-ENV['DOMAIN'] = "vidraedur.is"
+ENV['DOMAIN'] = "p.vidraedur.is"
 
 DB_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/database.yml")
 
