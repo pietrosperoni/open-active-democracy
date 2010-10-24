@@ -8,11 +8,11 @@
 		<%= render :partial => "comments/show_first", :locals => {:comment => @comments.first} %>
 		<% if @comments.length > 10 %>
 			<div class="comment_more">
-			<%= link_to t('esb.comment.more')+" (#{(activity.comments_count-1).to_s})", activity.priority, :class => "priority_name_link" %>
+			<%= link_to t('esb.comment.more')+" (#{(@comments.length-2).to_s})", activity.priority, :class => "priority_name_link" %>
 			</div>
 		<% elsif @comments.length > 2 %>
 			<div class="comment_more">
-			<%= link_to_remote t('esb.comment.more')+" (#{(activity.comments_count-1).to_s})", { :url => more_activity_comments_url(activity), :method => :get } %>
+			<%= link_to_remote t('esb.comment.more')+" (#{(@comments.length-2).to_s})", { :url => more_activity_comments_url(activity), :method => :get } %>
 			</div>
 		<% end %>
 		<% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>

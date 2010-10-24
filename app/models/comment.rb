@@ -84,6 +84,7 @@ class Comment < ActiveRecord::Base
       self.activity.changed_at = self.activity.comments.published.by_recently_created.first.created_at
     end
     self.activity.comments_count -= 1
+    self.activity.save_with_validation(false)    
     self.save_with_validation(false)    
 
     self.user.decrement!("comments_count")
