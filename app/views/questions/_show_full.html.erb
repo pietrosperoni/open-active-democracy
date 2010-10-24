@@ -35,11 +35,6 @@
 		<% end %>
 		
 	</div>
-	
-	<!-- Do we need this? aom 230910 --> 
-	<%#= link_to h(question.user.login), question.user, :title => t('esb.mouseover.comment.user') %> 
-	<!-- Not used -->
-	<%# = time_ago(question.created_at) %> 
 			
 	<!-- Comment box - 'Official Reply' box! -->	
 	<%= render :partial => "questions/show_answer", :locals => {:question => question, :suffix => "_noself"} %>
@@ -54,57 +49,7 @@
 	<% for activity in activities %>
 		<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself"} %>
 	<% end %>
-	
-	<!-- Show More comments: see activties/comments_questions  
-	<div class="comment_box"> <p><a href="#">Sýna 12 athugasemdir í viðbót</a></p> </div> 
-	--> 
-									
-	<!-- Answer box: see activities/comments_questions -->	
-	<!-- <p><input type="text" size="60" value="Taka þátt í umræðunni" /> <input type="submit" value="Senda" /></p> --> 
 
 </div>
-
-
-
-
-<!-- commented out 14.09 2010 aom 
-<div class="point" id="<%= question.id %>">
-	<div class="point_name">
-	<%= link_to_unless_current h(question.content), question %>
-	</div>
-	<div class="point_byline">
-		<%= t('revisions.byline', :author_sentence => question.author_sentence) %> &middot; <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>
-		<span class="point_edit">
-			<% if question.discussions_count == 0 %>
-				<%= link_to t('comments.discuss.name'), discussions_question_url(question) %>
-			<% else %>
-				<%= link_to t('comments.discussions.name', :count => question.discussions_count), discussions_question_url(question) %>
-			<% end %>
-			or 
-			<%= link_to t('points.edit.name'), new_question_revision_url(question), :title => t('points.edit.title') %>
-		</span>
-	</div>
-	<div class="point_content">
-	<% if revision %>
-		<%= revision.content_diff %>
-    <% else %>
-		<%= question.content_html %>
-	<% end %>
-	</div>
-</div> 
--->
-
-
-
-
-
-
-				
-							
-
-					
-					
-
-					
 					
 				

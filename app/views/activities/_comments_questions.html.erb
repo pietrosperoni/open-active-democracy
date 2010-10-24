@@ -10,8 +10,7 @@
 		<% if !defined? all%>
 			<% all ="0" %>
 		<% end %>						
-		<% if all == "1" %>
-			
+		<% if all == "1" %>				
 			<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>			
 			<% @comments.each do |comment| %>   
    				<% if @comments.first == comment %>
@@ -19,22 +18,17 @@
 				<% else %>
 					<%= render :partial => "comments_questions/show", :locals => {:comment => comment, :shortentext => 0} %>
 				<% end %>   		
-		<% end %>
+			<% end %>
 		<% else %>
-		<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
-		<!-- <div class="comment_box"> --> 		
-		<%= render :partial => "comments_questions/show", :locals => {:comment => @comments.last} if @comments.length > 0 %>
-		<!-- </div> -->
-				
-		<% if @comments.length > 10 %>
-			<!-- <div class="comment_box">-->
-			<%= link_to t('esb.comment.more')+" (#{(activity.comments_count-1).to_s})", activity.question, :class => "priority_name_link" %>
-			<!-- </div>-->
-		<% elsif @comments.length > 1 %>
-			<!-- <div class="comment_box">-->
-			<%= link_to_remote t('esb.comment.more')+" (#{(activity.comments_count-1).to_s})", { :url => more_activity_comments_url(activity), :method => :get } %>
-			<!-- </div>-->
-		<% end %>
+			<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
+					
+			<% if @comments.length > 10 %>
+				<%= link_to t('esb.comment.more')+" (#{(@comments.length).to_s})", activity.question, :class => "priority_name_link" %>
+			<% elsif @comments.length > 1 %>
+				<%= link_to_remote t('esb.comment.more')+" (#{(@comments.length).to_s})", { :url => more_activity_comments_url(activity), :method => :get } %>
+			<% end %>
+			<% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>
+			<%= render :partial => "comments_questions/show", :locals => {:comment => comments_without_abuse.last} if comments_without_abuse.length > 1 %>
 		
 		<% end %>
 		<!-- deleted from if statement: ' @comments.length > 0 and ' 230910 aom-->
