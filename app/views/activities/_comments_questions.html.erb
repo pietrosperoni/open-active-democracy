@@ -28,7 +28,7 @@
 				</div>
 			<% elsif @comments.length > 1 %>
 				<div class="comment_more">
-				<%= link_to_remote t('esb.comment.more')+" (#{(@comments.length).to_s})", { :url => more_activity_comments_url(activity), :method => :get } %>
+				<%= link_to_remote t('esb.comment.more')+" (#{(@comments.length).to_s})", { :loading=>"update('Sæki athugasemdir...')", :url => more_activity_comments_url(activity), :method => :get } %>
 				</div>
 			<% end %>
 			<% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>
