@@ -19,12 +19,14 @@ var addthis_config = {
 			<a  class="addthis_button_twitter" title="Senda á Twitter" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>">
 				<%=image_tag("esb_entry_twitter.gif", :border => 0)%>
 			</a>
-			<% if action_item.instance_of?(Priority) %>
-				<%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), flag_inappropriate_priority_url(action_item), :title => t('esb.mouseover.entry.report'), :confirm => t('menu.priorities.flag.confirm'), :method => :put %>
-			<% elsif action_item.instance_of?(Question) %>
-			  <%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
-			<% elsif action_item.instance_of?(Document) %>
-			  <%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
+			<% if logged_in? %>
+				<% if action_item.instance_of?(Priority) %>
+					<%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), flag_inappropriate_priority_url(action_item), :title => t('esb.mouseover.entry.report'), :confirm => t('menu.priorities.flag.confirm'), :method => :put %>
+				<% elsif action_item.instance_of?(Question) %>
+				  <%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
+				<% elsif action_item.instance_of?(Document) %>
+				  <%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
+				<% end %>
 			<% end %>
 		</div>
 </span>
