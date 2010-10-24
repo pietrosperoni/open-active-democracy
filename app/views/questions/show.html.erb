@@ -46,11 +46,8 @@
 			<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself", :all => "1" }%>
 	<% end %>
 </div>
-			
-	<!-- Commented out aom 240910 -->
-	<%#= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>	
-	<%#= render :partial => "documents/authors", :locals => {:users => @question.authors } %>	
-	<%#= render :partial => "questions/left_nav" %>
-	
 
+<meta name="title" content="<%=@question.name%>" />
+<meta name="description" content="<%=@question.content%>" />
+<link rel="image_src" href="http://<%=request.host.downcase%>/images/logo_facebook_share.gif" />
 	

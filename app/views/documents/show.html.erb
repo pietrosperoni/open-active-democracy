@@ -1,4 +1,3 @@
-
 <div class="entry_box">
 		<%= render :partial => "shared/entry_icons", :locals => {:content => @document.content, :action_item=>@document}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => @document.user}%> 
@@ -32,12 +31,8 @@
 				<%= @document.content_html %>
 			</div>
 		<% end %>
-
 	</div>
-			
-						
-			<!-- No activites div class="heading">Recent activity on this document</div> -->
-			<%# for activity in @document.activities.active.by_recently_created.find(:all, :limit => 10) %>
-				<%#= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
-			<%# end %>
-			
+	
+<meta name="title" content="<%=@document.name%>" />
+<meta name="description" content="<%=@document.content%>" />
+<link rel="image_src" href="http://<%=request.host.downcase%>/images/logo_facebook_share.gif" />
