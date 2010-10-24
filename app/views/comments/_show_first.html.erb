@@ -5,16 +5,6 @@
 		<div class="comment_hidden">
 			<%= t('comments.abusive')%>
 		</div>
-	<% elsif comment.user.status == 'deleted' and params[:action] != 'unhide' %>
-		<div class="comment_hidden" id="comment_hidden_<%= comment.id.to_s %>">
-			<%= t('comments.account_deleted', :user_name => comment.user.name )%>
-			<%= link_to_remote t('comments.show'),{ :url => unhide_activity_comment_url(comment.activity_id,comment), :method => :get }  %>
-		</div>	
-	<% elsif comment.user.status == 'suspended' and params[:action] != 'unhide' %>
-		<div class="comment_hidden" id="comment_hidden_<%= comment.id.to_s %>">
-			<%= t('comments.account_suspended', :user_name => comment.user.name )%>
-			<%= link_to_remote t('comments.show'),{ :url => unhide_activity_comment_url(comment.activity_id,comment), :method => :get }  %>
-		</div>		
 	<% else %>
 	<!-- Entry box -->
 	<div class="entry_box">
