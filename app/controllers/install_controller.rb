@@ -7,10 +7,6 @@ class InstallController < ApplicationController
   skip_before_filter :check_installation
   skip_before_filter :set_facebook_session
   skip_before_filter :load_actions_to_publish
-  skip_before_filter :check_subdomain
-  skip_before_filter :check_blast_click
-  skip_before_filter :check_priority
-  skip_before_filter :check_referral
   skip_before_filter :check_suspension
   skip_before_filter :update_loggedin_at
   skip_before_filter :check_facebook
@@ -64,7 +60,7 @@ class InstallController < ApplicationController
   
   private
   def set_current_government
-    Government.current = current_government if current_government
+    Government.last = current_government if current_government
   end
 
 end

@@ -41,36 +41,7 @@ class DocumentsController < ApplicationController
       format.json { render :json => @documents.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end
   end  
-  
-  def your_priorities
-    @page_title = t('document.your_priorities.title')
-    if current_user.endorsements_count > 0    
-      if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
-        @documents = Document.published.by_recently_created.paginate :conditions => ["(documents.priority_id in (?) and documents.endorser_helpful_count > 0) or (documents.priority_id in (?) and documents.opposer_helpful_count > 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
-      elsif current_user.up_endorsements_count > 0
-        @documents = Document.published.by_recently_created.paginate :conditions => ["documents.priority_id in (?) and documents.endorser_helpful_count > 0",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
-      elsif current_user.down_endorsements_count > 0
-        @documents = Document.published.by_recently_created.paginate :conditions => ["documents.priority_id in (?) and documents.opposer_helpful_count > 0",current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
-      end
-    else
-      @documents = nil
-    end
-    respond_to do |format|
-      format.html { render :action => "index" }
-      format.xml { render :xml => @documents.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @documents.to_json(:except => NB_CONFIG['api_exclude_fields']) }
-    end    
-  end  
  
-  def revised
-    @page_title = t('document.revised.title')
-    @revisions = DocumentRevision.published.by_recently_created.find(:all, :include => [{:document => :priority},:user], :conditions => "documents.revisions_count > 1").paginate :page => params[:page], :per_page => params[:per_page]
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @revisions.to_xml(:include => :document, :except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @revisions.to_json(:include => :document, :except => NB_CONFIG['api_exclude_fields']) }
-    end    
-  end 
  
   # GET /documents/1
   def show

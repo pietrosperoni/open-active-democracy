@@ -11,7 +11,6 @@ class Tag < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :taggings
   has_many :priorities, :through => :taggings, :source => :priority, :conditions => "taggings.taggable_type = 'Priority'"
-  has_many :feeds, :through => :taggings, :source => :feed, :conditions => "taggings.taggable_type = 'Feed'"
                               
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -70,7 +69,7 @@ class Tag < ActiveRecord::Base
   
   def prompt_display
     return prompt if attribute_present?("prompt")
-    return Government.current.prompt
+    return Government.last.prompt
   end
   
   def published_priority_ids

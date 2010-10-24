@@ -7,7 +7,7 @@ class LoadTwitterFollowers
   end
 
   def perform
-    Government.current = Government.all.last
+    Government.last = Government.all.last
     user = User.find(@id)
     if not user.attribute_present?("twitter_crawled_at")
       user.twitter_followers_follow

@@ -71,9 +71,9 @@ module Contacts
     # You can check an example of a config file inside config/ directory
     #
     def initialize(config_file=CONFIG_FILE)
-      if Government.current and Government.current.attribute_present?("yahoo_appid")
-        @appid = Government.current.yahoo_appid
-        @secret = Government.current.yahoo_secret_key
+      if Government.last and Government.last.attribute_present?("yahoo_appid")
+        @appid = Government.last.yahoo_appid
+        @secret = Government.last.yahoo_secret_key
       else
         confs = YAML.load_file(config_file)['yahoo']
         @appid = confs['appid']

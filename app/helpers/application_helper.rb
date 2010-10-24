@@ -39,15 +39,6 @@ module ApplicationHelper
     return f
   end
 
-  def revisions_sentence(user)
-    return "" if user.questions_count+user.documents_count+user.revisions_count == 0
-    r = []
-    r << link_to(t('menu.briefing.points', :count => user.questions_count), questions_user_url(user)) if user.questions_count > 0 
-    r << link_to(t('menu.briefing.documents', :count => user.documents_count), documents_user_url(user)) if user.documents_count > 0     
-    r << t('menu.briefing.revisions', :count => user.revisions_count) if user.revisions_count > 0
-    t('document.revision.sentence', :sentence => r.to_sentence)
-  end
-  
   def notifications_sentence(notifications)
     return "" if notifications.empty?
     r = []
@@ -99,21 +90,6 @@ module ApplicationHelper
     r.to_sentence
   end
   
-  def relationship_sentence(relationships)
-    return "" if relationships.empty?
-    r = []
-		for relationship in relationships
-			if relationship.class == RelationshipUndecidedEndorsed
-				r << t('priorities.relationship.undeclared', :percentage => number_to_percentage(relationship.percentage, :precision => 0))
-			elsif relationship.class == RelationshipOpposerEndorsed
-				r << t('priorities.relationship.opposers', :percentage => number_to_percentage(relationship.percentage, :precision => 0))			  
-			elsif relationship.class == RelationshipEndorserEndorsed
-				r << t('priorities.relationship.endorsers', :percentage => number_to_percentage(relationship.percentage, :precision => 0))			  
-			end
-		end
-		t('priorities.relationship.name', :sentence => r.to_sentence)
-  end
-  
   def tags_sentence(list)
     r = []
     for tag_name in list.split(', ')
@@ -121,14 +97,6 @@ module ApplicationHelper
 			r << link_to(tag.title, :controller => "issues", :slug => tag.slug) if tag
 		end
 		r.to_sentence
-  end
-  
-  def branches_sentence(branches)
-    r = []
-    for branch in branches
-      r << link_to(branch.name, :controller => "settings", :action => "branch_change", :branch_id => branch.id)
-    end
-    r.to_sentence(:last_word_connector => " or ") + "?"
   end
   
   def relationship_tags_sentence(list)
@@ -163,18 +131,6 @@ module ApplicationHelper
 		  s += '</div>'
 		end
 		return s
-  end
-  
-  def official_status(priority)
-  	if priority.is_failed?
-  		'<span class="opposed">' + priority.obama_status_name + '</span>'
-  	elsif priority.is_successful?
-  		'<span class="endorsed">' + priority.obama_status_name + '</span>'
-  	elsif priority.is_compromised?
-  		'<span class="compromised">' + priority.obama_status_name + '</span>'
-  	elsif priority.is_intheworks?
-  		'<span>' + priority.obama_status_name + '</span>'
-  	end
   end
   
   def liquidize(content, arguments)

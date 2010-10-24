@@ -1,6 +1,5 @@
 <div id="activity_and_comments_<%= activity.id %>" class="activity_border">
 	<% if activity.class != ActivityCommentParticipant and activity.class != ActivityBulletinProfileAuthor %>
-	<% if !defined? is_news%><% is_news=0 %><% end %>
-		<%= render :partial => "activities/comments", :locals => {:activity => activity} %>		
+    <%= render :partial => "activities/comments", :locals => {:activity => activity} %>		
 	<% end %>
 </div>

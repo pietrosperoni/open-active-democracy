@@ -194,7 +194,7 @@ class Revision < ActiveRecord::Base
   end
   
   def url
-    'http://' + Government.current.base_url + '/questions/' + question_id.to_s + '/revisions/' + id.to_s + '?utm_source=questions_changed&utm_medium=email'
+    'http://' + Government.last.base_url + '/questions/' + question_id.to_s + '/revisions/' + id.to_s + '?utm_source=questions_changed&utm_medium=email'
   end  
   
   auto_html_for(:content) do

@@ -14,17 +14,13 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
   
-  # Make these methods visible to views as well
-  helper_method :facebook_session, :government_cache, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :current_branches, :facebook_session, :is_robot?, :js_help
+  helper_method :facebook_session, :government_cache, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
-  # switch to the right database for this government
   before_filter :show_login_status
-  before_filter :check_subdomain
 
   before_filter :check_if_email_is_set
   skip_before_filter :check_if_email_is_set, :only=>["set_email"]
 
-  #before_filter :set_facebook_session, :unless => [:no_facebook?]
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
   before_filter :check_facebook, :unless => [:is_robot?]
     
@@ -32,21 +28,12 @@ class ApplicationController < ActionController::Base
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   
   before_filter :check_for_reset_filters
- # before_filter  :set_p3p
   
   filter_parameter_logging :password, :password_confirmation
 
   layout :get_layout
 
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
-  #protect_from_forgery #:secret => 'd0451bc51967070c0872c2865d2651e1'
-
   protected
-
-  def set_p3p
-    response.headers["P3P"]='CP="CAO PSA OUR"'
-  end
 
   def show_login_status
     if logged_in?
@@ -94,44 +81,8 @@ class ApplicationController < ActionController::Base
     if RAILS_ENV=="development"
       self.current_user = User.first
     end
-    return @current_government if @current_government
-#    @current_government = Rails.cache.read('government')
-    if not @current_government
-      @current_government = Government.last
-      if @current_government
-        @current_government.update_counts
-#        Rails.cache.write('government', @current_government, :expires_in => 15.minutes) 
-      else
-        return nil
-      end
-    end
-    Government.current = @current_government
+    @current_government = Government.last
     return @current_government
-  end
-  
-  def current_priority_ids
-    return [] unless logged_in? and current_user.endorsements_count > 0
-    @current_priority_ids ||= current_user.endorsements.active_and_inactive.collect{|e|e.priority_id}
-  end  
-  
-  def current_following_ids
-    return [] unless logged_in? and current_user.followings_count > 0
-    @current_following_ids ||= current_user.followings.up.collect{|f|f.other_user_id}
-  end
-  
-  def current_following_facebook_uids
-    return [] unless logged_in? and current_user.followings_count > 0 and current_user.has_facebook?
-    @current_following_facebook_uids ||= current_user.followings.up.collect{|f|f.other_user.facebook_uid}.compact
-  end  
-  
-  def current_ignoring_ids
-    return [] unless logged_in? and current_user.ignorings_count > 0
-    @current_ignoring_ids ||= current_user.followings.down.collect{|f|f.other_user_id}    
-  end
-
-  def current_branches
-    return [] unless current_government.is_branches?
-    Branch.all_cached
   end
   
   def current_tags
@@ -172,22 +123,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_blast_click
-    # if they've got a ?b= code, log them in as that user
-    if params[:b] and params[:b].length > 2
-      @blast = Blast.find_by_code(params[:b])
-      if @blast and not logged_in?
-        self.current_user = @blast.user
-        @blast.increment!(:clicks_count)
-      end
-      redirect = request.path_info.split('?').first
-      redirect = "/" if not redirect
-      redirect_to redirect
-      return
-    end
-  end
-
-  def process_display_array(activities)
+   def process_display_array(activities)
     unless activities.empty?
       class_type=activities.first.class
       found_array = Rails.cache.read("dl_#{session[:session_id]}_#{class_type}")
@@ -211,22 +147,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_subdomain
-    if not current_government
-      redirect_to :controller => "install"
-      return
-    end
-  end
-  
-  def check_referral
-    if not params[:referral_id].blank?
-      @referral = User.find(params[:referral_id])
-    else
-      @referral = nil
-    end    
-  end  
-  
-  # if they're logged in with a wh2 account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook
     if logged_in? and current_facebook_user
       @user = User.find(current_user.id)
@@ -247,9 +167,6 @@ class ApplicationController < ActionController::Base
   
   def no_facebook?
     return false
-#    return false if Facebooker.api_key
-#    return true if is_robot?
-#    return true
   end
   
   def bad_token

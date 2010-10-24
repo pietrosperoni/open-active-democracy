@@ -201,7 +201,7 @@ end
 class NotificationInvitationAccepted < Notification
   
   def name
-    I18n.t('notification.invitation.accepted.name', :sender_name => sender.name, :government_name => Government.current.name)
+    I18n.t('notification.invitation.accepted.name', :sender_name => sender.name, :government_name => Government.last.name)
   end
   
   def is_recipient_subscribed?

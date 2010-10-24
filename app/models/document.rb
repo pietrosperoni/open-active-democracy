@@ -165,7 +165,7 @@ class Document < ActiveRecord::Base
   end
 
   def show_url
-    Government.current.homepage_url + 'documents/' + to_param
+    Government.last.homepage_url + 'documents/' + to_param
   end
 
   auto_html_for(:content) do

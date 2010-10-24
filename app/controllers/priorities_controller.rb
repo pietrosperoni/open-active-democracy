@@ -280,46 +280,7 @@ class PrioritiesController < ApplicationController
     end
   end  
   
-  # PUT /priorities/1/successful
-  def successful
-    @priority = Priority.find(params[:id])
-    @priority.successful!
-    respond_to do |format|
-      flash[:notice] = t('priorities.successful', :priority_name => @priority.name)
-      format.html { redirect_to(@priority) }
-    end
-  end  
-  
-  # PUT /priorities/1/intheworks
-  def intheworks
-    @priority = Priority.find(params[:id])
-    @priority.intheworks!
-    respond_to do |format|
-      flash[:notice] = t('priorities.intheworks', :priority_name => @priority.name)
-      format.html { redirect_to(@priority) }
-    end
-  end  
-  
-  # PUT /priorities/1/failed
-  def failed
-    @priority = Priority.find(params[:id])
-    @priority.failed!
-    respond_to do |format|
-      flash[:notice] = t('priorities.failed', :priority_name => @priority.name)
-      format.html { redirect_to(@priority) }
-    end
-  end  
-  
-  # PUT /priorities/1/compromised
-  def compromised
-    @priority = Priority.find(params[:id])
-    @priority.compromised!
-    respond_to do |format|
-      flash[:notice] = t('priorities.compromised', :priority_name => @priority.name)
-      format.html { redirect_to(@priority) }
-    end
-  end  
-  
+ 
   # GET /priorities/1/tag
   def tag
     @priority = Priority.find(params[:id])

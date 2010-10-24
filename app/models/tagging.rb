@@ -7,7 +7,6 @@ class Tagging < ActiveRecord::Base
   validates_presence_of :context
   
   belongs_to :priority, :class_name => "Priority", :foreign_key => "taggable_id"
-  belongs_to :feed, :class_name => "Feed", :foreign_key => "taggable_id"
       
   after_create :increment_tag
   before_destroy :decrement_tag
@@ -18,8 +17,6 @@ class Tagging < ActiveRecord::Base
       tag.increment!(:priorities_count)
       tag.update_counts # recalculate the discussions/questions/documents
       tag.save_with_validation(false)
-    elsif taggable.class == Feed
-      tag.increment!(:feeds_count)      
     end
   end
   
@@ -29,8 +26,6 @@ class Tagging < ActiveRecord::Base
       tag.decrement!(:priorities_count)
       tag.update_counts # recalculate the discussions/questions/documents
       tag.save_with_validation(false)
-    elsif taggable.class == Feed
-      tag.decrement!(:feeds_count)        
     end    
   end
   

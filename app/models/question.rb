@@ -127,7 +127,7 @@ class Question < ActiveRecord::Base
   end  
   
   def show_url
-    Government.current.homepage_url + 'questions/' + to_param
+    Government.last.homepage_url + 'questions/' + to_param
   end  
   
   auto_html_for(:content) do
