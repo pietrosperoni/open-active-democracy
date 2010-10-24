@@ -1,10 +1,7 @@
 <% if user.has_picture? %>
-	<!-- <a href="<%= url_for user %>">-->
 	<%= image_tag user.buddy_icon.url(:icon_48), :size => "35x35", :border => 0, :align => "left" %>
-	<!-- </a> -->
 <% elsif user.facebook_id %>
-     <%= fb_profile_pic user,:facebook_logo=>false, :linked=>false, :height=>"35",:width=>"35"%>
+     <%= fb_profile_pic user,:facebook_logo=>false, :linked=>false, :size=>"square", :height=>"35",:width=>"35"%>
 <% else %>
 	<%= image_tag "profile_default.png", :size => "35x35", :border => 0, :align => "left" %>
-	<%#= image_tag current_government.buddy_icon.url(:icon_35), :size => "35x35", :border => 0, :align => "left" %>
 <% end %>
