@@ -10,15 +10,12 @@ class HomeController < ApplicationController
   end  
   
   def rules
-    @issues = Tag.most_priorities.all(:include => :top_priority, :limit => 10)
   end  
   
   def help
-    @issues = Tag.most_priorities.all(:include => :top_priority, :limit => 10)
   end
   
    def contact
-    @issues = Tag.most_priorities.all(:include => :top_priority, :limit => 10)
   end 
   
 end
