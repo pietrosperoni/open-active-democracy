@@ -1,6 +1,6 @@
 <div class="point" id="<%= question.id %>">
 	<!-- Entry box --> 
-	<div class="entry_box"> 
+	<div class="entry_box">
 		<%= render :partial => "shared/entry_icons", :locals => {:content => question.content, :action_item=>question}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
 		<h5><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %>
@@ -16,6 +16,9 @@
 
 			<% for tag in question.issues %>
 		   		- <a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><%=tag.name%></a>
+			<% end %>
+			<% if logged_in? and ((question.discussions_count == 0 and !question.answer and current_user.id == question.user_id) or current_user.is_admin?) %>
+				- <%= link_to t('menu.briefing.delete.name'), question_path(question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
 			<% end %>
 			<% if controller_name=="news" %>
 			 - Spurning
@@ -35,9 +38,6 @@
 		
 		<!-- Edit or delete if there is no answer nor any comments-->		
 
-		<% if logged_in? and ((question.discussions_count == 0 and !question.answer and current_user.id == question.user_id) or current_user.is_admin?) %>
-			<%= link_to t('menu.briefing.delete.name'), question_path(question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
-		<% end %>
 		<div id="flagged_question_info_<%=question.id%>"><%=render :partial=>"questions/flagged", :locals=>{:question=>question}-%></div>
 
 	</div>

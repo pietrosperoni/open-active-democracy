@@ -4,7 +4,7 @@
 
         <% form_remote_for comment, :url => activity_comments_path(activity), :loading=>"$('submit_span_#{activity.id}').toggle(); $('loading_span_#{activity.id}').toggle();" do |f| %>
         <%= f.error_messages %>
-                    <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value", :id => "comment_content_#{activity.id.to_s}" %>
+                    <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
                     <br>
 		    <div class="senda_a_facebook">
                 	<% if current_facebook_user %>
@@ -23,10 +23,10 @@
 <!-- <div id="comment_error_<%= activity.id.to_s %>" class="comment_error"></div> -->
 <script type="text/javascript">
     <!--
-    jQuery('#comment_content_<%=activity.id.to_s%>').autoResize({
+    jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').autoResize({
         extraSpace: 20
     })
-    jQuery('#comment_content_<%=activity.id.to_s%>').DefaultValue("<%= t('esb.add')%>");
+    jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').DefaultValue("<%= t('esb.add')%>");
     //-->
 </script>
 <% end %>
