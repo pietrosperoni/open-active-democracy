@@ -2,7 +2,7 @@ module Delayed
   class PerformableMethod
 
     def perform
-      Government.last = Government.all.last
+      Government.current = Government.all.last
       load(object).send(method, *args.map{|a| load(a)})
     rescue ActiveRecord::RecordNotFound
       # We cannot do anything about objects which were deleted in the meantime
