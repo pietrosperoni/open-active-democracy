@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101025020644) do
+ActiveRecord::Schema.define(:version => 20101025224230) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -420,8 +420,10 @@ ActiveRecord::Schema.define(:version => 20101025020644) do
     t.string   "slug",              :limit => 60
     t.integer  "weight",                           :default => 0
     t.integer  "tag_type"
+    t.integer  "external_id"
   end
 
+  add_index "tags", ["external_id"], :name => "index_tags_on_external_id"
   add_index "tags", ["slug"], :name => "index_tags_on_slug"
   add_index "tags", ["tag_type"], :name => "index_tags_on_tag_type"
   add_index "tags", ["top_priority_id"], :name => "tag_top_priority_id_index"
@@ -436,7 +438,10 @@ ActiveRecord::Schema.define(:version => 20101025020644) do
     t.string   "url",                   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cached_issue_list"
   end
+
+  add_index "treaty_documents", ["cached_issue_list"], :name => "index_treaty_documents_on_cached_issue_list"
 
   create_table "user_contacts", :force => true do |t|
     t.integer  "user_id"

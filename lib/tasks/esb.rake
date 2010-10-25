@@ -35,40 +35,67 @@ namespace :esb do
   desc "Create esb tags"
   task(:create_tags => :environment) do
       Tag.destroy_all
-      ["Félagaréttur","Fjármálaþjónusta","Frjáls för fjármagns",
-       "Frjáls för vinnuafls","Frjálst vöruflæði","Hugverkaréttur",
-       "Opinber útboð","Samkeppnismál","Staðfesturéttur og þjónustufrelsi",
-       "Upplýsingatækni og fjölmiðlum"].each_with_index do |t,i|
+      [["Félagaréttur",6],
+      ["Fjármálaþjónusta",9],
+      ["Frjáls för fjármagns",4],
+      ["Frjáls för vinnuafls",2],
+       ["Frjálst vöruflæði",1],
+       ["Hugverkaréttur",7],
+       ["Opinber útboð",5],
+       ["Samkeppnismál",8],
+       ["Staðfesturéttur og þjónustufrelsi",3],
+       ["Upplýsingatækni og fjölmiðlum",10]].each_with_index do |t,i|
         tag=Tag.new
-        tag.name = t
+        tag.name = t[0]
         tag.weight = i
         tag.tag_type = 1
+        tag.external_id = t[1]
         tag.save
       end
-      ["Evrópsk samgöngunet","Félagsmála- og atvinnustefna","Hagtölur",
-      "Iðnstefna","Matvæla- og hreinlætismál","Menntun og menning","Neytenda- og heilsuvernd",
-      "Orka","Samgöngur","Umhverfismál","Vísindi og rannsóknir"].each_with_index do |t,i|
+      [["Evrópsk samgöngunet",21],
+      ["Félagsmála- og atvinnustefna",19],
+      ["Hagtölur",18],
+      ["Iðnstefna",20],
+      ["Matvæla- og hreinlætismál",12],
+      ["Menntun og menning",26],
+      ["Neytenda- og heilsuvernd",28],
+      ["Orka",15],
+      ["Samgöngur",14],
+      ["Umhverfismál",27],
+      ["Vísindi og rannsóknir",25]].each_with_index do |t,i|
         tag=Tag.new
-        tag.name = t
+        tag.name = t[0]
         tag.weight = i
         tag.tag_type = 2
+        tag.external_id = t[1]
         tag.save
       end
-      ["Dóms- og innanríkismál","Fiskveiðar","Fjárhagslegt eftirlit",
-      "Framlagsmál","Gjaldmiðilssamstarf","Landbúnaður og byggðastefna","Réttarvarsla og grundvallarréttindi",
-      "Skattamál","Tollabandalag","Uppbyggingarstyrkir","Utanríkis-, öryggis- og varnamál",
-      "Utanríkistengsl"].each_with_index do |t,i|
+      [["Dóms- og innanríkismál",24],
+      ["Fiskveiðar",13],
+      ["Fjárhagslegt eftirlit",32],
+      ["Framlagsmál",33],
+      ["Gjaldmiðilssamstarf",17],
+      ["Landbúnaður og byggðastefna",11],
+      ["Réttarvarsla og grundvallarréttindi",23],
+      ["Skattamál",16],
+      ["Tollabandalag",29],
+      ["Uppbyggingarstyrkir",22],
+      ["Utanríkis-, öryggis- og varnamál",31],
+      ["Utanríkistengsl",30]].each_with_index do |t,i|
         tag=Tag.new
-        tag.name = t
+        tag.name = t[0]
         tag.weight = i
         tag.tag_type = 3
+        tag.external_id = t[1]
         tag.save
       end
-      ["Stofnanir","Annað"].each_with_index do |t,i|
+      [["Stofnanir",34],
+      ["Annað",35]].each_with_index do |t,i|
         tag=Tag.new
-        tag.name = t
+        tag.name = t[0]
         tag.weight = i
         tag.tag_type = 4
+        tag.external_id = t[1]
         tag.save
       end
   end
