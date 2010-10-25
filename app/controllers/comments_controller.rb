@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
   
   #GET /activities/1/comments/more
   def more
-    @comments = @activity.comments.published.by_first_created
+    @comments = @activity.comments.published_and_abusive.by_first_created
     respond_to do |format|
       format.js {
         render :update do |page|
