@@ -24,7 +24,7 @@ class Document < ActiveRecord::Base
   
   has_many :author_users, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User"
   
-  liquid_methods :id, :text, :user
+  liquid_methods :id, :name, :activity_id, :content, :user, :activity, :show_url, :text
 
   define_index do
     indexes name

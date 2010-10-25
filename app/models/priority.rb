@@ -29,7 +29,7 @@ class Priority < ActiveRecord::Base
   
   acts_as_taggable_on :issues
   
-  liquid_methods :id, :name, :show_url, :value_name
+  liquid_methods :id, :name, :activity_id, :content, :user, :activity, :show_url
 
   define_index do
     indexes name

@@ -33,7 +33,7 @@ class Question < ActiveRecord::Base
     where "status = 'published'"    
   end
 
-  liquid_methods :id, :user, :text
+  liquid_methods :id, :name, :activity_id, :content, :user, :activity, :show_url, :text
   
   cattr_reader :per_page
   @@per_page = 15  
