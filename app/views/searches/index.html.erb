@@ -10,9 +10,8 @@
 
 <div class="search_results" > 
 	<% unless @search_results.empty? %>
-		<%=will_paginate @search_results %>
 		<div id="left">
-			
+		<%=will_paginate @search_results %>			
 			<% @search_results.each do |result|%>
 				
 				<!-- PRITORITY --> 
@@ -63,9 +62,9 @@
 			 <% end %>
 		
 		<% end %>
+		<%=will_paginate @search_results%>
 	</div> 
 				
-		<%=will_paginate @search_results%>
 		<% else %>
 			  Ekkert fannst með þessum leitarorðum og öðrum skilyrðum sem þú hefur valið. 
 			  <br> 
