@@ -1,0 +1,22 @@
+<ul class="action">
+    <li>
+        <%= link_to t('esb.create.question'), "/senda_spurningu" %>
+    </li>
+    <li>
+        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
+    </li>
+    <li>
+        <%= link_to t('esb.create.document'), "/senda_erindi" %>
+    </li>
+</ul>
+<% if logged_in? and current_user.is_admin? %>
+Vefumsjón<br>
+<ul class="action">
+    <li>
+        <%= link_to "Flaggað efni", "/admin/all_flagged" %>
+    </li>
+    <li>
+        <%= link_to "Bannaðir notendur", "/users/list_suspended" %>
+    </li>
+</ul>
+<% end %>

@@ -30,7 +30,7 @@ is:
                     name: "{{sender_name}} gerði athugasemdir við athafnir þínar"
                     link: "{{sender_name}} setti athugasemdir við <a href='{{comment_url}}'>athafnir þínar</a>"
             flagged:
-                name: "{{sender_name}} merkti við athugasemd gerða af {{user_name}}"
+                name: "{{sender_name}} merkti við efni sent inn af {{user_name}}"
                 link:
                     one: "1 merkt athugasemd"
                     other: "{{count}} merktar athugasemdir"                
@@ -73,8 +73,8 @@ is:
             flagged:
                 name: "{{sender_name}} merkti við {{priority_name}} fyrir yfirferð"
                 link:
-                    one: "merkt við 1 hugmynd"
-                    other: "merkt við {{count}} hugmyndir"
+                    one: "merkt við 1 umræðuefni"
+                    other: "merkt við {{count}} umræðuefni"
             finished:
                 link:
                     one: "1 hugmynd lokið"

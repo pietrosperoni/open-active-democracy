@@ -117,24 +117,8 @@ class Comment < ActiveRecord::Base
   end
   
   def do_abusive
-    if self.user.warnings_count == 0 # this is their first warning, get a warning message
-      notifications << NotificationWarning1.new(:recipient => self.user)
-    elsif self.user.warnings_count == 1 # 2nd warning, lose 10% of pc
-      notifications << NotificationWarning2.new(:recipient => self.user)
-      capital_lost = (self.user.capitals_count*0.1).to_i
-      capital_lost = 1 if capital_lost == 0
-      ActivityCapitalWarning.create(:user => self.user, :capital => CapitalWarning.create(:recipient => self.user, :amount => -capital_lost))
-    elsif self.user.warnings_count == 2 # third warning, on probation, lose 30% of pc
-      notifications << NotificationWarning3.new(:recipient => self.user)      
-      capital_lost = (self.user.capitals_count*0.3).to_i
-      capital_lost = 3 if capital_lost < 3
-      ActivityCapitalWarning.create(:user => self.user, :capital => CapitalWarning.create(:recipient => self.user, :amount => -capital_lost))
-      self.user.probation!
-    elsif self.user.warnings_count == 3 # fourth warning, suspended
-      self.user.suspended!
-    end
+    self.user.do_abusive!
     self.update_attribute(:flags_count, 0)
-    self.user.increment!("warnings_count")
   end
   
   def request=(request)

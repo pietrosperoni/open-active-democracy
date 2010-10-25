@@ -27,17 +27,7 @@
                     <% end %>
                 </div>
                 <!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
-                <ul class="action">
-                    <li>
-                        <%= link_to t('esb.create.question'), "/senda_spurningu" %>
-                    </li>
-                    <li>
-                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
-                    </li>
-                    <li>
-                        <%= link_to t('esb.create.document'), "/senda_erindi" %>
-                    </li>
-                </ul>
+				<%=render :partial=>"shared/left_nav"%>
                 <!-- Lúppa með rss -->
                 <div class="left_box">
                     <% if logged_in? %>

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
-  before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password, :show]
+  before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password, :show]
   skip_before_filter :check_if_email_is_set, :only=>["set_email"]
   
   def index
@@ -19,6 +19,13 @@ class UsersController < ApplicationController
     end    
   end
   
+  def suspended
+  end
+
+  def list_suspended
+    @users = User.suspended.paginate :page => params[:page], :per_page => params[:per_page] 
+  end
+
   def disable_facebook
 #    @user = current_user
 #    @user.facebook_uid=nil
@@ -273,9 +280,9 @@ class UsersController < ApplicationController
   # PUT /users/1/unsuspend
   def unsuspend
     @user = User.find(params[:id])
-    @user.unsuspend! 
+    @user.unsuspend!
     flash[:notice] = t('users.reinstated', :user_name => @user.name)
-    redirect_to(@user)
+    redirect_to request.referer
   end
 
   def impersonate

@@ -20,12 +20,20 @@ var addthis_config = {
 				<%=image_tag("esb_entry_twitter.gif", :border => 0)%>
 			</a>
 			<% if logged_in? %>
-				<% if action_item.instance_of?(Priority) %>
-					<%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), flag_inappropriate_priority_url(action_item), :title => t('esb.mouseover.entry.report'), :confirm => t('menu.priorities.flag.confirm'), :method => :put %>
-				<% elsif action_item.instance_of?(Question) %>
-				  <%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
-				<% elsif action_item.instance_of?(Document) %>
-				  <%= link_to image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), "#", :title => t('esb.mouseover.entry.report') %>
+				<% if action_item.user_id != current_user.id or current_user.is_admin? %>
+					<% if action_item.instance_of?(Priority) %>
+						<%= link_to_remote image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), :url=>{:controller=>"priorites", :action=>"flag", :id=>action_item.id, :title => t('esb.mouseover.entry.report')}, :confirm => t('menu.priorities.flag.confirm'), :method => :get,
+ 																			  :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:right;\">')",
+																			  :complete=>"update('<img src=\"/images/entry_report_gray.gif\" style=\"float:right;\">')" %>
+					<% elsif action_item.instance_of?(Question) %>
+						<%= link_to_remote image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), :url=>{:controller=>"questions", :action=>"flag", :id=>action_item.id, :title => t('esb.mouseover.entry.report')}, :confirm => t('menu.priorities.flag.confirm'), :method => :get,
+ 																			  :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:right;\">')",
+																			  :complete=>"update('<img src=\"/images/entry_report_gray.gif\" style=\"float:right;\">')" %>
+					<% elsif action_item.instance_of?(Document) %>
+						<%= link_to_remote image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), :url=>{:controller=>"documents", :action=>"flag", :id=>action_item.id, :title => t('esb.mouseover.entry.report')}, :confirm => t('menu.priorities.flag.confirm'), :method => :get,
+ 																			  :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:right;\">')",
+																			  :complete=>"update('<img src=\"/images/entry_report_gray.gif\" style=\"float:right;\">')" %>
+					<% end %>
 				<% end %>
 			<% end %>
 		</div>

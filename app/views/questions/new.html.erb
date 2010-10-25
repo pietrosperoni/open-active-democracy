@@ -39,26 +39,10 @@
 		<b><%= t('esb.priority.description') %><span class="star">*</span></b>  (<span id="pointContentDown" class="">487</span> stafir eftir) <!-- <span class="star">*</span></div> -->
 	    </div>
 		<div class="field_box">
-	    <%= f.text_area :content, :maxlength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
+	    <%= f.text_area :content, :maxLength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
 		</div>
-		
-		
-			<br />
-			<!-- <b><%#= t('esb.question.your_question') %> <span class="star">*</span></b><br />-->
-			<%#= f.text_area :content, :rows => 18, :cols => 70, :maxlength => 500 %>
 			
-			<!-- <div class="field form_header">
-	    		<div class="field_label form_header"><%#= t('esb.question.question') %> <span id="pointContentDown"></span> <%#= t('characters_left')%></div>
-				<div class="field_box">
-	    			<%#= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 7, :cols => 70, :maxLength => 500 %><br /><br />
-				</div>
-			</div> --> 
-		
-			<!-- TODO AOM 210910
-			<b>Settu inn vefslóð sem tengist spurningunni:</b>
-			<input type="text" size="50" name="" value="http://" /><br />
-			<p>Vefslóðin er valkvæm, þú þarft ekki að setja hana inn <br /><br />					
-			</p> -->
+			<br />
              <% if current_facebook_user %>
                Senda á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %><br>
 			<% end %>
@@ -78,14 +62,13 @@ jQuery().ready(function() {
 		rules: {
 			'question[name]': {
 				required: true,
-				minlength: 5,
-				maxlength: 60,
+				minlength: 5
 			},
 			custom_tag: "required",
 			'question[content]': {
 				required: true,
 				minlength: 10,
-				maxlength: 1000,
+				maxlength: 500
 			},
 
 		},
@@ -95,8 +78,7 @@ jQuery().ready(function() {
 			},
 			'question[name]': {
 				required: "Settu inn titil á spurningu",
-				minlength: "Minnst 5 bókstafir",
-				maxlength: "Mest 60 bókstafir"
+				minlength: "Minnst 5 bókstafir"
 			},
 			'question[content]': {
 				required: "Settu inn spurningu",

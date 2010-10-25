@@ -35,17 +35,7 @@
 
 				</div>
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
-                <ul class="action">
-                    <li <%= controller_name=="questions" && @action == "new" ? "class='active'" : "" %>>
-                         <%= link_to t('esb.create.question'), "/senda_spurningu" %>
-                    </li>
-                    <li <%= controller_name=="priorities" && @action == "new" ? "class='active'" : "" %>>
-                        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
-                    </li>
-                    <li <%= controller_name=="documents" && @action == "new" ? "class='active'" : "" %>>
-                         <%= link_to t('esb.create.document'), "/senda_erindi" %>
-                    </li>
-                </ul>
+				<%=render :partial=>"shared/left_nav"%>
 				<!-- Lúppa með rss -->
 				 <% if logged_in? %>
                 <div class="left_box">

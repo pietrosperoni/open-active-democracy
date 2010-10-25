@@ -1,4 +1,6 @@
-<!-- Show a single question with its answer and all comments -->			
+<%if @question.status == 'abusive'%>
+Þessari spurningu hefur verið eytt.
+<% else %>
 <h4><%= @question.name %></h4>
 	
 <div class="entry_box"> 
@@ -25,13 +27,12 @@
 				<%= @question.content_html %>
 			</div>
 		<% end %>
-		
-			<!-- Edit or delete if there is no answer nor any comments-->		
 
-		<% if logged_in? and @question.discussions_count == 0 and !@question.answer and (current_user.is_admin? or current_user.id == @question.user_id) %>
-			<%= link_to t('menu.briefing.delete.name'), question_path(@question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
+		<% if logged_in? and ((@question.discussions_count == 0 and !@question.answer and current_user.id == @question.user_id) or current_user.is_admin?) %>
+			<%= link_to t('menu.briefing.delete.name'), question_path(@question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>
 		<% end %>
 </div>	
+<div id="flagged_question_info_<%=@question.id%>"><%=render :partial=>"questions/flagged", :locals=>{:question=>@question}-%></div>
 
 <!-- Comment box - 'Official Reply' box! -->	
 <%= render :partial => "questions/show_answer", :locals => {:question => @question, :suffix => "_noself"} %>
@@ -42,7 +43,6 @@
 	<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
 	
 	<% for activity in @question.activities.active.by_recently_created.find(:all, :limit => 10) %>
-			<%#= render :partial => "comments_questions/show_all", :locals => {:comment => @comment, :suffix => "_noself"}%>
 			<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself", :all => "1" }%>
 	<% end %>
 </div>
@@ -50,3 +50,4 @@
 <meta name="title" content="<%=@question.name%>" />
 <meta name="description" content="<%=@question.content%>" />
 <link rel="image_src" href="http://<%=request.host.downcase%>/images/logo_facebook_share.gif" />
+<% end %>

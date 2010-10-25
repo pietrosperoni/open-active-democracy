@@ -126,9 +126,7 @@ class User < ActiveRecord::Base
   end
   
   event :unsuspend do
-    transitions :from => :suspended, :to => :active, :guard => Proc.new {|u| !u.activated_at.blank? }
-    transitions :from => :suspended, :to => :pending, :guard => Proc.new {|u| !u.activation_code.blank? }
-    transitions :from => :suspended, :to => :passive
+    transitions :from => :suspended, :to => :active
   end
   
   event :probation do
@@ -154,6 +152,7 @@ class User < ActiveRecord::Base
     self.probation_at = nil
     self.suspended_at = nil
     self.deleted_at = nil
+    self.warnings_count = 0
   end  
   
   def do_delete
@@ -181,14 +180,10 @@ class User < ActiveRecord::Base
   
   def do_probation
     self.probation_at = Time.now
-    ActivityUserProbation.create(:user => self)
   end
   
   def do_suspension
     self.suspended_at = Time.now
-    for e in endorsements.active
-      e.suspend!
-    end
   end  
   
   def resend_activation
@@ -488,6 +483,20 @@ def self.adapter
   config = Rails::Configuration.new
   @adapter = config.database_configuration[RAILS_ENV]["adapter"]
   return @adapter
+end
+
+def do_abusive!
+   if self.warnings_count == 0 # this is their first warning, get a warning message
+    notifications << NotificationWarning1.new(:recipient => self)
+  elsif self.warnings_count == 1 # 2nd warning
+    notifications << NotificationWarning2.new(:recipient => self)
+  elsif self.warnings_count == 2 # third warning, on probation
+    notifications << NotificationWarning3.new(:recipient => self)      
+    self.probation!
+  elsif self.warnings_count > 3 # fourth or more warning, suspended
+    self.suspend!
+  end
+  self.increment!("warnings_count")
 end
 
 protected

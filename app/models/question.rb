@@ -5,7 +5,11 @@ class Question < ActiveRecord::Base
 
   named_scope :by_subfilter, lambda{|filter| filter==nil ? nil : filter=="answered" ? {:conditions=>"answer IS NOT NULL"} : {:conditions=>"answer IS NULL"} }
 
+  named_scope :flagged, :conditions => "flags_count > 0"
+
   acts_as_taggable_on :issues
+
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
 
   named_scope :published, :conditions => "questions.status = 'published'"
   named_scope :by_recently_created, :order => "questions.created_at desc"
@@ -49,6 +53,8 @@ class Question < ActiveRecord::Base
   state :published, :enter => :do_publish
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
+  state :abusive, :enter => :do_abusive
+
   
   event :publish do
     transitions :from => [:draft], :to => :published
@@ -72,11 +78,30 @@ class Question < ActiveRecord::Base
     transitions :from => :buried, :to => :draft     
   end  
 
+  event :abusive do
+    transitions :from => :published, :to => :abusive
+  end
+
+  def do_abusive
+    self.user.do_abusive!
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end
+
   def do_publish
     self.published_at = Time.now
   end
   
   def do_delete
+    activities.each do |a|
+      a.delete!
+    end
     for r in revisions
       r.delete!
     end

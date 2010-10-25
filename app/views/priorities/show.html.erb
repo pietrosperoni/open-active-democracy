@@ -1,6 +1,4 @@
-<!--<%=@priority.name%><br>
-	<div class="heading"><%= t('priorities.recent_activity')%></div>
--->
+<% unless @priority.status=="abusive" or @priority.status=="abusive" %>
 <div id="activities">
 	<% @activities.each do |activity| %>
 		<%= render :partial => "activities/show_single", :locals => {:activity => activity, :suffix => "_noself"} %>
@@ -12,7 +10,7 @@
 		<%= will_paginate(@activities, :params => {:action => "activities"} ) %>
 	<% end %>
 </div>
-
 <meta name="title" content="<%=@priority.name%>" />
 <meta name="description" content="<%=@priority.description%>" />
 <link rel="image_src" href="http://<%=request.host.downcase%>/images/logo_facebook_share.gif" />
+<% end%>

@@ -3,12 +3,17 @@
 	<div class="entry_box"> 
 		<%= render :partial => "shared/entry_icons", :locals => {:content => question.content, :action_item=>question}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
-		<h5><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %><% if current_user and current_user.is_admin? %>(<%= question.created_at.strftime("%d.%m.%Y") %>)<% end %>
+		<h5><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %>
 </h5> 
 		
 		<span class="entry_profile">
 			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> 
+			<% if current_user and current_user.is_admin? %>
+			 - <%= question.created_at.strftime("%d.%m.%y %H:%M") %>
+			<% else %>
 			- <%= t('revisions.added', :time_ago => time_ago(question.created_at)) %>			
+			<% end %>
+
 			<% for tag in question.issues %>
 		   		- <a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><%=tag.name%></a>
 			<% end %>
@@ -30,24 +35,24 @@
 		
 		<!-- Edit or delete if there is no answer nor any comments-->		
 
-		<% if logged_in? and question.discussions_count == 0 and !question.answer and (current_user.is_admin? or current_user.id == question.user_id) %>
+		<% if logged_in? and ((question.discussions_count == 0 and !question.answer and current_user.id == question.user_id) or current_user.is_admin?) %>
 			<%= link_to t('menu.briefing.delete.name'), question_path(question), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
 		<% end %>
-		
+		<div id="flagged_question_info_<%=question.id%>"><%=render :partial=>"questions/flagged", :locals=>{:question=>question}-%></div>
+
 	</div>
-			
-	<!-- Comment box - 'Official Reply' box! -->	
-	<%= render :partial => "questions/show_answer", :locals => {:question => question, :suffix => "_noself"} %>
-								
-	<!-- Comment box -->			
-	
-	<% activities = question.activities.active.for_all_users.by_recently_updated :include => :user %>
-	<% activity = activities.first %>
-	<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
-	
-	<!-- TODO Hve mörg komment/umræður ?? -->
-	<% for activity in activities %>
-		<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself"} %>
+							
+	<!-- Comment box -->
+	<% unless defined? skip_details %>
+		<%= render :partial => "questions/show_answer", :locals => {:question => question, :suffix => "_noself"} %>
+		<% activities = question.activities.active.for_all_users.by_recently_updated :include => :user %>
+		<% activity = activities.first %>
+		<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
+		
+		<!-- TODO Hve mörg komment/umræður ?? -->
+		<% for activity in activities %>
+			<%= render :partial => "activities/show_questions", :locals => {:activity => activity, :suffix => "_noself"} %>
+		<% end %>
 	<% end %>
 
 </div>

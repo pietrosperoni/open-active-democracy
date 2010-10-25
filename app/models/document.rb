@@ -3,6 +3,8 @@ class Document < ActiveRecord::Base
   named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
   named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
 
+  named_scope :flagged, :conditions => "flags_count > 0"
+
   acts_as_taggable_on :issues
 
   named_scope :published, :conditions => "documents.status = 'published'"
@@ -10,6 +12,8 @@ class Document < ActiveRecord::Base
   named_scope :by_recently_created, :order => "documents.created_at desc"
   named_scope :by_recently_updated, :order => "documents.updated_at desc"  
   named_scope :revised, :conditions => "revisions_count > 1"
+
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
 
   belongs_to :user
   belongs_to :priority
@@ -49,7 +53,8 @@ class Document < ActiveRecord::Base
   state :published, :enter => :do_publish
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
-  
+  state :abusive, :enter => :do_abusive
+
   event :publish do
     transitions :from => [:draft], :to => :published
   end
@@ -72,6 +77,22 @@ class Document < ActiveRecord::Base
     transitions :from => :buried, :to => :draft     
   end  
 
+  event :abusive do
+    transitions :from => :published, :to => :abusive
+  end
+
+  def do_abusive
+    self.user.do_abusive!
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end
+
   def update_word_count
     self.word_count = self.content.split(' ').length
   end
@@ -84,12 +105,9 @@ class Document < ActiveRecord::Base
   
   def do_delete
     remove_counts
-    # look for any capital they may have earned on this document, and remove it
-    capital_earned = capitals.sum(:amount)
-    if capital_earned != 0
-      self.capitals << CapitalDocumentHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1))
+    activities.each do |a|
+      a.delete!
     end
-    priority.save_with_validation(false)
     for r in revisions
       r.delete!
     end

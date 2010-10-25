@@ -1,3 +1,7 @@
+<%if @document.status == 'abusive' %>
+Þessu erindi hefur verið eytt.
+<% else %>
+
 <div class="entry_box">
 		<%= render :partial => "shared/entry_icons", :locals => {:content => @document.content, :action_item=>@document}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => @document.user}%> 
@@ -10,7 +14,12 @@
 			
 		<span class="entry_profile">
 			<%= t('revisions.byline', :author_sentence => @document.author_sentence) %>
+			<% if current_user and current_user.is_admin? %>
+			 - <%= @document.created_at.strftime("%d.%m.%y %H:%M") %>
+			<% else %>
 			- <%= t('revisions.added', :time_ago => time_ago(@document.created_at)) %>
+			<% end %>
+
 			<%#= t('revisions.word_count', :count => document.word_count) %>
 			<% @document.issues %>
 			<% for tag in @document.issues %>
@@ -31,8 +40,10 @@
 				<%= @document.content_html %>
 			</div>
 		<% end %>
+		<div id="flagged_document_info_<%=@document.id%>"><%=render :partial=>"documents/flagged", :locals=>{:document=>@document}-%></div>
 	</div>
 	
 <meta name="title" content="<%=@document.name%>" />
 <meta name="description" content="<%=@document.content%>" />
 <link rel="image_src" href="http://<%=request.host.downcase%>/images/logo_facebook_share.gif" />
+<% end %>

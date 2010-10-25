@@ -22,13 +22,12 @@
 		<% end %>		
 				
 		<% if shortentext == 0 %>
-			<p><div id="comment_content_text_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>	
+			<p><div id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>	
 		<% else %>
-			<p><div class="comment_content_2" id="comment_content_text_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
+			<p><div class="comment_content_2" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div></p>
 		<% end %>
-	
-		
-		<% if logged_in? and comment == @comments.last and (current_user.is_admin? or current_user.id == comment.user_id) %>
+
+		<% if logged_in? and ((@comments and comment == @comments.last and current_user.id == comment.user_id) or current_user.is_admin?) %>
 			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
 		<% end %>
 	</div>		

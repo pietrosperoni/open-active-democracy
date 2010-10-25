@@ -4,20 +4,26 @@
 		<%= render :partial => "users/pic_48", :locals => {:user => document.user}%> 
 		
 		<% if revision %>
-			<h4><%= link_to_unless_current h(revision.name), document_revision_url(document,revision) %><% if current_user and current_user.user.is_admin? %>(<%= document.created_at.strftime("%d.%m.%Y") %>)<% end %>
-</h4>
+			<h4><%= link_to_unless_current h(revision.name), document_revision_url(document,revision) %></h4>
 		<% else %>
-			<h4><%= link_to_unless_current h(document.name), document %><% if current_user and current_user.is_admin? %>(<%= document.created_at.strftime("%d.%m.%Y") %>)<% end %>
-</h4>
+			<h4><%= link_to_unless_current h(document.name), document %></h4>
 		<% end %>
 			
 		<span class="entry_profile">
 			<%= t('revisions.byline', :author_sentence => document.author_sentence) %>
+			<% if current_user and current_user.is_admin? %>
+			 - <%= document.created_at.strftime("%d.%m.%y %H:%M") %>
+			<% else %>
 			- <%= t('revisions.added', :time_ago => time_ago(document.created_at)) %>
+			<% end %>
+
 			<%#= t('revisions.word_count', :count => document.word_count) %>
 			<% for tag in document.issues %>
-		   		<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><%=tag.name%></a>
+		   		- <a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>"><%=tag.name%></a>
 			<% end %>
+			<% if logged_in? and (current_user.id == document.user_id or current_user.is_admin?) %>
+			   - <%= link_to t('menu.briefing.delete.name'), document_path(document), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>	
+		    <% end %>
 			<% if controller_name=="news" %>
 			 - Erindi
 			 <% end %>
@@ -32,6 +38,7 @@
 				<%= document.content_html %>
 			</div>
 		<% end %>
+		<div id="flagged_document_info_<%=document.id%>"><%=render :partial=>"documents/flagged", :locals=>{:document=>document}-%></div>
 
 	</div>
 		

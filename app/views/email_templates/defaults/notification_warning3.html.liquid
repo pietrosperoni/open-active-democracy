@@ -1,19 +1,15 @@
-Sæl(l) {{ recipient.first_name | capitalize }},
+Sæl(l) {{ recipient.login }},
 
-Þetta er þriðja viðvörun til þín fyrir að brjóta reglur vefsins "Samningaviðræður Íslands við ESB". 
+Þetta er síðasta viðvörun af þremur til þín fyrir að brjóta reglur vefsins "Samningaviðræður Íslands við ESB". Aðsendu efni hefur verið eytt.
 
-Athugasemd þinni var eytt og aðgangur þinn hefur verið frystur í viku sem þýðir að þú getur ekkert sett inn á vefinn í þann tíma. 
+Skoðaðu reglurnar: {{ recipient.root_url }}reglur
 
-Skoðaðu reglurnar: {{ recipient.root_url }}about/rules
+Við næsta brot á reglum vefsins verður þú bannaður/bönnuð af vefnum.
 
-Ef þú brýtur reglurnar einu sinni enn þá verður þú bannaður af vefnum til frambúðar.
-
-Hér er athugasemdin sem orsakaði þetta bréf. 
+Hér er efnið sem orsakaði þetta bréf. Ef þú hefur einhverjar spurningar þá geturðu haft samband við okkur á {{ government.admin_email }}.
 
 "{{ notifiable.content }}"
 
-Ef þú hefur einhverjar spurningar þá geturðu haft samband við {{ government.admin_name }} á netfangið {{ government.admin_email }}.
-
 
 ---
-Þetta er sjálfvirk tilkynning frá {{ government.name }} sem send er á {{ recipient.email }}.  
+Þetta er sjálfvirk tilkynning frá vidraedur.is sem send er á {{ recipient.email }}.  

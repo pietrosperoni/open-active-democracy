@@ -1,110 +1,111 @@
 <% if params[:notice] %>
-	<%= params[:notice] %>
+<%= params[:notice] %>
 <% end %>
 <% form_for :priority, :url => "/priorities/create", :html=>{:id=>"priority_form"}  do |f| %>
-	<%= f.error_messages %>
-
-	<h2>Setja inn nýtt umræðuefni</h2>
-	<h3><%= t('esb.priority.whatis') %> <span class="star">*</span></h3>
-	<h4>				
-		<%= t('document.revision.new.name.label')%>
-	</h4>	
-		<br/>
-   		<%= f.text_field :name, :size => 60, :maxlength => 60 %>		
-	
-	<%#= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
-	<!-- Tengt kafla: <span class="custom_tag"><%=select_tag "custom_tag", "#{Tag.all_dropdown_options}" %></span> -->
-	<br />
-	<h4><%= t('esb.priority.tag') %> <span class="star">*</span></h4>
-	<div class="addContent_kaflar">
-		<b><%= t('esb.tags.notin') %></b><br />
-			<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>
-			<% end %>			
-	</div>
-	<div class="addContent_kaflar">
-		<b><%= t('esb.tags.partly') %></b><br />
-			<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>	
-			<% end %>			
-	</div>
-	<div class="addContent_kaflar">
-		<b><%= t('esb.tags.within') %></b><br />
-			<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>	
-			<% end %>			
-	</div>	
-
-	<div class="addContent_kaflar annad">
-		<b>Annað</b><br />
-
-			<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>
-				<input type="radio" name="custom_tag" value="<%=tag.name%>"/> <span class="Chapter_name"><%=tag.name%><br /></span>	
-			<% end %>			
-	</div>	
-	
-	<br/><br/>
-	<div class="NanariLysing">
-    <b><%= t('esb.priority.description') %><span class="star">*</span></b>  (<span id="pointContentDown" class="">487</span> stafir eftir) <!-- <span class="star">*</span></div> -->
-	</div>
-			<div class="field_box">
-	    	<%= f.text_area :description, :maxlength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
-			</div>
-			
-	
-	<%#= f.text_area :description, :rows => 18, :cols => 70 %>
-	<%#= text_area_tag "priority[description]", "", :button => 'submit', :size => 500, :maxLength => 500 %>
-    
-	<br /><br />
-
-	<!-- TODO aom, add web-tag 210910-->
-    <% if current_facebook_user %>
-       Senda á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %><br>
- 	<% end %>
-
-	<%#= submit_tag "Búa til umræðuefni", :class => "suggest_button" %>
-	<%= f.submit "Búa til umræðuefni", :id => "submit", :class => "yellow_button" %>
-	<div id="errors" class="error"><%= f.error_messages %></div>
-	
-<% end %>	
-
+<%= f.error_messages %>
+<h2>Setja inn nýtt umræðuefni</h2>
+<h3><%= t('esb.priority.whatis') %><span class="star">*</span></h3>
+<h4><%= t('document.revision.new.name.label') %>
+</h4>
+<br/>
+<%= f.text_field :name, :size => 60, :maxlength => 60 %>
+<br/>
+<h4><%= t('esb.priority.tag') %><span class="star">*</span></h4>
+<div class="addContent_kaflar">
+    <b><%= t('esb.tags.notin') %></b>
+    <br/>
+    <% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag| %>
+    <input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name %>
+        <br/>
+    </span>
+    <% end %>
+</div>
+<div class="addContent_kaflar">
+    <b><%= t('esb.tags.partly') %></b>
+    <br/>
+    <% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag| %>
+    <input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name %>
+        <br/>
+    </span>
+    <% end %>
+</div>
+<div class="addContent_kaflar">
+    <b><%= t('esb.tags.within') %></b>
+    <br/>
+    <% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag| %>
+    <input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name %>
+        <br/>
+    </span>
+    <% end %>
+</div>
+<div class="addContent_kaflar annad">
+    <b>Annað</b>
+    <br/>
+    <% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag| %>
+    <input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name %>
+        <br/>
+    </span>
+    <% end %>
+</div>
+<br/>
+<br/>
+<div class="NanariLysing">
+    <b><%= t('esb.priority.description') %><span class="star">*</span></b>
+    (<span id="pointContentDown" class="">487</span> stafir eftir)
+</div>
+<div class="field_box">
+    <%= f.text_area :description, :maxLength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
+</div>
+<br/>
+<br/>
+<% if current_facebook_user %>
+Senda á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %>
+<br>
+<% end %>
+<%= f.submit "Búa til umræðuefni", :id => "submit", :class => "yellow_button" %>
+<div id="errors" class="error">
+    <%= f.error_messages %>
+</div>
+<% end %>
 <style type="text/css">
-label.error { float: right; color: red; padding-left: .5em; vertical-align: top; }
+    label.error {
+        float: right;
+        color: red;
+        padding-left: .5em;
+        vertical-align: top;
+    }
 </style>
-
-<script type="text/javascript"> 
-jQuery().ready(function() {	
-	// validate signup form on keyup and submit
-	jQuery("#priority_form").validate({
-		rules: {
-			'priority[name]': {
-				required: true,
-				minlength: 5,
-				maxlength: 60,
-			},
-			custom_tag: "required",
-			'priority[description]': {
-				required: true,
-				minlength: 10,
-				maxlength: 1000,
-			},
-
-		},
-		messages: {
-			custom_tag: {
-				required: "Veldu flokk",
-			},
-			'priority[name]': {
-				required: "Settu inn titil fyrir umræðuefni",
-				minlength: "Minnst 5 bókstafir",
-				maxlength: "Mest 60 bókstafir"
-			},
-			'priority[description]': {
-				required: "Settu inn lýsingu á umræðuefni",
-				minlength: "Minnst 10 bókstafir",
-				maxlength: "Mest 500 bókstafir"
-			}
-		}
-	});	
-});
-</script> 
+<script type="text/javascript">
+    jQuery().ready(function(){
+        // validate signup form on keyup and submit
+        jQuery("#priority_form").validate({
+            rules: {
+                'priority[name]': {
+                    required: true,
+                    minlength: 5
+                },
+                custom_tag: "required",
+                'priority[description]': {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 500
+                },
+            
+            },
+            messages: {
+                custom_tag: {
+                    required: "Veldu flokk",
+                },
+                'priority[name]': {
+                    required: "Settu inn titil fyrir umræðuefni",
+                    minlength: "Minnst 5 bókstafir"
+                },
+                'priority[description]': {
+                    required: "Settu inn lýsingu á umræðuefni",
+                    minlength: "Minnst 10 bókstafir",
+                    maxlength: "Mest 500 bókstafir"
+                }
+            }
+        });
+    });
+</script>

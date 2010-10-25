@@ -2,6 +2,15 @@ class AdminController < ApplicationController
   
   before_filter :admin_required
   
+  def all_flagged
+    @all = [] 
+    @all += Priority.published.flagged
+    @all += Question.published.flagged
+    @all += Comment.published.flagged
+    @all += Document.published.flagged
+    @all = @all.sort_by {|s| s.created_at}
+  end
+  
   def random_user
     if User.adapter == 'postgresql'
       users = User.find(:all, :conditions => "status = 'active'", :order => "RANDOM()", :limit => 1)

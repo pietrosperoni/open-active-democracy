@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
  
-  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy, :update_importance]
-  before_filter :admin_required, :only => [:edit, :update]
+  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy, :update_importance, :flag]
+  before_filter :admin_required, :only => [:edit, :update, :abusive, :not_abusive]
  # before_filter :set_default_subfilter
  
  def set_subfilter
@@ -226,6 +226,48 @@ class QuestionsController < ApplicationController
       format.html { redirect_to(questions_url) }   
     end
   end
-  
+
+  def flag
+    @question = Question.find(params[:id])
+    @question.flag_by_user(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to(comments_url) }
+      format.js {
+        render :update do |page|
+          if current_user.is_admin?
+            page.replace_html "flagged_question_info_#{@question.id}", render(:partial => "questions/flagged", :locals => {:question => @question})
+          else
+            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>Takk fyrir að vekja athygli okkar á þessu umræðuefni.</div>"
+          end
+        end        
+      }
+    end    
+  end  
+
+  def abusive
+    @question = Question.find(params[:id])
+    @question.abusive!
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>Þessari spurningu hefur verið eytt og viðvörun send.</div>"
+        end        
+      }
+    end    
+  end
+
+  def not_abusive
+    @question = Question.find(params[:id])
+    @question.update_attribute(:flags_count, 0)
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_question_info_#{@question.id}",""
+        end        
+      }
+    end    
+  end
+
   private    
 end

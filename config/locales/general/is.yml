@@ -268,7 +268,7 @@ is:
             success: "Meðlimir sem ekki hafa valið sér grein verða núna settir undir {{branch_name}}.  Stigagjöf hugmynda verður ekki uppfærð alveg strax, það gæti tekið um klukkustund eða svo."
             priorities:
                 name: "hugmynd"
-                deleted: "Þessari hugmynd var eytt"
+                deleted: "Þessu umræðuefni var eytt"
                 replaced: "Þessari hugmynd var skipt út fyrir {{priority_name}}"
     branch_endorsements:
         top:
@@ -514,9 +514,9 @@ is:
                 one: "1 flagg"
                 other: "{{count}} flögg"
             issue_warning:
-                action: "{{user_name}} hefur borist #{{warnings_count}} aðvaranir"
-                name: "Senda viðvörun"
-                ing: "Sendi viðvörun"
+                action: "{{user_name}} áður {{warnings_count}} aðvaranir"
+                name: "Senda viðvörun og eyða efni"
+                ing: "Sendi viðvörun og eyði efni"
             clear:
                 name: "Sleppa flaggi"
                 ing: "Sleppi flaggi"
@@ -1071,7 +1071,7 @@ is:
             all_best_points: "Öll bestu rök"
     priorities:
         name: "hugmynd"
-        deleted: "Þessari hugmynd var eytt"
+        deleted: "Þessu umræðuefni var eytt"
         replaced: "Þessari hugmynd var skippt út fyrir {{priority_name}}"
         short_url:
             name: "Stutt vefslóð:"

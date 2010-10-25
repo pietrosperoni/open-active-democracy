@@ -3,6 +3,7 @@ class Priority < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
   
   named_scope :published, :conditions => "priorities.status = 'published'"
+  named_scope :flagged, :conditions => "flags_count > 0"
 
   named_scope :alphabetical, :order => "priorities.name asc"
   named_scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
@@ -47,6 +48,7 @@ class Priority < ActiveRecord::Base
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
   state :inactive
+  state :abusive, :enter => :do_abusive
   
   event :publish do
     transitions :from => [:draft, :passive], :to => :published
@@ -67,6 +69,10 @@ class Priority < ActiveRecord::Base
   
   event :deactivate do
     transitions :from => [:draft, :published, :buried], :to => :inactive
+  end
+
+  event :abusive do
+    transitions :from => :published, :to => :abusive
   end
     
   cattr_reader :per_page
@@ -117,19 +123,35 @@ class Priority < ActiveRecord::Base
     Government.last.homepage_url + 'priorities/' + to_param
   end
   
+  def content
+    "#{self.name} - #{self.description}"
+  end
+  
   # this uses http://is.gd
   def create_short_url
     self.short_url = open('http://is.gd/create.php?longurl=' + show_url, "UserAgent" => "Ruby-ShortLinkCreator").read[/http:\/\/is\.gd\/\w+(?=" onselect)/]
   end
 
+  def do_abusive
+    self.user.do_abusive!
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end
+  
   private
   def do_publish
     self.published_at = Time.now
   end
   
   def do_delete
-    for e in endorsements
-      e.delete!
+    activities.each do |a|
+      a.delete!
     end
     self.deleted_at = Time.now
   end

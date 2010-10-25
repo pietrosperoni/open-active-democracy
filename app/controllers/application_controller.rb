@@ -100,9 +100,8 @@ class ApplicationController < ActionController::Base
       self.current_user.forget_me if logged_in?
       cookies.delete :auth_token
       reset_session
-      flash[:notice] = "This account has been suspended."
-      redirect_back_or_default('/')
-      return  
+      redirect_to "/bann"
+      return false
     end
   end
   

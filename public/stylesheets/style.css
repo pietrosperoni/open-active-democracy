@@ -434,6 +434,7 @@ h5
 {
 	font-weight: normal;
 }
+
 .comment_more
 {
 	background-color: #e9eced;
@@ -937,4 +938,15 @@ display: none;
 .senda_a_facebook
 {
 
+}
+
+.warning_inline
+{
+	background-color: #ff7777;
+	min-height: 14px;
+	padding: 1px 4px 2px 6px;
+	margin: 0px 0px 8px 60px;
+	width: 515px;
+	border-bottom: 1px solid #e2e2e2;
+	margin: 0px 0px 8px 65px !ie;
 }

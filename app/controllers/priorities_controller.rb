@@ -1,7 +1,7 @@
 class PrioritiesController < ApplicationController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :comment, :edit, :update, 
-                                           :tag, :tag_save, :opposed, :endorsed, :destroy, :new, :set_subfilter]
+                                           :tag, :tag_save, :opposed, :endorsed, :destroy, :new, :set_subfilter, :flag]
   before_filter :admin_required, :only => [:bury, :successful, :compromised, :intheworks, :failed]
   before_filter :load_priority, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, 
                                              :opposed_top_points, :endorsed_top_points, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
@@ -80,6 +80,9 @@ class PrioritiesController < ApplicationController
   # GET /priorities/1
   def show
     if @priority.status == 'deleted'
+      flash[:notice] = t('priorities.deleted')
+    end
+    if @priority.status == 'abusive'
       flash[:notice] = t('priorities.deleted')
     end
     @page_title = @priority.name
@@ -260,14 +263,47 @@ class PrioritiesController < ApplicationController
   end
 
   # PUT /priorities/1/flag_inappropriate
-  def flag_inappropriate
+  def flag
     @priority = Priority.find(params[:id])
-    @saved = ActivityPriorityFlag.create(:priority => @priority, :user => current_user)
+    @priority.flag_by_user(current_user)
+
     respond_to do |format|
-      flash[:notice] = t('priorities.change.flagged', :priority_name => @priority.name, :admin_name => current_government.admin_name)
-      format.html { redirect_to(@priority) }
-    end
+      format.html { redirect_to(comments_url) }
+      format.js {
+        render :update do |page|
+          if current_user.is_admin?
+            page.replace_html "flagged_info_#{@priority.id}", render(:partial => "priorities/flagged", :locals => {:priority => @priority})
+          else
+            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>Takk fyrir að vekja athygli okkar á þessu umræðuefni.</div>"
+          end
+        end        
+      }
+    end    
   end  
+
+  def abusive
+    @priority = Priority.find(params[:id])
+    @priority.abusive!
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>Þessu umræðuefni hefur verið eytt og viðvörun send.</div>"
+        end        
+      }
+    end    
+  end
+
+  def not_abusive
+    @priority = Priority.find(params[:id])
+    @priority.update_attribute(:flags_count, 0)
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_info_#{@priority.id}",""
+        end        
+      }
+    end    
+  end
   
   # PUT /priorities/1/bury
   def bury
@@ -316,10 +352,10 @@ class PrioritiesController < ApplicationController
     end
     return unless @priority
     name = @priority.name
-    @priority.send_later(:destroy)
+    @priority.delete!
     flash[:notice] = t('priorities.destroy.success', :priority_name => name)
     respond_to do |format|
-      format.html { redirect_to yours_created_priorities_url }    
+      format.html { redirect_to(priorities_url) }
     end
   end  
 

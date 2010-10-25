@@ -1,0 +1,24 @@
+<table width="100%">
+	<tr>
+		<td width="30%">
+			<b>Nafn</b>
+		</td>
+		<td width="20%">
+			<b>Kennitala</b>
+		</td>
+		<td width="20%">
+			<b>Tölvupóstur</b>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<%@users.each do |user|%>
+		<tr>
+			<td><%=user.login%></td>
+			<td><%=user.national_identity%></td>
+			<td><%=user.email%></td>
+			<td><%=link_to "Taka bann af", "/users/unsuspend/#{user.id}"%></td>
+		</tr>
+	<% end %>
+</table>
+<%=will_paginate @users %>
