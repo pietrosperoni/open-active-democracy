@@ -83,7 +83,7 @@ class Document < ActiveRecord::Base
   end
 
   def do_abusive
-    self.user.do_abusive!
+    self.user.do_abusive!(notifications)
     self.update_attribute(:flags_count, 0)
   end
 

@@ -485,13 +485,13 @@ def self.adapter
   return @adapter
 end
 
-def do_abusive!
+def do_abusive!(parent_notifications)
    if self.warnings_count == 0 # this is their first warning, get a warning message
-    notifications << NotificationWarning1.new(:recipient => self)
+    parent_notifications << NotificationWarning1.new(:recipient => self)
   elsif self.warnings_count == 1 # 2nd warning
-    notifications << NotificationWarning2.new(:recipient => self)
+    parent_notifications << NotificationWarning2.new(:recipient => self)
   elsif self.warnings_count == 2 # third warning, on probation
-    notifications << NotificationWarning3.new(:recipient => self)      
+    parent_notifications << NotificationWarning3.new(:recipient => self)      
     self.probation!
   elsif self.warnings_count > 3 # fourth or more warning, suspended
     self.suspend!
