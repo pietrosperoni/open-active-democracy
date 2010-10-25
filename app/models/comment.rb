@@ -21,6 +21,7 @@ class Comment < ActiveRecord::Base
   define_index do
     indexes content
     indexes cached_issue_list, :facet=>true
+    where "status = 'published'"
   end
   
   # docs: http://www.vaporbase.com/postings/stateful_authentication

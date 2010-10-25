@@ -30,6 +30,7 @@ class Question < ActiveRecord::Base
     indexes content
     indexes answer
     indexes cached_issue_list, :facet=>true
+    where "status = 'published'"    
   end
 
   liquid_methods :id, :user, :text

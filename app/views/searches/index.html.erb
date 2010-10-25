@@ -29,7 +29,7 @@
 				<% elsif result.class == Question %>
 				<div>
 					<h4> Spurning og svar - <%= time_ago(result.excerpts.created_at) %></h4> 				
-					<h3><%= h(result.excerpts.name) %></h3>
+					<h3><%= result.excerpts.name %></h3>
 					Spurning: <%= result.excerpts.content %><br>
 					Svar: <%= result.excerpts.answer %>
 					<br>

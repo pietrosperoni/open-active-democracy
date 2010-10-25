@@ -30,6 +30,7 @@ class Document < ActiveRecord::Base
     indexes name
     indexes content
     indexes cached_issue_list, :facet=>true
+    where "status = 'published'"
   end
   
   cattr_reader :per_page
