@@ -26,20 +26,20 @@
     jQuery("#treaty_document_window").dialog("open");
  }
 
- function showTreatyDocumentChapterWindow(chapter_name)
+ function showTreatyDocumentChapterWindow(chapter_id)
  {
  	jQuery.ajaxSetup({cache: false});
 	var dialogOpts = {
 		      modal: true,
 		      bgiframe: true,
 		      autoOpen: false,
-		      height: 350,
-		      width: 550,
+		      height: 600,
+		      width: 900,
 		      draggable: true,
 		      resizeable: true,
 			  open: function() {
 			  	jQuery('<img class="spinner_classy" src="/images/spinner.gif" style="float: right; padding-right:25px;" />').insertAfter('.ui-dialog-title');
-	        	jQuery("#treaty_document_chapter_window").load("/treaty_documents/show_chapter?chapter_name="+encodeURIComponent(chapter_name), function() {jQuery('.spinner_classy').hide();});
+	        	jQuery("#treaty_document_chapter_window").load("/treaty_documents/show_chapter?chapter_id="+encodeURIComponent(chapter_id), function() {jQuery('.spinner_classy').hide();});
 				},
 			  close: function(){
 			  		jQuery("#treaty_document_chapter_window").dialog("destroy");
@@ -51,4 +51,3 @@
  }
  
 </script>
-

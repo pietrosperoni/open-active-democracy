@@ -11,15 +11,13 @@
 		<% #end %>
 	</tr>
 
-<% TreatyDocument::TREATY_ARRAY.each do |chapter| %>
+<% Tag.by_external_id.each do |tag| %>
 	<tr>	
 		<td class="td_Underline">
-			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=chapter[:name]%>')"><%=chapter[:id]%>. <%=chapter[:name]%></a>
+			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=tag.external_id%>. <%=tag.name%></a>
 		</td>
-		
-		<% chapter[:negotiation_stages].each do |stage| %>
-			
-			<% count = TreatyDocument.count(:conditions=>"chapter = #{chapter[:id]} AND negotiation_status = #{stage[:id]}") %>
+		<% TreatyDocument::NEGOTIATION_STAGES.each do |stage| %>			
+			<% count = TreatyDocument.count(:conditions=>"chapter = #{tag.external_id} AND negotiation_status = #{stage[:id]}") %>
 			<% if count > 0 and count < TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS %>
 				<td style="background-color:<%= GrayScaleColor.from_fraction(1-(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f)).html %>">
 			<% elsif count > 0 %>
@@ -29,7 +27,7 @@
 				<span style="color:#fff">
 			<% end %>
 				<% if count>0 %>
-					<a href="#" onclick="showTreatyDocumentWindow(<%=chapter[:id]%>,<%=stage[:id]%>)"><%=count%></a>
+					<a href="#" onclick="showTreatyDocumentWindow(<%=tag.external_id%>,<%=stage[:id]%>)"><%=count%></a>
 				<% else %>
 					<%=count%>
 				<% end %>

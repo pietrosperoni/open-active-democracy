@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
 
   def current_government
     if RAILS_ENV=="development"
-      self.current_user = User.first
+      self.current_user = User.last
     end
     @current_government = Government.last
     return @current_government
