@@ -600,7 +600,8 @@ ActiveRecord::Schema.define(:version => 20101025224230) do
     t.string   "cached_issue_list"
   end
 
-<<<<<<< HEAD
+  add_index "treaty_documents", ["cached_issue_list"], :name => "index_treaty_documents_on_cached_issue_list"
+
   create_table "unsubscribes", :force => true do |t|
     t.integer  "user_id"
     t.string   "email"
@@ -616,9 +617,6 @@ ActiveRecord::Schema.define(:version => 20101025224230) do
     t.boolean  "is_finished_subscribed",      :default => true
     t.boolean  "is_admin_subscribed",         :default => false
   end
-=======
-  add_index "treaty_documents", ["cached_issue_list"], :name => "index_treaty_documents_on_cached_issue_list"
->>>>>>> rvb/esb
 
   create_table "user_contacts", :force => true do |t|
     t.integer  "user_id"

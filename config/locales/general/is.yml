@@ -1644,10 +1644,23 @@ is:
         comment:
             delete: "Eyða"
             more: "Sýna allar athugasemdir"
+        menu:
+            all: 
+                label: "Allt" 
+                mouseover: "Öll virkni vefsins á einum stað"
+            questionsanswers: 
+                label: "Spurningar og svör"
+                mouseover: "Innsendar spurningar ásamt svörum"
+            discussions: 
+                label: "Umræður"
+                mouseover: "Umræður notenda vefsins"
+            documents: 
+                label: "Erindi"
+                mouseover: "Yfirlit yfir formleg erindi til samninganefndar" 
         mouseover:
             logout: "Skrá mig út"
             edituser: "Breyta eigin stillingum: Mynd, netfangi og Facebook tengingu"
-            subscribe: "Gerast áskrifandi"
+            subscribe: "Veldu samningskafla sem þú vilt fá í áskrift"
             entry:
                 email: "Senda tölvupóst til vinar með þessu máli"
                 bookmark: "Fylgjast með þessu máli"
@@ -1662,7 +1675,7 @@ is:
                 less: "sýna færri athugasemdir"
                 delete: "Fjarlægja þessa athugasemd"
             question:
-                title: "Sjá allt um þessa spurningu"
+                title: "Sjá allt um þessa spurningu"                
         sessions:
             new:
                 intro: "<a href='{{signup_url}}'>Nýskráning</a>"
@@ -1687,5 +1700,20 @@ is:
             send_short: "Senda spurningu"
             success: "Takk fyrir að leggja inn spurningu."
         empty_chapter: "Ekkert efni fellur undir þær skilgreiningar sem þú hefur valið. <br> Prófaðu að skoða alla kafla eða veldu Allt hér fyrir ofan til að sjá efni sem þú leitar að."
-
+        footer:
+            rules:
+                label: "Skilmálar" 
+                mouseover: "Skilmálar og almennar reglur um notkun vefsins"
+            about:
+                label: "Um vefinn" 
+                mouseover: "Upplýsingar um tilgang vefsins og hverjir unnu að gerð hans"
+            help:
+                label: "Hjálp" 
+                mouseover: "Leiðbeiningar um notkun vefsins"
+            ministry:
+                label: "Utanríkisráðuneytið" 
+                mouseover: "Tengill á vef utanríkisráðuneytisins"
+            contact:
+                label: "vidraedur@utn.stjr.is" 
+                mouseover: "Sendu póst á umsjónarmann síðunnar"
            
