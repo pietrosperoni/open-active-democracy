@@ -20,7 +20,7 @@ class TreatyDocumentsController < ApplicationController
   
   def show_chapter
     @active = "show_chapter"
-    @chapter_desc = TreatyDocument::TREATY_CHAPTER_DESCRIPTION.find {|c| c[:name]==params[:chapter_name]}[:desc]
+    @chapter_id = params[:chapter_id]
     render :layout=>false
   end
   
