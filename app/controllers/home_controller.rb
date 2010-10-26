@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   
-  layout "esb"
+  layout "esb_search"
+  
   
   def index
   end 
@@ -15,7 +16,7 @@ class HomeController < ApplicationController
   def help
   end
   
-   def contact
+  def contact
   end 
   
 end
