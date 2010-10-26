@@ -511,10 +511,10 @@ is:
             confirm: "Er þessi athugasemd frá {{user_name}} persónuleg árás eða brot á reglum síðunnar? Með því að smella á Ok þá sendirðu tilkynningu til umsjónarmanns vefsins um þessa athugasemd."
             title: "Tilkynna óviðeigandi ummæli!"
             number:
-                one: "1 flagg"
-                other: "{{count}} flögg"
+                one: "1 tilkynning"
+                other: "{{count}} tilkynningar"
             issue_warning:
-                action: "{{user_name}} áður {{warnings_count}} aðvaranir"
+                action: "{{user_name}} hefur áður fengið {{warnings_count}} aðvaranir. Viltu samþykkja þessa:"
                 name: "Senda viðvörun og eyða efni"
                 ing: "Sendi viðvörun og eyði efni"
             clear:

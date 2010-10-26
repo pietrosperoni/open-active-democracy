@@ -146,7 +146,6 @@ h5
 }
 #content
 {
-	padding: 5px;
 	margin-top: 5px;
 }
 #rightCol
@@ -344,7 +343,7 @@ h5
 	height: 37px !ie;
 	line-height: 150%;
 	margin-bottom: 7px;
-	padding: 15px 0 0px 6px;
+	padding: 15px 0 0px 15px;
 	display: table;
 	width: 584px;
 }
@@ -372,13 +371,13 @@ h5
 .entry_icons
 {
 	float: right;
-	margin-right: 4px;
+/*	margin-right: 4px;*/
 }
 .entry_icons img
 {
 	margin: 0 1px;
 	padding: 0px;
-	float: right !Important;
+	float: right;
 }
 .entry_cat
 {
@@ -399,9 +398,11 @@ h5
 	min-height: 34px;
 	line-height: 120%;
 	padding: 5px;
-	margin: 0px 5px 10px 60px;
 	display: table;
-	width: 513px;
+	width: 520px;
+	width: 518px !ie;
+	margin: 0px 5px 3px 61px;
+	margin: 0px 5px 3px 66px !ie;
 	height: 34px !ie;
 
 }
@@ -428,22 +429,28 @@ h5
 .comment_report
 {
 	margin: 0px;
-	float: right;
+	float: right !important;
 }
 .comment_content b
 {
 	font-weight: normal;
 }
 
+.comment_content
+{
+	margin-left: 55px !ie;
+}
+
 .comment_more
 {
-	background-color: #e9eced;
-	min-height: 14px;
-	padding: 1px 4px 2px 6px;
-	margin: 0px 0px 8px 60px;
-	width: 14em;
+/*	background-color: #e9eced;
 	border-bottom: 1px solid #e2e2e2;
-	margin: 0px 0px 8px 65px !ie;
+*/
+	min-height: 14px;
+	padding: 1px 4px 1px 6px;
+	width: 14em;
+	margin: 0px 0px 2px 60px;
+	margin: 0px 0px 0px 65px !ie;
 }
 .comment_error
 {
@@ -466,7 +473,8 @@ width:518px;
 
 .comment_submit, #comment_submit
 {
-margin-top: 3px;	
+background-color: #E9ECED;
+margin-top: 5px;	
 /*
 margin-right:5px;
 margin-left: 469px;
@@ -546,7 +554,10 @@ margin-top: 0px !ie;
 }
 .new_comment textarea
 {
-	width: 524px;
+	padding: 1px 4px 1px 6px;
+	margin-top: 2px;
+	width: 532px;
+	width: 518px !ie;
 }
 #person
 {
@@ -741,6 +752,7 @@ input.chapter
 	font-size: 10px;
 	float: right;
 }
+
 #content h2
 {
 	font-size: 15px;
@@ -945,7 +957,7 @@ display: none;
 	background-color: #ff7777;
 	min-height: 14px;
 	padding: 1px 4px 2px 6px;
-	margin: 0px 0px 8px 60px;
+	margin: 10px 0px 8px 54px;
 	width: 515px;
 	border-bottom: 1px solid #e2e2e2;
 	margin: 0px 0px 8px 65px !ie;

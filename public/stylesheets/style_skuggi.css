@@ -49,7 +49,7 @@ min-height: 20px;
 }
 
 .comment, .comment_endorses, .comment_opposes {
-	padding: 2px 0px 0px 5px;
+	padding: 2px 0px 0px 0px;
 	margin-top: 1px;
 }
 .comment_more {
