@@ -600,7 +600,25 @@ ActiveRecord::Schema.define(:version => 20101025224230) do
     t.string   "cached_issue_list"
   end
 
+<<<<<<< HEAD
+  create_table "unsubscribes", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.text     "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_comments_subscribed",      :default => false
+    t.boolean  "is_votes_subscribed",         :default => false
+    t.boolean  "is_newsletter_subscribed",    :default => false
+    t.boolean  "is_point_changes_subscribed", :default => false
+    t.boolean  "is_messages_subscribed",      :default => false
+    t.boolean  "is_followers_subscribed",     :default => true
+    t.boolean  "is_finished_subscribed",      :default => true
+    t.boolean  "is_admin_subscribed",         :default => false
+  end
+=======
   add_index "treaty_documents", ["cached_issue_list"], :name => "index_treaty_documents_on_cached_issue_list"
+>>>>>>> rvb/esb
 
   create_table "unsubscribes", :force => true do |t|
     t.integer  "user_id"

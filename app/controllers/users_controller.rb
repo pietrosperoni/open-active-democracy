@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  layout "esb_search"
+  
   before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password, :show]
