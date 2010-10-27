@@ -139,6 +139,8 @@ module ActiveRecord
           else
             conditions << tags.map { |t| sanitize_sql(["#{tags_alias}.name LIKE ?", t]) }.join(" OR ")
 
+            options.delete(:match_any)
+
             if options.delete(:match_all)
               group = "#{taggings_alias}.taggable_id HAVING COUNT(#{taggings_alias}.taggable_id) = #{tags.size}"
             end
