@@ -1,4 +1,4 @@
-<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @priorities} %>
+<%= render :partial => "shared/rss_feed" %>
 <div id="priorities_div">
 	<% if @priorities.count == 0 %>
 		<%= t('esb.empty_chapter')%>
