@@ -447,7 +447,6 @@ class User < ActiveRecord::Base
   end
   
   def send_report_if_needed!
-    self.last_sent_report=Time.now-20.years
     if self.reports_enabled
       if self.reports_interval and self.reports_interval==1
         interval = 1.hour
