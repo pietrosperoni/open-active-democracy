@@ -130,6 +130,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @saved
         if Revision.create_from_question(@question.id,request)
+          UserMailer.deliver_new_question(@question)
           session[:goal] = 'point'
           flash[:notice] = t('esb.question.success')
           if current_facebook_user and params[:send_to_facebook]
