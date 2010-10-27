@@ -1,8 +1,9 @@
 class TreatyDocument < ActiveRecord::Base
 
-  MAXIMUM_NUMBER_OF_DOCUMENTS = 15
+  MAXIMUM_NUMBER_OF_DOCUMENTS = 25
  
   named_scope :by_category, lambda{|category| {:conditions=>["category=?",category]}}
+  named_scope :by_negotiation_status, lambda{|negotiation_status| {:conditions=>["negotiation_status=?",negotiation_status]}}
   named_scope :latest_three, :limit=>3, :order=>"date DESC"
 
   acts_as_taggable_on :issues
