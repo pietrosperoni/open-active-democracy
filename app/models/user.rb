@@ -450,6 +450,8 @@ class User < ActiveRecord::Base
     self.last_sent_report=Time.now-10.years
     if self.reports_enabled
       if self.reports_interval and self.reports_interval==1
+        interval = 1.hour
+      elsif self.reports_interval and self.reports_interval==2
         interval = 1.day
       else
         interval = 7.days
