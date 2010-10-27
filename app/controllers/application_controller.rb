@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   require_dependency "activity.rb"
 
-  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
+#  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
 
   helper :all # include all helpers, all the time
   
