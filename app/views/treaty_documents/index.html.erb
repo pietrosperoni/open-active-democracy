@@ -17,9 +17,9 @@
 			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=tag.external_id%>. <%=tag.name%></a>
 		</td>
 		<% TreatyDocument::NEGOTIATION_STAGES.each do |stage| %>			
-			<% count = TreatyDocument.count(:conditions=>"chapter = #{tag.external_id} AND negotiation_status = #{stage[:id]}") %>
+			<% count = TreatyDocument.tagged_with(make_quoted(tag.name),:match_all=>:true).by_negotiation_status(stage[:id]).count %>
 			<% if count > 0 and count < TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS %>
-				<td style="background-color:<%= GrayScaleColor.from_fraction(1-(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f)).html %>">
+				<td class="merkt" style="background-color:<%= GrayScaleColor.from_fraction(1-(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f)).html %>">
 			<% elsif count > 0 %>
 				<td class="files_max">
 			<% else %>

@@ -43,10 +43,10 @@
             <!-- Haus á miðjusvæði -->
             <div id="tabs">
                 <ul id="right_tabs">
-                    <li<%= controller_name=="treaty_documents" && @active!="newest" ? "class='active'" : "" %>>
+                    <li<%= controller_name=="treaty_documents" && @active!="newest" ? " class='active'" : "" %>>
                         <%= link_to "Staða viðræðna", :controller=>"treaty_documents" %>
                     </li>
-                    <li<%= @active=="newest" ? "class='active'" : "" %>>
+                    <li<%= @active=="newest" ? " class='active'" : "" %>>
                         <%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %>
                     </li>
                 </ul>

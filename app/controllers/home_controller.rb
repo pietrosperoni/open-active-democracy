@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   
-  layout "esb"
+  layout "esb_search"
+  
   
   def index
   end 
@@ -10,15 +11,12 @@ class HomeController < ApplicationController
   end  
   
   def rules
-    @issues = Tag.most_priorities.all(:include => :top_priority, :limit => 10)
   end  
   
   def help
-    @issues = Tag.most_priorities.all(:include => :top_priority, :limit => 10)
   end
   
-   def contact
-    @issues = Tag.most_priorities.all(:include => :top_priority, :limit => 10)
+  def contact
   end 
   
 end

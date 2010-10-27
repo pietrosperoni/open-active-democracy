@@ -55,7 +55,7 @@
     <br/>
 </div>
 <div class="field_box">
-    <%= f.text_area :content, :maxLength => 5000, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
+    <%= f.text_area :content, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
 </div>
 <% if current_facebook_user %>
 Birta líka á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %>
