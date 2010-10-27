@@ -1007,3 +1007,6 @@ background-color:#E9ECED;
 font-weight: bold;
 }
 
+.stage_box_identifier {
+  border: 1px solid #55f !important;	
+}

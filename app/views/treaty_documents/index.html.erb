@@ -15,15 +15,18 @@
 	<tr>	
 		<td class="td_Underline">
 			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=tag.external_id%>. <%=tag.name%></a>
+			 <% if logged_in? and current_user.is_admin? %>
+				- <a href="#" onclick="showEditStageWindow('<%=tag.external_id%>')">(st)</a>
+			 <% end %>
 		</td>
 		<% TreatyDocument::NEGOTIATION_STAGES.each do |stage| %>			
 			<% count = TreatyDocument.tagged_with(make_quoted(tag.name),:match_all=>:true).by_negotiation_status(stage[:id]).count %>
 			<% if count > 0 and count < TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS %>
-				<td class="merkt" style="background-color:<%= GrayScaleColor.from_fraction(1-(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f)).html %>">
+				<td class="merkt<%=stage[:id]<=tag.external_stage ? ' stage_box_identifier' : ''%>" style="background-color:<%= GrayScaleColor.from_fraction(1-(count.to_f/TreatyDocument::MAXIMUM_NUMBER_OF_DOCUMENTS.to_f)).html %>">
 			<% elsif count > 0 %>
-				<td class="files_max">
+				<td class="files_max<%=stage[:id]<=tag.external_stage ? ' stage_box_identifier' : ''%>">
 			<% else %>
-				<td class="merkt">
+				<td class="merkt<%=stage[:id]<=tag.external_stage ? ' stage_box_identifier' : ''%>">
 				<span style="color:#fff">
 			<% end %>
 				<% if count>0 %>
