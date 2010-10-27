@@ -1,0 +1,37 @@
+Eftirfarandi nýtt efni er komið inn síðan seinast:
+
+<% unless @priorities.empty? -%>
+Umræðurefni:
+<% @priorities.each do |priority|-%>
+<%=priority.name%>
+<%=priority.show_url%>
+
+<% end -%>
+
+<% end -%>
+<% unless @questions.empty? -%>
+Spurningar og Svör:
+<% @questions.each do |question|-%>
+<%=question.name%>
+<%=question.show_url%>
+
+<% end -%>
+
+<% end -%>
+<% unless @documents.empty? -%>
+Erindi:
+<% @documents.each do |document|-%>
+<%=document.name%>
+<%=document.show_url%>
+
+<% end -%>
+
+<% end -%>
+<% unless @treaty_documents.empty? -%>
+Ný skjöl:
+<% @treaty_documents.each do |document|-%>
+<%=document.title%>
+<%=document.url%>
+
+<% end -%>
+<% end -%>

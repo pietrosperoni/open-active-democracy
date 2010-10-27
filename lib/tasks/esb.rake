@@ -155,6 +155,13 @@ namespace :esb do
       end
   end
 
+  desc "Send reports"
+  task(:send_reports=> :environment) do
+    User.find_all_by_reports_enabled(1).each do |user|
+      user.send_report_if_needed!
+    end
+  end
+
   desc "Create dummy treaty test data"
   task(:treaty_test_data => :environment) do
     TreatyDocument.destroy_all

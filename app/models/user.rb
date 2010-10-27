@@ -445,6 +445,29 @@ class User < ActiveRecord::Base
       return nil
     end
   end
+  
+  def send_report_if_needed!
+    self.last_sent_report=Time.now-10.years
+    if self.reports_enabled
+      if self.reports_interval and self.reports_interval==1
+        interval = 1.day
+      else
+        interval = 7.days
+      end
+      if Time.now-interval>self.last_sent_report
+        priorities = Priority.published.since(self.last_sent_report)
+        questions = Question.published.since(self.last_sent_report)
+        documents = Document.published.since(self.last_sent_report)
+        treaty_documents = TreatyDocument.since(self.last_sent_report)
+        if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
+          UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+        end
+        self.reload
+        self.last_sent_report=Time.now
+        self.save(false)
+      end
+    end
+  end
 
 def update_with_facebook(facebook_user_id)
   self.facebook_uid = facebook_user_id

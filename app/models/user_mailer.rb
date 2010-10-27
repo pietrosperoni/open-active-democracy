@@ -38,6 +38,19 @@ class UserMailer < ActionMailer::Base
     @body = EmailTemplate.fetch_liquid(n.class.to_s.underscore).render({'government' => Government.last, 'recipient' => recipient, 'sender' => sender, 'notifiable' => notifiable, 'notification' => n}, :filters => [LiquidFilters])
   end  
   
+  def report(user,priorities,questions,documents,treaty_documents)
+    @recipients  = "#{user.login} <#{user.email}>"
+    @from        = "#{Government.last.name} <#{Government.last.email}>"
+    headers        "Reply-to" => Government.last.email
+    @sent_on     = Time.now
+    @content_type = "text/plain"
+    @priorities = priorities
+    @questions = questions
+    @documents = documents
+    @treaty_documents = treaty_documents
+    @subject = "Skýrsla frá vidraedur.is"
+  end
+  
   def new_question(question)
     tag = Tag.find_by_name(question.cached_issue_list)
     QUESTION_EMAILS_SETUP.each do |email_setup|
