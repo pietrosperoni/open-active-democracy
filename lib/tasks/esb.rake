@@ -1,32 +1,87 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
+
+def setup_chapter_tags(treaty_document, chapter_ids)
+  unless chapter_ids.empty?
+    if chapter_ids[0]==36      
+      tags = Tag.all.collect {|tag| "'#{tag.name}'"}.join(",")
+      treaty_document.chapter = 36
+    elsif chapter_ids[0]==0
+      tags = ""
+      treaty_document.chapter = 0
+    else
+      tags = ""
+      chapter_ids.each_with_index do |id,i|
+        tag = Tag.find_by_external_id(id)
+        if tag
+          tags += "," unless i==0
+          tags += "'#{tag.name}'"
+        end
+      end
+    end
+  end
+  unless treaty_document.chapter
+    if chapter_ids.length==1
+      treaty_document.chapter = chapter_ids[0]
+    else
+      treaty_document.chapter = -1
+    end
+  end
+  treaty_document.issue_list = tags
+end
+
+def parse_treaty_doc(element)
+  if element.attributes["class"] and element.attributes["class"].value[0..0] == "K"
+    puts url = element.attributes["href"].to_s
+    puts element.attributes["class"].to_s
+    puts title = element.children.to_s
+    puts types = element.attributes["class"].value.split(" ")
+    treaty_document = TreatyDocument.new
+    treaty_document.title = title
+    treaty_document.url  = url
+    treaty_document.document_type  = 1
+    types.each do |type|
+      if type[0..0]=="K"
+        setup_chapter_tags(treaty_document, type[1..type.length].split("_").collect {|id| id.to_i})
+      elsif type[0..0]=="T"
+        treaty_document.document_content_type = type[1..type.length].to_i
+      elsif type[0..0]=="S"
+        treaty_document.negotiation_status = type[1..type.length].to_i
+      elsif type[0..0]=="F"
+        treaty_document.category = type[1..type.length]
+      elsif type[0..0]=="D"
+        treaty_document.date = DateTime.parse("#{type[1..6]}20#{type[7..8]}".gsub("_","."))
+      end
+    end
+    treaty_document.save
+    treaty_document.inspect
+  end  
+end
  
 namespace :esb do
   desc "Crawl treaty documents"
   task(:crawl_treaty_documents => :environment) do
-    html_doc = Nokogiri::HTML(open('http://eu.mfa.is/test/skrap'))
-    main_div = html_doc.at("div.boxbody")
     ActiveRecord::Base.transaction do
       TreatyDocument.destroy_all
-      main_div.children.search("a").each do |element|
-        if element.attributes["class"] and element.attributes["class"].value[0..0] == "K"
-          puts url = element.attributes["href"].to_s
-          puts element.attributes["class"].to_s
-          puts title = element.children.to_s
-          types = element.attributes["class"].value.split(" ")
-          puts types
-          puts chapter_id = types[0][1..types[0].length]
-          puts content_type_id = types[1][1..types[1].length]
-          puts status_id = types[2][1..types[2].length]
-          t=TreatyDocument.new
-          t.chapter = chapter_id.to_i
-          t.document_content_type = content_type_id.to_i
-          t.negotiation_status = status_id.to_i
-          t.title = title
-          t.document_type = 3
-          t.url = url
-          t.save
+      ["http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-esb/",
+       "http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-isl/",
+       "http://esb.utn.is/hlidarval/skjol-og-tenglar/onnur-skjol/",
+       "http://esb.utn.is/hlidarval/frettir/",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5846",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5835",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5847",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5848",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5849",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5850",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5851",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5852",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5853",
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5854"].each do |url_to_parse|
+      html_doc = Nokogiri::HTML(open(url_to_parse))
+      main_div = html_doc.at("div.boxbody")
+        main_div.children.search("a").each do |element|
+           parse_treaty_doc(element)
         end
       end
     end

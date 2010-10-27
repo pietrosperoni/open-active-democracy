@@ -21,6 +21,7 @@ class TreatyDocumentsController < ApplicationController
   def show_chapter
     @active = "show_chapter"
     @chapter_id = params[:chapter_id]
+    @tag = Tag.find_by_external_id(@chapter_id)
     render :layout=>false
   end
   

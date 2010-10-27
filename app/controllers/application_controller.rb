@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     store_location
     unless logged_in?
       if RAILS_ENV=="development"
-        current_user = User.find(1)
+        current_user = User.first
       else
         redirect_to DB_CONFIG[RAILS_ENV]['rsk_url']
       end
