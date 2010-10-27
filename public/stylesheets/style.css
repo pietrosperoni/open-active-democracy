@@ -431,6 +431,12 @@ h5
 	margin: 0px;
 	float: right !important;
 }
+img.comment_report
+{
+	margin-right: 0px;
+	float: right !important;
+}
+
 .comment_content b
 {
 	font-weight: normal;
@@ -440,6 +446,30 @@ h5
 {
 	margin-left: 55px !ie;
 }
+
+.comment_link_add, .small { font-size: 11px !important; }
+
+.comment_content {
+	padding: 0px 10px 0px 0px;
+}
+.comment_content p, .comment_endorses p, .entry_box div p
+{
+	font-size: 12px !important;
+	width: 510px;
+	overflow:hidden; 
+	width: 500px !iie;
+	overflow:auto !ie; 
+
+}
+
+.activity {
+font-size:11px !important;
+}
+
+div
+{
+}
+
 
 .comment_more
 {
@@ -889,6 +919,7 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 	border: 1px solid #DDDDDD;
 	width: 574px;
 	height: 120px;
+	margin-bottom: 5px;
 }
 
 .fb_link img {
@@ -962,3 +993,17 @@ display: none;
 	border-bottom: 1px solid #e2e2e2;
 	margin: 0px 0px 8px 65px !ie;
 }
+
+#document_form, #question_form, #priority_form
+{
+margin-left: 10px;	
+}
+
+#document_form #submit, #question_form #submit, #priority_form #submit
+{
+margin-bottom: 10px;	
+height: 22px;
+background-color:#E9ECED;
+font-weight: bold;
+}
+
