@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101027093631) do
+ActiveRecord::Schema.define(:version => 20101027102551) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -544,6 +544,7 @@ ActiveRecord::Schema.define(:version => 20101027093631) do
     t.boolean  "have_sent_welcome",                         :default => false
     t.boolean  "is_comments_subscribed",                    :default => true
     t.datetime "last_sent_report"
+    t.boolean  "reports_treaty_documents",                  :default => false
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

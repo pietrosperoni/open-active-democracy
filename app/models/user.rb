@@ -457,10 +457,26 @@ class User < ActiveRecord::Base
         interval = 7.days
       end
       if Time.now-interval>self.last_sent_report
-        priorities = Priority.published.since(self.last_sent_report)
-        questions = Question.published.since(self.last_sent_report)
-        documents = Document.published.since(self.last_sent_report)
-        treaty_documents = TreatyDocument.since(self.last_sent_report)
+        if self.reports_discussions
+          priorities = Priority.published.since(self.last_sent_report)
+        else
+          priorities = []
+        end
+        if self.reports_questions
+          questions = Question.published.since(self.last_sent_report)
+        else
+          questions = []
+        end
+        if self.reports_documents
+          documents = Document.published.since(self.last_sent_report)
+        else
+          documents = []
+        end
+        if self.reports_treaty_documents
+          treaty_documents = TreatyDocument.since(self.last_sent_report)
+        else
+          treaty_documents = []
+        end
         if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
           UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
         end
