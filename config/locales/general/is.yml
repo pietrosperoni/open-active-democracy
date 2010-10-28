@@ -1738,4 +1738,16 @@ is:
             contact:
                 label: "vidraedur@utn.stjr.is" 
                 mouseover: "Sendu póst á umsjónarmann síðunnar"
-           
+        subfilter:
+            mine:
+                label: "Mín skrif" 
+                mouseover: "Það sem þú hefur sett inn á vefinn"
+            subscribe:
+                label: "Kaflar í áskrift" 
+                mouseover: "Samningskaflar sem þú hefur valið að fylgjast með og fá tilkynningar um ný gögn"
+            answered:
+                label: "Svarað" 
+                mouseover: "Birta einungis spurningar sem hefur verið svarað." 
+            unanswered:
+                label: "Ósvarað" 
+                mouseover: "Birta einungis spurningar sem ekki hefur verið svarað."
