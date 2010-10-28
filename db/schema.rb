@@ -580,7 +580,7 @@ ActiveRecord::Schema.define(:version => 20101027121904) do
     t.integer  "weight",                                   :default => 0
     t.integer  "tag_type"
     t.integer  "external_id"
-    t.integer  "external_stage",                   :default => 0
+    t.integer  "external_stage",                           :default => 0
   end
 
   add_index "tags", ["external_id"], :name => "index_tags_on_external_id"
