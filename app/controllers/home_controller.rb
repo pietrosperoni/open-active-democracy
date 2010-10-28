@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  layout "esb_search"
+  layout "esb_no_chapters"
   
   
   def index

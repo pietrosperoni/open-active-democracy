@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  layout "esb_search"
+  layout "esb_no_chapters"
   
   before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
