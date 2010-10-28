@@ -907,8 +907,16 @@ input.chapter
 }
 .addthis_toolbox
 {
-	width: 80px;
+	width: 90px;
+	height: 20px;
+	padding-right: 10px;
 }
+
+.addthis_toolbox a
+{
+	float:right !important;
+}
+
 .pagination
 {
 	float: left;
