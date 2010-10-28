@@ -1,12 +1,12 @@
 <ul class="action">
-    <li>
-        <%= link_to t('esb.create.question'), "/senda_spurningu" %>
+    <li <%= controller_name=="questions" && @action == "new" ? "class='active'" : "" %>>
+        <%= link_to t('esb.create.question.label'), "/senda_spurningu", :title => t('esb.create.question.mouseover'), :alt => t('esb.create.question.mouseover') %>
     </li>
-    <li>
-        <%= link_to t('esb.create.priority'), "/taka_thatt" %>
+    <li <%= controller_name=="priorities" && @action == "new" ? "class='active'" : "" %>>
+        <%= link_to t('esb.create.priority.label'), "/taka_thatt", :title => t('esb.create.priority.mouseover'), :alt => t('esb.create.priority.mouseover')  %>
     </li>
-    <li>
-        <%= link_to t('esb.create.document'), "/senda_erindi" %>
+    <li <%= controller_name=="documents" && @action == "new" ? "class='active'" : "" %>>
+        <%= link_to t('esb.create.document.label'), "/senda_erindi", :title => t('esb.create.document.mouseover'), :alt => t('esb.create.document.mouseover')  %>
     </li>
 </ul>
 <% if logged_in? and current_user.is_admin? %>

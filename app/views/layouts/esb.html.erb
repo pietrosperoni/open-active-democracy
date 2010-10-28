@@ -48,8 +48,9 @@
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
 				<ul id="right_tabs">
-					<li><%= link_to "Staða viðræðna", :controller=>"treaty_documents", :action=>"", :title=>"bla bla" %></li>
-					<li><%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest", :title=>"bla bla"  %></li>
+					<li><%= link_to(t('esb.menu.treaty.label'),{:controller=>"treaty_documents", :action=>""}, :title=>t('esb.menu.treaty.mouseover'), :alt=>t('esb.menu.treaty.mouseover') )%></li>
+					<li><%= link_to(t('esb.menu.alldocs.label'),{:controller=>"treaty_documents", :action=>"newest"}, :title=>t('esb.menu.alldocs.mouseover'), :alt=>t('esb.menu.alldocs.mouseover') ) %></li>
+								
 				</ul>
 				<ul>
 			<div id="left_tabs">
@@ -102,7 +103,7 @@
 				</div>
 				<% end %>
 -->
-				<h4>Utan EES</h4>
+				<h4 title="<%= t('esb.tag_type.notin.mouseover')%>"><%= t('esb.tag_type.notin.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
 					<li>
@@ -115,7 +116,7 @@
                     </li>
 					<% end %>
                 </ul>
-				<h4>Að hluta í EES</h4>
+				<h4 title="<%= t('esb.tag_type.partly.mouseover')%>"><%= t('esb.tag_type.partly.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
 					<li>
@@ -128,7 +129,7 @@
                     </li>
 					<% end %>
                 </ul>
-				<h4>Í EES</h4>
+				<h4 title="<%= t('esb.tag_type.within.mouseover')%>"><%= t('esb.tag_type.within.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
@@ -141,7 +142,7 @@
                     </li>
 					<% end %>
                 </ul>
-				<h4>Annað</h4>
+					<h4 title="<%= t('esb.tag_type.other.mouseover')%>"><%= t('esb.tag_type.other.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>	
 					<li>

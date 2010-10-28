@@ -1635,9 +1635,15 @@ is:
         title: "Samningaviðræður Íslands við ESB | Gagnvirkur vefur fyrir Íslendinga"
         intro: "Hér birtast gögn samningaviðræðna Íslands um aðild að ESB þar sem hægt er að spyrja spurninga, taka þátt í umræðum og senda erindi til samninganefndar Íslands. Lesa meira..."        
         create:       
-            priority: "Taka þátt í umræðu" 
-            question: "Senda inn spurningu"
-            document: "Leggja inn erindi"
+            priority: 
+                label: "Taka þátt í umræðu"
+                mouseover: "Hvað liggur þér á hjarta varðandi samningsferlið?"
+            question: 
+                label: "Senda inn spurningu"
+                mouseover: "Hvað viltu vita um samningaviðræðurnar?"
+            document: 
+                label: "Leggja inn erindi"
+                mouseover: "Sendu samninganefndinni þína skoðun"
         add: "Taka þátt í umræðunni"
         send: "Senda"
         more: "Lesa meira"
@@ -1657,7 +1663,14 @@ is:
             documents: 
                 label: "Erindi"
                 mouseover: "Yfirlit yfir formleg erindi til samninganefndar" 
+            treaty:    
+                label: "Staða viðræðna" 
+                mouseover: "Yfirlit yfir stöðu samningaviðræðnanna og öll helstu gögn í tímaröð eftir köflum"
+            alldocs:
+                label: "Öll skjöl" 
+                mouseover: "Skjöl tengd samningaviðræðunum í tímaröð"                
         mouseover:
+            rss: "Fáðu fréttir tengt samningaferlinu í RSS"
             logout: "Skrá mig út"
             edituser: "Breyta eigin stillingum: Mynd, netfangi og Facebook tengingu"
             subscribe: "Veldu samningskafla sem þú vilt fá í áskrift"
@@ -1681,10 +1694,19 @@ is:
                 intro: "<a href='{{signup_url}}'>Nýskráning</a>"
                 id:
                     label: "Kennitala"
-        tags:
-            notin: "Utan EES"
-            partly: "Að mestu leyti í EES"
-            within: "Í EES"
+        tag_type:
+            notin: 
+                label: "Utan EES"
+                mouseover: "Samningskaflar sem eru ekki hluti af EES-samningnum"                
+            partly: 
+                label: "Að mestu leyti í EES"
+                mouseover: "Samningskaflar sem eru að mestu leyti hluti af EES-samningnum"
+            within: 
+                label: "Í EES"
+                mouseover: "Samningskaflar sem eru hluti af EES og hafa að öllu leyti verið teknir upp í íslenska löggjöf"
+            other:
+                label: "Annað" 
+                mouseover: "Samningskaflar um stofnanir og önnur mál sem ekki heyra undir aðra kafla"
         priority:
             whatis: "Hvert er umræðuefnið?"
             tag: "Veldu kafla:"
