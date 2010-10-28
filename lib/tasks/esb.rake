@@ -90,6 +90,7 @@ namespace :esb do
   desc "Create esb tags"
   task(:create_tags => :environment) do
       Tag.destroy_all
+      TagSubscription.delete_all
       [["Félagaréttur",6],
       ["Fjármálaþjónusta",9],
       ["Frjáls för fjármagns",4],

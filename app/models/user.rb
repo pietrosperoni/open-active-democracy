@@ -447,7 +447,6 @@ class User < ActiveRecord::Base
   end
   
   def send_report_if_needed!
-    self.last_sent_report=Time.now-10.years
     if self.reports_enabled
       if self.reports_interval and self.reports_interval==1
         interval = 1.hour
@@ -457,28 +456,31 @@ class User < ActiveRecord::Base
         interval = 7.days
       end
       if Time.now-interval>self.last_sent_report
-        if self.reports_discussions
-          priorities = Priority.published.since(self.last_sent_report)
-        else
-          priorities = []
-        end
-        if self.reports_questions
-          questions = Question.published.since(self.last_sent_report)
-        else
-          questions = []
-        end
-        if self.reports_documents
-          documents = Document.published.since(self.last_sent_report)
-        else
-          documents = []
-        end
-        if self.reports_treaty_documents
-          treaty_documents = TreatyDocument.since(self.last_sent_report)
-        else
-          treaty_documents = []
-        end
-        if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
-          UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+        tags = TagSubscription.find_all_by_user_id(self.id).collect {|sub| sub.tag.name if sub.tag }.compact
+        unless tags.empty?
+          if self.reports_discussions
+            priorities = Priority.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            priorities = []
+          end
+          if self.reports_questions
+            questions = Question.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            questions = []
+          end
+          if self.reports_documents
+            documents = Document.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            documents = []
+          end
+          if self.reports_treaty_documents
+            treaty_documents = TreatyDocument.tagged_with(tags,:match_any=>true).since(self.last_sent_report)
+          else
+            treaty_documents = []
+          end
+          if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
+            UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+          end
         end
         self.reload
         self.last_sent_report=Time.now

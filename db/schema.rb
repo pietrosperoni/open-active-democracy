@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101027102551) do
+ActiveRecord::Schema.define(:version => 20101027121904) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -580,6 +580,7 @@ ActiveRecord::Schema.define(:version => 20101027102551) do
     t.integer  "weight",                                   :default => 0
     t.integer  "tag_type"
     t.integer  "external_id"
+    t.integer  "external_stage",                   :default => 0
   end
 
   add_index "tags", ["external_id"], :name => "index_tags_on_external_id"

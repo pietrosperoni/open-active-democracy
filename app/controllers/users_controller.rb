@@ -78,7 +78,7 @@ class UsersController < ApplicationController
         params[:user][:last_sent_report]=Time.now
       end
       current_user.update_attributes(params[:user])
-      current_user.save
+      current_user.save(false)
       redirect_to "/"
     end
   end

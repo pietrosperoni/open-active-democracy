@@ -1,5 +1,6 @@
 <div id="treaty_document_window" title="Staða viðræðna" style="display: none;"></div>
 <div id="treaty_document_chapter_window" title="Um kafla" style="display: none;"></div>
+<div id="chapter_stage_edit_window" title="Breyta Stöðu" style="display: none;"></div>
 
 <script type="text/javascript">
  function showTreatyDocumentWindow(chapter_id,status_id)
@@ -50,4 +51,30 @@
     jQuery("#treaty_document_chapter_window").dialog("open");
  }
  
+ <% if logged_in? and current_user.is_admin? %>
+ function showEditStageWindow(chapter_id)
+ {
+ 	jQuery.ajaxSetup({cache: false});
+	var dialogOpts = {
+		      modal: true,
+		      bgiframe: true,
+		      autoOpen: false,
+		      height: 100,
+		      width: 270,
+		      draggable: true,
+		      resizeable: true,
+			  open: function() {
+			  	jQuery('<img class="spinner_classy" src="/images/spinner.gif" style="float: right; padding-right:25px;" />').insertAfter('.ui-dialog-title');
+	        	jQuery("#chapter_stage_edit_window").load("/treaty_documents/edit_stage?chapter_id="+chapter_id, function() {jQuery('.spinner_classy').hide();});
+				},
+			  close: function(){
+				  	jQuery('<img class="spinner_classy" src="/images/spinner.gif" style="float: right; padding-right:25px;" />').insertAfter('.ui-dialog-title');
+					window.parent.location="/treaty_documents"
+			  	}
+    };
+	jQuery("#chapter_stage_edit_window").dialog(dialogOpts);
+	jQuery('#chapter_stage_edit_window').empty();
+    jQuery("#chapter_stage_edit_window").dialog("open");
+ }
+ <% end %>
 </script>
