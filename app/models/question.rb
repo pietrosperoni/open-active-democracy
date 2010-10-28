@@ -17,6 +17,8 @@ class Question < ActiveRecord::Base
   named_scope :revised, :conditions => "revisions_count > 1"
   named_scope :five, :limit => 5
 
+  named_scope :since, lambda{|time| {:conditions=>["questions.created_at>?",time]}}
+
   belongs_to :user
   belongs_to :revision # the current revision
   

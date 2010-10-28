@@ -7,9 +7,7 @@
 <h3><%= t('esb.priority.whatis') %><span class="star">*</span></h3>
 <h4><%= t('document.revision.new.name.label') %>
 </h4>
-<br/>
 <%= f.text_field :name, :size => 60, :maxlength => 60 %>
-<br/>
 <h4><%= t('esb.priority.tag') %><span class="star">*</span></h4>
 <div class="addContent_kaflar">
     <b><%= t('esb.tag_type.notin.label') %></b>
@@ -56,8 +54,6 @@
 <div class="field_box">
     <%= f.text_area :description, :maxLength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
 </div>
-<br/>
-<br/>
 <% if current_facebook_user %>
 Senda á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %>
 <br>

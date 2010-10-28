@@ -49,7 +49,7 @@ min-height: 20px;
 }
 
 .comment, .comment_endorses, .comment_opposes {
-	padding: 2px 0px 0px 5px;
+	padding: 2px 0px 0px 0px;
 	margin-top: 1px;
 }
 .comment_more {
@@ -71,21 +71,6 @@ min-height: 20px;
 }
 
 /* Rök */
-.comment_link_add, .small { font-size: 11px !important; }
-
-.comment_content {
-	padding: 0px 10px 0px 0px;
-	overflow:hidden; 
-/*	width: 570px !ie;*/
-}
-.comment_content p {
-font-size: 12px !important;
-}
-
-.activity {
-font-size:11px !important;
-}
-
 
 /* Login box items */
 

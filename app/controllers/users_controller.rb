@@ -74,8 +74,11 @@ class UsersController < ApplicationController
         end
       end
       RAILS_DEFAULT_LOGGER.info("After HASH #{params[:user].inspect}")
+      if not current_user.reports_enabled and params[:user][:reports_enabled].to_i==1
+        params[:user][:last_sent_report]=Time.now
+      end
       current_user.update_attributes(params[:user])
-      current_user.save
+      current_user.save(false)
       redirect_to "/"
     end
   end

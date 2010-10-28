@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   require_dependency "activity.rb"
 
-  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
+#  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
 
   helper :all # include all helpers, all the time
   
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     store_location
     unless logged_in?
       if RAILS_ENV=="development"
-        current_user = User.find(1)
+        current_user = User.first
       else
         redirect_to DB_CONFIG[RAILS_ENV]['rsk_url']
       end
@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
 
   def current_government
     if RAILS_ENV=="development"
-      self.current_user = User.last
+      self.current_user = User.first
     end
     @current_government = Government.last
     return @current_government

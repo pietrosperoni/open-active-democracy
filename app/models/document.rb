@@ -13,6 +13,8 @@ class Document < ActiveRecord::Base
   named_scope :by_recently_updated, :order => "documents.updated_at desc"  
   named_scope :revised, :conditions => "revisions_count > 1"
 
+  named_scope :since, lambda{|time| {:conditions=>["documents.created_at>?",time]}}
+
   has_many :notifications, :as => :notifiable, :dependent => :destroy
 
   belongs_to :user

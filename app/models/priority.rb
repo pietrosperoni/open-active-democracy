@@ -12,6 +12,8 @@ class Priority < ActiveRecord::Base
 
   named_scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
   
+  named_scope :since, lambda{|time| {:conditions=>["priorities.created_at>?",time]}}
+  
   named_scope :item_limit, lambda{|limit| {:limit=>limit}} 
 
   named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}

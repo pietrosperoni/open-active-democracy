@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101025224230) do
+ActiveRecord::Schema.define(:version => 20101027121904) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -580,6 +580,7 @@ ActiveRecord::Schema.define(:version => 20101025224230) do
     t.integer  "weight",                                   :default => 0
     t.integer  "tag_type"
     t.integer  "external_id"
+    t.integer  "external_stage",                           :default => 0
   end
 
   add_index "tags", ["external_id"], :name => "index_tags_on_external_id"
@@ -598,9 +599,12 @@ ActiveRecord::Schema.define(:version => 20101025224230) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cached_issue_list"
+    t.string   "category"
+    t.datetime "date"
   end
 
   add_index "treaty_documents", ["cached_issue_list"], :name => "index_treaty_documents_on_cached_issue_list"
+  add_index "treaty_documents", ["category"], :name => "index_treaty_documents_on_category"
 
   create_table "unsubscribes", :force => true do |t|
     t.integer  "user_id"
@@ -737,6 +741,8 @@ ActiveRecord::Schema.define(:version => 20101025224230) do
     t.integer  "reports_interval"
     t.string   "national_identity",                                                  :null => false
     t.boolean  "have_sent_welcome",                           :default => false
+    t.datetime "last_sent_report"
+    t.boolean  "reports_treaty_documents",                    :default => false
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

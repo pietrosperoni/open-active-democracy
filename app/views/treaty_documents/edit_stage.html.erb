@@ -1,0 +1,6 @@
+<%=@tag.name%><br><br>
+  <%= form_tag('/treaty_documents/edit_stage?chapter_id='+@chapter_id) -%>
+    <%= select_tag ("negotion_stage", options_for_select(TreatyDocument::NEGOTIATION_STAGES.map {|u| [u[:name], u[:id]]}, @tag.external_stage)) %>
+	<br><br>
+    <div><%= submit_tag 'Breyta' %></div>
+  </form>

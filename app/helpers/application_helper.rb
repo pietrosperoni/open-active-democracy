@@ -15,6 +15,10 @@ module ApplicationHelper
       option
     end
   end
+  
+  def make_quoted(tag_name)
+    "'#{tag_name}'"
+  end
 
   def subscribed_to_tag?(user_id,tag_id)
     if TagSubscription.find(:first, :conditions=>["user_id = ? AND tag_id = ?",user_id,tag_id])

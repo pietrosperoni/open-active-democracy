@@ -445,6 +445,49 @@ class User < ActiveRecord::Base
       return nil
     end
   end
+  
+  def send_report_if_needed!
+    if self.reports_enabled
+      if self.reports_interval and self.reports_interval==1
+        interval = 1.hour
+      elsif self.reports_interval and self.reports_interval==2
+        interval = 1.day
+      else
+        interval = 7.days
+      end
+      if Time.now-interval>self.last_sent_report
+        tags = TagSubscription.find_all_by_user_id(self.id).collect {|sub| sub.tag.name if sub.tag }.compact
+        unless tags.empty?
+          if self.reports_discussions
+            priorities = Priority.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            priorities = []
+          end
+          if self.reports_questions
+            questions = Question.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            questions = []
+          end
+          if self.reports_documents
+            documents = Document.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            documents = []
+          end
+          if self.reports_treaty_documents
+            treaty_documents = TreatyDocument.tagged_with(tags,:match_any=>true).since(self.last_sent_report)
+          else
+            treaty_documents = []
+          end
+          if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
+            UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+          end
+        end
+        self.reload
+        self.last_sent_report=Time.now
+        self.save(false)
+      end
+    end
+  end
 
 def update_with_facebook(facebook_user_id)
   self.facebook_uid = facebook_user_id

@@ -3,8 +3,8 @@
 	<div class="entry_box">
 		<%= render :partial => "shared/entry_icons", :locals => {:content => question.content, :action_item=>question}%> 
 		<%= render :partial => "users/pic_48", :locals => {:user => question.user}%> 
-		<h5><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %>
-</h5> 
+		<h4><%= link_to_unless_current h(question.name), question, :title => t('esb.mouseover.question.title') %>
+</h4> 
 		
 		<span class="entry_profile">
 			<%= t('revisions.byline', :author_sentence => question.author_sentence) %> 
