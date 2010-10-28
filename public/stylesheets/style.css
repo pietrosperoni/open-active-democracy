@@ -112,9 +112,11 @@ h5
 }
 #search input.leita
 {
-	height: 18px;
 	padding-left: 3px;
 	padding-right: 5px;
+	margin-top: 1px;
+	height: 22px;
+	height: 21px !ie;
 }
 #header-right p
 {
@@ -147,6 +149,8 @@ h5
 #content
 {
 	margin-top: 5px;
+	min-height: 590px;
+	height: 590px !ie;
 }
 #rightCol
 {
@@ -401,7 +405,7 @@ h5
 	display: table;
 	width: 520px;
 	width: 518px !ie;
-	margin: 0px 5px 3px 61px;
+	margin: 0px 5px 3px 69px;
 	margin: 0px 5px 3px 66px !ie;
 	height: 34px !ie;
 
@@ -411,7 +415,7 @@ h5
 	border: 1px solid #cbd4d7;
 	line-height: 120%;
 	padding: 5px;
-	margin: 0px 5px 10px 60px;
+	margin: 0px 10px 10px 69px;
 }
 .comment_box a:hover
 {
@@ -444,22 +448,21 @@ img.comment_report
 
 .comment_content
 {
-	margin-left: 55px !ie;
+	margin-left: 55px;
 }
 
 .comment_link_add, .small { font-size: 11px !important; }
 
 .comment_content {
-	padding: 0px 10px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 .comment_content p, .comment_endorses p, .entry_box div p
 {
 	font-size: 12px !important;
-	width: 510px;
 	overflow:hidden; 
-	width: 500px !iie;
-	overflow:auto !ie; 
-
+/*	overflow:auto !ie; */
+	width: 500px !ie;
+	width: 510px;
 }
 
 .activity {
@@ -488,8 +491,9 @@ div
 }
 .new_comment
 {
-	margin-left: 50px;
-	margin-left: 55px !ie;
+
+	margin-left: 58px;
+	margin-left: 58px !ie;
 }
 
 .comment_hidden
@@ -505,12 +509,42 @@ width:518px;
 {
 background-color: #E9ECED;
 margin-top: 5px;	
+height: 22px;
+padding: 0px 2px;
 /*
 margin-right:5px;
 margin-left: 469px;
 */
 }
 
+.new_comment_facebook
+{
+clear: all;
+height: 30px;
+width:500px;
+}
+
+.birta_a_facebook
+{
+float: right;	
+margin-top: 5px;
+}
+
+
+.birta_a_facebook input
+{
+	margin-left: 3px;
+}
+
+.birta_a_facebook span
+{
+margin-top: 13px;
+}
+
+.new_comment_facebook .senda
+{
+float:left;	
+}
 .readmore
 {
 	margin: 0 2px;
@@ -524,8 +558,8 @@ margin-left: 469px;
 input, textarea
 {
 	border: 1px solid #9da7c1;
-	height: 18px;
-	padding: 0px 5px;
+/*	height: 18px; */
+	padding: 3px;
 	font-family: sans-serif;
 	font-size: 13px;
 }
@@ -542,7 +576,10 @@ input, textarea
 	border: none;
 	float: left;
 	clear: both;
-	margin-top: 2px;
+	margin-top: 5px;
+	margin-right: 2px;
+	margin-right: 0px !ie;
+	margin-top: auto !ie;
 }
 .addContent_kaflar
 {
@@ -551,6 +588,7 @@ input, textarea
 	font-size: 10px;
 	line-height: 180%;
 	height: 260px;
+	height: auto !Ie;
 }
 .addContent_kaflar b
 {
@@ -560,8 +598,9 @@ input, textarea
 {
 	float:right;
 	height:70px;
-	margin-top:-38px;
 	width:203px;
+	margin-top:-38px;
+	margin-top:0px !ie;
 }
 
 .NanariLysing
@@ -584,10 +623,14 @@ margin-top: 0px !ie;
 }
 .new_comment textarea
 {
-	padding: 1px 4px 1px 6px;
-	margin-top: 2px;
-	width: 532px;
+	width: 100%;
+	height:22px;
+	padding:2px 4px 1px 2px;
+
+/*
+width: 532px;
 	width: 518px !ie;
+*/
 }
 #person
 {
@@ -687,6 +730,15 @@ float:left;
 	width: 100%;
 	text-align: right;
 }
+
+#rss_feed
+{
+	float:right;
+	margin-left:10px;
+	margin-right:5px;
+	margin-top:6px;
+}
+
 .left_box
 {
 	margin-bottom: 10px;
@@ -783,15 +835,31 @@ input.chapter
 	float: right;
 }
 
-#content h2
+#content h2, #mainContentExpanded h2
 {
 	font-size: 15px;
 	margin-bottom: 5px;
+	margin-left:10px;
+	margin-top:5px;
 }
+
+#content form h2
+{
+	margin-left:0px;
+}
+
+
 #content h4
 {
 	margin: 0px;
+	margin-left: 10px;
 }
+
+#content form h4
+{
+	margin-left: 0px;
+}
+
 #content h5
 {
 	font-size: 13px;
@@ -843,7 +911,10 @@ input.chapter
 }
 .pagination
 {
-	float: right;
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 5px;
 }
 #Content p b
 {
@@ -893,7 +964,15 @@ input.chapter
 {
 	border-bottom: 1px solid #F1F1F1;
 	padding-bottom: 3px;
+	margin-left: 10px;
 }
+
+.activity_border
+{
+	border-bottom: 1px solid #F1F1F1;
+	padding-bottom: 3px;
+}
+
 .AllaKafla
 {
 	background-color: #CCCCCC;
@@ -976,12 +1055,9 @@ display: none;
 #question_name, #priority_name, #document_name
 {
 	margin-bottom: 10px;
+	margin-top: 3px;
 }
 
-.senda_a_facebook
-{
-
-}
 
 .warning_inline
 {
@@ -994,10 +1070,11 @@ display: none;
 	margin: 0px 0px 8px 65px !ie;
 }
 
-#document_form, #question_form, #priority_form
+#document_form, #question_form, #priority_form, .edit_question
 {
 margin-left: 10px;	
 }
+
 
 #document_form #submit, #question_form #submit, #priority_form #submit
 {
@@ -1005,6 +1082,63 @@ margin-bottom: 10px;
 height: 22px;
 background-color:#E9ECED;
 font-weight: bold;
+}
+
+#treaty_documents
+{
+		margin-left: 10px;
+}
+
+#treaty_documents td.merkt a 
+{
+	display: block; 
+	width: 100%; 
+	text-align:center;
+}
+
+.treaty_docs_popup
+{
+text-align: left;
+font-size:12px;
+line-height:140%;
+}
+
+.treaty_docs_popup a, .treaty_docs_popup a:visited 
+{
+color:#003399 !important;
+}
+
+.treaty_docs_popup h4
+{
+margin-top: 10px;
+}
+
+.treaty_docs_popup .left
+{
+width: 400px;
+float: left;
+}
+
+.treaty_docs_popup .right
+{
+width: 400px;
+float: right;
+}
+
+.treaty_docs_popup ul
+{
+list-style-type: disc;
+margin-left: 15px;
+}
+
+.treaty_docs_newest ul
+{
+list-style-type: disc;
+margin-left: 30px;
+}
+
+div
+{
 }
 
 .stage_box_identifier {

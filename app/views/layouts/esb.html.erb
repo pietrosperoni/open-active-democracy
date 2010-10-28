@@ -73,6 +73,9 @@
             <div id="MainContent">
             	 
 			 	<% unless controller_name=="users" or controller_name=="settings" %>
+					<div id="rss_feed">
+						<%= render :partial => "shared/rss_feed" %>
+					</div>
 				 	<div id="subfilters">				
 						<%= render :partial=>"shared/subfilters" %>
 					</div>
