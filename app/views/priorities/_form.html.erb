@@ -55,7 +55,7 @@
     <%= f.text_area :description, :maxLength => 500, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
 </div>
 <% if current_facebook_user %>
-Senda á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %>
+Birta líka á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %>
 <br>
 <% end %>
 <%= f.submit "Búa til umræðuefni", :id => "submit", :class => "yellow_button" %>

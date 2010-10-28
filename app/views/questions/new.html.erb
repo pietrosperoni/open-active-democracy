@@ -43,7 +43,7 @@
 		</div>
 			
              <% if current_facebook_user %>
-               Senda á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %><br>
+               Birta líka á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %><br>
 			<% end %>
 			<%= f.submit "Senda spurningu", :id => "submit", :class => "yellow_button" %>
 			<div id="errors" class="error"><%= f.error_messages %></div>
