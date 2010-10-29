@@ -6,7 +6,7 @@
         <%= f.error_messages %>
 
 
-                    <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value", :id => "comment_content_#{activity.id.to_s}" %>
+                    <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
 
 <div class="new_comment_facebook">
 
@@ -34,8 +34,8 @@
 
 <script type="text/javascript">
 <!--
-	jQuery('#comment_content_<%=activity.id.to_s%>').autoResize({extraSpace : 20})
-	jQuery('#comment_content_<%=activity.id.to_s%>').DefaultValue("<%= t('esb.add')%>");
+	jQuery('.comment_content_autoresize_#{activity.id.to_s}').autoResize({extraSpace : 20})
+	jQuery('.comment_content_autoresize_#{activity.id.to_s}').DefaultValue("<%= t('esb.add')%>");
 //-->
 </script>
 <% end %>
