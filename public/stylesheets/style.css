@@ -403,19 +403,36 @@ h5
 	line-height: 120%;
 	padding: 5px;
 	display: table;
-	width: 520px;
-	width: 518px !ie;
+	width: 503px;
+	width: 515px !ie;
 	margin: 0px 5px 3px 69px;
-	margin: 0px 5px 3px 66px !ie;
 	height: 34px !ie;
+}
+
+.comment_box p
+{
+	width: auto !important;
+}
+
+.comment_content_2 p
+{
+width:auto !important;
 
 }
+
+/* Chrome and Safari */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.comment_box { width: 514px; }
+}
+
 .comment_box_samn
 {
 	border: 1px solid #cbd4d7;
 	line-height: 120%;
 	padding: 5px;
-	margin: 0px 10px 10px 69px;
+	margin: 0px 0px 10px 69px;
+	width: 503px;
+	width: 515px !ie;
 }
 .comment_box a:hover
 {
@@ -460,9 +477,10 @@ img.comment_report
 {
 	font-size: 12px !important;
 	overflow:hidden; 
+	line-height: 140%;
 /*	overflow:auto !ie; */
 	width: 500px !ie;
-	width: 510px;
+	width: 510px; 
 }
 
 .activity {
@@ -521,7 +539,8 @@ margin-left: 469px;
 {
 clear: all;
 height: 30px;
-width:500px;
+width:515px;
+width:518px !ie;
 }
 
 .birta_a_facebook
@@ -534,6 +553,7 @@ margin-top: 5px;
 .birta_a_facebook input
 {
 	margin-left: 3px;
+	border: 0px white none;
 }
 
 .birta_a_facebook span
@@ -623,7 +643,7 @@ margin-top: 0px !ie;
 }
 .new_comment textarea
 {
-	width: 100%;
+	width: 515px;
 	height:22px;
 	padding:2px 4px 1px 2px;
 
@@ -907,8 +927,27 @@ input.chapter
 }
 .addthis_toolbox
 {
-	width: 80px;
+	width: 90px;
+	height: 20px;
 }
+
+/* FF */
+@-moz-document url-prefix() {
+  .addthis_toolbox {
+     padding-right:20px;
+  }
+}
+
+/* Opera */
+@media all and (min-width: 0px){
+    .addthis_toolbox {padding-right:20px;}
+}
+
+.addthis_toolbox a
+{
+	float:right !important;
+}
+
 .pagination
 {
 	float: left;
@@ -964,7 +1003,6 @@ input.chapter
 {
 	border-bottom: 1px solid #F1F1F1;
 	padding-bottom: 3px;
-	margin-left: 10px;
 }
 
 .activity_border
@@ -1139,8 +1177,9 @@ margin-left: 30px;
 
 div
 {
+/*	border: 1px solid #55f !important;	*/
 }
 
 .stage_box_identifier {
-  border: 1px solid #55f !important;	
+  border: 1px solid #44a !important;	
 }
