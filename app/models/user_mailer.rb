@@ -54,7 +54,7 @@ class UserMailer < ActionMailer::Base
   def new_question(question)
     tag = Tag.find_by_name(question.cached_issue_list)
     QUESTION_EMAILS_SETUP.each do |email_setup|
-      if email_setup[0].include?(tag.external_id)
+      if tag and email_setup[0].include?(tag.external_id)
         @recipients  = email_setup[1]   
         break
       end
