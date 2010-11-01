@@ -1,11 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-        <title>Aðildarviðræður Íslands við ESB | Samráðsvettvangur almennings og samninganefndar </title>
+        <title> <%= t('esb.title') %> </title>
         <%= render :partial => "shared/javascripts" %>
         <%= stylesheet_link_tag "style" %>
 		<%= stylesheet_link_tag "style_skuggi" %>
 		<%= stylesheet_link_tag "style_gg" %>
+		<%= stylesheet_link_tag 'jquery-ui-1.7.2' %>
 
+		<%= javascript_include_tag "jquery-ui-1.7.2.custom.min" %>
+		<%= javascript_include_tag "jquery.validate.min" %>
 		<%= javascript_include_tag "jquery.jgfeed-min" %>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
@@ -21,34 +24,33 @@
             <%= render :partial => "shared/esb_header" %>
 			<!-- Vinstridálkur -->
             <div id="LeftCol">
-                <!-- Persónuupplýsingar -->
+             					
+				<!-- Persónuupplýsingar -->
 				<div id="person">
 				 <% if logged_in? %>
                     <%= render :partial => "shared/user_info" %>
                  <% else %>
                     <%= render :partial => "shared/login" %>
                  <% end %> 
+
 				</div>
 				<!-- Lúppa með iconum, þau má setja í css skjalið líka ef vill -->
 				<%=render :partial=>"shared/left_nav"%>
 				<!-- Lúppa með rss -->
-				<div class="left_box">
-					<%= render :partial=>"shared/utn_rss" %>
-				</div>
-
-				<div class="left_box">	
-
 				 <% if logged_in? %>
-					 <%= render :partial=>"shared/facebook" %>
+                <div class="left_box">
+                </div>
 				 <% end %>
-											
-				</div>
+                <div class="left_box">
+                    <%= render :partial=>"shared/utn_rss" %>
+                </div>
             </div>
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
 				<ul id="right_tabs">
-					<li><%= link_to "Staða viðræðna", :controller=>"treaty_documents" %></li>
-					<li><%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %></li>
+					<li><%= link_to(t('esb.menu.treaty.label'),{:controller=>"treaty_documents", :action=>""}, :title=>t('esb.menu.treaty.mouseover'), :alt=>t('esb.menu.treaty.mouseover') )%></li>
+					<li><%= link_to(t('esb.menu.alldocs.label'),{:controller=>"treaty_documents", :action=>"newest"}, :title=>t('esb.menu.alldocs.mouseover'), :alt=>t('esb.menu.alldocs.mouseover') ) %></li>
+								
 				</ul>
 				<ul>
 			<div id="left_tabs">
@@ -69,32 +71,44 @@
               </div>
 						
             <!-- Miðjusvæðið -->
-			<div id="mainContentExpanded"> 
-            
-			
-            	<% if session[:selected_tag_name] %>
-            	<!-- <div id="selected_tag"> -->
-	            	<%#=session[:selected_tag_name] %>
-            	<!--</div>	-->	
+            <div id="MainContent">
+            	 
+			 	<% unless controller_name=="users" or controller_name=="settings" %>
+					<div id="rss_feed">
+						<%= render :partial => "shared/rss_feed" %>
+					</div>
+				 	<div id="subfilters">				
+						<%= render :partial=>"shared/subfilters" %>
+					</div>
+				<% end %>
+				
+				<% if session[:selected_tag_name] %>
+            	<h2>
+	            	<%=session[:selected_tag_name] %>
+            	</h2>		
 				<% end %>
 			 
                 <div id="Content_wrapper">
-            		
-					<%=flash[:notice]%>
-					<%=flash[:error]%>				
-				
-					       
+             	<%=flash[:notice]%>
+				<%=flash[:error]%>	      
                     <div id="Content">
                     	<%=yield%>
                     </div>
                 </div>
             </div>
+            <!-- Hægridálkur -->
+            <div id="RightCol">	
+
+            </div>
             <!-- Fótur síðunnar -->
             <%= render :partial => "shared/esb_footer" %>
+						
+            </div>
         </div>
 		<script type="text/javascript">
 			jQuery("input#search-id").DefaultValue("Leitarorð...");
 		</script>
+		<%=render :partial=>"treaty_documents/popup_window" %>
         <%= render :partial => "shared/facebook_footer" %>
     </body>
 </html>

@@ -6,6 +6,45 @@ var addthis_config = {
 
 <span class="entry_icons">
 		<div class="addthis_toolbox addthis_default_style">
+<<<<<<< HEAD
+	
+			<a class="addthis_button_facebook" title="Senda á Facebook" alt="Senda á Facebook" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>">
+				<%=image_tag("esb_entry_facebook.gif", :border => 0)%>
+			</a>
+			
+			<a  class="addthis_button_twitter" title="Senda á Twitter" alt="Senda á Twitter" addthis:url="<%=action_item.show_url%>"  addthis:title="<%=action_item.name%>">
+				<%=image_tag("esb_entry_twitter.gif", :border => 0)%>
+			</a>
+			
+			<% if logged_in? %>
+				<% if action_item.user_id != current_user.id or current_user.is_admin? %>
+					<% if action_item.instance_of?(Priority) %>
+						<%= link_to_remote image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), :url=>{:controller=>"priorites", :action=>"flag", :id=>action_item.id, :title => t('esb.mouseover.entry.report')}, :confirm => t('menu.priorities.flag.confirm'), :method => :get,
+ 																			  :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:right;\">')",
+																			  :complete=>"update('<img src=\"/images/entry_report_gray.gif\" style=\"float:right;\">')" %>
+					<% elsif action_item.instance_of?(Question) %>
+						<%= link_to_remote image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), :url=>{:controller=>"questions", :action=>"flag", :id=>action_item.id, :title => t('esb.mouseover.entry.report')}, :confirm => t('menu.priorities.flag.confirm'), :method => :get,
+ 																			  :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:right;\">')",
+																			  :complete=>"update('<img src=\"/images/entry_report_gray.gif\" style=\"float:right;\">')",
+																			:title => t('esb.mouseover.entry.report') %>
+					<% elsif action_item.instance_of?(Document) %>
+						<%= link_to_remote image_tag("entry_report_gray.gif", :border => 0, :style=>"float:right;"), :url=>{:controller=>"documents", :action=>"flag", :id=>action_item.id, :title => t('esb.mouseover.entry.report')}, :confirm => t('menu.priorities.flag.confirm'), :method => :get,
+ 																			  :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:right;\">')",
+																			  :complete=>"update('<img src=\"/images/entry_report_gray.gif\" style=\"float:right;\">')",
+																			:title => t('esb.mouseover.entry.report') %>
+					<% end %>
+				<% end %>
+			<% end %>
+			
+			<% unless action_item.instance_of?(Document) %>
+				<% if action_item.instance_of?(Priority) %>
+					<% if logged_in? %>
+						<%=render :partial=>"shared/follow_icons", :locals => {:activity => activity, :following => following}%>
+					<% end %>
+				<% end %>
+		   <% end %>
+			
+=======
 
 
 			<% if logged_in? %>
@@ -45,6 +84,7 @@ var addthis_config = {
 				<% end %>
 			<% end %>
 
+>>>>>>> rvb/esb
 		</div>
 </span>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4cad2bb74f7d4e97"></script>

@@ -10,7 +10,7 @@
 <%= f.text_field :name, :size => 60, :maxlength => 60 %>
 <h4><%= t('esb.priority.tag') %><span class="star">*</span></h4>
 <div class="addContent_kaflar">
-    <b><%= t('esb.tags.notin') %></b>
+    <b><%= t('esb.tag_type.notin.label') %></b>
     <br/>
     <% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag| %>
     <input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name %>
@@ -19,7 +19,7 @@
     <% end %>
 </div>
 <div class="addContent_kaflar">
-    <b><%= t('esb.tags.partly') %></b>
+    <b><%= t('esb.tag_type.partly.label') %></b>
     <br/>
     <% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag| %>
     <input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name %>
@@ -28,7 +28,7 @@
     <% end %>
 </div>
 <div class="addContent_kaflar">
-    <b><%= t('esb.tags.within') %></b>
+    <b><%= t('esb.tag_type.within.label') %></b>
     <br/>
     <% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag| %>
     <input type="radio" name="custom_tag" value="<%=tag.name%>"/><span class="Chapter_name"><%=tag.name %>
