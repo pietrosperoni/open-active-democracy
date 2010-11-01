@@ -48,22 +48,23 @@
 			<!-- Haus á miðjusvæði -->
 			<div id="tabs">
 				<ul id="right_tabs">
-					<li><%= link_to "Staða viðræðna", :controller=>"treaty_documents" %></li>
-					<li><%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %></li>
+					<li><%= link_to(t('esb.menu.treaty.label'),{:controller=>"treaty_documents", :action=>""}, :title=>t('esb.menu.treaty.mouseover'), :alt=>t('esb.menu.treaty.mouseover') )%></li>
+					<li><%= link_to(t('esb.menu.alldocs.label'),{:controller=>"treaty_documents", :action=>"newest"}, :title=>t('esb.menu.alldocs.mouseover'), :alt=>t('esb.menu.alldocs.mouseover') ) %></li>
+								
 				</ul>
 				<ul>
 			<div id="left_tabs">
 				     <li <%= controller_name=="news" ? "class='active'" : "" %>>
-					<a href="/news/activities?r=1">Allt</a>
+					<a href="/news/activities?r=1" title="<%=t('esb.menu.all.mouseover') %>"><%=t('esb.menu.all.label')%></a>
 				     </li>
 				     <li <%= controller_name=="questions" ? "class='active'" : "" %>>
-					<a href="/questions/newest?r=1">Spurningar og svör</a>
+					<a href="/questions/newest?r=1" title="<%=t('esb.menu.questionsanswers.mouseover')%>"><%=t('esb.menu.questionsanswers.label')%></a>
 				     </li>
 				     <li <%= controller_name=="priorities" ? "class='active'" : "" %>>
-					<a href="/priorities/newest?r=1">Umræður</a>
+					<a href="/priorities/newest?r=1" title="<%=t('esb.menu.discussions.mouseover')%>"><%=t('esb.menu.discussions.label')%></a>
 				     </li>
 				     <li <%= controller_name=="documents" ? "class='active'" : "" %>>
-					 <a href="/documents/newest?r=1">Erindi</a>
+					 <a href="/documents/newest?r=1" title="<%=t('esb.menu.documents.mouseover')%>"><%=t('esb.menu.documents.label')%></a>
 				     </li>
 			</div>
 				</ul>
@@ -105,7 +106,7 @@
 				</div>
 				<% end %>
 -->
-				<h4>Utan EES</h4>
+				<h4 title="<%= t('esb.tag_type.notin.mouseover')%>"><%= t('esb.tag_type.notin.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
 					<li>
@@ -118,7 +119,7 @@
                     </li>
 					<% end %>
                 </ul>
-				<h4>Að hluta í EES</h4>
+				<h4 title="<%= t('esb.tag_type.partly.mouseover')%>"><%= t('esb.tag_type.partly.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
 					<li>
@@ -131,7 +132,7 @@
                     </li>
 					<% end %>
                 </ul>
-				<h4>Í EES</h4>
+				<h4 title="<%= t('esb.tag_type.within.mouseover')%>"><%= t('esb.tag_type.within.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
@@ -144,7 +145,7 @@
                     </li>
 					<% end %>
                 </ul>
-				<h4>Annað</h4>
+					<h4 title="<%= t('esb.tag_type.other.mouseover')%>"><%= t('esb.tag_type.other.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>	
 					<li>

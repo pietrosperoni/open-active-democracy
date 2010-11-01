@@ -14,7 +14,20 @@
 <% Tag.by_external_id.each do |tag| %>
 	<tr>	
 		<td class="td_Underline">
-			<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=tag.external_id%>. <%=tag.name%></a>
+			<%#= tag.tag_type == 1 ? "1") ) OBS how to to multinested if with short syntax? %>		
+			<a href="#" 
+			onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"
+			<% if tag.tag_type == 1 %>
+				class="chapter_innan"
+			<% elsif tag.tag_type == 2 %>
+				class="chapter_hluta"
+			<% elsif tag.tag_type == 3 %>
+				class="chapter_utan"
+			<% else %>
+				class="chapter_innan" 
+			<% end %>	
+			>
+				<%=tag.external_id%>. <%=tag.name%></a>	
 			 <% if logged_in? and current_user.is_admin? %>
 				- <a href="#" onclick="showEditStageWindow('<%=tag.external_id%>')">(st)</a>
 			 <% end %>
