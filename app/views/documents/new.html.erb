@@ -1,16 +1,16 @@
-....<% form_for :document, :url => "/documents/create", :html=>{:id=>"document_form"}  do |f| %>
+<% form_for :document, :url => "/documents/create", :html=>{:id=>"document_form"}  do |f| %>
 <%= f.error_messages %>
 <h2>Leggja inn erindi til samninganefndar</h2>
-<div class="description">
+<!--<div class="description">
     Erindi eru....
-</div>
+</div>-->
 <h3>Titill erindis <span class="star">*</span></h3>
 <h4><%= t('document.revision.new.name.label') %>
     <br/>
     <%= f.text_field :name, :size => 60, :maxLength => 60 %>
 </h4>
-<br/>
 <h4><%= t('esb.priority.tag') %><span class="star">*</span></h4>
+
 <div class="addContent_kaflar">
     <b><%= t('esb.tag_type.notin.label') %></b>
     <br/>
