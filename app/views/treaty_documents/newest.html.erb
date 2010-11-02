@@ -2,7 +2,7 @@
 
 <ul>
 <% @documents.each do |document|%>
-<li>  <%=link_to document.title, document.url, :target => "_blank" %></li>
+<li>  <%=link_to document.title, document.url, :target => "_blank" %> / <%=document.tag_name%></li>
 <% end %>
 </ul>
 <%=will_paginate @documents%>
