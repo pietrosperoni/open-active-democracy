@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
 
   named_scope :published, :conditions => "comments.status = 'published'"
-  named_scope :unpublished, :conditions => "comments.status != 'published'"
+  named_scope :unpublished, :conditions => "comments.status not in ('published','abusive')"
 
   named_scope :published_and_abusive, :conditions => "comments.status in ('published','abusive')"
   named_scope :deleted, :conditions => "comments.status = 'deleted'"

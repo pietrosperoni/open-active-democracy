@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   has_many :notifications, :as => :notifiable, :dependent => :destroy
 
   named_scope :published, :conditions => "questions.status = 'published'"
-  named_scope :unpublished, :conditions => "questions.status != 'published'"
+  named_scope :unpublished, :conditions => "questions.status not in ('published','abusive')"
 
   named_scope :by_recently_created, :order => "questions.created_at desc"
   named_scope :by_recently_updated, :order => "questions.updated_at desc"  

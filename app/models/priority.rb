@@ -4,7 +4,7 @@ class Priority < ActiveRecord::Base
   
 
   named_scope :published, :conditions => "priorities.status = 'published'"
-  named_scope :unpublished, :conditions => "priorities.status != 'published'"
+  named_scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
 
   named_scope :flagged, :conditions => "flags_count > 0"
 
