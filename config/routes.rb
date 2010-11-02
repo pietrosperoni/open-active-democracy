@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/documents/flag/:id', :controller=>'documents', :action=>'flag'
 
   map.connect '/admin/all_flagged', :controller=>'admin', :action=>'all_flagged'
+  map.connect '/admin/all_deleted', :controller=>'admin', :action=>'all_deleted'
   map.connect '/users/list_suspended', :controller=>'users', :action=>'list_suspended'
 
   map.resources :partners, :member => {
