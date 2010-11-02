@@ -64,7 +64,12 @@ namespace :esb do
   task(:crawl_treaty_documents => :environment) do
     ActiveRecord::Base.transaction do
       TreatyDocument.destroy_all
-      ["http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-esb/",
+      subs = []
+      (5775..5810).each do |n|
+        next if n==5789
+        subs<<"http://esb.utn.is/hlidarval/malaflokkar-vidraedna/kaflar/nr/#{n}" 
+      end
+      (subs+["http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-esb/",
        "http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-isl/",
        "http://esb.utn.is/hlidarval/skjol-og-tenglar/onnur-skjol/",
        "http://esb.utn.is/hlidarval/frettir/",
@@ -77,7 +82,8 @@ namespace :esb do
        "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5851",
        "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5852",
        "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5853",
-       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5854"].each do |url_to_parse|
+       "http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5854"]).each do |url_to_parse|
+      puts "Crawling #{url_to_parse}"
       html_doc = Nokogiri::HTML(open(url_to_parse))
       main_div = html_doc.at("div.boxbody")
         main_div.children.search("a").each do |element|
