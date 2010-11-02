@@ -15,12 +15,22 @@ Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði 
 <li><%=link_to "Umræður", "/velja_kafla/#{@tag.name}?controller_name=priorities"%></li>
 <li><%=link_to "Erindi", "/velja_kafla/#{@tag.name}?controller_name=documents"%></li>
 </ul>
+
+<br />
+<ul>
+<li><a href="http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/ees1">Upplýsingar um samningahóp</a></li>
+<li><a href="http://evropa.utanrikisraduneyti.is/media/evropa/samningahopar/EES_I.pdf">Erindisbréf samningahóps</a></li>
+</ul>
+
+
 </div>
 
 
 <div class="right">
 <h3>Skjöl frá samninganefnd</h3>
 <h4>Fundafrásagnir</h4>
+
+
 
 <ul>
 <% TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_1").latest_three.each do |document| -%>
@@ -29,12 +39,23 @@ Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði 
 </ul>
 
 <h4>Gögn vegna rýnivinnu</h4>
+
+<ul><li>Skrapa:</li>
+<li>Þarna birtir þú það sem skrapað er upp með merkingunni K13_36 S2 F1_4 af síðu um kafla 13</li> <li>(http://esb.utn.is/hlidarval/malaflokkar-vidraedna/kaflar/nr/5798), skjöl, upplýsingar og tenglar (http://esb.utn.is/hlidarval/skjol-og-tenglar/) og undirsíðunum ESB (http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-esb/) og Ísland (http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-isl/) </li>
+</ul>
+
+
 <ul>
 <li>Fundadagskrá - Kemur síðar</li>
 <li>Niðurstaða um rýnivinnu - Kemur síðar</li>
 </ul>
 
 <h4>Samningsafstaða</h4>
+<ul>
+<li><b>Skrapa</b></li>
+<li>Þar fyrir neðan á að birtast það sem skrapað er upp með merkingunni K36 S4_5 F1_3 af tenglasíðunni skjöl, upplýsingar og tenglar (http://esb.utn.is/hlidarval/skjol-og-tenglar/) og undirsíðunum ESB (http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-esb/) og Ísland (http://esb.utn.is/hlidarval/skjol-og-tenglar/skjol-fra-isl/) </li>
+</ul>
+
 <ul>
 <li>Kemur síðar</li>
 </ul>
@@ -46,7 +67,13 @@ Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði 
 
 <h4>Fréttatilkynningar </h4>
 
+<ul><li><b>Skrapa</b></li>
+<li>Þar fyrir neðan á að birtast það sem skrapað er upp með merkingunni K13 T8 S6 F1_5 af síðunni um kafla 1 (http://esb.utn.is/hlidarval/malaflokkar-vidraedna/kaflar/nr/5810) 
+</li></ul>
+
 <h4>Allir kaflar</h4>
+<b>Óljóst</b>
+
 <ul>
 <% TreatyDocument.find(:all,:conditions=>"chapter = 36").each do |document| -%>
 	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
