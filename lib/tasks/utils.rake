@@ -65,7 +65,7 @@ namespace :utils do
       ["Félagaréttur","Fjármálaþjónusta","Frjáls för fjármagns",
        "Frjáls för vinnuafls","Frjálst vöruflæði","Hugverkaréttur",
        "Opinber útboð","Samkeppnismál","Staðfesturéttur og þjónustufrelsi",
-       "Upplýsingatækni og fjölmiðlum"].each_with_index do |t,i|
+       "Upplýsingatækni og fjölmiðlun"].each_with_index do |t,i|
         tag=Tag.new
         tag.name = t
         tag.weight = i
@@ -83,7 +83,7 @@ namespace :utils do
       end
       ["Dóms- og innanríkismál","Fiskveiðar","Fjárhagslegt eftirlit",
       "Framlagsmál","Gjaldmiðilssamstarf","Landbúnaður og byggðastefna","Réttarvarsla og grundvallarréttindi",
-      "Skattamál","Tollabandalag","Uppbyggingarstyrkir","Utanríkis-, öryggis- og varnamál",
+      "Skattamál","Tollabandalag","Uppbyggingarstyrkir","Utanríkis-, öryggis- og varnarmál",
       "Utanríkistengsl"].each_with_index do |t,i|
         tag=Tag.new
         tag.name = t

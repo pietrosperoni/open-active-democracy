@@ -100,7 +100,7 @@ namespace :esb do
        ["Opinber útboð",5],
        ["Samkeppnismál",8],
        ["Staðfesturéttur og þjónustufrelsi",3],
-       ["Upplýsingatækni og fjölmiðlum",10]].each_with_index do |t,i|
+       ["Upplýsingatækni og fjölmiðlun",10]].each_with_index do |t,i|
         tag=Tag.new
         tag.name = t[0]
         tag.weight = i
@@ -136,7 +136,7 @@ namespace :esb do
       ["Skattamál",16],
       ["Tollabandalag",29],
       ["Uppbyggingarstyrkir",22],
-      ["Utanríkis-, öryggis- og varnamál",31],
+      ["Utanríkis-, öryggis- og varnarmál",31],
       ["Utanríkistengsl",30]].each_with_index do |t,i|
         tag=Tag.new
         tag.name = t[0]
