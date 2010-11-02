@@ -1,4 +1,3 @@
-<!-- Pers�nuuppl�singar -->
 <div id="Person">
 
 	<!-- TODO profile image --><br/>
@@ -13,10 +12,10 @@
     <span class="profile_edit"> 
 		<a href="/settings/picture" title="<%= t('esb.mouseover.edituser')%>"><img src="/images/profile_edit.gif" border=0></a> 	
 		<!--<a href="<%#= url_for current_user %>/edit" title=""><img src="/images/profile_edit.gif" border=0></a>-->
-		<%#= link_to image_tag("profile_edit.gif", :border => 0), url_for current_user, :controller => "", :action => "", :title => t('esb.mouseover.edituser') %>
+		<%#= link_to image_tag("profile_edit.gif", :border => 0), url_for current_user, :controller => "", :action => "", :title => t('esb.mouseover.edituser'), :alt => t('esb.mouseover.edituser') %>
 	</span>
 	<span class="profile_logout">		
-		<%= link_to image_tag("profile_logout.gif", :border => 0), logout_path, :title => t('esb.mouseover.logout') %>
+		<%= link_to image_tag("profile_logout.gif", :border => 0), logout_path, :title => t('esb.mouseover.logout'), :alt => t('esb.mouseover.logout') %>
 	</span>
 	<span class="facebook">
 		 					 <%= render :partial=>"shared/facebook" %>

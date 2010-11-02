@@ -63,6 +63,13 @@ h4
 {
 	font-size: 11px;
 }
+
+h4.samningskaflar
+{
+	margin-top: -10px !important;
+	margin-bottom: 10px !important;
+}
+
 h5
 {
 	font-size: 11px;
