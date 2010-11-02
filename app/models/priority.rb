@@ -2,7 +2,10 @@ class Priority < ActiveRecord::Base
   
   include ActionView::Helpers::DateHelper
   
+
   named_scope :published, :conditions => "priorities.status = 'published'"
+  named_scope :unpublished, :conditions => "priorities.status != 'published'"
+
   named_scope :flagged, :conditions => "flags_count > 0"
 
   named_scope :alphabetical, :order => "priorities.name asc"

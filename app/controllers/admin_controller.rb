@@ -14,10 +14,10 @@ class AdminController < ApplicationController
   def all_deleted
     #TODO: Rethink this as the list of deleted comments grows
     @all = [] 
-    @all += Priority.deleted
-    @all += Question.deleted
-    @all += Comment.deleted
-    @all += Document.deleted
+    @all += Priority.unpublished
+    @all += Question.unpublished
+    @all += Comment.unpublished
+    @all += Document.unpublished
     @all = @all.sort_by {|s| s.created_at}
     
     render :action=>:all_flagged
