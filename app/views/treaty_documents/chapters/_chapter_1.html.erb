@@ -29,13 +29,11 @@ Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði 
 <div class="right">
 <h3>Skjöl frá samninganefnd</h3>
 <h4>Fundafrásagnir</h4>
-
-
-
 <ul>
 <% TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_1").latest_three.each do |document| -%>
 	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
 <% end %>
+<li><a href="http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5846">Fleiri fundafrásagnir</a></li>
 </ul>
 
 <h4>Gögn vegna rýnivinnu</h4>
@@ -59,7 +57,6 @@ Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði 
 </ul>
 <% end %>
 <ul>
-<li>Kemur síðar</li>
 </ul>
 
 <h4>Skýrslur</h4>
@@ -77,15 +74,21 @@ Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði 
 </ul>
 <% end %>
 
-<h4>Allir kaflar</h4>
-<b>Óljóst</b>
+<h4>Önnur lykilskjöl tengt öllum köflum</h4>
+<ul>
+<li><a href="http://www.utanrikisraduneyti.is/media/esb/27072010-Iceland-statement-isl.pdf"> Skrifleg yfirlýsing Íslands sem lögð var fram á ríkjaráðstefnunni 27. júlí 2010</a></li>
+<li>Svo skrifar Atli:  "...það sem nú er efst í flokknum á popup síðunni." Ég átta mig ekki á hvaða skjal það er GG. </li>
+</ul>
 
+
+<!--
 <ul>
 <% TreatyDocument.find(:all,:conditions=>"chapter = 36").each do |document| -%>
 	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
 <% end %>
 <li><a href="http://esb.utn.is/hlidarval/skjol-og-tenglar/">Öll skjöl og tenglar</a></li>
 </ul>
+-->
 
 </div>
 
