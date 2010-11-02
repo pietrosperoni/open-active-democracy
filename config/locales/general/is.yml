@@ -1636,7 +1636,7 @@ is:
         intro: "Hér birtast gögn samningaviðræðna Íslands um aðild að ESB þar sem hægt er að spyrja spurninga, taka þátt í umræðum og senda erindi til samninganefndar Íslands. Lesa meira..."        
         create:       
             priority: 
-                label: "Taka þátt í umræðu"
+                label: "Hefja umræðu"
                 mouseover: "Hvað liggur þér á hjarta varðandi samningsferlið?"
             question: 
                 label: "Senda inn spurningu"
