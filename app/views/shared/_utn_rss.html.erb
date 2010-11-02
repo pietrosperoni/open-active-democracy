@@ -17,7 +17,9 @@ function(feeds){
   for(var i=0; i<feeds.entries.length; i++){
     var entry = feeds.entries[i];
     // Entry title
-    jQuery("#utn_rss").append("<p class='rss_heading'><a target='_blank' href='" + entry.link+ " '>" + entry.title + "</a></p>");
+	pd= new Date(Date.parse(entry.publishedDate));
+    date_html='('+pd.getDate()+'-'+pd.getMonth()+'-'+pd.getFullYear()+')';
+    jQuery("#utn_rss").append("<p class='rss_heading'><a target='_blank' href='" + entry.link+ " '>" + entry.title + " " + date_html +"</a></p>");
   }
 }, 5);
 });
