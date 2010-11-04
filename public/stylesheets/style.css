@@ -59,9 +59,15 @@ h3
 {
 	font-size: 12px;
 }
-h4
+
+.treaty_docs_popup h3
 {
-	font-size: 11px;
+	margin-top: 10px;
+}
+
+.search_results h3
+{
+	padding-top: 5px;
 }
 
 h4.samningskaflar
@@ -244,7 +250,7 @@ h5
 }
 #rightCol ul li img
 {
-	margin: 0px 2px 2px 0;
+	margin: 0px 0px 2px 0;
 	vertical-align: middle;
 }
 #rightCol ul li.header
@@ -624,8 +630,9 @@ input, textarea
 {
 	float:right;
 	height:70px;
-	width:203px;
+	width:204px;
 	margin-top:-38px;
+	width:202px !ie;
 	margin-top:0px !ie;
 }
 
@@ -1078,6 +1085,7 @@ vertical-align:top;
 {
 float:left;	
 width: 600px;
+padding-left: 10px;
 }
 
 .search_results #right
@@ -1165,7 +1173,7 @@ float: left;
 
 .treaty_docs_popup .right
 {
-width: 400px;
+width: 450px;
 float: right;
 }
 
@@ -1195,4 +1203,7 @@ div
 margin-top: 10px;	
 }
 	
-	
+.edit_user
+{
+		margin-left: 10px;
+}
