@@ -25,10 +25,8 @@ class TreatyDocument < ActiveRecord::Base
   def tag_name
     if self.chapter==36
       "Allir kaflar"
-    elsif Tag.find_by_external_id(self.chapter)
-      Tag.find_by_external_id(self.chapter).name
     else
-      "Ekki tengt kafla"
+      self.cached_issue_list
     end
   end
 end
