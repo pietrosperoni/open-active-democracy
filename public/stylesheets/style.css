@@ -59,6 +59,17 @@ h3
 {
 	font-size: 12px;
 }
+
+.treaty_docs_popup h3
+{
+	margin-top: 10px;
+}
+
+.search_results h3
+{
+	padding-top: 5px;
+}
+
 h4
 {
 	font-size: 11px;
@@ -244,7 +255,7 @@ h5
 }
 #rightCol ul li img
 {
-	margin: 0px 2px 2px 0;
+	margin: 0px 0px 2px 0;
 	vertical-align: middle;
 }
 #rightCol ul li.header
@@ -524,9 +535,9 @@ div
 {
 background-color:#F1F1F1;
 margin-bottom:7px;
-margin-left:61px;
+margin-left:69px;
 padding-left:6px;
-width:518px;	
+width:509px;	
 }
 
 .comment_submit, #comment_submit
@@ -624,8 +635,9 @@ input, textarea
 {
 	float:right;
 	height:70px;
-	width:203px;
+	width:204px;
 	margin-top:-38px;
+	width:202px !ie;
 	margin-top:0px !ie;
 }
 
@@ -668,6 +680,7 @@ width: 532px;
 }
 .profile_name
 {
+	margin-top: -2px;
 }
 .profile_info
 {
@@ -684,29 +697,37 @@ width: 532px;
 	width: 60px;
 	margin-top: 5px;
 }
+
+.stillingar, .utskraning
+{
+		margin-top: 4px;
+		font-size: 10px;
+}
+
 #settings
 {
-	clear: both;
+/*	clear: both;
 	margin: 10px 0 0 0;
 	height: 20px;
+*/
 }
 .profile_edit img
 {
-	margin: 5px 0 0 0px;
+	margin: 3px 0 0px 0px;
 }
 
 .profile_edit
 {
-float:left;
+/*float:left;*/
 }
 
 .profile_logout img
 {
-	margin: 5px 0 0 3px;
+	margin: 2px 0 0 0px;
 }
 .profile_logout
 {
-float:left;
+/*float:left;*/
 }
 
 .profile_askrift
@@ -907,6 +928,7 @@ input.chapter
 .profile_image img
 {
 	border: 1px #669 solid;
+	margin-top: 2px;
 }
 .profile_image
 {
@@ -1009,11 +1031,16 @@ input.chapter
 {
 	border-bottom: 1px solid #F1F1F1;
 	padding-bottom: 3px;
+	
+/* Need to remove other margin/padding patches from various elements and apply this instead 	
+	margin-left: 10px; 
+	margin-right: 10px; 
+*/
 }
 
 .activity_border
 {
-	border-bottom: 1px solid #F1F1F1;
+/*	border-bottom: 1px solid #F1F1F1; */
 	padding-bottom: 3px;
 }
 
@@ -1052,7 +1079,8 @@ float:left;
 
 .facebook
 {
-float: right;	
+/* float: right;	*/
+padding-left: 55px;
 }
 
 .fb_profile_pic_rendered
@@ -1078,6 +1106,7 @@ vertical-align:top;
 {
 float:left;	
 width: 600px;
+padding-left: 10px;
 }
 
 .search_results #right
@@ -1108,10 +1137,11 @@ display: none;
 	background-color: #ff7777;
 	min-height: 14px;
 	padding: 1px 4px 2px 6px;
-	margin: 10px 0px 8px 54px;
-	width: 515px;
+	margin: 10px 0px 8px 70px;
+	width: 504px;
 	border-bottom: 1px solid #e2e2e2;
-	margin: 0px 0px 8px 65px !ie;
+	margin: 0px 0px 8px 69px !ie;
+	width: 515px !ie;
 }
 
 #document_form, #question_form, #priority_form, .edit_question
@@ -1165,7 +1195,7 @@ float: left;
 
 .treaty_docs_popup .right
 {
-width: 400px;
+width: 450px;
 float: right;
 }
 
@@ -1195,4 +1225,12 @@ div
 margin-top: 10px;	
 }
 	
-	
+.edit_user
+{
+		margin-left: 10px;
+}
+
+.askrift input, .annad input
+{
+		border: 0px none #fff;
+}
