@@ -535,9 +535,9 @@ div
 {
 background-color:#F1F1F1;
 margin-bottom:7px;
-margin-left:61px;
+margin-left:69px;
 padding-left:6px;
-width:518px;	
+width:509px;	
 }
 
 .comment_submit, #comment_submit
@@ -1031,6 +1031,11 @@ input.chapter
 {
 	border-bottom: 1px solid #F1F1F1;
 	padding-bottom: 3px;
+	
+/* Need to remove other margin/padding patches from various elements and apply this instead 	
+	margin-left: 10px; 
+	margin-right: 10px; 
+*/
 }
 
 .activity_border
@@ -1132,10 +1137,11 @@ display: none;
 	background-color: #ff7777;
 	min-height: 14px;
 	padding: 1px 4px 2px 6px;
-	margin: 10px 0px 8px 54px;
-	width: 515px;
+	margin: 10px 0px 8px 70px;
+	width: 504px;
 	border-bottom: 1px solid #e2e2e2;
-	margin: 0px 0px 8px 65px !ie;
+	margin: 0px 0px 8px 69px !ie;
+	width: 515px !ie;
 }
 
 #document_form, #question_form, #priority_form, .edit_question
