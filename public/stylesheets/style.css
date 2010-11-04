@@ -675,6 +675,7 @@ width: 532px;
 }
 .profile_name
 {
+	margin-top: -2px;
 }
 .profile_info
 {
@@ -691,29 +692,37 @@ width: 532px;
 	width: 60px;
 	margin-top: 5px;
 }
+
+.stillingar, .utskraning
+{
+		margin-top: 4px;
+		font-size: 10px;
+}
+
 #settings
 {
-	clear: both;
+/*	clear: both;
 	margin: 10px 0 0 0;
 	height: 20px;
+*/
 }
 .profile_edit img
 {
-	margin: 5px 0 0 0px;
+	margin: 3px 0 0px 0px;
 }
 
 .profile_edit
 {
-float:left;
+/*float:left;*/
 }
 
 .profile_logout img
 {
-	margin: 5px 0 0 3px;
+	margin: 2px 0 0 0px;
 }
 .profile_logout
 {
-float:left;
+/*float:left;*/
 }
 
 .profile_askrift
@@ -914,6 +923,7 @@ input.chapter
 .profile_image img
 {
 	border: 1px #669 solid;
+	margin-top: 2px;
 }
 .profile_image
 {
@@ -1059,7 +1069,8 @@ float:left;
 
 .facebook
 {
-float: right;	
+/* float: right;	*/
+padding-left: 55px;
 }
 
 .fb_profile_pic_rendered
@@ -1206,4 +1217,10 @@ margin-top: 10px;
 .edit_user
 {
 		margin-left: 10px;
+}
+#utn_rss p
+{
+border-bottom:1px solid #CCCCCC !important;
+margin:5px 0 0;
+padding-bottom:5px;
 }
