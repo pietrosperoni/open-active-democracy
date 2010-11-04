@@ -70,6 +70,11 @@ h3
 	padding-top: 5px;
 }
 
+h4
+{
+	font-size: 11px;
+}
+
 h4.samningskaflar
 {
 	margin-bottom: 10px !important;
@@ -1030,7 +1035,7 @@ input.chapter
 
 .activity_border
 {
-	border-bottom: 1px solid #F1F1F1;
+/*	border-bottom: 1px solid #F1F1F1; */
 	padding-bottom: 3px;
 }
 
@@ -1218,9 +1223,8 @@ margin-top: 10px;
 {
 		margin-left: 10px;
 }
-#utn_rss p
+
+.askrift input, .annad input
 {
-border-bottom:1px solid #CCCCCC !important;
-margin:5px 0 0;
-padding-bottom:5px;
+		border: 0px none #fff;
 }
