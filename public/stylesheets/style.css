@@ -116,9 +116,12 @@ h5
 }
 #search
 {
-	float: right;
-	margin: 45px 18px 0px 0px;
-	margin-right: 10px !ie;
+	position:relative;
+	right:0;
+	top:47px;
+	width:230px;
+	left:574px;
+	left:572px !ie;
 }
 #search input.input
 {
@@ -129,12 +132,23 @@ h5
 }
 #search input.leita
 {
-	padding-left: 3px;
-	padding-right: 5px;
-	margin-top: 1px;
-	height: 22px;
-	height: 21px !ie;
+	font-size:12px;
+	height:22px !important;
+	width: 45px;
 }
+
+#search-id
+{
+	font-size:12px;
+	height:22px !important;
+	width:160px;
+	float:left;
+	margin-right: 3px;
+	margin-right: 0px !ie;
+	
+}
+
+
 #header-right p
 {
 	margin-bottom: 5px;
@@ -600,6 +614,7 @@ input, textarea
 	font-family: sans-serif;
 	font-size: 13px;
 }
+
 #question_content, #priority_description
 {
 	height: 80px;
@@ -608,6 +623,7 @@ input, textarea
 {
 	height: 380px;
 }
+
 .addContent_kaflar input
 {
 	border: none;
@@ -700,8 +716,9 @@ width: 532px;
 
 .stillingar, .utskraning
 {
-		margin-top: 4px;
-		font-size: 10px;
+	font-size: 10px;
+	padding-top:5px;
+	display:block;
 }
 
 #settings
@@ -713,17 +730,21 @@ width: 532px;
 }
 .profile_edit img
 {
-	margin: 3px 0 0px 0px;
+	margin: 3px 3px 0px 0px;
+	float:left;
 }
 
 .profile_edit
 {
+	height: 20px;
 /*float:left;*/
 }
 
 .profile_logout img
 {
-	margin: 2px 0 0 0px;
+	float:left;
+	margin: 3px 3px 0 0px;
+	margin: 3px 3px 0 3px !ie;
 }
 .profile_logout
 {
@@ -793,6 +814,8 @@ width: 532px;
 .left_box p
 {
 	margin: 5px 0px 0px 0px;
+	padding-bottom:5px;
+	border-bottom:1px solid #DDDDDD;
 }
 .left_box input
 {
@@ -1079,8 +1102,9 @@ float:left;
 
 .facebook
 {
-/* float: right;	*/
-padding-left: 55px;
+	clear:both;
+	margin-left:55px;
+	margin-left:58px !ie;
 }
 
 .fb_profile_pic_rendered
