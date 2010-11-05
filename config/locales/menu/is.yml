@@ -196,8 +196,8 @@ is:
                 confirm: "Merkja þessa hugmynd sem lokið og misheppnaða: {{priority_name}}. Vinsamlegast sýnið biðlund, vinnslan gæti tekið eina eða tvær mínútur ef þessi hugmynd hefur marga meðmælendur"
             flag:
                 name: "Tilkynna óviðeigandi ummæli!"
-                title: "Er ástæða til að umsjónarmaður síðunnar líti á þessa hugmynd? Láta einnig vita í athugasemdum um hugmyndir ef það er ekki augljóst hvað vandamálið er."
-                confirm: "Þú ert um það bil að tilkynna um óviðeigandi ummæli til umsjónarmanni síðunnar. Ef það er ekki augljóst afhverju þú ert að tilkynna þetta, þá vinsamlegast setjið inn athugasemd svo það sé hægt að gera viðeigandi ráðstafanir."
+                title: "Er ástæða til að umsjónarmaður síðunnar líti á þessa hugmynd?."
+                confirm: "Þú ert um það bil að tilkynna um óviðeigandi ummæli til umsjónarmanns síðunnar. Ertu viss um að þú viljir gera það?"
             endorsers:
                 name: "Meðmælendur"
                 one: "1 með"

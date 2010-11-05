@@ -16,6 +16,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Language" content="EN" />
         <meta name="keywords" content="" />
+	
+<!--
+Vefur smíðaður af Íbúar.is fyrir Utanríkisráðuneytið á haustdögum 2010. 
+http://ibuar.is - ibuar@ibuar.is
+-->
 
 </head>
     <body>
@@ -106,6 +111,8 @@
 				</div>
 				<% end %>
 -->
+
+<h4 class="samningskaflar">Samningskaflar</h4>
 				<h4 title="<%= t('esb.tag_type.notin.mouseover')%>"><%= t('esb.tag_type.notin.label')%></h4>
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	

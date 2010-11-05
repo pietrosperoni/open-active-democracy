@@ -17,9 +17,14 @@ function(feeds){
   for(var i=0; i<feeds.entries.length; i++){
     var entry = feeds.entries[i];
     // Entry title
-    jQuery("#utn_rss").append("<p class='rss_heading'><a target='_blank' href='" + entry.link+ " '>" + entry.title + "</a></p>");
+	pd= new Date(Date.parse(entry.publishedDate));
+    date_html='('+pd.getDate()+'-'+pd.getMonth()+'-'+pd.getFullYear()+')';
+    jQuery("#utn_rss").append("<p class='rss_heading'><a target='_blank' href='" + entry.link+ " '> " + date_html +" " + entry.title + "</a></p>");
   }
 }, 5);
 });
 </script> 
 
+<div class="allar_frettir">
+	<a href="http://esb.utn.is/hlidarval/frettir/">Allar fréttir</a>
+</div>

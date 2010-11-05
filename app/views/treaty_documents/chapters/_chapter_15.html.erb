@@ -1,0 +1,106 @@
+<html>
+<body>
+
+<div class="treaty_docs_popup">
+<h2>Kafli 15:  Orka</h2>
+
+<div class="left">
+<p>
+<h3>Um kaflann</h3>
+
+
+
+Orkustefna ESB snýr m.a. að því að bæta samkeppnishæfni og öryggi orkuauðlinda svo og umhverfisvernd við vinnslu og flutning á orku. Reglur og stefnumál ESB á þessu sviði snerta samkeppnismál og ríkisafskipti, innri orkumarkað, orkusparnað, kjarnorku og öryggi kjarnorkuvinnslu og geislavarnir. Með þessari stefnu er unnið að því að tengja saman orku- og umhverfismál. Fyrirkomulag eignarhalds náttúruauðlinda er ekki viðfangsefni ESB heldur alfarið á hendi aðildarríkjanna.
+</p>
+
+<h3>Af umræðuvef</h3>
+<ul>
+<li><%=link_to "Spurningar og svör", "/velja_kafla/#{@tag.name}?controller_name=questions"%></li>
+<li><%=link_to "Umræður", "/velja_kafla/#{@tag.name}?controller_name=priorities"%></li>
+<li><%=link_to "Erindi", "/velja_kafla/#{@tag.name}?controller_name=documents"%></li>
+</ul>
+
+<h3>Um samningahópinn</h3>
+<ul>
+<li><a href="http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/ees1">Upplýsingar um samningahóp</a></li>
+<li><a href="http://evropa.utanrikisraduneyti.is/media/evropa/samningahopar/EES_I.pdf">Erindisbréf samningahóps</a> - PDF</li>
+</ul>
+
+
+</div>
+
+
+<div class="right">
+<h3>Skjöl frá samninganefnd</h3>
+<h4>Fundafrásagnir</h4>
+<ul>
+<% TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_1").latest_three.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %> - PDF</li>
+<% end %>
+<li><a href="http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5846">Fleiri fundafrásagnir</a></li>
+</ul>
+
+<h4>Gögn vegna rýnivinnu</h4>
+<ul>
+<% TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_4").latest_three.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
+</ul>
+<ul>
+<li><a href="http://www.utanrikisraduneyti.is/media/screening/Timaaaetlun-rynifunda-Islands-IS.pdf">Fundadagskrá</a> - PDF</li>
+<li>Niðurstaða um rýnivinnu - Kemur síðar</li>
+</ul>
+
+<% docs = TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_3").latest_three%>
+<% unless false and docs.empty? %>
+<h4>Samningsafstaða</h4>
+<ul>
+<% docs.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
+<li>Kemur síðar</li>
+</ul>
+<% end %>
+<ul>
+</ul>
+
+<h4>Skýrslur</h4>
+<ul>
+<li><a href="http://esb.utn.is/hlidarval/malaflokkar-vidraedna/kaflar/nr/5810">Sjá allar skýrslur</a></li>
+</ul>
+
+<% docs = TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_5").latest_three%>
+<% unless false and docs.empty? %>
+<h4>Fréttatilkynningar </h4>
+<ul>
+<% docs.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
+<li>Kemur síðar</li>
+</ul>
+<% end %>
+
+<h4>Önnur lykilskjöl tengd öllum köflum</h4>
+<ul>
+<li><a href="http://www.utanrikisraduneyti.is/media/esb/27072010-Iceland-statement-isl.pdf">Almenn afstaða Íslands sem lögð var fram á ríkjaráðstefnunni 27. júlí 2010</a> - PDF</li>
+<li><a href="http://www.utanrikisraduneyti.is/media/esb/27072010-ESB-statement-isl.pdf">Almenn afstaða Evrópusambandsins sem lögð var fram á ríkjaráðstefnunni 27. júlí 2010</a> - PDF</li>
+<li><a href="http://www.utanrikisraduneyti.is/media/esb/ESB-greiningarskyrsla.pdf"> ESB greiningarskýrsla - fylgiskjal við orðsendingu Framkvæmdarstjórnarinnar til Evrópuþingsins og Evrópuráðsins</a> - PDF</li>
+<li><a href="http://esb.utn.is/hlidarval/skjol-og-tenglar/">Öll skjöl og tenglar</a></li>
+</ul>
+
+
+<!--
+<ul>
+<% TreatyDocument.find(:all,:conditions=>"chapter = 36").each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
+<li><a href="http://esb.utn.is/hlidarval/skjol-og-tenglar/">Öll skjöl og tenglar</a></li>
+</ul>
+-->
+
+</div>
+
+
+</div>
+</body>
+</html>

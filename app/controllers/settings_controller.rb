@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   
-  layout "esb_search"
+  layout "esb_no_chapters"
   
   before_filter :login_required
   before_filter :get_user

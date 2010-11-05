@@ -7,7 +7,11 @@
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
 		    <div class="senda_a_facebook">
                 	<% if current_facebook_user %>
-                    Senda á Facebook?<%= check_box_tag "send_to_facebook", "yes", false %>
+			
+	            <span class="birta">Birta líka á Facebook?</span> <%= check_box_tag "send_to_facebook", "yes", false %>
+			
+					
+<!--                   Senda á Facebook?<%= check_box_tag "send_to_facebook", "yes", false %>-->
 					<% end %>
 				  <span id="submit_span_<%=activity.id%>">
                     <%= f.submit t('esb.send') %>

@@ -9,8 +9,22 @@ class AdminController < ApplicationController
     @all += Comment.published.flagged
     @all += Document.published.flagged
     @all = @all.sort_by {|s| s.created_at}
+    @page_title = "Allt flaggað efni"
   end
-  
+
+  def all_deleted
+    #TODO: Rethink this as the list of deleted comments grows
+    @all = [] 
+    @all += Priority.unpublished
+    @all += Question.unpublished
+    @all += Comment.unpublished
+    @all += Document.unpublished
+    @all = @all.sort_by {|s| s.created_at}
+    @page_title = "Allt eytt efni"
+    
+    render :action=>:all_flagged
+  end
+
   def random_user
     if User.adapter == 'postgresql'
       users = User.find(:all, :conditions => "status = 'active'", :order => "RANDOM()", :limit => 1)

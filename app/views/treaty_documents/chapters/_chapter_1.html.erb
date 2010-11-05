@@ -6,37 +6,60 @@
 
 <div class="left">
 <p>
+<h3>Um kaflann</h3>
+
 Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði ESB og Evrópska efnahagssvæðisins (EES). Uppistaðan í þessum kafla ESB löggjafarinnar er hin samræmda regluskrá ESB um framleiddar vörur, sem skylt er að innleiða í löggjöf umsóknarríkisins. Gerðar eru kröfur á að umsóknarríki sýni fram á að það búi yfir nauðsynlegum stjórnsýslulegum styrk til að gera viðvart um hömlur gegn frjálsum vöruviðskiptum og til að hrinda í framkvæmd fylgiaðgerðum á borð við staðla, uppruna og gæðavottun, löggildingu mælitækja, markaðseftirlit og fleira. 
 </p>
 
-<h4>Af umræðuvef</h4>
+<h3>Af umræðuvef</h3>
 <ul>
 <li><%=link_to "Spurningar og svör", "/velja_kafla/#{@tag.name}?controller_name=questions"%></li>
 <li><%=link_to "Umræður", "/velja_kafla/#{@tag.name}?controller_name=priorities"%></li>
 <li><%=link_to "Erindi", "/velja_kafla/#{@tag.name}?controller_name=documents"%></li>
 </ul>
+
+<h3>Um samningahópinn</h3>
+<ul>
+<li><a href="http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/ees1">Upplýsingar um samningahóp</a></li>
+<li><a href="http://evropa.utanrikisraduneyti.is/media/evropa/samningahopar/EES_I.pdf">Erindisbréf samningahóps</a> - PDF</li>
+</ul>
+
+
 </div>
 
 
 <div class="right">
 <h3>Skjöl frá samninganefnd</h3>
 <h4>Fundafrásagnir</h4>
-
 <ul>
 <% TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_1").latest_three.each do |document| -%>
-	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+	<li><%= link_to document.title, document.url, :target => "_blank" %> - PDF</li>
 <% end %>
+<li><a href="http://esb.utn.is/samninganefnd-islands-og-samningahopar/samningahopar/fundarfrasagnir/nr/5846">Fleiri fundafrásagnir</a></li>
 </ul>
 
 <h4>Gögn vegna rýnivinnu</h4>
 <ul>
-<li>Fundadagskrá - Kemur síðar</li>
+<% TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_4").latest_three.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
+</ul>
+<ul>
+<li><a href="http://www.utanrikisraduneyti.is/media/screening/Timaaaetlun-rynifunda-Islands-IS.pdf">Fundadagskrá</a> - PDF</li>
 <li>Niðurstaða um rýnivinnu - Kemur síðar</li>
 </ul>
 
+<% docs = TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_3").latest_three%>
+<% unless false and docs.empty? %>
 <h4>Samningsafstaða</h4>
 <ul>
+<% docs.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
 <li>Kemur síðar</li>
+</ul>
+<% end %>
+<ul>
 </ul>
 
 <h4>Skýrslur</h4>
@@ -44,15 +67,34 @@ Viðskipti með vörur eiga að ganga hindranalaust fyrir sig á innri markaði 
 <li><a href="http://esb.utn.is/hlidarval/malaflokkar-vidraedna/kaflar/nr/5810">Sjá allar skýrslur</a></li>
 </ul>
 
+<% docs = TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_5").latest_three%>
+<% unless false and docs.empty? %>
 <h4>Fréttatilkynningar </h4>
+<ul>
+<% docs.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
+<li>Kemur síðar</li>
+</ul>
+<% end %>
 
-<h4>Allir kaflar</h4>
+<h4>Önnur lykilskjöl tengd öllum köflum</h4>
+<ul>
+<li><a href="http://www.utanrikisraduneyti.is/media/esb/27072010-Iceland-statement-isl.pdf">Almenn afstaða Íslands sem lögð var fram á ríkjaráðstefnunni 27. júlí 2010</a> - PDF</li>
+<li><a href="http://www.utanrikisraduneyti.is/media/esb/27072010-ESB-statement-isl.pdf">Almenn afstaða Evrópusambandsins sem lögð var fram á ríkjaráðstefnunni 27. júlí 2010</a> - PDF</li>
+<li><a href="http://www.utanrikisraduneyti.is/media/esb/ESB-greiningarskyrsla.pdf"> ESB greiningarskýrsla - fylgiskjal við orðsendingu Framkvæmdarstjórnarinnar til Evrópuþingsins og Evrópuráðsins</a> - PDF</li>
+<li><a href="http://esb.utn.is/hlidarval/skjol-og-tenglar/">Öll skjöl og tenglar</a></li>
+</ul>
+
+
+<!--
 <ul>
 <% TreatyDocument.find(:all,:conditions=>"chapter = 36").each do |document| -%>
 	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
 <% end %>
 <li><a href="http://esb.utn.is/hlidarval/skjol-og-tenglar/">Öll skjöl og tenglar</a></li>
 </ul>
+-->
 
 </div>
 

@@ -12,13 +12,21 @@ class TreatyDocument < ActiveRecord::Base
 
   NEGOTIATION_STAGES = [
                      {:id=>0, :name=>"Umsóknarferli"},
-                     {:id=>1, :name=>"Rikjaradstefna"},
+                     {:id=>1, :name=>"Ríkjaráðstefna"},
                      {:id=>2, :name=>"Rýnivinna"},
                      {:id=>3, :name=>"Viðmið fyrir opnun kafla"},
                      {:id=>4, :name=>"Samningsafstaða Íslands"},
                      {:id=>5, :name=>"Samningsafstaða ESB"},
                      {:id=>6, :name=>"Opnun kafla"},
-                     {:id=>7, :name=>"Viðmð fyrir lokun kafla"},
+                     {:id=>7, :name=>"Viðmið fyrir lokun kafla"},
                      {:id=>8, :name=>"Aðildarsamningur"}
           ]
+  
+  def tag_name
+    if self.chapter==36
+      "Allir kaflar"
+    else
+      self.cached_issue_list
+    end
+  end
 end

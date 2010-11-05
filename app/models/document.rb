@@ -8,6 +8,7 @@ class Document < ActiveRecord::Base
   acts_as_taggable_on :issues
 
   named_scope :published, :conditions => "documents.status = 'published'"
+  named_scope :unpublished, :conditions => "documents.status not in ('published','abusive')"
 
   named_scope :by_recently_created, :order => "documents.created_at desc"
   named_scope :by_recently_updated, :order => "documents.updated_at desc"  
