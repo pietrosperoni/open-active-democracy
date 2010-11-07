@@ -831,7 +831,8 @@ width: 532px;
 }
 a.chapter_utan, a:visited.chapter_utan, li.chapter_utan
 {
-	color: #c57947;
+	color: #dc7947;
+/*	color: #c57947;*/
 	margin: 0 0 2px 0;
 }
 a.chapter_hluta, a:visited.chapter_hluta, li.chapter_hluta
@@ -1193,6 +1194,26 @@ font-weight: bold;
 	width: 100%; 
 	text-align:center;
 }
+#treaty_documents .merkt a, #treaty_documents .merkt a:visited
+{
+	color: #000;
+}
+
+/*
+#treaty_documents a.chapter_utan, #treaty_documents a:visited.chapter_utan, #treaty_documents li.chapter_utan
+{
+	color: red;
+	margin: 0 0 2px 0;
+}
+#treaty_documents a.chapter_hluta, #treaty_documents a:visited.chapter_hluta, #treaty_documents li.chapter_hluta
+{
+	color: yellow;
+}
+#treaty_documents a.chapter_innan, #treaty_documents a:visited.chapter_innan, #treaty_documents li.chapter_innan
+{
+	color: green;
+}
+*/
 
 .treaty_docs_popup
 {
@@ -1209,6 +1230,7 @@ color:#003399 !important;
 .treaty_docs_popup h4
 {
 margin-top: 10px;
+margin-bottom: 2px;
 }
 
 .treaty_docs_popup .left
@@ -1225,15 +1247,30 @@ float: right;
 
 .treaty_docs_popup ul
 {
-list-style-type: disc;
-margin-left: 15px;
+/*list-style-type: disc;*/
+margin-left: 10px;
 }
 
 .treaty_docs_newest ul
 {
-list-style-type: disc;
-margin-left: 30px;
+background-image:url('images/bullet.png');
+/*list-style-type: disc;*/
+margin-left: 20px;
 }
+
+.treaty_docs_newest ul li, .treaty_docs_popup ul li
+{
+background-image:url('/images/bullet.png');
+background-repeat: no-repeat;
+background-position: 0px  7px;
+padding-left: 9px;
+margin-bottom: 3px;
+}
+
+.stada_kafla_info
+{
+		vertical-align: top;
+}	
 
 div
 {
@@ -1241,7 +1278,7 @@ div
 }
 
 .stage_box_identifier {
-  border: 1px solid #44a !important;	
+  border: 1px solid #f66 !important;	
 }
 
 .allar_frettir
@@ -1267,4 +1304,9 @@ margin-top: 10px;
 	margin-top:10px;
 	margin-bottom:10px;
 	border:1px solid #DDDDDD;
+}
+
+#print_header
+{
+	display: none; 
 }

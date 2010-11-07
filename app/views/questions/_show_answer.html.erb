@@ -1,9 +1,8 @@
 	<!-- Comment box - 'Official Reply' box! -->	
 	<div class="comment_box_samn"> 
 		<img src="/images/logo_litid_sogsvor.png" border="0" class="comment_profile" alt="" align="left" /> 
-		<span class="entry_profile">Samninganefnd</span> 
 		<% if question.answered_at %>
-			svaraði <%= time_ago(question.answered_at) %>
+			<b>Það eru <%= time_ago(question.answered_at) %> svar barst</b>
 		<% end %>		
 		<p>						
 			<%if question.answer %>

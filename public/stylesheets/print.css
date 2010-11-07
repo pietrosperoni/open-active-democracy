@@ -1,0 +1,9 @@
+#leftCol, #tabs, #rightCol, #header-right, #search, .entry_icons, #subfilters, #footer-right, #new_comment, .rss_feed, #header
+{
+	display: none; 
+	margin-bottom: 20px;
+}
+
+* {
+ background-color: auto !important;
+ }

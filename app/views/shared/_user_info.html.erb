@@ -11,11 +11,11 @@
 
     <div class="profile_edit"> 
 		<a href="/settings/picture" title="<%= t('esb.mouseover.edituser')%>"><img src="/images/profile_edit.gif" border=0></a> 	
-		<%#= link_to image_tag("profile_edit.gif", :border => 0), url_for current_user, :controller => "", :action => "", :title => t('esb.mouseover.edituser'), :alt => t('esb.mouseover.edituser') %> <a href="/settings/picture" class="stillingar">Stillingar</a>
+		<%#= link_to image_tag("profile_edit.gif", :border => 0), url_for current_user, :controller => "", :action => "", :title => t('esb.mouseover.edituser'), :alt => t('esb.mouseover.edituser') %> <a href="/settings/picture" class="stillingar" title="Breyta eigin stillingum:  Mynd, netfangi og Facebook tengingum">Stillingar</a>
 	</div>
 	
 	<div class="profile_logout">		
-		<%= link_to image_tag("profile_logout.gif", :border => 0,:title => t('esb.mouseover.logout'), :alt => t('esb.mouseover.logout')), logout_path %> <a href="/logout/" class="utskraning">Útskráning</a>
+		<%= link_to image_tag("profile_logout.gif", :border => 0,:title => t('esb.mouseover.logout'), :alt => t('esb.mouseover.logout')), logout_path %> <a href="/logout/" class="utskraning" title="Skrá mig út">Útskráning</a>
 	</div>
 
 	<div class="facebook">
