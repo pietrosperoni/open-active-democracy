@@ -5,26 +5,32 @@
         <% form_remote_for comment, :url => activity_comments_path(activity), :loading=>"$('submit_span_#{activity.id}').toggle(); $('loading_span_#{activity.id}').toggle();" do |f| %>
         <%= f.error_messages %>
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
-		    <div class="senda_a_facebook">
-                	<% if current_facebook_user %>
 
-Setja inn nýja athugasemd?
+Setja inn nýja athugasemd
 
-	            <span class="birta">Birta líka á Facebook?</span> <%= check_box_tag "send_to_facebook", "yes", false %>
-			
-					
-<!--                   Senda á Facebook?<%= check_box_tag "send_to_facebook", "yes", false %>-->
-					<% end %>
+<div class="new_comment_facebook">
+
+	<div class="senda">
 				  <span id="submit_span_<%=activity.id%>">
                     <%= f.submit t('esb.send') %>
 				  </span>
 				  <span id = "loading_span_<%=activity.id%>" style = "display: none;">
 				    <%= image_tag("submit-loader.gif")%>
 				  </span>
-			</div>
-        <% end %>
-    </p>
+	</div>		
+
+	<div class="birta_a_facebook senda_a_facebook">
+		                	<% if current_facebook_user %>
+                    <span class="birta">Birta líka á Facebook?</span> <%= check_box_tag "send_to_facebook", "yes", false %>
+					<% end %>
+		<span class="birta">Birta líka Á Facebook?</span><input id="send_to_facebook" name="send_to_facebook" type="checkbox" value="yes" />
+
+	</div>
 </div>
+	
+        <% end %>
+</div>
+
 <!-- <div id="comment_error_<%= activity.id.to_s %>" class="comment_error"></div> -->
 <script type="text/javascript">
     <!--
