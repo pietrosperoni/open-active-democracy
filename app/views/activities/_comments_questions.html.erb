@@ -1,4 +1,3 @@
-
 <% if activity.comments_count > 0 %>
 	<div id="activity_<%= activity.id %>_comments" class="comment_list">
 <% else %>
@@ -28,7 +27,7 @@
 				</div>
 			<% end %>
 			<% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>
-			<%= render :partial => "comments_questions/show", :locals => {:comment => comments_without_abuse.last} if comments_without_abuse.length > 1 %>
+			<%= render :partial => "comments_questions/show", :locals => {:comment => comments_without_abuse.last} if comments_without_abuse.length > 0 %>
 		
 		<% end %>
 		<!-- deleted from if statement: ' @comments.length > 0 and ' 230910 aom-->

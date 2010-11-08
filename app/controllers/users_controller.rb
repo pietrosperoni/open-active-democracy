@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   skip_before_filter :check_if_email_is_set, :only=>["set_email"]
   
   def index
+    redirect_to '/' and return
     if params[:q]
       @users = User.active.find(:all, :conditions => ["login LIKE ?", "#{h(params[:q])}%"], :order => "users.login asc")
     else
@@ -128,6 +129,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
+    redirect_to '/' and return
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     @page_title = t('users.show.title', :user_name => @user.name, :government_name => current_government.name)
@@ -140,6 +142,7 @@ class UsersController < ApplicationController
   end
   
   def priorities
+    redirect_to '/' and return
     @user = User.find(params[:id])    
     redirect_to '/' and return if check_for_suspension
     @page_title = t('users.priorities.title', :user_name => @user.name.possessive, :government_name => current_government.name)
@@ -157,6 +160,7 @@ class UsersController < ApplicationController
   end
   
   def activities
+    redirect_to '/' and return
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
@@ -171,6 +175,7 @@ class UsersController < ApplicationController
   end
   
   def comments
+    redirect_to '/' and return
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     @page_title = t('users.comments.title', :user_name => @user.name.possessive, :government_name => current_government.name)
@@ -183,6 +188,7 @@ class UsersController < ApplicationController
   end  
   
   def discussions
+    redirect_to '/' and return
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
@@ -196,6 +202,7 @@ class UsersController < ApplicationController
   end 
   
   def documents
+    redirect_to '/' and return
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
@@ -299,6 +306,7 @@ class UsersController < ApplicationController
   end
   
   def make_admin
+    redirect_to '/' and return
     @user = User.find(params[:id])
     @user.is_admin = true
     @user.save_with_validation(false)
