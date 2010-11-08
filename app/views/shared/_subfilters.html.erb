@@ -21,14 +21,14 @@
 		<% if Comment.count("user_id = #{current_user.id} AND status!='deleted'")>0 %>
 		 <%=link_to "Mín skrif", "/minar_umraedur?controller_name=#{controller_name}", :title => t('esb.subfilter.mine.mouseover') , :alt => t('esb.subfilter.mine.mouseover') %>
 		<% end %>
-		<% if TagSubscription.count("user_id = #{current_user.id}")>0 %>
+		<% if TagSubscription.count(:all, :conditions=>"user_id = #{current_user.id}")>0 %>
 		 <%=link_to t('esb.subfilter.subscribe.label') , "/minir_umraedu_kaflar?controller_name=#{controller_name}", :title => t('esb.subfilter.subscribe.mouseover') , :alt => t('esb.subfilter.subscribe.mouseover') %>
 	    <% end %>
 	<% elsif session[:priorities_subfilter]=="mine" %>
 <!--		<%=link_to "Allt", "/allar_umraedur?controller_name=#{controller_name}" unless controller_name == "questions" and session[:priorities_subfilter]%> -->
 
 		<b><%= t('esb.subfilter.mine.label') %></b>
-		<% if TagSubscription.count("user_id = #{current_user.id}")>0 %>
+		<% if TagSubscription.count(:all, :conditions=>"user_id = #{current_user.id}")>0 %>
 		  <%=link_to t('esb.subfilter.subscribe.label'), "/minir_umraedu_kaflar?controller_name=#{controller_name}", :title => t('esb.subfilter.subscribe.mouseover') , :alt => t('esb.subfilter.subscribe.mouseover') %>
 		 <% end %>
 	<% elsif session[:priorities_subfilter]=="my_chapters" %>
