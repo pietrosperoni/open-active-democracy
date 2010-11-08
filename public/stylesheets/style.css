@@ -906,7 +906,7 @@ input.chapter
 	float: right;
 }
 
-#content h2, #mainContentExpanded h2
+#content h2, #mainContentExpanded h2, #MainContent h2
 {
 	font-size: 15px;
 	margin-bottom: 5px;
