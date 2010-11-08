@@ -1711,6 +1711,7 @@ is:
             whatis: "Hvert er umræðuefnið?"
             tag: "Veldu kafla:"
             description: "Nánar:"
+            delete: "Eyða þessu umræðuefni?"
         question:
             send_long: "Senda inn spurningu til samninganefndar"
             check: "Athugaðu fyrst hvort þegar er komin fram sambærileg spurning. Leitarglugginn hér fyrir ofan er gagnlegur í slíkt."

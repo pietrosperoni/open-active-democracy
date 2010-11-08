@@ -536,7 +536,7 @@ def do_abusive!(parent_notifications)
   elsif self.warnings_count == 2 # third warning, on probation
     parent_notifications << NotificationWarning3.new(:recipient => self)      
     self.probation!
-  elsif self.warnings_count > 3 # fourth or more warning, suspended
+  elsif self.warnings_count >= 3 # fourth or more warning, suspended
     self.suspend!
   end
   self.increment!("warnings_count")

@@ -29,7 +29,7 @@
 			<%= render :partial => "priorities/action_show", :locals => {:priority => comment.activity.priority }%>    
 			- <%= render :partial => "priorities/tag_show_esb", :locals => { :priority => comment.activity.priority }%>	
 			<% if logged_in? and not comment.deleted? and ((@comments and comment == @comments.last and current_user.id == comment.user_id) or current_user.is_admin?) %>
-		 	- <%= link_to_remote t('esb.comment.delete'), { :url => priority_path(comment.activity.priority),:method => :delete, :confirm => t('priorites.delete.confirm')}, :title => t('esb.mouseover.priority.delete') %>
+		 	- <%= link_to_remote t('esb.comment.delete'), { :url => priority_path(comment.activity.priority),:method => :delete, :confirm => t('esb.priority.delete')}, :title => t('esb.mouseover.priority.delete') %>
 			<% end %>
 			<% if controller_name=="news" %>
 			 - Umræður
