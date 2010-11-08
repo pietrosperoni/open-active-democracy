@@ -574,12 +574,19 @@ width:515px;
 width:518px !ie;
 }
 
+.new_entry_facebook
+{
+clear: all;
+height: 30px;
+width:575px;
+width:518px !ie;
+}
+
 .birta_a_facebook
 {
 float: right;	
 margin-top: 5px;
 }
-
 
 .birta_a_facebook input
 {
@@ -592,10 +599,11 @@ margin-top: 5px;
 margin-top: 13px;
 }
 
-.new_comment_facebook .senda
+.new_comment_facebook .senda, .new_entry_facebook .senda
 {
 float:left;	
 }
+
 .readmore
 {
 	margin: 0 2px;
