@@ -115,47 +115,64 @@ class CommentsController < ApplicationController
     elsif @activity.document_id
       @comment.cached_issue_list = @activity.document.cached_issue_list
     end
-
-    if @comment.save
-      @comments = @activity.comments.published.by_first_created
-      respond_to do |format|
-        format.html { 
-          flash[:notice] = t('comments.new.success')
-          redirect_to(activity_comments_path(@activity)) 
-        }
-        format.js {
-          render :update do |page|
-            if @activity.priority_id
-              page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments/show", :locals => {:comment => @comment, :activity => @activity})
-              page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
-            elsif @activity.question_id
-              page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/show", :locals => {:comment => @comment, :activity => @activity})
-              page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
-            elsif @activity.document_id
-              page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/show", :locals => {:comment => @comment, :activity => @activity})
-              page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+    if @comment.content=="Taka þátt í umræðunni"
+        respond_to do |format|
+          format.html { 
+          }
+          format.js {
+            render :update do |page|
+              if @activity.priority_id
+                page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+              elsif @activity.question_id
+                page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+              elsif @activity.document_id
+                page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+              end
             end
-            page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
-            page << "FB.XFBML.parse(document.getElementById('comment_<%= @comment.id.to_s %>'));"
-            if current_facebook_user and params[:send_to_facebook]
-              current_facebook_user.fetch
-              UserPublisher.create_comment(current_facebook_user, @comment, @activity)
-            end
-          end
-        }
-      end
+          }
+        end
     else
-      respond_to do |format|
-        format.js {
-          render :update do |page|
-            page["comment-form-submit"].enable
-            page["comment_content_"+@activity.id.to_s].focus
-            for error in @comment.errors
-              page.replace_html 'comment_error_'+@activity.id.to_s, error[0] + ' ' + error[1]
+      if @comment.save
+        @comments = @activity.comments.published.by_first_created
+        respond_to do |format|
+          format.html { 
+            flash[:notice] = t('comments.new.success')
+            redirect_to(activity_comments_path(@activity)) 
+          }
+          format.js {
+            render :update do |page|
+              if @activity.priority_id
+                page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments/show", :locals => {:comment => @comment, :activity => @activity})
+                page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+              elsif @activity.question_id
+                page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/show", :locals => {:comment => @comment, :activity => @activity})
+                page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_questions/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+              elsif @activity.document_id
+                page.insert_html :before, 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/show", :locals => {:comment => @comment, :activity => @activity})
+                page.replace 'activity_' + @activity.id.to_s + '_comment_form', render(:partial => "comments_documents/new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+              end
+              page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
+              page << "FB.XFBML.parse(document.getElementById('comment_<%= @comment.id.to_s %>'));"
+              if current_facebook_user and params[:send_to_facebook]
+                current_facebook_user.fetch
+                UserPublisher.create_comment(current_facebook_user, @comment, @activity)
+              end
             end
-          end
-        }
-        format.html { render :action => "new" }
+          }
+        end
+      else
+        respond_to do |format|
+          format.js {
+            render :update do |page|
+              page["comment-form-submit"].enable
+              page["comment_content_"+@activity.id.to_s].focus
+              for error in @comment.errors
+                page.replace_html 'comment_error_'+@activity.id.to_s, error[0] + ' ' + error[1]
+              end
+            end
+          }
+          format.html { render :action => "new" }
+        end
       end
     end
   end
