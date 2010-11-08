@@ -30,6 +30,8 @@ class PrioritiesController < ApplicationController
   end
   
   def set_tag_filter
+    session[:priorities_subfilter]=nil
+    session[:questions_subfilter]=nil
     if params[:tag_name] and params[:tag_name]=="-1"
       session[:selected_tag_name]=nil
       redirect_to :controller=>params[:controller_name]    

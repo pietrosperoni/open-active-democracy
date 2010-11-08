@@ -3,7 +3,7 @@ class Tag < ActiveRecord::Base
   extend ActiveSupport::Memoizable
 
   named_scope :alphabetical, :order => "tags.name asc"
-  named_scope :by_external_id, :order => "tags.external_id"
+  named_scope :by_external_id, :order => "tags.external_id", :conditions=>"tags.external_id IS NOT NULL"
   
   named_scope :most_feeds, :conditions => "tags.feeds_count > 0", :order => "tags.feeds_count desc"   
 
