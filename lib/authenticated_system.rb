@@ -80,9 +80,6 @@ module AuthenticatedSystem
           store_previous_location
           render_to_facebox(:template => "sessions/new")
         end        
-        format.any do
-          request_http_basic_authentication 'Web Password'
-        end
       end
     end
 
