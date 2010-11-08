@@ -7,8 +7,9 @@
 <% end %>
 
 <% form_for(current_government, :url => {:action => "picture_save" }, :html => {:multipart => true}) do |f| %>
-
-	<%= f.error_messages %>
+	<% if f.error_messages %>
+	  Gat ekki vistað mynd.  Reyndu aftur. Aðeins er hægt að nota PNG, JPG og GIF myndir.
+	<% end %>
 	<%= f.file_field :logo %><br/>
 	<span class="small"><%= t('pictures.must') %></span>
 

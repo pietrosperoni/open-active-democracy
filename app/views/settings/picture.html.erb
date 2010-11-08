@@ -1,7 +1,9 @@
 <h2>Stillingar<%#= @page_title %></h2>
 
 <% form_for(@user, :url => {:action => "picture_save" }, :html => {:multipart => true}) do |f| %>
-<%= f.error_messages %>
+	<% if f.error_messages and not f.error_messages==""%>
+	  Gat ekki vistað.  Reyndu aftur. Aðeins er hægt að nota PNG, JPG og GIF myndir.<br><br>
+	<% end %>
 
 <div class="field">
 	<h3>
