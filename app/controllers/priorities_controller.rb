@@ -358,6 +358,11 @@ class PrioritiesController < ApplicationController
     flash[:notice] = t('priorities.destroy.success', :priority_name => name)
     respond_to do |format|
       format.html { redirect_to(priorities_url) }
+      format.js {
+        render :update do |page|
+          page << "window.location='/priorities'"
+        end        
+      }
     end
   end  
 

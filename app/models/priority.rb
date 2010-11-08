@@ -14,6 +14,7 @@ class Priority < ActiveRecord::Base
   named_scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.created_at desc"
 
   named_scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
+  named_scope :by_recently_updated, :order => "priorities.updated_at desc"  
   
   named_scope :since, lambda{|time| {:conditions=>["priorities.created_at>?",time]}}
   

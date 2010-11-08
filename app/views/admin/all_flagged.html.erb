@@ -9,4 +9,5 @@
 	<% elsif action_item.instance_of?(Comment) %>
 		<%= render :partial => "comments/show", :locals => {:comment => action_item, :suffix => "_noself"} %>		
 	<% end %>
+_________________________________________________________________<br>
 <% end %>

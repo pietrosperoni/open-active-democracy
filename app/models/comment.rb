@@ -10,7 +10,8 @@ class Comment < ActiveRecord::Base
   named_scope :last_three_days, :conditions => "comments.created_at > '#{Time.now-3.days}'"
   named_scope :by_recently_created, :order => "comments.created_at desc"  
   named_scope :by_first_created, :order => "comments.created_at asc"  
-    
+  named_scope :by_recently_updated, :order => "comments.updated_at desc"  
+  
   belongs_to :user
   belongs_to :activity
   

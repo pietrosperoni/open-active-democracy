@@ -19,7 +19,7 @@ class AdminController < ApplicationController
     @all += Question.unpublished
     @all += Comment.unpublished
     @all += Document.unpublished
-    @all = @all.sort_by {|s| s.created_at}
+    @all = @all.sort_by {|s| s.updated_at}.reverse
     @page_title = "Allt eytt efni"
     
     render :action=>:all_flagged
