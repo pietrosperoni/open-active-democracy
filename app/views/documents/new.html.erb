@@ -57,16 +57,28 @@
 <div class="field_box">
     <%= f.text_area :content, :maxLength => 5000, :id => 'pointContent', :button => 'submit', :class => 'idleField_big' %>
 </div>
+
+<div class="new_comment_facebook">
+
+	<div class="senda">
+	<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
+	</div>		
+
 	<div class="birta_a_facebook senda_a_facebook">
-<% if current_facebook_user %>
-Birta líka á Facebook? <%= check_box_tag "send_to_facebook", "yes", false %>
-<% end %>
-<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
+		                	<% if current_facebook_user %>
+                    <span class="birta">Birta líka á Facebook?</span> <%= check_box_tag "send_to_facebook", "yes", false %>
+					<% end %>
+	</div>
 </div>
+
+
+
+
 <div id="errors" class="error">
     <%= f.error_messages %>
 </div>
 <% end %>
+
 <style type="text/css">
     label.error {
         float: right;
