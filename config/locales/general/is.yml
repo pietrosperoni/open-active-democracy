@@ -1723,6 +1723,10 @@ is:
             send_short: "Senda spurningu"
             success: "Takk fyrir að leggja inn spurningu."
         empty_chapter: "Ekkert efni fellur undir þær skilgreiningar sem þú hefur valið. <br> Prófaðu að skoða alla kafla eða veldu Allt hér fyrir ofan til að sjá efni sem þú leitar að."
+        login:
+            island_is:
+              label: "Innskráning"
+              mouseover: "Skráðu þig inn í gegnum island.is"
         footer:
             rules:
                 label: "Skilmálar" 

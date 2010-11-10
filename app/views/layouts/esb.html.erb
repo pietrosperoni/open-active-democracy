@@ -116,11 +116,11 @@ http://ibuar.is - ibuar@ibuar.is
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 3", :order=>"weight").each do |tag|%>	
 					<li>
-						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0, :alt => "Lýsing á innihaldi kafla og öll helstu skjöl", :title => "Lýsing á innihaldi kafla og öll helstu skjöl")%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_utan"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_utan" title="Skoða innsent efni tengt þessum kafla"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_utan"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_utan" title="Skoða innsent efni tengt þessum kafla"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -129,11 +129,11 @@ http://ibuar.is - ibuar@ibuar.is
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 2", :order=>"weight").each do |tag|%>	
 					<li>
-						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0, :alt => "Lýsing á innihaldi kafla og öll helstu skjöl", :title => "Lýsing á innihaldi kafla og öll helstu skjöl")%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_hluta"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_hluta" title="Skoða innsent efni tengt þessum kafla"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_hluta"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_hluta" title="Skoða innsent efni tengt þessum kafla"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -142,11 +142,11 @@ http://ibuar.is - ibuar@ibuar.is
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 1", :order=>"weight").each do |tag|%>	
 					<li>
-						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0, :alt => "Lýsing á innihaldi kafla og öll helstu skjöl", :title => "Lýsing á innihaldi kafla og öll helstu skjöl")%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan" title="Skoða innsent efni tengt þessum kafla"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan" title="Skoða innsent efni tengt þessum kafla"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>
@@ -155,11 +155,11 @@ http://ibuar.is - ibuar@ibuar.is
                 <ul>          
 					<% Tag.find(:all, :conditions=>"tag_type = 4", :order=>"weight").each do |tag|%>	
 					<li>
-						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0)%></a>
+						<a href="#" onclick="showTreatyDocumentChapterWindow('<%=tag.external_id%>')"><%=image_tag("esb_chapter_info.gif", :border=>0, :alt => "Lýsing á innihaldi kafla og öll helstu skjöl", :title => "Lýsing á innihaldi kafla og öll helstu skjöl")%></a>
 						<% if session[:selected_tag_name] and tag.name==session[:selected_tag_name]%>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><b><%=tag.name%></b></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan" title="Skoða innsent efni tengt þessum kafla"><b><%=tag.name%></b></a>
 						<% else %>
-							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan"><%=tag.name%></a>
+							<a href="/velja_kafla/<%=tag.name%>?controller_name=<%=controller_name%>" class="chapter_innan" title="Skoða innsent efni tengt þessum kafla"><%=tag.name%></a>
 						<% end %>
                     </li>
 					<% end %>

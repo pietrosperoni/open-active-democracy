@@ -86,7 +86,7 @@ h5
 }
 #wrapper
 {
-	width: 1000px;
+	width: 1020px;
 	padding: 0px;
 	margin: 0px auto;
 	text-align: left;
@@ -185,7 +185,7 @@ h5
 }
 #rightCol
 {
-	width: 205px;
+	width: 220px;
 	float: left;
 	margin: -12 0 0 5px;
 }
@@ -424,6 +424,8 @@ h5
 .entry_profile
 {
 }
+
+/* Revert to this if problem with IE
 .comment_box
 {
 	background-color: #F1F1F1;
@@ -439,6 +441,23 @@ h5
 	margin: 0px 5px 3px 69px;
 	height: 34px !ie;
 }
+*/
+
+.comment_box
+{
+	background-color: #F1F1F1;
+	border-left: 1px solid #ECECEC;
+	border-right: 1px solid #ECECEC;
+	border-bottom: 1px solid #E2E2E2;
+	min-height: 34px;
+	line-height: 120%;
+	padding: 5px;
+	overflow: hidden;
+	width: 503px;
+	width: 515px !ie;
+	margin: 0px 5px 3px 69px;
+}
+
 
 .comment_box p
 {
@@ -1174,7 +1193,7 @@ display: none;
 	margin: 10px 0px 8px 70px;
 	width: 504px;
 	border-bottom: 1px solid #e2e2e2;
-	margin: 0px 0px 8px 69px !ie;
+	margin: 0px 0px 8px 54px !ie;
 	width: 515px !ie;
 }
 
@@ -1271,15 +1290,64 @@ margin-left: 20px;
 {
 background-image:url('/images/bullet.png');
 background-repeat: no-repeat;
-background-position: 0px  7px;
+background-position: 0px  10px;
 padding-left: 9px;
-margin-bottom: 3px;
+padding-bottom: 3px;
+margin-right: 10px;
+border-bottom: 1px dotted #ddd;
+padding-top: 3px;
 }
 
 .stada_kafla_info
 {
 		vertical-align: top;
 }	
+
+.utils
+{
+margin-top: -20px;	
+margin-top: -10px !ie;	
+}
+
+.utils ul
+{
+margin-left: 10px;
+margin-top: 15px;
+}
+
+.utils ul ul
+{
+margin-left: 10px;
+margin-top: 0px;
+}
+
+.utils ul li
+{
+background-image:url('/images/bullet.png');
+background-repeat: no-repeat;
+background-position: 0px  7px;
+padding-left: 7px;
+margin-top: 5px;
+}
+
+.utils ul li li
+{
+padding-top: 1px;
+}
+
+
+.utils p
+{
+padding-left: 10px;	
+margin-top: 5px;
+}
+
+.utils img
+{
+padding-right: 5px;	
+margin-top: 3px;
+}
+
 
 div
 {
