@@ -77,15 +77,8 @@
 					<div id="rss_feed">
 						<%= render :partial => "shared/rss_feed" %>
 					</div>
-				 	<div id="subfilters">				
-						<%= render :partial=>"shared/subfilters" %>
+					<div><br><br>
 					</div>
-				<% end %>
-				
-				<% if session[:selected_tag_name] %>
-            	<h2>
-	            	<%=session[:selected_tag_name] %>
-            	</h2>		
 				<% end %>
 			 
                 <div id="Content_wrapper">
