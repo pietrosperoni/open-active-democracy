@@ -63,10 +63,7 @@ Sértækar reglur gilda um rafræn fjarskipti í lögum og reglum ESB. Þær eig
 <ul>
 </ul>
 
-<h4>Skýrslur</h4>
-<ul>
-<li><a href="http://esb.utn.is/hlidarval/malaflokkar-vidraedna/kaflar/nr/5810">Sjá allar skýrslur</a></li>
-</ul>
+<%=render :partial=>"skyrslur" %>
 
 <% docs = TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_5").latest_three%>
 <% unless false and docs.empty? %>

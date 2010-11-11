@@ -6,6 +6,8 @@ class TreatyDocument < ActiveRecord::Base
   named_scope :by_negotiation_status, lambda{|negotiation_status| {:conditions=>["negotiation_status=?",negotiation_status]}}
   named_scope :latest_three, :limit=>3, :order=>"date DESC"
 
+  named_scope :s9, :conditions=>"negotiation_status = 9 AND chapter = 36 AND category = 'F1_4'"
+
   named_scope :since, lambda{|time| {:conditions=>["date>?",time]}}
 
   acts_as_taggable_on :issues
