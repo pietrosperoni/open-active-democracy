@@ -63,7 +63,7 @@ Evrópusambandið er mótandi afl í umhverfismálum á heimsvísu og hefur mjö
 <ul>
 </ul>
 
-<%=render :partial=>"skyrslur" %>
+<%=render :partial=>"treaty_documents/chapters/skyrslur" %>
 
 <% docs = TreatyDocument.tagged_with(@tag.name,:match_all=>:true).by_category("1_5").latest_three%>
 <% unless false and docs.empty? %>
