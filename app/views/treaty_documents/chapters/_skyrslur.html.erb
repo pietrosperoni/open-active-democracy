@@ -1,0 +1,7 @@
+<% docs = TreatyDocument.s9 %>
+<h4>Skýrslur</h4>
+<ul>
+<% docs.each do |document| -%>
+	<li><%= link_to document.title, document.url, :target => "_blank" %></li>
+<% end %>
+</ul>
