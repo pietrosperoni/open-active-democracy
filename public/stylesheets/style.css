@@ -483,8 +483,15 @@ width:auto !important;
 	margin: 0px 0px 10px 69px;
 	min-height: 28px;
 	width: 503px;
-	width: 515px !ie;
+	width: 514px !ie;
 }
+
+.comment_box_samn p
+{
+	width: 453px !important;
+	width: 435px !ie;
+}
+
 .comment_box a:hover
 {
 	color: #1461ac;
@@ -530,8 +537,9 @@ img.comment_report
 	overflow:hidden; 
 	line-height: 140%;
 /*	overflow:auto !ie; */
-	width: 500px !ie;
+	padding-bottom: 7px; 
 	width: 510px; 
+	width: auto !ie;
 }
 
 .activity {
@@ -1039,10 +1047,13 @@ input.chapter
 {
 	font-weight: normal;
 }
+
+/*
 #activities b br
 {
 	display: none;
 }
+*/
 .merkt, .files_x1 , .files_x2, .files_x3, .files_x4
 {
 	width: 36px;
@@ -1305,9 +1316,9 @@ padding-top: 3px;
 
 .utils
 {
-margin-top: -20px;	
+/*margin-top: -20px;	
 margin-top: -10px !ie;	
-}
+*/}
 
 .utils ul
 {
