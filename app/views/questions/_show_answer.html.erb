@@ -7,7 +7,7 @@
 		<p>						
 			<%if question.answer %>
 			 	<div class="comment_content" id="comment_content_<%= question.answer.id.to_s %>">
-					<%= question.answer %>
+					<%= simple_format(question.answer) %>
 				</div>				
 			<% else%>
 			  	Ekkert svar er til við þessari spurningu eins og er.

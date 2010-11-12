@@ -35,7 +35,7 @@
 			</div>
     	<% else %>
 			<div class="comment_content" id="comment_content_<%= document.id.to_s %>">
-				<%= document.content_html %>
+				<%= simple_format(document.content_html) %>
 			</div>
 		<% end %>
 		<div id="flagged_document_info_<%=document.id%>"><%=render :partial=>"documents/flagged", :locals=>{:document=>document}-%></div>
