@@ -250,7 +250,7 @@ class QuestionsController < ApplicationController
 
   def abusive
     @question = Question.find(params[:id])
-    @question.abusive!
+    @question.delete!
     respond_to do |format|
       format.js {
         render :update do |page|

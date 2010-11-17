@@ -285,7 +285,7 @@ class PrioritiesController < ApplicationController
 
   def abusive
     @priority = Priority.find(params[:id])
-    @priority.abusive!
+    @priority.delete!
     respond_to do |format|
       format.js {
         render :update do |page|

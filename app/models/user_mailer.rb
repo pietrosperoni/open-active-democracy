@@ -35,13 +35,12 @@ class UserMailer < ActionMailer::Base
   def notification(n,sender,recipient,notifiable)
     setup_notification(recipient)
     @notification = n
-    @n = n.class.to_s.underscore
+    @n = n.to_s.underscore
+    RAILS_DEFAULT_LOGGER.info("Notification class: #{@n}")
     @notifiable = notifiable
-    if @n.include?("warning")
+    if @n.include?("notification_warning")
       @subject = "Viðvörun frá vidraedur.is"
-    elsif @n.include?("priority_flagged")
-      @subject = "Viðvörun frá vidraedur.is"
-    elsif ["priority_flagged","comment_flagged"].include?(@n) 
+    elsif ["notification_comment_flagged"].include?(@n) 
       @subject = @notification.name
     end
     @recipient = recipient
