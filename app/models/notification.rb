@@ -56,7 +56,8 @@ class Notification < ActiveRecord::Base
   end
   
   def queue_sending
-    send_later(:send!)
+#    send_later(:send!)
+    send!
   end
   
   def do_read
