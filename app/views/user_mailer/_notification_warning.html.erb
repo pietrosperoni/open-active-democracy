@@ -1,11 +1,11 @@
-<% unless @n=="notification_warning4" %>
+<% unless @n.include?("notification_warning4") %>
     <p>Sæl(l) <%=@recipient.login%>,</p>
     <p>Þetta er sjálfvirk tilkynning vegna brots á notkunarreglum vefsins vidraedur.is. Hafa því ummæli þín verið fjarlægð af vefsíðunni og er þessi tilkynning skráð sem 
-	<% if @n=="notification_warning1" %>
+	<% if @n.include?("notification_warning1") %>
 	fyrsta aðvörun.
-	<% elsif @n=="notification_warning2" %>
+	<% elsif @n.include?("notification_warning2") %>
 	önnur aðvörun.
-	<% elsif @n=="notification_warning3" %>
+	<% elsif @n.include?("notification_warning3") %>
 	þriðja og síðasta aðvörun.
 	<% end %>
 	</p>

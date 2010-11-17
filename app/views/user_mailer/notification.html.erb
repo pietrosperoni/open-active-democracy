@@ -11,7 +11,7 @@
     	<p><img src="http://www.utanrikisraduneyti.is/media/Logo/vidraedur.is-logo.jpg" alt="Vidraedur.is" width="600" /></p>
 		<% if @n.include?("warning") %>
 		  <%=render :partial=>"notification_warning"%>
-		<% elsif @n=="notification_comment_flagged"%>
+		<% elsif @n.include?("comment_flagged"%>
 		  <%=render :partial=>"notification_comment_flagged"%>
 		<% end %>
 	</td>

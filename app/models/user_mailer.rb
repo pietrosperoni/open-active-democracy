@@ -40,7 +40,7 @@ class UserMailer < ActionMailer::Base
     @notifiable = notifiable
     if @n.include?("notification_warning")
       @subject = "Viðvörun frá vidraedur.is"
-    elsif ["notification_comment_flagged"].include?(@n) 
+    elsif @n.include?("notification_comment_flagged") 
       @subject = @notification.name
     end
     @recipient = recipient
