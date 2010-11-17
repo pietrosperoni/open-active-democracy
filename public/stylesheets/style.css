@@ -531,6 +531,7 @@ img.comment_report
 .comment_content {
 	padding: 0px 0px 0px 0px;
 }
+
 .comment_content p, .comment_endorses p, .entry_box div p
 {
 	font-size: 12px !important;
@@ -540,6 +541,11 @@ img.comment_report
 	padding-bottom: 7px; 
 	width: 510px; 
 	width: auto !ie;
+}
+
+.comment_box_samn .comment_content p
+{
+		width: 350px;
 }
 
 .activity {
@@ -1238,6 +1244,18 @@ font-weight: bold;
 	color: #000;
 }
 
+#treaty_documents a.chapter_innan, #treaty_documents a.chapter_innan:visited,#treaty_documents  li.chapter_innan {
+color:#000;
+}
+
+#treaty_documents a.chapter_utan, #treaty_documents a.chapter_utan:visited, #treaty_documents li.chapter_utan {
+color:#000;
+}
+
+#treaty_documents a.chapter_hluta, #treaty_documents a.chapter_hluta:visited, #treaty_documents li.chapter_hluta {
+color:#000;
+}
+
 /*
 #treaty_documents a.chapter_utan, #treaty_documents a:visited.chapter_utan, #treaty_documents li.chapter_utan
 {
@@ -1366,7 +1384,7 @@ div
 }
 
 .stage_box_identifier {
-  border: 1px solid #f66 !important;	
+  border: 1px solid #000 !important;	
 }
 
 .allar_frettir
