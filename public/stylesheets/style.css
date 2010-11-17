@@ -483,8 +483,15 @@ width:auto !important;
 	margin: 0px 0px 10px 69px;
 	min-height: 28px;
 	width: 503px;
-	width: 515px !ie;
+	width: 514px !ie;
 }
+
+.comment_box_samn p
+{
+	width: 453px !important;
+	width: 435px !ie;
+}
+
 .comment_box a:hover
 {
 	color: #1461ac;
@@ -524,14 +531,21 @@ img.comment_report
 .comment_content {
 	padding: 0px 0px 0px 0px;
 }
+
 .comment_content p, .comment_endorses p, .entry_box div p
 {
 	font-size: 12px !important;
 	overflow:hidden; 
 	line-height: 140%;
 /*	overflow:auto !ie; */
-	width: 500px !ie;
+	padding-bottom: 7px; 
 	width: 510px; 
+	width: auto !ie;
+}
+
+.comment_box_samn .comment_content p
+{
+		width: 350px;
 }
 
 .activity {
@@ -1039,10 +1053,13 @@ input.chapter
 {
 	font-weight: normal;
 }
+
+/*
 #activities b br
 {
 	display: none;
 }
+*/
 .merkt, .files_x1 , .files_x2, .files_x3, .files_x4
 {
 	width: 36px;
@@ -1227,6 +1244,24 @@ font-weight: bold;
 	color: #000;
 }
 
+#treaty_documents a.chapter_innan, #treaty_documents a.chapter_innan:visited,#treaty_documents  li.chapter_innan {
+color:#000;
+}
+
+#treaty_documents a.chapter_utan, #treaty_documents a.chapter_utan:visited, #treaty_documents li.chapter_utan {
+color:#000;
+}
+
+#treaty_documents a.chapter_hluta, #treaty_documents a.chapter_hluta:visited, #treaty_documents li.chapter_hluta {
+color:#000;
+}
+
+/* Image map pointer style */
+#Status area
+{
+	cursor:default;
+}
+
 /*
 #treaty_documents a.chapter_utan, #treaty_documents a:visited.chapter_utan, #treaty_documents li.chapter_utan
 {
@@ -1305,9 +1340,9 @@ padding-top: 3px;
 
 .utils
 {
-margin-top: -20px;	
+/*margin-top: -20px;	
 margin-top: -10px !ie;	
-}
+*/}
 
 .utils ul
 {
@@ -1355,7 +1390,7 @@ div
 }
 
 .stage_box_identifier {
-  border: 1px solid #f66 !important;	
+  border: 1px solid #000 !important;	
 }
 
 .allar_frettir
