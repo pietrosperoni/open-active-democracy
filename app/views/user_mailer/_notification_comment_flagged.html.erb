@@ -3,7 +3,7 @@
 <p>Hér getur þú séð efnið:<br>
 <%=simple_format @notifiable.content%></p>
 <br>
-<p><%=link_to @notifiable.show_url %></p>
+<p><a href="<%=@notifiable.show_url%>"><%=@notifiable.show_url%></a></p>
 <br>
 <p>Þú þarft að skoða þetta og ákveða hvort það brýtur reglur vefsins og ef svo er þá mun <%=@notifiable.user.login%> fá senda viðvörun.</p>
 <br>
