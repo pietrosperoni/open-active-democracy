@@ -1256,6 +1256,12 @@ color:#000;
 color:#000;
 }
 
+/* Image map pointer style */
+#Status area
+{
+	cursor:default;
+}
+
 /*
 #treaty_documents a.chapter_utan, #treaty_documents a:visited.chapter_utan, #treaty_documents li.chapter_utan
 {
