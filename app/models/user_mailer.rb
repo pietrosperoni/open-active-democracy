@@ -36,6 +36,7 @@ class UserMailer < ActionMailer::Base
     setup_notification(recipient)
     @notification = n
     @sender = sender
+    @government = Government.last
     @n = n.to_s.underscore
     RAILS_DEFAULT_LOGGER.info("Notification class: #{@n}")
     @notifiable = notifiable
