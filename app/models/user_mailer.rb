@@ -35,6 +35,7 @@ class UserMailer < ActionMailer::Base
   def notification(n,sender,recipient,notifiable)
     setup_notification(recipient)
     @notification = n
+    @sender = sender
     @n = n.to_s.underscore
     RAILS_DEFAULT_LOGGER.info("Notification class: #{@n}")
     @notifiable = notifiable
