@@ -243,6 +243,7 @@ class DocumentsController < ApplicationController
 
   def abusive
     @document = Document.find(params[:id])
+    @document.do_abusive
     @document.delete!
     respond_to do |format|
       format.js {
