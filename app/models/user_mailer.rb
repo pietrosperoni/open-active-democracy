@@ -138,7 +138,7 @@ class UserMailer < ActionMailer::Base
       @from        = "#{Government.last.name} <#{Government.last.email}>"
       headers        "Reply-to" => Government.last.email
       @sent_on     = Time.now
-      @content_type = "text/plain"      
+      @content_type = "text/html"      
       @body[:root_url] = 'http://' + Government.last.base_url + '/'
     end    
         
