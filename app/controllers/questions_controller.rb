@@ -130,7 +130,8 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @saved
         if Revision.create_from_question(@question.id,request)
-          UserMailer.deliver_new_question(@question)
+          UserMailer.deliver_new_question(@question,true)
+          UserMailer.deliver_new_question(@question,false)
           session[:goal] = 'point'
           flash[:notice] = t('esb.question.success')
           if current_facebook_user and params[:send_to_facebook]
@@ -158,6 +159,7 @@ class QuestionsController < ApplicationController
             a.save
           end
         end
+        UserMailer.deliver_question_answer(@question)
         flash[:notice] = t('points.update.success', :question_name => @question.name)
         format.html { redirect_to(@question) }
       else

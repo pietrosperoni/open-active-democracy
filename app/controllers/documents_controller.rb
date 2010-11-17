@@ -122,6 +122,8 @@ class DocumentsController < ApplicationController
         if DocumentRevision.create_from_document(@document.id,request)
           session[:goal] = 'document'
           flash[:notice] = t('document.new.success', :document_name => @document.name)
+          UserMailer.deliver_new_document(@document,true)
+          UserMailer.deliver_new_document(@document,false)
           if current_facebook_user and params[:send_to_facebook]
             current_facebook_user.fetch
             UserPublisher.create_document(current_facebook_user, @document)

@@ -1,40 +1,56 @@
-Eftirfarandi nýtt efni er komið inn síðan seinast:
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Vidraedur.is</title>
+</head>
+<body>
+<table align="center" width="600" cellpadding="10" border="1">
+  <tr>
+    <td align="justify">
+    	<p><img src="http://www.utanrikisraduneyti.is/media/Logo/vidraedur.is-logo.jpg" alt="Vidraedur.is" width="600" /></p>
+		<p>Eftirfarandi nýtt efni er komið inn síðan seinast:</p>
+		<% unless @priorities.empty? -%>
+		<p>
+		Umræðurefni:<br>
+		<% @priorities.each do |priority|-%>
+		<%=priority.name%>
+		<%=link_to priority.show_url%><br>
+		<% end -%></p>
+		<% end -%>
+		<% unless @questions.empty? -%>
+		<p>
+		<b>Spurningar og Svör:</b><br>
+		<% @questions.each do |question|-%>
+		<%=question.name%>
+		<%=question.show_url%><br>
+		<% end -%></p>
+		<% end -%>
+		
+		<% unless @documents.empty? -%>
+		<p>
+		<b>Erindi:</b><br>
+		<% @documents.each do |document|-%>
+		<%=document.name%>
+		<%=document.show_url%><br>
+		<% end -%></p>
+		<% end -%>
+		
+		<% unless @treaty_documents.empty? -%>
+		<p>
+		<b>Ný skjöl:</b><br>
+		<% @treaty_documents.each do |document|-%>
+		<%=document.title%>
+		<%=document.url%><br>
+		<% end -%></p>
+		<% end -%>			
+		<p>---<br>
+		Póststillingar eru hér: http://vidraedur.is/askrift</p>		
+	</td>
+  </tr>
+</table>
+</body>
+</html>
 
-<% unless @priorities.empty? -%>
-Umræðurefni:
-<% @priorities.each do |priority|-%>
-<%=priority.name%>
-<%=priority.show_url%>
 
-<% end -%>
 
-<% end -%>
-<% unless @questions.empty? -%>
-Spurningar og Svör:
-<% @questions.each do |question|-%>
-<%=question.name%>
-<%=question.show_url%>
-
-<% end -%>
-
-<% end -%>
-<% unless @documents.empty? -%>
-Erindi:
-<% @documents.each do |document|-%>
-<%=document.name%>
-<%=document.show_url%>
-
-<% end -%>
-
-<% end -%>
-<% unless @treaty_documents.empty? -%>
-Ný skjöl:
-<% @treaty_documents.each do |document|-%>
-<%=document.title%>
-<%=document.url%>
-
-<% end -%>
-<% end -%>
-
----
-Póststillingar eru hér: http://vidraedur.is/askrift

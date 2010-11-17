@@ -33,17 +33,26 @@ class UserMailer < ActionMailer::Base
   end  
   
   def notification(n,sender,recipient,notifiable)
-    setup_notification(recipient)    
-    @subject = EmailTemplate.fetch_subject_liquid(n.class.to_s.underscore).render({'government' => Government.last, 'recipient' => recipient, 'sender' => sender, 'notifiable' => notifiable, 'notification' => n}, :filters => [LiquidFilters])    
-    @body = EmailTemplate.fetch_liquid(n.class.to_s.underscore).render({'government' => Government.last, 'recipient' => recipient, 'sender' => sender, 'notifiable' => notifiable, 'notification' => n}, :filters => [LiquidFilters])
-  end  
+    setup_notification(recipient)
+    @notification = n
+    @n = n.class.to_s.underscore
+    @notifiable = notifiable
+    if @n.include?("warning")
+      @subject = "Viðvörun frá vidraedur.is"
+    elsif @n.include?("priority_flagged")
+      @subject = "Viðvörun frá vidraedur.is"
+    elsif ["priority_flagged","comment_flagged"].include?(@n) 
+      @subject = @notification.name
+    end
+    @recipient = recipient
+  end
   
   def report(user,priorities,questions,documents,treaty_documents)
     @recipients  = "#{user.login} <#{user.email}>"
     @from        = "#{Government.last.name} <#{Government.last.email}>"
     headers        "Reply-to" => Government.last.email
     @sent_on     = Time.now
-    @content_type = "text/plain"
+    @content_type = "text/html"
     @priorities = priorities
     @questions = questions
     @documents = documents
@@ -51,31 +60,82 @@ class UserMailer < ActionMailer::Base
     @subject = "Skýrsla frá vidraedur.is"
   end
   
-  def new_question(question)
+  def new_question(question,admin=true)
     tag = Tag.find_by_name(question.cached_issue_list)
-    QUESTION_EMAILS_SETUP.each do |email_setup|
-      if tag and email_setup[0].include?(tag.external_id)
-        @recipients  = email_setup[1]   
-        break
+    if admin
+      QUESTION_EMAILS_SETUP.each do |email_setup|
+        if tag and email_setup[0].include?(tag.external_id)
+          @recipients  = email_setup[1]   
+          break
+        end
       end
-    end
-    unless @recipients
-      @recipients  = "robert@ibuar.is,gunnar@ibuar.is" 
-      @subject = "Error in sending new question email"
+      unless @recipients
+        @recipients  = "robert@ibuar.is,gunnar@ibuar.is" 
+        @subject = "Error in sending new question email"
+      else
+        @subject = "Ný spurning frá vidraedur.is"
+      end
     else
-      @subject = "Ný spurning frá vidraedur.is"
+      @recipients  = question.user.email 
+      @subject = "Þín innsend spurning - vidraedur.is"
     end
     @from        = "#{Government.last.name} <#{Government.last.email}>"
     headers        "Reply-to" => Government.last.email
     @sent_on     = Time.now
-    @content_type = "text/plain"
+    @content_type = "text/html"
     @body[:root_url] = 'http://' + Government.last.base_url + '/'
+    @body[:admin] = admin
     @question = question
+    @tag = tag
+    @admin = admin
   end
 
+  def question_answer(question)
+    tag = Tag.find_by_name(question.cached_issue_list)
+    @recipients  = question.user.email 
+    @subject = "Svar við spurningu - vidraedur.is"
+    @from        = "#{Government.last.name} <#{Government.last.email}>"
+    headers        "Reply-to" => Government.last.email
+    @sent_on     = Time.now
+    @content_type = "text/html"
+    @body[:root_url] = 'http://' + Government.last.base_url + '/'
+    @question = question
+    @tag = tag
+  end
+
+  def new_document(document,admin=true)
+    tag = Tag.find_by_name(document.cached_issue_list)
+    if admin
+      QUESTION_EMAILS_SETUP.each do |email_setup|
+        if tag and email_setup[0].include?(tag.external_id)
+          @recipients  = email_setup[1]   
+          break
+        end
+      end
+      unless @recipients
+        @recipients  = "robert@ibuar.is,gunnar@ibuar.is" 
+        @subject = "Error in sending new document email"
+      else
+        @subject = "Nýtt erindi frá vidraedur.is"
+      end
+    else
+      @recipients  = document.user.email 
+      @subject = "Þitt innsenda erindi - vidraedur.is"
+    end
+    @from        = "#{Government.last.name} <#{Government.last.email}>"
+    headers        "Reply-to" => Government.last.email
+    @sent_on     = Time.now
+    @content_type = "text/html"
+    @body[:root_url] = 'http://' + Government.last.base_url + '/'
+    @body[:admin] = admin
+    @document = document
+    @tag = tag
+    @admin = admin
+  end
+  
   protected
     def setup_notification(user)
-      @recipients  = "#{user.real_name.titleize} <#{user.email}>"
+      @recipients  = "#{user.login} <#{user.email}>"
       @from        = "#{Government.last.name} <#{Government.last.email}>"
       headers        "Reply-to" => Government.last.email
       @sent_on     = Time.now

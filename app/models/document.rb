@@ -47,9 +47,6 @@ class Document < ActiveRecord::Base
   before_destroy :remove_counts
   before_save :update_word_count
   
-  validates_length_of :name, :within => 3..60
-  validates_uniqueness_of :name  
-  
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
   

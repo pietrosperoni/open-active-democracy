@@ -1,0 +1,52 @@
+<% if @admin %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Vidraedur.is</title>
+</head>
+
+<body>
+<table align="center" width="600" cellpadding="10" border="1">
+  <tr>
+    <td align="justify" ><p><img src="http://www.utanrikisraduneyti.is/media/Logo/vidraedur.is-logo.jpg" alt="Vidraedur.is" width="600" /></p>
+    <p>Erindi hefur borist frá vidraedur.is.</p>
+    <p>Samningskafli: <%=@tag.name %></p>
+    <p>Dagsetning: <%=@document.created_at.strftime("%d/%m/%Y")%></p>
+    <p>Netfang sendanda: <%=@document.user.email%></p>
+    <p>Titill erindis: <%=@document.name%></p>
+    <p>Erindi:</p>
+    <p><%=simple_format @document.content%></p>
+	<p>Erindið má finna á: <a href="<%=@document.show_url%>" target="_new"><%=@document.show_url%></a></p>
+	</td>
+  </tr>
+</table>
+</body>
+</html>
+<% else %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Vidraedur.is</title>
+</head>
+
+<body>
+<table align="center" width="600" cellpadding="10" border="1">
+  <tr>
+    <td align="justify" ><p><img src="http://www.utanrikisraduneyti.is/media/Logo/vidraedur.is-logo.jpg" alt="Vidraedur.is" width="600" /></p>
+    <p>Sæl(l) <%=@document.user.login%>,</p>
+    <p>Vidraedur.is hefur borist erindi frá þér:</p>
+    <p>Samningskafli: <%=@tag.name%></p>
+    <p>Dagsetning: <%=@document.created_at.strftime("%d/%m/%Y")%></p>
+    <p>Titill erindis: <%=@document.name%></p>
+    <p>Erindi:</p>
+    <p><%=simple_format @document.content%>:</p>
+    <p>Erindi þitt verður lagt fyrir á næsta fundi samningahóps.</p>
+	<p>Erindið má finna á: <a href="<%=@document.show_url%>" target="_new"><%=@document.show_url%></a></p>
+<p>Tekið skal fram að aðeins er tekið á móti erindum sem lúta að samningaviðræðunum við ESB og viðfangsefnum þeirra.  <a href="http://vidraedur.is/home/rules" target="_new">Sjá nánar um erindi og notkunarreglur um vefinn</a>.</p></td>
+  </tr>
+</table>
+</body>
+</html>
+<% end %>
