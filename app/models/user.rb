@@ -455,7 +455,7 @@ class User < ActiveRecord::Base
       else
         interval = 7.days
       end
-      if Time.now-interval>self.last_sent_report
+      if self.last_sent_report==nil or Time.now-interval>self.last_sent_report
         tags = TagSubscription.find_all_by_user_id(self.id).collect {|sub| sub.tag.name if sub.tag }.compact
         unless tags.empty?
           if self.reports_discussions
