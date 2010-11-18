@@ -98,4 +98,8 @@ is:
             name: "Þetta er þriðja viðvörunin þín. Þú ert núna á skilorði."
             with_link: "Þetta er þriðja viðvörunin þín. Þú braust gegn <a href='/about/rules'>reglum síðunnar</a> með <a href='{{comment_url}}'>þessari athugasemd</a>. Þú ert nú á skilorði."
             link: "Þriðja viðvörunin þín"
+        warning4:
+            name: "Þú hefur verið bannaður."
+            with_link: ""
+            link: ""
 

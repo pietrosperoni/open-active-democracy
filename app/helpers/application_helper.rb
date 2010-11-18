@@ -53,6 +53,8 @@ module ApplicationHelper
         r << link_to(t('notification.warning2.link'), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationWarning3'
         r << link_to(t('notification.warning3.link'), :controller => "inbox", :action => "notifications")                 
+      elsif u[0] == 'NotificationWarning4'
+        r << link_to(t('notification.warning3.link'), :controller => "inbox", :action => "notifications")                 
       elsif u[0] == 'NotificationMessage' 
         r << t('notification.message.link',:count => u[1], :sentence =>   messages_sentence(current_user.received_notifications.messages.unread.count(:group => [:sender], :order => "count_all desc")))
       elsif u[0] == 'NotificationCommentFlagged'

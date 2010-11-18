@@ -330,7 +330,7 @@ end
 class NotificationWarning4 < Notification
   
   def name
-    I18n.t('notification.warning3')
+    I18n.t('notification.warning4')
   end
   
   def is_recipient_subscribed?
