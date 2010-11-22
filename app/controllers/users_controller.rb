@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password, :show]
   skip_before_filter :check_if_email_is_set, :only=>["set_email"]
+  skip_before_filter :setup_welcome_cookie
   
   def index
     redirect_to '/' and return

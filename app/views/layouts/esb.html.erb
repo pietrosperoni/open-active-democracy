@@ -96,6 +96,7 @@ http://ibuar.is - ibuar@ibuar.is
              	<%=flash[:notice]%>
 				<%=flash[:error]%>	      
                     <div id="Content">
+                    	<%=render :partial=>"shared/welcome" %>
                     	<%=yield%>
                     </div>
                 </div>

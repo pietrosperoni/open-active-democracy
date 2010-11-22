@@ -1,5 +1,6 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
+  skip_before_filter :setup_welcome_cookie
   
   def create
     RAILS_DEFAULT_LOGGER.debug("BLAH -5: #{session[:return_to]}")

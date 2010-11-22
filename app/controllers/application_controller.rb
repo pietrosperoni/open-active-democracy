@@ -28,12 +28,23 @@ class ApplicationController < ActionController::Base
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   
   before_filter :check_for_reset_filters
+  before_filter :setup_welcome_cookie
   
   filter_parameter_logging :password, :password_confirmation
 
   layout :get_layout
 
   protected
+
+  def setup_welcome_cookie
+    if cookies["welcome_d"]
+      @shown_welcome = true
+    else
+      @shown_welcome = false
+      cookies["welcome_d"] = { :value => true, :expires => 12.months.from_now }
+    end
+    @shown_welcome = false if params[:v_f]
+  end
 
   def show_login_status
     if logged_in?
