@@ -13,15 +13,13 @@ class TreatyDocument < ActiveRecord::Base
   acts_as_taggable_on :issues
 
   NEGOTIATION_STAGES = [
-                     {:id=>0, :name=>"Umsóknarferli"},
-                     {:id=>1, :name=>"Ríkjaráðstefna"},
+                     {:id=>0, :name=>"Umsókn"},
+                     {:id=>1, :name=>"Upphaf viðræðna"},
                      {:id=>2, :name=>"Rýnivinna"},
-                     {:id=>3, :name=>"Viðmið fyrir opnun kafla"},
-                     {:id=>4, :name=>"Samningsafstaða Íslands"},
-                     {:id=>5, :name=>"Samningsafstaða ESB"},
-                     {:id=>6, :name=>"Opnun kafla"},
-                     {:id=>7, :name=>"Viðmið fyrir lokun kafla"},
-                     {:id=>8, :name=>"Aðildarsamningur"}
+                     {:id=>3, :name=>"Samningsafstaða Íslands"},
+                     {:id=>4, :name=>"Opnun kafla"},
+                     {:id=>5, :name=>"Lokun kafla"},
+                     {:id=>6, :name=>"Aðildarsamningur"}
           ]
   
   def tag_name
