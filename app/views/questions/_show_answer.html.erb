@@ -10,7 +10,7 @@
 					<%= simple_format(question.answer) %>
 				</div>				
 			<% else%>
-			  	Ekkert svar er til við þessari spurningu eins og er.
+			  	Svar í vinnslu.
 			<% end %>
 				<%=link_to "Þú ert Admin og mátt Breyta/Svara hér","/questions/edit/#{question.id}" if logged_in? and current_user.is_admin?%>		
 		</p> 
