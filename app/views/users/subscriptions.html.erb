@@ -7,14 +7,14 @@
 	<div id="content2">
             <h2>Gerast &aacute;skrifandi a&eth; v&ouml;ldum k&ouml;flum</h2>
             <p class="subtext">
-                H&eacute;r a&eth; ne&eth;an &thorn;&uacute; getur vali&eth; um a&eth; fylgjast me&eth; &aacute;kve&eth;num k&ouml;flum vi&eth;r&aelig;&eth;nanna. &THORN;&uacute; getur vali&eth; hvort &thorn;&uacute; f&aelig;r&eth; &aacute;skriftina &iacute; p&oacute;sti e&eth;a hvort &thorn;&uacute; vilt bara fylgjast me&eth; m&ouml;rgum k&ouml;flum &iacute; einu h&eacute;r &aacute; vefnum. .
+                H&eacute;r a&eth; ne&eth;an &thorn;&uacute; getur vali&eth; um a&eth; fylgjast me&eth; &aacute;kve&eth;num k&ouml;flum vi&eth;r&aelig;&eth;nanna. &THORN;&uacute; getur vali&eth; hvort &thorn;&uacute; f&aelig;r&eth; &aacute;skriftina &iacute; tölvup&oacute;sti e&eth;a hvort &thorn;&uacute; vilt bara fylgjast me&eth; m&ouml;rgum k&ouml;flum &iacute; einu h&eacute;r &aacute; vefnum. .
             </p>
 
             <div class="Form_askriftar Askrift">
                 <h4>Form áskriftar: <span class="star">*</span></h4>
-			<%= f.radio_button :reports_enabled, true %> Fá skýrslur í pósti og fylgjast með mörgum köflum í einu á vefnum
+			<%= f.radio_button :reports_enabled, true %> Fá skýrslur í tölvupósti og fylgjast með mörgum köflum í einu á vefnum
                 <br/>
-			<%= f.radio_button :reports_enabled, false %> Engan póst, fylgjast bara með mörgum köflum í einu á vefnum
+			<%= f.radio_button :reports_enabled, false %> Engan tölvupóst, fylgjast bara með mörgum köflum í einu á vefnum
                 <br/>
             </div>
 	    
@@ -65,7 +65,7 @@
             </div>
 
             <div class="Tidni_Askriftar Askrift">
-                <h4>Hversu oft viltu fá póst? <span class="star">*</span></h4>
+                <h4>Hversu oft viltu fá tölvupóst? <span class="star">*</span></h4>
                 <%= f.radio_button :reports_interval, 1 %> Á hverjum klukkutíma
                 <br/>
                 <%= f.radio_button :reports_interval, 2 %> Daglega

@@ -1072,6 +1072,13 @@ input.chapter
 {
 	border: 1px solid #eee !important;
 }
+
+.stage_box_identifier
+{
+	background-color: #ebebeb !important;	
+}
+
+/*
 .files_x1
 {
 	background-color: #CCC !important;
@@ -1088,6 +1095,8 @@ input.chapter
 {
 	background-color: #444 !important;
 }
+*/
+
 .profile_image
 {
 	border: 1px #669 solid;
@@ -1244,6 +1253,7 @@ font-weight: bold;
 	color: #000;
 }
 
+/*
 #treaty_documents a.chapter_innan, #treaty_documents a.chapter_innan:visited,#treaty_documents  li.chapter_innan {
 color:#000;
 }
@@ -1256,6 +1266,7 @@ color:#000;
 color:#000;
 }
 
+*/
 /* Image map pointer style */
 #Status area
 {
@@ -1347,7 +1358,7 @@ margin-top: -10px !ie;
 .utils ul
 {
 margin-left: 10px;
-margin-top: 15px;
+margin-top: 0px;
 }
 
 .utils ul ul
@@ -1368,13 +1379,30 @@ margin-top: 5px;
 .utils ul li li
 {
 padding-top: 1px;
+margin-top: 0px;
 }
 
+.sub li
+{
+margin-top: 6px !important;
+}
+
+.sub li li
+{
+margin-top: 0px !important;
+}
+
+.icons li
+{
+background-image:url('none') !Important;
+}
 
 .utils p
 {
 padding-left: 10px;	
-margin-top: 5px;
+padding-right: 10px;	
+margin-top: 0px;
+padding-bottom: 10px;
 }
 
 .utils img
@@ -1383,6 +1411,10 @@ padding-right: 5px;
 margin-top: 3px;
 }
 
+.utils h4
+{
+margin: 5px 0 0 10px !important;
+}
 
 div
 {

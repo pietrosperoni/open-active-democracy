@@ -1643,7 +1643,7 @@ is:
                 mouseover: "Hvað viltu vita um samningaviðræðurnar?"
             document: 
                 label: "Leggja inn erindi"
-                mouseover: "Sendu samninganefndinni þína skoðun"
+                mouseover: "Sendu samninganefndinni erindi"
         add: "Taka þátt í umræðunni"
         send: "Senda"
         more: "Lesa meira"
@@ -1721,7 +1721,7 @@ is:
             web: "Settu inn vefslóð sem tengist spurningunni:"
             web_optional: "Vefslóðin er valkvæm, þú þarft ekki að setja hana inn" 
             send_short: "Senda spurningu"
-            success: "Takk fyrir að leggja inn spurningu."
+            success: "Takk fyrir að senda inn spurningu."
         empty_chapter: "Ekkert efni fellur undir þær skilgreiningar sem þú hefur valið. <br> Prófaðu að skoða alla kafla eða veldu Allt hér fyrir ofan til að sjá efni sem þú leitar að."
         login:
             island_is:
