@@ -8,6 +8,10 @@ class TreatyDocumentsController < ApplicationController
   def index
   end
 
+  def about_chapters
+    render :layout=>false
+  end
+
   def show
     @active = "show"
     @tag = Tag.find_by_external_id(params[:chapter_id])

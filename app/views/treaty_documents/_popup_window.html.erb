@@ -1,8 +1,34 @@
 <div id="treaty_document_window" title="Staða viðræðna" style="display: none;"></div>
 <div id="treaty_document_chapter_window" title="Um kafla" style="display: none;"></div>
 <div id="chapter_stage_edit_window" title="Breyta Stöðu" style="display: none;"></div>
+<div id="treaty_document_chapter_help" title="Um Samningskafla" style="display: none;"></div>
 
 <script type="text/javascript">
+ function showChapterHelp()
+ {
+ 	jQuery.ajaxSetup({cache: false});
+	var dialogOpts = {
+		      modal: true,
+		      bgiframe: true,
+		      autoOpen: false,
+		      height: 250,
+		      width: 400,
+		      draggable: true,
+		      resizeable: true,
+			  open: function() {
+			  	jQuery('<img class="spinner_classy" src="/images/spinner.gif" style="float: right; padding-right:25px;" />').insertAfter('.ui-dialog-title');
+	        	jQuery("#treaty_document_chapter_help").load("/treaty_documents/about_chapters", function() {jQuery('.spinner_classy').hide();});
+				},
+			  close: function(){
+			  		jQuery("#treaty_document_chapter_help").dialog("destroy");
+			  	}
+    };
+	jQuery("#treaty_document_chapter_help").dialog(dialogOpts);
+	jQuery('#treaty_document_chapter_help').empty();
+    jQuery("#treaty_document_chapter_help").dialog("open");
+ }
+
+
  function showTreatyDocumentWindow(chapter_id,status_id)
  {
  	jQuery.ajaxSetup({cache: false});
