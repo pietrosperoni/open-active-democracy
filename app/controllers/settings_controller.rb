@@ -4,7 +4,6 @@ class SettingsController < ApplicationController
   
   before_filter :login_required
   before_filter :get_user
-  skip_before_filter :setup_welcome_cookie
 
   # GET /settings
   def index

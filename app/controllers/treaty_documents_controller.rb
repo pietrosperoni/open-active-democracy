@@ -4,7 +4,6 @@ class TreatyDocumentsController < ApplicationController
   
   before_filter :admin_required, :only => [:edit_stage]
   before_filter :login_required, :only => [:edit_stage]
-  skip_before_filter :setup_welcome_cookie
 
   def index
   end

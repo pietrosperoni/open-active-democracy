@@ -1,6 +1,4 @@
-class SearchesController < ApplicationController
-  skip_before_filter :setup_welcome_cookie
-  
+class SearchesController < ApplicationController  
   layout "esb_search"
   
   def index
