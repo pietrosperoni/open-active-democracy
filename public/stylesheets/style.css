@@ -861,11 +861,19 @@ width: 532px;
 }
 .left_box input
 {
-	margin-bottom: 4px;
+	margin-bottom: 4px !ie;
 }
-#login
+
+.login img
 {
+	margin-left: -3px !ie;
 }
+
+.login
+{
+	margin-left: -3px !important;
+}
+
 .login_field
 {
 	float: right;
