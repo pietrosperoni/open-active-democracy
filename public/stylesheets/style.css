@@ -1467,8 +1467,9 @@ margin-left: 15px;
 
 #welcome_text
 {
-	width: 240px;
+	width: 220px;
 	float:left;
+	padding: 10px;
 
 }
 
