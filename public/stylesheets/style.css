@@ -1458,7 +1458,28 @@ margin-top: 10px;
 	border:1px solid #DDDDDD;
 }
 
+#welcome
+{
+background-color: #f1f1f1;
+width: 570px;
+margin-left: 15px;
+}
+
+#welcome_text
+{
+	width: 240px;
+	float:left;
+
+}
+
+#welcome_video
+{
+	margin-left: 250px;
+	width: 320px;
+}
+
 #print_header
 {
 	display: none; 
 }
+
