@@ -316,7 +316,7 @@ h5
 	height: 20px;
 	padding: 4px 10px;
 	background-color: #cccccc;
-	background-image: url('img/menu_bg.gif');
+	background-image: url('/images/menu_bg.gif');
 	margin: 0px;
 }
 #tabs ul li.active
@@ -1460,9 +1460,12 @@ margin-top: 10px;
 
 #welcome
 {
-background-color: #f1f1f1;
-width: 570px;
-margin-left: 15px;
+	background-color: #f1f1f1;
+	width: 570px;
+	margin-left: 15px;
+	margin-top: 20px;
+	margin-top: 0px !ie;
+	
 }
 
 #welcome_text
@@ -1475,8 +1478,9 @@ margin-left: 15px;
 
 #welcome_video
 {
-	margin-left: 250px;
 	width: 320px;
+	margin-left: 250px;
+	margin-left: 247px !ie;
 }
 
 #print_header
