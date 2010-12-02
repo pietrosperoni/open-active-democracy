@@ -1476,6 +1476,10 @@ margin-top: 10px;
 
 }
 
+#welcome_text p
+{
+padding-bottom: 7px;
+}
 #welcome_video
 {
 	width: 320px;
