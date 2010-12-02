@@ -1472,18 +1472,20 @@ margin-top: 10px;
 {
 	width: 220px;
 	float:left;
-	padding: 10px;
 
 }
 
 #welcome_text p
 {
-padding-bottom: 7px;
+padding: 7px;
+line-height: 145%;
 }
+
 #welcome_video
 {
 	width: 320px;
 	margin-left: 250px;
+	border: 1px solid #f1f1f1;
 	margin-left: 247px !ie;
 }
 
