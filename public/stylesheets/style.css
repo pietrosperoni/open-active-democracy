@@ -381,6 +381,8 @@ h5
 	padding: 15px 0 0px 15px;
 	display: table;
 	width: 584px;
+	font-size: 12px;
+	line-height: 140%
 }
 .entry_box h4
 {
@@ -1313,6 +1315,11 @@ color:#003399 !important;
 {
 margin-top: 10px;
 margin-bottom: 2px;
+}
+
+.treaty_docs_popup p
+{
+padding-bottom: 7px;
 }
 
 .treaty_docs_popup .left
