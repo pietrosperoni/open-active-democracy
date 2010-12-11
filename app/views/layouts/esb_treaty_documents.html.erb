@@ -47,13 +47,10 @@
             <!-- Haus á miðjusvæði -->
             <div id="tabs">
                 <ul id="right_tabs">
-                    <li<%= controller_name=="treaty_documents" && @active!="newest" ? " class='active'" : "" %>>
-                        <%= link_to "Staða viðræðna", :controller=>"treaty_documents" %>
-                    </li>
-                    <li<%= @active=="newest" ? " class='active'" : "" %>>
-                        <%= link_to "Nýtt efni", :controller=>"treaty_documents", :action=>"newest" %>
-                    </li>
-                </ul>
+			<li<%= controller_name=="treaty_documents" && @active!="newest" ? " class='active'" : "" %>><%= link_to(t('esb.menu.treaty.label'),{:controller=>"treaty_documents", :action=>""}, :title=>t('esb.menu.treaty.mouseover'), :alt=>t('esb.menu.treaty.mouseover') )%></li>
+			<li<%= @active=="newest" ? " class='active'" : "" %>><%= link_to(t('esb.menu.alldocs.label'),{:controller=>"treaty_documents", :action=>"newest"}, :title=>t('esb.menu.alldocs.mouseover'), :alt=>t('esb.menu.alldocs.mouseover') ) %></li>
+
+		</ul>
                 <ul>
                     <div id="left_tabs">
 				     <li <%= controller_name=="news" ? "class='active'" : "" %>>
