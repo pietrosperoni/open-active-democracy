@@ -133,12 +133,12 @@ namespace :esb do
         tag.save
       end
       [["Dóms- og innanríkismál",24],
-      ["Sjávarútvegsmál",13],
       ["Fjárhagslegt eftirlit",32],
       ["Framlagsmál",33],
       ["Gjaldmiðilssamstarf",17],
       ["Landbúnaður og byggðastefna",11],
       ["Réttarvarsla og grundvallarréttindi",23],
+      ["Sjávarútvegsmál",13],
       ["Skattamál",16],
       ["Tollabandalag",29],
       ["Uppbyggingarstyrkir",22],

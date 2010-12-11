@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_35 => "35x35#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
   
   validates_attachment_size :buddy_icon, :less_than => 5.megabytes
-  validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif','image/x-png','image/pjepg']
   
   belongs_to :branch
   belongs_to :referral, :class_name => "User", :foreign_key => "referral_id"
