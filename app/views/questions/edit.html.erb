@@ -6,7 +6,8 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label "Spurningin er: " %><i><%= @question.name%></i><br /><br>
+    <%= f.label "Spurningin er: " %><i><%= @question.name%></i><br>
+    <%= f.label "Spyrjandi er: " %><i><%= @question.user.login%></i><br><br>
 	<%=@question.content%><br><br>
 	 <%= f.text_area :answer, :class => 'idleField_big' %>
     <%#= f.text_area :answer, :rows=>10 %>
