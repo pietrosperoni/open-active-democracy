@@ -18,7 +18,8 @@ function(feeds){
     var entry = feeds.entries[i];
     // Entry title
 	pd= new Date(Date.parse(entry.publishedDate));
-    date_html='('+pd.getDate()+'-'+pd.getMonth()+'-'+pd.getFullYear()+')';
+	month=pd.getMonth()+1;
+    date_html='('+pd.getDate()+'-'+month+'-'+pd.getFullYear()+')';
     jQuery("#utn_rss").append("<p class='rss_heading'><a target='_blank' href='" + entry.link+ " '> " + date_html +" " + entry.title + "</a></p>");
   }
 }, 5);
