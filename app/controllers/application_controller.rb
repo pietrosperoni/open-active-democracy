@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   
   helper_method :facebook_session, :government_cache, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
-  
+
+  before_filter :sanitize_params
   before_filter :show_login_status
 
   before_filter :check_if_email_is_set
