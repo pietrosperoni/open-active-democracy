@@ -162,7 +162,7 @@ class DocumentRevision < ActiveRecord::Base
   end
   
   def url
-    'http://' + Government.last.base_url + '/documents/' + document_id.to_s + '/revisions/' + id.to_s + '?utm_source=documents_changed&utm_medium=email'
+    'https://' + Government.last.base_url + '/documents/' + document_id.to_s + '/revisions/' + id.to_s + '?utm_source=documents_changed&utm_medium=email'
   end
 
   auto_html_for(:content) do

@@ -1,6 +1,6 @@
 <link rel="icon" href="<%= current_government.fav_icon.url(:icon_16) %>">
 <% if request.subdomains.any? and request.subdomains[0] != 'www' %>
-	<link rel="canonical" href="http://<%= current_government.base_url %><%= url_for %>" />
+	<link rel="canonical" href="https://<%= current_government.base_url %><%= url_for %>" />
 <% end %>
 <% if @rss_url and @page_title %>
 	<link rel="alternate" type="application/rss+xml" title="<%= @page_title %>" href="<%= @rss_url %>">

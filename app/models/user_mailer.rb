@@ -84,7 +84,7 @@ class UserMailer < ActionMailer::Base
     headers        "Reply-to" => Government.last.email
     @sent_on     = Time.now
     @content_type = "text/html"
-    @body[:root_url] = 'http://' + Government.last.base_url + '/'
+    @body[:root_url] = 'https://' + Government.last.base_url + '/'
     @body[:admin] = admin
     @question = question
     @tag = tag
@@ -99,7 +99,7 @@ class UserMailer < ActionMailer::Base
     headers        "Reply-to" => Government.last.email
     @sent_on     = Time.now
     @content_type = "text/html"
-    @body[:root_url] = 'http://' + Government.last.base_url + '/'
+    @body[:root_url] = 'https://' + Government.last.base_url + '/'
     @question = question
     @tag = tag
   end
@@ -127,7 +127,7 @@ class UserMailer < ActionMailer::Base
     headers        "Reply-to" => Government.last.email
     @sent_on     = Time.now
     @content_type = "text/html"
-    @body[:root_url] = 'http://' + Government.last.base_url + '/'
+    @body[:root_url] = 'https://' + Government.last.base_url + '/'
     @body[:admin] = admin
     @document = document
     @tag = tag
@@ -141,7 +141,7 @@ class UserMailer < ActionMailer::Base
       headers        "Reply-to" => Government.last.email
       @sent_on     = Time.now
       @content_type = "text/html"      
-      @body[:root_url] = 'http://' + Government.last.base_url + '/'
+      @body[:root_url] = 'https://' + Government.last.base_url + '/'
     end    
         
 end

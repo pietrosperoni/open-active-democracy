@@ -235,7 +235,7 @@ class User < ActiveRecord::Base
   end
   
   def to_param_link
-    '<a href="http://' + Government.last.base_url + '/users/' + sender.to_param + '">' + sender.name + '</a>'  
+    '<a href="https://' + Government.last.base_url + '/users/' + sender.to_param + '">' + sender.name + '</a>'  
   end
   
   def is_admin?
@@ -510,15 +510,15 @@ def make_rss_code
 end  
 
 def root_url
-  return 'http://' + Government.last.base_url + '/'
+  return 'https://' + Government.last.base_url + '/'
 end
 
 def profile_url
-    'http://' + Government.last.base_url + '/users/' + to_param
+    'https://' + Government.last.base_url + '/users/' + to_param
 end
 
 def unsubscribe_url
-    'http://' + Government.last.base_url + '/unsubscribes/new'
+    'https://' + Government.last.base_url + '/unsubscribes/new'
 end
 
 def self.adapter

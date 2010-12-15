@@ -83,7 +83,7 @@ class Government < ActiveRecord::Base
   end
   
   def homepage_url
-    'http://' + base_url + '/'
+    'https://' + base_url + '/'
   end
   
   def name_with_tagline
