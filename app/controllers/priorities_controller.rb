@@ -195,7 +195,7 @@ class PrioritiesController < ApplicationController
         flash[:notice] = t('priorities.new.success', :priority_name => @priority.name)
         format.html { redirect_to(@priority) }    
       else
-        flash[:notice] = "Gat ekki geymt.  Þú verður að setja inn umræðuefni og útskýringu"
+        flash[:notice] = "Gat ekki geymt..."
         format.html { redirect_to :controller => "priorities", :action => "new", :notice=>flash[:notice] }
       end
     end
