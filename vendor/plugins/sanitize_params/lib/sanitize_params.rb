@@ -1,6 +1,6 @@
 module SanitizeParams
   
- def help
+  def helper_for_sanitize
     Helper.instance
   end
 
@@ -18,7 +18,7 @@ module SanitizeParams
   def walk_hash(hash)
     hash.keys.each do |key|
       if hash[key].is_a? String
-        hash[key] = help.sanitize(hash[key])
+        hash[key] = helper_for_sanitize.sanitize(hash[key])
       elsif hash[key].is_a? Hash
         hash[key] = walk_hash(hash[key])
       elsif hash[key].is_a? Array
@@ -31,7 +31,7 @@ module SanitizeParams
   def walk_array(array)
     array.each_with_index do |el,i|
       if el.is_a? String
-        array[i] = help.sanitize(el)
+        array[i] = helper_for_sanitize.sanitize(el)
       elsif el.is_a? Hash
         array[i] = walk_hash(el)
       elsif el.is_a? Array

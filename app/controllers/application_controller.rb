@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
   
   helper_method :facebook_session, :government_cache, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
 
-  before_filter :sanitize_params
   before_filter :show_login_status
 
   before_filter :check_if_email_is_set
@@ -32,6 +31,8 @@ class ApplicationController < ActionController::Base
   before_filter :setup_welcome_cookie
   
   filter_parameter_logging :password, :password_confirmation
+
+  before_filter :sanitize_params
 
   layout :get_layout
 
