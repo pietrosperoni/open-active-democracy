@@ -508,7 +508,7 @@ is:
             success: "Vistuð athugasemd"
             submit: "Senda athugasemd"
         flag:
-            confirm: "Er þessi athugasemd frá {{user_name}} persónuleg árás eða brot á reglum síðunnar? Með því að smella á Ok þá sendirðu tilkynningu til umsjónarmanns vefsins um þessa athugasemd."
+            confirm: "Telur þú að þessi athugasemd, sem {{user_name}} setti inn, brjóti gegn notkunarreglum síðunnar? Með því að smella á Ok, sendir þú umsjónarmanni vefsins tilkynningu um þessa athugasemd."
             title: "Tilkynna óviðeigandi ummæli!"
             number:
                 one: "1 tilkynning"
@@ -1357,7 +1357,7 @@ is:
                 example: ""
             email:
                 label: "Netfang"
-                example: "Við notum netfangið til að geta sent þér tilkynningar ef einhver kvartar undar færslu frá þér og til að geta náð til þín ef nauðsynlegt reynist. Einnig er það notað ef þú ákveður að gerast áskrifandi að efni vefsins. Netfangið verður hvorki afhent öðrum né birt hér á vefnum án leyfis frá þér."
+                example: "Skráðu inn netfangið þitt til að fá gögn í áskrift, tilkynningar um svör við spurningum eða upplýsingar um umræður. <a href='/home/rules'>Lesa meira."
             branch:
                 label: "Í hvaða hópi áttu best heima?"
             address:
