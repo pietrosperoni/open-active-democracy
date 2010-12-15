@@ -1357,7 +1357,7 @@ is:
                 example: ""
             email:
                 label: "Netfang"
-                example: "Skráðu inn netfangið þitt til að fá gögn í áskrift, tilkynningar um svör við spurningum eða upplýsingar um umræður. <a href='/home/rules'>Lesa meira."
+                example: "Skráðu inn netfangið þitt til að fá gögn í áskrift, tilkynningar um svör við spurningum eða upplýsingar um umræður. <a href='/home/rules'>Lesa meira.</a>"
             branch:
                 label: "Í hvaða hópi áttu best heima?"
             address:
