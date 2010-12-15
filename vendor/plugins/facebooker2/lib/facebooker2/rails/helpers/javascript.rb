@@ -26,6 +26,7 @@ module Facebooker2
                 cookie : #{cookie}, // enable cookies to allow the server to access the session
                 xfbml  : #{xfbml}  // parse XFBML
               });
+              FB._domain.staticfb = 'https://static-s.ak.facebook.com/';
               #{extra_js}
             };
 
