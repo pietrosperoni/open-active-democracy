@@ -7,6 +7,7 @@ module SanitizeParams
   class Helper
     include Singleton
     include ActionView::Helpers::TextHelper
+    include ActionView::Helpers::SanitizeHelper
   end
   
   def sanitize_params(params = params)
