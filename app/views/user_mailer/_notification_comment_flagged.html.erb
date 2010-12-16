@@ -1,4 +1,4 @@
-<p><%=@sender.name%> merkti efni sem óviðeigandi. Það kom frá <%=@notifiable.user.login%>.</p>
+<p><%=@sender.name%> (<%=@sender.email%>) merkti efni sem óviðeigandi. Það kom frá <%=@notifiable.user.login%>.</p>
 <br>
 <p>Hér getur þú séð efnið:<br>
 <%=simple_format @notifiable.content%></p>
