@@ -95,7 +95,7 @@ class Notification < ActiveRecord::Base
   def do_send
     self.deleted_at = nil    
     self.processed_at = Time.now
-    if is_recipient_subscribed? and recipient.has_email? and recipient.is_active?
+    if is_recipient_subscribed? and recipient.has_email?
       self.sent_at = Time.now
       UserMailer.deliver_notification(self,sender,recipient,notifiable)
     end
