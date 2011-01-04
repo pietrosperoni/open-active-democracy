@@ -214,6 +214,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/leita', :controller=>'searches', :action=>'index'
   map.connect '/skraning', :controller=>'sessions', :action=>'create'
+
+  map.connect '/skilmalar', :controller=>'home', :action=>'rules'
+  map.connect '/um', :controller=>'home', :action=>'about'
+  map.connect '/hjalp', :controller=>'home', :action=>'help'
   
   map.connect '/minar_umraedur', :controller => 'priorities', :action => 'set_subfilter', :filter=>"mine"
   map.connect '/minir_umraedu_kaflar', :controller => 'priorities', :action => 'set_subfilter', :filter=>"my_chapters"
