@@ -21,7 +21,9 @@ class UsersController < ApplicationController
   # render new.rhtml
   def new
     @user = User.new(:branch => current_government.default_branch) if current_government.is_branches?
-    if logged_in?
+    if logged_in? and current_user.is_admin?
+      # Nothing
+    elsif logged_in?
       redirect_to "/"
       return
     end
@@ -274,7 +276,13 @@ class UsersController < ApplicationController
       end
       return
     end
-    self.current_user = @user # automatically log them in
+    
+    if self.current_user and self.current_user.is_admin?
+      @user.
+    else
+      self.current_user = @user # automatically log them in
+    end
+    
     
     if current_partner and params[:signup]
       @user.signups << Signup.create(:partner => current_partner, :is_optin => params[:signup][:is_optin], :ip_address => request.remote_ip)
