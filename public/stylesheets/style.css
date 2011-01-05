@@ -767,6 +767,7 @@ width: 532px;
 
 #settings
 {
+	margin-left: 55px;
 /*	clear: both;
 	margin: 10px 0 0 0;
 	height: 20px;
@@ -1168,8 +1169,9 @@ float:left;
 .facebook
 {
 	clear:both;
-	margin-left:55px;
+/*	margin-left:55px;
 	margin-left:58px !ie;
+*/
 }
 
 .fb_profile_pic_rendered
