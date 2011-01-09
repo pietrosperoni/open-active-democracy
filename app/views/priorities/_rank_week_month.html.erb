@@ -12,7 +12,7 @@
 	<td valign="top" align="right" width="30" style="padding-right: 5px;">
 		<% if priority.position != 0 %>
 		<div class="priority_position" title="<%= t('priorities.position.title', :position => priority.position, :government_name => current_government.name) %>">
-			<%= priority.position %>
+			<%= priority.position %> (<%=priority.cached_allocated_points_counter%>)
 		</div>
 		<% end %>
 	</td>

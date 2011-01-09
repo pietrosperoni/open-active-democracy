@@ -147,7 +147,7 @@ class User < ActiveRecord::Base
   end
 
   def allocated_points_left
-    [80-total_allocated_points,80].min
+    [100-total_allocated_points,100].min
   end
   
   def get_points_allocated_for_this(priority_id)

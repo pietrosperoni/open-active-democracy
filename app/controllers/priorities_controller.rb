@@ -12,13 +12,15 @@ class PrioritiesController < ApplicationController
     params.each do |p,value|
       if p.include?("slider_values")
         id = p.split("|")[1].to_i
-        AllocatedUserPoint.transaction do
+        ActiveRecord::Base.transaction do
           AllocatedUserPoint.destroy_all("user_id = #{current_user.id} AND priority_id = #{id}")
           a = AllocatedUserPoint.new
           a.user_id = current_user.id
           a.priority_id = id
           a.allocated_points = value.to_i
           a.save
+          priority = Priority.find(id, :lock=>true)
+          priority.update_allocated_points_cache!
         end
       end
     end
@@ -229,7 +231,7 @@ class PrioritiesController < ApplicationController
   def top
     @page_title = t('priorities.top.title', :target => current_government.target)
     @rss_url = top_priorities_url(:format => 'rss')   
-    @priorities = Priority.published.filtered.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+    @priorities = Priority.published.filtered.by_allocated_points.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }

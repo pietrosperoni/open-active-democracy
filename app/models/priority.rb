@@ -18,6 +18,8 @@ class Priority < ActiveRecord::Base
   named_scope :falling, :conditions => "priorities.trending_score < 0", :order => "priorities.trending_score asc"
   named_scope :controversial, :conditions => "priorities.is_controversial = true", :order => "priorities.controversial_score desc"
 
+  named_scope :by_allocated_points, :order=>"cached_allocated_points_counter DESC"
+
   named_scope :rising_7days, :conditions => "priorities.position_7days_change > 0"
   named_scope :flat_7days, :conditions => "priorities.position_7days_change = 0"
   named_scope :falling_7days, :conditions => "priorities.position_7days_change < 0"
@@ -129,6 +131,11 @@ class Priority < ActiveRecord::Base
   
   def priority_process_root_node
     PriorityProcess.find :first, :conditions=>"root_node = 1 AND priority_id = #{self.id}"
+  end
+  
+  def update_allocated_points_cache!
+    self.cached_allocated_points_counter = AllocatedUserPoint.sum('allocated_points', :conditions=>["priority_id = ?",self.id])
+    self.save
   end
   
   def endorse(user,request=nil,partner=nil,referral=nil)
