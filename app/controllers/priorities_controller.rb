@@ -8,6 +8,23 @@ class PrioritiesController < ApplicationController
                                              :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
 
+  def allocate_points
+    params.each do |p,value|
+      if p.include?("slider_values")
+        id = p.split("|")[1].to_i
+        AllocatedUserPoint.transaction do
+          AllocatedUserPoint.destroy_all("user_id = #{current_user.id} AND priority_id = #{id}")
+          a = AllocatedUserPoint.new
+          a.user_id = current_user.id
+          a.priority_id = id
+          a.allocated_points = value.to_i
+          a.save
+        end
+      end
+    end
+    redirect_to :action=>"show", :id=>params[:id]
+  end
+
   # GET /priorities
   def index
     if params[:q] and request.xhr?
