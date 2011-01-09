@@ -140,6 +140,19 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids  
   
+  def total_allocated_points
+    AllocatedUserPoint.sum('allocated_points', :conditions=>["user_id = ?",self.id])
+  end
+  
+  def get_points_allocated_for_this(priority_id)
+    allocated = AllocatedUserPoint.find(:first, :conditions=>["user_id = ? AND priority_id = ?",self.id, priority_id])
+    if allocated
+      allocated.allocated_points
+    else
+      0
+    end
+  end
+  
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
     resend_activation if self.has_email? and self.is_pending?
