@@ -1,0 +1,6 @@
+<div id="allocated_points">
+  <% if current_user %>
+    Heildar punktaúthlutun vegna allra verkefna: <%=current_user.total_allocated_points%><br>
+    Punktaúthlutun á þetta verkefni: <%=current_user.get_points_allocated_for_this(@priority.id)%>    
+  <% end %>
+</div>
