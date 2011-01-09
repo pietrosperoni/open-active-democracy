@@ -685,8 +685,11 @@ class PrioritiesController < ApplicationController
           @priority = Priority.new
           @priority.name = params[:finalized].strip
           @priority.user = current_user
+          @priority.html_description = params[:priority][:html_description]
+          @priority.block_emails_from_voting = params[:priority][:block_emails_from_voting]
           @priority.ip_address = request.remote_ip
           create_tags(@priority)
+          RAILS_DEFAULT_LOGGER.debug("BEFORE SAVE 1")
           @saved = @priority.save
         else
           # see if it already exists
@@ -707,39 +710,21 @@ class PrioritiesController < ApplicationController
             @priority = Priority.new
             @priority.name = params[:priority][:name].strip
             @priority.user = current_user
+            @priority.html_description = params[:priority][:html_description]
+            @priority.block_emails_from_voting = params[:priority][:block_emails_from_voting]            
             @priority.ip_address = request.remote_ip
             create_tags(@priority)
+            RAILS_DEFAULT_LOGGER.debug("BEFORE SAVE 2")
             @saved = @priority.save
           end
         end
-        @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
-        if current_user.endorsements_count > 24
-          session[:endorsement_page] = (@endorsement.position/25).to_i+1
-          session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
-        end    
         #did they also do this in a tag area?
         if @tag_names and @priority.issue_list.empty?
           @priority.issue_list = @tag_names 
           @priority.save
         end
         
-        if @saved
-          @point = Point.new(params[:point])
-          @point.user = current_user
-          @point.priority_id = @priority.id
-          @point_saved = @point.save
-        end
-        
-        if @point_saved
-          if Revision.create_from_point(@point.id,request)
-            session[:goal] = 'point'
-            if facebook_session
-              flash[:user_action_to_publish] = UserPublisher.create_point(facebook_session, @point, @priority)
-            end          
-            @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
-          end      
-        end
-        raise "rollback" if not @point_saved or not @saved
+        raise "rollback" if not @saved
       end
     rescue
       RAILS_DEFAULT_LOGGER.info("ROLLBACK ERROR")
