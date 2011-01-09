@@ -25,7 +25,7 @@ module PortalHelper
   end
 
   def setup_priorities_top(limit)
-    get_cached_priorities("Priority.published.filtered.top_rank.item_limit(#{limit})")
+    get_cached_priorities("Priority.published.filtered.by_allocated_points.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>top_priorities_url}
   end
 

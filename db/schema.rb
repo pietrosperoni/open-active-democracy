@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110103152356) do
+ActiveRecord::Schema.define(:version => 20110109214837) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -808,47 +808,47 @@ ActiveRecord::Schema.define(:version => 20110103152356) do
   add_index "portlets", ["portlet_template_id"], :name => "index_portlets_on_portlet_template_id"
 
   create_table "priorities", :force => true do |t|
-    t.integer  "position",                                :default => 0,     :null => false
+    t.integer  "position",                                       :default => 0,     :null => false
     t.integer  "user_id"
-    t.string   "name",                     :limit => 250
-    t.integer  "endorsements_count",                      :default => 0,     :null => false
-    t.string   "status",                   :limit => 50
-    t.string   "ip_address",               :limit => 16
+    t.string   "name",                            :limit => 250
+    t.integer  "endorsements_count",                             :default => 0,     :null => false
+    t.string   "status",                          :limit => 50
+    t.string   "ip_address",                      :limit => 16
     t.datetime "deleted_at"
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "position_1hr",                            :default => 0,     :null => false
-    t.integer  "position_24hr",                           :default => 0,     :null => false
-    t.integer  "position_7days",                          :default => 0,     :null => false
-    t.integer  "position_30days",                         :default => 0,     :null => false
-    t.integer  "position_1hr_change",                     :default => 0,     :null => false
-    t.integer  "position_24hr_change",                    :default => 0,     :null => false
-    t.integer  "position_7days_change",                   :default => 0,     :null => false
-    t.integer  "position_30days_change",                  :default => 0,     :null => false
+    t.integer  "position_1hr",                                   :default => 0,     :null => false
+    t.integer  "position_24hr",                                  :default => 0,     :null => false
+    t.integer  "position_7days",                                 :default => 0,     :null => false
+    t.integer  "position_30days",                                :default => 0,     :null => false
+    t.integer  "position_1hr_change",                            :default => 0,     :null => false
+    t.integer  "position_24hr_change",                           :default => 0,     :null => false
+    t.integer  "position_7days_change",                          :default => 0,     :null => false
+    t.integer  "position_30days_change",                         :default => 0,     :null => false
     t.integer  "change_id"
     t.string   "cached_issue_list"
-    t.integer  "up_endorsements_count",                   :default => 0
-    t.integer  "down_endorsements_count",                 :default => 0
-    t.integer  "points_count",                            :default => 0
-    t.integer  "up_points_count",                         :default => 0
-    t.integer  "down_points_count",                       :default => 0
-    t.integer  "neutral_points_count",                    :default => 0
-    t.integer  "discussions_count",                       :default => 0
-    t.integer  "relationships_count",                     :default => 0
-    t.integer  "changes_count",                           :default => 0
-    t.integer  "obama_status",                            :default => 0
-    t.integer  "obama_value",                             :default => 0
+    t.integer  "up_endorsements_count",                          :default => 0
+    t.integer  "down_endorsements_count",                        :default => 0
+    t.integer  "points_count",                                   :default => 0
+    t.integer  "up_points_count",                                :default => 0
+    t.integer  "down_points_count",                              :default => 0
+    t.integer  "neutral_points_count",                           :default => 0
+    t.integer  "discussions_count",                              :default => 0
+    t.integer  "relationships_count",                            :default => 0
+    t.integer  "changes_count",                                  :default => 0
+    t.integer  "obama_status",                                   :default => 0
+    t.integer  "obama_value",                                    :default => 0
     t.datetime "status_changed_at"
-    t.integer  "score",                                   :default => 0
-    t.integer  "up_documents_count",                      :default => 0
-    t.integer  "down_documents_count",                    :default => 0
-    t.integer  "neutral_documents_count",                 :default => 0
-    t.integer  "documents_count",                         :default => 0
-    t.string   "short_url",                :limit => 20
-    t.boolean  "is_controversial",                        :default => false
-    t.integer  "trending_score",                          :default => 0
-    t.integer  "controversial_score",                     :default => 0
+    t.integer  "score",                                          :default => 0
+    t.integer  "up_documents_count",                             :default => 0
+    t.integer  "down_documents_count",                           :default => 0
+    t.integer  "neutral_documents_count",                        :default => 0
+    t.integer  "documents_count",                                :default => 0
+    t.string   "short_url",                       :limit => 20
+    t.boolean  "is_controversial",                               :default => false
+    t.integer  "trending_score",                                 :default => 0
+    t.integer  "controversial_score",                            :default => 0
     t.string   "external_info_1"
     t.string   "external_info_2"
     t.string   "external_info_3"
@@ -859,6 +859,7 @@ ActiveRecord::Schema.define(:version => 20110103152356) do
     t.integer  "partner_id"
     t.text     "html_description"
     t.string   "block_emails_from_voting"
+    t.integer  "cached_allocated_points_counter",                :default => 0
   end
 
   add_index "priorities", ["obama_status"], :name => "index_priorities_on_obama_status"
