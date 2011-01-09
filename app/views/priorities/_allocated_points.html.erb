@@ -16,6 +16,7 @@
   <%=submit_tag "Uppfæra punktaúthlutun"%>
 </form>
 <br>
+<div id="other_point_allocations">
 <%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
   <% display_submit = false %>
   <% current_user.allocated_user_points.each do |allocation| %>
@@ -29,10 +30,12 @@
           </div>
         </div>
         <input type="hidden" name="slider_values_|<%=allocation.priority_id%>" id="slider_form_value_<%=allocation.priority_id%>"/>
-     </div>     
+     </div>
   <% end %>
   <%=submit_tag "Taka punkta frá öðrum hugmyndum" if display_submit %>
 </form>
+</div>
+<br><br>
 <script>
   <% curr_points = current_user.get_points_allocated_for_this(@priority.id) %>
   <% max_points = [80,curr_points+current_user.allocated_points_left].min %>
