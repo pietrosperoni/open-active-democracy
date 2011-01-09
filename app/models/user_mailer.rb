@@ -22,6 +22,17 @@ class UserMailer < ActionMailer::Base
     @subject = EmailTemplate.fetch_subject_liquid("welcome").render({'government' => Government.current, 'user' => user, 'partner' => Partner.current}, :filters => [LiquidFilters])
     @body = EmailTemplate.fetch_liquid("welcome").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
   end
+
+  def welcome_with_password(password,user)
+    @recipients  = user.email
+    @from        = "#{Government.current.name} <#{Government.current.admin_email}>"
+    headers        "Reply-to" => Government.current.admin_email
+    @sent_on     = Time.now
+    @content_type = "text/plain"      
+    @subject = "Velkomin í forgangsröðunarkerfi styrkja"
+    @body[:password] = password
+    @body[:user] = user
+  end
   
   def invitation(user,sender_name,to_name,to_email)
     @recipients = ""

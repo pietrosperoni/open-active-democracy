@@ -1470,7 +1470,7 @@ is:
             success: "Velkomin/n til {{government_name}}"
             submit_and_endorse: "Styðja og sækja um"
             submit_and_oppose: "Vera á móti og sækja um"
-            submit: "Skrá mig á Skuggaborg"
+            submit: "Skrá notanda"
             login: "<b>Ertu þegar skráð/ur?</b>"
             validation:
                 login: "Vinsamlegast gefðu upp nafn sem þú vilt að verði notað á síðunni."

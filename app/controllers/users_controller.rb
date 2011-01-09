@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   # render new.rhtml
   def new
     @user = User.new(:branch => current_government.default_branch) if current_government.is_branches?
+    @rand_pass = File.read("/dev/urandom", 4).unpack("H*")[0]
     if logged_in? and current_user.is_admin?
       # Nothing
     elsif logged_in?
@@ -253,7 +254,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    cookies.delete :auth_token
+ #   cookies.delete :auth_token
     # protects against session fixation attacks, wreaks havoc with
     # request forgery protection.
     # uncomment at your own risk
@@ -278,15 +279,14 @@ class UsersController < ApplicationController
     end
     
     if self.current_user and self.current_user.is_admin?
-      @user.
+      @user.send_password_email(params[:user][:password])
     else
       self.current_user = @user # automatically log them in
     end
     
-    
-    if current_partner and params[:signup]
-      @user.signups << Signup.create(:partner => current_partner, :is_optin => params[:signup][:is_optin], :ip_address => request.remote_ip)
-    end
+#    if current_partner and params[:signup]
+#      @user.signups << Signup.create(:partner => current_partner, :is_optin => params[:signup][:is_optin], :ip_address => request.remote_ip)
+#    end
       
     flash[:notice] = t('users.new.success', :government_name => current_government.name)
     if session[:query] 

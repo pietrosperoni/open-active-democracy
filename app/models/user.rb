@@ -141,6 +141,10 @@ class User < ActiveRecord::Base
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids  
+
+  def send_password_email(password)    
+    UserMailer.deliver_welcome_with_password(password, self)
+  end
     
   def total_allocated_points
     AllocatedUserPoint.sum('allocated_points', :conditions=>["user_id = ?",self.id])
@@ -231,7 +235,7 @@ class User < ActiveRecord::Base
   end
   
   # docs: http://www.vaporbase.com/postings/stateful_authentication
-  acts_as_state_machine :initial => :pending, :column => :status
+  acts_as_state_machine :initial => :active, :column => :status
 
   state :passive
   state :pending, :enter => :do_pending

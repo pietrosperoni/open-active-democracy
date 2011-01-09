@@ -35,6 +35,10 @@
 		<div class="small"><%= t('settings.edit.email.example')%></div>
 	</div>
 
+<% if current_user and current_user.is_admin? %>
+<input type="hidden" id="user_password" name="user[password]" value="<%= @rand_pass %>"/>
+<input type="hidden" id="user_password_confirmation" name="user[password_confirmation]" value="<%= @rand_pass %>"/>
+<% else %>
 	<div class="field">
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr><td valign="top">
@@ -51,7 +55,7 @@
 		</tr>
 	</table>
 	</div>
-
+<% end %>
 	<div class="field">
 	<div class="field_label">
 		<%= t('settings.edit.login.label')%>
