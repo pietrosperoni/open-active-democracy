@@ -4,11 +4,11 @@
 
 .column {
 	width: 348px !important;
-	position: relative;
 	background-color: #fff;
 	height: 100%;
     padding-bottom: 20px;
 	margin-top: 7px;
+	float:left;
 }
 
 .column_id_1 .portlet
