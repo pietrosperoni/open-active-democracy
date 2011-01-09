@@ -1,3 +1,13 @@
+#menu, #skuggathing, #not_activated, #not_activated_header {
+	display:none;
+}
+
+#menu_home 
+{
+	list-style-type: none; 
+	padding-left: 10px;
+}
+
 .top_p {
 /*margin-top: 20px; */
 }
@@ -48,6 +58,12 @@ line-height: 150%;
 
 #content_text {
 font-size:11px !important;
+border-top: 1px solid #dbdbdb;
+border-left: 1px dotted #dbdbdb;
+border-right: 1px solid #dbdbdb;
+padding-left: 10px; 
+padding-right: 10px; 
+
 }
 
 .yes_and_no_points_link_hacky a {
@@ -440,9 +456,6 @@ border:1px solid #DDD !Important;
 
 #header
 {
-border-bottom: 1px solid #ddd;	
-border-left: 1px solid #ddd;	
-border-right: 1px solid #ddd;	
 }
 
 #activities {
@@ -736,11 +749,6 @@ height: 17px !Important;
 border: 1px solid red;	
 }
 
-.logo a
-{	
-	padding: 10px 15px;
-}
-
 #toolbar a
 {
 color: #5272b5 !important;	
@@ -764,4 +772,9 @@ background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F8f
 background-color:#F8F8F8;
 color:#D61A1A;
 padding-top:3px;
+}
+
+#search_priorities
+{
+display: none;	
 }

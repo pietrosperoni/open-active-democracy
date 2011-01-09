@@ -28,31 +28,9 @@
     	
 </script>
 
-<div id="main-dialogues-div">
-    <%= render(:partial=>'portal/dialogues') %>
-</div>
-<% params[:q]=true %>
-
-
-<div id="portal_header">
+<!-- Used to contain New case - Search - Custom portal box
+-->
 
 	<div id="new_button">
 		<%= render :partial => "priorities/new_button" %>
 	</div>
-
-	<div id="google_search">
-		<%= render :partial => "portal/google_search" %>
-	</div>
-
-	<div id="portal-menu-div">
-		<%= render(:partial=>'portal/menu') %>
-	</div>
-
-</div>
-
-
-<div id="main-portal-div">
-	<%= render(:partial => "portal") %>
-</div>
-
-

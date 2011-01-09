@@ -30,6 +30,12 @@
 			</td><td valign="middle" align="left">
 	<% end %>
 
+	<ul id="menu_home">
+		<li class="tab0">
+			<span class="tab_header"><%= link_to "Heim", :controller => "portal" %></span>
+		</li>
+	</ul>
+	<!-- Hidden in gnew.css-->
 	<ul id="menu">
 		<% if current_government.is_tags? %>
 		<li class="tab0">

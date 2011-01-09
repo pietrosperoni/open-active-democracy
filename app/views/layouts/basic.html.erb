@@ -16,6 +16,8 @@
         <% if controller_name == "facebook" %>
         <%= stylesheet_link_tag "fb_invite_hack.css" %>
         <% end %>
+	
+<!--
         <map name="Map" id="Map">
   <area shape="rect" coords="3,0,36,38" href="http://framsokn.skuggaborg.is/portal" alt="Framsóknarflokkurinn" />
   <area shape="rect" coords="39,0,84,38" href="http://sjalfstaedisflokkur.skuggaborg.is/portal" alt="Sjálfstæðisflokkurinn" />
@@ -26,6 +28,7 @@
   <area shape="rect" coords="236,0,276,38" href="http://vinstrigraen.skuggaborg.is/portal" alt="Vinstri hreyfingin grænt framboð" />
   <area shape="rect" coords="276,0,308,38" href="http://allskonar.bestiflokkurinn.is" alt="Besti flokkurinn" />
         </map>
+-->
     </head>
     <body>
         <%= blurb("header") %>
@@ -38,14 +41,16 @@
 	                    </div>
 	                    <div id="parent_image" class="logo_small" style="float: right">
 	                        <% if RAILS_ENV=="development" %>
-		                        <%= link_to image_tag("skuggaborg_logo_small.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3000 %>
+		                        <%= link_to image_tag("skuggaborg_logo_small.png"), :controller=>"portal", :host=>"skuggaborg.is", :port=>3009 %>
 	                        <% else %>
 								  <a href="http://skuggaborg.is/" target='_top'><%=image_tag("skuggaborg_logo_small.png")%></a>
 	                        <% end %>
 	                    </div>
                     <% else %>
+		    
+
 	                    <div id="parent_image" class="logo" style="float: left">
-	                        <%= link_to image_tag("skuggaborg_logo.png"), :controller=>"portal" %>
+	                        <%= link_to image_tag("top-banner.png"), :controller=>"portal" %>
 	                    </div>
 	                    <div id="parent_image" style="float: right" class="partner_image">
 	                        <% Partner.with_logo.all.each do |partner| %>
@@ -56,12 +61,13 @@
 		                        <% end %>
 	                        <% end %>
 	                    </div>
-	                    <div id="betri_reykjavik">
+<!--	                    <div id="betri_reykjavik">
 				<a href="http://betrireykjavik.skuggaborg.is/portal"><img src="/images/betri_reykjavik_214x32.png" width="214" height="32" border="0" /></a>
 	                    </div>
 	                    <div id="party_logos">
 	                        <img src="/images/party_logos.png" width="308" height="38" border="0" usemap="#Map" />
 	                    </div>
+-->
 	                <% end %>
                 </div><%= flash_div :warning, :notice, :error %>
                 <%= render :partial => "ads/pick" %>
