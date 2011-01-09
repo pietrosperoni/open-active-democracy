@@ -109,6 +109,8 @@ class User < ActiveRecord::Base
   has_many :following_discussions, :dependent => :destroy
   has_many :following_discussion_activities, :through => :following_discussions, :source => :activity
   
+  has_many :allocated_user_points
+  
   liquid_methods :first_name, :last_name, :id, :name, :login, :activation_code, :email, :root_url, :profile_url, :unsubscribe_url
   
   validates_presence_of     :login, :message => I18n.t('users.new.validation.login')
@@ -139,13 +141,13 @@ class User < ActiveRecord::Base
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids  
-  
+    
   def total_allocated_points
     AllocatedUserPoint.sum('allocated_points', :conditions=>["user_id = ?",self.id])
   end
 
   def allocated_points_left
-    80-total_allocated_points
+    [80-total_allocated_points,80].min
   end
   
   def get_points_allocated_for_this(priority_id)
