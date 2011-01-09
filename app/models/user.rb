@@ -143,6 +143,10 @@ class User < ActiveRecord::Base
   def total_allocated_points
     AllocatedUserPoint.sum('allocated_points', :conditions=>["user_id = ?",self.id])
   end
+
+  def allocated_points_left
+    80-total_allocated_points
+  end
   
   def get_points_allocated_for_this(priority_id)
     allocated = AllocatedUserPoint.find(:first, :conditions=>["user_id = ? AND priority_id = ?",self.id, priority_id])

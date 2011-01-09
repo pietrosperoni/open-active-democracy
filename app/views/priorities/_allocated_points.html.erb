@@ -1,6 +1,41 @@
-<div id="allocated_points">
-  <% if current_user %>
-    Heildar punktaúthlutun vegna allra verkefna: <%=current_user.total_allocated_points%><br>
-    Punktaúthlutun á þetta verkefni: <%=current_user.get_points_allocated_for_this(@priority.id)%>    
-  <% end %>
-</div>
+<% if current_user %>
+<h3>Punktaúthlutun</h3>
+<%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
+  <div id="allocated_points">
+      Heildar punktaúthlutun vegna allra verkefna: <%=current_user.total_allocated_points%><br>
+      Punktaúthlutun á þetta verkefni:
+      <div id="slider_value_<%=@priority.id%>"></div>
+      <br>
+      <div id="slider_track_<%=@priority.id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
+        <div id="slider_handle_<%=@priority.id%>" style="background-image:url(/images/thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;">
+        </div>
+      </div>
+      <input type="hidden" name="slider_values_|<%=@priority.id%>" id="slider_form_value_<%=@priority.id%>"/>
+      <br>
+  </div>
+  <script>
+    <% curr_points = current_user.get_points_allocated_for_this(@priority.id) %>
+    jQuery(document).ready(function() {
+       $('slider_value_<%=@priority.id%>').innerHTML = <%=curr_points%>;
+       $('slider_form_value_<%=@priority.id%>').value = <%=curr_points%>;
+       new Control.Slider('slider_handle_<%=@priority.id%>', 'slider_track_<%=@priority.id%>' ,
+       {
+           range: $R(0,80),
+           values: <%=(0..80).to_a.inspect%>,
+           sliderValue: <%=curr_points%>,
+                   axis:'horizontal',
+           onChange: function(v){
+                           $('slider_value_<%=@priority.id%>').innerHTML = parseInt(v);
+                           $('slider_form_value_<%=@priority.id%>').value = parseInt(v);
+           },
+           onSlide: function(v){
+                           $('slider_value_<%=@priority.id%>').innerHTML = parseInt(v);
+                           $('slider_form_value_<%=@priority.id%>').value = parseInt(v);
+           }
+       });
+    });
+  </script>
+<br>
+<%=submit_tag "Uppfæra punktaúthlutun"%>
+</form>
+<% end %>
