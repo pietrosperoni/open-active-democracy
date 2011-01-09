@@ -1,4 +1,4 @@
-#menu, #skuggathing, #not_activated, #not_activated_header {
+#menu, #skuggathing, #not_activated, #not_activated_header, #next_steps_box {
 	display:none;
 }
 
@@ -607,7 +607,7 @@ display:none !important;
 #new_button
 {
 	width: 190px !important;	
-	margin-right: 47px !Important;
+
 }
 
 #new_button input
