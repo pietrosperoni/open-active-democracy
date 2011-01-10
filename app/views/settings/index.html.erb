@@ -62,14 +62,6 @@
 	</div>	
 	<% end %>
 	
-	<div class="field">
-		<div class="field_box">
-			<%= f.check_box :is_mergeable %> <%= t('settings.edit.is_mergeable.label')%>
-		</div>
-		<div class="field_box">
-			<%= f.check_box :is_newsletter_subscribed %> <%= t('settings.edit.is_newsletter_subscribed.label')%>
-		</div>
-	</div>	
 
 </td><td valign="top" width="300" style="padding-left: 20px;">
 	
@@ -102,19 +94,6 @@
 		</div>
 	</div>
 	
-	<% if (current_government.has_facebook_enabled? and not facebook_session) or (current_government.has_twitter_enabled? and not current_user.has_twitter?) %>
-		<h2><%= t('settings.connect')%></h2>
-	
-		<%= t('settings.connect_intro')%>
-		<p>
-		<% if current_government.has_facebook_enabled? and not facebook_session %>
-			<%= fb_login_and_redirect url_for, :size => :medium, :background => :white, :length => :long %>
-		<% end %>
-	
-		<% if current_government.has_twitter_enabled? and not current_user.has_twitter? %>
-			<p><%= link_to image_tag("twitter_signin.png", :border => 0), :controller => "twitter", :action => "create" %>
-		<% end %>
-	<% end %>
 	</td>
 </tr>
 </table>
