@@ -1,3 +1,4 @@
+<% if current_user -%>
 <div id="toolbar">
 <% if ['priorities','changes','ads','prioritizer','branch_priorities'].include?(params[:controller]) %>
 	<% nav = 2 %>
@@ -22,7 +23,6 @@
 <% end %>
 <div id="nav">
 <div id="nav<%= nav %>">	
-
 	<% if false and current_government.has_fav_icon? %>
 		<table border="0" cellspacing="0" cellpadding="0" width="100%">
 			<tr><td valign="middle" style="padding: 0px 0px 0px 10px;" align="left">
@@ -138,5 +138,5 @@
 		<%= render :partial => "widgets/nav" %>
 	<% end %>
 <% end %>
-
 </div>
+<% end %>
