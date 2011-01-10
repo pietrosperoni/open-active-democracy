@@ -47,9 +47,6 @@
 						<%= link_to t('menu.settings.password'), edit_password_url(current_user) %>
 				</div>
 				<% if logged_in? and current_user.is_admin? %>
-					<div class="tab_subhead">
-						<%= link_to t('menu.partner.become'), partners_url %>						
-					</div>
 				<% end %>
 				<% if logged_in? and current_user.is_admin? and Partner.current %>
 					<div class="tab_subhead">
@@ -70,18 +67,12 @@
 					</div>
 					<div class="tab_sublinks">
 						<%= link_to t('menu.admin.government.name'), edit_government_url(current_government) %>
-						&middot; <%= link_to t('menu.admin.branches'), branches_url %>
 						<% if current_government.is_tags? %>
 							&middot; <%= link_to current_government.tags_name.pluralize.titleize, tags_url %>
 						<% end %>
-						&middot; <%= link_to t('menu.admin.apis'), apis_government_url(current_government) %>							
-						<br/>
-						<%= link_to t('menu.admin.blurbs'), blurbs_url %>						
-						&middot; <%= link_to t('menu.admin.pages'), pages_url %>
+							
+						&middot; <%= link_to t('menu.admin.blurbs'), blurbs_url %>						
 						&middot; <%= link_to t('menu.admin.emails'), email_templates_url %>		
-						<br/>
-						<%= link_to t('menu.admin.graphics'), :controller => "admin", :action => "picture" %>
-						&middot; <%= link_to t('menu.admin.colors'), color_schemes_url %>
 					</div>
 				<% end %>
 				
