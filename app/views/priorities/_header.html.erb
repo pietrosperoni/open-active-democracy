@@ -16,8 +16,7 @@
 	<span class="priority_header_custom"><%= render :partial => "priorities/name", :locals => { :priority => @priority } %></span>
 <%= render :partial => "priorities/tag_show_large", :locals => { :priority => @priority }%>
 </div>
-<br>
-<%=@priority.html_description %><br>
-<br>
+
+<%=@priority.html_description %>
 
 <%=render :partial=>"allocated_points" %><br>

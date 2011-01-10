@@ -1,12 +1,5 @@
 <% if portlet_locals[:priorities].any? %>
 	<table border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td align="center" style="padding-right: 1px;"><span class="table_header" title="Staða hugmynds"><%= t('rank') %></span></td>
-			<td style="padding-left: 1px;"><span class="table_header" title="Breyting síðan í síðustu viku"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 1px;"><span class="table_header" title="Breyting síðan í síðusta mánuði"><%= t('time.mo') %></span></td>
-			<td></td>
-			<td align="right" width="100%"><%= rss_url(@rss_url) %></td>	
-		</tr>
 	<% for priority in portlet_locals[:priorities] %>
 		<% if portlet_locals[:endorsements] %>
 			<% endorsement = portlet_locals[:endorsements].detect {|e| e.priority_id == priority.id } %>

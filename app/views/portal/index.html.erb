@@ -50,6 +50,82 @@
 	<div id="portal-menu-div">
 		<%= render(:partial=>'portal/menu') %>
 	</div>
+	
+	<div id="portal_settings">
+
+		<li class="tab6 mega">
+			<span class="tab_header">
+				<%= link_to t('menu.settings.name'), "#" %>
+			</span>
+			<div class="tab_body">
+				<div class="tab_subhead">
+					<%= link_to t('menu.settings.account'), settings_url %>
+				</div>
+				<div class="tab_sublinks">
+					<%= link_to t('menu.settings.picture'), picture_settings_url %>
+					&middot; <%= link_to t('menu.settings.bio'), new_user_profile_url(current_user) %>
+					<% if current_government.is_legislators? %>
+						&middot; <%= link_to t('menu.settings.legislators'), legislators_settings_url %>
+					<% end %>
+					<br/>
+					<% if not current_user.has_facebook? %>
+						<%= link_to t('menu.settings.password'), edit_password_url(current_user) %> &middot;
+					<% end %>
+					<%= link_to t('menu.settings.emails'), signups_settings_url %>
+				</div>
+				<% if logged_in? and current_user.is_admin? %>
+					<div class="tab_subhead">
+						<%= link_to t('menu.partner.become'), partners_url %>						
+					</div>
+				<% end %>
+				<% if logged_in? and current_user.is_admin? and Partner.current %>
+					<div class="tab_subhead">
+s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
+					</div>
+				<% end %>
+				<div class="tab_sublinks">
+				<% if logged_in? and current_user.is_admin? and Partner.current %>
+					<%= link_to t('menu.partner.account'), edit_partner_url(Partner.current) %>
+					&middot; <%= link_to t('menu.partner.logo'), picture_partner_path(Partner.current) %>
+					&middot; <%= link_to t('menu.partner.email'), email_partner_path(Partner.current) %>
+				<% end %>
+				</div>
+				
+				<% if current_user.is_admin? %>
+					<div class="tab_subhead">
+						<%= link_to t('menu.admin.name'), edit_government_url(current_government) %>
+					</div>
+					<div class="tab_sublinks">
+						<%= link_to t('menu.admin.government.name'), edit_government_url(current_government) %>
+						&middot; <%= link_to t('menu.admin.branches'), branches_url %>
+						<% if current_government.is_tags? %>
+							&middot; <%= link_to current_government.tags_name.pluralize.titleize, tags_url %>
+						<% end %>
+						&middot; <%= link_to t('menu.admin.apis'), apis_government_url(current_government) %>							
+						<br/>
+						<%= link_to t('menu.admin.blurbs'), blurbs_url %>						
+						&middot; <%= link_to t('menu.admin.pages'), pages_url %>
+						&middot; <%= link_to t('menu.admin.emails'), email_templates_url %>		
+						<br/>
+						<%= link_to t('menu.admin.graphics'), :controller => "admin", :action => "picture" %>
+						&middot; <%= link_to t('menu.admin.colors'), color_schemes_url %>
+					</div>
+				<% end %>
+				
+				<div class="tab_sublinks">
+				<% if facebook_session %>
+					<%= fb_logout_link t('menu.logout'), logout_path %>
+				<% else %>
+			  		<%= link_to t('menu.logout'), logout_path %>
+				<% end %>
+				</div>
+
+			</div>
+		</li>		
+
+
+
+	</div>
 </div>
 
 <div id="main-portal-div">

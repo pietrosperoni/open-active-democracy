@@ -600,8 +600,7 @@ display:none !important;
 
 #portal-menu-div
 {
-	width: 190px !important;
-	padding-left:12px;
+	width: 80px !important;
 }
 
 #new_button
@@ -622,7 +621,7 @@ background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50
 
 #google_search 
 {
-	margin-right: 48px;
+	margin-right: 6px;
 }
 
 
@@ -644,7 +643,7 @@ background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50
 }
 
 #portlets-menu {
-width:150px;
+width:80px;
 }
 
 #add_portlet a
