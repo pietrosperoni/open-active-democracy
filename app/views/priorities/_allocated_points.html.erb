@@ -1,85 +1,93 @@
 <% if current_user %>
-<h3>Punktaúthlutun</h3>
-<%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
-  <div id="allocated_points">
-      Heildar punktaúthlutun vegna allra verkefna: <%=current_user.total_allocated_points%><br>
-      Punktar eftir: <%=current_user.allocated_points_left%><br>
-      Punktaúthlutun á þetta verkefni:
-      <div id="slider_value_<%=@priority.id%>"></div>
-        <br>
-        <div id="slider_track_<%=@priority.id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
-          <div id="slider_handle_<%=@priority.id%>" style="background-image:url(/images/thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;">
-          </div>
-        </div>
-        <input type="hidden" name="slider_values_|<%=@priority.id%>" id="slider_form_value_<%=@priority.id%>"/>
-        <br>
-     </div>
-  <%=submit_tag "Uppfæra punktaúthlutun"%>
-</form>
-<br>
-<div id="other_point_allocations">
-<%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
-  <% display_submit = false %>
-  <% current_user.allocated_user_points.each do |allocation| %>
-      <% next if allocation.priority_id == @priority.id %>
-      <% display_submit = true %>
-      Punktar fyrir: <%=allocation.priority.name%><br>
-      <div id="slider_value_<%=allocation.priority_id%>"></div>
-        <br>
-        <div id="slider_track_<%=allocation.priority_id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
-          <div id="slider_handle_<%=allocation.priority_id%>" style="background-image:url(/images/thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;">
-          </div>
-        </div>
-        <input type="hidden" name="slider_values_|<%=allocation.priority_id%>" id="slider_form_value_<%=allocation.priority_id%>"/>
-     </div>
+  <% if @priority.can_allocate_points?(current_user) %>
+    <h3>Punktaúthlutun</h3>
+    <%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
+      <div id="allocated_points">
+          Heildar punktaúthlutun vegna allra verkefna: <%=current_user.total_allocated_points%><br>
+          Punktar eftir: <%=current_user.allocated_points_left%><br>
+          Punktaúthlutun á þetta verkefni:
+          <div id="slider_value_<%=@priority.id%>"></div>
+            <br>
+            <div id="slider_track_<%=@priority.id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
+              <div id="slider_handle_<%=@priority.id%>" style="background-image:url(/images/thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;">
+              </div>
+            </div>
+            <input type="hidden" name="slider_values_|<%=@priority.id%>" id="slider_form_value_<%=@priority.id%>"/>
+            <br>
+         </div>
+      <%=submit_tag "Uppfæra punktaúthlutun"%>
+    </form>
   <% end %>
-  <%=submit_tag "Taka punkta frá öðrum hugmyndum" if display_submit %>
-</form>
-</div>
-<br><br>
-<script>
-  <% curr_points = current_user.get_points_allocated_for_this(@priority.id) %>
-  <% max_points = [80,curr_points+current_user.allocated_points_left].min %>
-  jQuery(document).ready(function() {
-     $('slider_value_<%=@priority.id%>').innerHTML = <%=curr_points%>;
-     $('slider_form_value_<%=@priority.id%>').value = <%=curr_points%>;
-     new Control.Slider('slider_handle_<%=@priority.id%>', 'slider_track_<%=@priority.id%>' ,
-     {
-         range: $R(0,<%= max_points %>),
-         values: <%=(0..max_points).to_a.inspect%>,
-         sliderValue: <%=curr_points%>,
-                 axis:'horizontal',
-         onChange: function(v){
-                         $('slider_value_<%=@priority.id%>').innerHTML = parseInt(v);
-                         $('slider_form_value_<%=@priority.id%>').value = parseInt(v);
-         },
-         onSlide: function(v){
-                         $('slider_value_<%=@priority.id%>').innerHTML = parseInt(v);
-                         $('slider_form_value_<%=@priority.id%>').value = parseInt(v);
-         }
-     });
+  <br>
+  <div id="other_point_allocations">
+  <%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
+    <% display_submit = false %>
     <% current_user.allocated_user_points.each do |allocation| %>
-      <% next if allocation.priority_id == @priority.id %>
-      <% curr_points = current_user.get_points_allocated_for_this(allocation.priority_id) %>
-      $('slider_value_<%=allocation.priority_id%>').innerHTML = <%=curr_points%>;
-      $('slider_form_value_<%=allocation.priority_id%>').value = <%=curr_points%>;
-      new Control.Slider('slider_handle_<%=allocation.priority_id%>', 'slider_track_<%=allocation.priority_id%>',
-      {
-          range: $R(0,<%=curr_points%>),
-          values: <%=(0..curr_points).to_a.inspect%>,
-          sliderValue: <%=curr_points%>,
-                 axis:'horizontal',
-          onChange: function(v){
-                           $('slider_value_<%=allocation.priority_id%>').innerHTML = parseInt(v);
-                           $('slider_form_value_<%=allocation.priority_id%>').value = parseInt(v);
-          },
-          onSlide: function(v){
-                           $('slider_value_<%=allocation.priority_id%>').innerHTML = parseInt(v);
-                           $('slider_form_value_<%=allocation.priority_id%>').value = parseInt(v);
-          }
-       });
+        <% next if allocation.priority_id == @priority.id %>
+        <% if Priority.find(allocation.priority_id).can_allocate_points?(current_user) %>
+          <% display_submit = true %>
+          Punktar fyrir: <%=allocation.priority.name%><br>
+          <div id="slider_value_<%=allocation.priority_id%>"></div>
+            <br>
+            <div id="slider_track_<%=allocation.priority_id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
+              <div id="slider_handle_<%=allocation.priority_id%>" style="background-image:url(/images/thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;">
+              </div>
+            </div>
+            <input type="hidden" name="slider_values_|<%=allocation.priority_id%>" id="slider_form_value_<%=allocation.priority_id%>"/>
+         </div>
+       <% end %>
     <% end %>
-  });
-
-  </script>
+    <%=submit_tag "Taka punkta frá öðrum hugmyndum" if display_submit %>
+  </form>
+  </div>
+  <br><br>
+  <script>
+    <% curr_points = current_user.get_points_allocated_for_this(@priority.id) %>
+    <% max_points = [80,curr_points+current_user.allocated_points_left].min %>
+    jQuery(document).ready(function() {
+       <% if @priority.can_allocate_points?(current_user) %>
+         $('slider_value_<%=@priority.id%>').innerHTML = <%=curr_points%>;
+         $('slider_form_value_<%=@priority.id%>').value = <%=curr_points%>;
+         new Control.Slider('slider_handle_<%=@priority.id%>', 'slider_track_<%=@priority.id%>' ,
+         {
+             range: $R(0,<%= max_points %>),
+             values: <%=(0..max_points).to_a.inspect%>,
+             sliderValue: <%=curr_points%>,
+                     axis:'horizontal',
+             onChange: function(v){
+                             $('slider_value_<%=@priority.id%>').innerHTML = parseInt(v);
+                             $('slider_form_value_<%=@priority.id%>').value = parseInt(v);
+             },
+             onSlide: function(v){
+                             $('slider_value_<%=@priority.id%>').innerHTML = parseInt(v);
+                             $('slider_form_value_<%=@priority.id%>').value = parseInt(v);
+             }
+         });
+      <% end %>
+      <% current_user.allocated_user_points.each do |allocation| %>
+        <% next if allocation.priority_id == @priority.id %>
+        <% if Priority.find(allocation.priority_id).can_allocate_points?(current_user) %>
+          <% curr_points = current_user.get_points_allocated_for_this(allocation.priority_id) %>
+          $('slider_value_<%=allocation.priority_id%>').innerHTML = <%=curr_points%>;
+          $('slider_form_value_<%=allocation.priority_id%>').value = <%=curr_points%>;
+          new Control.Slider('slider_handle_<%=allocation.priority_id%>', 'slider_track_<%=allocation.priority_id%>',
+          {
+              range: $R(0,<%=curr_points%>),
+              values: <%=(0..curr_points).to_a.inspect%>,
+              sliderValue: <%=curr_points%>,
+                     axis:'horizontal',
+              onChange: function(v){
+                               $('slider_value_<%=allocation.priority_id%>').innerHTML = parseInt(v);
+                               $('slider_form_value_<%=allocation.priority_id%>').value = parseInt(v);
+              },
+              onSlide: function(v){
+                               $('slider_value_<%=allocation.priority_id%>').innerHTML = parseInt(v);
+                               $('slider_form_value_<%=allocation.priority_id%>').value = parseInt(v);
+              }
+           });
+         <% end %>
+      <% end %>
+    });
+  
+    </script>
 <% end %>
