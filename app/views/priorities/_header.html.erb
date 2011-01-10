@@ -19,4 +19,4 @@
 
 <%=@priority.html_description %>
 
-<%=render :partial=>"priorities/allocated_points" %><br>
+<%=render :partial=>"priorities/allocated_points" if action_name=="show"%><br>
