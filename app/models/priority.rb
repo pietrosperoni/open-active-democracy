@@ -133,6 +133,14 @@ class Priority < ActiveRecord::Base
     PriorityProcess.find :first, :conditions=>"root_node = 1 AND priority_id = #{self.id}"
   end
   
+  def can_allocate_points?(current_user)
+    if self.block_emails_from_voting
+      !self.block_emails_from_voting.include?(current_user.email)
+    else
+      true
+    end
+  end
+  
   def update_allocated_points_cache!
     self.cached_allocated_points_counter = AllocatedUserPoint.sum('allocated_points', :conditions=>["priority_id = ?",self.id])
     self.save
