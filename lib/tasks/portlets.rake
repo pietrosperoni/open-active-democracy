@@ -40,7 +40,7 @@ namespace :portlets do
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_top"
     p.partial_name = "priority_list"
-    p.item_limit = 3
+    p.item_limit = 5003
     p.weight = 2
     p.save
     
@@ -85,7 +85,7 @@ namespace :portlets do
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_random"
     p.partial_name = "priority_list"
-    p.item_limit = 5
+    p.item_limit = 5003
     p.weight = 7
     p.caching_disabled = true
     p.save
