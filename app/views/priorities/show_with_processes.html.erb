@@ -82,20 +82,6 @@
 
 			<% latest_discussions = @priority.activities.discussions.by_recently_updated.item_limit(1)%>
 
-			<% if logged_in? %>
-				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
-			<% end %>
-						
-			<% if latest_discussions and not latest_discussions.empty? %>
-				<h5>Nýjasta umræða:</h5>
-				<% for activity in latest_discussions %>
-					<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
-				<% end %>
-				<h5>
-				<%= link_to 'Allar athugasemdir almennings', discussions_priority_url(@priority) %>
-				</h5>
-			<% end %>
-
 			
 		<div id="althingi_video_discussions">
 			<% if @priority_process %>
@@ -183,6 +169,10 @@
 			<% if @activities.total_pages > 1 %>
 				<%= will_paginate(@activities, :params => {:action => "activities"} ) %>
 			<% end %>
+      <% if logged_in? %>
+        <%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
+      <% end %>
+
 		</td>	
 		
 		<td valign="top" width="150" class="extras">
