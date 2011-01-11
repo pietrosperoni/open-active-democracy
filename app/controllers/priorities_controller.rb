@@ -12,17 +12,25 @@ class PrioritiesController < ApplicationController
     params.each do |p,value|
       if p.include?("slider_values")
         id = p.split("|")[1].to_i
-        ActiveRecord::Base.transaction do
-          AllocatedUserPoint.destroy_all("user_id = #{current_user.id} AND priority_id = #{id}")
-          if current_user.allocated_points_left>=value.to_i
-            a = AllocatedUserPoint.new
-            a.user_id = current_user.id
-            a.priority_id = id
-            a.allocated_points = value.to_i
-            a.save
+        retry_count = 3
+        begin
+          ActiveRecord::Base.transaction do
+            AllocatedUserPoint.destroy_all("user_id = #{current_user.id} AND priority_id = #{id}")
+            if current_user.allocated_points_left>=value.to_i
+              a = AllocatedUserPoint.new
+              a.user_id = current_user.id
+              a.priority_id = id
+              a.allocated_points = value.to_i
+              a.save
+            end
+            priority = Priority.find(id, :lock=>true)
+            priority.update_allocated_points_cache!
           end
-          priority = Priority.find(id, :lock=>true)
-          priority.update_allocated_points_cache!
+        rescue # Deadlock rescue 3 tries
+          if retry_count > 0
+            retry_count-=1
+            retry
+          end
         end
       end
     end
