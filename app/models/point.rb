@@ -35,8 +35,6 @@ class Point < ActiveRecord::Base
   
   has_many :capitals, :as => :capitalizable, :dependent => :nullify
   
-  acts_as_solr :fields => [ :name, :content, :priority_name, :is_published ]
-
   liquid_methods :id, :user, :text
   
   cattr_reader :per_page
