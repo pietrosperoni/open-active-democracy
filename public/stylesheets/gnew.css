@@ -373,12 +373,23 @@ table#add_portlet
 	margin-left: 3px;
 }
 
-#new_button input, #new_button div  
+#new_button input, #new_button div
 {
 	width: 184px !important;
 	height: 25px;
 }
 
+#new_user a
+{
+	width: 70px !important;
+	height: 17px;
+	float: left;
+	border: 1px #ddd solid;
+	margin-left: 44px;
+	padding-left: 17px;
+	padding-top: 3px;
+	
+}
 
 .button-to
 {
