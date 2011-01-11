@@ -974,7 +974,7 @@ is:
             facebook: "Lykilorðið þitt er sama og Facebook lykilorðið þannig að þú þarft að breyta því á Facebook."
             success: "Lykilorði breytt"
             nomatch: "Staðfestingarlykilorðin passa ekki saman"
-            submit: "Breyta lykilorðum"            
+            submit: "Breyta lykilorði"            
     pictures:
         blank: "Smelltu á 'velja' til að velja myndaskrá til að upphlaða. Smelltu síðan á 'uppfæra og vista'"
         success: "Tókst að sækja mynd"
@@ -1571,7 +1571,7 @@ is:
                 twitter: "Twitter"
                 facebook: "Facebook"
                 options: "eða <b>skráðu þig strax inn</b> með:"
-            intro: "<b><a href='{{signup_url}}'>Nýskráning</a></b> eða <a href='#' id='login_link'>innskráning {{government_name}}</a>."
+            intro: "<a href='#' id='login_link'>Innskráning í {{government_name}}</a>."
             forgot: "Gleymt lykilorð"
             email:
                 label: "Netfang"

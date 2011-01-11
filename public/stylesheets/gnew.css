@@ -1,4 +1,4 @@
-#skuggathing, #not_activated, #not_activated_header, #next_steps_box, #menu_sub, #priority_nav, #green_button_priority, .extras {
+#skuggathing, #not_activated, #not_activated_header, #next_steps_box, #menu_sub, #priority_nav, #green_button_priority, .extras, #intro {
 	display:none;
 }
 
@@ -60,6 +60,7 @@ line-height: 150%;
 font-size:11px !important;
 border-top: 1px solid #dbdbdb;
 border-left: 1px dotted #dbdbdb;
+border-bottom: 1px dotted #dbdbdb;
 border-right: 1px solid #dbdbdb;
 padding-left: 10px; 
 padding-right: 10px; 
@@ -319,9 +320,9 @@ float:left;
 margin-top: 30px;
 }
 
-.blurb b
+.blurb p
 {
-
+	padding-bottom: 7px;
 }
 
 
