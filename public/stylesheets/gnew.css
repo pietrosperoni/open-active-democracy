@@ -1,4 +1,4 @@
-#skuggathing, #not_activated, #not_activated_header, #next_steps_box, #menu_sub, #priority_nav, #green_button_priority, .extras, #intro {
+#skuggathing, #not_activated, #not_activated_header, #next_steps_box, #menu_sub, #priority_nav, #green_button_priority, .extras, #intro, .oppose, .endorse {
 	display:none;
 }
 
@@ -175,7 +175,6 @@ float: left;
 .add_point_for
 {
 position: absolute;
-left: 110px;
 top: -10px;
 float: left;
 width: 112px;
@@ -184,7 +183,7 @@ width: 112px;
 .add_point_against
 {
 position: absolute;
-left: 383px;
+left: 278px;
 top: -10px;
 float: left;
 width: 112px;

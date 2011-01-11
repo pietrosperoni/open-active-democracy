@@ -197,7 +197,7 @@ h4 {
 }
 
 .flash_error, .flash_notice {
-    width:220px !important;
+    width:219px !important;
 	float:right;
 	margin-right: 5px;
     z-index:105;
