@@ -82,6 +82,10 @@
 
 			<% latest_discussions = @priority.activities.discussions.by_recently_updated.item_limit(1)%>
 
+			<% if logged_in? %>
+				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
+			<% end %>
+
 			
 		<div id="althingi_video_discussions">
 			<% if @priority_process %>
@@ -169,10 +173,6 @@
 			<% if @activities.total_pages > 1 %>
 				<%= will_paginate(@activities, :params => {:action => "activities"} ) %>
 			<% end %>
-      <% if logged_in? %>
-        <%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
-      <% end %>
-
 		</td>	
 		
 		<td valign="top" width="150" class="extras">
