@@ -4,7 +4,7 @@
 # Code is not reloaded between requests
 config.cache_classes = true
 
-config.cache_store = :mem_cache_store, 'localhost:11611'
+config.cache_store = :mem_cache_store, 'localhost:11999'
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
@@ -28,7 +28,7 @@ config.action_mailer.raise_delivery_errors = false
 #  :password => ENV['SENDGRID_PASSWORD']
 #}
 
-ENV['DOMAIN'] = "skuggaborg.is"
+ENV['DOMAIN'] = "frodi.is"
 
 if ActionController::Base.session
   ActionController::Base.session[:domain] = '.frodi.is'
