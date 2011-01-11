@@ -5,9 +5,9 @@
       <div id="allocated_points">
     <%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
           <b>Punktaúthlutun á þetta verkefni:</b>
-          <div id="slider_value_<%=@priority.id%>"></div>
+          <span class="box" id="slider_value_<%=@priority.id%>"></span>
             <br>
-            <div id="slider_track_<%=@priority.id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
+            <div class="slider" id="slider_track_<%=@priority.id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
               <div id="slider_handle_<%=@priority.id%>" style="background-image:url(/images/thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;">
               </div>
             </div>
@@ -26,10 +26,10 @@
         <% if Priority.find(allocation.priority_id).can_allocate_points?(current_user) %>
           <% display_submit = true %>
 	  
-          Punktar fyrir: <b><%=allocation.priority.name%></b><br>
-          <div id="slider_value_<%=allocation.priority_id%>"></div>
+          Punktar fyrir: <b><%=allocation.priority.name%></b>
+          <span class="box" id="slider_value_<%=allocation.priority_id%>"></span>
             <br>
-            <div id="slider_track_<%=allocation.priority_id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
+            <div class="slider" id="slider_track_<%=allocation.priority_id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
               <div id="slider_handle_<%=allocation.priority_id%>" style="background-image:url(/images/thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;">
               </div>
             </div>

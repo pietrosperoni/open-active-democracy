@@ -895,4 +895,10 @@ padding-top: 0px !important
 		border: 1px solid #ccc;
 		background-color: #F0F0F0;
 		padding: 1px;
+		font-weight: bold;
+}
+
+.slider
+{
+	margin-top:10px;
 }
