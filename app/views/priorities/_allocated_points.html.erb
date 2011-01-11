@@ -38,7 +38,7 @@
     <%=submit_tag "Taka punkta frá öðrum hugmyndum" if display_submit %>
   </form>
   </div>
-  <br><br>
+<br>
   <script>
     <% curr_points = current_user.get_points_allocated_for_this(@priority.id) %>
     <% max_points = [80,curr_points+current_user.allocated_points_left].min %>
