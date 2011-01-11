@@ -150,8 +150,7 @@ class Government < ActiveRecord::Base
   end
   
   def has_facebook_enabled?
-    return false unless is_facebook?
-    return true if Facebooker.api_key
+    false
   end
   
   def has_windows_enabled?
@@ -180,7 +179,7 @@ class Government < ActiveRecord::Base
   end
   
   def is_searchable?
-    not ENV["WEBSOLR_URL"].nil?
+    false
   end
 
   def logo_large
