@@ -197,8 +197,9 @@ h4 {
 }
 
 .flash_error, .flash_notice {
-    width:200px !important;
+    width:220px !important;
 	float:right;
+	margin-right: 5px;
     z-index:105;
     text-align:center;
     font-weight:bold;
@@ -549,10 +550,15 @@ del {
 }
 .priority_name, .priority_name_add {
   	font-size: 12px;
-	font-weight: bold;
 	margin-bottom: 2px;	
 /*	line-height: 1em; */
 }
+
+.priority_name a, .priority_name_add a{
+	font-weight: bold;
+}
+
+
 .priority_name_related {
   	font-size: 1.1em;
 	font-weight: bold;
