@@ -1,3 +1,5 @@
+<% if current_user and current_user.is_admin? %>
+
 <div id="new_user_form">
 
 	<% form_remote_for :user, :url => users_path(:region => "short") do |f| -%>
@@ -103,3 +105,4 @@
 	<% end -%>
 
 </div>
+<% end %>
