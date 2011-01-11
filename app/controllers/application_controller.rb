@@ -50,12 +50,11 @@ class ApplicationController < ActionController::Base
 
   def current_government
     return @current_government if @current_government
-    @current_government = Rails.cache.read('government')
+    @current_government = nil
     if not @current_government
       @current_government = Government.last
       if @current_government
         @current_government.update_counts
-        Rails.cache.write('government', @current_government, :expires_in => 15.minutes) 
       else
         return nil
       end
