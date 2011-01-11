@@ -2,13 +2,13 @@ is:
     menu:
         logout: "Útskráning"
         about:
-            name: "Skuggaborg"
-            site: "Um Skuggaborg"
+            name: "Forgangsröðunarkerfi styrkja"
+            site: "Um forgangsröðunarkerfið"
             faq: "Spurt & Svarað"
             rules: "Reglur fyrir vefinn"
             privacy: "Reglur um friðhelgi"
         admin:
-            name: "Stillingar hugmyndabanka"
+            name: "Stillingar kerfis"
             government:
                 name: "Stillingar"
                 edit: "Upplýsingar um samfélag"
