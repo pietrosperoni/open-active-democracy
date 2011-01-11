@@ -789,3 +789,17 @@ padding-top:3px;
 {
 display: none;	
 }
+
+#allocated_points
+{
+	float: left;
+    width: 330px;
+}
+
+#other_point_allocations
+{
+	margin-left: 340px;
+    width: 330px;
+	min-height: 145px;
+	margin-top: -15px;
+}

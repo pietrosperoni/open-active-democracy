@@ -1,11 +1,10 @@
 <% if current_user %>
   <% if @priority.can_allocate_points?(current_user) %>
     <h3>Punktaúthlutun</h3>
-    <%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
+          Heildar punktaúthlutun vegna allra verkefna: <b><%=current_user.total_allocated_points%></b> - Lausir punktar: <b><%=current_user.allocated_points_left%></b><br /><br />
       <div id="allocated_points">
-          Heildar punktaúthlutun vegna allra verkefna: <%=current_user.total_allocated_points%><br>
-          Punktar eftir: <%=current_user.allocated_points_left%><br>
-          Punktaúthlutun á þetta verkefni:
+    <%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
+          <b>Punktaúthlutun á þetta verkefni:</b>
           <div id="slider_value_<%=@priority.id%>"></div>
             <br>
             <div id="slider_track_<%=@priority.id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
@@ -14,9 +13,9 @@
             </div>
             <input type="hidden" name="slider_values_|<%=@priority.id%>" id="slider_form_value_<%=@priority.id%>"/>
             <br>
-         </div>
       <%=submit_tag "Uppfæra punktaúthlutun"%>
     </form>
+         </div>
   <% end %>
   <br>
   <div id="other_point_allocations">
@@ -26,7 +25,7 @@
         <% next if allocation.priority_id == @priority.id %>
         <% if Priority.find(allocation.priority_id).can_allocate_points?(current_user) %>
           <% display_submit = true %>
-          Punktar fyrir: <%=allocation.priority.name%><br>
+          Punktar fyrir: <b><%=allocation.priority.name%></b><br>
           <div id="slider_value_<%=allocation.priority_id%>"></div>
             <br>
             <div id="slider_track_<%=allocation.priority_id%>" style="background-image:url(/images/bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;">
