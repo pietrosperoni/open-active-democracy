@@ -50,12 +50,11 @@ class ApplicationController < ActionController::Base
 
   def current_government
     return @current_government if @current_government
-    @current_government = Rails.cache.read('government')
+    @current_government = nil
     if not @current_government
       @current_government = Government.last
       if @current_government
         @current_government.update_counts
-        Rails.cache.write('government', @current_government, :expires_in => 15.minutes) 
       else
         return nil
       end
@@ -171,10 +170,6 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => "install"
       return
     end
-    if not current_partner and RAILS_ENV == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
-      redirect_to 'http://' + current_government.base_url + request.path_info
-      return
-    end    
   end
   
   def check_referral

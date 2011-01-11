@@ -1,6 +1,6 @@
 set :application, "open-active-democracy"
-set :domain, "skuggaborg.is"
-set :selected_branch, "mastercity"
+set :domain, "forgangur.frodi.is"
+set :selected_branch, "mmr"
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
 set :deploy_to, "/home/robert/sites/#{application}/#{selected_branch}"
