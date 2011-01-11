@@ -1,7 +1,7 @@
 <% if current_user %>
   <% if @priority.can_allocate_points?(current_user) %>
     <h3>Punktaúthlutun</h3>
-          Heildar punktaúthlutun vegna allra verkefna: <b><%=current_user.total_allocated_points%></b> - Lausir punktar: <b><%=current_user.allocated_points_left%></b><br /><br />
+          Heildar punktaúthlutun vegna allra verkefna: <b class="box"><%=current_user.total_allocated_points%></b> - Lausir punktar: <b class="box"><%=current_user.allocated_points_left%></b><br /><br />
       <div id="allocated_points">
     <%=form_tag "/priorities/allocate_points/#{@priority.id}"%>
           <b>Punktaúthlutun á þetta verkefni:</b>
@@ -25,6 +25,7 @@
         <% next if allocation.priority_id == @priority.id %>
         <% if Priority.find(allocation.priority_id).can_allocate_points?(current_user) %>
           <% display_submit = true %>
+	  
           Punktar fyrir: <b><%=allocation.priority.name%></b><br>
           <div id="slider_value_<%=allocation.priority_id%>"></div>
             <br>

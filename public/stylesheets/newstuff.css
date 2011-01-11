@@ -2,6 +2,11 @@ html, body {
 	font-family: "lucida grande",tahoma,Helvetica, arial,sans-serif !important;
 }
 
+ul, ol
+{
+	margin-left: 15px;
+}
+
 #header {
     background-image: url("images/top-banner.png");
     background-repeat: no-repeat;
@@ -883,4 +888,11 @@ padding-bottom: 0px;
 .portlet-content .priority_added
 {
 padding-top: 0px !important
+}
+
+.box
+{
+		border: 1px solid #ccc;
+		background-color: #F0F0F0;
+		padding: 1px;
 }
