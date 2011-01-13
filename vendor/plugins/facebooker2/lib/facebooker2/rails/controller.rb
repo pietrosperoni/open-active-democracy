@@ -9,7 +9,6 @@ module Facebooker2
         controller.helper_method :current_facebook_user
         controller.helper_method :current_facebook_client
         controller.helper_method :facebook_params
-        controller.helper_method :fb_cookie_destroy
       end
       
       def current_facebook_user
@@ -59,10 +58,6 @@ module Facebooker2
           hash[parts.first] = parts.last
         end
         hash
-      end
-      
-      def fb_cookie_destroy
-        cookies.delete "fbs_#{Facebooker2.app_id}"
       end
       
       def fb_cookie_for_app_id?(app_id)
