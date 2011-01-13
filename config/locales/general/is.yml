@@ -1210,7 +1210,7 @@ is:
                 name: "Hugmyndin sem þú bættir við:"
                 one: "Áður en við bætum þinni hugmynd við, vinsamlegast athugaðu hvort <b>{{priority_name}}</b> virki frekar. Stuðningur þin vegur þyngra í samfloti með öðrum."
                 other: "Áður en við bætum þinni hugmynd við, vinsamlegast athugaðu hvort einhver önnur hugmynd virki frekar.  Stuðningur þin vegur þyngra í samfloti með öðrum."
-        recent_activity: "Hvað er að gerast í þessu verkefni?"
+        recent_activity: "Virkni"
         buried: "{{priority_name}} hefur grafist undir, Það mun ekki lengur sjást á listum."
         successful: "{{priority_name}} er nú merkt að hafi verið lokið og hafi tekist"
         failed: "{{priority_name}} er nú merkt að hafi verið lokað og hafi mistekist"

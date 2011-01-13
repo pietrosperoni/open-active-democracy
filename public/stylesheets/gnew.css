@@ -802,3 +802,11 @@ display: none;
 	min-height: 145px;
 	margin-top: -15px;
 }
+
+.smallbox
+{
+	font-size: 10px;	
+	position: relative;
+	top: -2px;	
+	margin-left: 3px;
+}

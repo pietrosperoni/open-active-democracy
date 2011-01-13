@@ -420,6 +420,8 @@ div.meta { width: 120px !important; }
 .tag_button 
 { 
 	font-size: 10px !important; 
+	border: none !important;
+
 }
 .container_12, .container_13 
 { 
@@ -894,7 +896,7 @@ padding-top: 0px !important
 {
 		border: 1px solid #ccc;
 		background-color: #F0F0F0;
-		padding: 1px;
+		padding: 2px;
 		font-weight: bold;
 }
 
