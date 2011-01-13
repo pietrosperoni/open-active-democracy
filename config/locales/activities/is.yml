@@ -273,14 +273,14 @@ is:
         point:
             new:
                 name: "{{user_name}} bætti við {{point_name}} við {{priority_name}}"
-                noself: "Bætti við {{point_name}} við þessa hugmynd"                
+                noself: "Bætti við {{point_name}} við þetta verkefni"                
                 nouser: "Bætti við {{point_name}} við {{priority_name}}"
             deleted:
                 name: "{{user_name}} eyddi {{point_name}}"
                 nouser: "Eyddi {{point_name}}"
             revision:
-                name: "{{user_name}} breytti nafni hugmyndar í {{point_name}}"
-                nouser: "Breytti nafni hugmyndar í {{point_name}}"
+                name: "{{user_name}} breytti nafni verkefnis í {{point_name}}"
+                nouser: "Breytti nafni verkefnis í {{point_name}}"
                 content:
                     name: "{{user_name}} uppfærði {{point_name}}"
                     nouser: "Uppfærði {{point_name}}"
@@ -322,8 +322,8 @@ is:
         priority:
             new:
                 name: "{{user_name}} er höfundur {{priority_name}}"
-                noself: "{{user_name}} er höfundur þessarar hugmyndar"
-                nouser: "Lagði fram {{priority_name}} sem nýja hugmyndar"
+                noself: "{{user_name}} er höfundur þessa verkefnis"
+                nouser: "Lagði fram {{priority_name}} sem nýtt verkefni"
             debut:
                 name: 
                     known: "{{priority_name}} er nýtt á lista í #{{position}}"
@@ -365,9 +365,9 @@ is:
                     nouser: "Tók þátt í umræðum um {{priority_name}}"
             first:
                 endorsed:
-                    name: "{{priority_name}} er {{user_name}} ný #1 hugmynd"
-                    noself: "Þetta er nú {{user_name}} ný #1 hugmynd"
-                    nouser: "Ný #1 hugmynd: {{priority_name}}"
+                    name: "{{priority_name}} er {{user_name}} nýtt #1 verkefni"
+                    noself: "Þetta er nú {{user_name}} nýtt #1 verkefni"
+                    nouser: "Nýtt #1 verkefni: {{priority_name}}"
                 opposed:
                     name: "Andstaða við {{priority_name}} er {{user_name}} ný #1 hugmynd"
                     noself: "Andstaða við þetta er nú {{user_name}} ný #1 hugmynd"

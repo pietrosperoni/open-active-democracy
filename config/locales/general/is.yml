@@ -327,8 +327,8 @@ is:
             point: "Opna umræðu um þessi rök" 
             document: "Opna umræðu um þetta skjal" 
             profile: "Setja skilaboð á korktöflu í notandaupplýsingasvæði {{user_name}}" 
-            priority_discussion: "Opna umræðu um þessa hugmynd" 
-            priority: "Settu inn athugasemd um þessa hugmynd" 
+            priority_discussion: "Opna umræðu um þetta verkefni" 
+            priority: "Settu inn athugasemd um þetta verkefni" 
             priority_dropdown: "Senda á hugmynd: (valkvæmt)" 
             discussion: "Opna umræðu" 
             submit: "Senda inn athugasemd" 
@@ -1077,7 +1077,7 @@ is:
             name: "Stutt vefslóð:"
             link: "Gera stutta vefslóð fyrir Twitter"
         top:
-            name: "Efstu hugmyndir"
+            name: "Efstu verkefni"
             short: "Topp:"
             title: "Efstu hugmyndir fyrir {{target}}"
         rising:
@@ -1098,8 +1098,8 @@ is:
             see_all: "Sjá öll <a href='{{url}}'>hugmynd sem er lokið</a>"
             empty: "Hérna verða hugmyndir sem hefur verið lokið hvort sem er með eða án árangurs."
         random:
-            name: "Hugmyndir af handahófi"
-            title: "Hugmyndir af handahófi fyrir {{target}}"
+            name: "Verkefni af handahófi"
+            title: "Verkefni af handahófi fyrir {{target}}"
         newest:
             name: "Nýjustu hugmyndirnar"
             title: "Nýjustu hugmyndirnar fyrir {{target}}"
@@ -1210,7 +1210,7 @@ is:
                 name: "Hugmyndin sem þú bættir við:"
                 one: "Áður en við bætum þinni hugmynd við, vinsamlegast athugaðu hvort <b>{{priority_name}}</b> virki frekar. Stuðningur þin vegur þyngra í samfloti með öðrum."
                 other: "Áður en við bætum þinni hugmynd við, vinsamlegast athugaðu hvort einhver önnur hugmynd virki frekar.  Stuðningur þin vegur þyngra í samfloti með öðrum."
-        recent_activity: "Hvað er að gerast í þessari hugmynd"
+        recent_activity: "Hvað er að gerast í þessu verkefni?"
         buried: "{{priority_name}} hefur grafist undir, Það mun ekki lengur sjást á listum."
         successful: "{{priority_name}} er nú merkt að hafi verið lokið og hafi tekist"
         failed: "{{priority_name}} er nú merkt að hafi verið lokað og hafi mistekist"
