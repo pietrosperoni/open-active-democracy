@@ -181,7 +181,7 @@ class PointsController < ApplicationController
     respond_to do |format|
       if @point.update_attributes(params[:point])
         flash[:notice] = t('points.update.success', :point_name => @point.name)
-        format.html { redirect_to(@point) }
+        format.html { redirect_to(@priority) }
       else
         format.html { render :action => "edit" }
       end
@@ -237,82 +237,4 @@ class PointsController < ApplicationController
             page.replace_html 'point_' + @point.id.to_s + '_helpful_chart', render(:partial => "documents/helpful_chart", :locals => {:document => @point })            
           elsif params[:region] = "point_inline"
 #            page.select("point_" + @point.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) ) }                       
-            page.replace_html 'point_' + @point.id.to_s + '_quality', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
-          end
-        end        
-      }
-    end
-  end  
-  
-  # POST /points/1/unquality
-  def unquality
-    @point = Point.find(params[:id])
-    @qualities = @point.point_qualities.find(:all, :conditions => ["user_id = ?",current_user.id])
-    for quality in @qualities
-      quality.destroy
-    end
-    @point.reload
-    respond_to do |format|
-      format.js {
-        render :update do |page|
-          if params[:region] == "point_detail"
-            page.replace_html 'point_' + @point.id.to_s + '_helpful_button', render(:partial => "points/button", :locals => {:point => @point, :quality => @quality })
-            page.replace_html 'point_' + @point.id.to_s + '_helpful_chart', render(:partial => "documents/helpful_chart", :locals => {:document => @point })            
-          elsif params[:region] = "point_inline"
-#            page.select("point_" + @point.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) ) }
-            page.replace_html 'point_' + @point.id.to_s + '_quality', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
-          end          
-        end       
-      }
-    end
-  end  
-  
-  # GET /points/1/unhide
-  def unhide
-    @point = Point.find(params[:id])
-    @priority = @point.priority
-    @quality = nil
-    if logged_in?
-      @quality = @point.point_qualities.find_by_user_id(current_user.id)
-    end
-    respond_to do |format|
-      format.js {
-        render :update do |page|
-          page.replace 'point_' + @point.id.to_s, render(:partial => "points/show", :locals => {:point => @point, :quality => @quality})
-        end
-      }
-    end
-  end
-
-  # DELETE /points/1
-  def destroy
-    @point = Point.find(params[:id])
-    if @point.user_id != current_user.id and not current_user.is_admin?
-      flash[:error] = t('point.destroy.access_denied')
-      redirect_to(@point)
-      return
-    end
-    @point.delete!
-    ActivityPointDeleted.create(:user => current_user, :point => @point)
-    respond_to do |format|
-      format.html { redirect_to(points_url) }
-    end
-  end
-  
-  private
-    def load_endorsement
-      @priority = Priority.find(params[:priority_id])    
-      @endorsement = nil
-      if logged_in? # pull all their endorsements on the priorities shown
-        @endorsement = @priority.endorsements.active.find_by_user_id(current_user.id)
-      end    
-    end  
-    
-    def get_qualities
-      @qualities = nil
-      if logged_in? and @points.any? # pull all their qualities on the points shown
-        @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
-      end    
-    end    
-    
-end
+            page.replace_html 'point_' + @point.id.to_s + '_quality', render(:partial => "points/bu

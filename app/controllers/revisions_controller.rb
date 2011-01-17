@@ -77,7 +77,7 @@ class RevisionsController < ApplicationController
           end
         end
         flash[:notice] = t('points.revision.new.success', :point_name => @point.name)
-        format.html { redirect_to(@point) }
+        format.html { redirect_to(@point.priority) }
       else
         format.html { render :action => "new" }
       end
@@ -90,7 +90,7 @@ class RevisionsController < ApplicationController
     respond_to do |format|
       if @revision.update_attributes(params[:revision])
         flash[:notice] = t('points.revision.new.success', :point_name => @point.name)
-        format.html { redirect_to(@revision) }
+        format.html { redirect_to(@revision.priority) }
       else
         format.html { render :action => "edit" }
       end
