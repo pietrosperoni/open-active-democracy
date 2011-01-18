@@ -542,7 +542,7 @@ img.comment_report
 /*	overflow:auto !ie; */
 	padding-bottom: 7px; 
 	width: 510px; 
-	width: auto !ie;
+/*	width: auto !ie;*/
 }
 
 .comment_box_samn .comment_content p
@@ -768,6 +768,8 @@ width: 532px;
 #settings
 {
 	margin-left: 55px;
+	padding-bottom: 5px;
+
 /*	clear: both;
 	margin: 10px 0 0 0;
 	height: 20px;
@@ -789,10 +791,13 @@ width: 532px;
 {
 	float:left;
 	margin: 3px 3px 0 0px;
-	margin: 3px 3px 0 3px !ie;
+	margin: 3px 3px 0 0px !ie;
 }
 .profile_logout
 {
+	height: 25px;
+	padding-left: -5px !important;
+	margin-left: -3px !important;
 /*float:left;*/
 }
 
