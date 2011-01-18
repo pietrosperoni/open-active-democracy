@@ -32,7 +32,7 @@
 			</div>
     	<% else %>
 			<div class="comment_content" id="comment_content_<%= question.id.to_s %>">
-				<%= simple_format(question.content_html) %>
+				<%= simple_format h(question.content_html) %>
 			</div>
 		<% end %>
 		
