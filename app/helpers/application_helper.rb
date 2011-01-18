@@ -6,7 +6,7 @@ module ActionView
       def simple_format_with_strip(text)
         simple_format_without_strip(sanitize(text))
       end
-      alias_method_chain :simpler_format, :strip
+      alias_method_chain :simple_format, :strip
     end
   end
 end
