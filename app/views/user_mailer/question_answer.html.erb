@@ -10,7 +10,7 @@
     <td><p><img src="http://www.utanrikisraduneyti.is/media/Logo/vidraedur.is-logo.jpg" alt="Vidraedur.is" width="600" /></p>
     <p>Sæl(l) <%=@question.user.login%>,</p>
     <p>Þér hefur borist svar við spurningu þinni frá <%=@question.created_at.strftime("%d/%m/%Y")%>:</p>
-	<p><%=simple_format h(@question.content_html)%></p>
+	<p><%=simple_format(@question.content_html)%></p>
 <p>Svarið er að finna á <a href="<%=@question.show_url%>" target="_new"><%=@question.show_url%></a></p>
 </td>
   </tr>
