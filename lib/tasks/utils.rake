@@ -36,6 +36,7 @@ def create_priority_from_row(row,current_user,partner)
         @point.priority_id = @priority.id
         @point.content = point_text
         @point.name = point_name
+        @point.value = 1
         @point.website = point_link if point_link and point_link != ""
         @point.partner_id = partner.id
         puts @point.inspect

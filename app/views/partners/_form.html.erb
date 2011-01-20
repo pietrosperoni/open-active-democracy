@@ -11,6 +11,11 @@
   <span class="small"><%= t('partners.new.name.example')%></span>
 </p>
 <p>
+  <label for="partner_name">Beygingar á nafni</label><br />
+  <%= f.text_field :name_variations_data, :size => 50, :maxlength => 300 %><br/>
+  <span class="small">(hér er,um,frá,til,stutt_útgáfa_fyrir_að_búa_til_hugmynd)</span>
+</p>
+<p>
   <label for="partner_website"><%= t('partners.new.website.label')%></label><br />
   <%= f.text_field :website %><br/>
   <span class="small"><%= t('partners.new.website.example')%></span>

@@ -121,6 +121,7 @@ module AuthenticatedSystem
     # Called from #current_user.  First attempt to login by the user id stored in the session.
     # if they connected to facebook while they were logged in to the site, it will automatically add the facebook uid to their existing account
     def login_from_session
+      RAILS_DEFAULT_LOGGER.info("LOGIN: FROM SESSION")
       if session[:user_id]
         u = User.find_by_id(session[:user_id])
         self.current_user = u 
@@ -130,9 +131,12 @@ module AuthenticatedSystem
     # Called from #current_user. Then try to login from facebook
     def login_from_facebook
       if facebook_session
+        RAILS_DEFAULT_LOGGER.info("LOGIN: fbuid #{facebook_session.user.uid}")
         if u = User.find_by_facebook_uid(facebook_session.user.uid)
+          RAILS_DEFAULT_LOGGER.info("LOGIN: FOUND ONE")          
           return u
         end
+        RAILS_DEFAULT_LOGGER.info("LOGIN: About to create")          
         u = User.create_from_facebook(facebook_session,current_partner,request)
         if u
           session[:goal] = 'signup'
@@ -151,6 +155,7 @@ module AuthenticatedSystem
 
     # Called from #current_user.  Attempt to login by an expiring token in the cookie.
     def login_from_cookie
+      RAILS_DEFAULT_LOGGER.info("LOGIN: FROM COOKIE")
       user = cookies[:auth_token] && User.find_by_remember_token(cookies[:auth_token])
       if user && user.remember_token?
         cookies[:auth_token] = { :value => user.remember_token, :expires => user.remember_token_expires_at }
@@ -159,5 +164,4 @@ module AuthenticatedSystem
         return false
       end
     end
-
 end

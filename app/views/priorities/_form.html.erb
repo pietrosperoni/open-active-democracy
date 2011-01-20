@@ -2,42 +2,43 @@
 <%=  params[:notice] %>
 <% end %>
 
+<%=form_tag('/priorities/create', :method => :post)%>
 
-<% form_for(@priority,:action=>"create") do |f| %>
 <% if @tag_names %>
 	<%= hidden_field_tag :tag_names, @tag_names %>
 <% end %>
 
-<h3>Búa til nýtt mál á Skuggaþingi</h3>
+<h3>Búa til nýja hugmynd á Skuggaborg</h3>
+<p><strong>Athugaðu fyrst hvort þegar er komin fram sambærileg hugmynd! Leitarglugginn hér til hægri er gagnlegur í slíkt. Ef margar hugmyndir um sama mál eru í gangi þá dreifast atkvæðin og minni líkur á að hún nái mikilli athygli.</strong></p>
 		
-		<div id="your_priority" class="form_header">Hvert er málið? <span class="red">* </span> </div>
-			<%= f.text_field :name, :maxlength => 60, :autocomplete =>"off" %>
-			<div class="tiny_info">Gott er að orða mál skýrt, þá er auðveldara fyrir aðra að taka afstöðu til þess</div>			
+		<div id="your_priority" class="form_header">Hver er hugmyndin? <span class="red">* </span> </div>
+			<%= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
+			<div class="tiny_info">Gott er að orða hugmynd skýrt, þá er auðveldara fyrir aðra að taka afstöðu til hennar.</div>			
 		
-					<% if Partner.current and Partner.current.custom_tag_checkbox %>
+					<% if Partner.current and Partner.current.custom_tag_checkbox and Partner.current.custom_tag_checkbox!="" %>
 						
-							<div  class="form_header">Flokkar sem mál á að birtast í:</div>
-<!--						
+							<div  class="form_header">Flokkar sem hugmynd á að birtast í:</div>
+						
 							<%=Partner.current.custom_tag_checkbox%>? <%= check_box_tag 'custom_checkbox', Partner.current.custom_tag_checkbox%>
--->						
+						
 					<% else %>
 						
-							<div  class="form_header">Flokkar sem mál á að birtast í:</div>
+							<div  class="form_header">Flokkar sem hugmynd á að birtast í:</div>
 						
 					<% end %>
 
 
-					<% if Partner.current and Partner.current.custom_tag_dropdown_1 %>
+					<% if Partner.current and Partner.current.custom_tag_dropdown_1 and Partner.current.custom_tag_dropdown_1!="" %>
 						<span class="custom_tag">
 							<%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%>
 						</span>
 					<% end %>
-<!--
-					<% if Partner.current and Partner.current.custom_tag_dropdown_2 %>
+
+					<% if Partner.current and Partner.current.custom_tag_dropdown_2 and Partner.current.custom_tag_dropdown_2!="" %>
 						<span class="custom_tag">						
 							<%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%>
 						</span>		
--->
+
 					</div>
 					<% end %>
 				
@@ -56,21 +57,21 @@
  			<%= text_field_tag "point[name]", "", :size => 50, :maxlength => 60 %>
 		</div>
  		<div class="field_label">
-			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þín mál þá eru góð rök lykilatriði</div>
+			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þína hugmynd þá eru góð rök lykilatriði</div>
 		</div>
 	</div>
 	<div class="field form_header">
 		<div class="field_label">
 			<div id="point_supports">
-			<%= radio_button_tag("point[value]", 1, true) %> Já, þessi rök styðja málið					
+			<%= radio_button_tag("point[value]", 1, true) %> Já, þessi rök styðja hugmyndina					
 			</div>
 			
 			<div id="point_opposes">
-			<%= radio_button_tag("point[value]", -1) %> Nei, þessi rök eru á móti málinu
+			<%= radio_button_tag("point[value]", -1) %> Nei, þessi rök eru á móti hugmyndinni
 			</div>
 			</div>
 			</div>
-		<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður mál eða ekki</div>
+		<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður hugmynd eða ekki</div>
 
 	<div class="field">
 	    <div class="field_label form_header"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
@@ -86,9 +87,8 @@
 		<div class="field_box">
 			<%= text_field_tag "point[website]", "", :size => 50 %>	
 		</div>
-		<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir mál þitt.</div>
+		<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir hugmynd þitt.</div>
 	</div>
 		
-	<%= f.submit t('priorities.new.submit'), :class => "suggest_button" %>	
-
-<% end %>
+	<%= submit_tag t('priorities.new.submit'), :class => "suggest_button" %>	
+</form>

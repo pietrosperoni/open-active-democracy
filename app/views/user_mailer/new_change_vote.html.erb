@@ -1,6 +1,6 @@
 Hæ <%= h(@recipient.real_name) %>,
 
-<%= @sender.name %> lagði til að að "<%= @change.new_priority.name %>" með <% if @change.is_endorsers? %><%= pluralize(@change.new_priority.up_endorsements_count,"stuðningsmann") %><% end %><% if @change.is_endorsers? and @change.is_opposers? %> og <% end %><% if @change.is_opposers? %><%= pluralize(@change.new_priority.down_endorsements_count,"andstæðing") %><% end %> taki yfir <% if @change.is_active? %><% if @change.is_endorsers? %><%= pluralize(@change.priority.up_endorsements_count,"stuðningsmann") %><% end %><% if @change.is_endorsers? and @change.is_opposers? %> og <% end %><% if @change.is_opposers? %><%= pluralize(@change.priority.down_endorsements_count,"andstæðing") %><% end %><% else %><% if @change.is_endorsers? %>stuðningsmönnum<% end %><% if @change.is_endorsers? and @change.is_opposers? %> og <% end %><% if @change.is_opposers? %>andstæðingum <% end %><% end %> frá "<%= h(@change.priority.name) %>"<% if @change.is_flip?%> breyti  <% if @change.is_endorsers? %>stuðningsmönnum í andstæðinga<% end %><% if @change.is_endorsers? and @change.is_opposers? %> og  <% end %><% if @change.is_opposers? %>andstæðingum í stuðningsmenn<% end %><% end %>.
+<%= @sender.name %> lagði til að "<%= @change.new_priority.name %>" með <% if @change.is_endorsers? %><%= pluralize(@change.new_priority.up_endorsements_count,"stuðningsmann") %><% end %><% if @change.is_endorsers? and @change.is_opposers? %> og <% end %><% if @change.is_opposers? %><%= pluralize(@change.new_priority.down_endorsements_count,"andstæðing") %><% end %> taki yfir <% if @change.is_active? %><% if @change.is_endorsers? %><%= pluralize(@change.priority.up_endorsements_count,"stuðningsmann") %><% end %><% if @change.is_endorsers? and @change.is_opposers? %> og <% end %><% if @change.is_opposers? %><%= pluralize(@change.priority.down_endorsements_count,"andstæðing") %><% end %><% else %><% if @change.is_endorsers? %>stuðningsmönnum<% end %><% if @change.is_endorsers? and @change.is_opposers? %> og <% end %><% if @change.is_opposers? %>andstæðingum <% end %><% end %> frá "<%= h(@change.priority.name) %>"<% if @change.is_flip?%> breyti  <% if @change.is_endorsers? %>stuðningsmönnum í andstæðinga<% end %><% if @change.is_endorsers? and @change.is_opposers? %> og  <% end %><% if @change.is_opposers? %>andstæðingum í stuðningsmenn<% end %><% end %>.
 <% if @change.attribute_present?("content") -%>
 
 Þeirra rök eru: <%= @change.content %>
@@ -8,23 +8,27 @@ Hæ <%= h(@recipient.real_name) %>,
 
 Ertu sammála þessu?
 
-JÁ, ég <% if @vote.is_up? -%>styð<% else -%>er á móti<% end -%> nýja málið: "<%= @change.new_priority.name %>."  
-Smelltu hér til að samþykkja: <%= @root_url %>vote/yes/<%= @vote.code %>?utm_source=vote&utm_medium=email
+JÁ, ég <% if @vote.is_up? -%>er meðmæltur<% else -%>er á móti<% end -%> nýju hugmyndinni: "<%= @change.new_priority.name %>."  
+Smelltu hér til að samþykkja samrunann: <%= @root_url %>vote/yes/<%= @vote.code %>?utm_source=vote&utm_medium=email
 
-NEI, ég vil halda áfram að <% if (@vote.is_up? and @change.is_flip?) or (@vote.is_down? and not @change.is_flip?) -%>vera á móti<% else -%>styðja<% end -%>: "<%= @change.priority.name %>."  
-Smelltu hér til að synja: <%= @root_url %>vote/no/<%= @vote.code %>?utm_source=vote&utm_medium=email
+NEI, ég vil halda áfram að <% if (@vote.is_up? and @change.is_flip?) or (@vote.is_down? and not @change.is_flip?) -%>vera á móti<% else -%>meðmæltur<% end -%> upprunalegu hugmyndinni: "<%= @change.priority.name %>."  
+Smelltu hér til að segja nei við samruna þessara hugmynda: <%= @root_url %>vote/no/<%= @vote.code %>?utm_source=vote&utm_medium=email
 
 Ef þú vilt ræða þessa tillögu og sjá stöðuna í kosningunni farðu þá á: 
 <%= @root_url %>vote/maybe/<%= @vote.code %>?utm_source=vote&utm_medium=email
 
-Ef þú kýst ekki innan <%= @change.time_left %>, og ef málið fær amk. 70% atkvæða, þá mun <% if @vote.is_up? -%>þinn stuðningur<% else -%>þín mótstaða<% end -%> vera sameinaður nýja málinu.  
-Ef þessi tillaga fær ekki meira en 70% meirihluta kosningu þá mun <% if @vote.is_up? -%>þinn stuðningur<% else -%>þín mótstaða<% end -%> vera óbreytt(ur). Nánari upplýsingar er að finna á: <%= @root_url %>about/faq#merge
+Þú þarft að kjósa innan <%= @change.time_left %>.
 
-Takk fyrir að taka þátt.
+Ef samrunatillagan fær yfir 70% atkvæða, þá mun <% if @vote.is_up? -%>þinn stuðningur<% else -%>þín andstaða<% end -%> fylgja nýju hugmyndinni.  
+Ef tillagan fær ekki meira en 70%  atkvæða þá mun <% if @vote.is_up? -%>þinn stuðningur<% else -%>þín andstaða<% end -%> ekki breytast. 
+
+Nánari upplýsingar er að finna á: <%= @root_url %>about/faq#merge
+
+Þakka þér fyrir að taka þátt.
 
 <%= @root_url %>?utm_source=vote&utm_medium=email
 
 ----
 Athugasemdir sendist á vefur@skuggathing.is
 Þessi tölvupóstur var sendur til <%= @recipient.email %>.
-Ef þú vilt ekki fá pósta frá Skuggaþingi, farðu þá á: <%= @root_url %>unsubscribes/new
+Ef þú vilt ekki fá pósta frá Skuggaborg, farðu þá á: <%= @root_url %>unsubscribes/new

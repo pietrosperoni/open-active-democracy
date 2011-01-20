@@ -659,7 +659,7 @@ class PrioritiesController < ApplicationController
     tags << params[:custom_checkbox] if params[:custom_checkbox]
     tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
     tags += Partner.current.default_tags.split(",").collect {|t| t.strip} if Partner.current and Partner.current.default_tags
-    tags << "frá almenningi" unless Partner.current
+    tags << "utan flokka" unless Partner.current
     unless tags.empty?
       priority.issue_list = tags.join(",")
     end
@@ -739,11 +739,11 @@ class PrioritiesController < ApplicationController
             @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
           end      
         end
+        raise "rollback" if not @point_saved or not @saved
       end
-      raise "rollback" if not @point_saved or not @saved
     rescue
       RAILS_DEFAULT_LOGGER.info("ROLLBACK ERROR")
-      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á máli og rök"
+      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á hugmynd og rök - texti við rök má ekki vera of langur."
     end
     
     respond_to do |format|
@@ -846,36 +846,41 @@ class PrioritiesController < ApplicationController
     @previous_name = @priority.name
     @page_name = t('priorities.edit.title', :priority_name => @priority.name)
     respond_to do |format|
-      if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
-        # already renamed?
-        @activity = ActivityPriorityRenamed.find_by_user_id_and_priority_id(current_user.id,@priority.id)
-        if @activity
-          @activity.update_attribute(:updated_at,Time.now)
+      if params[:commit]=="Vista hugmynd"
+        if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
+          # already renamed?
+          @activity = ActivityPriorityRenamed.find_by_user_id_and_priority_id(current_user.id,@priority.id)
+          if @activity
+            @activity.update_attribute(:updated_at,Time.now)
+          else
+            @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
+          end
+          format.html { 
+            flash[:notice] = t('priorities.edit.success', :priority_name => @priority.name)
+            redirect_to(@priority)         
+          }
+          format.js {
+            render :update do |page|
+              page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}          
+              page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}                      
+              page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
+              page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
+              page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
+            end
+          }
         else
-          @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
+          format.html { render :action => "edit" }
+          format.js {
+            render :update do |page|
+              page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
+              page.insert_html :top, 'activities', render(:partial => "priorities/new_inline", :locals => {:priority => @priority})
+              page['priority_name'].focus
+            end
+          }
         end
-        format.html { 
-          flash[:notice] = t('priorities.edit.success', :priority_name => @priority.name)
-          redirect_to(@priority)         
-        }
-        format.js {
-          render :update do |page|
-            page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}          
-            page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}                      
-            page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
-            page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
-            page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
-          end
-        }
       else
-        format.html { render :action => "edit" }
-        format.js {
-          render :update do |page|
-            page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
-            page.insert_html :top, 'activities', render(:partial => "priorities/new_inline", :locals => {:priority => @priority})
-            page['priority_name'].focus
-          end
-        }
+        RAILS_DEFAULT_LOGGER.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
+        redirect_to(@priority)
       end
     end
   end

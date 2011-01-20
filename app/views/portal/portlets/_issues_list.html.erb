@@ -1,4 +1,4 @@
-<% cache(["portlets_issues_list",I18n.locale], :expires_in => 5.minutes) do %>
+<% cache(["portlets_issues_list",I18n.locale,Partner.current_id], :expires_in => 5.minutes) do %>
 <% for issue in Tag.most_priorities.item_limit(portlet.portlet_template.item_limit) %>
 	<div class="priority_listing">
 		<span class="priority_name">

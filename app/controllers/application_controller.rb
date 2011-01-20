@@ -66,10 +66,15 @@ class ApplicationController < ActionController::Base
   
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
-    return nil if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'dev'
-    @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
-    Partner.current = @current_partner
-    return @current_partner
+    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'dev'
+      @current_partner = nil
+      Partner.current = @current_partner
+      return nil
+    else
+      @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+      Partner.current = @current_partner
+      return @current_partner
+    end
   end
   
   def current_user_endorsements
@@ -141,7 +146,9 @@ class ApplicationController < ActionController::Base
   def update_loggedin_at
     return unless logged_in?
     return unless current_user.loggedin_at.nil? or Time.now > current_user.loggedin_at+30.minutes
-    User.find(current_user.id).update_attribute(:loggedin_at,Time.now)
+    User.retry_mysql_error do
+      User.find(current_user.id).update_attribute(:loggedin_at,Time.now)
+    end
   end
 
   def check_blast_click
@@ -220,7 +227,7 @@ class ApplicationController < ActionController::Base
     reset_session    
     flash[:error] = t('application.fb_session_expired')
     respond_to do |format|
-      format.html { redirect_to request.referrer||'/' }
+      format.html { redirect_to '/portal/' }
       format.js { redirect_from_facebox(request.referrer||'/') }
     end    
   end

@@ -5,9 +5,9 @@ class PartnersController < ApplicationController
 
   def index
     @page_title = t('partners.new.title', :government_name => current_government.name)
-    if logged_in? and current_user.attribute_present?("partner_id")
-      redirect_to 'http://' + current_user.partner.short_name + '.' + current_government.base_url + edit_partner_path(current_user.partner)
-    end
+#    if logged_in? and current_user.attribute_present?("partner_id")
+#      redirect_to 'http://' + current_user.partner.short_name + '.' + current_government.base_url + edit_partner_path(current_user.partner)
+#    end
     @partner = Partner.new
   end
   
