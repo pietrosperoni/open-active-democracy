@@ -2,6 +2,13 @@
 	display:none;
 }
 
+#disclaimer
+{
+padding-top: 30px;	
+padding-left: 10px;
+padding-right: 10px;
+}
+
 #menu_home 
 {
 	list-style-type: none; 
