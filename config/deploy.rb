@@ -18,6 +18,7 @@ role :db,  domain, :primary => true
 
 task :before_update_code, :roles => [:app] do
   thinking_sphinx.stop
+  bundler.bundle_new_release
 end
 
 task :after_update_code, :roles => [:app] do
@@ -44,10 +45,35 @@ namespace :deploy do
   end
 end
 
+namespace :bundler do
+  task :create_symlink, :roles => :app do
+    shared_dir = File.join(shared_path, 'bundle')
+    release_dir = File.join(current_release, '.bundle')
+    run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
+  end
+  
+  task :bundle_new_release, :roles => :app do
+    bundler.create_symlink
+    run "cd #{release_path} && bundle install --without test"
+  end
+  
+  task :lock, :roles => :app do
+    run "cd #{current_release} && bundle lock;"
+  end
+  
+  task :unlock, :roles => :app do
+    run "cd #{current_release} && bundle unlock;"
+  end
+end
+
 deploy.task :start do
 # nothing
 end
 
+after "deploy:update_code" do
+  bundler.bundle_new_release
+  # ...
+end
 
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
   $: << File.join(vendored_notifier, 'lib')
