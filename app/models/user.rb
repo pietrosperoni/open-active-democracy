@@ -108,9 +108,7 @@ class User < ActiveRecord::Base
   
   has_many :following_discussions, :dependent => :destroy
   has_many :following_discussion_activities, :through => :following_discussions, :source => :activity
-  
-  liquid_methods :first_name, :last_name, :id, :name, :login, :activation_code, :email, :root_url, :profile_url, :unsubscribe_url
-  
+    
   validates_presence_of     :login, :message => I18n.t('users.new.validation.login')
   validates_length_of       :login, :within => 3..40
   validates_uniqueness_of   :login, :case_sensitive => false    
@@ -596,13 +594,13 @@ class User < ActiveRecord::Base
   def remember_me_until(time)
     self.remember_token_expires_at = time
     self.remember_token            = encrypt("#{email}--#{remember_token_expires_at}")
-    save_with_validation(false)
+    save(false)
   end
 
   def forget_me
     self.remember_token_expires_at = nil
     self.remember_token            = nil
-    save_with_validation(false)
+    save(false)
   end
 
   def name
@@ -937,7 +935,7 @@ class User < ActiveRecord::Base
     if twitter_info['profile_image_url']
       u.picture = Picture.create_from_url(twitter_info['profile_image_url'])
     end
-    if u.save_with_validation(false)
+    if u.save(false)
       u.activate!
       return u
     else
@@ -998,7 +996,7 @@ class User < ActiveRecord::Base
       self.picture = Picture.create_from_url(twitter_info['profile_image_url'])
     end
     self.twitter_count = twitter_info['followers_count'].to_i
-    self.save_with_validation(false)
+    self.save(false)
     self.activate! if not self.activated?
   end  
   
@@ -1041,7 +1039,7 @@ class User < ActiveRecord::Base
     if check_existing_facebook.any?
       for e in check_existing_facebook
         e.remove_facebook
-        e.save_with_validation(false)
+        e.save(false)
       end
     end
     if fb_session.user.current_location
@@ -1049,7 +1047,7 @@ class User < ActiveRecord::Base
       self.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any? and not self.attribute_present?("city")
       self.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any? and not self.attribute_present?("state")
     end
-    self.save_with_validation(false)
+    self.save(false)
     check_contacts # looks for any contacts with the facebook uid, and connects them
     return true
   end
@@ -1082,10 +1080,7 @@ class User < ActiveRecord::Base
   end
   
   def self.adapter
-    return @adapter if @adapter
-    config = Rails::Configuration.new
-    @adapter = config.database_configuration[Rails.env]["adapter"]
-    return @adapter
+    return 'mysql'
   end
   
 def do_abusive!(parent_notifications)

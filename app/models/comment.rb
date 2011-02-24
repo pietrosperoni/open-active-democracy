@@ -18,8 +18,6 @@ class Comment < ActiveRecord::Base
   has_many :notifications, :as => :notifiable, :dependent => :destroy
   
   validates_presence_of :content
-  
-  liquid_methods :id, :activity_id, :content, :user, :activity, :show_url
 
   define_index do
     indexes content
@@ -49,7 +47,7 @@ class Comment < ActiveRecord::Base
   def do_publish
     self.activity.changed_at = Time.now
     self.activity.comments_count += 1
-    self.activity.save_with_validation(false)
+    self.activity.save(false)
     self.user.increment!("comments_count")
     for u in activity.followers
       if u.id != self.user_id and not Following.find_by_user_id_and_other_user_id_and_value(u.id,self.user_id,-1)
@@ -88,7 +86,7 @@ class Comment < ActiveRecord::Base
       self.activity.changed_at = self.activity.comments.published.by_recently_created.first.created_at
     end
     self.activity.comments_count -= 1
-    self.save_with_validation(false)    
+    self.save(false)    
 
     self.user.decrement!("comments_count")
     if self.activity.comments_count == 0

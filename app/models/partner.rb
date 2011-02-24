@@ -19,8 +19,6 @@ class Partner < ActiveRecord::Base
   has_many :activities
   has_many :priorities
 
-  liquid_methods :name, :website, :custom_domain
-    
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :passive, :column => :status
   

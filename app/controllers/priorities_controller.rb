@@ -743,7 +743,7 @@ class PrioritiesController < ApplicationController
       end
     rescue
       Rails.logger.info("ROLLBACK ERROR")
-      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á hugmynd og rök - texti við rök má ekki vera of langur."
+      flash[:notice] = I18n.t(:could_not_save_priority)
     end
     
     respond_to do |format|
@@ -890,7 +890,7 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @short_url = @priority.create_short_url
     if @short_url
-      @priority.save_with_validation(false)
+      @priority.save(false)
     end
     respond_to do |format|
       format.js {
@@ -914,7 +914,7 @@ class PrioritiesController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_info_#{@priority.id}", render(:partial => "priorities/flagged", :locals => {:priority => @priority})
           else
-            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>Takk fyrir að vekja athygli okkar á þessu umræðuefni.</div>"
+            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'> #{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
           end
         end        
       }
@@ -928,7 +928,7 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>Þessu umræðuefni hefur verið eytt og viðvörun send.</div>"
+          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
         end        
       }
     end    

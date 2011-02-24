@@ -71,7 +71,7 @@ class Feed < ActiveRecord::Base
       end
       # this generates an error for some unknown reason
       # webpage.published_at = post.pubDate
-      webpage.save_with_validation(false)
+      webpage.save(false)
     end
     self.update_attribute(:crawled_at, Time.now)  
   end

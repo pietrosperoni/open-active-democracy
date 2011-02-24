@@ -50,8 +50,6 @@ class Activity < ActiveRecord::Base
   has_many :followings, :class_name => "FollowingDiscussion", :foreign_key => "activity_id", :dependent => :destroy
   has_many :followers, :through => :followings, :source => :user, :select => "DISTINCT users.*"
   
-  liquid_methods :name, :id, :first_comment, :last_comment
-  
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :active, :column => :status
 

@@ -25,26 +25,24 @@ class Change < ActiveRecord::Base
   has_many :votes, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :notifications, :as => :notifiable, :dependent => :destroy
-  
-  liquid_methods :show_url, :priority_name, :new_priority_name
-  
+    
   def validate
     if user.capitals_count < calculate_cost
-      errors.add(:base, "Þá átt ekki nógu marga " + Government.current.currency_name.downcase + " til að leggja til yfirtöku.")
+      errors.add(:base, I18n.t(:you_dont_have_enough_captial_to_suggest_a_takeover))
     end
     if new_priority == priority
-      errors.add(:base, "Þú getur ekki lagt til yfirtöku á sama hugmynd.")
+      errors.add(:base, I18n.t(:you_cant_suggest_a_take_over_of_the_same_priority))
     end
     if not is_endorsers and not is_opposers
-      errors.add(:base, "Þú verður að velja að minnsta kosti annað hvort stuðningsmenn eða anstæðinga fyrir þessa yfirtöku.")
+      errors.add(:base, I18n.t(:you_must_select_either_supporters_or_opposers))
     end
     if priority.has_change?
-      errors.add(:base, "Þessi hugmynd er þegar með yfirtöku í gangi, vinsamlegast bíddu eftir að kosning um hana klárist.")
+      errors.add(:base, I18n.t(:this_priority_already_has_a_take_over_in_progress))
     end
   end
   
   validates_presence_of :priority, :user
-  validates_presence_of :new_priority, :message => "fannst ekki.  Vertu viss um að þú hafir slegið rétt inn."
+  validates_presence_of :new_priority, :message => I18n.t(:could_not_find_make_sure_you_entered_it_correctly)
   validates_length_of :content, :maximum => 500, :allow_nil => true, :allow_blank => true  
   
   acts_as_list
@@ -130,7 +128,7 @@ class Change < ActiveRecord::Base
         @comment.is_endorser = true if e and e.is_up?
         @comment.is_opposer = true if e and e.is_down?
       end
-      @comment.save_with_validation(false)
+      @comment.save(false)
     end
   end  
   
@@ -161,11 +159,11 @@ class Change < ActiveRecord::Base
     hours = (minutes/60).round
     minutes_left = minutes - (hours*60)
     if hours < 1
-      return minutes_left.to_s + " mín."
+      return minutes_left.to_s + " #{I18n.t(:minutes_short)}."
     elsif hours == 1
-      return hours.to_s + " klst " + minutes_left.to_s + " mín."      
+      return hours.to_s + " #{I18n.t(:hours_short)} " + minutes_left.to_s + " #{I18n.t(:minutes_short)}."      
     else
-      return hours.to_s + " klst " + minutes_left.to_s + " mín."
+      return hours.to_s + " #{I18n.t(:hours_short)} " + minutes_left.to_s + " #{I18n.t(:minutes_short)}."
     end
   end
   
@@ -195,7 +193,7 @@ class Change < ActiveRecord::Base
         else
           v.value = 1
         end
-        v.save_with_validation(false)
+        v.save(false)
         ballots += 1
       end
     end
@@ -207,7 +205,7 @@ class Change < ActiveRecord::Base
         else
           v.value = -1
         end
-        v.save_with_validation(false)
+        v.save(false)
         ballots += 1
       end
     end

@@ -92,7 +92,7 @@ class Government < ActiveRecord::Base
     User.connection.execute("update users set branch_id = #{default_branch_id} where is_branch_chosen = false;")
     for branch in Branch.all
       branch.update_counts
-      branch.save_with_validation(false)
+      branch.save(false)
     end
     Branch.expire_cache  
   end
@@ -119,7 +119,7 @@ class Government < ActiveRecord::Base
     self.documents_count = Document.published.count
     self.contributors_count = User.active.at_least_one_endorsement.contributed.count
     self.official_user_priorities_count = official_user.endorsements_count if has_official?
-    save_with_validation(false)
+    self.save(false)
   end  
   
   def has_official?

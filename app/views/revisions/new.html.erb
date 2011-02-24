@@ -5,9 +5,9 @@
 		
 		<td valign="top">
 			<p>
-			<%= blurb("point_revision_new")%>
+			<%= I18n.t("blurb_point_revision_new")%>
 			<p>
-			<% form_for :revision, :url => point_revisions_path(@point)  do |f| %>
+			<%= form_for :revision, :url => point_revisions_path(@point)  do |f| %>
 			  <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 			<p>
 		    <%= t('points.new.name.label')%><br />

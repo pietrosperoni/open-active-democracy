@@ -114,7 +114,7 @@ class Point < ActiveRecord::Base
   def do_publish
     self.published_at = Time.now
     add_counts
-    priority.save_with_validation(false)    
+    priority.save(false)    
   end
   
   def do_delete
@@ -126,7 +126,7 @@ class Point < ActiveRecord::Base
     if capital_earned != 0
       self.capitals << CapitalPointHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1)) 
     end    
-    priority.save_with_validation(false)
+    priority.save(false)
     for r in revisions
       r.delete!
     end
@@ -134,7 +134,7 @@ class Point < ActiveRecord::Base
   
   def do_bury
     remove_counts
-    priority.save_with_validation(false)    
+    priority.save(false)    
   end
   
   def add_counts
@@ -162,7 +162,7 @@ class Point < ActiveRecord::Base
 
   def name_with_type
     return name unless is_down?
-    "[á móti] " + name
+    "[#{I18n.t(:against)}] " + name
   end
 
   def text
@@ -268,7 +268,7 @@ class Point < ActiveRecord::Base
     end    
 
     if old_score != self.score and tosave
-      self.save_with_validation(false)
+      self.save(false)
     end    
   end
   

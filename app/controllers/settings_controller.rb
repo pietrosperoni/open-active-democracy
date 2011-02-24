@@ -103,7 +103,7 @@ class SettingsController < ApplicationController
     end
     @user.branch = @branch
     @user.is_branch_chosen = true
-    @user.save_with_validation(false)
+    @user.save(false)
     Branch.expire_cache
     flash[:notice] = t('settings.branch_change.success', :branch_name => @branch.name)
     respond_to do |format|

@@ -20,7 +20,7 @@
 <body>
 
 
-<%= blurb("header") %>
+<%= I18n.t("blurb_header") %>
 
 <div id="backgroundwrap">
 	<div id="header">
@@ -95,7 +95,7 @@
 
 		<% else %>
 
-		<div id="intro"><%= blurb("intro") %></div>
+		<div id="intro"><%= I18n.t("blurb_intro") %></div>
 		<% if current_government.short_name == 'wh2' %>
 		<%= render :partial => "shared/buzz" %>
 		<% end %>

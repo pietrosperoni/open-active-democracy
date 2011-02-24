@@ -43,7 +43,7 @@
 			<p>
 		<% end %>
 		<div style="padding: 0px 10px 10px 10px;">
-			<%= blurb("sorting_instruct")%>
+			<%= I18n.t("blurb_sorting_instruct")%>
 		</div>
 	<% end %>
 
@@ -56,7 +56,7 @@
 	<% if current_user.endorsements_count > 4 %>
 
 		<div style="padding: 0px 0px 10px 20px;">
-			<%= blurb("sorting_instruct_adv")%>
+			<%= I18n.t("blurb_sorting_instruct_adv")%>
 		</div>
 	
 	<% end %>

@@ -1,6 +1,6 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= blurb("legislators_intro")%>
+<%= I18n.t("blurb_legislators_intro")%>
 <p>
 <% form_remote_for(:user, :url => {:action => "legislators_save" }) do |f| %>
 	<%= f.error_messages %>

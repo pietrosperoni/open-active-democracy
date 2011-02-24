@@ -22,7 +22,7 @@ class PointQuality < ActiveRecord::Base
       point.neutral_helpful_count += 1 if is_neutral?      
       point.opposer_helpful_count += 1 if is_opposer?
       point.calculate_score
-      point.save_with_validation(false)
+      point.save(false)
       ActivityPointHelpful.create(:point => point, :user => user, :priority => point.priority)      
     end
     if not self.is_helpful?
@@ -31,7 +31,7 @@ class PointQuality < ActiveRecord::Base
       point.neutral_unhelpful_count += 1 if is_neutral?      
       point.opposer_unhelpful_count += 1 if is_opposer?
       point.calculate_score
-      point.save_with_validation(false)
+      point.save(false)
       ActivityPointUnhelpful.create(:point => point, :user => user, :priority => point.priority)
     end
     user.increment!(:qualities_count)
@@ -44,7 +44,7 @@ class PointQuality < ActiveRecord::Base
       point.neutral_helpful_count -= 1 if is_neutral?      
       point.opposer_helpful_count -= 1 if is_opposer?
       point.send_later(:calculate_score, true)
-      point.save_with_validation(false)
+      point.save(false)
       ActivityPointHelpfulDelete.create(:point => point, :user => user, :priority => point.priority)        
     end
     if not self.is_helpful?
@@ -53,7 +53,7 @@ class PointQuality < ActiveRecord::Base
       point.neutral_unhelpful_count -= 1 if is_neutral?      
       point.opposer_unhelpful_count -= 1 if is_opposer?
       point.send_later(:calculate_score, true)
-      point.save_with_validation(false)
+      point.save(false)
       ActivityPointUnhelpfulDelete.create(:point => point, :user => user, :priority => point.priority)      
     end
     user.decrement!(:qualities_count)    

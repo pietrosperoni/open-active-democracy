@@ -38,7 +38,7 @@ module Rails
           )
         end
 
-        lines = grep_for("scope", "app/models/")
+        lines = grep_for("named_scope", "app/models/")
         files = extract_filenames(lines)
 
         if files
@@ -152,7 +152,7 @@ module Rails
       # Check for deprecated constants
       def check_deprecated_constants
         files = []
-        ["Rails.env", "RAILS_ROOT", "Rails.logger"].each do |v|
+        ["RAILS_ENV", "RAILS_ROOT", "RAILS_DEFAULT_LOGGER"].each do |v|
           lines = grep_for(v, "app/")
           files += extract_filenames(lines) || []
 

@@ -16,9 +16,7 @@ class Message < ActiveRecord::Base
   has_many :notifications, :as => :notifiable, :dependent => :destroy  
   
   validates_presence_of :content
-  
-  liquid_methods :content, :created_at
-  
+    
   acts_as_state_machine :initial => :draft, :column => :status
   
   state :draft

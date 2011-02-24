@@ -40,7 +40,7 @@ class Priority < ActiveRecord::Base
   scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
   scope :item_limit, lambda{|limit| {:limit=>limit}} 
   
-scope :alphabetical, :order => "priorities.name asc"
+  scope :alphabetical, :order => "priorities.name asc"
   scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
   scope :tagged, :conditions => "(priorities.cached_issue_list is not null and priorities.cached_issue_list <> '')"
   scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
@@ -87,7 +87,6 @@ scope :alphabetical, :order => "priorities.name asc"
   
   acts_as_taggable_on :issues
   acts_as_list
-  acts_as_solr :fields => [ :name, :cached_issue_list, :is_published ]
   
   define_index do
     indexes name
@@ -202,7 +201,7 @@ scope :alphabetical, :order => "priorities.name asc"
   end
   
   def is_buried?
-    status == 'grafið undir'
+    status == I18n.t(:buried)
   end
   
   def is_top?
@@ -254,15 +253,15 @@ scope :alphabetical, :order => "priorities.name asc"
   
   def value_name 
     if is_failed?
-      'fellt'
+      I18n.t(:priority_failed)
     elsif is_successful?
-      'tókst'
+      I18n.t(:priority_succesful)
     elsif is_compromised?
-      'tókst með málamiðlun'
+      I18n.t(:priority_succesful_with_compromises)
     elsif is_intheworks?
-      'er í vinnslu'
+      I18n.t(:priority_in_the_works)
     else
-      'hefur ekki verið afgreitt'
+      I18n.t(:priority_has_not_been_processed)
     end
   end
   
@@ -272,7 +271,7 @@ scope :alphabetical, :order => "priorities.name asc"
     self.obama_status = -2
     self.status = 'inactive'
     self.change = nil
-    self.save_with_validation(false)
+    self.save(false)
     deactivate_endorsements  
   end
   
@@ -282,7 +281,7 @@ scope :alphabetical, :order => "priorities.name asc"
     self.obama_status = 2
     self.status = 'inactive'
     self.change = nil    
-    self.save_with_validation(false)
+    self.save(false)
     deactivate_endorsements
   end  
   
@@ -292,7 +291,7 @@ scope :alphabetical, :order => "priorities.name asc"
     self.obama_status = -1
     self.status = 'inactive'
     self.change = nil    
-    self.save_with_validation(false)
+    self.save(false)
     deactivate_endorsements
   end  
   
@@ -307,7 +306,7 @@ scope :alphabetical, :order => "priorities.name asc"
     self.change = nil
     self.status_changed_at = Time.now
     self.obama_status = 0
-    self.save_with_validation(false)
+    self.save(false)
     for e in endorsements.active_and_inactive
       e.update_attribute(:status,'active')
       row = 0
@@ -427,7 +426,7 @@ scope :alphabetical, :order => "priorities.name asc"
             e.value = -1
           end
         end   
-        e.save_with_validation(false)     
+        e.save(false)     
       end
     end
     p2.reload
@@ -447,11 +446,11 @@ scope :alphabetical, :order => "priorities.name asc"
           if c.is_opposer?
             c.is_opposer = false
             c.is_endorser = true
-            c.save_with_validation(false)
+            c.save(false)
           elsif c.is_endorser?
             c.is_opposer = true
             c.is_endorser = false
-            c.save_with_validation(false)            
+            c.save(false)            
           end
         end
         if a.class == ActivityEndorsementNew
@@ -504,7 +503,7 @@ scope :alphabetical, :order => "priorities.name asc"
         point.opposer_helpful_count = helpful
         point.opposer_unhelpful_count = unhelpful        
       end      
-      point.save_with_validation(false)      
+      point.save(false)      
     end
     for document in documents
       document.priority = p2
@@ -522,7 +521,7 @@ scope :alphabetical, :order => "priorities.name asc"
         document.opposer_helpful_count = helpful
         document.opposer_unhelpful_count = unhelpful        
       end      
-      document.save_with_validation(false)      
+      document.save(false)      
     end
     for point in incoming_points
       if flip == 1
@@ -532,7 +531,7 @@ scope :alphabetical, :order => "priorities.name asc"
       else
         point.other_priority = p2
       end
-      point.save_with_validation(false)
+      point.save(false)
     end
     if not preserve # set preserve to true if you want to leave the Change and the original priority in tact, otherwise they will be deleted
       for c in changes_with_deleted

@@ -5,19 +5,19 @@ class TagChanges < ActiveRecord::Migration
     add_index :tags, :slug
     for t in Tag.all
       t.name = t.name.titleize
-      t.save_with_validation(false)
+      t.save(false)
     end
     for p in Priority.all
       p.issue_list = p.issues.collect {|i|i.name}.join(', ')
-      p.save_with_validation(false)
+      p.save(false)
     end
     for p in Feed.all
       p.issue_list = p.issues.collect {|i|i.name}.join(', ')
-      p.save_with_validation(false)
+      p.save(false)
     end
     for p in Webpage.all
       p.issue_list = p.issues.collect {|i|i.name}.join(', ')
-      p.save_with_validation(false)
+      p.save(false)
     end    
   end
 

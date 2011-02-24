@@ -33,8 +33,6 @@ class ApplicationController < ActionController::Base
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
 
-  filter_parameter_logging :password, :password_confirmation
-
   layout :get_layout
 
   # See ActionController::RequestForgeryProtection for details
@@ -147,8 +145,9 @@ class ApplicationController < ActionController::Base
   def update_loggedin_at
     return unless logged_in?
     return unless current_user.loggedin_at.nil? or Time.now > current_user.loggedin_at+30.minutes
-    User.retry_mysql_error do
+    begin
       User.find(current_user.id).update_attribute(:loggedin_at,Time.now)
+    rescue
     end
   end
 

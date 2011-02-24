@@ -34,8 +34,6 @@ class Endorsement < ActiveRecord::Base
   @@per_page = 25
   @@max_position = 100
   
-  liquid_methods :value, :value_name, :id, :user, :priority  
-  
   # docs: http://noobonrails.blogspot.com/2007/02/actsaslist-makes-lists-drop-dead-easy.html
   acts_as_list :scope => 'endorsements.user_id = #{user_id} AND status = \'active\''
   
@@ -88,7 +86,7 @@ class Endorsement < ActiveRecord::Base
     if self.position == 1
       if self.id != user.top_endorsement_id
         user.top_endorsement = self
-        user.save_with_validation(false)
+        user.save(false)
         if self.is_up?
           ActivityPriority1.find_or_create_by_user_id_and_priority_id(user.id, self.priority_id)
         elsif self.is_down?
@@ -98,7 +96,7 @@ class Endorsement < ActiveRecord::Base
     elsif user.top_endorsement_id.nil?
       e = user.endorsements.active.by_position.find(:all, :conditions => "position > 0", :limit => 1)[0]
       user.top_endorsement = e
-      user.save_with_validation(false)
+      user.save(false)
       if e
         if e.is_up?
           ActivityPriority1.find_or_create_by_user_id_and_priority_id(user.id, e.priority_id)
@@ -211,8 +209,8 @@ class Endorsement < ActiveRecord::Base
   end
 
   def value_name
-    return 'studdir' if is_up?
-    return 'varst á móti' if is_down?
+    return I18n.t(:you_supported) if is_up?
+    return I18n.t(:you_were_against) if is_down?
   end
 
   def flip_up
@@ -276,7 +274,7 @@ class Endorsement < ActiveRecord::Base
     else
       user.down_endorsements_count += -1
     end  
-    user.save_with_validation(false)
+    user.save(false)
     # if this government has branches, need to update the branch endorsement    
     if Government.current.is_branches? and user.has_branch?
       be = priority.branch_endorsements.find_by_branch_id(user.branch_id)
@@ -287,7 +285,7 @@ class Endorsement < ActiveRecord::Base
         else
           be.down_endorsements_count += -1
         end
-        be.save_with_validation(false)    
+        be.save(false)    
       end
     end
     if user.qualities_count > 0 and priority.points_count > 0
@@ -314,7 +312,7 @@ class Endorsement < ActiveRecord::Base
     else
       user.down_endorsements_count += 1
     end  
-    user.save_with_validation(false) 
+    user.save(false) 
     # if this government has branches, need to update the branch endorsement
     if Government.current.is_branches? and user.has_branch?
       be = priority.branch_endorsements.find_or_create_by_branch_id(user.branch_id)
@@ -325,7 +323,7 @@ class Endorsement < ActiveRecord::Base
         else
           be.down_endorsements_count += 1
         end
-        be.save_with_validation(false)
+        be.save(false)
         # this is the first endorsement in this branch, move it to the bottom of the list
         be.move_to_bottom if be.endorsements_count == 1
       end

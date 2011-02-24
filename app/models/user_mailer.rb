@@ -19,8 +19,8 @@ class UserMailer < ActionMailer::Base
     headers        "Reply-to" => Government.current.admin_email
     @sent_on     = Time.now
     @content_type = "text/plain"      
-    @subject = EmailTemplate.fetch_subject_liquid("welcome").render({'government' => Government.current, 'user' => user, 'partner' => Partner.current}, :filters => [LiquidFilters])
-    @body = EmailTemplate.fetch_liquid("welcome").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
+    @subject = "WELCOME DRAFT" #EmailTemplate.fetch_subject_liquid("welcome").render({'government' => Government.current, 'user' => user, 'partner' => Partner.current}, :filters => [LiquidFilters])
+    @body = "DRAFT" #EmailTemplate.fetch_liquid("welcome").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
   end
   
   def invitation(user,sender_name,to_name,to_email)
@@ -31,14 +31,14 @@ class UserMailer < ActionMailer::Base
     headers        "Reply-to" => Government.current.admin_email
     @sent_on = Time.now
     @content_type = "text/plain"      
-    @subject = EmailTemplate.fetch_subject_liquid("invitation").render({'government' => Government.current, 'user' => user, 'sender_name' => sender_name, 'to_name' => to_name, 'to_email' => to_email}, :filters => [LiquidFilters])    
-    @body = EmailTemplate.fetch_liquid("invitation").render({'government' => Government.current, 'user' => user, 'sender_name' => sender_name, 'to_name' => to_name, 'to_email' => to_email}, :filters => [LiquidFilters])    
+    @subject = "INVITATION DRAFT" #EmailTemplate.fetch_subject_liquid("invitation").render({'government' => Government.current, 'user' => user, 'sender_name' => sender_name, 'to_name' => to_name, 'to_email' => to_email}, :filters => [LiquidFilters])    
+    @body = "DRAFT" #EmailTemplate.fetch_liquid("invitation").render({'government' => Government.current, 'user' => user, 'sender_name' => sender_name, 'to_name' => to_name, 'to_email' => to_email}, :filters => [LiquidFilters])    
   end  
 
   def new_password(user,new_password) 
     setup_notification(user) 
-    @subject = EmailTemplate.fetch_subject_liquid("new_password").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
-    @body = EmailTemplate.fetch_liquid("new_password").render({'government' => Government.current, 'user' => user, 'new_password' => new_password}, :filters => [LiquidFilters])
+    @subject = "" #EmailTemplate.fetch_subject_liquid("new_password").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
+    @body = "" #EmailTemplate.fetch_liquid("new_password").render({'government' => Government.current, 'user' => user, 'new_password' => new_password}, :filters => [LiquidFilters])
   end  
   
   def notification(n,sender,recipient,notifiable)
@@ -50,7 +50,7 @@ class UserMailer < ActionMailer::Base
     Rails.logger.info("Notification class: #{@n}")
     @notifiable = notifiable
     if @n.include?("notification_warning")
-      @subject = "Viðvörun frá vidraedur.is"
+      @subject = I18n.t(:email_subject_warning_from_website)
     elsif @n.include?("notification_comment_flagged") 
       @subject = @notification.name
     end
@@ -67,7 +67,7 @@ class UserMailer < ActionMailer::Base
     @questions = questions
     @documents = documents
     @treaty_documents = treaty_documents
-    @subject = "Skýrsla frá vidraedur.is"
+    @subject = I18n.t(:email_subject_report_from_website)
   end
   
   protected

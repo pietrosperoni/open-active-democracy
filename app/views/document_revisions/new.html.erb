@@ -12,7 +12,7 @@
 				<%= t('document.revision.new.intro.oppose', :priority_name => link_to(@priority.name,@priority), :new_document_url => new_priority_document_path(@priority)) %>
 				<p>
 			<% end %>
-			<% form_for :revision, :url => document_revisions_path(@document)  do |f| %>
+			<%= form_for :revision, :url => document_revisions_path(@document)  do |f| %>
 		    <%= f.error_messages %>
 			<p>
 		    <%= t('document.revision.new.name.label') %><br />

@@ -559,7 +559,7 @@ class UsersController < ApplicationController
     redirect_to '/' and return
     @user = User.find(params[:id])
     @user.is_admin = true
-    @user.save_with_validation(false)
+    @user.save(false)
     flash[:notice] = t('users.make_admin', :user_name => @user.name)
     redirect_to @user
   end

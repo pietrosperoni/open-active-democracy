@@ -13,8 +13,6 @@ class Revision < ActiveRecord::Base
   # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
   validates_length_of :content, :maximum => 516, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
   
-  liquid_methods :id, :user, :url, :text
-  
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :draft, :column => :status
   
@@ -103,7 +101,7 @@ class Revision < ActiveRecord::Base
     point.author_sentence = point.user.login
     point.author_sentence += ", breytingar " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
     point.published_at = Time.now
-    point.save_with_validation(false)
+    point.save(false)
     user.increment!(:point_revisions_count)    
   end
   
@@ -150,11 +148,11 @@ class Revision < ActiveRecord::Base
   
   def text
     s = point.name
-    s += " [á móti]" if is_down?
-    s += " [hlutlaust]" if is_neutral?    
-    s += "\r\nTil stuðnings " + point.other_priority.name if point.has_other_priority?
+    s += " [#{I18n.t(:in_support)}]" if is_down?
+    s += " [#{I18n.t(:neutral)}]" if is_neutral?    
+    s += "\r\n#{I18n.t(:in_support_of)} " + point.other_priority.name if point.has_other_priority?
     s += "\r\n" + content
-    s += "\r\nUppruni: " + website_link if has_website?
+    s += "\r\n#{I18n.t(:originated_at)}: " + website_link if has_website?
     return s
   end  
   
@@ -190,7 +188,7 @@ class Revision < ActiveRecord::Base
     r.content_diff = p.content
     r.website = p.website    
     r.request = request
-    r.save_with_validation(false)
+    r.save(false)
     r.publish!
   end
   

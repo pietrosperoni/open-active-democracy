@@ -75,11 +75,11 @@ class ProcessSpeechVideo < ActiveRecord::Base
     time = (time - minutes) / 60
     hours      =  time % 24
     if hours > 0
-      "#{hours} kl #{minutes} mín #{seconds} sek"
+      "#{hours} #{I18n.t(:hours_short)} #{minutes} #{I18n.t(:minutes_short)} #{seconds} #{I18n.t(:seconds_short)}"
     elsif minutes > 0
-      "#{minutes} mín #{seconds} sek"
+      "#{minutes} #{I18n.t(:minutes_short)} #{seconds} #{I18n.t(:seconds_short)}"
     else
-      "#{seconds} sek"
+      "#{seconds} #{I18n.t(:seconds_short)}"
     end
   end
   

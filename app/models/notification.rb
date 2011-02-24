@@ -21,8 +21,6 @@ class Notification < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 30
   
-  liquid_methods :name, :sender, :recipient, :sender_name, :recipient_name, :id
-
   acts_as_state_machine :initial => :unsent, :column => :status
   
   state :unsent, :enter => :queue_sending

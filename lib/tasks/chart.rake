@@ -47,7 +47,7 @@ namespace :chart do
       if previous
         chart.change = previous.position-chart.position
         chart.change_percent = (chart.change.to_f/previous.position.to_f)
-        chart.save_with_validation(false)
+        chart.save(false)
       end
       previous = chart
     end

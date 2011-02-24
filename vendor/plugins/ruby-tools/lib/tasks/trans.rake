@@ -18,8 +18,9 @@ namespace :trans do
        next if f == 'api_key'
        puts "Processing file #{f}"
        puts "... uploading #{config[f]['path']}"
+       puts "/upload_master/#{api_key}/#{f}"
        upload_file('99translations.com', "/upload_master/#{api_key}/#{f}", File.join(Rails.root, config[f]['path']))
-     end  
+     end
       
    end
    

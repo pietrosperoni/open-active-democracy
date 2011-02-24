@@ -34,8 +34,6 @@ class DocumentRevision < ActiveRecord::Base
     transitions :from => :deleted, :to => :archived 
   end
   
-  liquid_methods :text, :id, :url, :user
-  
   before_save :update_word_count
   
   before_save :truncate_user_agent
@@ -93,7 +91,7 @@ class DocumentRevision < ActiveRecord::Base
     document.author_sentence = document.user.login
     document.author_sentence += ", breytingar " + document.editors.collect{|a| a[0].login}.to_sentence if document.editors.size > 0
     document.published_at = Time.now
-    document.save_with_validation(false)
+    document.save(false)
     user.increment!(:document_revisions_count)
   end
   
@@ -132,8 +130,8 @@ class DocumentRevision < ActiveRecord::Base
 
   def text
     s = document.name
-    s += " [á móti]" if is_down?
-    s += " [hlutlaust]" if is_neutral? and has_priority?
+    s += " [#{I18n.t(:against)}]" if is_down?
+    s += " [#{I18n.t(:neutral)}]" if is_neutral? and has_priority?
     s += "\r\n" + content
     return s
   end  
@@ -157,7 +155,7 @@ class DocumentRevision < ActiveRecord::Base
     r.content = p.content
     r.content_diff = p.content
     r.request = request
-    r.save_with_validation(false)
+    r.save(false)
     r.publish!
   end
   
