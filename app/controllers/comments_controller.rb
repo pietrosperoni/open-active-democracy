@@ -47,13 +47,17 @@ class CommentsController < ApplicationController
   
   #GET /activities/1/comments/more
   def more
-    @comments = @activity.comments.published.by_first_created
+    @comments = @activity.comments.published_and_abusive.by_first_created
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html 'activity_' + @activity.id.to_s + '_comments', render(:partial => "comments/show_all")
-          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+          update_div_name = 'activity_' + @activity.id.to_s + '_comments'
+          if @activity.priority_id
+            page.replace_html update_div_name, render(:partial => "comments/show_all")
+            page.insert_html :bottom, update_div_name, render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
+          end
           page << "jQuery('#comment_content_#{@activity.id.to_s}').autoResize({extraSpace : 20});"
+          page << "FB.XFBML.parse(document.getElementById('#{update_div_name}'));"
         end
       }
     end
@@ -79,7 +83,7 @@ class CommentsController < ApplicationController
       format.html # new.html.erb
       format.js {
         render :update do |page|
-          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => @comment, :activity => @activity})
+          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline_small", :locals => {:comment => @comment, :activity => @activity})
           page.remove 'comment_link_' + @activity.id.to_s
           page << render(:partial => "shared/javascripts_reloadable")
           page['comment_content_' + @activity.id.to_s].focus    
@@ -153,7 +157,7 @@ class CommentsController < ApplicationController
           if current_user.is_admin?
             page.insert_html :after, 'comment_' + @comment.id.to_s, render(:partial => "comments/flagged", :locals => {:comment => @comment})
           else
-            page.insert_html :top, 'comment_content_' + @comment.id.to_s, "<div class='red'>Thanks for flagging this comment for review.</div>"
+            page.insert_html :top, 'comment_content_' + @comment.id.to_s, "<div class='red'>t(:thanks_for_flagging_comment)</div>"
           end
         end        
       }

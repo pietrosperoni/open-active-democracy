@@ -1,6 +1,44 @@
 # Methods added to this helper will be available to all templates in the application.
+
+module ActionView
+  module Helpers
+    module TextHelper
+      def simple_format_with_strip(text)
+        simple_format_without_strip(sanitize(text))
+      end
+      alias_method_chain :simple_format, :strip
+    end
+  end
+end
+
 module ApplicationHelper
   include WillPaginate::ViewHelpers 
+
+  def translate_facet_option(option)
+    if option=="Comment"
+      "Athugasemdir"
+    elsif option=="Question"
+      "Spurningar og Svör"
+    elsif option=="Priority"
+      "Umræðuefni"
+    elsif option=="Document"
+      "Erindi"
+    else
+      option
+    end
+  end
+  
+  def make_quoted(tag_name)
+    "'#{tag_name}'"
+  end
+
+  def subscribed_to_tag?(user_id,tag_id)
+    if TagSubscription.find(:first, :conditions=>["user_id = ? AND tag_id = ?",user_id,tag_id])
+      true
+    else
+      false
+    end
+  end
 
   def time_ago(time, options = {})
     if true or request.xhr?
@@ -29,43 +67,45 @@ module ApplicationHelper
   def notifications_sentence(notifications)
     return "" if notifications.empty?
     r = []
-		for u in notifications
-		  if u[0] == 'NotificationWarning1'
-		    r << link_to(t('notification.warning1.link'), :controller => "inbox", :action => "notifications")
-  		elsif u[0] == 'NotificationWarning2'
-  		  r << link_to(t('notification.warning2.link'), :controller => "inbox", :action => "notifications")
-    	elsif u[0] == 'NotificationWarning3'
-    		r << link_to(t('notification.warning3.link'), :controller => "inbox", :action => "notifications")  		    		    
-			elsif u[0] == 'NotificationMessage' 
-				r << t('notification.message.link',:count => u[1], :sentence =>   messages_sentence(current_user.received_notifications.messages.unread.count(:group => [:sender], :order => "count_all desc")))
-			elsif u[0] == 'NotificationCommentFlagged'
-			  r << link_to(t('notification.comment.flagged.link', :count => u[1]), :controller => "inbox", :action => "notifications")
-			elsif u[0] == 'NotificationPriorityFlagged'
-			  r << link_to(t('notification.priority.flagged.link', :count => u[1]), :controller => "inbox", :action => "notifications")			  
-			elsif u[0] == 'NotificationComment' 
-				r << link_to(t('notification.comment.new.link', :count => u[1]), :controller => "news", :action => "your_discussions") 
-			elsif u[0] == 'NotificationProfileBulletin'
-			  r << link_to(t('notification.profile.bulletin.link', :count => u[1]), current_user)
-			elsif u[0] == 'NotificationFollower' 
-				r << link_to(t('notification.follower.link', :count => u[1]), :controller => "inbox", :action => "notifications") 			
-			elsif u[0] == 'NotificationInvitationAccepted' 
-				r << link_to(t('notification.invitation.accepted.link', :count => u[1]), :controller => "inbox", :action => "notifications")
-			elsif u[0] == 'NotificationContactJoined' 
-				r << link_to(t('notification.contact.joined.link', :count => u[1]), :controller => "inbox", :action => "notifications")
-			elsif u[0] == 'NotificationDocumentRevision' 
-				r << link_to(t('notification.document.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
-			elsif u[0] == 'NotificationPointRevision' 
-				r << link_to(t('notification.point.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
-			elsif u[0] == 'NotificationPriorityFinished' 
-				r << link_to(t('notification.priority.finished.link', :count => u[1]), yours_finished_priorities_url)
-			elsif u[0] == 'NotificationChangeVote' 
-				r << link_to(t('notification.change.vote.link', :count => u[1]), :controller => "news", :action => "changes_voting")
-			elsif u[0] == 'NotificationChangeProposed' 
-				r << link_to(t('notification.change.proposed.link', :count => u[1]), :controller => "news", :action => "changes_voting")
-			end 
-		end     
-	  return "" if r.empty?
-		t('notification.sentence', :sentence => r.to_sentence)
+    for u in notifications
+      if u[0] == 'NotificationWarning1'
+        r << link_to(t('notification.warning1.link'), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationWarning2'
+        r << link_to(t('notification.warning2.link'), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationWarning3'
+        r << link_to(t('notification.warning3.link'), :controller => "inbox", :action => "notifications")                 
+      elsif u[0] == 'NotificationWarning4'
+        r << link_to(t('notification.warning3.link'), :controller => "inbox", :action => "notifications")                 
+      elsif u[0] == 'NotificationMessage' 
+        r << t('notification.message.link',:count => u[1], :sentence =>   messages_sentence(current_user.received_notifications.messages.unread.count(:group => [:sender], :order => "count_all desc")))
+      elsif u[0] == 'NotificationCommentFlagged'
+        r << link_to(t('notification.comment.flagged.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationPriorityFlagged'
+        r << link_to(t('notification.priority.flagged.link', :count => u[1]), :controller => "inbox", :action => "notifications")       
+      elsif u[0] == 'NotificationComment' 
+        r << link_to(t('notification.comment.new.link', :count => u[1]), :controller => "news", :action => "your_discussions") 
+      elsif u[0] == 'NotificationProfileBulletin'
+        r << link_to(t('notification.profile.bulletin.link', :count => u[1]), current_user)
+      elsif u[0] == 'NotificationFollower' 
+        r << link_to(t('notification.follower.link', :count => u[1]), :controller => "inbox", :action => "notifications")       
+      elsif u[0] == 'NotificationInvitationAccepted' 
+        r << link_to(t('notification.invitation.accepted.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationContactJoined' 
+        r << link_to(t('notification.contact.joined.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationDocumentRevision' 
+        r << link_to(t('notification.document.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationPointRevision' 
+        r << link_to(t('notification.point.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationPriorityFinished' 
+        r << link_to(t('notification.priority.finished.link', :count => u[1]), yours_finished_priorities_url)
+      elsif u[0] == 'NotificationChangeVote' 
+        r << link_to(t('notification.change.vote.link', :count => u[1]), :controller => "news", :action => "changes_voting")
+      elsif u[0] == 'NotificationChangeProposed' 
+        r << link_to(t('notification.change.proposed.link', :count => u[1]), :controller => "news", :action => "changes_voting")
+      end 
+    end     
+    return "" if r.empty?
+    t('notification.sentence', :sentence => r.to_sentence)
   end
   
   def messages_sentence(messages)

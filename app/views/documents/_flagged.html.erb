@@ -1,0 +1,12 @@
+<% if document.flags_count > 0 and document.status == 'published' and logged_in? and current_user.is_admin? %>
+	<div class="warning_inline" id="document_flag_<%= document.id.to_s %>">
+		<span class="red"><%= t('comments.flag.number', :count => document.flags_count)%></span>. <%= t('comments.flag.issue_warning.action', :user_name => document.user.login, :warnings_count => document.user.warnings_count) %>
+		<span class="tag_button">
+			<%= link_to_remote t('doit'), { :url => "/documents/abusive/#{document.id}", :loading=>"update('#{t('comments.flag.issue_warning.ing')}')" }, :class => "quality_unhelpful_link", :title => t('comments.flag.issue_warning.name') %></span>
+		<span class="or"><%= t('or') %></span>
+
+		<span class="tag_button">
+			<%= link_to_remote t('dont'), { :url => "/documents/not_abusive/#{document.id}", :loading=>"update('#{t('comments.flag.clear.ing')}')" }, :class => "quality_unhelpful_link", :title => t('comments.flag.clear.name') %>
+		</span>		
+	</div>
+<% end %>

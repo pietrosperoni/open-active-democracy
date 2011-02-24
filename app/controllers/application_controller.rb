@@ -5,14 +5,15 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
   include FaceboxRender
-  
+
+  include Facebooker2::Rails::Controller
+
   require_dependency "activity.rb"
   require_dependency "blast.rb" 
   require_dependency "relationship.rb"   
   require_dependency "capital.rb"
 
-  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
-  rescue_from Facebooker::Session::SessionExpired, :with => :fb_session_expired 
+#  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
 
   helper :all # include all helpers, all the time
   
@@ -187,11 +188,9 @@ class ApplicationController < ActionController::Base
   
   # if they're logged in with a wh2 account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
-    return unless Facebooker.api_key
-    if logged_in? and facebook_session and not current_user.has_facebook?
-      return if facebook_session.user.uid == 55714215 and current_user.id != 1 # this is jim, don't add his facebook to everyone's account!
+    if logged_in? and current_facebook_user
       @user = User.find(current_user.id)
-      if not @user.update_with_facebook(facebook_session)
+      if not @user.update_with_facebook(current_facebook_user.id)
         return
       end
       if not @user.activated?
@@ -208,8 +207,7 @@ class ApplicationController < ActionController::Base
   end
   
   def no_facebook?
-    return false if Facebooker.api_key
-    return true if is_robot?
+    return false if logged_in? and current_facebook_user
     return true
   end
   

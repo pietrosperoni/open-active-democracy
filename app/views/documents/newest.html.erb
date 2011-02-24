@@ -1,0 +1,12 @@
+
+<div id="documents_div">
+	
+		<% if @documents.count == 0 %>
+		<%= t('esb.empty_chapter')%>
+	<% end %>
+	
+<%= render :partial => "newest" %>
+</div>
+<%= will_paginate(@documents) %>
+
+<%=render :partial=>"shared/live_update", :locals=>{:update_url=>"/documents/newest"}%>

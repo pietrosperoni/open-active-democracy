@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse]
+  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
-  before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
+  before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
   
   def index
     if params[:q]
@@ -16,6 +16,68 @@ class UsersController < ApplicationController
       format.xml { render :xml => @users.to_xml(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @users.to_json(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
     end    
+  end
+  
+  def suspended
+  end
+
+  def list_suspended
+    @users = User.suspended.paginate :page => params[:page], :per_page => params[:per_page] 
+  end
+
+  def disable_facebook
+#    @user = current_user
+#    @user.facebook_uid=nil
+#    @user.save(false)
+#    fb_cookie_destroy
+    redirect_to '/'
+  end
+  
+  def set_email
+    @user = current_user
+    flash[:notice]=nil
+    if request.put?
+      @user.email = params[:user][:email]
+      @user.have_sent_welcome = true
+      if @user.save
+        @user.send_welcome
+        redirect_back_or_default('/')
+      else
+        flash[:notice]="Töluvpóstfang ekki samþykkt"
+        redirect_to "/set_email"
+      end
+    end
+  end
+  
+  def subscriptions
+    @subscription_user = current_user
+    if request.put?
+      TagSubscription.delete_all(["user_id = ?",current_user.id])
+      Tag.all.each do |tag|
+        tag_checkbox_id = "subscribe_to_tag_id_#{tag.id}"
+        if params[:user][tag_checkbox_id]
+          subscription = TagSubscription.new
+          subscription.user_id = current_user.id
+          subscription.tag_id = tag.id
+          subscription.save
+        end
+      end
+      RAILS_DEFAULT_LOGGER.info("Starting HASH #{params[:user].inspect}")
+      params[:user].each do |hash_value,x|
+        RAILS_DEFAULT_LOGGER.info(hash_value)
+        if hash_value.include?("to_tag_id")
+          RAILS_DEFAULT_LOGGER.info("DELETING: #{hash_value}")
+          params[:user].delete(hash_value)
+        end
+      end
+      RAILS_DEFAULT_LOGGER.info("After HASH #{params[:user].inspect}")
+      if not current_user.reports_enabled and params[:user][:reports_enabled].to_i==1
+        params[:user][:last_sent_report]=Time.now
+      end
+      current_user.update_attributes(params[:user])
+      current_user.save(false)
+      redirect_to "/"
+    end
   end
   
   # render new.rhtml
@@ -463,9 +525,9 @@ class UsersController < ApplicationController
   # PUT /users/1/unsuspend
   def unsuspend
     @user = User.find(params[:id])
-    @user.unsuspend! 
+    @user.unsuspend!
     flash[:notice] = t('users.reinstated', :user_name => @user.name)
-    redirect_to(@user)
+    redirect_to request.referer
   end
 
   # this isn't actually used, but the current_user will endorse ALL of this user's priorities
@@ -494,6 +556,7 @@ class UsersController < ApplicationController
   end
   
   def make_admin
+    redirect_to '/' and return
     @user = User.find(params[:id])
     @user.is_admin = true
     @user.save_with_validation(false)

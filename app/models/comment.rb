@@ -1,6 +1,8 @@
 class Comment < ActiveRecord::Base
 
   named_scope :published, :conditions => "comments.status = 'published'"
+  named_scope :unpublished, :conditions => "comments.status not in ('published','abusive')"
+
   named_scope :published_and_abusive, :conditions => "comments.status in ('published','abusive')"
   named_scope :deleted, :conditions => "comments.status = 'deleted'"
   named_scope :flagged, :conditions => "flags_count > 0"
@@ -8,7 +10,8 @@ class Comment < ActiveRecord::Base
   named_scope :last_three_days, :conditions => "comments.created_at > '#{Time.now-3.days}'"
   named_scope :by_recently_created, :order => "comments.created_at desc"  
   named_scope :by_first_created, :order => "comments.created_at asc"  
-    
+  named_scope :by_recently_updated, :order => "comments.updated_at desc"  
+  
   belongs_to :user
   belongs_to :activity
   
@@ -17,6 +20,12 @@ class Comment < ActiveRecord::Base
   validates_presence_of :content
   
   liquid_methods :id, :activity_id, :content, :user, :activity, :show_url
+
+  define_index do
+    indexes content
+    indexes cached_issue_list, :facet=>true
+    where "status = 'published'"
+  end
   
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :published, :column => :status
@@ -111,24 +120,8 @@ class Comment < ActiveRecord::Base
   end
   
   def do_abusive
-    if self.user.warnings_count == 0 # this is their first warning, get a warning message
-      notifications << NotificationWarning1.new(:recipient => self.user)
-    elsif self.user.warnings_count == 1 # 2nd warning, lose 10% of pc
-      notifications << NotificationWarning2.new(:recipient => self.user)
-      capital_lost = (self.user.capitals_count*0.1).to_i
-      capital_lost = 1 if capital_lost == 0
-      ActivityCapitalWarning.create(:user => self.user, :capital => CapitalWarning.create(:recipient => self.user, :amount => -capital_lost))
-    elsif self.user.warnings_count == 2 # third warning, on probation, lose 30% of pc
-      notifications << NotificationWarning3.new(:recipient => self.user)      
-      capital_lost = (self.user.capitals_count*0.3).to_i
-      capital_lost = 3 if capital_lost < 3
-      ActivityCapitalWarning.create(:user => self.user, :capital => CapitalWarning.create(:recipient => self.user, :amount => -capital_lost))
-      self.user.probation!
-    elsif self.user.warnings_count == 3 # fourth warning, suspended
-      self.user.suspended!
-    end
+    self.user.do_abusive!(notifications)
     self.update_attribute(:flags_count, 0)
-    self.user.increment!("warnings_count")
   end
   
   def request=(request)

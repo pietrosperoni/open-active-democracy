@@ -12,6 +12,13 @@ class Priority < ActiveRecord::Base
     named_scope :published, :conditions => "priorities.status = 'published'"
   end
 
+  named_scope :published, :conditions => "priorities.status = 'published'"
+  named_scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
+
+  named_scope :flagged, :conditions => "flags_count > 0"
+
+  named_scope :alphabetical, :order => "priorities.name asc"
+
   named_scope :top_rank, :order => "priorities.score desc, priorities.position asc"
   named_scope :not_top_rank, :conditions => "priorities.position > 25"
   named_scope :rising, :conditions => "priorities.trending_score > 0", :order => "priorities.trending_score desc"
@@ -30,12 +37,10 @@ class Priority < ActiveRecord::Base
   
   named_scope :finished, :conditions => "priorities.obama_status in (-2,-1,2)"
   
-  named_scope :obama_endorsed, :conditions => "priorities.obama_value > 0"
-  named_scope :not_obama, :conditions => "priorities.obama_value = 0"
-  named_scope :obama_opposed, :conditions => "priorities.obama_value < 0"
-  named_scope :not_obama_or_opposed, :conditions => "priorities.obama_value < 1"   
+  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+  named_scope :item_limit, lambda{|limit| {:limit=>limit}} 
   
-  named_scope :alphabetical, :order => "priorities.name asc"
+named_scope :alphabetical, :order => "priorities.name asc"
   named_scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
   named_scope :tagged, :conditions => "(priorities.cached_issue_list is not null and priorities.cached_issue_list <> '')"
   named_scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
@@ -84,7 +89,10 @@ class Priority < ActiveRecord::Base
   acts_as_list
   acts_as_solr :fields => [ :name, :cached_issue_list, :is_published ]
   
-  liquid_methods :id, :name, :show_url, :value_name
+  define_index do
+    indexes name
+    indexes cached_issue_list, :facet=>true
+  end  
   
   #validates_length_of :name, :within => 3..60
   #validates_uniqueness_of :name
@@ -98,6 +106,7 @@ class Priority < ActiveRecord::Base
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
   state :inactive
+  state :abusive, :enter => :do_abusive
   
   event :publish do
     transitions :from => [:draft, :passive], :to => :published
@@ -118,6 +127,10 @@ class Priority < ActiveRecord::Base
   
   event :deactivate do
     transitions :from => [:draft, :published, :buried], :to => :inactive
+  end
+
+  event :abusive do
+    transitions :from => :published, :to => :abusive
   end
     
   cattr_reader :per_page
@@ -569,7 +582,19 @@ class Priority < ActiveRecord::Base
     end
     latest_priority_process_txt
   end
-  
+
+  def do_abusive
+    self.user.do_abusive!(notifications)
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end  
+
   private
   def do_publish
     self.published_at = Time.now
@@ -577,6 +602,9 @@ class Priority < ActiveRecord::Base
   end
   
   def do_delete
+    activities.each do |a|
+      a.delete!
+    end
     for e in endorsements
       e.delete!
     end

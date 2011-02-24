@@ -1,0 +1,26 @@
+<% unless @n.include?("notification_warning4") %>
+    <p>Sæl(l) <%=@recipient.login%>,</p>
+    <p>Þetta er sjálfvirk tilkynning vegna brots á notkunarreglum vefsins vidraedur.is. Hafa því ummæli þín verið fjarlægð af vefsíðunni og er þessi tilkynning skráð sem 
+	<% if @n.include?("notification_warning1") %>
+	fyrsta aðvörun.
+	<% elsif @n.include?("notification_warning2") %>
+	önnur aðvörun.
+	<% elsif @n.include?("notification_warning3") %>
+	þriðja og síðasta aðvörun.
+	<% end %>
+	</p>
+    <p><a href="https://vidraedur.is/skilmalar" target="_new">Sjá nánar notkunarreglur vefsins</a>.</p>
+    <p>Ummæli sem voru fjarlægð:</p>
+    <p><%=simple_format @notifiable.content%></p>
+    <p>Þetta er sjálfvirk tilkynning frá vidraedur.is sem send er til <%=@recipient.email%></p>
+    <p>Þessi tölvupóstur inniheldur trúnaðarupplýsingar og er eingöngu ætlaður þeim sem hann er stílaður á. Ef sending þessi hefur ranglega borist yður, vinsamlega gætið fyllsta trúnaðar, tilkynnið sendanda og eyðileggið sendinguna eins og skylt er skv. 47. gr. laga nr. 81/2003 um fjarskipti.</p>
+<% else %>
+    <p>Sæl(l) <%=@recipient.login%>,</p>
+    <p>Þetta er sjálfvirk tilkynning vegna brots á notkunarreglum vefsins vidraedur.is. Hafa því ummæli þín verið fjarlægð af vefsíðunni og er þessi tilkynning skráð sem fjórða aðvörun. Með vísan til notkunarreglna vefsins, hefur nú verið lokað á aðgang þinn að viraedur.is.</p>
+    <p>Hafir þú athugasemdir við þessa ákvörðun er þér vinsamlegast bent á að hafa samband við umsjónarmenn vefsins með því að senda póst á netfangið utn-vidraedur@utn.stjr.is</p>
+    <p><a href="https://vidraedur.is/skilmalar" target="_new">Sjá notkunarreglur vefsins</a>.</p>
+    <p>Ummæli sem voru fjarlægð:</p>
+    <p><%=simple_format @notifiable.content%></p>
+    <p>Þetta er sjálfvirk tilkynning frá vidraedur.is sem send er til <%=@recipient.email%></p>
+    <p>Þessi tölvupóstur inniheldur trúnaðarupplýsingar og er eingöngu ætlaður þeim sem hann er stílaður á. Ef sending þessi hefur ranglega borist yður, vinsamlega gætið fyllsta trúnaðar, tilkynnið sendanda og eyðileggið sendinguna eins og skylt er skv. 47. gr. laga nr. 81/2003 um fjarskipti.</p>
+<% end %>

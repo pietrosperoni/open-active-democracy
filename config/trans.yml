@@ -1,0 +1,8 @@
+api_key: 69605456129
+Activities:
+  path: config/locales/activities/en.yml
+  type: yml
+  translations:
+    de: config/locales/activities/de.yml
+    is: config/locales/activities/is.yml
+    fr: config/locales/activities/fr.yml

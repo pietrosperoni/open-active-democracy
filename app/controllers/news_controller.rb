@@ -67,18 +67,6 @@ class NewsController < ApplicationController
     end 
   end  
   
-  def obama
-    @page_title = t('news.obama.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
-    @activities = Activity.active.filtered.for_all_users.by_recently_created.paginate :conditions => "type like 'ActivityPriorityObamaStatus%' or user_id = #{current_government.official_user_id}", :page => params[:page]
-    @rss_url = url_for(:only_path => false, :format => "rss")      
-    respond_to do |format|
-      format.html { render :action => "activity_list" }
-      format.rss { render :template => "rss/activities" }        
-      format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
-    end
-  end  
-  
   def capital
     @page_title = t('news.capital.title', :government_name => current_government.name, :currency_name => current_government.currency_name.titleize)
     @activities = Activity.active.filtered.for_all_users.capital.by_recently_created.paginate :page => params[:page]

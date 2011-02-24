@@ -1,4 +1,15 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect '/priorites/flag/:id', :controller=>'priorities', :action=>'flag'
+  map.connect '/priorites/abusive/:id', :controller=>'priorities', :action=>'abusive'
+  map.connect '/priorites/not_abusive/:id', :controller=>'priorities', :action=>'not_abusive'
+
+  map.connect '/points/flag/:id', :controller=>'questions', :action=>'flag'
+  map.connect '/documents/flag/:id', :controller=>'documents', :action=>'flag'
+
+  map.connect '/admin/all_flagged', :controller=>'admin', :action=>'all_flagged'
+  map.connect '/admin/all_deleted', :controller=>'admin', :action=>'all_deleted'
+  map.connect '/users/list_suspended', :controller=>'users', :action=>'list_suspended'
+
   map.resources :partners, :member => {
     :email => :get,    
     :picture => :get,

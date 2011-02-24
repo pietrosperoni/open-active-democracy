@@ -284,6 +284,49 @@ class PointsController < ApplicationController
     end
   end
 
+  def flag
+    @question = Question.find(params[:id])
+    @question.flag_by_user(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to(comments_url) }
+      format.js {
+        render :update do |page|
+          if current_user.is_admin?
+            page.replace_html "flagged_question_info_#{@question.id}", render(:partial => "questions/flagged", :locals => {:question => @question})
+          else
+            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>Takk fyrir að vekja athygli okkar á þessu umræðuefni.</div>"
+          end
+        end        
+      }
+    end    
+  end  
+
+  def abusive
+    @question = Question.find(params[:id])
+    @question.do_abusive
+    @question.delete!
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>Þessari spurningu hefur verið eytt og viðvörun send.</div>"
+        end        
+      }
+    end    
+  end
+
+  def not_abusive
+    @question = Question.find(params[:id])
+    @question.update_attribute(:flags_count, 0)
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_question_info_#{@question.id}",""
+        end        
+      }
+    end    
+  end
+
   # DELETE /points/1
   def destroy
     @point = Point.find(params[:id])

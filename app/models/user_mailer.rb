@@ -42,27 +42,41 @@ class UserMailer < ActionMailer::Base
   end  
   
   def notification(n,sender,recipient,notifiable)
-    setup_notification(recipient)    
-    @subject = EmailTemplate.fetch_subject_liquid(n.class.to_s.underscore).render({'government' => Government.current, 'recipient' => recipient, 'sender' => sender, 'notifiable' => notifiable, 'notification' => n}, :filters => [LiquidFilters])    
-    @body = EmailTemplate.fetch_liquid(n.class.to_s.underscore).render({'government' => Government.current, 'recipient' => recipient, 'sender' => sender, 'notifiable' => notifiable, 'notification' => n}, :filters => [LiquidFilters])
-  end  
-  
-  def new_change_vote(sender,recipient,vote)
     setup_notification(recipient)
-    @subject = "Skuggaþings atkvæðagreiðsla vegna: " + vote.change.priority.name
-    @body[:vote] = vote
-    @body[:change] = vote.change
-    @body[:recipient] = recipient
-    @body[:sender] = sender
+    @notification = n
+    @sender = sender
+    @government = Government.last
+    @n = n.to_s.underscore
+    RAILS_DEFAULT_LOGGER.info("Notification class: #{@n}")
+    @notifiable = notifiable
+    if @n.include?("notification_warning")
+      @subject = "Viðvörun frá vidraedur.is"
+    elsif @n.include?("notification_comment_flagged") 
+      @subject = @notification.name
+    end
+    @recipient = recipient
   end
-
+  
+  def report(user,priorities,questions,documents,treaty_documents)
+    @recipients  = "#{user.login} <#{user.email}>"
+    @from        = "#{Government.last.name} <#{Government.last.email}>"
+    headers        "Reply-to" => Government.last.email
+    @sent_on     = Time.now
+    @content_type = "text/html"
+    @priorities = priorities
+    @questions = questions
+    @documents = documents
+    @treaty_documents = treaty_documents
+    @subject = "Skýrsla frá vidraedur.is"
+  end
+  
   protected
     def setup_notification(user)
-      @recipients  = "#{user.real_name.titleize} <#{user.email}>"
+      @recipients  = "#{user.login} <#{user.email}>"
       @from        = "#{Government.current.name} <#{Government.current.email}>"
       headers        "Reply-to" => Government.current.email
       @sent_on     = Time.now
-      @content_type = "text/plain"      
+      @content_type = "text/html"     
       @body[:root_url] = 'http://' + Government.current.base_url + '/'
     end    
         

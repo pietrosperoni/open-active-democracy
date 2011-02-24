@@ -1,3 +1,5 @@
+require 'vendor/plugins/thinking-sphinx/recipes/thinking_sphinx'
+
 set :application, "open-active-democracy"
 set :domain, "skuggathing.is"
 set :selected_branch, "master"
@@ -14,16 +16,25 @@ role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
+task :before_update_code, :roles => [:app] do
+  thinking_sphinx.stop
+end
+
+task :after_update_code, :roles => [:app] do
+#  symlink_sphinx_indexes
+end
+
 task :after_update_code do
+  run "ln -nfs #{deploy_to}/#{shared_dir}/db/sphinx #{current_release}/db/sphinx"
   run "ln -s #{deploy_to}/#{shared_dir}/config/database.yml #{current_release}/config/database.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
+  run "rm #{deploy_to}/#{shared_dir}/system/system"
   run "ln -s #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -s #{deploy_to}/#{shared_dir}/private #{current_release}/private"
-  run "ln -s #{deploy_to}/#{shared_dir}/solr #{current_release}/solr"
-  run "ln -s #{deploy_to}/#{shared_dir}/solr_java #{current_release}/vendor/plugins/acts_as_solr/solr"
-  #run "rm -f #{current_path}"
+  thinking_sphinx.configure
+  thinking_sphinx.start  #run "rm -f #{current_path}"
 end
 
 namespace :deploy do

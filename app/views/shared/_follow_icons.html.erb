@@ -1,0 +1,13 @@
+<div id="activity_add_<%= activity.id.to_s %>">
+<% if following %>
+	<span class="big_x">
+
+		<%= link_to_remote image_tag("esb_entry_bookmark_selected.gif", :border => 0, :style=>"float:left;", :alt => "Hætta að fylgjast með umræðu"), { :url => activity_following_path(activity, following, :region => "activity_show"), :method => :delete, :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:left;\">')" }, :class => "priority_remove_link", :title =>"Hætta að fylgjast með umræðu", :alt =>"Hætta að fylgjast með umræðu" %>
+	</span>
+<% else %>
+	<span class="big_x">
+		<%= link_to_remote image_tag("esb_entry_bookmark.gif", :border => 0, :style=>"float:left;", :title => "Fylgjast með umræðu", :alt => "Fylgjast með umræðu"), { :url => activity_followings_path(activity, :region => "activity_show"), :method => :post, :loading=>"update('<img src=\"/images/following-loader.gif\" style=\"float:left;\">')" }, :class => "priority_add_link", :title => "Fylgjast með umræðu", :alt => "Fylgjast með umræðu" %>
+
+	</span>
+<% end %>
+</div>

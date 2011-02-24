@@ -1,8 +1,16 @@
 class Document < ActiveRecord::Base
+  named_scope :tagged, :conditions => "(documents.cached_issue_list is not null and documents.cached_issue_list <> '')"
+  named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
 
+  named_scope :flagged, :conditions => "flags_count > 0"
+
+  acts_as_taggable_on :issues
   acts_as_set_partner :table_name=>"documents"
 
   named_scope :published, :conditions => "documents.status = 'published'"
+  named_scope :unpublished, :conditions => "documents.status not in ('published','abusive')"
+
   named_scope :by_helpfulness, :order => "documents.score desc"
   named_scope :by_endorser_helpfulness, :conditions => "documents.endorser_score > 0", :order => "documents.endorser_score desc"
   named_scope :by_neutral_helpfulness, :conditions => "documents.neutral_score > 0", :order => "documents.neutral_score desc"    
@@ -14,6 +22,9 @@ class Document < ActiveRecord::Base
   named_scope :by_recently_created, :order => "documents.created_at desc"
   named_scope :by_recently_updated, :order => "documents.updated_at desc"  
   named_scope :revised, :conditions => "revisions_count > 1"
+  named_scope :since, lambda{|time| {:conditions=>["documents.created_at>?",time]}}
+
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
 
   belongs_to :user
   belongs_to :priority
@@ -32,7 +43,12 @@ class Document < ActiveRecord::Base
   
   liquid_methods :id, :text, :user
   
-  acts_as_solr :fields => [ :name, :content, :priority_name, :is_published ]
+  define_index do
+    indexes name
+    indexes content
+    indexes cached_issue_list, :facet=>true
+    where "status = 'published'"
+  end
   
   cattr_reader :per_page
   @@per_page = 25
@@ -55,7 +71,8 @@ class Document < ActiveRecord::Base
   state :published, :enter => :do_publish
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
-  
+  state :abusive, :enter => :do_abusive
+
   event :publish do
     transitions :from => [:draft], :to => :published
   end
@@ -78,6 +95,22 @@ class Document < ActiveRecord::Base
     transitions :from => :buried, :to => :draft     
   end  
 
+  event :abusive do
+    transitions :from => :published, :to => :abusive
+  end
+
+  def do_abusive
+    self.user.do_abusive!(notifications)
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end
+
   def update_word_count
     self.word_count = self.content.split(' ').length
   end
@@ -90,6 +123,9 @@ class Document < ActiveRecord::Base
   
   def do_delete
     remove_counts
+    activities.each do |a|
+      a.delete!
+    end
     # look for any capital they may have earned on this document, and remove it
     capital_earned = capitals.sum(:amount)
     if capital_earned != 0

@@ -61,6 +61,14 @@ class Tag < ActiveRecord::Base
     name
   end
   
+  def self.all_dropdown_options
+    out = ""
+    Tag.all.each do |t|
+      out+="<option>#{t.name}</option>"
+    end
+    out
+  end
+  
   # LIKE is used for cross-database case-insensitivity
   def self.find_or_create_with_like_by_name(name)
     find(:first, :conditions => ["name LIKE ?", name]) || create(:name => name)

@@ -46,10 +46,10 @@ class User < ActiveRecord::Base
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
 
   belongs_to :picture
-  has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
+  has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_35 => "35x35#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
   
   validates_attachment_size :buddy_icon, :less_than => 5.megabytes
-  validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif','image/x-png','image/pjpeg']
   
   belongs_to :partner
   belongs_to :branch
@@ -269,7 +269,8 @@ class User < ActiveRecord::Base
     self.deleted_at = nil
     for e in endorsements.suspended
       e.unsuspend!
-    end    
+    end
+    self.warnings_count = 0    
   end  
   
   def do_delete
@@ -312,6 +313,12 @@ class User < ActiveRecord::Base
     UserMailer.deliver_welcome(self)    
   end
   
+  def send_welcome
+    unless self.have_sent_welcome
+      UserMailer.deliver_welcome(self)    
+    end
+  end
+
   def to_param
     "#{id}-#{login.parameterize_full}"
   end  
@@ -938,6 +945,49 @@ class User < ActiveRecord::Base
     end
   end
   
+  def send_report_if_needed!
+    if self.reports_enabled
+      if self.reports_interval and self.reports_interval==1
+        interval = 1.hour
+      elsif self.reports_interval and self.reports_interval==2
+        interval = 1.day
+      else
+        interval = 7.days
+      end
+      if self.last_sent_report==nil or Time.now-interval>self.last_sent_report
+        tags = TagSubscription.find_all_by_user_id(self.id).collect {|sub| sub.tag.name if sub.tag }.compact
+        unless tags.empty?
+          if self.reports_discussions
+            priorities = Priority.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            priorities = []
+          end
+          if self.reports_questions
+            questions = Question.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            questions = []
+          end
+          if self.reports_documents
+            documents = Document.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            documents = []
+          end
+          if self.reports_treaty_documents
+            treaty_documents = TreatyDocument.tagged_with(tags,:match_any=>true).since(self.last_sent_report)
+          else
+            treaty_documents = []
+          end
+          if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
+            UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+          end
+        end
+        self.reload
+        self.last_sent_report=Time.now
+        self.save(false)
+      end
+    end
+  end
+
   def update_with_twitter(twitter_info, token, secret, request)
     self.twitter_id = twitter_info['id'].to_i
     self.twitter_login = twitter_info['screen_name']
@@ -1038,6 +1088,21 @@ class User < ActiveRecord::Base
     return @adapter
   end
   
+def do_abusive!(parent_notifications)
+   if self.warnings_count == 0 # this is their first warning, get a warning message
+    parent_notifications << NotificationWarning1.new(:recipient => self)
+  elsif self.warnings_count == 1 # 2nd warning
+    parent_notifications << NotificationWarning2.new(:recipient => self)
+  elsif self.warnings_count == 2 # third warning, on probation
+    parent_notifications << NotificationWarning3.new(:recipient => self)      
+    self.probation!
+  elsif self.warnings_count >= 3 # fourth or more warning, suspended
+    parent_notifications << NotificationWarning4.new(:recipient => self)      
+    self.suspend!
+  end
+  self.increment!("warnings_count")
+end
+
   protected
   
     # before filter 

@@ -1,0 +1,3 @@
+<% for document in @documents %>
+	<%= render :partial => "documents/show_full", :locals => {:document => document, :quality => nil, :revision => nil}%>
+<% end %>

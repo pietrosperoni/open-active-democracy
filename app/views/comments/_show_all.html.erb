@@ -1,3 +1,9 @@
-<% for comment in @comments %>
-	<%= render :partial => "comments/show", :locals => {:comment => comment} %>
-<% end %>
+  	<% @comments.each do |comment| %>   
+   		<% if @comments.first == comment %>
+			<%= render :partial => "comments/show_first", :locals => {:comment => comment, :shortentext => 0} %>
+		<% else %>
+			<%= render :partial => "comments/show", :locals => {:comment => comment, :shortentext => 0} %>
+		<% end %>   		
+	<% end %>
+
+

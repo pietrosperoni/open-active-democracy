@@ -22,7 +22,10 @@ class Activity < ActiveRecord::Base
   named_scope :by_recently_created, :order => "activities.created_at desc"    
 
   named_scope :item_limit, lambda{|limit| {:limit=>limit}}
-  
+    named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+
+  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+
   belongs_to :user
   belongs_to :partner
   
@@ -67,6 +70,32 @@ class Activity < ActiveRecord::Base
   
   event :undelete do
     transitions :from => :deleted, :to => :active
+  end
+
+  def multi_name
+    return "test x"
+    if self.priority_id
+      self.priority.name
+    elsif self.point_id
+      self.question.name
+    elsif self.document_id
+      self.document.name
+    else
+      "#{self.inspect}"
+    end
+  end
+
+  def show_multi_url
+    return "test m"
+    if self.priority_id
+      self.priority.show_url
+    elsif self.point_id
+      self.point.show_url
+    elsif self.document_id
+      self.document.show_url
+    else
+      "#{self.inspect}"
+    end
   end
 
   def do_delete

@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   
-  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :index, :your_priorities, :destroy]
-  before_filter :admin_required, :only => [:edit, :update]
+  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy, :flag]
+  before_filter :admin_required, :only => [:edit, :update, :abusive, :not_abusive]
  
   def index
     @page_title = t('document.yours.title')
@@ -248,7 +248,50 @@ class DocumentsController < ApplicationController
       format.html { redirect_to(documents_url) }
     end
   end
-  
+
+  def flag
+    @document = Document.find(params[:id])
+    @document.flag_by_user(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to(comments_url) }
+      format.js {
+        render :update do |page|
+          if current_user.is_admin?
+            page.replace_html "flagged_document_info_#{@document.id}", render(:partial => "documents/flagged", :locals => {:document => @document})
+          else
+            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>Takk fyrir að vekja athygli okkar á þessu umræðuefni.</div>"
+          end
+        end        
+      }
+    end    
+  end  
+
+  def abusive
+    @document = Document.find(params[:id])
+    @document.do_abusive
+    @document.delete!
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>Þessu erindi hefur verið eytt og viðvörun send.</div>"
+        end        
+      }
+    end    
+  end
+
+  def not_abusive
+    @document = Document.find(params[:id])
+    @document.update_attribute(:flags_count, 0)
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_document_info_#{@document.id}",""
+        end        
+      }
+    end    
+  end  
+
   private
     def load_endorsement
       @priority = Priority.find(params[:priority_id])    
