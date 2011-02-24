@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
-  before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
+  before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :make_admin, :reset_password]
   
   def index
     if params[:q]
@@ -121,54 +121,7 @@ class UsersController < ApplicationController
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_notifications", :format => "rss", :c => @user.rss_code)
     @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
   end
-  
-  def legislators
-    @user = User.find(params[:id])
-    redirect_to '/' and return if check_for_suspension
-    @page_title = t('users.legislators.title', :user_name => @user.name)
-    respond_to do |format|
-      format.html
-    end    
-  end
-  
-  def legislators_save
-    @user = User.find(params[:id])
-    @saved = @user.update_attributes(params[:user])  
-    @number = @user.attach_legislators if @saved
-    if (@saved and @number == 3) or (@saved and @number == 2 and @user.state == 'Minnesota')
-      if not CapitalLegislatorsAdded.find_by_recipient_id(@user.id)
-        ActivityCapitalLegislatorsAdded.create(:user => @user, :capital => CapitalLegislatorsAdded.create(:recipient => @user, :amount => 2))
-      end
-    end
-    respond_to do |format|
-      if @saved
-        format.js {
-          render :update do |page|
-            page.replace_html 'your_legislators', render(:partial => "settings/legislators", :locals => {:user => @user})
-            if @number == 3 or (@number == 2 and @user.state == 'Minnesota')
-              page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.found_all') + "</div>"
-            elsif @number == 2
-              page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.found_senators') + "</div>"
-            else
-              page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.found_none') + "</div>"
-            end
-          end          
-        }
-        format.html { 
-          flash[:notice] = t('settings.legislators.found_all')
-          redirect_to(:action => :legislators) 
-        }
-      else
-        format.js {
-          render :update do |page|
-            page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.error') + "</div>"
-          end          
-        }
-        format.html { render :action => "legislators" }
-      end      
-    end    
-  end  
-  
+    
   # GET /users/1
   # GET /users/1.xml
   def show
@@ -361,11 +314,7 @@ class UsersController < ApplicationController
       current_user.activate!
     end
     flash[:notice] = t('users.activate.success')
-    if logged_in? and current_government.is_legislators?
-      redirect_to legislators_settings_url
-    else
-      redirect_back_or_default('/')
-    end
+    redirect_back_or_default('/')
   end
   
   def resend_activation

@@ -73,10 +73,7 @@ class User < ActiveRecord::Base
   has_many :document_revisions, :class_name => "DocumentRevision", :dependent => :destroy
   has_many :changes, :dependent => :nullify
   has_many :rankings, :class_name => "UserRanking", :dependent => :destroy
-  
-  has_many :constituents
-  has_many :legislators, :through => :constituents
-  
+    
   has_many :point_qualities, :dependent => :destroy
   has_many :document_qualities, :dependent => :destroy
   
@@ -426,52 +423,7 @@ class User < ActiveRecord::Base
     a += zip if attribute_present?("zip")
     a
   end
-  
-  def attach_legislators
-    return 0 unless attribute_present?("zip")
-    constituents.destroy_all
-    if attribute_present?("address")
-      begin
-        sun = Sunlight::Legislator.all_for(:address => address_full)
-        if sun and sun.size > 0
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:senior_senator].govtrack_id)) if sun[:senior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:junior_senator].govtrack_id)) if sun[:junior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:representative].govtrack_id)) if sun[:representative]
-        end    
-      rescue
-      end  
-    elsif zip.length == 10 and zip[4] == '-'
-      begin
-        sun = Sunlight::Legislator.all_for(:address => zip)
-        if sun and sun.size > 0
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:senior_senator].govtrack_id)) if sun[:senior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:junior_senator].govtrack_id)) if sun[:junior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:representative].govtrack_id)) if sun[:representative]
-        end
-      rescue
-      end
-    end
-    if constituents.empty? and zip.to_i > 0
-      begin
-        sun = Sunlight::Legislator.all_in_zipcode(zip[0..4])
-        if sun and sun.size > 3 # only pull in their senators, need more info to pick their rep
-          for s in sun
-            if s.title == 'Sen'
-              constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(s.govtrack_id))
-            end
-          end            
-        elsif sun and sun.size < 4
-          for s in sun
-            constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(s.govtrack_id))
-          end
-        end
-      rescue
-        return 0
-      end
-    end
-    return constituents.size
-  end
-  
+   
   def revisions_count
     document_revisions_count+point_revisions_count-points_count-documents_count 
   end

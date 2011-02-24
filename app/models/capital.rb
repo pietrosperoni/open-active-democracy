@@ -170,6 +170,3 @@ end
 
 class CapitalInactive < Capital  
 end
-
-class CapitalLegislatorsAdded < Capital
-end

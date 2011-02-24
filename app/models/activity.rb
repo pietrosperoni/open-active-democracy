@@ -728,12 +728,6 @@ class ActivityCapitalInactive < Activity
   end
 end
 
-class ActivityCapitalLegislatorsAdded < Activity
-  def name
-      I18n.t('activity.capital.legislators.added.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)   
-  end
-end
-
 class ActivityIgnoringNew < Activity
   def name
     I18n.t('activity.ignoring.new.name', :user_name => user.name, :other_user_name => other_user.name)

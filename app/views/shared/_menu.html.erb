@@ -312,9 +312,6 @@
 				<div class="tab_sublinks">
 					<%= link_to t('menu.settings.picture'), picture_settings_url %>
 					&middot; <%= link_to t('menu.settings.bio'), new_user_profile_url(current_user) %>
-					<% if current_government.is_legislators? %>
-						&middot; <%= link_to t('menu.settings.legislators'), legislators_settings_url %>
-					<% end %>
 					<br/>
 					<% if not current_user.has_facebook? %>
 						<%= link_to t('menu.settings.password'), edit_password_url(current_user) %> &middot;

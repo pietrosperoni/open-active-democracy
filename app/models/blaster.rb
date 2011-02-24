@@ -32,12 +32,6 @@ class Blaster < ActionMailer::Base
     @body[:blast] = blast
   end
   
-  def add_legislators(blast,user)
-    setup_email(user)
-    @subject = "Sync your White House 2 priorities to your members of Congress"
-    @body[:blast] = blast
-  end  
-  
   protected
     def setup_email(user)
       @recipients  = "#{user.real_name.titleize} <#{user.email}>"
