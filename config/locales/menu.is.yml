@@ -42,11 +42,11 @@ is:
       discussions: 
         name: Umræður
         one: "1 umræða"
-        other: "{{count}} umræður"
+        other: "%{count} umræður"
       documents: 
         name: Skjöl
         one: "1 skjal"
-        other: "{{count}} skjöl"
+        other: "%{count} skjöl"
       edit: Breyta
       full_text: "Allur texti"
       helpful_to: "Gagnlegt til að:"
@@ -54,11 +54,11 @@ is:
       points: 
         name: Rök
         one: "1 rök"
-        other: "{{count}} rök"
+        other: "%{count} rök"
       priorities: 
         name: Hugmyndir
         one: "1 hugmynd"
-        other: "{{count}} hugmyndir"
+        other: "%{count} hugmyndir"
       recently_revised: "Nýlega yfirfarið"
       research: 
         contributors: 
@@ -67,17 +67,17 @@ is:
           other: "Hitta meðhöfunda"
         documents_needed: "Hugmyndir verða að innihalda skjöl"
         name: "Órökstudd hugmynd"
-        needed: "Hugmynd sem vantar {{points_name}} eða {{documents_name}}"
+        needed: "Hugmynd sem vantar %{points_name} eða %{documents_name}"
         points_needed: "Hugmyndir verða að innihalda rök"
       revised: Yfirfarið
       revisions: 
         name: endurskoðun
         one: "1 endurskoðun"
-        other: "{{count}} endurskoðanir"
+        other: "%{count} endurskoðanir"
       your_priorities: "Þínar hugmyndir"
       yours: Þitt
     charts: 
-      active_issues: "Virkustu {{tags_name}}"
+      active_issues: "Virkustu %{tags_name}"
       falling: "Fallandi hugmynd á dagskrá"
       name: "Línurit og tölfræði"
       rising: "Rísandi hugmynd á dagskrá"
@@ -90,7 +90,7 @@ is:
       not_invited: Óboðnir
       number: 
         one: "Þú ert með einn tengilið"
-        other: "Þú hefur {{count}} tengiliði"
+        other: "Þú hefur %{count} tengiliði"
       your_network: "Þitt samskiptanet"
     documents: 
       name: Skjöl
@@ -139,7 +139,7 @@ is:
       manda: S&Y
       name: Fréttir
       network: Fólk
-      official_user_activity: "{{official_user_name}} virkni"
+      official_user_activity: "%{official_user_name} virkni"
       proposals: Tillögur
       voting: "Niðurstöður atkvæðagreiðslu"
       what: "Hvað er að gerast"
@@ -153,7 +153,7 @@ is:
       branches: "Hvaða hópi áttu mest sameiginlegt með:"
       comments: "Skoðaðu umræður um þína hugmynd"
       facebook_friends: "Bjóddu Facebook vinum"
-      intro: "{{government_name}} býður upp á ýmsa möguleika:"
+      intro: "%{government_name} býður upp á ýmsa möguleika:"
       invite: "Bjóddu vinum að vera með"
       legislators: "Tengdu þín hugmynd þinginu"
       outro: ""
@@ -182,23 +182,23 @@ is:
       action: Aðgerð
       add_ad: 
         name: "Kaupa auglýsingu fyrir þessa hugmynd"
-        title: "Verja hluta af {{currency_name}} til að koma þessari hugmynd fremst í röðina til íhugunar fyrir alla."
+        title: "Verja hluta af %{currency_name} til að koma þessari hugmynd fremst í röðina til íhugunar fyrir alla."
       add_proposal: 
         name: "Leggja til yfirtöku"
         title: "Er annað hugmynd sem ætti að sameina þessu"
       branch: 
-        name: "{{branch_name}} hugmynd"
+        name: "%{branch_name} hugmynd"
       bury: 
-        confirm: "Þú ert við það að taka þessa hugmynd úr uppröðunarlistanum: {{priority_name}}. Einungis gera það fyrir atriði sem eru óheiðarleg, misbjóðandi eða fáránleg"
+        confirm: "Þú ert við það að taka þessa hugmynd úr uppröðunarlistanum: %{priority_name}. Einungis gera það fyrir atriði sem eru óheiðarleg, misbjóðandi eða fáránleg"
         name: "Fjarlægja úr uppröðun"
         title: "Fjarlægja þessa hugmynd úr þessari uppröðun"
       compromised: 
-        confirm: "Þú ert að merkja eftirfarandi hugmynd klárað en ógnað: {{priority_name}}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef hugmyndin hefur fjölda meðmæla"
+        confirm: "Þú ert að merkja eftirfarandi hugmynd klárað en ógnað: %{priority_name}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef hugmyndin hefur fjölda meðmæla"
         name: "Merkja að þessu sé ógnað"
         title: "Merkja þetta klárað en ógnað"
       consider: "Hugmynd til athugunar"
       delete: 
-        confirm: "Ertu viss að þú viljir eyða {{priority_name}} varanlega?"
+        confirm: "Ertu viss að þú viljir eyða %{priority_name} varanlega?"
         name: "Eyða þessari hugmynd"
         title: "Eyða þessari hugmynd varanlega"
       edit: 
@@ -207,7 +207,7 @@ is:
       endorsers: 
         name: Meðmælendur
         one: "1 með"
-        other: "{{count}} með"
+        other: "%{count} með"
       everyone: 
         ads: Auglýsingar
         controversial: Umdeilt
@@ -221,7 +221,7 @@ is:
         short: Allir
         top: Efst
       failed: 
-        confirm: "Merkja þessa hugmynd sem lokið og misheppnaða: {{priority_name}}. Vinsamlegast sýnið biðlund, vinnslan gæti tekið eina eða tvær mínútur ef þessi hugmynd hefur marga meðmælendur"
+        confirm: "Merkja þessa hugmynd sem lokið og misheppnaða: %{priority_name}. Vinsamlegast sýnið biðlund, vinnslan gæti tekið eina eða tvær mínútur ef þessi hugmynd hefur marga meðmælendur"
         name: "Merkja sem mistök"
         title: "Merkja þessa hugmynd sem lokið og misheppnaða"
       flag: 
@@ -229,7 +229,7 @@ is:
         name: "Tilkynna óviðeigandi ummæli!"
         title: "Er ástæða til að umsjónarmaður síðunnar líti á þessa hugmynd? Láta einnig vita í athugasemdum um hugmyndir ef það er ekki augljóst hvað vandamálið er."
       intheworks: 
-        confirm: "Þú ert að merkja við þessa hugmynd að hún sé í vinnslu: {{priority_name}}."
+        confirm: "Þú ert að merkja við þessa hugmynd að hún sé í vinnslu: %{priority_name}."
         name: "Merkja í vinnslu"
         title: "Merkja að þessi hugmynd sé í vinnslu"
       name: Hugmyndir
@@ -240,20 +240,20 @@ is:
         agenda_endorsed: "Mælt með"
         agenda_not: "Ekki á dagskrá"
         agenda_opposed: "Á móti"
-        name: "{{official_user_name}} hugmynd"
+        name: "%{official_user_name} hugmynd"
       opposers: 
         name: "Á móti"
         one: "1 á móti"
-        other: "{{count}} á móti"
+        other: "%{count} á móti"
       quiz: "Könnun á hugmynd"
       successful: 
-        confirm: "Þú ert að merkja eftirfarandi hugmynd kláraða og árangursríka: {{priority_name}}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef hugmyndin hefur fjölda meðmæla"
+        confirm: "Þú ert að merkja eftirfarandi hugmynd kláraða og árangursríka: %{priority_name}.  Vinsamlegast sýndu biðlund, það getur tekið smá stund að afgreiða þessa beiðni ef hugmyndin hefur fjölda meðmæla"
         name: "Merkja þetta árangursríkt"
         title: "Merkja þessa hugmynd kláraða og árangursríka"
       undeclareds: 
         name: Óyfirlýst
         one: "1 óyfirlýst"
-        other: "{{count}} óyfirlýst"
+        other: "%{count} óyfirlýst"
       yours: 
         active: Virk
         ads: "Auglýsingar sem þú keyptir"
@@ -277,13 +277,13 @@ is:
       followers: Fylgjendur
       following: Fylgjandi
       impersonate: 
-        confirm: "Ertu viss um að þú viljir skrá þig inn sem  {{user_name}}? Farðu varlega!"
+        confirm: "Ertu viss um að þú viljir skrá þig inn sem  %{user_name}? Farðu varlega!"
         name: "Skrá inn sem þessi meðlimur"
         title: "Skrá inn sem þessi meðlimur"
       legislators: 
         name: Lagasmiðir/Reglusmiðir
       make_admin: 
-        confirm: "Ef þú gerir  {{user_name}} að umsjónarmanni mun viðkomandi hafa sömu réttindi og þú og þú getur EKKI afturkallað þessi réttindi."
+        confirm: "Ef þú gerir  %{user_name} að umsjónarmanni mun viðkomandi hafa sömu réttindi og þú og þú getur EKKI afturkallað þessi réttindi."
         name: "Gera að umsjónarmanni"
         title: "Gera þennan meðlim að umsjónarmanni"
       name: Notendaupplýsingar
@@ -294,11 +294,11 @@ is:
       signups: 
         name: "Tölvupóstfangs stillingar"
       suspend: 
-        confirm: "{{user_name}} mun ekki geta tengst og prófíl viðkomandi verður eytt og þau skilaboð gefin að viðkomandi hafi verið sagt upp. Viðkomandi fær EKKI tilkynningu um þetta í tölvupósti"
+        confirm: "%{user_name} mun ekki geta tengst og prófíl viðkomandi verður eytt og þau skilaboð gefin að viðkomandi hafi verið sagt upp. Viðkomandi fær EKKI tilkynningu um þetta í tölvupósti"
         name: "Ljúka aðild þessa meðlims/Setja þennann meðlim á bið"
         title: "Útiloka þennann meðlim algerlega"
       unsuspend: 
-        confirm: "Ef þú endurvekur {{user_name}} verða notendaupplýsingarnar aftur virkar og viðkomandi getur skráð sig inn. Viðkomandi fær EKKI tilkynningu um þetta í tölvupósti þ.a. ef þú vilt láta notandann vita þarftu að hafa samband við viðkomandi."
+        confirm: "Ef þú endurvekur %{user_name} verða notendaupplýsingarnar aftur virkar og viðkomandi getur skráð sig inn. Viðkomandi fær EKKI tilkynningu um þetta í tölvupósti þ.a. ef þú vilt láta notandann vita þarftu að hafa samband við viðkomandi."
         name: "Endurvekja þennann meðlim"
         title: "Affrysta þennan meðlim"
     settings: 

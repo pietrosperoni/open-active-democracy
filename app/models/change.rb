@@ -128,7 +128,7 @@ class Change < ActiveRecord::Base
         @comment.is_endorser = true if e and e.is_up?
         @comment.is_opposer = true if e and e.is_down?
       end
-      @comment.save(false)
+      @comment.save(:validate => false)
     end
   end  
   
@@ -193,7 +193,7 @@ class Change < ActiveRecord::Base
         else
           v.value = 1
         end
-        v.save(false)
+        v.save(:validate => false)
         ballots += 1
       end
     end
@@ -205,7 +205,7 @@ class Change < ActiveRecord::Base
         else
           v.value = -1
         end
-        v.save(false)
+        v.save(:validate => false)
         ballots += 1
       end
     end

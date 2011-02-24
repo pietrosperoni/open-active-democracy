@@ -106,7 +106,7 @@ class Government < ActiveRecord::Base
     self.documents_count = Document.published.count
     self.contributors_count = User.active.at_least_one_endorsement.contributed.count
     self.official_user_priorities_count = official_user.endorsements_count if has_official?
-    self.save(false)
+    self.save(:validate => false)
   end  
   
   def has_official?

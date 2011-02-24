@@ -668,83 +668,84 @@ class PrioritiesController < ApplicationController
   # POST /priorities
   # POST /priorities.xml
   def create
-    begin
-      Priority.transaction do
-        @tag_names = params[:tag_names]
+ #   begin
+      @tag_names = params[:tag_names]
+      @priority = Priority.new
+      @priority.name = params[:q] if params[:q]
+      create_tags(@priority)
+      if not logged_in?
+        flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
+        session[:query] = params[:priority][:name] if params[:priority]
+        access_denied
+        return
+      end
+      # if they've confirmed, skip everything and just add it
+      if not params[:finalized].blank?
         @priority = Priority.new
-        @priority.name = params[:q] if params[:q]
+        @priority.name = params[:finalized].strip
+        @priority.user = current_user
+        @priority.ip_address = request.remote_ip
         create_tags(@priority)
-        if not logged_in?
-          flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
-          session[:query] = params[:priority][:name] if params[:priority]
-          access_denied
-          return
+        @saved = @priority.save
+      else
+        # see if it already exists
+        query = params[:priority][:name].strip
+        if query.blank? or query == current_government.prompt or query == t('priorities.yours.prompt')
+          flash[:notice] = t('priorities.new.blank')
+           @saved = false
         end
-        # if they've confirmed, skip everything and just add it
-        if not params[:finalized].blank?
+        @priorities = Priority.find(:all, :conditions => ["name = ? and status = 'published'",query], :order => "endorsements_count desc")
+        if @priorities.any?
+          @priority = @priorities[0]
+          @saved = true
+        elsif current_government.is_searchable? # doesn't exist, let's do a search assuming solr is installed
+          @priority_results = Priority.find_by_solr "(" + query + ") AND is_published:true", :limit => 25
+          @priorities = @priority_results.docs
+        end
+        if not @saved 
           @priority = Priority.new
-          @priority.name = params[:finalized].strip
+          @priority.name = params[:priority][:name].strip
           @priority.user = current_user
           @priority.ip_address = request.remote_ip
           create_tags(@priority)
           @saved = @priority.save
-        else
-          # see if it already exists
-          query = params[:priority][:name].strip
-          if query.blank? or query == current_government.prompt or query == t('priorities.yours.prompt')
-            flash[:notice] = t('priorities.new.blank')
-             @saved = false
-          end
-          @priorities = Priority.find(:all, :conditions => ["name = ? and status = 'published'",query], :order => "endorsements_count desc")
-          if @priorities.any?
-            @priority = @priorities[0]
-            @saved = true
-          elsif current_government.is_searchable? # doesn't exist, let's do a search assuming solr is installed
-            @priority_results = Priority.find_by_solr "(" + query + ") AND is_published:true", :limit => 25
-            @priorities = @priority_results.docs
-          end
-          if not @saved 
-            @priority = Priority.new
-            @priority.name = params[:priority][:name].strip
-            @priority.user = current_user
-            @priority.ip_address = request.remote_ip
-            create_tags(@priority)
-            @saved = @priority.save
-          end
         end
-        @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
-        if current_user.endorsements_count > 24
-          session[:endorsement_page] = (@endorsement.position/25).to_i+1
-          session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
-        end    
-        #did they also do this in a tag area?
-        if @tag_names and @priority.issue_list.empty?
-          @priority.issue_list = @tag_names 
-          @priority.save
-        end
-        
-        if @saved
-          @point = Point.new(params[:point])
-          @point.user = current_user
-          @point.priority_id = @priority.id
-          @point_saved = @point.save
-        end
-        
-        if @point_saved
-          if Revision.create_from_point(@point.id,request)
-            session[:goal] = 'point'
-            if facebook_session
-              flash[:user_action_to_publish] = UserPublisher.create_point(facebook_session, @point, @priority)
-            end          
-            @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
-          end      
-        end
-        raise "rollback" if not @point_saved or not @saved
       end
-    rescue
-      Rails.logger.info("ROLLBACK ERROR")
-      flash[:notice] = I18n.t(:could_not_save_priority)
-    end
+      @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
+      if current_user.endorsements_count > 24
+        session[:endorsement_page] = (@endorsement.position/25).to_i+1
+        session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
+      end    
+      #did they also do this in a tag area?
+      if @tag_names and @priority.issue_list.empty?
+        @priority.issue_list = @tag_names 
+        @priority.save
+      end
+      
+      if @saved
+        @point = Point.new(params[:point])
+        @point.user = current_user
+        @point.priority_id = @priority.id
+        @point_saved = @point.save
+      end
+      
+      if @point_saved
+        if Revision.create_from_point(@point.id,request)
+          session[:goal] = 'point'
+          if current_facebook_user
+            flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
+          end          
+          @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
+        end      
+      end
+      unless @point_saved and @saved
+        @priority.destroy if @priority
+        @point.destroy if @point
+      end
+#    rescue => ex
+#      Rails.logger.info("ROLLBACK ERROR: #{ex.backtrace}")
+#      flash[:notice] = I18n.t(:could_not_save_priority)
+#    end
     
     respond_to do |format|
       if @saved and @point_saved
@@ -823,11 +824,11 @@ class PrioritiesController < ApplicationController
           end
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
           page.visual_effect :highlight, 'your_priorities'
-          if facebook_session
+          if current_facebook_user
             if @value == 1
-              page << fb_connect_stream_publish(UserPublisher.create_endorsement(facebook_session, @endorsement, @priority))
+              page << fb_connect_stream_publish(UserPublisher.create_endorsement(current_facebook_user, @endorsement, @priority))
             else
-              page << fb_connect_stream_publish(UserPublisher.create_opposition(facebook_session, @endorsement, @priority))
+              page << fb_connect_stream_publish(UserPublisher.create_opposition(current_facebook_user, @endorsement, @priority))
             end
           end
         end
@@ -886,7 +887,7 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @short_url = @priority.create_short_url
     if @short_url
-      @priority.save(false)
+      @priority.save(:validate => false)
     end
     respond_to do |format|
       format.js {

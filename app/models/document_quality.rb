@@ -15,7 +15,7 @@ class DocumentQuality < ActiveRecord::Base
       document.neutral_helpful_count += 1 if is_neutral?      
       document.opposer_helpful_count += 1 if is_opposer?
       document.calculate_score
-      document.save(false)
+      document.save(:validate => false)
       ActivityDocumentHelpful.create(:document => document, :user => user, :priority => document.priority)      
     end
     if not self.is_helpful?
@@ -24,7 +24,7 @@ class DocumentQuality < ActiveRecord::Base
       document.neutral_unhelpful_count += 1 if is_neutral?      
       document.opposer_unhelpful_count += 1 if is_opposer?
       document.calculate_score
-      document.save(false)
+      document.save(:validate => false)
       ActivityDocumentUnhelpful.create(:document => document, :user => user, :priority => document.priority)
     end
     user.increment!(:qualities_count)
@@ -37,7 +37,7 @@ class DocumentQuality < ActiveRecord::Base
       document.neutral_helpful_count -= 1 if is_neutral?      
       document.opposer_helpful_count -= 1 if is_opposer?
       document.send_later(:calculate_score, true)
-      document.save(false)
+      document.save(:validate => false)
       ActivityDocumentHelpfulDelete.create(:document => document, :user => user, :priority => document.priority)        
     end
     if not self.is_helpful?
@@ -46,7 +46,7 @@ class DocumentQuality < ActiveRecord::Base
       document.neutral_unhelpful_count -= 1 if is_neutral?      
       document.opposer_unhelpful_count -= 1 if is_opposer?
       document.send_later(:calculate_score, true)
-      document.save(false)
+      document.save(:validate => false)
       ActivityDocumentUnhelpfulDelete.create(:document => document, :user => user, :priority => document.priority)      
     end
     user.decrement!(:qualities_count)    

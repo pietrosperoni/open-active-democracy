@@ -114,7 +114,7 @@ class Point < ActiveRecord::Base
   def do_publish
     self.published_at = Time.now
     add_counts
-    priority.save(false)    
+    priority.save(:validate => false)    
   end
   
   def do_delete
@@ -126,7 +126,7 @@ class Point < ActiveRecord::Base
     if capital_earned != 0
       self.capitals << CapitalPointHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1)) 
     end    
-    priority.save(false)
+    priority.save(:validate => false)
     for r in revisions
       r.delete!
     end
@@ -134,7 +134,7 @@ class Point < ActiveRecord::Base
   
   def do_bury
     remove_counts
-    priority.save(false)    
+    priority.save(:validate => false)    
   end
   
   def add_counts
@@ -268,7 +268,7 @@ class Point < ActiveRecord::Base
     end    
 
     if old_score != self.score and tosave
-      self.save(false)
+      self.save(:validate => false)
     end    
   end
   
@@ -340,7 +340,7 @@ class Point < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
     link(:rel => "nofollow")

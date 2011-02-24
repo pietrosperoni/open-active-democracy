@@ -18,7 +18,7 @@ namespace :multiple do
       next if User.admins.first
       @user = User.create(:login => govt.admin_name, :first_name => govt.admin_name.split(' ').first, :last_name => govt.admin_name.split(' ')[1..govt.admin_name.split(' ').length].join(' '), :email => govt.admin_email, :password => govt.password, :password_confirmation => govt.password, :status => "active")
       @user.is_admin = true
-      @user.save(false)
+      @user.save(:validate => false)
       CapitalGovernmentNew.create(:recipient => @user, :amount => 5)
       
       # create account on run.nationbuilder.com
@@ -34,7 +34,7 @@ namespace :multiple do
       govt.status = 'active'
       govt.password = nil
       govt.users_count = User.active.count
-      govt.save(false)
+      govt.save(:validate => false)
       govt.switch_db_back
     end
   end

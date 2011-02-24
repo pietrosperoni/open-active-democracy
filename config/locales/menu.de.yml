@@ -42,11 +42,11 @@ de:
       discussions: 
         name: Diskussionen
         one: "1 Diskussion"
-        other: "{{count}} Diskussionen"
+        other: "%{count} Diskussionen"
       documents: 
         name: Dokumente
         one: "1 Dokument"
-        other: "{{count}} Dokumente"
+        other: "%{count} Dokumente"
       edit: Bearbeiten
       full_text: Volltext
       helpful_to: "Hilfreich für:"
@@ -54,30 +54,30 @@ de:
       points: 
         name: Argumentationshilfen
         one: "1 Argumentationshilfe"
-        other: "{{count}} Argumentationshilfen"
+        other: "%{count} Argumentationshilfen"
       priorities: 
         name: Prioritäten
         one: "1 Priorität"
-        other: "{{count}} Prioritäten"
+        other: "%{count} Prioritäten"
       recently_revised: "Kürzlich geändert"
       research: 
         contributors: 
           name: Mitarbeiter
           one: "Triff den 1 Mitarbeiter"
-          other: "Triff dich mit {{count}} Mitarbeitern"
+          other: "Triff dich mit %{count} Mitarbeitern"
         documents_needed: "Prioritäten, die Dokumente benötigen"
         name: Weiterforschen
-        needed: "Prioritäten, die {{points_name}} oder {{documents_name}} benötigen"
+        needed: "Prioritäten, die %{points_name} oder %{documents_name} benötigen"
         points_needed: "Prioritäten, die Argumentationshilfen benötigen"
       revised: Geändert
       revisions: 
         name: Änderungen
         one: "1 Änderung"
-        other: "{{count}} Änderungen"
+        other: "%{count} Änderungen"
       your_priorities: "Deine Prioritäten"
       yours: Deine
     charts: 
-      active_issues: "Aktivste Tags: {{tags_name}}"
+      active_issues: "Aktivste Tags: %{tags_name}"
       falling: "Sinkende Agendas"
       name: "Charts und Statistiken"
       rising: "Steigende Agendas"
@@ -90,7 +90,7 @@ de:
       not_invited: "Nicht eingeladen"
       number: 
         one: "Du hast 1 Kontakt"
-        other: "Du hast {{count}} Kontakte"
+        other: "Du hast %{count} Kontakte"
       your_network: "Dein Netzwerk"
     documents: 
       name: Dokumente
@@ -139,7 +139,7 @@ de:
       manda: M&A
       name: News
       network: Netzwerk
-      official_user_activity: "{{official_user_name}} Aktivitäten"
+      official_user_activity: "%{official_user_name} Aktivitäten"
       proposals: Vorschläge
       voting: Abstimmungsergebnisse
       what: "Was passiert gerade?"
@@ -153,7 +153,7 @@ de:
       branches: "In welche Gruppe passt du am besten: "
       comments: "Nimm an der Diskussion über deine Prioritäten teil"
       facebook_friends: "Lade deine Facebook Freunde ein"
-      intro: "Es gibt viel, was du auf {{government_name}} machen kannst .  So fängst du an:"
+      intro: "Es gibt viel, was du auf %{government_name} machen kannst .  So fängst du an:"
       invite: "Lade Leute ein teilzunehmen"
       legislators: "Verbinde deine Interessen mit dem Kongress"
       outro: "Du kannst mitmachen, wie und wann du willst."
@@ -182,23 +182,23 @@ de:
       action: Aktion
       add_ad: 
         name: "Kaufe einen Banner für diese Priorität"
-        title: "Gib etwas von deinen {{currency_name}} aus, um diese Priorität für jeden sichtbar oben auf der Seite zu platzieren."
+        title: "Gib etwas von deinen %{currency_name} aus, um diese Priorität für jeden sichtbar oben auf der Seite zu platzieren."
       add_proposal: 
         name: "Eine Übernahme vorschlagen"
         title: "Gibt es eine andere Priorität, mit der diese fusionieren sollte?"
       branch: 
-        name: "{{branch_name}} Prioritäten"
+        name: "%{branch_name} Prioritäten"
       bury: 
-        confirm: "Du bist dabei diese Priorität aus den Rankings zu entfernen: {{priority_name}}. Bitte nur machen, wenn die Inhalte offensichtlich nicht ernstgemeint, obszön oder lächerlich sind"
+        confirm: "Du bist dabei diese Priorität aus den Rankings zu entfernen: %{priority_name}. Bitte nur machen, wenn die Inhalte offensichtlich nicht ernstgemeint, obszön oder lächerlich sind"
         name: "Aus den Rankings entfernen"
         title: "Diese Priorität aus den Rankings entfernen"
       compromised: 
-        confirm: "Du bist dabei diese Priorität als abgeschlossen durch Kompromiss zu kennzeichnen: {{priority_name}}.  Bitte sei geduldig, es kann keine oder zwei Minuten daueren, wenn diese Prioritätit viele Unterstützer hat"
+        confirm: "Du bist dabei diese Priorität als abgeschlossen durch Kompromiss zu kennzeichnen: %{priority_name}.  Bitte sei geduldig, es kann keine oder zwei Minuten daueren, wenn diese Prioritätit viele Unterstützer hat"
         name: "Als Kompromiss kennzeichnen"
         title: "Kennzeichne diese Priorität als 'durch Kompromiss' abgeschlossen"
       consider: "Priorities, die zu berücksichtigen sind"
       delete: 
-        confirm: "Bist du sicher, dass du diese Priorität {{priority_name}} dauerhaft löschen willst?"
+        confirm: "Bist du sicher, dass du diese Priorität %{priority_name} dauerhaft löschen willst?"
         name: "Lösche diese Priorität"
         title: "Lösche diese Priorität dauerhaft"
       edit: 
@@ -207,7 +207,7 @@ de:
       endorsers: 
         name: Befürworter
         one: "1 Befürworter"
-        other: "{{count}} Befürworter"
+        other: "%{count} Befürworter"
       everyone: 
         ads: Banner
         controversial: Kontrovers
@@ -221,7 +221,7 @@ de:
         short: Jeder
         top: Top
       failed: 
-        confirm: "Du bist dabei diese Priorität als abgeschlossen und gescheitert zu kennzeichnen: {{priority_name}}.  Bitte sei geduldig, es kann keine oder zwei Minuten daueren, wenn diese Prioritätit viele Unterstützer hat"
+        confirm: "Du bist dabei diese Priorität als abgeschlossen und gescheitert zu kennzeichnen: %{priority_name}.  Bitte sei geduldig, es kann keine oder zwei Minuten daueren, wenn diese Prioritätit viele Unterstützer hat"
         name: "Als gescheitert kennzeichen"
         title: "Kennzeichne diese Priorität als abgeschlossen und fehlgeschlagen"
       flag: 
@@ -229,7 +229,7 @@ de:
         name: "Zur Überprüfung kennzeichnen"
         title: "Soll der Admin der Seite einen Blick auf diese Priorität werfen?  Schicke auch ein Bulletin, wenn nicht offensichtlich ist, was das Problem darstellt."
       intheworks: 
-        confirm: "Du bist dabei diese Priorität als 'in Arbeit' zu kennzeichnen: {{priority_name}}."
+        confirm: "Du bist dabei diese Priorität als 'in Arbeit' zu kennzeichnen: %{priority_name}."
         name: "Als 'in Arbeit' kennzeichnen"
         title: "Kennzeichne diese Priorität als 'in Arbeit'"
       name: Prioritäten
@@ -240,20 +240,20 @@ de:
         agenda_endorsed: Befürwortet
         agenda_not: "Nicht auf der Agenda"
         agenda_opposed: Abgelehnt
-        name: "{{official_user_name}} Prioritäten"
+        name: "%{official_user_name} Prioritäten"
       opposers: 
         name: Gegner
         one: "1 Gegner"
-        other: "{{count}} Gegner"
+        other: "%{count} Gegner"
       quiz: "Prioritäten Quiz"
       successful: 
-        confirm: "Du bist dabei diese Priorität als abgeschlossen und erfolgreich zu kennzeichnen: {{priority_name}}.  Bitte sei geduldig, es kann keine oder zwei Minuten daueren, wenn diese Prioritätit viele Unterstützer hat"
+        confirm: "Du bist dabei diese Priorität als abgeschlossen und erfolgreich zu kennzeichnen: %{priority_name}.  Bitte sei geduldig, es kann keine oder zwei Minuten daueren, wenn diese Prioritätit viele Unterstützer hat"
         name: "Als erfolgreich kennzeichnen"
         title: "Kennzeichne diese Priorität als abgeschlossen und erfolgreich"
       undeclareds: 
         name: Untentschieden
         one: "1 Untentschiedener"
-        other: "{{count}} Unentschiedener"
+        other: "%{count} Unentschiedener"
       yours: 
         active: Aktiv
         ads: "Banner, die du gekauft hast"
@@ -277,13 +277,13 @@ de:
       followers: Follower
       following: Following
       impersonate: 
-        confirm: "Bist du sicher, ob du dich als {{user_name}} einloggen willst?  Sei vorsichtig!"
+        confirm: "Bist du sicher, ob du dich als %{user_name} einloggen willst?  Sei vorsichtig!"
         name: "Login als dieses Mitglied"
         title: "Login als dieses Mitglied"
       legislators: 
         name: Gesetzgeber
       make_admin: 
-        confirm: "Wenn du {{user_name}} zum Admin machst, werden sie dieselben Privilegien haben wie du und du wirst ihnen diese nicht entziehen können."
+        confirm: "Wenn du %{user_name} zum Admin machst, werden sie dieselben Privilegien haben wie du und du wirst ihnen diese nicht entziehen können."
         name: "Zum Admin machen"
         title: "Mache dieses Mitglied zum Admin"
       name: Profil
@@ -294,11 +294,11 @@ de:
       signups: 
         name: "Email Einstellungen"
       suspend: 
-        confirm: "{{user_name}} will sich nicht länger einloggen können and sein Profile wird gelöscht mit der Nachricht, dass sie ausgesetzt wurden.  Die Nutzer werden diesbezüglich KEINE Email Benachrichtigung erhalten."
+        confirm: "%{user_name} will sich nicht länger einloggen können and sein Profile wird gelöscht mit der Nachricht, dass sie ausgesetzt wurden.  Die Nutzer werden diesbezüglich KEINE Email Benachrichtigung erhalten."
         name: "Diese Mitgliedschaft aussetzen"
         title: "Dieses Mitglied komplett ausschließen"
       unsuspend: 
-        confirm: "Wenn du {{user_name}} wieder einsetzt, wird sein Profil wieder hergestellt und er wird sich wieder einloggen könnena.  Die Nutzer werden diesbezüglich KEINE Email Benachrichtigung erhalten. Eine Kontaktierung müsste direkt erfolgen."
+        confirm: "Wenn du %{user_name} wieder einsetzt, wird sein Profil wieder hergestellt und er wird sich wieder einloggen könnena.  Die Nutzer werden diesbezüglich KEINE Email Benachrichtigung erhalten. Eine Kontaktierung müsste direkt erfolgen."
         name: "Dieses Mitglied wieder einsetzen"
         title: "Suspendierung dieser Person rückgängig machen"
     settings: 

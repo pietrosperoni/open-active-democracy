@@ -82,7 +82,7 @@ class Message < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
     link(:rel => "nofollow")

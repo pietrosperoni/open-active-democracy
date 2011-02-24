@@ -116,7 +116,7 @@ class UserContact < ActiveRecord::Base
     #ActivityInvitationNew.create(:user => user)
     user.contacts_invited_count += 1
     user.contacts_not_invited_count += -1
-    user.save(false)
+    user.save(:validate => false)
     send_later(:send!)
   end
   

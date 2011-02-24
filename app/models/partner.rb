@@ -51,8 +51,10 @@ class Partner < ActiveRecord::Base
   end  
 
   before_save :clean_urls
+  
+  before_validation :shorten_name
 
-  def before_validation
+  def shorten_name
     short_name.gsub(/[^a-z0-9]+/i, '-')
   end
   

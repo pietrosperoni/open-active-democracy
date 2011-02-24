@@ -32,7 +32,7 @@ gem 'nokogiri'
 
 gem 'paperclip'
 gem 'sunlight', '>= 0.9'  
-gem "RedCloth", ">= 3.0.4"
+gem "RedCloth"
 gem 'googlecharts', '1.3.6'
 gem 'oauth', '>= 0.3.1'
 #gem "twitter-auth", :require => "twitter_auth/engine"
@@ -48,4 +48,4 @@ gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
   :branch  => 'rails3',
   :require => 'thinking_sphinx'
-
+gem 'jquery-rails', '>= 0.2.6'

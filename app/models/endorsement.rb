@@ -86,7 +86,7 @@ class Endorsement < ActiveRecord::Base
     if self.position == 1
       if self.id != user.top_endorsement_id
         user.top_endorsement = self
-        user.save(false)
+        user.save(:validate => false)
         if self.is_up?
           ActivityPriority1.find_or_create_by_user_id_and_priority_id(user.id, self.priority_id)
         elsif self.is_down?
@@ -96,7 +96,7 @@ class Endorsement < ActiveRecord::Base
     elsif user.top_endorsement_id.nil?
       e = user.endorsements.active.by_position.find(:all, :conditions => "position > 0", :limit => 1)[0]
       user.top_endorsement = e
-      user.save(false)
+      user.save(:validate => false)
       if e
         if e.is_up?
           ActivityPriority1.find_or_create_by_user_id_and_priority_id(user.id, e.priority_id)
@@ -274,7 +274,7 @@ class Endorsement < ActiveRecord::Base
     else
       user.down_endorsements_count += -1
     end  
-    user.save(false)
+    user.save(:validate => false)
     if user.qualities_count > 0 and priority.points_count > 0
       for p in priority.points.published.all
         p.calculate_score(true,self)
@@ -299,7 +299,7 @@ class Endorsement < ActiveRecord::Base
     else
       user.down_endorsements_count += 1
     end  
-    user.save(false) 
+    user.save(:validate => false) 
     if user.qualities_count > 0 and priority.points_count > 0
       for p in priority.points.published.all
         p.calculate_score(true,self)

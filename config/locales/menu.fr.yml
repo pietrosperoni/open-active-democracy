@@ -42,11 +42,11 @@ fr:
       discussions: 
         name: Discussions
         one: "1 discussion"
-        other: "{{count}} discussions"
+        other: "%{count} discussions"
       documents: 
         name: Documents
         one: "1 document"
-        other: "{{count}} documents"
+        other: "%{count} documents"
       edit: Editer
       full_text: "Texte en entier"
       helpful_to: "Qui peut aider "
@@ -54,30 +54,30 @@ fr:
       points: 
         name: "Point de discussion"
         one: "1 point de discussion"
-        other: "{{count}} points de discussion"
+        other: "%{count} points de discussion"
       priorities: 
         name: Priorités
         one: "1 priorité"
-        other: "{{count}} priorités"
+        other: "%{count} priorités"
       recently_revised: "Recu récemement"
       research: 
         contributors: 
           name: Contributeurs
           one: "Rencontrer le contributeur"
-          other: "Rencontrer les {{count}} contributeurs"
+          other: "Rencontrer les %{count} contributeurs"
         documents_needed: "Priorité ayant besoin de documents"
         name: "contribuer à la recherche"
-        needed: "Priorités ayant besoin {{points_name}} ou {{documents_name}}"
+        needed: "Priorités ayant besoin %{points_name} ou %{documents_name}"
         points_needed: "Priorités ayant besoin de points de discussion "
       revised: Revu
       revisions: 
         name: Révisions
         one: "1 révision"
-        other: "{{count}} revisions"
+        other: "%{count} revisions"
       your_priorities: "Vos priorités"
       yours: Vos
     charts: 
-      active_issues: "Plus active {{tags_name}}"
+      active_issues: "Plus active %{tags_name}"
       falling: "Agenda délaissé"
       name: "Graphiques et statistiques"
       rising: "Agendas augmentant"
@@ -90,7 +90,7 @@ fr:
       not_invited: "Pas invité"
       number: 
         one: "Vous avez 1 contact"
-        other: "Vous avez {{count}} contacts"
+        other: "Vous avez %{count} contacts"
       your_network: "Votre réseau"
     documents: 
       name: Documents
@@ -139,7 +139,7 @@ fr:
       manda: "M&A   (?)"
       name: Nouvelles
       network: Réseau
-      official_user_activity: "{{official_user_name}} activité"
+      official_user_activity: "%{official_user_name} activité"
       proposals: Proposition
       voting: "Résultats du vote"
       what: "Que se passe t-il?"
@@ -153,7 +153,7 @@ fr:
       branches: "Quel groupe vous décrit le mieux.?"
       comments: "Rejoindre les discussions sur vos priorités "
       facebook_friends: "Ajoutez vos ami(e)s de Facebook"
-      intro: "Il ya beaucoup que vous pouvez faire pour  {{government_name}}. Voici comment commencé "
+      intro: "Il ya beaucoup que vous pouvez faire pour  %{government_name}. Voici comment commencé "
       invite: "Inviter des personnes  à rejoindre"
       legislators: "Connecter vos priorité au Congres"
       outro: "Vous pouvez vous impliquer quand,comme et aussi souvent que vous aimez.Nous sommes ouvert 24 heures par jour."
@@ -182,14 +182,14 @@ fr:
       action: Action
       add_ad: 
         name: "Achetez une publicité pour ce commentaire"
-        title: "Dépenser quelques {{currency_name}} pour mettre cette priorité en haut de la page afin que tout le monde l'a considérer"
+        title: "Dépenser quelques %{currency_name} pour mettre cette priorité en haut de la page afin que tout le monde l'a considérer"
       add_proposal: 
         name: "Propose une aquisition"
         title: "Y-t-il une autre priorité avec laquelle celle ci devrait êtres associée?"
       branch: 
-        name: "{{branch_name}} priorités"
+        name: "%{branch_name} priorités"
       bury: 
-        confirm: "Vous êtes sur le point ?You are about to de-list this priority from the rankings: {{priority_name}}. Only do this for things that are insincere, obscene or ridiculous"
+        confirm: "Vous êtes sur le point ?You are about to de-list this priority from the rankings: %{priority_name}. Only do this for things that are insincere, obscene or ridiculous"
         name: "Enlever des classements "
         title: "Effacer cette priorité des classementsRemove this priority from the rankings"
       compromised: 
@@ -198,7 +198,7 @@ fr:
         title: "Marquer la priorité comme finis mais compromise  "
       consider: "Prioritées a considérer "
       delete: 
-        confirm: "Etes vous sur de pouvoir éffacer de façon permente {{priority_name}}?"
+        confirm: "Etes vous sur de pouvoir éffacer de façon permente %{priority_name}?"
         name: "Effacer cette priorité"
         title: "Effacer de façon permanente cette priorité"
       edit: 
@@ -207,7 +207,7 @@ fr:
       endorsers: 
         name: Suppoteurs
         one: "1 supporteurs"
-        other: "{{count}} endorsers"
+        other: "%{count} endorsers"
       everyone: 
         ads: Publicités
         controversial: Controversable
@@ -221,7 +221,7 @@ fr:
         short: "Tout le monde"
         top: Haut
       failed: 
-        confirm: "\"Vous êtes sur le point de marquer cette priorité finis et  échoué: {{}} priority_name S'il vous plaît soyez patient, une minute ou deux peuvent être necessaire pour traiter  cette priorité si elle a  beaucoup d'appuis."
+        confirm: "\"Vous êtes sur le point de marquer cette priorité finis et  échoué: %{} priority_name S'il vous plaît soyez patient, une minute ou deux peuvent être necessaire pour traiter  cette priorité si elle a  beaucoup d'appuis."
         name: "Indiqué comme échoué"
         title: "Marquer cette priorité comme terminée et échoué"
       flag: 
@@ -229,7 +229,7 @@ fr:
         name: "Signaler pour révision"
         title: "\"Si l'administrateur devait jeter  un oeil à cette priorité? Publier aussi un bulletin, c'est évident quel est le problème."
       intheworks: 
-        confirm: "Vous allez marquer cette priorité comme en contruction  {{priority_name}}."
+        confirm: "Vous allez marquer cette priorité comme en contruction  %{priority_name}."
         name: "Marquer ceci comme en construction"
         title: "Marquer ceci comme en construction"
       name: Prioritées
@@ -240,20 +240,20 @@ fr:
         agenda_endorsed: Approuvé
         agenda_not: "Pas sur l'agenda"
         agenda_opposed: "S'est opposé(e)"
-        name: "{{official_user_name}} priorité"
+        name: "%{official_user_name} priorité"
       opposers: 
         name: Opposants
         one: "1 opposant"
-        other: "{{count}} opposants"
+        other: "%{count} opposants"
       quiz: "Priorité quiz"
       successful: 
-        confirm: "You are about to mark this priority finished and successful: {{priority_name}}.  Please be patient, it may take a minute or two to process if this priority has a lot of endorsements"
+        confirm: "You are about to mark this priority finished and successful: %{priority_name}.  Please be patient, it may take a minute or two to process if this priority has a lot of endorsements"
         name: "A marquer comme un succés (couronnee de succes-frutueux)"
         title: "Mark this priority finished and successful"
       undeclareds: 
         name: "Non déclaré"
         one: "1 non déclaré"
-        other: "{{count}} non déclaré"
+        other: "%{count} non déclaré"
       yours: 
         active: Active
         ads: "Publicité achetées"
@@ -277,13 +277,13 @@ fr:
       followers: Supporteurs
       following: Suppoteurs
       impersonate: 
-        confirm: "Etes vous sure de vouloir vous connectez en tant que {{user_name}}?  Faîtes attention"
+        confirm: "Etes vous sure de vouloir vous connectez en tant que %{user_name}?  Faîtes attention"
         name: "Se connecter en tant que membres"
         title: "Se connecter en tant que"
       legislators: 
         name: Legislateurs
       make_admin: 
-        confirm: "Si nomination d' {{user_name}} un administrateur, ils auront les mêmes privilèges que vous,et vous n'aurez pas la possibilité de les annuler"
+        confirm: "Si nomination d' %{user_name} un administrateur, ils auront les mêmes privilèges que vous,et vous n'aurez pas la possibilité de les annuler"
         name: "Nommer en tant qu'administrateur"
         title: "Nommer ce membre comme administrateur"
       name: Profile
@@ -294,11 +294,11 @@ fr:
       signups: 
         name: "Parametres du courriel"
       suspend: 
-        confirm: "{{user_name}}ne sera plus plus capable de se connecter,et leur profile sera annulé,ainsir qu 'un message qu'ils sont suspendus.Its recevront un courriel les notifiants de ceci. "
+        confirm: "%{user_name}ne sera plus plus capable de se connecter,et leur profile sera annulé,ainsir qu 'un message qu'ils sont suspendus.Its recevront un courriel les notifiants de ceci. "
         name: "Suspendre ce membre "
         title: "Interdire complétement ce membre."
       unsuspend: 
-        confirm: "Si vous réintégrer ce membre, {{user_name}},leur profile sera restauré et ils pourront se connecter a nouveau their profile will be restored and they will be able to sign in again.  They will NOT receive an email notification of this, so if you want them to know you should contact them directly."
+        confirm: "Si vous réintégrer ce membre, %{user_name},leur profile sera restauré et ils pourront se connecter a nouveau their profile will be restored and they will be able to sign in again.  They will NOT receive an email notification of this, so if you want them to know you should contact them directly."
         name: "Réintégrer ce membre "
         title: "?"
     settings: 

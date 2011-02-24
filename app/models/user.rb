@@ -535,13 +535,13 @@ class User < ActiveRecord::Base
   def remember_me_until(time)
     self.remember_token_expires_at = time
     self.remember_token            = encrypt("#{email}--#{remember_token_expires_at}")
-    save(false)
+    save(:validate => false)
   end
 
   def forget_me
     self.remember_token_expires_at = nil
     self.remember_token            = nil
-    save(false)
+    save(:validate => false)
   end
 
   def name
@@ -872,7 +872,7 @@ class User < ActiveRecord::Base
     if twitter_info['profile_image_url']
       u.picture = Picture.create_from_url(twitter_info['profile_image_url'])
     end
-    if u.save(false)
+    if u.save(:validate => false)
       u.activate!
       return u
     else
@@ -918,7 +918,7 @@ class User < ActiveRecord::Base
         end
         self.reload
         self.last_sent_report=Time.now
-        self.save(false)
+        self.save(:validate => false)
       end
     end
   end
@@ -933,7 +933,7 @@ class User < ActiveRecord::Base
       self.picture = Picture.create_from_url(twitter_info['profile_image_url'])
     end
     self.twitter_count = twitter_info['followers_count'].to_i
-    self.save(false)
+    self.save(:validate => false)
     self.activate! if not self.activated?
   end  
   
@@ -976,7 +976,7 @@ class User < ActiveRecord::Base
     if check_existing_facebook.any?
       for e in check_existing_facebook
         e.remove_facebook
-        e.save(false)
+        e.save(:validate => false)
       end
     end
     if fb_session.user.current_location
@@ -984,7 +984,7 @@ class User < ActiveRecord::Base
       self.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any? and not self.attribute_present?("city")
       self.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any? and not self.attribute_present?("state")
     end
-    self.save(false)
+    self.save(:validate => false)
     check_contacts # looks for any contacts with the facebook uid, and connects them
     return true
   end

@@ -269,7 +269,7 @@ class Priority < ActiveRecord::Base
     self.official_status = -2
     self.status = 'inactive'
     self.change = nil
-    self.save(false)
+    self.save(:validate => false)
     deactivate_endorsements  
   end
   
@@ -279,7 +279,7 @@ class Priority < ActiveRecord::Base
     self.official_status = 2
     self.status = 'inactive'
     self.change = nil    
-    self.save(false)
+    self.save(:validate => false)
     deactivate_endorsements
   end  
   
@@ -289,7 +289,7 @@ class Priority < ActiveRecord::Base
     self.official_status = -1
     self.status = 'inactive'
     self.change = nil    
-    self.save(false)
+    self.save(:validate => false)
     deactivate_endorsements
   end  
   
@@ -304,7 +304,7 @@ class Priority < ActiveRecord::Base
     self.change = nil
     self.status_changed_at = Time.now
     self.official_status = 0
-    self.save(false)
+    self.save(:validate => false)
     for e in endorsements.active_and_inactive
       e.update_attribute(:status,'active')
       row = 0
@@ -424,7 +424,7 @@ class Priority < ActiveRecord::Base
             e.value = -1
           end
         end   
-        e.save(false)     
+        e.save(:validate => false)     
       end
     end
     p2.reload
@@ -444,11 +444,11 @@ class Priority < ActiveRecord::Base
           if c.is_opposer?
             c.is_opposer = false
             c.is_endorser = true
-            c.save(false)
+            c.save(:validate => false)
           elsif c.is_endorser?
             c.is_opposer = true
             c.is_endorser = false
-            c.save(false)            
+            c.save(:validate => false)            
           end
         end
         if a.class == ActivityEndorsementNew
@@ -501,7 +501,7 @@ class Priority < ActiveRecord::Base
         point.opposer_helpful_count = helpful
         point.opposer_unhelpful_count = unhelpful        
       end      
-      point.save(false)      
+      point.save(:validate => false)      
     end
     for document in documents
       document.priority = p2
@@ -519,7 +519,7 @@ class Priority < ActiveRecord::Base
         document.opposer_helpful_count = helpful
         document.opposer_unhelpful_count = unhelpful        
       end      
-      document.save(false)      
+      document.save(:validate => false)      
     end
     for point in incoming_points
       if flip == 1
@@ -529,7 +529,7 @@ class Priority < ActiveRecord::Base
       else
         point.other_priority = p2
       end
-      point.save(false)
+      point.save(:validate => false)
     end
     if not preserve # set preserve to true if you want to leave the Change and the original priority in tact, otherwise they will be deleted
       for c in changes_with_deleted

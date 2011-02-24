@@ -101,7 +101,7 @@ class Revision < ActiveRecord::Base
     point.author_sentence = point.user.login
     point.author_sentence += ", breytingar " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
     point.published_at = Time.now
-    point.save(false)
+    point.save(:validate => false)
     user.increment!(:point_revisions_count)    
   end
   
@@ -188,7 +188,7 @@ class Revision < ActiveRecord::Base
     r.content_diff = p.content
     r.website = p.website    
     r.request = request
-    r.save(false)
+    r.save(:validate => false)
     r.publish!
   end
   
@@ -197,10 +197,9 @@ class Revision < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
     link(:rel => "nofollow")
   end  
-  
 end

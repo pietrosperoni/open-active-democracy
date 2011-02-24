@@ -174,7 +174,7 @@ class ProcessParser
         current_user=User.new
         current_user.email = "lagafrumvorp@skuggathing.is"
         current_user.login = "Lagafrumvörp frá Alþingi"
-        current_user.save(false)
+        current_user.save(:validate => false)
       end
     elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
       tags_to_collect << "þingsályktunartillögur"
@@ -182,7 +182,7 @@ class ProcessParser
         current_user=User.new
         current_user.email = "thingsalyktunartillaga@skuggathing.is"
         current_user.login = "Þingsályktunartillögur frá Alþingi"
-        current_user.save(false)
+        current_user.save(:validate => false)
       end
     end
     

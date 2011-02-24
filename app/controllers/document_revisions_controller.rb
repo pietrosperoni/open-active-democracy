@@ -71,7 +71,7 @@ class DocumentRevisionsController < ApplicationController
               @comment.is_endorser = true if e and e.is_up?
               @comment.is_opposer = true if e and e.is_down?
             end
-            @comment.save(false)            
+            @comment.save(:validate => false)            
           end
         end
         flash[:notice] = t('document.revision.new.success', :document_name => @document.name)

@@ -116,7 +116,7 @@ class Document < ActiveRecord::Base
   def do_publish
     self.published_at = Time.now
     add_counts
-    priority.save(false) if priority
+    priority.save(:validate => false) if priority
   end
   
   def do_delete
@@ -129,7 +129,7 @@ class Document < ActiveRecord::Base
     if capital_earned != 0
       self.capitals << CapitalDocumentHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1))
     end
-    priority.save(false)
+    priority.save(:validate => false)
     for r in revisions
       r.delete!
     end
@@ -137,7 +137,7 @@ class Document < ActiveRecord::Base
   
   def do_bury
     remove_counts
-    priority.save(false) if priority
+    priority.save(:validate => false) if priority
   end
   
   def add_counts
@@ -266,7 +266,7 @@ class Document < ActiveRecord::Base
     end    
 
     if old_score != self.score and tosave
-      self.save(false)
+      self.save(:validate => false)
     end    
   end
   
@@ -319,7 +319,7 @@ class Document < ActiveRecord::Base
   end
 
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 460, :height => 285)
     vimeo(:width => 460, :height => 260)
     link(:rel => "nofollow")

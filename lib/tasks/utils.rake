@@ -136,7 +136,7 @@ namespace :utils do
       current_user=User.new
       current_user.email = "island@skuggathing.is"
       current_user.login = "Island.is"
-      current_user.save(false)
+      current_user.save(:validate => false)
     end
     f = File.open(ENV['csv_import_file'])
     partner = Partner.find_by_short_name(ENV['partner_short_name'])

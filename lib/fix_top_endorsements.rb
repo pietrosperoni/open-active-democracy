@@ -6,7 +6,7 @@ class FixTopEndorsements
     Government.current = Government.all.last    
     for u in User.find_by_sql("select * from users where top_endorsement_id not in (select id from endorsements)")
       u.top_endorsement = u.endorsements.active.by_position.find(:all, :limit => 1)[0]
-      u.save(false)        
+      u.save(:validate => false)        
       puts u.login
     end
     Delayed::Job.enqueue FixTopEndorsements.new, -3, 2.minutes.from_now

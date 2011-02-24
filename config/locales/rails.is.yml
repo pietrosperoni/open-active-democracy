@@ -8,27 +8,27 @@ is:
         blank: "má ekki vera autt"
         confirmation: "Þarfnast ekki samþykktar"
         empty: "má ekki vera tómt"
-        equal_to: "þarf að vera {{count}}"
+        equal_to: "þarf að vera %{count}"
         even: "þarf að vera jöfn tala"
         exclusion: "er upptekið"
-        greater_than: "þarf að vera meira en {{count}}"
-        greater_than_or_equal_to: "þarf að vera meira en eða sama og {{count}}"
+        greater_than: "þarf að vera meira en %{count}"
+        greater_than_or_equal_to: "þarf að vera meira en eða sama og %{count}"
         inclusion: "er ekki á listanum"
         invalid: "er ekki leyfilegt"
-        less_than: "þarf að vera minna en {{count}}"
-        less_than_or_equal_to: "þarf að vera minna eða það sama og {{count}}"
+        less_than: "þarf að vera minna en %{count}"
+        less_than_or_equal_to: "þarf að vera minna eða það sama og %{count}"
         not_a_number: "er ekki númer"
         odd: "þarf að vera oddatala"
         taken: "hefur þegar verið tekið"
-        too_long: "er of langt (hámarksfjöldi stafa eru {{count}} stafir)"
-        too_short: "er of stutt (lámarksfjöldi stafa eru {{count}} stafir)"
-        wrong_length: "er röng lengd (ætti að vera {{count}} stafir)"
+        too_long: "er of langt (hámarksfjöldi stafa eru %{count} stafir)"
+        too_short: "er of stutt (lámarksfjöldi stafa eru %{count} stafir)"
+        wrong_length: "er röng lengd (ætti að vera %{count} stafir)"
       models: ""
       template: 
         body: "Upp komu vandamál með eftirfarandi svæði:"
         header: 
-          one: "1 villa varð til þess að {{model}} gat ekki verið vistað"
-          other: "{{count}} villur urðu til þess að {{model}} gat ekki verið vistað"
+          one: "1 villa varð til þess að %{model} gat ekki verið vistað"
+          other: "%{count} villur urðu til þess að %{model} gat ekki verið vistað"
   date: 
     abbr_day_names: 
       - Sun
@@ -85,35 +85,35 @@ is:
   datetime: 
     distance_in_words: 
       about_x_hours: 
-        many: "um {{count}} klst."
+        many: "um %{count} klst."
         one: "um klukkustund"
       about_x_months: 
-        many: "um {{count}} mán."
+        many: "um %{count} mán."
         one: "um mánuði"
       about_x_years: 
-        many: "um {{count}} árum"
+        many: "um %{count} árum"
         one: "um ári"
       half_a_minute: "hálf mín"
       less_than_x_minutes: 
-        many: "minna en {{count}} mín"
+        many: "minna en %{count} mín"
         one: "undir einni mín"
       less_than_x_seconds: 
-        many: "minna en {{count}} sek."
+        many: "minna en %{count} sek."
         one: "undir 1 sek."
       over_x_years: 
-        many: "yfir {{count}} árum"
+        many: "yfir %{count} árum"
         one: "yfir 1 ári"
       x_days: 
-        many: "{{count}} dagar"
+        many: "%{count} dagar"
         one: "1 dagur"
       x_minutes: 
-        many: "{{count}} mín"
+        many: "%{count} mín"
         one: "1 mín"
       x_months: 
-        many: "{{count}} mán."
+        many: "%{count} mán."
         one: "1 mánuður"
       x_seconds: 
-        many: "{{count}} sek."
+        many: "%{count} sek."
         one: "1 sek."
   number: 
     currency: 

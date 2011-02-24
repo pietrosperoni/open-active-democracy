@@ -47,7 +47,7 @@ class Comment < ActiveRecord::Base
   def do_publish
     self.activity.changed_at = Time.now
     self.activity.comments_count += 1
-    self.activity.save(false)
+    self.activity.save(:validate => false)
     self.user.increment!("comments_count")
     for u in activity.followers
       if u.id != self.user_id and not Following.find_by_user_id_and_other_user_id_and_value(u.id,self.user_id,-1)
@@ -86,7 +86,7 @@ class Comment < ActiveRecord::Base
       self.activity.changed_at = self.activity.comments.published.by_recently_created.first.created_at
     end
     self.activity.comments_count -= 1
-    self.save(false)    
+    self.save(:validate => false)    
 
     self.user.decrement!("comments_count")
     if self.activity.comments_count == 0
@@ -152,7 +152,7 @@ class Comment < ActiveRecord::Base
   end
   
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
     link(:rel => "nofollow")

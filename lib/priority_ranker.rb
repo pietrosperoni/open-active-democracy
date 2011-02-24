@@ -129,7 +129,7 @@ class PriorityRanker
             p.position_30days_change = 0
           end      
           
-          p.save(false)
+          p.save(:validate => false)
           r = BranchEndorsementRanking.create(:version => v, :branch_endorsement => p, :position => i, :endorsements_count => p.endorsements_count)
         end
 
@@ -317,7 +317,7 @@ class PriorityRanker
          tag.official_priority_id = nil
        end
        tag.up_endorsers_count = tag.num_endorsers
-       tag.save(false)
+       tag.save(:validate => false)
       end
       # get the number of opposers on the issue
       tags = Tag.find_by_sql("SELECT tags.id, tags.name, tags.down_endorsers_count, count(distinct endorsements.user_id) as num_opposers
@@ -404,7 +404,7 @@ class PriorityRanker
         u.index_24hr_change = u.index_change_percent(2)
         u.index_7days_change = u.index_change_percent(7)
         u.index_30days_change = u.index_change_percent(30)
-        u.save(false)
+        u.save(:validate => false)
         u.expire_charts
       end
        

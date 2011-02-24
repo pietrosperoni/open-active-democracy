@@ -48,7 +48,9 @@ module OpenActiveDemocracy
   
     # Make Active Record use UTC-base instead of local time
     # config.active_record.default_timezone = :utc
-  
+
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails)  
+
     config.i18n.load_path += Dir[File.join(Rails.root.to_s, 'config', 'locales', '**', '*.{rb,yml}')] 
     config.i18n.default_locale = :en
     config.i18n.locale = :en

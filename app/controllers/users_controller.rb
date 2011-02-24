@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def disable_facebook
 #    @user = current_user
 #    @user.facebook_uid=nil
-#    @user.save(false)
+#    @user.save(:validate => false)
 #    fb_cookie_destroy
     redirect_to '/'
   end
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
         params[:user][:last_sent_report]=Time.now
       end
       current_user.update_attributes(params[:user])
-      current_user.save(false)
+      current_user.save(:validate => false)
       redirect_to "/"
     end
   end
@@ -507,7 +507,7 @@ class UsersController < ApplicationController
     redirect_to '/' and return
     @user = User.find(params[:id])
     @user.is_admin = true
-    @user.save(false)
+    @user.save(:validate => false)
     flash[:notice] = t('users.make_admin', :user_name => @user.name)
     redirect_to @user
   end
