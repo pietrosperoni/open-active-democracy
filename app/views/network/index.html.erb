@@ -12,11 +12,7 @@
 	</tr>
 <% for user in @users %>
 	<tr><td valign="top"></td>
-		<% if params[:controller] == 'branch_users' %>
-			<%= render :partial => "branch_users/rank_week_month", :locals => {:user => user } %>		
-		<% else %>
-			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => user } %>
-		<% end %>
+		<%= render :partial => "priorities/rank_week_month", :locals => {:priority => user } %>
 		<td valign="top" width="26" style="padding: 10px 5px 4px 7px;">
 			<%= render :partial => "users/pic", :locals => {:user => user}%>
 		</td><td style="padding: 7px 5px 4px 0px;" valign="top">

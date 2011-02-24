@@ -94,23 +94,6 @@ class SettingsController < ApplicationController
     end    
   end
   
-  def branch_change
-    store_previous_location
-    @branch = Branch.find(params[:branch_id])
-    if @user.branch_id != @branch.id # they changed their branch, need to update the user counts
-      @branch.increment!(:users_count)
-      @user.branch.decrement!(:users_count)
-    end
-    @user.branch = @branch
-    @user.is_branch_chosen = true
-    @user.save(false)
-    Branch.expire_cache
-    flash[:notice] = t('settings.branch_change.success', :branch_name => @branch.name)
-    respond_to do |format|
-      format.html { redirect_back_or_default }
-    end
-  end
-  
   # GET /settings/delete
   def delete
     @page_title = t('settings.delete.title', :government_name => current_government.name)

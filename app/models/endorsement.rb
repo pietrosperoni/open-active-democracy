@@ -275,19 +275,6 @@ class Endorsement < ActiveRecord::Base
       user.down_endorsements_count += -1
     end  
     user.save(false)
-    # if this government has branches, need to update the branch endorsement    
-    if Government.current.is_branches? and user.has_branch?
-      be = priority.branch_endorsements.find_by_branch_id(user.branch_id)
-      if be
-        be.endorsements_count += -1
-        if self.is_up?
-          be.up_endorsements_count += -1
-        else
-          be.down_endorsements_count += -1
-        end
-        be.save(false)    
-      end
-    end
     if user.qualities_count > 0 and priority.points_count > 0
       for p in priority.points.published.all
         p.calculate_score(true,self)
@@ -313,21 +300,6 @@ class Endorsement < ActiveRecord::Base
       user.down_endorsements_count += 1
     end  
     user.save(false) 
-    # if this government has branches, need to update the branch endorsement
-    if Government.current.is_branches? and user.has_branch?
-      be = priority.branch_endorsements.find_or_create_by_branch_id(user.branch_id)
-      if be
-        be.endorsements_count += 1
-        if self.is_up?
-          be.up_endorsements_count += 1
-        else
-          be.down_endorsements_count += 1
-        end
-        be.save(false)
-        # this is the first endorsement in this branch, move it to the bottom of the list
-        be.move_to_bottom if be.endorsements_count == 1
-      end
-    end    
     if user.qualities_count > 0 and priority.points_count > 0
       for p in priority.points.published.all
         p.calculate_score(true,self)

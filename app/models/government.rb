@@ -6,8 +6,6 @@ class Government < ActiveRecord::Base
   scope :active, :conditions => "status = 'active'"
   scope :pending, :conditions => "status = 'pending'"
   scope :least_active, :conditions => "status = 'active'", :order => "users_count"
-  scope :with_branches, :conditions => "default_branch_id is not null"
-  scope :without_branches, :conditions => "default_branch_id is null"
   scope :facebook, :conditions => "is_facebook = true"
   scope :twitter, :conditions => "is_twitter = true"
   
@@ -32,8 +30,6 @@ class Government < ActiveRecord::Base
   
   validates_attachment_size :fav_icon, :less_than => 5.megabytes
   validates_attachment_content_type :fav_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif']  
-  
-  belongs_to :default_branch, :class_name => "Branch"
   
   validates_presence_of     :name
   validates_length_of       :name, :within => 3..60
@@ -88,15 +84,6 @@ class Government < ActiveRecord::Base
     Thread.current[:government] = government
   end
   
-  def update_user_default_branch
-    User.connection.execute("update users set branch_id = #{default_branch_id} where is_branch_chosen = false;")
-    for branch in Branch.all
-      branch.update_counts
-      branch.save(false)
-    end
-    Branch.expire_cache  
-  end
-
   def base_url
     return ENV['DOMAIN']
   end
@@ -126,10 +113,6 @@ class Government < ActiveRecord::Base
     attribute_present?("official_user_id")
   end
 
-  def is_branches?
-    attribute_present?("default_branch_id")
-  end
-  
   def official_user_name
     official_user.name if official_user
   end
@@ -149,7 +132,7 @@ class Government < ActiveRecord::Base
   
   def has_facebook_enabled?
     return false unless is_facebook?
-    return true if Facebooker.api_key
+    return true
   end
   
   def has_windows_enabled?

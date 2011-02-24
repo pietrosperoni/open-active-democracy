@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   
   # Make these methods visible to views as well
-  helper_method :facebook_session, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :current_branches, :facebook_session, :is_robot?, :js_help
+  helper_method :facebook_session, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
   before_filter :check_subdomain
@@ -98,11 +98,6 @@ class ApplicationController < ActionController::Base
   def current_ignoring_ids
     return [] unless logged_in? and current_user.ignorings_count > 0
     @current_ignoring_ids ||= current_user.followings.down.collect{|f|f.other_user_id}    
-  end
-
-  def current_branches
-    return [] unless current_government.is_branches?
-    Branch.all_cached
   end
   
   def current_tags

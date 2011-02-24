@@ -19,8 +19,6 @@ class User < ActiveRecord::Base
   scope :deleted, :conditions => "users.status = 'deleted'"
   scope :pending, :conditions => "users.status = 'pending'"  
   scope :warnings, :conditions => "warnings_count > 0"
-  scope :no_branch, :conditions => "branch_id is null"
-  scope :with_branch, :conditions => "branch_id is not null"
   
   scope :by_capital, :order => "users.capitals_count desc, users.score desc"
   scope :by_ranking, :conditions => "users.position > 0", :order => "users.position asc"  
@@ -52,7 +50,6 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif','image/x-png','image/pjpeg']
   
   belongs_to :partner
-  belongs_to :branch
   belongs_to :referral, :class_name => "User", :foreign_key => "referral_id"
   belongs_to :partner_referral, :class_name => "Partner", :foreign_key => "partner_referral_id"
   belongs_to :top_endorsement, :class_name => "Endorsement", :foreign_key => "top_endorsement_id", :include => :priority  
@@ -126,7 +123,6 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password
   before_create :make_rss_code
-  before_create :check_branch
   after_save :update_signups
   after_create :check_contacts
   after_create :give_partner_credit
@@ -141,13 +137,6 @@ class User < ActiveRecord::Base
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
     resend_activation if self.has_email? and self.is_pending?
-  end
-  
-  def check_branch
-    return if has_branch? or not Government.current.is_branches?
-    self.branch = Government.current.default_branch
-    Government.current.default_branch.increment!(:users_count) 
-    Branch.expire_cache
   end
   
   def check_contacts
@@ -847,10 +836,6 @@ class User < ActiveRecord::Base
   def has_email?
     self.attribute_present?("email")
   end  
-  
-  def has_branch?
-    self.attribute_present?("branch_id")
-  end
   
   def create_first_and_last_name_from_name(s)
     names = s.split

@@ -7,6 +7,20 @@ require 'new_configuration_generator'
 require 'fileutils'
 
 namespace :rails do
+  namespace :convert do
+    desc 'Recommend Arel syntax changes for the named_scopes'
+    task :named_scopes do
+      converter = Rails::Converter::NamedScope.new
+      converter.run
+    end
+
+    task :finders do
+      converter = Rails::Converter::ActiveRecordFinder.new
+      converter.run
+    end
+
+  end
+  
   namespace :upgrade do
     desc "Runs a battery of checks on your Rails 2.x app and generates a report on required upgrades for Rails 3"
     task :check do

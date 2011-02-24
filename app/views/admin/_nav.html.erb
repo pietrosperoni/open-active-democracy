@@ -1,5 +1,5 @@
 <div id="nav_sub">
-	<div id="nav_sub_<% if ['governments'].include?(params[:controller]) and params[:action] != 'apis' %>1<% elsif ['tags'].include?(params[:controller]) %>2<% elsif ['branches'].include?(params[:controller]) %>3<% elsif ['picture','picture_save','buddy_icon','buddy_icon_save','fav_icon','fav_icon_save'].include?(params[:action]) %>4<% elsif ['color_schemes'].include?(params[:controller]) %>5<% elsif ['pages'].include?(params[:controller]) %>6<% elsif ['blurbs'].include?(params[:controller]) %>7<% elsif ['email_templates'].include?(params[:controller]) %>8<% elsif ['governments'].include?(params[:controller]) and params[:action] == 'apis' %>9<% end %>">
+	<div id="nav_sub_<% if ['governments'].include?(params[:controller]) and params[:action] != 'apis' %>1<% elsif ['tags'].include?(params[:controller]) %>2<% elsif ['picture','picture_save','buddy_icon','buddy_icon_save','fav_icon','fav_icon_save'].include?(params[:action]) %>4<% elsif ['color_schemes'].include?(params[:controller]) %>5<% elsif ['pages'].include?(params[:controller]) %>6<% elsif ['blurbs'].include?(params[:controller]) %>7<% elsif ['email_templates'].include?(params[:controller]) %>8<% elsif ['governments'].include?(params[:controller]) and params[:action] == 'apis' %>9<% end %>">
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
@@ -13,11 +13,6 @@
 				</span>
 			</li>
 			<% end %>
-			<li class="tab3">
-				<span class="tab_header">
-					<%= link_to t('menu.admin.branches'), branches_url %>
-				</span>
-			</li>
 			<li class="tab4">
 				<span class="tab_header">
 					<%= link_to t('menu.admin.graphics'), :controller => "admin", :action => "picture" %>

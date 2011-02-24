@@ -1,5 +1,5 @@
 <div id="toolbar">
-<% if ['priorities','changes','ads','prioritizer','branch_priorities'].include?(params[:controller]) %>
+<% if ['priorities','changes','ads','prioritizer'].include?(params[:controller]) %>
 	<% nav = 2 %>
 <% elsif ['news','comments'].include?(params[:controller]) %>
 	<% if logged_in? %>
@@ -9,11 +9,11 @@
 	<% end %>
 <% elsif ['issues'].include?(params[:controller]) %>
 	<% nav = 1 %>
-<% elsif ['network','users','user_contacts','import','messages','inbox','facebook','branch_users'].include?(params[:controller]) or (params[:controller] == 'partners' and not logged_in?) %>
+<% elsif ['network','users','user_contacts','import','messages','inbox','facebook'].include?(params[:controller]) or (params[:controller] == 'partners' and not logged_in?) %>
 	<% nav = 5 %>
 <% elsif ['points','revisions','documents','document_revisions','briefing'].include?(params[:controller]) %>	
 	<% nav = 3 %>
-<% elsif ['settings','profiles','blurbs','governments','color_schemes','email_templates','admin','passwords','pages','partners','tags','branches'].include?(params[:controller]) %>
+<% elsif ['settings','profiles','governments','color_schemes','email_templates','admin','passwords','pages','partners','tags'].include?(params[:controller]) %>
 	<% nav = 6 %>
 <% elsif ['about','charts','widgets'].include?(params[:controller]) %>
 	<% nav = 7 %>
@@ -94,26 +94,7 @@
 					&middot; <%= link_to t('menu.priorities.yours.created'), yours_created_priorities_url %> &middot; <%= link_to t('menu.priorities.consider'), consider_priorities_url %> &middot; <%= link_to t('menu.priorities.quiz'), :controller => "prioritizer" %>					
 					</div>
 				<% end %>
-				
-				<% if current_government.is_branches? %>
-				
-					<% for branch in current_branches %>
-				
-						<div class="tab_subhead">
-							<%= link_to t('menu.priorities.branch.name', :branch_name => branch.name), top_branch_priorities_url(branch) %><% if branch.endorsements_count > 0 %> (<%= number_with_delimiter(branch.endorsements_count) %>)<% end %>
-						</div>
-						<div class="tab_sublinks">
-						<%= link_to t('menu.priorities.everyone.top'), top_branch_priorities_url(branch) %>
-						&middot; <%= link_to t('menu.priorities.everyone.controversial'), controversial_branch_priorities_url(branch) %>
-						&middot; <%= link_to t('menu.priorities.everyone.rising'), rising_branch_priorities_url(branch) %>
-						&middot; <%= link_to t('menu.priorities.everyone.falling'), falling_branch_priorities_url(branch) %>
-						&middot; <%= link_to t('menu.priorities.everyone.random'), random_branch_priorities_url(branch) %>
-						&middot; <%= link_to t('menu.priorities.everyone.new'), newest_branch_priorities_url(branch) %>
-						</div>
-				
-					<% end %>
-				<% end %>
-				
+								
 				<% if current_government.has_official? %>
 					<div class="tab_subhead">
 						<%= link_to t('menu.priorities.official.name', :official_user_name => current_government.official_user_short_name), obama_priorities_url %> (<%= number_with_delimiter(current_government.official_user_priorities_count) %>)
@@ -258,10 +239,6 @@
 					<%= link_to t('menu.network.ambassadors'), :controller => "network", :action => "ambassadors" %>					
 					&middot; <%= link_to t('menu.network.new'), :controller => "network", :action => "newest" %>
 					&middot; <%= link_to t('menu.network.partners'), :controller => "network", :action => "partners" %>
-					<% if current_government.is_branches? %>
-						<br/>
-						<%= current_branches.collect{ |branch| link_to(branch.name, branch_users_url(branch))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
-					<% end %>
 				</div>
 				<% if logged_in? %>
 					<% if current_user.followings_count > 0 %>
@@ -269,7 +246,7 @@
 						<div class="tab_sublinks"></div>
 					<% end %>
 					<div class="tab_subhead">
-						<% if facebook_session %>
+						<% if current_facebook_user %>
 							<%= link_to t('menu.network.facebook'), :controller => "facebook", :action => "invite" %>
 						<% else %>
 							<%= link_to t('menu.network.grow'), user_contacts_path(current_user) %>
@@ -368,7 +345,7 @@ s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
 					</div>
 					<div class="tab_sublinks">
 						<%= link_to t('menu.admin.government.name'), edit_government_url(current_government) %>
-						&middot; <%= link_to t('menu.admin.branches'), branches_url %>
+						&middot;
 						<% if current_government.is_tags? %>
 							&middot; <%= link_to current_government.tags_name.pluralize.titleize, tags_url %>
 						<% end %>
@@ -384,7 +361,7 @@ s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
 				<% end %>
 				
 				<div class="tab_sublinks">
-				<% if facebook_session %>
+				<% if current_facebook_user %>
 					<%= fb_logout_link t('menu.logout'), logout_path %>
 				<% else %>
 			  		<%= link_to t('menu.logout'), logout_path %>
@@ -464,7 +441,7 @@ s						<%= link_to t('menu.partner.name'), edit_partner_url(Partner.current) %>
 		<%= render :partial => "network/nav" %>
 	<% end %>
 <% elsif nav == 6 %>
-	<% if ['governments','blurbs','color_schemes','admin','email_templates','pages','tags','branches'].include?(params[:controller]) %>
+	<% if ['governments','blurbs','color_schemes','admin','email_templates','pages','tags'].include?(params[:controller]) %>
 		<%= render :partial => "admin/nav" %>
 	<% elsif ['partners'].include?(params[:controller]) and logged_in? %>
 		<%= render :partial => "partners/nav" %>	

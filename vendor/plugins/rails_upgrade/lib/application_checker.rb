@@ -43,8 +43,8 @@ module Rails
 
         if files
           alert(
-            "scope is now just scope",
-            "The scope method has been renamed to just scope.",
+            "named_scope is now just scope",
+            "The named_scope method has been renamed to just scope.",
             "http://github.com/rails/rails/commit/d60bb0a9e4be2ac0a9de9a69041a4ddc2e0cc914",
             files
           )
@@ -59,7 +59,7 @@ module Rails
           files += extract_filenames(lines) || []
         end
         
-        unless files.empty?
+        if files
           alert(
             "Updated syntax for validate_on_* methods",
             "Validate-on-callback methods (validate_on_create/validate_on_destroy) have been changed to validate :x, :on => :create",
@@ -77,7 +77,7 @@ module Rails
           files += extract_filenames(lines) || []
         end
         
-        unless files.empty?
+        if files
           alert(
             "Updated syntax for before_validation_on_* methods",
             "before_validation_on_* methods have been changed to before_validation(:on => :create/:update) { ... }",
@@ -163,7 +163,7 @@ module Rails
         unless files.empty?
           alert(
             "Deprecated constant(s)",
-            "Constants like Rails.env, RAILS_ROOT, and Rails.logger are now deprecated.",
+            "Constants like RAILS_ENV, RAILS_ROOT, and RAILS_DEFAULT_LOGGER are now deprecated.",
             "http://litanyagainstfear.com/blog/2010/02/03/the-rails-module/",
             files.uniq
           )
@@ -259,14 +259,7 @@ module Rails
 
       # Checks for old-style ERb helpers
       def check_old_helpers
-
-        lines = grep_for("<% .*content_tag.* do.*%>", "app/views/**/*")
-        lines += grep_for("<% .*javascript_tag.* do.*%>", "app/views/**/*")
-        lines += grep_for("<% .*form_for.* do.*%>", "app/views/**/*")
-        lines += grep_for("<% .*form_tag.* do.*%>", "app/views/**/*")
-        lines += grep_for("<% .*fields_for.* do.*%>", "app/views/**/*")
-        lines += grep_for("<% .*field_set_tag.* do.*%>", "app/views/**/*")
-        
+        lines = grep_for("<% .* do.*%>", "app/views/**/*")
         files = extract_filenames(lines)
 
         if files
@@ -365,7 +358,10 @@ module Rails
         end
 
         # ignore comments
-        lines.gsub /^(\/[^:]+:)?\s*#.+$/m, ""
+        lines.split("\n").map do |l|
+          clean_line = l.gsub(/^(\/[^:]+:)?\s*#.+$/m, '')
+          clean_line.blank?? nil : clean_line
+        end.compact.join("\n")
       end
 
       # Sets a base path for finding files; mostly for testing

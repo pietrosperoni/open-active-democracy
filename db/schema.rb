@@ -103,90 +103,6 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
 
   add_index "blurbs", ["name"], :name => "index_blurbs_on_name"
 
-  create_table "branch_endorsement_charts", :force => true do |t|
-    t.integer  "date_year"
-    t.integer  "date_month"
-    t.integer  "date_day"
-    t.integer  "position"
-    t.float    "change_percent",        :default => 0.0
-    t.integer  "change",                :default => 0
-    t.datetime "created_at"
-    t.integer  "branch_endorsement_id"
-  end
-
-  add_index "branch_endorsement_charts", ["branch_endorsement_id"], :name => "index_branch_endorsement_charts_on_branch_endorsement_id"
-  add_index "branch_endorsement_charts", ["date_year", "date_month", "date_day"], :name => "branch_pcharts_date"
-
-  create_table "branch_endorsement_rankings", :force => true do |t|
-    t.integer  "version",               :default => 0
-    t.integer  "position"
-    t.integer  "endorsements_count",    :default => 0
-    t.datetime "created_at"
-    t.integer  "branch_endorsement_id"
-  end
-
-  add_index "branch_endorsement_rankings", ["branch_endorsement_id"], :name => "index_branch_endorsement_rankings_on_branch_endorsement_id"
-  add_index "branch_endorsement_rankings", ["created_at"], :name => "index_branch_priority_rankings_on_created_at"
-  add_index "branch_endorsement_rankings", ["version"], :name => "index_branch_priority_rankings_on_version"
-
-  create_table "branch_endorsements", :force => true do |t|
-    t.integer  "branch_id"
-    t.integer  "priority_id"
-    t.integer  "score",                   :default => 0
-    t.integer  "position",                :default => 0
-    t.integer  "endorsements_count",      :default => 0
-    t.integer  "up_endorsements_count",   :default => 0
-    t.integer  "down_endorsements_count", :default => 0
-    t.integer  "position_1hr",            :default => 0
-    t.integer  "position_24hr",           :default => 0
-    t.integer  "position_7days",          :default => 0
-    t.integer  "position_30days",         :default => 0
-    t.integer  "position_1hr_change",     :default => 0
-    t.integer  "position_24hr_change",    :default => 0
-    t.integer  "position_7days_change",   :default => 0
-    t.integer  "position_30days_change",  :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "branch_endorsements", ["branch_id"], :name => "index_branch_endorsements_on_branch_id"
-  add_index "branch_endorsements", ["priority_id"], :name => "index_branch_endorsements_on_priority_id"
-
-  create_table "branch_user_charts", :force => true do |t|
-    t.integer  "branch_id"
-    t.integer  "user_id"
-    t.integer  "date_year"
-    t.integer  "date_month"
-    t.integer  "date_day"
-    t.integer  "position"
-    t.datetime "created_at"
-  end
-
-  add_index "branch_user_charts", ["date_year", "date_month", "date_day"], :name => "branch_ucharts_date"
-  add_index "branch_user_charts", ["user_id", "branch_id"], :name => "branch_ucharts_id"
-
-  create_table "branch_user_rankings", :force => true do |t|
-    t.integer  "branch_id"
-    t.integer  "user_id"
-    t.integer  "version",        :default => 0
-    t.integer  "position"
-    t.integer  "capitals_count", :default => 0
-    t.datetime "created_at"
-  end
-
-  add_index "branch_user_rankings", ["created_at"], :name => "index_branch_user_rankings_on_created_at"
-  add_index "branch_user_rankings", ["user_id", "branch_id"], :name => "branch_uranks_id"
-  add_index "branch_user_rankings", ["version"], :name => "index_branch_user_rankings_on_version"
-
-  create_table "branches", :force => true do |t|
-    t.string   "name",               :limit => 20
-    t.integer  "users_count",                      :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "endorsements_count",               :default => 0
-    t.float    "rank_factor",                      :default => 0.0
-  end
-
   create_table "capitals", :force => true do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
@@ -525,7 +441,6 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
     t.string   "windows_secret_key",             :limit => 32
     t.string   "yahoo_appid",                    :limit => 40
     t.string   "yahoo_secret_key",               :limit => 32
-    t.integer  "default_branch_id"
     t.boolean  "is_twitter",                                    :default => true
     t.string   "twitter_key",                    :limit => 46
     t.string   "twitter_secret_key",             :limit => 46
@@ -1299,20 +1214,11 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
     t.datetime "suspended_at"
     t.integer  "referrals_count",                              :default => 0
     t.boolean  "is_admin",                                     :default => false
-    t.integer  "branch_id"
-    t.integer  "branch_position",                              :default => 0
-    t.integer  "branch_position_24hr",                         :default => 0
-    t.integer  "branch_position_7days",                        :default => 0
-    t.integer  "branch_position_30days",                       :default => 0
-    t.integer  "branch_position_24hr_change",                  :default => 0
-    t.integer  "branch_position_7days_change",                 :default => 0
-    t.integer  "branch_position_30days_change",                :default => 0
     t.integer  "twitter_id"
     t.string   "twitter_token",                 :limit => 64
     t.string   "twitter_secret",                :limit => 64
     t.datetime "twitter_crawled_at"
     t.boolean  "is_admin_subscribed",                          :default => true
-    t.boolean  "is_branch_chosen",                             :default => false
     t.string   "buddy_icon_file_name"
     t.string   "buddy_icon_content_type",       :limit => 30
     t.integer  "buddy_icon_file_size"

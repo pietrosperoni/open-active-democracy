@@ -80,10 +80,6 @@ class EndorsementsController < ApplicationController
           elsif ['priority_inline'].include?(params[:region])
             page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority})) }
             page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => nil, :region => params[:region]}))}
-          elsif ['branch_inline'].include?(params[:region])
-            be = BranchEndorsement.find_by_priority_id_and_branch_id(@priority.id,params[:branch_id])
-            page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "branch_priorities/endorsement_count", :locals => {:priority => @priority, :branch_endorsement => be})) }
-            page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "branch_priorities/button_small", :locals => {:priority => @priority, :branch_endorsement => be, :endorsement => nil, :region => params[:region]}))}          
           elsif params[:region] == 'your_priorities'
             page.visual_effect :fade, 'endorsement_' + eid.to_s, :duration => 0.5
           elsif params[:region] == 'ad'
