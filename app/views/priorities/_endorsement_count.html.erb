@@ -18,9 +18,9 @@
 	&middot; <%= priority.latest_priority_process_at %>
 <% end %>
 
-<% if priority.is_obama_endorsed? %> 
+<% if priority.is_official_endorsed? %> 
 	&middot; <%= current_government.official_user_short_name %> <span class="endorsed"><%= t('endorse.plural')%></span>
-<% elsif priority.is_obama_opposed? %> 
+<% elsif priority.is_official_opposed? %> 
 	&middot; <%= current_government.official_user_short_name %> <span class="opposed"><%= t('oppose.plural')%></span>
 <% end %>
 </span>

@@ -107,7 +107,7 @@ ActionController::Routing::Routes.draw do |map|
     :yours_created => :get,
     :network => :get,
     :consider => :get,
-    :obama => :get, :not_obama => :get, :obama_opposed => :get,
+    :official => :get, :not_official => :get, :official_opposed => :get,
     :finished => :get,
     :ads => :get,
     :top => :get,

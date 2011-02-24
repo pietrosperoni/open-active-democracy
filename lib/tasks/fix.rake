@@ -254,16 +254,16 @@ namespace :fix do
     end
   end
   
-  desc "update obama_status on priorities"
+  desc "update official_status on priorities"
   task :official_status => :environment do
     Government.current = Government.all.last    
     if Government.current.has_official?
-      Priority.connection.execute("update priorities set obama_value = 1
-      where obama_value <> 1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value > 0 and status = 'active')")
-      Priority.connection.execute("update priorities set obama_value = -1
-      where obama_value <> -1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value < 0 and status = 'active')")
-      Priority.connection.execute("update priorities set obama_value = 0
-      where obama_value <> 0 and id not in (select priority_id from endorsements where user_id = #{govt.official_user_id} and status = 'active')")
+      Priority.connection.execute("update priorities set official_value = 1
+      where official_value <> 1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value > 0 and status = 'active')")
+      Priority.connection.execute("update priorities set official_value = -1
+      where official_value <> -1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value < 0 and status = 'active')")
+      Priority.connection.execute("update priorities set official_value = 0
+      where official_value <> 0 and id not in (select priority_id from endorsements where user_id = #{govt.official_user_id} and status = 'active')")
     end
   end  
   

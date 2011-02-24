@@ -74,7 +74,7 @@ is:
         added: 
           name: "{{user_name}} vann sér inn {{capital}}{{currency_short_name}} með því að fá kosinn fulltrúa með sér í lið"
           nouser: "Vann {{capital}}{{currency_short_name}} með því að fá kosinn fulltrúa með sér í lið"
-      obama_letter: 
+      official_letter: 
         name: "{{user_name}} vann sér inn {{capital}}{{currency_short_name}} fyrir að senda dagskrána sína til {{official_user_name}}"
         nouser: "Vann sér inn {{capital}}{{currency_short_name}} fyrir að senda dagskrána sína til {{official_user_name}}"
       partner: 
@@ -369,7 +369,7 @@ is:
         name: "{{user_name}} er höfundur {{priority_name}}"
         noself: "{{user_name}} er höfundur þessarar hugmyndar"
         nouser: "Lagði fram {{priority_name}} sem nýja hugmyndar"
-      obama_status: 
+      official_status: 
         compromised: 
           name: "{{priority_name}} tókst en þó með breytingum"
           noself: "Tókst með breytingum"
@@ -396,7 +396,7 @@ is:
         first: 
           name: "{{priority_name}} er ný hugmynd #1 í {{tag_name}}"
           noself: "Þetta er ný hugmynd #1 í {{tag_name}}"
-        obama: 
+        official: 
           first: 
             name: "{{priority_name}} er ný #1 hugmynd í {{official_user_name}} {{tag_name}} hugmyndaflokki"
             noself: "Þetta er ný #1 hugmynd í {{official_user_name}} {{tag_name}} hugmyndaflokki"

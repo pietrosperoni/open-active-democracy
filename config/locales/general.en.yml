@@ -431,7 +431,7 @@ en:
         user:
             name: "{{user_name}} Agenda"
             title: "Tracks the movement of {{user_name}} priorities in the rankings over the last 30 days.  The more people who endorse priorities on {{user_name}} agenda at a high priority, the higher it rises."
-            obama:
+            official:
                 title: "Compares how {{user_name}} priorities (green) have moved on the charts compared to {{official_user_name}} (blue) in the last 30 days. The more people who endorse priorities on {{user_name}} agenda at a high priority, the higher it rises."
     color_schemes:
         theme:
@@ -828,7 +828,7 @@ en:
         activities:
             name: "Latest activity"
             title: "Everything happening at {{government_name}}"
-        obama:
+        official:
             title: "What {{official_user_name}} is doing at {{government_name}}"
         capital:
             name: "Latest political capital activity"
@@ -875,7 +875,7 @@ en:
             title: "What's happening on your priorities?"
         your_priority_discussions:
             title: "Discussions on your priorities"
-        your_priority_obama:
+        your_priority_official:
             title: "What {{official_user_name}} is doing on your priorities"
         your_priority_points:
             title: "Talking points and documents on your priorities"
@@ -887,7 +887,7 @@ en:
             title: "M&A activity on your priorities"        
         your_priorities_created_activities:
             title: "Everything happening on priorities you created"            
-        your_priorities_created_obama:
+        your_priorities_created_official:
             title: "What {{official_user_name}} is doing on priorities you created"
         your_priorities_created_changes:
             title: "M&A activity on priorities you created"
@@ -1417,13 +1417,13 @@ en:
             title: "Your {{tag_name}} priorities"
         network:
             title: "Your network's {{tag_name}} priorities"
-        obama:
+        official:
             title: "{{official_user_name}} {{tag_name}} priorities"
             intro: "This is the {{official_user_name}} agenda for {{tag_name}} as prioritized by all members"
-        not_obama:
+        not_official:
             title: "{{tag_name}} priorities NOT on {{official_user_name}} agenda"
             intro: "These are our members' {{tag_name}} priorities NOT on {{official_user_name}} agenda"
-        obama_opposed:
+        official_opposed:
             title: "{{tag_name}} priorities {{official_user_name}} opposes"
             intro: "These are our members' {{tag_name}} priorities that {{official_user_name}} opposes"
         rising:

@@ -94,15 +94,6 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
   add_index "blasts", ["type"], :name => "blasts_type_index"
   add_index "blasts", ["user_id"], :name => "blast_user_id_index"
 
-  create_table "blurbs", :force => true do |t|
-    t.string   "name",       :limit => 50
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "blurbs", ["name"], :name => "index_blurbs_on_name"
-
   create_table "capitals", :force => true do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
@@ -323,16 +314,6 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
   add_index "documents", ["revision_id"], :name => "index_documents_on_revision_id"
   add_index "documents", ["status"], :name => "index_documents_on_status"
   add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
-
-  create_table "email_templates", :force => true do |t|
-    t.string   "name",       :limit => 50
-    t.string   "subject",    :limit => 150
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "email_templates", ["name"], :name => "index_email_templates_on_name"
 
   create_table "endorsements", :force => true do |t|
     t.string   "status",      :limit => 50
@@ -740,8 +721,8 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
     t.integer  "discussions_count",                      :default => 0
     t.integer  "relationships_count",                    :default => 0
     t.integer  "changes_count",                          :default => 0
-    t.integer  "obama_status",                           :default => 0
-    t.integer  "obama_value",                            :default => 0
+    t.integer  "official_status",                           :default => 0
+    t.integer  "official_value",                            :default => 0
     t.datetime "status_changed_at"
     t.integer  "score",                                  :default => 0
     t.integer  "up_documents_count",                     :default => 0
@@ -762,8 +743,8 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
     t.integer  "partner_id"
   end
 
-  add_index "priorities", ["obama_status"], :name => "index_priorities_on_obama_status"
-  add_index "priorities", ["obama_value"], :name => "index_priorities_on_obama_value"
+  add_index "priorities", ["official_status"], :name => "index_priorities_on_official_status"
+  add_index "priorities", ["official_value"], :name => "index_priorities_on_official_value"
   add_index "priorities", ["position"], :name => "priorities_position_index"
   add_index "priorities", ["status"], :name => "priorities_status_index"
   add_index "priorities", ["trending_score"], :name => "index_priorities_on_trending_score"
@@ -1043,7 +1024,7 @@ ActiveRecord::Schema.define(:version => 20100405120237) do
     t.integer  "down_endorsers_count",                     :default => 0
     t.integer  "controversial_priority_id"
     t.integer  "rising_priority_id"
-    t.integer  "obama_priority_id"
+    t.integer  "official_priority_id"
     t.integer  "webpages_count",                           :default => 0
     t.integer  "priorities_count",                         :default => 0
     t.integer  "feeds_count",                              :default => 0

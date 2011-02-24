@@ -74,7 +74,7 @@ de:
         added: 
           name: "{{user_name}} erhielt {{capital}}{{currency_short_name}} für das Hinzufügen von Gesetzgebern zu seinem/ihrem Account"
           nouser: "Erhielt {{capital}}{{currency_short_name}} für das Hinzufügen von Gesetzgebern zu seinem/ihrem Account"
-      obama_letter: 
+      official_letter: 
         name: "{{user_name}} erhielt {{capital}}{{currency_short_name}} für das Senden seiner Agenda an {{official_user_name}}"
         nouser: "Erhielt {{capital}}{{currency_short_name}} für das Senden seiner Agenda an {{official_user_name}}"
       partner: 
@@ -369,7 +369,7 @@ de:
         name: "{{user_name}} schlug vor {{priority_name}}"
         noself: "{{user_name}} schlug zuerst diese Priorität vor"
         nouser: "Schlug {{priority_name}} als neue Priorität vor"
-      obama_status: 
+      official_status: 
         compromised: 
           name: "{{priority_name}} wurde mit einem Kompromiss abgeschlossen"
           noself: "Mit einem Kompromiss abgeschlossen"
@@ -396,7 +396,7 @@ de:
         first: 
           name: "{{priority_name}} ist die neue #1 Priorität unter dem Schlagwort: {{tag_name}}"
           noself: "Das ist die neue #1 Priorität unter dem Schlagwort: {{tag_name}}"
-        obama: 
+        official: 
           first: 
             name: "{{priority_name}} ist die neue #1 Priorität auf der {{tag_name}} Agenda von {{official_user_name}}"
             noself: "Das ist die neue #1 Priorität auf der {{tag_name}} Agenda von {{official_user_name}}"

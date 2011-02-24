@@ -509,9 +509,9 @@ class ActivityIssuePriorityRising1 < Activity
   end
 end
 
-class ActivityIssuePriorityObama1 < Activity
+class ActivityIssuePriorityOfficial1 < Activity
   def name
-    I18n.t('activity.priority.tag.obama.first.name', :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
+    I18n.t('activity.priority.tag.official.first.name', :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
   end
 end
 
@@ -746,15 +746,15 @@ class ActivityIgnoringDelete < Activity
   end
 end
 
-class ActivityObamaLetter < Activity
+class ActivityOfficialLetter < Activity
   def name
-    I18n.t('activity.obama_letter.name', :user_name => user.name, :official_user_name => Government.current.official_user.name)
+    I18n.t('activity.official_letter.name', :user_name => user.name, :official_user_name => Government.current.official_user.name)
   end
 end
 
-class ActivityCapitalObamaLetter < Activity
+class ActivityCapitalOfficialLetter < Activity
   def name
-      I18n.t('activity.capital.obama_letter.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :official_user_name => Government.current.official_user.name)   
+      I18n.t('activity.capital.official_letter.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :official_user_name => Government.current.official_user.name)   
   end
 end
 
@@ -806,27 +806,27 @@ class ActivityCapitalAcquisitionProposalApproved < Activity
   end
 end
 
-class ActivityPriorityObamaStatusFailed < Activity
+class ActivityPriorityOfficialStatusFailed < Activity
   def name
-    I18n.t('activity.priority.obama_status.failed.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.failed.name', :priority_name => priority.name)
   end
 end
 
-class ActivityPriorityObamaStatusCompromised < Activity
+class ActivityPriorityOfficialStatusCompromised < Activity
   def name
-    I18n.t('activity.priority.obama_status.compromised.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.compromised.name', :priority_name => priority.name)
   end
 end
 
-class ActivityPriorityObamaStatusInTheWorks < Activity
+class ActivityPriorityOfficialStatusInTheWorks < Activity
   def name
-    I18n.t('activity.priority.obama_status.intheworks.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.intheworks.name', :priority_name => priority.name)
   end
 end
 
-class ActivityPriorityObamaStatusSuccessful < Activity
+class ActivityPriorityOfficialStatusSuccessful < Activity
   def name
-    I18n.t('activity.priority.obama_status.successful.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.successful.name', :priority_name => priority.name)
   end
 end
 

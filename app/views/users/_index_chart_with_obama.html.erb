@@ -23,14 +23,14 @@
 <p>
 <% end %>
 
-<% cu = user.index_chart_with_obama_hash(30) %>
+<% cu = user.index_chart_with_official_hash(30) %>
 <% if cu[:charts].any? %>
 <div class="heading"><%= t('charts.30day.name')%></div>
 <div class="priority_chart">
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td valign="top" rowspan="3" colspan="3">
-				<%= image_tag Gchart.line(:size => '130x80', :data => [cu[:adjusted_percentages],cu[:obama_adjusted_percentages]], :line_colors => "009933,13499b", :chart_background => 'EEEEEE', :min_value => 0, :max_value => cu[:max_percentage]*2, :custom => "chg=0,50,1,0"), :title => t('charts.user.obama.title', :user_name => user.name, :official_user_name => current_government.official_user_short_name), :size => "130x80", :class => "qtip_left" %>
+				<%= image_tag Gchart.line(:size => '130x80', :data => [cu[:adjusted_percentages],cu[:official_adjusted_percentages]], :line_colors => "009933,13499b", :chart_background => 'EEEEEE', :min_value => 0, :max_value => cu[:max_percentage]*2, :custom => "chg=0,50,1,0"), :title => t('charts.user.official.title', :user_name => user.name, :official_user_name => current_government.official_user_short_name), :size => "130x80", :class => "qtip_left" %>
 			</td>			
 			<td valign="top" class="chart_label_plus" height="17">+<%= number_to_percentage(cu[:max_percentage]*100, :precision => 2) %></td>
 

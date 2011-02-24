@@ -8,10 +8,10 @@ class Endorsement < ActiveRecord::Base
   scope :active_and_inactive, :conditions => "endorsements.status in ('active','inactive','finished')" 
   scope :opposing, :conditions => "endorsements.value < 0"
   scope :endorsing, :conditions => "endorsements.value > 0"
-  scope :obama_endorsed, :conditions => "priorities.obama_value = 1", :include => :priority
-  scope :not_obama, :conditions => "priorities.obama_value = 0", :include => :priority
-  scope :obama_opposed, :conditions => "priorities.obama_value = -1", :include => :priority
-  scope :not_obama_or_opposed, :conditions => "priorities.obama_value < 1", :include => :priority
+  scope :official_endorsed, :conditions => "priorities.official_value = 1", :include => :priority
+  scope :not_official, :conditions => "priorities.official_value = 0", :include => :priority
+  scope :official_opposed, :conditions => "priorities.official_value = -1", :include => :priority
+  scope :not_official_or_opposed, :conditions => "priorities.official_value < 1", :include => :priority
   scope :finished, :conditions => "endorsements.status in ('inactive','finished') and priorities.status = 'inactive'", :include => :priority
   scope :top10, :order => "endorsements.position asc", :limit => 10
   
@@ -77,7 +77,7 @@ class Endorsement < ActiveRecord::Base
 
   before_create :calculate_score
   after_save :check_for_top_priority
-  after_save :check_obama
+  after_save :check_official
   before_destroy :remove
   after_destroy :check_for_top_priority
   
@@ -107,11 +107,11 @@ class Endorsement < ActiveRecord::Base
     end
   end
   
-  def check_obama
+  def check_official
     return unless user_id == Government.current.official_user_id
-    Priority.update_all("obama_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
-    Priority.update_all("obama_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
-    Priority.update_all("obama_value = 0", ["id = ?",priority_id]) if status == 'deleted'
+    Priority.update_all("official_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
+    Priority.update_all("official_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
+    Priority.update_all("official_value = 0", ["id = ?",priority_id]) if status == 'deleted'
   end
   
   def priority_name
@@ -227,8 +227,8 @@ class Endorsement < ActiveRecord::Base
   
   def remove
     if self.status == 'active'
-      if user_id == Government.current.official_user_id and priority.obama_value != 0
-        Priority.update_all("obama_value = 0", ["id = ?",priority_id]) 
+      if user_id == Government.current.official_user_id and priority.official_value != 0
+        Priority.update_all("official_value = 0", ["id = ?",priority_id]) 
       end
       delete_update_counts
       if self.is_up?

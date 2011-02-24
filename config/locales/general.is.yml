@@ -253,7 +253,7 @@ is:
         title: "Grænt sýnir fjölda stuðningsatkvæða hvern dag og rautt fjölda mótatkvæða."
     user: 
       name: "{{user_name}} Stefnuhugmynd"
-      obama: 
+      official: 
         title: "Ber saman hvernig hugmynd {{user_name}} (græn) hafa færst til í gröfunum samanborið við {{official_user_name}} (blár) síðustu 30 daga. Því fleiri einstaklingar sem styðja við hugmynd á hugmyndaskrá {{user_name}} á háu forgangsstigi, því hærra rís það."
       title: "Fylgist með hreyfingum hugmynda {{user_name}} í einkunnagjöf síðustu 30 daga. Því fleiri einstaklingar sem styðja hugmynd í stefnuskrá {{user_name}} á háu forgangsstigi, því hærra rís það."
   check_uncheck: "Merkja/Afmerkja allt"
@@ -753,7 +753,7 @@ is:
       name: "Virkar umræður"
       title: "Það sem allir eru að tala um hjá {{government_name}}"
     name: Fréttir
-    obama: 
+    official: 
       title: "Hvað {{official_user_name}} er að gerast hjá {{government_name}}"
     points: 
       name: "Nýjasta virkni fyrir rök"
@@ -795,7 +795,7 @@ is:
       title: "S&Y virkni í hugmyndum sem þú hefur stofnað"
     your_priorities_created_discussions: 
       title: "Umræður um hugmynd sem þú hefur stofnað"
-    your_priorities_created_obama: 
+    your_priorities_created_official: 
       title: "Hvað {{official_user_name}} er að gerast í hugmyndum sem þú hefur stofnað"
     your_priorities_created_points: 
       title: "{{briefing_name}} virkni í hugmyndum sem þú hefur stofnað"
@@ -809,7 +809,7 @@ is:
       title: "Yfirtökur til að kjósa um"
     your_priority_discussions: 
       title: "Umræður um þína hugmynd"
-    your_priority_obama: 
+    your_priority_official: 
       title: "Hvað {{official_user_name}} er að gera í þínum hugmyndum"
     your_priority_points: 
       title: "Rök og skjöl í þínum hugmyndum"
@@ -1394,13 +1394,13 @@ is:
       title: "Bæta við {{tags_name}}"
     newest: 
       title: "Ný {{tag_name}}"
-    not_obama: 
+    not_official: 
       intro: "Þetta eru {{tag_name}} hugmynd meðlima okkar sem eru EKKI á hugmyndaskrá {{official_user_name}}"
       title: "Hugmynd {{tag_name}} EKKI á hugmyndskrá {{official_user_name}}"
-    obama: 
+    official: 
       intro: "Þetta er hugmyndskrá {{official_user_name}} fyrir {{tag_name}} skv. forgangsröð meðlima"
       title: "hugmynd {{official_user_name}} {{tag_name}}"
-    obama_opposed: 
+    official_opposed: 
       intro: "Þetta er hugmynd meðlima {{tag_name}} sem {{official_user_name}} er á móti"
       title: "hugmynd {{tag_name}} sem {{official_user_name}} er á móti"
     points: 

@@ -7,7 +7,7 @@ class Homepage
     [ "random", "Random priorities" ], 
     [ "newest", "New priorities" ], 
     [ "controversial", "Controversial priorities" ], 
-    [ "obama", "Official priorities" ], 
+    [ "official", "Official priorities" ], 
     [ "your_network", "Your network's priorities" ],                         
     [ "yours", "Your priorities" ]
   ]

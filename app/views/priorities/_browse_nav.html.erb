@@ -1,8 +1,8 @@
 	<div id="nav_sub">
 		<% if @priority %>
-		<div id="nav_sub_<% if @priority.new_record? %>1<% elsif @priority.is_finished? %>10<% elsif params[:controller] == 'ads' %>5<% elsif @endorsement %>1<% elsif @priority.is_top? %>4<% elsif @priority.is_obama_endorsed? %>3<% elsif @priority.is_rising? %>7<% elsif @priority.is_new? %>9<% elsif @priority.is_controversial? %>6<% else %>8<% end %>">
+		<div id="nav_sub_<% if @priority.new_record? %>1<% elsif @priority.is_finished? %>10<% elsif params[:controller] == 'ads' %>5<% elsif @endorsement %>1<% elsif @priority.is_top? %>4<% elsif @priority.is_official_endorsed? %>3<% elsif @priority.is_rising? %>7<% elsif @priority.is_new? %>9<% elsif @priority.is_controversial? %>6<% else %>8<% end %>">
 		<% else %>
-		<div id="nav_sub_<% if ['yours','yours_finished','yours_created','yours_top','yours_lowest','yours_ads'].include?(params[:action]) %>1<% elsif logged_in? and ['network'].include?(params[:action]) %>2<% elsif not logged_in? and ['index'].include?(params[:action]) %>2<% elsif ['obama','not_obama','obama_opposed'].include?(params[:action]) %>3<% elsif ['top'].include?(params[:action]) %>4<% elsif ['ads'].include?(params[:action]) %>5<% elsif ['controversial'].include?(params[:action]) %>6<% elsif ['rising'].include?(params[:action]) %>7<% elsif ['random'].include?(params[:action]) %>8<% elsif ['newest'].include?(params[:action]) %>9<% elsif ['finished'].include?(params[:action]) %>10<% end %>">
+		<div id="nav_sub_<% if ['yours','yours_finished','yours_created','yours_top','yours_lowest','yours_ads'].include?(params[:action]) %>1<% elsif logged_in? and ['network'].include?(params[:action]) %>2<% elsif not logged_in? and ['index'].include?(params[:action]) %>2<% elsif ['official','not_official','official_opposed'].include?(params[:action]) %>3<% elsif ['top'].include?(params[:action]) %>4<% elsif ['ads'].include?(params[:action]) %>5<% elsif ['controversial'].include?(params[:action]) %>6<% elsif ['rising'].include?(params[:action]) %>7<% elsif ['random'].include?(params[:action]) %>8<% elsif ['newest'].include?(params[:action]) %>9<% elsif ['finished'].include?(params[:action]) %>10<% end %>">
 		<% end %>
 			<ul id="menu_sub">
 				<% if not logged_in? and current_government.homepage == 'index' %>
@@ -27,7 +27,7 @@
 				<% if current_government.has_official? %>			
 					<li class="tab3">
 						<span class="tab_header">
-							<%= link_to current_government.official_user_short_name, obama_priorities_url %>
+							<%= link_to current_government.official_user_short_name, official_priorities_url %>
 						</span>
 					</li>
 				<% end %>
@@ -126,28 +126,28 @@
 <% end %>
 <% end %>
 
-<% if ['obama','not_obama','obama_opposed'].include?(params[:action]) %>
+<% if ['official','not_official','official_opposed'].include?(params[:action]) %>
 	
 	<div id="nav_third">
-		<div id="nav_third_<% if ['obama'].include?(params[:action]) %>1<% elsif ['not_obama'].include?(params[:action]) %>2<% elsif ['obama_opposed'].include?(params[:action]) %>3<% end %>">	
+		<div id="nav_third_<% if ['official'].include?(params[:action]) %>1<% elsif ['not_official'].include?(params[:action]) %>2<% elsif ['official_opposed'].include?(params[:action]) %>3<% end %>">	
 
 			<ul id="menu_third">
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.agenda_endorsed'), obama_priorities_url %>
+						<%= link_to t('menu.priorities.official.agenda_endorsed'), official_priorities_url %>
 					</span>
 				</li>			
 	
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.agenda_not'), not_obama_priorities_url %>
+						<%= link_to t('menu.priorities.official.agenda_not'), not_official_priorities_url %>
 					</span>
 				</li>	
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.agenda_opposed'), obama_opposed_priorities_url %>
+						<%= link_to t('menu.priorities.official.agenda_opposed'), official_opposed_priorities_url %>
 					</span>
 				</li>	
 			

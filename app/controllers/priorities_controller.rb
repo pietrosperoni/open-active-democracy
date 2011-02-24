@@ -163,11 +163,11 @@ class PrioritiesController < ApplicationController
     end    
   end
 
-  # GET /priorities/obama
-  def obama
+  # GET /priorities/official
+  def official
     @page_title = t('priorities.official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
-    @rss_url = obama_priorities_url(:format => 'rss')   
-    @priorities = Priority.published.filtered.obama_endorsed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = official_priorities_url(:format => 'rss')   
+    @priorities = Priority.published.filtered.official_endorsed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
@@ -178,11 +178,11 @@ class PrioritiesController < ApplicationController
     end
   end
   
-  # GET /priorities/obama_opposed  
-  def obama_opposed
+  # GET /priorities/official_opposed  
+  def official_opposed
     @page_title = t('priorities.official_opposed.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
-    @rss_url = obama_opposed_priorities_url(:format => 'rss')       
-    @priorities = Priority.published.filtered.obama_opposed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = official_opposed_priorities_url(:format => 'rss')       
+    @priorities = Priority.published.filtered.official_opposed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
@@ -193,11 +193,11 @@ class PrioritiesController < ApplicationController
     end
   end  
   
-  # GET /priorities/not_obama  
-  def not_obama
+  # GET /priorities/not_official  
+  def not_official
     @page_title = t('priorities.not_official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
-    @rss_url = not_obama_priorities_url(:format => 'rss')       
-    @priorities = Priority.published.filtered.not_obama.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = not_official_priorities_url(:format => 'rss')       
+    @priorities = Priority.published.filtered.not_official.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }

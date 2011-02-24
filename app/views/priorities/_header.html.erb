@@ -1,9 +1,9 @@
 <% if current_government.has_official? %>
 <div id="priority_<%= @priority.id %>_intro" class="intro">
-	<% if @priority.is_obama_endorsed? %> 
+	<% if @priority.is_official_endorsed? %> 
 		<%= current_government.official_user.name %>
 		<span class="endorsed"><%= t('endorse.plural')%></span>
-	<% elsif @priority.is_obama_opposed? %> 
+	<% elsif @priority.is_official_opposed? %> 
 		<%= current_government.official_user.name %>
 		<span class="opposed"><%= t('oppose.plural')%></span>
 	<% else %>

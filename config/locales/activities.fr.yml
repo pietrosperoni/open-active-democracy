@@ -74,7 +74,7 @@ fr:
         added: 
           name: "{{user_name}} a gagné {{capital}}{{currency_short_name}} en ajoutant les legislateurs à leurs comptes."
           nouser: "A gagné {{capital}}{{currency_short_name}} en ajoutant les legislateurs à leurs comptes."
-      obama_letter: 
+      official_letter: 
         name: "{{user_name}} a gagné {{capital}}{{currency_short_name}} pour envoyer leur agenda à {{official_user_name}}"
         nouser: "A gagné {{capital}}{{currency_short_name}} pour envoyer leur agenda à{{official_user_name}}"
       partner: 
@@ -369,7 +369,7 @@ fr:
         name: "{{user_name}} a été le (la)premier(e) {{priority_name}}"
         noself: "{{user_name}} a été le (la)premier(e)"
         nouser: "A suggeré  {{priority_name}} comme une nouvelle priorités"
-      obama_status: 
+      official_status: 
         compromised: 
           name: "{{priority_name}} fut accepté avec un compromis"
           noself: " fut accepté avec un compromis"
@@ -396,7 +396,7 @@ fr:
         first: 
           name: "{{priority_name}} est le nouvelle numéro un dans {{tag_name}}"
           noself: "est le nouvelle numéro un dans {{tag_name}}"
-        obama: 
+        official: 
           first: 
             name: "{{priority_name}} est la priortié numéro un dans l' {{official_user_name}} {{tag_name}} agenda"
             noself: "Est la priortié numéro un dans l'{{official_user_name}} {{tag_name}} agenda"

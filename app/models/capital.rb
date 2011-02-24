@@ -153,7 +153,7 @@ end
 class CapitalIgnorers < Capital
 end
 
-class CapitalObamaLetter < Capital
+class CapitalOfficialLetter < Capital
 end
 
 class CapitalAdNew < Capital

@@ -126,7 +126,7 @@ en:
                 recruited:
                     name: "{{user_name}} earned {{capital}}{{currency_short_name}} for recruiting {{other_user_name}} to {{government_name}}"
                     nouser: "Earned {{capital}}{{currency_short_name}} for recruiting {{other_user_name}} to {{government_name}}"                
-            obama_letter:
+            official_letter:
                 name: "{{user_name}} earned {{capital}}{{currency_short_name}} for sending their agenda to {{official_user_name}}"
                 nouser: "Earned {{capital}}{{currency_short_name}} for sending their agenda to {{official_user_name}}"
             partner:
@@ -376,7 +376,7 @@ en:
             rising:
                 name: "{{priority_name}} is the fastest rising priority"
                 noself: "This is the fastest rising priority"
-            obama_status:
+            official_status:
                 successful:
                     name: "{{priority_name}} was completed successfully"
                     noself: "Completed successfully"
@@ -399,7 +399,7 @@ en:
                 rising:
                     name: "{{priority_name}} is the fastest rising priority in {{tag_name}}"
                     noself: "This is the fastest rising priority in {{tag_name}}"                    
-                obama:
+                official:
                     first:
                         name: "{{priority_name}} is the new #1 priority on {{official_user_name}} {{tag_name}} agenda"
                         noself: "This is the new #1 priority on {{official_user_name}} {{tag_name}} agenda"

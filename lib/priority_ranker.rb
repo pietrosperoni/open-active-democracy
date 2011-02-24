@@ -272,7 +272,7 @@ class PriorityRanker
     if Government.current.is_tags? and Tag.count > 0
       keep = []
       # get the number of endorsers on the issue
-      tags = Tag.find_by_sql("SELECT tags.id, tags.name, tags.top_priority_id, tags.controversial_priority_id, tags.rising_priority_id, tags.obama_priority_id, count(distinct endorsements.user_id) as num_endorsers
+      tags = Tag.find_by_sql("SELECT tags.id, tags.name, tags.top_priority_id, tags.controversial_priority_id, tags.rising_priority_id, tags.official_priority_id, count(distinct endorsements.user_id) as num_endorsers
       FROM tags,taggings,endorsements
       where 
       taggings.taggable_id = endorsements.priority_id
@@ -280,7 +280,7 @@ class PriorityRanker
       and taggings.tag_id = tags.id
       and endorsements.status = 'active'
       and endorsements.value > 0
-      group by tags.id, tags.name, tags.top_priority_id, tags.controversial_priority_id, tags.rising_priority_id, tags.obama_priority_id, taggings.tag_id")
+      group by tags.id, tags.name, tags.top_priority_id, tags.controversial_priority_id, tags.rising_priority_id, tags.official_priority_id, taggings.tag_id")
       for tag in tags
        keep << tag.id
        priorities = tag.priorities.published.top_rank # figure out the top priority while we're at it
@@ -303,18 +303,18 @@ class PriorityRanker
          elsif rising.empty?
            tag.rising_priority_id = nil
          end 
-         obama = tag.priorities.published.obama_endorsed
-         if obama.any? and tag.obama_priority_id != obama[0].id
-           ActivityIssuePriorityObama1.create(:tag => tag, :priority_id => obama[0].id)
-           tag.obama_priority_id = obama[0].id
-         elsif obama.empty?
-           tag.obama_priority_id = nil
+         official = tag.priorities.published.official_endorsed
+         if official.any? and tag.official_priority_id != official[0].id
+           ActivityIssuePriorityOfficial1.create(:tag => tag, :priority_id => official[0].id)
+           tag.official_priority_id = official[0].id
+         elsif official.empty?
+           tag.official_priority_id = nil
          end
        else
          tag.top_priority_id = nil
          tag.controversial_priority_id = nil
          tag.rising_priority_id = nil
-         tag.obama_priority_id = nil
+         tag.official_priority_id = nil
        end
        tag.up_endorsers_count = tag.num_endorsers
        tag.save(false)

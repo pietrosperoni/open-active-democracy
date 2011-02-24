@@ -4,13 +4,13 @@
 <p>	
 <% if current_government.has_official? %>
 
-	<% if params[:action] == 'not_obama' %>
+	<% if params[:action] == 'not_official' %>
 	<%= t('priorities.not_official.intro', :official_user_name => current_government.official_user.name)%>
 	<p>
-	<% elsif params[:action] == 'obama' %>
+	<% elsif params[:action] == 'official' %>
 	<%= t('priorities.official.intro', :official_user_name => current_government.official_user.name)%>
 	<p>
-	<% elsif params[:action] == 'obama_opposed' %>
+	<% elsif params[:action] == 'official_opposed' %>
 	<%= t('priorities.official_opposed.intro', :official_user_name => current_government.official_user.name)%>
 	<p>
 	<% end %>

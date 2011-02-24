@@ -25,7 +25,7 @@ class Tag < ActiveRecord::Base
   belongs_to :top_priority, :class_name => "Priority", :foreign_key => "top_priority_id"
   belongs_to :rising_priority, :class_name => "Priority", :foreign_key => "rising_priority_id"
   belongs_to :controversial_priority, :class_name => "Priority", :foreign_key => "controversial_priority_id"  
-  belongs_to :obama_priority, :class_name => "Priority", :foreign_key => "obama_priority_id"    
+  belongs_to :official_priority, :class_name => "Priority", :foreign_key => "official_priority_id"    
   
   validates_presence_of :name
   validates_uniqueness_of :name

@@ -35,7 +35,7 @@ class Priority < ActiveRecord::Base
   scope :flat_24hr, :conditions => "priorities.position_24hr_change = 0"
   scope :falling_24hr, :conditions => "priorities.position_24hr_change < 0"
   
-  scope :finished, :conditions => "priorities.obama_status in (-2,-1,2)"
+  scope :finished, :conditions => "priorities.official_status in (-2,-1,2)"
   
   scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
   scope :item_limit, lambda{|limit| {:limit=>limit}} 
@@ -177,12 +177,12 @@ class Priority < ActiveRecord::Base
     return endorsement
   end  
   
-  def is_obama_endorsed?
-    obama_value == 1
+  def is_official_endorsed?
+    official_value == 1
   end
   
-  def is_obama_opposed?
-    obama_value == -1
+  def is_official_opposed?
+    official_value == -1
   end
   
   def is_rising?
@@ -218,23 +218,23 @@ class Priority < ActiveRecord::Base
   alias :is_published :is_published?
     
   def is_finished?
-    obama_status > 1 or obama_status < 0
+    official_status > 1 or official_status < 0
   end
   
   def is_failed?
-    obama_status == -2
+    official_status == -2
   end
   
   def is_successful?
-    obama_status == 2
+    official_status == 2
   end
   
   def is_compromised?
-    obama_status == -1
+    official_status == -1
   end
   
   def is_intheworks?
-    obama_status == 1
+    official_status == 1
   end  
   
   def position_7days_change_percent
@@ -264,9 +264,9 @@ class Priority < ActiveRecord::Base
   end
   
   def failed!
-    ActivityPriorityObamaStatusFailed.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
-    self.obama_status = -2
+    self.official_status = -2
     self.status = 'inactive'
     self.change = nil
     self.save(false)
@@ -274,9 +274,9 @@ class Priority < ActiveRecord::Base
   end
   
   def successful!
-    ActivityPriorityObamaStatusSuccessful.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
-    self.obama_status = 2
+    self.official_status = 2
     self.status = 'inactive'
     self.change = nil    
     self.save(false)
@@ -284,9 +284,9 @@ class Priority < ActiveRecord::Base
   end  
   
   def compromised!
-    ActivityPriorityObamaStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
-    self.obama_status = -1
+    self.official_status = -1
     self.status = 'inactive'
     self.change = nil    
     self.save(false)
@@ -303,7 +303,7 @@ class Priority < ActiveRecord::Base
     self.status = 'published'
     self.change = nil
     self.status_changed_at = Time.now
-    self.obama_status = 0
+    self.official_status = 0
     self.save(false)
     for e in endorsements.active_and_inactive
       e.update_attribute(:status,'active')
@@ -317,17 +317,17 @@ class Priority < ActiveRecord::Base
   end
   
   def intheworks!
-    ActivityPriorityObamaStatusInTheWorks.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusInTheWorks.create(:priority => self, :user => user)
     self.update_attribute(:status_changed_at, Time.now)
-    self.update_attribute(:obama_status, 1)
+    self.update_attribute(:official_status, 1)
   end  
   
-  def obama_status_name
-    return I18n.t('status.failed') if obama_status == -2
-    return I18n.t('status.compromised') if obama_status == -1
-    return I18n.t('status.unknown') if obama_status == 0 
-    return I18n.t('status.intheworks') if obama_status == 1
-    return I18n.t('status.successful') if obama_status == 2
+  def official_status_name
+    return I18n.t('status.failed') if official_status == -2
+    return I18n.t('status.compromised') if official_status == -1
+    return I18n.t('status.unknown') if official_status == 0 
+    return I18n.t('status.intheworks') if official_status == 1
+    return I18n.t('status.successful') if official_status == 2
   end
   
   def has_change?
@@ -434,7 +434,7 @@ class Priority < ActiveRecord::Base
     Priority.update_all("endorsements_count = #{size}, up_endorsements_count = #{up_size}, down_endorsements_count = #{down_size}", ["id = ?",p2.id]) 
 
     # look for the activities that should be removed entirely
-    for a in Activity.find(:all, :conditions => ["priority_id = ? and type in ('ActivityPriorityDebut','ActivityPriorityNew','ActivityPriorityRenamed','ActivityPriorityFlag','ActivityPriorityFlagInappropriate','ActivityPriorityObamaStatusCompromised','ActivityPriorityObamaStatusFailed','ActivityPriorityObamaStatusIntheworks','ActivityPriorityObamaStatusSuccessful','ActivityPriorityRising1','ActivityIssuePriority1','ActivityIssuePriorityControversial1','ActivityIssuePriorityObama1','ActivityIssuePriorityRising1')",self.id])
+    for a in Activity.find(:all, :conditions => ["priority_id = ? and type in ('ActivityPriorityDebut','ActivityPriorityNew','ActivityPriorityRenamed','ActivityPriorityFlag','ActivityPriorityFlagInappropriate','ActivityPriorityOfficialStatusCompromised','ActivityPriorityOfficialStatusFailed','ActivityPriorityOfficialStatusIntheworks','ActivityPriorityOfficialStatusSuccessful','ActivityPriorityRising1','ActivityIssuePriority1','ActivityIssuePriorityControversial1','ActivityIssuePriorityOfficial1','ActivityIssuePriorityRising1')",self.id])
       a.destroy
     end    
     #loop through the rest of the activities and move them over

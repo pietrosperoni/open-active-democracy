@@ -253,7 +253,7 @@ de:
         title: "Die Nummer der täglichen Zustimmungen für diese Priorität ist grün, die Nummer der Ablehnungen rot."
     user: 
       name: "{{user_name}} Agenda"
-      obama: 
+      official: 
         title: "Vergleiche, wie die Prioritäten von {{user_name}} (grün) sich in den Charts bewegt haben, verglichen mit denen von {{official_user_name}} (blau) in den letzten 30 Tagen. Je mehr Leute die Prioritäten auf der Agenda von {{user_name}} mit einer hohen Priorität unterstützen, desto höher steigt sie."
       title: "Verfolgt die Bewegungen von {{user_name}} Prioritäten in den Rankings über die letzten 30 Tage. Je mehr Leute die Prioritäten auf der Agenda von {{user_name}} mit einer hochen Priorität unterstützen, desto höher steigt sie."
   check_uncheck: Markieren
@@ -753,7 +753,7 @@ de:
       name: "Aktive Diskussionen"
       title: "Worüber jeder in {{government_name}} diskutiert"
     name: News
-    obama: 
+    official: 
       title: "Was {{official_user_name}} in {{government_name}} macht"
     points: 
       name: "Latest points"
@@ -795,7 +795,7 @@ de:
       title: "M&A Aktivitäten für die Prioritäten, die du erstellt hast"
     your_priorities_created_discussions: 
       title: "Diskussionen über Prioritäten, die du erstellt hast"
-    your_priorities_created_obama: 
+    your_priorities_created_official: 
       title: "Was macht {{official_user_name}} in Bezug auf die Prioritäten, die du erstellt hast"
     your_priorities_created_points: 
       title: "{{briefing_name}} Aktivität bei den Prioritäten, die du erstellt hast"
@@ -809,7 +809,7 @@ de:
       title: "Übernahmen zur Abstimmung"
     your_priority_discussions: 
       title: "Diskussionen über deine Prioritäten"
-    your_priority_obama: 
+    your_priority_official: 
       title: "Was {{official_user_name}} in Bezug auf deine Prioritäten unternimmt"
     your_priority_points: 
       title: "Argumentationshilfen und Dokumente in Bezug auf deine Prioritäten"
@@ -1394,13 +1394,13 @@ de:
       title: "Füge einen {{tags_name}} hinzu"
     newest: 
       title: "Neue {{tag_name}} Prioritäten"
-    not_obama: 
+    not_official: 
       intro: "Das sind die Prioritäten {{tag_name}} unserer Mitglieder, die nicht auf der Agenda von {{official_user_name}} sind"
       title: "{{tag_name}} Prioritäten, die NICHT auf der {{official_user_name}} Agenda sind"
-    obama: 
+    official: 
       intro: "Das ist die {{official_user_name}} Agenda für {{tag_name}} nach der Schwerpunktsetzung aller Mitglieder."
       title: "{{official_user_name}} {{tag_name}} Prioritäten"
-    obama_opposed: 
+    official_opposed: 
       intro: "Das sind die Prioritäten {{tag_name}} unserer Mitglieder, die {{official_user_name}} ablehnt"
       title: "{{tag_name}} Prioritäten, die {{official_user_name}} ablehnt"
     points: 

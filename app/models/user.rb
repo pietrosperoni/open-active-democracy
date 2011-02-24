@@ -792,39 +792,39 @@ class User < ActiveRecord::Base
     return h
   end
   
-  def index_chart_with_obama_hash(limit=30)
+  def index_chart_with_official_hash(limit=30)
     h = Hash.new
     h[:charts] = index_charts(limit)
-    h[:obama_charts] = Government.current.official_user.index_charts(limit)
+    h[:official_charts] = Government.current.official_user.index_charts(limit)
     h[:percentages] = h[:charts].collect{|c|c.percentage.to_f}.reverse
     h[:percentages][0] = 0
     for i in 1..h[:percentages].length-1
     	 h[:percentages][i] =  h[:percentages][i-1] + h[:percentages][i]
     end
-    h[:obama_percentages] = h[:obama_charts].collect{|c|c.percentage.to_f}.reverse
-    h[:obama_percentages][0] = 0
-    for i in 1..h[:obama_percentages].length-1
-    	 h[:obama_percentages][i] = h[:obama_percentages][i-1] + h[:obama_percentages][i]
+    h[:official_percentages] = h[:official_charts].collect{|c|c.percentage.to_f}.reverse
+    h[:official_percentages][0] = 0
+    for i in 1..h[:official_percentages].length-1
+    	 h[:official_percentages][i] = h[:official_percentages][i-1] + h[:official_percentages][i]
     end
     
     h[:max_percentage] = h[:percentages].max.abs
     if h[:max_percentage] < h[:percentages].min.abs
       h[:max_percentage] = h[:percentages].min.abs
     end
-    if h[:max_percentage] < h[:obama_percentages].max.abs
-      h[:max_percentage] = h[:obama_percentages].max.abs
+    if h[:max_percentage] < h[:official_percentages].max.abs
+      h[:max_percentage] = h[:official_percentages].max.abs
     end
-    if h[:max_percentage] < h[:obama_percentages].min.abs
-      h[:max_percentage] = h[:obama_percentages].min.abs
+    if h[:max_percentage] < h[:official_percentages].min.abs
+      h[:max_percentage] = h[:official_percentages].min.abs
     end
         
     h[:adjusted_percentages] = []
     for i in 0..h[:percentages].length-1
       h[:adjusted_percentages][i] = h[:percentages][i] + h[:max_percentage]
     end
-    h[:obama_adjusted_percentages] = []
-    for i in 0..h[:obama_percentages].length-1
-      h[:obama_adjusted_percentages][i] = h[:obama_percentages][i] + h[:max_percentage]
+    h[:official_adjusted_percentages] = []
+    for i in 0..h[:official_percentages].length-1
+      h[:official_adjusted_percentages][i] = h[:official_percentages][i] + h[:max_percentage]
     end    
     return h
   end  
