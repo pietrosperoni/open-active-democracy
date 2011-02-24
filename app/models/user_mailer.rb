@@ -47,7 +47,7 @@ class UserMailer < ActionMailer::Base
     @sender = sender
     @government = Government.last
     @n = n.to_s.underscore
-    RAILS_DEFAULT_LOGGER.info("Notification class: #{@n}")
+    Rails.logger.info("Notification class: #{@n}")
     @notifiable = notifiable
     if @n.include?("notification_warning")
       @subject = "Viðvörun frá vidraedur.is"

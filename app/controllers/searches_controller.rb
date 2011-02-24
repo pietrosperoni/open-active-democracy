@@ -1,7 +1,7 @@
 class SearchesController < ApplicationController  
   
   def index
-    RAILS_DEFAULT_LOGGER.info("ISSUE LIST #{params[:cached_issue_list]} CRC #{params[:cached_issue_list].to_crc32}") if params[:cached_issue_list]
+    Rails.logger.info("ISSUE LIST #{params[:cached_issue_list]} CRC #{params[:cached_issue_list].to_crc32}") if params[:cached_issue_list]
     @page_title = t('searches.index.title', :government_name => current_government.name)
     if params[:q]
       @query = params[:q]

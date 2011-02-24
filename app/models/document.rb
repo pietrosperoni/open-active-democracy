@@ -1,28 +1,28 @@
 class Document < ActiveRecord::Base
-  named_scope :tagged, :conditions => "(documents.cached_issue_list is not null and documents.cached_issue_list <> '')"
-  named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
-  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+  scope :tagged, :conditions => "(documents.cached_issue_list is not null and documents.cached_issue_list <> '')"
+  scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+  scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
 
-  named_scope :flagged, :conditions => "flags_count > 0"
+  scope :flagged, :conditions => "flags_count > 0"
 
   acts_as_taggable_on :issues
   acts_as_set_partner :table_name=>"documents"
 
-  named_scope :published, :conditions => "documents.status = 'published'"
-  named_scope :unpublished, :conditions => "documents.status not in ('published','abusive')"
+  scope :published, :conditions => "documents.status = 'published'"
+  scope :unpublished, :conditions => "documents.status not in ('published','abusive')"
 
-  named_scope :by_helpfulness, :order => "documents.score desc"
-  named_scope :by_endorser_helpfulness, :conditions => "documents.endorser_score > 0", :order => "documents.endorser_score desc"
-  named_scope :by_neutral_helpfulness, :conditions => "documents.neutral_score > 0", :order => "documents.neutral_score desc"    
-  named_scope :by_opposer_helpfulness, :conditions => "documents.opposer_score > 0", :order => "documents.opposer_score desc"
-  named_scope :up, :conditions => "documents.endorser_score > 0"
-  named_scope :neutral, :conditions => "documents.neutral_score > 0"
-  named_scope :down, :conditions => "documents.opposer_score > 0"  
+  scope :by_helpfulness, :order => "documents.score desc"
+  scope :by_endorser_helpfulness, :conditions => "documents.endorser_score > 0", :order => "documents.endorser_score desc"
+  scope :by_neutral_helpfulness, :conditions => "documents.neutral_score > 0", :order => "documents.neutral_score desc"    
+  scope :by_opposer_helpfulness, :conditions => "documents.opposer_score > 0", :order => "documents.opposer_score desc"
+  scope :up, :conditions => "documents.endorser_score > 0"
+  scope :neutral, :conditions => "documents.neutral_score > 0"
+  scope :down, :conditions => "documents.opposer_score > 0"  
 
-  named_scope :by_recently_created, :order => "documents.created_at desc"
-  named_scope :by_recently_updated, :order => "documents.updated_at desc"  
-  named_scope :revised, :conditions => "revisions_count > 1"
-  named_scope :since, lambda{|time| {:conditions=>["documents.created_at>?",time]}}
+  scope :by_recently_created, :order => "documents.created_at desc"
+  scope :by_recently_updated, :order => "documents.updated_at desc"  
+  scope :revised, :conditions => "revisions_count > 1"
+  scope :since, lambda{|time| {:conditions=>["documents.created_at>?",time]}}
 
   has_many :notifications, :as => :notifiable, :dependent => :destroy
 

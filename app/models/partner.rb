@@ -2,9 +2,9 @@ class Partner < ActiveRecord::Base
 
   require 'paperclip'
   
-  named_scope :active, :conditions => "status in ('pending','active')"
+  scope :active, :conditions => "status in ('pending','active')"
   
-  named_scope :with_logo, :conditions => "logo_file_name is not null"
+  scope :with_logo, :conditions => "logo_file_name is not null"
   
   belongs_to :picture
   

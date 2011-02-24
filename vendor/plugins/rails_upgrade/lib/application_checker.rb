@@ -38,13 +38,13 @@ module Rails
           )
         end
 
-        lines = grep_for("named_scope", "app/models/")
+        lines = grep_for("scope", "app/models/")
         files = extract_filenames(lines)
 
         if files
           alert(
-            "named_scope is now just scope",
-            "The named_scope method has been renamed to just scope.",
+            "scope is now just scope",
+            "The scope method has been renamed to just scope.",
             "http://github.com/rails/rails/commit/d60bb0a9e4be2ac0a9de9a69041a4ddc2e0cc914",
             files
           )
@@ -152,7 +152,7 @@ module Rails
       # Check for deprecated constants
       def check_deprecated_constants
         files = []
-        ["RAILS_ENV", "RAILS_ROOT", "RAILS_DEFAULT_LOGGER"].each do |v|
+        ["Rails.env", "RAILS_ROOT", "Rails.logger"].each do |v|
           lines = grep_for(v, "app/")
           files += extract_filenames(lines) || []
 
@@ -163,7 +163,7 @@ module Rails
         unless files.empty?
           alert(
             "Deprecated constant(s)",
-            "Constants like RAILS_ENV, RAILS_ROOT, and RAILS_DEFAULT_LOGGER are now deprecated.",
+            "Constants like Rails.env, RAILS_ROOT, and Rails.logger are now deprecated.",
             "http://litanyagainstfear.com/blog/2010/02/03/the-rails-module/",
             files.uniq
           )

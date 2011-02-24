@@ -29,7 +29,7 @@ class RatingsController < ApplicationController
       rateable.add_rating Rating.new(:rating => params[:rating], :user_id => @user.id)      
       rateable.process_document.touch  if params[:rateable_type]=="ProcessDocumentElement"
     else
-      RAILS_DEFAULT_LOGGER.info("user is not logged in")
+      Rails.logger.info("user is not logged in")
     end
            
     render :update do |page|  

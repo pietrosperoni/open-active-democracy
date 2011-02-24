@@ -2,27 +2,27 @@ class Point < ActiveRecord::Base
 
   acts_as_set_partner :table_name=>"points"
 
-  named_scope :published, :conditions => "points.status = 'published'"
-  named_scope :by_helpfulness, :order => "points.score desc"
-  named_scope :by_endorser_helpfulness, :conditions => "points.endorser_score > 0", :order => "points.endorser_score desc"
-  named_scope :by_neutral_helpfulness, :conditions => "points.neutral_score > 0", :order => "points.neutral_score desc"    
-  named_scope :by_opposer_helpfulness, :conditions => "points.opposer_score > 0", :order => "points.opposer_score desc"
-  named_scope :up, :conditions => "points.endorser_score > 0"
-  named_scope :neutral, :conditions => "points.neutral_score > 0"
-  named_scope :down, :conditions => "points.opposer_score > 0"    
-  named_scope :up_value, :conditions => "points.value > 0"
-  named_scope :neutral_value, :conditions => "points.value = 0"
-  named_scope :down_value, :conditions => "points.value < 0"    
-  named_scope :by_recently_created, :order => "points.created_at desc"
-  named_scope :by_recently_updated, :order => "points.updated_at desc"  
-  named_scope :flagged, :conditions => "flags_count > 0" 
-  named_scope :published, :conditions => "questions.status = 'published'"
-  named_scope :unpublished, :conditions => "questions.status not in ('published','abusive')"
+  scope :published, :conditions => "points.status = 'published'"
+  scope :by_helpfulness, :order => "points.score desc"
+  scope :by_endorser_helpfulness, :conditions => "points.endorser_score > 0", :order => "points.endorser_score desc"
+  scope :by_neutral_helpfulness, :conditions => "points.neutral_score > 0", :order => "points.neutral_score desc"    
+  scope :by_opposer_helpfulness, :conditions => "points.opposer_score > 0", :order => "points.opposer_score desc"
+  scope :up, :conditions => "points.endorser_score > 0"
+  scope :neutral, :conditions => "points.neutral_score > 0"
+  scope :down, :conditions => "points.opposer_score > 0"    
+  scope :up_value, :conditions => "points.value > 0"
+  scope :neutral_value, :conditions => "points.value = 0"
+  scope :down_value, :conditions => "points.value < 0"    
+  scope :by_recently_created, :order => "points.created_at desc"
+  scope :by_recently_updated, :order => "points.updated_at desc"  
+  scope :flagged, :conditions => "flags_count > 0" 
+  scope :published, :conditions => "questions.status = 'published'"
+  scope :unpublished, :conditions => "questions.status not in ('published','abusive')"
 
-  named_scope :revised, :conditions => "revisions_count > 1"
-  named_scope :top, :order => "points.score desc"
-  named_scope :five, :limit => 5
-  named_scope :since, lambda{|time| {:conditions=>["questions.created_at>?",time]}}
+  scope :revised, :conditions => "revisions_count > 1"
+  scope :top, :order => "points.score desc"
+  scope :five, :limit => 5
+  scope :since, lambda{|time| {:conditions=>["questions.created_at>?",time]}}
 
   belongs_to :user
   belongs_to :priority

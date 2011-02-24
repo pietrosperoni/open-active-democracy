@@ -44,12 +44,12 @@ require 'speech_video_processing'
 
 f = File.open( File.dirname(__FILE__) + '/config/worker.yml')
 worker_config = YAML.load(f)
-ENV['RAILS_ENV'] = worker_config['rails_env']
+ENV['Rails.env'] = worker_config['rails_env']
 config = YAML::load(File.open(File.dirname(__FILE__) + "/../../config/database.yml"))
 
 class VideoWorker
   def initialize(config)
-    @logger = Logger.new(File.dirname(__FILE__) + "/video_"+ENV['RAILS_ENV']+".log")
+    @logger = Logger.new(File.dirname(__FILE__) + "/video_"+ENV['Rails.env']+".log")
     @shell = Shell.new(self)
     @worker_config = config
     @counter = 0
@@ -102,14 +102,14 @@ class VideoWorker
       stat = Filesystem.stat(@worker_config["master_path"]+"/")
       freeGB = (stat.block_size * stat.blocks_available) /1024 / 1024 / 1024
       if @last_report_time+EMAIL_REPORTING_INTERVALS<Time.now.to_i
-        #email_progress_report(freeGB) unless ENV['RAILS_ENV']=="development"
+        #email_progress_report(freeGB) unless ENV['Rails.env']=="development"
         @last_report_time = Time.now.to_i
       end
       info("Free video space in GB #{freeGB} - Run count: #{@counter}")
       info("Load Average #{load_avg[0]}, #{load_avg[1]}, #{load_avg[2]}")      
       if load_avg[0] < @worker_config["max_load_average"]
         if freeGB > MIN_FREE_SPACE_GB
-          if ENV['RAILS_ENV'] == 'development' && @counter > MASTER_TEST_MAX_COUNTER
+          if ENV['Rails.env'] == 'development' && @counter > MASTER_TEST_MAX_COUNTER
             warn("Reached maximum number of tests - sleeping for an hour")
             sleep(3600)
           else

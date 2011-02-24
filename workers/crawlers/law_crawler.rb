@@ -25,8 +25,8 @@ require 'nokogiri'
 require 'open-uri'
 require 'timeout'
 
-RAILS_ENV='production'
-#RAILS_ENV='development'
+Rails.env='production'
+#Rails.env='development'
 
 require '../../config/boot'
 require "#{Rails.root.to_s}/config/environment"

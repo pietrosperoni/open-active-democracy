@@ -2,24 +2,24 @@ class Endorsement < ActiveRecord::Base
 
   extend ActiveSupport::Memoizable
   
-  named_scope :active, :conditions => "endorsements.status = 'active'"
-  named_scope :deleted, :conditions => "endorsements.status = 'deleted'" 
-  named_scope :suspended, :conditions => "endorsements.status = 'suspended'"
-  named_scope :active_and_inactive, :conditions => "endorsements.status in ('active','inactive','finished')" 
-  named_scope :opposing, :conditions => "endorsements.value < 0"
-  named_scope :endorsing, :conditions => "endorsements.value > 0"
-  named_scope :obama_endorsed, :conditions => "priorities.obama_value = 1", :include => :priority
-  named_scope :not_obama, :conditions => "priorities.obama_value = 0", :include => :priority
-  named_scope :obama_opposed, :conditions => "priorities.obama_value = -1", :include => :priority
-  named_scope :not_obama_or_opposed, :conditions => "priorities.obama_value < 1", :include => :priority
-  named_scope :finished, :conditions => "endorsements.status in ('inactive','finished') and priorities.status = 'inactive'", :include => :priority
-  named_scope :top10, :order => "endorsements.position asc", :limit => 10
+  scope :active, :conditions => "endorsements.status = 'active'"
+  scope :deleted, :conditions => "endorsements.status = 'deleted'" 
+  scope :suspended, :conditions => "endorsements.status = 'suspended'"
+  scope :active_and_inactive, :conditions => "endorsements.status in ('active','inactive','finished')" 
+  scope :opposing, :conditions => "endorsements.value < 0"
+  scope :endorsing, :conditions => "endorsements.value > 0"
+  scope :obama_endorsed, :conditions => "priorities.obama_value = 1", :include => :priority
+  scope :not_obama, :conditions => "priorities.obama_value = 0", :include => :priority
+  scope :obama_opposed, :conditions => "priorities.obama_value = -1", :include => :priority
+  scope :not_obama_or_opposed, :conditions => "priorities.obama_value < 1", :include => :priority
+  scope :finished, :conditions => "endorsements.status in ('inactive','finished') and priorities.status = 'inactive'", :include => :priority
+  scope :top10, :order => "endorsements.position asc", :limit => 10
   
-  named_scope :by_position, :order => "endorsements.position asc"
-  named_scope :by_priority_position, :order => "priorities.position asc"
-  named_scope :by_priority_lowest_position, :order => "priorities.position desc"  
-  named_scope :by_recently_created, :order => "endorsements.created_at desc"
-  named_scope :by_recently_updated, :order => "endorsements.updated_at desc"  
+  scope :by_position, :order => "endorsements.position asc"
+  scope :by_priority_position, :order => "priorities.position asc"
+  scope :by_priority_lowest_position, :order => "priorities.position desc"  
+  scope :by_recently_created, :order => "endorsements.created_at desc"
+  scope :by_recently_updated, :order => "endorsements.updated_at desc"  
   
   belongs_to :partner
   belongs_to :user

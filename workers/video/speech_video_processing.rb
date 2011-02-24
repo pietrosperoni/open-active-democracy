@@ -44,10 +44,10 @@ class SpeechVideoProcessing < VideoProcessing
   end
 
   def self.convert_all_speeches_to_flash(master_video)
-    master_video_filename = "#{Rails.root.to_s}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.flv"
+    master_video_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.flv"
     cut_points = []
     master_video.process_speech_videos.each do |video|
-      speech_video_path = "#{Rails.root.to_s}/public/"+ENV['RAILS_ENV']+"/process_speech_videos/#{video.id}/"
+      speech_video_path = "#{Rails.root.to_s}/public/"+ENV['Rails.env']+"/process_speech_videos/#{video.id}/"
       speech_video_first_tmp_filename = speech_video_path+"speech.tmp_1.flv"
       FileUtils.mkpath(speech_video_path)
       inpoint_ms = video.inpoint_s*1000
@@ -76,7 +76,7 @@ class SpeechVideoProcessing < VideoProcessing
       video.save
       @@logger.info("VIDEO TO PROCESS: #{video.title}")
       @@logger.info("PROCESS: #{video.process_discussion.meeting_url}")
-      speech_video_path = "#{Rails.root.to_s}/public/"+ENV['RAILS_ENV']+"/process_speech_videos/#{video.id}/"
+      speech_video_path = "#{Rails.root.to_s}/public/"+ENV['Rails.env']+"/process_speech_videos/#{video.id}/"
       speech_video_first_tmp_filename = speech_video_path+"speech.tmp_1.flv"
       speech_video_second_tmp_filename = speech_video_path+"speech.tmp_2.flv"
       speech_video_filename = speech_video_path+"speech.flv"

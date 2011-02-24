@@ -742,7 +742,7 @@ class PrioritiesController < ApplicationController
         raise "rollback" if not @point_saved or not @saved
       end
     rescue
-      RAILS_DEFAULT_LOGGER.info("ROLLBACK ERROR")
+      Rails.logger.info("ROLLBACK ERROR")
       flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á hugmynd og rök - texti við rök má ekki vera of langur."
     end
     
@@ -879,7 +879,7 @@ class PrioritiesController < ApplicationController
           }
         end
       else
-        RAILS_DEFAULT_LOGGER.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
+        Rails.logger.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
         redirect_to(@priority)
       end
     end

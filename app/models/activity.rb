@@ -2,29 +2,29 @@ class Activity < ActiveRecord::Base
   
   acts_as_set_partner :table_name=>"activities"
   
-  named_scope :active, :conditions => "activities.status = 'active'"
-  named_scope :deleted, :conditions => "activities.status = 'deleted'", :order => "updated_at desc"
-  named_scope :for_all_users, :conditions => "is_user_only=false"
+  scope :active, :conditions => "activities.status = 'active'"
+  scope :deleted, :conditions => "activities.status = 'deleted'", :order => "updated_at desc"
+  scope :for_all_users, :conditions => "is_user_only=false"
 
-  named_scope :discussions, :conditions => "activities.comments_count > 0"
-  named_scope :changes, :conditions => "change_id is not null"
-  named_scope :points, :conditions => "type like 'ActivityPoint%'", :order => "activities.created_at desc"
-  named_scope :points_and_docs, :conditions => "type like 'ActivityPoint%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
-  named_scope :capital, :conditions => "type like '%Capital%'"
-  named_scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
+  scope :discussions, :conditions => "activities.comments_count > 0"
+  scope :changes, :conditions => "change_id is not null"
+  scope :points, :conditions => "type like 'ActivityPoint%'", :order => "activities.created_at desc"
+  scope :points_and_docs, :conditions => "type like 'ActivityPoint%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
+  scope :capital, :conditions => "type like '%Capital%'"
+  scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
   
-  named_scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
-  named_scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
-  named_scope :last_thirty_days, :conditions => "activities.changed_at > '#{Time.now-30.days}'"    
-  named_scope :last_24_hours, :conditions => "created_at > '#{Time.now-24.hours}')"  
+  scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
+  scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
+  scope :last_thirty_days, :conditions => "activities.changed_at > '#{Time.now-30.days}'"    
+  scope :last_24_hours, :conditions => "created_at > '#{Time.now-24.hours}')"  
   
-  named_scope :by_recently_updated, :order => "activities.changed_at desc"  
-  named_scope :by_recently_created, :order => "activities.created_at desc"    
+  scope :by_recently_updated, :order => "activities.changed_at desc"  
+  scope :by_recently_created, :order => "activities.created_at desc"    
 
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}
-    named_scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
+    scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
 
-  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+  scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
 
   belongs_to :user
   belongs_to :partner

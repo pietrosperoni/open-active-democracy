@@ -1,16 +1,16 @@
 class Comment < ActiveRecord::Base
 
-  named_scope :published, :conditions => "comments.status = 'published'"
-  named_scope :unpublished, :conditions => "comments.status not in ('published','abusive')"
+  scope :published, :conditions => "comments.status = 'published'"
+  scope :unpublished, :conditions => "comments.status not in ('published','abusive')"
 
-  named_scope :published_and_abusive, :conditions => "comments.status in ('published','abusive')"
-  named_scope :deleted, :conditions => "comments.status = 'deleted'"
-  named_scope :flagged, :conditions => "flags_count > 0"
+  scope :published_and_abusive, :conditions => "comments.status in ('published','abusive')"
+  scope :deleted, :conditions => "comments.status = 'deleted'"
+  scope :flagged, :conditions => "flags_count > 0"
     
-  named_scope :last_three_days, :conditions => "comments.created_at > '#{Time.now-3.days}'"
-  named_scope :by_recently_created, :order => "comments.created_at desc"  
-  named_scope :by_first_created, :order => "comments.created_at asc"  
-  named_scope :by_recently_updated, :order => "comments.updated_at desc"  
+  scope :last_three_days, :conditions => "comments.created_at > '#{Time.now-3.days}'"
+  scope :by_recently_created, :order => "comments.created_at desc"  
+  scope :by_first_created, :order => "comments.created_at asc"  
+  scope :by_recently_updated, :order => "comments.updated_at desc"  
   
   belongs_to :user
   belongs_to :activity

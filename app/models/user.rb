@@ -4,46 +4,46 @@ class User < ActiveRecord::Base
   extend ActiveSupport::Memoizable
   require 'paperclip'
     
-  named_scope :active, :conditions => "users.status in ('pending','active')"
-  named_scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
-  named_scope :newsletter_subscribed, :conditions => "users.is_newsletter_subscribed = true and users.email is not null and users.email <> ''"
-  named_scope :comments_unsubscribed, :conditions => "users.is_comments_subscribed = false"  
-  named_scope :twitterers, :conditions => "users.twitter_login is not null and users.twitter_login <> ''"
-  named_scope :authorized_twitterers, :conditions => "users.twitter_token is not null"
-  named_scope :uncrawled_twitterers, :conditions => "users.twitter_crawled_at is null"
-  named_scope :contributed, :conditions => "users.document_revisions_count > 0 or users.point_revisions_count > 0"
-  named_scope :no_recent_login, :conditions => "users.loggedin_at < '#{Time.now-90.days}'"
-  named_scope :admins, :conditions => "users.is_admin = true"
-  named_scope :suspended, :conditions => "users.status = 'suspended'"
-  named_scope :probation, :conditions => "users.status = 'probation'"
-  named_scope :deleted, :conditions => "users.status = 'deleted'"
-  named_scope :pending, :conditions => "users.status = 'pending'"  
-  named_scope :warnings, :conditions => "warnings_count > 0"
-  named_scope :no_branch, :conditions => "branch_id is null"
-  named_scope :with_branch, :conditions => "branch_id is not null"
+  scope :active, :conditions => "users.status in ('pending','active')"
+  scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
+  scope :newsletter_subscribed, :conditions => "users.is_newsletter_subscribed = true and users.email is not null and users.email <> ''"
+  scope :comments_unsubscribed, :conditions => "users.is_comments_subscribed = false"  
+  scope :twitterers, :conditions => "users.twitter_login is not null and users.twitter_login <> ''"
+  scope :authorized_twitterers, :conditions => "users.twitter_token is not null"
+  scope :uncrawled_twitterers, :conditions => "users.twitter_crawled_at is null"
+  scope :contributed, :conditions => "users.document_revisions_count > 0 or users.point_revisions_count > 0"
+  scope :no_recent_login, :conditions => "users.loggedin_at < '#{Time.now-90.days}'"
+  scope :admins, :conditions => "users.is_admin = true"
+  scope :suspended, :conditions => "users.status = 'suspended'"
+  scope :probation, :conditions => "users.status = 'probation'"
+  scope :deleted, :conditions => "users.status = 'deleted'"
+  scope :pending, :conditions => "users.status = 'pending'"  
+  scope :warnings, :conditions => "warnings_count > 0"
+  scope :no_branch, :conditions => "branch_id is null"
+  scope :with_branch, :conditions => "branch_id is not null"
   
-  named_scope :by_capital, :order => "users.capitals_count desc, users.score desc"
-  named_scope :by_ranking, :conditions => "users.position > 0", :order => "users.position asc"  
-  named_scope :by_talkative, :conditions => "users.comments_count > 0", :order => "users.comments_count desc"
-  named_scope :by_twitter_count, :order => "users.twitter_count desc"
-  named_scope :by_recently_created, :order => "users.created_at desc"
-  named_scope :by_revisions, :order => "users.document_revisions_count+users.point_revisions_count desc"
-  named_scope :by_invites_accepted, :conditions => "users.contacts_invited_count > 0", :order => "users.referrals_count desc"
-  named_scope :by_suspended_at, :order => "users.suspended_at desc"
-  named_scope :by_deleted_at, :order => "users.deleted_at desc"
-  named_scope :by_recently_loggedin, :order => "users.loggedin_at desc"
-  named_scope :by_probation_at, :order => "users.probation_at desc"
-  named_scope :by_oldest_updated_at, :order => "users.updated_at asc"
-  named_scope :by_twitter_crawled_at, :order => "users.twitter_crawled_at asc"
+  scope :by_capital, :order => "users.capitals_count desc, users.score desc"
+  scope :by_ranking, :conditions => "users.position > 0", :order => "users.position asc"  
+  scope :by_talkative, :conditions => "users.comments_count > 0", :order => "users.comments_count desc"
+  scope :by_twitter_count, :order => "users.twitter_count desc"
+  scope :by_recently_created, :order => "users.created_at desc"
+  scope :by_revisions, :order => "users.document_revisions_count+users.point_revisions_count desc"
+  scope :by_invites_accepted, :conditions => "users.contacts_invited_count > 0", :order => "users.referrals_count desc"
+  scope :by_suspended_at, :order => "users.suspended_at desc"
+  scope :by_deleted_at, :order => "users.deleted_at desc"
+  scope :by_recently_loggedin, :order => "users.loggedin_at desc"
+  scope :by_probation_at, :order => "users.probation_at desc"
+  scope :by_oldest_updated_at, :order => "users.updated_at asc"
+  scope :by_twitter_crawled_at, :order => "users.twitter_crawled_at asc"
   
-  named_scope :by_24hr_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change desc"
-  named_scope :by_24hr_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change asc"  
-  named_scope :by_7days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change desc"
-  named_scope :by_7days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change asc"  
-  named_scope :by_30days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change desc"
-  named_scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
+  scope :by_24hr_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change desc"
+  scope :by_24hr_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change asc"  
+  scope :by_7days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change desc"
+  scope :by_7days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change asc"  
+  scope :by_30days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change desc"
+  scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
 
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
 
   belongs_to :picture
   has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_35 => "35x35#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
@@ -1009,7 +1009,7 @@ class User < ActiveRecord::Base
     if User.find_by_login(name)
      name = name + "FB(#{rand(6553)})"
     end
-    RAILS_DEFAULT_LOGGER.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
+    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
     u = User.new(
      :login => name,
      :first_name => fb_session.user.first_name,
@@ -1084,7 +1084,7 @@ class User < ActiveRecord::Base
   def self.adapter
     return @adapter if @adapter
     config = Rails::Configuration.new
-    @adapter = config.database_configuration[RAILS_ENV]["adapter"]
+    @adapter = config.database_configuration[Rails.env]["adapter"]
     return @adapter
   end
   

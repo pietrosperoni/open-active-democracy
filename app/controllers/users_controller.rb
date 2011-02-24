@@ -62,15 +62,15 @@ class UsersController < ApplicationController
           subscription.save
         end
       end
-      RAILS_DEFAULT_LOGGER.info("Starting HASH #{params[:user].inspect}")
+      Rails.logger.info("Starting HASH #{params[:user].inspect}")
       params[:user].each do |hash_value,x|
-        RAILS_DEFAULT_LOGGER.info(hash_value)
+        Rails.logger.info(hash_value)
         if hash_value.include?("to_tag_id")
-          RAILS_DEFAULT_LOGGER.info("DELETING: #{hash_value}")
+          Rails.logger.info("DELETING: #{hash_value}")
           params[:user].delete(hash_value)
         end
       end
-      RAILS_DEFAULT_LOGGER.info("After HASH #{params[:user].inspect}")
+      Rails.logger.info("After HASH #{params[:user].inspect}")
       if not current_user.reports_enabled and params[:user][:reports_enabled].to_i==1
         params[:user][:last_sent_report]=Time.now
       end

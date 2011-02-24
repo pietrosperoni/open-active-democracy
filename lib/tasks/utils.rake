@@ -86,7 +86,7 @@ namespace :utils do
       masters.each do |master_video|
         puts "master_video id: #{master_video.id} all_done: #{master_video.process_speech_videos.all_done?} has_any_in_processing: #{master_video.process_speech_videos.any_in_processing?}"
         if master_video.process_speech_videos.all_done? and not master_video.process_speech_videos.any_in_processing?
-          master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.flv"
+          master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.flv"
           if File.exist?(master_video_flv_filename)
             rm_string = "rm #{master_video_flv_filename}"
             puts rm_string
@@ -113,7 +113,7 @@ namespace :utils do
       masters = ProcessSpeechMasterVideo.find(:all)
       masters.each do |master_video|
         unless master_video.process_speech_videos.all_done? and not master_video.process_speech_videos.any_in_processing?
-          master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.flv"
+          master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.flv"
           if File.exist?(master_video_flv_filename)
             puts "master_video id: #{master_video.id} all_done: #{master_video.process_speech_videos.all_done?} has_any_in_processing: #{master_video.process_speech_videos.any_in_processing?}"
             master_video.process_speech_videos.each do |video|

@@ -72,11 +72,11 @@ class ApplicationCheckerTest < ActiveSupport::TestCase
     assert @checker.alerts.has_key?("Updated syntax for before_validation_on_* methods")
   end
 
-  def test_named_scope_left_over
-    make_file("app/models", "post.rb", "named_scope :failure")
+  def test_scope_left_over
+    make_file("app/models", "post.rb", "scope :failure")
     @checker.check_ar_methods
 
-    assert @checker.alerts.has_key?("named_scope is now just scope")
+    assert @checker.alerts.has_key?("scope is now just scope")
   end
 
   def test_check_routes
@@ -205,14 +205,14 @@ class ApplicationCheckerTest < ActiveSupport::TestCase
   end
 
   def test_check_deprecated_constants_in_app_code
-    make_file("app/controllers/", "thing_controller.rb", "class ThingController; THING = RAILS_ENV; end;")
+    make_file("app/controllers/", "thing_controller.rb", "class ThingController; THING = Rails.env; end;")
     @checker.check_deprecated_constants
 
     assert @checker.alerts.has_key?("Deprecated constant(s)")
   end
 
   def test_check_deprecated_constants_in_lib
-    make_file("lib/", "extra_thing.rb", "class ExtraThing; THING = RAILS_ENV; end;")
+    make_file("lib/", "extra_thing.rb", "class ExtraThing; THING = Rails.env; end;")
     @checker.check_deprecated_constants
 
     assert @checker.alerts.has_key?("Deprecated constant(s)")

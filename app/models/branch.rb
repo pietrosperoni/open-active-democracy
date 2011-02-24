@@ -9,8 +9,8 @@ class Branch < ActiveRecord::Base
   has_many :user_rankings, :class_name => "BranchUserRanking", :dependent => :destroy
   has_many :user_charts, :class_name => "BranchUserChart", :dependent => :destroy
   
-  named_scope :by_users_count, :order => "branches.users_count desc"
-  named_scope :with_endorsements, :conditions => "endorsements_count > 0"
+  scope :by_users_count, :order => "branches.users_count desc"
+  scope :with_endorsements, :conditions => "endorsements_count > 0"
 
   validates_presence_of :name
   validates_length_of :name, :within => 2..20

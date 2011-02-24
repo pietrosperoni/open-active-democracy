@@ -57,7 +57,7 @@ class TwitterController < ApplicationController
         end
       end
     else
-      RAILS_DEFAULT_LOGGER.error "Failed to get twitter user info via OAuth"
+      Rails.logger.error "Failed to get twitter user info via OAuth"
       # The user might have rejected this application. Or there was some other error during the request.
       redirect_to Government.current.homepage_url + "twitter/failed"
       return

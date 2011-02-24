@@ -7,47 +7,47 @@ class Priority < ActiveRecord::Base
   acts_as_set_partner :table_name=>"priorities"
 
   if Government.current and Government.current.is_suppress_empty_priorities?
-    named_scope :published, :conditions => "priorities.status = 'published' and priorities.position > 0 and endorsements_count > 0"
+    scope :published, :conditions => "priorities.status = 'published' and priorities.position > 0 and endorsements_count > 0"
   else
-    named_scope :published, :conditions => "priorities.status = 'published'"
+    scope :published, :conditions => "priorities.status = 'published'"
   end
 
-  named_scope :published, :conditions => "priorities.status = 'published'"
-  named_scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
+  scope :published, :conditions => "priorities.status = 'published'"
+  scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
 
-  named_scope :flagged, :conditions => "flags_count > 0"
+  scope :flagged, :conditions => "flags_count > 0"
 
-  named_scope :alphabetical, :order => "priorities.name asc"
+  scope :alphabetical, :order => "priorities.name asc"
 
-  named_scope :top_rank, :order => "priorities.score desc, priorities.position asc"
-  named_scope :not_top_rank, :conditions => "priorities.position > 25"
-  named_scope :rising, :conditions => "priorities.trending_score > 0", :order => "priorities.trending_score desc"
-  named_scope :falling, :conditions => "priorities.trending_score < 0", :order => "priorities.trending_score asc"
-  named_scope :controversial, :conditions => "priorities.is_controversial = true", :order => "priorities.controversial_score desc"
+  scope :top_rank, :order => "priorities.score desc, priorities.position asc"
+  scope :not_top_rank, :conditions => "priorities.position > 25"
+  scope :rising, :conditions => "priorities.trending_score > 0", :order => "priorities.trending_score desc"
+  scope :falling, :conditions => "priorities.trending_score < 0", :order => "priorities.trending_score asc"
+  scope :controversial, :conditions => "priorities.is_controversial = true", :order => "priorities.controversial_score desc"
 
-  named_scope :rising_7days, :conditions => "priorities.position_7days_change > 0"
-  named_scope :flat_7days, :conditions => "priorities.position_7days_change = 0"
-  named_scope :falling_7days, :conditions => "priorities.position_7days_change < 0"
-  named_scope :rising_30days, :conditions => "priorities.position_30days_change > 0"
-  named_scope :flat_30days, :conditions => "priorities.position_30days_change = 0"
-  named_scope :falling_30days, :conditions => "priorities.position_30days_change < 0"
-  named_scope :rising_24hr, :conditions => "priorities.position_24hr_change > 0"
-  named_scope :flat_24hr, :conditions => "priorities.position_24hr_change = 0"
-  named_scope :falling_24hr, :conditions => "priorities.position_24hr_change < 0"
+  scope :rising_7days, :conditions => "priorities.position_7days_change > 0"
+  scope :flat_7days, :conditions => "priorities.position_7days_change = 0"
+  scope :falling_7days, :conditions => "priorities.position_7days_change < 0"
+  scope :rising_30days, :conditions => "priorities.position_30days_change > 0"
+  scope :flat_30days, :conditions => "priorities.position_30days_change = 0"
+  scope :falling_30days, :conditions => "priorities.position_30days_change < 0"
+  scope :rising_24hr, :conditions => "priorities.position_24hr_change > 0"
+  scope :flat_24hr, :conditions => "priorities.position_24hr_change = 0"
+  scope :falling_24hr, :conditions => "priorities.position_24hr_change < 0"
   
-  named_scope :finished, :conditions => "priorities.obama_status in (-2,-1,2)"
+  scope :finished, :conditions => "priorities.obama_status in (-2,-1,2)"
   
-  named_scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}} 
+  scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+  scope :item_limit, lambda{|limit| {:limit=>limit}} 
   
-named_scope :alphabetical, :order => "priorities.name asc"
-  named_scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
-  named_scope :tagged, :conditions => "(priorities.cached_issue_list is not null and priorities.cached_issue_list <> '')"
-  named_scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
+scope :alphabetical, :order => "priorities.name asc"
+  scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
+  scope :tagged, :conditions => "(priorities.cached_issue_list is not null and priorities.cached_issue_list <> '')"
+  scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
 
-  named_scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
+  scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
   
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}  
+  scope :item_limit, lambda{|limit| {:limit=>limit}}  
   
   belongs_to :user
   belongs_to :partner

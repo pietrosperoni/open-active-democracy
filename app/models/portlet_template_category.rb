@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class PortletTemplateCategory < ActiveRecord::Base
-  named_scope :by_weight, :order=>"weight"
+  scope :by_weight, :order=>"weight"
   
   has_many :portlet_templates
 end

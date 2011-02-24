@@ -1,7 +1,7 @@
 class Webpage < ActiveRecord::Base
 
-  named_scope :published, :conditions => "webpages.status = 'published'"
-  named_scope :newest, :order => "webpages.created_at desc"
+  scope :published, :conditions => "webpages.status = 'published'"
+  scope :newest, :order => "webpages.created_at desc"
 
   belongs_to :user
   belongs_to :feed

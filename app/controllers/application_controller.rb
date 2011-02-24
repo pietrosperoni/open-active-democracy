@@ -172,7 +172,7 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => "install"
       return
     end
-    if not current_partner and RAILS_ENV == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
+    if not current_partner and Rails.env == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
       redirect_to 'http://' + current_government.base_url + request.path_info
       return
     end    

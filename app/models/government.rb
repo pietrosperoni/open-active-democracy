@@ -3,13 +3,13 @@ class Government < ActiveRecord::Base
   extend ActiveSupport::Memoizable
   require 'paperclip'
   
-  named_scope :active, :conditions => "status = 'active'"
-  named_scope :pending, :conditions => "status = 'pending'"
-  named_scope :least_active, :conditions => "status = 'active'", :order => "users_count"
-  named_scope :with_branches, :conditions => "default_branch_id is not null"
-  named_scope :without_branches, :conditions => "default_branch_id is null"
-  named_scope :facebook, :conditions => "is_facebook = true"
-  named_scope :twitter, :conditions => "is_twitter = true"
+  scope :active, :conditions => "status = 'active'"
+  scope :pending, :conditions => "status = 'pending'"
+  scope :least_active, :conditions => "status = 'active'", :order => "users_count"
+  scope :with_branches, :conditions => "default_branch_id is not null"
+  scope :without_branches, :conditions => "default_branch_id is null"
+  scope :facebook, :conditions => "is_facebook = true"
+  scope :twitter, :conditions => "is_twitter = true"
   
   belongs_to :official_user, :class_name => "User"
   belongs_to :color_scheme
