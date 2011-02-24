@@ -8,8 +8,9 @@
 development:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
-  database: OpenActiveDemocracy_development
+  collation: utf8_general_ci
+  reconnect: true
+  database: oad_development
   pool: 5
   username: root
   password:
@@ -31,8 +32,9 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
-  database: OpenActiveDemocracy_production
+  collation: utf8_general_ci
+  reconnect: true
+  database: oad_production
   pool: 5
   username: root
   password:

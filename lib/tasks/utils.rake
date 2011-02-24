@@ -1,5 +1,3 @@
-require 'fastercsv'
-
 def create_tags(row)
   tags = []
   tags << row[1]
@@ -60,7 +58,7 @@ namespace :utils do
   desc "Archive processes"
   task(:archive_processes => :environment) do
       if ENV['current_thing_id']
-        logg = "#{ENV['current_thing_id']}. lög"
+        logg = "#{ENV['current_thing_id']}. log"
         puts "Archiving all processes except for thing: #{logg}"
         Process.find(:all).each do |c|
           puts c.external_info_3
@@ -142,7 +140,7 @@ namespace :utils do
     end
     f = File.open(ENV['csv_import_file'])
     partner = Partner.find_by_short_name(ENV['partner_short_name'])
-    FasterCSV.parse(f.read) do |row|
+    CSV.parse(f.read) do |row|
       puts row.inspect
       create_priority_from_row(row, current_user, partner)  
     end
