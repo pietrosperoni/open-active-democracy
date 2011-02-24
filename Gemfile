@@ -42,4 +42,4 @@ gem 'mogli'
 gem 'facebooker2'
 gem 'hoptoad_notifier'
 gem "newrelic_rpm"
-
+gem "memcache-client"

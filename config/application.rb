@@ -1,3 +1,4 @@
+# Put this in config/application.rb
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
@@ -8,35 +9,61 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module OpenActiveDemocracy
   class Application < Rails::Application
+    
+    require 'core_extensions'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-
-    # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
-
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
+    # See Rails::Configuration for more options.
+  
+    # Skip frameworks you're not going to use (only works if using vendor/rails).
+    # To use Rails without a database, you must remove the Active Record framework
+    # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
+  
+    # Only load the plugins named here, in the order given. By default, all plugins 
+    # in vendor/plugins are loaded in alphabetical order.
+    # :all can be used as a placeholder for all plugins not explicitly named
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-    # Activate observers that should always be running.
-    # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
-
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+  
+    # Add additional load paths for your own custom dirs
+    # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  
+    # Force all environments to use the same logger level
+    # (by default production uses :info, the others :debug)
+    # config.log_level = :debug
+  
+    # Use the database for sessions instead of the cookie-based default,
+    # which shouldn't be used to store highly confidential information
+    # (create the session table with 'rake db:sessions:create')
+    # config.action_controller.session_store = :active_record_store
+  
+    # Use SQL instead of Active Record's schema dumper when creating the test database.
+    # This is necessary if your schema can't be completely dumped by the schema dumper,
+    # like if you have constraints or database-specific column types
+    # config.active_record.schema_format = :sql
+  
+    # Activate observers that should always be running
+    # config.active_record.observers = :user_observer
+  
+    # Make Active Record use UTC-base instead of local time
+    # config.active_record.default_timezone = :utc
+  
+    config.i18n.load_path += Dir[File.join(Rails.root.to_s, 'config', 'locales', '**', '*.{rb,yml}')] 
     config.i18n.default_locale = :en
-
-    # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
-    # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
-
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.i18n.locale = :en
+    
+    NB_CONFIG = { 'api_exclude_fields' => [:ip_address, :user_agent, :referrer, :google_token, :google_crawled_at, :activation_code, :salt, :email, :first_name, :last_name, :crypted_password, :is_tagger, :partner_id, :ip_address, :user_agent, :remember_token, :remember_token_expires_at, :referrer, :zip, :birth_date, :city, :state, :is_comments_subscribed, :is_finished_subscribed, :is_followers_subscribed, :is_mergeable, :is_messages_subscribed, :is_newsletter_subscribed, :is_point_changes_subscribed, :is_votes_subscribed, :is_subscribed, :contacts_count, :contacts_invited_count, :contacts_members_count, :contacts_not_invited_count, :code, :rss_code, :address] }  
   end
+  
+  HoptoadNotifier.configure do |config|
+    config.api_key = ENV['HOPTOAD_KEY'] if ENV['HOPTOAD_KEY']
+    config.development_lookup = false
+  end
+  
+  require 'diff'
+  require 'open-uri'
+  require 'validates_uri_existence_of'
+  
+  require 'timeout'
 end

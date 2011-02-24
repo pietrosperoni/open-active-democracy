@@ -9,7 +9,7 @@ namespace :multiple do
       # this will generate an error if the database already exists
       Government.connection.execute("CREATE DATABASE #{govt.db_name} character SET utf8 COLLATE utf8_general_ci")
       govt.switch_db
-      file = "#{RAILS_ROOT}/db/schema.rb"
+      file = "#{Rails.root.to_s}/db/schema.rb"
       load(file)
       User.connection.execute("ALTER TABLE rankings ENGINE=MYISAM")
       User.connection.execute("ALTER TABLE user_rankings ENGINE=MYISAM")    

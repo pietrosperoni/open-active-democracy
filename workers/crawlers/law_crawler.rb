@@ -29,7 +29,7 @@ RAILS_ENV='production'
 #RAILS_ENV='development'
 
 require '../../config/boot'
-require "#{RAILS_ROOT}/config/environment"
+require "#{Rails.root.to_s}/config/environment"
 
 require 'law_proposal_document_element'
 require 'process_parser'

@@ -27,7 +27,7 @@ class Blurb < ActiveRecord::Base
   end
 
   def Blurb.fetch_default(name)
-    File.open(RAILS_ROOT + "/app/views/blurbs/defaults/" + name + ".html.liquid", "r").read    
+    File.open(Rails.root.to_s + "/app/views/blurbs/defaults/" + name + ".html.liquid", "r").read    
   end
 
 end

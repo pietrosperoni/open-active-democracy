@@ -59,7 +59,7 @@ module Contacts
     CREDENTIAL_PATH = "/WSLogin/V1/wspwtoken_login?appid=#appid&ts=#ts&token=#token"
     ADDRESS_BOOK_DOMAIN = "address.yahooapis.com"
     ADDRESS_BOOK_PATH = "/v1/searchContacts?format=json&fields=name,email&appid=#appid&WSSID=#wssid"
-    CONFIG_FILE = RAILS_ROOT + '/config/contacts.yml'
+    CONFIG_FILE = Rails.root.to_s + '/config/contacts.yml'
 
     attr_reader :appid, :secret, :token, :wssid, :cookie
     

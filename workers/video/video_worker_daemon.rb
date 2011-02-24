@@ -26,7 +26,7 @@ require 'utils/logger.rb'
 require 'utils/shell.rb'
 
 require File.dirname(__FILE__) + '/../../config/boot'
-require "#{RAILS_ROOT}/config/environment" 
+require "#{Rails.root.to_s}/config/environment" 
 
 include Sys
 

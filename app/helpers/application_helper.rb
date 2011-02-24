@@ -16,13 +16,13 @@ module ApplicationHelper
 
   def translate_facet_option(option)
     if option=="Comment"
-      "Athugasemdir"
-    elsif option=="Question"
-      "Spurningar og Svör"
+      i18n.t(:comments)
+    elsif option=="Poitns"
+      i18n.t(:points)
     elsif option=="Priority"
-      "Umræðuefni"
+      i18n.t(:priorities)
     elsif option=="Document"
-      "Erindi"
+      i18n.t(:document)
     else
       option
     end
