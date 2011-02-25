@@ -150,7 +150,7 @@ module ApplicationHelper
     s = '<span class="rss_feed"><a href="' + url + '">'
     s += image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0
     s += '</a> <a href="' + url + '">' + t('feeds.rss') + '</a></span>'
-    return s
+    return s.html_safe
   end
   
   def agenda_change(user,period,precision=2)

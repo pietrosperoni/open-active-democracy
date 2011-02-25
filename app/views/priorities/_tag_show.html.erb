@@ -2,7 +2,7 @@
 <% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
 
 	<% for tag in priority.issues %>
-	<span class="tag_name"><%= link_to tag.title, :controller => "issues", :slug => tag.slug %></span>
+	ROBO<span class="tag_name"><%= link_to tag.title, :controller => "issues", :slug => tag.slug %></span>
 	<span class="tag_count"><%= tag.priorities_count %></span>
 	<% end %>
 

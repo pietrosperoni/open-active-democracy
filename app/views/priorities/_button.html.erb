@@ -16,10 +16,10 @@
 	<% end %>
 <% else %>
 	<div class="yellow_button endorse" id="priority_add_<%= priority.id.to_s %>">
-		ROBO <%= link_to t('endorse.capitalize'), endorse_priority_path(priority, :referral_id => (@user || nil), :region => "priority_left", :value => 1), :remote=>true, :method => :post, :disable_with=>escape_t(t(:ajax_disabled_updating)), :class => "priority_add_link", :title => t('endorse.title') %>								
+		ROBO <%= link_to t('endorse.capitalize'), endorse_priority_path(priority, :referral_id => (@user || nil), :region => "priority_left", :value => 1), :remote=>true, :method => :post, 'data-target' => "#priority_add_#{priority.id.to_s}", :class => "priority_add_link", :title => t('endorse.title') %>								
 	</div>
 	<div class="endorse_or"><%= t('or') %></div>
 	<div class="yellow_button oppose" id="priority_add_<%= priority.id.to_s %>">
-		ROBO <%= link_to t('oppose.capitalize'), endorse_priority_path(priority, :referral_id => (@user || nil), :region => "priority_left", :value => -1), :remote=>true, :method => :post, :disable_with=>escape_t(t(:ajax_disabled_updating)), :class => "priority_add_link", :title => t('oppose.title') %>								
+		ROBO <%= link_to t('oppose.capitalize'), endorse_priority_path(priority, :referral_id => (@user || nil), :region => "priority_left", :value => -1), :remote=>true, :method => :post, 'data-target' => "#priority_add_#{priority.id.to_s}", :class => "priority_add_link", :title => t('oppose.title') %>								
 	</div>	
 <% end %>
