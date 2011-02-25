@@ -59,6 +59,7 @@ class EndorsementsController < ApplicationController
     @priority = @endorsement.priority
     eid = @endorsement.id
     @endorsement.destroy
+    @priority.reload
     respond_to do |format|
       format.js {
         render :update do |page|
@@ -78,8 +79,8 @@ class EndorsementsController < ApplicationController
             page.replace 'endorser_link', render(:partial => "priorities/endorser_link") 
             page.replace 'opposer_link', render(:partial => "priorities/opposer_link")             
           elsif ['priority_inline'].include?(params[:region])
-            page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority})) }
-            page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => nil, :region => params[:region]}))}
+            page<<"$('.priority_#{@priority.id.to_s}_button_small').replaceWith('#{escape_javascript(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => nil, :region => params[:region]}))}')"
+            page<<"$('.priority_#{@priority.id.to_s}_endorsement_count').replaceWith('#{escape_javascript(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority}))}')"
           elsif params[:region] == 'your_priorities'
             # page.visual_effect :fade, 'endorsement_' + eid.to_s, :duration => 0.5
           elsif params[:region] == 'ad'

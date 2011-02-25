@@ -335,6 +335,7 @@ ActiveRecord::Schema.define(:version => 20101027093631) do
   add_index "endorsements", ["position"], :name => "position"
   add_index "endorsements", ["priority_id"], :name => "endorsements_priority_id_index"
   add_index "endorsements", ["status", "priority_id", "user_id", "value"], :name => "endorsements_status_pid_uid"
+  add_index "endorsements", ["status", "priority_id", "value"], :name => "endorsements_status_pid_value"
   add_index "endorsements", ["status"], :name => "endorsements_status_index"
   add_index "endorsements", ["user_id"], :name => "endorsements_user_id_index"
   add_index "endorsements", ["value"], :name => "value"
@@ -716,8 +717,6 @@ ActiveRecord::Schema.define(:version => 20101027093631) do
     t.integer  "position_30days_change",                 :default => 0,     :null => false
     t.integer  "change_id"
     t.string   "cached_issue_list"
-    t.integer  "up_endorsements_count",                  :default => 0
-    t.integer  "down_endorsements_count",                :default => 0
     t.integer  "points_count",                           :default => 0
     t.integer  "up_points_count",                        :default => 0
     t.integer  "down_points_count",                      :default => 0

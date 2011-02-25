@@ -788,11 +788,11 @@ class PrioritiesController < ApplicationController
         @ad.vote(current_user,@value,request) 
       end
     end
-    @priority.reload    
     if current_user.endorsements_count > 24
       session[:endorsement_page] = (@endorsement.position/25).to_i+1
       session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
     end
+    @priority.reload
     respond_to do |format|
       format.js {
         render :update do |page|
@@ -814,13 +814,13 @@ class PrioritiesController < ApplicationController
             page.replace 'endorser_link', render(:partial => "priorities/endorser_link") 
             page.replace 'opposer_link', render(:partial => "priorities/opposer_link")
           elsif params[:region] == 'priority_inline'
-            page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority})) }            
-            page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}
+            page<<"$('.priority_#{@priority.id.to_s}_button_small').replaceWith('#{escape_javascript(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}')"
+            page<<"$('.priority_#{@priority.id.to_s}_endorsement_count').replaceWith('#{escape_javascript(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority}))}')"
           elsif params[:region] == 'ad_top' and @ad
             page.replace 'notification_show', render(:partial => "ads/pick")
             page << 'jQuery("#notification_show").corners();'
           else
-            page << "alert('aaaa');"
+            page << "alert('error');"
           end
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
           # page.visual_effect :highlight, 'your_priorities'

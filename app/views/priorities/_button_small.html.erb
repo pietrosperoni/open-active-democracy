@@ -1,4 +1,4 @@
-<span id="priority_<%= priority.id.to_s %>_button_small">
+<span id="priority_<%= priority.id.to_s %>_button_small" class="priority_<%= priority.id.to_s %>_button_small">
 <% if endorsement and endorsement.status == 'active' %>
 
 	<% if endorsement.is_up? %>
@@ -27,7 +27,8 @@
 <% else %>
 	<span class="priority_add" id="priority_add_<%= priority.id.to_s %>">
 		<%= link_to t('endorse.name'), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => 1),
-                :remote=>true,
+                :method => :post,
+                :remote => true,
                 'data-disable-with' => escape_t(t(:ajax_endorsing)),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title =>  t('endorse.title') %>		
@@ -35,7 +36,8 @@
 	<span class="endorse_or"><%= t('or') %></span>
 	<span class="priority_add" id="priority_add_<%= priority.id.to_s %>">
 		<%= link_to t('oppose.name'), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => -1),
-                :remote=>true,
+                :method => :post,
+                :remote => true,
                 'data-disable-with' => escape_t(t(:ajax_opposing)),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title =>  t('oppose.title') %>

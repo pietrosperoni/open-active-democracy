@@ -3,7 +3,8 @@
     <div class="green_button green_button_priority" id="priority_add_<%= priority.id.to_s %>">
       <span class="text"><%= t('endorse.you') %></span>
       <span class="big_x">
-      <%= link_to "X", endorsement_path(endorsement, :region => "priority_left"), :method => :delete, :remote=>true,
+      <%= link_to "X", endorsement_path(endorsement, :region => "priority_left"),
+        :method => :delete, :remote=>true,
         :class => "priority_remove_link",
         'data-disable-with' => "",
         'data-loader-name' => "circle",
@@ -13,7 +14,8 @@
     <div class="red_button red_button_priority" id="priority_add_<%= priority.id.to_s %>">
       <%= t('oppose.you') %>
       <span class="big_x">
-      <%= link_to "X", endorsement_path(endorsement, :region => "priority_left"), :method => :delete, :remote=>true, 
+      <%= link_to "X", endorsement_path(endorsement, :region => "priority_left"), 
+        :method => :delete, :remote=>true, 
         :class => "priority_remove_link",
         'data-disable-with' => "",
         'data-loader-name' => "circle",
