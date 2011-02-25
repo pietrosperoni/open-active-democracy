@@ -19,9 +19,9 @@ class Widget < ActiveRecord::Base
     a << [ "controversial", I18n.t('priorities.controversial.name') ]
     a << [ "finished", I18n.t('priorities.finished.name') ]
     if Government.current.has_official?
-      a << [ "obama", I18n.t('priorities.official.title', :official_user_name => Government.current.official_user_short_name) ]
-      a << [ "not_obama", I18n.t('priorities.not_official.title', :official_user_name => Government.current.official_user_short_name) ]
-      a << [ "obama_opposed", I18n.t('priorities.official_opposed.title', :official_user_name => Government.current.official_user_short_name) ]
+      a << [ "official", I18n.t('priorities.official.title', :official_user_name => Government.current.official_user_short_name) ]
+      a << [ "not_official", I18n.t('priorities.not_official.title', :official_user_name => Government.current.official_user_short_name) ]
+      a << [ "official_opposed", I18n.t('priorities.official_opposed.title', :official_user_name => Government.current.official_user_short_name) ]
     end
     a
   end

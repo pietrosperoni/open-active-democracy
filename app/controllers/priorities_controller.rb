@@ -163,11 +163,11 @@ class PrioritiesController < ApplicationController
     end    
   end
 
-  # GET /priorities/obama
-  def obama
+  # GET /priorities/official
+  def official
     @page_title = t('priorities.official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
-    @rss_url = obama_priorities_url(:format => 'rss')   
-    @priorities = Priority.published.filtered.obama_endorsed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = official_priorities_url(:format => 'rss')   
+    @priorities = Priority.published.filtered.official_endorsed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
@@ -178,11 +178,11 @@ class PrioritiesController < ApplicationController
     end
   end
   
-  # GET /priorities/obama_opposed  
-  def obama_opposed
+  # GET /priorities/official_opposed  
+  def official_opposed
     @page_title = t('priorities.official_opposed.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
-    @rss_url = obama_opposed_priorities_url(:format => 'rss')       
-    @priorities = Priority.published.filtered.obama_opposed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = official_opposed_priorities_url(:format => 'rss')       
+    @priorities = Priority.published.filtered.official_opposed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
@@ -193,11 +193,11 @@ class PrioritiesController < ApplicationController
     end
   end  
   
-  # GET /priorities/not_obama  
-  def not_obama
+  # GET /priorities/not_official  
+  def not_official
     @page_title = t('priorities.not_official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
-    @rss_url = not_obama_priorities_url(:format => 'rss')       
-    @priorities = Priority.published.filtered.not_obama.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = not_official_priorities_url(:format => 'rss')       
+    @priorities = Priority.published.filtered.not_official.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
@@ -330,7 +330,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/1
   def show
-    if @priority.status == 'deleted'
+    if @priority.status == 'deleted' or @priority.status == 'abusive'
       flash[:notice] = t('priorities.deleted')
     end
     @page_title = @priority.name
@@ -668,83 +668,84 @@ class PrioritiesController < ApplicationController
   # POST /priorities
   # POST /priorities.xml
   def create
-    begin
-      Priority.transaction do
-        @tag_names = params[:tag_names]
+ #   begin
+      @tag_names = params[:tag_names]
+      @priority = Priority.new
+      @priority.name = params[:q] if params[:q]
+      create_tags(@priority)
+      if not logged_in?
+        flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
+        session[:query] = params[:priority][:name] if params[:priority]
+        access_denied
+        return
+      end
+      # if they've confirmed, skip everything and just add it
+      if not params[:finalized].blank?
         @priority = Priority.new
-        @priority.name = params[:q] if params[:q]
+        @priority.name = params[:finalized].strip
+        @priority.user = current_user
+        @priority.ip_address = request.remote_ip
         create_tags(@priority)
-        if not logged_in?
-          flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
-          session[:query] = params[:priority][:name] if params[:priority]
-          access_denied
-          return
+        @saved = @priority.save
+      else
+        # see if it already exists
+        query = params[:priority][:name].strip
+        if query.blank? or query == current_government.prompt or query == t('priorities.yours.prompt')
+          flash[:notice] = t('priorities.new.blank')
+           @saved = false
         end
-        # if they've confirmed, skip everything and just add it
-        if not params[:finalized].blank?
+        @priorities = Priority.find(:all, :conditions => ["name = ? and status = 'published'",query], :order => "endorsements_count desc")
+        if @priorities.any?
+          @priority = @priorities[0]
+          @saved = true
+        elsif current_government.is_searchable? # doesn't exist, let's do a search assuming solr is installed
+          @priority_results = Priority.find_by_solr "(" + query + ") AND is_published:true", :limit => 25
+          @priorities = @priority_results.docs
+        end
+        if not @saved 
           @priority = Priority.new
-          @priority.name = params[:finalized].strip
+          @priority.name = params[:priority][:name].strip
           @priority.user = current_user
           @priority.ip_address = request.remote_ip
           create_tags(@priority)
           @saved = @priority.save
-        else
-          # see if it already exists
-          query = params[:priority][:name].strip
-          if query.blank? or query == current_government.prompt or query == t('priorities.yours.prompt')
-            flash[:notice] = t('priorities.new.blank')
-             @saved = false
-          end
-          @priorities = Priority.find(:all, :conditions => ["name = ? and status = 'published'",query], :order => "endorsements_count desc")
-          if @priorities.any?
-            @priority = @priorities[0]
-            @saved = true
-          elsif current_government.is_searchable? # doesn't exist, let's do a search assuming solr is installed
-            @priority_results = Priority.find_by_solr "(" + query + ") AND is_published:true", :limit => 25
-            @priorities = @priority_results.docs
-          end
-          if not @saved 
-            @priority = Priority.new
-            @priority.name = params[:priority][:name].strip
-            @priority.user = current_user
-            @priority.ip_address = request.remote_ip
-            create_tags(@priority)
-            @saved = @priority.save
-          end
         end
-        @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
-        if current_user.endorsements_count > 24
-          session[:endorsement_page] = (@endorsement.position/25).to_i+1
-          session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
-        end    
-        #did they also do this in a tag area?
-        if @tag_names and @priority.issue_list.empty?
-          @priority.issue_list = @tag_names 
-          @priority.save
-        end
-        
-        if @saved
-          @point = Point.new(params[:point])
-          @point.user = current_user
-          @point.priority_id = @priority.id
-          @point_saved = @point.save
-        end
-        
-        if @point_saved
-          if Revision.create_from_point(@point.id,request)
-            session[:goal] = 'point'
-            if facebook_session
-              flash[:user_action_to_publish] = UserPublisher.create_point(facebook_session, @point, @priority)
-            end          
-            @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
-          end      
-        end
-        raise "rollback" if not @point_saved or not @saved
       end
-    rescue
-      RAILS_DEFAULT_LOGGER.info("ROLLBACK ERROR")
-      flash[:notice] = "Gat ekki geymt - þú verður að setja nafn á hugmynd og rök - texti við rök má ekki vera of langur."
-    end
+      @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
+      if current_user.endorsements_count > 24
+        session[:endorsement_page] = (@endorsement.position/25).to_i+1
+        session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
+      end    
+      #did they also do this in a tag area?
+      if @tag_names and @priority.issue_list.empty?
+        @priority.issue_list = @tag_names 
+        @priority.save
+      end
+      
+      if @saved
+        @point = Point.new(params[:point])
+        @point.user = current_user
+        @point.priority_id = @priority.id
+        @point_saved = @point.save
+      end
+      
+      if @point_saved
+        if Revision.create_from_point(@point.id,request)
+          session[:goal] = 'point'
+          if current_facebook_user
+            #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
+          end          
+          @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
+        end      
+      end
+      unless @point_saved and @saved
+        @priority.destroy if @saved
+        @point.destroy if @point_saved
+      end
+#    rescue => ex
+#      Rails.logger.info("ROLLBACK ERROR: #{ex.backtrace}")
+#      flash[:notice] = I18n.t(:could_not_save_priority)
+#    end
     
     respond_to do |format|
       if @saved and @point_saved
@@ -815,10 +816,6 @@ class PrioritiesController < ApplicationController
           elsif params[:region] == 'priority_inline'
             page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority})) }            
             page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}
-          elsif ['branch_inline'].include?(params[:region])
-            be = BranchEndorsement.find_by_priority_id_and_branch_id(@priority.id,params[:branch_id])
-            page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "branch_priorities/endorsement_count", :locals => {:priority => @priority, :branch_endorsement => be})) }
-            page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "branch_priorities/button_small", :locals => {:priority => @priority, :branch_endorsement => be, :endorsement => @endorsement, :region => params[:region]}))}
           elsif params[:region] == 'ad_top' and @ad
             page.replace 'notification_show', render(:partial => "ads/pick")
             page << 'jQuery("#notification_show").corners();'
@@ -826,12 +823,12 @@ class PrioritiesController < ApplicationController
             page << "alert('aaaa');"
           end
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          page.visual_effect :highlight, 'your_priorities'
-          if facebook_session
+          # page.visual_effect :highlight, 'your_priorities'
+          if current_facebook_user
             if @value == 1
-              page << fb_connect_stream_publish(UserPublisher.create_endorsement(facebook_session, @endorsement, @priority))
+              #page << fb_connect_stream_publish(UserPublisher.create_endorsement(current_facebook_user, @endorsement, @priority))
             else
-              page << fb_connect_stream_publish(UserPublisher.create_opposition(facebook_session, @endorsement, @priority))
+              #page << fb_connect_stream_publish(UserPublisher.create_opposition(current_facebook_user, @endorsement, @priority))
             end
           end
         end
@@ -865,7 +862,7 @@ class PrioritiesController < ApplicationController
               page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}                      
               page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
               page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
-              page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
+              # page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
             end
           }
         else
@@ -879,7 +876,7 @@ class PrioritiesController < ApplicationController
           }
         end
       else
-        RAILS_DEFAULT_LOGGER.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
+        Rails.logger.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
         redirect_to(@priority)
       end
     end
@@ -890,7 +887,7 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @short_url = @priority.create_short_url
     if @short_url
-      @priority.save_with_validation(false)
+      @priority.save(:validate => false)
     end
     respond_to do |format|
       format.js {
@@ -903,14 +900,48 @@ class PrioritiesController < ApplicationController
   end
 
   # PUT /priorities/1/flag_inappropriate
-  def flag_inappropriate
+  def flag
     @priority = Priority.find(params[:id])
-    @saved = ActivityPriorityFlag.create(:priority => @priority, :user => current_user, :partner => current_partner)
+    @priority.flag_by_user(current_user)
+
     respond_to do |format|
-      flash[:notice] = t('priorities.change.flagged', :priority_name => @priority.name, :admin_name => current_government.admin_name)
-      format.html { redirect_to(@priority) }
-    end
+      format.html { redirect_to(comments_url) }
+      format.js {
+        render :update do |page|
+          if current_user.is_admin?
+            page.replace_html "flagged_info_#{@priority.id}", render(:partial => "priorities/flagged", :locals => {:priority => @priority})
+          else
+            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'> #{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
+          end
+        end        
+      }
+    end    
   end  
+
+  def abusive
+    @priority = Priority.find(params[:id])
+    @priority.do_abusive
+    @priority.delete!
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
+        end        
+      }
+    end    
+  end
+
+  def not_abusive
+    @priority = Priority.find(params[:id])
+    @priority.update_attribute(:flags_count, 0)
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_info_#{@priority.id}",""
+        end        
+      }
+    end    
+  end
   
   # PUT /priorities/1/bury
   def bury
@@ -1010,7 +1041,7 @@ class PrioritiesController < ApplicationController
     end
     return unless @priority
     name = @priority.name
-    @priority.send_later(:destroy)
+    @priority.delete!
     flash[:notice] = t('priorities.destroy.success', :priority_name => name)
     respond_to do |format|
       format.html { redirect_to yours_created_priorities_url }    

@@ -1,19 +1,30 @@
 class Document < ActiveRecord::Base
+  scope :tagged, :conditions => "(documents.cached_issue_list is not null and documents.cached_issue_list <> '')"
+  scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+  scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
 
+  scope :flagged, :conditions => "flags_count > 0"
+
+  acts_as_taggable_on :issues
   acts_as_set_partner :table_name=>"documents"
 
-  named_scope :published, :conditions => "documents.status = 'published'"
-  named_scope :by_helpfulness, :order => "documents.score desc"
-  named_scope :by_endorser_helpfulness, :conditions => "documents.endorser_score > 0", :order => "documents.endorser_score desc"
-  named_scope :by_neutral_helpfulness, :conditions => "documents.neutral_score > 0", :order => "documents.neutral_score desc"    
-  named_scope :by_opposer_helpfulness, :conditions => "documents.opposer_score > 0", :order => "documents.opposer_score desc"
-  named_scope :up, :conditions => "documents.endorser_score > 0"
-  named_scope :neutral, :conditions => "documents.neutral_score > 0"
-  named_scope :down, :conditions => "documents.opposer_score > 0"  
+  scope :published, :conditions => "documents.status = 'published'"
+  scope :unpublished, :conditions => "documents.status not in ('published','abusive')"
 
-  named_scope :by_recently_created, :order => "documents.created_at desc"
-  named_scope :by_recently_updated, :order => "documents.updated_at desc"  
-  named_scope :revised, :conditions => "revisions_count > 1"
+  scope :by_helpfulness, :order => "documents.score desc"
+  scope :by_endorser_helpfulness, :conditions => "documents.endorser_score > 0", :order => "documents.endorser_score desc"
+  scope :by_neutral_helpfulness, :conditions => "documents.neutral_score > 0", :order => "documents.neutral_score desc"    
+  scope :by_opposer_helpfulness, :conditions => "documents.opposer_score > 0", :order => "documents.opposer_score desc"
+  scope :up, :conditions => "documents.endorser_score > 0"
+  scope :neutral, :conditions => "documents.neutral_score > 0"
+  scope :down, :conditions => "documents.opposer_score > 0"  
+
+  scope :by_recently_created, :order => "documents.created_at desc"
+  scope :by_recently_updated, :order => "documents.updated_at desc"  
+  scope :revised, :conditions => "revisions_count > 1"
+  scope :since, lambda{|time| {:conditions=>["documents.created_at>?",time]}}
+
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
 
   belongs_to :user
   belongs_to :priority
@@ -30,9 +41,12 @@ class Document < ActiveRecord::Base
   
   has_many :capitals, :as => :capitalizable, :dependent => :nullify
   
-  liquid_methods :id, :text, :user
-  
-  acts_as_solr :fields => [ :name, :content, :priority_name, :is_published ]
+  define_index do
+    indexes name
+    indexes content
+    indexes cached_issue_list, :facet=>true
+    where "status = 'published'"
+  end
   
   cattr_reader :per_page
   @@per_page = 25
@@ -55,7 +69,8 @@ class Document < ActiveRecord::Base
   state :published, :enter => :do_publish
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
-  
+  state :abusive, :enter => :do_abusive
+
   event :publish do
     transitions :from => [:draft], :to => :published
   end
@@ -78,6 +93,22 @@ class Document < ActiveRecord::Base
     transitions :from => :buried, :to => :draft     
   end  
 
+  event :abusive do
+    transitions :from => :published, :to => :abusive
+  end
+
+  def do_abusive
+    self.user.do_abusive!(notifications)
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end
+
   def update_word_count
     self.word_count = self.content.split(' ').length
   end
@@ -85,17 +116,20 @@ class Document < ActiveRecord::Base
   def do_publish
     self.published_at = Time.now
     add_counts
-    priority.save_with_validation(false) if priority
+    priority.save(:validate => false) if priority
   end
   
   def do_delete
     remove_counts
+    activities.each do |a|
+      a.delete!
+    end
     # look for any capital they may have earned on this document, and remove it
     capital_earned = capitals.sum(:amount)
     if capital_earned != 0
       self.capitals << CapitalDocumentHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1))
     end
-    priority.save_with_validation(false)
+    priority.save(:validate => false)
     for r in revisions
       r.delete!
     end
@@ -103,7 +137,7 @@ class Document < ActiveRecord::Base
   
   def do_bury
     remove_counts
-    priority.save_with_validation(false) if priority
+    priority.save(:validate => false) if priority
   end
   
   def add_counts
@@ -135,7 +169,7 @@ class Document < ActiveRecord::Base
 
   def name_with_type
     return name unless is_down?
-    "[á móti] " + name
+    "[#{I18n.t(:against)}] " + name
   end
 
   def text
@@ -232,7 +266,7 @@ class Document < ActiveRecord::Base
     end    
 
     if old_score != self.score and tosave
-      self.save_with_validation(false)
+      self.save(:validate => false)
     end    
   end
   
@@ -285,7 +319,7 @@ class Document < ActiveRecord::Base
   end
 
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 460, :height => 285)
     vimeo(:width => 460, :height => 260)
     link(:rel => "nofollow")

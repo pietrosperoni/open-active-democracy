@@ -20,7 +20,7 @@ class ProcessSpeechVideosController < ApplicationController
   def search
     @priority_filter = params[:priority_id] ? "priority_filter_#{params[:priority_id]}" : "no_priority_filter"
     @search_query = params[:search_query].titleize_is
-    RAILS_DEFAULT_LOGGER.info(@search_query)
+    Rails.logger.info(@search_query)
       #TODO: Do the rejection with mysql
     unless fragment_exist?(["process_video_search", @priority_filter, @search_query.gsub(".","").parameterize_full, I18n.locale])
       if params[:priority_id]
@@ -59,7 +59,7 @@ class ProcessSpeechVideosController < ApplicationController
       @priority = @process_speech_video.process_discussion.priority_process.priority
       render :update do |page|  
         page.replace_html "process_speech_detail", :partial => "video_detail", :locals => {:process_speech_video=> @process_speech_video }  
-        page.visual_effect :highlight, "process_speech_detail",  {:restorecolor=>"#ffffff", :startcolor=>"#cccccc", :endcolor=>"#ffffff"}  
+        # page.visual_effect :highlight, "process_speech_detail",  {:restorecolor=>"#ffffff", :startcolor=>"#cccccc", :endcolor=>"#ffffff"}  
       end
     else
       @process_speech_video = ProcessSpeechVideo.find(params[:id])

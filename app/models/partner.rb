@@ -2,9 +2,9 @@ class Partner < ActiveRecord::Base
 
   require 'paperclip'
   
-  named_scope :active, :conditions => "status in ('pending','active')"
+  scope :active, :conditions => "status in ('pending','active')"
   
-  named_scope :with_logo, :conditions => "logo_file_name is not null"
+  scope :with_logo, :conditions => "logo_file_name is not null"
   
   belongs_to :picture
   
@@ -19,8 +19,6 @@ class Partner < ActiveRecord::Base
   has_many :activities
   has_many :priorities
 
-  liquid_methods :name, :website, :custom_domain
-    
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :passive, :column => :status
   
@@ -53,8 +51,10 @@ class Partner < ActiveRecord::Base
   end  
 
   before_save :clean_urls
+  
+  before_validation :shorten_name
 
-  def before_validation
+  def shorten_name
     short_name.gsub(/[^a-z0-9]+/i, '-')
   end
   

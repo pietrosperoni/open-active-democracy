@@ -162,8 +162,8 @@ class PointsController < ApplicationController
         if Revision.create_from_point(@point.id,request)
           session[:goal] = 'point'
           flash[:notice] = t('points.new.success')
-          if facebook_session
-            flash[:user_action_to_publish] = UserPublisher.create_point(facebook_session, @point, @priority)
+          if current_facebook_user
+            #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
           end          
           @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
           format.html { redirect_to(top_points_priority_url(@priority)) }
@@ -282,6 +282,49 @@ class PointsController < ApplicationController
         end
       }
     end
+  end
+
+  def flag
+    @question = Question.find(params[:id])
+    @question.flag_by_user(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to(comments_url) }
+      format.js {
+        render :update do |page|
+          if current_user.is_admin?
+            page.replace_html "flagged_question_info_#{@question.id}", render(:partial => "questions/flagged", :locals => {:question => @question})
+          else
+            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
+          end
+        end        
+      }
+    end    
+  end  
+
+  def abusive
+    @question = Question.find(params[:id])
+    @question.do_abusive
+    @question.delete!
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
+        end        
+      }
+    end    
+  end
+
+  def not_abusive
+    @question = Question.find(params[:id])
+    @question.update_attribute(:flags_count, 0)
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_question_info_#{@question.id}",""
+        end        
+      }
+    end    
   end
 
   # DELETE /points/1

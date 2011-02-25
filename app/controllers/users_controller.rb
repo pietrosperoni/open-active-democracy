@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse]
+  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
-  before_filter :admin_required, :only => [:suspend, :unsuspend, :impersonate, :edit, :update, :signups, :legislators, :legislators_save, :make_admin, :reset_password]
+  before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :make_admin, :reset_password]
   
   def index
     if params[:q]
@@ -18,9 +18,70 @@ class UsersController < ApplicationController
     end    
   end
   
+  def suspended
+  end
+
+  def list_suspended
+    @users = User.suspended.paginate :page => params[:page], :per_page => params[:per_page] 
+  end
+
+  def disable_facebook
+#    @user = current_user
+#    @user.facebook_uid=nil
+#    @user.save(:validate => false)
+#    fb_cookie_destroy
+    redirect_to '/'
+  end
+  
+  def set_email
+    @user = current_user
+    flash[:notice]=nil
+    if request.put?
+      @user.email = params[:user][:email]
+      @user.have_sent_welcome = true
+      if @user.save
+        @user.send_welcome
+        redirect_back_or_default('/')
+      else
+        flash[:notice]=I18n.t(:email_not_accepted)
+        redirect_to "/set_email"
+      end
+    end
+  end
+  
+  def subscriptions
+    @subscription_user = current_user
+    if request.put?
+      TagSubscription.delete_all(["user_id = ?",current_user.id])
+      Tag.all.each do |tag|
+        tag_checkbox_id = "subscribe_to_tag_id_#{tag.id}"
+        if params[:user][tag_checkbox_id]
+          subscription = TagSubscription.new
+          subscription.user_id = current_user.id
+          subscription.tag_id = tag.id
+          subscription.save
+        end
+      end
+      Rails.logger.info("Starting HASH #{params[:user].inspect}")
+      params[:user].each do |hash_value,x|
+        Rails.logger.info(hash_value)
+        if hash_value.include?("to_tag_id")
+          Rails.logger.info("DELETING: #{hash_value}")
+          params[:user].delete(hash_value)
+        end
+      end
+      Rails.logger.info("After HASH #{params[:user].inspect}")
+      if not current_user.reports_enabled and params[:user][:reports_enabled].to_i==1
+        params[:user][:last_sent_report]=Time.now
+      end
+      current_user.update_attributes(params[:user])
+      current_user.save(:validate => false)
+      redirect_to "/"
+    end
+  end
+  
   # render new.rhtml
   def new
-    @user = User.new(:branch => current_government.default_branch) if current_government.is_branches?
     if logged_in?
       redirect_to "/"
       return
@@ -60,54 +121,7 @@ class UsersController < ApplicationController
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_notifications", :format => "rss", :c => @user.rss_code)
     @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
   end
-  
-  def legislators
-    @user = User.find(params[:id])
-    redirect_to '/' and return if check_for_suspension
-    @page_title = t('users.legislators.title', :user_name => @user.name)
-    respond_to do |format|
-      format.html
-    end    
-  end
-  
-  def legislators_save
-    @user = User.find(params[:id])
-    @saved = @user.update_attributes(params[:user])  
-    @number = @user.attach_legislators if @saved
-    if (@saved and @number == 3) or (@saved and @number == 2 and @user.state == 'Minnesota')
-      if not CapitalLegislatorsAdded.find_by_recipient_id(@user.id)
-        ActivityCapitalLegislatorsAdded.create(:user => @user, :capital => CapitalLegislatorsAdded.create(:recipient => @user, :amount => 2))
-      end
-    end
-    respond_to do |format|
-      if @saved
-        format.js {
-          render :update do |page|
-            page.replace_html 'your_legislators', render(:partial => "settings/legislators", :locals => {:user => @user})
-            if @number == 3 or (@number == 2 and @user.state == 'Minnesota')
-              page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.found_all') + "</div>"
-            elsif @number == 2
-              page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.found_senators') + "</div>"
-            else
-              page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.found_none') + "</div>"
-            end
-          end          
-        }
-        format.html { 
-          flash[:notice] = t('settings.legislators.found_all')
-          redirect_to(:action => :legislators) 
-        }
-      else
-        format.js {
-          render :update do |page|
-            page.insert_html :top, 'your_legislators', "<div class='red'>" + t('settings.legislators.error') + "</div>"
-          end          
-        }
-        format.html { render :action => "legislators" }
-      end      
-    end    
-  end  
-  
+    
   # GET /users/1
   # GET /users/1.xml
   def show
@@ -300,11 +314,7 @@ class UsersController < ApplicationController
       current_user.activate!
     end
     flash[:notice] = t('users.activate.success')
-    if logged_in? and current_government.is_legislators?
-      redirect_to legislators_settings_url
-    else
-      redirect_back_or_default('/')
-    end
+    redirect_back_or_default('/')
   end
   
   def resend_activation
@@ -463,9 +473,9 @@ class UsersController < ApplicationController
   # PUT /users/1/unsuspend
   def unsuspend
     @user = User.find(params[:id])
-    @user.unsuspend! 
+    @user.unsuspend!
     flash[:notice] = t('users.reinstated', :user_name => @user.name)
-    redirect_to(@user)
+    redirect_to request.referer
   end
 
   # this isn't actually used, but the current_user will endorse ALL of this user's priorities
@@ -494,9 +504,10 @@ class UsersController < ApplicationController
   end
   
   def make_admin
+    redirect_to '/' and return
     @user = User.find(params[:id])
     @user.is_admin = true
-    @user.save_with_validation(false)
+    @user.save(:validate => false)
     flash[:notice] = t('users.make_admin', :user_name => @user.name)
     redirect_to @user
   end

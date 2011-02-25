@@ -1,3 +1,4 @@
+<% if @point or @priority or @user or @document %>
 <div class="bulletin_form" id="bulletin_form">
 	<div class="happening_heading">
 		<% if @point and params[:action].include?("discussions") %>
@@ -18,7 +19,7 @@
 		<%= t('bulletins.new.name') %>
 		<% end %>
 	</div>
-	<% form_remote_for comment, :url => bulletins_url, :loading=>"Form.Element.disable('bulletin-form-submit')" do |f| %>		
+	<%= form_for comment, :remote=>true, :url => bulletins_url, :loading=>"Form.Element.disable('bulletin-form-submit')" do |f| %>		
 		<%= f.error_messages %>
 		<%= f.text_area :content, :size => "70x2", :id => "bulletin_content" %><br/>
 		<div style="padding-top: 3px;">
@@ -29,16 +30,9 @@
 							<div id="bulletin_error" class="comment_error"></div>
 						</td>
 					<td valign="top" style="padding-left: 3px;" align="right">
-						<% fields_for Activity.new do |a| %>						
-							<% if @priority %>
-								<input type="hidden" name="activity[priority_id]" value="<%= @priority.id %>">
-							<% elsif @tag %>
-								<%= a.select("priority_id", Priority.tagged_with(@tag_names, :on => :issues).published.top_rank.find(:all, :select => "priorities.id, priorities.name").collect {|p| [ p.name[0..40], p.id]})%>
-							<% else %>
-								<% if not @user or @user == current_user %>
-									<%= a.select("priority_id", current_user.endorsements.by_position.active.find(:all, :select => "endorsements.priority_id, priorities.name", :include => :priority).collect {|p| [ p.priority_name[0..40], p.priority_id ] }, {:include_blank => t('bulletins.new.priority_dropdown')}) %>
-								<% end %>
-							<% end %>
+              <% if @priority %>
+                <input type="hidden" name="activity[priority_id]" value="<%= @priority.id %>">
+              <% end %>
 							<% if @point %>
 								<input type="hidden" name="activity[point_id]" value="<%= @point.id %>">
 							<% end %>
@@ -48,7 +42,6 @@
 							<% if @user and @user != current_user %>
 								<input type="hidden" name="activity[other_user_id]" value="<%= @user.id %>">
 							<% end %>												
-						<% end %>
 					</td>
 				</tr>
 			</table>			
@@ -56,3 +49,4 @@
 	<% end %>
 </div>
 <p>
+<% end %>

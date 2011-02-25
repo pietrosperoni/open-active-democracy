@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
 
-  before_filter :login_required, :except => [:index, :discussions, :points, :activities, :capitals, :obama, :changes, :changes_voting, :changes_activity, :ads, :videos, :comments, :your_discussions, :your_priority_discussions, :your_network_discussions, :your_priorities_created_discussions]
+  before_filter :login_required, :except => [:index, :discussions, :points, :activities, :capitals, :official, :changes, :changes_voting, :changes_activity, :ads, :videos, :comments, :your_discussions, :your_priority_discussions, :your_network_discussions, :your_priorities_created_discussions]
   before_filter :check_for_user, :only => [:your_discussions, :your_priority_discussions, :your_network_discussions, :your_priorities_created_discussions]
 
   def index
@@ -65,18 +65,6 @@ class NewsController < ApplicationController
       format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
     end 
-  end  
-  
-  def obama
-    @page_title = t('news.obama.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
-    @activities = Activity.active.filtered.for_all_users.by_recently_created.paginate :conditions => "type like 'ActivityPriorityObamaStatus%' or user_id = #{current_government.official_user_id}", :page => params[:page]
-    @rss_url = url_for(:only_path => false, :format => "rss")      
-    respond_to do |format|
-      format.html { render :action => "activity_list" }
-      format.rss { render :template => "rss/activities" }        
-      format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
-      format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
-    end
   end  
   
   def capital
@@ -319,11 +307,11 @@ class NewsController < ApplicationController
     end
   end
   
-  def your_priority_obama
-    @page_title = t('news.your_priority_obama.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
+  def your_priority_official
+    @page_title = t('news.your_priority_official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
     @activities = nil
     if current_priority_ids.any?
-      @activities = Activity.active.filtered.by_recently_created.paginate :conditions => ["(type like 'ActivityPriorityObamaStatus%' or user_id = #{current_government.official_user_id}) and priority_id in (?)",current_priority_ids], :page => params[:page]
+      @activities = Activity.active.filtered.by_recently_created.paginate :conditions => ["(type like 'ActivityPriorityOfficialStatus%' or user_id = #{current_government.official_user_id}) and priority_id in (?)",current_priority_ids], :page => params[:page]
     end
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -413,12 +401,12 @@ class NewsController < ApplicationController
     end
   end
   
-  def your_priorities_created_obama
-    @page_title = t('news.your_priorities_created_obama.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
+  def your_priorities_created_official
+    @page_title = t('news.your_priorities_created_official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
     @activities = nil
     created_priority_ids = current_user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?
-      @activities = Activity.active.filtered.by_recently_created.paginate :conditions => ["(type like 'ActivityPriorityObamaStatus%' or user_id = #{current_government.official_user_id}) and priority_id in (?)",created_priority_ids], :page => params[:page]
+      @activities = Activity.active.filtered.by_recently_created.paginate :conditions => ["(type like 'ActivityPriorityOfficialStatus%' or user_id = #{current_government.official_user_id}) and priority_id in (?)",created_priority_ids], :page => params[:page]
     end
     respond_to do |format|
       format.html { render :action => "activity_list" }

@@ -1,7 +1,7 @@
 class DocumentRevision < ActiveRecord::Base
 
-  named_scope :published, :conditions => "document_revisions.status = 'published'"
-  named_scope :by_recently_created, :order => "document_revisions.created_at desc"  
+  scope :published, :conditions => "document_revisions.status = 'published'"
+  scope :by_recently_created, :order => "document_revisions.created_at desc"  
 
   belongs_to :document  
   belongs_to :user
@@ -33,8 +33,6 @@ class DocumentRevision < ActiveRecord::Base
     transitions :from => :deleted, :to => :published, :guard => Proc.new {|p| !p.published_at.blank? }
     transitions :from => :deleted, :to => :archived 
   end
-  
-  liquid_methods :text, :id, :url, :user
   
   before_save :update_word_count
   
@@ -93,7 +91,7 @@ class DocumentRevision < ActiveRecord::Base
     document.author_sentence = document.user.login
     document.author_sentence += ", breytingar " + document.editors.collect{|a| a[0].login}.to_sentence if document.editors.size > 0
     document.published_at = Time.now
-    document.save_with_validation(false)
+    document.save(:validate => false)
     user.increment!(:document_revisions_count)
   end
   
@@ -132,8 +130,8 @@ class DocumentRevision < ActiveRecord::Base
 
   def text
     s = document.name
-    s += " [á móti]" if is_down?
-    s += " [hlutlaust]" if is_neutral? and has_priority?
+    s += " [#{I18n.t(:against)}]" if is_down?
+    s += " [#{I18n.t(:neutral)}]" if is_neutral? and has_priority?
     s += "\r\n" + content
     return s
   end  
@@ -157,7 +155,7 @@ class DocumentRevision < ActiveRecord::Base
     r.content = p.content
     r.content_diff = p.content
     r.request = request
-    r.save_with_validation(false)
+    r.save(:validate => false)
     r.publish!
   end
   
@@ -166,7 +164,7 @@ class DocumentRevision < ActiveRecord::Base
   end
 
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 460, :height => 285)
     vimeo(:width => 460, :height => 260)
     link(:rel => "nofollow")

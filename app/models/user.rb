@@ -4,55 +4,52 @@ class User < ActiveRecord::Base
   extend ActiveSupport::Memoizable
   require 'paperclip'
     
-  named_scope :active, :conditions => "users.status in ('pending','active')"
-  named_scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
-  named_scope :newsletter_subscribed, :conditions => "users.is_newsletter_subscribed = true and users.email is not null and users.email <> ''"
-  named_scope :comments_unsubscribed, :conditions => "users.is_comments_subscribed = false"  
-  named_scope :twitterers, :conditions => "users.twitter_login is not null and users.twitter_login <> ''"
-  named_scope :authorized_twitterers, :conditions => "users.twitter_token is not null"
-  named_scope :uncrawled_twitterers, :conditions => "users.twitter_crawled_at is null"
-  named_scope :contributed, :conditions => "users.document_revisions_count > 0 or users.point_revisions_count > 0"
-  named_scope :no_recent_login, :conditions => "users.loggedin_at < '#{Time.now-90.days}'"
-  named_scope :admins, :conditions => "users.is_admin = true"
-  named_scope :suspended, :conditions => "users.status = 'suspended'"
-  named_scope :probation, :conditions => "users.status = 'probation'"
-  named_scope :deleted, :conditions => "users.status = 'deleted'"
-  named_scope :pending, :conditions => "users.status = 'pending'"  
-  named_scope :warnings, :conditions => "warnings_count > 0"
-  named_scope :no_branch, :conditions => "branch_id is null"
-  named_scope :with_branch, :conditions => "branch_id is not null"
+  scope :active, :conditions => "users.status in ('pending','active')"
+  scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
+  scope :newsletter_subscribed, :conditions => "users.is_newsletter_subscribed = true and users.email is not null and users.email <> ''"
+  scope :comments_unsubscribed, :conditions => "users.is_comments_subscribed = false"  
+  scope :twitterers, :conditions => "users.twitter_login is not null and users.twitter_login <> ''"
+  scope :authorized_twitterers, :conditions => "users.twitter_token is not null"
+  scope :uncrawled_twitterers, :conditions => "users.twitter_crawled_at is null"
+  scope :contributed, :conditions => "users.document_revisions_count > 0 or users.point_revisions_count > 0"
+  scope :no_recent_login, :conditions => "users.loggedin_at < '#{Time.now-90.days}'"
+  scope :admins, :conditions => "users.is_admin = true"
+  scope :suspended, :conditions => "users.status = 'suspended'"
+  scope :probation, :conditions => "users.status = 'probation'"
+  scope :deleted, :conditions => "users.status = 'deleted'"
+  scope :pending, :conditions => "users.status = 'pending'"  
+  scope :warnings, :conditions => "warnings_count > 0"
   
-  named_scope :by_capital, :order => "users.capitals_count desc, users.score desc"
-  named_scope :by_ranking, :conditions => "users.position > 0", :order => "users.position asc"  
-  named_scope :by_talkative, :conditions => "users.comments_count > 0", :order => "users.comments_count desc"
-  named_scope :by_twitter_count, :order => "users.twitter_count desc"
-  named_scope :by_recently_created, :order => "users.created_at desc"
-  named_scope :by_revisions, :order => "users.document_revisions_count+users.point_revisions_count desc"
-  named_scope :by_invites_accepted, :conditions => "users.contacts_invited_count > 0", :order => "users.referrals_count desc"
-  named_scope :by_suspended_at, :order => "users.suspended_at desc"
-  named_scope :by_deleted_at, :order => "users.deleted_at desc"
-  named_scope :by_recently_loggedin, :order => "users.loggedin_at desc"
-  named_scope :by_probation_at, :order => "users.probation_at desc"
-  named_scope :by_oldest_updated_at, :order => "users.updated_at asc"
-  named_scope :by_twitter_crawled_at, :order => "users.twitter_crawled_at asc"
+  scope :by_capital, :order => "users.capitals_count desc, users.score desc"
+  scope :by_ranking, :conditions => "users.position > 0", :order => "users.position asc"  
+  scope :by_talkative, :conditions => "users.comments_count > 0", :order => "users.comments_count desc"
+  scope :by_twitter_count, :order => "users.twitter_count desc"
+  scope :by_recently_created, :order => "users.created_at desc"
+  scope :by_revisions, :order => "users.document_revisions_count+users.point_revisions_count desc"
+  scope :by_invites_accepted, :conditions => "users.contacts_invited_count > 0", :order => "users.referrals_count desc"
+  scope :by_suspended_at, :order => "users.suspended_at desc"
+  scope :by_deleted_at, :order => "users.deleted_at desc"
+  scope :by_recently_loggedin, :order => "users.loggedin_at desc"
+  scope :by_probation_at, :order => "users.probation_at desc"
+  scope :by_oldest_updated_at, :order => "users.updated_at asc"
+  scope :by_twitter_crawled_at, :order => "users.twitter_crawled_at asc"
   
-  named_scope :by_24hr_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change desc"
-  named_scope :by_24hr_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change asc"  
-  named_scope :by_7days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change desc"
-  named_scope :by_7days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change asc"  
-  named_scope :by_30days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change desc"
-  named_scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
+  scope :by_24hr_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change desc"
+  scope :by_24hr_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_24hr_change asc"  
+  scope :by_7days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change desc"
+  scope :by_7days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_7days_change asc"  
+  scope :by_30days_gainers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change desc"
+  scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
 
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
 
   belongs_to :picture
-  has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
+  has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_35 => "35x35#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
   
   validates_attachment_size :buddy_icon, :less_than => 5.megabytes
-  validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  validates_attachment_content_type :buddy_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif','image/x-png','image/pjpeg']
   
   belongs_to :partner
-  belongs_to :branch
   belongs_to :referral, :class_name => "User", :foreign_key => "referral_id"
   belongs_to :partner_referral, :class_name => "Partner", :foreign_key => "partner_referral_id"
   belongs_to :top_endorsement, :class_name => "Endorsement", :foreign_key => "top_endorsement_id", :include => :priority  
@@ -76,10 +73,7 @@ class User < ActiveRecord::Base
   has_many :document_revisions, :class_name => "DocumentRevision", :dependent => :destroy
   has_many :changes, :dependent => :nullify
   has_many :rankings, :class_name => "UserRanking", :dependent => :destroy
-  
-  has_many :constituents
-  has_many :legislators, :through => :constituents
-  
+    
   has_many :point_qualities, :dependent => :destroy
   has_many :document_qualities, :dependent => :destroy
   
@@ -108,9 +102,7 @@ class User < ActiveRecord::Base
   
   has_many :following_discussions, :dependent => :destroy
   has_many :following_discussion_activities, :through => :following_discussions, :source => :activity
-  
-  liquid_methods :first_name, :last_name, :id, :name, :login, :activation_code, :email, :root_url, :profile_url, :unsubscribe_url
-  
+    
   validates_presence_of     :login, :message => I18n.t('users.new.validation.login')
   validates_length_of       :login, :within => 3..40
   validates_uniqueness_of   :login, :case_sensitive => false    
@@ -128,7 +120,6 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password
   before_create :make_rss_code
-  before_create :check_branch
   after_save :update_signups
   after_create :check_contacts
   after_create :give_partner_credit
@@ -143,13 +134,6 @@ class User < ActiveRecord::Base
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
     resend_activation if self.has_email? and self.is_pending?
-  end
-  
-  def check_branch
-    return if has_branch? or not Government.current.is_branches?
-    self.branch = Government.current.default_branch
-    Government.current.default_branch.increment!(:users_count) 
-    Branch.expire_cache
   end
   
   def check_contacts
@@ -269,7 +253,8 @@ class User < ActiveRecord::Base
     self.deleted_at = nil
     for e in endorsements.suspended
       e.unsuspend!
-    end    
+    end
+    self.warnings_count = 0    
   end  
   
   def do_delete
@@ -312,6 +297,12 @@ class User < ActiveRecord::Base
     UserMailer.deliver_welcome(self)    
   end
   
+  def send_welcome
+    unless self.have_sent_welcome
+      UserMailer.deliver_welcome(self)    
+    end
+  end
+
   def to_param
     "#{id}-#{login.parameterize_full}"
   end  
@@ -432,52 +423,7 @@ class User < ActiveRecord::Base
     a += zip if attribute_present?("zip")
     a
   end
-  
-  def attach_legislators
-    return 0 unless attribute_present?("zip")
-    constituents.destroy_all
-    if attribute_present?("address")
-      begin
-        sun = Sunlight::Legislator.all_for(:address => address_full)
-        if sun and sun.size > 0
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:senior_senator].govtrack_id)) if sun[:senior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:junior_senator].govtrack_id)) if sun[:junior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:representative].govtrack_id)) if sun[:representative]
-        end    
-      rescue
-      end  
-    elsif zip.length == 10 and zip[4] == '-'
-      begin
-        sun = Sunlight::Legislator.all_for(:address => zip)
-        if sun and sun.size > 0
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:senior_senator].govtrack_id)) if sun[:senior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:junior_senator].govtrack_id)) if sun[:junior_senator]
-          constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(sun[:representative].govtrack_id)) if sun[:representative]
-        end
-      rescue
-      end
-    end
-    if constituents.empty? and zip.to_i > 0
-      begin
-        sun = Sunlight::Legislator.all_in_zipcode(zip[0..4])
-        if sun and sun.size > 3 # only pull in their senators, need more info to pick their rep
-          for s in sun
-            if s.title == 'Sen'
-              constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(s.govtrack_id))
-            end
-          end            
-        elsif sun and sun.size < 4
-          for s in sun
-            constituents << Constituent.new(:legislator => Legislator.find_by_govtrack_id(s.govtrack_id))
-          end
-        end
-      rescue
-        return 0
-      end
-    end
-    return constituents.size
-  end
-  
+   
   def revisions_count
     document_revisions_count+point_revisions_count-points_count-documents_count 
   end
@@ -589,13 +535,13 @@ class User < ActiveRecord::Base
   def remember_me_until(time)
     self.remember_token_expires_at = time
     self.remember_token            = encrypt("#{email}--#{remember_token_expires_at}")
-    save_with_validation(false)
+    save(:validate => false)
   end
 
   def forget_me
     self.remember_token_expires_at = nil
     self.remember_token            = nil
-    save_with_validation(false)
+    save(:validate => false)
   end
 
   def name
@@ -798,39 +744,39 @@ class User < ActiveRecord::Base
     return h
   end
   
-  def index_chart_with_obama_hash(limit=30)
+  def index_chart_with_official_hash(limit=30)
     h = Hash.new
     h[:charts] = index_charts(limit)
-    h[:obama_charts] = Government.current.official_user.index_charts(limit)
+    h[:official_charts] = Government.current.official_user.index_charts(limit)
     h[:percentages] = h[:charts].collect{|c|c.percentage.to_f}.reverse
     h[:percentages][0] = 0
     for i in 1..h[:percentages].length-1
     	 h[:percentages][i] =  h[:percentages][i-1] + h[:percentages][i]
     end
-    h[:obama_percentages] = h[:obama_charts].collect{|c|c.percentage.to_f}.reverse
-    h[:obama_percentages][0] = 0
-    for i in 1..h[:obama_percentages].length-1
-    	 h[:obama_percentages][i] = h[:obama_percentages][i-1] + h[:obama_percentages][i]
+    h[:official_percentages] = h[:official_charts].collect{|c|c.percentage.to_f}.reverse
+    h[:official_percentages][0] = 0
+    for i in 1..h[:official_percentages].length-1
+    	 h[:official_percentages][i] = h[:official_percentages][i-1] + h[:official_percentages][i]
     end
     
     h[:max_percentage] = h[:percentages].max.abs
     if h[:max_percentage] < h[:percentages].min.abs
       h[:max_percentage] = h[:percentages].min.abs
     end
-    if h[:max_percentage] < h[:obama_percentages].max.abs
-      h[:max_percentage] = h[:obama_percentages].max.abs
+    if h[:max_percentage] < h[:official_percentages].max.abs
+      h[:max_percentage] = h[:official_percentages].max.abs
     end
-    if h[:max_percentage] < h[:obama_percentages].min.abs
-      h[:max_percentage] = h[:obama_percentages].min.abs
+    if h[:max_percentage] < h[:official_percentages].min.abs
+      h[:max_percentage] = h[:official_percentages].min.abs
     end
         
     h[:adjusted_percentages] = []
     for i in 0..h[:percentages].length-1
       h[:adjusted_percentages][i] = h[:percentages][i] + h[:max_percentage]
     end
-    h[:obama_adjusted_percentages] = []
-    for i in 0..h[:obama_percentages].length-1
-      h[:obama_adjusted_percentages][i] = h[:obama_percentages][i] + h[:max_percentage]
+    h[:official_adjusted_percentages] = []
+    for i in 0..h[:official_percentages].length-1
+      h[:official_adjusted_percentages][i] = h[:official_percentages][i] + h[:max_percentage]
     end    
     return h
   end  
@@ -842,10 +788,6 @@ class User < ActiveRecord::Base
   def has_email?
     self.attribute_present?("email")
   end  
-  
-  def has_branch?
-    self.attribute_present?("branch_id")
-  end
   
   def create_first_and_last_name_from_name(s)
     names = s.split
@@ -930,7 +872,7 @@ class User < ActiveRecord::Base
     if twitter_info['profile_image_url']
       u.picture = Picture.create_from_url(twitter_info['profile_image_url'])
     end
-    if u.save_with_validation(false)
+    if u.save(:validate => false)
       u.activate!
       return u
     else
@@ -938,6 +880,49 @@ class User < ActiveRecord::Base
     end
   end
   
+  def send_report_if_needed!
+    if self.reports_enabled
+      if self.reports_interval and self.reports_interval==1
+        interval = 1.hour
+      elsif self.reports_interval and self.reports_interval==2
+        interval = 1.day
+      else
+        interval = 7.days
+      end
+      if self.last_sent_report==nil or Time.now-interval>self.last_sent_report
+        tags = TagSubscription.find_all_by_user_id(self.id).collect {|sub| sub.tag.name if sub.tag }.compact
+        unless tags.empty?
+          if self.reports_discussions
+            priorities = Priority.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            priorities = []
+          end
+          if self.reports_questions
+            questions = Question.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            questions = []
+          end
+          if self.reports_documents
+            documents = Document.tagged_with(tags,:match_any=>true).published.since(self.last_sent_report)
+          else
+            documents = []
+          end
+          if self.reports_treaty_documents
+            treaty_documents = TreatyDocument.tagged_with(tags,:match_any=>true).since(self.last_sent_report)
+          else
+            treaty_documents = []
+          end
+          if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
+            UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+          end
+        end
+        self.reload
+        self.last_sent_report=Time.now
+        self.save(:validate => false)
+      end
+    end
+  end
+
   def update_with_twitter(twitter_info, token, secret, request)
     self.twitter_id = twitter_info['id'].to_i
     self.twitter_login = twitter_info['screen_name']
@@ -948,7 +933,7 @@ class User < ActiveRecord::Base
       self.picture = Picture.create_from_url(twitter_info['profile_image_url'])
     end
     self.twitter_count = twitter_info['followers_count'].to_i
-    self.save_with_validation(false)
+    self.save(:validate => false)
     self.activate! if not self.activated?
   end  
   
@@ -959,7 +944,7 @@ class User < ActiveRecord::Base
     if User.find_by_login(name)
      name = name + "FB(#{rand(6553)})"
     end
-    RAILS_DEFAULT_LOGGER.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
+    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
     u = User.new(
      :login => name,
      :first_name => fb_session.user.first_name,
@@ -991,7 +976,7 @@ class User < ActiveRecord::Base
     if check_existing_facebook.any?
       for e in check_existing_facebook
         e.remove_facebook
-        e.save_with_validation(false)
+        e.save(:validate => false)
       end
     end
     if fb_session.user.current_location
@@ -999,7 +984,7 @@ class User < ActiveRecord::Base
       self.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any? and not self.attribute_present?("city")
       self.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any? and not self.attribute_present?("state")
     end
-    self.save_with_validation(false)
+    self.save(:validate => false)
     check_contacts # looks for any contacts with the facebook uid, and connects them
     return true
   end
@@ -1032,12 +1017,24 @@ class User < ActiveRecord::Base
   end
   
   def self.adapter
-    return @adapter if @adapter
-    config = Rails::Configuration.new
-    @adapter = config.database_configuration[RAILS_ENV]["adapter"]
-    return @adapter
+    return 'mysql'
   end
   
+def do_abusive!(parent_notifications)
+   if self.warnings_count == 0 # this is their first warning, get a warning message
+    parent_notifications << NotificationWarning1.new(:recipient => self)
+  elsif self.warnings_count == 1 # 2nd warning
+    parent_notifications << NotificationWarning2.new(:recipient => self)
+  elsif self.warnings_count == 2 # third warning, on probation
+    parent_notifications << NotificationWarning3.new(:recipient => self)      
+    self.probation!
+  elsif self.warnings_count >= 3 # fourth or more warning, suspended
+    parent_notifications << NotificationWarning4.new(:recipient => self)      
+    self.suspend!
+  end
+  self.increment!("warnings_count")
+end
+
   protected
   
     # before filter 

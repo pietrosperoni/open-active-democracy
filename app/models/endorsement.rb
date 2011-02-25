@@ -2,24 +2,24 @@ class Endorsement < ActiveRecord::Base
 
   extend ActiveSupport::Memoizable
   
-  named_scope :active, :conditions => "endorsements.status = 'active'"
-  named_scope :deleted, :conditions => "endorsements.status = 'deleted'" 
-  named_scope :suspended, :conditions => "endorsements.status = 'suspended'"
-  named_scope :active_and_inactive, :conditions => "endorsements.status in ('active','inactive','finished')" 
-  named_scope :opposing, :conditions => "endorsements.value < 0"
-  named_scope :endorsing, :conditions => "endorsements.value > 0"
-  named_scope :obama_endorsed, :conditions => "priorities.obama_value = 1", :include => :priority
-  named_scope :not_obama, :conditions => "priorities.obama_value = 0", :include => :priority
-  named_scope :obama_opposed, :conditions => "priorities.obama_value = -1", :include => :priority
-  named_scope :not_obama_or_opposed, :conditions => "priorities.obama_value < 1", :include => :priority
-  named_scope :finished, :conditions => "endorsements.status in ('inactive','finished') and priorities.status = 'inactive'", :include => :priority
-  named_scope :top10, :order => "endorsements.position asc", :limit => 10
+  scope :active, :conditions => "endorsements.status = 'active'"
+  scope :deleted, :conditions => "endorsements.status = 'deleted'" 
+  scope :suspended, :conditions => "endorsements.status = 'suspended'"
+  scope :active_and_inactive, :conditions => "endorsements.status in ('active','inactive','finished')" 
+  scope :opposing, :conditions => "endorsements.value < 0"
+  scope :endorsing, :conditions => "endorsements.value > 0"
+  scope :official_endorsed, :conditions => "priorities.official_value = 1", :include => :priority
+  scope :not_official, :conditions => "priorities.official_value = 0", :include => :priority
+  scope :official_opposed, :conditions => "priorities.official_value = -1", :include => :priority
+  scope :not_official_or_opposed, :conditions => "priorities.official_value < 1", :include => :priority
+  scope :finished, :conditions => "endorsements.status in ('inactive','finished') and priorities.status = 'inactive'", :include => :priority
+  scope :top10, :order => "endorsements.position asc", :limit => 10
   
-  named_scope :by_position, :order => "endorsements.position asc"
-  named_scope :by_priority_position, :order => "priorities.position asc"
-  named_scope :by_priority_lowest_position, :order => "priorities.position desc"  
-  named_scope :by_recently_created, :order => "endorsements.created_at desc"
-  named_scope :by_recently_updated, :order => "endorsements.updated_at desc"  
+  scope :by_position, :order => "endorsements.position asc"
+  scope :by_priority_position, :order => "priorities.position asc"
+  scope :by_priority_lowest_position, :order => "priorities.position desc"  
+  scope :by_recently_created, :order => "endorsements.created_at desc"
+  scope :by_recently_updated, :order => "endorsements.updated_at desc"  
   
   belongs_to :partner
   belongs_to :user
@@ -33,8 +33,6 @@ class Endorsement < ActiveRecord::Base
   cattr_reader :per_page, :max_position
   @@per_page = 25
   @@max_position = 100
-  
-  liquid_methods :value, :value_name, :id, :user, :priority  
   
   # docs: http://noobonrails.blogspot.com/2007/02/actsaslist-makes-lists-drop-dead-easy.html
   acts_as_list :scope => 'endorsements.user_id = #{user_id} AND status = \'active\''
@@ -79,7 +77,7 @@ class Endorsement < ActiveRecord::Base
 
   before_create :calculate_score
   after_save :check_for_top_priority
-  after_save :check_obama
+  after_save :check_official
   before_destroy :remove
   after_destroy :check_for_top_priority
   
@@ -88,7 +86,7 @@ class Endorsement < ActiveRecord::Base
     if self.position == 1
       if self.id != user.top_endorsement_id
         user.top_endorsement = self
-        user.save_with_validation(false)
+        user.save(:validate => false)
         if self.is_up?
           ActivityPriority1.find_or_create_by_user_id_and_priority_id(user.id, self.priority_id)
         elsif self.is_down?
@@ -98,7 +96,7 @@ class Endorsement < ActiveRecord::Base
     elsif user.top_endorsement_id.nil?
       e = user.endorsements.active.by_position.find(:all, :conditions => "position > 0", :limit => 1)[0]
       user.top_endorsement = e
-      user.save_with_validation(false)
+      user.save(:validate => false)
       if e
         if e.is_up?
           ActivityPriority1.find_or_create_by_user_id_and_priority_id(user.id, e.priority_id)
@@ -109,11 +107,11 @@ class Endorsement < ActiveRecord::Base
     end
   end
   
-  def check_obama
+  def check_official
     return unless user_id == Government.current.official_user_id
-    Priority.update_all("obama_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
-    Priority.update_all("obama_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
-    Priority.update_all("obama_value = 0", ["id = ?",priority_id]) if status == 'deleted'
+    Priority.update_all("official_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
+    Priority.update_all("official_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
+    Priority.update_all("official_value = 0", ["id = ?",priority_id]) if status == 'deleted'
   end
   
   def priority_name
@@ -211,8 +209,8 @@ class Endorsement < ActiveRecord::Base
   end
 
   def value_name
-    return 'studdir' if is_up?
-    return 'varst á móti' if is_down?
+    return I18n.t(:you_supported) if is_up?
+    return I18n.t(:you_were_against) if is_down?
   end
 
   def flip_up
@@ -229,8 +227,8 @@ class Endorsement < ActiveRecord::Base
   
   def remove
     if self.status == 'active'
-      if user_id == Government.current.official_user_id and priority.obama_value != 0
-        Priority.update_all("obama_value = 0", ["id = ?",priority_id]) 
+      if user_id == Government.current.official_user_id and priority.official_value != 0
+        Priority.update_all("official_value = 0", ["id = ?",priority_id]) 
       end
       delete_update_counts
       if self.is_up?
@@ -276,20 +274,7 @@ class Endorsement < ActiveRecord::Base
     else
       user.down_endorsements_count += -1
     end  
-    user.save_with_validation(false)
-    # if this government has branches, need to update the branch endorsement    
-    if Government.current.is_branches? and user.has_branch?
-      be = priority.branch_endorsements.find_by_branch_id(user.branch_id)
-      if be
-        be.endorsements_count += -1
-        if self.is_up?
-          be.up_endorsements_count += -1
-        else
-          be.down_endorsements_count += -1
-        end
-        be.save_with_validation(false)    
-      end
-    end
+    user.save(:validate => false)
     if user.qualities_count > 0 and priority.points_count > 0
       for p in priority.points.published.all
         p.calculate_score(true,self)
@@ -314,22 +299,7 @@ class Endorsement < ActiveRecord::Base
     else
       user.down_endorsements_count += 1
     end  
-    user.save_with_validation(false) 
-    # if this government has branches, need to update the branch endorsement
-    if Government.current.is_branches? and user.has_branch?
-      be = priority.branch_endorsements.find_or_create_by_branch_id(user.branch_id)
-      if be
-        be.endorsements_count += 1
-        if self.is_up?
-          be.up_endorsements_count += 1
-        else
-          be.down_endorsements_count += 1
-        end
-        be.save_with_validation(false)
-        # this is the first endorsement in this branch, move it to the bottom of the list
-        be.move_to_bottom if be.endorsements_count == 1
-      end
-    end    
+    user.save(:validate => false) 
     if user.qualities_count > 0 and priority.points_count > 0
       for p in priority.points.published.all
         p.calculate_score(true,self)

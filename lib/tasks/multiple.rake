@@ -9,7 +9,7 @@ namespace :multiple do
       # this will generate an error if the database already exists
       Government.connection.execute("CREATE DATABASE #{govt.db_name} character SET utf8 COLLATE utf8_general_ci")
       govt.switch_db
-      file = "#{RAILS_ROOT}/db/schema.rb"
+      file = "#{Rails.root.to_s}/db/schema.rb"
       load(file)
       User.connection.execute("ALTER TABLE rankings ENGINE=MYISAM")
       User.connection.execute("ALTER TABLE user_rankings ENGINE=MYISAM")    
@@ -18,7 +18,7 @@ namespace :multiple do
       next if User.admins.first
       @user = User.create(:login => govt.admin_name, :first_name => govt.admin_name.split(' ').first, :last_name => govt.admin_name.split(' ')[1..govt.admin_name.split(' ').length].join(' '), :email => govt.admin_email, :password => govt.password, :password_confirmation => govt.password, :status => "active")
       @user.is_admin = true
-      @user.save_with_validation(false)
+      @user.save(:validate => false)
       CapitalGovernmentNew.create(:recipient => @user, :amount => 5)
       
       # create account on run.nationbuilder.com
@@ -34,7 +34,7 @@ namespace :multiple do
       govt.status = 'active'
       govt.password = nil
       govt.users_count = User.active.count
-      govt.save_with_validation(false)
+      govt.save(:validate => false)
       govt.switch_db_back
     end
   end

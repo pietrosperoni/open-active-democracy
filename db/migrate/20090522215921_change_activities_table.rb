@@ -3,7 +3,7 @@ class ChangeActivitiesTable < ActiveRecord::Migration
     add_column :activities, :position, :integer
     add_column :activities, :followers_count, :integer, :default => 0
     add_column :activities, :ignorers_count, :integer, :default => 0
-    for a in ActivityObamaLetter.find(:all)
+    for a in ActivityOfficialLetter.find(:all)
       a.destroy
     end
     remove_column :activities, :letter_id

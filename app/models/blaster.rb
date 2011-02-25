@@ -22,7 +22,7 @@ class Blaster < ActionMailer::Base
   
   def alert(user,tag)
     setup_email(user)
-    @subject = "The Obama transition team is asking for your ideas on healthcare"
+    @subject = "The Official transition team is asking for your ideas on healthcare"
     @body[:tag] = tag
   end  
   
@@ -31,12 +31,6 @@ class Blaster < ActionMailer::Base
     @subject = "White House 2 priority quiz"
     @body[:blast] = blast
   end
-  
-  def add_legislators(blast,user)
-    setup_email(user)
-    @subject = "Sync your White House 2 priorities to your members of Congress"
-    @body[:blast] = blast
-  end  
   
   protected
     def setup_email(user)

@@ -16,8 +16,8 @@
 	<%= link_to tag.rising_priority.name, tag.rising_priority %><br/>
 <% end %>
 <p>
-<b><%= link_to t('priorities.official.title', :official_user_name => current_government.official_user_short_name), obama_priorities_url %></b>:<br/>
+<b><%= link_to t('priorities.official.title', :official_user_name => current_government.official_user_short_name), official_priorities_url %></b>:<br/>
 <% for tag in @issues %>
 	<%= tag.title %>:
-	<%= link_to tag.obama_priority.name, tag.obama_priority %><br/>
+	<%= link_to tag.official_priority.name, tag.official_priority %><br/>
 <% end %>

@@ -12,7 +12,7 @@ class LoadGoogleContacts
     if not @user.is_importing_contacts? or not @user.attribute_present?("imported_contacts_count") or @user.imported_contacts_count > 0
       @user.is_importing_contacts = true
       @user.imported_contacts_count = 0
-      @user.save_with_validation(false)
+      @user.save(:validate => false)
     end
     gmail = Contacts::Google.new(@user.email, @user.google_token)
     gcontacts = gmail.all_contacts
@@ -26,7 +26,7 @@ class LoadGoogleContacts
         if @user.followings_count > 0 and contact.other_user
           contact.following = followings.find_by_other_user_id(contact.other_user_id)
         end
-        contact.save_with_validation(false)          
+        contact.save(:validate => false)          
         offset += 1
         @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0
       rescue
@@ -37,7 +37,7 @@ class LoadGoogleContacts
     @user.imported_contacts_count = offset
     @user.is_importing_contacts = false
     @user.google_crawled_at = Time.now    
-    @user.save_with_validation(false)
+    @user.save(:validate => false)
   end
   
 end

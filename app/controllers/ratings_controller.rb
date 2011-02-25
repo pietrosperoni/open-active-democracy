@@ -29,24 +29,24 @@ class RatingsController < ApplicationController
       rateable.add_rating Rating.new(:rating => params[:rating], :user_id => @user.id)      
       rateable.process_document.touch  if params[:rateable_type]=="ProcessDocumentElement"
     else
-      RAILS_DEFAULT_LOGGER.info("user is not logged in")
+      Rails.logger.info("user is not logged in")
     end
            
     render :update do |page|  
       if @user
         if params[:smaller_comments]!=nil
           page.replace_html "star-ratings-block-#{rateable.id}_#{rateable.class.name}", :partial => "rate_smaller_comments", :locals => { :asset => rateable }        
-          page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
+          # page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
         elsif params[:smaller]!=nil
           page.replace_html "star-ratings-block-#{rateable.id}_#{rateable.class.name}_all", :partial => "rate_smaller", :locals => { :asset => rateable, :postfix=>"all"}
-#          page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}_all", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
+#          # page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}_all", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
           page << "if ($('star-ratings-block-#{rateable.id}_#{rateable.class.name}_7_days')) {"
           page.replace_html "star-ratings-block-#{rateable.id}_#{rateable.class.name}_7_days", :partial => "rate_smaller", :locals => { :asset => rateable, :postfix=>"7_days"}
-#          page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}_7_days",  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
+#          # page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}_7_days",  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
           page << "}"
         else
           page.replace_html "star-ratings-block-#{rateable.id}_#{rateable.class.name}", :partial => "rate", :locals => { :asset => rateable }        
-          page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
+          # page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
         end
       else
         page << "alert('#{t(:please_login_before_rating)}')"

@@ -1,4 +1,4 @@
-<% if not facebook_session %>
+<% if not current_facebook_user %>
 <div id="hp_intro"><%= @page_title %></div>
 <%= t('facebook.invite.connect')%>
 <p>
@@ -6,7 +6,7 @@
 <% end %>			
 
 
-<% if facebook_session %>
+<% if current_facebook_user %>
 	<fb:serverfbml>
 		<script type="text/fbml">
 			<fb:request-form 

@@ -22,7 +22,7 @@ class ProcessSpeechVideo < ActiveRecord::Base
   acts_as_rateable  
 
   def get_image_tag(padding_direction="top", image_size="smaller", class_id=nil, title=false, pos=nil)
-    speech_video_path = "/"+ENV['RAILS_ENV']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
     tiny_filename = "#{speech_video_path}#{image_size}_thumb_#{rand(5-2)+2}.png"
     ancenstor_number = self.ancestors.length
     class_id = " class=\"#{class_id}\"" if class_id
@@ -33,13 +33,13 @@ class ProcessSpeechVideo < ActiveRecord::Base
   end
 
   def get_video_link_tag
-    speech_video_path = "/"+ENV['RAILS_ENV']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
     "#{speech_video_path}speech.flv"
   end
   
   def get_playlist_image_url(image_size="tiny")
     image_size+="_" unless image_size==""
-    speech_video_path = "/"+ENV['RAILS_ENV']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
     "#{speech_video_path}#{image_size}thumb_#{rand(5-2)+2}.png"
   end
 
@@ -75,21 +75,21 @@ class ProcessSpeechVideo < ActiveRecord::Base
     time = (time - minutes) / 60
     hours      =  time % 24
     if hours > 0
-      "#{hours} kl #{minutes} mín #{seconds} sek"
+      "#{hours} #{I18n.t(:hours_short)} #{minutes} #{I18n.t(:minutes_short)} #{seconds} #{I18n.t(:seconds_short)}"
     elsif minutes > 0
-      "#{minutes} mín #{seconds} sek"
+      "#{minutes} #{I18n.t(:minutes_short)} #{seconds} #{I18n.t(:seconds_short)}"
     else
-      "#{seconds} sek"
+      "#{seconds} #{I18n.t(:seconds_short)}"
     end
   end
   
   def video_share_screenshot_image
-    speech_video_path = "/"+ENV['RAILS_ENV']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
     "#{speech_video_path}small_thumb_#{rand(5-2)+2}.png"
   end
 
   def video_share_url
-    "/"+ENV['RAILS_ENV']+"/process_speech_videos/#{self.id}/speech.flv"
+    "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/speech.flv"
   end
     
   def get_menu_title

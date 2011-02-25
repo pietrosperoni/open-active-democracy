@@ -54,7 +54,7 @@ class UserRanker
             u.branch_position_30days = 0
             u.branch_position_30days_change = 0
           end      
-          u.save_with_validation(false)
+          u.save(:validate => false)
           r = branch.user_rankings.create(:version => v, :user => u, :position => i, :capitals_count => u.capitals_count)
         end
       end
@@ -108,7 +108,7 @@ class UserRanker
         u.position_30days = 0
         u.position_30days_change = 0
       end      
-      u.save_with_validation(false)
+      u.save(:validate => false)
       r = UserRanking.create(:version => v, :user => u, :position => i, :capitals_count => u.capitals_count)
     end
     

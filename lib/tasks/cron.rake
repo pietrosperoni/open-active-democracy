@@ -20,7 +20,7 @@ task :cron => :environment do
     if changed
       # updates their counts
       u.update_counts
-      u.save_with_validation(false)
+      u.save(:validate => false)
       puts "updated endorsement positions of " + u.login
     end
   end
@@ -28,7 +28,7 @@ task :cron => :environment do
   # update the user counts for all users who logged in during the last 25 hours, just to make sure they're right
   for u in User.find(:all, :conditions => "loggedin_at > '#{Time.now-25.hours}'")
     u.update_counts
-    u.save_with_validation(false)
+    u.save(:validate => false)
     puts "updated counts of " + u.login
   end
 

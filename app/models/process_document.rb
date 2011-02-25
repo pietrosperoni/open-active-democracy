@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # Copyright (C) 2008,2009,2010 Róbert Viðar Bjarnason
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,8 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class ProcessDocument < ActiveRecord::Base
-  named_scope :by_latest, :order => "process_documents.external_date desc"  
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}  
+  scope :by_latest, :order => "process_documents.external_date desc"  
+  scope :item_limit, lambda{|limit| {:limit=>limit}}  
 
   belongs_to :user
   belongs_to :priority_process

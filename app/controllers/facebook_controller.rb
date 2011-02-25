@@ -7,8 +7,8 @@ class FacebookController < ApplicationController
     @page_title = t('facebook.invite.title', :government_name => current_government.name)
     @user = User.find(current_user.id)
     @facebook_contacts = @user.contacts.active.facebook.collect{|c|c.facebook_uid}
-    if facebook_session
-      app_users = facebook_session.user.friends_with_this_app
+    if current_facebook_user
+      app_users = current_facebook_user.user.friends_with_this_app
       if app_users.any?
         count = 0
         @users = User.active.find(:all, :conditions => ["facebook_uid in (?)",app_users.collect{|u|u.uid}.uniq.compact])        
@@ -30,7 +30,7 @@ class FacebookController < ApplicationController
       redirect_to :controller => "network", :action => "find"
       return
     end
-    @fb_users = facebook_session.users(params[:ids])
+    @fb_users = current_facebook_user.users(params[:ids])
     success = 0
     for fb_user in @fb_users
       @contact = @user.contacts.create(:name => fb_user.name, :facebook_uid => fb_user.uid, :is_from_realname => 1)

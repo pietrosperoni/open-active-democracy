@@ -2,22 +2,27 @@ class Point < ActiveRecord::Base
 
   acts_as_set_partner :table_name=>"points"
 
-  named_scope :published, :conditions => "points.status = 'published'"
-  named_scope :by_helpfulness, :order => "points.score desc"
-  named_scope :by_endorser_helpfulness, :conditions => "points.endorser_score > 0", :order => "points.endorser_score desc"
-  named_scope :by_neutral_helpfulness, :conditions => "points.neutral_score > 0", :order => "points.neutral_score desc"    
-  named_scope :by_opposer_helpfulness, :conditions => "points.opposer_score > 0", :order => "points.opposer_score desc"
-  named_scope :up, :conditions => "points.endorser_score > 0"
-  named_scope :neutral, :conditions => "points.neutral_score > 0"
-  named_scope :down, :conditions => "points.opposer_score > 0"    
-  named_scope :up_value, :conditions => "points.value > 0"
-  named_scope :neutral_value, :conditions => "points.value = 0"
-  named_scope :down_value, :conditions => "points.value < 0"    
-  named_scope :by_recently_created, :order => "points.created_at desc"
-  named_scope :by_recently_updated, :order => "points.updated_at desc"  
-  named_scope :revised, :conditions => "revisions_count > 1"
-  named_scope :top, :order => "points.score desc"
-  named_scope :five, :limit => 5
+  scope :published, :conditions => "points.status = 'published'"
+  scope :by_helpfulness, :order => "points.score desc"
+  scope :by_endorser_helpfulness, :conditions => "points.endorser_score > 0", :order => "points.endorser_score desc"
+  scope :by_neutral_helpfulness, :conditions => "points.neutral_score > 0", :order => "points.neutral_score desc"    
+  scope :by_opposer_helpfulness, :conditions => "points.opposer_score > 0", :order => "points.opposer_score desc"
+  scope :up, :conditions => "points.endorser_score > 0"
+  scope :neutral, :conditions => "points.neutral_score > 0"
+  scope :down, :conditions => "points.opposer_score > 0"    
+  scope :up_value, :conditions => "points.value > 0"
+  scope :neutral_value, :conditions => "points.value = 0"
+  scope :down_value, :conditions => "points.value < 0"    
+  scope :by_recently_created, :order => "points.created_at desc"
+  scope :by_recently_updated, :order => "points.updated_at desc"  
+  scope :flagged, :conditions => "flags_count > 0" 
+  scope :published, :conditions => "questions.status = 'published'"
+  scope :unpublished, :conditions => "questions.status not in ('published','abusive')"
+
+  scope :revised, :conditions => "revisions_count > 1"
+  scope :top, :order => "points.score desc"
+  scope :five, :limit => 5
+  scope :since, lambda{|time| {:conditions=>["questions.created_at>?",time]}}
 
   belongs_to :user
   belongs_to :priority
@@ -35,9 +40,13 @@ class Point < ActiveRecord::Base
   
   has_many :capitals, :as => :capitalizable, :dependent => :nullify
   
-  acts_as_solr :fields => [ :name, :content, :priority_name, :is_published ]
-
-  liquid_methods :id, :user, :text
+  define_index do
+    indexes name
+    indexes content
+    indexes answer
+    indexes cached_issue_list, :facet=>true
+    where "status = 'published'"    
+  end
   
   cattr_reader :per_page
   @@per_page = 15  
@@ -61,6 +70,8 @@ class Point < ActiveRecord::Base
   state :published, :enter => :do_publish
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
+  state :abusive, :enter => :do_abusive
+
   
   event :publish do
     transitions :from => [:draft], :to => :published
@@ -84,19 +95,38 @@ class Point < ActiveRecord::Base
     transitions :from => :buried, :to => :draft     
   end  
 
+  event :abusive do
+    transitions :from => :published, :to => :abusive
+  end
+
+  def do_abusive
+    self.user.do_abusive!(notifications)
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end
+
   def do_publish
     self.published_at = Time.now
     add_counts
-    priority.save_with_validation(false)    
+    priority.save(:validate => false)    
   end
   
   def do_delete
     remove_counts
+    activities.each do |a|
+      a.delete!
+    end
     capital_earned = capitals.sum(:amount)
     if capital_earned != 0
       self.capitals << CapitalPointHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1)) 
     end    
-    priority.save_with_validation(false)
+    priority.save(:validate => false)
     for r in revisions
       r.delete!
     end
@@ -104,7 +134,7 @@ class Point < ActiveRecord::Base
   
   def do_bury
     remove_counts
-    priority.save_with_validation(false)    
+    priority.save(:validate => false)    
   end
   
   def add_counts
@@ -132,7 +162,7 @@ class Point < ActiveRecord::Base
 
   def name_with_type
     return name unless is_down?
-    "[á móti] " + name
+    "[#{I18n.t(:against)}] " + name
   end
 
   def text
@@ -238,7 +268,7 @@ class Point < ActiveRecord::Base
     end    
 
     if old_score != self.score and tosave
-      self.save_with_validation(false)
+      self.save(:validate => false)
     end    
   end
   
@@ -310,7 +340,7 @@ class Point < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
     link(:rel => "nofollow")

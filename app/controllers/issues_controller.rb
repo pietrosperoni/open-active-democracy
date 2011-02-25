@@ -96,9 +96,9 @@ class IssuesController < ApplicationController
     end   
   end  
 
-  def obama
-    @page_title = t('tags.obama.title', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name.possessive)
-    @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.obama_endorsed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+  def official
+    @page_title = t('tags.official.title', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name.possessive)
+    @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.official_endorsed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
@@ -108,9 +108,9 @@ class IssuesController < ApplicationController
     end  
   end
   
-  def not_obama
-    @page_title = t('tags.not_obama.title', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name.possessive)
-    @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.not_obama.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+  def not_official
+    @page_title = t('tags.not_official.title', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name.possessive)
+    @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.not_official.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
@@ -120,9 +120,9 @@ class IssuesController < ApplicationController
     end   
   end
   
-  def obama_opposed
-    @page_title = t('tags.obama_opposed.title', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)
-    @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.obama_opposed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
+  def official_opposed
+    @page_title = t('tags.official_opposed.title', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)
+    @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.official_opposed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }

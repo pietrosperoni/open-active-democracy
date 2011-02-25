@@ -74,7 +74,7 @@ class MasterProcessing < VideoProcessing
   end
 
   def self.download_master_video(master_video)
-    master_video_path = "#{RAILS_ROOT}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/"
+    master_video_path = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/"
     master_video_filename = "#{master_video_path}master.wmv"
     url_to_mmsh = "mmsh"+master_video.url[4..master_video.url.length]
     FileUtils.mkpath(master_video_path)
@@ -82,9 +82,9 @@ class MasterProcessing < VideoProcessing
   end
 
   def self.convert_master_to_flash(master_video)
-    master_video_filename = "#{RAILS_ROOT}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.wmv"
-    master_video_flv_tmp_filename = "#{RAILS_ROOT}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.tmp.flv"
-    master_video_flv_filename = "#{RAILS_ROOT}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.flv"
+    master_video_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.wmv"
+    master_video_flv_tmp_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.tmp.flv"
+    master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.flv"
     @@shell.execute("mencoder -of lavf -ovc lavc -lavcopts vcodec=flv:vbitrate=1000:keyint=25:vqmin=3:acodec=libmp3lame:abitrate=160\
      -srate 44100 -af channels=1 -delay 0.20 -oac lavc -lavcopts acodec=libmp3lame:abitrate=160 -ofps 25 -vf \"harddup,crop=812:476:16:3,scale=640:375\"\
      #{master_video_filename} -o #{master_video_flv_tmp_filename}")

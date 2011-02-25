@@ -1,43 +1,108 @@
-<div id="hp_intro"><%= @page_title %></div>
-<p>
-<% form_tag(searches_path, :method => 'get') do %>
-<table cellpadding="0" cellspacing="0">
-<tr>
-	<td valign="middle"><%= text_field_tag "q", params[:q] %></td>
-	<td valign="middle" style="padding-left:5px;"><%= submit_tag t('searches.new.submit'), :class => "yellow_button" %></td>
-</tr>
-</table>
-<% end %>
-<p>
-<% if @priorities %>
-	<%= render :partial => "nav" %>
-<% end %>
-<% if not @priorities %>
-<% elsif @priorities.empty? %>
-	<%= t('briefing.search.empty') %>
+<% if @error %>
+<%=@error%>
 <% else %>
-	<table border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= t('rank') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
-			<td style="padding-left: 7px; padding-bottom: 2px;"><%= will_paginate WillPaginate::Collection.new((params[:page]||1),(25),@priority_results.total_hits) -%></td>	
-		</tr>			
-	<% for priority in @priorities %>
-		<% if @endorsements %>
-			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
-		<% end %>
-		<tr>
-			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-			<td valign="top" style="padding-left: 8px;">
-			<div id="priority_<%= priority.id %>" class="priority_listing">
-				<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
+<h2>Leitarniðurstöður fyrir <span class="star"><%=@query%></span></h2><br>
+<% if params[:cached_issue_list] %>
+<h4>Kafli: <%=params[:cached_issue_list]%></h4>
+<% elsif params[:class] %>
+<h4>Tegund: <%=translate_facet_option(params[:class])%></h4>
+<% end %>
+
+<div class="search_results" > 
+	<% unless @search_results.empty? %>
+		<div id="left">
+			<% @search_results.each do |result|%>
+				
+				<!-- PRITORITY --> 
+				<% if result.class == Priority %>
+				<div>
+					<h4> Umræða - <%= time_ago(result.excerpts.created_at) %></h4> 				
+					<h3><%= result.excerpts.name %></h3>
+					<%#= result.excerpts.content %>
+					
+					<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.id %>
+					<br><br>	
+				</div>		
+				<!-- QUESTION --> 
+				<% elsif result.class == Question %>
+				<div>
+					<h4> Spurning og svar - <%= time_ago(result.excerpts.created_at) %></h4> 				
+					<h3><%= result.excerpts.name %></h3>
+					Spurning: <%= result.excerpts.content %><br>
+					Svar: <%= result.excerpts.answer %>
+					<br>
+					<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.id %>
+					<br><br>
+				</div>					
+				<!-- DOCUMENT --> 	
+				<% elsif result.class == Document %>
+				<div>	
+					<h4> Erindi - <%= time_ago(result.excerpts.created_at) %></h4> 							
+					<h3><%= result.excerpts.name %></h3>
+					<%= result.excerpts.content %>
+					<br>
+					<%= link_to "Skoða erindi", :controller=>"documents", :action=>"show", :id=>result.id %>
+					<br><br>
+				</div>			
+				<!-- COMMENTS --> 
+				<% elsif result.class == Comment%>
+				<div>
+				  	<h4> Athugasemd - <%= time_ago(result.excerpts.created_at) %></h4>  
+					<%= result.excerpts.content %>	
+					<br>			  	
+				  	<% if result.activity.priority_id %>
+						<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %>
+					<% elsif result.activity.question_id  %>
+						<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.activity.question_id %>
+					<% end %>
+					<br><br>
 			</div>
-			</td>
-		</tr>
-	<% end %>
+			
+			 <% end %>
+		
+		<% end %>
+		<%=will_paginate @search_results%>
+	</div> 
+				
+		<% else %>
+			  Ekkert fannst með þessum leitarorðum og öðrum skilyrðum sem þú hefur valið. 
+			  <br> 
+			  Prófaðu önnur leitarorð eða hreinsaðu allar síur með því að velja Allt hér fyrir ofan.
+			  <br>
+			  <%#=@query %> 
+		<% end %>
 
-	</table>
-
-	<%= will_paginate WillPaginate::Collection.new((params[:page]||1),(25),@priority_results.total_hits) -%>
+	<% unless not @facets or @facets.empty?%>
+		<div id="right">	
+			<div> 
+				<h3><%= link_to "Allt", "/leita?q=#{@query}"%></h3>
+			</div>
+		
+			<% @facets.each do |facet, facet_options| %>
+			<div> 
+					<% if facet.to_s=="class" %>
+						<h3>Tegund</h3> 
+					<% elsif facet.to_s=="cached_issue_list" %>
+						<h3>Kaflar</h3> 
+					<% else %>
+						<h3><%=facet%></h3> 
+					<% end %>
+						<ul>
+						<% facet_options.each do |option, count| %>
+							<% next if option==nil or option=="" %>
+							<% translated_option = translate_facet_option(option) %>
+							<% if translated_option==params[:cached_issue_list] or option==params[:class]%>
+								<li><b><%= link_to "#{translated_option} (#{count})", :params => {facet => option, :q=>@query, :page => 1} %></b></li>
+							<% else %>
+								<li><%= link_to "#{translated_option} (#{count})", :params => {facet => option, :q=>@query, :page => 1} %></li>
+							<% end %>
+						<% end %>
+						</ul> 
+			</div> 
+			<% end %>
+		</div>
+</div> 		
+<% else %>
+	Engir kaflar fundust
+<% end %>			
 <% end %>

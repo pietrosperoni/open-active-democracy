@@ -2,27 +2,30 @@ class Activity < ActiveRecord::Base
   
   acts_as_set_partner :table_name=>"activities"
   
-  named_scope :active, :conditions => "activities.status = 'active'"
-  named_scope :deleted, :conditions => "activities.status = 'deleted'", :order => "updated_at desc"
-  named_scope :for_all_users, :conditions => "is_user_only=false"
+  scope :active, :conditions => "activities.status = 'active'"
+  scope :deleted, :conditions => "activities.status = 'deleted'", :order => "updated_at desc"
+  scope :for_all_users, :conditions => "is_user_only=false"
 
-  named_scope :discussions, :conditions => "activities.comments_count > 0"
-  named_scope :changes, :conditions => "change_id is not null"
-  named_scope :points, :conditions => "type like 'ActivityPoint%'", :order => "activities.created_at desc"
-  named_scope :points_and_docs, :conditions => "type like 'ActivityPoint%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
-  named_scope :capital, :conditions => "type like '%Capital%'"
-  named_scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
+  scope :discussions, :conditions => "activities.comments_count > 0"
+  scope :changes, :conditions => "change_id is not null"
+  scope :points, :conditions => "type like 'ActivityPoint%'", :order => "activities.created_at desc"
+  scope :points_and_docs, :conditions => "type like 'ActivityPoint%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
+  scope :capital, :conditions => "type like '%Capital%'"
+  scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
   
-  named_scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
-  named_scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
-  named_scope :last_thirty_days, :conditions => "activities.changed_at > '#{Time.now-30.days}'"    
-  named_scope :last_24_hours, :conditions => "created_at > '#{Time.now-24.hours}')"  
+  scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
+  scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
+  scope :last_thirty_days, :conditions => "activities.changed_at > '#{Time.now-30.days}'"    
+  scope :last_24_hours, :conditions => "created_at > '#{Time.now-24.hours}')"  
   
-  named_scope :by_recently_updated, :order => "activities.changed_at desc"  
-  named_scope :by_recently_created, :order => "activities.created_at desc"    
+  scope :by_recently_updated, :order => "activities.changed_at desc"  
+  scope :by_recently_created, :order => "activities.created_at desc"    
 
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}
-  
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
+    scope :by_tag_name, lambda{|tag_name| {:conditions=>["cached_issue_list=?",tag_name]}}
+
+  scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+
   belongs_to :user
   belongs_to :partner
   
@@ -47,8 +50,6 @@ class Activity < ActiveRecord::Base
   has_many :followings, :class_name => "FollowingDiscussion", :foreign_key => "activity_id", :dependent => :destroy
   has_many :followers, :through => :followings, :source => :user, :select => "DISTINCT users.*"
   
-  liquid_methods :name, :id, :first_comment, :last_comment
-  
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :active, :column => :status
 
@@ -67,6 +68,32 @@ class Activity < ActiveRecord::Base
   
   event :undelete do
     transitions :from => :deleted, :to => :active
+  end
+
+  def multi_name
+    return "test x"
+    if self.priority_id
+      self.priority.name
+    elsif self.point_id
+      self.question.name
+    elsif self.document_id
+      self.document.name
+    else
+      "#{self.inspect}"
+    end
+  end
+
+  def show_multi_url
+    return "test m"
+    if self.priority_id
+      self.priority.show_url
+    elsif self.point_id
+      self.point.show_url
+    elsif self.document_id
+      self.document.show_url
+    else
+      "#{self.inspect}"
+    end
   end
 
   def do_delete
@@ -482,9 +509,9 @@ class ActivityIssuePriorityRising1 < Activity
   end
 end
 
-class ActivityIssuePriorityObama1 < Activity
+class ActivityIssuePriorityOfficial1 < Activity
   def name
-    I18n.t('activity.priority.tag.obama.first.name', :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
+    I18n.t('activity.priority.tag.official.first.name', :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
   end
 end
 
@@ -701,12 +728,6 @@ class ActivityCapitalInactive < Activity
   end
 end
 
-class ActivityCapitalLegislatorsAdded < Activity
-  def name
-      I18n.t('activity.capital.legislators.added.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)   
-  end
-end
-
 class ActivityIgnoringNew < Activity
   def name
     I18n.t('activity.ignoring.new.name', :user_name => user.name, :other_user_name => other_user.name)
@@ -719,15 +740,15 @@ class ActivityIgnoringDelete < Activity
   end
 end
 
-class ActivityObamaLetter < Activity
+class ActivityOfficialLetter < Activity
   def name
-    I18n.t('activity.obama_letter.name', :user_name => user.name, :official_user_name => Government.current.official_user.name)
+    I18n.t('activity.official_letter.name', :user_name => user.name, :official_user_name => Government.current.official_user.name)
   end
 end
 
-class ActivityCapitalObamaLetter < Activity
+class ActivityCapitalOfficialLetter < Activity
   def name
-      I18n.t('activity.capital.obama_letter.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :official_user_name => Government.current.official_user.name)   
+      I18n.t('activity.capital.official_letter.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :official_user_name => Government.current.official_user.name)   
   end
 end
 
@@ -779,27 +800,27 @@ class ActivityCapitalAcquisitionProposalApproved < Activity
   end
 end
 
-class ActivityPriorityObamaStatusFailed < Activity
+class ActivityPriorityOfficialStatusFailed < Activity
   def name
-    I18n.t('activity.priority.obama_status.failed.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.failed.name', :priority_name => priority.name)
   end
 end
 
-class ActivityPriorityObamaStatusCompromised < Activity
+class ActivityPriorityOfficialStatusCompromised < Activity
   def name
-    I18n.t('activity.priority.obama_status.compromised.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.compromised.name', :priority_name => priority.name)
   end
 end
 
-class ActivityPriorityObamaStatusInTheWorks < Activity
+class ActivityPriorityOfficialStatusInTheWorks < Activity
   def name
-    I18n.t('activity.priority.obama_status.intheworks.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.intheworks.name', :priority_name => priority.name)
   end
 end
 
-class ActivityPriorityObamaStatusSuccessful < Activity
+class ActivityPriorityOfficialStatusSuccessful < Activity
   def name
-    I18n.t('activity.priority.obama_status.successful.name', :priority_name => priority.name)
+    I18n.t('activity.priority.official_status.successful.name', :priority_name => priority.name)
   end
 end
 

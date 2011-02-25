@@ -1,9 +1,9 @@
 <%= render :partial => "priorities/header" %>
 <%= render :partial => "priorities/nav" %>
 <p>
-<%= blurb('document_new')%>
+<%= I18n.t('blurb_document_new')%>
 	<p>
-<% form_for :document, :url => priority_documents_path(@priority)  do |f| %>
+<%= form_for :document, :url => priority_documents_path(@priority)  do |f| %>
 	<%= f.error_messages %>
 <p>
 	<%= t('document.revision.new.name.label')%><br/>
@@ -29,4 +29,4 @@
 
 <% end %>
 <p>
-<%= blurb('textile')%>
+<%= I18n.t('blurb_textile')%>

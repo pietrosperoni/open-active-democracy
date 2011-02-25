@@ -1,5 +1,3 @@
-require 'fastercsv'
-
 def create_tags(row)
   tags = []
   tags << row[1]
@@ -60,7 +58,7 @@ namespace :utils do
   desc "Archive processes"
   task(:archive_processes => :environment) do
       if ENV['current_thing_id']
-        logg = "#{ENV['current_thing_id']}. lög"
+        logg = "#{ENV['current_thing_id']}. log"
         puts "Archiving all processes except for thing: #{logg}"
         Process.find(:all).each do |c|
           puts c.external_info_3
@@ -88,7 +86,7 @@ namespace :utils do
       masters.each do |master_video|
         puts "master_video id: #{master_video.id} all_done: #{master_video.process_speech_videos.all_done?} has_any_in_processing: #{master_video.process_speech_videos.any_in_processing?}"
         if master_video.process_speech_videos.all_done? and not master_video.process_speech_videos.any_in_processing?
-          master_video_flv_filename = "#{RAILS_ROOT}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.flv"
+          master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.flv"
           if File.exist?(master_video_flv_filename)
             rm_string = "rm #{master_video_flv_filename}"
             puts rm_string
@@ -115,7 +113,7 @@ namespace :utils do
       masters = ProcessSpeechMasterVideo.find(:all)
       masters.each do |master_video|
         unless master_video.process_speech_videos.all_done? and not master_video.process_speech_videos.any_in_processing?
-          master_video_flv_filename = "#{RAILS_ROOT}/private/"+ENV['RAILS_ENV']+"/process_speech_master_videos/#{master_video.id}/master.flv"
+          master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.flv"
           if File.exist?(master_video_flv_filename)
             puts "master_video id: #{master_video.id} all_done: #{master_video.process_speech_videos.all_done?} has_any_in_processing: #{master_video.process_speech_videos.any_in_processing?}"
             master_video.process_speech_videos.each do |video|
@@ -138,11 +136,11 @@ namespace :utils do
       current_user=User.new
       current_user.email = "island@skuggathing.is"
       current_user.login = "Island.is"
-      current_user.save(false)
+      current_user.save(:validate => false)
     end
     f = File.open(ENV['csv_import_file'])
     partner = Partner.find_by_short_name(ENV['partner_short_name'])
-    FasterCSV.parse(f.read) do |row|
+    CSV.parse(f.read) do |row|
       puts row.inspect
       create_priority_from_row(row, current_user, partner)  
     end

@@ -1,5 +1,4 @@
 module AutoHtml
-
   class Filter
     def initialize(block)
       @block = block
@@ -14,11 +13,10 @@ module AutoHtml
     def apply(text, options = {})
       _options = @options && @options.merge(options)
       if _options
-        @block.call(text.dup, _options)
+        @block.call(text.to_s.dup, _options)
       else
-        @block.call(text.dup)
+        @block.call(text.to_s.dup)
       end
     end
   end
-
 end

@@ -15,7 +15,7 @@ class ImportController < ApplicationController
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
-    @user.save_with_validation(false)
+    @user.save(:validate => false)
     Delayed::Job.enqueue LoadGoogleContacts.new(@user.id), 5
     redirect_to :action => "status"
   end
@@ -28,7 +28,7 @@ class ImportController < ApplicationController
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
-    @user.save_with_validation(false)
+    @user.save(:validate => false)
     Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.request_uri), 5
     redirect_to :action => "status"
   end  
@@ -41,7 +41,7 @@ class ImportController < ApplicationController
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
-    @user.save_with_validation(false)
+    @user.save(:validate => false)
     Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,request.raw_post), 5
     redirect_to :action => "status"    
   end

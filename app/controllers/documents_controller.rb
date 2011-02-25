@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   
-  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :index, :your_priorities, :destroy]
-  before_filter :admin_required, :only => [:edit, :update]
+  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy, :flag]
+  before_filter :admin_required, :only => [:edit, :update, :abusive, :not_abusive]
  
   def index
     @page_title = t('document.yours.title')
@@ -150,8 +150,8 @@ class DocumentsController < ApplicationController
         if DocumentRevision.create_from_document(@document.id,request)
           session[:goal] = 'document'
           flash[:notice] = t('document.new.success', :document_name => @document.name)
-          if facebook_session
-            flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document, @priority)
+          if current_facebook_user
+            #flash[:user_action_to_publish] = UserPublisher.create_document(current_facebook_user, @document, @priority)
           end          
           @quality = @document.qualities.find_or_create_by_user_id_and_value(current_user.id,1)
           format.html { redirect_to(@document) }
@@ -248,7 +248,50 @@ class DocumentsController < ApplicationController
       format.html { redirect_to(documents_url) }
     end
   end
-  
+
+  def flag
+    @document = Document.find(params[:id])
+    @document.flag_by_user(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to(comments_url) }
+      format.js {
+        render :update do |page|
+          if current_user.is_admin?
+            page.replace_html "flagged_document_info_#{@document.id}", render(:partial => "documents/flagged", :locals => {:document => @document})
+          else
+            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
+          end
+        end        
+      }
+    end    
+  end  
+
+  def abusive
+    @document = Document.find(params[:id])
+    @document.do_abusive
+    @document.delete!
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
+        end        
+      }
+    end    
+  end
+
+  def not_abusive
+    @document = Document.find(params[:id])
+    @document.update_attribute(:flags_count, 0)
+    respond_to do |format|
+      format.js {
+        render :update do |page|
+          page.replace_html "flagged_document_info_#{@document.id}",""
+        end        
+      }
+    end    
+  end  
+
   private
     def load_endorsement
       @priority = Priority.find(params[:priority_id])    

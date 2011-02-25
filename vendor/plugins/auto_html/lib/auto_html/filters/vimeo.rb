@@ -1,6 +1,15 @@
-AutoHtml.add_filter(:vimeo).with(:width => 440, :height => 248) do |text, options|
+AutoHtml.add_filter(:vimeo).with(:width => 440, :height => 248, :show_title => false, :show_byline => false, :show_portrait => false) do |text, options|
   text.gsub(/http:\/\/(www.)?vimeo\.com\/([A-Za-z0-9._%-]*)((\?|#)\S+)?/) do
     vimeo_id = $2
-    %{<object width="#{options[:width]}" height="#{options[:height]}"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=#{vimeo_id}&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=#{vimeo_id}&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="#{options[:width]}" height="#{options[:height]}"></embed></object>}    
+    width  = options[:width]
+    height = options[:height]
+    show_title      = "title=0"    unless options[:show_title]
+    show_byline     = "byline=0"   unless options[:show_byline]  
+    show_portrait   = "portrait=0" unless options[:show_portrait]
+    frameborder     = options[:frameborder] || 0
+    query_string_variables = [show_title, show_byline, show_portrait].compact.join("&")
+    query_string    = "?" + query_string_variables unless query_string_variables.empty?
+
+    %{<iframe src="http://player.vimeo.com/video/#{vimeo_id}#{query_string}" width="#{width}" height="#{height}" frameborder="#{frameborder}"></iframe>}
   end
 end

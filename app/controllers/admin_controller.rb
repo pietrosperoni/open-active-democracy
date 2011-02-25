@@ -2,6 +2,28 @@ class AdminController < ApplicationController
   
   before_filter :admin_required
   
+  def all_flagged
+    @all = [] 
+    @all += Priority.published.flagged
+    @all += Question.published.flagged
+    @all += Comment.published.flagged
+    @all += Document.published.flagged
+    @all = @all.sort_by {|s| s.created_at}
+    @page_title = I18n.t(:admin_all_flagged_content)
+  end
+
+  def all_deleted
+    #TODO: Rethink this as the list of deleted comments grows
+    @all = [] 
+    @all += Priority.unpublished
+    @all += Question.unpublished
+    @all += Comment.unpublished
+    @all += Document.unpublished
+    @all = @all.sort_by {|s| s.updated_at}.reverse
+    @page_title = I18n.t(:admin_all_deleted_content)    
+    render :action=>:all_flagged
+  end
+
   def random_user
     if User.adapter == 'postgresql'
       users = User.find(:all, :conditions => "status = 'active'", :order => "RANDOM()", :limit => 1)

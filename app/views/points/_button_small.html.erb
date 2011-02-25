@@ -3,12 +3,12 @@
 	<% if quality.is_helpful? %>
 		<span class="tag_button tag_button_hack" id="point_helpful_<%= point.id.to_s %>">
 			<%= t('helpful.caps')%>  
-			<%= link_to_remote "&nbsp;x", { :url => unquality_point_path(point, :region => "point_inline") }, :class => "quality_remove", :title => t('helpful.delete.title') %>
+			<%= link_to "&nbsp;x", { :url => unquality_point_path(point, :region => "point_inline") }, :remote=>true, :class => "quality_remove", :title => t('helpful.delete.title') %>
 		</span>
 	<% else %>
 		<span class="tag_button tag_button_hack" id="point_helpful_<%= point.id.to_s %>">
 			<%= t('unhelpful.caps')%> 
-			<%= link_to_remote "&nbsp;x", { :url => unquality_point_path(point, :region => "point_inline") }, :class => "quality_remove", :title => t('unhelpful.delete.title') %>
+			<%= link_to "&nbsp;x", { :url => unquality_point_path(point, :region => "point_inline") }, :remote=>true, :class => "quality_remove", :title => t('unhelpful.delete.title') %>
 		</span>	
 	<% end %>
 <% end %>
@@ -18,12 +18,12 @@
 <% if not quality and logged_in? %>
 	<br><%= t('helpful.question')%>
 	<span class="tag_button tag_button_hack" id="priority_add_<%= point.id.to_s %>">
-		<%= link_to_remote t('doit'), { :url => quality_point_path(point, :region => "point_inline", :value => true), :loading=>"update('#{t('helpful.ing')}')" }, :class => "quality_helpful_link", :title => t('helpful.title') %></span>
+		<%= link_to t('doit'), { :url => quality_point_path(point, :region => "point_inline", :value => true), :remote=>true, :loading=>"update('#{t('helpful.ing')}')" }, :class => "quality_helpful_link", :title => t('helpful.title') %></span>
 		
 	<span class="or"><%= t('or') %></span>
 
 	<span class="tag_button tag_button_hack" id="priority_add_<%= point.id.to_s %>">
-		<%= link_to_remote t('dont'), { :url => quality_point_path(point, :region => "point_inline", :value => false), :loading=>"update('#{t('unhelpful.ing')}')" }, :class => "quality_unhelpful_link", :title => t('unhelpful.title') %>		
+		<%= link_to t('dont'), { :url => quality_point_path(point, :region => "point_inline", :value => false), :remote=>true, :loading=>"update('#{t('unhelpful.ing')}')" }, :class => "quality_unhelpful_link", :title => t('unhelpful.title') %>		
 	</span>	
 <% end %>
 </div>

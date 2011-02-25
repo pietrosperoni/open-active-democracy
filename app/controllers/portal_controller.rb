@@ -83,7 +83,7 @@ class PortalController < ApplicationController
           if portlet.portlet_container.user_id == current_user.id 
             dp.save
           else
-            RAILS_DEFAULT_LOGGER.error("Wrong user trying to save the wrong thing")
+            Rails.logger.error("Wrong user trying to save the wrong thing")
           end
         end
       end

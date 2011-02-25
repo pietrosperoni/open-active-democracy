@@ -1,6 +1,6 @@
 class Capital < ActiveRecord::Base
 
-  named_scope :recently, :order => "capitals.created_at desc"
+  scope :recently, :order => "capitals.created_at desc"
 
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
   belongs_to :recipient, :class_name => "User", :foreign_key => "recipient_id"
@@ -153,7 +153,7 @@ end
 class CapitalIgnorers < Capital
 end
 
-class CapitalObamaLetter < Capital
+class CapitalOfficialLetter < Capital
 end
 
 class CapitalAdNew < Capital
@@ -169,7 +169,4 @@ class CapitalAcquisitionProposalApproved < Capital
 end
 
 class CapitalInactive < Capital  
-end
-
-class CapitalLegislatorsAdded < Capital
 end

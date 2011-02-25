@@ -5,10 +5,10 @@ require 'yaml'
 f = File.open( File.dirname(__FILE__) + '/config/worker.yml')
 worker_config = YAML.load(f)
 
-ENV['RAILS_ENV'] = worker_config['rails_env']
+ENV['Rails.env'] = worker_config['rails_env']
 
 options = {
-    :app_name   => "video_worker_"+ENV['RAILS_ENV'],
+    :app_name   => "video_worker_"+ENV['Rails.env'],
     :dir_mode   => :script,
     :backtrace  => true,
     :monitor    => true,

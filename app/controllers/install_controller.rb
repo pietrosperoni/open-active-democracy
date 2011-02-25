@@ -57,7 +57,7 @@ class InstallController < ApplicationController
       cookies.delete :auth_token
       self.current_user = @user
       @user.is_admin = true
-      @user.save_with_validation(false)
+      @user.save(:validate => false)
       CapitalGovernmentNew.create(:recipient => @user, :amount => 5)   
       flash[:notice] = t('install.welcome.success_loggedin')
       redirect_to "/"         

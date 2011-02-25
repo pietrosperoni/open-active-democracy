@@ -5,7 +5,7 @@
 			<%= @tag_names.titleize %>
 		</div>
 
-		<div id="nav_sub_<% if ['yours','network','obama','not_obama','obama_opposed','show','controversial','rising','falling','random','newest','finished'].include?(params[:action]) %>2<% elsif ['points'].include?(params[:action]) %>3<% elsif ['documents'].include?(params[:action]) %>4<% elsif ['discussions'].include?(params[:action]) %>5<% end %>">
+		<div id="nav_sub_<% if ['yours','network','official','not_official','official_opposed','show','controversial','rising','falling','random','newest','finished'].include?(params[:action]) %>2<% elsif ['points'].include?(params[:action]) %>3<% elsif ['documents'].include?(params[:action]) %>4<% elsif ['discussions'].include?(params[:action]) %>5<% end %>">
 			<ul id="menu_sub">
 				<li class="tab2">
 					<span class="tab_header">
@@ -40,9 +40,9 @@
 		</div>
 	</div>
 
-	<% if ['yours','network','obama','not_obama','obama_opposed','show','controversial','rising','falling','random','newest','finished'].include?(params[:action])%>
+	<% if ['yours','network','official','not_official','official_opposed','show','controversial','rising','falling','random','newest','finished'].include?(params[:action])%>
 	<div id="nav_third">
-	<div id="nav_third_<% if ['yours'].include?(params[:action]) %>1<% elsif ['network'].include?(params[:action]) %>2<% elsif ['obama','not_obama','obama_opposed'].include?(params[:action]) %>3<% elsif ['show'].include?(params[:action]) %>4<% elsif ['controversial'].include?(params[:action]) %>5<% elsif ['rising'].include?(params[:action]) %>6<% elsif ['random'].include?(params[:action]) %>7<% elsif ['newest'].include?(params[:action]) %>8<% elsif ['finished'].include?(params[:action]) %>9<% end %>">
+	<div id="nav_third_<% if ['yours'].include?(params[:action]) %>1<% elsif ['network'].include?(params[:action]) %>2<% elsif ['official','not_official','official_opposed'].include?(params[:action]) %>3<% elsif ['show'].include?(params[:action]) %>4<% elsif ['controversial'].include?(params[:action]) %>5<% elsif ['rising'].include?(params[:action]) %>6<% elsif ['random'].include?(params[:action]) %>7<% elsif ['newest'].include?(params[:action]) %>8<% elsif ['finished'].include?(params[:action]) %>9<% end %>">
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
@@ -57,7 +57,7 @@
 			<% if current_government.has_official? %>			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.name', :official_user_name => current_government.official_user_short_name), :action => "obama" %>
+						<%= link_to t('menu.priorities.official.name', :official_user_name => current_government.official_user_short_name), :action => "official" %>
 					</span>
 				</li>
 			<% end %>

@@ -3,13 +3,11 @@ class Government < ActiveRecord::Base
   extend ActiveSupport::Memoizable
   require 'paperclip'
   
-  named_scope :active, :conditions => "status = 'active'"
-  named_scope :pending, :conditions => "status = 'pending'"
-  named_scope :least_active, :conditions => "status = 'active'", :order => "users_count"
-  named_scope :with_branches, :conditions => "default_branch_id is not null"
-  named_scope :without_branches, :conditions => "default_branch_id is null"
-  named_scope :facebook, :conditions => "is_facebook = true"
-  named_scope :twitter, :conditions => "is_twitter = true"
+  scope :active, :conditions => "status = 'active'"
+  scope :pending, :conditions => "status = 'pending'"
+  scope :least_active, :conditions => "status = 'active'", :order => "users_count"
+  scope :facebook, :conditions => "is_facebook = true"
+  scope :twitter, :conditions => "is_twitter = true"
   
   belongs_to :official_user, :class_name => "User"
   belongs_to :color_scheme
@@ -32,8 +30,6 @@ class Government < ActiveRecord::Base
   
   validates_attachment_size :fav_icon, :less_than => 5.megabytes
   validates_attachment_content_type :fav_icon, :content_type => ['image/jpeg', 'image/png', 'image/gif']  
-  
-  belongs_to :default_branch, :class_name => "Branch"
   
   validates_presence_of     :name
   validates_length_of       :name, :within => 3..60
@@ -67,8 +63,6 @@ class Government < ActiveRecord::Base
   validates_inclusion_of    :homepage, :in => Homepage::NAMES.collect{|n|n[0]}
   validates_inclusion_of    :tags_page, :in => Homepage::TAGS.collect{|n|n[0]}
   
-  liquid_methods :short_name, :domain_name, :name, :tagline, :name_with_tagline, :email, :official_user_id, :official_user_short_name,:official_user_priorities_count, :has_official?, :official_user_name, :target, :is_tags, :has_facebook_enabled?, :has_twitter_enabled?, :is_legislators?, :admin_name, :admin_email, :tags_name, :briefing_name, :currency_name, :currency_short_name, :priorities_count, :points_count, :documents_count, :users_count, :contributors_count, :partners_count, :endorsements_count, :logo, :logo_small, :logo_tiny, :logo_large, :logo_dimensions, :picture_id, :base_url, :homepage_url, :mission, :tags_name_plural
-
   after_save :clear_cache
   before_save :last_minute_checks
   
@@ -90,15 +84,6 @@ class Government < ActiveRecord::Base
     Thread.current[:government] = government
   end
   
-  def update_user_default_branch
-    User.connection.execute("update users set branch_id = #{default_branch_id} where is_branch_chosen = false;")
-    for branch in Branch.all
-      branch.update_counts
-      branch.save_with_validation(false)
-    end
-    Branch.expire_cache  
-  end
-
   def base_url
     return ENV['DOMAIN']
   end
@@ -121,17 +106,13 @@ class Government < ActiveRecord::Base
     self.documents_count = Document.published.count
     self.contributors_count = User.active.at_least_one_endorsement.contributed.count
     self.official_user_priorities_count = official_user.endorsements_count if has_official?
-    save_with_validation(false)
+    self.save(:validate => false)
   end  
   
   def has_official?
     attribute_present?("official_user_id")
   end
 
-  def is_branches?
-    attribute_present?("default_branch_id")
-  end
-  
   def official_user_name
     official_user.name if official_user
   end
@@ -151,7 +132,7 @@ class Government < ActiveRecord::Base
   
   def has_facebook_enabled?
     return false unless is_facebook?
-    return true if Facebooker.api_key
+    return true
   end
   
   def has_windows_enabled?

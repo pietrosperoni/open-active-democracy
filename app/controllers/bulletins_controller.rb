@@ -51,12 +51,12 @@ class BulletinsController < ApplicationController
         format.js {
           render :update do |page|
             page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => ""})
-            page["bulletin-form-submit"].enable  
+#            page["bulletin-form-submit"].enable  
             page["bulletin_content"].focus()
-            page["new_comment"].reset
+#            page["new_comment"].reset
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
-            if facebook_session
-              page << fb_connect_stream_publish(UserPublisher.create_comment(facebook_session, @comment, @activity))
+            if current_facebook_user
+              #page << fb_connect_stream_publish(UserPublisher.create_comment(current_facebook_user, @comment, @activity))
             end            
           end        
         }        
@@ -66,7 +66,7 @@ class BulletinsController < ApplicationController
       respond_to do |format|
         format.js {
           render :update do |page|
-            page["bulletin-form-submit"].enable
+ #           page["bulletin-form-submit"].enable
             page["bulletin_content"].focus
             for error in @comment.errors
               page.replace_html 'bulletin_error', error[0] + ' ' + error[1]

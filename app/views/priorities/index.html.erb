@@ -44,7 +44,7 @@
 		<p>
 		<% if logged_in? and current_user.endorsements_count > 4 %>
 			<% if current_government.has_official? %>
-				<%= render :partial => "users/index_chart_with_obama", :locals => {:user => current_user }%>
+				<%= render :partial => "users/index_chart_with_official", :locals => {:user => current_user }%>
 			<% else %>
 				<%= render :partial => "users/index_chart", :locals => {:user => current_user }%>
 			<% end %>
@@ -70,5 +70,5 @@
 </table>
 
 <% if @issues.current_page == 1 and @issues.size > 0 %>
-	<p><%= blurb("overview_more")%>
+	<p><%= I18n.t("blurb_overview_more")%>
 <% end %>

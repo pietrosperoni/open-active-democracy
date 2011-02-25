@@ -6,11 +6,11 @@
 		
 		<td valign="top">
 
-<!--<%= blurb('point_new')%>-->
+<!--<%= I18n.t('blurb_point_new')%>-->
 
 	<div  class="form_header">Bæta við rökum: <span class="red">* </span> </div>
 
-<% form_for :point, :url => priority_points_path(@priority)  do |f| %>
+<%= form_for :point, :url => priority_points_path(@priority)  do |f| %>
   <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
 	<div class="field">
 		<div class="field_box">

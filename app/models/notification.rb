@@ -5,24 +5,22 @@ class Notification < ActiveRecord::Base
 
   belongs_to :notifiable, :polymorphic => true
 
-  named_scope :active, :conditions => "notifications.status <> 'deleted'"
-  named_scope :unprocessed, :conditions => "notifications.processed_at IS NULL"
-  named_scope :sent, :conditions => "notifications.status in('sent','read')"
-  named_scope :read, :conditions => "notifications.status = 'read'"
-  named_scope :unread, :conditions => "notifications.status in ('sent','unsent')"
+  scope :active, :conditions => "notifications.status <> 'deleted'"
+  scope :unprocessed, :conditions => "notifications.processed_at IS NULL"
+  scope :sent, :conditions => "notifications.status in('sent','read')"
+  scope :read, :conditions => "notifications.status = 'read'"
+  scope :unread, :conditions => "notifications.status in ('sent','unsent')"
 
-  named_scope :messages, :conditions => "notifications.type = 'NotificationMessage'"
-  named_scope :comments, :conditions => "notifications.type = 'NotificationComment'"  
+  scope :messages, :conditions => "notifications.type = 'NotificationMessage'"
+  scope :comments, :conditions => "notifications.type = 'NotificationComment'"  
 
-  named_scope :by_recently_created, :order => "notifications.created_at desc"  
-  named_scope :by_recently_sent, :order => "notifications.sent_at desc"
-  named_scope :by_oldest_sent, :order => "notifications.sent_at asc"  
+  scope :by_recently_created, :order => "notifications.created_at desc"  
+  scope :by_recently_sent, :order => "notifications.sent_at desc"
+  scope :by_oldest_sent, :order => "notifications.sent_at asc"  
 
   cattr_reader :per_page
   @@per_page = 30
   
-  liquid_methods :name, :sender, :recipient, :sender_name, :recipient_name, :id
-
   acts_as_state_machine :initial => :unsent, :column => :status
   
   state :unsent, :enter => :queue_sending
@@ -278,13 +276,13 @@ class NotificationPriorityFinished < Notification
   
   def name
     if notifiable.priority.is_successful?
-       I18n.t('activity.priority.obama_status.successful.name', :priority_name => notifiable.priority.name)
+       I18n.t('activity.priority.official_status.successful.name', :priority_name => notifiable.priority.name)
     elsif notifiable.priority.is_compromised?
-      I18n.t('activity.priority.obama_status.compromised.name', :priority_name => notifiable.priority.name)
+      I18n.t('activity.priority.official_status.compromised.name', :priority_name => notifiable.priority.name)
     elsif notifiable.priority.is_failed?
-      I18n.t('activity.priority.obama_status.failed.name', :priority_name => notifiable.priority.name)
+      I18n.t('activity.priority.official_status.failed.name', :priority_name => notifiable.priority.name)
     elsif notifiable.priority.is_intheworks?
-      I18n.t('activity.priority.obama_status.intheworks.name', :priority_name => notifiable.priority.name)
+      I18n.t('activity.priority.official_status.intheworks.name', :priority_name => notifiable.priority.name)
     end
   end
   
@@ -322,6 +320,18 @@ class NotificationWarning3 < Notification
   
   def name
     I18n.t('notification.warning3')
+  end
+  
+  def is_recipient_subscribed?
+    true
+  end  
+  
+end
+
+class NotificationWarning4 < Notification
+  
+  def name
+    I18n.t('notification.warning4')
   end
   
   def is_recipient_subscribed?

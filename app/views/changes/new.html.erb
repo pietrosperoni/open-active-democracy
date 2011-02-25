@@ -2,9 +2,9 @@
 <%= render :partial => "priorities/nav" %>
 <p>
 			
-<% form_remote_for(@change, :url => priority_changes_path(@priority)) do |f| %>
+<%= form_for (@change, :remote=>true, :url => priority_changes_path(@priority)) do |f| %>
 
-<%= blurb("acquisition_new")%>
+<%= I18n.t("blurb_acquisition_new")%>
 
 	<p><%= t('changes.new.cost.label', :currency_short_name => current_government.currency_short_name) %><br/>
 		<%= f.check_box :is_endorsers %> <%= t('changes.new.cost.endorsers.label', :count => @priority.up_endorsements_count, :capital => @change.cost_endorsers, :currency_short_name => current_government.currency_short_name) %><br/>

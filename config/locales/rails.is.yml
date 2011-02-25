@@ -1,0 +1,149 @@
+--- 
+is: 
+  activerecord: 
+    errors: 
+      attributes: ""
+      messages: 
+        accepted: "þarf að vera samþykkt"
+        blank: "má ekki vera autt"
+        confirmation: "Þarfnast ekki samþykktar"
+        empty: "má ekki vera tómt"
+        equal_to: "þarf að vera %{count}"
+        even: "þarf að vera jöfn tala"
+        exclusion: "er upptekið"
+        greater_than: "þarf að vera meira en %{count}"
+        greater_than_or_equal_to: "þarf að vera meira en eða sama og %{count}"
+        inclusion: "er ekki á listanum"
+        invalid: "er ekki leyfilegt"
+        less_than: "þarf að vera minna en %{count}"
+        less_than_or_equal_to: "þarf að vera minna eða það sama og %{count}"
+        not_a_number: "er ekki númer"
+        odd: "þarf að vera oddatala"
+        taken: "hefur þegar verið tekið"
+        too_long: "er of langt (hámarksfjöldi stafa eru %{count} stafir)"
+        too_short: "er of stutt (lámarksfjöldi stafa eru %{count} stafir)"
+        wrong_length: "er röng lengd (ætti að vera %{count} stafir)"
+      models: ""
+      template: 
+        body: "Upp komu vandamál með eftirfarandi svæði:"
+        header: 
+          one: "1 villa varð til þess að %{model} gat ekki verið vistað"
+          other: "%{count} villur urðu til þess að %{model} gat ekki verið vistað"
+  date: 
+    abbr_day_names: 
+      - Sun
+      - Mán
+      - Þri
+      - Mið
+      - Fim
+      - Fös
+      - Lau
+    abbr_month_names: 
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - Maí
+      - Jún
+      - Júl
+      - Áug
+      - Sep
+      - Okt
+      - Nóv
+      - Des
+    day_names: 
+      - Sunnudagur
+      - Mánudagur
+      - Þriðjudagur
+      - Miðvikudagur
+      - Fimmtudagur
+      - Föstudagur
+      - Laugardagur
+    formats: 
+      default: "%d.%m.%Y"
+      long: "%d. %B %Y"
+      short: "%d. %b"
+    month_names: 
+      - ~
+      - Janúar
+      - Febrúar
+      - Mars
+      - Apríl
+      - Maí
+      - Júní
+      - Júlí
+      - Ágúst
+      - September
+      - Október
+      - Nóvember
+      - Desember
+    order: 
+      - :year
+      - :month
+      - :day
+  datetime: 
+    distance_in_words: 
+      about_x_hours: 
+        many: "um %{count} klst."
+        one: "um klukkustund"
+      about_x_months: 
+        many: "um %{count} mán."
+        one: "um mánuði"
+      about_x_years: 
+        many: "um %{count} árum"
+        one: "um ári"
+      half_a_minute: "hálf mín"
+      less_than_x_minutes: 
+        many: "minna en %{count} mín"
+        one: "undir einni mín"
+      less_than_x_seconds: 
+        many: "minna en %{count} sek."
+        one: "undir 1 sek."
+      over_x_years: 
+        many: "yfir %{count} árum"
+        one: "yfir 1 ári"
+      x_days: 
+        many: "%{count} dagar"
+        one: "1 dagur"
+      x_minutes: 
+        many: "%{count} mín"
+        one: "1 mín"
+      x_months: 
+        many: "%{count} mán."
+        one: "1 mánuður"
+      x_seconds: 
+        many: "%{count} sek."
+        one: "1 sek."
+  number: 
+    currency: 
+      format: 
+        delimiter: "."
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        unit: kr.
+    format: 
+      delimiter: ","
+      precision: 3
+      separator: "."
+    human: 
+      format: 
+        delimiter: ""
+        precision: 1
+    percentage: 
+      format: 
+        delimiter: ""
+    precision: 
+      format: 
+        delimiter: ""
+  support: 
+    array: 
+      sentence_connector: " og "
+  time: 
+    am: am
+    formats: 
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm

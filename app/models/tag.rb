@@ -4,17 +4,17 @@ class Tag < ActiveRecord::Base
   
   acts_as_set_partner :table_name=>"tags"
   
-  named_scope :by_endorsers_count, :order => "tags.up_endorsers_count desc"
+  scope :by_endorsers_count, :order => "tags.up_endorsers_count desc"
 
-  named_scope :alphabetical, :order => "tags.name asc"
-  named_scope :more_than_three_priorities, :conditions => "tags.priorities_count > 3"
-  named_scope :with_priorities, :conditions => "tags.priorities_count > 0"
+  scope :alphabetical, :order => "tags.name asc"
+  scope :more_than_three_priorities, :conditions => "tags.priorities_count > 3"
+  scope :with_priorities, :conditions => "tags.priorities_count > 0"
   
-  named_scope :most_priorities, :conditions => "tags.priorities_count > 0", :order => "tags.priorities_count desc"
-  named_scope :most_webpages, :conditions => "tags.webpages_count > 0", :order => "tags.webpages_count desc"  
-  named_scope :most_feeds, :conditions => "tags.feeds_count > 0", :order => "tags.feeds_count desc"   
+  scope :most_priorities, :conditions => "tags.priorities_count > 0", :order => "tags.priorities_count desc"
+  scope :most_webpages, :conditions => "tags.webpages_count > 0", :order => "tags.webpages_count desc"  
+  scope :most_feeds, :conditions => "tags.feeds_count > 0", :order => "tags.feeds_count desc"   
 
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
 
   has_many :activities, :dependent => :destroy
   has_many :taggings
@@ -25,7 +25,7 @@ class Tag < ActiveRecord::Base
   belongs_to :top_priority, :class_name => "Priority", :foreign_key => "top_priority_id"
   belongs_to :rising_priority, :class_name => "Priority", :foreign_key => "rising_priority_id"
   belongs_to :controversial_priority, :class_name => "Priority", :foreign_key => "controversial_priority_id"  
-  belongs_to :obama_priority, :class_name => "Priority", :foreign_key => "obama_priority_id"    
+  belongs_to :official_priority, :class_name => "Priority", :foreign_key => "official_priority_id"    
   
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -59,6 +59,14 @@ class Tag < ActiveRecord::Base
 
   def to_s
     name
+  end
+  
+  def self.all_dropdown_options
+    out = ""
+    Tag.all.each do |t|
+      out+="<option>#{t.name}</option>"
+    end
+    out
   end
   
   # LIKE is used for cross-database case-insensitivity

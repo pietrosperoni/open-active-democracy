@@ -1,5 +1,5 @@
 <div id="priority_nav">
-<div id="priority_nav<% if ['show'].include?(params[:action]) %>1<% elsif ['messages'].include?(params[:controller]) %>2<% elsif ['priorities'].include?(params[:action]) %>3<% elsif ['following','followers'].include?(params[:action]) %>4<% elsif ['documents','points'].include?(params[:action]) %>5<% elsif ['discussions','activities','capital','issues','ads'].include?(params[:action]) %>6<% elsif ['edit','update','signups','legislators'].include?(params[:action]) %>7<% end %>">	
+<div id="priority_nav<% if ['show'].include?(params[:action]) %>1<% elsif ['messages'].include?(params[:controller]) %>2<% elsif ['priorities'].include?(params[:action]) %>3<% elsif ['following','followers'].include?(params[:action]) %>4<% elsif ['documents','points'].include?(params[:action]) %>5<% elsif ['discussions','activities','capital','issues','ads'].include?(params[:action]) %>6<% elsif ['edit','update','signups'].include?(params[:action]) %>7<% end %>">	
 
 	<ul id="priority_menu">
 
@@ -75,9 +75,6 @@
 				</span>
 				<div class="tab_body">
 					<%= link_to t('menu.profile.edit.name'), edit_user_url(@user) %><br/>
-					<% if current_government.is_legislators? %>
-						<%= link_to t('menu.profile.legislators.name'), legislators_user_url(@user) %><br/>
-					<% end %>
  					<%= link_to t('menu.profile.signups.name'), signups_user_url(@user) %><br/>
 					<% if @user.is_active? %>
 						<% if @user.is_pending? %>

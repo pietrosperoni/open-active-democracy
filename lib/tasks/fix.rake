@@ -18,7 +18,7 @@ namespace :fix do
       p.endorsements_count = p.endorsements.active_and_inactive.size
       p.up_endorsements_count = p.endorsements.endorsing.active_and_inactive.size
       p.down_endorsements_count = p.endorsements.opposing.active_and_inactive.size
-      p.save_with_validation(false)      
+      p.save(:validate => false)      
     end
   end
   
@@ -112,7 +112,7 @@ namespace :fix do
     Government.current = Government.all.last    
     for t in Tag.all
       t.update_counts
-      t.save_with_validation(false)
+      t.save(:validate => false)
     end
   end  
   
@@ -121,7 +121,7 @@ namespace :fix do
     Government.current = Government.all.last    
     for b in Branch.all
       b.update_counts
-      b.save_with_validation(false)
+      b.save(:validate => false)
     end
     Branch.expire_cache
   end  
@@ -250,20 +250,20 @@ namespace :fix do
     users = User.find(:all)
     for u in users
       u.update_counts
-      u.save_with_validation(false)
+      u.save(:validate => false)
     end
   end
   
-  desc "update obama_status on priorities"
+  desc "update official_status on priorities"
   task :official_status => :environment do
     Government.current = Government.all.last    
     if Government.current.has_official?
-      Priority.connection.execute("update priorities set obama_value = 1
-      where obama_value <> 1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value > 0 and status = 'active')")
-      Priority.connection.execute("update priorities set obama_value = -1
-      where obama_value <> -1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value < 0 and status = 'active')")
-      Priority.connection.execute("update priorities set obama_value = 0
-      where obama_value <> 0 and id not in (select priority_id from endorsements where user_id = #{govt.official_user_id} and status = 'active')")
+      Priority.connection.execute("update priorities set official_value = 1
+      where official_value <> 1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value > 0 and status = 'active')")
+      Priority.connection.execute("update priorities set official_value = -1
+      where official_value <> -1 and id in (select priority_id from endorsements where user_id = #{govt.official_user_id} and value < 0 and status = 'active')")
+      Priority.connection.execute("update priorities set official_value = 0
+      where official_value <> 0 and id not in (select priority_id from endorsements where user_id = #{govt.official_user_id} and status = 'active')")
     end
   end  
   
@@ -281,7 +281,7 @@ namespace :fix do
           else
             revisions[row].content_diff = HTMLDiff.diff(RedCloth.new(revisions[row+1].content).to_html,RedCloth.new(revisions[row].content).to_html)
           end
-          revisions[row].save_with_validation(false)
+          revisions[row].save(:validate => false)
         end
       end
     end
@@ -362,7 +362,7 @@ namespace :fix do
         else
           be.up_endorsements_count = 0
         end            
-        be.save_with_validation(false)
+        be.save(:validate => false)
       end          
     end
   end
@@ -416,7 +416,7 @@ namespace :fix do
 #          u.index_24hr_change = u.index_change_percent(2)
 #          u.index_7days_change = u.index_change_percent(7)
 #          u.index_30days_change = u.index_change_percent(30)
-#          u.save_with_validation(false)
+#          u.save(:validate => false)
 #          u.expire_charts
 #        end       
       end

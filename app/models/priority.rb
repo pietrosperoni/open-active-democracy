@@ -7,42 +7,47 @@ class Priority < ActiveRecord::Base
   acts_as_set_partner :table_name=>"priorities"
 
   if Government.current and Government.current.is_suppress_empty_priorities?
-    named_scope :published, :conditions => "priorities.status = 'published' and priorities.position > 0 and endorsements_count > 0"
+    scope :published, :conditions => "priorities.status = 'published' and priorities.position > 0 and endorsements_count > 0"
   else
-    named_scope :published, :conditions => "priorities.status = 'published'"
+    scope :published, :conditions => "priorities.status = 'published'"
   end
 
-  named_scope :top_rank, :order => "priorities.score desc, priorities.position asc"
-  named_scope :not_top_rank, :conditions => "priorities.position > 25"
-  named_scope :rising, :conditions => "priorities.trending_score > 0", :order => "priorities.trending_score desc"
-  named_scope :falling, :conditions => "priorities.trending_score < 0", :order => "priorities.trending_score asc"
-  named_scope :controversial, :conditions => "priorities.is_controversial = true", :order => "priorities.controversial_score desc"
+  scope :published, :conditions => "priorities.status = 'published'"
+  scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
 
-  named_scope :rising_7days, :conditions => "priorities.position_7days_change > 0"
-  named_scope :flat_7days, :conditions => "priorities.position_7days_change = 0"
-  named_scope :falling_7days, :conditions => "priorities.position_7days_change < 0"
-  named_scope :rising_30days, :conditions => "priorities.position_30days_change > 0"
-  named_scope :flat_30days, :conditions => "priorities.position_30days_change = 0"
-  named_scope :falling_30days, :conditions => "priorities.position_30days_change < 0"
-  named_scope :rising_24hr, :conditions => "priorities.position_24hr_change > 0"
-  named_scope :flat_24hr, :conditions => "priorities.position_24hr_change = 0"
-  named_scope :falling_24hr, :conditions => "priorities.position_24hr_change < 0"
-  
-  named_scope :finished, :conditions => "priorities.obama_status in (-2,-1,2)"
-  
-  named_scope :obama_endorsed, :conditions => "priorities.obama_value > 0"
-  named_scope :not_obama, :conditions => "priorities.obama_value = 0"
-  named_scope :obama_opposed, :conditions => "priorities.obama_value < 0"
-  named_scope :not_obama_or_opposed, :conditions => "priorities.obama_value < 1"   
-  
-  named_scope :alphabetical, :order => "priorities.name asc"
-  named_scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
-  named_scope :tagged, :conditions => "(priorities.cached_issue_list is not null and priorities.cached_issue_list <> '')"
-  named_scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
+  scope :flagged, :conditions => "flags_count > 0"
 
-  named_scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
+  scope :alphabetical, :order => "priorities.name asc"
+
+  scope :top_rank, :order => "priorities.score desc, priorities.position asc"
+  scope :not_top_rank, :conditions => "priorities.position > 25"
+  scope :rising, :conditions => "priorities.trending_score > 0", :order => "priorities.trending_score desc"
+  scope :falling, :conditions => "priorities.trending_score < 0", :order => "priorities.trending_score asc"
+  scope :controversial, :conditions => "priorities.is_controversial = true", :order => "priorities.controversial_score desc"
+
+  scope :rising_7days, :conditions => "priorities.position_7days_change > 0"
+  scope :flat_7days, :conditions => "priorities.position_7days_change = 0"
+  scope :falling_7days, :conditions => "priorities.position_7days_change < 0"
+  scope :rising_30days, :conditions => "priorities.position_30days_change > 0"
+  scope :flat_30days, :conditions => "priorities.position_30days_change = 0"
+  scope :falling_30days, :conditions => "priorities.position_30days_change < 0"
+  scope :rising_24hr, :conditions => "priorities.position_24hr_change > 0"
+  scope :flat_24hr, :conditions => "priorities.position_24hr_change = 0"
+  scope :falling_24hr, :conditions => "priorities.position_24hr_change < 0"
   
-  named_scope :item_limit, lambda{|limit| {:limit=>limit}}  
+  scope :finished, :conditions => "priorities.official_status in (-2,-1,2)"
+  
+  scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
+  scope :item_limit, lambda{|limit| {:limit=>limit}} 
+  
+  scope :alphabetical, :order => "priorities.name asc"
+  scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
+  scope :tagged, :conditions => "(priorities.cached_issue_list is not null and priorities.cached_issue_list <> '')"
+  scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
+
+  scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
+  
+  scope :item_limit, lambda{|limit| {:limit=>limit}}  
   
   belongs_to :user
   belongs_to :partner
@@ -54,9 +59,7 @@ class Priority < ActiveRecord::Base
   has_many :endorsers, :through => :endorsements, :conditions => "endorsements.status in ('active','inactive')", :source => :user, :class_name => "User"
   has_many :up_endorsers, :through => :endorsements, :conditions => "endorsements.status in ('active','inactive') and endorsements.value=1", :source => :user, :class_name => "User"
   has_many :down_endorsers, :through => :endorsements, :conditions => "endorsements.status in ('active','inactive') and endorsements.value=-1", :source => :user, :class_name => "User"
-  
-  has_many :branch_endorsements, :dependent => :destroy
-  
+    
   has_many :points, :conditions => "points.status in ('published','draft')"
   has_many :incoming_points, :foreign_key => "other_priority_id", :class_name => "Point"
   has_many :published_points, :conditions => "status = 'published'", :class_name => "Point", :order => "points.helpful_count-points.unhelpful_count desc"
@@ -82,9 +85,11 @@ class Priority < ActiveRecord::Base
   
   acts_as_taggable_on :issues
   acts_as_list
-  acts_as_solr :fields => [ :name, :cached_issue_list, :is_published ]
   
-  liquid_methods :id, :name, :show_url, :value_name
+  define_index do
+    indexes name
+    indexes cached_issue_list, :facet=>true
+  end  
   
   #validates_length_of :name, :within => 3..60
   #validates_uniqueness_of :name
@@ -98,6 +103,7 @@ class Priority < ActiveRecord::Base
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
   state :inactive
+  state :abusive, :enter => :do_abusive
   
   event :publish do
     transitions :from => [:draft, :passive], :to => :published
@@ -118,6 +124,10 @@ class Priority < ActiveRecord::Base
   
   event :deactivate do
     transitions :from => [:draft, :published, :buried], :to => :inactive
+  end
+
+  event :abusive do
+    transitions :from => :published, :to => :abusive
   end
     
   cattr_reader :per_page
@@ -167,12 +177,12 @@ class Priority < ActiveRecord::Base
     return endorsement
   end  
   
-  def is_obama_endorsed?
-    obama_value == 1
+  def is_official_endorsed?
+    official_value == 1
   end
   
-  def is_obama_opposed?
-    obama_value == -1
+  def is_official_opposed?
+    official_value == -1
   end
   
   def is_rising?
@@ -189,7 +199,7 @@ class Priority < ActiveRecord::Base
   end
   
   def is_buried?
-    status == 'grafið undir'
+    status == I18n.t(:buried)
   end
   
   def is_top?
@@ -208,23 +218,23 @@ class Priority < ActiveRecord::Base
   alias :is_published :is_published?
     
   def is_finished?
-    obama_status > 1 or obama_status < 0
+    official_status > 1 or official_status < 0
   end
   
   def is_failed?
-    obama_status == -2
+    official_status == -2
   end
   
   def is_successful?
-    obama_status == 2
+    official_status == 2
   end
   
   def is_compromised?
-    obama_status == -1
+    official_status == -1
   end
   
   def is_intheworks?
-    obama_status == 1
+    official_status == 1
   end  
   
   def position_7days_change_percent
@@ -241,45 +251,45 @@ class Priority < ActiveRecord::Base
   
   def value_name 
     if is_failed?
-      'fellt'
+      I18n.t(:priority_failed)
     elsif is_successful?
-      'tókst'
+      I18n.t(:priority_succesful)
     elsif is_compromised?
-      'tókst með málamiðlun'
+      I18n.t(:priority_succesful_with_compromises)
     elsif is_intheworks?
-      'er í vinnslu'
+      I18n.t(:priority_in_the_works)
     else
-      'hefur ekki verið afgreitt'
+      I18n.t(:priority_has_not_been_processed)
     end
   end
   
   def failed!
-    ActivityPriorityObamaStatusFailed.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
-    self.obama_status = -2
+    self.official_status = -2
     self.status = 'inactive'
     self.change = nil
-    self.save_with_validation(false)
+    self.save(:validate => false)
     deactivate_endorsements  
   end
   
   def successful!
-    ActivityPriorityObamaStatusSuccessful.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
-    self.obama_status = 2
+    self.official_status = 2
     self.status = 'inactive'
     self.change = nil    
-    self.save_with_validation(false)
+    self.save(:validate => false)
     deactivate_endorsements
   end  
   
   def compromised!
-    ActivityPriorityObamaStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
-    self.obama_status = -1
+    self.official_status = -1
     self.status = 'inactive'
     self.change = nil    
-    self.save_with_validation(false)
+    self.save(:validate => false)
     deactivate_endorsements
   end  
   
@@ -293,8 +303,8 @@ class Priority < ActiveRecord::Base
     self.status = 'published'
     self.change = nil
     self.status_changed_at = Time.now
-    self.obama_status = 0
-    self.save_with_validation(false)
+    self.official_status = 0
+    self.save(:validate => false)
     for e in endorsements.active_and_inactive
       e.update_attribute(:status,'active')
       row = 0
@@ -307,17 +317,17 @@ class Priority < ActiveRecord::Base
   end
   
   def intheworks!
-    ActivityPriorityObamaStatusInTheWorks.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusInTheWorks.create(:priority => self, :user => user)
     self.update_attribute(:status_changed_at, Time.now)
-    self.update_attribute(:obama_status, 1)
+    self.update_attribute(:official_status, 1)
   end  
   
-  def obama_status_name
-    return I18n.t('status.failed') if obama_status == -2
-    return I18n.t('status.compromised') if obama_status == -1
-    return I18n.t('status.unknown') if obama_status == 0 
-    return I18n.t('status.intheworks') if obama_status == 1
-    return I18n.t('status.successful') if obama_status == 2
+  def official_status_name
+    return I18n.t('status.failed') if official_status == -2
+    return I18n.t('status.compromised') if official_status == -1
+    return I18n.t('status.unknown') if official_status == 0 
+    return I18n.t('status.intheworks') if official_status == 1
+    return I18n.t('status.successful') if official_status == 2
   end
   
   def has_change?
@@ -414,7 +424,7 @@ class Priority < ActiveRecord::Base
             e.value = -1
           end
         end   
-        e.save_with_validation(false)     
+        e.save(:validate => false)     
       end
     end
     p2.reload
@@ -424,7 +434,7 @@ class Priority < ActiveRecord::Base
     Priority.update_all("endorsements_count = #{size}, up_endorsements_count = #{up_size}, down_endorsements_count = #{down_size}", ["id = ?",p2.id]) 
 
     # look for the activities that should be removed entirely
-    for a in Activity.find(:all, :conditions => ["priority_id = ? and type in ('ActivityPriorityDebut','ActivityPriorityNew','ActivityPriorityRenamed','ActivityPriorityFlag','ActivityPriorityFlagInappropriate','ActivityPriorityObamaStatusCompromised','ActivityPriorityObamaStatusFailed','ActivityPriorityObamaStatusIntheworks','ActivityPriorityObamaStatusSuccessful','ActivityPriorityRising1','ActivityIssuePriority1','ActivityIssuePriorityControversial1','ActivityIssuePriorityObama1','ActivityIssuePriorityRising1')",self.id])
+    for a in Activity.find(:all, :conditions => ["priority_id = ? and type in ('ActivityPriorityDebut','ActivityPriorityNew','ActivityPriorityRenamed','ActivityPriorityFlag','ActivityPriorityFlagInappropriate','ActivityPriorityOfficialStatusCompromised','ActivityPriorityOfficialStatusFailed','ActivityPriorityOfficialStatusIntheworks','ActivityPriorityOfficialStatusSuccessful','ActivityPriorityRising1','ActivityIssuePriority1','ActivityIssuePriorityControversial1','ActivityIssuePriorityOfficial1','ActivityIssuePriorityRising1')",self.id])
       a.destroy
     end    
     #loop through the rest of the activities and move them over
@@ -434,11 +444,11 @@ class Priority < ActiveRecord::Base
           if c.is_opposer?
             c.is_opposer = false
             c.is_endorser = true
-            c.save_with_validation(false)
+            c.save(:validate => false)
           elsif c.is_endorser?
             c.is_opposer = true
             c.is_endorser = false
-            c.save_with_validation(false)            
+            c.save(:validate => false)            
           end
         end
         if a.class == ActivityEndorsementNew
@@ -491,7 +501,7 @@ class Priority < ActiveRecord::Base
         point.opposer_helpful_count = helpful
         point.opposer_unhelpful_count = unhelpful        
       end      
-      point.save_with_validation(false)      
+      point.save(:validate => false)      
     end
     for document in documents
       document.priority = p2
@@ -509,7 +519,7 @@ class Priority < ActiveRecord::Base
         document.opposer_helpful_count = helpful
         document.opposer_unhelpful_count = unhelpful        
       end      
-      document.save_with_validation(false)      
+      document.save(:validate => false)      
     end
     for point in incoming_points
       if flip == 1
@@ -519,7 +529,7 @@ class Priority < ActiveRecord::Base
       else
         point.other_priority = p2
       end
-      point.save_with_validation(false)
+      point.save(:validate => false)
     end
     if not preserve # set preserve to true if you want to leave the Change and the original priority in tact, otherwise they will be deleted
       for c in changes_with_deleted
@@ -569,7 +579,19 @@ class Priority < ActiveRecord::Base
     end
     latest_priority_process_txt
   end
-  
+
+  def do_abusive
+    self.user.do_abusive!(notifications)
+    self.update_attribute(:flags_count, 0)
+  end
+
+  def flag_by_user(user)
+    self.increment!(:flags_count)
+    for r in User.active.admins
+      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+    end
+  end  
+
   private
   def do_publish
     self.published_at = Time.now
@@ -577,6 +599,9 @@ class Priority < ActiveRecord::Base
   end
   
   def do_delete
+    activities.each do |a|
+      a.delete!
+    end
     for e in endorsements
       e.delete!
     end

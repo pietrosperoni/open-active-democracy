@@ -5,19 +5,20 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
   include FaceboxRender
-  
+
+  include Facebooker2::Rails::Controller
+
   require_dependency "activity.rb"
   require_dependency "blast.rb" 
   require_dependency "relationship.rb"   
   require_dependency "capital.rb"
 
-  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
-  rescue_from Facebooker::Session::SessionExpired, :with => :fb_session_expired 
+#  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
 
   helper :all # include all helpers, all the time
   
   # Make these methods visible to views as well
-  helper_method :facebook_session, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :current_branches, :facebook_session, :is_robot?, :js_help
+  helper_method :facebook_session, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
   before_filter :check_subdomain
@@ -31,8 +32,6 @@ class ApplicationController < ActionController::Base
   before_filter :check_referral, :unless => [:is_robot?]
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
-
-  filter_parameter_logging :password, :password_confirmation
 
   layout :get_layout
 
@@ -100,11 +99,6 @@ class ApplicationController < ActionController::Base
     return [] unless logged_in? and current_user.ignorings_count > 0
     @current_ignoring_ids ||= current_user.followings.down.collect{|f|f.other_user_id}    
   end
-
-  def current_branches
-    return [] unless current_government.is_branches?
-    Branch.all_cached
-  end
   
   def current_tags
     return [] unless current_government.is_tags?
@@ -146,8 +140,9 @@ class ApplicationController < ActionController::Base
   def update_loggedin_at
     return unless logged_in?
     return unless current_user.loggedin_at.nil? or Time.now > current_user.loggedin_at+30.minutes
-    User.retry_mysql_error do
+    begin
       User.find(current_user.id).update_attribute(:loggedin_at,Time.now)
+    rescue
     end
   end
 
@@ -171,7 +166,7 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => "install"
       return
     end
-    if not current_partner and RAILS_ENV == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
+    if not current_partner and Rails.env == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
       redirect_to 'http://' + current_government.base_url + request.path_info
       return
     end    
@@ -187,11 +182,9 @@ class ApplicationController < ActionController::Base
   
   # if they're logged in with a wh2 account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
-    return unless Facebooker.api_key
-    if logged_in? and facebook_session and not current_user.has_facebook?
-      return if facebook_session.user.uid == 55714215 and current_user.id != 1 # this is jim, don't add his facebook to everyone's account!
+    if logged_in? and current_facebook_user
       @user = User.find(current_user.id)
-      if not @user.update_with_facebook(facebook_session)
+      if not @user.update_with_facebook(current_facebook_user.id)
         return
       end
       if not @user.activated?
@@ -208,8 +201,7 @@ class ApplicationController < ActionController::Base
   end
   
   def no_facebook?
-    return false if Facebooker.api_key
-    return true if is_robot?
+    return false if logged_in? and current_facebook_user
     return true
   end
   

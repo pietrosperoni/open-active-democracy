@@ -49,7 +49,7 @@ module Contacts
   # 2. Import contacts from Windows Live and deliver it inside an Array
   #
   class WindowsLive
-    CONFIG_FILE = RAILS_ROOT + '/config/contacts.yml'
+    CONFIG_FILE = Rails.root.to_s + '/config/contacts.yml'
 
     # Initialize a new WindowsLive object.
     #    

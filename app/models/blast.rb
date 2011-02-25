@@ -67,10 +67,3 @@ class BlastBasic < Blast
     Blaster.deliver_basic_blast(self,user)
   end
 end
-
-class BlastLegislator < Blast
-  def do_send
-    self.sent_at = Time.now
-    Blaster.deliver_add_legislators(self,user)
-  end
-end

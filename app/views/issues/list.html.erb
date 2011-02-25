@@ -4,12 +4,12 @@
 
 <p>
 <% if @priorities.any? %>
-	<% if params[:action] == 'obama' %>
-		<%= t('tags.obama.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
-	<% elsif params[:action] == 'not_obama' %>
-		<%= t('tags.not_obama.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
-	<% elsif params[:action] == 'obama_opposed' %>
-		<%= t('tags.obama_opposed.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+	<% if params[:action] == 'official' %>
+		<%= t('tags.official.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+	<% elsif params[:action] == 'not_official' %>
+		<%= t('tags.not_official.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+	<% elsif params[:action] == 'official_opposed' %>
+		<%= t('tags.official_opposed.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
 	<% end %>
 <% else %>
 	<%= t('tags.show.empty', :tag_name => @tag_names.titleize)%>

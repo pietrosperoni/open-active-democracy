@@ -10,7 +10,7 @@
 <% end %>
 
 <% if params[:action].include?("network") and logged_in? and current_following_ids.empty? %>
-	<%= blurb("your_network_intro") %>
+	<%= I18n.t("blurb_your_network_intro") %>
 <% end %>
 
 <% if not @activities %>

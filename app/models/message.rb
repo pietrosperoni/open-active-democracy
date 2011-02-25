@@ -1,14 +1,14 @@
 class Message < ActiveRecord::Base
 
-  named_scope :active, :conditions => "messages.status <> 'deleted'"
-  named_scope :sent, :conditions => "messages.status in('sent','read')"
-  named_scope :read, :conditions => "messages.status = 'read'"
-  named_scope :unread, :conditions => "messages.status = 'sent'"
-  named_scope :draft, :conditions => "messages.status = 'draft'"
+  scope :active, :conditions => "messages.status <> 'deleted'"
+  scope :sent, :conditions => "messages.status in('sent','read')"
+  scope :read, :conditions => "messages.status = 'read'"
+  scope :unread, :conditions => "messages.status = 'sent'"
+  scope :draft, :conditions => "messages.status = 'draft'"
   
-  named_scope :by_recently_sent, :order => "messages.sent_at desc"
-  named_scope :by_oldest_sent, :order => "messages.sent_at asc"  
-  named_scope :by_unread, :order => "messages.status desc, messages.sent_at desc"
+  scope :by_recently_sent, :order => "messages.sent_at desc"
+  scope :by_oldest_sent, :order => "messages.sent_at asc"  
+  scope :by_unread, :order => "messages.status desc, messages.sent_at desc"
 
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
   belongs_to :recipient, :class_name => "User", :foreign_key => "recipient_id"
@@ -16,9 +16,7 @@ class Message < ActiveRecord::Base
   has_many :notifications, :as => :notifiable, :dependent => :destroy  
   
   validates_presence_of :content
-  
-  liquid_methods :content, :created_at
-  
+    
   acts_as_state_machine :initial => :draft, :column => :status
   
   state :draft
@@ -84,7 +82,7 @@ class Message < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-    redcloth
+#    redcloth
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
     link(:rel => "nofollow")
