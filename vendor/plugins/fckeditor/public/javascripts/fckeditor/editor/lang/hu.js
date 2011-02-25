@@ -143,7 +143,7 @@ SelectionFieldProp	: "Legördülő lista tulajdonságai",
 TextareaProp		: "Szövegterület tulajdonságai",
 FormProp			: "Űrlap tulajdonságai",
 
-FontFormats			: "Normál;Formázott;Címsor;Fejléc 1;Fejléc 2;Fejléc 3;Fejléc 4;Fejléc 5;Fejléc 6;Bekezdés (DIV)",
+FontFormats			: "Norhugmynd;Formázott;Címsor;Fejléc 1;Fejléc 2;Fejléc 3;Fejléc 4;Fejléc 5;Fejléc 6;Bekezdés (DIV)",
 
 // Alerts and Messages
 ProcessingXHTML		: "XHTML feldolgozása. Kérem várjon...",
@@ -431,7 +431,7 @@ DlgTextareaRows	: "Sorok száma",
 DlgTextName			: "Név",
 DlgTextValue		: "Érték",
 DlgTextCharWidth	: "Megjelenített karakterek száma",
-DlgTextMaxChars		: "Maximális karakterszám",
+DlgTextMaxChars		: "Maxihugmynds karakterszám",
 DlgTextType			: "Típus",
 DlgTextTypeText		: "Szöveg",
 DlgTextTypePass		: "Jelszó",

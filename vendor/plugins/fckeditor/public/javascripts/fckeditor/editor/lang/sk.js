@@ -143,7 +143,7 @@ SelectionFieldProp	: "Vlastnosti rozbaľovacieho zoznamu",
 TextareaProp		: "Vlastnosti textovej oblasti",
 FormProp			: "Vlastnosti formulára",
 
-FontFormats			: "Normálny;Formátovaný;Adresa;Nadpis 1;Nadpis 2;Nadpis 3;Nadpis 4;Nadpis 5;Nadpis 6;Odsek (DIV)",
+FontFormats			: "Norhugmyndny;Formátovaný;Adresa;Nadpis 1;Nadpis 2;Nadpis 3;Nadpis 4;Nadpis 5;Nadpis 6;Odsek (DIV)",
 
 // Alerts and Messages
 ProcessingXHTML		: "Prebieha spracovanie XHTML. Čakajte prosím...",
@@ -431,7 +431,7 @@ DlgTextareaRows	: "Riadky",
 DlgTextName			: "Názov",
 DlgTextValue		: "Hodnota",
 DlgTextCharWidth	: "Šírka pola (znakov)",
-DlgTextMaxChars		: "Maximálny počet znakov",
+DlgTextMaxChars		: "Maxihugmyndny počet znakov",
 DlgTextType			: "Typ",
 DlgTextTypeText		: "Text",
 DlgTextTypePass		: "Heslo",

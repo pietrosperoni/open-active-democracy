@@ -18,7 +18,11 @@ module ActiveRecord
       
       module InstanceMethods
         def set_partner
-          self.partner_id = Partner.current.id if Partner.current
+          if self.class.class_name=="Activity" and self.priority and self.priority.partner
+            self.partner_id = self.priority.partner.id
+          else       
+            self.partner_id = Partner.current.id if Partner.current
+          end
         end
       end
     end

@@ -24,13 +24,13 @@ is:
                     new:
                         name: "{{user_name}} eyddi {{capital}}{{currency_short_name}} í tillögu um að {{new_priority_name}} taki yfir {{priority_name}}"
                         nouser: "Eyddi {{capital}}{{currency_short_name}} í að <a href='{{proposal_url}}'>tillaga</a> for {{new_priority_name}} taki yfir {{priority_name}}"
-                        noself: "{{user_name}} eyddi {{capital}}{{currency_short_name}} fyrir <a href='{{proposal_url}}'>tillöguna</a> að þetta forgangsmál verði tekið yfir af {{new_priority_name}}"                        
+                        noself: "{{user_name}} eyddi {{capital}}{{currency_short_name}} fyrir <a href='{{proposal_url}}'>tillöguna</a> að þessi hugmynd verði tekin yfir af {{new_priority_name}}"                        
                         link: "{{user_name}} eyddi {{capital}}{{currency_short_name}} fyrir <a href='{{proposal_url}}'>tillöguna</a> að {{new_priority_name}} taki yfir {{priority_name}}"
             ad:
                 new:
                     name: "{{user_name}} eyddi {{capital}}{{currency_short_name}} í auglýsingu fyrir {{priority_name}}"
                     link: "{{user_name}} eyddi {{capital}}{{currency_short_name}} í <a href='{{ad_url}}'>auglýsingu</a> fyrir {{priority_name}}"
-                    noself: "{{user_name}} eyddi {{capital}}{{currency_short_name}} í <a href='{{ad_url}}'>auglýsingu</a> fyrir þetta forgangsmál"                    
+                    noself: "{{user_name}} eyddi {{capital}}{{currency_short_name}} í <a href='{{ad_url}}'>auglýsingu</a> fyrir þessa hugmynd"                    
                     nouser: "Eyddi {{capital}}{{currency_short_name}} í <a href='{{ad_url}}'>auglýsingu</a> fyrir {{priority_name}}"
             point:
                 helpful:
@@ -273,14 +273,14 @@ is:
         point:
             new:
                 name: "{{user_name}} bætti við {{point_name}} við {{priority_name}}"
-                noself: "Bætti við {{point_name}} við þetta forgangsmál"                
+                noself: "Bætti við {{point_name}} við þessa hugmynd"                
                 nouser: "Bætti við {{point_name}} við {{priority_name}}"
             deleted:
                 name: "{{user_name}} eyddi {{point_name}}"
                 nouser: "Eyddi {{point_name}}"
             revision:
-                name: "{{user_name}} breytti nafni forgangsmáls í {{point_name}}"
-                nouser: "Breytti nafni forgangsmáls í {{point_name}}"
+                name: "{{user_name}} breytti nafni hugmyndar í {{point_name}}"
+                nouser: "Breytti nafni hugmyndar í {{point_name}}"
                 content:
                     name: "{{user_name}} uppfærði {{point_name}}"
                     nouser: "Uppfærði {{point_name}}"
@@ -322,8 +322,8 @@ is:
         priority:
             new:
                 name: "{{user_name}} er höfundur {{priority_name}}"
-                noself: "{{user_name}} er höfundur þessa forgangsmáls"
-                nouser: "Lagði fram {{priority_name}} sem nýtt forgangsmál"
+                noself: "{{user_name}} er höfundur þessarar hugmyndar"
+                nouser: "Lagði fram {{priority_name}} sem nýja hugmyndar"
             debut:
                 name: 
                     known: "{{priority_name}} er nýtt á lista í #{{position}}"
@@ -333,15 +333,15 @@ is:
                     unknown: "Er nýtt á lista"
             flagged:
                 name: "{{user_name}} er merkt {{priority_name}} til yfirlestrar"
-                noself: "{{user_name}} merkti forgangsmál til yfirlestrar"
+                noself: "{{user_name}} merkti hugmynd til yfirlestrar"
                 nouser: "Merkti {{priority_name}} til yfirlestrar"
             buried:
                 name: "{{user_name}} jarðaði {{priority_name}}.  Ástæðan er líklega augljós."
-                noself: "{{user_name}} jarðaði þetta forgangsmál. Það mun ekki lengur birtast í listum. Ástæðan er líklega augljós."
+                noself: "{{user_name}} jarðaði þessa hugmynd. Hún mun ekki lengur birtast í listum. Ástæðan er líklega augljós."
                 nouser: "Jarðaði {{priority_name}}.  Ástæðan er líklega augljós."
             renamed:
                 name: "{{user_name}} endurnefndi {{priority_name}}"
-                noself: "{{user_name}} endurnefndi þetta forgangsmál {{priority_name}}"
+                noself: "{{user_name}} endurnefndi þessa hugmynd {{priority_name}}"
                 nouser: "Endurnefndi {{priority_name}}"
             acquisition:
                 proposal:
@@ -365,16 +365,16 @@ is:
                     nouser: "Tók þátt í umræðum um {{priority_name}}"
             first:
                 endorsed:
-                    name: "{{priority_name}} er {{user_name}} nýtt #1 forgangsmál"
-                    noself: "Þetta er nú {{user_name}} nýtt #1 forgangsmál"
-                    nouser: "Nýtt #1 forgangsmál: {{priority_name}}"
+                    name: "{{priority_name}} er {{user_name}} ný #1 hugmynd"
+                    noself: "Þetta er nú {{user_name}} ný #1 hugmynd"
+                    nouser: "Ný #1 hugmynd: {{priority_name}}"
                 opposed:
-                    name: "Andstaða við {{priority_name}} er {{user_name}} nýtt #1 forgangsmál"
-                    noself: "Andstaða við þetta er nú {{user_name}} nýtt #1 forgangsmál"
-                    nouser: "Nýtt #1 forgangsmál: Á móti {{priority_name}}"                    
+                    name: "Andstaða við {{priority_name}} er {{user_name}} ný #1 hugmynd"
+                    noself: "Andstaða við þetta er nú {{user_name}} ný #1 hugmynd"
+                    nouser: "Ný #1 hugmynd: Á móti {{priority_name}}"                    
             rising:
-                name: "{{priority_name}} hækkar nú hraðast allra forgangsmála"
-                noself: "Þetta hækkar nú hraðast allra forgangsmála"
+                name: "{{priority_name}} hækkar nú hraðast allra hugmynda"
+                noself: "Þessi hækkar nú hraðast allra hugmynda"
             obama_status:
                 successful:
                     name: "{{priority_name}} tókst að fullu"
@@ -383,25 +383,25 @@ is:
                     name: "{{priority_name}} tókst en þó með breytingum"
                     noself: "Tókst með breytingum"
                 failed:
-                    name: "{{priority_name}} fellt"
-                    noself: "Þetta mál var fellt"
+                    name: "{{priority_name}} felld"
+                    noself: "Þessi hugmynd var felld"
                 intheworks:
                     name: "{{priority_name}} er í vinnslu"
-                    noself: "Þetta forgangsmál er í vinnslu"
+                    noself: "Þessi hugmynd er í vinnslu"
             tag:
                 first:
-                    name: "{{priority_name}} er nýtt mál #1 í {{tag_name}}"
-                    noself: "Þetta er nýtt mál #1 í {{tag_name}}"
+                    name: "{{priority_name}} er ný hugmynd #1 í {{tag_name}}"
+                    noself: "Þetta er ný hugmynd #1 í {{tag_name}}"
                 controversial:
-                    name: "{{priority_name}} er umdeildasta forgangsmálið í {{tag_name}}"
-                    noself: "Þetta er umdeildasta forgangsmálið í {{tag_name}}"                    
+                    name: "{{priority_name}} er umdeildasta hugmyndin í {{tag_name}}"
+                    noself: "Þetta er umdeildasta hugmyndin í {{tag_name}}"                    
                 rising:
-                    name: "{{priority_name}} er það forgangsmál sem hækkar hraðast í {{tag_name}}"
-                    noself: "Þetta er það forgangsmál sem hækkar hraðast í {{tag_name}}"                    
+                    name: "{{priority_name}} er sú hugmynd sem hækkar hraðast í {{tag_name}}"
+                    noself: "Þetta er sú hugmynd sem hækkar hraðast í {{tag_name}}"                    
                 obama:
                     first:
-                        name: "{{priority_name}} er nýtt #1 forgangsmál í {{official_user_name}} {{tag_name}} málaflokki"
-                        noself: "Þetta er nýtt #1 forgangsmál í {{official_user_name}} {{tag_name}} málaflokki"
+                        name: "{{priority_name}} er ný #1 hugmynd í {{official_user_name}} {{tag_name}} hugmyndaflokki"
+                        noself: "Þetta er ný #1 hugmynd í {{official_user_name}} {{tag_name}} hugmyndaflokki"
         user:
             new:
                 name: "{{user_name}} er skráð(ur) í {{government_name}}"

@@ -3,15 +3,13 @@ Hæ {{ user.first_name }},
 Vinsamlega staðfestu aðganginn þinn svo þú getir tekið fullan þátt í Skuggaþingi. Þetta er nauðsynlegt til að draga úr ruslapósti.
 
 Staðfestu aðganginn þinn: {{ user.root_url }}activate/{{ user.activation_code }}?utm_source=activation&utm_medium=email
-
-Hjálpaðu okkur að stækka! Þú getur flutt inn Google og Facebook tengiliði, fundið fólk sem þú þekkir á vefnum og boðið fólki sem er ekki búið að skrá sig. 
+paðu okkur að stækka! Þú getur flutt inn Google og Facebook tengiliði, fundið fólk sem þú þekkir á vefnum og boðið fólki sem er ekki búið að skrá sig. 
 
 Finndu fólk sem þú þekkir: {{ user.root_url }}network/find?utm_source=signup&utm_medium=email
 
 Þú vinnur þér inn 5{{ government.currency_short_name }} fyrir hvern sem skráir sig eftir hvatningu frá þér.  Hvað eru  {{ government.currency_short_name }}?  Það stendur fyrir "{{ government.currency_name | downcase  }}" 
-og er leið til að sjá hversu áhrifamikil(l) þú ert á  {{ government.name }}.  Því fleiri sem finnast þínar uppfærslur og rök gagnleg, því fleiri {{ government.currency_short_name }} vinnurðu þér inn sem þú getur m.a. notað til að kaupa auglýsingar fyrir þau mál sem þú vilt koma á framfæri.  
-
-Meira um þetta {{ government.currency_name | downcase }} hér: {{ user.root_url }}about/faq#pc
+og er leið til að sjá hversu áhrifamikil(l) þú ert á  {{ government.name }}.  Því fleiri sem finnast þínar uppfærslur og rök gagnleg, því fleiri {{ government.currency_short_name }} vinnurðu þér inn sem þú getur m.a. notað til að kaupa auglýsingar fyrir þær hugmyndir sem þú vilt koma á framfæri.  
+.currency_name | downcase }} hér: {{ user.root_url }}about/faq#pc
 
 {{ government.admin_name }}
 {{ government.admin_email }}

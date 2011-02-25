@@ -34,8 +34,10 @@ config.action_mailer.raise_delivery_errors = false
 
 ENV['DOMAIN'] = "skuggathing.is"
 
-if ENV['DOMAIN']
-  config.action_controller.session = {:domain => '.' + ENV['DOMAIN']}
+if ActionController::Base.session
+  ActionController::Base.session[:domain] = '.skuggathing.is'
+else
+  ActionController::Base.session = { :domain => '.skuggathing.is' }
 end
 
 if ENV['S3_ACCESS_KEY_ID']

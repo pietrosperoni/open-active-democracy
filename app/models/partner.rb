@@ -90,9 +90,16 @@ class Partner < ActiveRecord::Base
   def self.current  
     Thread.current[:partner]  
   end  
-  
-  def self.current=(partner)  
-    raise(ArgumentError,"Invalid partner. Expected an object of class 'Partner', got #{partner.inspect}") unless partner.is_a?(Partner)
+
+  def self.current_id
+    if Thread.current[:partner]
+      Thread.current[:partner].id
+    else
+      "nopartner"
+    end
+  end
+
+  def self.current=(partner)
     Thread.current[:partner] = partner
   end
 
@@ -138,9 +145,16 @@ class Partner < ActiveRecord::Base
     out
   end
   
+  def name_variations
+    if self.name_variations_data and self.name_variations_data!=""
+      self.name_variations_data.split(",")
+    else
+      ["missing","missing","missing","missing","missing","missing","missing","missing","missing"]
+    end
+  end
+  
   private
   def do_delete
     deleted_at = Time.now
-  end
-  
+  end  
 end

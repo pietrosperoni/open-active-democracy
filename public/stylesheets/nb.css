@@ -317,7 +317,7 @@ h4 {
 
 #notification_show {
 	padding: 7px 5px 7px 15px;
-	margin: 10px 0px 10px 0px;
+	margin: 10px 10px 10px 10px;
 	font-size: 1.2em;
 	letter-spacing: 0;
 	line-height: 1.4em;
@@ -545,7 +545,7 @@ del {
 }
 .priority_listing {
 	margin-bottom: 4px;
-	padding-top: 5px;
+	padding-bottom: 5px;
 }
 .priority_name, .priority_name_add {
   	font-size: 12px;

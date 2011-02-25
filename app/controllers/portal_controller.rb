@@ -120,7 +120,7 @@ class PortalController < ApplicationController
   end
 
   def setup_portal
-    if not current_user or (current_user.is_admin? and current_user.id == 1) or not logged_in?
+    if not current_user or current_user.is_admin? or not logged_in?
       @portlet_container = default_container
     else
       @portlet_container = user_container
