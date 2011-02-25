@@ -66,7 +66,7 @@ class UserContactsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace 'status', '<div id="status">' + t('contacts.new.already_member', :user_name => @already_member.login) + '</div>'
-            page.visual_effect :fade, 'status', :duration => 3            
+            # page.visual_effect :fade, 'status', :duration => 3            
             page['user_contact_name'].value = ''
             page['user_contact_email'].value = ''            
             page['user_contact_name'].focus
@@ -76,7 +76,7 @@ class UserContactsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace 'status', '<div id="status">' + t('contacts.new.already_invited', :user_name => @contact.name) + '</div>'
-            page.visual_effect :fade, 'status', :duration => 3            
+            # page.visual_effect :fade, 'status', :duration => 3            
             page['user_contact_name'].value = ''
             page['user_contact_email'].value = ''            
             page['user_contact_name'].focus
@@ -91,13 +91,13 @@ class UserContactsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace 'status', '<div id="status">' + t('contacts.new.invited', :user_name => @contact.name) + '</div>'
-            page.visual_effect :fade, 'status', :duration => 3
+            # page.visual_effect :fade, 'status', :duration => 3
             page['user_contact_name'].value = ''
             page['user_contact_email'].value = ''            
             page['user_contact_name'].focus
             #if logged_in?
             #  page.insert_html :top, 'contacts', render(:partial => "contacts/item", :locals => { :contact => @contact })
-            #  page.visual_effect :highlight, 'contact_item_' + @contact.id.to_s
+            #  # page.visual_effect :highlight, 'contact_item_' + @contact.id.to_s
             #end
             page << "pageTracker._trackPageview('/goal/invitation')" if current_government.has_google_analytics?
           end
@@ -107,7 +107,7 @@ class UserContactsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace_html 'status', @contact.errors.full_messages.join('<br/>')
-            page.visual_effect :fade, 'status', :duration => 3            
+            # page.visual_effect :fade, 'status', :duration => 3            
           end
         }        
       end
@@ -132,9 +132,9 @@ class UserContactsController < ApplicationController
           else
             page.hide 'status'            
             page.replace_html 'contacts_not_invited_count', @user.contacts_not_invited_count
-            page.visual_effect :highlight, 'contacts_not_invited_count'            
+            # page.visual_effect :highlight, 'contacts_not_invited_count'            
             page.replace_html 'contacts_invited_count', @user.contacts_invited_count
-            page.visual_effect :highlight, 'contacts_invited_count'                                    
+            # page.visual_effect :highlight, 'contacts_invited_count'                                    
           end
         end
       }    

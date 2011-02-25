@@ -123,7 +123,7 @@ class ProcessDocumentElementsController < ApplicationController
     replace_div = "process_document_element_number_#{source_element.sequence_number}"
     render :update do |page|  
       page.replace_html replace_div, :partial => "process_document_elements/templates/#{source_element.process_document.template_name}_element", :locals => {:document=> source_element.process_document, :element => source_element, :open_panel => true }
-      page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"} 
+      # page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"} 
     end    
   end
 
@@ -140,7 +140,7 @@ class ProcessDocumentElementsController < ApplicationController
     replace_div = "process_document_element_number_#{change_proposal.sequence_number}"
     render :update do |page|  
       page.replace_html replace_div, :partial => "process_document_elements/templates/#{source_element.process_document.template_name}_element", :locals => {:document=> change_proposal.process_document, :element => change_proposal, :open_panel => true }
-      page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
+      # page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
     end
   end
 
@@ -149,7 +149,7 @@ class ProcessDocumentElementsController < ApplicationController
     replace_div = "process_document_element_number_#{source_element.sequence_number}"
     render :update do |page|  
       page.replace_html replace_div, :partial => "process_document_elements/templates/#{source_element.process_document.template_name}_element", :locals => {:document=> source_element.process_document, :element => source_element, :open_panel => true }
-      page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"} 
+      # page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"} 
     end
   end
 
@@ -158,7 +158,7 @@ class ProcessDocumentElementsController < ApplicationController
     replace_div = "process_document_element_number_#{source_element.sequence_number}"
     render :update do |page|  
       page.replace_html replace_div, :partial => "process_document_elements/templates/#{source_element.process_document.template_name}_element", :locals => {:document=> source_element.process_document, :element => source_element, :open_panel => true }
-      page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}  
+      # page.visual_effect :highlight, replace_div,  {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}  
     end
   end
   

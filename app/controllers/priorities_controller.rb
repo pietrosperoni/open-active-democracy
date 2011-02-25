@@ -823,7 +823,7 @@ class PrioritiesController < ApplicationController
             page << "alert('aaaa');"
           end
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          page.visual_effect :highlight, 'your_priorities'
+          # page.visual_effect :highlight, 'your_priorities'
           if current_facebook_user
             if @value == 1
               page << fb_connect_stream_publish(UserPublisher.create_endorsement(current_facebook_user, @endorsement, @priority))
@@ -862,7 +862,7 @@ class PrioritiesController < ApplicationController
               page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}                      
               page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
               page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
-              page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
+              # page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
             end
           }
         else

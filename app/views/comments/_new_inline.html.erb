@@ -2,7 +2,7 @@
 <!-- Comment box -->
 <div class="comment_link_add answer_box" id="activity_<%=activity.id.to_s%>_comment_form">
 
-        <%= form_for comment, :remote=>true, :url => activity_comments_path(activity), :loading=>"$('submit_span_#{activity.id}').toggle(); $('loading_span_#{activity.id}').toggle();" do |f| %>
+        <% form_for comment, :remote=>true, :url => activity_comments_path(activity), :loading=>"$('submit_span_#{activity.id}').toggle(); $('loading_span_#{activity.id}').toggle();" do |f| %>
         <%= f.error_messages %>
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
 

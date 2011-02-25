@@ -89,9 +89,9 @@ class FollowingsController < ApplicationController
             end
             page.hide 'status'            
             page.replace_html 'contacts_members_count', @user.contacts_members_count
-            page.visual_effect :highlight, 'contacts_members_count'            
+            # page.visual_effect :highlight, 'contacts_members_count'            
             page.replace_html 'followings_count', @user.followings_count
-            page.visual_effect :highlight, 'followings_count'
+            # page.visual_effect :highlight, 'followings_count'
           else
             page.redirect_to not_invited_user_contacts_path(@user)
           end

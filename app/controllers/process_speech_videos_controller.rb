@@ -59,7 +59,7 @@ class ProcessSpeechVideosController < ApplicationController
       @priority = @process_speech_video.process_discussion.priority_process.priority
       render :update do |page|  
         page.replace_html "process_speech_detail", :partial => "video_detail", :locals => {:process_speech_video=> @process_speech_video }  
-        page.visual_effect :highlight, "process_speech_detail",  {:restorecolor=>"#ffffff", :startcolor=>"#cccccc", :endcolor=>"#ffffff"}  
+        # page.visual_effect :highlight, "process_speech_detail",  {:restorecolor=>"#ffffff", :startcolor=>"#cccccc", :endcolor=>"#ffffff"}  
       end
     else
       @process_speech_video = ProcessSpeechVideo.find(params[:id])

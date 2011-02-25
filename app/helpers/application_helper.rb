@@ -174,7 +174,7 @@ module ApplicationHelper
 		end
 		return s
   end
-  
+
   def official_status(priority)
   	if priority.is_failed?
   		'<span class="opposed">' + priority.official_status_name + '</span>'
@@ -209,4 +209,8 @@ module ApplicationHelper
   end 
 
   alias_method_chain :will_paginate, :i18n  
+
+  def escape_t(text)
+    text.gsub("\"","")
+  end
 end

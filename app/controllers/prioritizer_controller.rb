@@ -25,8 +25,8 @@ class PrioritizerController < ApplicationController
           page.replace_html "quiz_changes", '<div id="prioritizer_changes">' + msg + '</div>'
           page.replace_html "quiz", :partial => "prioritizer/" + n
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          page.visual_effect :highlight, 'your_priorities'          
-          page.visual_effect :drop_out, "prioritizer_changes", :duration => 4
+          # page.visual_effect :highlight, 'your_priorities'          
+          # page.visual_effect :drop_out, "prioritizer_changes", :duration => 4
         end
       }
     end
@@ -45,8 +45,8 @@ class PrioritizerController < ApplicationController
           page.replace_html "quiz_changes", '<div id="prioritizer_changes">' + msg + '</div>'
           page.replace_html "quiz", :partial => "prioritizer/" + n
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          page.visual_effect :highlight, 'your_priorities'          
-          page.visual_effect :drop_out, "prioritizer_changes", :duration => 4
+          # page.visual_effect :highlight, 'your_priorities'          
+          # page.visual_effect :drop_out, "prioritizer_changes", :duration => 4
         end
       }
     end
@@ -84,8 +84,8 @@ class PrioritizerController < ApplicationController
           page.replace_html "quiz_changes", '<div id="prioritizer_changes">' + msg + '</div>'
           page.replace_html "quiz", :partial => "prioritizer/" + n
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          page.visual_effect :highlight, 'your_priorities'
-          page.visual_effect :drop_out, "prioritizer_changes", :duration => 4
+          # page.visual_effect :highlight, 'your_priorities'
+          # page.visual_effect :drop_out, "prioritizer_changes", :duration => 4
         end
       }
     end

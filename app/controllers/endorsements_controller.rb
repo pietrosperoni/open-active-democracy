@@ -81,11 +81,11 @@ class EndorsementsController < ApplicationController
             page.select('#priority_' + @priority.id.to_s + "_endorsement_count").each { |item| item.replace(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority})) }
             page.select('#priority_' + @priority.id.to_s + "_button_small").each {|item| item.replace(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => nil, :region => params[:region]}))}
           elsif params[:region] == 'your_priorities'
-            page.visual_effect :fade, 'endorsement_' + eid.to_s, :duration => 0.5
+            # page.visual_effect :fade, 'endorsement_' + eid.to_s, :duration => 0.5
           elsif params[:region] == 'ad'
           end     
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          page.visual_effect :highlight, 'your_priorities' unless params[:region] == 'your_priorities'          
+          # page.visual_effect :highlight, 'your_priorities' unless params[:region] == 'your_priorities'          
         end
       }    
     end
