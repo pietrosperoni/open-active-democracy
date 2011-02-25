@@ -3,8 +3,8 @@
 <div class="comment_link_add answer_box" id="activity_<%=activity.id.to_s%>_comment_form">
 
         <%= form_for comment, :remote=>true, :url => activity_comments_path(activity),
-                              'data-disable-with' => escape_t(t(:ajax_clearing_warning)),
                               'data-loader-name' => "horizontal_small" do |f| %>
+                              FORM
         <%= f.error_messages %>
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
 
@@ -13,7 +13,7 @@
 
 	<div class="senda">
 				  <span id="submit_span_<%=activity.id%>">
-                    <%= f.submit t('esb.send') %>
+                    <%= f.submit t(:ajax_send_comment), :disable_with => escape_t(t(:ajax_sending)) %>
 				  </span>
 				  <span id = "loading_span_<%=activity.id%>" style = "display: none;">
 				    <%= image_tag("submit-loader.gif")%>
