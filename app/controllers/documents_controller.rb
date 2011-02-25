@@ -150,8 +150,8 @@ class DocumentsController < ApplicationController
         if DocumentRevision.create_from_document(@document.id,request)
           session[:goal] = 'document'
           flash[:notice] = t('document.new.success', :document_name => @document.name)
-          if facebook_session
-            #flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document, @priority)
+          if current_facebook_user
+            #flash[:user_action_to_publish] = UserPublisher.create_document(current_facebook_user, @document, @priority)
           end          
           @quality = @document.qualities.find_or_create_by_user_id_and_value(current_user.id,1)
           format.html { redirect_to(@document) }

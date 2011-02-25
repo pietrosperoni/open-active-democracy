@@ -5,14 +5,13 @@
 <% end %>
 	<% if activity.comments_count > 0 %>
 		<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
-		<%= render :partial => "comments/show_first", :locals => {:comment => @comments.first} %>
 		<% if @comments.length > 10 %>
 			<div class="comment_more">
-			<%= link_to t('esb.comment.more')+" (#{(@comments.length-2).to_s})", activity.priority, :class => "priority_name_link" %>
+			<%= link_to t('comments.more')+" (#{(@comments.length-2).to_s})", activity.priority, :class => "priority_name_link" %>
 			</div>
-		<% elsif @comments.length > 2 %>
+		<% else %>
 			<div class="comment_more">
-			<%= link_to_remote t('esb.comment.more')+" (#{(@comments.length-2).to_s})", { :loading=>"update('Sæki athugasemdir...')", :url => more_activity_comments_url(activity), :method => :get } %>
+			<%= link_to t('comments.more')+" (#{(@comments.length-2).to_s})", :url => more_activity_comments_url(activity), :method => :get, :remote=>true %>
 			</div>
 		<% end %>
 		<% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>
