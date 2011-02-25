@@ -26,15 +26,10 @@ jQuery(function ($) {
 jQuery(document).ready(function() {
   jQuery('a[data-remote]').live("ajax:beforeSend", function(){
       var $clicked = $(this);
-          $target = $( this.getAttribute("data-target") );
-      $target.text('Loading...');
-    })
-    .live("ajax:success", function(evt, data, status, xhr){
-      var $clicked = $(this),
-          $target = $( this.getAttribute("data-target") );
-
-      $target.append( xhr.responseText );
-      $clicked.turnRemoteToToggle( $target, "Return home" );
+      $disable_with = $clicked.attr("data-disable-with");
+      $loader_name = $clicked.attr("data-loader-name");
+      $clicked.html($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
+    // $clicked.href("#");
     });
 
 	var isChrome = /Chrome/.test(navigator.userAgent);

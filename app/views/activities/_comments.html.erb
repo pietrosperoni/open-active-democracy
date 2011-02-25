@@ -11,7 +11,11 @@
 			</div>
 		<% else %>
 			<div class="comment_more">
-			<%= link_to t('comments.more')+" (#{(@comments.length-2).to_s})", :url => more_activity_comments_url(activity), :method => :get, :remote=>true %>
+			<%= link_to t('comments.more')+" (#{(@comments.length-2).to_s})", more_activity_comments_url(activity),
+			            :method => :get,
+			            :remote=>true,
+                  'data-disable-with' => "",
+                  'data-loader-name' => "circle" %>
 			</div>
 		<% end %>
 		<% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>

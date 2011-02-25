@@ -29,7 +29,8 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem 'rmagick'
+gem 'delayed_job'
+gem 'rmagick','2.12.2'
 gem 'mongrel', '>= 1.2.0.pre2'
 gem 'paperclip'
 gem 'sunlight', '>= 0.9'  

@@ -2,7 +2,9 @@
 <!-- Comment box -->
 <div class="comment_link_add answer_box" id="activity_<%=activity.id.to_s%>_comment_form">
 
-        <%= form_for comment, :remote=>true, :url => activity_comments_path(activity), :loading=>"$('submit_span_#{activity.id}').toggle(); $('loading_span_#{activity.id}').toggle();" do |f| %>
+        <%= form_for comment, :remote=>true, :url => activity_comments_path(activity),
+                              'data-disable-with' => escape_t(t(:ajax_clearing_warning)),
+                              'data-loader-name' => "horizontal_small" do |f| %>
         <%= f.error_messages %>
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
 
@@ -17,13 +19,6 @@
 				    <%= image_tag("submit-loader.gif")%>
 				  </span>
 	</div>		
-
-	<div class="birta_a_facebook senda_a_facebook">
-		                	<% if current_facebook_user %>
-                    <span class="birta">Birta líka á Facebook?</span> <%= check_box_tag "send_to_facebook", "yes", false %>
-					<% end %>
-
-	</div>
 </div>
 	
         <% end %>

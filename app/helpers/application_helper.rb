@@ -138,7 +138,7 @@ module ApplicationHelper
       tag = current_tags.detect{|t| t.name.downcase == tag_name.downcase}
 			r << link_to(tag.title, :controller => "issues", :slug => tag.slug) if tag
 		end
-		r.to_sentence
+		r.to_sentence.html_safe
   end
     
   def relationship_tags_sentence(list)

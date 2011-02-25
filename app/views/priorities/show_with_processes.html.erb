@@ -64,7 +64,7 @@
 							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
 						</div>
 						<div id="pro_new">
-							<%= render :partial => "points/long_list", :locals => {:id => "pro_new", :point => @priority.points.published.by_recently_created.up_value.first} %>
+							<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "pro_new", :point => @priority.points.published.by_recently_created.up_value.first} %>
 						</div>
 					</td>
 				    
@@ -74,7 +74,7 @@
 							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
 						</div>
 						<div id="con_new">
-							<%= render :partial => "points/long_list", :locals => {:id => "con_new", :point => @priority.points.published.by_recently_created.down_value.first} %>
+							<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "con_new", :point => @priority.points.published.by_recently_created.down_value.first} %>
 						</div>
 					</td>
 					</tr>
