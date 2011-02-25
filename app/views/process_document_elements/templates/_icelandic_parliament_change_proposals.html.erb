@@ -39,11 +39,14 @@
 		            <% change_proposal_title = t(:view_original) %>
 	            <% end %>
 	            <td>
-	                <%= link_to_remote( change_proposal_author,
-	                { :url => { :controller => "process_document_elements", :action => "view_element",
-	                :source_id => change_proposal.id, :sequence_number => change_target.sequence_number } },
-	                { :class => "participateLink", :name => "",
-	                :title => change_proposal_title } ) %>
+	                <%= link_to change_proposal_author,
+	                            url_for(:controller => "process_document_elements", :action => "view_element",
+                    	                :source_id => change_proposal.id, :sequence_number => change_target.sequence_number),
+                              :remote=>true,
+                              'data-disable-with' => "",
+                              'data-loader-name' => "horizontal_small",
+            	                :class => "participateLink", :name => "",
+            	                :title => change_proposal_title %>
 	            </td>
             <% end %>
             <% if change_proposal.original_version %>
@@ -64,11 +67,14 @@
             <% end %>
             <% if @user and (((change_proposal.user and change_proposal.user.id == @user.id) or @user.is_admin_subscribed) and not change_proposal.original_version) %>
 	            <td>
-	                <%= link_to_remote( "x",
-	                { :url => { :controller => "process_document_elements", :action => "delete_change_proposal",
-	                :source_id => change_proposal.id, :sequence_number => change_target.sequence_number } },
-	                { :class => "participateLink", :name => "",
-	                :title => change_proposal_title } ) %>
+	                <%= link_to "x",
+	                            url_for(:controller => "process_document_elements", :action => "delete_change_proposal",
+                    	                :source_id => change_proposal.id, :sequence_number => change_target.sequence_number),
+                              :remote=>true,
+                              'data-disable-with' => "",
+                              'data-loader-name' => "circle",                                  	                
+            	                :class => "participateLink", :name => "",
+             	                :title => change_proposal_title %>
 	            </td> 
             <% else %>
 	            <td>
@@ -81,10 +87,13 @@
 		<tr>
 			<td align="left">
 		      <% if @user %>
-			      <%= link_to_remote( t(:new_change_proposal),
-	                        { :url => { :controller => "process_document_elements", :action => "new_change_proposal",
-	                          :source_id => change_target.id, :sequence_number => change_target.sequence_number } },
-	                        { :class => "participateLink", :name => "", :title => t(:new_change_proposal) } ) %>
+			      <%= link_to t(:new_change_proposal),
+	                      url_for(:controller => "process_document_elements", :action => "new_change_proposal",
+	                              :source_id => change_target.id, :sequence_number => change_target.sequence_number),
+                        :remote=>true,
+                        'data-disable-with' => "",
+                        'data-loader-name' => "horizontal_small",
+	                      :class => "participateLink", :name => "", :title => t(:new_change_proposal) %>
 			 <% else %>
 			   <%=link_to t(:login_to_submit_change_proposal), :controller=>"login" %>
 			 <% end %>	

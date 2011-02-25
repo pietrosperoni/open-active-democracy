@@ -28,26 +28,26 @@ OpenActiveDemocracy::Application.routes.draw do
       put :unsuspend
       get :activities
       get :comments
+  	  get :points
+  	  get :discussions
+  	  get :capital
+  	  put :impersonate
+  	  get :followers
+  	  get :documents
+  	  get :stratml
+  	  get :ignorers
+  	  get :following
+  	  get :ignoring
+  	  post :follow
+  	  post :unfollow
+  	  put :make_admin
+  	  get :ads
+  	  get :priorities
+  	  get :signups
+  	  post :endorse
+  	  get :reset_password
+  	  get :resend_activation
     end
-	  get :points
-	  get :discussions
-	  get :capital
-	  put :impersonate
-	  get :followers
-	  get :documents
-	  get :stratml
-	  get :ignorers
-	  get :following
-	  get :ignoring
-	  post :follow
-	  post :unfollow
-	  put :make_admin
-	  get :ads
-	  get :priorities
-	  get :signups
-	  post :endorse
-	  get :reset_password
-	  get :resend_activation
     resources :messages
     resources :followings do
       collection do

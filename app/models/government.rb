@@ -85,7 +85,11 @@ class Government < ActiveRecord::Base
   end
   
   def base_url
-    return ENV['DOMAIN']
+    if ENV['DOMAIN']
+      return ENV['DOMAIN']
+    else
+      "www.open-active-democracy.org"
+    end
   end
   
   def homepage_url

@@ -1,4 +1,4 @@
-<span class="priority_endorsement_count" id="priority_<%= priority.id.to_s %>_endorsement_count">
+<span class="priority_<%= priority.id.to_s %>_endorsement_count priority_endorsement_count" id="priority_<%= priority.id.to_s %>_endorsement_count">
 <%= link_to priority.up_endorsements_count.to_s + ' ' + t('endorse.ed'), endorsers_priority_url(priority) %>
 <% if priority.down_endorsements_count > 0 %> 
 	&middot; <%= link_to priority.down_endorsements_count.to_s + ' ' + t('oppose.ed'), opposers_priority_url(priority) %>

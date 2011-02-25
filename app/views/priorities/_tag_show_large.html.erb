@@ -10,7 +10,10 @@
 
 <% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
 	<span class="tag_button">
-		<%= link_to "tag", { :url => tag_priority_path(priority) }, :remote=>true %>
+		<%= link_to "tag", tag_priority_path(priority), 
+                :remote=>true,
+                'data-disable-with' => "",
+                'data-loader-name' => "horizontal_small" %>
 	</span>
 <% end %>
 </div>

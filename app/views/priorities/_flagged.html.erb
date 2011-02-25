@@ -2,11 +2,19 @@
 	<div class="warning_inline" id="priority_flag_<%= priority.id.to_s %>">
 		<span class="red"><%= t('comments.flag.number', :count => priority.flags_count)%></span>. <%= t('comments.flag.issue_warning.action', :user_name => priority.user.login, :warnings_count => priority.user.warnings_count) %>
 		<span class="tag_button">
-			<%= link_to_remote t('doit'), { :url => "/priorities/abusive/#{priority.id}", :loading=>"update('#{t('comments.flag.issue_warning.ing')}')" }, :class => "quality_unhelpful_link", :title => t('comments.flag.issue_warning.name') %></span>
+			<%= link_to t('doit'), "/priorities/abusive/#{priority.id}",
+                  :remote=>true,
+                  'data-disable-with' => escape_t(t(:ajax_issuing_warning)),
+                  'data-loader-name' => "horizontal_small",
+			            :class => "quality_unhelpful_link", :title => t('comments.flag.issue_warning.name') %></span>
 		<span class="or"><%= t('or') %></span>
 
 		<span class="tag_button">
-			<%= link_to_remote t('dont'), { :url => "/priorites/not_abusive/#{priority.id}", :loading=>"update('#{t('comments.flag.clear.ing')}')" }, :class => "quality_unhelpful_link", :title => t('comments.flag.clear.name') %>
+			<%= link_to t('dont'), "/priorites/not_abusive/#{priority.id}",
+                  :remote=>true,
+                  'data-disable-with' => escape_t(t(:ajax_clearing_warning)),
+                  'data-loader-name' => "horizontal_small",
+			            :class => "quality_unhelpful_link", :title => t('comments.flag.clear.name') %>
 		</span>		
 	</div>
 <% end %>

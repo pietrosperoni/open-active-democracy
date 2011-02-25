@@ -1,8 +1,37 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-jQuery.noConflict();
+jQuery(function ($) {
+  $.fn.extend({
+    turnRemoteToToggle: function(target,altText){
+        var $el = $(this),
+            altText = altText || "Hide";
+
+        $el.text(altText);
+        $el.toggle(
+          function(){
+            $el.text(el.data('origText'));
+            $el.data('expanded', false);
+            target.slideUp(); // or target.hide() or other effect
+          }, 
+          function(){
+            $el.text(altText);
+            $el.data('expanded', true);
+            target.slideDown(); // or target.show() or whatever
+          }
+        );
+      }
+  });
+});
 
 jQuery(document).ready(function() {
+  jQuery('a[data-remote]').live("ajax:beforeSend", function(){
+      var $clicked = $(this);
+      $disable_with = $clicked.attr("data-disable-with");
+      $loader_name = $clicked.attr("data-loader-name");
+      $clicked.html($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
+    // $clicked.href("#");
+    });
+
 	var isChrome = /Chrome/.test(navigator.userAgent);
 	if(!isChrome & jQuery.support.opacity) {
 		//jQuery(".tab_header a, div.tab_body").corners(); 

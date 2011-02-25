@@ -238,12 +238,13 @@ class PointsController < ApplicationController
           elsif params[:region] = "point_inline"
 #            page.select("point_" + @point.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) ) }                       
             page.replace_html 'point_' + @point.id.to_s + '_quality', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
+            page.replace_html 'point_' + @point.id.to_s + '_quality_newest', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
           end
         end        
       }
     end
   end  
-  
+
   # POST /points/1/unquality
   def unquality
     @point = Point.find(params[:id])
@@ -261,6 +262,7 @@ class PointsController < ApplicationController
           elsif params[:region] = "point_inline"
 #            page.select("point_" + @point.id.to_s + "_quality").each { |item| item.replace_html(render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) ) }
             page.replace_html 'point_' + @point.id.to_s + '_quality', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
+            page.replace_html 'point_' + @point.id.to_s + '_quality_newest', render(:partial => "points/button_small", :locals => {:point => @point, :quality => @quality, :priority => @point.priority}) 
           end          
         end       
       }

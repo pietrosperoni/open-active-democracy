@@ -28,9 +28,14 @@
 		<% end %>
 
 		<% if logged_in? and not comment.deleted? and ((@comments and comment == @comments.last and current_user.id == comment.user_id) or current_user.is_admin?) %>
-			<%= link_to_remote t('esb.comment.delete'), { :url => activity_comment_url(comment.activity_id,comment),:method => :delete, :confirm => t('comments.delete.confirm')}, :title => t('esb.mouseover.comment.delete') %>
+			<%= link_to t('esb.comment.delete'), activity_comment_url(comment.activity_id,comment),
+			            :method => :delete,
+                  :remote=>true,
+                  'data-disable-with' => escape_t(t(:ajax_deleting)),
+                  'data-loader-name' => "horizontal_small",
+			            :confirm => t('comments.delete.confirm'), :title => t('esb.mouseover.comment.delete') %>
 		<% end %>
-	</div>		
+	</div>
 	<%= render :partial => "comments/flagged", :locals => {:comment => comment} %>
 	<% end %>
 </div>

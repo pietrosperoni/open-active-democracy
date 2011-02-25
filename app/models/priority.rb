@@ -193,6 +193,14 @@ class Priority < ActiveRecord::Base
     position_7days_change < 0
   end
   
+  def up_endorsements_count
+    Endorsement.where(:priority_id=>self.id, :status=>'active', :value=>1).count
+  end
+  
+  def down_endorsements_count
+    Endorsement.where(:priority_id=>self.id, :status=>'active', :value=>-1).count
+  end
+  
   def is_controversial?
     return false unless down_endorsements_count > 0 and up_endorsements_count > 0
     (up_endorsements_count/down_endorsements_count) > 0.5 and (up_endorsements_count/down_endorsements_count) < 2
