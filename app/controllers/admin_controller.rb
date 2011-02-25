@@ -9,7 +9,7 @@ class AdminController < ApplicationController
     @all += Comment.published.flagged
     @all += Document.published.flagged
     @all = @all.sort_by {|s| s.created_at}
-    @page_title = "Allt flaggað efni"
+    @page_title = I18n.t(:admin_all_flagged_content)
   end
 
   def all_deleted
@@ -20,8 +20,7 @@ class AdminController < ApplicationController
     @all += Comment.unpublished
     @all += Document.unpublished
     @all = @all.sort_by {|s| s.updated_at}.reverse
-    @page_title = "Allt eytt efni"
-    
+    @page_title = I18n.t(:admin_all_deleted_content)    
     render :action=>:all_flagged
   end
 

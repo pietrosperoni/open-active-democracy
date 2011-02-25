@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         @user.send_welcome
         redirect_back_or_default('/')
       else
-        flash[:notice]="Töluvpóstfang ekki samþykkt"
+        flash[:notice]=I18n.t(:email_not_accepted)
         redirect_to "/set_email"
       end
     end

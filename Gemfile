@@ -29,7 +29,8 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
-
+gem 'rmagick'
+gem 'mongrel', '>= 1.2.0.pre2'
 gem 'paperclip'
 gem 'sunlight', '>= 0.9'  
 gem "RedCloth"
@@ -43,7 +44,7 @@ gem 'mogli'
 gem 'facebooker2'
 gem 'hoptoad_notifier'
 gem "newrelic_rpm"
-gem "memcache-client"
+gem 'dalli'
 gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
   :branch  => 'rails3',

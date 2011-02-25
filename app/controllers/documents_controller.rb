@@ -151,7 +151,7 @@ class DocumentsController < ApplicationController
           session[:goal] = 'document'
           flash[:notice] = t('document.new.success', :document_name => @document.name)
           if facebook_session
-            flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document, @priority)
+            #flash[:user_action_to_publish] = UserPublisher.create_document(facebook_session, @document, @priority)
           end          
           @quality = @document.qualities.find_or_create_by_user_id_and_value(current_user.id,1)
           format.html { redirect_to(@document) }
@@ -260,7 +260,7 @@ class DocumentsController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_document_info_#{@document.id}", render(:partial => "documents/flagged", :locals => {:document => @document})
           else
-            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>Takk fyrir að vekja athygli okkar á þessu umræðuefni.</div>"
+            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
           end
         end        
       }
@@ -274,7 +274,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>Þessu erindi hefur verið eytt og viðvörun send.</div>"
+          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
         end        
       }
     end    

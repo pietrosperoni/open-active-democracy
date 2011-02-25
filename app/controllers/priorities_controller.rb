@@ -733,14 +733,14 @@ class PrioritiesController < ApplicationController
         if Revision.create_from_point(@point.id,request)
           session[:goal] = 'point'
           if current_facebook_user
-            flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
+            #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
           end          
           @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
         end      
       end
       unless @point_saved and @saved
-        @priority.destroy if @priority
-        @point.destroy if @point
+        @priority.destroy if @saved
+        @point.destroy if @point_saved
       end
 #    rescue => ex
 #      Rails.logger.info("ROLLBACK ERROR: #{ex.backtrace}")
@@ -826,9 +826,9 @@ class PrioritiesController < ApplicationController
           # page.visual_effect :highlight, 'your_priorities'
           if current_facebook_user
             if @value == 1
-              page << fb_connect_stream_publish(UserPublisher.create_endorsement(current_facebook_user, @endorsement, @priority))
+              #page << fb_connect_stream_publish(UserPublisher.create_endorsement(current_facebook_user, @endorsement, @priority))
             else
-              page << fb_connect_stream_publish(UserPublisher.create_opposition(current_facebook_user, @endorsement, @priority))
+              #page << fb_connect_stream_publish(UserPublisher.create_opposition(current_facebook_user, @endorsement, @priority))
             end
           end
         end
