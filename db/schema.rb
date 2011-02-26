@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101027093631) do
+ActiveRecord::Schema.define(:version => 20110226034428) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -110,6 +110,12 @@ ActiveRecord::Schema.define(:version => 20101027093631) do
   add_index "capitals", ["recipient_id"], :name => "capitals_recipient_id_index"
   add_index "capitals", ["sender_id"], :name => "capitals_sender_id_index"
   add_index "capitals", ["type"], :name => "capitals_type_index"
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "changes", :force => true do |t|
     t.integer  "user_id"
@@ -335,7 +341,6 @@ ActiveRecord::Schema.define(:version => 20101027093631) do
   add_index "endorsements", ["position"], :name => "position"
   add_index "endorsements", ["priority_id"], :name => "endorsements_priority_id_index"
   add_index "endorsements", ["status", "priority_id", "user_id", "value"], :name => "endorsements_status_pid_uid"
-  add_index "endorsements", ["status", "priority_id", "value"], :name => "endorsements_status_pid_value"
   add_index "endorsements", ["status"], :name => "endorsements_status_index"
   add_index "endorsements", ["user_id"], :name => "endorsements_user_id_index"
   add_index "endorsements", ["value"], :name => "value"
@@ -717,6 +722,8 @@ ActiveRecord::Schema.define(:version => 20101027093631) do
     t.integer  "position_30days_change",                 :default => 0,     :null => false
     t.integer  "change_id"
     t.string   "cached_issue_list"
+    t.integer  "up_endorsements_count",                  :default => 0
+    t.integer  "down_endorsements_count",                :default => 0
     t.integer  "points_count",                           :default => 0
     t.integer  "up_points_count",                        :default => 0
     t.integer  "down_points_count",                      :default => 0
@@ -745,8 +752,10 @@ ActiveRecord::Schema.define(:version => 20101027093631) do
     t.string   "external_name"
     t.integer  "partner_id"
     t.integer  "flags_count",                            :default => 0
+    t.integer  "category_id"
   end
 
+  add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
   add_index "priorities", ["official_status"], :name => "index_priorities_on_official_status"
   add_index "priorities", ["official_value"], :name => "index_priorities_on_official_value"
   add_index "priorities", ["position"], :name => "priorities_position_index"

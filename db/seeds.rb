@@ -6,7 +6,20 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-# Create Portlet Tempaltes
+# Create Categories
+Category.create(:name=>"category_law")
+Category.create(:name=>"category_police")
+Category.create(:name=>"category_public_services")
+Category.create(:name=>"category_military")
+Category.create(:name=>"category_economy")
+Category.create(:name=>"category_constitution")
+Category.create(:name=>"category_social_welfare")
+Category.create(:name=>"category_healthcare")
+Category.create(:name=>"category_banks")
+Category.create(:name=>"category_entertainment")
+Category.create(:name=>"category_immigration")
+
+# Create Portlet Templates
 pc=PortletTemplateCategory.new
 pc.name="priorities.name"
 pc.weight = 1

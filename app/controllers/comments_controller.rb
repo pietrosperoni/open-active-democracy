@@ -52,10 +52,8 @@ class CommentsController < ApplicationController
       format.js {
         render :update do |page|
           update_div_name = 'activity_' + @activity.id.to_s + '_comments'
-          if @activity.priority_id
-            page.replace_html update_div_name, render(:partial => "comments/show_all")
-            page.insert_html :bottom, update_div_name, render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
-          end
+          page.replace_html update_div_name, render(:partial => "comments/show_all")
+          page.insert_html :bottom, update_div_name, render(:partial => "new_inline", :locals => {:comment => Comment.new, :activity => @activity})
           page << "jQuery('#comment_content_#{@activity.id.to_s}').autoResize({extraSpace : 20});"
           page << "FB.XFBML.parse(document.getElementById('#{update_div_name}'));"
         end
@@ -83,7 +81,7 @@ class CommentsController < ApplicationController
       format.html # new.html.erb
       format.js {
         render :update do |page|
-          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline_small", :locals => {:comment => @comment, :activity => @activity})
+          page.insert_html :bottom, 'activity_' + @activity.id.to_s + '_comments', render(:partial => "new_inline", :locals => {:comment => @comment, :activity => @activity})
           page.remove 'comment_link_' + @activity.id.to_s
           page << render(:partial => "shared/javascripts_reloadable")
           page['comment_content_' + @activity.id.to_s].focus    

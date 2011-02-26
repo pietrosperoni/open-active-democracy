@@ -25,7 +25,7 @@
 	
 <% else %>
 	<span class="priority_add" id="user_add_<%= user.id.to_s %>">
-		<%= link_to t('follow.capitalize'), follow_user_path(user, :region => "user_left", :value => 1)
+		<%= link_to t('follow.capitalize'), follow_user_path(user, :region => "user_left", :value => 1),
                 :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_follow_capitalize)),

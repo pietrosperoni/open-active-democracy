@@ -42,7 +42,7 @@
 		<li class="tab2 mega">
 			<span class="tab_header"><%= link_to t('menu.priorities.name'), "#" %></span>
 			<div class="tab_body">
-				<% unless Partner.current %>
+				<% if not Partner.current and request.host.include?("skuggathing.is") %>
 				<div class="tab_subhead">
 					<%= link_to "Lagafrumvörp", "/issues/lagafrumvorp" %>
 				</div>
@@ -129,7 +129,7 @@
 				</div>
 			
 				<div class="tab_sublinks">
-						<%= t('menu.briefing.research.needed', :points_name => link_to(t('menu.documents.name').downcase, :controller => "briefing", :action => "documents"), :documents_name => link_to(t('points.name'), :controller => "briefing", :action => "points")) %><br/>
+						<%= raw t('menu.briefing.research.needed', :points_name => link_to(t('menu.documents.name').downcase, :controller => "briefing", :action => "documents"), :documents_name => link_to(t('points.name'), :controller => "briefing", :action => "points")) %><br/>
 					<% if current_government.contributors_count > 0 %>
 						<%= link_to t('menu.briefing.research.contributors', :count => number_with_delimiter(current_government.contributors_count)), :controller => "briefing", :action => "contributors" %>
 					<% end %>						

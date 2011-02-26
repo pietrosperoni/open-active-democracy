@@ -1,3 +1,5 @@
+# coding: utf-8
+
 <% if @error %>
 <%=@error%>
 <% else %>
@@ -17,19 +19,18 @@
 				<% if result.class == Priority %>
 				<div>
 					<h4> Umræða - <%= time_ago(result.excerpts.created_at) %></h4> 				
-					<h3><%= result.excerpts.name %></h3>
+					<h3><%= result.excerpts.name.html_safe %></h3>
 					<%#= result.excerpts.content %>
 					
 					<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.id %>
 					<br><br>	
 				</div>		
 				<!-- QUESTION --> 
-				<% elsif result.class == Question %>
+				<% elsif result.class == Point %>
 				<div>
 					<h4> Spurning og svar - <%= time_ago(result.excerpts.created_at) %></h4> 				
 					<h3><%= result.excerpts.name %></h3>
-					Spurning: <%= result.excerpts.content %><br>
-					Svar: <%= result.excerpts.answer %>
+					Spurning: <%= result.excerpts.content.html_safe %><br>
 					<br>
 					<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.id %>
 					<br><br>
@@ -39,7 +40,7 @@
 				<div>	
 					<h4> Erindi - <%= time_ago(result.excerpts.created_at) %></h4> 							
 					<h3><%= result.excerpts.name %></h3>
-					<%= result.excerpts.content %>
+					<%= result.excerpts.content.html_safe %>
 					<br>
 					<%= link_to "Skoða erindi", :controller=>"documents", :action=>"show", :id=>result.id %>
 					<br><br>
@@ -48,12 +49,12 @@
 				<% elsif result.class == Comment%>
 				<div>
 				  	<h4> Athugasemd - <%= time_ago(result.excerpts.created_at) %></h4>  
-					<%= result.excerpts.content %>	
+					<%= result.excerpts.content.encoding %>	
 					<br>			  	
 				  	<% if result.activity.priority_id %>
 						<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %>
-					<% elsif result.activity.question_id  %>
-						<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.activity.question_id %>
+					<% elsif result.activity.point_id  %>
+						<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.activity.point_id %>
 					<% end %>
 					<br><br>
 			</div>
@@ -85,16 +86,16 @@
 					<% elsif facet.to_s=="cached_issue_list" %>
 						<h3>Kaflar</h3> 
 					<% else %>
-						<h3><%=facet%></h3> 
+						<h3><%=facet.to_s.html_safe%></h3> 
 					<% end %>
 						<ul>
 						<% facet_options.each do |option, count| %>
 							<% next if option==nil or option=="" %>
 							<% translated_option = translate_facet_option(option) %>
 							<% if translated_option==params[:cached_issue_list] or option==params[:class]%>
-								<li><b><%= link_to "#{translated_option} (#{count})", :params => {facet => option, :q=>@query, :page => 1} %></b></li>
+								<li><b><%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %></b></li>
 							<% else %>
-								<li><%= link_to "#{translated_option} (#{count})", :params => {facet => option, :q=>@query, :page => 1} %></li>
+								<li><%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %></li>
 							<% end %>
 						<% end %>
 						</ul> 
