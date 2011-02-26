@@ -5,6 +5,7 @@
 		<span class="priority_remove" id="user_add_<%= user.id.to_s %>">
 			<%= t('follow.ing')%> 
 			<%= link_to "&nbsp;x".html_safe, unfollow_user_path(user, :region => "user_left", :value => 1), 
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => "",
                 'data-loader-name' => "circle",
@@ -14,6 +15,7 @@
 		<span class="priority_remove_oppose" id="user_add_<%= user.id.to_s %>">
 			<%= t('ignore.ing')%> 
 			<%= link_to "&nbsp;x".html_safe, unfollow_user_path(user, :region => "user_left", :value => -1),
+                  :method => :post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "circle",
@@ -24,6 +26,7 @@
 <% else %>
 	<span class="priority_add" id="user_add_<%= user.id.to_s %>">
 		<%= link_to t('follow.capitalize'), follow_user_path(user, :region => "user_left", :value => 1)
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_follow_capitalize)),
                 'data-loader-name' => "horizontal_small",
@@ -32,6 +35,7 @@
 	<span class="endorse_or"><%= t('or')%></span>
 	<span class="priority_add" id="user_add_<%= user.id.to_s %>">
 		<%= link_to t('ignore.capitalize'), follow_user_path(user, :region => "user_left", :value => -1),
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_ignore_capitalize)),
                 'data-loader-name' => "horizontal_small",

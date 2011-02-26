@@ -155,9 +155,9 @@ class CommentsController < ApplicationController
       format.js {
         render :update do |page|
           if current_user.is_admin?
-            page.insert_html :after, 'comment_' + @comment.id.to_s, render(:partial => "comments/flagged", :locals => {:comment => @comment})
+            page.replace 'comment_' + @comment.id.to_s, render(:partial => "comments/flagged", :locals => {:comment => @comment})
           else
-            page.insert_html :top, 'comment_content_' + @comment.id.to_s, "<div class='red'>t(:thanks_for_flagging_comment)</div>"
+            page.replace 'comment_' + @comment.id.to_s, "<div class='red'>#{t(:thanks_for_flagging_comment)}</div>".html_safe
           end
         end        
       }

@@ -1,6 +1,6 @@
 <div id="login">
 
-	<%= t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
+	<%= raw t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
 	<div id="login_form">
 		<p>
 	<%= form_for :session, :remote=>true, 

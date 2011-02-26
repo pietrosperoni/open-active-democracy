@@ -35,7 +35,7 @@ gem 'mongrel', '>= 1.2.0.pre2'
 gem 'paperclip'
 gem 'sunlight', '>= 0.9'  
 gem "RedCloth"
-gem 'googlecharts', '1.3.6'
+gem 'googlecharts'
 gem 'oauth', '>= 0.3.1'
 #gem "twitter-auth", :require => "twitter_auth/engine"
 gem "twitter-auth", :git => "git://github.com/jaikoo/twitter-auth.git", :branch => "rails_3", :require => "twitter_auth/engine"
@@ -51,3 +51,7 @@ gem 'thinking-sphinx',
   :branch  => 'rails3',
   :require => 'thinking_sphinx'
 gem 'jquery-rails', '>= 0.2.6'
+
+group :development do
+  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+end

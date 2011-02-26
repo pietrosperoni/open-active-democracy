@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
       var $clicked = $(this);
       $disable_with = $clicked.attr("data-disable-with");
       $loader_name = $clicked.attr("data-loader-name");
-      $clicked.html($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
+      $clicked.replaceWith($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
     // $clicked.href("#");
     });
 

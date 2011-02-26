@@ -3,6 +3,7 @@
 		<%= t('following_discussions.new.ing')%> 
 		<span class="big_x">
 		<%= link_to "&nbsp;x".safe_html, activity_following_path(activity, following, :region => "activity_show"), 
+                :method => :post,
 		            :remote=>true,
       		      'data-disable-with' => "",
                 'data-loader-name' => "circle",

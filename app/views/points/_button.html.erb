@@ -4,6 +4,7 @@
 			<%= t('helpful.caps')%>
 			<span class="big_x">
 			<%= link_to "X", unquality_point_path(point, :region => "point_detail"),
+                  :method => :post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "circle",
@@ -16,6 +17,7 @@
 		<%= t('unhelpful.caps')%>
 		<span class="big_x">
 		<%= link_to "X", unquality_point_path(point, :region => "point_detail"), 
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => "",
                 'data-loader-name' => "circle",
@@ -27,6 +29,7 @@
 <% else %>
 	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
 		<%= link_to t('helpful.capitalized'), quality_point_path(point, :region => "point_detail", :value => true), 
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_helpful)),
                 'data-loader-name' => "horizontal_small",
@@ -35,6 +38,7 @@
 	<div class="endorse_or"><%= t('or') %></div>
 	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
 		<%= link_to t('unhelpful.capitalized'), quality_point_path(point, :region => "point_detail", :value => false),
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_unhelpful)),
                 'data-loader-name' => "horizontal_small",

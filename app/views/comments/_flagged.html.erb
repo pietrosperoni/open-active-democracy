@@ -3,6 +3,7 @@
 		<span class="red"><%= t('comments.flag.number', :count => comment.flags_count)%></span>. <%= t('comments.flag.issue_warning.action', :user_name => comment.user.login, :warnings_count => comment.user.warnings_count) %>
 		<span class="tag_button">
 			<%= link_to t('doit'), abusive_activity_comment_url(comment.activity_id,comment),
+                  :method=>:post,
                   :remote=>true,
                   'data-disable-with' => escape_t(t(:ajax_issuing_warning)),
                   'data-loader-name' => "horizontal_small",
@@ -12,6 +13,7 @@
 
 		<span class="tag_button">
 			<%= link_to t('dont'),not_abusive_activity_comment_url(comment.activity_id,comment),
+                  :method=>:post,
                   :remote=>true,
                   'data-disable-with' => escape_t(t(:ajax_clearing_warning)),
                   'data-loader-name' => "horizontal_small",

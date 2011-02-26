@@ -5,6 +5,7 @@
 		<span class="tag_button" id="document_helpful_<%= document.id.to_s %>">
 			<%= t('helpful.caps')%> 
 			<%= link_to "&nbsp;x".html_safe, unquality_document_path(document, :region => "document_inline"), 
+                  :method => :post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "horizontal_small",
@@ -14,6 +15,7 @@
 		<span class="tag_button" id="document_helpful_<%= document.id.to_s %>">
 			<%= t('unhelpful.caps')%>
 			<%= link_to "&nbsp;x".safe_html, unquality_document_path(document, :region => "document_inline"),
+                  :method => :post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "circle",
@@ -33,6 +35,7 @@
 	<%= t('helpful.question')%>
 	<span class="tag_button" id="priority_add_<%= document.id.to_s %>">
 		<%= link_to t('doit'), quality_document_path(document, :region => "document_inline", :value => 1), 
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_helpful)),
                 'data-loader-name' => "horizontal_small",
@@ -42,6 +45,7 @@
 
 	<span class="tag_button" id="priority_add_<%= document.id.to_s %>">
 		<%= link_to t('dont'), quality_document_path(document, :region => "document_inline", :value => 0),
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_unhelpful)),
                 'data-loader-name' => "horizontal_small",

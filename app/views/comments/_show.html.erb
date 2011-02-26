@@ -13,7 +13,13 @@
 		<%= h(comment.user.login) %>
 			 - <%= time_ago(comment.created_at) %> 
 	       <% if logged_in? and current_user.id != comment.user_id  %>
-			 <%= link_to_remote image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"), { :url => flag_activity_comment_url(comment.activity_id,comment),:method => :get, :confirm => t('comments.flag.confirm', :user_name => comment.user.name)}, :title => t('esb.mouseover.entry.report') %>
+			 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"),
+			             flag_activity_comment_url(comment.activity_id,comment),:method => :get,
+                   :remote=>true,
+                   'data-disable-with' => "",
+                   'data-loader-name' => "circle",
+			             :confirm => t('comments.flag.confirm', :user_name => comment.user.name),
+			             :title => t('esb.mouseover.entry.report') %>
 		   <% end %>
 		</span>
 		
