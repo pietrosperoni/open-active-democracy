@@ -38,7 +38,7 @@ class PortalController < ApplicationController
     portlet_pos.portlet_id = portlet.id
     portlet_pos.save
 
-    portal=@template.escape_javascript(render_to_string :partial=>"portal")
+    portal=escape_javascript(render_to_string :partial=>"portal")
     respond_to do |format|
       format.js do
         render :update do |page|
@@ -60,7 +60,7 @@ class PortalController < ApplicationController
       end
     end
 
-    portal=@template.escape_javascript(render_to_string :partial=>"portal")
+    portal=escape_javascript(render_to_string :partial=>"portal")
     respond_to do |format|
       format.js do
         render :update do |page|

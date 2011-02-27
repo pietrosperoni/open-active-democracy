@@ -444,7 +444,7 @@ class UsersController < ApplicationController
     order = params[:your_priorities]
     endorsements = Endorsement.find(:all, :conditions => ["id in (?)", params[:your_priorities]], :order => "position asc")
     order.each_with_index do |id, position|
-      if id.any?
+      if id
         endorsement = endorsements.detect {|e| e.id == id.to_i }
         new_position = (((session[:endorsement_page]||1)*25)-25)+position + 1
         if endorsement and endorsement.position != new_position

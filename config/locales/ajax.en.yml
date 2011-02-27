@@ -20,4 +20,10 @@ en:
   ajax_tagging: "Tagging"
   ajax_stop_following_discussion: "Stop following discussion"
   ajax_follow_discussion: "Follow discussion"
+  ajax_send_comment: "Send comment"
+  ajax_report: "Report"
+  ajax_comment: "comment/s"
+  ajax_comment_delete: "delete"
+  ajax_comment_delete_title: "Delete comment"
+  ajax_comments_more: "More"
   

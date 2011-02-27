@@ -13,7 +13,13 @@
 		<%= h(comment.user.login) %>
 			 - <%= time_ago(comment.created_at) %> 
 	       <% if logged_in? and current_user.id != comment.user_id  %>
-			 <%= link_to_remote image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"), { :url => flag_activity_comment_url(comment.activity_id,comment),:method => :get, :confirm => t('comments.flag.confirm', :user_name => comment.user.name)}, :title => t('esb.mouseover.entry.report') %>
+			 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"),
+			             flag_activity_comment_url(comment.activity_id,comment),:method => :get,
+                   :remote=>true,
+                   'data-disable-with' => "",
+                   'data-loader-name' => "circle",
+			             :confirm => t('comments.flag.confirm', :user_name => comment.user.name),
+			             :title => t('ajax_report') %>
 		   <% end %>
 		</span>
 		
@@ -22,18 +28,18 @@
 		<% end %>		
 				
 		<% if shortentext == 0 %>
-			<div id="comment_content_<%= comment.id.to_s %>"><%= sanitize(comment.content_html) %></div>	
+			<div id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div>	
 		<% else %>
-			<div class="comment_content_2" id="comment_content_<%= comment.id.to_s %>"><%= sanitize(comment.content_html) %></div>
+			<div class="comment_content_2" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div>
 		<% end %>
 
 		<% if logged_in? and not comment.deleted? and ((@comments and comment == @comments.last and current_user.id == comment.user_id) or current_user.is_admin?) %>
-			<%= link_to t('esb.comment.delete'), activity_comment_url(comment.activity_id,comment),
+			<%= link_to t(:ajax_comment_delete), activity_comment_url(comment.activity_id,comment),
 			            :method => :delete,
                   :remote=>true,
                   'data-disable-with' => escape_t(t(:ajax_deleting)),
                   'data-loader-name' => "horizontal_small",
-			            :confirm => t('comments.delete.confirm'), :title => t('esb.mouseover.comment.delete') %>
+			            :confirm => t('comments.delete.confirm'), :title => t(:ajax_comment_delete_title) %>
 		<% end %>
 	</div>
 	<%= render :partial => "comments/flagged", :locals => {:comment => comment} %>

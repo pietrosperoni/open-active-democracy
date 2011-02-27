@@ -16,13 +16,13 @@ module ApplicationHelper
 
   def translate_facet_option(option)
     if option=="Comment"
-      i18n.t(:comments)
-    elsif option=="Poitns"
-      i18n.t(:points)
+      I18n.t(:comments)
+    elsif option=="Point"
+      I18n.t(:points)
     elsif option=="Priority"
-      i18n.t(:priorities)
+      I18n.t(:priorities)
     elsif option=="Document"
-      i18n.t(:document)
+      I18n.t(:document)
     else
       option
     end
@@ -52,7 +52,7 @@ module ApplicationHelper
   def flash_div *keys
     f = keys.collect { |key| content_tag(:div, link_to("x","#", :class => "close_notify") + content_tag(:span, flash[key]), :class => "flash_#{key}") if flash[key] }.join
     keys.collect { |key| flash[key] = nil }
-    return f
+    return f.html_safe
   end
 
   def revisions_sentence(user)

@@ -40,6 +40,23 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery #:secret => 'd0451bc51967070c0872c2865d2651e1'
 
   protected
+
+  JS_ESCAPE_MAP = {
+        '\\'    => '\\\\',
+        '</'    => '<\/',
+        "\r\n"  => '\n',
+        "\n"    => '\n',
+        "\r"    => '\n',
+        '"'     => '\\"',
+        "'"     => "\\'" }
+        
+  def escape_javascript(javascript)
+    if javascript
+      javascript.gsub(/(\\|<\/|\r\n|[\n\r"'])/) { JS_ESCAPE_MAP[$1] }
+    else
+      ''
+    end
+  end  
   
   def get_layout
     return false if not is_robot? and not current_government

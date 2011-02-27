@@ -39,18 +39,18 @@
 		            :confirm => escape_t(t(:ajax_delete_from_this_page)) %>
 		<% end %>
 		</div>
-		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}") do %> 
+		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{I18n.locale.to_s}") do %> 
 			<%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
 		<% end %>
 		<span class="small"><%= time_ago(activity.created_at) %></span>
 
 		<% if activity.class != ActivityCommentParticipant %>
 			<% if activity.comments_count > 0 %>
-				<span class="comment_link" title="Settu inn athugasemd">
-				<%= link_to_unless_current pluralize(activity.comments_count, "athugasemd"), activity_comments_url(activity) %>
+				<span class="comment_link" title="<%=escape_t(t(:ajax_send_comment))%>">
+				<%= link_to_unless_current pluralize(activity.comments_count, title="#{escape_t(t(:ajax_comment))}"), activity_comments_url(activity) %>
 				</span>
 			<% else %>
-				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="Settu inn athugasemd">	
+				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="<%=escape_t(t(:ajax_send_comment))%>">	
   				<%= link_to t(:comment), new_activity_comment_url(activity), :method => :get,
                       'data-disable-with' => "",
                       'data-loader-name' => "horizontal_small",

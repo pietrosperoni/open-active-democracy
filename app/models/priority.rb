@@ -51,6 +51,7 @@ class Priority < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :partner
+  belongs_to :category
   
   has_many :relationships, :dependent => :destroy
   has_many :incoming_relationships, :foreign_key => :other_priority_id, :class_name => "Relationship", :dependent => :destroy
@@ -88,7 +89,8 @@ class Priority < ActiveRecord::Base
   
   define_index do
     indexes name
-    indexes cached_issue_list, :facet=>true
+    indexes category.name, :facet=>true
+    where "priorities.status = 'published'"
   end  
   
   #validates_length_of :name, :within => 3..60

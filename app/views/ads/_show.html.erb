@@ -18,6 +18,7 @@
 
 					<span class="priority_add" id="priority_add_<%= ad.priority.id %>">
 						<%= link_to t('endorse.name'), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => 1, :ad_id => ad),
+                        :method => :post,
 						            :remote=>true,
                         'data-disable-with' => escape_t(t(:ajax_endorsing)),
                         'data-loader-name' => "horizontal_small",
@@ -26,6 +27,7 @@
 					<span class="endorse_or"><%= t('or') %></span>
 					<span class="priority_add" id="priority_add_<%= ad.priority.id %>">
 						<%= link_to t('oppose.name'), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => -1, :ad_id => ad),
+                        :method => :post,
                         :remote=>true,
                         'data-disable-with' => escape_t(t(:ajax_endorsing)),
                         'data-loader-name' => "horizontal_small",
@@ -40,6 +42,7 @@
 
 			<span class="tag_button" id="notification_show_<%= ad.priority.id %>_skip" style="margin-left: 5px;">
 				<%= link_to t('skip.name'), skip_priority_ad_path(ad.priority,ad), 
+                    :method => :post,
                     :remote=>true,
                     'data-disable-with' => escape_t(t(:ajax_skipping)),
                     'data-loader-name' => "horizontal_small",

@@ -43,9 +43,8 @@ class Point < ActiveRecord::Base
   define_index do
     indexes name
     indexes content
-    indexes answer
-    indexes cached_issue_list, :facet=>true
-    where "status = 'published'"    
+    indexes priority.category.name, :facet=>true
+    where "points.status = 'published'"    
   end
   
   cattr_reader :per_page

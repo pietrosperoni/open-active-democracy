@@ -2,7 +2,7 @@
 <% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
 
 	<% for tag in priority.issues %>
-	ROBO<span class="tag_name"><%= link_to tag.title, :controller => "issues", :slug => tag.slug %></span>
+	<span class="tag_name"><%= link_to tag.title, :controller => "issues", :slug => tag.slug %></span>
 	<span class="tag_count"><%= tag.priorities_count %></span>
 	<% end %>
 
@@ -15,6 +15,7 @@
 <% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
 	<span class="tag_button">
     <%= link_to "tag", tag_priority_path(priority), 
+                :method => :post,
                 :remote=>true,
                 'data-disable-with' => "",
                 'data-loader-name' => "horizontal_small" %>

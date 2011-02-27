@@ -4,7 +4,6 @@
 
         <%= form_for comment, :remote=>true, :url => activity_comments_path(activity),
                               'data-loader-name' => "horizontal_small" do |f| %>
-                              FORM
         <%= f.error_messages %>
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
 

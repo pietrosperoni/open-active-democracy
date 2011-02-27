@@ -76,7 +76,7 @@ module PortalHelper
     @priorities = Rails.cache.read(key)
     if not @priorities
       eval("@priorities = #{code_function}")
-      Rails.cache.write(key, @priorities, :expires_in => 5.minutes) if @priorities
+      Rails.cache.write(key, @priorities.all, :expires_in => 5.minutes) if @priorities
     end
   end
 

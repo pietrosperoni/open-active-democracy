@@ -9,11 +9,11 @@
     <%= render :partial => "comments/show", :locals => {:comment => comments_without_abuse.first} if comments_without_abuse.first %>
 		<% if comments_without_abuse.length > 10 %>
 			<div class="comment_more">
-			<%= link_to t('comments.more')+" (#{(comments_without_abuse.length-2).to_s})", activity.priority, :class => "priority_name_link" %>
+			<%= link_to t(:ajax_comments_more)+" (#{(comments_without_abuse.length-2).to_s})", priorities_comments_url(activity.priority), :class => "priority_name_link" %>
 			</div>
 		<% elsif comments_without_abuse.length > 2 %>
 			<div class="comment_more">
-			<%= link_to t('comments.more')+" (#{(comments_without_abuse.length-2).to_s})", more_activity_comments_url(activity),
+			<%= link_to t(:ajax_comments_more)+" (#{(comments_without_abuse.length-2).to_s})", more_activity_comments_url(activity),
 			            :method => :get,
 			            :remote=>true,
                   'data-disable-with' => "",

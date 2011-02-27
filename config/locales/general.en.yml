@@ -1,4 +1,16 @@
 en:
+    category_law: "Law"
+    category_police: "Police"
+    category_public_services: "Public services"
+    category_military: "Military"
+    category_economy: "Economy"
+    category_constitution: "Constitution"
+    category_social_welfare: "Social welfare"
+    category_healthcare: "Healthcare"
+    category_banks: "Banks"
+    category_entertainment: "Entertainment"
+    category_immigration: "Immigration"
+
     priority_failed: "Priority failed"
     prev_t: "Previous"
     next_t: "Next"

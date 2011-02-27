@@ -44,8 +44,8 @@ class Document < ActiveRecord::Base
   define_index do
     indexes name
     indexes content
-    indexes cached_issue_list, :facet=>true
-    where "status = 'published'"
+    indexes priority.category.name, :facet=>true
+    where "documents.status = 'published'"    
   end
   
   cattr_reader :per_page
@@ -54,6 +54,11 @@ class Document < ActiveRecord::Base
   def to_param
     "#{id}-#{name.parameterize_full}"
   end  
+  
+  def activity
+    # HACK TO ENABLE THINKING SPHINX TO GET THROUGH... NEED TO FIND THE REAL CAUSE
+    self
+  end
   
   after_destroy :delete_document_quality_activities
   before_destroy :remove_counts
