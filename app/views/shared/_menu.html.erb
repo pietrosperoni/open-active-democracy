@@ -196,18 +196,6 @@
 					<% end %>
 				</div>			
 			
-				<div class="tab_subhead"><%= link_to t('menu.news.acquisitions'), :controller => "news", :action => "changes_voting" %></div>
-				<div class="tab_sublinks">
-					
-					<%= link_to t('menu.news.proposals'), :controller => "news", :action => "changes" %>
-					&middot; <%= link_to t('menu.news.voting'), :controller => "news", :action => "changes_voting" %>
-					<br/>
-					<%= link_to t('menu.news.your_activity'), :controller => "news", :action => "your_changes" %>					
-					&middot; <%= link_to t('menu.news.created'), :controller => "news", :action => "your_priorities_created_changes" %>
-					&middot; <%= link_to t('menu.news.your_priorities'), :controller => "news", :action => "your_priority_changes_activity" %>
-					&middot; <%= link_to t('menu.news.all_activity'), :controller => "news", :action => "changes_activity" %>
-				</div>
-
 				<div class="tab_subhead"><%= link_to t('menu.news.all_activity'), :controller => "news", :action => "activities" %></div>
 				<div class="tab_sublinks">
 					<%= link_to t('menu.news.all'), :controller => "news", :action => "activities" %>	

@@ -33,7 +33,7 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 #sidebar {
 	width: 220px;
-	float: right;
+	float: left;
 	overflow: hidden;
 	padding-right: 4px;
 	
@@ -42,7 +42,7 @@ hr { border-top: 3px solid #e5e5e5; }
 #contentwrap {
 	width: 720px;
 	margin-left: 4px;
-	float: left;
+	float: right;
 	position: relative;
 	padding: 0px 0px 0px 0px !important;
 }

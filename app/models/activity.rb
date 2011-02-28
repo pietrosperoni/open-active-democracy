@@ -12,6 +12,8 @@ class Activity < ActiveRecord::Base
   scope :points_and_docs, :conditions => "type like 'ActivityPoint%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
   scope :capital, :conditions => "type like '%Capital%'"
   scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
+
+  scope :top, :conditions => "type in ('ActivityPointNew','ActivityDocumentNew','ActivityPriorityNew','ActivityBulletinNew')"
   
   scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
   scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"

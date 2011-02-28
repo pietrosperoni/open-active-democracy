@@ -61,11 +61,23 @@ class NewsController < ApplicationController
     @rss_url = url_for(:only_path => false, :format => "rss")    
     respond_to do |format|
       format.html { render :action => "activity_list" }
-      format.rss { render :template => "rss/activities" }         
+      format.rss { render :template => "rss/activities" }
       format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
     end 
-  end  
+  end
+
+  def top
+    @page_title = t('news.activities.title', :government_name => current_government.name)
+    @activities = Activity.active.top.filtered.for_all_users.by_recently_created.paginate :page => params[:page]      
+    @rss_url = url_for(:only_path => false, :format => "rss")    
+    respond_to do |format|
+      format.html { render :action => "activity_list" }
+      format.rss { render :template => "rss/activities" }
+      format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
+    end 
+  end
   
   def capital
     @page_title = t('news.capital.title', :government_name => current_government.name, :currency_name => current_government.currency_name.titleize)
