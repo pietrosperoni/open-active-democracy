@@ -13,3 +13,38 @@ and
 
 Open Direct Democracy by Róbert Viðar Bjarnason and Gunnar Grimsson
 "http://github.com/rbjarnason/open-direct-democracy":http://github.com/rbjarnason/open-direct-democracy
+
+Here are quick installation instructions for the new version that uses Rails 3.0.4 and Ruby 1.9.2
+
+First install RVM:
+
+bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+
+Then add this to your .bashrc
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+Restart your shell and do:
+rvm install 1.9.2
+
+then
+rvm use 1.9.2
+
+and
+gem install bundler
+
+then (if you have created a fork at github under your name)
+
+git clone git@github.com:yourname/open-active-democracy.git
+
+cd open-active-democracy
+
+bundle install
+
+then fixup database.yml with your local mysql root password
+
+rake db:create
+rake db:schema:load
+
+Finally to start the rails server:
+rails s
