@@ -4,7 +4,7 @@
 <%= javascript_include_tag 'jquery.mousewheel' %>
 <%= javascript_include_tag 'jquery.scrollable-1.0.1.min' %>
 <%= stylesheet_link_tag 'vertical_video_speeches_scroller_large' %>
-<h1><%=t :newly_processed_speeches %></h1>
+<h1><%=t(:newly_processed_speeches) %></h1>
 <!-- navigator -->
 <div class="navi"></div>
 <!-- root element -->
@@ -17,9 +17,9 @@
             <p>
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
-                    <%=t :speech %>
+                    <%=t(:speech) %>
                     <% else %>
-                    <%=t :speeches %>
+                    <%=t(:speeches) %>
                     <% end %>
                     </em>
                 </span>

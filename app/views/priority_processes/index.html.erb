@@ -1,15 +1,15 @@
 <% if @processes_changed_past_7_days %>
-<h1><%=t :listing_processes_changed_the_past_7_days %></h1>
+<h1><%=t(:listing_processes_changed_the_past_7_days) %></h1>
 <table width="100%">
     <tr>
         <th>
-            <%=t :importance %>
+            <%=t(:importance)%>
         </th>
         <th>
-            <%=t :althingi_process_name %>
+            <%=t(:althingi_process_name)%>
         </th>
         <th>
-            <%=t :althingi_process_presenter %>
+            <%=t(:althingi_process_presenter) %>
         </th>
     </tr>
     <% for current_process in @processes_changed_past_7_days %>
@@ -46,9 +46,9 @@
 	<tr>
 		<td width="50%">
 			<% if @last_comments %>
-			  <h1><%=t :latest_comments %></h1>
+			  <h1><%=t(:latest_comments) %></h1>
 			  <% for comment in @last_comments %>
-			    <b><%=comment.user.login%> <%=t :about_process%> <%=get_comment_process_document_process_link(comment) %> <%=t :says%>:</b> <%=truncate(comment.comment, :length => 142)%> <br>
+			    <b><%=comment.user.login%> <%=t(:about_process)%> <%=get_comment_process_document_process_link(comment) %> <%=t(:says)%>:</b> <%=truncate(comment.comment, :length => 142)%> <br>
 			    <br>
 			  <% end %>
 			<% end %>
@@ -58,9 +58,9 @@
 			<tr>
 				<td width="50%">
 					<% if @latest_votes %>
-					  <h1><%=t :latest_votes %></h1>
+					  <h1><%=t(:latest_votes) %></h1>
 					  <% for vote in @latest_votes %>
-					    <%=vote.document.votes.count%> <%=t :votes_for_this_document%> <%=get_vote_process_document_process_link(vote) %><br>
+					    <%=vote.document.votes.count%> <%=t(:votes_for_this_document)%> <%=get_vote_process_document_process_link(vote) %><br>
 					    <br>
 					  <% end %>
 					<% end %>			
@@ -71,17 +71,17 @@
 	</tr>
 </table>
 
-<h1><%=t :listing_processes %></h1>
+<h1><%=t(:listing_processes) %></h1>
 <table width="100%">
     <tr>
         <th>
-            <%=t :importance %>
+            <%=t(:importance)%>
         </th>
         <th>
-            <%=t :althingi_process_name %>
+            <%=t(:althingi_process_name)%>
         </th>
         <th>
-            <%=t :althingi_process_presenter %>
+            <%=t(:althingi_process_presenter) %>
         </th>
     </tr>
     <% for current_process in @most_important_processes %>
@@ -111,9 +111,9 @@
 	<tr>
 		<td colspan=3>
 			<% if @all_archived %>
-  			  <a href="/processes"><%=t :show_only_current_processes %></a>
+  			  <a href="/processes"><%=t(:show_only_current_processes)%></a>
 			<% else %>
-  			  <a href="/processes?all_archived=1"><%=t :show_all_archived_processes %></a>
+  			  <a href="/processes?all_archived=1"><%=t(:show_all_archived_processes)%></a>
 			<% end %>  
 		</td>
 	</tr>

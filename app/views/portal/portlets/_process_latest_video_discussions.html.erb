@@ -17,9 +17,9 @@
             <p>
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
-                    <%=t :speech %>
+                    <%=t(:speech) %>
                     <% else %>
-                    <%=t :speeches %>
+                    <%=t(:speeches) %>
                     <% end %>
                     </em>
                 </span>

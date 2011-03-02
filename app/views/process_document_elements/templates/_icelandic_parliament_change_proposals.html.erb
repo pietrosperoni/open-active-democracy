@@ -1,16 +1,16 @@
-<a onclick="toggleDiv('change_proposals_panel_for_<%=change_target.sequence_number%>');" title="<%=t :toggle_change_proposals%>" id="participateLinkCursor" class="participateLinkLarger"><%=t :toggle_change_proposals %></a>
+<a onclick="toggleDiv('change_proposals_panel_for_<%=change_target.sequence_number%>');" title="<%=t(:toggle_change_proposals)%>" id="participateLinkCursor" class="participateLinkLarger"><%=t :toggle_change_proposals %></a>
 <br>
 <div id="change_proposals_panel_for_<%=change_target.sequence_number%>" style="<%=open_panel ? "": "display:none;"%>">
-    <h2><%= t :change_proposals %></h2>
+    <h2><%= t(:change_proposals) %></h2>
     <table width="100%">
         <th>
-            <%=t :rating %>
+            <%=t(:rating)%>
         </th>
         <th>
-            <%=t :creation_date %>
+            <%=t(:creation_date)%>
         </th>
         <th>
-            <%=t :author %>
+            <%=t(:author)%>
         </th>
         <% for change_proposal in document.get_all_change_proposals_for_sequence_number(change_target.sequence_number) %>
         <tr>
@@ -27,7 +27,7 @@
 	            </td>
 	            <% else %>
 	            <td>
-	                <%=t :system_import %>
+	                <%=t(:system_import)%>
 	            </td>
 	            <% end %>
             <% else %>
@@ -51,7 +51,7 @@
             <% end %>
             <% if change_proposal.original_version %>
 	            <td>
-	                <%=t :original_version %>
+	                <%=t(:original_version)%>
 	            </td>
             <% else %>
 	            <td>
@@ -59,7 +59,7 @@
             <% end %>
             <% if change_proposal.id == change_target.id %>
 	            <td>
-	                <%=t :selected %>
+	                <%=t(:selected) %>
 	            </td> 
             <% else %>
 	            <td>

@@ -10,7 +10,7 @@
         <% elsif controller_name == "process_documents" and action_name == "show" %>
         <%= render :partial => "process_documents/share_metadata", :locals => {:document=> @document } %>
         <% else %>
-        <title><%=t :main_header %></title>
+        <title><%=t(:main_header) %></title>
         <% end %>
 
   <script type="text/javascript">
@@ -27,15 +27,15 @@
           
           function getSentimentWord(sentiment) {
             if (sentiment==1) {
-                return "<%=t :very_in_support%>";            
+                return "<%=t(:very_in_support)%>";            
               } else if (sentiment==2) {
-                return "<%=t :in_support%>";            
+                return "<%=t(:in_support)%>";            
               } else if (sentiment==3) {
-                return "<%=t :not_sure%>";            
+                return "<%=t(:not_sure)%>";            
               } else if (sentiment==4) {
-                return "<%=t :against%>";        
+                return "<%=t(:against)%>";        
               } else if (sentiment==5) {
-                return "<%=t :very_against%>";
+                return "<%=t(:very_against)%>";
               }          
             };
             function fbs_click(u){

@@ -14,7 +14,7 @@
 		<div id="your_priority" class="form_header">Hver er hugmyndin? <span class="red">* </span> </div>
 			<%= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
 			<br>
-			<%= t :select_categories %><br>
+			<%= t(:select_categories) %><br>
 			<br>
   	  <% Category.order("name").each do |category| %>
   	    <%= radio_button("priority", "category_id", category.id) %>
