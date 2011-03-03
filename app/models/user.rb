@@ -131,6 +131,14 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids  
   
+  def gender
+    'unknown'
+  end
+  
+  def guest?
+    false
+  end
+  
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
     resend_activation if self.has_email? and self.is_pending?

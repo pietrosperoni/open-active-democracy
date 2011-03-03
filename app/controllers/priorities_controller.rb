@@ -1,4 +1,4 @@
-class PrioritiesController < ApplicationController
+class PrioritiesController < Tr8n::BaseController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
                                            :tag, :tag_save, :opposed, :endorsed, :destroy, :new]
@@ -7,6 +7,8 @@ class PrioritiesController < ApplicationController
                                              :opposed_top_points, :endorsed_top_points, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
                                              :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
+
+  layout :get_layout
 
   # GET /priorities
   def index

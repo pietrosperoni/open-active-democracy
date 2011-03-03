@@ -33,7 +33,7 @@
 	<ul id="menu">
 		<% if current_government.is_tags? %>
 		<li class="tab0">
-			<span class="tab_header"><%= link_to "Heim", :controller => "portal" %></span>
+			<span class="tab_header"><%= link_to tr("Home","Menu system"), :controller => "portal" %></span>
 		</li>
 		<li class="tab1">
 			<span class="tab_header"><%= link_to current_government.tags_name.pluralize.titleize, :controller => "issues" %></span>

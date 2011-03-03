@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-
+  include Tr8n::CommonMethods
   include AuthenticatedSystem
   include FaceboxRender
 
@@ -249,7 +249,6 @@ class ApplicationController < ActionController::Base
     include Singleton
     include ActionView::Helpers::JavaScriptHelper
   end  
-  
 end
 
 module FaceboxRender

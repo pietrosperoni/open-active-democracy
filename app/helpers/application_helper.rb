@@ -12,7 +12,10 @@ module ActionView
 end
 
 module ApplicationHelper
-  include WillPaginate::ViewHelpers 
+#  include WillPaginate::ViewHelpers 
+  include Tr8n::HelperMethods
+  include Tr8n::BaseHelper
+  include Wf::HelperMethods
 
   def translate_facet_option(option)
     if option=="Comment"
@@ -204,11 +207,11 @@ module ApplicationHelper
     "#{sprintf("%.1f",asset.rating)}/5.0 #{br ? "<br>" : ""} <small>(#{asset.ratings.size} #{t(:votes_counted)})</small>"
   end
   
-  def will_paginate_with_i18n(collection, options = {}) 
-    will_paginate_without_i18n(collection, options.merge(:previous_label => I18n.t(:prev_t), :next_label => I18n.t(:next_t))) 
-  end 
+#  def will_paginate_with_i18n(collection, options = {}) 
+#    will_paginate_without_i18n(collection, options.merge(:previous_label => I18n.t(:prev_t), :next_label => I18n.t(:next_t))) 
+#  end 
 
-  alias_method_chain :will_paginate, :i18n  
+#  alias_method_chain :will_paginate, :i18n  
 
   def escape_t(text)
     text.gsub("\"","")
