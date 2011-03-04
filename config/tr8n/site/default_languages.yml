@@ -660,7 +660,7 @@
   native_name: "Íslenska"
   google_key: "is"
   facebook_key: ""
-  enabled:  false
+  enabled:  true
 "ig":
   english_name: "Igbo"
   native_name: "Igbo"

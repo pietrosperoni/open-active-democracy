@@ -36,7 +36,7 @@
 			<span class="tab_header"><%= link_to tr("Home","Menu system"), :controller => "portal" %></span>
 		</li>
 		<li class="tab1">
-			<span class="tab_header"><%= link_to current_government.tags_name.pluralize.titleize, :controller => "issues" %></span>
+			<span class="tab_header"><%= link_to tr("{number_of} Categories","Menu system", :number_of=>5), :controller => "issues" %></span>
 		</li>
 		<% end %>
 		<li class="tab2 mega">
