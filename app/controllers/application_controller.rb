@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
   require_dependency "relationship.rb"   
   require_dependency "capital.rb"
 
+  # HACK hardcoded here as otherwise it would not run in Rails 3 production
+  before_filter :init_tr8n
+
 #  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
 
   helper :all # include all helpers, all the time

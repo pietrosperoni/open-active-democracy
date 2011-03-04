@@ -17,7 +17,7 @@
 <% if controller_name == "facebook" %>
   <%= stylesheet_link_tag "fb_invite_hack.css" %>
 <% end %>
-<%=render :partial => "/layouts/html_head" %>
+  <%= tr8n_scripts_tag %>
 </head>
 <body>
 
@@ -27,8 +27,10 @@
 
 <div id="backgroundwrap">
 	<div id="header">
-    <%=render :partial => "/layouts/header" %>
-		<div id="branding" style="height: 52px">
+      <div style="float:right">
+         <%= tr8n_language_selector_tag %>
+      </div>
+     <div id="branding" style="height: 52px">
 		<% if current_partner %>
 		<div id="partner_image">
 			<%= render :partial => "partners/logo" %>
@@ -108,11 +110,10 @@
 
 	</div>
 	<div class="push">
-<%=render :partial =>"/layouts/footer" %>
-		
 	</div>
 </div>
 
+<%= tr8n_language_strip_tag %>    
 <%= render :partial => "shared/footer" %>
 <%= render :partial => "shared/analytics" %>
 <%= render :partial => "shared/facebook_footer" %>

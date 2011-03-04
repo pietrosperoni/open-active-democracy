@@ -1,4 +1,4 @@
-class PrioritiesController < Tr8n::BaseController
+class PrioritiesController < ApplicationController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
                                            :tag, :tag_save, :opposed, :endorsed, :destroy, :new]
