@@ -1,0 +1,3 @@
+<% if @google_translate_enabled_for_locale %>
+  Google translate <INPUT TYPE="checkbox" NAME="enable_google_translate" VALUE="1" <%= session[:enable_google_translate] ? "CHECKED" : "" %> onClick="toggleGoogleTranslate(this)">
+<% end %>

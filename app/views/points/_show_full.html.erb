@@ -28,9 +28,9 @@
 	</div>
 	<div class="point_content">
 	<% if revision %>
-		<%= revision.content_diff %>
+		<%= tg(revision.content_diff) %>
     <% else %>
-		<%= point.content_html %>
+		<%= tg(point.content_html) %>
 	<% end %>
 	</div>
 	<% if point.has_website? %>

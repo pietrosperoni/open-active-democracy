@@ -17,6 +17,10 @@ module ApplicationHelper
   include Tr8n::BaseHelper
   include Wf::HelperMethods
 
+  def tg(text)
+    "<span class=\"to_translate\">#{text}</span>".html_safe
+  end
+
   def translate_facet_option(option)
     if option=="Comment"
       I18n.t(:comments)

@@ -17,7 +17,7 @@
 				<%= link_to t('points.edit.name'), new_point_revision_url(point), :title => t('points.edit.title') %>
 			</span>
 		</div>
-		<p><%=point.content%></p>
+		<p><%=tg(point.content)%></p>
 		<div class="point_qualities">
 			<%= render :partial => "points/button_small", :locals => {:newest_points=>defined?(newest_points) ? true : false, :point => point, :quality => quality} %>
 		</div>

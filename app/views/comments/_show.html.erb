@@ -28,7 +28,7 @@
 		<% end %>		
 				
 		<% if shortentext == 0 %>
-			<div id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div>	
+			<div id="comment_content_<%= comment.id.to_s %>"><%= tg(comment.content_html) %></div>	
 		<% else %>
 			<div class="comment_content_2" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html %></div>
 		<% end %>

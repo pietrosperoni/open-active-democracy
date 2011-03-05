@@ -36,6 +36,8 @@ class ApplicationController < ActionController::Base
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
 
+  before_filter :check_google_translate_setting
+
   layout :get_layout
 
   # See ActionController::RequestForgeryProtection for details
@@ -60,6 +62,20 @@ class ApplicationController < ActionController::Base
       ''
     end
   end  
+  
+  def check_google_translate_setting
+    if params[:gt]
+      if params[:gt]=="1"
+        Rails.logger.debug("session[:enable_google_translate] = true")
+        session[:enable_google_translate] = true
+      else
+        Rails.logger.debug("session[:enable_google_translate] = nil")
+        session[:enable_google_translate] = nil
+      end
+    end
+    
+    @google_translate_enabled_for_locale = tr8n_current_google_language_code
+  end
   
   def get_layout
     return false if not is_robot? and not current_government
