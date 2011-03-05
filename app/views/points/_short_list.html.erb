@@ -4,7 +4,7 @@
 		<% quality = @qualities.detect {|e| e.point_id == point.id } %>
 	<% end %>				
 	<div class="point_item">
-		<h3 class="point_item_hacky"><%=numbering ? "#{i+1}. " : ""%><%= link_to_unless_current h(point.name), point %></h3>
+		<h3 class="point_item_hacky"><%=numbering ? "#{i+1}. " : ""%><%= link_to_unless_current tg(h(point.name)), point %></h3>
 		<div class="point_byline">
 			<%= t('revisions.byline', :author_sentence => point.author_sentence) %> <%= t('revisions.added', :time_ago => time_ago(point.created_at)) %>
 			<span class="point_edit">
