@@ -252,8 +252,6 @@ fr:
         title: "Green is the number of endorsements for this priority each day, and red is the oppositions."
     user:
       name: "%{user_name} Agenda"
-      obama:
-        title: "Comparer comment %{user_name} priorités (green) ont évoluées dans le tableau comparé à %{official_user_name} (blue) dans les 30 derniers jours.Le plus de personne qui soutienne les priorités pour %{user_name} agenda à une haute priorité,le plus haut elle monte. "
       title: "Suivre le mouvement de%{user_name} priorités dans les classements pour les 30 derniers jours.Le plus de personne qui soutienne les priorités  %{user_name} agenda comme une priorité haute ,le plue haut elle monte."
   check_uncheck: "Selectionné/Désectionné tout"
   color_schemes:
@@ -752,8 +750,6 @@ fr:
       name: "Discussions active"
       title: "Ce que tout les participants discutent sur  %{government_name}"
     name: Nouveaux
-    obama:
-      title: "Ce que %{official_user_name} est en train de faire pour  %{government_name}"
     points:
       name: "Derniers points"
       title: "Derniere activité dans le  %{briefing_name} pour %{government_name}"
@@ -794,8 +790,6 @@ fr:
       title: "M&A activity on priorities you created"
     your_priorities_created_discussions:
       title: "Discussions sur les prioritées que vous avez créer "
-    your_priorities_created_obama:
-      title: "Ce que %{official_user_name} fait sur les priorités que vous avez créer "
     your_priorities_created_points:
       title: "%{briefing_name} activité sur les priorités que vous avez crée "
     your_priority_activities:
@@ -808,8 +802,6 @@ fr:
       title: "Acquisitions pour voter sur"
     your_priority_discussions:
       title: "Discussions sur vos priorités"
-    your_priority_obama:
-      title: "Ce que %{official_user_name} fait sur vos priorités"
     your_priority_points:
       title: "Points de discussion et documents sur les priorités "
   next_t: Prochain
@@ -1393,15 +1385,6 @@ fr:
       title: "Ajouter un %{tags_name}"
     newest:
       title: "Nouvelles %{tag_name} priorités"
-    not_obama:
-      intro: "These are our members' %{tag_name} priorities NOT on %{official_user_name} agenda"
-      title: "%{tag_name} priorittés pas sur l'agenda de  %{official_user_name} "
-    obama:
-      intro: "ceci est l'agenda %{official_user_name} indiqué comme %{tag_name} par tout les membres"
-      title: "%{official_user_name} %{tag_name} priorités"
-    obama_opposed:
-      intro: "These are our members' %{tag_name} priorities that %{official_user_name} opposes"
-      title: "%{tag_name} priorities %{official_user_name} opposes"
     points:
       title: "%{tag_name} points de discussion"
     random:
