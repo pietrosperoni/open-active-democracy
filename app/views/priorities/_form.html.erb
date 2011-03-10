@@ -14,7 +14,7 @@
 		<div id="your_priority" class="form_header">Hver er hugmyndin? <span class="red">* </span> </div>
 			<%= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
 			<br>
-			<%= t(:select_categories) %><br>
+			<%= tr("translation missing: en.select_categories", "view/priorities/_form") %><br>
 			<br>
   	  <% Category.order("name").each do |category| %>
   	    <%= radio_button("priority", "category_id", category.id) %>
@@ -58,9 +58,9 @@
 						<div class="tiny_info"  id="br_hack"><br>Skrifaðu flokka og notaðu kommu á milli (flokkur, annar, þriðji)</div>
 
 							<div  class="form_header">Bæta við rökum: <span class="red">* </span> </div>
-<!--<%= I18n.t('blurb_point_new')%>-->
+<!--<%= tr("translation missing: en.blurb_point_new", "view/priorities/_form")%>-->
 
-  <%= error_messages_for Point, :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') if @point %>
+  <%= error_messages_for Point, :header_message => tr("Please review", "view/priorities/_form"), :message => tr("We need a change to your talking point", "view/priorities/_form") if @point %>
 	<div class="field">
 		<div class="field_box">
  			<%= text_field_tag "point[name]", "", :size => 50, :maxlength => 60 %>
@@ -83,7 +83,7 @@
 		<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður hugmynd eða ekki</div>
 
 	<div class="field">
-	    <div class="field_label form_header"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
+	    <div class="field_label form_header"><%= tr("Explain your talking point.", "view/priorities/_form") %> <span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%></div>
 		<div class="field_box">
 	    <%= text_area_tag "point[content]", "", :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
 		</div>
@@ -92,12 +92,12 @@
 	</div>				
 	
 	<div class="field">
-		<div class="field_label form_header"><%= t('points.new.website.label') %></div>
+		<div class="field_label form_header"><%= tr("Include a website source link", "view/priorities/_form") %></div>
 		<div class="field_box">
 			<%= text_field_tag "point[website]", "", :size => 50 %>	
 		</div>
 		<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir hugmynd þitt.</div>
 	</div>
 		
-	<%= submit_tag t('priorities.new.submit'), :class => "suggest_button" %>	
+	<%= submit_tag tr("Make a priority", "view/priorities/_form"), :class => "suggest_button" %>	
 </form>

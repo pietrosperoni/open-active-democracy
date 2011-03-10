@@ -1,4 +1,4 @@
-<% cache(["latest_video_discussion_medium",I18n.locale,@priority.id], :expires_in => 15.minutes) do %>
+<% cache(["latest_video_discussion_medium",locale,@priority.id], :expires_in => 15.minutes) do %>
 <% @latest_speech_discussions = ProcessSpeechMasterVideo.get_all(@priority) %>
 <% if @latest_speech_discussions.length > 0 %>
 <%= javascript_include_tag 'jquery.mousewheel' %>
@@ -18,9 +18,9 @@
             <img src="<%=process_discussion.process_speech_videos.get_random_published.get_playlist_image_url("small")%>" />
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
-                    <%=t(:speech) %>
+                    <%=tr("translation missing: en.speech", "view/process_speech_master_videos/_latest_video_discussions_medium") %>
                     <% else %>
-                    <%=t(:speeches) %>
+                    <%=tr("speeches", "view/process_speech_master_videos/_latest_video_discussions_medium") %>
                     <% end %>
                     </em>
                 </span>
@@ -34,9 +34,9 @@
     <tr align="left">
         <td align="left" style="padding-left:70px">
             <% form_tag("/process_speech_videos/search?priority_id=#{@priority.id}") do -%>
-            <b><%=label_tag t(:search_by_person) %></b>
+            <b><%=label_tag tr("Search by member of Althingi", "view/process_speech_master_videos/_latest_video_discussions_medium") %></b>
             <%=text_field_tag 'search_query' %>
-            <%= submit_tag t(:search) %>
+            <%= submit_tag tr("Search", "view/process_speech_master_videos/_latest_video_discussions_medium") %>
             <% end %>
         </td>
     </tr>

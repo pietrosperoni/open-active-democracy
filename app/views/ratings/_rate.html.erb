@@ -5,7 +5,7 @@
 <div id="star-ratings-block-<%= "#{asset.id}_#{asset.class.name}"  %>" class="star-ratings-block">  
 <ul class='star-rating'>
     <li class='current-rating' style='width:<%= (asset.rating * 30).to_i -%>px;'>
-        <%=t(:currently) %><%= number_with_precision(asset.rating, :precision=>1) %>/5
+        <%=tr("translation missing: en.currently", "view/ratings/_rate") %><%= number_with_precision(asset.rating, :precision=>1) %>/5
     </li>
     <% 1.upto(5) do |x| -%>
       <li>
@@ -15,13 +15,13 @@
                     'data-disable-with' => "",
                     'data-loader-name' => "circle",               
                     :remote=>true,
-                    :class => "#{@convert[x-1]}-stars", :name => "#{pluralize(x,t(:star))} #{t(:out_of_5)}",
-                    :title => t(:rate_this_a)+"#{x}"+t(:out_of_5) %>
+                    :class => "#{@convert[x-1]}-stars", :name => "#{pluralize(x,tr("translation missing: en.star", "view/ratings/_rate"))} #{tr("out of 5", "view/ratings/_rate")}",
+                    :title => tr("rate this", "view/ratings/_rate")+"#{x}"+t(:out_of_5) %>
       </li>
     <% end -%>
 </ul>
 <br/>
-<%= number_with_precision(asset.rating, :precision=>1) %>/5.0 (<%= asset.ratings.size %> <%=t(:votes_counted) %>)
+<%= number_with_precision(asset.rating, :precision=>1) %>/5.0 (<%= asset.ratings.size %> <%=tr("atkvæði", "view/ratings/_rate") %>)
 </div>
 </td>
 </tr>

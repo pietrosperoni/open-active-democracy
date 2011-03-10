@@ -174,7 +174,7 @@ class Document < ActiveRecord::Base
 
   def name_with_type
     return name unless is_down?
-    "[#{I18n.t(:against)}] " + name
+    "[#{tr("Against", "model/document")}] " + name
   end
 
   def text

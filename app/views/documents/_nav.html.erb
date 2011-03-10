@@ -4,33 +4,33 @@
 	<ul id="priority_menu">
 		<li class="tab1">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.full_text'), document_url(@document) %>
+				<%= link_to tr("Full text", "view/documents/_nav"), document_url(@document) %>
 			</span>
 		</li>
 		<li class="tab2">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.edit'), new_document_revision_url(@document) %>
+				<%= link_to tr("Edit", "view/documents/_nav"), new_document_revision_url(@document) %>
 			</span>
 		</li>
 		<li class="tab3">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.revisions', :count => @document.revisions_count), document_revision_url(@document,@document.revision_id) %>
+				<%= link_to tr("{count} revisions", "view/documents/_nav", :count => @document.revisions_count), document_revision_url(@document,@document.revision_id) %>
 			</span>
 		</li>	
 		<li class="tab4">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.discussions', :count => @document.discussions_count), discussions_document_url(@document) %>
+				<%= link_to tr("{count} discussions", "view/documents/_nav", :count => @document.discussions_count), discussions_document_url(@document) %>
 			</span>
 		</li>	
 		<li class="tab5">
 			<span class="tab_header">
-				<%= link_to t('menu.briefing.all_activity'), activity_document_url(@document) %>
+				<%= link_to tr("All activity", "view/documents/_nav"), activity_document_url(@document) %>
 			</span>
 		</li>	
 		<% if logged_in? and (@document.user_id == current_user.id or current_user.is_admin?) %>
 			<li class="tab6">
 				<span class="tab_header">
-					<%= link_to t('menu.briefing.delete.name'), document_path(@document), :method => :delete, :confirm => t('menu.briefing.delete.confirm') %>
+					<%= link_to tr("Delete", "view/documents/_nav"), document_path(@document), :method => :delete, :confirm => tr("Are you sure you want to delete this?", "view/documents/_nav") %>
 				</span>
 			</li>
 		<% end %>					

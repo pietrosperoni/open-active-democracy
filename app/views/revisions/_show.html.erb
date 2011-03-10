@@ -1,12 +1,12 @@
 <div class="point_name">
 <% if revision.is_down? %>
-	<span class="opposed"><%= t('oppose.ed')%></span>
+	<span class="opposed"><%= tr("opposed", "view/revisions/_show")%></span>
 <% end %>
 <%= link_to_unless_current h(point.name), point %>
 </div>
 <% if point.has_other_priority? %>
 	<div class="point_other">
-	<%= t('points.supporting', :priority_name => link_to(point.other_priority.name, point.other_priority)) %>
+	<%= tr("Supporting {priority_name}", "view/revisions/_show", :priority_name => link_to(point.other_priority.name, point.other_priority)) %>
 	</div>
 <% end %>	
 <div class="point_content">
@@ -14,6 +14,6 @@
 </div>
 <% if revision.has_website? %>
 	<div class="point_source">
-	<%= t('points.source')%> <a href="<%= revision.website_link %>"><%= truncate(revision.website_link,70) %></a>
+	<%= tr("Source:", "view/revisions/_show")%> <a href="<%= revision.website_link %>"><%= truncate(revision.website_link,70) %></a>
 	</div>
 <% end %>		

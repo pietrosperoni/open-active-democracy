@@ -1,15 +1,15 @@
 <%= render :partial => "priorities/header" %>
 <%= render :partial => "priorities/nav" %>
 <p>
-<%= I18n.t('blurb_ad_new')%>
+<%= tr("translation missing: en.blurb_ad_new", "view/ads/new")%>
 <p>
 <%= form_for(@ad, :url => priority_ads_path(@priority)) do |f| %>
 
-	<%= f.error_messages :header_message => t('ads.new.errors.header_message') %>
+	<%= f.error_messages :header_message => tr("There was a problem creating your ad", "view/ads/new") %>
 
 	<div class="field">
 		<div class="field_label">
-			<%= t('ads.new.content.label')%>
+			<%= tr("Your message to go underneath the link to the priority:", "view/ads/new")%>
 		</div>
 		<div class="field_box">
     		<%= f.text_field :content, :size => 50, :maxlength => 90, :id => "somethingelse" %>
@@ -19,11 +19,11 @@
 	<div class="field">
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr><td>
-		    <%= t('ads.new.showto')%>
+		    <%= tr("Show to", "view/ads/new")%>
 			</td><td valign="top" style="padding-left: 3px;">
 		    <%= f.text_field :show_ads_count, :size => 3 %>
 			</td><td style="padding-left: 3px;">
-			<%= t('ads.new.members')%>
+			<%= tr("members and spend", "view/ads/new")%>
 			</td><td valign="top" style="padding-left: 3px;">
 		    <%= f.text_field :cost, :size => 1 %>
 			</td><td>
@@ -34,10 +34,10 @@
 	</table>
 	</div>
 	<div class="field">
-		<%= t('ads.new.price')%>
+		<%= tr("At this price, your ad will be", "view/ads/new")%>
 		<span id="ad_ranking"><%= render :partial => "ads/ranking", :locals => {:ad => @ad} %></span>
 	</div>
-	<%= f.submit t('ads.new.submit'), :id => "submit", :class => "yellow_button" %>
+	<%= f.submit tr("Save and publish your Ad", "view/ads/new"), :id => "submit", :class => "yellow_button" %>
 <% end %>
 <%= observe_form 'new_ad',  :frequency => 0.5, :update => 'ad_show', :url => preview_priority_ads_url(@priority) %>
 <p>

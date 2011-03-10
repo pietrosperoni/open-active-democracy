@@ -19,7 +19,7 @@ class ChangesController < ApplicationController
   # GET /priorities/1/changes/1.xml
   def show
     @change = @priority.changes.find(params[:id])
-    @page_title = t('changes.show.title', :priority_name => @priority.name)
+    @page_title = tr("Proposal to acquire {priority_name}", "controller/changes", :priority_name => @priority.name)
     for a in @change.activities.find(:all, :conditions => "type in ('ActivityCapitalAcquisitionProposal','ActivityPriorityMergeProposal')")
       @activity = a
     end
@@ -39,7 +39,7 @@ class ChangesController < ApplicationController
   
   def activities
     @change = @priority.changes.find(params[:id])
-    @page_title = t('changes.activities.title', :priority_name => @priority.name)
+    @page_title = tr("Activity on the {priority_name} acquisition", "controller/changes", :priority_name => @priority.name)
     for a in @change.activities.find(:all, :conditions => "type in ('ActivityCapitalAcquisitionProposal','ActivityPriorityMergeProposal')")
       @activity = a
     end
@@ -60,7 +60,7 @@ class ChangesController < ApplicationController
   def new
     @change = @priority.changes.new
     if @priority.has_change?
-      flash[:error] = t('changes.new.already_proposed', :priority_name => @priority.change.new_priority.name)
+      flash[:error] = tr("There is already an acquisition proposal from {priority_name}", "controller/changes", :priority_name => @priority.change.new_priority.name)
       return
     end
     respond_to do |format|
@@ -83,7 +83,7 @@ class ChangesController < ApplicationController
     @change.user = current_user
     respond_to do |format|
       if @change.save
-        flash[:notice] = t('changes.new.success', :priority_name => @change.new_priority.name, :admin_name => current_government.admin_name)
+        flash[:notice] = tr("Successfully proposed an acquisition by {priority_name}. {admin_name} will review and schedule a vote.", "controller/changes", :priority_name => @change.new_priority.name, :admin_name => current_government.admin_name)
         format.html { redirect_to(priority_change_path(@priority,@change)) }
         format.js { redirect_from_facebox(priority_change_path(@priority,@change)) }
       else
@@ -105,7 +105,7 @@ class ChangesController < ApplicationController
   def start
     @change = @priority.changes.find(params[:id])
     @change.send_later(:send!)
-    flash[:notice] = t('changes.start')
+    flash[:notice] = tr("Voting is starting, it may take a few minutes depending on how many endorsers and opposers need ballots.", "controller/changes")
     redirect_to priority_change_path(@priority,@change)
     return
   end
@@ -114,7 +114,7 @@ class ChangesController < ApplicationController
   def approve
     @change = @priority.changes.find(params[:id])
     @change.send_later(:insta_approve!)
-    flash[:notice] = t('changes.approve', :currency_name => current_government.currency_name.downcase, :user_name => @change.user.name)
+    flash[:notice] = tr("Approving proposal and awarding {currency_name} to {user_name}. It may take a few minutes depending on how many endorsements and oppositions need to be adjusted.", "controller/changes", :currency_name => current_government.currency_name.downcase, :user_name => @change.user.name)
     redirect_to @change.new_priority
     return
   end
@@ -123,7 +123,7 @@ class ChangesController < ApplicationController
   def stop
     @change = @priority.changes.find(params[:id])
     @change.dont_send!
-    flash[:notice] = t('changes.stop', :currency_name => current_government.currency_name.downcase, :user_name => @change.user.name)
+    flash[:notice] = tr("Deleting this proposal, and refunding {currency_name} to {user_name}", "controller/changes", :currency_name => current_government.currency_name.downcase, :user_name => @change.user.name)
     ActivityPriorityAcquisitionProposalDeleted.create(:change => @change, :priority => @priority, :user => current_user)    
     redirect_to priority_change_path(@priority,@change)
     return
@@ -133,13 +133,13 @@ class ChangesController < ApplicationController
   def flip
     @change = @priority.changes.find(params[:id])
     if @change.new_priority.has_change?
-      flash[:error] = t('changes.new.already_proposed', :priority_name => @priority.change.new_priority.name)
+      flash[:error] = tr("There is already an acquisition proposal from {priority_name}", "controller/changes", :priority_name => @priority.change.new_priority.name)
       redirect_to @change.new_priority
       return
     end
     @change = @change.flip!
     @change.save
-    flash[:notice] = t('changes.flip')
+    flash[:notice] = tr("Flipping proposal", "controller/changes")
     redirect_to priority_change_path(@change.priority,@change)
     return
   end  
@@ -156,7 +156,7 @@ class ChangesController < ApplicationController
 
     respond_to do |format|
       if @change.update_attributes(params[:change])
-        flash[:notice] = t('changes.saved')
+        flash[:notice] = tr("Saved changes to acquisition", "controller/changes")
         format.html { redirect_to(priority_changes_path(@change)) }
       else
         format.html { render :action => "edit" }
@@ -168,7 +168,7 @@ class ChangesController < ApplicationController
   # DELETE /priorities/1/changes/1.xml
   def destroy
     @change = @priority.changes_with_deleted.find(params[:id])
-    flash[:notice] = t('changes.destroy')
+    flash[:notice] = tr("Removed acquisition", "controller/changes")
     @change.delete!
     respond_to do |format|
       format.html { redirect_to(changes_url) }

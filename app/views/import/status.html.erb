@@ -1,4 +1,4 @@
-<%= t('import.please_wait')%>
+<%= tr("Please wait while we import your contacts.<br/>It might take 10 seconds to start, but then you should see the number completed start to rise.", "view/import/status")%>
 <p>
 <%= image_tag "bert-loader.gif" %>
 
@@ -6,7 +6,7 @@
 <span id="number_completed">
 	<%= current_user.imported_contacts_count %>
 </span>
-<%= t('import.completed') %>
+<%= tr("completed so far", "view/import/status") %>
 </span>
 
 <%= periodically_call_remote :url => { :action => "status"}, :frequency => 5 %>

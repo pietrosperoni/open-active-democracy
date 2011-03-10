@@ -1,7 +1,7 @@
 <p><% if endorsement and endorsement.is_active? %></p>
 <p>
-<%= t('endorsements.position.yours', :position => endorsement.position)%> <span class="tag_button">
-  <%= link_to t('endorsements.change'), edit_endorsement_url(endorsement, :region => "priority_left"),
+<%= tr("Your {position} priority.", "view/endorsements/_position", :position => endorsement.position)%> <span class="tag_button">
+  <%= link_to tr("change", "view/endorsements/_position"), edit_endorsement_url(endorsement, :region => "priority_left"),
               :remote=>true,
               'data-disable-with' => "",
               'data-loader-name' => "circle",

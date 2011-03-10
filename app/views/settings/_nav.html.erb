@@ -3,28 +3,28 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.settings.account'), settings_url %>
+					<%= link_to tr("Your account", "view/settings/_nav"), settings_url %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.settings.picture'), picture_settings_url %>
+					<%= link_to tr("Picture", "view/settings/_nav"), picture_settings_url %>
 				</span>
 			</li>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to t('menu.settings.bio'), new_user_profile_url(current_user) %>
+					<%= link_to tr("Bio", "view/settings/_nav"), new_user_profile_url(current_user) %>
 				</span>
 			</li>			
 			<li class="tab5">
 				<span class="tab_header">
-					<%= link_to t('menu.settings.emails'), signups_settings_url %>
+					<%= link_to tr("Email notifications", "view/settings/_nav"), signups_settings_url %>
 				</span>
 			</li>
 			<% if not current_user.has_facebook? %>
 			<li class="tab6">
 				<span class="tab_header">
-					<%= link_to t('menu.settings.password'), edit_password_url(current_user) %>
+					<%= link_to tr("Change password", "view/settings/_nav"), edit_password_url(current_user) %>
 				</span>
 			</li>
 			<% end %>

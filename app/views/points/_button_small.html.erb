@@ -6,23 +6,23 @@
 <% if quality %>
 	<% if quality.is_helpful? %>
 		<span class="tag_button tag_button_hack" id="point_helpful_<%= point.id.to_s %>">
-			<%= t('helpful.caps')%>  
+			<%= tr("HELPFUL", "view/points/_button_small")%>  
 			<%= link_to "&nbsp;x".html_safe, unquality_point_path(point, :region => "point_inline"), 
                   :method=>:post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "circle",
-			            :class => "quality_remove", :title => t('helpful.delete.title') %>
+			            :class => "quality_remove", :title => tr("This is no longer helpful", "view/points/_button_small") %>
 		</span>
 	<% else %>
 		<span class="tag_button tag_button_hack" id="point_helpful_<%= point.id.to_s %>">
-			<%= t('unhelpful.caps')%> 
+			<%= tr("NOT HELPFUL", "view/points/_button_small")%> 
 			<%= link_to "&nbsp;x".html_safe, unquality_point_path(point, :region => "point_inline"), 
                   :method=>:post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "circle",
-			            :class => "quality_remove", :title => t('unhelpful.delete.title') %>
+			            :class => "quality_remove", :title => tr("This is no longer unhelpful", "view/points/_button_small") %>
 		</span>	
 	<% end %>
 <% end %>
@@ -30,24 +30,24 @@
 <%= render :partial => "points/helpful_count", :locals => {:point => point} %>
 
 <% if not quality and logged_in? %>
-	<br><%= t('helpful.question')%>
+	<br><%= tr("Is this helpful?", "view/points/_button_small")%>
 	<span class="tag_button tag_button_hack" id="priority_add_<%= point.id.to_s %>">
-		<%= link_to t('doit'), quality_point_path(point, :region => "point_inline", :value => true),
+		<%= link_to tr("YES", "view/points/_button_small"), quality_point_path(point, :region => "point_inline", :value => true),
                 :method=>:post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_helpful)),
                 'data-loader-name' => "horizontal_small",
-		            :class => "quality_helpful_link", :title => t('helpful.title') %></span>
+		            :class => "quality_helpful_link", :title => tr("This is helpful", "view/points/_button_small") %></span>
 		
-	<span class="or"><%= t('or') %></span>
+	<span class="or"><%= tr("OR", "view/points/_button_small") %></span>
 
 	<span class="tag_button tag_button_hack" id="priority_add_<%= point.id.to_s %>">
-		<%= link_to t('dont'), quality_point_path(point, :region => "point_inline", :value => false),
+		<%= link_to tr("NO", "view/points/_button_small"), quality_point_path(point, :region => "point_inline", :value => false),
                 :method=>:post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_unhelpful)),
                 'data-loader-name' => "horizontal_small",
-		            :class => "quality_unhelpful_link", :title => t('unhelpful.title') %>
+		            :class => "quality_unhelpful_link", :title => tr("This is not helpful", "view/points/_button_small") %>
 	</span>	
 <% end %>
 </div>

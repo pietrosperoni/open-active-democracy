@@ -1,16 +1,16 @@
 <p>
 	<%=h @document.priority_process.priority.external_info_2 %> <%=h @document.priority_process.priority.external_info_3 %>
 <% if @document.priority_process.stage_sequence_number > 0 %> | 
-   <%=@document.priority_process.stage_sequence_number%> <%=t(:stage_sequence_discussion)%> | 
+   <%=@document.priority_process.stage_sequence_number%> <%=tr("Discussion Stage", "view/process_documents/templates")%> | 
    <%=@document.external_type %>
 <% end %>
 
 </p>
 <br>
-<a href="http://www.facebook.com/share.php?u=http://<%=request.host.downcase != 'localhost' ? request.host.downcase : 'beint.lydraedi.is'%>/process_documents/<%=@document.id%>" onclick="return fbs_click('http://<%=request.host.downcase != 'localhost' ? request.host.downcase : 'beint.lydraedi.is'%>/process_documents/<%=@document.id%>')" target="_blank" class="fb_share_link"><%=t(:share_on_facebook)%></a>
+<a href="http://www.facebook.com/share.php?u=http://<%=request.host.downcase != 'localhost' ? request.host.downcase : 'beint.lydraedi.is'%>/process_documents/<%=@document.id%>" onclick="return fbs_click('http://<%=request.host.downcase != 'localhost' ? request.host.downcase : 'beint.lydraedi.is'%>/process_documents/<%=@document.id%>')" target="_blank" class="fb_share_link"><%=tr("Share on Facebook", "view/process_documents/templates")%></a>
 <br><br>
 <p>
-    <b><%=t(:process_document_elements) %>:</b>
+    <b><%=tr("ProcessDocument elements", "view/process_documents/templates") %>:</b>
 	<% cut_off_top = true %>
     <% wait_for_frumvarp = false %>
 	<% wait_for_frumvarp_disabled = false %>

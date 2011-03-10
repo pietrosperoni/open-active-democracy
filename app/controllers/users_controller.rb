@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         @user.send_welcome
         redirect_back_or_default('/')
       else
-        flash[:notice]=I18n.t(:email_not_accepted)
+        flash[:notice]=tr("translation missing: en.email_not_accepted", "controller/users")
         redirect_to "/set_email"
       end
     end
@@ -95,16 +95,16 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
-    @page_title = t('users.edit.title', :user_name => @user.name)
+    @page_title = tr("Changing settings for {user_name}", "controller/users", :user_name => @user.name)
   end
   
   def update
     @user = User.find(params[:id])
-    @page_title = t('users.edit.title', :user_name => @user.name)
+    @page_title = tr("Changing settings for {user_name}", "controller/users", :user_name => @user.name)
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:notice] = t('users.edit.saved', :user_name => @user.name)
-        @page_title = t('users.edit.title', :user_name => @user.name)
+        flash[:notice] = tr("Saved settings for {user_name}", "controller/users", :user_name => @user.name)
+        @page_title = tr("Changing settings for {user_name}", "controller/users", :user_name => @user.name)
         format.html { redirect_to @user }
         format.xml  { head :ok }
       else
@@ -117,7 +117,7 @@ class UsersController < ApplicationController
   def signups
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
-    @page_title = t('users.signups.title', :user_name => @user.name)
+    @page_title = tr("Email notifications for {user_name}", "controller/users", :user_name => @user.name)
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_notifications", :format => "rss", :c => @user.rss_code)
     @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
   end
@@ -127,7 +127,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
-    @page_title = t('users.show.title', :user_name => @user.name, :government_name => current_government.name)
+    @page_title = tr("{user_name} at {government_name}", "controller/users", :user_name => @user.name, :government_name => current_government.name)
     @priorities = @user.endorsements.active.by_position.find(:all, :include => :priority, :limit => 5)
     @endorsements = nil
     get_following
@@ -145,7 +145,7 @@ class UsersController < ApplicationController
   def priorities
     @user = User.find(params[:id])    
     redirect_to '/' and return if check_for_suspension
-    @page_title = t('users.priorities.title', :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} priorities at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
     @priorities = @user.endorsements.active.by_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]  
     @endorsements = nil
     get_following
@@ -163,7 +163,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.activities.title', :user_name => @user.name, :government_name => current_government.name)
+    @page_title = tr("What {user_name} is doing at {government_name}", "controller/users", :user_name => @user.name, :government_name => current_government.name)
     @activities = @user.activities.active.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html # show.html.erb
@@ -176,7 +176,7 @@ class UsersController < ApplicationController
   def comments
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
-    @page_title = t('users.comments.title', :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} comments at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
     @comments = @user.comments.published.by_recently_created.find(:all, :include => :activity).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.rss { render :template => "rss/comments" }
@@ -189,7 +189,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.discussions.title', :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} discussions at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
     @activities = @user.activities.active.discussions.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :template => "users/activities" }
@@ -202,7 +202,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.ads.title', :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} ads at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
     @ads = @user.ads.active_first.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html # show.html.erb
@@ -215,7 +215,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.capital.title', :user_name => @user.name.possessive, :currency_name => current_government.currency_name.downcase, :government_name => current_government.name)
+    @page_title = tr("{user_name} {currency_name} at {government_name}", "controller/users", :user_name => @user.name.possessive, :currency_name => current_government.currency_name.downcase, :government_name => current_government.name)
     @activities = @user.activities.active.capital.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html {
@@ -230,7 +230,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.points.title', :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} talking points at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
     @points = @user.points.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     if logged_in? and @points.any? # pull all their qualities on the points shown
       @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
@@ -246,7 +246,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.documents.title', :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} documents at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
     @documents = @user.documents.published.by_recently_updated.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -257,7 +257,7 @@ class UsersController < ApplicationController
 
   def stratml
     @user = User.find(params[:id])
-    @page_title = t('users.priorities.title', :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} priorities at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
     @tags = @user.issues(500)
     respond_to do |format|
       format.xml # show.html.erb
@@ -294,7 +294,7 @@ class UsersController < ApplicationController
       @user.signups << Signup.create(:partner => current_partner, :is_optin => params[:signup][:is_optin], :ip_address => request.remote_ip)
     end
       
-    flash[:notice] = t('users.new.success', :government_name => current_government.name)
+    flash[:notice] = tr("Welcome to {government_name}", "controller/users", :government_name => current_government.name)
     if session[:query] 
       @send_to_url = "/?q=" + session[:query]
       session[:query] = nil
@@ -313,7 +313,7 @@ class UsersController < ApplicationController
     if logged_in? && !current_user.active?
       current_user.activate!
     end
-    flash[:notice] = t('users.activate.success')
+    flash[:notice] = tr("Thanks for verifying your email address", "controller/users")
     redirect_back_or_default('/')
   end
   
@@ -321,14 +321,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     @user.resend_activation
-    flash[:notice] = t('users.activate.resend', :email => @user.email)
+    flash[:notice] = tr("Resent verification email to {email}", "controller/users", :email => @user.email)
     redirect_back_or_default(url_for(@user))
   end  
 
   def reset_password
     @user = User.find(params[:id])
     @user.reset_password
-    flash[:notice] = t('passwords.new.sent', :email => @user.email)
+    flash[:notice] = tr("Sent a new temporary password to {email}", "controller/users", :email => @user.email)
     redirect_to @user
   end
   
@@ -377,7 +377,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.followers.title', :user_name => @user.name, :count => @user.followers_count)      
+    @page_title = tr("{count} people are following {user_name}", "controller/users", :user_name => @user.name, :count => @user.followers_count)      
     @followings = @user.followers.up.paginate :page => @page, :per_page => 50
     respond_to do |format|
       format.html
@@ -391,7 +391,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following    
-    @page_title = t('users.ignorers.title', :user_name => @user.name, :count => @user.ignorers_count)      
+    @page_title = tr("{count} people are ignoring {user_name}", "controller/users", :user_name => @user.name, :count => @user.ignorers_count)      
     @followings = @user.followers.down.paginate :page => @page, :per_page => 50
     respond_to do |format|
       format.html { render :action => "followers" }
@@ -405,7 +405,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = t('users.following.title', :user_name => @user.name, :count => @user.followings_count)      
+    @page_title = tr("{user_name} is following {count} people", "controller/users", :user_name => @user.name, :count => @user.followings_count)      
     @followings = @user.followings.up.paginate :page => @page, :per_page => 50
     respond_to do |format|
       format.html
@@ -419,7 +419,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following    
-    @page_title = t('users.ignoring.title', :user_name => @user.name, :count => @user.ignorings_count)      
+    @page_title = tr("{user_name} is ignoring {count} people", "controller/users", :user_name => @user.name, :count => @user.ignorings_count)      
     @followings = @user.followings.down.paginate :page => @page, :per_page => 50
     respond_to do |format|
       format.html { render :action => "following" }
@@ -474,7 +474,7 @@ class UsersController < ApplicationController
   def unsuspend
     @user = User.find(params[:id])
     @user.unsuspend!
-    flash[:notice] = t('users.reinstated', :user_name => @user.name)
+    flash[:notice] = tr("{user_name} has been reinstated", "controller/users", :user_name => @user.name)
     redirect_to request.referer
   end
 
@@ -498,7 +498,7 @@ class UsersController < ApplicationController
   def impersonate
     @user = User.find(params[:id])
     self.current_user = @user
-    flash[:notice] = t('admin.impersonate', :user_name => @user.name)
+    flash[:notice] = tr("You are now logged in as {user_name}", "controller/users", :user_name => @user.name)
     redirect_to @user
     return
   end
@@ -508,7 +508,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.is_admin = true
     @user.save(:validate => false)
-    flash[:notice] = t('users.make_admin', :user_name => @user.name)
+    flash[:notice] = tr("{user_name} is now an Administrator", "controller/users", :user_name => @user.name)
     redirect_to @user
   end
   
@@ -524,14 +524,14 @@ class UsersController < ApplicationController
     
     def check_for_suspension
       if @user.status == 'suspended'
-        flash[:error] = t('users.suspended', :user_name => @user.name)
+        flash[:error] = tr("{user_name} is suspended", "controller/users", :user_name => @user.name)
         if logged_in? and current_user.is_admin?
         else
           return true
         end
       end
       if @user.status == 'deleted'
-        flash[:error] = t('users.deleted')
+        flash[:error] = tr("That user deleted their account", "controller/users")
         return true
       end
     end

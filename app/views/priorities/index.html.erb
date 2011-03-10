@@ -15,21 +15,21 @@
 			
 			<% if tag.top_priority %>
 			<div class="home_issue_priority" id="priority_<%= tag.top_priority_id %>">
-			<%= t('priorities.top.short')%> <span class="home_issue_priority_name"><%= link_to tag.top_priority.name, tag.top_priority %></span><br/>
+			<%= tr("Top:", "view/priorities/index")%> <span class="home_issue_priority_name"><%= link_to tag.top_priority.name, tag.top_priority %></span><br/>
 			<%= render :partial => "priorities/action_show", :locals => {:priority => tag.top_priority, :endorsement => (@endorsements.detect {|e| e.priority_id == tag.top_priority_id } if @endorsements) }%>
 			</div>
 			<% end %>
 			
 			<% if tag.controversial_priority %>
 				<div class="home_issue_priority" id="priority_<%= tag.controversial_priority_id %>">
-				<%= t('priorities.controversial.short')%> <span class="home_issue_priority_name"><%= link_to tag.controversial_priority.name, tag.controversial_priority %></span><br/>
+				<%= tr("Controversial:", "view/priorities/index")%> <span class="home_issue_priority_name"><%= link_to tag.controversial_priority.name, tag.controversial_priority %></span><br/>
 				<%= render :partial => "priorities/action_show", :locals => {:priority => tag.controversial_priority, :endorsement => (@endorsements.detect {|e| e.priority_id == tag.controversial_priority_id } if @endorsements)}%>		
 				</div>
 			<% end %>
 	
 			<% if tag.rising_priority %>
 				<div class="home_issue_priority" id="priority_<%= tag.rising_priority_id %>">
-				<%= t('priorities.rising.short')%> <span class="home_issue_priority_name"><%= link_to tag.rising_priority.name, tag.rising_priority %></span><br/>
+				<%= tr("Rising:", "view/priorities/index")%> <span class="home_issue_priority_name"><%= link_to tag.rising_priority.name, tag.rising_priority %></span><br/>
 			<%= render :partial => "priorities/action_show", :locals => {:priority => tag.rising_priority, :endorsement => (@endorsements.detect {|e| e.priority_id == tag.rising_priority_id } if @endorsements)}%>		
 				</div>
 			<% end %>
@@ -55,7 +55,7 @@
 		<% @finished = Priority.finished.by_most_recent_status_change.all(:limit => 5) %>
 		<% if @finished.any? %>
 			<p>
-			<div class="heading"><%= t('priorities.finished.heading')%></div>
+			<div class="heading"><%= tr("Recently finished", "view/priorities/index")%></div>
 			<% for priority in @finished %>
 			<div class="priority_finished">
 				<%= link_to_unless_current h(priority.name), priority, :class => "priority_name_link" %><br/>
@@ -63,12 +63,12 @@
 				<span class="priority_finished_time"><%= time_ago(priority.status_changed_at) %></span>
 			</div>
 			<% end %>
-			<%= t('priorities.finished.see_all', :url => finished_priorities_url)%> &rarr;
+			<%= tr("See all <a href='{url}'>finished priorities</a>", "view/priorities/index", :url => finished_priorities_url)%> &rarr;
 		<% end %>
 	</td>
 </tr>
 </table>
 
 <% if @issues.current_page == 1 and @issues.size > 0 %>
-	<p><%= I18n.t("blurb_overview_more")%>
+	<p><%= tr("translation missing: en.blurb_overview_more", "view/priorities/index")%>
 <% end %>

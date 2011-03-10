@@ -11,7 +11,7 @@ class Revision < ActiveRecord::Base
   has_many :notifications, :as => :notifiable, :dependent => :destroy
       
   # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  validates_length_of :content, :maximum => 516, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
+  validates_length_of :content, :maximum => 516, :allow_blank => true, :allow_nil => true, :too_long => tr("has a maximum of 500 characters", "model/revision")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :draft, :column => :status
@@ -148,11 +148,11 @@ class Revision < ActiveRecord::Base
   
   def text
     s = point.name
-    s += " [#{I18n.t(:in_support)}]" if is_down?
-    s += " [#{I18n.t(:neutral)}]" if is_neutral?    
-    s += "\r\n#{I18n.t(:in_support_of)} " + point.other_priority.name if point.has_other_priority?
+    s += " [#{tr("In support", "model/revision")}]" if is_down?
+    s += " [#{tr("translation missing: en.neutral", "model/revision")}]" if is_neutral?    
+    s += "\r\n#{tr("translation missing: en.in_support_of", "model/revision")} " + point.other_priority.name if point.has_other_priority?
     s += "\r\n" + content
-    s += "\r\n#{I18n.t(:originated_at)}: " + website_link if has_website?
+    s += "\r\n#{tr("translation missing: en.originated_at", "model/revision")}: " + website_link if has_website?
     return s
   end  
   

@@ -3,7 +3,7 @@ class InboxController < ApplicationController
   before_filter :login_required
   
   def index
-    @page_title = t('inbox.index')
+    @page_title = tr("Your private messages", "controller/inbox")
     @messages = Message.sent.by_recently_sent.find(:all, :conditions => ["recipient_id = ?",current_user.id], :include => [:sender, :recipient]).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -13,7 +13,7 @@ class InboxController < ApplicationController
   end
   
   def sent
-    @page_title =  t('inbox.sent')
+    @page_title =  tr("Private messages you sent", "controller/inbox")
     @messages = Message.sent.by_recently_sent.find(:all, :conditions => ["sender_id = ?",current_user.id]).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -23,7 +23,7 @@ class InboxController < ApplicationController
   end
   
   def notifications
-    @page_title =  t('inbox.notifications')
+    @page_title =  tr("Your notifications", "controller/inbox")
     @notifications = current_user.received_notifications.active.by_recently_created.find(:all, :include => [:notifiable]).paginate :page => params[:page], :per_page => params[:per_page]
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_notifications", :format => "rss", :c => current_user.rss_code)
     respond_to do |format|

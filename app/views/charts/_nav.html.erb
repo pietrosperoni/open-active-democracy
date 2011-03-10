@@ -3,17 +3,17 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.charts.active_issues', :tags_name => current_government.tags_name.pluralize.downcase), :controller => "charts", :action => "issues" %>
+					<%= link_to tr("Most active {tags_name}", "view/charts/_nav", :tags_name => current_government.tags_name.pluralize.downcase), :controller => "charts", :action => "issues" %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.charts.rising'), :controller => "charts", :action => "gainers_24hr" %>
+					<%= link_to tr("Rising agendas", "view/charts/_nav"), :controller => "charts", :action => "gainers_24hr" %>
 				</span>
 			</li>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to t('menu.charts.falling'), :controller => "charts", :action => "losers_24hr" %>
+					<%= link_to tr("Falling agendas", "view/charts/_nav"), :controller => "charts", :action => "losers_24hr" %>
 				</span>
 			</li>
 		</ul>
@@ -29,19 +29,19 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('24hr'), :action => "gainers_24hr" %>
+						<%= link_to tr("24 hours", "view/charts/_nav"), :action => "gainers_24hr" %>
 					</span>
 				</li>			
 	
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('7days'), :action => "gainers_7days" %>
+						<%= link_to tr("Last 7 days", "view/charts/_nav"), :action => "gainers_7days" %>
 					</span>
 				</li>	
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('30days'), :action => "gainers_30days" %>
+						<%= link_to tr("Last 30 days", "view/charts/_nav"), :action => "gainers_30days" %>
 					</span>
 				</li>	
 			
@@ -61,19 +61,19 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('24hr'), :action => "losers_24hr" %>
+						<%= link_to tr("24 hours", "view/charts/_nav"), :action => "losers_24hr" %>
 					</span>
 				</li>			
 	
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('7days'), :action => "losers_7days" %>
+						<%= link_to tr("Last 7 days", "view/charts/_nav"), :action => "losers_7days" %>
 					</span>
 				</li>	
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('30days'), :action => "losers_30days" %>
+						<%= link_to tr("Last 30 days", "view/charts/_nav"), :action => "losers_30days" %>
 					</span>
 				</li>	
 			

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<%= I18n.t("blurb_header") %>
+<%= tr("translation missing: en.blurb_header", "view/layouts/wh") %>
 
 <div id="backgroundwrap" align="center">
 
@@ -35,7 +35,7 @@
 </td><td valign="top" align="left" width="284" style="padding-left: 10px;">
 	
 	<% if logged_in? and current_user.warnings_count > 0 %>
-		<div id="warning"><%= t('warnings.name', :count => current_user.warnings_count) %></div>
+		<div id="warning"><%= tr("{count} warnings", "view/layouts/wh", :count => current_user.warnings_count) %></div>
 	<% end %>	
 	
 	<div id="top_right_column">
@@ -62,7 +62,7 @@
 		
 	<% else %>
 
-		<div id="intro"><%= I18n.t("blurb_intro") %></div>
+		<div id="intro"><%= tr("translation missing: en.blurb_intro", "view/layouts/wh") %></div>
 		<% if current_government.short_name == 'wh2' %>
 			<%= render :partial => "shared/buzz" %>
 		<% end %>

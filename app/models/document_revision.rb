@@ -130,8 +130,8 @@ class DocumentRevision < ActiveRecord::Base
 
   def text
     s = document.name
-    s += " [#{I18n.t(:against)}]" if is_down?
-    s += " [#{I18n.t(:neutral)}]" if is_neutral? and has_priority?
+    s += " [#{tr("Against", "model/revision")}]" if is_down?
+    s += " [#{tr("translation missing: en.neutral", "model/revision")}]" if is_neutral? and has_priority?
     s += "\r\n" + content
     return s
   end  

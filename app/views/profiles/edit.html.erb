@@ -1,18 +1,18 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= t('profiles.new.intro', :url => url_for(@user))%>
+<%= tr("Your bio will go at the top of <a href='{url}'>your profile page</a>, above your top 5 priorities.", "view/profiles/edit", :url => url_for(@user))%>
 <%= form_for @profile, :url => user_profile_path(@user) do |f| %>
-	<%= f.error_messages :header_message => t('profiles.new.errors.header_message') %>			
+	<%= f.error_messages :header_message => tr("Oops, there was a problem", "view/profiles/edit") %>			
 	<div class="field">
 		<div class="field_label">
-			<%= t('profiles.new.content.label')%> (<span id="bioContentDown"></span> <%= t('characters_left')%>)						
+			<%= tr("Briefly, tell us about yourself.", "view/profiles/edit")%> (<span id="bioContentDown"></span> <%= tr("characters left", "view/profiles/edit")%>)						
 		</div>
 		<div class="field_box">
 		    <%= f.text_area :bio, :size => "60x5", :id => "bioContent", :button => 'submit', :maxLength => 500 %>
 		</div>
 	</div>
-    <%= f.submit t('profiles.new.submit'), :class => "yellow_button" %>
+    <%= f.submit tr("Save your bio", "view/profiles/edit"), :class => "yellow_button" %>
 <% end %>
 
 <p>
-<%= I18n.t('blurb_textile')%>
+<%= tr("translation missing: en.blurb_textile", "view/profiles/edit")%>

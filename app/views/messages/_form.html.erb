@@ -5,7 +5,7 @@
 		<div style="padding-top: 3px;">
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td valign="top">
-					<%= f.submit t('messages.new.submit'), :id => "message-form-submit", :class => "grey_button" %>
+					<%= f.submit tr("Send private message", "view/messages/_form"), :id => "message-form-submit", :class => "grey_button" %>
 				</td>
 				<td valign="top">
 					<div id="message_error_<%= @user.id.to_s %>" class="message_error"></div>

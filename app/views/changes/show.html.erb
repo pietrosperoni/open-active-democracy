@@ -16,7 +16,7 @@
 			<p>
 			<% if @activity %>	
 				<table border="0" cellspacing="0" cellpadding="0" width="100%">
-				<tr><td><div class="heading"><%= t('changes.discussion.name') %></div></td>
+				<tr><td><div class="heading"><%= tr("Discussion on this acquisition", "view/changes/show") %></div></td>
 				</tr>
 				</table>
 				<div id="activities">
@@ -27,7 +27,7 @@
 
 			<% if @activities.any? %>
 				<table border="0" cellspacing="0" cellpadding="0" width="100%">
-				<tr><td><div class="heading"><%= t('changes.activities.name') %></div></td>
+				<tr><td><div class="heading"><%= tr("Activity on this acquisition", "view/changes/show") %></div></td>
 					<td>
 						<%= will_paginate(@activities) %>
 					</td>

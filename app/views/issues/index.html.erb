@@ -1,4 +1,4 @@
-<%= I18n.t("blurb_tags_intro") %>
+<%= tr("translation missing: en.blurb_tags_intro", "view/issues/index") %>
 
 <% for issue in @issues %>
 	<div class="priority_listing">
@@ -6,18 +6,18 @@
 		<a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
 		</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
 		<div class="priority_action">
-			<a href="/issues/<%= issue.slug %>"><%= t('menu.briefing.priorities', :count => issue.priorities_count) %></a>
+			<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
 			<% if issue.points_count > 0 %>	
-			&middot; <a href="/issues/<%= issue.slug %>/points"><%= t('menu.briefing.points', :count => issue.points_count) %></a>
+			&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} talking points", "view/issues/index", :count => issue.points_count) %></a>
 			<% end %>
 			<% if issue.documents_count > 0 %>
-			&middot; <a href="/issues/<%= issue.slug %>/documents"><%= t('menu.briefing.documents', :count => issue.documents_count) %></a>
+			&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/issues/index", :count => issue.documents_count) %></a>
 			<% end %>
 			<% if issue.discussions_count > 0 %>
-			&middot; <a href="/issues/<%= issue.slug %>/discussions"><%= t('comments.discussions.name', :count => issue.discussions_count) %></a>
+			&middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/issues/index", :count => issue.discussions_count) %></a>
 			<% end %>
 			<% if logged_in? and current_user.is_admin? %>
-				&nbsp; <span class="tag_button"><%= link_to t('points.edit.name'), edit_tag_url(issue) %></span>
+				&nbsp; <span class="tag_button"><%= link_to tr("Edit", "view/issues/index"), edit_tag_url(issue) %></span>
 			<% end %>
 		</div>
 	</div>

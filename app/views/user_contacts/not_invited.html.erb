@@ -1,16 +1,16 @@
-<div id="hp_intro"><%= t('contacts.index.title', :government_name => current_government.name)%></div>
+<div id="hp_intro"><%= tr("Find people you know at {government_name}", "view/user_contacts/not_invited", :government_name => current_government.name)%></div>
 
 <%= render :partial => "import_nav", :locals => {:user => current_user} %>		
 
 <% if @contacts.any? %>
-	<p><%= t('contacts.not_invited.intro', :contacts_count => @contacts.size, :government_name => current_government.name)%>
+	<p><%= tr("{contacts_count} of your contacts are <i>not</i> {government_name} members.<br/>Checkbox the people you'd like to invite and click the big yellow button.", "view/user_contacts/not_invited", :contacts_count => @contacts.size, :government_name => current_government.name)%>
 	<% form_tag :loading => "Element.show('status');",
               :remote=>true,
               'data-disable-with' =>  escape_t(t(:ajax_sending)),
 	            :url => multiple_user_contacts_url, :method => :put do %>				
 		
 		<% if @contacts.size > 1 %>
-			<%= link_to_function(t('check_uncheck'),"toggleAll('select');return false;") %>
+			<%= link_to_function(tr("Check/Uncheck All", "view/user_contacts/not_invited"),"toggleAll('select');return false;") %>
 		<% end %>
 		<% if @contacts.size > 6 %>
 			<div id="contacts">
@@ -25,17 +25,17 @@
 		<% end %>					
 		</div>
 		<% if current_user.login != current_user.real_name %>
-			<p><%= t('contacts.new.is_from_realname.label')%><br/>
+			<p><%= tr("Should I reference your real name, or your site name?", "view/user_contacts/not_invited")%><br/>
 			<%= radio_button_tag :is_from_realname, false %> <%= current_user.login %>					
 		    <%= radio_button_tag :is_from_realname, true %> <%= current_user.real_name %>	
 		<% end %>					
 		<p>
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td>	
-				<%= submit_tag t('contacts.not_invited.submit', :government_name => current_government.name), :class => "yellow_button" %>
+				<%= submit_tag tr("Invited checked people to join {government_name}", "view/user_contacts/not_invited", :government_name => current_government.name), :class => "yellow_button" %>
 				</td><td valign="top">
 					<div id="status" style="display: none;">
-						<%= t('processing')%>
+						<%= tr("Processing...", "view/user_contacts/not_invited")%>
 					</div>
 				</td>
 			</tr>

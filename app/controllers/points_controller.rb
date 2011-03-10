@@ -4,7 +4,7 @@ class PointsController < ApplicationController
   before_filter :admin_required, :only => [:edit, :update]
  
   def index
-    @page_title = t('points.yours.title', :government_name => current_government.name)
+    @page_title = tr("Your talking points", "controller/points", :government_name => current_government.name)
     @points = Point.filtered.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
     get_qualities
     respond_to do |format|
@@ -15,7 +15,7 @@ class PointsController < ApplicationController
   end
   
   def newest
-    @page_title = t('points.newest.title', :government_name => current_government.name)
+    @page_title = tr("Newest talking points", "controller/points", :government_name => current_government.name)
     @points = Point.filtered.published.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     @rss_url = url_for :only_path => false, :format => "rss"
     get_qualities
@@ -28,7 +28,7 @@ class PointsController < ApplicationController
   end  
   
   def for_and_against
-  	@page_title = t('points.for_and_against.title', :government_name => current_government.name)
+  	@page_title = tr("translation missing: en.points.for_and_against.title", "controller/points", :government_name => current_government.name)
     @priority=Priority.find(params[:id])
   	@points_new_up = @priority.points.published.by_recently_created.up_value.five
   	@points_new_down = @priority.points.published.by_recently_created.down_value.five
@@ -62,14 +62,14 @@ class PointsController < ApplicationController
   		@yesno = "Nei"
   	end
   	
-  	@page_title = t('points.for_and_against.title', :government_name => current_government.name)
+  	@page_title = tr("translation missing: en.points.for_and_against.title", "controller/points", :government_name => current_government.name)
   	respond_to do |format|
   		format.html { render :action => "all_points" }
   	end
   end
   
   def your_priorities
-    @page_title = t('points.your_priorities.title', :government_name => current_government.name)
+    @page_title = tr("Talking points on your priorities", "controller/points", :government_name => current_government.name)
     if current_user.endorsements_count > 0    
       if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
         @points = Point.published.by_recently_created.paginate :conditions => ["(points.priority_id in (?) and points.endorser_helpful_count > 0) or (points.priority_id in (?) and points.opposer_helpful_count > 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
@@ -90,7 +90,7 @@ class PointsController < ApplicationController
   end 
  
   def revised
-    @page_title = t('points.revised.title', :government_name => current_government.name)
+    @page_title = tr("Recently revised talking points", "controller/points", :government_name => current_government.name)
     @revisions = Revision.published.by_recently_created.find(:all, :include => :point, :conditions => "points.revisions_count > 1").paginate :page => params[:page], :per_page => params[:per_page]
     @qualities = nil
     if logged_in? and @revisions.any? # pull all their qualities on the points shown
@@ -107,7 +107,7 @@ class PointsController < ApplicationController
   def show
     @point = Point.find(params[:id])
     if @point.is_deleted?
-      flash[:error] = t('points.deleted')
+      flash[:error] = tr("That talking point was deleted", "controller/points")
       redirect_to @point.priority
       return
     end    
@@ -138,7 +138,7 @@ class PointsController < ApplicationController
   def new
     load_endorsement
     @point = @priority.points.new
-    @page_title = t('points.new.title', :priority_name => @priority.name)
+    @page_title = tr("Add a talking point to {priority_name}", "controller/points", :priority_name => @priority.name)
     @point.value = @endorsement.value if @endorsement
     respond_to do |format|
       format.html # new.html.erb
@@ -161,7 +161,7 @@ class PointsController < ApplicationController
       if @saved
         if Revision.create_from_point(@point.id,request)
           session[:goal] = 'point'
-          flash[:notice] = t('points.new.success')
+          flash[:notice] = tr("Thanks for contributing your talking point", "controller/points")
           if current_facebook_user
             #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
           end          
@@ -180,7 +180,7 @@ class PointsController < ApplicationController
     @priority = @point.priority
     respond_to do |format|
       if @point.update_attributes(params[:point])
-        flash[:notice] = t('points.update.success', :point_name => @point.name)
+        flash[:notice] = tr("Saved {point_name}", "controller/points", :point_name => @point.name)
         format.html { redirect_to(@point) }
       else
         format.html { render :action => "edit" }
@@ -191,7 +191,7 @@ class PointsController < ApplicationController
   # GET /points/1/activity
   def activity
     @point = Point.find(params[:id])
-    @page_title = t('points.activity.title', :point_name => @point.name)
+    @page_title = tr("Activity regarding {point_name}", "controller/points", :point_name => @point.name)
     @priority = @point.priority
     if logged_in? 
       @quality = @point.point_qualities.find_by_user_id(current_user.id) 
@@ -209,7 +209,7 @@ class PointsController < ApplicationController
   # GET /points/1/discussions
   def discussions
     @point = Point.find(params[:id])
-    @page_title = t('points.discussions.title', :point_name => @point.name)
+    @page_title = tr("Discussions on {point_name}", "controller/points", :point_name => @point.name)
     @priority = @point.priority
     if logged_in? 
       @quality = @point.point_qualities.find_by_user_id(current_user.id) 
@@ -297,7 +297,7 @@ class PointsController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_question_info_#{@question.id}", render(:partial => "questions/flagged", :locals => {:question => @question})
           else
-            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
+            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("translation missing: en.thanks_for_bringing_this_to_our_attention", "controller/points")}</div>"
           end
         end        
       }
@@ -311,7 +311,7 @@ class PointsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
+          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("translation missing: en.the_content_has_been_deleted_and_a_warning_sent", "controller/points")}</div>"
         end        
       }
     end    
@@ -333,7 +333,7 @@ class PointsController < ApplicationController
   def destroy
     @point = Point.find(params[:id])
     if @point.user_id != current_user.id and not current_user.is_admin?
-      flash[:error] = t('point.destroy.access_denied')
+      flash[:error] = tr("translation missing: en.point.destroy.access_denied", "controller/points")
       redirect_to(@point)
       return
     end

@@ -2,10 +2,10 @@
 <div id="priority_<%= @priority.id %>_intro" class="intro">
 	<% if @priority.is_official_endorsed? %> 
 		<%= current_government.official_user.name %>
-		<span class="endorsed"><%= t('endorse.plural')%></span>
+		<span class="endorsed"><%= tr("endorses", "view/priorities/_header")%></span>
 	<% elsif @priority.is_official_opposed? %> 
 		<%= current_government.official_user.name %>
-		<span class="opposed"><%= t('oppose.plural')%></span>
+		<span class="opposed"><%= tr("opposes", "view/priorities/_header")%></span>
 	<% else %>
 		<%= h(current_government.prompt) %>
 	<% end %>

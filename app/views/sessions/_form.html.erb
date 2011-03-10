@@ -2,7 +2,7 @@
               'data-disable-with' => escape_t(t(:ajax_sending)), :url => session_path do |f| -%>
 	<div class="field">
 		<div class="field_label">
-			<%= t('sessions.new.email.label')%>
+			<%= tr("Email address", "view/sessions/_form")%>
 		</div>
 		<div class="field_box">
 			<%= text_field_tag :email %>
@@ -11,11 +11,11 @@
 	
 	<div class="field">
 		<div class="field_label">
-			<%= t('sessions.new.password.label')%>
+			<%= tr("Password", "view/sessions/_form")%>
 		</div>
 		<div class="field_box">
 			<%= password_field_tag :password %>
 		</div>
 	</div>	
-	<%= submit_tag t('sessions.new.submit'), :class => "yellow_button" %>
+	<%= submit_tag tr("Sign in", "view/sessions/_form"), :class => "yellow_button" %>
 <% end -%>

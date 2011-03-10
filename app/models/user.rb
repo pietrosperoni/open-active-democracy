@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   has_many :following_discussions, :dependent => :destroy
   has_many :following_discussion_activities, :through => :following_discussions, :source => :activity
     
-  validates_presence_of     :login, :message => I18n.t('users.new.validation.login')
+  validates_presence_of     :login, :message => tr("Please specify a name to be identified as on the site.", "model/user")
   validates_length_of       :login, :within => 3..40
   validates_uniqueness_of   :login, :case_sensitive => false    
   

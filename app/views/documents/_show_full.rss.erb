@@ -1,10 +1,10 @@
 <% if document.priority %>
 	<% if document.is_up? %>
-		<%= t('document.intro.endorsed', :priority_name => link_to(document.priority.name, document.priority))%>
+		<%= tr("Document in support of {priority_name}:", "view/documents/_show_full", :priority_name => link_to(document.priority.name, document.priority))%>
 	<% elsif document.is_down? %>
-		<%= t('document.intro.opposed', :priority_name => link_to(document.priority.name, document.priority))%>	
+		<%= tr("Document in <span class='opposed'>opposition</span> to {priority_name}:", "view/documents/_show_full", :priority_name => link_to(document.priority.name, document.priority))%>	
 	<% else %>
-		<%= t('document.intro.neutral', :priority_name => link_to(document.priority.name, document.priority))%>
+		<%= tr("Document about {priority_name}:", "view/documents/_show_full", :priority_name => link_to(document.priority.name, document.priority))%>
 	<% end %>
 <% end %>
 

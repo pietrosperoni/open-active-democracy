@@ -1,7 +1,7 @@
 <%= render :partial => "header" %>
 <p>
 <% if @ads.empty? %>
-	<%= t('ads.empty.user', :user_name => @user.name)%>
+	<%= tr("{user_name} hasn't purchased any ads yet.", "view/users/ads", :user_name => @user.name)%>
 <% else %>
 
 	<% shown_active = false %>
@@ -10,11 +10,11 @@
 		
 		<% if ad.status == 'active' and not shown_active %>
 		<% shown_active = true %>
-		<div class="heading"><%= t('ads.current')%></div>
+		<div class="heading"><%= tr("Currently running ads", "view/users/ads")%></div>
 		<% elsif ad.status != 'active' and not shown_past %>
 		<p>
 		<% shown_past = true %>
-		<div class="heading"><%= t('ads.past')%></div>
+		<div class="heading"><%= tr("Past ads", "view/users/ads")%></div>
 		<% end %>
 		
 		<%= render :partial => "ads/show_inline", :locals => {:ad => ad}%>

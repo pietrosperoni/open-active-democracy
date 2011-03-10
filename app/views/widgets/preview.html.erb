@@ -1,7 +1,7 @@
 <div id="widget_code">
-	<%= t('widgets.new.code.label')%><br/>
+	<%= tr("Copy and paste this code into the HTML on your website", "view/widgets/preview")%><br/>
 	<textarea onFocus="this.select()" onMouseUp="return false;" rows="2" cols="50"><%= h(@widget.javascript_code) %></textarea>
 </div>
 <p>
-<h2><%= t('widgets.preview.label')%></h2>	
+<h2><%= tr("It will look like this, except with your site's font and colors:", "view/widgets/preview")%></h2>	
 <iframe src="<%= url_for :action => "preview_iframe", :url => @widget.javascript_url %>" id="widget_show" frameborder="0" height="400" width="500"></iframe>

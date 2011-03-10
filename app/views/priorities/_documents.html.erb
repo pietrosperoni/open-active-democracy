@@ -5,19 +5,19 @@
 	<table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr><td><div class="heading">
 		<% if document_value == 0 %> 
-			<%= t('document.title') %>
+			<%= tr("Documents", "view/priorities/_documents") %>
 		<% elsif document_value == 1 %>
-			<%= t('document.helpful.endorsers') %>
+			<%= tr("Documents helpful to endorsers", "view/priorities/_documents") %>
 		<% elsif document_value == -1 %>
-			<%= t('document.helpful.opposers') %>
+			<%= tr("Documents helpful to opposers", "view/priorities/_documents") %>
 		<% elsif document_value == 2 %>
-			<%= t('document.helpful.undeclared') %>
+			<%= tr("Documents helpful to undeclared", "view/priorities/_documents") %>
 		<% end %>
 		</div>
 		</td>
 		<td align="right">
 			<div class="heading_link">
-			<%= link_to t('menu.briefing.add_document.name'), new_priority_document_path(@priority) %>
+			<%= link_to tr("Add a document", "view/priorities/_documents"), new_priority_document_path(@priority) %>
 			</div>
 		</td>
 	</tr>

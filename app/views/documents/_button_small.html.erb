@@ -3,23 +3,23 @@
 
 	<% if quality.is_helpful? %>
 		<span class="tag_button" id="document_helpful_<%= document.id.to_s %>">
-			<%= t('helpful.caps')%> 
+			<%= tr("HELPFUL", "view/documents/_button_small")%> 
 			<%= link_to "&nbsp;x".html_safe, unquality_document_path(document, :region => "document_inline"), 
                   :method => :post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "horizontal_small",
- 			            :class => "quality_remove", :title => t('helpful.delete.title') %>
+ 			            :class => "quality_remove", :title => tr("This is no longer helpful", "view/documents/_button_small") %>
 		</span>
 	<% else %>
 		<span class="tag_button" id="document_helpful_<%= document.id.to_s %>">
-			<%= t('unhelpful.caps')%>
+			<%= tr("NOT HELPFUL", "view/documents/_button_small")%>
 			<%= link_to "&nbsp;x".safe_html, unquality_document_path(document, :region => "document_inline"),
                   :method => :post,
                   :remote=>true,
                   'data-disable-with' => "",
                   'data-loader-name' => "circle",
-  			          :class => "quality_remove", :title => t('unhelpful.delete.title') %>
+  			          :class => "quality_remove", :title => tr("This is no longer unhelpful", "view/documents/_button_small") %>
 		</span>	
 	<% end %>
 
@@ -28,28 +28,28 @@
 <%= render :partial => "points/helpful_count", :locals => {:point => document} %>
 
 <% if document.discussions_count > 0 %>
-	<%= link_to t('comments.discussions.name', :count => document.discussions_count), document %>.
+	<%= link_to tr("{count} discussions", "view/documents/_button_small", :count => document.discussions_count), document %>.
 <% end %>
 
 <% if not quality and logged_in? %>
-	<%= t('helpful.question')%>
+	<%= tr("Is this helpful?", "view/documents/_button_small")%>
 	<span class="tag_button" id="priority_add_<%= document.id.to_s %>">
-		<%= link_to t('doit'), quality_document_path(document, :region => "document_inline", :value => 1), 
+		<%= link_to tr("YES", "view/documents/_button_small"), quality_document_path(document, :region => "document_inline", :value => 1), 
                 :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_helpful)),
                 'data-loader-name' => "horizontal_small",
-		            :class => "quality_helpful_link", :title => t('helpful.title') %></span>
+		            :class => "quality_helpful_link", :title => tr("This is helpful", "view/documents/_button_small") %></span>
 		
-	<span class="or"><%= t('or') %></span>
+	<span class="or"><%= tr("OR", "view/documents/_button_small") %></span>
 
 	<span class="tag_button" id="priority_add_<%= document.id.to_s %>">
-		<%= link_to t('dont'), quality_document_path(document, :region => "document_inline", :value => 0),
+		<%= link_to tr("NO", "view/documents/_button_small"), quality_document_path(document, :region => "document_inline", :value => 0),
                 :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_unhelpful)),
                 'data-loader-name' => "horizontal_small",
-		            :class => "quality_unhelpful_link", :title => t('unhelpful.title') %>		
+		            :class => "quality_unhelpful_link", :title => tr("This is not helpful", "view/documents/_button_small") %>		
 	</span>	
 <% end %>
 </div>

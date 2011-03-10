@@ -1,6 +1,6 @@
 <div id="login">
 
-	<%= raw t('sessions.new.intro', :signup_url => signup_url, :government_name => current_government.name)%>
+	<%= raw tr("<b><a href='{signup_url}'>Sign up</a></b> or <a href='#' id='login_link'>Sign in with {government_name}</a>.", "view/shared/_login", :signup_url => signup_url, :government_name => current_government.name)%>
 	<div id="login_form">
 		<p>
 	<%= form_for :session, :remote=>true, 
@@ -8,17 +8,17 @@
  	             :url => session_path(:region => "inline") do |f| -%>
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td class="email">
-				<input type="text" name="email" size="15" id="login_email"> <%= t('sessions.new.email.label')%>
+				<input type="text" name="email" size="15" id="login_email"> <%= tr("Email address", "view/shared/_login")%>
 			</td></tr><tr><td class="password">
-				<input type="password" name="password" size="8" id="login_password"> <%= t('sessions.new.password.label')%>
+				<input type="password" name="password" size="8" id="login_password"> <%= tr("Password", "view/shared/_login")%>
 			</td></tr><tr>
 			<td class="submit">
-				<%= submit_tag t('sessions.new.submit'), :class => "yellow_button" %>
+				<%= submit_tag tr("Sign in", "view/shared/_login"), :class => "yellow_button" %>
 			</td>
 			</tr>
 		</table>
 		<div id="login_message"></div>
-		<%= link_to t('sessions.new.forgot'), new_password_path %>	
+		<%= link_to tr("I forgot my password", "view/shared/_login"), new_password_path %>	
 	<% end -%>
 	</div>
 

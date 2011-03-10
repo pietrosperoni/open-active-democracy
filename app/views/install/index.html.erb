@@ -12,7 +12,7 @@
 </head>
 <body>
 <%= flash_div :warning, :notice, :error %>
-<h1><%= t('install.new.heading')%></h1>
+<h1><%= tr("Welcome to NationBuilder!", "view/install/index")%></h1>
 
 <table border="0" cellspacing="0" cellpadding="0">
 	
@@ -32,7 +32,7 @@
 
 					<div class="field">
 						<div class="field_label">
-							<%= t('government.settings.name.label')%>
+							<%= tr("Name of Nation", "view/install/index")%>
 						</div>
 
 						<div class="field_box">
@@ -42,7 +42,7 @@
 	
 					<div class="field">
 						<div class="field_label">
-							<%= t('government.settings.target.label')%>
+							<%= tr("What are you running?", "view/install/index")%>
 						</div>
 						<div class="field_box">
 				  		<%= f.text_field :target, :size => 40, :maxlength => 30 %>
@@ -58,7 +58,7 @@
 			
 					<div class="field">
 						<div class="field_label">
-							<%= t('government.settings.admin.label')%>
+							<%= tr("Administrator Name", "view/install/index")%>
 						</div>
 						<div class="field_box">
 						<%= f.text_field :admin_name, :size => 40, :maxlength => 60 %>
@@ -67,7 +67,7 @@
 
 					<div class="field">
 						<div class="field_label">
-							<%= t('government.settings.admin_email.label')%>
+							<%= tr("Administrator's public email address", "view/install/index")%>
 						</div>
 						<div class="field_box">
 						<%= f.text_field :admin_email, :size => 40, :maxlength => 100 %>
@@ -76,7 +76,7 @@
 			
 				</td></tr>
 			</table>
-		    <%= f.submit t('government.settings.submit'), :class => "yellow_button" %>
+		    <%= f.submit tr("Save Nation Settings", "view/install/index"), :class => "yellow_button" %>
 		<% end %>
 
 	</td>

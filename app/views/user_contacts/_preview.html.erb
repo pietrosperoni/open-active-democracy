@@ -1,7 +1,7 @@
-<h2><%= t('contacts.new.preview.heading')%></h2>
+<h2><%= tr("Here's what the email will look like", "view/user_contacts/_preview")%></h2>
 <p>
-<%= t('contacts.new.preview.from')%> <%= current_government.admin_name %> &lt;<%= current_government.admin_email %>&gt;<br/>
-<%= t('contacts.new.preview.to')%> <span class="highlight">Their Name &lt;theiremail@address.com&gt;</span><br/>
-<%= t('contacts.new.preview.subject')%> <%= EmailTemplate.fetch_subject_liquid("invitation").render({"government" => current_government, "user" => current_user, "sender_name" => t('contacts.new.preview.from_name'), "to_name" => t('contacts.new.preview.to_name'), "to_email" => t('contacts.new.preview.to_email')}, :filters => [LiquidFilters]) %>
+<%= tr("From:", "view/user_contacts/_preview")%> <%= current_government.admin_name %> &lt;<%= current_government.admin_email %>&gt;<br/>
+<%= tr("To:", "view/user_contacts/_preview")%> <span class="highlight">Their Name &lt;theiremail@address.com&gt;</span><br/>
+<%= tr("Subject:", "view/user_contacts/_preview")%> <%= EmailTemplate.fetch_subject_liquid("invitation").render({"government" => current_government, "user" => current_user, "sender_name" => tr("YOUR NAME", "view/user_contacts/_preview"), "to_name" => tr("THEIR NAME", "view/user_contacts/_preview"), "to_email" => tr("THEIR EMAIL", "view/user_contacts/_preview")}, :filters => [LiquidFilters]) %>
 
 <%= simple_format(h(EmailTemplate.fetch_liquid("invitation").render({"government" => current_government, "user" => current_user, "sender_name" => t('contacts.new.preview.from_name'), "to_name" => t('contacts.new.preview.to_name'), "to_email" => t('contacts.new.preview.to_email')}, :filters => [LiquidFilters]))) %>

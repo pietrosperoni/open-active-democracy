@@ -1,7 +1,7 @@
 <% if quality %>
 	<% if quality.is_helpful? %>
 		<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
-			<%= t('helpful.caps')%>
+			<%= tr("HELPFUL", "view/points/_button")%>
 			<span class="big_x">
 			<%= link_to "X", unquality_point_path(point, :region => "point_detail"),
                   :method => :post,
@@ -9,12 +9,12 @@
                   'data-disable-with' => "",
                   'data-loader-name' => "circle",
 			            :class => "priority_remove_link",
-			            :title => t('helpful.delete.title') %>		
+			            :title => tr("This is no longer helpful", "view/points/_button") %>		
 			</span>
 		</div>			
 	<% else %>
 	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
-		<%= t('unhelpful.caps')%>
+		<%= tr("NOT HELPFUL", "view/points/_button")%>
 		<span class="big_x">
 		<%= link_to "X", unquality_point_path(point, :region => "point_detail"), 
                 :method => :post,
@@ -22,26 +22,26 @@
                 'data-disable-with' => "",
                 'data-loader-name' => "circle",
 		            :class => "priority_remove_link",
-		            :title => t('unhelpful.delete.title') %>
+		            :title => tr("This is no longer unhelpful", "view/points/_button") %>
 		</span>	
 	</div>	
 	<% end %>
 <% else %>
 	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
-		<%= link_to t('helpful.capitalized'), quality_point_path(point, :region => "point_detail", :value => true), 
+		<%= link_to tr("Helpful?", "view/points/_button"), quality_point_path(point, :region => "point_detail", :value => true), 
                 :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_helpful)),
                 'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link", :title => t('helpful.title') %>								
+		            :class => "priority_add_link", :title => tr("This is helpful", "view/points/_button") %>								
 	</div>
-	<div class="endorse_or"><%= t('or') %></div>
+	<div class="endorse_or"><%= tr("OR", "view/points/_button") %></div>
 	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
-		<%= link_to t('unhelpful.capitalized'), quality_point_path(point, :region => "point_detail", :value => false),
+		<%= link_to tr("Not Helpful?", "view/points/_button"), quality_point_path(point, :region => "point_detail", :value => false),
                 :method => :post,
                 :remote=>true,
                 'data-disable-with' => escape_t(t(:ajax_unhelpful)),
                 'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link", :title => t('unhelpful.title') %>								
+		            :class => "priority_add_link", :title => tr("This is not helpful", "view/points/_button") %>								
 	</div>	
 <% end %>

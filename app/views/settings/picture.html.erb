@@ -5,11 +5,11 @@
 <%= form_for(User.new, :url => {:action => "picture_save" }, :html => {:multipart => true}) do |f| %>
 <%= f.error_messages %>
 
-<p><label for="picture"><%= t('settings.picture.upload')%></label>
+<p><label for="picture"><%= tr("Upload your picture", "view/settings/picture")%></label>
 <p>
 <%= f.file_field :buddy_icon %><br/>
-<span class="small"><%= t('pictures.must') %></span>
+<span class="small"><%= tr("Must be a gif, jpg or png", "view/settings/picture") %></span>
 
-<p><%= submit_tag t('pictures.submit'), :class => "yellow_button" %></p>
+<p><%= submit_tag tr("Upload and save your picture", "view/settings/picture"), :class => "yellow_button" %></p>
 <% end %>
 

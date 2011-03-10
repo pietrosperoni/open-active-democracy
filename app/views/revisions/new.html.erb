@@ -5,42 +5,42 @@
 		
 		<td valign="top">
 			<p>
-			<%= I18n.t("blurb_point_revision_new")%>
+			<%= tr("translation missing: en.blurb_point_revision_new", "view/revisions/new")%>
 			<p>
 			<%= form_for :revision, :url => point_revisions_path(@point)  do |f| %>
-			  <%= f.error_messages :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') %>
+			  <%= f.error_messages :header_message => tr("Please review", "view/revisions/new"), :message => tr("We need a change to your talking point", "view/revisions/new") %>
 			<p>
-		    <%= t('points.new.name.label')%><br />
+		    <%= tr("Summarize your talking point in <span class='small'>60 characters</span>", "view/revisions/new")%><br />
 		    <%= f.text_field :name, :size => 50, :maxlength => 60 %>		
 			</p>			
 			<p>
-			<%= t('points.new.position.label', :priority_name => link_to(@priority.name, @priority), :support_radio => f.radio_button(:value, 1), :oppose_radio => f.radio_button(:value, -1), :neutral_radio => f.radio_button(:value, 0))%>				
+			<%= tr("Is this talking point {support_radio} in support or {oppose_radio} in opposition to {priority_name}?", "view/revisions/new", :priority_name => link_to(@priority.name, @priority), :support_radio => f.radio_button(:value, 1), :oppose_radio => f.radio_button(:value, -1), :neutral_radio => f.radio_button(:value, 0))%>				
 			</p>
 			<p>
-			<%= t('points.new.content.label') %> <span id="revisionContentDown"></span> <%= t('characters_left')%>
+			<%= tr("Explain your talking point.", "view/revisions/new") %> <span id="revisionContentDown"></span> <%= tr("characters left", "view/revisions/new")%>
 			<%= f.text_area :content, :id => 'revisionContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
 			</p>
 			
 			<p>
-			<%= t('points.new.website.label') %><br/>
+			<%= tr("Include a website source link", "view/revisions/new") %><br/>
 			<%= f.text_field :website, :size => 50 %>	
 			</p>	
 			
 			<p>
-			<%= t('points.new.other_priority_name.label') %>
+			<%= tr("Link this to another priority <span class='small'>Just start typing the name</span>", "view/revisions/new") %>
 			<%= f.text_field :other_priority_name, :size => 50, :autocomplete => "off" %>			
-			<%= t('points.new.other_priority_name.example')%>
+			<%= tr("Linking to another priority is optional. If your point is in opposition, you can link to a better priority. OR, if your point is supportive or neutral, you can highlight a more specific or related priority.", "view/revisions/new")%>
 			</p>			
 			
 			<p>
-			<%= t('points.new.comment.label') %><br/>
+			<%= tr("Why did you make this change?", "view/revisions/new") %><br/>
 			<% fields_for :comment do |c| %>
 				<%= c.text_field :content, :size => 50 %>	
 			<% end %>
 			</p>
 			
 			<p>
-			<%= f.submit t('points.new.submit'), :id => "submit", :class => "yellow_button" %>
+			<%= f.submit tr("Save talking point", "view/revisions/new"), :id => "submit", :class => "yellow_button" %>
 			</p>
 
 			<% end %>
@@ -48,7 +48,7 @@
 		</td>	
 		
 		<td valign="top" width="150" style="padding-left: 20px;">
-			<%= link_to t('document.revision.new.cancel'), @point %>
+			<%= link_to tr("Cancel this revision", "view/revisions/new"), @point %>
 			<p>
 			<%= render :partial => "documents/authors", :locals => {:users => @point.authors } %>	
 		</td>		

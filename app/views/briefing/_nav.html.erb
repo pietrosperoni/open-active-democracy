@@ -4,29 +4,29 @@
 			<li class="tab1">
 				<span class="tab_header">
 					<% if logged_in? %>
-					<%= link_to t('menu.points.name'), points_url %>
+					<%= link_to tr("Talking points", "view/briefing/_nav"), points_url %>
 					<% else %>
-					<%= link_to t('menu.points.name'), newest_points_url %>
+					<%= link_to tr("Talking points", "view/briefing/_nav"), newest_points_url %>
 					<% end %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
 					<% if logged_in? %>
-					<%= link_to t('menu.documents.name'), documents_url %>
+					<%= link_to tr("Documents", "view/briefing/_nav"), documents_url %>
 					<% else %>
-					<%= link_to t('menu.documents.name'), newest_documents_url %>
+					<%= link_to tr("Documents", "view/briefing/_nav"), newest_documents_url %>
 					<% end %>
 				</span>
 			</li>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to t('menu.briefing.research.name'), :controller => "briefing", :action => "points" %>
+					<%= link_to tr("Contribute research", "view/briefing/_nav"), :controller => "briefing", :action => "points" %>
 				</span>
 			</li>
 			<li class="tab4">
 				<span class="tab_header">
-					<%= link_to t('menu.briefing.research.contributors.name'), :controller => "briefing", :action => "contributors" %>
+					<%= link_to tr("Contributors", "view/briefing/_nav"), :controller => "briefing", :action => "contributors" %>
 				</span>
 			</li>			
 		</ul>
@@ -44,25 +44,25 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.yours'), points_url %>
+						<%= link_to tr("Yours", "view/briefing/_nav"), points_url %>
 					</span>
 				</li>
 
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.your_priorities'), your_priorities_points_url %>
+						<%= link_to tr("Your priorities", "view/briefing/_nav"), your_priorities_points_url %>
 					</span>
 				</li>
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.all_points'), newest_points_url %>
+						<%= link_to tr("All talking points", "view/briefing/_nav"), newest_points_url %>
 					</span>
 				</li>			
 
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.recently_revised'), revised_points_url %>
+						<%= link_to tr("Recently revised", "view/briefing/_nav"), revised_points_url %>
 					</span>
 				</li>
 
@@ -83,25 +83,25 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.yours'), documents_url %>
+						<%= link_to tr("Yours", "view/briefing/_nav"), documents_url %>
 					</span>
 				</li>
 
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.your_priorities'), your_priorities_documents_url %>
+						<%= link_to tr("Your priorities", "view/briefing/_nav"), your_priorities_documents_url %>
 					</span>
 				</li>
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.all_documents'), newest_documents_url %>
+						<%= link_to tr("All documents", "view/briefing/_nav"), newest_documents_url %>
 					</span>
 				</li>			
 
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.recently_revised'), revised_documents_url %>
+						<%= link_to tr("Recently revised", "view/briefing/_nav"), revised_documents_url %>
 					</span>
 				</li>
 			
@@ -120,13 +120,13 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.research.points_needed'), :controller => "briefing", :action => "points" %>
+						<%= link_to tr("Priorities needing talking points", "view/briefing/_nav"), :controller => "briefing", :action => "points" %>
 					</span>
 				</li>
 			
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.research.documents_needed'), :controller => "briefing", :action => "documents" %>
+						<%= link_to tr("Priorities needing documents", "view/briefing/_nav"), :controller => "briefing", :action => "documents" %>
 					</span>
 				</li>			
 

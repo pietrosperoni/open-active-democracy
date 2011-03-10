@@ -6,10 +6,10 @@
 	</td>
 
 	<td valign="top" style="padding-left: 7px;">
-		<%= t('ads.show.intro', :user_name => link_to(ad.user.name, ad.user), :priority_name => link_to(ad.priority.name, ad.priority))%>
+		<%= tr("{user_name} asks you to consider {priority_name}", "view/ads/_show", :user_name => link_to(ad.user.name, ad.user), :priority_name => link_to(ad.priority.name, ad.priority))%>
 		<% if ad.has_content? %>
 		<div class="notification_show_message">
-		"<%= h(ad.content) %>"<span class="show_all_ads"><%= link_to t('ads.your_message'), ads_priorities_url %></span>
+		"<%= h(ad.content) %>"<span class="show_all_ads"><%= link_to tr("Put your message here", "view/ads/_show"), ads_priorities_url %></span>
 		</div>
 		<% end %>
 
@@ -17,23 +17,23 @@
 			<span id="priority_<%= ad.priority.id %>_button_small">
 
 					<span class="priority_add" id="priority_add_<%= ad.priority.id %>">
-						<%= link_to t('endorse.name'), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => 1, :ad_id => ad),
+						<%= link_to tr("endorse", "view/ads/_show"), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => 1, :ad_id => ad),
                         :method => :post,
 						            :remote=>true,
                         'data-disable-with' => escape_t(t(:ajax_endorsing)),
                         'data-loader-name' => "horizontal_small",
-						            :class => "priority_add_link", :title => t('endorse.title') %>		
+						            :class => "priority_add_link", :title => tr("I support this, add it to my priority list", "view/ads/_show") %>		
 					</span>
-					<span class="endorse_or"><%= t('or') %></span>
+					<span class="endorse_or"><%= tr("OR", "view/ads/_show") %></span>
 					<span class="priority_add" id="priority_add_<%= ad.priority.id %>">
-						<%= link_to t('oppose.name'), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => -1, :ad_id => ad),
+						<%= link_to tr("oppose", "view/ads/_show"), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => -1, :ad_id => ad),
                         :method => :post,
                         :remote=>true,
                         'data-disable-with' => escape_t(t(:ajax_endorsing)),
                         'data-loader-name' => "horizontal_small",
                         'data-disable-with' => escape_t(t(:ajax_opposing)),
                         'data-loader-name' => "horizontal_small",
-						            :class => "priority_add_link", :title => t('oppose.title') %>		
+						            :class => "priority_add_link", :title => tr("I oppose this, and want to add my opposition to my priority list.", "view/ads/_show") %>		
 					</span>	
 
 			</span>
@@ -41,7 +41,7 @@
 			<% unless ad.new_record? %>
 
 			<span class="tag_button" id="notification_show_<%= ad.priority.id %>_skip" style="margin-left: 5px;">
-				<%= link_to t('skip.name'), skip_priority_ad_path(ad.priority,ad), 
+				<%= link_to tr("Skip", "view/ads/_show"), skip_priority_ad_path(ad.priority,ad), 
                     :method => :post,
                     :remote=>true,
                     'data-disable-with' => escape_t(t(:ajax_skipping)),

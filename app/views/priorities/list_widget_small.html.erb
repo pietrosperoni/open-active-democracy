@@ -29,16 +29,16 @@
 				<br/>
 				<span class="nb_priority_position_status">
 					<% if priority.position != 0 and params[:action] == 'yours' %>
-						<%= t('priorities.position.number', :position => priority.position)%>,
+						<%= tr("Priority {position}", "view/priorities/list_widget_small", :position => priority.position)%>,
 					<% end %>
 					<% if priority.is_new? %>	
-						<%= t('priorities.position.new.7days.short') %>
+						<%= tr("new this week", "view/priorities/list_widget_small") %>
 					<% elsif priority.position_7days_change > 0 %>
-						<%= t('priorities.position.up.7days.short', :count => priority.position_7days_change.abs)%>
+						<%= tr("up {count} spots this week", "view/priorities/list_widget_small", :count => priority.position_7days_change.abs)%>
 					<% elsif priority.position_7days_change < 0 %>
-						<%= t('priorities.position.down.7days.short', :count => priority.position_7days_change.abs)%>
+						<%= tr("down {count} spots this week", "view/priorities/list_widget_small", :count => priority.position_7days_change.abs)%>
 					<% else %>
-						<%= t('priorities.position.no_change.7days.short') %>
+						<%= tr("no change this week", "view/priorities/list_widget_small") %>
 					<% end %>
 				</span>
 			<% end %>

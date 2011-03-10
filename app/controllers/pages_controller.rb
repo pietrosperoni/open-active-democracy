@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   # GET /pages.xml
   def index
     @pages = Page.find(:all)
-    @page_title = t('pages.index', :government_name => current_government.name)
+    @page_title = tr("All pages", "controller/pages", :government_name => current_government.name)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pages }
@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   def new
     @pages = Page.find(:all)
     @page = Page.new
-    @page_title = t('pages.new.title')
+    @page_title = tr("Create a new page", "controller/pages")
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @page }
@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   def edit
     @pages = Page.find(:all)    
     @page = Page.find(params[:id])
-    @page_title = t('pages.edit.title')
+    @page_title = tr("translation missing: en.pages.edit.title", "controller/pages")
   end
 
   # POST /pages
@@ -37,10 +37,10 @@ class PagesController < ApplicationController
   def create
     @pages = Page.find(:all)    
     @page = Page.new(params[:page])
-    @page_title = t('pages.new.title')
+    @page_title = tr("Create a new page", "controller/pages")
     respond_to do |format|
       if @page.save
-        flash[:notice] = t('pages.saved', :page_name => @page.name)
+        flash[:notice] = tr("Saved {page_name}", "controller/pages", :page_name => @page.name)
         format.html { redirect_to(about_path(@page.short_name)) }
         format.xml  { render :xml => @page, :status => :created, :location => @page }
       else
@@ -55,10 +55,10 @@ class PagesController < ApplicationController
   def update
     @pages = Page.find(:all)
     @page = Page.find(params[:id])
-    @page_title = t('pages.edit.title')
+    @page_title = tr("translation missing: en.pages.edit.title", "controller/pages")
     respond_to do |format|
       if @page.update_attributes(params[:page])
-        flash[:notice] = t('pages.saved', :page_name => @page.name)
+        flash[:notice] = tr("Saved {page_name}", "controller/pages", :page_name => @page.name)
         format.html { render :action => "edit" }
         format.xml  { head :ok }
       else
@@ -72,7 +72,7 @@ class PagesController < ApplicationController
   # DELETE /pages/1.xml
   def destroy
     @page = Page.find(params[:id])
-    flash[:notice] = t('pages.destroy', :page_name => @page.name)
+    flash[:notice] = tr("Deleted {page_name}", "controller/pages", :page_name => @page.name)
     @page.destroy
     respond_to do |format|
       format.html { redirect_to(pages_url) }

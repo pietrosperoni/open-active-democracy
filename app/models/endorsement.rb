@@ -209,8 +209,8 @@ class Endorsement < ActiveRecord::Base
   end
 
   def value_name
-    return I18n.t(:you_supported) if is_up?
-    return I18n.t(:you_were_against) if is_down?
+    return tr("translation missing: en.you_supported", "model/endorsement") if is_up?
+    return tr("translation missing: en.you_were_against", "model/endorsement") if is_down?
   end
 
   def flip_up

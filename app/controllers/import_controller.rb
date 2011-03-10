@@ -47,10 +47,10 @@ class ImportController < ApplicationController
   end
 
   def status
-    @page_title = t('import.started')
+    @page_title = tr("Importing your contacts", "controller/import")
     respond_to do |format|
       if not current_user.is_importing_contacts?
-        flash[:notice] = t('import.finished')
+        flash[:notice] = tr("Finished loading contacts", "controller/import")
         if current_user.contacts_members_count > 0
           format.html { redirect_to members_user_contacts_path(current_user) }
           format.js { redirect_from_facebox(members_user_contacts_path(current_user)) }

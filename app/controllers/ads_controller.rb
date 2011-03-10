@@ -6,7 +6,7 @@ class AdsController < ApplicationController
   # GET /priorities/1/ads
   def index
     @ads = @priority.ads.filtered.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
-    @page_title = t('ads.index.title', :priority_name => @priority.name)
+    @page_title = tr("All ads for {priority_name}", "controller/ads", :priority_name => @priority.name)
     respond_to do |format|
       format.html { redirect_to priority_url(@priority) }
       format.xml { render :xml => @ads.to_xml(:include => [:user, :priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -17,7 +17,7 @@ class AdsController < ApplicationController
   # GET /priorities/1/ads/1
   def show
     @ad = @priority.ads.find(params[:id])
-    @page_title = t('ads.show.title', :priority_name => @priority.name)
+    @page_title = tr("Ad for {priority_name}", "controller/ads", :priority_name => @priority.name)
     @activities = @ad.activities.active.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html # show.html.erb
@@ -29,11 +29,11 @@ class AdsController < ApplicationController
   # GET /priorities/1/ads/new
   def new
 #    if @priority.position < 26
-#      flash[:error] = t('ads.new.top25error')
+#      flash[:error] = tr("You cannot buy an ad for a priority that's already in the top 25.", "controller/ads")
 #      redirect_to @priority
 #      return
 #    end
-    @page_title = t('ads.new.title', :priority_name => @priority.name)  
+    @page_title = tr("Buy an ad for {priority_name}", "controller/ads", :priority_name => @priority.name)  
     @ad = @priority.ads.new
     @ad.user = current_user
     @ad.cost = 1
@@ -49,7 +49,7 @@ class AdsController < ApplicationController
     @ad.user = current_user
     respond_to do |format|
       if @ad.save
-        flash[:notice] = t('ads.new.success', :priority_name => @priority.name)
+        flash[:notice] = tr("Purchased an ad for {priority_name}", "controller/ads", :priority_name => @priority.name)
         format.html { redirect_to(priority_ad_path(@priority,@ad)) }
       else
         format.html { render :action => "new" }

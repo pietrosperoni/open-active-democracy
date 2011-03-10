@@ -209,7 +209,7 @@ class Priority < ActiveRecord::Base
   end
   
   def is_buried?
-    status == I18n.t(:buried)
+    status == tr("delisted", "model/priority")
   end
   
   def is_top?
@@ -261,15 +261,15 @@ class Priority < ActiveRecord::Base
   
   def value_name 
     if is_failed?
-      I18n.t(:priority_failed)
+      tr("Priority failed", "model/priority")
     elsif is_successful?
-      I18n.t(:priority_succesful)
+      tr("translation missing: en.priority_succesful", "model/priority")
     elsif is_compromised?
-      I18n.t(:priority_succesful_with_compromises)
+      tr("translation missing: en.priority_succesful_with_compromises", "model/priority")
     elsif is_intheworks?
-      I18n.t(:priority_in_the_works)
+      tr("translation missing: en.priority_in_the_works", "model/priority")
     else
-      I18n.t(:priority_has_not_been_processed)
+      tr("translation missing: en.priority_has_not_been_processed", "model/priority")
     end
   end
   
@@ -333,11 +333,11 @@ class Priority < ActiveRecord::Base
   end  
   
   def official_status_name
-    return I18n.t('status.failed') if official_status == -2
-    return I18n.t('status.compromised') if official_status == -1
-    return I18n.t('status.unknown') if official_status == 0 
-    return I18n.t('status.intheworks') if official_status == 1
-    return I18n.t('status.successful') if official_status == 2
+    return tr("failed", "model/priority") if official_status == -2
+    return tr("compromised", "model/priority") if official_status == -1
+    return tr("unknown", "model/priority") if official_status == 0 
+    return tr("in the works", "model/priority") if official_status == 1
+    return tr("successful", "model/priority") if official_status == 2
   end
   
   def has_change?
@@ -355,27 +355,27 @@ class Priority < ActiveRecord::Base
   def movement_text
     s = ''
     if status == 'buried'
-      return I18n.t('buried').capitalize
+      return tr("delisted", "model/priority").capitalize
     elsif status == 'inactive'
-      return I18n.t('inactive').capitalize
+      return tr("inactive", "model/priority").capitalize
     elsif created_at > Time.now-86400
-      return I18n.t('new').capitalize
+      return tr("new", "model/priority").capitalize
     elsif position_24hr_change == 0 and position_7days_change == 0 and position_30days_change == 0
-      return I18n.t('nochange').capitalize
+      return tr("no change", "model/priority").capitalize
     end
     s += '+' if position_24hr_change > 0
     s += '-' if position_24hr_change < 0    
-    s += I18n.t('nochange') if position_24hr_change == 0
+    s += tr("no change", "model/priority") if position_24hr_change == 0
     s += position_24hr_change.abs.to_s unless position_24hr_change == 0
     s += ' today'
     s += ', +' if position_7days_change > 0
     s += ', -' if position_7days_change < 0    
-    s += ', ' + I18n.t('nochange') if position_7days_change == 0
+    s += ', ' + tr("no change", "model/priority") if position_7days_change == 0
     s += position_7days_change.abs.to_s unless position_7days_change == 0
     s += ' this week'
     s += ', and +' if position_30days_change > 0
     s += ', and -' if position_30days_change < 0    
-    s += ', and ' + I18n.t('nochange') if position_30days_change == 0
+    s += ', and ' + tr("no change", "model/priority") if position_30days_change == 0
     s += position_30days_change.abs.to_s unless position_30days_change == 0
     s += ' this month'    
     s
@@ -580,11 +580,11 @@ class Priority < ActiveRecord::Base
         time = Time.now-5.years
       end
       if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
-        stage_txt = "#{I18n.t :waits_for_discussion}"
+        stage_txt = "#{t :waits_for_discussion}"
       else
-        stage_txt = "#{priority_process.stage_sequence_number}. #{I18n.t :parliment_stage_sequence_discussion}"
+        stage_txt = "#{priority_process.stage_sequence_number}. #{t :parliment_stage_sequence_discussion}"
       end
-      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
+      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{t :since}"
       Rails.cache.write("latest_priority_process_at_#{self.id}", latest_priority_process_txt, :expires_in => 30.minutes)
     end
     latest_priority_process_txt

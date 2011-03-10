@@ -59,7 +59,7 @@ class InstallController < ApplicationController
       @user.is_admin = true
       @user.save(:validate => false)
       CapitalGovernmentNew.create(:recipient => @user, :amount => 5)   
-      flash[:notice] = t('install.welcome.success_loggedin')
+      flash[:notice] = tr("Welcome to your nation!", "controller/install")
       redirect_to "/"         
     else
       render :action => "admin_user"

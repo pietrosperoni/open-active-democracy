@@ -7,17 +7,17 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.network.yours'), following_user_contacts_path(current_user) %>
+					<%= link_to tr("Your network", "view/user_contacts/_nav"), following_user_contacts_path(current_user) %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.network.find'), user_contacts_path(current_user) %>
+					<%= link_to tr("Find people you know", "view/user_contacts/_nav"), user_contacts_path(current_user) %>
 				</span>
 			</li>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to t('menu.network.invitation'), new_user_contact_path(current_user) %>
+					<%= link_to tr("Send an invitation", "view/user_contacts/_nav"), new_user_contact_path(current_user) %>
 				</span>
 			</li>
 		</ul>
@@ -33,14 +33,14 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.network.import.google'), :controller => "import", :action => "google" %>
+						<%= link_to tr("Import your Google contacts", "view/user_contacts/_nav"), :controller => "import", :action => "google" %>
 					</span>
 				</li>			
 
 				<% if current_government.has_yahoo_enabled? %>
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.network.import.yahoo'), :controller => "import", :action => "yahoo" %>
+						<%= link_to tr("Yahoo", "view/user_contacts/_nav"), :controller => "import", :action => "yahoo" %>
 					</span>
 				</li>	
 				<% end %>
@@ -48,7 +48,7 @@
 				<% if current_government.has_windows_enabled? %>
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.network.import.windows'), :controller => "import", :action => "windows" %>
+						<%= link_to tr("Windows Live", "view/user_contacts/_nav"), :controller => "import", :action => "windows" %>
 					</span>
 				</li>	
 				<% end %>
@@ -56,7 +56,7 @@
 				<% if current_government.has_facebook_enabled? %>
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.network.import.facebook'), :controller => "facebook", :action => "invite" %>
+						<%= link_to tr("Facebook", "view/user_contacts/_nav"), :controller => "facebook", :action => "invite" %>
 					</span>
 				</li>	
 				<% end %>

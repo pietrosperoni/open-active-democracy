@@ -4,7 +4,7 @@ class PartnersController < ApplicationController
   before_filter :admin_required, :only => [:destroy]
 
   def index
-    @page_title = t('partners.new.title', :government_name => current_government.name)
+    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => current_government.name)
 #    if logged_in? and current_user.attribute_present?("partner_id")
 #      redirect_to 'http://' + current_user.partner.short_name + '.' + current_government.base_url + edit_partner_path(current_user.partner)
 #    end
@@ -30,7 +30,7 @@ class PartnersController < ApplicationController
   # GET /partners/new
   # GET /partners/new.xml
   def new
-    @page_title = t('partners.new.title', :government_name => current_government.name)
+    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => current_government.name)
     @partner = Partner.new
     respond_to do |format|
       format.html # new.html.erb
@@ -40,13 +40,13 @@ class PartnersController < ApplicationController
   # GET /partners/1/edit
   def edit
     @partner = Partner.find(params[:id])
-    @page_title = t('partners.settings.title') 
+    @page_title = tr("Partner settings", "controller/partners") 
   end
 
   # GET /partners/1/email
   def email
     @partner = Partner.find(params[:id])
-    @page_title = t('partners.settings.emails')   
+    @page_title = tr("Email list settings", "controller/partners")   
   end
 
   # POST /partners
@@ -54,13 +54,13 @@ class PartnersController < ApplicationController
   def create
     @partner = Partner.new(params[:partner])
     @partner.ip_address = request.remote_ip
-    @page_title = t('partners.new.title', :government_name => current_government.name)
+    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => current_government.name)
     respond_to do |format|
       if @partner.save
         @partner.register!
         current_user.update_attribute(:partner_id,@partner.id)
         @partner.activate!
-        flash[:notice] = t('partners.new.success')
+        flash[:notice] = tr("Thanks for partnering with us!", "controller/partners")
         session[:goal] = 'partner'
         format.html { redirect_to 'http://' + @partner.short_name + '.' + current_government.base_url + picture_partner_path(@partner)}
       else
@@ -73,10 +73,10 @@ class PartnersController < ApplicationController
   # PUT /partners/1.xml
   def update
     @partner = Partner.find(params[:id])
-    @page_title = t('partners.settings.title')  
+    @page_title = tr("Partner settings", "controller/partners")  
     respond_to do |format|
       if @partner.update_attributes(params[:partner])
-        flash[:notice] = t('partners.settings.success')
+        flash[:notice] = tr("Saved settings", "controller/partners")
         format.html { 
           if not @partner.has_picture?
             redirect_to picture_partner_path(@partner)
@@ -100,7 +100,7 @@ class PartnersController < ApplicationController
   
   def picture
     @partner = Partner.find(params[:id])
-    @page_title = t('partners.picture.title')
+    @page_title = tr("Upload partner logo", "controller/partners")
   end
 
   def picture_save
@@ -108,7 +108,7 @@ class PartnersController < ApplicationController
     respond_to do |format|
       if @partner.update_attributes(params[:partner])
         ActivityPartnerPictureNew.create(:user => current_user, :partner => @partner)        
-        flash[:notice] = t('pictures.success')
+        flash[:notice] = tr("Picture uploaded successfully", "controller/partners")
         format.html { redirect_to(:action => :picture) }
       else
         format.html { render :action => "picture" }

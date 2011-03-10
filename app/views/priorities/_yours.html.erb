@@ -19,7 +19,7 @@
                         'data-disable-with' => "",
                         'data-loader-name' => "circle",               
                         :remote=>true,
-						            :title => t('endorsements.position.title') %>
+						            :title => tr("Click the number to change its position on your list. You can also drag and drop the names to sort.", "view/priorities/_yours") %>
 						</div>
 					</td>
 					<td valign="top" width="220">
@@ -34,7 +34,7 @@
                       'data-disable-with' => "",
                       'data-loader-name' => "circle",               
                       :remote=>true,
-					            :class => "your_priorities_remove", :title => t('endorsements.delete.title')%>	
+					            :class => "your_priorities_remove", :title => tr("Click the X to remove this priority from your list", "view/priorities/_yours")%>	
 					</div>
 					</td>		
 				</tr>
@@ -53,7 +53,7 @@
 			<p>
 		<% end %>
 		<div style="padding: 0px 10px 10px 10px;">
-			<%= I18n.t("blurb_sorting_instruct")%>
+			<%= tr("translation missing: en.blurb_sorting_instruct", "view/priorities/_yours")%>
 		</div>
 	<% end %>
 
@@ -66,7 +66,7 @@
 	<% if current_user.endorsements_count > 4 %>
 
 		<div style="padding: 0px 0px 10px 20px;">
-			<%= I18n.t("blurb_sorting_instruct_adv")%>
+			<%= tr("translation missing: en.blurb_sorting_instruct_adv", "view/priorities/_yours")%>
 		</div>
 	
 	<% end %>

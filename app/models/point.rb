@@ -60,7 +60,7 @@ class Point < ActiveRecord::Base
   validates_length_of :name, :within => 3..100
   #validates_uniqueness_of :name
   # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  #validates_length_of :content, :maximum => 1100, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
+  #validates_length_of :content, :maximum => 1100, :allow_blank => true, :allow_nil => true, :too_long => tr("has a maximum of 500 characters", "model/point")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
@@ -161,7 +161,7 @@ class Point < ActiveRecord::Base
 
   def name_with_type
     return name unless is_down?
-    "[#{I18n.t(:against)}] " + name
+    "[#{tr("Against", "model/point")}] " + name
   end
 
   def text

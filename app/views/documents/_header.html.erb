@@ -1,11 +1,11 @@
 <div class="intro">
 <% if @priority %>
 	<% if @document.is_up? %>
-		<%= t('document.intro.endorsed', :priority_name => link_to(@priority.name, @priority))%>
+		<%= tr("Document in support of {priority_name}:", "view/documents/_header", :priority_name => link_to(@priority.name, @priority))%>
 	<% elsif @document.is_down? %>
-		<%= t('document.intro.opposed', :priority_name => link_to(@priority.name, @priority))%>	
+		<%= tr("Document in <span class='opposed'>opposition</span> to {priority_name}:", "view/documents/_header", :priority_name => link_to(@priority.name, @priority))%>	
 	<% else %>
-		<%= t('document.intro.neutral', :priority_name => link_to(@priority.name, @priority))%>
+		<%= tr("Document about {priority_name}:", "view/documents/_header", :priority_name => link_to(@priority.name, @priority))%>
 	<% end %>
 <% end %>
 </div>

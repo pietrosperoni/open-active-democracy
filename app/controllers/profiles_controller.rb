@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   
   def authorized?
     @user = User.find(params[:user_id])
-    @page_title = t('profiles.new.title', :government_name => current_government.name)
+    @page_title = tr("Your bio at {government_name}", "controller/profiles", :government_name => current_government.name)
     current_user and (current_user.is_admin? or @user.id == current_user.id)
   end  
   
@@ -40,7 +40,7 @@ class ProfilesController < ApplicationController
     @profile.user = current_user
     respond_to do |format|
       if @profile.save
-        flash[:notice] = t('profiles.new.success')
+        flash[:notice] = tr("Saved your bio", "controller/profiles")
         format.html { redirect_to(@user) }
         format.xml  { render :xml => @profile, :status => :created, :location => @user }
       else
@@ -56,7 +56,7 @@ class ProfilesController < ApplicationController
     @profile = @user.profile    
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
-        flash[:notice] = t('profiles.new.success')
+        flash[:notice] = tr("Saved your bio", "controller/profiles")
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else

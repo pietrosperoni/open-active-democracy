@@ -116,7 +116,7 @@ end
 class NotificationChangeVote < Notification
   
   def name
-    I18n.t('notification.change.vote.name', :priority_name => notifiable.change.priority_name, :new_priority_name => notifiable.change.new_priority.name)
+    tr("Voting has started on {new_priority_name} acquiring {priority_name}", "model/notification", :priority_name => notifiable.change.priority_name, :new_priority_name => notifiable.change.new_priority.name)
   end
   
   def is_recipient_subscribed?
@@ -128,7 +128,7 @@ end
 class NotificationChangeProposed < Notification
   
   def name
-    I18n.t('notification.change.proposed.name', :sender_name => sender.name, :priority_name => notifiable.priority_name, :new_priority_name => notifiable.new_priority.name)
+    tr("{sender_name} proposed {new_priority_name} acquire {priority_name}", "model/notification", :sender_name => sender.name, :priority_name => notifiable.priority_name, :new_priority_name => notifiable.new_priority.name)
   end
   
   def is_recipient_subscribed?
@@ -141,18 +141,18 @@ class NotificationComment < Notification
   
   def name
     if notifiable.activity.has_document?
-      I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.document.name)
+      tr("{sender_name} commented on {comment_name}", "model/notification", :sender_name => sender.name, :comment_name => notifiable.activity.document.name)
     elsif notifiable.activity.has_point?
-      I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.point.name)      
+      tr("{sender_name} commented on {comment_name}", "model/notification", :sender_name => sender.name, :comment_name => notifiable.activity.point.name)      
     elsif notifiable.activity.has_priority?
-      I18n.t('notification.comment.name', :sender_name => sender.name, :comment_name => notifiable.activity.priority.name)      
+      tr("{sender_name} commented on {comment_name}", "model/notification", :sender_name => sender.name, :comment_name => notifiable.activity.priority.name)      
     elsif notifiable.activity.class == ActivityBulletinProfileNew
-      I18n.t('notification.comment.profile.name', :sender_name => sender.name, :user_name => notifiable.activity.user.name)
+      tr("{sender_name} left a comment on {user_name} profile", "model/notification", :sender_name => sender.name, :user_name => notifiable.activity.user.name)
     else
       if notifiable.activity.user_id == recipient_id
-        I18n.t('notification.comment.activity.yours.name', :sender_name => sender.name, :comment_name => notifiable.activity.name)              
+        tr("{sender_name} commented on your activity", "model/notification", :sender_name => sender.name, :comment_name => notifiable.activity.name)              
       else
-        I18n.t('notification.comment.activity.name', :sender_name => sender.name, :comment_name => notifiable.activity.name, :user_name => notifiable.activity.user.name)     
+        tr("{sender_name} commented on {user_name} activity", "model/notification", :sender_name => sender.name, :comment_name => notifiable.activity.name, :user_name => notifiable.activity.user.name)     
       end 
     end      
   end
@@ -166,7 +166,7 @@ end
 class NotificationCommentFlagged < Notification
   
   def name
-    I18n.t('notification.comment.flagged.name', :sender_name => sender.name, :user_name => notifiable.user.name)
+    tr("{sender_name} flagged a comment by {user_name}", "model/notification", :sender_name => sender.name, :user_name => notifiable.user.name)
   end
   
   def is_recipient_subscribed?
@@ -178,7 +178,7 @@ end
 class NotificationContactJoined < Notification
   
   def name
-    I18n.t('notification.contact.joined.name', :sender_name => sender.name)
+    tr("{sender_name} just joined", "model/notification", :sender_name => sender.name)
     sender.login + " just joined"
   end
   
@@ -191,7 +191,7 @@ end
 class NotificationFollower < Notification
   
   def name
-    I18n.t('notification.follower.name', :sender_name => sender.name)
+    tr("{sender_name} is now following your updates", "model/notification", :sender_name => sender.name)
   end
   
   def is_recipient_subscribed?
@@ -203,7 +203,7 @@ end
 class NotificationInvitationAccepted < Notification
   
   def name
-    I18n.t('notification.invitation.accepted.name', :sender_name => sender.name, :government_name => Government.current.name)
+    tr("{sender_name} accepted your invitation to join {government_name}", "model/notification", :sender_name => sender.name, :government_name => Government.current.name)
   end
   
   def is_recipient_subscribed?
@@ -215,7 +215,7 @@ end
 class NotificationMessage < Notification
   
   def name
-    I18n.t('notification.message.name', :sender_name => sender.name)
+    tr("{sender_name} sent you a private message", "model/notification", :sender_name => sender.name)
   end
   
   def is_recipient_subscribed?
@@ -227,7 +227,7 @@ end
 class NotificationPriorityFlagged < Notification
   
   def name
-    I18n.t('notification.priority.flagged.name', :sender_name => sender.name, :priority_name => notifiable.name)
+    tr("{sender_name} flagged {priority_name} for review", "model/notification", :sender_name => sender.name, :priority_name => notifiable.name)
   end
   
   def is_recipient_subscribed?
@@ -239,7 +239,7 @@ end
 class NotificationProfileBulletin < Notification
   
   def name
-    I18n.t('notification.profile.bulletin.name', :sender_name => sender.name)
+    tr("{sender_name} posted a bulletin to your profile", "model/notification", :sender_name => sender.name)
   end
   
   def is_recipient_subscribed?
@@ -251,7 +251,7 @@ end
 class NotificationPointRevision < Notification
   
   def name
-    I18n.t('notification.point.revision.name', :sender_name => sender.name, :point_name => notifiable.name)
+    tr("{sender_name} revised {point_name}", "model/notification", :sender_name => sender.name, :point_name => notifiable.name)
   end
   
   def is_recipient_subscribed?
@@ -263,7 +263,7 @@ end
 class NotificationDocumentRevision < Notification
   
   def name
-    I18n.t('notification.document.revision.name', :sender_name => sender.name, :document_name => notifiable.name)
+    tr("{sender_name} revised {document_name}", "model/notification", :sender_name => sender.name, :document_name => notifiable.name)
   end
   
   def is_recipient_subscribed?
@@ -276,13 +276,13 @@ class NotificationPriorityFinished < Notification
   
   def name
     if notifiable.priority.is_successful?
-       I18n.t('activity.priority.official_status.successful.name', :priority_name => notifiable.priority.name)
+       tr("{priority_name} was completed successfully", "model/notification", :priority_name => notifiable.priority.name)
     elsif notifiable.priority.is_compromised?
-      I18n.t('activity.priority.official_status.compromised.name', :priority_name => notifiable.priority.name)
+      tr("{priority_name} was completed with a compromise", "model/notification", :priority_name => notifiable.priority.name)
     elsif notifiable.priority.is_failed?
-      I18n.t('activity.priority.official_status.failed.name', :priority_name => notifiable.priority.name)
+      tr("{priority_name} failed", "model/notification", :priority_name => notifiable.priority.name)
     elsif notifiable.priority.is_intheworks?
-      I18n.t('activity.priority.official_status.intheworks.name', :priority_name => notifiable.priority.name)
+      tr("{priority_name} is in the works", "model/notification", :priority_name => notifiable.priority.name)
     end
   end
   
@@ -295,7 +295,7 @@ end
 class NotificationWarning1 < Notification
   
   def name
-    I18n.t('notification.warning1')
+    tr("This is your first warning for violating the site rules", "model/notification")
   end
   
   def is_recipient_subscribed?
@@ -307,7 +307,7 @@ end
 class NotificationWarning2 < Notification
   
   def name
-    I18n.t('notification.warning2')
+    tr("This is your second warning for violating the site rules", "model/notification")
   end
   
   def is_recipient_subscribed?
@@ -319,7 +319,7 @@ end
 class NotificationWarning3 < Notification
   
   def name
-    I18n.t('notification.warning3')
+    tr("This is your third warning. You are now on probation.", "model/notification")
   end
   
   def is_recipient_subscribed?
@@ -331,7 +331,7 @@ end
 class NotificationWarning4 < Notification
   
   def name
-    I18n.t('notification.warning4')
+    tr("translation missing: en.notification.warning4", "model/notification")
   end
   
   def is_recipient_subscribed?

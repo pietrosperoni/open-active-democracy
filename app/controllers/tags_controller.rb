@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.xml
   def index
-    @page_title = t('tags.title', :tags_name => current_government.tags_name.pluralize.titleize)
+    @page_title = tr("All {tags_name}", "controller/tags", :tags_name => current_government.tags_name.pluralize.titleize)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tags }
@@ -28,7 +28,7 @@ class TagsController < ApplicationController
   # GET /tags/new.xml
   def new
     @tag = Tag.new
-    @page_title = t('tags.new.title', :tags_name => current_government.tags_name)
+    @page_title = tr("Add a {tags_name}", "controller/tags", :tags_name => current_government.tags_name)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @tag }
@@ -38,7 +38,7 @@ class TagsController < ApplicationController
   # GET /tags/1/edit
   def edit
     @tag = Tag.find(params[:id])
-    @page_title = t('tags.edit.title', :tag_name => @tag.name)  
+    @page_title = tr("Editing {tag_name}", "controller/tags", :tag_name => @tag.name)  
     respond_to do |format|  
       format.html { render :action => "new" }
     end
@@ -48,10 +48,10 @@ class TagsController < ApplicationController
   # POST /tags.xml
   def create
     @tag = Tag.new(params[:tag])
-    @page_title = t('tags.new.title', :tags_name => current_government.tags_name)
+    @page_title = tr("Add a {tags_name}", "controller/tags", :tags_name => current_government.tags_name)
     respond_to do |format|
       if @tag.save
-        flash[:notice] = t('tags.new.success', :tag_name => @tag.name)
+        flash[:notice] = tr("Saved {tag_name}", "controller/tags", :tag_name => @tag.name)
         format.html { redirect_to(new_tag_url) }
         format.xml  { render :xml => @tag, :status => :created, :location => @tag }
       else
@@ -71,11 +71,11 @@ class TagsController < ApplicationController
     else
       redo_cached_issue_list = false
     end
-    @page_title = t('tags.edit.title', :tag_name => @tag.name)
+    @page_title = tr("Editing {tag_name}", "controller/tags", :tag_name => @tag.name)
     respond_to do |format|
       if @tag.update_attributes(params[:tag])
         Tag.expire_cache
-        flash[:notice] = t('tags.new.success', :tag_name => @tag.title)
+        flash[:notice] = tr("Saved {tag_name}", "controller/tags", :tag_name => @tag.title)
         format.html { redirect_to(edit_tag_url(@tag)) }
         format.xml  { head :ok }
       else

@@ -1,15 +1,15 @@
 <% if @user.endorsements_count > 4 %>
 
 <div class="heading">
-<%= t('charts.user.name', :user_name => @user.name)%>
+<%= tr("{user_name} Agenda", "view/users/_left_nav", :user_name => @user.name)%>
 </div>
 
 <% if @user.index_7days_change != 0 or @user.index_30days_change != 0 or @user.index_24hr_change != 0%>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
-		<td><span class="table_header"><%= t('time.yday') %></span></td>		
-		<td style="padding-left: 3px;"><span class="table_header"><%= t('time.week') %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= t('time.month') %></span></td>
+		<td><span class="table_header"><%= tr("Yday", "view/users/_left_nav") %></span></td>		
+		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Week", "view/users/_left_nav") %></span></td>
+		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Month", "view/users/_left_nav") %></span></td>
 	</tr>
 	<tr><td valign="top" class="user_agenda_change">
 		<%= agenda_change(@user,'24hr') %>

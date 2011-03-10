@@ -12,7 +12,7 @@
 
 	<div class="senda">
 				  <span id="submit_span_<%=activity.id%>">
-                    <%= f.submit t(:ajax_send_comment), :disable_with => escape_t(t(:ajax_sending)) %>
+                    <%= f.submit tr("Send comment", "view/comments/_new_inline"), :disable_with => escape_t(t(:ajax_sending)) %>
 				  </span>
 				  <span id = "loading_span_<%=activity.id%>" style = "display: none;">
 				    <%= image_tag("submit-loader.gif")%>
@@ -29,7 +29,7 @@
     jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').autoResize({
         extraSpace: 20
     })
-    jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').DefaultValue("<%= t('esb.add')%>");
+    jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').DefaultValue("<%= tr("translation missing: en.esb.add", "view/comments/_new_inline")%>");
     //-->
 </script>
 <% end %>

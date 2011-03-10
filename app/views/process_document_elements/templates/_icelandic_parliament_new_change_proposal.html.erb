@@ -3,9 +3,9 @@
   <%= fckeditor_textarea("source_element", :content, :toolbarSet => 'Simple', :ajax => true, :width => '100%', :height => '300px') %>
   <br><br>
   <%= hidden_field_tag :source_id, element.id %>  
-  <%= submit_tag t(:submit_change_proposal) %> 
-  <%= button_to_remote( t(:cancel_change_proposal),   
+  <%= submit_tag tr("Submit change proposal", "view/process_document_elements/templates") %> 
+  <%= button_to_remote( tr("Cancel", "view/process_document_elements/templates"),   
                            { :url => { :controller => "process_document_elements", :action => "cancel_new_change_proposal",   
                              :source_id => element.id, :sequence_number => element.sequence_number } },  
-                           { :class => "", :name => "", :title => t(:cancel_change_proposal) } ) %>
+                           { :class => "", :name => "", :title => tr("Cancel", "view/process_document_elements/templates") } ) %>
  <% end -%>

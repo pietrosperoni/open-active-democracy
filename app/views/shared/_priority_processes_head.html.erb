@@ -10,7 +10,7 @@
         <% elsif controller_name == "process_documents" and action_name == "show" %>
         <%= render :partial => "process_documents/share_metadata", :locals => {:document=> @document } %>
         <% else %>
-        <title><%=t(:main_header) %></title>
+        <title><%=tr("Open Direct Democracy", "view/shared/_priority_processes_head") %></title>
         <% end %>
 
   <script type="text/javascript">
@@ -27,15 +27,15 @@
           
           function getSentimentWord(sentiment) {
             if (sentiment==1) {
-                return "<%=t(:very_in_support)%>";            
+                return "<%=tr("Much in support", "view/shared/_priority_processes_head")%>";            
               } else if (sentiment==2) {
-                return "<%=t(:in_support)%>";            
+                return "<%=tr("In support", "view/shared/_priority_processes_head")%>";            
               } else if (sentiment==3) {
-                return "<%=t(:not_sure)%>";            
+                return "<%=tr("Not sure", "view/shared/_priority_processes_head")%>";            
               } else if (sentiment==4) {
-                return "<%=t(:against)%>";        
+                return "<%=tr("Against", "view/shared/_priority_processes_head")%>";        
               } else if (sentiment==5) {
-                return "<%=t(:very_against)%>";
+                return "<%=tr("Very against", "view/shared/_priority_processes_head")%>";
               }          
             };
             function fbs_click(u){

@@ -4,15 +4,15 @@
 
 	<%= f.error_messages %>
 
-	<%= f.check_box :is_newsletter_subscribed %> <%= t("unsubscribe.weekly") %><br/>									
-	<%= f.check_box :is_comments_subscribed %> <%= t("unsubscribe.comments") %><br/>
-	<%= f.check_box :is_point_changes_subscribed %> <%= t("unsubscribe.points")%><br/>	
-	<%= f.check_box :is_followers_subscribed %> <%= t("unsubscribe.followers")%><br/>		
-	<%= f.check_box :is_finished_subscribed %> <%= t("unsubscribe.finished")%><br/>	
-	<%= f.check_box :is_votes_subscribed %> <%= t("unsubscribe.votes")%><br/>
-	<%= f.check_box :is_messages_subscribed %> <%= t("unsubscribe.messages")%><br/>	
+	<%= f.check_box :is_newsletter_subscribed %> <%= tr("Weekly update on your priorities", "view/users/signups") %><br/>									
+	<%= f.check_box :is_comments_subscribed %> <%= tr("Comments on your discussions", "view/users/signups") %><br/>
+	<%= f.check_box :is_point_changes_subscribed %> <%= tr("Revisions on your documents and talking points", "view/users/signups")%><br/>	
+	<%= f.check_box :is_followers_subscribed %> <%= tr("When someone follows you or one of your contacts joins", "view/users/signups")%><br/>		
+	<%= f.check_box :is_finished_subscribed %> <%= tr("When priorities are finished", "view/users/signups")%><br/>	
+	<%= f.check_box :is_votes_subscribed %> <%= tr("When your vote is needed on an acquisition", "view/users/signups")%><br/>
+	<%= f.check_box :is_messages_subscribed %> <%= tr("Private messages and profile bulletins", "view/users/signups")%><br/>	
 	<% if current_user.is_admin? %>
-		<%= f.check_box :is_admin_subscribed %> <%= t("unsubscribe.admin")%><br/>
+		<%= f.check_box :is_admin_subscribed %> <%= tr("For administrators", "view/users/signups")%><br/>
 	<% end %>
 
 	<%= hidden_field_tag "user[partner_ids][]", "" %>
@@ -24,11 +24,11 @@
 			<a href="<%= partner.website_link %>"><%= partner.name %></a>
 			<% else %>
 			<%= h(partner.name)%>
-			<% end %>(<a href="<%= partner.privacy_url %>"><%= t('partners.privacy_policy')%></a>)
+			<% end %>(<a href="<%= partner.privacy_url %>"><%= tr("privacy policy", "view/users/signups")%></a>)
 		</div>
 	<% end %>
 	<p>
-	<%= submit_tag t('signups.edit.submit'), :class => "yellow_button" %>
-	<p><%= t('users.signups.also_rss', :rss_url => rss_url(@rss_url), :user_name => @user.name) %>
+	<%= submit_tag tr("Save email settings", "view/users/signups"), :class => "yellow_button" %>
+	<p><%= tr("{rss_url} of {user_name} notifications", "view/users/signups", :rss_url => rss_url(@rss_url), :user_name => @user.name) %>
 
 <% end %>

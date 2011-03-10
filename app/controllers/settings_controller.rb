@@ -6,14 +6,14 @@ class SettingsController < ApplicationController
   # GET /settings
   def index
     @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
-    @page_title = t('settings.index.title', :government_name => current_government.name)
+    @page_title = tr("Your {government_name} settings", "controller/settings", :government_name => current_government.name)
   end
 
   # PUT /settings
   def update
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:notice] = t('settings.saved')
+        flash[:notice] = tr("Saved your settings", "controller/settings")
         format.html { 
           redirect_to(settings_url) 
         }
@@ -25,14 +25,14 @@ class SettingsController < ApplicationController
 
   # GET /settings/signups
   def signups
-    @page_title = t('settings.notifications.title', :government_name => current_government.name)
+    @page_title = tr("Your email notifications", "controller/settings", :government_name => current_government.name)
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_notifications", :format => "rss", :c => current_user.rss_code)
     @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
   end
 
   # GET /settings/picture
   def picture
-    @page_title = t('settings.picture.title')
+    @page_title = tr("Your picture", "controller/settings")
   end
 
   def picture_save
@@ -40,7 +40,7 @@ class SettingsController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         ActivityUserPictureNew.create(:user => @user)   
-        flash[:notice] = t('pictures.success')
+        flash[:notice] = tr("Picture uploaded successfully", "controller/settings")
         format.html { redirect_to(:action => :picture) }
       else
         format.html { render :action => "picture" }
@@ -50,7 +50,7 @@ class SettingsController < ApplicationController
     
   # GET /settings/delete
   def delete
-    @page_title = t('settings.delete.title', :government_name => current_government.name)
+    @page_title = tr("Delete your {government_name} account", "controller/settings", :government_name => current_government.name)
   end
 
   # DELETE /settings
@@ -59,7 +59,7 @@ class SettingsController < ApplicationController
     self.current_user.forget_me
     cookies.delete :auth_token
     reset_session    
-    flash[:notice] = t('settings.destroy')
+    flash[:notice] = tr("Your account was deleted. Good bye!", "controller/settings")
     redirect_to "/" and return
   end
 

@@ -1,21 +1,21 @@
 <% if following %>
 	<div class="green_button" id="activity_add_<%= activity.id.to_s %>">
-		<%= t('following_discussions.new.ing')%> 
+		<%= tr("Following discussion", "view/activities/_button")%> 
 		<span class="big_x">
 		<%= link_to "&nbsp;x".safe_html, activity_following_path(activity, following, :region => "activity_show"), 
                 :method => :post,
 		            :remote=>true,
       		      'data-disable-with' => "",
                 'data-loader-name' => "circle",
- 		            :method => :delete, :class => "priority_remove_link", :title => t('follow.delete.title') %>	
+ 		            :method => :delete, :class => "priority_remove_link", :title => tr("Remove this person from your network", "view/activities/_button") %>	
 		</span>
 	</div>			
 <% else %>
 	<div class="yellow_button" id="activity_add_<%= activity.id.to_s %>">
-		<%= link_to t('following_discussions.new.name'), activity_followings_path(activity, :region => "activity_show"), 
+		<%= link_to tr("Follow this discussion", "view/activities/_button"), activity_followings_path(activity, :region => "activity_show"), 
 		            :method => :post, 
                 'data-disable-with' => escape_t(t(:ajax_following_discussion)),
                 'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link", :title => t('follow.title') %>								
+		            :class => "priority_add_link", :title => tr("I want to follow this person's comments and activity", "view/activities/_button") %>								
 	</div>
 <% end %>

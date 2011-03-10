@@ -1,7 +1,7 @@
 <%= render :partial => "header" %>
 <p>
 <% if @documents.empty? %>
-	<%= t('document.empty')%>
+	<%= tr("No documents yet.", "view/users/documents")%>
 <% else %>
 
 	<% for document in @documents %>

@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
 <% if @revisions.empty? %>
-	<%= t('points.revised.empty')%>
+	<%= tr("No talking points have been revised recently", "view/points/revised")%>
 <% else %>
 	
 	<% if @revisions.total_pages > 1 %>

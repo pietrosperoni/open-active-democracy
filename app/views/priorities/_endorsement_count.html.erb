@@ -1,17 +1,17 @@
 <span class="priority_<%= priority.id.to_s %>_endorsement_count priority_endorsement_count" id="priority_<%= priority.id.to_s %>_endorsement_count">
-<%= link_to priority.up_endorsements_count.to_s + ' ' + t('endorse.ed'), endorsers_priority_url(priority) %>
+<%= link_to (priority.up_endorsements_count.to_s + ' ' + tr("endorsed", "view/priorities/_endorsement_count")).html_safe, endorsers_priority_url(priority) %>
 <% if priority.down_endorsements_count > 0 %> 
-	&middot; <%= link_to priority.down_endorsements_count.to_s + ' ' + t('oppose.ed'), opposers_priority_url(priority) %>
+	&middot; <%= link_to (priority.down_endorsements_count.to_s + ' ' + tr("opposed", "view/priorities/_endorsement_count")).html_safe, opposers_priority_url(priority) %>
 <% end %>
 
 <% if priority.points_count > 0 %>
-	&middot; <%= link_to t('menu.briefing.points', :count => priority.points_count).downcase, top_points_priority_url(priority) -%>
+	&middot; <%= link_to tr("{count} talking points", "view/priorities/_endorsement_count", :count => priority.points_count).downcase, top_points_priority_url(priority) -%>
 <% else %>
-	&middot; <%= link_to t('points.top_points.new_point_short').downcase, new_priority_point_path(priority)+"?support=1" , :title => t('menu.briefing.add_point.title'), :class => "qtip_left" %>
+	&middot; <%= link_to tr("New point", "view/priorities/_endorsement_count").downcase, new_priority_point_path(priority)+"?support=1" , :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_endorsement_count"), :class => "qtip_left" %>
 <% end %>
 
 <% if priority.discussions_count > 0 %> 
-	&middot; <%= link_to t('comments.discussions.name', :count => priority.discussions_count), discussions_priority_url(priority) %>
+	&middot; <%= link_to tr("{count} discussions", "view/priorities/_endorsement_count", :count => priority.discussions_count), discussions_priority_url(priority) %>
 <% end %>
 
 <% if priority.priority_processes.count > 0 %> 
@@ -19,8 +19,8 @@
 <% end %>
 
 <% if priority.is_official_endorsed? %> 
-	&middot; <%= current_government.official_user_short_name %> <span class="endorsed"><%= t('endorse.plural')%></span>
+	&middot; <%= current_government.official_user_short_name %> <span class="endorsed"><%= tr("endorses", "view/priorities/_endorsement_count")%></span>
 <% elsif priority.is_official_opposed? %> 
-	&middot; <%= current_government.official_user_short_name %> <span class="opposed"><%= t('oppose.plural')%></span>
+	&middot; <%= current_government.official_user_short_name %> <span class="opposed"><%= tr("opposes", "view/priorities/_endorsement_count")%></span>
 <% end %>
 </span>

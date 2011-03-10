@@ -1,16 +1,16 @@
 <%= render :partial => "priorities/header" %>
 <%= render :partial => "priorities/nav" %>
 <p>
-<%= I18n.t('blurb_document_new')%>
+<%= tr("translation missing: en.blurb_document_new", "view/documents/new")%>
 	<p>
 <%= form_for :document, :url => priority_documents_path(@priority)  do |f| %>
 	<%= f.error_messages %>
 <p>
-	<%= t('document.revision.new.name.label')%><br/>
+	<%= tr("Title <span class='small'>60 characters</span>", "view/documents/new")%><br/>
    <%= f.text_field :name, :size => 50, :maxlength => 60 %>		
 </p>
 <p>
-<%= t('document.revision.new.position.label', :support_radio => f.radio_button(:value, 1), :neutral_radio => f.radio_button(:value, 0), :oppose_radio => f.radio_button(:value, -1), :priority_name => link_to(@priority.name, @priority)) %>
+<%= tr("Is this document {support_radio} in support {neutral_radio} neutral or {oppose_radio} in opposition to {priority_name}?", "view/documents/new", :support_radio => f.radio_button(:value, 1), :neutral_radio => f.radio_button(:value, 0), :oppose_radio => f.radio_button(:value, -1), :priority_name => link_to(@priority.name, @priority)) %>
 </p>
 <p>
 <%= f.text_area :content, :rows => 10, :cols => 60 %>
@@ -19,7 +19,7 @@
 <p>
 <table border="0" cellspacing="0" cellpading="0">
 	<tr><td valign="top">
-		<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
+		<%= f.submit tr("Save document", "view/documents/new"), :id => "submit", :class => "yellow_button" %>
 	</td><td valign="top" style="padding-left: 10px; padding-top: 3px;">
 		<div id="errors" class="error"><%= f.error_messages %></div>
 	</td>
@@ -29,4 +29,4 @@
 
 <% end %>
 <p>
-<%= I18n.t('blurb_textile')%>
+<%= tr("translation missing: en.blurb_textile", "view/documents/new")%>

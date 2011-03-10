@@ -2,7 +2,7 @@ class ColorSchemesController < ApplicationController
   # GET /color_schemes
   # GET /color_schemes.xml
   def index
-    @page_title = t('color_schemes.theme.title', :government_name => current_government.name)
+    @page_title = tr("Choose a color theme", "controller/schemes", :government_name => current_government.name)
     @color_schemes = ColorScheme.featured.all
 
     respond_to do |format|
@@ -24,7 +24,7 @@ class ColorSchemesController < ApplicationController
   # GET /color_schemes/new
   # GET /color_schemes/new.xml
   def new
-    @page_title = t('color_schemes.new.title', :government_name => current_government.name)
+    @page_title = tr("Design for {government_name}", "controller/schemes", :government_name => current_government.name)
     if params[:id]
       find = ColorScheme.find(params[:id]) 
       @color_scheme = find.clone if find
@@ -45,12 +45,12 @@ class ColorSchemesController < ApplicationController
   # POST /color_schemes
   # POST /color_schemes.xml
   def create
-    @page_title = t('color_schemes.new.title', :government_name => current_government.name)
+    @page_title = tr("Design for {government_name}", "controller/schemes", :government_name => current_government.name)
     @color_scheme = ColorScheme.new(params[:color_scheme])
     respond_to do |format|
       if @color_scheme.save
         current_government.update_attribute(:color_scheme_id, @color_scheme.id)
-        flash[:notice] = t('color_schemes.new.success')
+        flash[:notice] = tr("Saved color scheme", "controller/schemes")
         format.html { redirect_to(new_color_scheme_url(:id => @color_scheme)) }
         format.xml  { render :xml => @color_scheme, :status => :created, :location => @color_scheme }
       else
@@ -67,7 +67,7 @@ class ColorSchemesController < ApplicationController
 
     respond_to do |format|
       if @color_scheme.update_attributes(params[:color_scheme])
-        flash[:notice] = t('color_schemes.new.success')
+        flash[:notice] = tr("Saved color scheme", "controller/schemes")
         format.html { redirect_to(@color_scheme) }
         format.xml  { head :ok }
       else

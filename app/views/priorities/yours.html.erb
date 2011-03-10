@@ -3,19 +3,19 @@
 <%= render :partial => "priorities/new_button" %>
 
 <% if params[:action] == 'yours_finished' %>
-	<%= t('priorities.yours_finished.intro')%>
+	<%= tr("Like a to do list, when priorities you've endorsed or opposed are finished, they will fall off your list and be placed here.", "view/priorities/yours")%>
 <% end %>
 	
 	
 <% if @priorities.empty? %>
-	<%= t('endorsements.empty')%>
+	<%= tr("You have not endorsed any priorities yet. For inspiration, why not check out some <a href='/priorities/random'>random priorities</a>?", "view/priorities/yours")%>
 <% else %>
 
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= t('rank') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
+			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/yours") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/priorities/yours") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/priorities/yours") %></span></td>
 			<td style="padding-left: 7px; padding-bottom: 2px;"><%= will_paginate @priorities %></td>	
 		</tr>
 	<% for e in @priorities %>
@@ -35,6 +35,6 @@
 
 	<%= will_paginate @priorities %>
 
-	<p><%= t('priorities.yours.outro')%>
+	<p><%= tr("You can also follow all the <a href='/news/your_priority_activities'>activity</a> and <a href='/news/your_priority_discussions'>discussions</a> on your priorities.", "view/priorities/yours")%>
 		
 <% end %>

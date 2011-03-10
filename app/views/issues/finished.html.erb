@@ -3,7 +3,7 @@
 <%= render :partial => "priorities/new_button" %>
 
 <% if @priorities.empty? %>
-	<p><%= t('priorities.finished.empty')%>
+	<p><%= tr("This is where priorities that have been finished, either successfully or unsuccessfully will be.", "view/issues/finished")%>
 <% else %>
 	
 	<% for priority in @priorities %>

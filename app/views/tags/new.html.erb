@@ -9,11 +9,11 @@
 		
 			<%= form_for(@tag) do |f| %>
 
-			  <%= f.error_messages :header_message => t('tags.errors.header_message', :tags_name => current_government.tags_name.downcase) %>
+			  <%= f.error_messages :header_message => tr("There was a problem saving {tags_name}", "view/tags/new", :tags_name => current_government.tags_name.downcase) %>
 
 				<% if @tag.new_record? %>
 				<div class="field">
-					<div class="field_label"><%= t('tags.edit.name.label')%></div>
+					<div class="field_label"><%= tr("Name", "view/tags/new")%></div>
 			    	<div class="field_box">
 						<%= f.text_field :name, :size => 30, :maxlength => 60 %>
 					</div>
@@ -21,33 +21,33 @@
 				<% else %>
 					<div class="field">
 						<div class="field_label">
-							<%= t('tags.edit.name.unchangeable', :tag_name => @tag.name)%>
+							<%= tr("Name: {tag_name}", "view/tags/new", :tag_name => @tag.name)%>
 						</div>
 					</div>
 				<% end %>
 				
 				<div class="field">
-					<div class="field_label"><%= t('tags.edit.display_name.label')%></div>
+					<div class="field_label"><%= tr("Title (usually the same as name)", "view/tags/new")%></div>
 					<div class="field_box">
 						<%= f.text_field :title, :size => 30, :maxlength => 60 %>
 					</div>
 				</div>
 				
 				<div class="field">
-					<div class="field_label"><%= t('tags.edit.description.label')%></div>
+					<div class="field_label"><%= tr("Description", "view/tags/new")%></div>
 			    	<div class="field_box">
 						<%= f.text_field :description, :size => 60, :maxlength => 200 %>
 					</div>
 				</div>				
 				
 				<div class="field">
-					<div class="field_label"><%= t('tags.edit.prompt.label')%></div>
+					<div class="field_label"><%= tr("Prompt", "view/tags/new")%></div>
 			    	<div class="field_box">
 						<%= f.text_field :prompt, :size => 60, :maxlength => 100 %>
 					</div>
 				</div>				
 
-			  <%= f.submit t('tags.new.submit', :tags_name => current_government.tags_name.titleize), :class => "yellow_button" %>
+			  <%= f.submit tr("Save {tags_name}", "view/tags/new", :tags_name => current_government.tags_name.titleize), :class => "yellow_button" %>
 
 			<% end %>
 			

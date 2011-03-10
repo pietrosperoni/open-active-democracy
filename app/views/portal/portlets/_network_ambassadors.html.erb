@@ -1,4 +1,4 @@
-<% cache(["portlets_network_ambassadors",I18n.locale,Partner.current_id], :expires_in => 5.minutes) do %>
+<% cache(["portlets_network_ambassadors",locale,Partner.current_id], :expires_in => 5.minutes) do %>
 <% @row = 0 %>
 <table border="0" cellspacing="0" cellpadding="0">
 	<% for user in User.active.by_invites_accepted.item_limit(portlet.portlet_template.item_limit) %>
@@ -11,22 +11,22 @@
 			</td><td style="padding: 5px 5px 4px 0px;" valign="top">
 				<%= link_to user.login, user %><span class="pc"><%= user.capitals_count%><%= current_government.currency_short_name %></span>
 				<% if user.referrals_count > 0 %>
-					<%= t('users.recruited.name', :count => user.referrals_count) %>
+					<%= tr("Recruited {count} members", "view/portal/portlets", :count => user.referrals_count) %>
 				<% end %>
 				<% if user.referrals_count > 0 and user.contacts_invited_count > 0 %>
 					&middot;
 				<% end %>
 				<% if user.contacts_invited_count > 0 %>
-					<%= t('users.invited.name', :count => user.contacts_invited_count) %>
+					<%= tr("Invited {count} people", "view/portal/portlets", :count => user.contacts_invited_count) %>
 				<% end %>				
 				<% if user.has_top_priority? %>
-					<br/><%= t('endorsements.priority1') %>
-					<% if user.top_endorsement.is_down? %><span class="opposed"><%= t('oppose.ing')%></span><% end %>
+					<br/><%= tr("#1 priority:", "view/portal/portlets") %>
+					<% if user.top_endorsement.is_down? %><span class="opposed"><%= tr("Opposing", "view/portal/portlets")%></span><% end %>
 					<%= link_to user.top_endorsement.priority.name, user.top_endorsement.priority %>.
 				<% end %>
 			</td>
 		</tr>
 	<% end %>					
 </table>
-<%= link_to "#{t('more')}...", "/network/ambassadors" %>
+<%= link_to "#{tr("More", "view/portal/portlets")}...", "/network/ambassadors" %>
 <% end %>

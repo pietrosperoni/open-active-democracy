@@ -8,12 +8,12 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.news.everything'), :controller => "news", :action => "activities" %>
+					<%= link_to tr("Everything", "view/news/_nav"), :controller => "news", :action => "activities" %>
 				</span>
 			</li>			
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.news.discussions'), :controller => "news", :action => "discussions" %>
+					<%= link_to tr("Discussions", "view/news/_nav"), :controller => "news", :action => "discussions" %>
 				</span>
 			</li>
 			<li class="tab3">
@@ -24,7 +24,7 @@
 			<% if current_government.has_official? %>
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.news.official_user_activity', :official_user_name => current_government.official_user_short_name), :controller => "news", :action => "official" %>
+						<%= link_to tr("{official_user_name} activity", "view/news/_nav", :official_user_name => current_government.official_user_short_name), :controller => "news", :action => "official" %>
 					</span>
 				</li>
 			<% end %>			
@@ -35,7 +35,7 @@
 			</li>
 			<li class="tab6">
 				<span class="tab_header">
-					<%= link_to t('menu.news.manda'), :controller => "news", :action => "changes_voting" %>
+					<%= link_to tr("M&A", "view/news/_nav"), :controller => "news", :action => "changes_voting" %>
 				</span>
 			</li>			
 		</ul>
@@ -51,32 +51,32 @@
 
 					<li class="tab1">
 						<span class="tab_header">
-							<%= link_to t('menu.news.all'), :controller => "news", :action => "discussions" %>
+							<%= link_to tr("All", "view/news/_nav"), :controller => "news", :action => "discussions" %>
 						</span>
 					</li>
 
 					<li class="tab2">
 						<span class="tab_header">
-							<%= link_to t('menu.news.yours'), :controller => "news", :action => "your_discussions" %>
+							<%= link_to tr("Yours", "view/news/_nav"), :controller => "news", :action => "your_discussions" %>
 						</span>
 					</li>
 			
 					<li class="tab3">
 						<span class="tab_header">
-							<%= link_to t('menu.news.your_priorities'), :controller => "news", :action => "your_priority_discussions" %>
+							<%= link_to tr("Your priorities", "view/news/_nav"), :controller => "news", :action => "your_priority_discussions" %>
 						</span>
 					</li>			
 
 					<li class="tab4">
 						<span class="tab_header">
-							<%= link_to t('menu.news.created'), :controller => "news", :action => "your_priorities_created_discussions" %>	
+							<%= link_to tr("Priorities you created", "view/news/_nav"), :controller => "news", :action => "your_priorities_created_discussions" %>	
 						</span>
 					</li>
 				
 					<% if current_user.followings_count > 0 %>
 						<li class="tab5">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_network'), :controller => "news", :action => "your_network_discussions" %>	
+								<%= link_to tr("Your network", "view/news/_nav"), :controller => "news", :action => "your_network_discussions" %>	
 							</span>
 						</li>
 					<% end %>
@@ -84,7 +84,7 @@
 					<% if current_user.followers_count > 0 %>
 						<li class="tab6">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_followers'), :controller => "news", :action => "your_followers_discussions" %>
+								<%= link_to tr("Your followers", "view/news/_nav"), :controller => "news", :action => "your_followers_discussions" %>
 							</span>
 						</li>
 					<% end %>
@@ -103,32 +103,32 @@
 
 					<li class="tab1">
 						<span class="tab_header">
-							<%= link_to t('menu.news.all'), :controller => "news", :action => "activities" %>
+							<%= link_to tr("All", "view/news/_nav"), :controller => "news", :action => "activities" %>
 						</span>
 					</li>
 
 					<li class="tab2">
 						<span class="tab_header">
-							<%= link_to t('menu.news.yours'), :controller => "news", :action => "your_activities" %>
+							<%= link_to tr("Yours", "view/news/_nav"), :controller => "news", :action => "your_activities" %>
 						</span>
 					</li>
 			
 					<li class="tab3">
 						<span class="tab_header">
-							<%= link_to t('menu.news.your_priorities'), :controller => "news", :action => "your_priority_activities" %>
+							<%= link_to tr("Your priorities", "view/news/_nav"), :controller => "news", :action => "your_priority_activities" %>
 						</span>
 					</li>			
 
 					<li class="tab4">
 						<span class="tab_header">
-							<%= link_to t('menu.news.created'), :controller => "news", :action => "your_priorities_created_activities" %>	
+							<%= link_to tr("Priorities you created", "view/news/_nav"), :controller => "news", :action => "your_priorities_created_activities" %>	
 						</span>
 					</li>
 				
 					<% if current_user.followings_count > 0 %>
 						<li class="tab5">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_network'), :controller => "news", :action => "your_network_activities" %>	
+								<%= link_to tr("Your network", "view/news/_nav"), :controller => "news", :action => "your_network_activities" %>	
 							</span>
 						</li>
 					<% end %>
@@ -136,7 +136,7 @@
 					<% if current_user.followers_count > 0 %>
 						<li class="tab6">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_followers'), :controller => "news", :action => "your_followers_activities" %>
+								<%= link_to tr("Your followers", "view/news/_nav"), :controller => "news", :action => "your_followers_activities" %>
 							</span>
 						</li>
 					<% end %>
@@ -155,32 +155,32 @@
 
 					<li class="tab1">
 						<span class="tab_header">
-							<%= link_to t('menu.news.all'), :controller => "news", :action => "points" %>
+							<%= link_to tr("All", "view/news/_nav"), :controller => "news", :action => "points" %>
 						</span>
 					</li>
 
 					<li class="tab2">
 						<span class="tab_header">
-							<%= link_to t('menu.news.yours'), :controller => "news", :action => "your_points" %>
+							<%= link_to tr("Yours", "view/news/_nav"), :controller => "news", :action => "your_points" %>
 						</span>
 					</li>
 			
 					<li class="tab3">
 						<span class="tab_header">
-							<%= link_to t('menu.news.your_priorities'), :controller => "news", :action => "your_priority_points" %>
+							<%= link_to tr("Your priorities", "view/news/_nav"), :controller => "news", :action => "your_priority_points" %>
 						</span>
 					</li>			
 
 					<li class="tab4">
 						<span class="tab_header">
-							<%= link_to t('menu.news.created'), :controller => "news", :action => "your_priorities_created_points" %>	
+							<%= link_to tr("Priorities you created", "view/news/_nav"), :controller => "news", :action => "your_priorities_created_points" %>	
 						</span>
 					</li>
 				
 					<% if current_user.followings_count > 0 %>
 						<li class="tab5">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_network'), :controller => "news", :action => "your_network_points" %>	
+								<%= link_to tr("Your network", "view/news/_nav"), :controller => "news", :action => "your_network_points" %>	
 							</span>
 						</li>
 					<% end %>
@@ -188,7 +188,7 @@
 					<% if current_user.followers_count > 0 %>
 						<li class="tab6">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_followers'), :controller => "news", :action => "your_followers_points" %>
+								<%= link_to tr("Your followers", "view/news/_nav"), :controller => "news", :action => "your_followers_points" %>
 							</span>
 						</li>
 					<% end %>
@@ -207,20 +207,20 @@
 
 					<li class="tab1">
 						<span class="tab_header">
-							<%= link_to t('menu.news.all'), :controller => "news", :action => "capital" %>
+							<%= link_to tr("All", "view/news/_nav"), :controller => "news", :action => "capital" %>
 						</span>
 					</li>
 
 					<li class="tab2">
 						<span class="tab_header">
-							<%= link_to t('menu.news.yours'), :controller => "news", :action => "your_capital" %>
+							<%= link_to tr("Yours", "view/news/_nav"), :controller => "news", :action => "your_capital" %>
 						</span>
 					</li>
 			
 					<% if current_user.followings_count > 0 %>
 						<li class="tab3">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_network'), :controller => "news", :action => "your_network_capital" %>	
+								<%= link_to tr("Your network", "view/news/_nav"), :controller => "news", :action => "your_network_capital" %>	
 							</span>
 						</li>
 					<% end %>
@@ -228,7 +228,7 @@
 					<% if current_user.followers_count > 0 %>
 						<li class="tab4">
 							<span class="tab_header">
-								<%= link_to t('menu.news.your_followers'), :controller => "news", :action => "your_followers_capital" %>
+								<%= link_to tr("Your followers", "view/news/_nav"), :controller => "news", :action => "your_followers_capital" %>
 							</span>
 						</li>
 					<% end %>
@@ -247,38 +247,38 @@
 
 					<li class="tab1">
 						<span class="tab_header">
-							<%= link_to t('menu.news.proposals'), :controller => "news", :action => "changes" %>
+							<%= link_to tr("Proposals", "view/news/_nav"), :controller => "news", :action => "changes" %>
 						</span>
 					</li>
 
 					<li class="tab2">
 						<span class="tab_header">
-							<%= link_to t('menu.news.voting'), :controller => "news", :action => "changes_voting" %>
+							<%= link_to tr("Voting results", "view/news/_nav"), :controller => "news", :action => "changes_voting" %>
 						</span>
 					</li>
 			
 					<li class="tab3">
 						<span class="tab_header">
-							<%= link_to t('menu.news.your_activity'), :controller => "news", :action => "your_changes" %>
+							<%= link_to tr("Your activity", "view/news/_nav"), :controller => "news", :action => "your_changes" %>
 						</span>
 					</li>
 					
 					<li class="tab4">
 						<span class="tab_header">
-							<%= link_to t('menu.news.created'), :controller => "news", :action => "your_priorities_created_changes" %>
+							<%= link_to tr("Priorities you created", "view/news/_nav"), :controller => "news", :action => "your_priorities_created_changes" %>
 							
 						</span>
 					</li>
 					
 					<li class="tab5">
 						<span class="tab_header">
-							<%= link_to t('menu.news.your_priorities'), :controller => "news", :action => "your_priority_changes_activity" %>
+							<%= link_to tr("Your priorities", "view/news/_nav"), :controller => "news", :action => "your_priority_changes_activity" %>
 						</span>
 					</li>
 					
 					<li class="tab6">
 						<span class="tab_header">
-							<%= link_to t('menu.news.all_activity'), :controller => "news", :action => "changes_activity" %>
+							<%= link_to tr("All activity", "view/news/_nav"), :controller => "news", :action => "changes_activity" %>
 						</span>
 					</li>																		
 				

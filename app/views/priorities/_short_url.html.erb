@@ -1,9 +1,9 @@
 <div id="priority_short_url">
 <% if priority.attribute_present?("short_url") %>
-	<%= t('priorities.short_url.name')%>
+	<%= tr("Short URL:", "view/priorities/_short_url")%>
 	<input type="text" id="short_url" onFocus="this.select()" onMouseUp="return false;" value="<%= priority.short_url %>" readonly="true" size="10">
 <% else %>	
-	<%= link_to t('priorities.short_url.link'), create_short_url_priority_path(priority),
+	<%= link_to tr("Make a short URL for Twitter", "view/priorities/_short_url"), create_short_url_priority_path(priority),
               :remote=>true,
               'data-disable-with' => escape_t(t(:ajax_creating_url)),
               'data-loader-name' => "horizontal_small",

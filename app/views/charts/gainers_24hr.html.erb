@@ -1,10 +1,10 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= t('charts.gainers_24hr.intro')%>
+<%= tr("Imagine each person's priorities are a portfolio of stocks like a mutual fund. This page is updated at midnight ET with the people whose priorities rose the most in the rankings in the last 24 hours.", "view/charts/gainers_")%>
 <p>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td style="padding-left: 3px;"><span class="table_header"><%= t('charts.change') %></span></td>
+		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Change", "view/charts/gainers_") %></span></td>
 		<td style="padding-left: 7px; margin-bottom: 2px;" colspan="2"><%= will_paginate @users %></td>				
 	</tr>
 <% for user in @users %>

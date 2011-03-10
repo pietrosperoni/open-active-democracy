@@ -24,7 +24,7 @@ class TwitterController < ApplicationController
     if @response.class == Net::HTTPOK
       user_info = JSON.parse(@response.body)
       if not user_info['screen_name']
-        flash[:error] = t('sessions.create.failed_twitter')
+        flash[:error] = tr("Sign in from Twitter failed.", "controller/twitter")
         redirect_to Government.current.homepage_url + "twitter/failed"
         return
       else
@@ -65,17 +65,17 @@ class TwitterController < ApplicationController
   end
   
   def success
-    flash[:notice] = t('sessions.create.success', :government_name => Government.current.name, :user_name => current_user.name)
+    flash[:notice] = tr("Welcome back, {user_name}.", "controller/twitter", :government_name => Government.current.name, :user_name => current_user.name)
     redirect_back_or_default('/')
   end
   
   def connected
-    flash[:notice] = t('settings.twitter_connected')
+    flash[:notice] = tr("Your Twitter account is now linked", "controller/twitter")
     redirect_back_or_default('/')
   end
   
   def failed
-    flash[:error] = t('sessions.create.failed_twitter')
+    flash[:error] = tr("Sign in from Twitter failed.", "controller/twitter")
     redirect_back_or_default('/')
   end
 

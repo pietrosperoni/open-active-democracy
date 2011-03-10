@@ -11,48 +11,48 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.network.influential'), :controller => "network" %>
+					<%= link_to tr("Influential", "view/network/_nav"), :controller => "network" %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.network.talkative'), :controller => "network", :action => "talkative" %>
+					<%= link_to tr("Talkative", "view/network/_nav"), :controller => "network", :action => "talkative" %>
 				</span>
 			</li>
 			<% if current_government.has_twitter_enabled? %>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to t('menu.network.twitterers'), :controller => "network", :action => "twitterers" %>
+					<%= link_to tr("Twitterers", "view/network/_nav"), :controller => "network", :action => "twitterers" %>
 				</span>
 			</li>
 			<% end %>
 			<li class="tab4">
 				<span class="tab_header">
-					<%= link_to t('menu.network.new'), :controller => "network", :action => "newest" %>
+					<%= link_to tr("New members", "view/network/_nav"), :controller => "network", :action => "newest" %>
 				</span>
 			</li>
 			<li class="tab5">
 				<span class="tab_header">
-					<%= link_to t('menu.network.ambassadors'), :controller => "network", :action => "ambassadors" %>
+					<%= link_to tr("Ambassadors", "view/network/_nav"), :controller => "network", :action => "ambassadors" %>
 				</span>
 			</li>
 			<li class="tab6">
 				<span class="tab_header">
-					<%= link_to t('menu.network.partners'), :controller => "network", :action => "partners" %>
+					<%= link_to tr("Partners", "view/network/_nav"), :controller => "network", :action => "partners" %>
 				</span>
 			</li>
 			<% if logged_in? and current_user.is_admin? %>
 			<li class="tab7 mega">
 				<span class="tab_header">
-					<%= link_to t('menu.network.more'), :controller => "network", :action => "newest" %>
+					<%= link_to tr("More", "view/network/_nav"), :controller => "network", :action => "newest" %>
 				</span>
 				
 				<div class="tab_body">
-					<%= link_to t('menu.network.unverified'), :controller => "network", :action => "unverified" %><br/>	
-					<%= link_to t('menu.network.warnings'), :controller => "network", :action => "warnings" %><br/>										
-					<%= link_to t('menu.network.suspended'), :controller => "network", :action => "suspended" %><br/>
-					<%= link_to t('menu.network.probation'), :controller => "network", :action => "probation" %><br/>
-					<%= link_to t('menu.network.deleted'), :controller => "network", :action => "deleted" %>
+					<%= link_to tr("Unverified", "view/network/_nav"), :controller => "network", :action => "unverified" %><br/>	
+					<%= link_to tr("Warnings", "view/network/_nav"), :controller => "network", :action => "warnings" %><br/>										
+					<%= link_to tr("Suspended", "view/network/_nav"), :controller => "network", :action => "suspended" %><br/>
+					<%= link_to tr("Probation", "view/network/_nav"), :controller => "network", :action => "probation" %><br/>
+					<%= link_to tr("Deleted", "view/network/_nav"), :controller => "network", :action => "deleted" %>
 					<p>
 				</div>				
 			</li>

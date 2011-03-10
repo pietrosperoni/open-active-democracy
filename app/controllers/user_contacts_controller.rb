@@ -5,7 +5,7 @@ class UserContactsController < ApplicationController
   
   # GET /users/1/contacts
   def index
-    @page_title = t('contacts.index.title', :government_name => current_government.name)
+    @page_title = tr("Find people you know at {government_name}", "controller/contacts", :government_name => current_government.name)
     if @user.contacts_members_count > 0
       redirect_to members_user_contacts_path(@user) and return
     elsif @user.contacts_not_invited_count > 0
@@ -17,14 +17,14 @@ class UserContactsController < ApplicationController
   end
 
   def following
-    @page_title = t('contacts.following.title', :government_name => current_government.name)
+    @page_title = tr("People you're following at {government_name}", "controller/contacts", :government_name => current_government.name)
     unless current_following_ids.empty?
       @users = User.active.by_capital.find(:all, :conditions => ["id in (?)",current_following_ids]).paginate :page => params[:page], :per_page => params[:per_page]
     end
   end
   
   def members
-    @page_title = t('contacts.members.title', :government_name => current_government.name)
+    @page_title = tr("Already members at {government_name}", "controller/contacts", :government_name => current_government.name)
     @contacts = @user.contacts.active.members.not_following.find :all, :include => :other_user, :order => "users.created_at desc"
     if @contacts.empty?
       redirect_to not_invited_user_contacts_path(@user) and return
@@ -32,18 +32,18 @@ class UserContactsController < ApplicationController
   end  
   
   def not_invited
-    @page_title = t('contacts.not_invited.title', :government_name => current_government.name)
+    @page_title = tr("Not members yet, go ahead and invite them.", "controller/contacts", :government_name => current_government.name)
     @contacts = @user.contacts.active.not_members.not_invited.with_email
   end
   
   def invited
-    @page_title = t('contacts.invited.title', :government_name => current_government.name)
+    @page_title = tr("People you've invited to join {government_name}", "controller/contacts", :government_name => current_government.name)
     @contacts = @user.contacts.active.not_members.invited.with_email.recently_updated.paginate :page => params[:page], :per_page => params[:per_page]
   end  
 
   # GET /users/1/contacts/new
   def new
-    @page_title = t('contacts.new.title', :government_name => current_government.name)
+    @page_title = tr("Invite people to join {government_name}", "controller/contacts", :government_name => current_government.name)
     @contact = @user.contacts.new
     respond_to do |format|
       format.html # new.html.erb
@@ -65,7 +65,7 @@ class UserContactsController < ApplicationController
         @user.follow(@already_member)
         format.js {
           render :update do |page|
-            page.replace 'status', '<div id="status">' + t('contacts.new.already_member', :user_name => @already_member.login) + '</div>'
+            page.replace 'status', '<div id="status">' + tr("{user_name} is already a member", "controller/contacts", :user_name => @already_member.login) + '</div>'
             # page.visual_effect :fade, 'status', :duration => 3            
             page['user_contact_name'].value = ''
             page['user_contact_email'].value = ''            
@@ -75,7 +75,7 @@ class UserContactsController < ApplicationController
       elsif @existing
         format.js {
           render :update do |page|
-            page.replace 'status', '<div id="status">' + t('contacts.new.already_invited', :user_name => @contact.name) + '</div>'
+            page.replace 'status', '<div id="status">' + tr("You already invited {user_name}", "controller/contacts", :user_name => @contact.name) + '</div>'
             # page.visual_effect :fade, 'status', :duration => 3            
             page['user_contact_name'].value = ''
             page['user_contact_email'].value = ''            
@@ -85,12 +85,12 @@ class UserContactsController < ApplicationController
       elsif @contact.save
         @contact.invite!
         format.html { 
-          flash[:notice] = t('contacts.new.invited', :user_name => @contact.name)
+          flash[:notice] = tr("Invited {user_name}", "controller/contacts", :user_name => @contact.name)
           redirect_to(@contact) 
           }
         format.js {
           render :update do |page|
-            page.replace 'status', '<div id="status">' + t('contacts.new.invited', :user_name => @contact.name) + '</div>'
+            page.replace 'status', '<div id="status">' + tr("Invited {user_name}", "controller/contacts", :user_name => @contact.name) + '</div>'
             # page.visual_effect :fade, 'status', :duration => 3
             page['user_contact_name'].value = ''
             page['user_contact_email'].value = ''            
@@ -127,7 +127,7 @@ class UserContactsController < ApplicationController
           end
           @user.reload
           if @user.contacts_not_invited_count == 0 # invited all their contacts
-            flash[:notice] = t('contacts.multiple.success', :currency_short_name => current_government.currency_short_name, :government_name => current_government.name)
+            flash[:notice] = tr("Thanks for inviting people to join {government_name}. We'll send you an email when they join, and you'll earn 5{currency_short_name} too.", "controller/contacts", :currency_short_name => current_government.currency_short_name, :government_name => current_government.name)
             page.redirect_to invited_user_contacts_path(@user)
           else
             page.hide 'status'            

@@ -1,5 +1,5 @@
 <% if changes.empty? %>
-	<%= t('changes.empty')%>
+	<%= tr("No acquisition proposals", "view/portal/portlets")%>
 <% else %>
 	<% for change in changes %>
 		<%= render :partial => "changes/show", :locals => {:change => change} %>

@@ -1,8 +1,8 @@
 <div id="hp_intro"><%= @page_title %></div>
 
 <%= form_for :password, :url => passwords_path do |f| -%>
-<p><label for="email"><%= t('passwords.new.email.label')%></label><br/>
-<%= text_field_tag :email %> <%= submit_tag t('passwords.new.submit'), :class => "yellow_button" %></p>
+<p><label for="email"><%= tr("Your email address", "view/passwords/new")%></label><br/>
+<%= text_field_tag :email %> <%= submit_tag tr("Request a new password", "view/passwords/new"), :class => "yellow_button" %></p>
 <% end -%>
 
-<%= link_to t('passwords.new.nevermind'), new_session_url %>
+<%= link_to tr("Never mind, I remember it now", "view/passwords/new"), new_session_url %>

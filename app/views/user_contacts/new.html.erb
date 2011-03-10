@@ -1,6 +1,6 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= I18n.t("blurb_invite_intro")%>
+<%= tr("translation missing: en.blurb_invite_intro", "view/user_contacts/new")%>
 <p>
 <%= form_for @contact, :remote=>true,
              'data-disable-with' =>  escape_t(t(:ajax_sending)),
@@ -10,7 +10,7 @@
 	<% if logged_in? %>
 
 		<% if @user.login != @user.real_name %>
-			<%= t('contacts.new.is_from_realname.label')%>
+			<%= tr("Should I reference your real name, or your site name?", "view/user_contacts/new")%>
 			<br/>
 			<%= f.radio_button :is_from_realname, false %> <%= @user.login %>					
 		    <%= f.radio_button :is_from_realname, true %> <%= @user.real_name %>	
@@ -20,12 +20,12 @@
 
   	<p>
 	<table border="0" cellspacing="0" cellpadding="0">
-		<tr><td><%= t('contacts.new.to_name.label')%></td><td style="padding-left: 10px;"><%= t('contacts.new.to_email.label')%></td><td></td></tr>
+		<tr><td><%= tr("Their name", "view/user_contacts/new")%></td><td style="padding-left: 10px;"><%= tr("Their email", "view/user_contacts/new")%></td><td></td></tr>
 		<tr><td><%= f.text_field :name, :size => 17 %></td>
 			<td style="padding-left: 10px;"><%= f.text_field :email, :size => 17 %></td>
 			<td style="padding-left: 10px;">
-			<%= link_to t('contacts.new.import.name'), user_contacts_path(current_user) %>
-			<div class="small"><%= t('contacts.new.import.example')%></div>
+			<%= link_to tr("Import your contacts", "view/user_contacts/new"), user_contacts_path(current_user) %>
+			<div class="small"><%= tr("works with Google, Yahoo, Windows Live, and Facebook", "view/user_contacts/new")%></div>
 			</td>
 		</tr>
     </table>
@@ -33,7 +33,7 @@
 	<p>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr><td>
-    		<%= f.submit t('contacts.new.submit'), :class => "yellow_button" %>
+    		<%= f.submit tr("Send email invitation", "view/user_contacts/new"), :class => "yellow_button" %>
 		</td><td valign="top">
 			<div id="status"></div>
 		</td></tr>

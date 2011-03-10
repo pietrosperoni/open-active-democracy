@@ -7,7 +7,7 @@ class FollowingDiscussionsController < ApplicationController
   # GET /activities/1/followings.xml
   def index
     if @activity.status == 'deleted'
-      flash[:error] = t('comments.deleted')
+      flash[:error] = tr("That comment was deleted", "controller/discussions")
       if not (logged_in? and current_user.is_admin?)
         redirect_to @activity.priority and return if @activity.priority
         redirect_to '/' and return
@@ -42,7 +42,7 @@ class FollowingDiscussionsController < ApplicationController
       ActivityDiscussionFollowingNew.create(:user => current_user, :activity => @activity)
       respond_to do |format|
         format.html { 
-          flash[:notice] = t('following_discussions.new.success')
+          flash[:notice] = tr("You will now be notified when others add to this discussion", "controller/discussions")
           redirect_to(activity_comments_path(@activity)) 
         }
         format.js {

@@ -13,12 +13,12 @@ class RevisionsController < ApplicationController
   # GET /points/1/revisions/1
   def show
     if @point.is_deleted?
-      flash[:error] = t('points.deleted')
+      flash[:error] = tr("That talking point was deleted", "controller/revisions")
       redirect_to @point.priority
       return
     end    
     @revision = @point.revisions.find(params[:id])
-    @page_title = t('points.revision.show.title', :user_name => @revision.user.name.possessive, :point_name => @revision.name)
+    @page_title = tr("{user_name} revision of {point_name}", "controller/revisions", :user_name => @revision.user.name.possessive, :point_name => @revision.name)
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -27,7 +27,7 @@ class RevisionsController < ApplicationController
   # GET /points/1/revisions/1/clean
   def clean
     @revision = @point.revisions.find(params[:id])
-    @page_title = t('points.revision.show.title', :user_name => @revision.user.name.possessive, :point_name => @revision.name)
+    @page_title = tr("{user_name} revision of {point_name}", "controller/revisions", :user_name => @revision.user.name.possessive, :point_name => @revision.name)
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -41,7 +41,7 @@ class RevisionsController < ApplicationController
     @revision.website = @point.website
     @revision.value = @point.value
     @revision.other_priority = @point.other_priority
-    @page_title = t('points.revision.new.title', :point_name => @point.name)    
+    @page_title = tr("Revise {point_name}", "controller/revisions", :point_name => @point.name)    
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -76,7 +76,7 @@ class RevisionsController < ApplicationController
             @comment.save(:validate => false)            
           end
         end
-        flash[:notice] = t('points.revision.new.success', :point_name => @point.name)
+        flash[:notice] = tr("Revised {point_name}", "controller/revisions", :point_name => @point.name)
         format.html { redirect_to(@point) }
       else
         format.html { render :action => "new" }
@@ -89,7 +89,7 @@ class RevisionsController < ApplicationController
     @revision = @point.revisions.find(params[:id])
     respond_to do |format|
       if @revision.update_attributes(params[:revision])
-        flash[:notice] = t('points.revision.new.success', :point_name => @point.name)
+        flash[:notice] = tr("Revised {point_name}", "controller/revisions", :point_name => @point.name)
         format.html { redirect_to(@revision) }
       else
         format.html { render :action => "edit" }
@@ -100,7 +100,7 @@ class RevisionsController < ApplicationController
   # DELETE /points/1/revisions/1
   def destroy
     @revision = @point.revisions.find(params[:id])
-    flash[:notice] = t('points.revision.destroy', :point_name => @point.name)
+    flash[:notice] = tr("Deleted revision of {point_name}", "controller/revisions", :point_name => @point.name)
     @revision.destroy
 
     respond_to do |format|

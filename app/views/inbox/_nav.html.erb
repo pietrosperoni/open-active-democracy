@@ -3,17 +3,17 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.inbox.name'), :controller => "inbox" %>
+					<%= link_to tr("Your inbox", "view/inbox/_nav"), :controller => "inbox" %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.inbox.notifications'), :controller => "inbox", :action => "notifications" %>
+					<%= link_to tr("Notifications", "view/inbox/_nav"), :controller => "inbox", :action => "notifications" %>
 				</span>
 			</li>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to t('menu.inbox.sent'), :controller => "inbox", :action => "sent" %>
+					<%= link_to tr("Sent messages", "view/inbox/_nav"), :controller => "inbox", :action => "sent" %>
 				</span>
 			</li>
 		</ul>

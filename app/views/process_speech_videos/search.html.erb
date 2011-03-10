@@ -1,4 +1,4 @@
-<% cache(["process_video_search", @priority_filter, @search_query.gsub(".","").parameterize_full, I18n.locale], :expires_in => 30.minutes) do -%>
+<% cache(["process_video_search", @priority_filter, @search_query.gsub(".","").parameterize_full, locale], :expires_in => 30.minutes) do -%>
 <% if @priority %>
 	<%= render :partial => "/priorities/header" %>
 	<%= render :partial => "/priorities/nav" %>
@@ -7,7 +7,7 @@
 <%= javascript_include_tag 'jquery.cluetip' %>
 <%= stylesheet_link_tag 'jquery.cluetip' %>
 
-<h1><%=t(:search_results_for)%>: <%=params[:search_query] %> <%= params[:priority_id] ? "- #{Priority.find(params[:priority_id]).name}" : ""%></h1>
+<h1><%=tr("Search results for", "view/process_speech_videos/search")%>: <%=params[:search_query] %> <%= params[:priority_id] ? "- #{Priority.find(params[:priority_id]).name}" : ""%></h1>
 <% if  @process_speech_videos.length > 0%>
 	<% @process_speech_videos.group_by(&:get_process).sort {|a,b| a[0].process_discussions.find(:last).meeting_date <=> b[0].process_discussions.find(:last).meeting_date}.each do |my_process,videos| %>
 		<h2 style="padding-bottom: 10px;"><%="#{link_to_unless_current h(my_process.priority.name), my_process.priority}<br> "+
@@ -43,6 +43,6 @@
 		</script>
 	<% end %>
 <% else %>
-<%=t(:no_search_results)%>
+<%=tr("translation missing: en.no_search_results", "view/process_speech_videos/search")%>
 <% end %>
 <% end %>

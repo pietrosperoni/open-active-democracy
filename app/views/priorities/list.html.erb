@@ -5,20 +5,20 @@
 <% if current_government.has_official? %>
 
 	<% if params[:action] == 'not_official' %>
-	<%= t('priorities.not_official.intro', :official_user_name => current_government.official_user.name)%>
+	<%= tr("These are the priorities NOT on {official_user_name} agenda as prioritized by all members.", "view/priorities/list", :official_user_name => current_government.official_user.name)%>
 	<p>
 	<% elsif params[:action] == 'official' %>
-	<%= t('priorities.official.intro', :official_user_name => current_government.official_user.name)%>
+	<%= tr("These are the priorities {official_user_name} endorses, as prioritized by all members.", "view/priorities/list", :official_user_name => current_government.official_user.name)%>
 	<p>
 	<% elsif params[:action] == 'official_opposed' %>
-	<%= t('priorities.official_opposed.intro', :official_user_name => current_government.official_user.name)%>
+	<%= tr("These are the priorities {official_user_name} opposes, as prioritized by all members.", "view/priorities/list", :official_user_name => current_government.official_user.name)%>
 	<p>
 	<% end %>
 	
 <% end %>
 
 <% if params[:action] == 'yours_created' %>
-	<%= t('priorities.yours_created.intro')%>
+	<%= tr("This is where priorities you've created go, so you can easily reference them and track their progress.", "view/priorities/list")%>
 	<p>
 <% end %>
 
@@ -26,9 +26,9 @@
 
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= t('rank') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
+			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/list") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/priorities/list") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/priorities/list") %></span></td>
 			<td style="padding-left: 7px; padding-bottom: 2px;"><nobr><%= will_paginate @priorities %></nobr></td>
 			<td></td>
 			<td align="right" width="100%"><%= rss_url(@rss_url) %></td>	
@@ -52,7 +52,7 @@
 	<%= will_paginate @priorities %>
 
 	<% if params[:action] == 'yours_created' %>
-		<p><%= t('priorities.yours_created.outro')%>
+		<p><%= tr("You can also follow all the <a href='/news/your_priorities_created_activities'>activity</a> and <a href='/news/your_priorities_created_discussions'>discussions</a> on priorities you created.", "view/priorities/list")%>
 	<% end %>
 
 

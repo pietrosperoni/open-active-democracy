@@ -8,19 +8,19 @@
 				<% if not logged_in? and current_government.homepage == 'index' %>
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.overview'), priorities_url %>
+						<%= link_to tr("Overview", "view/priorities/_browse_nav"), priorities_url %>
 					</span>
 				</li>
 				<% end %>			
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.yours.short'), yours_priorities_url %>
+						<%= link_to tr("Yours", "view/priorities/_browse_nav"), yours_priorities_url %>
 					</span>
 				</li>
 				<% if logged_in? %>
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.network.short'), network_priorities_url %>
+						<%= link_to tr("Your network", "view/priorities/_browse_nav"), network_priorities_url %>
 					</span>
 				</li>
 				<% end %>
@@ -33,37 +33,37 @@
 				<% end %>
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.top'), top_priorities_url %>
+						<%= link_to tr("Top", "view/priorities/_browse_nav"), top_priorities_url %>
 					</span>
 				</li>
 				<li class="tab5">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.ads'), ads_priorities_url %>
+						<%= link_to tr("Ads", "view/priorities/_browse_nav"), ads_priorities_url %>
 					</span>
 				</li>			
 				<li class="tab6">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.controversial'), controversial_priorities_url %>
+						<%= link_to tr("Controversial", "view/priorities/_browse_nav"), controversial_priorities_url %>
 					</span>
 				</li>
 				<li class="tab7">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.rising'), rising_priorities_url %>
+						<%= link_to tr("Rising", "view/priorities/_browse_nav"), rising_priorities_url %>
 					</span>
 				</li>
 				<li class="tab8">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.random'), random_priorities_url %>
+						<%= link_to tr("Random", "view/priorities/_browse_nav"), random_priorities_url %>
 					</span>
 				</li>
 				<li class="tab9">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.new'), newest_priorities_url %>
+						<%= link_to tr("New", "view/priorities/_browse_nav"), newest_priorities_url %>
 					</span>
 				</li>
 				<li class="tab10">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.everyone.finished'), finished_priorities_url %>
+						<%= link_to tr("Finished", "view/priorities/_browse_nav"), finished_priorities_url %>
 					</span>
 				</li>														
 			</ul>
@@ -85,37 +85,37 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.yours.active'), yours_priorities_url %>
+						<%= link_to tr("Active", "view/priorities/_browse_nav"), yours_priorities_url %>
 					</span>
 				</li>
 
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.yours.created'), yours_created_priorities_url %>
+						<%= link_to tr("Priorities you created", "view/priorities/_browse_nav"), yours_created_priorities_url %>
 					</span>
 				</li>
 
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.yours.ads'), yours_ads_priorities_url %>
+						<%= link_to tr("Ads you bought", "view/priorities/_browse_nav"), yours_ads_priorities_url %>
 					</span>
 				</li>
 			
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.yours.top'), yours_top_priorities_url %>
+						<%= link_to tr("Top ranked", "view/priorities/_browse_nav"), yours_top_priorities_url %>
 					</span>
 				</li>			
 
 				<li class="tab5">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.yours.lowest'), yours_lowest_priorities_url %>
+						<%= link_to tr("Lowest ranked", "view/priorities/_browse_nav"), yours_lowest_priorities_url %>
 					</span>
 				</li>
 			
 				<li class="tab6">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.yours.finished'), yours_finished_priorities_url %>
+						<%= link_to tr("Finished", "view/priorities/_browse_nav"), yours_finished_priorities_url %>
 					</span>
 				</li>			
 
@@ -134,19 +134,19 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.agenda_endorsed'), official_priorities_url %>
+						<%= link_to tr("Endorsed", "view/priorities/_browse_nav"), official_priorities_url %>
 					</span>
 				</li>			
 	
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.agenda_not'), not_official_priorities_url %>
+						<%= link_to tr("Not on the agenda", "view/priorities/_browse_nav"), not_official_priorities_url %>
 					</span>
 				</li>	
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.agenda_opposed'), official_opposed_priorities_url %>
+						<%= link_to tr("Opposed", "view/priorities/_browse_nav"), official_opposed_priorities_url %>
 					</span>
 				</li>	
 			

@@ -227,7 +227,7 @@ class ApplicationController < ActionController::Base
         @user.activate!
       end      
       @current_user = User.find(current_user.id)
-      flash.now[:notice] = t('facebook.synced', :government_name => current_government.name)
+      flash.now[:notice] = tr("Your account is now synced with Facebook. In the future, to sign in, simply click the big blue Facebook button.", "controller/application", :government_name => current_government.name)
     end      
   end
   
@@ -242,7 +242,7 @@ class ApplicationController < ActionController::Base
   end
   
   def bad_token
-    flash[:error] = t('application.bad_token')
+    flash[:error] = tr("Sorry, that last page already expired. Please try what you were doing again.", "controller/application")
     respond_to do |format|
       format.html { redirect_to request.referrer||'/' }
       format.js { redirect_from_facebox(request.referrer||'/') }
@@ -253,7 +253,7 @@ class ApplicationController < ActionController::Base
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session    
-    flash[:error] = t('application.fb_session_expired')
+    flash[:error] = tr("Your Facebook session expired.", "controller/application")
     respond_to do |format|
       format.html { redirect_to '/portal/' }
       format.js { redirect_from_facebox(request.referrer||'/') }

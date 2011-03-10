@@ -3,7 +3,7 @@ class PrioritizerController < ApplicationController
   before_filter :login_required
 
   def index
-    @page_title = t('prioritizer.index.title', :government_name => current_government.name)
+    @page_title = tr("{government_name} Priority Quiz", "controller/prioritizer", :government_name => current_government.name)
     n = choose_next
     respond_to do |format|
       format.html {render :template => "prioritizer/" + n}
@@ -14,9 +14,9 @@ class PrioritizerController < ApplicationController
     load_endorsements
     @endorsement1.insert_at(@endorsement2.position)
     if @endorsement1.is_down?
-      msg = t('prioritizer.oppose.moved.msg',:priority_name => @endorsement1.priority.name, :position => @endorsement1.position)    
+      msg = tr("Moved opposing {priority_name} up to priority {position}", "controller/prioritizer", :priority_name => @endorsement1.priority.name, :position => @endorsement1.position)    
     else
-      msg = t('prioritizer.endorse.moved.msg',:priority_name => @endorsement1.priority.name, :position => @endorsement1.position)    
+      msg = tr("Moved {priority_name} up to priority {position}", "controller/prioritizer", :priority_name => @endorsement1.priority.name, :position => @endorsement1.position)    
     end
     n = choose_next
     respond_to do |format|
@@ -37,7 +37,7 @@ class PrioritizerController < ApplicationController
     diff = ((@endorsement1.position-@endorsement2.position)/2).to_i
     @endorsement1.insert_at(@endorsement1.position-diff)
     @endorsement2.insert_at(@endorsement2.position+diff)
-    msg = t('prioritizer.same.msg', :position => @endorsement2.position, :position2 => @endorsement1.position)
+    msg = tr("Moved to priorities {position} and {position2}", "controller/prioritizer", :position => @endorsement2.position, :position2 => @endorsement1.position)
     n = choose_next
     respond_to do |format|
       format.js {
@@ -68,10 +68,10 @@ class PrioritizerController < ApplicationController
     @priority = Priority.find(params[:id])
     if @value == 1
       @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
-      msg = t('prioritizer.endorse.msg',:priority_name => @priority.name, :position => @endorsement.position)
+      msg = tr("Endorsed {priority_name} at priority {position}", "controller/prioritizer", :priority_name => @priority.name, :position => @endorsement.position)
     else
       @endorsement = @priority.oppose(current_user,request,current_partner,@referral)
-      msg = t('prioritizer.oppose.msg',:priority_name => @priority.name, :position => @endorsement.position)
+      msg = tr("Opposed {priority_name} at priority {position}", "controller/prioritizer", :priority_name => @priority.name, :position => @endorsement.position)
     end
     if current_user.endorsements_count > 24
       session[:endorsement_page] = (@endorsement.position/25).to_i+1

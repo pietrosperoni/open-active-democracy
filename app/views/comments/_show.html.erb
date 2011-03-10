@@ -3,7 +3,7 @@
 <div id="comment_<%= comment.id.to_s %>" class="comment_endorses">	
 	<% if comment.status == 'abusive' %>
 		<div class="comment_hidden">
-			<%= t('comments.abusive')%>
+			<%= tr("Comment deleted. The author received a warning for violating the <a href='/about/rules'>site rules</a>", "view/comments/_show")%>
 		</div>
 	<% else %>
 	<!-- Comment box -->		
@@ -18,8 +18,8 @@
                    :remote=>true,
                    'data-disable-with' => "",
                    'data-loader-name' => "circle",
-			             :confirm => t('comments.flag.confirm', :user_name => comment.user.name),
-			             :title => t('ajax_report') %>
+			             :confirm => tr("Is this comment from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => comment.user.name),
+			             :title => tr("Report", "view/comments/_show") %>
 		   <% end %>
 		</span>
 		
@@ -34,12 +34,12 @@
 		<% end %>
 
 		<% if logged_in? and not comment.deleted? and ((@comments and comment == @comments.last and current_user.id == comment.user_id) or current_user.is_admin?) %>
-			<%= link_to t(:ajax_comment_delete), activity_comment_url(comment.activity_id,comment),
+			<%= link_to tr("delete", "view/comments/_show"), activity_comment_url(comment.activity_id,comment),
 			            :method => :delete,
                   :remote=>true,
                   'data-disable-with' => escape_t(t(:ajax_deleting)),
                   'data-loader-name' => "horizontal_small",
-			            :confirm => t('comments.delete.confirm'), :title => t(:ajax_comment_delete_title) %>
+			            :confirm => tr("Remove this comment?", "view/comments/_show"), :title => tr("Delete comment", "view/comments/_show") %>
 		<% end %>
 	</div>
 	<%= render :partial => "comments/flagged", :locals => {:comment => comment} %>

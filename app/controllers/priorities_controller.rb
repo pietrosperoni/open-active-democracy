@@ -41,7 +41,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/yours
   def yours
-    @page_title = t('priorities.yours.title', :government_name => current_government.name)
+    @page_title = tr("Your priorities at {government_name}", "controller/priorities", :government_name => current_government.name)
     @priorities = @user.endorsements.active.by_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html 
@@ -53,7 +53,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/yours_top
   def yours_top
-    @page_title = t('priorities.yours_top.title', :government_name => current_government.name)
+    @page_title = tr("Your priorities ranked highest by {government_name} members", "controller/priorities", :government_name => current_government.name)
     @priorities = current_user.endorsements.active.by_priority_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "yours" }
@@ -64,7 +64,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/yours_lowest
   def yours_lowest
-    @page_title = t('priorities.yours_lowest.title', :government_name => current_government.name)
+    @page_title = tr("Your priorities ranked lowest by {government_name} members", "controller/priorities", :government_name => current_government.name)
     @priorities = current_user.endorsements.active.by_priority_lowest_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "yours" }
@@ -75,7 +75,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/yours_created  
   def yours_created
-    @page_title = t('priorities.yours_created.title', :government_name => current_government.name)
+    @page_title = tr("Priorities you created at {government_name}", "controller/priorities", :government_name => current_government.name)
     @priorities = @user.created_priorities.published.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
@@ -89,7 +89,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/network
   def network
-    @page_title = t('priorities.network.title', :government_name => current_government.name)
+    @page_title = tr("Your network's priorities", "controller/priorities", :government_name => current_government.name)
     if @user.followings_count > 0
       @priorities = Endorsement.active.find(:all, 
         :select => "endorsements.priority_id, sum((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value) as score, count(*) as endorsements_number, priorities.*", 
@@ -109,7 +109,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/yours_finished
   def yours_finished
-    @page_title = t('priorities.yours_finished.title', :government_name => current_government.name)
+    @page_title = tr("Your finished priorities at {government_name}", "controller/priorities", :government_name => current_government.name)
     @priorities = @user.endorsements.finished.find(:all, :order => "priorities.status_changed_at desc", :include => :priority).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "yours" }
@@ -127,7 +127,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/ads
   def ads
-    @page_title = t('priorities.ads.title', :government_name => current_government.name)
+    @page_title = tr("Ads running at {government_name}", "controller/priorities", :government_name => current_government.name)
     @ads = Ad.active_first.paginate :include => [:user, :priority], :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -138,7 +138,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/yours_ads
   def yours_ads
-    @page_title = t('priorities.yours_ads.title', :government_name => current_government.name)
+    @page_title = tr("Your ads", "controller/priorities", :government_name => current_government.name)
     @ads = current_user.ads.active_first.paginate :include => [:user, :priority], :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -149,10 +149,10 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/consider
   def consider
-    @page_title = t('priorities.consider.title', :government_name => current_government.name)
+    @page_title = tr("Priorities you should consider", "controller/priorities", :government_name => current_government.name)
     @priorities = current_user.recommend(25)
     if @priorities.empty?
-      flash[:error] = t('priorities.consider.need_endorsements')
+      flash[:error] = tr("You need to endorse a few things before we can recommend other priorities for you to consider. Here are a few random priorities to get started.", "controller/priorities")
       redirect_to :action => "random"
       return
     end
@@ -167,7 +167,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/official
   def official
-    @page_title = t('priorities.official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
+    @page_title = tr("{official_user_name} priorities", "controller/priorities", :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
     @rss_url = official_priorities_url(:format => 'rss')   
     @priorities = Priority.published.filtered.official_endorsed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -182,7 +182,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/official_opposed  
   def official_opposed
-    @page_title = t('priorities.official_opposed.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
+    @page_title = tr("Priorities {official_user_name} opposes", "controller/priorities", :government_name => current_government.name, :official_user_name => current_government.official_user.name)
     @rss_url = official_opposed_priorities_url(:format => 'rss')       
     @priorities = Priority.published.filtered.official_opposed.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -197,7 +197,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/not_official  
   def not_official
-    @page_title = t('priorities.not_official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
+    @page_title = tr("Priorities NOT on {official_user_name} agenda", "controller/priorities", :government_name => current_government.name, :official_user_name => current_government.official_user.name.possessive)
     @rss_url = not_official_priorities_url(:format => 'rss')       
     @priorities = Priority.published.filtered.not_official.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -212,7 +212,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/top
   def top
-    @page_title = t('priorities.top.title', :target => current_government.target)
+    @page_title = tr("Top priorities for {target}", "controller/priorities", :target => current_government.target)
     @rss_url = top_priorities_url(:format => 'rss')   
     @priorities = Priority.published.filtered.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -227,7 +227,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/rising
   def rising
-    @page_title = t('priorities.rising.title', :target => current_government.target)
+    @page_title = tr("Priorities rising in the rankings", "controller/priorities", :target => current_government.target)
     @rss_url = rising_priorities_url(:format => 'rss')           
     @priorities = Priority.published.filtered.rising.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -242,7 +242,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/falling
   def falling
-    @page_title = t('priorities.falling.title', :target => current_government.target)
+    @page_title = tr("Priorities falling in the rankings", "controller/priorities", :target => current_government.target)
     @rss_url = falling_priorities_url(:format => 'rss')
     @priorities = Priority.published.filtered.falling.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -257,7 +257,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/controversial  
   def controversial
-    @page_title = t('priorities.controversial.title', :target => current_government.target)
+    @page_title = tr("Most controversial priorities", "controller/priorities", :target => current_government.target)
     @rss_url = controversial_priorities_url(:format => 'rss')       
     @priorities = Priority.published.filtered.controversial.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -272,7 +272,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/finished
   def finished
-    @page_title = t('priorities.finished.title', :target => current_government.target)
+    @page_title = tr("Finished priorities", "controller/priorities", :target => current_government.target)
     @priorities = Priority.finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "list" }
@@ -285,7 +285,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/random
   def random
-    @page_title = t('priorities.random.title', :target => current_government.target)
+    @page_title = tr("Random priorities for {target}", "controller/priorities", :target => current_government.target)
     if User.adapter == 'postgresql'
       @priorities = Priority.published.filtered.paginate :order => "RANDOM()", :page => params[:page], :per_page => params[:per_page]
     else
@@ -303,7 +303,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/newest
   def newest
-    @page_title = t('priorities.newest.title', :target => current_government.target)
+    @page_title = tr("Newest priorities for {target}", "controller/priorities", :target => current_government.target)
     @rss_url = newest_priorities_url(:format => 'rss')     
     @priorities = Priority.published.filtered.newest.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -318,7 +318,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/untagged
   def untagged
-    @page_title = t('priorities.untagged.title', :target => current_government.target)
+    @page_title = tr("Untagged (or uncategorized) priorities", "controller/priorities", :target => current_government.target)
     @rss_url = untagged_priorities_url(:format => 'rss')            
     @priorities = Priority.published.filtered.untagged.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -333,7 +333,7 @@ class PrioritiesController < ApplicationController
   # GET /priorities/1
   def show
     if @priority.status == 'deleted' or @priority.status == 'abusive'
-      flash[:notice] = t('priorities.deleted')
+      flash[:notice] = tr("That priority was deleted", "controller/priorities")
     end
     @page_title = @priority.name
     @priority_process = @priority.priority_process_root_node
@@ -409,7 +409,7 @@ class PrioritiesController < ApplicationController
   end
   
   def opposer_points
-    @page_title = t('priorities.opposer_points.title', :priority_name => @priority.name)
+    @page_title = tr("Talking points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = -1  
     @points = @priority.points.published.by_opposer_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -421,7 +421,7 @@ class PrioritiesController < ApplicationController
   end
   
   def endorser_points
-    @page_title = t('priorities.endorser_points.title', :priority_name => @priority.name)
+    @page_title = tr("Talking points supporting {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = 1
     @points = @priority.points.published.by_endorser_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -433,7 +433,7 @@ class PrioritiesController < ApplicationController
   end
   
   def neutral_points
-    @page_title = t('priorities.neutral_points.title', :priority_name => @priority.name) 
+    @page_title = tr("Talking points about {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @point_value = 2 
     @points = @priority.points.published.by_neutral_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -445,7 +445,7 @@ class PrioritiesController < ApplicationController
   end  
   
   def everyone_points
-    @page_title = t('priorities.everyone_points.title', :priority_name => @priority.name) 
+    @page_title = tr("Best talking points on {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @point_value = 0 
     @points = @priority.points.published.by_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -457,7 +457,7 @@ class PrioritiesController < ApplicationController
   end  
 
   def opposed_top_points
-    @page_title = t('priorities.opposer_points.title', :priority_name => @priority.name)
+    @page_title = tr("Talking points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = -1
     if params[:by_newest]
       @points = @priority.points.published.down_value.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
@@ -473,7 +473,7 @@ class PrioritiesController < ApplicationController
   end
   
   def endorsed_top_points
-    @page_title = t('priorities.endorser_points.title', :priority_name => @priority.name)
+    @page_title = tr("Talking points supporting {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = 1
     if params[:by_newest]
       @points = @priority.points.published.up_value.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
@@ -489,7 +489,7 @@ class PrioritiesController < ApplicationController
   end
 
   def top_points
-    @page_title = t('priorities.top_points.title_long', :priority_name => @priority.name) 
+    @page_title = tr("translation missing: en.priorities.top_points.title_long", "controller/priorities", :priority_name => @priority.name) 
     @point_value = 0 
     @points_top_up = @priority.points.published.by_helpfulness.up_value.five
     @points_top_down = @priority.points.published.by_helpfulness.down_value.five
@@ -516,7 +516,7 @@ class PrioritiesController < ApplicationController
   end  
   
   def opposer_documents
-    @page_title = t('priorities.opposer_documents.title', :priority_name => @priority.name) 
+    @page_title = tr("Documents opposing {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @document_value = -1  
     @documents = @priority.documents.published.by_opposer_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
@@ -527,7 +527,7 @@ class PrioritiesController < ApplicationController
   end
 
   def endorser_documents
-    @page_title = t('priorities.endorser_documents.title', :priority_name => @priority.name)   
+    @page_title = tr("Documents supporting {priority_name}", "controller/priorities", :priority_name => @priority.name)   
     @document_value = 1
     @documents = @priority.documents.published.by_endorser_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
@@ -538,7 +538,7 @@ class PrioritiesController < ApplicationController
   end
 
   def neutral_documents
-    @page_title = t('priorities.neutral_documents.title', :priority_name => @priority.name)   
+    @page_title = tr("Documents about {priority_name}", "controller/priorities", :priority_name => @priority.name)   
     @document_value = 2 
     @documents = @priority.documents.published.by_neutral_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
@@ -549,7 +549,7 @@ class PrioritiesController < ApplicationController
   end  
 
   def everyone_documents
-    @page_title = t('priorities.everyone_documents.title', :priority_name => @priority.name) 
+    @page_title = tr("Best documents on {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @document_value = 0 
     @documents = @priority.documents.published.by_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
@@ -560,7 +560,7 @@ class PrioritiesController < ApplicationController
   end  
   
   def discussions
-    @page_title = t('priorities.discussions.title', :priority_name => @priority.name) 
+    @page_title = tr("Discussions on {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @activities = @priority.activities.active.discussions.by_recently_updated.for_all_users.paginate :page => params[:page], :per_page => 10
     if @activities.empty? # pull all activities if there are no discussions
       @activities = @priority.activities.active.paginate :page => params[:page]
@@ -574,7 +574,7 @@ class PrioritiesController < ApplicationController
   
   def comments
     @priority = Priority.find(params[:id])  
-    @page_title = t('priorities.comments.title', :priority_name => @priority.name) 
+    @page_title = tr("Latest comments on {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @comments = Comment.published.by_recently_created.find(:all, :conditions => ["activities.priority_id = ?",@priority.id], :include => :activity).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -586,7 +586,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/1/activities
   def activities
-    @page_title = t('priorities.activities.title', :priority_name => @priority.name) 
+    @page_title = tr("Activity on {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @activities = @priority.activities.active.for_all_users.by_recently_created.paginate :include => :user, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -598,7 +598,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/1/endorsers
   def endorsers
-    @page_title = t('priorities.endorsers.title', :priority_name => @priority.name, :number => @priority.up_endorsements_count)
+    @page_title = tr("{number} people endorse {priority_name}", "controller/priorities", :priority_name => @priority.name, :number => @priority.up_endorsements_count)
     if request.format != 'html'
       @endorsements = @priority.endorsements.active_and_inactive.endorsing.paginate :page => params[:page], :per_page => params[:per_page], :include => :user
     end
@@ -611,7 +611,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/1/opposers
   def opposers
-    @page_title = t('priorities.opposers.title', :priority_name => @priority.name, :number => @priority.down_endorsements_count)
+    @page_title = tr("{number} people opposed {priority_name}", "controller/priorities", :priority_name => @priority.name, :number => @priority.down_endorsements_count)
     if request.format != 'html'
       @endorsements = @priority.endorsements.active_and_inactive.opposing.paginate :page => params[:page], :per_page => params[:per_page], :include => :user
     end
@@ -644,9 +644,9 @@ class PrioritiesController < ApplicationController
   # GET /priorities/1/edit
   def edit
     @priority = Priority.find(params[:id])
-    @page_name = t('priorities.edit.title', :priority_name => @priority.name)
+    @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
     if not (current_user.id == @priority.user_id and @priority.endorsements_count < 2) and not current_user.is_admin?
-      flash[:error] = t('priorities.change.already_active')
+      flash[:error] = tr("You cannot change a priority's name once other people have endorsed it.", "controller/priorities")
       redirect_to @priority and return
     end
     respond_to do |format|
@@ -676,7 +676,7 @@ class PrioritiesController < ApplicationController
       @priority.name = params[:q] if params[:q]
       create_tags(@priority)
       if not logged_in?
-        flash[:notice] = t('priorities.new.need_account', :target => current_government.target)
+        flash[:notice] = tr("First you need to fill out this quick form and agree to the rules, then you can start adding your priorities for {target}.", "controller/priorities", :target => current_government.target)
         session[:query] = params[:priority][:name] if params[:priority]
         access_denied
         return
@@ -692,8 +692,8 @@ class PrioritiesController < ApplicationController
       else
         # see if it already exists
         query = params[:priority][:name].strip
-        if query.blank? or query == current_government.prompt or query == t('priorities.yours.prompt')
-          flash[:notice] = t('priorities.new.blank')
+        if query.blank? or query == current_government.prompt or query == tr("Add a priority to your list", "controller/priorities")
+          flash[:notice] = tr("Please type in your priority, or click on the endorse button underneath each priority to add it to yours.", "controller/priorities")
            @saved = false
         end
         @priorities = Priority.find(:all, :conditions => ["name = ? and status = 'published'",query], :order => "endorsements_count desc")
@@ -746,13 +746,13 @@ class PrioritiesController < ApplicationController
       end
 #    rescue => ex
 #      Rails.logger.info("ROLLBACK ERROR: #{ex.backtrace}")
-#      flash[:notice] = I18n.t(:could_not_save_priority)
+#      flash[:notice] = tr("translation missing: en.could_not_save_priority", "controller/priorities")
 #    end
     
     respond_to do |format|
       if @saved and @point_saved
         format.html { 
-          flash[:notice] = t('priorities.new.success', :priority_name => @priority.name)
+          flash[:notice] = tr("Thanks for adding {priority_name}", "controller/priorities", :priority_name => @priority.name)
           redirect_to(@priority)
         }
         format.js {
@@ -843,7 +843,7 @@ class PrioritiesController < ApplicationController
   def update
     @priority = Priority.find(params[:id])
     @previous_name = @priority.name
-    @page_name = t('priorities.edit.title', :priority_name => @priority.name)
+    @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
     respond_to do |format|
       if params[:commit]=="Vista hugmynd"
         if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
@@ -855,7 +855,7 @@ class PrioritiesController < ApplicationController
             @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
           end
           format.html { 
-            flash[:notice] = t('priorities.edit.success', :priority_name => @priority.name)
+            flash[:notice] = tr("Saved {priority_name}", "controller/priorities", :priority_name => @priority.name)
             redirect_to(@priority)         
           }
           format.js {
@@ -913,7 +913,7 @@ class PrioritiesController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_info_#{@priority.id}", render(:partial => "priorities/flagged", :locals => {:priority => @priority})
           else
-            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'> #{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
+            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'> #{tr("translation missing: en.thanks_for_bringing_this_to_our_attention", "controller/priorities")}</div>"
           end
         end        
       }
@@ -927,7 +927,7 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
+          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>#{tr("translation missing: en.the_content_has_been_deleted_and_a_warning_sent", "controller/priorities")}</div>"
         end        
       }
     end    
@@ -951,7 +951,7 @@ class PrioritiesController < ApplicationController
     @priority.bury!
     ActivityPriorityBury.create(:priority => @priority, :user => current_user, :partner => current_partner)
     respond_to do |format|
-      flash[:notice] = t('priorities.buried', :priority_name => @priority.name)
+      flash[:notice] = tr("{priority_name} is now buried, it will no longer be displayed in the charts.", "controller/priorities", :priority_name => @priority.name)
       format.html { redirect_to(@priority) }
     end
   end  
@@ -961,7 +961,7 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @priority.successful!
     respond_to do |format|
-      flash[:notice] = t('priorities.successful', :priority_name => @priority.name)
+      flash[:notice] = tr("{priority_name} is now marked finished and successful", "controller/priorities", :priority_name => @priority.name)
       format.html { redirect_to(@priority) }
     end
   end  
@@ -971,7 +971,7 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @priority.intheworks!
     respond_to do |format|
-      flash[:notice] = t('priorities.intheworks', :priority_name => @priority.name)
+      flash[:notice] = tr("{priority_name} is now marked 'in the works'", "controller/priorities", :priority_name => @priority.name)
       format.html { redirect_to(@priority) }
     end
   end  
@@ -981,7 +981,7 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @priority.failed!
     respond_to do |format|
-      flash[:notice] = t('priorities.failed', :priority_name => @priority.name)
+      flash[:notice] = tr("{priority_name} is now marked finished and failed", "controller/priorities", :priority_name => @priority.name)
       format.html { redirect_to(@priority) }
     end
   end  
@@ -991,7 +991,7 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @priority.compromised!
     respond_to do |format|
-      flash[:notice] = t('priorities.compromised', :priority_name => @priority.name)
+      flash[:notice] = tr("{priority_name} is now marked finished but compromised", "controller/priorities", :priority_name => @priority.name)
       format.html { redirect_to(@priority) }
     end
   end  
@@ -1044,7 +1044,7 @@ class PrioritiesController < ApplicationController
     return unless @priority
     name = @priority.name
     @priority.delete!
-    flash[:notice] = t('priorities.destroy.success', :priority_name => name)
+    flash[:notice] = tr("Permanently deleting {priority_name}. This may take a few minutes depending on how many endorsements/oppositions need to be removed.", "controller/priorities", :priority_name => name)
     respond_to do |format|
       format.html { redirect_to yours_created_priorities_url }    
     end
