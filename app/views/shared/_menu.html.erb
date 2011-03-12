@@ -288,7 +288,7 @@
 				<% end %>
 			</div>
 		</li>
-		<% if logged_in? %>
+		<% if logged_in? and current_user.is_admin? %>
 		<li class="tab6 mega">
 			<span class="tab_header">
 				<%= link_to tr("Settings", "view/shared/_menu"), "#" %>
@@ -313,7 +313,7 @@
 				<% end %>
 				<% if logged_in? and current_user.is_admin? and Partner.current %>
 					<div class="tab_subhead">
-s						<%= link_to tr("Partner settings", "view/shared/_menu"), edit_partner_url(Partner.current) %>
+						<%= link_to tr("Partner settings", "view/shared/_menu"), edit_partner_url(Partner.current) %>
 					</div>
 				<% end %>
 				<div class="tab_sublinks">

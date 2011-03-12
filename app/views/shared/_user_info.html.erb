@@ -12,7 +12,9 @@
     </td>
     <td>
         <div id="user_info_box_picture">
-          <%= render :partial => "users/pic_48", :locals => {:user => current_user}%>
+          <%= link_to :controller=>"settings", :action=>"picture" do %>
+            <%= render :partial => "users/pic_48", :locals => {:user => current_user}%>
+          <% end %>
         </div>
     </td>
   </tr>
