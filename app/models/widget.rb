@@ -47,7 +47,7 @@ class Widget < ActiveRecord::Base
   
   def charts_available
     [
-      [ "charts_priority", tr("translation missing: en.charts.priority.short_name", "model/widget") ],
+      [ "charts_priority", tr("Chart Priority", "model/widget") ],
       [ "charts_user", tr("Your priorities", "model/widget") ]
     ]
   end

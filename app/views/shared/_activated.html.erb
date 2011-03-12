@@ -1,6 +1,6 @@
 <% if logged_in? and not current_user.activated? %>
 	<div id="not_activated_header"><%= tr("Please verify your account", "view/shared/_activated")%></div>
 	<div id="not_activated">
-		<%= tr("translation missing: en.blurb_not_verified", "view/shared/_activated")%>
+		<%= tr("Not verified BLURB", "view/shared/_activated")%>
 	</div>
 <% end %>

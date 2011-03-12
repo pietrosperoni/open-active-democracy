@@ -10,7 +10,7 @@
 <% end %>
 
 <% if params[:action].include?("network") and logged_in? and current_following_ids.empty? %>
-	<%= tr("translation missing: en.blurb_your_network_intro", "view/news/activity_list") %>
+	<%= tr("Your network intro BLURB", "view/news/activity_list") %>
 <% end %>
 
 <% if not @activities %>

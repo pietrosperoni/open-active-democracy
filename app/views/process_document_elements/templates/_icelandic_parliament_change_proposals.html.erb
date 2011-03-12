@@ -33,10 +33,10 @@
             <% else %>
 	            <% if change_proposal.user %>
 		            <% change_proposal_author = change_proposal.user.login %>
-		            <% change_proposal_title = tr("translation missing: en.view_change_proposal", "view/process_document_elements/templates") %>
+		            <% change_proposal_title = tr("View change proposal", "view/process_document_elements/templates") %>
 	            <% else %>
 		            <% change_proposal_author = tr("System import", "view/process_document_elements/templates") %>
-		            <% change_proposal_title = tr("translation missing: en.view_original", "view/process_document_elements/templates") %>
+		            <% change_proposal_title = tr("View original", "view/process_document_elements/templates") %>
 	            <% end %>
 	            <td>
 	                <%= link_to change_proposal_author,
@@ -95,7 +95,7 @@
                         'data-loader-name' => "horizontal_small",
 	                      :class => "participateLink", :name => "", :title => tr("New change proposal", "view/process_document_elements/templates") %>
 			 <% else %>
-			   <%=link_to tr("translation missing: en.login_to_submit_change_proposal", "view/process_document_elements/templates"), :controller=>"login" %>
+			   <%=link_to tr("Login to submit change proposal", "view/process_document_elements/templates"), :controller=>"login" %>
 			 <% end %>	
 			</td>
 		</tr>

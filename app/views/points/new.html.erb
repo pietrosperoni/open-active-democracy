@@ -6,9 +6,9 @@
 		
 		<td valign="top">
 
-<!--<%= tr("translation missing: en.blurb_point_new", "view/points/new")%>-->
+ <%=tr("Point new BLURB", "view/points/new")%>
 
-	<div  class="form_header">Bæta við rökum: <span class="red">* </span> </div>
+	<div  class="form_header"><%=tr("Add a point", "view/points/new")%> <span class="red">* </span> </div>
 
 <%= form_for :point, :url => priority_points_path(@priority)  do |f| %>
   <%= f.error_messages :header_message => tr("Please review", "view/points/new"), :message => tr("We need a change to your talking point", "view/points/new") %>
@@ -16,22 +16,19 @@
 		<div class="field_box">
  			<%= f.text_field :name, :size => 50, :maxlength => 60 %>
 		</div>
-			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þína hugmynd þá eru góð rök lykilatriði</div>
 	</div>
 
 	<div class="field">
 		<div class="field_label">
 			<div id="point_supports" class="form_header">
 
-				<%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>	 Já, þessi rök styðja hugmyndina					
+				<%= f.radio_button(:value, 1, :checked=>params[:support] ? "checked" : "nil") %>	 <%=tr("Yes, this point supports this priority","views/priorities/form")%>					
 			</div>			
 			<div id="point_opposes" class="form_header">
-				<%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %> Nei, þessi rök eru á móti hugmyndinni
+				<%= f.radio_button(:value, -1, :checked=>params[:support] ?  "nil" : "checked") %> <%=tr("Not, this point is against this priority","views/priorities/form")%>
 			</div>
 		</div>
 	</div>
-			<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður hugmynd eða ekki</div>
-
 
 	<div class="field form_header">
 	    <div class="field_label form_header"><%= tr("Explain your talking point.", "view/points/new") %> <span id="pointContentDown"></span> <%= tr("characters left", "view/points/new")%></div>
@@ -40,8 +37,7 @@
 		</div>
 
 	</div>				
-					<div class="tiny_info_no_pad">Aðrir munu geta breytt því sem þú skrifar en við höldum breytingaskrá, á svipaðan hátt og Wikipedia.</div> 
-			<div class="tiny_info">Stutt og skýr rök um einn lið virka best, þú getur alltaf bætt við fleiri rökum.</div>
+					<div class="tiny_info_no_pad"><%=tr("Other people will be able to edit your points, similar to Wikipedia","views/priorities/form")%></div> 
 	
 	<div class="field form_header">
 		<div class="field_label"><%= tr("Include a website source link", "view/points/new") %></div>
@@ -49,8 +45,6 @@
 			<%= f.text_field :website, :size => 50 %>	
 		</div>
 	</div>
-					<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir hugmynd þitt.</div>
-
 	
 	<div class="field form_header">
 		<div class="field_label">
@@ -61,9 +55,7 @@
 <!--			<%= tr("Linking to another priority is optional. If your point is in opposition, you can link to a better priority. OR, if your point is supportive or neutral, you can highlight a more specific or related priority.", "view/points/new")%>-->
 		</div>
 		
-	</div>
-					<div class="tiny_info">Þú ræður hvort þú tengir við annað hugmynd. Ef skoðun þín er andstæð, geturðu tengt við betra hugmynd. EÐA, ef skoðun þín styður eða er hlutlaus, geturðu lagt áherslu á nákvæmara eða tengdara hugmynd.</div>
-	
+	</div>	
 	<%= f.submit tr("Save talking point", "view/points/new"), :id => "submit", :class => "yellow_button" %>
 
 <% end %>

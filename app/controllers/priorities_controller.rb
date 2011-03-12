@@ -489,7 +489,7 @@ class PrioritiesController < ApplicationController
   end
 
   def top_points
-    @page_title = tr("translation missing: en.priorities.top_points.title_long", "controller/priorities", :priority_name => @priority.name) 
+    @page_title = tr("Top points", "controller/priorities", :priority_name => @priority.name) 
     @point_value = 0 
     @points_top_up = @priority.points.published.by_helpfulness.up_value.five
     @points_top_down = @priority.points.published.by_helpfulness.down_value.five
@@ -746,7 +746,7 @@ class PrioritiesController < ApplicationController
       end
 #    rescue => ex
 #      Rails.logger.info("ROLLBACK ERROR: #{ex.backtrace}")
-#      flash[:notice] = tr("translation missing: en.could_not_save_priority", "controller/priorities")
+#      flash[:notice] = tr("Could not save priority", "controller/priorities")
 #    end
     
     respond_to do |format|
@@ -913,7 +913,7 @@ class PrioritiesController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_info_#{@priority.id}", render(:partial => "priorities/flagged", :locals => {:priority => @priority})
           else
-            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'> #{tr("translation missing: en.thanks_for_bringing_this_to_our_attention", "controller/priorities")}</div>"
+            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'> #{tr("Thanks for bringing this to our attention", "controller/priorities")}</div>"
           end
         end        
       }
@@ -927,7 +927,7 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>#{tr("translation missing: en.the_content_has_been_deleted_and_a_warning_sent", "controller/priorities")}</div>"
+          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning_sent", "controller/priorities")}</div>"
         end        
       }
     end    

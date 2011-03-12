@@ -25,13 +25,13 @@
         </td>
         <% if @i_am_admin %>
 	        <td>
-	            - <%= link_to tr("translation missing: en.show", "view/priority_processes/index"), current_process %>
+	            - <%= link_to tr("Show", "view/priority_processes/index"), current_process %>
 	        </td>
 	        <td>
-	            <%= link_to tr("translation missing: en.edit", "view/priority_processes/index"), edit_process_path(current_process) %>
+	            <%= link_to tr("Edit", "view/priority_processes/index"), edit_process_path(current_process) %>
 	        </td>
 	        <td>
-	            <%= link_to tr("translation missing: en.destroy", "view/priority_processes/index"), current_process, :confirm => tr("translation missing: en.are_you_sure?", "view/priority_processes/index"), :method => :delete %>
+	            <%= link_to tr("Destroy", "view/priority_processes/index"), current_process, :confirm => tr("Are you sure?", "view/priority_processes/index"), :method => :delete %>
 	        </td>
         <% end %>
     </tr>
@@ -97,13 +97,13 @@
         </td>
         <% if @i_am_admin %>
 	        <td>
-	            - <%= link_to tr("translation missing: en.show", "view/priority_processes/index"), current_process %>
+	            - <%= link_to tr("Show", "view/priority_processes/index"), current_process %>
 	        </td>
 	        <td>
-	            <%= link_to tr("translation missing: en.edit", "view/priority_processes/index"), edit_process_path(current_process) %>
+	            <%= link_to tr("Edit", "view/priority_processes/index"), edit_process_path(current_process) %>
 	        </td>
 	        <td>
-	            <%= link_to tr("translation missing: en.destroy", "view/priority_processes/index"), current_process, :confirm => tr("translation missing: en.are_you_sure?", "view/priority_processes/index"), :method => :delete %>
+	            <%= link_to tr("Destroy", "view/priority_processes/index"), current_process, :confirm => tr("Are you sure?", "view/priority_processes/index"), :method => :delete %>
 	        </td>
         <% end %>
     </tr>
@@ -111,9 +111,9 @@
 	<tr>
 		<td colspan=3>
 			<% if @all_archived %>
-  			  <a href="/processes"><%=tr("translation missing: en.show_only_current_processes", "view/priority_processes/index")%></a>
+  			  <a href="/processes"><%=tr("Show only current processes", "view/priority_processes/index")%></a>
 			<% else %>
-  			  <a href="/processes?all_archived=1"><%=tr("translation missing: en.show_all_archived_processes", "view/priority_processes/index")%></a>
+  			  <a href="/processes?all_archived=1"><%=tr("Show all archived processes", "view/priority_processes/index")%></a>
 			<% end %>  
 		</td>
 	</tr>

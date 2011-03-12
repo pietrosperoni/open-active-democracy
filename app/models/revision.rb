@@ -149,10 +149,10 @@ class Revision < ActiveRecord::Base
   def text
     s = point.name
     s += " [#{tr("In support", "model/revision")}]" if is_down?
-    s += " [#{tr("translation missing: en.neutral", "model/revision")}]" if is_neutral?    
-    s += "\r\n#{tr("translation missing: en.in_support_of", "model/revision")} " + point.other_priority.name if point.has_other_priority?
+    s += " [#{tr("Neutral", "model/revision")}]" if is_neutral?    
+    s += "\r\n#{tr("In support of", "model/revision")} " + point.other_priority.name if point.has_other_priority?
     s += "\r\n" + content
-    s += "\r\n#{tr("translation missing: en.originated_at", "model/revision")}: " + website_link if has_website?
+    s += "\r\n#{tr("Originated at", "model/revision")}: " + website_link if has_website?
     return s
   end  
   

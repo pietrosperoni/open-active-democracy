@@ -744,7 +744,7 @@ end
 
 class ActivityOfficialLetter < Activity
   def name
-    tr("translation missing: en.activity.official_letter.name", "model/activity", :user_name => user.name, :official_user_name => Government.current.official_user.name)
+    tr("{user_name} Activity Official Letter", "model/activity", :user_name => user.name, :official_user_name => Government.current.official_user.name)
   end
 end
 

@@ -50,7 +50,7 @@ class UserMailer < ActionMailer::Base
     Rails.logger.info("Notification class: #{@n}")
     @notifiable = notifiable
     if @n.include?("notification_warning")
-      @subject = tr("translation missing: en.email_subject_warning_from_website", "model/mailer")
+      @subject = tr("Warning", "model/mailer")
     elsif @n.include?("notification_comment_flagged") 
       @subject = @notification.name
     end
@@ -67,7 +67,7 @@ class UserMailer < ActionMailer::Base
     @questions = questions
     @documents = documents
     @treaty_documents = treaty_documents
-    @subject = tr("translation missing: en.email_subject_report_from_website", "model/mailer")
+    @subject = tr("Report", "model/mailer")
   end
   
   protected

@@ -42,7 +42,7 @@ class VoteController < ApplicationController
       redirect_to @vote.change.new_priority
       return
     elsif @vote.status == 'declined'
-      flash[:error] = tr("translation missing: en.vote.already_voted_no", "controller/vote", :priority_name => @vote.change.priority.name)
+      flash[:error] = tr("You already voted no", "controller/vote", :priority_name => @vote.change.priority.name)
       redirect_to @vote.change.priority      
       return
     elsif @vote.status == 'implicit_approved'

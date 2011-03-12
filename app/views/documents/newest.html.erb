@@ -2,7 +2,7 @@
 <div id="documents_div">
 	
 		<% if @documents.count == 0 %>
-		<%= tr("translation missing: en.esb.empty_chapter", "view/documents/newest")%>
+		<%= tr("No documents", "view/documents/newest")%>
 	<% end %>
 	
 <%= render :partial => "newest" %>

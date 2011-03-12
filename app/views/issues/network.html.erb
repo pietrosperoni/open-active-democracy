@@ -9,7 +9,7 @@
 	<%= tr("Here are just your priorities and the <a href='{url}'>{count} people in your network</a>, not all of {government_name}.", "view/issues/network", :count => current_user.followings_count, :url => following_user_contacts_path(current_user), :government_name => current_government.name)%>
 <% end %>
 
-<%= tr("translation missing: en.blurb_network_intro", "view/issues/network")%>
+<%= tr("Network intro BLURB", "view/issues/network")%>
 <p>
 <% if current_user.followings_count > 0 %>
 	<table border="0" cellspacing="0" cellpadding="0">

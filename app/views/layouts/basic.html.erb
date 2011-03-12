@@ -24,8 +24,6 @@
 
 <%= csrf_meta_tag %>
 
-<%= tr("translation missing: en.blurb_header", "view/layouts/basic") %>
-
 <div id="backgroundwrap">
 	<div id="header">
       <div style="float:right">
@@ -99,7 +97,7 @@
 
 		<% else %>
 
-		<div id="intro"><%= tr("translation missing: en.blurb_intro", "view/layouts/basic") %></div>
+		<div id="intro"><%= tr("Intro BLURB", "view/layouts/basic") %></div>
 		<% if current_government.short_name == 'wh2' %>
 		<%= render :partial => "shared/buzz" %>
 		<% end %>

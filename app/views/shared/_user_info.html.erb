@@ -10,12 +10,12 @@
 	<!--<span class="profile_info"><%=current_user.national_identity%></span>-->
 
     <div class="profile_edit"> 
-		<a href="/settings/picture" title="<%= tr("translation missing: en.esb.mouseover.edituser", "view/shared/_user_info")%>"><img src="/images/profile_edit.gif" border=0></a> 	
-		<%#= link_to image_tag("profile_edit.gif", :border => 0), url_for current_user, :controller => "", :action => "", :title => tr("translation missing: en.esb.mouseover.edituser", "view/shared/_user_info"), :alt => tr("translation missing: en.esb.mouseover.edituser", "view/shared/_user_info") %> <a href="/settings/picture" class="stillingar" title="Breyta eigin stillingum:  Mynd, netfangi og Facebook tengingum">Stillingar</a>
+		<a href="/settings/picture" title="<%= tr("Edit user", "view/shared/_user_info")%>"><img src="/images/profile_edit.gif" border=0></a> 	
+		<%#= link_to image_tag("profile_edit.gif", :border => 0), url_for current_user, :controller => "", :action => "", :title => tr("Edit User", "view/shared/_user_info"), :alt => tr("Edit User", "view/shared/_user_info") %> <a href="/settings/picture" class="stillingar" title="Breyta eigin stillingum:  Mynd, netfangi og Facebook tengingum">Stillingar</a>
 	</div>
 	
 	<div class="profile_logout">		
-		<%= link_to image_tag("profile_logout.gif", :border => 0,:title => tr("translation missing: en.esb.mouseover.logout", "view/shared/_user_info"), :alt => tr("translation missing: en.esb.mouseover.logout", "view/shared/_user_info")), logout_path %> <a href="/logout/" class="utskraning" title="Skrá mig út">Útskráning</a>
+		<%= link_to image_tag("profile_logout.gif", :border => 0,:title => tr("Logout", "view/shared/_user_info"), :alt => tr("Logout", "view/shared/_user_info")), logout_path %> <a href="/logout/" class="utskraning" title="Skrá mig út">Útskráning</a>
 	</div>
 
 	<div class="facebook">

@@ -260,7 +260,7 @@ class DocumentsController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_document_info_#{@document.id}", render(:partial => "documents/flagged", :locals => {:document => @document})
           else
-            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{tr("translation missing: en.thanks_for_bringing_this_to_our_attention", "controller/documents")}</div>"
+            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{tr("Thanks for bringing this to our attention", "controller/documents")}</div>"
           end
         end        
       }
@@ -274,7 +274,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{tr("translation missing: en.the_content_has_been_deleted_and_a_warning_sent", "controller/documents")}</div>"
+          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning sent", "controller/documents")}</div>"
         end        
       }
     end    

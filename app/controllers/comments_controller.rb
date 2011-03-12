@@ -155,7 +155,7 @@ class CommentsController < ApplicationController
           if current_user.is_admin?
             page.replace 'comment_' + @comment.id.to_s, render(:partial => "comments/flagged", :locals => {:comment => @comment})
           else
-            page.replace 'comment_' + @comment.id.to_s, "<div class='red'>#{tr("translation missing: en.thanks_for_flagging_comment", "controller/comments")}</div>".html_safe
+            page.replace 'comment_' + @comment.id.to_s, "<div class='red'>#{tr("Thanks for flagging comment", "controller/comments")}</div>".html_safe
           end
         end        
       }

@@ -7,11 +7,11 @@
                     <% PortletTemplateCategory.by_weight.all.each do |template_category| %>
 						<% if not template_category.partner_id or (Partner.current and Partner.current.id == template_category.partner_id) %>
 		                    <li>
-		                        <a href="#"><%=tr("translation missing: en.nil", "view/portal/_menu").titleize %></a>
+		                        <a href="#"><%=tr(template_category.name, "view/portal/_menu").titleize %></a>
 		                        <ul>
 		                            <% template_category.portlet_templates.each do |portlet_template| %>
 		                            <li>
-		                                <a href="#"><%=tr("translation missing: en.nil", "view/portal/_menu").titleize %>-<%=portlet_template.id %></a>
+		                                <a href="#"><%=tr(portlet_template.name, "view/portal/_menu").titleize %>-<%=portlet_template.id %></a>
 		                            </li>
 		                            <%end %>
 		                        </ul>

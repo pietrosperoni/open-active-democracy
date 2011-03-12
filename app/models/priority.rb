@@ -263,13 +263,13 @@ class Priority < ActiveRecord::Base
     if is_failed?
       tr("Priority failed", "model/priority")
     elsif is_successful?
-      tr("translation missing: en.priority_succesful", "model/priority")
+      tr("Priority succesful", "model/priority")
     elsif is_compromised?
-      tr("translation missing: en.priority_succesful_with_compromises", "model/priority")
+      tr("Priority succesful with compromises", "model/priority")
     elsif is_intheworks?
-      tr("translation missing: en.priority_in_the_works", "model/priority")
+      tr("Priority in the works", "model/priority")
     else
-      tr("translation missing: en.priority_has_not_been_processed", "model/priority")
+      tr("Priority has not been processed", "model/priority")
     end
   end
   

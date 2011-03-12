@@ -75,11 +75,11 @@ class ProcessSpeechVideo < ActiveRecord::Base
     time = (time - minutes) / 60
     hours      =  time % 24
     if hours > 0
-      "#{hours} #{tr("translation missing: en.hours_short", "model/video")} #{minutes} #{tr("translation missing: en.minutes_short", "model/video")} #{seconds} #{tr("translation missing: en.seconds_short", "model/video")}"
+      "#{hours} #{tr("hr", "model/video")} #{minutes} #{tr("min", "model/video")} #{seconds} #{tr("sec", "model/video")}"
     elsif minutes > 0
-      "#{minutes} #{tr("translation missing: en.minutes_short", "model/video")} #{seconds} #{tr("translation missing: en.seconds_short", "model/video")}"
+      "#{minutes} #{tr("min", "model/video")} #{seconds} #{tr("sec", "model/video")}"
     else
-      "#{seconds} #{tr("translation missing: en.seconds_short", "model/video")}"
+      "#{seconds} #{tr("sec", "model/video")}"
     end
   end
   

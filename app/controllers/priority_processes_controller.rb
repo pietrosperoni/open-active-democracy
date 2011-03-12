@@ -106,7 +106,7 @@ class PriorityProcessesController < ApplicationController
   def show_all_for_priority
     @priority = Priority.find(params[:id])    
     @priority_process = @priority.priority_process_root_node
-    @page_title = tr("translation missing: en.processes.show_all.title", "controller/processes", :priority_name => @priority.name) 
+    @page_title = tr("Show all", "controller/processes", :priority_name => @priority.name) 
     respond_to do |format|
       format.html
       format.xml  { render :xml => @document }

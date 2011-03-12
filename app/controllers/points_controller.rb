@@ -28,7 +28,7 @@ class PointsController < ApplicationController
   end  
   
   def for_and_against
-  	@page_title = tr("translation missing: en.points.for_and_against.title", "controller/points", :government_name => current_government.name)
+  	@page_title = tr("Points for and against", "controller/points", :government_name => current_government.name)
     @priority=Priority.find(params[:id])
   	@points_new_up = @priority.points.published.by_recently_created.up_value.five
   	@points_new_down = @priority.points.published.by_recently_created.down_value.five
@@ -62,7 +62,7 @@ class PointsController < ApplicationController
   		@yesno = "Nei"
   	end
   	
-  	@page_title = tr("translation missing: en.points.for_and_against.title", "controller/points", :government_name => current_government.name)
+  	@page_title = tr("Points for and against", "controller/points", :government_name => current_government.name)
   	respond_to do |format|
   		format.html { render :action => "all_points" }
   	end
@@ -297,7 +297,7 @@ class PointsController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_question_info_#{@question.id}", render(:partial => "questions/flagged", :locals => {:question => @question})
           else
-            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("translation missing: en.thanks_for_bringing_this_to_our_attention", "controller/points")}</div>"
+            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("Thanks for bringing this to our attention", "controller/points")}</div>"
           end
         end        
       }
@@ -311,7 +311,7 @@ class PointsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("translation missing: en.the_content_has_been_deleted_and_a_warning_sent", "controller/points")}</div>"
+          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning sent", "controller/points")}</div>"
         end        
       }
     end    
@@ -333,7 +333,7 @@ class PointsController < ApplicationController
   def destroy
     @point = Point.find(params[:id])
     if @point.user_id != current_user.id and not current_user.is_admin?
-      flash[:error] = tr("translation missing: en.point.destroy.access_denied", "controller/points")
+      flash[:error] = tr("Access denied", "controller/points")
       redirect_to(@point)
       return
     end

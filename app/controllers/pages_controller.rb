@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   def edit
     @pages = Page.find(:all)    
     @page = Page.find(params[:id])
-    @page_title = tr("translation missing: en.pages.edit.title", "controller/pages")
+    @page_title = tr("Edit title", "controller/pages")
   end
 
   # POST /pages
@@ -55,7 +55,7 @@ class PagesController < ApplicationController
   def update
     @pages = Page.find(:all)
     @page = Page.find(params[:id])
-    @page_title = tr("translation missing: en.pages.edit.title", "controller/pages")
+    @page_title = tr("Edit title", "controller/pages")
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = tr("Saved {page_name}", "controller/pages", :page_name => @page.name)

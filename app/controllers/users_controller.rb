@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         @user.send_welcome
         redirect_back_or_default('/')
       else
-        flash[:notice]=tr("translation missing: en.email_not_accepted", "controller/users")
+        flash[:notice]=tr("Email not accepted", "controller/users")
         redirect_to "/set_email"
       end
     end

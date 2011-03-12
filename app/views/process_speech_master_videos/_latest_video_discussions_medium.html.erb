@@ -18,7 +18,7 @@
             <img src="<%=process_discussion.process_speech_videos.get_random_published.get_playlist_image_url("small")%>" />
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
-                    <%=tr("translation missing: en.speech", "view/process_speech_master_videos/_latest_video_discussions_medium") %>
+                    <%=tr("Speech", "view/process_speech_master_videos/_latest_video_discussions_medium") %>
                     <% else %>
                     <%=tr("speeches", "view/process_speech_master_videos/_latest_video_discussions_medium") %>
                     <% end %>

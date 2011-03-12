@@ -4,7 +4,7 @@
 			
 <%= form_for (@change, :remote=>true, :url => priority_changes_path(@priority)) do |f| %>
 
-<%= tr("translation missing: en.blurb_acquisition_new", "view/changes/new")%>
+<%= tr("Acquisition new BLURB", "view/changes/new")%>
 
 	<p><%= tr("The cost is<span class='pc'>0.01{currency_short_name}</span> per ballot, so you can include", "view/changes/new", :currency_short_name => current_government.currency_short_name) %><br/>
 		<%= f.check_box :is_endorsers %> <%= tr("{count} endorsers for <span class='pc'>{capital}{currency_short_name}</span>", "view/changes/new", :count => @priority.up_endorsements_count, :capital => @change.cost_endorsers, :currency_short_name => current_government.currency_short_name) %><br/>

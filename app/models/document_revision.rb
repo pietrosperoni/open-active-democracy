@@ -131,7 +131,7 @@ class DocumentRevision < ActiveRecord::Base
   def text
     s = document.name
     s += " [#{tr("Against", "model/revision")}]" if is_down?
-    s += " [#{tr("translation missing: en.neutral", "model/revision")}]" if is_neutral? and has_priority?
+    s += " [#{tr("Neutral", "model/revision")}]" if is_neutral? and has_priority?
     s += "\r\n" + content
     return s
   end  

@@ -29,7 +29,7 @@
     jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').autoResize({
         extraSpace: 20
     })
-    jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').DefaultValue("<%= tr("translation missing: en.esb.add", "view/comments/_new_inline")%>");
+    jQuery('.comment_content_autoresize_<%=activity.id.to_s%>').DefaultValue("<%= tr("Add comment", "view/comments/_new_inline")%>");
     //-->
 </script>
 <% end %>

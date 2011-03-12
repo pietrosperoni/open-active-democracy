@@ -4,7 +4,7 @@ class UnsubscribesController < ApplicationController
   # GET /unsubscribes/new.xml
   def new
     redirect_to signups_settings_url and return if logged_in?
-    @page_title = tr("translation missing: en.email_your_email_report_settings", "controller/unsubscribes")   
+    @page_title = tr("Your email report settings", "controller/unsubscribes")     
     @unsubscribe = Unsubscribe.new
     @unsubscribe.is_comments_subscribed = true
     @unsubscribe.is_votes_subscribed = true
@@ -23,7 +23,7 @@ class UnsubscribesController < ApplicationController
   # POST /unsubscribes.xml
   def create
     @unsubscribe = Unsubscribe.new(params[:unsubscribe])
-    @page_title = tr("translation missing: en.email_your_email_report_settings", "controller/unsubscribes")   
+    @page_title = tr("Your email report settings", "controller/unsubscribes")   
     respond_to do |format|
       if @unsubscribe.save
         flash[:notice] = tr("You will no longer receive email updates from {government_name}", "controller/unsubscribes", :government_name => current_government.name)

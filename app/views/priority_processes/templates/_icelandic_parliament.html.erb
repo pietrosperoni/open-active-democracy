@@ -4,7 +4,7 @@
 <% if @show_only_last_process %>
   <% processes = [processes.last] %>
   <h2><%=t "processes.only_last_process"%></h2>
-  <%=link_to tr("translation missing: en.processes.show_all_processes", "view/priority_processes/templates"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
+  <%=link_to tr("Show all processes", "view/priority_processes/templates"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
 <% else %>
 <br>
 <table width="100%">

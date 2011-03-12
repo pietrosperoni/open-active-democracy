@@ -17,7 +17,7 @@
             <p>
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
-                    <%=tr("translation missing: en.speech", "view/portal/portlets") %>
+                    <%=tr("Speech", "view/portal/portlets") %>
                     <% else %>
                     <%=tr("speeches", "view/portal/portlets") %>
                     <% end %>

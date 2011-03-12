@@ -331,7 +331,7 @@ end
 class NotificationWarning4 < Notification
   
   def name
-    tr("translation missing: en.notification.warning4", "model/notification")
+    tr("You have been banned from the website", "model/notification")
   end
   
   def is_recipient_subscribed?

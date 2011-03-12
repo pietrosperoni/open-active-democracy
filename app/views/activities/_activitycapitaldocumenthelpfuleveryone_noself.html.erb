@@ -3,5 +3,5 @@
 <%= raw tr("{user_name} earned {capital}{currency_short_name} because both endorsers and opposers found {point_name} helpful", "view/activities/_activitycapitaldocumenthelpfuleveryone_noself", :user_name => link_to(activity.user.login, activity.user), :capital => activity.capital.amount.abs, :currency_short_name => current_government.currency_short_name, :point_name => link_to((activity.document.name), activity.document))%>
 <% else %>
 <img src="/images/icons/coins_delete.png" height="16" width="16" border="0" class="icon">
-<%= raw tr("translation missing: en.activity.capital.point.everyone.endorsers.name", "view/activities/_activitycapitaldocumenthelpfuleveryone_noself", :user_name => link_to(activity.user.login, activity.user), :capital => activity.capital.amount.abs, :currency_short_name => current_government.currency_short_name, :point_name => link_to((activity.document.name), activity.document))%>
+<%= raw tr("{user_name} earned {capital}{currency_short_name} because both endorsers and opposers found {point_name} helpful", "view/activities/_activitycapitaldocumenthelpfuleveryone_noself", :user_name => link_to(activity.user.login, activity.user), :capital => activity.capital.amount.abs, :currency_short_name => current_government.currency_short_name, :point_name => link_to((activity.document.name), activity.document))%>
 <% end %>

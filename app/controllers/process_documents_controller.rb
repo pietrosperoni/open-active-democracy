@@ -40,7 +40,7 @@ class ProcessDocumentsController < ApplicationController
     @priority = @document.priority_process.priority
     unless fragment_exist?(@document)
       @document.reload(:include => [:process_document_elements])
-      @page_title = tr("translation missing: en.processes.process_documents.title", "controller/documents", :priority_name => @priority.name) 
+      @page_title = tr("Process documents", "controller/documents", :priority_name => @priority.name) 
     end
     respond_to do |format|
       format.html

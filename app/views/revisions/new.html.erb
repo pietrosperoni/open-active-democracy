@@ -5,7 +5,7 @@
 		
 		<td valign="top">
 			<p>
-			<%= tr("translation missing: en.blurb_point_revision_new", "view/revisions/new")%>
+			<%= tr("point revision new BLURB", "view/revisions/new")%>
 			<p>
 			<%= form_for :revision, :url => point_revisions_path(@point)  do |f| %>
 			  <%= f.error_messages :header_message => tr("Please review", "view/revisions/new"), :message => tr("We need a change to your talking point", "view/revisions/new") %>

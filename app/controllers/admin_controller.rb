@@ -9,7 +9,7 @@ class AdminController < ApplicationController
     @all += Comment.published.flagged
     @all += Document.published.flagged
     @all = @all.sort_by {|s| s.created_at}
-    @page_title = tr("translation missing: en.admin_all_flagged_content", "controller/admin")
+    @page_title = tr("All Flagged Content", "controller/admin")
   end
 
   def all_deleted
@@ -20,7 +20,7 @@ class AdminController < ApplicationController
     @all += Comment.unpublished
     @all += Document.unpublished
     @all = @all.sort_by {|s| s.updated_at}.reverse
-    @page_title = tr("translation missing: en.admin_all_deleted_content", "controller/admin")    
+    @page_title = tr("All Deleted Content", "controller/admin")    
     render :action=>:all_flagged
   end
 
