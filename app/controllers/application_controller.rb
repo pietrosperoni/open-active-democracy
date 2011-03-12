@@ -55,6 +55,10 @@ class ApplicationController < ActionController::Base
         '"'     => '\\"',
         "'"     => "\\'" }
         
+  def unfrozen_instance(object)
+    eval "#{object.class}.where(:id=>object.id).first"
+  end
+        
   def escape_javascript(javascript)
     if javascript
       javascript.gsub(/(\\|<\/|\r\n|[\n\r"'])/) { JS_ESCAPE_MAP[$1] }
