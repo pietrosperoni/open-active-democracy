@@ -42,6 +42,7 @@ class AdminController < ApplicationController
   def picture_save
     @government = current_government
     respond_to do |format|
+      @government = @government.reload
       if @government.update_attributes(params[:government])
         flash[:notice] = tr("Picture uploaded successfully", "controller/admin")
         format.html { redirect_to(:action => :picture) }
@@ -58,6 +59,7 @@ class AdminController < ApplicationController
   def fav_icon_save
     @government = current_government
     respond_to do |format|
+      @government = @government.reload
       if @government.update_attributes(params[:government])
         flash[:notice] = tr("Picture uploaded successfully", "controller/admin")
         format.html { redirect_to(:action => :fav_icon) }
@@ -74,6 +76,7 @@ class AdminController < ApplicationController
   def buddy_icon_save
     @government = current_government
     respond_to do |format|
+      @government = @government.reload
       if @government.update_attributes(params[:government])
         flash[:notice] = tr("Picture uploaded successfully", "controller/admin")
         format.html { redirect_to(:action => :buddy_icon) }
