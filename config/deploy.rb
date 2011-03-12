@@ -1,8 +1,8 @@
-require 'vendor/plugins/thinking-sphinx/recipes/thinking_sphinx'
+require 'bundler/capistrano'
 
 set :application, "open-active-democracy"
-set :domain, "skuggathing.is"
-set :selected_branch, "master"
+set :domain, "alphatest.yourpriorities.org"
+set :selected_branch, "master_tr8n"
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
 set :deploy_to, "/home/robert/sites/#{application}/#{selected_branch}"
@@ -17,8 +17,8 @@ role :web, domain
 role :db,  domain, :primary => true
 
 task :before_update_code, :roles => [:app] do
-  thinking_sphinx.stop
-  bundler.bundle_new_release
+ # thinking_sphinx.stop
+ # bundler.bundle_new_release
 end
 
 task :after_update_code, :roles => [:app] do
@@ -34,8 +34,8 @@ task :after_update_code do
   run "rm #{deploy_to}/#{shared_dir}/system/system"
   run "ln -s #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -s #{deploy_to}/#{shared_dir}/private #{current_release}/private"
-  thinking_sphinx.configure
-  thinking_sphinx.start  #run "rm -f #{current_path}"
+#  thinking_sphinx.configure
+#  thinking_sphinx.start  #run "rm -f #{current_path}"
 end
 
 namespace :deploy do
@@ -45,34 +45,8 @@ namespace :deploy do
   end
 end
 
-namespace :bundler do
-  task :create_symlink, :roles => :app do
-    shared_dir = File.join(shared_path, 'bundle')
-    release_dir = File.join(current_release, '.bundle')
-    run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
-  end
-  
-  task :bundle_new_release, :roles => :app do
-    bundler.create_symlink
-    run "cd #{release_path} && bundle install --without test"
-  end
-  
-  task :lock, :roles => :app do
-    run "cd #{current_release} && bundle lock;"
-  end
-  
-  task :unlock, :roles => :app do
-    run "cd #{current_release} && bundle unlock;"
-  end
-end
-
 deploy.task :start do
 # nothing
-end
-
-after "deploy:update_code" do
-  bundler.bundle_new_release
-  # ...
 end
 
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|

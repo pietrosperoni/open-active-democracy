@@ -2,8 +2,6 @@
 .project
 *.git
 vendor/plugins/i18n_to_tr8n
-vendor/plugins/tr8n
-vendor/plugins/will_filter
 log/*
 tmp/**/*
 tmp/restart.txt
