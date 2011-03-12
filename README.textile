@@ -43,14 +43,12 @@ bundle install
 
 # then fixup database.yml with your local mysql root password
 
-rails plugin install git://github.com/rbjarnason/tr8n.git -r 'rails3'
-rails plugin install git://github.com/rbjarnason/will_filter.git -r 'rails3'
-
 rake db:create
 rake db:schema:load
 
 # To setup the translation software
 rake tr8n:init
+rake tr8n:import_db
 
 Finally to start the rails server:
 rails s
