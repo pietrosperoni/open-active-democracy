@@ -23,13 +23,13 @@ module ApplicationHelper
 
   def translate_facet_option(option)
     if option=="Comment"
-      I18n.t(:comments)
+      tr("comments","helpers/application")
     elsif option=="Point"
-      I18n.t(:points)
+      tr("points","helpers/application")
     elsif option=="Priority"
-      I18n.t(:priorities)
+      tr("priorities","helpers/application")
     elsif option=="Document"
-      I18n.t(:document)
+      tr("document","helpers/application")
     else
       option
     end
@@ -49,7 +49,7 @@ module ApplicationHelper
 
   def time_ago(time, options = {})
     if true or request.xhr?
-      distance_of_time_in_words_to_now(time) + ' '+I18n.t(:time_ago)
+      (distance_of_time_in_words_to_now(time) + ' '+tr("ago","helpers/application")).html_safe
     else
       options[:class] ||= "timeago"
       content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
@@ -201,10 +201,10 @@ module ApplicationHelper
   def time_in_words(time)
     return "" unless time
     s = ""
-    s += ' '+I18n.t(:time_in) if time > Time.now
+    s += ' '+tr("in","helpers/application") if time > Time.now
     s += distance_of_time_in_words_to_now(time).gsub("about","")
-    s += ' '+I18n.t(:time_ago) if time < Time.now
-    return s
+    s += ' '+tr("ago","helpers/application") if time < Time.now
+    return s.html_safe
   end
 
   def get_short_star_rating(asset,br=false)

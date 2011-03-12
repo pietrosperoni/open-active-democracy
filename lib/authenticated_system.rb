@@ -70,7 +70,7 @@ module AuthenticatedSystem
     # simply close itself.
     def access_denied
       Rails.logger.info("IN ACCESS DENIED #{request.request_uri}")
-      flash[:error] = I18n.t('sessions.please_login')
+      flash[:error] = tr("Please login","lib/authenticated_system")
       respond_to do |format|
         format.html do
           store_location

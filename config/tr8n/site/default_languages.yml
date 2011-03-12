@@ -1262,7 +1262,7 @@
   native_name: "Español (Argentina)"
   google_key: "es"
   facebook_key: ""
-  enabled:  false
+  enabled:  true
 "es-BO":
   english_name: "Spanish (Bolivia)"
   native_name: "Español (Bolivia)"

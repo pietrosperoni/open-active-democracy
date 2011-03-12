@@ -74,6 +74,7 @@ module Tr8n::CommonMethods
       # choose the first language from the accepted languages header
       session[:locale] = tr8n_user_preffered_locale unless session[:locale]
       session[:locale] = params[:locale] if params[:locale]
+      I18n.locale = ENABLED_I18_LOCALES.include?(session[:locale]) ? session[:locale] : "en"
       tr8n_current_locale = session[:locale]
     end
 
