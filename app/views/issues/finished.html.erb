@@ -1,7 +1,5 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= render :partial => "priorities/new_button" %>
-
 <% if @priorities.empty? %>
 	<p><%= tr("This is where priorities that have been finished, either successfully or unsuccessfully will be.", "view/issues/finished")%>
 <% else %>

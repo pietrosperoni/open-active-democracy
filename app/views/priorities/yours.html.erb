@@ -1,7 +1,5 @@
 <h1><%= @page_title %></h1>
 
-<%= render :partial => "priorities/new_button" %>
-
 <% if params[:action] == 'yours_finished' %>
 	<%= tr("Like a to do list, when priorities you've endorsed or opposed are finished, they will fall off your list and be placed here.", "view/priorities/yours")%>
 <% end %>

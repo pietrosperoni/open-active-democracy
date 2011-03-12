@@ -26,16 +26,39 @@
 
 <div id="backgroundwrap">
 	<div id="header">
-      <div style="float:right">
-         <%= tr8n_language_selector_tag %>
-         <%= render :partial => "shared/google_translate_select" %>
-      </div>
-      <%= render :partial => "shared/branding"%>
-		<%= flash_div :warning, :notice, :error %>
-
-		<%= render :partial => "ads/pick" %>
+	  <table>
+	    <tr>
+	      <td width="45%">
+          <%= render :partial => "shared/branding/your_priorities"%>
+        </td>
+        <td width="55%" align="center">
+          <table>
+            <tr align="center">
+              <td>
+                  <%= render :partial => "priorities/new_button" %>
+              </td>
+              <td>
+                  <%= render :partial => "shared/search" %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"  align="center">
+                 <%=tr("Veldu tungumal:","views/layouts/basic")%> <%= tr8n_language_selector_tag %>
+                 <%= render :partial => "shared/google_translate_select" %>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <%= flash_div :warning, :notice, :error %>
+        <td/>
+      </tr>          
+    </table>
 	</div>
 	<div id="contentwrap">
+    <%= render :partial => "ads/pick" %>
 		<%= render :partial => "shared/menu" %>		
 		<div id="content_text">
 			<%= yield :layout %>
@@ -47,17 +70,11 @@
 		<% end %>	
 
 		<div id="top_right_column">
-
-			<% if current_government.is_searchable? %>
-			<%= render :partial => "shared/search" %>
-			<% end %>
-
 			<% if logged_in? %>
 			<%= render :partial => "shared/notifications" %>
 			<% else %>
 			<%= render :partial => "shared/login" %>
 			<% end %>
-
 		</div>
 
 		<% if logged_in? %>
@@ -82,7 +99,6 @@
 	</div>
 </div>
 
-<%= tr8n_language_strip_tag %>    
 <%= render :partial => "shared/footer" %>
 <%= render :partial => "shared/analytics" %>
 <%= render :partial => "shared/facebook_footer" %>

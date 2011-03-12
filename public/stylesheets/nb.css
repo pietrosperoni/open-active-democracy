@@ -124,6 +124,7 @@ h4 {
 }
 #search_box {
 	padding: 5px 5px 5px 10px;
+	float: right;
 }
 #intro, #buzz_box {
 	margin-top: 10px;

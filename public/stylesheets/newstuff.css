@@ -30,19 +30,25 @@ hr { border-top: 3px solid #e5e5e5; }
 #backgroundwrap {
 	width: 960px !important;
 	margin: 0px auto;
+	height: 100%;
 }
+
 #sidebar {
 	width: 220px;
-	float: left;
+	float: right;
 	overflow: hidden;
 	padding-right: 4px;
-	
+  position:absolute;
+  top: 0px;
+  right: 5px;
+  padding-top: 0px;
+  margin-top: 0px;
 }
 
 #contentwrap {
 	width: 720px;
 	margin-left: 4px;
-	float: right;
+	float: left;
 	position: relative;
 	padding: 0px 0px 0px 0px !important;
 }
@@ -671,6 +677,14 @@ border-bottom:1px solid #EEEEEE !important;
 width:130px;
 }
 
+#new_priority_button {
+  padding:2px 5px 3px 8px;
+  border:1px solid #ddd;
+  float: right;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 #right_column_priorities {
 padding:0 !important;

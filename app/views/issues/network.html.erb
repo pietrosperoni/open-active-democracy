@@ -1,7 +1,5 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= render :partial => "priorities/new_button" %>
-
 <p>
 <% if current_user.followings_count == 0 %>
 	<%= tr("You don't have anyone in your network yet because you aren't following anyone.", "view/issues/network", :url => user_contacts_path(current_user), :government_name => current_government.name)%>
