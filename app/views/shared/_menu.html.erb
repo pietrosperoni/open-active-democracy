@@ -36,7 +36,7 @@
 			<span class="tab_header"><%= link_to tr("Home","Menu system"), :controller => "portal" %></span>
 		</li>
 		<li class="tab1">
-			<span class="tab_header"><%= link_to tr("{number_of} Categories","Menu system", :number_of=>5), :controller => "issues" %></span>
+			<span class="tab_header"><%= link_to tr("Categories","Menu system"), :controller => "issues" %></span>
 		</li>
 		<% end %>
 		<li class="tab2 mega">
@@ -109,7 +109,7 @@
 		</li>
 		<% if logged_in? %>
 		<li class="tab3 mega">
-			<span class="tab_header"><%= link_to current_government.briefing_name, "#" %></span>
+			<span class="tab_header"><%= link_to tr("Briefing Room", "view/shared/_menu"), "#" %></span>
 			<div class="tab_body">
 
 				<div class="tab_subhead"><%= link_to tr("Talking points", "view/shared/_menu"), newest_points_url %> (<%= number_with_delimiter(Point.published.filtered.count) %>)</div>
