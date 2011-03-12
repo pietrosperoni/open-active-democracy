@@ -31,7 +31,6 @@ task :after_update_code do
   run "ln -s #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
-  run "rm #{deploy_to}/#{shared_dir}/system/system"
   run "ln -s #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -s #{deploy_to}/#{shared_dir}/private #{current_release}/private"
 #  thinking_sphinx.configure
