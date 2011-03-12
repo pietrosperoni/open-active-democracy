@@ -30,34 +30,7 @@
          <%= tr8n_language_selector_tag %>
          <%= render :partial => "shared/google_translate_select" %>
       </div>
-     <div id="branding" style="height: 52px">
-		<% if current_partner %>
-		<div id="partner_image">
-			<%= render :partial => "partners/logo" %>
-		</div>
-		<div id="parent_image" style="float: right">
-			<% if Rails.env=="development"%>
-				<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is", :port=>3000 %>
-			<% else %>
-				<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is" %>
-			<% end %>
-		</div>
-		<% else %>
-		<div id="parent_image" style="float: left">
-			<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal" %>
-		</div>
-		<div id="parent_image" style="float: right" class="partner_image">
-			<% Partner.with_logo.all.each do |partner| %>
-			<% if Rails.env=="development"%>
-			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
-			<% else %>
-			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
-			<% end %>
-			<br>
-		<% end %>
-		</div>
-		<% end %>
-	</div>
+      <%= render :partial => "shared/branding"%>
 		<%= flash_div :warning, :notice, :error %>
 
 		<%= render :partial => "ads/pick" %>

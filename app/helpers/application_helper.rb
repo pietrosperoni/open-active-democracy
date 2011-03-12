@@ -17,6 +17,11 @@ module ApplicationHelper
   include Tr8n::BaseHelper
   include Wf::HelperMethods
 
+  def get_random_logo
+    logo_filename = Pathname.new(Dir.glob(Rails.root.join("public","images","logos").to_s+'/*').sort_by { rand }.first).basename
+    %Q{<img src="/images/logos/#{logo_filename}"/>}.html_safe    
+  end
+
   def tg(text)
     "<span class=\"to_translate\">#{text}</span>".html_safe
   end

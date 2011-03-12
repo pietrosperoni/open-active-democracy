@@ -47,12 +47,46 @@ hr { border-top: 3px solid #e5e5e5; }
 	padding: 0px 0px 0px 0px !important;
 }
 
+#branding_text_header {
+  margin-left: 12px;
+  margin-top: 7px;
+  font-family: sans-serif;
+  font-style: normal;
+  font-variant: small-caps;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 100%;
+  word-spacing: normal;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
+  text-align: center;
+  text-indent: 0ex;
+}
+
+#branding_text_sub {
+  margin-left: 12px;
+  font-family: sans-serif;
+  font-style: normal;
+  font-variant: small-caps;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 100%;
+  word-spacing: normal;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
+  text-align: center;
+  text-indent: 0ex;
+}
+
+
 #branding {
-	background-color: #f0f0f0 !important;
+	background-color: #fefefe !important;
 }
 
 #branding a {
-	background-color: #f0f0f0 !important;
+	background-color: #fefefe !important;
 	color: #e5e5e5 !important;
 /*	padding: 10px 15px;
 	display: block;
