@@ -64,37 +64,7 @@
 			<%= yield :layout %>
 		</div>
 	</div>
-	<div id="sidebar">
-		<% if logged_in? and current_user.warnings_count > 0 %>
-		<div id="warning"><%= tr("{count} warnings", "view/layouts/basic", :count => current_user.warnings_count) %></div>
-		<% end %>	
-
-		<div id="top_right_column">
-			<% if logged_in? %>
-			<%= render :partial => "shared/notifications" %>
-			<% else %>
-			<%= render :partial => "shared/login" %>
-			<% end %>
-		</div>
-
-		<% if logged_in? %>
-
-		<div id="priority_column">
-			<%= render :partial => "shared/your_priorities" %>
-		</div>
-
-		<%= render :partial => "shared/activated" %>
-
-		<% else %>
-
-		<div id="intro"><%= tr("Intro BLURB", "view/layouts/basic") %></div>
-		<% if current_government.short_name == 'wh2' %>
-		<%= render :partial => "shared/buzz" %>
-		<% end %>
-
-		<% end %>
-
-	</div>
+  <%= render :partial => "shared/sidebar" %>   
 	<div class="push">
 	</div>
 </div>

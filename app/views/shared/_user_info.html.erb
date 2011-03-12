@@ -1,36 +1,21 @@
-<div id="Person">
-
-	<!-- TODO profile image --><br/>
-	<span class="profile_image"><%= render :partial => "users/pic_48", :locals => {:user => current_user}%> 
-	</span>
+<div id="user_info_box">
+<table width="100%">
+  <tr>
+    <td>      
+        <div id="user_info_box_name_and_menu">
+          <span class="profile_name"><%= current_user.name%></span><br>
+          <%= link_to tr("Settings","views/shares/_user_info"), :controller=>"settings" %> | 
+          <%= link_to tr("Logout", "view/shared/_user_info"), :controller=>"sessions", :action=>"destroy" %> 
+        </div>
+        <br>
+        <%= render :partial => "shared/facebook" %>
+    </td>
+    <td>
+        <div id="user_info_box_picture">
+          <%= render :partial => "users/pic_48", :locals => {:user => current_user}%>
+        </div>
+    </td>
+  </tr>
+</table>
 </div>
-
-<div id="Settings">
-	<span class="profile_name"><%=current_user.name%></span>
-	<!--<span class="profile_info"><%=current_user.national_identity%></span>-->
-
-    <div class="profile_edit"> 
-		<a href="/settings/picture" title="<%= tr("Edit user", "view/shared/_user_info")%>"><img src="/images/profile_edit.gif" border=0></a> 	
-		<%#= link_to image_tag("profile_edit.gif", :border => 0), url_for current_user, :controller => "", :action => "", :title => tr("Edit User", "view/shared/_user_info"), :alt => tr("Edit User", "view/shared/_user_info") %> <a href="/settings/picture" class="stillingar" title="Breyta eigin stillingum:  Mynd, netfangi og Facebook tengingum">Stillingar</a>
-	</div>
-	
-	<div class="profile_logout">		
-		<%= link_to image_tag("profile_logout.gif", :border => 0,:title => tr("Logout", "view/shared/_user_info"), :alt => tr("Logout", "view/shared/_user_info")), logout_path %> <a href="/logout/" class="utskraning" title="Skrá mig út">Útskráning</a>
-	</div>
-
-	<div class="facebook">
-		<%= render :partial=>"shared/facebook" %>
-	</div>
-				
-	<!-- <div class="profile_actions">
-		<div class="actions_number">32</div>
-		<div class="actions_text">hreyfingar <br />á málum</div>
-	</div> -->
-	<!-- <span class="Edit"><a href="/settings">Breyta stillingum</a></span> 
-	<span class="Edit"><a href="/settings/picture">Breyta mynd</a></span>
-    <span class="Logout"><a href="/sessions/destroy">Skrá út</a></span> -->
-</div>
-
-
-
-
+      

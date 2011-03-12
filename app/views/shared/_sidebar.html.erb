@@ -1,0 +1,29 @@
+<div id="sidebar">
+  <% if logged_in? %>
+    <%= render :partial => "shared/user_info" %>
+    <% if current_user.warnings_count > -1 %>
+      <div id="warning">
+        <%= tr("{count} warnings", "view/layouts/basic", :count => current_user.warnings_count) %>
+      </div>
+    <% end %>
+    <%= render :partial => "shared/activated" %>
+  <% end %>
+
+  <div id="top_right_column">
+    <% if logged_in? %>
+      <%= render :partial => "shared/notifications" %>
+    <% else %>
+      <%= render :partial => "shared/login" %>
+    <% end %>
+  </div>
+
+  <% if logged_in? %>
+    <div id="priority_column">
+      <%= render :partial => "shared/your_priorities" %>
+    </div>
+  <% else %>
+    <div id="intro">
+      <%= tr("Intro BLURB", "view/layouts/basic") %>
+    </div>
+  <% end %>
+</div>
