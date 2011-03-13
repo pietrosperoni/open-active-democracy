@@ -28,7 +28,7 @@
 		<%= link_to tr("Follow", "view/users/_button_small"), follow_user_path(user, :region => "user_left", :value => 1),
                 :method => :post,
                 :remote=>true,
-                'data-disable-with' => escape_t(t(:ajax_follow_capitalize)),
+                'data-disable-with' => escape_t(tr(:ajax_follow_capitalize.to_s)),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title => tr("I want to follow this person's comments and activity", "view/users/_button_small") %>	
 	</span>
@@ -37,7 +37,7 @@
 		<%= link_to tr("Ignore", "view/users/_button_small"), follow_user_path(user, :region => "user_left", :value => -1),
                 :method => :post,
                 :remote=>true,
-                'data-disable-with' => escape_t(t(:ajax_ignore_capitalize)),
+                'data-disable-with' => escape_t(tr(:ajax_ignore_capitalize.to_s)),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title => tr("I want to ignore this person's comments and activity", "view/users/_button_small") %>	
 	</span>	

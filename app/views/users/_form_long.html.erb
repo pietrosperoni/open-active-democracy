@@ -1,7 +1,12 @@
-<div id="new_user_form">
+<script type="text/javascript">
+var RecaptchaOptions = {
+   lang : '<%=session[:locale]%>',
+};
+</script>
 
-<%= form_for :user, :remote=>true, 
-             'data-disable-with' => escape_t(t(:ajax_sending)),
+<div id="new_user_form">
+<%= form_for :user,
+             'data-disable-with' => escape_t(tr(:ajax_sending.to_s)),
              :url => users_path(:region => "long") do |f| -%>
 <%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form_long") %>
 <p>
@@ -43,6 +48,7 @@
 		</div>
 
 	</td><td valign="top" style="padding-left: 10px;">
+    <%=recaptcha_tags(:display=>{:theme => 'clean', :tabindex => 10})%>
 
 		<div class="field">
 		<div class="field_label">

@@ -6,7 +6,7 @@
 	<p><%= tr("{contacts_count} of your contacts are <i>not</i> {government_name} members.<br/>Checkbox the people you'd like to invite and click the big yellow button.", "view/user_contacts/not_invited", :contacts_count => @contacts.size, :government_name => current_government.name)%>
 	<% form_tag :loading => "Element.show('status');",
               :remote=>true,
-              'data-disable-with' =>  escape_t(t(:ajax_sending)),
+              'data-disable-with' =>  escape_t(tr(:ajax_sending.to_s)),
 	            :url => multiple_user_contacts_url, :method => :put do %>				
 		
 		<% if @contacts.size > 1 %>

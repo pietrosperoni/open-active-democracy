@@ -271,20 +271,31 @@ class UsersController < ApplicationController
     # uncomment at your own risk
     # reset_session
     @valid = true
+
     @user = User.new(params[:user]) 
     @user.request = request
     @user.referral = @referral
     @user.partner_referral = current_partner
+    unless verify_recaptcha(:model => @user, :message => tr("Please enter the reCAPTCHA words again"))
+      @valid = false
+      respond_to do |format|
+        format.js
+        format.html { render :action => "new" }
+      end
+      return
+    end
+
     begin
       @user.save! #save first
       rescue ActiveRecord::RecordInvalid
         @valid = false    
     end
     
-    if not @valid # if it's not valid, punt on all the rest
+
+    if not @valid
       respond_to do |format|
         format.js
-        format.html { render :text => "error", :status => 500}
+        format.html { render :action => "new" }
       end
       return
     end
@@ -304,7 +315,7 @@ class UsersController < ApplicationController
     session[:goal] = 'signup'
     respond_to do |format|
       format.js
-      format.html { render :text => "error", :status => 500}
+      format.html { redirect_to @send_to_url }
     end      
   end  
 

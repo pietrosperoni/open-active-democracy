@@ -2,7 +2,7 @@
 <div class="comment_link_add" id="comment_link_<%= activity.id.to_s %>">
 	<%= link_to tr("Add a comment", "view/comments/_new_inline_small"), new_activity_comment_url(activity), :method => :get,
               :remote=>true,
-              'data-disable-with' => escape_t(t(:ajax_sending)),
+              'data-disable-with' => escape_t(tr(:ajax_sending.to_s)),
               'data-loader-name' => "horizontal_small" %>
 	<% if not current_page?(activity_comments_url(activity)) %>
 		&middot;	

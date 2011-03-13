@@ -4,7 +4,7 @@
 		<span class="tag_button">
 			<%= link_to tr("YES", "view/priorities/_flagged"), "/priorities/abusive/#{priority.id}",
                   :remote=>true,
-                  'data-disable-with' => escape_t(t(:ajax_issuing_warning)),
+                  'data-disable-with' => escape_t(tr(:ajax_issuing_warning.to_s)),
                   'data-loader-name' => "horizontal_small",
 			            :class => "quality_unhelpful_link", :title => tr("Issue warning", "view/priorities/_flagged") %></span>
 		<span class="or"><%= tr("OR", "view/priorities/_flagged") %></span>
@@ -12,7 +12,7 @@
 		<span class="tag_button">
 			<%= link_to tr("NO", "view/priorities/_flagged"), "/priorites/not_abusive/#{priority.id}",
                   :remote=>true,
-                  'data-disable-with' => escape_t(t(:ajax_clearing_warning)),
+                  'data-disable-with' => escape_t(tr(:ajax_clearing_warning.to_s)),
                   'data-loader-name' => "horizontal_small",
 			            :class => "quality_unhelpful_link", :title => tr("Clear flag", "view/priorities/_flagged") %>
 		</span>		

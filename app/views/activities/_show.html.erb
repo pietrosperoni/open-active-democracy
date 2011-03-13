@@ -36,7 +36,7 @@
 		            :remote=>true,
                 'data-disable-with' => "",
                 'data-loader-name' => "circle",
-		            :confirm => escape_t(t(:ajax_delete_from_this_page)) %>
+		            :confirm => escape_t(tr(:ajax_delete_from_this_page.to_s)) %>
 		<% end %>
 		</div>
 		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{locale.to_s}") do %> 
@@ -46,11 +46,11 @@
 
 		<% if activity.class != ActivityCommentParticipant %>
 			<% if activity.comments_count > 0 %>
-				<span class="comment_link" title="<%=escape_t(t(:ajax_send_comment))%>">
-				<%= link_to_unless_current pluralize(activity.comments_count, title="#{escape_t(t(:ajax_comment))}"), activity_comments_url(activity) %>
+				<span class="comment_link" title="<%=escape_t(tr(:ajax_send_comment.to_s))%>">
+				<%= link_to_unless_current pluralize(activity.comments_count, title="#{escape_t(tr(:ajax_comment.to_s))}"), activity_comments_url(activity) %>
 				</span>
 			<% else %>
-				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="<%=escape_t(t(:ajax_send_comment))%>">	
+				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="<%=escape_t(tr(:ajax_send_comment.to_s))%>">	
   				<%= link_to tr("Comment", "view/activities/_show"), new_activity_comment_url(activity), :method => :get,
                       'data-disable-with' => "",
                       'data-loader-name' => "horizontal_small",

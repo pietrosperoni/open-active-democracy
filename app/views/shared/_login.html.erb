@@ -4,7 +4,7 @@
 	<div id="login_form">
 		<p>
 	<%= form_for :session, :remote=>true, 
-	             'data-disable-with' =>  escape_t(t(:ajax_sending)),
+	             'data-disable-with' =>  escape_t(tr(:ajax_sending.to_s)),
  	             :url => session_path(:region => "inline") do |f| -%>
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td class="email">

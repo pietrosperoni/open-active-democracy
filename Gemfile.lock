@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: ccc0719048fe6136064e627a61ee4da400cceba6
+  revision: 36e5a005d2be3faf0535417a4e7046c73635bf95
   branch: rails3
   specs:
     thinking-sphinx (2.0.2)
@@ -15,6 +15,12 @@ GIT
     twitter-auth (0.1.22)
       ezcrypto (>= 0.7.2)
       oauth (>= 0.3.1)
+
+GIT
+  remote: git://github.com/rbjarnason/recaptcha.git
+  revision: 493d858bec6c42fb1dec1df9acc6319a7fdc8c37
+  specs:
+    recaptcha (0.3.1)
 
 GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
@@ -167,6 +173,7 @@ DEPENDENCIES
   paperclip
   rails (= 3.0.5)
   rails-dev-boost!
+  recaptcha!
   rmagick (= 2.12.2)
   sunlight (>= 0.9)
   thinking-sphinx!
