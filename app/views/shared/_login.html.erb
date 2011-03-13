@@ -1,6 +1,6 @@
 <div id="login">
 
-	<%= raw tr("<b><a href='{signup_url}'>Sign up</a></b> or <a href='#' id='login_link'>Sign in with {government_name}</a>.", "view/shared/_login", :signup_url => signup_url, :government_name => current_government.name)%>
+	<%= raw tr("<b><a href='{signup_url}'>Sign up</a></b> or <a href='#' id='login_link'>Sign in</a>.", "view/shared/_login", :signup_url => signup_url, :government_name => current_government.name)%>
 	<div id="login_form">
 		<p>
 	<%= form_for :session, :remote=>true, 
@@ -27,7 +27,7 @@
 	<% end %>
 
 	<% if current_government.has_facebook_enabled? %>
-    <div style="margin-bottom: 7px; margin-bottom: 5px;">
+    <div style="margin-bottom: 7px; margin-top: 5px;">
     <%= fb_login_and_redirect "/", :text=>tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=>tr("Sign in with Facebook","views/shared/_login"), :perms=>"email"%>
     </div>
 	<% end %>
