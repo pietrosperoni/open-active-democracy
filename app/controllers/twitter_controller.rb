@@ -36,8 +36,8 @@ class TwitterController < ApplicationController
     # Exchange the request token for an access token.
     stored_request_token = session[:request_token]
     stored_request_token_secret = session[:request_token_secret]
-    @access_token = access_token = prepare_access_token(stored_request_token, stored_request_token_secret,params[:oauth_verifier])
-    @response = @access_token.request(:get, '/account/verify_credentials.json')
+    @access_token = access_token = prepare_access_token(params[:oauth_token], stored_request_token_secret,params[:oauth_verifier])
+    @response = @access_token.request(:get, '/account/verify_credentials.json', :oauth_verifier => oauth_verifier)
     Rails.logger.debug("Twitter Response: #{pp @response}")
     if @response.class == Net::HTTPOK
       Rails.logger.debug("Twitter Body: #{pp @response.body}")
