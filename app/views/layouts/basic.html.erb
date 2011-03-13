@@ -17,8 +17,10 @@
 <% if controller_name == "facebook" %>
   <%= stylesheet_link_tag "fb_invite_hack.css" %>
 <% end %>
-<% %>
-  <%= tr8n_scripts_tag %>
+<% if controller_name == "priorities" and action_name == "show" %>
+  <%= render :partial=>"priorities/fb_og_tags" %>
+<% end %>
+<%= tr8n_scripts_tag %>
 </head>
 <body>
 
