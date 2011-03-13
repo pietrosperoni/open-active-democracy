@@ -139,7 +139,7 @@ module AuthenticatedSystem
         Rails.logger.info("LOGIN: About to fb create")
         begin          
           current_facebook_user.fetch
-        rescue
+        rescue Mogli::Client::OAuthException
           Rails.logger.error("LOGIN: Error in current_facebook_user.fetch")
           return false
         end
