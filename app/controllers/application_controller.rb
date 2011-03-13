@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   before_filter :check_subdomain
   
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
-  before_filter :check_facebook, :unless => [:is_robot?]
+#  before_filter :check_facebook, :unless => [:is_robot?]
     
   before_filter :check_blast_click, :unless => [:is_robot?]
   before_filter :check_priority, :unless => [:is_robot?]
