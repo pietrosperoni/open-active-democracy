@@ -23,7 +23,7 @@ class TwitterController < ApplicationController
     session[:request_token] = @request_token.token
     session[:request_token_secret] = @request_token.secret
     # Send to twitter.com to authorize
-    redirect_to @request_token.authorize_url.gsub('authorize', 'authenticate')
+    redirect_to @request_token.authorize_url
     return
   end
 
