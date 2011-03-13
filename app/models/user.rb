@@ -946,28 +946,20 @@ class User < ActiveRecord::Base
     self.activate! if not self.activated?
   end  
   
-  def User.create_from_facebook(fb_session,partner,request)
-    return if fb_session.expired?
-    name = fb_session.user.name
+  def User.create_from_facebook(facebook_user,partner,request)
+    name = facebook_user.name
     # check for existing account with this name
-    if User.find_by_login(name)
-     name = name + "FB(#{rand(6553)})"
-    end
-    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
+    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{facebook_user.id}")
     u = User.new(
      :login => name,
-     :first_name => fb_session.user.first_name,
-     :last_name => fb_session.user.last_name,       
-     :facebook_uid => fb_session.user.uid,
+     :email => facebook_user.email,
+     :first_name => facebook_user.first_name,
+     :last_name => facebook_user.last_name,       
+     :facebook_uid => facebook_user.id,
      :partner_referral => partner,
      :request => request
     )
     
-    if fb_session.user.current_location
-      u.zip = fb_session.user.current_location.zip if fb_session.user.current_location.zip and fb_session.user.current_location.zip.any?  
-      u.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any?
-      u.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any?
-    end
     if u.save
       u.activate!
       return u
@@ -977,9 +969,8 @@ class User < ActiveRecord::Base
     end
   end
   
-  def update_with_facebook(fb_session)
-    return if fb_session.expired?
-    self.facebook_uid = fb_session.user.uid
+  def update_with_facebook(facebook_user)
+    self.facebook_uid = facebook_user.id
     # need to do some checking on whether this facebook_uid is already attached to a diff account
     check_existing_facebook = User.active.find(:all, :conditions => ["facebook_uid = ? and id <> ?",self.facebook_uid,self.id])
     if check_existing_facebook.any?
@@ -987,11 +978,6 @@ class User < ActiveRecord::Base
         e.remove_facebook
         e.save(:validate => false)
       end
-    end
-    if fb_session.user.current_location
-      self.zip = fb_session.user.current_location.zip if fb_session.user.current_location.zip and fb_session.user.current_location.zip.any? and not self.attribute_present?("zip")
-      self.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any? and not self.attribute_present?("city")
-      self.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any? and not self.attribute_present?("state")
     end
     self.save(:validate => false)
     check_contacts # looks for any contacts with the facebook uid, and connects them
