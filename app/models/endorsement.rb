@@ -108,10 +108,10 @@ class Endorsement < ActiveRecord::Base
   end
   
   def check_official
-    return unless user_id == Government.current.official_user_id
-    Priority.update_all("official_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
-    Priority.update_all("official_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
-    Priority.update_all("official_value = 0", ["id = ?",priority_id]) if status == 'deleted'
+#    return unless user_id == Government.current.official_user_id
+#    Priority.update_all("official_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
+#    Priority.update_all("official_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
+#    Priority.update_all("official_value = 0", ["id = ?",priority_id]) if status == 'deleted'
   end
   
   def priority_name
