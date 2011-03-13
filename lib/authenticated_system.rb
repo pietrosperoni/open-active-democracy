@@ -125,7 +125,6 @@ module AuthenticatedSystem
       if session[:user_id]
         u = User.find_by_id(session[:user_id])
         self.current_user = u 
-        Rails.logger.info("LOGIN: FROM SESSION curr #{self.current_user}")
       end
     end
     
