@@ -1,7 +1,7 @@
 <% if not ['inactive','buried'].include?(priority.status) %>
 	<div class="priority_actions">
 		<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :endorsement => endorsement, :region => "priority_inline"} %>
-     <fb:like href="<%=priority.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"> 
 		<%= render :partial => "priorities/endorsement_count", :locals => {:priority => priority }%>
+    <fb:like href="<%=priority.show_url%>" layout="standard" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light">
 	</div>
 <% end %>
