@@ -6,7 +6,7 @@
           <span class="profile_name"><%= current_user.name%></span><br>
           <%= link_to tr("Settings","views/shares/_user_info"), :controller=>"settings" %> | 
           <% if current_facebook_user %>
-            <%= fb_logout_link(tr("Logout","view/shared/_user_info"), "/sessions/destroy") %>
+            <%= fb_logout_link(tr("Logout","view/shared/_user_info"), request.host+"/sessions/destroy") %>
           <% else %>
             <%= link_to tr("Logout", "view/shared/_user_info"), "/sessions/destroy" %> 
           <% end %>
