@@ -27,9 +27,7 @@
 	<% end %>
 
 	<% if current_government.has_facebook_enabled? %>
-		<div style="margin-bottom: 5px;">
-		<a href="#" onclick="FB.Connect.requireSession(function(){window.location.href=window.location.href=window.location.href;}); return false;"><%= image_tag("facebook_signin.png", :border => 0)%></a>
-		</div>
+    <%= fb_login_and_redirect "/", :text=>"tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=> "Samtengja við Facebook", :perms=>"email"%>
 	<% end %>
 	
 	<% if current_government.has_twitter_enabled? %>
