@@ -132,6 +132,7 @@ module AuthenticatedSystem
     # Called from #current_user. Then try to login from facebook
     def login_from_facebook
       if current_facebook_user
+        current_facebook_user.fetch
         Rails.logger.info("LOGIN: fbuid #{current_facebook_user.id} #{current_facebook_user.inspect} name #{current_facebook_user.name}")
         if u = User.find_by_facebook_uid(current_facebook_user.id)
           Rails.logger.info("LOGIN: FOUND ONE")          
