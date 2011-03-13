@@ -948,7 +948,7 @@ class User < ActiveRecord::Base
   def User.create_from_facebook(facebook_user,partner,request)
     name = facebook_user.name
     # check for existing account with this name
-    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{facebook_user.id} #{facebook_user.name} #{facebook_user.inspect}")
+    Rails.logger.info("LOGIN: CREATE FROM FACEBOOK from UID #{facebook_user.id} #{facebook_user.name} #{facebook_user.inspect}")
     u = User.new(
      :login => name,
      :email => facebook_user.email,
