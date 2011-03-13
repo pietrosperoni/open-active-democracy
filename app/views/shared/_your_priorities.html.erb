@@ -3,15 +3,7 @@
     <tr>
       <td valign="top" style="padding-left: 5px;">
       <div class="user_name">
-        <%= link_to tr("{user_name} priorities", "view/shared/_your_priorities", :user_name => current_user.name), yours_priorities_url %>
-      </div>
-      <div id="search_priorities">
-        <%= form_for(Priority.new) do |f| %>
-        <% if @tag_names %>
-        <%= hidden_field_tag :tag_names, @tag_names %>
-        <% end %>
-        <%= f.text_field :name, :id => "right_priority_box", :size => 40, :maxlength => 60, :autocomplete =>"off" %>
-        <% end %>
+        <%= link_to tr("Your Priorities", "view/shared/_your_priorities", :user_name => current_user.name), yours_priorities_url %>
       </div>
       </td>
     </tr>
