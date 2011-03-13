@@ -4,14 +4,15 @@ class TwitterController < ApplicationController
     "http://localize.yrpri.org/twitter/callback"
   end
 
-  def prepare_access_token(oauth_token, oauth_token_secret)
+  def prepare_access_token(oauth_token, oauth_token_secret,oauth_verifier)
     consumer = OAuth::Consumer.new(Government.first.twitter_key, Government.first.twitter_secret_key,
       { :site => "http://api.twitter.com",
         :scheme => :header
       })
     # now create the access token object from passed values
     token_hash = { :oauth_token => oauth_token,
-                   :oauth_token_secret => oauth_token_secret
+                   :oauth_token_secret => oauth_token_secret,
+                   :oauth_verifier => oauth_verifier
                  }
     access_token = OAuth::AccessToken.from_hash(consumer, token_hash )
     return access_token
@@ -35,7 +36,7 @@ class TwitterController < ApplicationController
     # Exchange the request token for an access token.
     stored_request_token = session[:request_token]
     stored_request_token_secret = session[:request_token_secret]
-    @access_token = access_token = prepare_access_token(stored_request_token, stored_request_token_secret)
+    @access_token = access_token = prepare_access_token(stored_request_token, stored_request_token_secret,params[:oauth_verifier])
     @response = @access_token.request(:get, '/account/verify_credentials.json')
     Rails.logger.debug("Twitter Response: #{pp @response}")
     if @response.class == Net::HTTPOK
