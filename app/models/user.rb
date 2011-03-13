@@ -958,12 +958,13 @@ class User < ActiveRecord::Base
      :partner_referral => partner,
      :request => request
     )
+    Rails.logger.info("LOGIN: CREATE FROM FACEBOOK user #{u.inspect}")
     
     if u.save
       u.activate!
       return u
     else
-      puts "ERROR w/ user -- " + u.errors.full_messages.join(" | ")
+      Rails.logger.error "ERROR w/ user -- " + u.errors.full_messages.join(" | ")
       return nil
     end
   end
