@@ -36,7 +36,7 @@ class TwitterController < ApplicationController
     stored_request_token = session[:request_token]
     stored_request_token_secret = session[:request_token_secret]
     @access_token = access_token = prepare_access_token(stored_request_token, stored_request_token_secret)
-    @response = @access_token.request(:get, '/account/verify_credentials.json', { :scheme => :query_string })
+    @response = @access_token.request(:get, '/account/verify_credentials.json')
     if @response.class == Net::HTTPOK
       user_info = JSON.parse(@response.body)
       if not user_info['screen_name']
