@@ -104,8 +104,7 @@ class User < ActiveRecord::Base
   has_many :following_discussion_activities, :through => :following_discussions, :source => :activity
     
   validates_presence_of     :login, :message => tr("Please specify a name to be identified as on the site.", "model/user")
-  validates_length_of       :login, :within => 3..40
-  validates_uniqueness_of   :login, :case_sensitive => false    
+  validates_length_of       :login, :within => 3..60
   
   validates_presence_of     :email, :unless => [:has_facebook?, :has_twitter?]
   validates_length_of       :email, :within => 3..100, :allow_nil => true, :allow_blank => true
@@ -949,7 +948,7 @@ class User < ActiveRecord::Base
   def User.create_from_facebook(facebook_user,partner,request)
     name = facebook_user.name
     # check for existing account with this name
-    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{facebook_user.id}")
+    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{facebook_user.id} #{facebook_user.name}")
     u = User.new(
      :login => name,
      :email => facebook_user.email,
