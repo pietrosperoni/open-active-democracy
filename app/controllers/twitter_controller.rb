@@ -7,7 +7,7 @@ class TwitterController < ApplicationController
   def prepare_access_token(oauth_token, oauth_token_secret,oauth_verifier)
     consumer = OAuth::Consumer.new(Government.first.twitter_key, Government.first.twitter_secret_key,
       { :site => "http://api.twitter.com",
-        :scheme => :query_string
+        :scheme => :header
       })
     # now create the access token object from passed values
     token_hash = { :oauth_token => oauth_token,
@@ -37,9 +37,10 @@ class TwitterController < ApplicationController
     stored_request_token = session[:request_token]
     stored_request_token_secret = session[:request_token_secret]
     Rails.logger.debug("stored req tok: #{stored_request_token} secret #{stored_request_token_secret}")
-    @access_token = access_token = prepare_access_token(params[:oauth_token], stored_request_token_secret,params[:oauth_verifier])
+    request_token = OAuth::RequestToken.new(TwitterController.consumer, session[:request_token], session[:request_token_secret])
+    @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     Rails.logger.debug(@access_token.inspect)
-    @response = @access_token.request(:get, '/account/verify_credentials.json')
+    @response = @access_token.get('/account/verify_credentials.json')
     Rails.logger.debug("Twitter Response: #{@response.inspect}")
     if @response.class == Net::HTTPOK
       Rails.logger.debug("Twitter Body: #{@response.body.inspect}")
