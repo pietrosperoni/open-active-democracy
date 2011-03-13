@@ -5,7 +5,11 @@
         <div id="user_info_box_name_and_menu">
           <span class="profile_name"><%= current_user.name%></span><br>
           <%= link_to tr("Settings","views/shares/_user_info"), :controller=>"settings" %> | 
-          <%= link_to tr("Logout", "view/shared/_user_info"), "/sessions/destroy" %> 
+          <% if current_facebook_user %>
+            <%= fb_logout_link(tr("Logout","view/shared/_user_info"), "/sessions/destroy") %>
+          <% else %>
+            <%= link_to tr("Logout", "view/shared/_user_info"), "/sessions/destroy" %> 
+          <% end %>
         </div>
         <br>
     </td>
