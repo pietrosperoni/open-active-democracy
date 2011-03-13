@@ -23,7 +23,6 @@ class ApplicationController < ActionController::Base
   # switch to the right database for this government
   before_filter :check_subdomain
   
-  before_filter :set_facebook_session, :unless => [:no_facebook?]
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
   before_filter :check_facebook, :unless => [:is_robot?]
     
