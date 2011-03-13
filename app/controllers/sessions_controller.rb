@@ -1,5 +1,10 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
+  skip_before_filter :check_priority
+  skip_before_filter :check_referral
+  skip_before_filter :check_suspension
+  skip_before_filter :update_loggedin_at
+  skip_before_filter :check_blast_click
 
   def new
     @page_title = tr("Please sign in", "controller/sessions", :government_name => current_government.name)
