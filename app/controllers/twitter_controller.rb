@@ -1,4 +1,8 @@
 class TwitterController < ApplicationController
+  
+  def oauth_callback_url
+    "http://localize.yrpri.org/twitter/callback"
+  end
 
   def prepare_access_token(oauth_token, oauth_token_secret)
     consumer = OAuth::Consumer.new(Government.first.twitter_key, Government.first.twitter_secret_key,
@@ -19,11 +23,11 @@ class TwitterController < ApplicationController
 
   def create
     store_previous_location    
-    @request_token = TwitterController.consumer.get_request_token(:oauth_callback => "http://localize.yrpri.org/twitter/callback")
+    @request_token = TwitterController.consumer.get_request_token(:oauth_callback => oauth_callback_url)
     session[:request_token] = @request_token.token
     session[:request_token_secret] = @request_token.secret
     # Send to twitter.com to authorize
-    redirect_to @request_token.authorize_url+"?oauth_callback_url=http://localize.yrpri.org/twitter/callback"
+    redirect_to @request_token.authorize_url+"&oauth_callback_url="+oauth_callback_url
     return
   end
 
