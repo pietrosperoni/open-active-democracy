@@ -121,10 +121,11 @@ module AuthenticatedSystem
     # Called from #current_user.  First attempt to login by the user id stored in the session.
     # if they connected to facebook while they were logged in to the site, it will automatically add the facebook uid to their existing account
     def login_from_session
-      Rails.logger.info("LOGIN: FROM SESSION")
+      Rails.logger.info("LOGIN: FROM SESSION #{session[:user_id]}")
       if session[:user_id]
         u = User.find_by_id(session[:user_id])
         self.current_user = u 
+        Rails.logger.info("LOGIN: FROM SESSION curr #{self.current_user}")
       end
     end
     

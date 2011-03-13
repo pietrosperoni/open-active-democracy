@@ -29,6 +29,7 @@
 	<% if current_government.has_facebook_enabled? %>
     <%= fb_login_and_redirect "/", :text=>tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=>tr("Sign in with Facebook","views/shared/_login"), :perms=>"email"%>
 	<% end %>
+	<br>
 	
 	<% if current_government.has_twitter_enabled? %>
 		<div style="margin-bottom: 5px;">
