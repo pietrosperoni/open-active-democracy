@@ -136,8 +136,12 @@ module AuthenticatedSystem
           Rails.logger.info("LOGIN: fb FOUND ONE")          
           return u
         end
-        Rails.logger.info("LOGIN: About to fb create")          
-        current_facebook_user.fetch
+        Rails.logger.info("LOGIN: About to fb create")
+        begin          
+          current_facebook_user.fetch
+        rescue
+          return false
+        end
         u = User.create_from_facebook(current_facebook_user,current_partner,request)
         if u
           session[:goal] = 'signup'
