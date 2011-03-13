@@ -1,3 +1,5 @@
+require 'load_twitter_followers'
+
 class TwitterController < ApplicationController
   
   def oauth_callback_url
