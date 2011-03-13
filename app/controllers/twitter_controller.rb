@@ -1,7 +1,7 @@
 class TwitterController < ApplicationController
 
   def self.consumer
-    OAuth::Consumer.new(current_government.twitter_key,current_government.twitter_secret_key,{ :site=>"http://twitter.com" })  
+    OAuth::Consumer.new(Government.first.twitter_key,Government.first.twitter_secret_key,{ :site=>"http://twitter.com" })  
   end
 
   def create
