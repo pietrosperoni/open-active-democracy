@@ -5,7 +5,6 @@ class InstallController < ApplicationController
   protect_from_forgery :only => :blah
 
   skip_before_filter :check_installation
-  skip_before_filter :set_facebook_session
   skip_before_filter :load_actions_to_publish
   skip_before_filter :check_subdomain
   skip_before_filter :check_blast_click

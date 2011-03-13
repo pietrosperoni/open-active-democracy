@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   
   # Make these methods visible to views as well
-  helper_method :facebook_session, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
+  helper_method :current_facebook_user, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
   before_filter :check_subdomain
@@ -218,19 +218,21 @@ class ApplicationController < ActionController::Base
     end    
   end  
   
-  # if they're logged in with a wh2 account, AND connected with facebook, but don't have their facebook uid added to their account yet
+  # if they're logged in with our account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
     if logged_in? and current_facebook_user
-      @user = User.find(current_user.id)
-      if not @user.update_with_facebook(current_facebook_user.id)
-        return
+#      unless current_user.facebook_uid
+        @user = User.find(current_user.id)
+        if not @user.update_with_facebook(current_facebook_user)
+          return
+        end
+        if not @user.activated?
+          @user.activate!
+        end      
+        @current_user = User.find(current_user.id)
+        flash.now[:notice] = tr("Your account is now synced with Facebook. In the future, to sign in, simply click the big blue Facebook button.", "controller/application", :government_name => current_government.name)
       end
-      if not @user.activated?
-        @user.activate!
-      end      
-      @current_user = User.find(current_user.id)
-      flash.now[:notice] = tr("Your account is now synced with Facebook. In the future, to sign in, simply click the big blue Facebook button.", "controller/application", :government_name => current_government.name)
-    end      
+#    end      
   end
   
   def is_robot?
