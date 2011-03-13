@@ -60,3 +60,72 @@
 		</ul>
 	</div>
 </div>
+<div id="nav_sub">
+  <div style="float:right; margin-right: 10px; margin-top: 1px;">
+    <%= render :partial => "network/find" %>
+  </div>
+  
+  <div id="nav_sub_<% if ['following'].include?(params[:action]) %>1<% elsif ['index','members','not_invited','invited'].include?(params[:action]) or ['import','facebook'].include?(params[:controller]) %>2<% elsif ['new'].include?(params[:action]) %>3<% end %>">
+    <ul id="menu_sub">
+      <li class="tab1">
+        <span class="tab_header">
+          <%= link_to tr("Your network", "view/user_contacts/_nav"), following_user_contacts_path(current_user) %>
+        </span>
+      </li>
+      <li class="tab2">
+        <span class="tab_header">
+          <%= link_to tr("Find people you know", "view/user_contacts/_nav"), user_contacts_path(current_user) %>
+        </span>
+      </li>
+      <li class="tab3">
+        <span class="tab_header">
+          <%= link_to tr("Send an invitation", "view/user_contacts/_nav"), new_user_contact_path(current_user) %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<% if ['index','members','not_invited','invited'].include?(params[:action]) or ['import','facebook'].include?(params[:controller]) %>
+  
+  <div id="nav_third">
+    <div id="nav_third_<% if ['google'].include?(params[:action]) %>1<% elsif ['yahoo'].include?(params[:action]) %>2<% elsif ['windows'].include?(params[:action]) %>3<% elsif ['facebook'].include?(params[:controller]) %>4<% end %>"> 
+
+      <ul id="menu_third">
+
+        <li class="tab1">
+          <span class="tab_header">
+            <%= link_to tr("Import your Google contacts", "view/user_contacts/_nav"), :controller => "import", :action => "google" %>
+          </span>
+        </li>     
+
+        <% if current_government.has_yahoo_enabled? %>
+        <li class="tab2">
+          <span class="tab_header">
+            <%= link_to tr("Yahoo", "view/user_contacts/_nav"), :controller => "import", :action => "yahoo" %>
+          </span>
+        </li> 
+        <% end %>
+        
+        <% if current_government.has_windows_enabled? %>
+        <li class="tab3">
+          <span class="tab_header">
+            <%= link_to tr("Windows Live", "view/user_contacts/_nav"), :controller => "import", :action => "windows" %>
+          </span>
+        </li> 
+        <% end %>
+        
+        <% if current_government.has_facebook_enabled? %>
+        <li class="tab4">
+          <span class="tab_header">
+            <%= link_to tr("Facebook", "view/user_contacts/_nav"), :controller => "facebook", :action => "invite" %>
+          </span>
+        </li> 
+        <% end %>
+        
+      </ul>   
+      
+    </div>  
+  </div>
+  
+<% end %>

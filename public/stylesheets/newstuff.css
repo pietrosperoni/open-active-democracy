@@ -300,7 +300,8 @@ ul#menu_sub li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
-	border: 1px solid #ddd;
+	border: 0px solid #ddd;
+	background-color: #fff !important;
 }
 
 ul#menu_sub li {
@@ -338,8 +339,8 @@ ul#menu_third li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
-		border: 1px solid #ddd;
-
+  border: 0px solid #ddd;
+  background-color: #fff !important;
 }
 
 ul#menu_third li{ 

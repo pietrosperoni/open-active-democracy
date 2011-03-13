@@ -31,284 +31,33 @@
 	<% end %>
 
 	<ul id="menu">
-		<% if current_government.is_tags? %>
 		<li class="tab0">
 			<span class="tab_header"><%= link_to tr("Home","Menu system"), :controller => "portal" %></span>
 		</li>
-		<li class="tab1">
-			<span class="tab_header"><%= link_to tr("Categories","Menu system"), :controller => "issues" %></span>
+    <li class="tab4">
+      <span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), :controller => "news", :action=>"top" %></span>
+    </li>
+		<li class="tab2">
+			<span class="tab_header"><%= link_to tr("Priorities", "view/shared/_menu"), :controller => "issues" %></span>
 		</li>
-		<% end %>
-		<li class="tab2 mega">
-			<span class="tab_header"><%= link_to tr("Priorities", "view/shared/_menu"), "#" %></span>
-			<div class="tab_body">
-				<% if not Partner.current and request.host.include?("skuggathing.is") %>
-				<div class="tab_subhead">
-					<%= link_to "Lagafrumvörp", "/issues/lagafrumvorp" %>
-				</div>
-				<div class="tab_sublinks"></div>
-
-				<div class="tab_subhead">
-					<%= link_to "Þingsályktunartillögur", "/issues/thingsalyktunartillogur" %>
-				</div>
-				<div class="tab_sublinks"></div>
-
-				<div class="tab_subhead">
-					<%= link_to "Mál frá almenningi", "/issues/fra-almenningi" %>
-				</div>
-				<div class="tab_sublinks"></div>
-				<% end %>
-
-				<div class="tab_subhead">
-					<%= link_to tr("Everyone's priorities", "view/shared/_menu"), top_priorities_url %> (<%= number_with_delimiter(Priority.published.filtered.count) %>)
-				</div>
-				<div class="tab_sublinks">
-				<%= link_to tr("Top", "view/shared/_menu"), top_priorities_url %>
-				&middot; <%= link_to tr("Ads", "view/shared/_menu"), ads_priorities_url %>
-				&middot; <%= link_to tr("Controversial", "view/shared/_menu"), controversial_priorities_url %>
-				&middot; <%= link_to tr("Rising", "view/shared/_menu"), rising_priorities_url %>
-				&middot; <%= link_to tr("Falling", "view/shared/_menu"), falling_priorities_url %>
-				&middot; <%= link_to tr("Random", "view/shared/_menu"), random_priorities_url %>
-				&middot; <%= link_to tr("New", "view/shared/_menu"), newest_priorities_url %>
-				&middot; <%= link_to tr("Finished", "view/shared/_menu"), finished_priorities_url %>
-				</div>		
-				
-				<% if logged_in? %>
-					<div class="tab_subhead">
-						<%= link_to tr("Your network's priorities", "view/shared/_menu"), network_priorities_url %>
-					</div>
-					<div class="tab_sublinks"></div>
-					<div class="tab_subhead">
-					<% if logged_in? %>
-						<%= link_to tr("Your priorities", "view/shared/_menu"), yours_priorities_url %> (<%= current_user.endorsements_count %>)
-					<% else %>
-						<%= link_to tr("Your priorities", "view/shared/_menu"), new_user_url %>
-					<% end %>
-					</div>
-					<div class="tab_sublinks">
-					<%= link_to tr("Active", "view/shared/_menu"), yours_priorities_url %>
-					&middot; <%= link_to tr("Top ranked", "view/shared/_menu"), yours_top_priorities_url %>
-					&middot; <%= link_to tr("Ads you bought", "view/shared/_menu"), yours_ads_priorities_url %>					
-					&middot; <%= link_to tr("Lowest ranked", "view/shared/_menu"), yours_lowest_priorities_url %>
-					&middot; <%= link_to tr("Finished", "view/shared/_menu"), yours_finished_priorities_url %>
-					&middot; <%= link_to tr("Priorities you created", "view/shared/_menu"), yours_created_priorities_url %> &middot; <%= link_to tr("Priorities to consider", "view/shared/_menu"), consider_priorities_url %> &middot; <%= link_to tr("Priority quiz", "view/shared/_menu"), :controller => "prioritizer" %>					
-					</div>
-				<% end %>
-								
-				<% if current_government.has_official? %>
-					<div class="tab_subhead">
-						<%= link_to tr("{official_user_name} priorities", "view/shared/_menu", :official_user_name => current_government.official_user_short_name), official_priorities_url %> (<%= number_with_delimiter(current_government.official_user_priorities_count) %>)
-					</div>
-					<div class="tab_sublinks">
-					<%= link_to tr("Endorsed", "view/shared/_menu"), official_priorities_url %>
-					&middot; <%= link_to tr("Not on the agenda", "view/shared/_menu"), not_official_priorities_url %>
-					&middot; <%= link_to tr("Opposed", "view/shared/_menu"), official_opposed_priorities_url %>					
-					</div>
-				<% end %>
-			</div>
-		</li>
-		<% if logged_in? %>
-		<li class="tab3 mega">
-			<span class="tab_header"><%= link_to tr("Briefing Room", "view/shared/_menu"), "#" %></span>
-			<div class="tab_body">
-
-				<div class="tab_subhead"><%= link_to tr("Talking points", "view/shared/_menu"), newest_points_url %> (<%= number_with_delimiter(Point.published.filtered.count) %>)</div>
-				<div class="tab_sublinks">
-					<%= link_to tr("Yours", "view/shared/_menu"), points_url %>
-					&middot; <%= link_to tr("Your priorities", "view/shared/_menu"), your_priorities_points_url %>
-					&middot; <%= link_to tr("All", "view/shared/_menu"), newest_points_url %>
-					&middot; <%= link_to tr("Revised", "view/shared/_menu"), revised_points_url %>
-				</div>
-			
-				<div class="tab_subhead"><%= link_to tr("Documents", "view/shared/_menu"), newest_documents_url %> (<%= number_with_delimiter(Document.published.filtered.count) %>)</div>
-				<div class="tab_sublinks">
-					<%= link_to tr("Yours", "view/shared/_menu"), documents_url %>
-					&middot; <%= link_to tr("Your priorities", "view/shared/_menu"), your_priorities_documents_url %>
-					&middot; <%= link_to tr("All", "view/shared/_menu"), newest_documents_url %>
-					&middot; <%= link_to tr("Revised", "view/shared/_menu"), revised_documents_url %>
-				</div>
-			
-				<div class="tab_sublinks">
-						<%= raw tr("Priorities needing {points_name} or {documents_name}", "view/shared/_menu", :points_name => link_to(tr("Documents", "view/shared/_menu").downcase, :controller => "briefing", :action => "documents"), :documents_name => link_to(tr("talking points", "view/shared/_menu"), :controller => "briefing", :action => "points")) %><br/>
-					<% if current_government.contributors_count > 0 %>
-						<%= link_to tr("Meet the {count} contributors", "view/shared/_menu", :count => number_with_delimiter(current_government.contributors_count)), :controller => "briefing", :action => "contributors" %>
-					<% end %>						
-				</div>
-
-				<div class="tab_sublinks">
-				
-				</div>
-			</div>
-		</li>
-		<% else %>
 		<li class="tab3">
-			<span class="tab_header"><%= link_to current_government.briefing_name, newest_points_url %></span>
+			<span class="tab_header"><%= link_to tr("Points", "view/shared/_menu"), :controller => "points" %></span>
 		</li>
-		<% end %>
-		<% if logged_in? %>
-		<li class="tab4 mega">
-			<span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), "#" %></span>
-			<div class="tab_body">
-				
-				<div class="tab_subhead"><%= link_to tr("Discussions", "view/shared/_menu"), :controller => "news", :action => "discussions" %></div>
-				<div class="tab_sublinks">
-					<%= link_to tr("All", "view/shared/_menu"), :controller => "news", :action => "discussions" %>
-					&middot; <%= link_to tr("Yours", "view/shared/_menu"), :controller => "news", :action => "your_discussions" %>
-					&middot; <%= link_to tr("Your priorities", "view/shared/_menu"), :controller => "news", :action => "your_priority_discussions" %>
-					&middot; <%= link_to tr("Priorities you created", "view/shared/_menu"), :controller => "news", :action => "your_priorities_created_discussions" %>	
-					&middot; <%= link_to tr("Network", "view/shared/_menu"), :controller => "news", :action => "your_network_discussions" %>	
-					&middot; <%= link_to tr("Followers", "view/shared/_menu"), :controller => "news", :action => "your_followers_discussions" %>						
-				</div>
-				
-				<div class="tab_subhead"><%= link_to current_government.briefing_name + " virkni", :controller => "news", :action => "points" %></div>
-				<div class="tab_sublinks">
-					<%= link_to tr("All", "view/shared/_menu"), :controller => "news", :action => "points" %>
-					&middot; <%= link_to tr("Yours", "view/shared/_menu"), :controller => "news", :action => "your_points" %>
-					&middot; <%= link_to tr("Your priorities", "view/shared/_menu"), :controller => "news", :action => "your_priority_points" %>	
-					&middot; <%= link_to tr("Priorities you created", "view/shared/_menu"), :controller => "news", :action => "your_priorities_created_points" %>		
-					<% if current_user.followings_count > 0 %>
-					&middot; <%= link_to tr("Network", "view/shared/_menu"), :controller => "news", :action => "your_network_points" %>
-					<% end %>
-					<% if current_user.followers_count > 0 %>
-					&middot; <%= link_to tr("Followers", "view/shared/_menu"), :controller => "news", :action => "your_followers_points" %>
-					<% end %>
-				</div>
-				
-				<% if current_government.has_official? %>
-					<div class="tab_subhead">
-						<%= link_to tr("{official_user_name} activity", "view/shared/_menu", :official_user_name => current_government.official_user.name), :controller => "news", :action => "official" %>
-					</div>
-					<div class="tab_sublinks">
-						<%= link_to tr("Your priorities", "view/shared/_menu"), :controller => "news", :action => "your_priority_official" %>
-						&middot; <%= link_to tr("Priorities you created", "view/shared/_menu"), :controller => "news", :action => "your_priorities_created_official" %>		
-					</div>
-				<% end %>				
-				
-				<div class="tab_subhead"><%= link_to current_government.currency_name.titleize, :controller => "news", :action => "capital" %></div>
-				<div class="tab_sublinks">
-					<%= link_to tr("Everyone", "view/shared/_menu"), :controller => "news", :action => "capital" %>
-					&middot; <%= link_to tr("Yours", "view/shared/_menu"), :controller => "news", :action => "your_capital" %>
-					<% if current_user.followings_count > 0 %>
-					&middot; <%= link_to tr("Network", "view/shared/_menu"), :controller => "news", :action => "your_network_capital" %>
-					<% end %>
-					<% if current_user.followers_count > 0 %>
-					&middot; <%= link_to tr("Followers", "view/shared/_menu"), :controller => "news", :action => "your_followers_capital" %>	
-					<% end %>
-				</div>			
-			
-				<div class="tab_subhead"><%= link_to tr("All activity", "view/shared/_menu"), :controller => "news", :action => "activities" %></div>
-				<div class="tab_sublinks">
-					<%= link_to tr("All", "view/shared/_menu"), :controller => "news", :action => "activities" %>	
-					&middot; <%= link_to tr("Yours", "view/shared/_menu"), :controller => "news", :action => "your_activities" %>	
-					&middot; <%= link_to tr("Your priorities", "view/shared/_menu"), :controller => "news", :action => "your_priority_activities" %>
-					&middot; <%= link_to tr("Priorities you created", "view/shared/_menu"), :controller => "news", :action => "your_priorities_created_activities" %>					
-					<% if current_user.followings_count > 0 %>
-						&middot; <%= link_to tr("Network", "view/shared/_menu"), :controller => "news", :action => "your_network_activities" %>
-					<% end %>
-					<% if current_user.followers_count > 0 %>					
-						&middot; <%= link_to tr("Followers", "view/shared/_menu"), :controller => "news", :action => "your_followers_activities" %>
-					<% end %>
-				</div>
-
-			</div>
+		<li class="tab5">
+			<span class="tab_header"><%= link_to tr("Network", "view/shared/_menu"), :controller => "network" %></span>
 		</li>
-		<% end %>
-		<li class="tab5 mega">
-			<span class="tab_header"><%= link_to tr("Network", "view/shared/_menu"), "#" %></span>
-			<div class="tab_body">				
-				<div class="tab_subhead"><%= link_to tr("Meet everyone", "view/shared/_menu"), :controller => "network" %> (<%= number_with_delimiter(current_government.users_count) %>)</div>
-				<div class="tab_sublinks">
-					<%= link_to tr("Influential", "view/shared/_menu"), :controller => "network" %>
-					&middot; <%= link_to tr("Talkative", "view/shared/_menu"), :controller => "network", :action => "talkative" %>
-					<% if current_government.has_twitter_enabled? %>
-						&middot; <%= link_to tr("Twitterers", "view/shared/_menu"), :controller => "network", :action => "twitterers" %>
-					<% end %>
-					<br/>
-					<%= link_to tr("Ambassadors", "view/shared/_menu"), :controller => "network", :action => "ambassadors" %>					
-					&middot; <%= link_to tr("New members", "view/shared/_menu"), :controller => "network", :action => "newest" %>
-					&middot; <%= link_to tr("Partners", "view/shared/_menu"), :controller => "network", :action => "partners" %>
-				</div>
-				<% if logged_in? %>
-					<% if current_user.followings_count > 0 %>
-						<div class="tab_subhead"><%= link_to tr("Your network", "view/shared/_menu"), following_user_contacts_path(current_user) %><% if current_user.followings_count > 0 %> (<%= current_user.followings_count %>)<% end %></div>
-						<div class="tab_sublinks"></div>
-					<% end %>
-					<div class="tab_subhead">
-						<% if current_facebook_user %>
-							<%= link_to tr("Find your Facebook friends", "view/shared/_menu"), :controller => "facebook", :action => "invite" %>
-						<% else %>
-							<%= link_to tr("Grow your network", "view/shared/_menu"), user_contacts_path(current_user) %>
-						<% end %>
-					</div>
-
-					<div class="tab_sublinks">
-						<%= link_to tr("Find people you know", "view/shared/_menu"), user_contacts_path(current_user) %>
-						&middot; <%= link_to tr("Send an invitation", "view/shared/_menu"), new_user_contact_path(current_user) %>
-						<br/>
-						<%= link_to tr("Import your Google contacts", "view/shared/_menu"), :controller => "import", :action => "google" %>
-						<% if current_government.has_yahoo_enabled? %>
-							&middot; <%= link_to tr("Yahoo", "view/shared/_menu"), :controller => "import", :action => "yahoo" %>
-						<% end %>
-						<% if current_government.has_windows_enabled? %>
-							&middot; <%= link_to tr("Windows Live", "view/shared/_menu"), :controller => "import", :action => "windows" %>
-						<% end %>
-						<% if current_government.has_facebook_enabled? %>
-							&middot; <%= link_to tr("Facebook", "view/shared/_menu"), :controller => "facebook", :action => "invite" %>
-						<% end %>
-					</div>
-				
-					<div class="tab_subhead"><%= link_to tr("Your inbox", "view/shared/_menu"), :controller => "inbox" %></div>
-					<div class="tab_sublinks">
-					<%= link_to tr("Private messages", "view/shared/_menu"), :controller => "inbox" %>
-					&middot; <%= link_to tr("Notifications", "view/shared/_menu"), :controller => "inbox", :action => "notifications" %>
-					&middot; <%= link_to tr("Sent messages", "view/shared/_menu"), :controller => "inbox", :action => "sent" %>					
-					</div>
-					
-				<% end %>
-				
-				<% if logged_in? and current_user.is_admin? %>
-					<div class="tab_subhead"><%= link_to tr("Administrators only", "view/shared/_menu"), :controller => "network", :action => "unverified" %></div>
-					<div class="tab_sublinks">
-						<%= link_to tr("Unverified", "view/shared/_menu"), :controller => "network", :action => "unverified" %>
-						&middot; <%= link_to tr("Warnings", "view/shared/_menu"), :controller => "network", :action => "warnings" %>
-						&middot; <%= link_to tr("Suspended", "view/shared/_menu"), :controller => "network", :action => "suspended" %>
-						&middot; <%= link_to tr("Probation", "view/shared/_menu"), :controller => "network", :action => "probation" %>
-						&middot; <%= link_to tr("Deleted", "view/shared/_menu"), :controller => "network", :action => "deleted" %>
-					</div>
-					
-				<% end %>
-
-				<% if not logged_in? %>
-					<div class="tab_subhead"><%= link_to tr("What's happening?", "view/shared/_menu"), :controller => "news", :action => "discussions" %></div>
-					<div class="tab_sublinks">
-					<%= link_to tr("Discussions", "view/shared/_menu"), :controller => "news", :action => "discussions" %>
-					&middot; <%= link_to current_government.briefing_name, :controller => "news", :action => "points" %>
-					&middot; <%= link_to tr("All activity", "view/shared/_menu"), :controller => "news", :action => "activities" %>
-					</div>
-				<% end %>
-			</div>
-		</li>
+    <li class="tab1">
+      <span class="tab_header"><%= link_to tr("Categories","Menu system"), :controller => "issues" %></span>
+    </li>
 		<% if logged_in? and current_user.is_admin? %>
 		<li class="tab6 mega">
 			<span class="tab_header">
 				<%= link_to tr("Settings", "view/shared/_menu"), "#" %>
 			</span>
 			<div class="tab_body">
-				<div class="tab_subhead">
-					<%= link_to tr("Your account", "view/shared/_menu"), settings_url %>
-				</div>
-				<div class="tab_sublinks">
-					<%= link_to tr("Picture", "view/shared/_menu"), picture_settings_url %>
-					&middot; <%= link_to tr("Bio", "view/shared/_menu"), new_user_profile_url(current_user) %>
-					<br/>
-					<% if not current_user.has_facebook? %>
-						<%= link_to tr("Change password", "view/shared/_menu"), edit_password_url(current_user) %> &middot;
-					<% end %>
-					<%= link_to tr("Email notifications", "view/shared/_menu"), signups_settings_url %>
-				</div>
 				<% if logged_in? and current_user.is_admin? %>
 					<div class="tab_subhead">
-						<%= link_to tr("Become a partner", "view/shared/_menu"), partners_url %>						
+						<%= link_to tr("Setup a partner", "view/shared/_menu"), partners_url %>						
 					</div>
 				<% end %>
 				<% if logged_in? and current_user.is_admin? and Partner.current %>
@@ -343,15 +92,6 @@
 						&middot; <%= link_to tr("Colors", "view/shared/_menu"), color_schemes_url %>
 					</div>
 				<% end %>
-				
-				<div class="tab_sublinks">
-				<% if current_facebook_user %>
-					<%= fb_logout_link tr("Logout", "view/shared/_menu"), logout_path %>
-				<% else %>
-			  		<%= link_to tr("Logout", "view/shared/_menu"), logout_path %>
-				<% end %>
-				</div>
-
 			</div>
 		</li>		
 		<% end %>
@@ -418,7 +158,7 @@
 	<%= render :partial => "news/nav" %>
 <% elsif nav == 5 %>
 	<% if ['user_contacts','facebook','import'].include?(params[:controller])%>
-		<%= render :partial => "user_contacts/nav" %>
+		<%= render :partial => "network/nav" %>
 	<% elsif ['inbox'].include?(params[:controller]) %>
 		<%= render :partial => "inbox/nav" %>
 	<% else %>
