@@ -7,7 +7,7 @@ class TwitterController < ApplicationController
   def prepare_access_token(oauth_token, oauth_token_secret,oauth_verifier)
     consumer = OAuth::Consumer.new(Government.first.twitter_key, Government.first.twitter_secret_key,
       { :site => "http://api.twitter.com",
-        :scheme => :header
+        :scheme => :query_string
       })
     # now create the access token object from passed values
     token_hash = { :oauth_token => oauth_token,
