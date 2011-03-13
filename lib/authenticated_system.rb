@@ -140,6 +140,7 @@ module AuthenticatedSystem
         begin          
           current_facebook_user.fetch
         rescue
+          Rails.logger.error("LOGIN: Error in current_facebook_user.fetch")
           return false
         end
         u = User.create_from_facebook(current_facebook_user,current_partner,request)
