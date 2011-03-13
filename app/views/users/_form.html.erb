@@ -77,19 +77,30 @@
 		</span>
 
 	<% end %>
-
+  <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
+  <p>
+  <br>
+  <p>
+  <br>
+  <p>
+  <br>
+  <p>
+  <br>
+  <p>
+  <br>
 	<% if @priority %>
 		<% if @value == 1 %>
-			<%= submit_tag tr("Endorse and join", "view/users/_form"), :class => "yellow_button" %>			
+			<%= submit_tag tr("Endorse and signup", "view/users/_form"), :class => "yellow_button" %>			
 		<% elsif @value == -1 %>					
-			<%= submit_tag tr("Oppose and join", "view/users/_form"), :class => "yellow_button" %>
+			<%= submit_tag tr("Oppose and signup", "view/users/_form"), :class => "yellow_button" %>
 		<% else %>
-			<%= submit_tag tr("Join the network", "view/users/_form"), :class => "yellow_button" %>				
+			<%= submit_tag tr("Signup", "view/users/_form"), :class => "yellow_button" %>				
 		<% end %>
 	<% else %>
-		<%= submit_tag tr("Join the network", "view/users/_form"), :class => "yellow_button" %>
+		<%= submit_tag tr("Signup", "view/users/_form"), :class => "yellow_button" %>
 	<% end %>
 
 	<% end -%>
 
 </div>
+<%= render :partial=>"shared/keypad_javascript"%>

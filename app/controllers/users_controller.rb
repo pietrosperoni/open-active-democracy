@@ -276,21 +276,12 @@ class UsersController < ApplicationController
     @user.request = request
     @user.referral = @referral
     @user.partner_referral = current_partner
-    unless verify_recaptcha(:model => @user, :message => tr("Please enter the reCAPTCHA words again"))
-      @valid = false
-      respond_to do |format|
-        format.js
-        format.html { render :action => "new" }
-      end
-      return
-    end
 
     begin
       @user.save! #save first
       rescue ActiveRecord::RecordInvalid
         @valid = false    
-    end
-    
+    end   
 
     if not @valid
       respond_to do |format|

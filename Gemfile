@@ -29,7 +29,6 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem 'recaptcha', :git=> "git://github.com/rbjarnason/recaptcha.git"
 gem 'delayed_job'
 gem 'rmagick','2.12.2'
 gem 'mongrel', '>= 1.2.0.pre2'

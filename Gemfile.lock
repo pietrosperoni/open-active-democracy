@@ -17,12 +17,6 @@ GIT
       oauth (>= 0.3.1)
 
 GIT
-  remote: git://github.com/rbjarnason/recaptcha.git
-  revision: 493d858bec6c42fb1dec1df9acc6319a7fdc8c37
-  specs:
-    recaptcha (0.3.1)
-
-GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
   revision: c9428f87042d9422aad2b119c8c04de97f504148
   specs:
@@ -119,7 +113,7 @@ GEM
       activerecord
       activesupport
     polyglot (0.3.1)
-    rack (1.2.1)
+    rack (1.2.2)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
     rack-test (0.5.7)
@@ -173,7 +167,6 @@ DEPENDENCIES
   paperclip
   rails (= 3.0.5)
   rails-dev-boost!
-  recaptcha!
   rmagick (= 2.12.2)
   sunlight (>= 0.9)
   thinking-sphinx!
