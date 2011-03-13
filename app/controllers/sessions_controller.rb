@@ -69,6 +69,7 @@ class SessionsController < ApplicationController
   def destroy
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
+    cookies.delete["fbs_#{Facebooker2.app_id}"]
     reset_session    
     flash[:notice] = tr("Logged out. Please come again soon.", "controller/sessions")
     redirect_back_or_default('/')
