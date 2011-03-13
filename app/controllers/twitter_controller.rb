@@ -36,11 +36,13 @@ class TwitterController < ApplicationController
     # Exchange the request token for an access token.
     stored_request_token = session[:request_token]
     stored_request_token_secret = session[:request_token_secret]
+    Rails.logger.debug("stored req tok: #{stored_request_token} secret #{stored_request_token_secret}")
     @access_token = access_token = prepare_access_token(params[:oauth_token], stored_request_token_secret,params[:oauth_verifier])
-    @response = @access_token.request(:get, '/account/verify_credentials.json', {:oauth_verifier => params[:oauth_verifier]})
-    Rails.logger.debug("Twitter Response: #{pp @response}")
+    Rails.logger.debug(@access_token)
+    @response = @access_token.request(:get, '/account/verify_credentials.json')
+    Rails.logger.debug("Twitter Response: #{@response.inspect}")
     if @response.class == Net::HTTPOK
-      Rails.logger.debug("Twitter Body: #{pp @response.body}")
+      Rails.logger.debug("Twitter Body: #{@response.body.inspect}")
       user_info = JSON.parse(@response.body)
       if not user_info['screen_name']
         flash[:error] = tr("Sign in from Twitter failed.", "controller/twitter")
