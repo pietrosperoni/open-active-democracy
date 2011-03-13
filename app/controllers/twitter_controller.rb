@@ -39,6 +39,7 @@ class TwitterController < ApplicationController
     @response = @access_token.request(:get, '/account/verify_credentials.json')
     Rails.logger.debug("Twitter Response: #{pp @response}")
     if @response.class == Net::HTTPOK
+      Rails.logger.debug("Twitter Body: #{pp @response.body}")
       user_info = JSON.parse(@response.body)
       if not user_info['screen_name']
         flash[:error] = tr("Sign in from Twitter failed.", "controller/twitter")
