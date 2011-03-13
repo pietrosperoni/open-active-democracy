@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'load_google_contacts'
 class ImportController < ApplicationController
 
   before_filter :login_required
@@ -6,18 +7,21 @@ class ImportController < ApplicationController
   
   def google
     if not current_user.attribute_present?("google_token") and not params[:token]
-      redirect_to Contacts::Google.authentication_url(url_for(:only_path => false, :controller => "import", :action => "google"), :session => true)
+      out_url = Contacts::Google.authentication_url(url_for(:only_path => false, :controller => "import", :action => "google"), :session => true)
+      Rails.logger.debug("Google import #{out_url}")
+      redirect_to out_url
       return
     elsif params[:token]
       token = Contacts::Google.session_token(params[:token])      
       current_user.update_attribute(:google_token,token)
-    end 
+    end
+    Rails.logger.debug("IM HERE!!!!")
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     Delayed::Job.enqueue LoadGoogleContacts.new(@user.id), 5
-    redirect_to :action => "status"
+    redirect_to :action => "import_status"
   end
   
   def yahoo
@@ -30,7 +34,7 @@ class ImportController < ApplicationController
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.request_uri), 5
-    redirect_to :action => "status"
+    redirect_to :action => "import_status"
   end  
 
   def windows
@@ -43,20 +47,20 @@ class ImportController < ApplicationController
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,request.raw_post), 5
-    redirect_to :action => "status"    
+    redirect_to :action => "import_status"    
   end
 
-  def status
+  def import_status
     @page_title = tr("Importing your contacts", "controller/import")
     respond_to do |format|
       if not current_user.is_importing_contacts?
         flash[:notice] = tr("Finished loading contacts", "controller/import")
         if current_user.contacts_members_count > 0
-          format.html { redirect_to members_user_contacts_path(current_user) }
-          format.js { redirect_from_facebox(members_user_contacts_path(current_user)) }
+          format.html { redirect_to :action=>"members", :controller=>"user_contacts", :id=>current_user.id }
+          format.js { redirect_from_facebox(:action=>"members", :controller=>"user_contacts", :id=>current_user.id) }
         else
-          format.html { redirect_to not_invited_user_contacts_path(current_user) }
-          format.js { redirect_from_facebox(not_invited_user_contacts_path(current_user)) }          
+          format.html { redirect_to :action=>"not_invited", :controller=>"user_contacts", :id=>current_user.id }
+          format.js { redirect_from_facebox(:action=>"not_invited", :controller=>"user_contacts", :id=>current_user.id) }          
         end
       else
         format.html
