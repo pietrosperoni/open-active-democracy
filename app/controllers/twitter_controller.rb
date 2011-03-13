@@ -1,7 +1,20 @@
 class TwitterController < ApplicationController
 
+  def prepare_access_token(oauth_token, oauth_token_secret)
+    consumer = OAuth::Consumer.new(Government.first.twitter_key, Government.first.twitter_secret_key,
+      { :site => "http://api.twitter.com",
+        :scheme => :header
+      })
+    # now create the access token object from passed values
+    token_hash = { :oauth_token => oauth_token,
+                   :oauth_token_secret => oauth_token_secret
+                 }
+    access_token = OAuth::AccessToken.from_hash(consumer, token_hash )
+    return access_token
+  end
+
   def self.consumer
-    OAuth::Consumer.new(Government.first.twitter_key,Government.first.twitter_secret_key,{ :site=>"http://twitter.com" })  
+    OAuth::Consumer.new(Government.first.twitter_key,Government.first.twitter_secret_key,{ :site=>"http://api.twitter.com" })  
   end
 
   def create
@@ -18,9 +31,8 @@ class TwitterController < ApplicationController
     # Exchange the request token for an access token.
     stored_request_token = session[:request_token]
     stored_request_token_secret = session[:request_token_secret]
-    @request_token = OAuth::RequestToken.new(TwitterController.consumer, stored_request_token, stored_request_token_secret)   
-    @access_token = @request_token.get_access_token
-    @response = TwitterController.consumer.request(:get, '/account/verify_credentials.json', @access_token, { :scheme => :query_string })
+    @access_token = access_token = prepare_access_token(stored_request_token, stored_request_token_secret)
+    @response = @access_token.request(:get, '/account/verify_credentials.json', { :scheme => :query_string })
     if @response.class == Net::HTTPOK
       user_info = JSON.parse(@response.body)
       if not user_info['screen_name']
