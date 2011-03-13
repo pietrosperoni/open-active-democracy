@@ -606,7 +606,8 @@ class User < ActiveRecord::Base
   end
   
   def has_picture?
-    attribute_present?("picture_id") or attribute_present?("buddy_icon_file_name") 
+#    attribute_present?("picture_id") or attribute_present?("buddy_icon_file_name") 
+    attribute_present?("buddy_icon_file_name") 
   end
   
   def has_referral?
