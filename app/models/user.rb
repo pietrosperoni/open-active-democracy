@@ -955,11 +955,12 @@ class User < ActiveRecord::Base
      :first_name => facebook_user.first_name,
      :last_name => facebook_user.last_name,       
      :facebook_uid => facebook_user.id,
+     :facebook_id => facebook_user.id,
      :partner_referral => partner,
      :request => request
     )
     Rails.logger.info("LOGIN: CREATE FROM FACEBOOK user #{u.inspect}")
-    
+
     if u.save
       u.activate!
       return u
