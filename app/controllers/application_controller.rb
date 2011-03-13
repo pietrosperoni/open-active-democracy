@@ -221,7 +221,7 @@ class ApplicationController < ActionController::Base
   # if they're logged in with our account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
     if logged_in? and current_facebook_user
-#      unless current_user.facebook_uid
+      unless current_user.facebook_uid
         @user = User.find(current_user.id)
         if not @user.update_with_facebook(current_facebook_user)
           return
@@ -232,7 +232,7 @@ class ApplicationController < ActionController::Base
         @current_user = User.find(current_user.id)
         flash.now[:notice] = tr("Your account is now synced with Facebook. In the future, to sign in, simply click the big blue Facebook button.", "controller/application", :government_name => current_government.name)
       end
-#    end      
+    end      
   end
   
   def is_robot?
