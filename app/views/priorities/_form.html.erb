@@ -1,96 +1,99 @@
 <% if params[:notice] %>
-<%=  params[:notice] %>
+  <%=  params[:notice] %>
 <% end %>
 
 <%=form_tag('/priorities/create', :method => :post)%>
-
-<% if @tag_names %>
-	<%= hidden_field_tag :tag_names, @tag_names %>
-<% end %>
-
-<h3><%=tr("Create a new priority","views/priorities/form")%></h3>	
-		<div id="your_priority" class="form_header"><%=tr("What is your priority?","views/priorities/form")%><span class="red">* </span> </div>
-			<%= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
-			<br>
-			<%= tr("Select category","views/priorities/form")%><br>
-			<br>
-  	  <% Category.order("name").each do |category| %>
-  	    <%= radio_button("priority", "category_id", category.id) %>
-  	     <span class="Chapter_name"><%=category.i18n_name %>
-        </span>
-      <% end %>
-		
-					<% if Partner.current and Partner.current.custom_tag_checkbox and Partner.current.custom_tag_checkbox!="" %>
-						
-							<div  class="form_header"><%= tr("Select other categories:","views/priorities/form")%></div>
-						
-							<%=Partner.current.custom_tag_checkbox%>? <%= check_box_tag 'custom_checkbox', Partner.current.custom_tag_checkbox%>
-						
-					<% else %>
-						
-							<div  class="form_header"><%= tr("Select other categories:","views/priorities/form")%></div>
-						
-					<% end %>
-
-
-					<% if Partner.current and Partner.current.custom_tag_dropdown_1 and Partner.current.custom_tag_dropdown_1!="" %>
-						<span class="custom_tag">
-							<%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%>
-						</span>
-					<% end %>
-
-					<% if Partner.current and Partner.current.custom_tag_dropdown_2 and Partner.current.custom_tag_dropdown_2!="" %>
-						<span class="custom_tag">						
-							<%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%>
-						</span>		
-
-					</div>
-					<% end %>
-				
-						<span class="custom_tag">						
-						<%= text_field_tag :custom_tags %>		
-						</span>				
-						
-						<div class="tiny_info"  id="br_hack"><br><%=tr("Write your own categories, seperated by comma","views/priorities/form")%></div>
-
-							<div  class="form_header"><%=tr("Add a point in support or against","views/priorities/form")%>: <span class="red">* </span> </div>
-
+  <% if @tag_names %>
+    <%= hidden_field_tag :tag_names, @tag_names %>
+  <% end %>
+  
+  <h3><%=tr("Create a new priority","views/priorities/form")%></h3>
+  <div id="your_priority" class="form_header">
+    <%=tr("What is your priority?","views/priorities/form")%>
+    <span class="red">*</span>
+  </div>
+  <%= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
+  <br>
+  <%= tr("Select category","views/priorities/form")%>
+  <br>
+  <br>
+  <% Category.order("name").each do |category| %>
+    <%= radio_button("priority", "category_id", category.id) %>
+    <span class="Chapter_name"><%=category.i18n_name %></span>
+  <% end %>
+  
+  <% if Partner.current and Partner.current.custom_tag_checkbox and Partner.current.custom_tag_checkbox!="" %>
+    <div  class="form_header">
+      <%= tr("Select other categories:","views/priorities/form")%>
+    </div>
+  <%=Partner.current.custom_tag_checkbox%>? <%= check_box_tag 'custom_checkbox', Partner.current.custom_tag_checkbox%>
+    <% else %>
+    <div  class="form_header">
+      <%= tr("Select other categories:","views/priorities/form")%>
+    </div>
+  <% end %>
+  
+  <% if Partner.current and Partner.current.custom_tag_dropdown_1 and Partner.current.custom_tag_dropdown_1!="" %>
+    <span class="custom_tag"><%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%></span>
+  <% end %>
+  
+  <% if Partner.current and Partner.current.custom_tag_dropdown_2 and Partner.current.custom_tag_dropdown_2!="" %>
+    <span class="custom_tag"><%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%></span>
+    </div>
+  <% end %>
+  
+  <span class="custom_tag"><%= text_field_tag :custom_tags %></span>
+  <div class="tiny_info"  id="br_hack">
+    <br>
+    <%=tr("Write your own categories, seperated by comma","views/priorities/form")%>
+  </div>
+  <div  class="form_header">
+    <%=tr("Add a point in support or against","views/priorities/form")%>:
+    <span class="red">*</span>
+  </div>
   <%= error_messages_for Point, :header_message => tr("Please review", "view/priorities/_form"), :message => tr("We need a change to your talking point", "view/priorities/_form") if @point %>
-	<div class="field">
-		<div class="field_box">
- 			<%= text_field_tag "point[name]", "", :size => 50, :maxlength => 60 %>
-		</div>
- 		<div class="field_label">
-			<div class="tiny_info"><%=tr("To convince other people about this priority a strong point is important","views/priorities/form")%></div>
-		</div>
-	</div>
-	<div class="field form_header">
-		<div class="field_label">
-			<div id="point_supports">
-			<%= radio_button_tag("point[value]", 1, true) %> <%=tr("Yes, this point supports this priority","views/priorities/form")%>					
-			</div>
-			
-			<div id="point_opposes">
-			<%= radio_button_tag("point[value]", -1) %> <%=tr("Not, this point is against this priority","views/priorities/form")%>
-			</div>
-			</div>
-			</div>
-
-	<div class="field">
-	    <div class="field_label form_header"><%= tr("Explain your talking point.", "view/priorities/_form") %> <span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%></div>
-		<div class="field_box">
-	    <%= text_area_tag "point[content]", "", :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
-		</div>
-			<div class="tiny_info_no_pad"><%=tr("Other people will be able to edit your points, similar to Wikipedia","views/priorities/form")%></div> 
-	</div>				
-	
-	<div class="field">
-		<div class="field_label form_header"><%= tr("Include a website source link", "view/priorities/_form") %></div>
-		<div class="field_box">
-			<%= text_field_tag "point[website]", "", :size => 50 %>	
-		</div>
-		<div class="tiny_info"><%=tr("Add a link to an external website","views/priorities/form")%></div>
-	</div>
-		
-	<%= submit_tag tr("Make a priority", "view/priorities/_form"), :class => "suggest_button" %>	
+  <div class="field">
+    <div class="field_box">
+      <%= text_field_tag "point[name]", "", :size => 50, :maxlength => 60 %>
+    </div>
+    <div class="field_label">
+      <div class="tiny_info">
+        <%=tr("To convince other people about this priority a strong point is important","views/priorities/form")%>
+      </div>
+    </div>
+  </div>
+  <div class="field form_header">
+    <div class="field_label">
+      <div id="point_supports">
+        <%= radio_button_tag("point[value]", 1, true) %> <%=tr("Yes, this point supports this priority","views/priorities/form")%>
+      </div>
+      <div id="point_opposes">
+        <%= radio_button_tag("point[value]", -1) %> <%=tr("Not, this point is against this priority","views/priorities/form")%>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <div class="field_label form_header">
+      <%= tr("Explain your talking point.", "view/priorities/_form") %>
+      <span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%>
+    </div>
+    <div class="field_box">
+      <%= text_area_tag "point[content]", "", :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
+    </div>
+    <div class="tiny_info_no_pad">
+      <%=tr("Other people will be able to edit your points, similar to Wikipedia","views/priorities/form")%>
+    </div>
+  </div>
+  <div class="field">
+    <div class="field_label form_header">
+      <%= tr("Include a website source link", "view/priorities/_form") %>
+    </div>
+    <div class="field_box">
+      <%= text_field_tag "point[website]", "", :size => 50 %>
+    </div>
+    <div class="tiny_info">
+      <%=tr("Add a link to an external website","views/priorities/form")%>
+    </div>
+  </div>
+  <%= submit_tag tr("Make a priority", "view/priorities/_form"), :class => "suggest_button" %>
 </form>
