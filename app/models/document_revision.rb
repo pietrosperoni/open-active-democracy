@@ -152,8 +152,7 @@ class DocumentRevision < ActiveRecord::Base
     r.user = p.user
     r.value = p.value
     r.name = p.name
-    r.content = p.content
-    r.content_diff = p.content
+    r.content_diff = r.content = p.content
     r.request = request
     r.save(:validate => false)
     r.publish!

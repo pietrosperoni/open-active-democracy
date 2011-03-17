@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110313163013) do
+ActiveRecord::Schema.define(:version => 20110316174122) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -637,6 +637,8 @@ ActiveRecord::Schema.define(:version => 20110313163013) do
     t.text     "content_html"
     t.integer  "partner_id"
     t.integer  "flags_count",                             :default => 0
+    t.string   "user_agent",               :limit => 200
+    t.string   "ip_address"
   end
 
   add_index "points", ["other_priority_id"], :name => "index_points_on_other_priority_id"
@@ -753,6 +755,7 @@ ActiveRecord::Schema.define(:version => 20110313163013) do
     t.integer  "partner_id"
     t.integer  "flags_count",                            :default => 0
     t.integer  "category_id"
+    t.string   "user_agent",              :limit => 200
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"

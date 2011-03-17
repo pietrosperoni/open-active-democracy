@@ -55,12 +55,16 @@ class Point < ActiveRecord::Base
   end  
   
   after_destroy :delete_point_quality_activities
-  before_destroy :remove_counts  
+  before_destroy :remove_counts
+#  after_commit :setup_revision
+  before_save :ensure_request_and_user_are_set
   
-  validates_length_of :name, :within => 3..100
-  #validates_uniqueness_of :name
+  validates_length_of :name, :within => 5..60, :too_long => tr("has a maximum of 60 characters", "model/point"), 
+                                               :too_short => tr("please enter more than 5 characters", "model/point")
+    #validates_uniqueness_of :name
   # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  #validates_length_of :content, :maximum => 1100, :allow_blank => true, :allow_nil => true, :too_long => tr("has a maximum of 500 characters", "model/point")
+  validates_length_of :content, :within => 5..500, :too_long => tr("has a maximum of 500 characters", "model/point"), 
+                                                   :too_short => tr("please enter more than 5 characters", "model/point")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
@@ -70,7 +74,6 @@ class Point < ActiveRecord::Base
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
   state :abusive, :enter => :do_abusive
-
   
   event :publish do
     transitions :from => [:draft], :to => :published
@@ -129,6 +132,17 @@ class Point < ActiveRecord::Base
     for r in revisions
       r.delete!
     end
+  end
+
+  def setup_revision
+    Revision.create_from_point(self)
+  end
+ 
+  def ensure_request_and_user_are_set
+    self.ip_address = self.priority.ip_address
+    self.user_agent = self.priority.user_agent
+    self.user_id = self.priority.user_id
+    Rails.logger.debug("SELF PRIORITY: #{pp self.priority.inspect}")
   end
   
   def do_bury
@@ -338,12 +352,6 @@ class Point < ActiveRecord::Base
     Government.current.homepage_url + 'points/' + to_param
   end  
   
-  auto_html_for(:content) do
-#    redcloth
-    youtube(:width => 330, :height => 210)
-    vimeo(:width => 330, :height => 180)
-    link(:rel => "nofollow")
-  end  
   
   def calculate_importance
   	PointImportanceScore.calculate_score(self.id)

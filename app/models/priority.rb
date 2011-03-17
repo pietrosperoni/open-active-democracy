@@ -62,7 +62,10 @@ class Priority < ActiveRecord::Base
   has_many :down_endorsers, :through => :endorsements, :conditions => "endorsements.status in ('active','inactive') and endorsements.value=-1", :source => :user, :class_name => "User"
     
   has_many :points, :conditions => "points.status in ('published','draft')"
-  accepts_nested_attributes_for :points, :allow_destroy => false
+  accepts_nested_attributes_for :points
+
+  has_many :my_points, :conditions => "points.status in ('published','draft')", :class_name => "Point"
+  accepts_nested_attributes_for :my_points
   
   has_many :incoming_points, :foreign_key => "other_priority_id", :class_name => "Point"
   has_many :published_points, :conditions => "status = 'published'", :class_name => "Point", :order => "points.helpful_count-points.unhelpful_count desc"
@@ -95,8 +98,10 @@ class Priority < ActiveRecord::Base
     where "priorities.status = 'published'"
   end  
   
-  #validates_length_of :name, :within => 3..60
-  #validates_uniqueness_of :name
+  validates_length_of :name, :within => 5..60, :too_long => tr("has a maximum of 60 characters", "model/point"), 
+                                               :too_short => tr("please enter more than 5 characters", "model/point")
+  validates_uniqueness_of :name, :if => Proc.new { |priority| priority.status == 'published' }
+  validates :category_id, :presence => true
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
@@ -248,6 +253,16 @@ class Priority < ActiveRecord::Base
   def is_intheworks?
     official_status == 1
   end  
+  
+  def request=(request)
+    if request
+      self.ip_address = request.remote_ip
+      self.user_agent = request.env['HTTP_USER_AGENT']
+    else
+      self.ip_address = "127.0.0.1"
+      self.user_agent = "Import"
+    end
+  end
   
   def position_7days_change_percent
     position_7days_change.to_f/(position+position_7days_change).to_f

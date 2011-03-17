@@ -786,7 +786,7 @@ width:230px;
 
 #your_priority, .form_header
 {
-padding-bottom: 2px; 
+padding-bottom: 4px; 
 }
 
 
@@ -794,6 +794,7 @@ padding-bottom: 2px;
 {
 font-size: 13px; 
 font-weight: bold;
+padding-bottom: 4px; 
 }
 
 .suggest_button {
@@ -924,4 +925,8 @@ padding-bottom: 0px;
 .portlet-content .priority_added
 {
 padding-top: 0px !important
+}
+
+.field_with_errors {
+  border: 1px solid red;
 }

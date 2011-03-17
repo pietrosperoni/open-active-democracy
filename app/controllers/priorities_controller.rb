@@ -625,13 +625,9 @@ class PrioritiesController < ApplicationController
   # GET /priorities/new
   # GET /priorities/new.xml
   def new
-    if not params[:q].blank? and not @priorities and current_government.is_searchable?
-      @priority_results = Priority.find_by_solr "(" + params[:q] + ") AND is_published:true", :limit => 25
-      @priorities = @priority_results.docs      
-    end
-    
     @priority = Priority.new unless @priority
-  
+    @priority.points.build
+
     if @priorities
       @endorsements = Endorsement.find(:all, :conditions => ["priority_id in (?) and user_id = ? and status='active'", @priorities.collect {|c| c.id},current_user.id])
     end    
@@ -654,103 +650,44 @@ class PrioritiesController < ApplicationController
     end    
   end
   
-  def create_tags(priority)
-    tags = []
-    tags << params[:custom_tag_option_1] if params[:custom_tag_option_1]
-    tags << params[:custom_tag_option_2] if params[:custom_tag_option_2]
-    tags << params[:custom_checkbox] if params[:custom_checkbox]
-    tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
-    tags += Partner.current.default_tags.split(",").collect {|t| t.strip} if Partner.current and Partner.current.default_tags
-    tags << "utan flokka" unless Partner.current
-    unless tags.empty?
-      priority.issue_list = tags.join(",")
-    end
-  end
-
   # POST /priorities
   # POST /priorities.xml
   def create
- #   begin
-      @tag_names = params[:tag_names]
-      @priority = Priority.new
-      @priority.name = params[:q] if params[:q]
-      create_tags(@priority)
-      if not logged_in?
-        flash[:notice] = tr("First you need to fill out this quick form and agree to the rules, then you can start adding your priorities for {target}.", "controller/priorities", :target => current_government.target)
-        session[:query] = params[:priority][:name] if params[:priority]
-        access_denied
-        return
-      end
-      # if they've confirmed, skip everything and just add it
-      if not params[:finalized].blank?
-        @priority = Priority.new
-        @priority.name = params[:finalized].strip
-        @priority.user = current_user
-        @priority.ip_address = request.remote_ip
-        create_tags(@priority)
-        @saved = @priority.save
-      else
-        # see if it already exists
-        query = params[:priority][:name].strip
-        if query.blank? or query == current_government.prompt or query == tr("Add a priority to your list", "controller/priorities")
-          flash[:notice] = tr("Please type in your priority, or click on the endorse button underneath each priority to add it to yours.", "controller/priorities")
-           @saved = false
-        end
-        @priorities = Priority.find(:all, :conditions => ["name = ? and status = 'published'",query], :order => "endorsements_count desc")
-        if @priorities.any?
-          @priority = @priorities[0]
-          @saved = true
-        elsif current_government.is_searchable? # doesn't exist, let's do a search assuming solr is installed
-          @priority_results = Priority.find_by_solr "(" + query + ") AND is_published:true", :limit => 25
-          @priorities = @priority_results.docs
-        end
-        if not @saved 
-          @priority = Priority.new
-          @priority.name = params[:priority][:name].strip
-          @priority.user = current_user
-          @priority.ip_address = request.remote_ip
-          create_tags(@priority)
-          @saved = @priority.save
-        end
-      end
+    if not logged_in?
+      flash[:notice] = tr("First you need to fill out this quick form and agree to the rules, then you can start adding your priorities for {target}.", "controller/priorities", :target => current_government.target)
+      session[:query] = params[:priority][:name] if params[:priority]
+      access_denied
+      return
+    end
+
+    @priority = Priority.new(params[:priority])
+    tags = []
+    tags << @priority.category.name if @priority.category
+    tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
+    unless tags.empty?
+      @priority.issue_list = tags.join(",")
+    end
+    @priority.user = current_user
+    @priority.ip_address = request.remote_ip
+    @priority.request = request
+    @saved = @priority.save
+    
+    if @saved
+      @priority.points.first.setup_revision
       @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
       if current_user.endorsements_count > 24
         session[:endorsement_page] = (@endorsement.position/25).to_i+1
         session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
       end    
-      #did they also do this in a tag area?
-      if @tag_names and @priority.issue_list.empty?
-        @priority.issue_list = @tag_names 
-        @priority.save
-      end
-      
-      if @saved
-        @point = Point.new(params[:point])
-        @point.user = current_user
-        @point.priority_id = @priority.id
-        @point_saved = @point.save
-      end
-      
-      if @point_saved
-        if Revision.create_from_point(@point.id,request)
-          session[:goal] = 'point'
-          if current_facebook_user
-            #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
-          end          
-          @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
-        end      
-      end
-      unless @point_saved and @saved
-        @priority.destroy if @saved
-        @point.destroy if @point_saved
-      end
-#    rescue => ex
-#      Rails.logger.info("ROLLBACK ERROR: #{ex.backtrace}")
-#      flash[:notice] = tr("Could not save priority", "controller/priorities")
-#    end
+    else
+      # see if it already exists
+      query = params[:priority][:name].strip
+      same_name_priority = Priority.find(:first, :conditions => ["name = ? and status = 'published'", query], :order => "endorsements_count desc")
+      flash[:current_same_name_priority_id] = same_name_priority.id if same_name_priority
+    end
     
     respond_to do |format|
-      if @saved and @point_saved
+      if @saved
         format.html { 
           flash[:notice] = tr("Thanks for adding {priority_name}", "controller/priorities", :priority_name => @priority.name)
           redirect_to(@priority)
@@ -761,7 +698,7 @@ class PrioritiesController < ApplicationController
           end
         }        
       else
-        format.html { redirect_to :controller => "priorities", :action => "new", :notice=>flash[:notice] }
+        format.html { render :controller => "priorities", :action => "new", :notice=>flash[:notice] }
       end
     end
   end

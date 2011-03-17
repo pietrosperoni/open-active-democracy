@@ -42,7 +42,7 @@ def create_priority_from_row(row,current_user,partner)
       end
       puts @point_saved
       if @point_saved
-        if Revision.create_from_point(@point.id,nil)
+        if Revision.create_from_point(@point.id)
           @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
         end      
       end

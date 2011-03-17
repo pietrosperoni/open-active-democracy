@@ -177,17 +177,17 @@ class Revision < ActiveRecord::Base
     end
   end
   
-  def Revision.create_from_point(point_id, request)
-    p = Point.find(point_id)
+  def Revision.create_from_point(point,ip=nil,agent=nil)
     r = Revision.new
-    r.point = p
-    r.user = p.user
-    r.value = p.value
-    r.name = p.name
-    r.content = p.content
-    r.content_diff = p.content
-    r.website = p.website    
-    r.request = request
+    r.point = point
+    r.user = point.user
+    r.value = point.value
+    r.name = point.name
+    r.content = point.content
+    r.content_diff = point.content
+    r.ip_address = ip ? ip : point.ip_address
+    r.user_agent = agent ? agent : point.user_agent
+    r.website = point.website    
     r.save(:validate => false)
     r.publish!
   end
