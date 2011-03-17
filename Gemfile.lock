@@ -55,11 +55,16 @@ GEM
     activesupport (3.0.5)
     arel (2.0.9)
     builder (2.1.2)
-    capistrano (2.5.19)
+    capistrano (2.5.20)
+      highline
       highline
       net-scp (>= 1.0.0)
+      net-scp
+      net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
+      net-ssh
+      net-ssh-gateway
       net-ssh-gateway (>= 1.0.0)
     crack (0.1.8)
     daemons (1.0.10)
@@ -93,7 +98,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mogli (0.0.26)
+    mogli (0.0.27)
       httparty (>= 0.4.3)
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
