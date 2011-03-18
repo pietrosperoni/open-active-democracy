@@ -279,7 +279,7 @@ namespace :fix do
           if row == revisions.length-1
             revisions[row].content_diff = revisions[row].content
           else
-            revisions[row].content_diff = HTMLDiff.diff(RedCloth.new(revisions[row+1].content).to_html,RedCloth.new(revisions[row].content).to_html)
+            revisions[row].content_diff = HTMLDiff.diff(revisions[row+1].content,revisions[row].content)
           end
           revisions[row].save(:validate => false)
         end

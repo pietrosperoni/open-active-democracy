@@ -12,7 +12,7 @@
 				</div>
 				<p>
 				<div class="point_content_detail">
-				<%= @revision.content_diff %>
+				<%= @revision.content_diff.html_safe %>
 				</div>
 				<% if @revision.has_website? %>
 					<div class="point_source">

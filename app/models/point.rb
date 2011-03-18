@@ -62,8 +62,8 @@ class Point < ActiveRecord::Base
   validates_length_of :name, :within => 5..60, :too_long => tr("has a maximum of 60 characters", "model/point"), 
                                                :too_short => tr("please enter more than 5 characters", "model/point")
     #validates_uniqueness_of :name
-  # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  validates_length_of :content, :within => 5..500, :too_long => tr("has a maximum of 500 characters", "model/point"), 
+  # this is actually just supposed to be 500, but bumping it to 520 because the javascript counter doesn't include carriage returns in the count, whereas this does.
+  validates_length_of :content, :within => 5..520, :too_long => tr("has a maximum of 500 characters", "model/point"), 
                                                    :too_short => tr("please enter more than 5 characters", "model/point")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
@@ -95,7 +95,7 @@ class Point < ActiveRecord::Base
   event :unbury do
     transitions :from => :buried, :to => :published, :guard => Proc.new {|p| !p.published_at.blank? }
     transitions :from => :buried, :to => :draft     
-  end  
+  end
 
   event :abusive do
     transitions :from => :published, :to => :abusive
@@ -215,6 +215,13 @@ class Point < ActiveRecord::Base
   end
   alias :is_published :is_published?
   
+  auto_html_for(:content) do
+    html_escape
+    youtube :width => 330, :height => 210
+    vimeo :width => 330, :height => 180
+    link :target => "_blank", :rel => "nofollow"
+  end  
+
   def calculate_score(tosave=false,current_endorsement=nil)
     old_score = self.score
     old_endorser_score = self.endorser_score

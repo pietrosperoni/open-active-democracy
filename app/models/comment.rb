@@ -152,10 +152,10 @@ class Comment < ActiveRecord::Base
   end
   
   auto_html_for(:content) do
-#    redcloth
+    html_escape
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
-    link(:rel => "nofollow")
+    link :target => "_blank", :rel => "nofollow"
   end
   
 end

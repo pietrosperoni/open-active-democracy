@@ -324,10 +324,10 @@ class Document < ActiveRecord::Base
   end
 
   auto_html_for(:content) do
-#    redcloth
+    html_escape
     youtube(:width => 460, :height => 285)
     vimeo(:width => 460, :height => 260)
-    link(:rel => "nofollow")
+    link :target => "_blank", :rel => "nofollow"
   end
 
 end

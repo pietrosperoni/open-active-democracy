@@ -10,8 +10,8 @@ class Revision < ActiveRecord::Base
   has_many :activities
   has_many :notifications, :as => :notifiable, :dependent => :destroy
       
-  # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  validates_length_of :content, :maximum => 516, :allow_blank => true, :allow_nil => true, :too_long => tr("has a maximum of 500 characters", "model/revision")
+  # this is actually just supposed to be 500, but bumping it to 520 because the javascript counter doesn't include carriage returns in the count, whereas this does.
+  validates_length_of :content, :maximum => 520, :allow_blank => true, :allow_nil => true, :too_long => tr("has a maximum of 500 characters", "model/revision")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :draft, :column => :status
@@ -49,7 +49,7 @@ class Revision < ActiveRecord::Base
     self.auto_html_prepare
     begin
       Timeout::timeout(5) do   #times out after 5 seconds
-        self.content_diff = HTMLDiff.diff(RedCloth.new(point.content).to_html,RedCloth.new(self.content).to_html)
+        self.content_diff = HTMLDiff.diff(point.content,self.content).html_safe
       end
     rescue Timeout::Error
     end    
@@ -99,7 +99,7 @@ class Revision < ActiveRecord::Base
     point.name = self.name
     point.other_priority = self.other_priority
     point.author_sentence = point.user.login
-    point.author_sentence += ", breytingar " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
+    point.author_sentence += ", #{tr("changes","model/revision")} " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
     point.published_at = Time.now
     point.save(:validate => false)
     user.increment!(:point_revisions_count)    
@@ -197,9 +197,9 @@ class Revision < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-#    redcloth
-    youtube(:width => 330, :height => 210)
-    vimeo(:width => 330, :height => 180)
-    link(:rel => "nofollow")
+    html_escape
+    youtube :width => 330, :height => 210
+    vimeo :width => 330, :height => 180
+    link :target => "_blank", :rel => "nofollow"
   end  
 end

@@ -659,6 +659,8 @@ class PrioritiesController < ApplicationController
       access_denied
       return
     end
+  
+    Rails.logger.debug("Point character length: #{params[:priority][:points_attributes]["0"][:content].length} #{params[:priority][:name].length}")
 
     @priority = Priority.new(params[:priority])
     tags = []

@@ -29,12 +29,12 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'auto_html'
 gem 'delayed_job'
 gem 'rmagick','2.12.2'
 gem 'mongrel', '>= 1.2.0.pre2'
 gem 'paperclip'
 gem 'sunlight', '>= 0.9'  
-gem "RedCloth"
 gem 'googlecharts'
 gem 'oauth', '>= 0.3.1'
 #gem "twitter-auth", :require => "twitter_auth/engine"

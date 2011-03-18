@@ -38,7 +38,7 @@
   </div>
 
   <span class="custom_tag">
-    <%= text_field_tag :custom_tags %>
+    <%= text_field_tag :custom_tags, "", :maxlength => 200 %>
   </span>
   
   <br>
@@ -53,7 +53,7 @@
   <%= f.fields_for(:points) do |point_form| %>
     <div class="field">
       <div class="field_box">
-        <%= point_form.text_field :name, :size => 50, :maxlength => 60 %>
+        <%= point_form.text_field :name, :size => 60, :maxlength => 60 %>
       </div>
       <div class="field_label">
         <div class="tiny_info"><em>
