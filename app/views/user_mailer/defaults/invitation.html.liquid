@@ -1,6 +1,6 @@
-Hæ {{ to_name }},
+<%=tr("Hi {{ to_name }},"email" "%>
 
-Þetta er boð frá {{ sender_name }} að koma á {{ government.name }} til að velja hugmynd fyrir {{ government.target }}.
+<%=tr("This is an invitation from {{ sender_name }} to join {{ government.name }} and help prioritize ideas for {{ government.target }}.", "email")%>
 
 Sem dæmi getur þú skoðað hugmyndir {{ sender_name | possessive }} á {{ user.profile_url }}
 

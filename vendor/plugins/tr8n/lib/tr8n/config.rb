@@ -330,7 +330,7 @@ class Tr8n::Config
   end
 
   def self.multiple_base_languages?
-    'en-US' == default_locale
+    'en' == default_locale
   end
 
   def self.default_url
