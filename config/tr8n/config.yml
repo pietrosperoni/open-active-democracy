@@ -23,7 +23,7 @@ defaults: &defaults
   enable_fallback_languages:  true      # for example: Catalan can fallback onto Spanish
   enable_translator_language: true      # translator can translate from non-default language
 
-  enable_language_flags:      true      # shows flag icons next to the languages
+  enable_language_flags:      false      # shows flag icons next to the languages
   enable_language_stats:      true      # shows percent completion of a language
 
   enable_admin_translations:  true      # registers tr8n admin keys in the system
