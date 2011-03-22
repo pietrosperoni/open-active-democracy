@@ -1,26 +1,15 @@
 class UserMailer < ActionMailer::Base
   
-  # action mailer docs: http://api.rubyonrails.com/classes/ActionMailer/Base.html
-  
-  def new_nation(govt,user)
-    @recipients  = "#{user.login} <#{user.email}>"
-    @from        = "Jim Gilliam <jim@gilliam.com>"
-    headers        "Reply-to" => "jim@gilliam.com"
-    @sent_on     = Time.now
-    @subject = "Your nation is ready"
-    @content_type = "text/plain"
-    @body[:govt] = govt
-    @body[:user] = user
-  end
+  default :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+          :reply_to => Government.current.admin_email
   
   def welcome(user)
-    @recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    @from        = "#{Government.current.name} <#{Government.current.admin_email}>"
-    headers        "Reply-to" => Government.current.admin_email
-    @sent_on     = Time.now
-    @content_type = "text/plain"      
-    @subject = "WELCOME DRAFT" #EmailTemplate.fetch_subject_liquid("welcome").render({'government' => Government.current, 'user' => user, 'partner' => Partner.current}, :filters => [LiquidFilters])
-    @body = "DRAFT" #EmailTemplate.fetch_liquid("welcome").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
+    @user = user
+    @government = Government.current
+    recipients  = "#{user.real_name.titleize} <#{user.email}>"
+    mail(:to=>recipients, :subject=>tr("Thank you for registerring at #{Government.current.name}","email")) do
+      format.html { render 'defaults/welcome'}
+    end
   end
   
   def invitation(user,sender_name,to_name,to_email)
@@ -31,7 +20,7 @@ class UserMailer < ActionMailer::Base
     headers        "Reply-to" => Government.current.admin_email
     @sent_on = Time.now
     @content_type = "text/plain"      
-    @subject = "INVITATION DRAFT" #EmailTemplate.fetch_subject_liquid("invitation").render({'government' => Government.current, 'user' => user, 'sender_name' => sender_name, 'to_name' => to_name, 'to_email' => to_email}, :filters => [LiquidFilters])    
+    @subject = tr("Thank you for registerring at #{Government.current.name}","email")
     @body = "DRAFT" #EmailTemplate.fetch_liquid("invitation").render({'government' => Government.current, 'user' => user, 'sender_name' => sender_name, 'to_name' => to_name, 'to_email' => to_email}, :filters => [LiquidFilters])    
   end  
 

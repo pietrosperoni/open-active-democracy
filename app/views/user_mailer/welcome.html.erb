@@ -1,0 +1,15 @@
+<%= render :partial=>"header" %>
+
+<p><%=tr("Hi","email")%> <%= @user.first_name %>,</p>
+
+<p><%=tr("Please confirm your account so you can fully take part in Your Priorities, if you do not confirm your account your support for priorities is not included in global priority calculations.","email")%></p>
+
+<p><%=tr("Visit this link to confirm your account","email")%>: <%= @user.root_url %>activate/<%= @user.activation_code %>?utm_source=activation&utm_medium=email</p>
+
+<p><%=tr("Find people you know","email")%>: <%= @user.root_url %>network/find?utm_source=signup&utm_medium=email</p>
+
+<p><%=tr("Your earn 5 political capital points for everybody you invite and is then registered with the website.  Political capital is a way to see how socially active and constructive people are.", "email")%> 
+   <%=tr("The more points for or against priorities you have written and people find useful the more political capital points you earn. You can then use your political capital to buy advertisements for your favorite priorities on the website.","email")%> 
+<%=tr("More here","email"): <%= @user.root_url %>about/faq#pc</p>
+
+<%= render :partial=>"footer" %>
