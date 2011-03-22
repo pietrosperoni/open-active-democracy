@@ -229,15 +229,15 @@ namespace :portlets do
   desc "initialize island.is"
   task(:initialize_island_is => :environment) do
     partner = Partner.find_by_short_name("island")
-    unless PortletTemplateCategory.find_by_name("partners.island_is.name")
+    unless PortletTemplateCategory.find_by_name("island.is")
       pc=PortletTemplateCategory.new
-      pc.name="partners.island_is.name"
+      pc.name="island.is"
       pc.weight = 1
       pc.partner_id = partner.id
       pc.save
   
       p=PortletTemplate.new
-      p.name="partners.island_is.name"
+      p.name="island.is"
       p.portlet_template_category_id=pc.id
       p.partial_name = "island_is_landshlutar"
       p.weight = 1
