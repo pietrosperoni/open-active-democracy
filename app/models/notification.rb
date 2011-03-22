@@ -331,7 +331,7 @@ end
 class NotificationWarning4 < Notification
   
   def name
-    tr("You have been banned from the website", "model/notification")
+    tr("You have been banned for violating the site rules", "model/notification")
   end
   
   def is_recipient_subscribed?

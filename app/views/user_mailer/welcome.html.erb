@@ -8,8 +8,9 @@
 
 <p><%=tr("Find people you know","email")%>: <%= @user.root_url %>network/find?utm_source=signup&utm_medium=email</p>
 
-<p><%=tr("Your earn 5 political capital points for everybody you invite and is then registered with the website.  Political capital is a way to see how socially active and constructive people are.", "email")%> 
-   <%=tr("The more points for or against priorities you have written and people find useful the more political capital points you earn. You can then use your political capital to buy advertisements for your favorite priorities on the website.","email")%> 
-<%=tr("More here","email"): <%= @user.root_url %>about/faq#pc</p>
+<p><%=tr("Your earn 5 political capital points for everybody you invite and is then registered with the website. Political capital is a way to see how socially active \
+          and constructive people are. The more points for or against priorities you have written and people find useful the more political capital points you earn. \
+          You can then use your political capital to buy advertisements for your favorite priorities on the website.","email") %> 
+<%=tr("More here","email"):%> <%= @user.root_url %>about/faq#pc</>
 
 <%= render :partial=>"footer" %>

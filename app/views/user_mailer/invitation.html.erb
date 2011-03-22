@@ -1,6 +1,6 @@
 <%= render :partial=>"header" %>
 
-<%=tr("Hi {{ to_name }}", "email", :to_name=>@to_name) %>
+<%=tr("Hi", "email"%> <%=@to_name%>,
 
 <%=tr("This is an invitation from {{ sender_name }} to join Your Priorites and help prioritize ideas for {{ government_target }}.", "email",
       :sender_name=> @sender_name, :government_name=>@government.name, :government_target=>@government.target) %>

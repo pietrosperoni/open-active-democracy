@@ -1,52 +1,53 @@
 class UserMailer < ActionMailer::Base
-  
-#  default :from => "#{Government.current.name} <#{Government.current.admin_email}>", :reply_to => Government.current.admin_email
-  
+    
   def welcome(user)
-    return
     @user = user
     @government = Government.current
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    mail(:to=>recipients, :subject=>tr("Thank you for registerring at #{Government.current.name}","email")) do
-      format.html { render 'defaults/welcome'}
-    end
+    mail(:to=>recipients,
+         :reply_to => Government.current.admin_email,
+         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :subject=>tr("Thank you for registering at Your Priorities","email"))
   end
   
   def invitation(user,sender_name,to_name,to_email)
-    return
+    @user = user
+    @sender_name = sender_name
+    @to_name = to_name
+    @to_email = to_email
     @recipients = ""
     @recipients += to_name + ' ' if to_name
     @recipients += '<' + to_email + '>'
-    @from        = "#{Government.current.admin_name} <#{Government.current.admin_email}>"
-    headers        "Reply-to" => Government.current.admin_email
-    @sent_on = Time.now
-    @content_type = "text/plain"      
-    @subject = tr("Thank you for registerring at #{Government.current.name}","email")
-    @body = "DRAFT" #EmailTemplate.fetch_liquid("invitation").render({'government' => Government.current, 'user' => user, 'sender_name' => sender_name, 'to_name' => to_name, 'to_email' => to_email}, :filters => [LiquidFilters])    
+    mail(:to => @recipients,
+         :reply_to => Government.current.admin_email,
+         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :subject => tr("Invitation from {{ sender_name }} to join Your Priorities","email", :sender_name=>sender_name))
   end  
 
-  def new_password(user,new_password) 
-    return
-    setup_notification(user) 
-    @subject = "" #EmailTemplate.fetch_subject_liquid("new_password").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
-    @body = "" #EmailTemplate.fetch_liquid("new_password").render({'government' => Government.current, 'user' => user, 'new_password' => new_password}, :filters => [LiquidFilters])
+  def new_password(user,new_password)
+    @user = user
+    @new_password = new_password
+    recipients  = "#{user.real_name.titleize} <#{user.email}>"
+    mail(:to=>recipients,
+         :reply_to => Government.current.admin_email,
+         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :subject => tr("Your new password request","email"))
   end  
   
   def notification(n,sender,recipient,notifiable)
-    return
-    setup_notification(recipient)
     @notification = n
     @sender = sender
     @government = Government.last
     @n = n.to_s.underscore
-    Rails.logger.info("Notification class: #{@n}")
     @notifiable = notifiable
-    if @n.include?("notification_warning")
-      @subject = tr("Warning", "model/mailer")
-    elsif @n.include?("notification_comment_flagged") 
-      @subject = @notification.name
+    Rails.logger.info("Notification class: #{@n}")
+    recipients  = "#{user.real_name.titleize} <#{user.email}>"
+    mail(:to => recipients,
+         :reply_to => Government.current.admin_email,
+         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :subject => @notification.name) do |format|
+      format.html { render "notifications/#{@n.class.to_s.underscore}" }
     end
-    @recipient = recipient
   end
   
   def report(user,priorities,questions,documents,treaty_documents)
@@ -61,6 +62,15 @@ class UserMailer < ActionMailer::Base
     @treaty_documents = treaty_documents
     @subject = tr("Report", "model/mailer")
   end
+  
+#   def new_change_vote(sender,recipient,vote)
+#     setup_notification(recipient)
+#     @subject = "Your " + Government.current.name + " vote is needed: " + vote.change.priority.name
+#     @body[:vote] = vote
+#     @body[:change] = vote.change
+#     @body[:recipient] = recipient
+#     @body[:sender] = sender
+#   end 
   
   protected
     def setup_notification(user)
