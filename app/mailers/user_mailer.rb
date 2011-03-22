@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
   
-  default :from => "#{Government.current.name} <#{Government.current.admin_email}>",
-          :reply_to => Government.current.admin_email
+#  default :from => "#{Government.current.name} <#{Government.current.admin_email}>", :reply_to => Government.current.admin_email
   
   def welcome(user)
+    return
     @user = user
     @government = Government.current
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
@@ -13,6 +13,7 @@ class UserMailer < ActionMailer::Base
   end
   
   def invitation(user,sender_name,to_name,to_email)
+    return
     @recipients = ""
     @recipients += to_name + ' ' if to_name
     @recipients += '<' + to_email + '>'
@@ -25,12 +26,14 @@ class UserMailer < ActionMailer::Base
   end  
 
   def new_password(user,new_password) 
+    return
     setup_notification(user) 
     @subject = "" #EmailTemplate.fetch_subject_liquid("new_password").render({'government' => Government.current, 'user' => user}, :filters => [LiquidFilters])
     @body = "" #EmailTemplate.fetch_liquid("new_password").render({'government' => Government.current, 'user' => user, 'new_password' => new_password}, :filters => [LiquidFilters])
   end  
   
   def notification(n,sender,recipient,notifiable)
+    return
     setup_notification(recipient)
     @notification = n
     @sender = sender
