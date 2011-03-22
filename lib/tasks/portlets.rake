@@ -2,32 +2,32 @@ namespace :portlets do
   desc "initialize"
   task(:initialize => :environment) do
     pc=PortletTemplateCategory.new
-    pc.name="priorities.name"
+    pc.name="Priorities"
     pc.weight = 1
     pc.save
     
     pc2=PortletTemplateCategory.new
-    pc2.name="issues.name"
+    pc2.name="Categories"
     pc2.weight = 2
     pc2.save
     
     pc3=PortletTemplateCategory.new
-    pc3.name="network.name"
+    pc3.name="Network"
     pc3.weight = 3
     pc3.save
     
     pc4=PortletTemplateCategory.new
-    pc4.name="news.name"
+    pc4.name="News"
     pc4.weight = 4
     pc4.save
     
     pc5=PortletTemplateCategory.new
-    pc5.name="processes.name"
+    pc5.name="Processes"
     pc5.weight = 4
     pc5.save
 
     p=PortletTemplate.new
-    p.name="priorities.newest.name"
+    p.name="Latest Priorities"
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_newest"
     p.partial_name = "priority_newest"
@@ -36,7 +36,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="priorities.top.name"
+    p.name="Top Priorities"
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_top"
     p.partial_name = "priority_list"
@@ -45,7 +45,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="priorities.rising.name"
+    p.name="Rising Priorities"
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_rising"
     p.partial_name = "priority_list"
@@ -54,7 +54,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="priorities.falling.name"
+    p.name="Falling Priorities"
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_falling"
     p.partial_name = "priority_list"
@@ -63,7 +63,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="priorities.controversial.name"
+    p.name="Controversial Priorities"
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_controversial"
     p.partial_name = "priority_list"
@@ -72,7 +72,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="priorities.finished.name"
+    p.name="Finished Priorities"
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_finished"
     p.partial_name = "priority_list"
@@ -81,7 +81,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="priorities.random.name"
+    p.name="Random Priorities"
     p.portlet_template_category_id=pc.id
     p.locals_data_function="setup_priorities_random"
     p.partial_name = "priority_list"
@@ -91,7 +91,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="issues.cloud.name"
+    p.name="Category Cloud"
     p.portlet_template_category_id=pc2.id
     p.locals_data_function=nil
     p.partial_name = "issues_cloud"
@@ -100,7 +100,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="issues.list.name"
+    p.name="Category List"
     p.portlet_template_category_id=pc2.id
     p.locals_data_function=nil
     p.partial_name = "issues_list"
@@ -109,7 +109,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="network.influential.name"
+    p.name="Most Active Users"
     p.portlet_template_category_id=pc3.id
     p.locals_data_function=nil
     p.partial_name = "network_list"
@@ -118,7 +118,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="network.newest.name"
+    p.name="Newest Users"
     p.portlet_template_category_id=pc3.id
     p.locals_data_function=nil
     p.partial_name = "network_newest"
@@ -127,7 +127,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="network.ambassadors.name"
+    p.name="Ambassadors"
     p.portlet_template_category_id=pc3.id
     p.locals_data_function=nil
     p.partial_name = "network_ambassadors"
@@ -136,7 +136,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="news.discussions.name"
+    p.name="Discussions"
     p.portlet_template_category_id=pc4.id
     p.locals_data_function=nil
     p.partial_name = "news_discussions"
@@ -145,7 +145,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="news.points.name"
+    p.name="Points"
     p.portlet_template_category_id=pc4.id
     p.locals_data_function=nil
     p.partial_name = "news_points"
@@ -154,7 +154,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="news.activities.name"
+    p.name="Activities"
     p.portlet_template_category_id=pc4.id
     p.locals_data_function=nil
     p.partial_name = "news_activities"
@@ -163,7 +163,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="news.capital.name"
+    p.name="News political capital"
     p.portlet_template_category_id=pc4.id
     p.locals_data_function=nil
     p.partial_name = "news_capital"
@@ -172,7 +172,7 @@ namespace :portlets do
     p.save
     
     p=PortletTemplate.new
-    p.name="news.changes.name"
+    p.name="Changes"
     p.portlet_template_category_id=pc4.id
     p.locals_data_function=nil
     p.partial_name = "news_changes"
@@ -181,7 +181,7 @@ namespace :portlets do
     p.save    
 
     p=PortletTemplate.new
-    p.name="processes.all_latest_video_discussions"
+    p.name="Latest Video Discussions"
     p.portlet_template_category_id=pc5.id
     p.locals_data_function=nil
     p.partial_name = "process_latest_video_discussions"
@@ -190,7 +190,7 @@ namespace :portlets do
     p.save    
 
     p=PortletTemplate.new
-    p.name="processes.most_popular_videos"
+    p.name="Most Popular Videos"
     p.portlet_template_category_id=pc5.id
     p.locals_data_function=nil
     p.partial_name = "process_most_popular_videos"
@@ -199,7 +199,7 @@ namespace :portlets do
     p.save    
 
     p=PortletTemplate.new
-    p.name="processes.latest_processes"
+    p.name="Latest Processes"
     p.portlet_template_category_id=pc5.id
     p.locals_data_function = "setup_priorities_latest_processes"
     p.partial_name = "priority_list"
@@ -208,7 +208,7 @@ namespace :portlets do
     p.save    
 
     p=PortletTemplate.new
-    p.name="processes.latest_process_documents"
+    p.name="Latest Process Documents"
     p.portlet_template_category_id=pc5.id
     p.locals_data_function=nil
     p.partial_name = "process_latest_documents"
@@ -217,7 +217,7 @@ namespace :portlets do
     p.save
 
     p=PortletTemplate.new
-    p.name="processes.icesave_portlet"
+    p.name="Icesave"
     p.portlet_template_category_id=pc5.id
     p.locals_data_function="setup_priorities_process_icesave"
     p.partial_name = "priority_list"
