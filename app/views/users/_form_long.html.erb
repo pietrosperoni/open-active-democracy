@@ -1,6 +1,6 @@
 <div id="new_user_form">
   <%= form_for :user,
-  'data-disable-with' => escape_t(tr(:ajax_sending.to_s)),
+  'data-disable-with' => escape_t(tr("Sending","Ajax")),
   :url => users_path(:region => "long") do |f| -%>
   <%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form_long") %>
   <p>

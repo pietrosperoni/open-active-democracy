@@ -16,7 +16,7 @@
 		<%= link_to tr("Follow", "view/activities/_button_small"), activity_followings_path(activity, :region => "activity_show"), 
 		            :method => :post,
 		            :remote=>true,
-                'data-disable-with' => escape_t(tr(:ajax_follow_capitalize.to_s)),
+                'data-disable-with' => escape_t(tr("FOLLOW","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title => tr("I want to follow this person's comments and activity", "view/activities/_button_small") %>	
 	</span>

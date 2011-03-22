@@ -5,7 +5,7 @@
 			<%= link_to tr("YES", "view/documents/_flagged"), "/documents/abusive/#{document.id}",
                   :method=>:post,
                   :remote=>true,
-                  'data-disable-with' => escape_t(tr(:ajax_issuing_warning.to_s)),
+                  'data-disable-with' => escape_t(tr("Issuing warning","Ajax")),
                   'data-loader-name' => "horizontal_small",
 			            :class => "quality_unhelpful_link", :title => tr("Issue warning", "view/documents/_flagged") %></span>
 		<span class="or"><%= tr("OR", "view/documents/_flagged") %></span>
@@ -14,7 +14,7 @@
 			<%= link_to tr("NO", "view/documents/_flagged"), "/documents/not_abusive/#{document.id}",
                   :method=>:post,
                   :remote=>true,
-                  'data-disable-with' => escape_t(tr(:ajax_clearing_warning.to_s)),
+                  'data-disable-with' => escape_t(tr("Clearing warning","Ajax")),
                   'data-loader-name' => "horizontal_small",
 			            :class => "quality_unhelpful_link", :title => tr("Clear flag", "view/documents/_flagged") %>
 		</span>		

@@ -37,7 +37,7 @@
 			<%= link_to tr("delete", "view/comments/_show"), activity_comment_url(comment.activity_id,comment),
 			            :method => :delete,
                   :remote=>true,
-                  'data-disable-with' => escape_t(tr(:ajax_deleting.to_s)),
+                  'data-disable-with' => escape_t(tr("Deleting","Ajax")),
                   'data-loader-name' => "horizontal_small",
 			            :confirm => tr("Remove this comment?", "view/comments/_show"), :title => tr("Delete comment", "view/comments/_show") %>
 		<% end %>

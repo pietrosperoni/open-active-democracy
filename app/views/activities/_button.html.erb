@@ -14,7 +14,7 @@
 	<div class="yellow_button" id="activity_add_<%= activity.id.to_s %>">
 		<%= link_to tr("Follow this discussion", "view/activities/_button"), activity_followings_path(activity, :region => "activity_show"), 
 		            :method => :post, 
-                'data-disable-with' => escape_t(tr(:ajax_following_discussion.to_s)),
+                'data-disable-with' => escape_t(tr("Follow discussion","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title => tr("I want to follow this person's comments and activity", "view/activities/_button") %>								
 	</div>

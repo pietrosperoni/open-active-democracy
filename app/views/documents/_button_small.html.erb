@@ -37,7 +37,7 @@
 		<%= link_to tr("YES", "view/documents/_button_small"), quality_document_path(document, :region => "document_inline", :value => 1), 
                 :method => :post,
                 :remote=>true,
-                'data-disable-with' => escape_t(tr(:ajax_helpful.to_s)),
+                'data-disable-with' => escape_t(tr("Helpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "quality_helpful_link", :title => tr("This is helpful", "view/documents/_button_small") %></span>
 		
@@ -47,7 +47,7 @@
 		<%= link_to tr("NO", "view/documents/_button_small"), quality_document_path(document, :region => "document_inline", :value => 0),
                 :method => :post,
                 :remote=>true,
-                'data-disable-with' => escape_t(tr(:ajax_unhelpful.to_s)),
+                'data-disable-with' => escape_t(tr("Unhelpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "quality_unhelpful_link", :title => tr("This is not helpful", "view/documents/_button_small") %>		
 	</span>	

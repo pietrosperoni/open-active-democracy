@@ -3,7 +3,7 @@
 <%= tr("Invite intro BLURB", "view/user_contacts/new")%>
 <p>
 <%= form_for @contact, :remote=>true,
-             'data-disable-with' =>  escape_t(tr(:ajax_sending.to_s)),
+             'data-disable-with' =>  escape_t(tr("Sending","Ajax")),
              :url => user_contacts_path(@user) do |f| %>
   	<%= f.error_messages %>
 

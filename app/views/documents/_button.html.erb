@@ -29,7 +29,7 @@
 		<%= link_to tr("Helpful?", "view/documents/_button"), quality_document_path(document, :region => "document_detail", :value => 1),
                 :remote=>true,
                 :method => :post,
-                'data-disable-with' => escape_t(tr(:ajax_helpful.to_s)),
+                'data-disable-with' => escape_t(tr("Helpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title => tr("This is helpful", "view/documents/_button") %>								
 	</div>
@@ -38,7 +38,7 @@
 		<%= link_to tr("Not Helpful?", "view/documents/_button"), quality_document_path(document, :region => "document_detail", :value => -1),
                 :method => :post,
                 :remote=>true,
-                'data-disable-with' => escape_t(tr(:ajax_unhelpful.to_s)),
+                'data-disable-with' => escape_t(tr("Unelpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title => tr("This is not helpful", "view/documents/_button") %>								
 	</div>	
