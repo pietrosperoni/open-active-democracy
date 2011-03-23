@@ -1,5 +1,4 @@
 require 'bundler/capistrano'
-require 'delayed_job/recipes'
 
 set :application, "open-active-democracy"
 set :domain, "alphatest.yourpriorities.org"
