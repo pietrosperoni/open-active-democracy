@@ -1,4 +1,5 @@
 require 'bundler/capistrano'
+require 'delayed_job/recipes'
 
 set :application, "open-active-democracy"
 set :domain, "alphatest.yourpriorities.org"
@@ -15,6 +16,16 @@ set :scm, "git"
 role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
+
+namespace :delayed_job do 
+    desc "Restart the delayed_job process"
+    task :restart, :roles => :app do
+        run "cd #{current_path}; RAILS_ENV=production ruby19 script/delayed_job stop RAILS_ENV=production"
+        run "cd #{current_path}; RAILS_ENV=production ruby19 script/delayed_job start RAILS_ENV=production"
+    end
+end
+
+after "deploy:update", "delayed_job:restart"
 
 task :before_update_code, :roles => [:app] do
  # thinking_sphinx.stop
