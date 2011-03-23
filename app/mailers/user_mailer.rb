@@ -11,8 +11,8 @@ class UserMailer < ActionMailer::Base
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
          :subject=>tr("Thank you for registering at Your Priorities","email") do |format|
-           format.html
            format.text { render :text=>convert_to_text(render_to_string("welcome.html")) }
+           format.html
          end
   end
   
@@ -29,9 +29,9 @@ class UserMailer < ActionMailer::Base
     mail :to => @recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
-         :subject => tr("Invitation from {sender_name} to join Your Priorities","email", :sender_name=>sender_name)  do |format|
-           format.html
+         :subject => tr("Invitation from {sender_name} to join Your Priorities","email", :sender_name=>sender_name) do |format|
            format.text { render :text=>convert_to_text(render_to_string("invitation.html")) }
+           format.html
          end
   end  
 
@@ -44,7 +44,10 @@ class UserMailer < ActionMailer::Base
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
-         :subject => tr("Your new temporary password","email")
+         :subject => tr("Your new temporary password","email") do |format|
+           format.text { render :text=>convert_to_text(render_to_string("new_password.html")) }
+           format.html
+         end
   end
   
   def notification(n,sender,recipient,notifiable)
@@ -61,10 +64,8 @@ class UserMailer < ActionMailer::Base
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
          :subject => @notification.name do |format|
+      format.text { render :text=>render_to_string("notifications/#{@n.class.to_s.underscore}.html") }      
       format.html { render "notifications/#{@n.class.to_s.underscore}" }
-      format.text { render :text=>render_to_string("notifications/#{@n.class.to_s.underscore}") }
-      
-      
     end
   end
   
