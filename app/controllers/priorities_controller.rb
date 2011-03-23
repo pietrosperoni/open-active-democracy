@@ -332,9 +332,6 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/1
   def show
-    if @priority.status == 'deleted' or @priority.status == 'abusive'
-      flash[:notice] = tr("That priority was deleted", "controller/priorities")
-    end
     @page_title = @priority.name
     @priority_process = @priority.priority_process_root_node
     @show_only_last_process = true
@@ -850,9 +847,9 @@ class PrioritiesController < ApplicationController
       format.js {
         render :update do |page|
           if current_user.is_admin?
-            page.replace_html "flagged_info_#{@priority.id}", render(:partial => "priorities/flagged", :locals => {:priority => @priority})
+            page.replace_html "priority_report_#{@priority.id}", render(:partial => "priorities/report_content", :locals => {:priority => @priority})
           else
-            page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'> #{tr("Thanks for bringing this to our attention", "controller/priorities")}</div>"
+            page.replace_html "priority_report_#{@priority.id}", "<div class='warning_inline'> #{tr("Thanks for bringing this to our attention", "controller/priorities")}</div>"
           end
         end        
       }
@@ -866,7 +863,7 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_info_#{@priority.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning_sent", "controller/priorities")}</div>"
+          page.replace_html "priority_flag_#{@priority.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning_sent", "controller/priorities")}</div>"
         end        
       }
     end    
@@ -878,7 +875,7 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_info_#{@priority.id}",""
+          page.replace_html "priority_flag_#{@priority.id}",""
         end        
       }
     end    
@@ -999,7 +996,13 @@ class PrioritiesController < ApplicationController
     end
     
     def load_endorsement
-      @priority = Priority.find(params[:id])    
+      @priority = Priority.find(params[:id])
+      if @priority.status == 'deleted' or @priority.status == 'abusive'
+        flash[:notice] = tr("That priority was deleted", "controller/priorities")
+        redirect_to "/"
+        return false
+      end
+
       @endorsement = nil
       if logged_in? # pull all their endorsements on the priorities shown
         @endorsement = @priority.endorsements.active.find_by_user_id(current_user.id)

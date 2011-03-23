@@ -1,5 +1,7 @@
 <% if priority.replaced? %>
 	<div id="hp_intro"><strike><%= tg(priority.name)%></strike></div>
 <% else %>
-	<div id="hp_intro" class="priorities"><%= link_to_unless_current tg(priority.name), priority %></div>
-<% end %>
+	<div id="hp_intro" class="priorities"><%= link_to_unless_current tg(priority.name), priority %>
+<%=render :partial=>"report_content", :locals=>{:priority=>priority} %>
+</div>
+<% end %><%= render :partial=>"flagged", :locals=>{:priority=>priority} -%>

@@ -91,11 +91,11 @@ module ApplicationHelper
       elsif u[0] == 'NotificationMessage' 
         r << tr('{count} {sentence}', "notifications", :count => u[1], :sentence =>messages_sentence(current_user.received_notifications.messages.unread.count(:group => [:sender], :order => "count_all desc")))
       elsif u[0] == 'NotificationCommentFlagged'
-        r << link_to(tr('{count} comment(s) flagged', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
+        r << link_to(tr('{count} comment flag(s)', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationPriorityFlagged'
-        r << link_to(tr('{count} prioritie(s) flagged', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")       
+        r << link_to(tr('{count} priority flag(s)', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")       
       elsif u[0] == 'NotificationPointFlagged'
-        r << link_to(tr('{count} point(s) flagged', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")       
+        r << link_to(tr('{count} point flag(s)', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")       
       elsif u[0] == 'NotificationComment' 
         r << link_to(tr('{count} new comment(s)', "notifications", :count => u[1]), :controller => "news", :action => "your_discussions") 
       elsif u[0] == 'NotificationProfileBulletin'

@@ -2,7 +2,9 @@
 
 <p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
 
-<p><%= @sender.name %> <%=tr("flagged a comment by","email")%> <%= @notifiable.user.name %>. <%=tr("Here is the comment in question","email")%>:</p>
+<p><%= @sender.name %> <%=tr("flagged a comment by","email")%> <%= @notifiable.user.name %>.
+   <%=tr("Here is the comment in question. Current flags count is {flags_count}.","email",
+         :flags_count => @notifiable.flags_count)%>:</p>
 
 <p><%= @notifiable.content %></p>
 

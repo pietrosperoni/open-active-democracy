@@ -150,6 +150,10 @@ class Priority < ActiveRecord::Base
     PriorityProcess.find :first, :conditions=>"root_node = 1 AND priority_id = #{self.id}"
   end
   
+  def content
+    self.name
+  end
+  
   def endorse(user,request=nil,partner=nil,referral=nil)
     return false if not user
     partner = nil if partner and partner.id == 1 # don't log partner if it's the default
@@ -615,7 +619,7 @@ class Priority < ActiveRecord::Base
   def flag_by_user(user)
     self.increment!(:flags_count)
     for r in User.active.admins
-      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+      notifications << NotificationPriorityFlagged.new(:sender => user, :recipient => r)    
     end
   end  
 
@@ -629,8 +633,8 @@ class Priority < ActiveRecord::Base
     activities.each do |a|
       a.delete!
     end
-    for e in endorsements
-      e.delete!
+    endorsements.each do |e|
+      e.destroy
     end
     self.deleted_at = Time.now
   end

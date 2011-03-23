@@ -2,10 +2,11 @@
 
 <p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
 
-<p><%=tr("{{ sender_name }} just revised a point. It now reads:","email", :sender_name=>@sender.name)%>:</p>
+<p><%=tr("{sender_name} just revised a point. It now reads:","email", :sender_name=>@sender.name)%>:</p>
 
 <p><%= @notifiable.text %></p>
 
-<p><%=tr("You can see the exact changes marked up and discuss it here","email")%>: <%= @notifiable.url %></p>
+<p><%=tr("You can see the exact changes marked up and discuss it here","email")%>:
+  <%= link_to @notifiable.url, @notifiable.url %></p>
 
 <%= render :partial=>"user_mailer/footer.html" %>

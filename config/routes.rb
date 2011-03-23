@@ -111,6 +111,7 @@ OpenActiveDemocracy::Application.routes.draw do
   resources :priorities do
   	member do
       put :flag_inappropriate
+      get :flag
       put :bury
       put :compromised
       put :successful
