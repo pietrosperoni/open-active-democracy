@@ -1,0 +1,12 @@
+<%= render :partial=>"user_mailer/header.html" %>
+
+<p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
+
+<p><%=tr("This is an automated message to let you know that {{ sender_name }} just joined Your Priorities.","email", :sender_name=>@sender.name)%> 
+   <%=tr("You're receiving it because you have {{ sender_email }} in your contacts.","email", :sender_email=>@sender.email)%></p> 
+  
+<p><%=tr("You can add {{ sender_name }} to your network and follow their activity here","email", :sender_name=>@sender.name)%>: <%=@sender.profile_url%></p>
+
+<p>Takk fyrir að taka þátt.</p>
+
+<%= render :partial=>"user_mailer/footer.html" %>

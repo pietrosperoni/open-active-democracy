@@ -1,0 +1,11 @@
+<%= render :partial=>"user_mailer/header.html" %>
+
+<p><%=tr("Hi", "email")%> <%= @recipient.first_name.capitalize %>,</p>
+
+<p><%=tr("{{ sender_name }} flagged {{ notifiable_name }} for review.", "email", 
+      :sender_name => @sender.name,
+      :notifiable_name => @notifiable.name)%>
+
+<p><%= @notifiable.show_url %></p>
+
+<%= render :partial=>"user_mailer/footer.html" %>

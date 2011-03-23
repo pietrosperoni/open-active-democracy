@@ -29,6 +29,7 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'htmlentities'
 gem 'auto_html'
 gem 'delayed_job'
 gem 'rmagick','2.12.2'

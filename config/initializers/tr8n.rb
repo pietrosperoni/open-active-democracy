@@ -10,6 +10,18 @@ module ActiveRecord
   end 
 end
 
+module ActionMailer
+  class Base 
+    def self.tr(a,b,c={})
+      Tr8n::Language.translate(a,b,c)
+    end
+
+    def tr(a,b,c={})
+      Tr8n::Language.translate(a,b,c)
+    end
+  end 
+end
+
 locales = []
 Dir.glob(Rails.root.to_s + '/config/locales/*.{rb,yml}') do |filename|
 

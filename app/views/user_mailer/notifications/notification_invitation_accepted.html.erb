@@ -1,0 +1,13 @@
+<%= render :partial=>"user_mailer/header.html" %>
+
+<p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
+
+<p><%=tr("Thanks for the referral! {{ sender_name }} accepted your invitation to join Your Priorities.\
+ You've earned 5 social points, and are now following {{ sender_name }} updates in your news.","email", :sender_name=>@sender.name)%>:</p>
+
+<p><%=@recipient.root_url%>news</p>
+
+<p><%=tr("You'll also be able to see their priorities here","email")%>:<br>
+<%= @sender.profile_url %></p>
+
+<%= render :partial=>"user_mailer/footer.html" %>

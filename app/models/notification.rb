@@ -95,9 +95,9 @@ class Notification < ActiveRecord::Base
     if is_recipient_subscribed? and recipient.has_email? and recipient.is_active?
       self.sent_at = Time.now
       if self.class == NotificationChangeVote
-        UserMailer.deliver_new_change_vote(sender,recipient,notifiable)
+        UserMailer.new_change_vote(sender,recipient,notifiable).deliver
       else
-        UserMailer.deliver_notification(self,sender,recipient,notifiable)
+        UserMailer.notification(self,sender,recipient,notifiable).deliver
       end
     end
     #if recipient.has_facebook?
@@ -228,6 +228,18 @@ class NotificationPriorityFlagged < Notification
   
   def name
     tr("{sender_name} flagged {priority_name} for review", "model/notification", :sender_name => sender.name, :priority_name => notifiable.name)
+  end
+  
+  def is_recipient_subscribed?
+    recipient.is_admin_subscribed?
+  end  
+  
+end
+
+class NotificationPointFlagged < Notification
+  
+  def name
+    tr("{sender_name} flagged {point_name} for review", "model/notification", :sender_name => sender.name, :point_name => notifiable.name)
   end
   
   def is_recipient_subscribed?

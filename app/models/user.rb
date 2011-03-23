@@ -304,12 +304,12 @@ class User < ActiveRecord::Base
   
   def resend_activation
     make_activation_code
-    UserMailer.deliver_welcome(self)    
+    UserMailer.welcome(self).deliver
   end
   
   def send_welcome
     unless self.have_sent_welcome
-      UserMailer.deliver_welcome(self)    
+      UserMailer.welcome(self).deliver    
     end
   end
 
@@ -702,7 +702,7 @@ class User < ActiveRecord::Base
   def reset_password
     new_password = random_password
     self.update_attribute(:password, new_password)
-    UserMailer.deliver_new_password(self, new_password)
+    UserMailer.new_password(self, new_password).deliver
   end
   
   def random_password( size = 4 )
@@ -924,7 +924,7 @@ class User < ActiveRecord::Base
             treaty_documents = []
           end
           if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
-            UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+            UserMailer.report(self,priorities,questions,documents,treaty_documents).deliver
           end
         end
         self.reload
