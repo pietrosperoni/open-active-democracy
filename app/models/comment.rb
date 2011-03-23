@@ -143,7 +143,9 @@ class Comment < ActiveRecord::Base
   def flag_by_user(user)
     self.increment!(:flags_count)
     for r in User.active.admins
+      Rails.logger.debug("Processing admin: #{r}")
       notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+      Rails.logger.debug("Notifications: #{notifications}")
     end
   end
   

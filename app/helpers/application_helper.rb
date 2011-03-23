@@ -70,10 +70,10 @@ module ApplicationHelper
   def revisions_sentence(user)
     return "" if user.points_count+user.documents_count+user.revisions_count == 0
     r = []
-    r << link_to(t('menu.briefing.points', :count => user.points_count), points_user_url(user)) if user.points_count > 0 
-    r << link_to(t('menu.briefing.documents', :count => user.documents_count), documents_user_url(user)) if user.documents_count > 0     
-    r << t('menu.briefing.revisions', :count => user.revisions_count) if user.revisions_count > 0
-    t('document.revision.sentence', :sentence => r.to_sentence)
+    r << link_to(tr('{count} points',"notifications", :count => user.points_count), points_user_url(user)) if user.points_count > 0 
+    r << link_to(tr('{count} documents', "notifications", :count => user.documents_count), documents_user_url(user)) if user.documents_count > 0     
+    r << tr('{count} revisions', "notifications",  :count => user.revisions_count) if user.revisions_count > 0
+    tr('Revisions: {sentence}', :sentence => r.to_sentence)
   end
   
   def notifications_sentence(notifications)
@@ -81,43 +81,45 @@ module ApplicationHelper
     r = []
     for u in notifications
       if u[0] == 'NotificationWarning1'
-        r << link_to(t('notification.warning1.link'), :controller => "inbox", :action => "notifications")
+        r << link_to(tr('{warning_number}. warning',"notifications", :warning_number=>1), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationWarning2'
-        r << link_to(t('notification.warning2.link'), :controller => "inbox", :action => "notifications")
+        r << link_to(tr('{warning_number}. warning',"notifications", :warning_number=>2), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationWarning3'
-        r << link_to(t('notification.warning3.link'), :controller => "inbox", :action => "notifications")                 
+        r << link_to(tr('{warning_number}. warning',"notifications", :warning_number=>3), :controller => "inbox", :action => "notifications")                 
       elsif u[0] == 'NotificationWarning4'
-        r << link_to(t('notification.warning3.link'), :controller => "inbox", :action => "notifications")                 
+        r << link_to(tr('{warning_number}. warning',"notifications", :warning_number=>4), :controller => "inbox", :action => "notifications")                 
       elsif u[0] == 'NotificationMessage' 
-        r << t('notification.message.link',:count => u[1], :sentence =>   messages_sentence(current_user.received_notifications.messages.unread.count(:group => [:sender], :order => "count_all desc")))
+        r << tr('{count} {sentence}', "notifications", :count => u[1], :sentence =>messages_sentence(current_user.received_notifications.messages.unread.count(:group => [:sender], :order => "count_all desc")))
       elsif u[0] == 'NotificationCommentFlagged'
-        r << link_to(t('notification.comment.flagged.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+        r << link_to(tr('{count} comment(s) flagged', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationPriorityFlagged'
-        r << link_to(t('notification.priority.flagged.link', :count => u[1]), :controller => "inbox", :action => "notifications")       
+        r << link_to(tr('{count} prioritie(s) flagged', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")       
+      elsif u[0] == 'NotificationPointFlagged'
+        r << link_to(tr('{count} point(s) flagged', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")       
       elsif u[0] == 'NotificationComment' 
-        r << link_to(t('notification.comment.new.link', :count => u[1]), :controller => "news", :action => "your_discussions") 
+        r << link_to(tr('{count} new comment(s)', "notifications", :count => u[1]), :controller => "news", :action => "your_discussions") 
       elsif u[0] == 'NotificationProfileBulletin'
-        r << link_to(t('notification.profile.bulletin.link', :count => u[1]), current_user)
+        r << link_to(tr('{count} new bulletin(s)', "notifications", :count => u[1]), current_user)
       elsif u[0] == 'NotificationFollower' 
-        r << link_to(t('notification.follower.link', :count => u[1]), :controller => "inbox", :action => "notifications")       
+        r << link_to(tr('{count} new follower(s)', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")       
       elsif u[0] == 'NotificationInvitationAccepted' 
-        r << link_to(t('notification.invitation.accepted.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+        r << link_to(tr('{count} new invitation(s) accepted', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationContactJoined' 
-        r << link_to(t('notification.contact.joined.link', :count => u[1]), :controller => "inbox", :action => "notifications")
-      elsif u[0] == 'NotificationDocumentRevision' 
-        r << link_to(t('notification.document.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+        r << link_to(tr('{count} new contact(s) joined', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
+      elsif u[0] == 'NotificationDocumentRevisions' 
+        r << link_to(tr('{count} document revision(s)', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationPointRevision' 
-        r << link_to(t('notification.point.revision.link', :count => u[1]), :controller => "inbox", :action => "notifications")
+        r << link_to(tr('{count} point revision(s)', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationPriorityFinished' 
-        r << link_to(t('notification.priority.finished.link', :count => u[1]), yours_finished_priorities_url)
+        r << link_to(tr('{count} prioritie(s) finished', "notifications", :count => u[1]), yours_finished_priorities_url)
       elsif u[0] == 'NotificationChangeVote' 
-        r << link_to(t('notification.change.vote.link', :count => u[1]), :controller => "news", :action => "changes_voting")
+        r << link_to(tr('{count} merger vote(s)', "notifications",:count => u[1]), :controller => "news", :action => "changes_voting")
       elsif u[0] == 'NotificationChangeProposed' 
-        r << link_to(t('notification.change.proposed.link', :count => u[1]), :controller => "news", :action => "changes_voting")
+        r << link_to(tr('{count} merger(s) proposed', "notifications", :count => u[1]), :controller => "news", :action => "changes_voting")
       end 
     end     
     return "" if r.empty?
-    t('notification.sentence', :sentence => r.to_sentence)
+    tr('Notifications: {sentence}', "notifications", :sentence => r.to_sentence)
   end
   
   def messages_sentence(messages)
@@ -134,11 +136,11 @@ module ApplicationHelper
     r = []
 		for relationship in relationships
 			if relationship.class == RelationshipUndecidedEndorsed
-				r << t('priorities.relationship.undeclared', :percentage => number_to_percentage(relationship.percentage, :precision => 0))
+				r << tr('{percentage} undeclared', "relationships", :percentage => number_to_percentage(relationship.percentage, :precision => 0))
 			elsif relationship.class == RelationshipOpposerEndorsed
-				r << t('priorities.relationship.opposers', :percentage => number_to_percentage(relationship.percentage, :precision => 0))			  
+				r << tr('{percentage} opposers', "relationships", :percentage => number_to_percentage(relationship.percentage, :precision => 0))			  
 			elsif relationship.class == RelationshipEndorserEndorsed
-				r << t('priorities.relationship.endorsers', :percentage => number_to_percentage(relationship.percentage, :precision => 0))			  
+				r << tr('{percentage} endorsers', "relationships", :percentage => number_to_percentage(relationship.percentage, :precision => 0))			  
 			end
 		end
 		t('priorities.relationship.name', :sentence => r.to_sentence)
@@ -174,7 +176,7 @@ module ApplicationHelper
 		  user_last = user.index_30days_change*100
 		end
 		if user_last < 0.005 and user_last > -0.005
-		  s = '<div class="nochange">' + t('unch') + '</div>'
+		  s = '<div class="nochange">' + tr('unchanged',"agenda_change") + '</div>'
 		elsif user_last.abs == user_last
 		  s = '<div class="gainer">+'
 		  s += number_to_percentage(user_last, :precision => precision)

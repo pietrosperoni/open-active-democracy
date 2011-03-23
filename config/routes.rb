@@ -188,7 +188,7 @@ OpenActiveDemocracy::Application.routes.draw do
       put :undelete
       get :unhide
     end
-    resources :following_discussion, :as=>"following"
+    resources :following_discussions, :as=>"followings"
     resources :comments do
       collection do
         get :more

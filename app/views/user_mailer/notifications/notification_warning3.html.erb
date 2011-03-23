@@ -2,8 +2,8 @@
 
 <p><%=tr("Hi", "email")%> <%= @recipient.first_name.capitalize %>,</p>
 
-<p><%=tr("You have violated the site rules. This is your {{ warning_number }}. warning out of three. Your comment was deleted. \
-You will be banned from the website if you break the rules more than three times.", "email", :warning_number=>1)%></p>
+<p><%=tr("You have violated the site rules. This is your {warning_number} warning out of three. Your comment was deleted. \
+You will be banned from the website if you break the rules more than three times.", "email", :warning_number=>'third')%></p>
 
 <p><%=tr("This is your final warning! Next time you break the rules you will be banned from posting to the website.", "email")%><p/>
 

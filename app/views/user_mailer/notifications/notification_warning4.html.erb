@@ -3,7 +3,7 @@
 <p><%=tr("Hi", "email")%> <%= @recipient.first_name.capitalize %>,</p>
 
 <p><%=tr("You have been banned from the website after breaking the rules four times with three warnings already \
-sent to you in email.", "email")%></p>
+sent to you by email.", "email")%></p>
 
 <p><%=tr("Here are more details on the rules", "email")%>: <%= link_to @recipient.root_url+'about/rules',@recipient.root_url+'about/rules' %></p>
 

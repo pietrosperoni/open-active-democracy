@@ -29,7 +29,7 @@ class Notification < ActiveRecord::Base
   state :deleted, :enter => :do_delete
   
   event :send do
-    transitions :from => [:unsent], :to => :sent
+    transitions :from => :unsent, :to => :sent
   end
   
   event :read do
@@ -54,7 +54,8 @@ class Notification < ActiveRecord::Base
   end
   
   def queue_sending
-    send_later(:send!)
+    Rails.logger.debug("In queue_sending")
+    self.send!
   end
   
   def do_read
@@ -90,9 +91,12 @@ class Notification < ActiveRecord::Base
   end  
   
   def do_send
+    Rails.logger.info("In send!")
     self.deleted_at = nil    
     self.processed_at = Time.now
-    if is_recipient_subscribed? and recipient.has_email? and recipient.is_active?
+    Rails.logger.debug("In send! #{is_recipient_subscribed?} #{recipient.has_email?} #{recipient.is_active?}")
+    if (is_recipient_subscribed? and recipient.has_email? and recipient.is_active?) or
+       (is_recipient_subscribed? and recipient.has_email? and self.class == NotificationWarning4)
       self.sent_at = Time.now
       if self.class == NotificationChangeVote
         UserMailer.new_change_vote(sender,recipient,notifiable).deliver

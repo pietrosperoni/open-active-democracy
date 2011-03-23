@@ -2,7 +2,7 @@
 	<div class="green_button" id="activity_add_<%= activity.id.to_s %>">
 		<%= tr("Following discussion", "view/activities/_button")%> 
 		<span class="big_x">
-		<%= link_to "&nbsp;x".safe_html, activity_following_path(activity, following, :region => "activity_show"), 
+		<%= link_to "&nbsp;x".html_safe, activity_following_path(activity, following, :region => "activity_show"), 
                 :method => :post,
 		            :remote=>true,
       		      'data-disable-with' => "",

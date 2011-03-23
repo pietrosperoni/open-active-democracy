@@ -51,21 +51,21 @@ class UserMailer < ActionMailer::Base
   end
   
   def notification(n,sender,recipient,notifiable)
-    @notification = n
+    @n = @notification = n
     @sender = sender
     @government = Government.current
-    @recipient = recipient
-    @n = n.to_s.underscore
+    user = @user = @recipient = recipient
     @notifiable = notifiable
-    Rails.logger.info("Notification class: #{@n}")
+    Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}  #{@n.inspect}")
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
     attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}")
     mail :to => recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
          :subject => @notification.name do |format|
-      format.text { render :text=>render_to_string("notifications/#{@n.class.to_s.underscore}.html") }      
-      format.html { render "notifications/#{@n.class.to_s.underscore}" }
+      format.text { render :text=>convert_to_text(render_to_string("user_mailer/notifications/#{@n.class.to_s.underscore}.html")) }      
+      format.html { render "user_mailer/notifications/#{@n.class.to_s.underscore}" }
     end
   end
   

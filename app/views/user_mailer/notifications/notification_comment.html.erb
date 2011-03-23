@@ -6,6 +6,6 @@
 
 <p><%= @notifiable.content %></p>
 
-<p>You can view or stop following this discussion here: <%= @notifiable.show_url %></p>
+<p><%=tr("You can view or stop following this discussion here","email")%>: <%= link_to @notifiable.show_url, @notifiable.show_url %></p>
 
 <%= render :partial=>"user_mailer/footer.html" %>
