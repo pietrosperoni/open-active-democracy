@@ -45,8 +45,16 @@ class Point < ActiveRecord::Base
   define_index do
     indexes name
     indexes content
-    indexes priority.category.name, :facet=>true
+    indexes priority.category.name, :facet=>true, :as=>"category_name"
     where "points.status = 'published'"    
+  end
+  
+  def category_name
+    if priority.category
+      priority.category.name
+    else
+      'No category'
+    end
   end
   
   cattr_reader :per_page

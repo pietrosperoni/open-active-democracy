@@ -16,6 +16,10 @@ color: #333;
 
 }
 
+.match {
+color: red;
+}
+
 #footer a:hover, #contentwrap a:hover { color: #333; }
 #toolbar a, #priority_menu a { border-bottom: none; }
 

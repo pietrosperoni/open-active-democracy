@@ -130,16 +130,6 @@ task :before_update_code, :roles => [:app] do
   thinking_sphinx.stop
 end
 
-task :after_update_code, :roles => [:app] do
-  symlink_sphinx_indexes
-  thinking_sphinx.configure
-  thinking_sphinx.start
-end
-
-task :symlink_sphinx_indexes, :roles => [:app] do
-  run "ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx"
-end
-
 task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/db/sphinx #{current_release}/db/sphinx"
   run "ln -s #{deploy_to}/#{shared_dir}/config/database.yml #{current_release}/config/database.yml"
@@ -148,8 +138,8 @@ task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
   run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -nfs #{deploy_to}/#{shared_dir}/private #{current_release}/private"
-#  thinking_sphinx.configure
-#  thinking_sphinx.start  #run "rm -f #{current_path}"
+  thinking_sphinx.configure
+  thinking_sphinx.start
 end
 
 namespace :deploy do

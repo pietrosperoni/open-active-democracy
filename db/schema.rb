@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110316174122) do
+ActiveRecord::Schema.define(:version => 20110324050748) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -217,13 +217,15 @@ ActiveRecord::Schema.define(:version => 20110316174122) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_endorser",  :default => false
+    t.boolean  "is_endorser",   :default => false
     t.string   "ip_address"
     t.string   "user_agent"
     t.string   "referrer"
-    t.boolean  "is_opposer",   :default => false
+    t.boolean  "is_opposer",    :default => false
     t.text     "content_html"
-    t.integer  "flags_count",  :default => 0
+    t.integer  "flags_count",   :default => 0
+    t.integer  "category_id"
+    t.string   "category_name", :default => "no cat"
   end
 
   add_index "comments", ["activity_id"], :name => "comments_activity_id"

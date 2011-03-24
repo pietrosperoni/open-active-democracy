@@ -94,10 +94,18 @@ class Priority < ActiveRecord::Base
   
   define_index do
     indexes name
-    indexes category.name, :facet=>true
+    indexes category.name, :facet=>true, :as=>"category_name"
     where "priorities.status = 'published'"
   end  
-  
+
+  def category_name
+    if category
+      category.name
+    else
+      'No category'
+    end
+  end
+    
   validates_length_of :name, :within => 5..60, :too_long => tr("has a maximum of 60 characters", "model/point"), 
                                                :too_short => tr("please enter more than 5 characters", "model/point")
   validates_uniqueness_of :name, :if => Proc.new { |priority| priority.status == 'published' }

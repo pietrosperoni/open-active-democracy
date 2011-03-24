@@ -41,12 +41,12 @@ class Document < ActiveRecord::Base
   
   has_many :capitals, :as => :capitalizable, :dependent => :nullify
   
-  define_index do
-    indexes name
-    indexes content
-    indexes priority.category.name, :facet=>true
-    where "documents.status = 'published'"    
-  end
+#  define_index do
+#    indexes name
+#    indexes content
+#    indexes priority.category.name, :facet=>true
+#    where "documents.status = 'published'"    
+#  end
   
   cattr_reader :per_page
   @@per_page = 25
