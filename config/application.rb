@@ -59,8 +59,6 @@ module OpenActiveDemocracy
     
     NB_CONFIG = { 'api_exclude_fields' => [:ip_address, :user_agent, :referrer, :google_token, :google_crawled_at, :activation_code, :salt, :email, :first_name, :last_name, :crypted_password, :is_tagger, :partner_id, :ip_address, :user_agent, :remember_token, :remember_token_expires_at, :referrer, :zip, :birth_date, :city, :state, :is_comments_subscribed, :is_finished_subscribed, :is_followers_subscribed, :is_mergeable, :is_messages_subscribed, :is_newsletter_subscribed, :is_point_changes_subscribed, :is_votes_subscribed, :is_subscribed, :contacts_count, :contacts_invited_count, :contacts_members_count, :contacts_not_invited_count, :code, :rss_code, :address] }  
     
-    config.cache_store = :dalli_store, '127.0.0.1:11211', { :namespace => "oad_3_#{Rails.env}_#{Rails.application.config.database_configuration[Rails.env]["git_branch"]}", 
-                                                            :expires_in => 2.minute, :compress => true, :compress_threshold => 64*1024 }
   end
   
   if defined?(PhusionPassenger)
