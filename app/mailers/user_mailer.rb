@@ -72,7 +72,7 @@ class UserMailer < ActionMailer::Base
   def report(user,priorities,questions,documents,treaty_documents)
     @government = Government.current
     @recipients  = "#{user.login} <#{user.email}>"
-    @from        = "#{Government.last.name} <#{Government.last.email}>"
+    @from        = "#{Government.current.name} <#{Government.current.email}>"
     headers        "Reply-to" => Government.last.email
     @sent_on     = Time.now
     @content_type = "text/html"

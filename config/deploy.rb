@@ -102,7 +102,7 @@ end
 
 set :application, "open-active-democracy"
 set :domain, "alphatest.yourpriorities.org"
-set :selected_branch, "master"
+set :selected_branch, Rails.application.config.database_configuration[Rails.env]["git_branch"]
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
 set :deploy_to, "/home/robert/sites/#{application}/#{selected_branch}"
