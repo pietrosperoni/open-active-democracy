@@ -56,7 +56,7 @@ class UserMailer < ActionMailer::Base
     @government = Government.current
     user = @user = @recipient = recipient
     @notifiable = notifiable
-    Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}  #{@n.inspect}")
+    Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}  #{@n.inspect} notifiable: #{@notifiable}")
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
     attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
     Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}")

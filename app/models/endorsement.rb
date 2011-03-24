@@ -209,8 +209,8 @@ class Endorsement < ActiveRecord::Base
   end
 
   def value_name
-    return tr("You supported", "model/endorsement") if is_up?
-    return tr("You opposed", "model/endorsement") if is_down?
+    return tr("supported", "model/endorsement") if is_up?
+    return tr("opposed", "model/endorsement") if is_down?
   end
 
   def flip_up

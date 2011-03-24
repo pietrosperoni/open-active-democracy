@@ -2,14 +2,14 @@
 
 <p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
 
-<p><%=tr("Congratulations! You just earned 1 social point because {{ sender_name }} is now following your updates at Your Priorities.","email", :sender_name=>@sender.name)%></p>
+<p><%=tr("Congratulations! You just earned 1 social point because {sender_name} is now following your updates at Your Priorities.","email", :sender_name=>@sender.name)%></p>
 
 <p><%=tr("Learn more about","email")%> <%= @sender.name %>:<br>
-<%= @sender.profile_url %></p>
+<%= link_to @sender.profile_url, @sender.profile_url %></p>
 
 <p><%=tr("What are social points, sp in short? It's a way to track how socially active and constructive people are. \
- The more people who find your updates and points useful, the more social points you earn, which you can use to buy "ads" for priorities \
+ The more people who find your updates and points useful, the more social points you earn, which you can use to buy ads for priorities \
  you care about, amongst other things.\
- More details here","email")%>: <%= @recipient.root_url %>about/faq#pc
+ More details here","email")%>: <%= link_to @recipient.root_url+'about/faq#pc', @recipient.root_url+'about/faq#pc' %></p>
 
 <%= render :partial=>"user_mailer/footer.html" %>

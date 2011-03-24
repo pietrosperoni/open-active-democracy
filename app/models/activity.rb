@@ -439,8 +439,6 @@ end
 
 class ActivityBulletinProfileNew < Activity
   
-  after_create :send_notification
-  
   def send_notification
     notifications << NotificationProfileBulletin.new(:sender => self.other_user, :recipient => self.user)       
   end
