@@ -51,6 +51,7 @@ class Tr8n::Translator < ActiveRecord::Base
   end
   
   def self.find_or_create(user)
+    Rails.logger.debug("Trying to create user from #{user.inspect}")
     trn = find(:first, :conditions => ["user_id = ?", user.id])
     trn = create(:user => user) unless trn
     trn
