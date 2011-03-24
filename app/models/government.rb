@@ -88,7 +88,7 @@ class Government < ActiveRecord::Base
     if ENV['DOMAIN']
       return ENV['DOMAIN']
     else
-      "localize.yrpri.org"
+      "dev.yrpri.org"
     end
   end
   

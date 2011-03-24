@@ -3,7 +3,7 @@ require 'load_twitter_followers'
 class TwitterController < ApplicationController
   
   def oauth_callback_url
-    "http://localize.yrpri.org/twitter/callback"
+    "http://#{Government.current.base_url}/twitter/callback"
   end
 
   def prepare_access_token(oauth_token, oauth_token_secret,oauth_verifier)
