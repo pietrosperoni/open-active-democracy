@@ -964,7 +964,7 @@ class User < ActiveRecord::Base
     )
     Rails.logger.info("LOGIN: CREATE FROM FACEBOOK user #{u.inspect}")
 
-    if u.save
+    if u.save(:validate => false)
       u.activate!
       return u
     else
