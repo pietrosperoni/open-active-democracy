@@ -1,9 +1,13 @@
 class PointsController < ApplicationController
  
-  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :index, :destroy, :update_importance]
+  before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :your_index, :destroy, :update_importance]
   before_filter :admin_required, :only => [:edit, :update]
- 
+
   def index
+    redirect_to :action=>:newest
+  end
+ 
+  def your_index
     @page_title = tr("Your talking points", "controller/points", :government_name => current_government.name)
     @points = Point.filtered.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
     get_qualities

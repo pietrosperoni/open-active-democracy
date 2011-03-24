@@ -8,8 +8,8 @@
 	</div>			
 	<div class="point_name">
 	<%= link_to_unless_current h(point.name), point %>
- 	<%= render :partial=>"report_content", :locals=>{:point=>point} %>
-  <%= render :partial=>"flagged", :locals=>{:point=>point} -%>
+ 	<%= render :partial=>"points/report_content", :locals=>{:point=>point} %>
+  <%= render :partial=>"points/flagged", :locals=>{:point=>point} -%>
 	</div>
 	<% if point.has_other_priority? %>
 		<div class="point_other">
@@ -41,6 +41,8 @@
 		</div>
 	<% end %>
 	<div class="point_qualities">
-		<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
+	  <% if defined?(quality) %>
+  		<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
+		<% end %>
 	</div>				
 </div>

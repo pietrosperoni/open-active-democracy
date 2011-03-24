@@ -4,9 +4,9 @@
 			<li class="tab1">
 				<span class="tab_header">
 					<% if logged_in? %>
-					<%= link_to tr("Talking points", "view/briefing/_nav"), points_url %>
+					<%= link_to tr("Points", "view/briefing/_nav"), points_url %>
 					<% else %>
-					<%= link_to tr("Talking points", "view/briefing/_nav"), newest_points_url %>
+					<%= link_to tr("Points", "view/briefing/_nav"), newest_points_url %>
 					<% end %>
 				</span>
 			</li>
@@ -35,7 +35,7 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to tr("Yours", "view/briefing/_nav"), points_url %>
+						<%= link_to tr("Yours", "view/briefing/_nav"), :controller=>"points", :action=>"your_index" %>
 					</span>
 				</li>
 
@@ -84,12 +84,6 @@
 					</span>
 				</li>
 			
-				<li class="tab3">
-					<span class="tab_header">
-						<%= link_to tr("All documents", "view/briefing/_nav"), newest_documents_url %>
-					</span>
-				</li>			
-
 				<li class="tab4">
 					<span class="tab_header">
 						<%= link_to tr("Recently revised", "view/briefing/_nav"), revised_documents_url %>

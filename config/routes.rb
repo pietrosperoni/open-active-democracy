@@ -218,6 +218,7 @@ OpenActiveDemocracy::Application.routes.draw do
       get :newest
       get :revised 
       get :your_priorities
+      get :your_index
     end
     resources :revisions do
       member do

@@ -78,8 +78,11 @@
 						<%= link_to tr("Nation settings", "view/shared/_menu"), edit_government_url(current_government) %>
 					</div>
 					<div class="tab_sublinks">
+
 						<%= link_to tr("Settings", "view/shared/_menu"), edit_government_url(current_government) %>
 						&middot;
+            <%= link_to tr("All Flagged", "view/shared/_menu"), "/admin/all_flagged" %>
+            &middot;
 						<% if current_government.is_tags? %>
 							&middot; <%= link_to current_government.tags_name.pluralize.titleize, tags_url %>
 						<% end %>

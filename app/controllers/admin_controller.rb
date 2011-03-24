@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   def all_flagged
     @all = [] 
     @all += Priority.published.flagged
-    @all += Question.published.flagged
+    @all += Point.published.flagged
     @all += Comment.published.flagged
     @all += Document.published.flagged
     @all = @all.sort_by {|s| s.created_at}
