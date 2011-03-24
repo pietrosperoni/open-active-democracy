@@ -7,112 +7,171 @@
 <%= render :partial => "shared/description" %>
 <%= render :partial => "shared/head" %>
 <%= render :partial => "shared/javascripts" %>
-<%= render :partial => "shared/css" %>
-<%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
-<%= stylesheet_link_tag "newstuff" %>
-<%= stylesheet_link_tag "gnew" %>
+<%= stylesheet_link_tag "oad" %>
 <%= stylesheet_link_tag "partners" %>
 <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
 <% if controller_name == "facebook" %>
 <%= stylesheet_link_tag "fb_invite_hack.css" %>
 <% end %>
-</head>
-<body>
 
+<!--
+%= render :partial => "shared/css" %>
+%= stylesheet_link_tag "newstuff" %>
+%= stylesheet_link_tag "gnew" %>
+%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
+-->
+
+
+</head>
+ 	
+<body> 
+	
 <%= csrf_meta_tag %>
 
 <%= I18n.t("blurb_header") %>
 
-<div id="backgroundwrap">
-	<div id="header">
-		<div id="branding" style="height: 52px">
-		<% if current_partner %>
-		<div id="partner_image">
-			<%= render :partial => "partners/logo" %>
-		</div>
-		<div id="parent_image" style="float: right">
-			<% if Rails.env=="development"%>
-				<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is", :port=>3000 %>
-			<% else %>
-				<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is" %>
-			<% end %>
-		</div>
-		<% else %>
-		<div id="parent_image" class="logo" style="float: left">
-			<%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal" %>
-		</div>
-		<div id="parent_image" style="float: right" class="partner_image">
-			<% Partner.with_logo.all.each do |partner| %>
-			<% if Rails.env=="development"%>
-			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
-			<% else %>
-			  <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
-			<% end %>
-		
-		<% end %>
-		</div>
-		<% end %>
-	</div>
-		<%= flash_div :warning, :notice, :error %>
+<div id="backgroundwrap"> 
+		<div id="mainContent"> 
+<!-- HEADER-->
+					 <div id="header"> 
+			
+								<div id="branding" style="height: 52px">
+										  <% if current_partner %>
+										  <div id="partner_image">
+													 <%= render :partial => "partners/logo" %>
+										  </div>
+										  <div id="parent_image" style="float: right">
+													 <% if Rails.env=="development"%>
+													 <%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is", :port=>3000 %>
+													 <% else %>
+													 <%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal", :host=>"skuggathing.is" %>
+													 <% end %>
+										  </div>
+													 <% else %>
+										  <div id="parent_image" class="logo" style="float: left">
+													 <%= link_to image_tag("skuggathing_logo.png"), :controller=>"portal" %>
+										  </div>
+										  <div id="parent_image" style="float: right" class="partner_image">
+													 <% Partner.with_logo.all.each do |partner| %>
+													 <% if Rails.env=="development"%>
+													 <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
+													 <% else %>
+													 <%= link_to image_tag(partner.logo.url(:icon_107_16)), :border => 0, :controller=>"portal", :host=>"#{partner.short_name}.skuggathing.is", :port=>3000 %>
+													 <% end %>
 
-		<%= render :partial => "ads/pick" %>
-	</div>
-	<div id="contentwrap">
-		
-		<%= render :partial => "shared/menu" %>
-		
-		<div id="content_text">
-			<%= yield :layout %>
-		</div>
+													 <% end %>
+										  </div>
+										  <% end %>
+								</div>
+								<%= flash_div :warning, :notice, :error %>
 
-	</div>
-	<div id="sidebar">
+								<%= render :partial => "ads/pick" %>
+<!-- Dagny ads-->	
+								<div id="ads">
+										  text
+								</div> 
+					 </div>			
+			</div> 
+			
+			<div id="menu"> 
+					 <%= render :partial => "shared/menu" %>
+			</div> 
+	 
+ 
+			<!-- Content boxes--> 
+		  <div id="content_text">
+					 <div class="pageBox"> 
+								<div class="title">
+								Efstu mal
+								</div> 
+								<div class="selector">
+								</div> 
+					 <div class="">
+					 </div> 				
+								<%= yield :layout %>
+					 </div>
 
-		<% if logged_in? and current_user.warnings_count > 0 %>
-		<div id="warning"><%= t('warnings.name', :count => current_user.warnings_count) %></div>
-		<% end %>	
+					 <div class="pageBox"> 
+								box
+					 </div> 
+					 
+					 <div class="pageBox"> 
+								box
+					 </div> 
+					 
+					 <div class="pageBox"> 
+								box
+					 </div> 
 
-		<div id="top_right_column">
+		  </div> 
 
-			<% if current_government.is_searchable? %>
-			<%= render :partial => "shared/search" %>
-			<% end %>
+</div> 
+		<!-- Sidebar area --> 
+		  <div id="reykjavikLink">link</div> 
+		  <div id="sidebar"> 
+					 <% if logged_in? and current_user.warnings_count > 0 %>
+		  <div id="warning"><%= t('warnings.name', :count => current_user.warnings_count) %></div>
+					 <% end %>	
 
-			<% if logged_in? %>
-			<%= render :partial => "shared/notifications" %>
-			<% else %>
-			<%= render :partial => "shared/login" %>
-			<% end %>
+			<div id="search"> 
+					  <% if current_government.is_searchable? %>
+					  <%= render :partial => "shared/search" %>
+					  <% end %>				
+			</div> 
+			
+			<div id="miniMenu"> 
+			<ul> 
+				<li><a href="#">Um vefinn</a></li> 
+				<li><a href="#">Hafdu samband</a></li> 
+				<li><a href="#">Hjalp</a></li> 
+			</ul> 
+			</div> 
+			
+			<div id="newIdea"><img src="img/newidea.gif" border="0" alt="" /></div> 
+ 
+		<!-- User area--> 
+			<div id="user"> 
+					 <% if logged_in? %>
+					 <%= render :partial => "shared/notifications" %>
+					 <% else %>
+					 <%= render :partial => "shared/login" %>
+					 <% end %>
 
-		</div>
+					 <% if logged_in? %>
 
-		<% if logged_in? %>
+					 <div id="priority_column">
+								<%= render :partial => "shared/your_priorities" %>
+					 </div>
 
-		<div id="priority_column">
-			<%= render :partial => "shared/your_priorities" %>
-		</div>
+					 <%= render :partial => "shared/activated" %>
 
-		<%= render :partial => "shared/activated" %>
+					 <% else %>
 
-		<% else %>
+					 <div id="intro">
+								<%= I18n.t("blurb_intro") %>
+					 </div>
+					 <% if current_government.short_name == 'wh2' %>
+					 <%= render :partial => "shared/buzz" %>
+					 <% end %>
 
-		<div id="intro"><%= I18n.t("blurb_intro") %></div>
-		<% if current_government.short_name == 'wh2' %>
-		<%= render :partial => "shared/buzz" %>
-		<% end %>
+					 <% end %>
 
-		<% end %>
+				<div class="settings"> 
+				<ul> 
+					<li><a href="#">Stillingar</a></li> 
+					<li><a href="#">Utskraning</a></li> 
+				</ul> 
+				</div> 
+			</div> 
+		</div> 
+	
+	</div> 
+	
+		  <%= render :partial => "shared/footer" %>
+		  <%= render :partial => "shared/analytics" %>
+		  <%= render :partial => "shared/facebook_footer" %>
 
-	</div>
-	<div class="push">
-		
-	</div>
-</div>
 
-<%= render :partial => "shared/footer" %>
-<%= render :partial => "shared/analytics" %>
-<%= render :partial => "shared/facebook_footer" %>
-
-</body>
-</html>
+</body> 
+</html> 
