@@ -12,6 +12,8 @@ class Activity < ActiveRecord::Base
   scope :points_and_docs, :conditions => "type like 'ActivityPoint%' or type like 'ActivityDocument%'", :order => "activities.created_at desc"
   scope :capital, :conditions => "type like '%Capital%'"
   scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
+
+  scope :top, :conditions => "type in ('ActivityPointNew','ActivityDocumentNew','ActivityPriorityNew','ActivityBulletinNew')"
   
   scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
   scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
@@ -175,7 +177,7 @@ end
 
 class ActivityUserNew < Activity
   def name
-    I18n.t('activity.user.new.name', :user_name => user.name, :government_name => Government.current.name)
+    tr("{user_name} joined {government_name}", "model/activity", :user_name => user.name, :government_name => Government.current.name)
   end
 end
 
@@ -183,9 +185,9 @@ end
 class ActivityInvitationNew < Activity
   def name
     if user 
-      I18n.t('activity.invitation.new.name', :user_name => user.login)
+      tr("{user_name} invited someone to join", "model/activity", :user_name => user.login)
     else
-      I18n.t('activity.invitation.new.name', :user_name => "Someone")
+      tr("{user_name} invited someone to join", "model/activity", :user_name => "Someone")
     end
   end
 end
@@ -194,9 +196,9 @@ end
 class ActivityInvitationAccepted < Activity
   def name
     if other_user
-      I18n.t('activity.invitation.accepted.name.known', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name)
+      tr("{user_name} accepted an invitation from {other_user_name} to join {government_name}", "model/activity", :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name)
     else
-      I18n.t('activity.invitation.accepted.name.unknown', :user_name => user.name, :government_name => Government.current.name)
+      tr("{user_name} accepted an invitation to join {government_name}", "model/activity", :user_name => user.name, :government_name => Government.current.name)
     end
   end  
 end
@@ -211,27 +213,27 @@ class ActivityUserRecruited < Activity
   end
   
   def name
-    I18n.t('activity.user.recruited.name', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name)
+    tr("{user_name} recruited {other_user_name} to {government_name}", "model/activity", :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name)
   end
 end
 
 class ActivityCapitalUserRecruited < Activity
   def name
-    I18n.t('activity.capital.user.recruited.name', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+    tr("{user_name} earned {capital}{currency_short_name} for recruiting {other_user_name} to {government_name}", "model/activity", :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
   end
 end
 
 class ActivityPartnerUserRecruited < Activity
   
   def name
-    I18n.t('activity.user.recruited.partner.name', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :partner_url => partner.short_name + '.' + Government.current.base_url)  
+    tr("{user_name} recruited {other_user_name} to {government_name} through {partner_url}", "model/activity", :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :partner_url => partner.short_name + '.' + Government.current.base_url)  
   end
   
 end
 
 class ActivityCapitalPartnerUserRecruited < Activity
   def name
-    I18n.t('activity.capital.partner.user.recruited.name', :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :partner_url => partner.short_name + '.' + Government.current.base_url)      
+    tr("{user_name} earned {capital}{currency_short_name} for recruiting {other_user_name} to {government_name} through {partner_url}", "model/activity", :user_name => user.name, :other_user_name => other_user.name, :government_name => Government.current.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :partner_url => partner.short_name + '.' + Government.current.base_url)      
   end
 end
 
@@ -239,9 +241,9 @@ class ActivityPriorityDebut < Activity
   
   def name
     if attribute_present?("position")
-      I18n.t('activity.priority.debut.name.known', :priority_name => priority.name, :position => position)
+      tr("{priority_name} debuted on the charts at {position}", "model/activity", :priority_name => priority.name, :position => position)
     else
-      I18n.t('activity.priority.debut.name.unknown', :priority_name => priority.name)
+      tr("{priority_name} debuted on the charts", "model/activity", :priority_name => priority.name)
     end
   end
   
@@ -251,9 +253,9 @@ class ActivityUserRankingDebut < Activity
   
   def name
     if attribute_present?("position")
-      I18n.t('activity.user.debut.name.known', :user_name => user.name, :position => position)
+      tr("{user_name} debuted on the most influential chart at {position}", "model/activity", :user_name => user.name, :position => position)
     else
-      I18n.t('activity.user.debut.name.unknown', :user_name => user.name)
+      tr("{user_name} debuted on the most influential chart", "model/activity", :user_name => user.name)
     end
   end
   
@@ -264,15 +266,15 @@ class ActivityEndorsementNew < Activity
   def name
     if has_ad?
       if attribute_present?("position")
-        I18n.t('activity.endorsement.new.ad.name.known', :user_name => user.name, :priority_name => priority.name, :position => position, :ad_user => ad.user.name.possessive)
+        tr("{user_name} endorsed {priority_name} at priority {position} due to {ad_user} ad", "model/activity", :user_name => user.name, :priority_name => priority.name, :position => position, :ad_user => ad.user.name.possessive)
       else
-        I18n.t('activity.endorsement.new.ad.name.unknown', :user_name => user.name, :priority_name => priority.name, :ad_user => ad.user.name.possessive)
+        tr("{user_name} endorsed {priority_name} due to {ad_user} ad", "model/activity", :user_name => user.name, :priority_name => priority.name, :ad_user => ad.user.name.possessive)
       end      
     else
       if attribute_present?("position")
-        I18n.t('activity.endorsement.new.name.known', :user_name => user.name, :priority_name => priority.name, :position => position)
+        tr("{user_name} endorsed {priority_name} at priority {position}", "model/activity", :user_name => user.name, :priority_name => priority.name, :position => position)
       else
-        I18n.t('activity.endorsement.new.name.unknown', :user_name => user.name, :priority_name => priority.name)
+        tr("{user_name} endorsed {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name)
       end
     end
   end  
@@ -281,7 +283,7 @@ end
 
 class ActivityEndorsementDelete < Activity
   def name
-    I18n.t('activity.endorsement.delete.name', :user_name => user.name, :priority_name => priority.name)
+    tr("{user_name} no longer endorses {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name)
   end
 end
 
@@ -290,15 +292,15 @@ class ActivityOppositionNew < Activity
   def name
     if has_ad?
       if attribute_present?("position")
-        I18n.t('activity.opposition.new.ad.name.known', :user_name => user.name, :priority_name => priority.name, :position => position, :ad_user => ad.user.name.possessive)
+        tr("{user_name} opposed {priority_name} at priority {position} due to {ad_user} ad", "model/activity", :user_name => user.name, :priority_name => priority.name, :position => position, :ad_user => ad.user.name.possessive)
       else
-        I18n.t('activity.opposition.new.ad.name.unknown', :user_name => user.name, :priority_name => priority.name, :ad_user => ad.user.name.possessive)
+        tr("{user_name} opposed {priority_name} due to {ad_user} ad", "model/activity", :user_name => user.name, :priority_name => priority.name, :ad_user => ad.user.name.possessive)
       end      
     else
       if attribute_present?("position")
-        I18n.t('activity.opposition.new.name.known', :user_name => user.name, :priority_name => priority.name, :position => position)
+        tr("{user_name} opposed {priority_name} at priority {position}", "model/activity", :user_name => user.name, :priority_name => priority.name, :position => position)
       else
-        I18n.t('activity.opposition.new.name.unknown', :user_name => user.name, :priority_name => priority.name)
+        tr("{user_name} opposed {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name)
       end
     end
   end  
@@ -307,67 +309,67 @@ end
 
 class ActivityOppositionDelete < Activity
   def name
-    I18n.t('activity.opposition.delete.name', :user_name => user.name, :priority_name => priority.name)
+    tr("{user_name} no longer opposes {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name)
   end
 end
 
 class ActivityEndorsementReplaced < Activity
   def name
-    I18n.t('activity.endorsement.replaced.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
+    tr("{user_name} endorsed {new_priority_name} instead of {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
   end  
 end
 
 class ActivityEndorsementReplacedImplicit < Activity
   def name
-    I18n.t('activity.endorsement.replaced.implicit.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
+    tr("{user_name} is now endorsing {new_priority_name} because {priority_name} was acquired", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
   end
 end
 
 class ActivityEndorsementFlipped < Activity
   def name
-    I18n.t('activity.endorsement.flipped.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
+    tr("{user_name} endorsed {new_priority_name} instead of opposing {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
   end
 end
 
 class ActivityEndorsementFlippedImplicit < Activity
   def name
-    I18n.t('activity.endorsement.flipped.implicit.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
+    tr("{user_name} is now endorsing {new_priority_name} because it acquired the opposers of {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
   end
 end
 
 class ActivityOppositionReplaced < Activity
   def name
-    I18n.t('activity.opposition.replaced.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
+    tr("{user_name} opposed {new_priority_name} instead of {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
   end
 end
 
 class ActivityOppositionReplacedImplicit < Activity
   def name
-    I18n.t('activity.opposition.replaced.implicit.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
+    tr("{user_name} is now opposing {new_priority_name} because {priority_name} was acquired", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)
   end
 end
 
 class ActivityOppositionFlipped < Activity
   def name
-    I18n.t('activity.opposition.flipped.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
+    tr("{user_name} opposed {new_priority_name} instead of opposing {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
   end
 end
 
 class ActivityOppositionFlippedImplicit < Activity
   def name
-    I18n.t('activity.endorsement.flipped.implicit.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name) 
+    tr("{user_name} is now endorsing {new_priority_name} because it acquired the opposers of {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name) 
   end
 end
 
 class ActivityPartnerNew < Activity
   def name
-    I18n.t('activity.partner.new.name', :partner_name => partner.name)
+    tr("{partner_name} is a new partner", "model/activity", :partner_name => partner.name)
   end
 end
 
 class ActivityPriorityNew < Activity
   def name
-    I18n.t('activity.priority.new.name', :user_name => user.name, :priority_name => priority.name)     
+    tr("{user_name} first suggested {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name)     
   end  
 end
 
@@ -375,7 +377,7 @@ end
 class ActivityPriorityFlagInappropriate < Activity
   
   def name
-    I18n.t('activity.priority.flagged.name', :user_name => user.name, :priority_name => priority.name)     
+    tr("{user_name} flagged {priority_name} for review", "model/activity", :user_name => user.name, :priority_name => priority.name)     
   end  
   
   validates_uniqueness_of :user_id, :scope => [:priority_id], :message => "You've already flagged this."
@@ -385,7 +387,7 @@ end
 class ActivityPriorityFlag < Activity
   
   def name
-    I18n.t('activity.priority.flagged.name', :user_name => user.name, :priority_name => priority.name)  
+    tr("{user_name} flagged {priority_name} for review", "model/activity", :user_name => user.name, :priority_name => priority.name)  
   end  
 
   after_create :notify_admin
@@ -401,7 +403,7 @@ end
 # [user name] buried [priority name].
 class ActivityPriorityBury < Activity
   def name
-    I18n.t('activity.priority.buried.name', :user_name => user.name, :priority_name => priority.name)  
+    tr("{user_name} buried {priority_name}. It's probably obvious why.", "model/activity", :user_name => user.name, :priority_name => priority.name)  
   end
 end
 
@@ -412,39 +414,37 @@ end
 class ActivityCommentParticipant < Activity
  
   def name
-    I18n.t('activity.comment.participant.name', :user_name => user.name, :count => comments_count, :discussion_name => activity.name)  
+    tr("{user_name} left {count} comments on {discussion_name}", "model/activity", :user_name => user.name, :count => comments_count, :discussion_name => activity.name)  
   end
   
 end
 
 class ActivityDiscussionFollowingNew < Activity
   def name
-    I18n.t('activity.discussion.following.new.name', :user_name => user.name, :discussion_name => activity.name)
+    tr("{user_name} is following the discussion on {discussion_name}", "model/activity", :user_name => user.name, :discussion_name => activity.name)
   end
 end
 
 class ActivityDiscussionFollowingDelete < Activity
   def name
-    I18n.t('activity.discussion.following.delete.name', :user_name => user.name, :discussion_name => activity.name)
+    tr("{user_name} stopped following the discussion on {discussion_name}", "model/activity", :user_name => user.name, :discussion_name => activity.name)
   end
 end
 
 class ActivityPriorityCommentNew < Activity
   def name
-    I18n.t('activity.priority.comment.new.name', :user_name => user.name, :priority_name => priority.name)  
+    tr("{user_name} left a comment on {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name)  
   end
 end
 
 class ActivityBulletinProfileNew < Activity
-  
-  after_create :send_notification
   
   def send_notification
     notifications << NotificationProfileBulletin.new(:sender => self.other_user, :recipient => self.user)       
   end
   
   def name
-    I18n.t('activity.bulletin.profile.new.name', :user_name => other_user.name, :other_user_name => user.name.possessive)  
+    tr("{user_name} posted a bulletin to {other_user_name} profile", "model/activity", :user_name => other_user.name, :other_user_name => user.name.possessive)  
   end
   
 end
@@ -452,7 +452,7 @@ end
 class ActivityBulletinProfileAuthor < Activity
   
   def name
-    I18n.t('activity.bulletin.profile.new.name', :user_name => user.name, :other_user_name => other_user.name.possessive)      
+    tr("{user_name} posted a bulletin to {other_user_name} profile", "model/activity", :user_name => user.name, :other_user_name => other_user.name.possessive)      
   end
   
 end
@@ -461,13 +461,13 @@ class ActivityBulletinNew < Activity
   
   def name
     if point
-      I18n.t('activity.bulletin.new.name.known', :user_name => user.name, :discussion_name => point.name)         
+      tr("{user_name} posted a bulletin to {discussion_name}", "model/activity", :user_name => user.name, :discussion_name => point.name)         
     elsif document
-      I18n.t('activity.bulletin.new.name.known', :user_name => user.name, :discussion_name => document.name)
+      tr("{user_name} posted a bulletin to {discussion_name}", "model/activity", :user_name => user.name, :discussion_name => document.name)
     elsif priority
-      I18n.t('activity.bulletin.new.name.known', :user_name => user.name, :discussion_name => priority.name)
+      tr("{user_name} posted a bulletin to {discussion_name}", "model/activity", :user_name => user.name, :discussion_name => priority.name)
     else
-      I18n.t('activity.bulletin.new.name.unknown', :user_name => user.name)
+      tr("{user_name} posted a bulletin", "model/activity", :user_name => user.name)
     end
   end
   
@@ -475,90 +475,90 @@ end
 
 class ActivityPriority1 < Activity
   def name
-    I18n.t('activity.priority.first.endorsed.name', :user_name => user.name.possessive, :priority_name => priority.name)
+    tr("{priority_name} is {user_name} new #1 priority", "model/activity", :user_name => user.name.possessive, :priority_name => priority.name)
   end
 end
 
 class ActivityPriority1Opposed < Activity
   def name
-    I18n.t('activity.priority.first.opposed.name', :user_name => user.name.possessive, :priority_name => priority.name)
+    tr("Opposing {priority_name} is {user_name} new #1 priority", "model/activity", :user_name => user.name.possessive, :priority_name => priority.name)
   end
 end
 
 class ActivityPriorityRising1 < Activity
   def name
-    I18n.t('activity.priority.rising.name', :priority_name => priority.name)
+    tr("{priority_name} is the fastest rising priority", "model/activity", :priority_name => priority.name)
   end
 end
 
 class ActivityIssuePriority1 < Activity
   def name
-    I18n.t('activity.priority.tag.first.name', :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the new #1 priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
   end
 end
 
 class ActivityIssuePriorityControversial1 < Activity
   def name
-    I18n.t('activity.priority.tag.controversial.name', :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the most controversial priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
   end
 end
 
 class ActivityIssuePriorityRising1 < Activity
   def name
-    I18n.t('activity.priority.tag.rising.name', :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the fastest rising priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
   end
 end
 
 class ActivityIssuePriorityOfficial1 < Activity
   def name
-    I18n.t('activity.priority.tag.official.first.name', :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
+    tr("{priority_name} is the new #1 priority on {official_user_name} {tag_name} agenda", "model/activity", :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
   end
 end
 
 class ActivityPriorityMergeProposal < Activity
   def name
-    I18n.t('activity.priority.acquisition.proposal.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
+    tr("{user_name} proposed {new_priority_name} acquire {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
   end
 end
 
 class ActivityPriorityRenamed < Activity
   def name
-    I18n.t('activity.priority.renamed.name', :user_name => user.name, :priority_name => priority.name)  
+    tr("{user_name} renamed {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name)  
   end
 end
 
 class ActivityPointNew < Activity
   
   def name
-    I18n.t('activity.point.new.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)      
+    tr("{user_name} added {point_name} to {priority_name}", "model/activity", :user_name => user.name, :point_name => point.name, :priority_name => priority.name)      
   end
   
 end
 
 class ActivityPointDeleted < Activity
   def name
-    I18n.t('activity.point.deleted.name', :user_name => user.name, :point_name => point.name)      
+    tr("{user_name} deleted {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)      
   end
 end
 
 class ActivityPointRevisionContent < Activity
   def name
-    I18n.t('activity.point.revision.content.name', :user_name => user.name, :point_name => point.name)      
+    tr("{user_name} revised {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)      
   end
 end
 
 class ActivityPointRevisionName < Activity
   def name
-    I18n.t('activity.point.revision.name', :user_name => user.name, :point_name => point.name)
+    tr("{user_name} changed the talking point's title to {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)
   end
 end
 
 class ActivityPointRevisionOtherPriority < Activity
   def name
     if revision.has_other_priority?
-      I18n.t('activity.point.revision.link.new.name', :user_name => user.name, :point_name => point.name, :priority_name => revision.other_priority.name)
+      tr("{user_name} linked {point_name} to {priority_name}", "model/activity", :user_name => user.name, :point_name => point.name, :priority_name => revision.other_priority.name)
     else
-      I18n.t('activity.point.revision.link.deleted.name', :user_name => user.name, :point_name => point.name)
+      tr("{user_name} removed the priority link from {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)
     end
   end
 end
@@ -566,73 +566,73 @@ end
 class ActivityPointRevisionWebsite < Activity
   def name
     if revision.has_website?
-      I18n.t('activity.point.revision.website.new.name', :user_name => user.name, :point_name => point.name)
+      tr("{user_name} revised the source link for {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)
     else
-      I18n.t('activity.point.revision.website.deleted.name', :user_name => user.name, :point_name => point.name)
+      tr("{user_name} removed the source link from {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)
     end
   end
 end
 
 class ActivityPointRevisionSupportive < Activity
   def name
-    I18n.t('activity.point.revision.supportive.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
+    tr("{user_name} revised {point_name} to indicate it's supportive of {priority_name}", "model/activity", :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityPointRevisionNeutral < Activity
   def name
-    I18n.t('activity.point.revision.neutral.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
+    tr("{user_name} revised {point_name} to indicate it's neutral on {priority_name}", "model/activity", :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityPointRevisionOpposition < Activity
   def name
-    I18n.t('activity.point.revision.opposition.name', :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
+    tr("{user_name} revised {point_name} to indicate it's opposed to {priority_name}", "model/activity", :user_name => user.name, :point_name => point.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityPointHelpful < Activity
   def name
-    I18n.t('activity.point.helpful.name', :user_name => user.name, :point_name => point.name)    
+    tr("{user_name} marked {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name)    
   end
 end
 
 class ActivityPointUnhelpful < Activity
   def name
-    I18n.t('activity.point.unhelpful.name', :user_name => user.name, :point_name => point.name)    
+    tr("{user_name} marked {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name)    
   end
 end
 
 class ActivityPointHelpfulDelete < Activity
   def name
-    I18n.t('activity.point.helpful.delete.name', :user_name => user.name, :point_name => point.name)    
+    tr("{user_name} no longer finds {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name)    
   end
 end
 
 class ActivityPointUnhelpfulDelete < Activity
   def name
-    I18n.t('activity.point.unhelpful.delete.name', :user_name => user.name, :point_name => point.name)    
+    tr("{user_name} no longer finds {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name)    
   end
 end
 
 class ActivityUserPictureNew < Activity
   def name
-    I18n.t('activity.user.picture.new.name', :user_name => user.name)
+    tr("{user_name} changed their profile picture", "model/activity", :user_name => user.name)
   end
 end
 
 class ActivityPartnerPictureNew < Activity
   def name
-    I18n.t('activity.partner.picture.new.name', :user_name => user.name, :partner_name => partner.name)
+    tr("{partner_name} has a new logo", "model/activity", :user_name => user.name, :partner_name => partner.name)
   end
 end
 
 class ActivityCapitalPointHelpfulEveryone < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.everyone.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because both endorsers and opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.everyone.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because both endorsers and opposers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
@@ -640,9 +640,9 @@ end
 class ActivityCapitalPointHelpfulEndorsers < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.endorsers.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because endorsers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.endorsers.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because endorsers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
@@ -650,9 +650,9 @@ end
 class ActivityCapitalPointHelpfulOpposers < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.opposers.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.opposers.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because opposers found {point_name} unelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
@@ -660,16 +660,16 @@ end
 class ActivityCapitalPointHelpfulUndeclareds < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.undeclareds.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because undeclareds found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.undeclareds.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because undeclares found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
 
 class ActivityCapitalPointHelpfulDeleted < Activity
   def name
-      I18n.t('activity.capital.point.helpful.deleted.name', :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)        
+      tr("{user_name} lost {capital}{currency_short_name} for deleting {point_name} because people found it helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)        
   end
 end
 
@@ -677,9 +677,9 @@ end
 class ActivityCapitalTwitterFollowers < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.twitter.followers.earned.name', :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)          
+      tr("{user_name} earned {count}{currency_short_name} for {count} new followers on Twitter", "model/activity", :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)          
     elsif capital.amount < 0
-      I18n.t('activity.capital.twitter.followers.lost.name', :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)         
+      tr("{user_name} lost {count}{currency_short_name} for {count} less followers on Twitter", "model/activity", :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)         
     end
   end
 end
@@ -687,217 +687,217 @@ end
 class ActivityCapitalFollowers < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.followers.earned.name', :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)          
+      tr("{user_name} earned {count}{currency_short_name} for {count} new followers", "model/activity", :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)          
     elsif capital.amount < 0
-      I18n.t('activity.capital.followers.lost.name', :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)         
+      tr("{user_name} lost {count}{currency_short_name} for {count} less followers", "model/activity", :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)         
     end
   end
 end
 
 class ActivityCapitalGovernmentNew < Activity
   def name
-    I18n.t('activity.capital.government.new.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+    tr("{user_name} earned {capital}{currency_short_name} for founding this nation", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
   end
 end
 
 class ActivityFollowingNew < Activity
   def name
-    I18n.t('activity.following.new.name', :user_name => user.name, :other_user_name => other_user.name)
+    tr("{user_name} is now following {other_user_name}", "model/activity", :user_name => user.name, :other_user_name => other_user.name)
   end
 end
 
 class ActivityFollowingDelete < Activity
   def name
-    I18n.t('activity.following.delete.name', :user_name => user.name, :other_user_name => other_user.name)
+    tr("{user_name} stopped following {other_user_name}", "model/activity", :user_name => user.name, :other_user_name => other_user.name)
   end
 end
 
 class ActivityCapitalIgnorers < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.ignorers.earned.name', :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)          
+      tr("{user_name} earned {count}{currency_short_name} because {count} people stopped ignoring", "model/activity", :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)          
     elsif capital.amount < 0
-      I18n.t('activity.capital.ignorers.lost.name', :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)         
+      tr("{user_name} lost {count}{currency_short_name} because {count} people are ignoring", "model/activity", :user_name => user.name, :count => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)         
     end
   end
 end
 
 class ActivityCapitalInactive < Activity
   def name
-      I18n.t('activity.capital.inactive.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)   
+      tr("{user_name} lost {capital}{currency_short_name} for not logging in recently", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)   
   end
 end
 
 class ActivityIgnoringNew < Activity
   def name
-    I18n.t('activity.ignoring.new.name', :user_name => user.name, :other_user_name => other_user.name)
+    tr("{user_name} is ignoring someone", "model/activity", :user_name => user.name, :other_user_name => other_user.name)
   end
 end
 
 class ActivityIgnoringDelete < Activity
   def name
-    I18n.t('activity.ignoring.delete.name', :user_name => user.name, :other_user_name => other_user.name)
+    tr("{user_name} stopped ignoring someone", "model/activity", :user_name => user.name, :other_user_name => other_user.name)
   end
 end
 
 class ActivityOfficialLetter < Activity
   def name
-    I18n.t('activity.official_letter.name', :user_name => user.name, :official_user_name => Government.current.official_user.name)
+    tr("{user_name} Activity Official Letter", "model/activity", :user_name => user.name, :official_user_name => Government.current.official_user.name)
   end
 end
 
 class ActivityCapitalOfficialLetter < Activity
   def name
-      I18n.t('activity.capital.official_letter.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :official_user_name => Government.current.official_user.name)   
+      tr("{user_name} earned {capital}{currency_short_name} for sending their agenda to {official_user_name}", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :official_user_name => Government.current.official_user.name)   
   end
 end
 
 class ActivityCapitalAdNew < Activity
   def name
-      I18n.t('activity.capital.ad.new.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name)   
+      tr("{user_name} spent {capital}{currency_short_name} on an ad for {priority_name}", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name)   
   end
 end
 
 class ActivityCapitalAcquisitionProposal < Activity
   def name
-      I18n.t('activity.capital.acquisition.proposal.new.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)   
+      tr("{user_name} spent {capital}{currency_short_name} on a proposal for {new_priority_name} to acquire {priority_name}", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)   
   end
 end
 
 class ActivityPriorityAcquisitionProposalNo < Activity
   def name
-    I18n.t('activity.priority.acquisition.proposal.novote.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
+    tr("{user_name} voted against {new_priority_name} acquiring {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)    
   end
 end
 
 class ActivityPriorityAcquisitionProposalApproved < Activity
   def name
-    I18n.t('activity.priority.acquisition.proposal.approved.name', :priority_name => priority.name, :new_priority_name => change.new_priority.name)
+    tr("{new_priority_name} acquired {priority_name}", "model/activity", :priority_name => priority.name, :new_priority_name => change.new_priority.name)
   end
 end
 
 class ActivityPriorityAcquisitionProposalDeclined < Activity
   def name
-    I18n.t('activity.priority.acquisition.proposal.declined.name', :priority_name => priority.name, :new_priority_name => change.new_priority.name)
+    tr("{new_priority_name} failed to acquire {priority_name}", "model/activity", :priority_name => priority.name, :new_priority_name => change.new_priority.name)
   end
 end
 
 class ActivityPriorityAcquisitionProposalDeleted < Activity
   def name
-    I18n.t('activity.priority.acquisition.proposal.deleted.name', :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)  
+    tr("{user_name} decided not to hold a vote on {new_priority_name} acquiring {priority_name}", "model/activity", :user_name => user.name, :priority_name => priority.name, :new_priority_name => change.new_priority.name)  
   end
 end
 
 class ActivityCapitalAcquisitionProposalDeleted < Activity
   def name
-      I18n.t('activity.capital.acquisition.proposal.deleted.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name, :new_priority_name => change.new_priority.name) 
+      tr("{user_name} was refunded {capital}{currency_short_name} because no vote will be held on {new_priority_name} acquiring {priority_name}", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name, :new_priority_name => change.new_priority.name) 
   end
 end
 
 class ActivityCapitalAcquisitionProposalApproved < Activity
   def name
-      I18n.t('activity.capital.acquisition.proposal.approved.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name, :new_priority_name => change.new_priority.name) 
+      tr("{user_name} earned {capital}{currency_short_name} because {new_priority_name} successfully acquired {priority_name}", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name, :new_priority_name => change.new_priority.name) 
   end
 end
 
 class ActivityPriorityOfficialStatusFailed < Activity
   def name
-    I18n.t('activity.priority.official_status.failed.name', :priority_name => priority.name)
+    tr("{priority_name} failed", "model/activity", :priority_name => priority.name)
   end
 end
 
 class ActivityPriorityOfficialStatusCompromised < Activity
   def name
-    I18n.t('activity.priority.official_status.compromised.name', :priority_name => priority.name)
+    tr("{priority_name} was completed with a compromise", "model/activity", :priority_name => priority.name)
   end
 end
 
 class ActivityPriorityOfficialStatusInTheWorks < Activity
   def name
-    I18n.t('activity.priority.official_status.intheworks.name', :priority_name => priority.name)
+    tr("{priority_name} is in the works", "model/activity", :priority_name => priority.name)
   end
 end
 
 class ActivityPriorityOfficialStatusSuccessful < Activity
   def name
-    I18n.t('activity.priority.official_status.successful.name', :priority_name => priority.name)
+    tr("{priority_name} was completed successfully", "model/activity", :priority_name => priority.name)
   end
 end
 
 class ActivityDocumentNew < Activity
   
   def name
-    I18n.t('activity.point.new.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)
+    tr("{user_name} added {point_name} to {priority_name}", "model/activity", :user_name => user.name, :point_name => document.name, :priority_name => priority.name)
   end
   
 end
 
 class ActivityDocumentDeleted < Activity
   def name
-    I18n.t('activity.point.deleted.name', :user_name => user.name, :point_name => document.name)      
+    tr("{user_name} deleted {point_name}", "model/activity", :user_name => user.name, :point_name => document.name)      
   end
 end
 
 class ActivityDocumentRevisionContent < Activity
   def name
-    I18n.t('activity.point.revision.content.name', :user_name => user.name, :point_name => document.name)      
+    tr("{user_name} revised {point_name}", "model/activity", :user_name => user.name, :point_name => document.name)      
   end
 end
 
 class ActivityDocumentRevisionName < Activity
   def name
-    I18n.t('activity.point.revision.name', :user_name => user.name, :point_name => document.name)
+    tr("{user_name} changed the talking point's title to {point_name}", "model/activity", :user_name => user.name, :point_name => document.name)
   end
 end
 
 class ActivityDocumentRevisionSupportive < Activity
   def name
-    I18n.t('activity.point.revision.supportive.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
+    tr("{user_name} revised {point_name} to indicate it's supportive of {priority_name}", "model/activity", :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityDocumentRevisionNeutral < Activity
   def name
-    I18n.t('activity.point.revision.neutral.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
+    tr("{user_name} revised {point_name} to indicate it's neutral on {priority_name}", "model/activity", :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityDocumentRevisionOpposition < Activity
   def name
-    I18n.t('activity.point.revision.opposition.name', :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
+    tr("{user_name} revised {point_name} to indicate it's opposed to {priority_name}", "model/activity", :user_name => user.name, :point_name => document.name, :priority_name => priority.name)    
   end
 end
 
 class ActivityDocumentHelpful < Activity
   def name
-    I18n.t('activity.point.helpful.name', :user_name => user.name, :point_name => document.name)    
+    tr("{user_name} marked {point_name} helpful", "model/activity", :user_name => user.name, :point_name => document.name)    
   end
 end
 
 class ActivityDocumentUnhelpful < Activity
   def name
-    I18n.t('activity.point.unhelpful.name', :user_name => user.name, :point_name => document.name)    
+    tr("{user_name} marked {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => document.name)    
   end
 end
 
 class ActivityDocumentHelpfulDelete < Activity
   def name
-    I18n.t('activity.point.helpful.delete.name', :user_name => user.name, :point_name => document.name)    
+    tr("{user_name} no longer finds {point_name} helpful", "model/activity", :user_name => user.name, :point_name => document.name)    
   end
 end
 
 class ActivityDocumentUnhelpfulDelete < Activity
   def name
-    I18n.t('activity.point.unhelpful.delete.name', :user_name => user.name, :point_name => document.name)    
+    tr("{user_name} no longer finds {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => document.name)    
   end
 end
 
 class ActivityCapitalDocumentHelpfulEveryone < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.everyone.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because both endorsers and opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.everyone.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because both endorsers and opposers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
@@ -905,9 +905,9 @@ end
 class ActivityCapitalDocumentHelpfulEndorsers < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.endorsers.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because endorsers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.endorsers.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because endorsers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
@@ -915,9 +915,9 @@ end
 class ActivityCapitalDocumentHelpfulOpposers < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.opposers.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.opposers.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because opposers found {point_name} unelpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
@@ -925,27 +925,27 @@ end
 class ActivityCapitalDocumentHelpfulUndeclareds < Activity
   def name
     if capital.amount > 0
-      I18n.t('activity.capital.point.helpful.undeclareds.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      tr("{user_name} earned {capital}{currency_short_name} because undeclareds found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
     elsif capital.amount < 0
-      I18n.t('activity.capital.point.unhelpful.undeclareds.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      tr("{user_name} lost {capital}{currency_short_name} because undeclares found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
     end
   end
 end
 
 class ActivityCapitalDocumentHelpfulDeleted < Activity
   def name
-      I18n.t('activity.capital.point.helpful.deleted.name', :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)        
+      tr("{user_name} lost {capital}{currency_short_name} for deleting {point_name} because people found it helpful", "model/activity", :user_name => user.name, :point_name => document.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)        
   end
 end
 
 class ActivityCapitalWarning < Activity
   def name
-    I18n.t('activity.capital.warning.name', :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+    tr("{user_name} lost {capital}{currency_short_name} for violating the site rules", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
   end
 end
 
 class ActivityUserProbation < Activity
   def name
-    I18n.t('activity.user.probation.name', :user_name => user.name)
+    tr("{user_name} is on probation for a week due to repeated violations of the site rules", "model/activity", :user_name => user.name)
   end
 end

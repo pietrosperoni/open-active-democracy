@@ -8,7 +8,7 @@
 			<% if @point.revision_id != @revision.id %>
 			<p>
 			<div class="notice">
-				<%= t('points.show.clean.intro', :revision_url => point_revision_url(@point,@revision), :time_ago => time_ago(@revision.created_at)) %>
+				<%= tr("Here's what this talking point looked like {time_ago}. You can also <a href='{revision_url}'>see the changes</a> in this version from the previous one.", "view/revisions/clean", :revision_url => point_revision_url(@point,@revision), :time_ago => time_ago(@revision.created_at)) %>
 			</div>
 			<% end %>
 
@@ -18,7 +18,7 @@
 			</div>
 			<% if @revision.has_website? %>
 				<div class="point_source">
-				<%= t('points.source')%> <a href="<%= @revision.website_link %>"><%= truncate(@revision.website_link,70) %></a>
+				<%= tr("Source:", "view/revisions/clean")%> <a href="<%= @revision.website_link %>"><%= truncate(@revision.website_link,70) %></a>
 				</div>
 			<% end %>
 			

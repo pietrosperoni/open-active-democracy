@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.4'
+gem 'rails', '3.0.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -29,18 +29,20 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'htmlentities'
+gem 'auto_html'
 gem 'delayed_job'
 gem 'rmagick','2.12.2'
 gem 'mongrel', '>= 1.2.0.pre2'
 gem 'paperclip'
 gem 'sunlight', '>= 0.9'  
-gem "RedCloth"
 gem 'googlecharts'
 gem 'oauth', '>= 0.3.1'
 #gem "twitter-auth", :require => "twitter_auth/engine"
 gem "twitter-auth", :git => "git://github.com/jaikoo/twitter-auth.git", :branch => "rails_3", :require => "twitter_auth/engine"
 gem 'hpricot', '>= 0.6'
-gem 'will_paginate'
+# gem 'will_paginate', :branch => "rails3"
+gem 'will_paginate', '~> 3.0.beta'
 gem 'mogli'
 gem 'facebooker2'
 gem 'hoptoad_notifier'

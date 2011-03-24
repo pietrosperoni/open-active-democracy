@@ -2,10 +2,10 @@
 <p>
 	
 <% if @ads.empty? %>
-	<%= I18n.t("blurb_ad_intro")%>
+	<%= tr("Ad intro BLURB", "view/priorities/yours_ads")%>
 <% else %>
 
-	<%= t('ads.yours.intro')%>
+	<%= tr("These are your ads, and the bars show how many members have <span class='endorsed'>&nbsp; &nbsp;</span> &nbsp;endorsed, <span class='opposed'>&nbsp; &nbsp;</span> &nbsp;opposed, or <span class='compromised'>&nbsp; &nbsp;</span> &nbsp;not responded yet. <br/>To place an ad, click on one of your priorities, then Action > Purchase an ad.", "view/priorities/yours_ads")%>
 	
 	<% shown_active = false %>
 	<% shown_past = false %>
@@ -13,11 +13,11 @@
 		
 		<% if ad.status == 'active' and not shown_active %>
 		<% shown_active = true %>
-		<div class="heading"><%= t('ads.current')%></div>
+		<div class="heading"><%= tr("Currently running ads", "view/priorities/yours_ads")%></div>
 		<% elsif ad.status != 'active' and not shown_past %>
 		<p>
 		<% shown_past = true %>
-		<div class="heading"><%= t('ads.past')%></div>
+		<div class="heading"><%= tr("Past ads", "view/priorities/yours_ads")%></div>
 		<% end %>
 		
 		<%= render :partial => "ads/show_inline", :locals => {:ad => ad}%>

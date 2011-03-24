@@ -1,0 +1,9 @@
+<%= @government.admin_name %><br>
+<%= @government.admin_email %><br>
+http://<%= @government.base_url %><br>
+<br>
+---<br>
+<%=tr("This is an automatic email from Your Priorities","email")%> <%=tr("sent to","email")%> <%= @recipient.email %>. 
+<%=tr("If you do not want to recieve this sort of email please adjust your email settings here","email")%>: <%= link_to @user.unsubscribe_url, @user.unsubscribe_url %>
+  </body>
+</html>

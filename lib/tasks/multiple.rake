@@ -30,7 +30,6 @@ namespace :multiple do
 
       # send welcome email
       govt.switch_db
-      UserMailer.deliver_new_nation(govt,@user)
       govt.status = 'active'
       govt.password = nil
       govt.users_count = User.active.count

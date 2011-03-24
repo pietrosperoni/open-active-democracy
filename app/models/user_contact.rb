@@ -117,7 +117,7 @@ class UserContact < ActiveRecord::Base
     user.contacts_invited_count += 1
     user.contacts_not_invited_count += -1
     user.save(:validate => false)
-    send_later(:send!)
+    self.delay.send!
   end
   
   def do_send
@@ -127,7 +127,7 @@ class UserContact < ActiveRecord::Base
 
   def send_email
     if has_email?
-      UserMailer.deliver_invitation(user,from_name,name,email)      
+      UserMailer.invitation(user,from_name,name,email).deliver
     elsif has_facebook?
       # don't do anything on send if it's facebook, because it was sent through the facebook system already
     end    

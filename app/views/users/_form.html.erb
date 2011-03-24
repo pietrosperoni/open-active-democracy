@@ -1,22 +1,22 @@
 <div id="new_user_form">
 
 	<%= form_for :user, :remote=>true, 
-               'data-disable-with' => escape_t(t(:ajax_sending)),
+               'data-disable-with' => escape_t(tr("Sending","Ajax")),
 	             :url => users_path(:region => "short") do |f| -%>
-	<%= error_messages_for :user, :header_message => t('users.new.error_message') %>
+	<%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form") %>
 	
 	<div class="field">
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td valign="top">
 				<div class="field_label">
-					<%= t('settings.edit.first_name.label')%>
+					<%= tr("First name", "view/users/_form")%>
 				</div>
 				<div class="field_box">
 		    		<%= f.text_field :first_name, :size => 12 %> 
 				</div>
 			</td><td valign="top" style="padding-left: 3px;">
 				<div class="field_label">
-					<%= t('settings.edit.last_name.label')%>
+					<%= tr("and Last name", "view/users/_form")%>
 				</div>
 				<div class="field_box">
 		    		<%= f.text_field :last_name, :size => 15 %>
@@ -24,28 +24,28 @@
 			</td>
 			</tr>
 		</table>
-		<div class="small"><%= t('settings.edit.first_name.example')%></div>
+		<div class="small"><%= tr("(Not displayed on the site)", "view/users/_form")%></div>
 	</div>
 
 	<div class="field">
 		<div class="field_label">
-			<%= t('settings.edit.email.label')%>
+			<%= tr("Email address", "view/users/_form")%>
 		</div>
 		<div class="field_box">
 			<%= f.text_field :email %>
 		</div>
-		<div class="small"><%= t('settings.edit.email.example')%></div>
+		<div class="small"><%= tr("(Never shared without your permission)", "view/users/_form")%></div>
 	</div>
 
 	<div class="field">
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr><td valign="top">
-			<div class="field_label"><%= t('users.new.password.label')%></div>
+			<div class="field_label"><%= tr("Password", "view/users/_form")%></div>
 			<div class="field_box">
 			<%= f.password_field :password, :size => 13 %>
 			</div>
 		</td><td valign="top" style="padding-left: 3px;">
-			<div class="field_label"><%= t('users.new.password.confirm')%></div>
+			<div class="field_label"><%= tr("and re-type it", "view/users/_form")%></div>
 			<div class="field_box">
 			<%= f.password_field :password_confirmation, :size => 13 %>
 			</div>
@@ -56,12 +56,12 @@
 
 	<div class="field">
 	<div class="field_label">
-		<%= t('settings.edit.login.label')%>
+		<%= tr("How should you be identified on the site?", "view/users/_form")%>
 	</div>
 	<div class="field_box">
 		<%= f.text_field :login, :maxlength => 40, :size => 30 %>
 	</div>
-	<div class="small"><%= t('settings.edit.login.example')%></div>
+	<div class="small"><%= tr("(Can be your name, or a pseudonym)", "view/users/_form")%></div>
 	</div>
 
 	<% if current_partner and current_partner.is_optin? %>
@@ -73,23 +73,34 @@
 			<a href="<%= current_partner.website_link %>"><%= current_partner.name %></a>
 			<% else %>
 			<%= h(current_partner.name)%>
-			<% end %>(<a href="<%= current_partner.privacy_url %>"><%= t('partners.privacy_policy')%></a>)
+			<% end %>(<a href="<%= current_partner.privacy_url %>"><%= tr("privacy policy", "view/users/_form")%></a>)
 		</span>
 
 	<% end %>
-
+  <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
+  <p>
+  <br>
+  <p>
+  <br>
+  <p>
+  <br>
+  <p>
+  <br>
+  <p>
+  <br>
 	<% if @priority %>
 		<% if @value == 1 %>
-			<%= submit_tag t('users.new.submit_and_endorse'), :class => "yellow_button" %>			
+			<%= submit_tag tr("Endorse and signup", "view/users/_form"), :class => "yellow_button" %>			
 		<% elsif @value == -1 %>					
-			<%= submit_tag t('users.new.submit_and_oppose'), :class => "yellow_button" %>
+			<%= submit_tag tr("Oppose and signup", "view/users/_form"), :class => "yellow_button" %>
 		<% else %>
-			<%= submit_tag t('users.new.submit'), :class => "yellow_button" %>				
+			<%= submit_tag tr("Signup", "view/users/_form"), :class => "yellow_button" %>				
 		<% end %>
 	<% else %>
-		<%= submit_tag t('users.new.submit'), :class => "yellow_button" %>
+		<%= submit_tag tr("Signup", "view/users/_form"), :class => "yellow_button" %>
 	<% end %>
 
 	<% end -%>
 
 </div>
+<%= render :partial=>"shared/keypad_javascript"%>

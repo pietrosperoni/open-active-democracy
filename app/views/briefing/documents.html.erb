@@ -1,14 +1,14 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
 <% if not @priorities or @priorities.empty? %>
-	<%= t('briefing.documents.needed.empty')%>
+	<%= tr("All of your priorities have at least one document.", "view/briefing/documents")%>
 <% else %>
-	<%= I18n.t("blurb_docs_needed_intro")%>
+	<%= tr("Docs needed intro BLURB", "view/briefing/documents")%>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= t('rank') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
+			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/briefing/documents") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/briefing/documents") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/briefing/documents") %></span></td>
 			<td style="padding-left: 7px; padding-bottom: 2px;"><%= will_paginate @priorities %></td>	
 		</tr>
 	<% for priority in @priorities %>

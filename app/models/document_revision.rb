@@ -47,7 +47,7 @@ class DocumentRevision < ActiveRecord::Base
     self.auto_html_prepare
     begin
       Timeout::timeout(5) do   #times out after 5 seconds
-        self.content_diff = HTMLDiff.diff(RedCloth.new(document.content).to_html,RedCloth.new(self.content).to_html)
+        self.content_diff = HTMLDiff.diff(document.content,self.content).html_safe
       end
     rescue Timeout::Error
     end    
@@ -130,8 +130,8 @@ class DocumentRevision < ActiveRecord::Base
 
   def text
     s = document.name
-    s += " [#{I18n.t(:against)}]" if is_down?
-    s += " [#{I18n.t(:neutral)}]" if is_neutral? and has_priority?
+    s += " [#{tr("Against", "model/revision")}]" if is_down?
+    s += " [#{tr("Neutral", "model/revision")}]" if is_neutral? and has_priority?
     s += "\r\n" + content
     return s
   end  
@@ -153,7 +153,7 @@ class DocumentRevision < ActiveRecord::Base
     r.value = p.value
     r.name = p.name
     r.content = p.content
-    r.content_diff = p.content
+    r.content_diff = p.content 
     r.request = request
     r.save(:validate => false)
     r.publish!
@@ -164,10 +164,10 @@ class DocumentRevision < ActiveRecord::Base
   end
 
   auto_html_for(:content) do
-#    redcloth
+    html_escape
     youtube(:width => 460, :height => 285)
     vimeo(:width => 460, :height => 260)
-    link(:rel => "nofollow")
+    link :target => "_blank", :rel => "nofollow"
   end
 
 end

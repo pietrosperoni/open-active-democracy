@@ -1,103 +1,104 @@
 <% if params[:notice] %>
-<%=  params[:notice] %>
+  <%=  params[:notice] %>
 <% end %>
 
-<%=form_tag('/priorities/create', :method => :post)%>
+<%= form_for @priority do |f| %>
+  <%= f.error_messages %>
+  
+  <% if @tag_names %>
+    <%= hidden_field_tag :tag_names, @tag_names %>
+  <% end %>
+  
+  <h3><%=tr("Create a new priority","views/priorities/form")%></h3>
+  <br>
+  <div id="your_priority" class="form_header">
+    <%=tr("What is your priority?","views/priorities/form")%>
+    <span class="red">*</span>
+  </div>
 
-<% if @tag_names %>
-	<%= hidden_field_tag :tag_names, @tag_names %>
+  <span class="priority_name">
+    <%= f.text_field :name, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
+  </span>
+
+  <br><br>
+
+  <div id="priority_category">
+    <div class="form_header">
+      <%= tr("Select category","views/priorities/form")%><br>
+    </div>
+    <% Category.order("name").each do |category| %>
+      <%= f.radio_button :category_id, category.id %> <span class="Chapter_name"><%=category.i18n_name %></span>
+    <% end %>
+  </div>
+
+  <br>
+
+  <div class="form_header">
+    <%=tr("Write your own categories, seperated by comma","views/priorities/form")%>
+  </div>
+
+  <span class="custom_tag">
+    <%= text_field_tag :custom_tags, "", :maxlength => 200 %>
+  </span>
+  
+  <br>
+  <br>
+  <hr><br>
+  
+  <div class="form_header">
+    <%=tr("Add a point in support or against","views/priorities/form")%>
+    <span class="red">*</span>
+  </div>
+
+  <%= f.fields_for(:points) do |point_form| %>
+    <div class="field">
+      <div class="field_box">
+        <%= point_form.text_field :name, :size => 60, :maxlength => 60 %>
+      </div>
+      <div class="field_label">
+        <div class="tiny_info"><em>
+          <%=tr("To convince other people about this priority a strong point is important","views/priorities/form")%>
+        </em></div>
+      </div>
+    </div>
+    <div class="field form_header">
+      <div class="field_label">
+        <div id="point_supports">
+          <%= point_form.radio_button :value, 1, :checked=>true %> <%=tr("Yes, this point supports this priority","views/priorities/form")%>
+        </div>
+        <div id="point_opposes">
+          <%= point_form.radio_button :value, -1 %> <%=tr("No, this point is against this priority","views/priorities/form")%>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="field">
+      <div class="field_label form_header">
+        <%= tr("Explain your talking point.", "view/priorities/_form") %>
+        <span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%>
+      </div>
+      <div class="field_box">
+        <%= point_form.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
+      </div>
+      <div class="tiny_info_no_pad">
+        <%=tr("Other people will be able to edit your points, similar to Wikipedia","views/priorities/form")%>
+      </div>
+    </div>
+    
+    <br>
+    
+    <div class="field">
+      <div class="form_header">
+        <%=tr("Add a link to an external website","views/priorities/form")%>
+      </div>
+      <div class="field_box">
+        <%= point_form.text_field :website, :size => 50 %>
+      </div>
+    </div>
+
+  <% end %>
+  
+  <br>
+  
+  <b><%= submit_tag tr("Create priority", "view/priorities/_form"), :class => "" %></b>
 <% end %>
-
-<h3>Búa til nýja hugmynd á Skuggaborg</h3>
-<p><strong>Athugaðu fyrst hvort þegar er komin fram sambærileg hugmynd! Leitarglugginn hér til hægri er gagnlegur í slíkt. Ef margar hugmyndir um sama mál eru í gangi þá dreifast atkvæðin og minni líkur á að hún nái mikilli athygli.</strong></p>
-		
-		<div id="your_priority" class="form_header">Hver er hugmyndin? <span class="red">* </span> </div>
-			<%= text_field_tag "priority[name]", nil, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
-			<br>
-			<%= t :select_categories %><br>
-			<br>
-  	  <% Category.order("name").each do |category| %>
-  	    <%= radio_button("priority", "category_id", category.id) %>
-  	     <span class="Chapter_name"><%=category.i18n_name %>
-        </span>
-      <% end %>
-
-			<div class="tiny_info">Gott er að orða hugmynd skýrt, þá er auðveldara fyrir aðra að taka afstöðu til hennar.</div>			
-		
-					<% if Partner.current and Partner.current.custom_tag_checkbox and Partner.current.custom_tag_checkbox!="" %>
-						
-							<div  class="form_header">Flokkar sem hugmynd á að birtast í:</div>
-						
-							<%=Partner.current.custom_tag_checkbox%>? <%= check_box_tag 'custom_checkbox', Partner.current.custom_tag_checkbox%>
-						
-					<% else %>
-						
-							<div  class="form_header">Flokkar sem hugmynd á að birtast í:</div>
-						
-					<% end %>
-
-
-					<% if Partner.current and Partner.current.custom_tag_dropdown_1 and Partner.current.custom_tag_dropdown_1!="" %>
-						<span class="custom_tag">
-							<%=select_tag "custom_tag_option_1", "#{Partner.current.custom_tag_dropdown_options(1)}"%>
-						</span>
-					<% end %>
-
-					<% if Partner.current and Partner.current.custom_tag_dropdown_2 and Partner.current.custom_tag_dropdown_2!="" %>
-						<span class="custom_tag">						
-							<%=select_tag "custom_tag_option_2", "#{Partner.current.custom_tag_dropdown_options(2)}"%>
-						</span>		
-
-					</div>
-					<% end %>
-				
-						<span class="custom_tag">						
-						<%= text_field_tag :custom_tags %>		
-						</span>				
-						
-						<div class="tiny_info"  id="br_hack"><br>Skrifaðu flokka og notaðu kommu á milli (flokkur, annar, þriðji)</div>
-
-							<div  class="form_header">Bæta við rökum: <span class="red">* </span> </div>
-<!--<%= I18n.t('blurb_point_new')%>-->
-
-  <%= error_messages_for Point, :header_message => t('points.new.errors.header_message'), :message => t('points.new.errors.message') if @point %>
-	<div class="field">
-		<div class="field_box">
- 			<%= text_field_tag "point[name]", "", :size => 50, :maxlength => 60 %>
-		</div>
- 		<div class="field_label">
-			<div class="tiny_info">Ef þú vilt sannfæra aðra um að styðja þína hugmynd þá eru góð rök lykilatriði</div>
-		</div>
-	</div>
-	<div class="field form_header">
-		<div class="field_label">
-			<div id="point_supports">
-			<%= radio_button_tag("point[value]", 1, true) %> Já, þessi rök styðja hugmyndina					
-			</div>
-			
-			<div id="point_opposes">
-			<%= radio_button_tag("point[value]", -1) %> Nei, þessi rök eru á móti hugmyndinni
-			</div>
-			</div>
-			</div>
-		<div class="tiny_info">Þú getur sett inn rök með og/eða á móti, óháð því hvort þú styður hugmynd eða ekki</div>
-
-	<div class="field">
-	    <div class="field_label form_header"><%= t('points.new.content.label') %> <span id="pointContentDown"></span> <%= t('characters_left')%></div>
-		<div class="field_box">
-	    <%= text_area_tag "point[content]", "", :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
-		</div>
-			<div class="tiny_info_no_pad">Aðrir munu geta breytt því sem þú skrifar en við höldum breytingaskrá, á svipaðan hátt og Wikipedia.</div> 
-			<div class="tiny_info">Stutt og skýr rök um einn lið virka best, þú getur alltaf bætt við fleiri rökum.</div>
-	</div>				
-	
-	<div class="field">
-		<div class="field_label form_header"><%= t('points.new.website.label') %></div>
-		<div class="field_box">
-			<%= text_field_tag "point[website]", "", :size => 50 %>	
-		</div>
-		<div class="tiny_info">Settu inn slóð á vefsíðu, þína eða annara, sem styrkir hugmynd þitt.</div>
-	</div>
-		
-	<%= submit_tag t('priorities.new.submit'), :class => "suggest_button" %>	
-</form>

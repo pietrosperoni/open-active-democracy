@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
 <% if @revisions.empty? %>
-	<%= t('document.no_revisions')%>
+	<%= tr("No documents have been revised recently", "view/documents/revised")%>
 <% else %>
 
 	<% if @revisions.total_pages > 1 %>

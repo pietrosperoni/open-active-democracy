@@ -29,10 +29,10 @@
 		<% if sorted.first.position == sorted.last.position %>
 		<div class="priority_chart" style="padding-top: 8px; padding-bottom: 5px;">
 		<table border="0" cellspacing="0" cellpadding="0">
-			<tr><td colspan="3" style="padding-top: 5px; padding-bottom: 2px;"><%= t('charts.priority.volume.name') %></td><td></td></tr>		
+			<tr><td colspan="3" style="padding-top: 5px; padding-bottom: 2px;"><%= tr("VOLUME", "view/priorities/_left_nav") %></td><td></td></tr>		
 			<tr>
 				<td valign="top" rowspan="3" colspan="3">
-					<%= image_tag Gchart.line(:size => '150x50', :data => [@charts.collect{|c| c.volume_count}.reverse,@charts.collect{|c| c.down_count}.reverse,[0,0]], :bar_colors => "009933,CC0000,EEEEEE",  :chart_background => 'EEEEEE', :min_value => 1, :max_value => max_volume, :custom => "chm=b,009933,0,1,0|b,CC0000,1,2,0&chls=1,1,0|1,1,0|0,1,-1&chg=17,50,1,5"), :title => t('charts.priority.volume.title'), :class => "qtip_left", :size => "150x50" %>			
+					<%= image_tag Gchart.line(:size => '150x50', :data => [@charts.collect{|c| c.volume_count}.reverse,@charts.collect{|c| c.down_count}.reverse,[0,0]], :bar_colors => "009933,CC0000,EEEEEE",  :chart_background => 'EEEEEE', :min_value => 1, :max_value => max_volume, :custom => "chm=b,009933,0,1,0|b,CC0000,1,2,0&chls=1,1,0|1,1,0|0,1,-1&chg=17,50,1,5"), :title => tr("Green is the number of endorsements for this priority each day, and red is the oppositions.", "view/priorities/_left_nav"), :class => "qtip_left", :size => "150x50" %>			
 				</td>			
 				<td valign="top" class="chart_label" height="17"><%= max_volume %></td>
 			</tr>
@@ -51,7 +51,7 @@
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td valign="top" rowspan="4" colspan="3">
-					<%= image_tag Gchart.line(:size => '150x100', :data => @charts.collect{|c| c.position*-1}.reverse, :line_colors => "13499b", :chart_background => 'EEEEEE', :min_value => min_position, :max_value => max_position, :custom => "chg=17,33,1,5"), :title => t('charts.priority.title'), :class => "qtip_left", :size => "150x100" %>
+					<%= image_tag Gchart.line(:size => '150x100', :data => @charts.collect{|c| c.position*-1}.reverse, :line_colors => "13499b", :chart_background => 'EEEEEE', :min_value => min_position, :max_value => max_position, :custom => "chg=17,33,1,5"), :title => tr("Tracks the movement of this priority in the rankings. The lower the number, the better. The rankings are influenced by how many people have it in their list and how high a priority they consider it.", "view/priorities/_left_nav"), :class => "qtip_left", :size => "150x100" %>
 				</td>			
 				<td valign="top" class="chart_label" height="17">1</td>
 
@@ -60,10 +60,10 @@
 			<tr><td valign="middle" class="chart_label" height="25"><% if max_position-min_position > 9 %><%= (max_position*0.67).to_i %><% end %></td></tr>
 			<tr><td valign="bottom" class="chart_label" height="15"><%= max_position %></td></tr>
 			</tr>
-			<tr><td colspan="3" style="padding-top: 5px; padding-bottom: 2px;"><%= t('charts.priority.volume.name') %></td><td></td></tr>		
+			<tr><td colspan="3" style="padding-top: 5px; padding-bottom: 2px;"><%= tr("VOLUME", "view/priorities/_left_nav") %></td><td></td></tr>		
 			<tr>
 				<td valign="top" rowspan="3" colspan="3">
-					<%= image_tag Gchart.line(:size => '150x50', :data => [@charts.collect{|c| c.volume_count}.reverse,@charts.collect{|c| c.down_count}.reverse,[0,0]], :bar_colors => "009933,CC0000,EEEEEE",  :chart_background => 'EEEEEE', :min_value => 1, :max_value => max_volume, :custom => "chm=b,009933,0,1,0|b,CC0000,1,2,0&chls=1,1,0|1,1,0|0,1,-1&chg=17,50,1,5"), :title => t('charts.priority.volume.title'), :class => "qtip_left", :size => "150x50" %>			
+					<%= image_tag Gchart.line(:size => '150x50', :data => [@charts.collect{|c| c.volume_count}.reverse,@charts.collect{|c| c.down_count}.reverse,[0,0]], :bar_colors => "009933,CC0000,EEEEEE",  :chart_background => 'EEEEEE', :min_value => 1, :max_value => max_volume, :custom => "chm=b,009933,0,1,0|b,CC0000,1,2,0&chls=1,1,0|1,1,0|0,1,-1&chg=17,50,1,5"), :title => tr("Green is the number of endorsements for this priority each day, and red is the oppositions.", "view/priorities/_left_nav"), :class => "qtip_left", :size => "150x50" %>			
 				</td>			
 				<td valign="top" class="chart_label" height="17"><%= max_volume %></td>
 			</tr>
@@ -80,6 +80,6 @@
 		<% end %>
 	<% end %>
 <% end %>
-<div class="rss_feed"><a href="<%= url_for activities_priority_url(@priority, :format => "rss") %>"><%= image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0 %></a> <a href="<%= url_for activities_priority_url(@priority, :format => "rss") %>"><%= t('feeds.activity')%></a></div>
-<div class="rss_feed"><a href="<%= url_for comments_priority_url(@priority, :format => "rss") %>"><%= image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0 %></a> <a href="<%= url_for comments_priority_url(@priority, :format => "rss") %>"><%= t('feeds.discussions')%></a></div>	
+<div class="rss_feed"><a href="<%= url_for activities_priority_url(@priority, :format => "rss") %>"><%= image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0 %></a> <a href="<%= url_for activities_priority_url(@priority, :format => "rss") %>"><%= tr("Activity feed", "view/priorities/_left_nav")%></a></div>
+<div class="rss_feed"><a href="<%= url_for comments_priority_url(@priority, :format => "rss") %>"><%= image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0 %></a> <a href="<%= url_for comments_priority_url(@priority, :format => "rss") %>"><%= tr("Discussions feed", "view/priorities/_left_nav")%></a></div>	
 	

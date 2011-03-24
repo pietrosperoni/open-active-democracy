@@ -2,9 +2,16 @@ class DocumentsController < ApplicationController
   
   before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy, :flag]
   before_filter :admin_required, :only => [:edit, :update, :abusive, :not_abusive]
+  
+  before_filter :disable
  
+  def disable
+    redirect_to "/"
+    false
+  end
+
   def index
-    @page_title = t('document.yours.title')
+    @page_title = tr("Your documents", "controller/documents")
     @documents = Document.published.filtered.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -14,7 +21,7 @@ class DocumentsController < ApplicationController
   end
   
   def newest
-    @page_title = t('document.newest.title')
+    @page_title = tr("Newest documents", "controller/documents")
     @documents = Document.published.filtered.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     @rss_url = url_for :only_path => false, :format => "rss"
     respond_to do |format|
@@ -26,7 +33,7 @@ class DocumentsController < ApplicationController
   end  
   
   def your_priorities
-    @page_title = t('document.your_priorities.title')
+    @page_title = tr("Newest documents on your priorities", "controller/documents")
     if current_user.endorsements_count > 0    
       if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
         @documents = Document.published.by_recently_created.paginate :conditions => ["(documents.priority_id in (?) and documents.endorser_helpful_count > 0) or (documents.priority_id in (?) and documents.opposer_helpful_count > 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
@@ -46,7 +53,7 @@ class DocumentsController < ApplicationController
   end  
  
   def revised
-    @page_title = t('document.revised.title')
+    @page_title = tr("Recently revised documents", "controller/documents")
     @revisions = DocumentRevision.published.by_recently_created.find(:all, :include => [{:document => :priority},:user], :conditions => "documents.revisions_count > 1").paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -59,7 +66,7 @@ class DocumentsController < ApplicationController
   def show
     get_document
     if @document.is_deleted?
-      flash[:error] = t('document.deleted')
+      flash[:error] = tr("That document was deleted", "controller/documents")
       redirect_to @document.priority and return
     end
     @page_title = @document.name
@@ -89,7 +96,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1/activity
   def activity
     get_document
-    @page_title = t('document.activity.title', :document_name => @document.name)
+    @page_title = tr("Activity on {document_name}", "controller/documents", :document_name => @document.name)
     @priority = @document.priority
     if logged_in? 
       @quality = @document.qualities.find_by_user_id(current_user.id) 
@@ -107,7 +114,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1/discussions
   def discussions
     get_document
-    @page_title =  t('document.discussions.title', :document_name => @document.name)
+    @page_title =  tr("Discussions on {document_name}", "controller/documents", :document_name => @document.name)
     @priority = @document.priority
     if logged_in? 
       @quality = @document.qualities.find_by_user_id(current_user.id) 
@@ -126,7 +133,7 @@ class DocumentsController < ApplicationController
   def new
     load_endorsement
     @document = @priority.documents.new
-    @page_title =  t('document.new.title', :priority_name => @priority.name)
+    @page_title =  tr("Add a document to {priority_name}", "controller/documents", :priority_name => @priority.name)
     @document.value = @endorsement.value if @endorsement
     respond_to do |format|
       format.html # new.html.erb
@@ -135,7 +142,7 @@ class DocumentsController < ApplicationController
 
   def edit
     get_document
-    @page_title =  t('document.edit.title', :document_name => @document.name)
+    @page_title =  tr("Edit {document_name}", "controller/documents", :document_name => @document.name)
     @priority = @document.priority
   end
 
@@ -149,7 +156,7 @@ class DocumentsController < ApplicationController
       if @saved
         if DocumentRevision.create_from_document(@document.id,request)
           session[:goal] = 'document'
-          flash[:notice] = t('document.new.success', :document_name => @document.name)
+          flash[:notice] = tr("Thank you for contributing {document_name}", "controller/documents", :document_name => @document.name)
           if current_facebook_user
             #flash[:user_action_to_publish] = UserPublisher.create_document(current_facebook_user, @document, @priority)
           end          
@@ -168,7 +175,7 @@ class DocumentsController < ApplicationController
     @priority = @document.priority
     respond_to do |format|
       if @document.update_attributes(params[:document])
-        flash[:notice] = t('document.new.save', :document_name => @document.name)
+        flash[:notice] = tr("{document_name} saved", "controller/documents", :document_name => @document.name)
         format.html { redirect_to(@document) }
       else
         format.html { render :action => "edit" }
@@ -238,7 +245,7 @@ class DocumentsController < ApplicationController
   def destroy
     get_document
     if @document.user_id != current_user.id and not current_user.is_admin?
-      flash[:error] = t('document.destroy.error')
+      flash[:error] = tr("Only the creator of a document can delete it.", "controller/documents")
       redirect_to(@document)
       return
     end
@@ -260,7 +267,7 @@ class DocumentsController < ApplicationController
           if current_user.is_admin?
             page.replace_html "flagged_document_info_#{@document.id}", render(:partial => "documents/flagged", :locals => {:document => @document})
           else
-            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{I18n.t(:thanks_for_bringing_this_to_our_attention)}</div>"
+            page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{tr("Thanks for bringing this to our attention", "controller/documents")}</div>"
           end
         end        
       }
@@ -274,7 +281,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{I18n.t(:the_content_has_been_deleted_and_a_warning_sent)}</div>"
+          page.replace_html "flagged_document_info_#{@document.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning sent", "controller/documents")}</div>"
         end        
       }
     end    

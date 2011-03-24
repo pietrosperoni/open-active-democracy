@@ -39,11 +39,11 @@
 	<% end %>
 	
 	<% if @user.position > 0 %>
-		<%= t('users.influential.name', :position => @user.position)%> &middot;
+		<%= tr("{position} most influential", "view/users/_header", :position => @user.position)%> &middot;
 	<% end %>	
-	<%= t('users.joined', :time_ago => time_ago(@user.created_at)) %>
+	<%= tr("Joined {time_ago}", "view/users/_header", :time_ago => time_ago(@user.created_at)) %>
 	<% if @user.attribute_present?("loggedin_at") %>
-		&middot; <%= t('users.last_visit', :time_ago => time_ago(@user.loggedin_at)) %>
+		&middot; <%= tr("Last visit {time_ago}", "view/users/_header", :time_ago => time_ago(@user.loggedin_at)) %>
 	<% end %>	
 </div>
 

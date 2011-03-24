@@ -4,9 +4,9 @@
 	<table border="0" cellspacing="0" cellpading="0">
 		<tr><td></td>
 			<td class="table_header"><%= current_government.tags_name.titleize %></td>
-			<td class="table_header"><%= t('endorse.people') %></td>
-			<td class="table_header"><%= t('oppose.people') %></td>		
-			<td class="table_header" align="center"><%= t('charts.issues.label')%></td>
+			<td class="table_header"><%= tr("Endorsers", "view/charts/issues") %></td>
+			<td class="table_header"><%= tr("Opposers", "view/charts/issues") %></td>		
+			<td class="table_header" align="center"><%= tr("falling/rising", "view/charts/issues")%></td>
 		</tr>
 	<% row = 0 %>
 	<% for tag in Tag.find(:all, :conditions => "priorities_count > 4", :order => "tags.up_endorsers_count desc") %>
@@ -20,6 +20,6 @@
 	<% end %>
 	</table>
 
-	<p><%= t('last_updated', :time_ago => time_ago(Time.now))%>
+	<p><%= tr("Last updated {time_ago}", "view/charts/issues", :time_ago => time_ago(Time.now))%>
 
 <% end %>

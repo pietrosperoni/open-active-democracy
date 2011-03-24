@@ -9,7 +9,7 @@
 		<%= link_to priority.name, priority %>
 		</div>
 		<div class="messagesub">
-			<%= t('splash.endorsements', :position => priority.position, :count => priority.up_endorsements_count, :oppose_count => priority.down_endorsements_count)%>
+			<%= tr("Priority {position}, endorsed by {count} people, and opposed by {oppose_count}.", "view/splash/index", :position => priority.position, :count => priority.up_endorsements_count, :oppose_count => priority.down_endorsements_count)%>
 		</div>
 	</div>
 	<% end %>
@@ -22,6 +22,6 @@
 <% end %>
 
 <div id="signup">
-	<a href="/signup" class="nounderline"><%= current_government.mission %></a>.  <a href="/" class="underline"><%= t('splash.enter')%></a> &rarr;
+	<a href="/signup" class="nounderline"><%= current_government.mission %></a>.  <a href="/" class="underline"><%= tr("Enter site", "view/splash/index")%></a> &rarr;
 </div>
 <% end %>

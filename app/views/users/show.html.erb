@@ -13,9 +13,9 @@
 			
 			<% if @priorities.any? %>
 				<% if @user.endorsements_count > 5 %>
-					<div class="heading"><%= link_to t('users.priorities.top5.more', :priority_count => @user.endorsements_count), priorities_user_path(@user) %></div>
+					<div class="heading"><%= link_to tr("Top 5 of {priority_count} priorities", "view/users/show", :priority_count => @user.endorsements_count), priorities_user_path(@user) %></div>
 				<% else %>
-					<div class="heading"><%= t('users.priorities.top5', :count => @priorities.length) %></div>
+					<div class="heading"><%= tr("Top {count} priorities", "view/users/show", :count => @priorities.length) %></div>
 				<% end %>
 				<table border="0" cellspacing="0" cellpadding="0">
 				<% for p in @priorities %>
@@ -29,7 +29,7 @@
 						<td valign="top" style="padding-left: 8px;">
 						<div id="priority_<%= p.priority_id %>" class="priority_listing">
 							<div class="point_name" id="priority_<%= p.priority_id %>_name">
-								<% if p.value < 0 %><span class="opposed"><%= t('oppose.ed')%></span><% end %>
+								<% if p.value < 0 %><span class="opposed"><%= tr("opposed", "view/users/show")%></span><% end %>
 								<%= link_to_unless_current h(p.priority.name), p.priority, :class => "priority_name_link" %>
 							</div>						
 							<%= render :partial => "priorities/action_show", :locals => {:priority => p.priority, :endorsement => endorsement }%>

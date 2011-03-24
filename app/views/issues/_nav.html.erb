@@ -9,20 +9,20 @@
 			<ul id="menu_sub">
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.priorities', :count => @tag.priorities_count), :action => "show" %>
+						<%= link_to tr("{count} priorities", "view/issues/_nav", :count => @tag.priorities_count), :action => "show" %>
 					</span>
 				</li>
 				<% if @tag.points_count > 0 %>
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.points', :count => @tag.points_count), :action => "points" %>
+						<%= link_to tr("{count} talking points", "view/issues/_nav", :count => @tag.points_count), :action => "points" %>
 					</span>
 				</li>
 				<% end %>
 				<% if @tag.documents_count > 0 %>
 				<li class="tab4">
 					<span class="tab_header">
-						<%= link_to t('menu.briefing.documents', :count => @tag.documents_count), :action => "documents" %>
+						<%= link_to tr("{count} documents", "view/issues/_nav", :count => @tag.documents_count), :action => "documents" %>
 					</span>
 				</li>
 				<% end %>
@@ -30,9 +30,9 @@
 				<li class="tab5">
 					<span class="tab_header">
 						<% if @tag.discussions_count > 0 %>
-						<%= link_to t('menu.briefing.discussions', :count => @tag.discussions_count), :action => "discussions" %>
+						<%= link_to tr("{count} discussions", "view/issues/_nav", :count => @tag.discussions_count), :action => "discussions" %>
 						<% else %>
-						<%= link_to t('bulletins.new.discussion', :count => @tag.discussions_count), :action => "discussions" %>
+						<%= link_to tr("Start a discussion", "view/issues/_nav", :count => @tag.discussions_count), :action => "discussions" %>
 						<% end %>
 					</span>
 				</li>
@@ -46,51 +46,51 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.yours.short'), :action => "yours" %>
+					<%= link_to tr("Yours", "view/issues/_nav"), :action => "yours" %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.network.short'), :action => "network" %>
+					<%= link_to tr("Your network", "view/issues/_nav"), :action => "network" %>
 				</span>
 			</li>			
 			<% if current_government.has_official? %>			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.priorities.official.name', :official_user_name => current_government.official_user_short_name), :action => "official" %>
+						<%= link_to tr("{official_user_name} priorities", "view/issues/_nav", :official_user_name => current_government.official_user_short_name), :action => "official" %>
 					</span>
 				</li>
 			<% end %>
 			<li class="tab4">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.everyone.top'), :action => "show" %>
+					<%= link_to tr("Top", "view/issues/_nav"), :action => "show" %>
 				</span>
 			</li>
 			<li class="tab5">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.everyone.controversial'), :action => "controversial" %>
+					<%= link_to tr("Controversial", "view/issues/_nav"), :action => "controversial" %>
 				</span>
 			</li>
 			<li class="tab6">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.everyone.rising'), :action => "rising" %>
+					<%= link_to tr("Rising", "view/issues/_nav"), :action => "rising" %>
 				</span>
 			</li>
 			<% if User.adapter != 'postgresql' %>
 			<li class="tab7">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.everyone.random'), :action => "random" %>
+					<%= link_to tr("Random", "view/issues/_nav"), :action => "random" %>
 				</span>
 			</li>
 			<% end %>
 			<li class="tab8">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.everyone.new'), :action => "newest" %>
+					<%= link_to tr("New", "view/issues/_nav"), :action => "newest" %>
 				</span>
 			</li>
 			<li class="tab9">
 				<span class="tab_header">
-					<%= link_to t('menu.priorities.everyone.finished'), :action => "finished" %>
+					<%= link_to tr("Finished", "view/issues/_nav"), :action => "finished" %>
 				</span>
 			</li>														
 

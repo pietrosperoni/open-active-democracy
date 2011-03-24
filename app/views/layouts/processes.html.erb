@@ -5,28 +5,28 @@
     </head>
     <body>
         <small>
-            <%=t :alpha_version %>
+            <%=tr("Test version - not ready for public use - data errors can appear - final layout has not been designed", "view/layouts/processes") %>
         </small>
         <br>
         <% if session[:user_id] %>
-        <h1><%=t :main_header %><%=t :for_user %><%=User.find(session[:user_id]).login %></h1>
+        <h1><%=tr("Open Direct Democracy", "view/layouts/processes") %><%=tr("for", "view/layouts/processes") %><%=User.find(session[:user_id]).login %></h1>
         <%else %>
-        <h1><%=t :main_header %></h1>
+        <h1><%=tr("Open Direct Democracy", "view/layouts/processes") %></h1>
         <%end %>
-        <hr><%=t :choice %>: <%= link_to "#{t :processes}", :controller=>"processes" %> | <% if session[:user_id] %>
-        <a href="/users/logout"><%=t :logout %></a> | 
+        <hr><%=t(:choice %>: <%= link_to "#{t :processes}", :controller=>"processes" %> | <% if session[:user_id] %>
+        <a href="/users/logout"><%=t(:logout) %></a> | 
         <% else %>
-        <a href="/users/login"><%=t :login %></a> | 
-        <a href="/users/eid_login"><%=t :eid_login %></a> | 
+        <a href="/users/login"><%=t(:login) %></a> | 
+        <a href="/users/eid_login"><%=t(:eid_login) %></a> | 
         <% end %>
-        <a href="/users/about_us"><%=t :about_us %></a>        
+        <a href="/users/about_us"><%=t(:about_us) %></a>        
         <hr>
         <p style="color: green">
             <%= flash[:notice] %>
         </p>
         <% unless session[:has_welcomed] %>
         <p style="color: green">
-            <b><%= t :login_welcome %></b>
+            <b><%= tr("login_welcome") %></b>
         </p>
         <% session[:has_welcomed] = true %>
         <% end %>
@@ -35,14 +35,14 @@
             <br>
             <br>
             <small>
-                <%= t :git_info %>
+                <%= tr("git_info") %>
                 <br>
                 <%= link_to "http://github.com/rbjarnason/open-direct-democracy/tree/master","http://github.com/rbjarnason/open-direct-democracy/tree/master", {:target=>"_blank"} %>
             </small>
             <br>
             <br>
             <small>
-                <%= t :bugs_info %>
+                <%= tr("bugs_info") %>
                 <br>
                 <%= link_to "http://rbjarnason.lighthouseapp.com/projects/23240-open-direct-democracy/overview","http://rbjarnason.lighthouseapp.com/projects/23240-open-direct-democracy/overview", {:target=>"_blank"} %>
             </small>

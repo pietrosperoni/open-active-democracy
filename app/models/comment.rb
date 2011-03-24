@@ -14,6 +14,7 @@ class Comment < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :activity
+  belongs_to :category
   
   has_many :notifications, :as => :notifiable, :dependent => :destroy
   
@@ -21,7 +22,7 @@ class Comment < ActiveRecord::Base
 
   define_index do
     indexes content
-    indexes activity.priority.category.name, :facet=>true
+    indexes category_name, :facet=>true, :as=>"category_name"
     where "comments.status = 'published'"
   end
   
@@ -42,6 +43,18 @@ class Comment < ActiveRecord::Base
   
   event :abusive do
     transitions :from => :published, :to => :abusive
+  end
+  
+  after_create :set_category
+  
+  def set_category
+    if self.activity.priority_id
+      self.category_name = self.activity.priority.category.name
+    elsif self.activity.point_id
+      self.category_name = self.activity.point.priority.category.name
+    else
+      self.category_name = tr('No category','search')
+    end
   end
   
   def do_publish
@@ -143,7 +156,9 @@ class Comment < ActiveRecord::Base
   def flag_by_user(user)
     self.increment!(:flags_count)
     for r in User.active.admins
+      Rails.logger.debug("Processing admin: #{r}")
       notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+      Rails.logger.debug("Notifications: #{notifications}")
     end
   end
   
@@ -152,10 +167,10 @@ class Comment < ActiveRecord::Base
   end
   
   auto_html_for(:content) do
-#    redcloth
+    html_escape
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
-    link(:rel => "nofollow")
+    link :target => "_blank", :rel => "nofollow"
   end
   
 end

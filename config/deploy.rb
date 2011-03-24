@@ -1,7 +1,107 @@
-require 'vendor/plugins/thinking-sphinx/recipes/thinking_sphinx'
+require 'bundler/capistrano'
+
+namespace :thinking_sphinx do
+  namespace :install do
+    desc <<-DESC
+        Install Sphinx by source
+        
+        If Postgres is available, Sphinx will use it.
+        
+        If the variable :thinking_sphinx_configure_args is set, it will
+        be passed to the Sphinx configure script. You can use this to
+        install Sphinx in a non-standard location:
+        
+          set :thinking_sphinx_configure_args, "--prefix=$HOME/software"
+DESC
+
+    task :sphinx do
+      with_postgres = false
+      begin
+        run "which pg_config" do |channel, stream, data|
+          with_postgres = !(data.nil? || data == "")
+        end
+      rescue Capistrano::CommandError => e
+        puts "Continuing despite error: #{e.message}"
+      end
+    
+      args = []
+      if with_postgres
+        run "pg_config --pkgincludedir" do |channel, stream, data|
+          args << "--with-pgsql=#{data}"
+        end
+      end
+      args << fetch(:thinking_sphinx_configure_args, '')
+      
+      commands = <<-CMD
+      wget -q http://www.sphinxsearch.com/downloads/sphinx-0.9.8.1.tar.gz >> sphinx.log
+      tar xzvf sphinx-0.9.8.1.tar.gz
+      cd sphinx-0.9.8.1
+      ./configure #{args.join(" ")}
+      make
+      #{try_sudo} make install
+      rm -rf sphinx-0.9.8.1 sphinx-0.9.8.1.tar.gz
+      CMD
+      run commands.split(/\n\s+/).join(" && ")
+    end
+  
+    desc "Install Thinking Sphinx as a gem from GitHub"
+    task :ts do
+      run "#{try_sudo} gem install thinking-sphinx --source http://gemcutter.org"
+    end
+  end
+
+  desc "Generate the Sphinx configuration file"
+  task :configure do
+    rake "thinking_sphinx:configure"
+  end
+
+  desc "Index data"
+  task :index do
+    rake "thinking_sphinx:index"
+  end
+
+  desc "Start the Sphinx daemon"
+  task :start do
+    configure
+    rake "thinking_sphinx:start"
+  end
+
+  desc "Stop the Sphinx daemon"
+  task :stop do
+    configure
+    rake "thinking_sphinx:stop"
+  end
+
+  desc "Stop and then start the Sphinx daemon"
+  task :restart do
+    stop
+    start
+  end
+
+  desc "Stop, re-index and then start the Sphinx daemon"
+  task :rebuild do
+    stop
+    index
+    start
+  end
+
+  desc "Add the shared folder for sphinx files"
+  task :shared_sphinx_folder, :roles => :web do
+    rails_env = fetch(:rails_env, "production")
+    run "mkdir -p #{shared_path}/sphinx/#{rails_env}"
+  end
+
+  def rake(*tasks)
+    rails_env = fetch(:rails_env, "production")
+    rake = fetch(:rake, "rake")
+    tasks.each do |t|
+      run "if [ -d #{release_path} ]; then cd #{release_path}; else cd #{current_path}; fi; #{rake} RAILS_ENV=#{rails_env} #{t}"
+    end
+  end
+end
 
 set :application, "open-active-democracy"
-set :domain, "skuggathing.is"
+set :domain, "alphatest.yourpriorities.org"
 set :selected_branch, "master"
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
@@ -16,13 +116,18 @@ role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
-task :before_update_code, :roles => [:app] do
-  thinking_sphinx.stop
-  bundler.bundle_new_release
+namespace :delayed_job do 
+    desc "Restart the delayed_job process"
+    task :restart, :roles => :app do
+        run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job stop RAILS_ENV=production"
+        run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
+    end
 end
 
-task :after_update_code, :roles => [:app] do
-#  symlink_sphinx_indexes
+after "deploy:update", "delayed_job:restart"
+
+task :before_update_code, :roles => [:app] do
+  thinking_sphinx.stop
 end
 
 task :after_update_code do
@@ -30,12 +135,11 @@ task :after_update_code do
   run "ln -s #{deploy_to}/#{shared_dir}/config/database.yml #{current_release}/config/database.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
-  run "ln -s #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
-  run "rm #{deploy_to}/#{shared_dir}/system/system"
-  run "ln -s #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
-  run "ln -s #{deploy_to}/#{shared_dir}/private #{current_release}/private"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/private #{current_release}/private"
   thinking_sphinx.configure
-  thinking_sphinx.start  #run "rm -f #{current_path}"
+  thinking_sphinx.start
 end
 
 namespace :deploy do
@@ -45,34 +149,8 @@ namespace :deploy do
   end
 end
 
-namespace :bundler do
-  task :create_symlink, :roles => :app do
-    shared_dir = File.join(shared_path, 'bundle')
-    release_dir = File.join(current_release, '.bundle')
-    run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
-  end
-  
-  task :bundle_new_release, :roles => :app do
-    bundler.create_symlink
-    run "cd #{release_path} && bundle install --without test"
-  end
-  
-  task :lock, :roles => :app do
-    run "cd #{current_release} && bundle lock;"
-  end
-  
-  task :unlock, :roles => :app do
-    run "cd #{current_release} && bundle unlock;"
-  end
-end
-
 deploy.task :start do
 # nothing
-end
-
-after "deploy:update_code" do
-  bundler.bundle_new_release
-  # ...
 end
 
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|

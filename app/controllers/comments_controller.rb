@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   # GET /activities/1/comments.xml
   def index
     if @activity.status == 'deleted'
-      flash[:error] = t('comments.deleted')
+      flash[:error] = tr("That comment was deleted", "controller/comments")
       if not (logged_in? and current_user.is_admin?)
         redirect_to @activity.priority and return if @activity.priority
         redirect_to '/' and return
@@ -94,7 +94,7 @@ class CommentsController < ApplicationController
   # GET /activities/1/comments/1/edit
   def edit
     @comment = @activity.comments.find(params[:id])
-    @page_title = t('comments.edit.title')
+    @page_title = tr("Editing comment", "controller/comments")
   end
 
   # POST /activities/1/comments
@@ -113,7 +113,7 @@ class CommentsController < ApplicationController
     if @comment.save
       respond_to do |format|
         format.html { 
-          flash[:notice] = t('comments.new.success')
+          flash[:notice] = tr("Saved comment", "controller/comments")
           redirect_to(activity_comments_path(@activity)) 
         }
         format.js {
@@ -155,7 +155,7 @@ class CommentsController < ApplicationController
           if current_user.is_admin?
             page.replace 'comment_' + @comment.id.to_s, render(:partial => "comments/flagged", :locals => {:comment => @comment})
           else
-            page.replace 'comment_' + @comment.id.to_s, "<div class='red'>#{t(:thanks_for_flagging_comment)}</div>".html_safe
+            page.replace 'comment_' + @comment.id.to_s, "<div class='red'>#{tr("Thanks for flagging comment", "controller/comments")}</div>".html_safe
           end
         end        
       }
@@ -197,11 +197,11 @@ class CommentsController < ApplicationController
   # PUT /activities/1/comments/1.xml
   def update
     @comment = @activity.comments.find(params[:id])
-    @page_title = t('comments.edit.title')
+    @page_title = tr("Editing comment", "controller/comments")
     access_denied unless current_user.is_admin? or @comment.user_id == current_user.id
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        flash[:notice] = t('comments.new.success')
+        flash[:notice] = tr("Saved comment", "controller/comments")
         format.html { redirect_to(activity_comments_path(@activity)) }
       else
         format.html { render :action => "edit" }

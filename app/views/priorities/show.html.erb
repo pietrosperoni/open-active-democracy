@@ -2,7 +2,7 @@
 
 <% if @priority.replaced? %>
 	<div id="hp_subhead">
-		<%= t('priorities.replaced', :priority_name => link_to(@priority.change.new_priority.name, @priority.change.new_priority))%>
+		<%= tr("This priority was replaced by {priority_name}", "view/priorities/show", :priority_name => link_to(@priority.change.new_priority.name, @priority.change.new_priority))%>
 	</div>
 <% else %>
 	<%= render :partial => "nav" %>
@@ -16,7 +16,7 @@
 	<% end %>
 	
 	<% if @priority.points_count == 0 %>
-		<%= t('points.priority.intro', :new_point_url => new_priority_point_path(@priority))%>
+		<%= tr("Please tell us why we should endorse or oppose this priority by <a href='{new_point_url}'>adding a talking point</a>. You can even suggest a different priority instead.", "view/priorities/show", :new_point_url => new_priority_point_path(@priority))%>
 	<% else %>	
 	
 		<% if @endorsement and @endorsement.is_down? %>
@@ -74,7 +74,7 @@
 		
 		<% if @document_ids.size < @priority.documents_count %>
 			<p>
-			<%= t('helpful.to', :count => @priority.documents_count, :everyone_link => everyone_documents_priority_url(@priority), :endorser_link => endorser_documents_priority_url(@priority), :opposer_link => opposer_documents_priority_url(@priority), :undeclared_link => neutral_documents_priority_url(@priority)) %>
+			<%= tr("See all <a href='{everyone_link}'>{count} documents</a>, or just those helpful to <a href='{endorser_link}'>endorsers</a>, <a href='{opposer_link}'>opposers</a>, or <a href='{undeclared_link}'>undeclared</a>.", "view/priorities/show", :count => @priority.documents_count, :everyone_link => everyone_documents_priority_url(@priority), :endorser_link => endorser_documents_priority_url(@priority), :opposer_link => opposer_documents_priority_url(@priority), :undeclared_link => neutral_documents_priority_url(@priority)) %>
 		<% end %>
 
 	<% end %>
@@ -84,7 +84,7 @@
 			<% if current_government.is_tags? and @priority.attribute_present?("cached_issue_list") %>
 				<%= relationship_tags_sentence(@priority.cached_issue_list) %>
 			<% else %>
-				<%= t('priorities.relationship.header')%>
+				<%= tr("Other priorities to consider", "view/priorities/show")%>
 			<% end %>				
 		</div>
 
@@ -118,7 +118,7 @@
 	<% if logged_in? %>
 		<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
 	<% else %>
-		<div class="heading"><%= t('priorities.recent_activity')%></div>
+		<div class="heading"><%= tr("What's happening on this priority", "view/priorities/show")%></div>
 	<% end %>
 	<div id="activities">
 		<% for activity in @activities %>

@@ -6,7 +6,7 @@
 <% if activity.user and activity.user.status == 'deleted' and params[:action] != 'unhide' %>
 	<div class="activity_hidden" id="activity_hidden_<%= activity.id.to_s %>">
 		Hidden because <%= activity.user.name %> deleted their account.
-		<%= link_to t(:show), unhide_activity_url(activity), :method => :get,
+		<%= link_to tr("Show", "view/activities/_show"), unhide_activity_url(activity), :method => :get,
                 'data-disable-with' => "",
                 'data-loader-name' => "horizontal_small",		            
 		            :remote=>true %>
@@ -14,7 +14,7 @@
 <% elsif activity.user and activity.user.status == 'suspended' and params[:action] != 'unhide' %>
 	<div class="activity_hidden" id="activity_hidden_<%= activity.id.to_s %>">
 		Hidden because <%= activity.user.name.possessive %> account was suspended.
-		<%= link_to t(:show), unhide_activity_url(activity), :method => :get,
+		<%= link_to tr("Show", "view/activities/_show"), unhide_activity_url(activity), :method => :get,
                 'data-disable-with' => "",
                 'data-loader-name' => "horizontal_small",               
 		            :remote=>true  %>
@@ -22,7 +22,7 @@
 <% elsif logged_in? and activity.user and current_ignoring_ids.include?(activity.user_id) and params[:action] != 'unhide' %>
 	<div class="activity_hidden" id="activity_hidden_<%= activity.id.to_s %>">
 		Hidden because you are ignoring <%= link_to activity.user.name, activity.user %>.
-		<%= link_to t(:show), unhide_activity_url(activity), :method => :get,
+		<%= link_to tr("Show", "view/activities/_show"), unhide_activity_url(activity), :method => :get,
                 'data-disable-with' => "",
                 'data-loader-name' => "horizontal_small",               
             		:remote=>true  %>
@@ -36,22 +36,22 @@
 		            :remote=>true,
                 'data-disable-with' => "",
                 'data-loader-name' => "circle",
-		            :confirm => escape_t(t(:ajax_delete_from_this_page)) %>
+		            :confirm => escape_t(tr("Delete from this page?","Ajax")) %>
 		<% end %>
 		</div>
-		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{I18n.locale.to_s}") do %> 
+		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{locale.to_s}") do %> 
 			<%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
 		<% end %>
 		<span class="small"><%= time_ago(activity.created_at) %></span>
 
 		<% if activity.class != ActivityCommentParticipant %>
 			<% if activity.comments_count > 0 %>
-				<span class="comment_link" title="<%=escape_t(t(:ajax_send_comment))%>">
-				<%= link_to_unless_current pluralize(activity.comments_count, title="#{escape_t(t(:ajax_comment))}"), activity_comments_url(activity) %>
+				<span class="comment_link" title="<%=escape_t(tr("Send comment","Ajax"))%>">
+				<%= link_to_unless_current pluralize(activity.comments_count, title="#{escape_t(tr("Comment","Ajax"))}"), activity_comments_url(activity) %>
 				</span>
 			<% else %>
-				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="<%=escape_t(t(:ajax_send_comment))%>">	
-  				<%= link_to t(:comment), new_activity_comment_url(activity), :method => :get,
+				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="<%=escape_t(tr("Send comment","Ajax"))%>">	
+  				<%= link_to tr("Comment", "view/activities/_show"), new_activity_comment_url(activity), :method => :get,
                       'data-disable-with' => "",
                       'data-loader-name' => "horizontal_small",
   				            :remote=>true %>

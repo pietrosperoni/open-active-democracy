@@ -1,24 +1,24 @@
 <% if change.status == 'suggested' %>
-	<%= link_to_unless_current t('changes.status.not_started'), priority_change_url(change.priority,change) %>
+	<%= link_to_unless_current tr("Voting has not started yet", "view/changes/_status"), priority_change_url(change.priority,change) %>
 	<% if logged_in? and current_user.is_admin? %>
 		<p>
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td valign="top">
-				<%= button_to t('changes.start_voting.name'), start_priority_change_url(change.priority,change), :method => :put, :confirm => t('changes.start_voting.confirm'), :class => "grey_button" %>
+				<%= button_to tr("Start the voting", "view/changes/_status"), start_priority_change_url(change.priority,change), :method => :put, :confirm => tr("This will send an email encouraging the affected people to vote.", "view/changes/_status"), :class => "grey_button" %>
 			</td><td valign="top" style="padding-left: 10px;">
-				<%= button_to t('changes.insta_approve.name'), approve_priority_change_url(change.priority,change), :method => :put, :confirm => t('changes.insta_approve.confirm'), :class => "grey_button" %>
+				<%= button_to tr("Approve without a vote", "view/changes/_status"), approve_priority_change_url(change.priority,change), :method => :put, :confirm => tr("This will approve the acquisition immediately without holding a vote.", "view/changes/_status"), :class => "grey_button" %>
 			</td><td valign="top" style="padding-left: 10px;">
-				<%= button_to t('changes.no_vote.name'), stop_priority_change_url(change.priority,change), :method => :put, :confirm => t('changes.no_vote.confirm',:currency_name => current_government.currency_name), :class => "grey_button" %>
+				<%= button_to tr("Don't hold a vote", "view/changes/_status"), stop_priority_change_url(change.priority,change), :method => :put, :confirm => tr("This will delete the proposal, refund the {currency_name}, and not hold a vote.", "view/changes/_status", :currency_name => current_government.currency_name), :class => "grey_button" %>
 			</td></tr>
 		</table>
 		<p>
 	<% end %>	
 <% elsif change.status == 'sent' %>
-	<%= t('changes.voting_underway', :vote_url => priority_change_url(change.priority,change), :time_left => change.time_left)%>
+	<%= tr("Voting underway! {time_left} to <a href='{vote_url}'>vote</a>.", "view/changes/_status", :vote_url => priority_change_url(change.priority,change), :time_left => change.time_left)%>
 <% elsif change.status == 'notsent' %>
-	<%= link_to_unless_current t('changes.status.no_vote'), priority_change_url(change.priority,change) %>
+	<%= link_to_unless_current tr("No vote will be held", "view/changes/_status"), priority_change_url(change.priority,change) %>
 <% elsif change.status == 'approved' %>
-	<%= t('changes.status.approved', :proposal_url => priority_change_url(change.priority,change)) %>
+	<%= tr("Voting is over, the <span class='endorsed'><a href='{proposal_url}'>acquisition was approved</a></span>", "view/changes/_status", :proposal_url => priority_change_url(change.priority,change)) %>
 <% elsif change.status == 'declined' %>
-	<%= t('changes.status.declined', :proposal_url => priority_change_url(change.priority,change)) %>
+	<%= tr("Voting is over, the <span class='opposed'><a href='{proposal_url}'>acquisition failed</a></span>", "view/changes/_status", :proposal_url => priority_change_url(change.priority,change)) %>
 <% end %>

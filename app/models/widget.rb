@@ -6,22 +6,22 @@ class Widget < ActiveRecord::Base
   def priorities_available
     a = Array.new
     if user
-      a << [ "yours", I18n.t('priorities.yours.name') ]
-      a << [ "yours_finished", I18n.t('priorities.yours_finished.name') ]
-      a << [ "yours_created", I18n.t('priorities.yours_created.name') ]
-      a << [ "network", I18n.t('priorities.network.name') ]
+      a << [ "yours", tr("Your priorities", "model/widget") ]
+      a << [ "yours_finished", tr("Your finished priorities", "model/widget") ]
+      a << [ "yours_created", tr("Priorities you created", "model/widget") ]
+      a << [ "network", tr("Your network's priorities", "model/widget") ]
     end
-    a << [ "top", I18n.t('priorities.top.name') ]
-    a << [ "rising", I18n.t('priorities.rising.name') ]
-    a << [ "falling", I18n.t('priorities.falling.name') ]
-    a << [ "random", I18n.t('priorities.random.name') ]
-    a << [ "newest", I18n.t('priorities.newest.name') ]
-    a << [ "controversial", I18n.t('priorities.controversial.name') ]
-    a << [ "finished", I18n.t('priorities.finished.name') ]
+    a << [ "top", tr("Top priorities", "model/widget") ]
+    a << [ "rising", tr("Rising priorities", "model/widget") ]
+    a << [ "falling", tr("Falling priorities", "model/widget") ]
+    a << [ "random", tr("Random priorities", "model/widget") ]
+    a << [ "newest", tr("New priorities", "model/widget") ]
+    a << [ "controversial", tr("Controversial priorities", "model/widget") ]
+    a << [ "finished", tr("Finished priorities", "model/widget") ]
     if Government.current.has_official?
-      a << [ "official", I18n.t('priorities.official.title', :official_user_name => Government.current.official_user_short_name) ]
-      a << [ "not_official", I18n.t('priorities.not_official.title', :official_user_name => Government.current.official_user_short_name) ]
-      a << [ "official_opposed", I18n.t('priorities.official_opposed.title', :official_user_name => Government.current.official_user_short_name) ]
+      a << [ "official", tr("{official_user_name} priorities", "model/widget", :official_user_name => Government.current.official_user_short_name) ]
+      a << [ "not_official", tr("Priorities NOT on {official_user_name} agenda", "model/widget", :official_user_name => Government.current.official_user_short_name) ]
+      a << [ "official_opposed", tr("Priorities {official_user_name} opposes", "model/widget", :official_user_name => Government.current.official_user_short_name) ]
     end
     a
   end
@@ -29,26 +29,26 @@ class Widget < ActiveRecord::Base
   def discussions_available
     a = Array.new
     if user
-      a << [ "your_discussions", I18n.t('news.your_discussions.name') ]
-      a << [ "your_network_discussions", I18n.t('news.your_network_discussions.title') ]
-      a << [ "your_priorities_discussions", I18n.t('news.your_priority_discussions.title') ]
-      a << [ "your_priorities_created_discussions", I18n.t('news.your_priorities_created_discussions.title') ]
+      a << [ "your_discussions", tr("Your discussions", "model/widget") ]
+      a << [ "your_network_discussions", tr("Discussions in your network", "model/widget") ]
+      a << [ "your_priorities_discussions", tr("Discussions on your priorities", "model/widget") ]
+      a << [ "your_priorities_created_discussions", tr("Discussions on priorities you created", "model/widget") ]
     end
-    a << [ "discussions", I18n.t('news.discussions.name') ]
+    a << [ "discussions", tr("Active discussions", "model/widget") ]
   end
   
   def points_available
     [
-      [ "index", I18n.t('points.yours.title') ],
-      [ "your_priorities", I18n.t('points.your_priorities.title')  ],                         
-      [ "newest", I18n.t('points.newest.title')  ]
+      [ "index", tr("Your talking points", "model/widget") ],
+      [ "your_priorities", tr("Talking points on your priorities", "model/widget")  ],                         
+      [ "newest", tr("Newest talking points", "model/widget")  ]
     ]
   end
   
   def charts_available
     [
-      [ "charts_priority", I18n.t('charts.priority.short_name') ],
-      [ "charts_user", I18n.t('priorities.yours.name') ]
+      [ "charts_priority", tr("Chart Priority", "model/widget") ],
+      [ "charts_user", tr("Your priorities", "model/widget") ]
     ]
   end
 

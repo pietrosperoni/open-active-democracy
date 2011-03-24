@@ -41,12 +41,12 @@ class Document < ActiveRecord::Base
   
   has_many :capitals, :as => :capitalizable, :dependent => :nullify
   
-  define_index do
-    indexes name
-    indexes content
-    indexes priority.category.name, :facet=>true
-    where "documents.status = 'published'"    
-  end
+#  define_index do
+#    indexes name
+#    indexes content
+#    indexes priority.category.name, :facet=>true
+#    where "documents.status = 'published'"    
+#  end
   
   cattr_reader :per_page
   @@per_page = 25
@@ -174,7 +174,7 @@ class Document < ActiveRecord::Base
 
   def name_with_type
     return name unless is_down?
-    "[#{I18n.t(:against)}] " + name
+    "[#{tr("Against", "model/document")}] " + name
   end
 
   def text
@@ -324,10 +324,10 @@ class Document < ActiveRecord::Base
   end
 
   auto_html_for(:content) do
-#    redcloth
+    html_escape
     youtube(:width => 460, :height => 285)
     vimeo(:width => 460, :height => 260)
-    link(:rel => "nofollow")
+    link :target => "_blank", :rel => "nofollow"
   end
 
 end

@@ -1,6 +1,8 @@
 .DS_Store
 .project
 *.git
+vendor/plugins/rails_css_refactor
+vendor/plugins/i18n_to_tr8n
 log/*
 tmp/**/*
 tmp/restart.txt
@@ -14,9 +16,11 @@ config/development.sphinx.conf
 solr/index
 solr/*.pid
 .tmp*
+tmp/
 *.sql
 public/production/*
 public/development/*
+public/system
 public/system/*
 public/development
 public/production

@@ -15,10 +15,10 @@
 
 module PriorityProcessesHelper
   def latest_video_speech_title(video)
-    "#{t(:process)}: #{video.process_discussion.priority_process.priority.external_info_1} / #{video.process_discussion.stage_sequence_number}. #{t(:stage_sequence_discussion)}"
+    "#{tr("Process", "helper/processes")}: #{video.process_discussion.priority_process.priority.external_info_1} / #{video.process_discussion.stage_sequence_number}. #{tr("Discussion Stage", "helper/processes")}"
   end
 
   def latest_video_speech_description(video)
-    "#{t(:process)}: #{video.process_discussion.priority_process.priority.external_info_1} (#{video.process_discussion.priority_process.priority.external_info_2}) / #{video.process_discussion.priority_process.priority.external_info_3} - #{video.process_discussion.stage_sequence_number}. #{t(:stage_sequence_discussion)}"
+    "#{tr("Process", "helper/processes")}: #{video.process_discussion.priority_process.priority.external_info_1} (#{video.process_discussion.priority_process.priority.external_info_2}) / #{video.process_discussion.priority_process.priority.external_info_3} - #{video.process_discussion.stage_sequence_number}. #{tr("Discussion Stage", "helper/processes")}"
   end
 end

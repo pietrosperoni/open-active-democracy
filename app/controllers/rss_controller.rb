@@ -10,7 +10,7 @@ class RssController < ApplicationController
   before_filter :login_from_rss_code
 
   def your_notifications
-    @page_title = t('rss.your_notifications', :user_name => @user.login.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} notifications at {government_name}", "controller/rss", :user_name => @user.login.possessive, :government_name => current_government.name)
     @notifications = @user.received_notifications.active.by_recently_created.find(:all, :include => [:notifiable]).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.rss { render :template => "rss/notifications" }
@@ -18,7 +18,7 @@ class RssController < ApplicationController
   end
   
   def your_comments
-    @page_title = t('rss.your_comments', :user_name => @user.login.possessive, :government_name => current_government.name)
+    @page_title = tr("Latest comments on {user_name} discussions", "controller/rss", :user_name => @user.login.possessive, :government_name => current_government.name)
     @notifications = @user.received_notifications.active.comments.by_recently_created.find(:all, :include => [:notifiable]).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.rss { render :template => "rss/notifications" }
@@ -26,7 +26,7 @@ class RssController < ApplicationController
   end  
   
   def your_priorities_created_activities
-    @page_title = t('news.your_priorities_created_activities.title', :government_name => current_government.name)
+    @page_title = tr("Everything happening on priorities you created", "controller/rss", :government_name => current_government.name)
     @activities = nil
     created_priority_ids = @user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?

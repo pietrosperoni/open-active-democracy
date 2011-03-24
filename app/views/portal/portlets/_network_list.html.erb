@@ -1,10 +1,10 @@
-<% cache(["portlets_network_influencial",I18n.locale,Partner.current_id], :expires_in => 5.minutes) do %>
+<% cache(["portlets_network_influencial",locale,Partner.current_id], :expires_in => 5.minutes) do %>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td></td>
-		<td><span class="table_header"><%= t('rank') %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
+		<td><span class="table_header"><%= tr("Rank", "view/portal/portlets") %></span></td>
+		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/portal/portlets") %></span></td>
+		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/portal/portlets") %></span></td>
 	</tr>
 <% if current_government.users_count < 100 %>
   <% users = User.active.at_least_one_endorsement.by_capital.item_limit(portlet.portlet_template.item_limit) %>
@@ -17,15 +17,15 @@
 		<td valign="top" width="26" style="padding: 10px 5px 4px 7px;">
 			<%= render :partial => "users/pic", :locals => {:user => user}%>
 		</td><td style="padding: 7px 5px 4px 0px;" valign="top">
-			<%= link_to user.login, user %><span class="pc"><%= user.capitals_count%><%= current_government.currency_short_name %></span><% if user.followers_count > 0 %> <%= t('users.followers.name', :count => user.followers_count)%><% end %>
+			<%= link_to user.login, user %><span class="pc"><%= user.capitals_count%><%= current_government.currency_short_name %></span><% if user.followers_count > 0 %> <%= tr("{count} followers", "view/portal/portlets", :count => user.followers_count)%><% end %>
 			<% if user.has_top_priority? and user.top_endorsement.priority %>
-				<br/><%= t('endorsements.priority1') %>
-				<% if user.top_endorsement.is_down? %><span class="opposed"><%= t('oppose.ing')%></span><% end %>
+				<br/><%= tr("#1 priority:", "view/portal/portlets") %>
+				<% if user.top_endorsement.is_down? %><span class="opposed"><%= tr("Opposing", "view/portal/portlets")%></span><% end %>
 				<%= link_to user.top_endorsement.priority.name, user.top_endorsement.priority %>
 			<% end %>
 		</td>
 	</tr>
 <% end %>
 </table>				
-<%= link_to "#{t('more')}...", "/network/" %>
+<%= link_to "#{tr("More", "view/portal/portlets")}...", "/network/" %>
 <% end %>

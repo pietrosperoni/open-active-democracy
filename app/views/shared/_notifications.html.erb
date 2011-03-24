@@ -13,32 +13,32 @@
 
 	<% if current_user.endorsements_count > 1 %>		
 			<div id="next_steps_box">
-				<%= t('menu.next_steps.intro', :government_name => current_government.name)%>
+				<%= tr("There's a lot you can do at {government_name}. Here's how to get started:", "view/shared/_notifications", :government_name => current_government.name)%>
 				<ol>
 					<% if current_user.followings_count < 2 %>
-						<li><%= link_to t('menu.next_steps.people_you_know'), user_contacts_path(current_user) %></li>
+						<li><%= link_to tr("Find people you know", "view/shared/_notifications"), user_contacts_path(current_user) %></li>
 					<% end %>
 					<% if current_user.referrals_count == 0 %>
 						<% if current_facebook_user %>
-							<li><%= link_to t('menu.next_steps.facebook_friends'), :controller => "facebook", :action => "invite" %></li>
+							<li><%= link_to tr("Invite your Facebook friends", "view/shared/_notifications"), :controller => "facebook", :action => "invite" %></li>
 						<% else %>
-							<li><%= link_to t('menu.next_steps.invite'), new_user_contact_url(current_user) %></li>
+							<li><%= link_to tr("Invite people to join", "view/shared/_notifications"), new_user_contact_url(current_user) %></li>
 						<% end %>
 					<% end %>
 					<% if not current_user.has_picture? and not current_user.has_facebook? %>
-						<li><%= link_to t('menu.next_steps.picture'), picture_settings_url %></li>
+						<li><%= link_to tr("Add your picture", "view/shared/_notifications"), picture_settings_url %></li>
 					<% end %>		
 					<% if not current_user.profile %>
-						<li><%= link_to t('menu.next_steps.bio'), new_user_profile_url(current_user) %></li>
+						<li><%= link_to tr("Add your bio", "view/shared/_notifications"), new_user_profile_url(current_user) %></li>
 					<% end %>
 					<% if current_user.points_count < 1 and current_user.endorsements_count > 2 %>
-						<li><%= link_to t('menu.next_steps.points'), :controller => "briefing", :action => "points" %></li>
+						<li><%= link_to tr("Write talking points for your priorities", "view/shared/_notifications"), :controller => "briefing", :action => "points" %></li>
 					<% end %>
 					<% if current_user.comments_count < 2 and current_user.endorsements_count > 2 %>
-						<li><%= link_to t('menu.next_steps.comments'), :controller => "news", :action => "your_priority_discussions" %></li>
+						<li><%= link_to tr("Join the discussion on your priorities", "view/shared/_notifications"), :controller => "news", :action => "your_priority_discussions" %></li>
 					<% end %>
 				</ol>
-				<%= t('menu.next_steps.outro', :government_name => current_government.name)%>
+				<%= tr("You can get involved whenever and however often you like. We're open 24 hours a day.", "view/shared/_notifications", :government_name => current_government.name)%>
 			</div>
 	
 	<% end %>

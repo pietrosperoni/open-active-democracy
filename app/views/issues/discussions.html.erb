@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
 
 <% if not logged_in? %>
-	<%= t('comments.participate_intro', :signup_url => new_user_url)%>
+	<%= tr("If you'd like to participate, <a href='{signup_url}'>please sign up</a>. Membership is free and you can even use your existing Facebook account.", "view/issues/discussions", :signup_url => new_user_url)%>
 	<p>
 <% end %>
 <% if logged_in? %>

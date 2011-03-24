@@ -16,6 +16,10 @@ color: #333;
 
 }
 
+.match {
+color: red;
+}
+
 #footer a:hover, #contentwrap a:hover { color: #333; }
 #toolbar a, #priority_menu a { border-bottom: none; }
 
@@ -30,13 +34,19 @@ hr { border-top: 3px solid #e5e5e5; }
 #backgroundwrap {
 	width: 960px !important;
 	margin: 0px auto;
+	height: 100%;
 }
+
 #sidebar {
 	width: 220px;
 	float: right;
 	overflow: hidden;
 	padding-right: 4px;
-	
+  position:absolute;
+  top: 0px;
+  right: 5px;
+  padding-top: 0px;
+  margin-top: 0px;
 }
 
 #contentwrap {
@@ -47,12 +57,46 @@ hr { border-top: 3px solid #e5e5e5; }
 	padding: 0px 0px 0px 0px !important;
 }
 
+#branding_text_header {
+  margin-left: 12px;
+  margin-top: 7px;
+  font-family: sans-serif;
+  font-style: normal;
+  font-variant: small-caps;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 100%;
+  word-spacing: normal;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
+  text-align: center;
+  text-indent: 0ex;
+}
+
+#branding_text_sub {
+  margin-left: 12px;
+  font-family: sans-serif;
+  font-style: normal;
+  font-variant: small-caps;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 100%;
+  word-spacing: normal;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-transform: none;
+  text-align: center;
+  text-indent: 0ex;
+}
+
+
 #branding {
-	background-color: #f0f0f0 !important;
+	background-color: #fefefe !important;
 }
 
 #branding a {
-	background-color: #f0f0f0 !important;
+	background-color: #fefefe !important;
 	color: #e5e5e5 !important;
 /*	padding: 10px 15px;
 	display: block;
@@ -260,7 +304,8 @@ ul#menu_sub li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
-	border: 1px solid #ddd;
+	border: 0px solid #ddd;
+	background-color: #fff !important;
 }
 
 ul#menu_sub li {
@@ -300,9 +345,14 @@ ul#menu_third li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
+<<<<<<< HEAD
 		border: 1px solid #ddd;
 	background-color: #fff !important;
 
+=======
+  border: 0px solid #ddd;
+  background-color: #fff !important;
+>>>>>>> rvb/master
 }
 
 ul#menu_third li{ 
@@ -640,6 +690,14 @@ border-bottom:1px solid #EEEEEE !important;
 width:130px;
 }
 
+#new_priority_button {
+  padding:2px 5px 3px 8px;
+  border:1px solid #ddd;
+  float: right;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 #right_column_priorities {
 padding:0 !important;
@@ -740,7 +798,7 @@ width:230px;
 
 #your_priority, .form_header
 {
-padding-bottom: 2px; 
+padding-bottom: 4px; 
 }
 
 
@@ -748,6 +806,7 @@ padding-bottom: 2px;
 {
 font-size: 13px; 
 font-weight: bold;
+padding-bottom: 4px; 
 }
 
 .suggest_button {
@@ -878,4 +937,8 @@ padding-bottom: 0px;
 .portlet-content .priority_added
 {
 padding-top: 0px !important
+}
+
+.field_with_errors {
+  border: 1px solid red;
 }

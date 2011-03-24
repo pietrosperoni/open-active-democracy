@@ -386,14 +386,14 @@ module HTMLDiff
       end
     
       # Using this as op_helper would be equivalent to the first version of diff.rb by Bill Atkins
-      def op_helper_simple(tagname, tagclass, to_add)
+      def op_helper(tagname, tagclass, to_add)
         @content << %(<#{tagname} class="#{tagclass}">) << to_add << %(</#{tagname}>)
       end
       
       # Tries to put <p> tags or newline chars before the opening diff tags (<ins> or <del>)
       # or after the ending diff tags.
       # As a result the diff tags should be the "most inside" possible.
-      def op_helper(tagname, tagclass, to_add)
+      def op_helper_newest(tagname, tagclass, to_add)
         predicate_methods = [:tab?, :newline?, :close_tag?, :open_tag?]
         content_to_skip   = Proc.new do |item| 
           predicate_methods.any? {|predicate| HTMLDiff.send(predicate, item)}
@@ -439,7 +439,7 @@ module HTMLDiff
 
       sequence_matcher = Diff::SequenceMatcher.new(a, b)
       sequence_matcher.get_opcodes.each {|opcode| out.do_op(opcode)}
-      out.result
+        out.result
     end
   end 
 end

@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
 
 <% if @documents.empty? %>
-	<%= t('document.empty')%>
+	<%= tr("No documents yet.", "view/issues/documents")%>
 <% else %>
 
 	<%= will_paginate(@documents) %>

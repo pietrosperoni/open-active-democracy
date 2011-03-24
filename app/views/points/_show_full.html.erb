@@ -2,43 +2,47 @@
 	<div class="point_other">
 		<%= official_status(point.priority) %>
 		<% if point.is_down? %>
-			<span class="opposed"><%= t('oppose.ed')%></span>
+			<span class="opposed"><%= tr("opposed", "view/points/_show_full")%></span>
 		<% end %>
 		<%= link_to point.priority.name, point.priority %>
 	</div>			
 	<div class="point_name">
 	<%= link_to_unless_current h(point.name), point %>
+ 	<%= render :partial=>"points/report_content", :locals=>{:point=>point} %>
+  <%= render :partial=>"points/flagged", :locals=>{:point=>point} -%>
 	</div>
 	<% if point.has_other_priority? %>
 		<div class="point_other">
-		<%= t('points.supporting', :priority_name => link_to(point.other_priority.name, point.other_priority)) %>
+		<%= tr("Supporting {priority_name}", "view/points/_show_full", :priority_name => link_to(point.other_priority.name, point.other_priority)) %>
 		</div>
 	<% end %>	
 	<div class="point_byline">
-		<%= t('revisions.byline', :author_sentence => point.author_sentence) %> &middot; <%= t('revisions.added', :time_ago => time_ago(point.created_at)) %>
+		<%= tr("by {author_sentence}", "view/points/_show_full", :author_sentence => point.author_sentence) %> &middot; <%= tr("added {time_ago}", "view/points/_show_full", :time_ago => time_ago(point.created_at)) %>
 		<span class="point_edit">
 			<% if point.discussions_count == 0 %>
-				<%= link_to t('comments.discuss.name'), discussions_point_url(point) %>
+				<%= link_to tr("Discuss", "view/points/_show_full"), discussions_point_url(point) %>
 			<% else %>
-				<%= link_to t('comments.discussions.name', :count => point.discussions_count), discussions_point_url(point) %>
+				<%= link_to tr("{count} discussions", "view/points/_show_full", :count => point.discussions_count), discussions_point_url(point) %>
 			<% end %>
 			or 
-			<%= link_to t('points.edit.name'), new_point_revision_url(point), :title => t('points.edit.title') %>
+			<%= link_to tr("Edit", "view/points/_show_full"), new_point_revision_url(point), :title => tr("Can you make this talking point more persuasive? Go ahead, change it!", "view/points/_show_full") %>
 		</span>
 	</div>
 	<div class="point_content">
 	<% if revision %>
-		<%= revision.content_diff %>
+		<%= tg(revision.content_diff) %>
     <% else %>
-		<%= point.content_html %>
+		<%= tg(point.content_html) %>
 	<% end %>
 	</div>
 	<% if point.has_website? %>
 		<div class="point_source">
-		<%= t('points.source')%> <a href="<%= point.website_link %>"><%= truncate(point.website_link,70) %></a>
+		<%= tr("Source:", "view/points/_show_full")%> <a href="<%= point.website_link %>"><%= truncate(point.website_link,70) %></a>
 		</div>
 	<% end %>
 	<div class="point_qualities">
-		<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
+	  <% if defined?(quality) %>
+  		<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
+		<% end %>
 	</div>				
 </div>

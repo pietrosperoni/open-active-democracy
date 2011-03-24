@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
 <% if not @documents or @documents.empty? %>
-	<%= t('document.empty')%>
+	<%= tr("No documents yet.", "view/documents/index")%>
 <% else %>
 	<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @documents} %>
 	<% for document in @documents %>

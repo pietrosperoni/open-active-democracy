@@ -6,29 +6,29 @@
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr><td width="100px">
 		<div class="yellow_button" id="priority_add_<%= @priority.id.to_s %>">
-			<%= link_to t('endorse.capitalize'), url_for(:action => "endorse", :id => @priority, :value => 1), 
+			<%= link_to tr("Endorse", "view/prioritizer/_single"), url_for(:action => "endorse", :id => @priority, :value => 1), 
                   :remote=>true,
-                  'data-disable-with' => escape_t(t(:ajax_endorsing)),
+                  'data-disable-with' => escape_t(tr("Endorsing","Ajax")),
                   'data-loader-name' => "horizontal_small",
-			            :class => "priority_add_link", :title => t('endorse.title') %>								
+			            :class => "priority_add_link", :title => tr("I support this, add it to my priority list", "view/prioritizer/_single") %>								
 		</div>
 		</td>
-		<td style="padding: 0px 30px 0px 30px;"><div class="endorse_or"><%= t('or')%></div></td>
+		<td style="padding: 0px 30px 0px 30px;"><div class="endorse_or"><%= tr("OR", "view/prioritizer/_single")%></div></td>
 		<td width="100px">
 		<div class="yellow_button" id="priority_add_<%= @priority.id.to_s %>">
-			<%= link_to t('oppose.capitalize'), url_for(:action => "endorse", :id => @priority, :value => -1),
+			<%= link_to tr("Oppose", "view/prioritizer/_single"), url_for(:action => "endorse", :id => @priority, :value => -1),
                   :remote=>true,
-                  'data-disable-with' => escape_t(t(:ajax_opposing)),
+                  'data-disable-with' => escape_t(tr("Opposing","Ajax")),
                   'data-loader-name' => "horizontal_small",
-			            :class => "priority_add_link", :title => t('oppose.title') %>								
+			            :class => "priority_add_link", :title => tr("I oppose this, and want to add my opposition to my priority list.", "view/prioritizer/_single") %>								
 		</div>
 	</td>
 	</tr>
 </table>
 <div id="prioritizer_skip"><div class="grey_button">
-        <%= link_to t('skip.name'), url_for(:action => "skip"),
+        <%= link_to tr("Skip", "view/prioritizer/_single"), url_for(:action => "skip"),
                     :remote=>true,
-                    'data-disable-with' => escape_t(t(:ajax_skipping)),
+                    'data-disable-with' => escape_t(tr("Skipping","Ajax")),
                     'data-loader-name' => "horizontal_small",
                     :class => "priority_add_link" %></div></div>
 </div>

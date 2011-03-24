@@ -1,14 +1,14 @@
 class WidgetsController < ApplicationController
   
   def index
-    @page_title = t('widgets.index.title', :government_name => current_government.name)
+    @page_title = tr("Widgets for your blog or website", "controller/widgets", :government_name => current_government.name)
     respond_to do |format|
       format.html
     end
   end
   
   def priorities
-    @page_title = t('widgets.priorities.title', :government_name => current_government.name)
+    @page_title = tr("Put {government_name} priorities on your website", "controller/widgets", :government_name => current_government.name)
     if logged_in?
       @widget = Widget.new(:controller_name => "priorities", :user => current_user, :action_name => "yours")
     else
@@ -20,7 +20,7 @@ class WidgetsController < ApplicationController
   end
   
   def discussions
-    @page_title = t('widgets.discussions.title', :government_name => current_government.name)
+    @page_title = tr("Put {government_name} discussions on your website", "controller/widgets", :government_name => current_government.name)
     if logged_in?
       @widget = Widget.new(:controller_name => "news", :user => current_user, :action_name => "your_discussions")
     else
@@ -32,7 +32,7 @@ class WidgetsController < ApplicationController
   end
   
   def points
-    @page_title = t('widgets.points.title', :government_name => current_government.name)    
+    @page_title = tr("Put {government_name} talking points on your website", "controller/widgets", :government_name => current_government.name)    
   end
   
   def preview

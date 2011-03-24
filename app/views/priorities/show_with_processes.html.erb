@@ -3,7 +3,7 @@
 <link href="/stylesheets/points_layout.css" rel="stylesheet" type="text/css" />
 <% if @priority.replaced? %>
 	<div id="hp_subhead">
-		<%= t('priorities.replaced', :priority_name => link_to(@priority.change.new_priority.name, @priority.change.new_priority))%>
+		<%= tr("This priority was replaced by {priority_name}", "view/priorities/show_with_processes", :priority_name => link_to(@priority.change.new_priority.name, @priority.change.new_priority))%>
 	</div>
 <% else %>
 	<%= render :partial => "nav" %>
@@ -23,7 +23,7 @@
 			<% end %>
 			
 			<% if @priority.points_count == 0 %>
-				<%= t('points.priority.intro', :new_point_url => new_priority_point_path(@priority))%>
+				<%= tr("Please tell us why we should endorse or oppose this priority by <a href='{new_point_url}'>adding a talking point</a>. You can even suggest a different priority instead.", "view/priorities/show_with_processes", :new_point_url => new_priority_point_path(@priority))%>
 			<% else %>
 			
 			</p>
@@ -33,8 +33,8 @@
 							<center>
 							</center>
 							<div class="sub_header">
-								<h2><%=t('points.top_points.best_points_for_endorse')%></h2>
-								<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+								<h2><%=tr("Best points for endorse", "view/priorities/show_with_processes")%></h2>
+								<p class="below_line"><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%></p>
 							</div>
 							<div id="pro_top">
 								<%= render :partial => "points/long_list", :locals => {:id => "pro_top", :point=>@priority.points.published.by_helpfulness.up_value.first } %>
@@ -45,8 +45,8 @@
 							<center>
 							</center>
 							<div class="sub_header">
-								<h2><%=t('points.top_points.best_points_for_oppose')%></h2>
-								<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+								<h2><%=tr("Best points for oppose", "view/priorities/show_with_processes")%></h2>
+								<p class="below_line"><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%></p>
 							</div>
 							<div id="con_top">
 								<%= render :partial => "points/long_list", :locals => {:id => "con_top", :point => @priority.points.published.by_helpfulness.down_value.first
@@ -60,8 +60,8 @@
 					<tr>
 					<td id="" class="grid_41">
 						<div class="sub_header">
-							<h2><%=t('points.top_points.newest_points_for_endorse')%></h2>
-							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+							<h2><%=tr("Newest points for endorse", "view/priorities/show_with_processes")%></h2>
+							<p class="below_line"><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%></p>
 						</div>
 						<div id="pro_new">
 							<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "pro_new", :point => @priority.points.published.by_recently_created.up_value.first} %>
@@ -70,8 +70,8 @@
 				    
 					<td id="point_right" class="grid_41">
 						<div class="sub_header">
-							<h2><%=t('points.top_points.newest_points_for_oppose')%></h2>
-							<p class="below_line"><%=link_to(t('points.top_points.all_best_points'), top_points_priority_url(@priority))%></p>
+							<h2><%=tr("Newest points for oppose", "view/priorities/show_with_processes")%></h2>
+							<p class="below_line"><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%></p>
 						</div>
 						<div id="con_new">
 							<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "con_new", :point => @priority.points.published.by_recently_created.down_value.first} %>
@@ -135,7 +135,7 @@
 			
 			<% if @document_ids.size < @priority.documents_count %>
 				<p>
-				<%= t('helpful.to', :count => @priority.documents_count, :everyone_link => everyone_documents_priority_url(@priority), :endorser_link => endorser_documents_priority_url(@priority), :opposer_link => opposer_documents_priority_url(@priority), :undeclared_link => neutral_documents_priority_url(@priority)) %>
+				<%= tr("See all <a href='{everyone_link}'>{count} documents</a>, or just those helpful to <a href='{endorser_link}'>endorsers</a>, <a href='{opposer_link}'>opposers</a>, or <a href='{undeclared_link}'>undeclared</a>.", "view/priorities/show_with_processes", :count => @priority.documents_count, :everyone_link => everyone_documents_priority_url(@priority), :endorser_link => endorser_documents_priority_url(@priority), :opposer_link => opposer_documents_priority_url(@priority), :undeclared_link => neutral_documents_priority_url(@priority)) %>
 			<% end %>
 
 			
@@ -145,7 +145,7 @@
 					<% if current_government.is_tags? and @priority.attribute_present?("cached_issue_list") %>
 						<%= relationship_tags_sentence(@priority.cached_issue_list) %>
 					<% else %>
-						<%= t('priorities.relationship.header')%>
+						<%= tr("Other priorities to consider", "view/priorities/show_with_processes")%>
 					<% end %>				
 				</div>
 
@@ -174,7 +174,7 @@
 			
 			<% end %>		
 			<p>
-			<div class="heading"><%= t('priorities.recent_activity')%></div>
+			<div class="heading"><%= tr("What's happening on this priority", "view/priorities/show_with_processes")%></div>
 			<div id="activities">
 			<% for activity in @activities %>
 			<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>

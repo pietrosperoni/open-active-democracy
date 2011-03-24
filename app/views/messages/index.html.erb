@@ -9,7 +9,7 @@
 <p>
 
 <% if @read_messages.any? %>
-	<%= t('messages.previously_read')%>
+	<%= tr("Messages previously read:", "view/messages/index")%>
 	<p>
 		<% for message in @read_messages %>
 			<%= render :partial => "messages/show", :locals => {:message => message} %>

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: 849d0fe4ad496ca6d8462d264e82029e91a45353
+  revision: 088d9aa6b15a35e48fab817d4d1118b050ae89f0
   branch: rails3
   specs:
     thinking-sphinx (2.0.2)
@@ -18,21 +18,20 @@ GIT
 
 GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
-  revision: 4c04c406c24c520cdc2685fc3f354bc35937bf2a
+  revision: c9428f87042d9422aad2b119c8c04de97f504148
   specs:
     rails-dev-boost (0.1.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.7)
     abstract (1.0.0)
-    actionmailer (3.0.4)
-      actionpack (= 3.0.4)
+    actionmailer (3.0.5)
+      actionpack (= 3.0.5)
       mail (~> 2.2.15)
-    actionpack (3.0.4)
-      activemodel (= 3.0.4)
-      activesupport (= 3.0.4)
+    actionpack (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
       builder (~> 2.1.2)
       erubis (~> 2.6.6)
       i18n (~> 0.4)
@@ -40,46 +39,53 @@ GEM
       rack-mount (~> 0.6.13)
       rack-test (~> 0.5.7)
       tzinfo (~> 0.3.23)
-    activemodel (3.0.4)
-      activesupport (= 3.0.4)
+    activemodel (3.0.5)
+      activesupport (= 3.0.5)
       builder (~> 2.1.2)
       i18n (~> 0.4)
-    activerecord (3.0.4)
-      activemodel (= 3.0.4)
-      activesupport (= 3.0.4)
+    activerecord (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
       arel (~> 2.0.2)
       tzinfo (~> 0.3.23)
-    activeresource (3.0.4)
-      activemodel (= 3.0.4)
-      activesupport (= 3.0.4)
-    activesupport (3.0.4)
+    activeresource (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
+    activesupport (3.0.5)
     arel (2.0.9)
+    auto_html (1.3.4)
     builder (2.1.2)
-    capistrano (2.5.19)
+    capistrano (2.5.20)
+      highline
       highline
       net-scp (>= 1.0.0)
+      net-scp
+      net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
+      net-ssh
+      net-ssh-gateway
       net-ssh-gateway (>= 1.0.0)
     crack (0.1.8)
     daemons (1.0.10)
-    dalli (1.0.2)
+    dalli (1.0.3)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
     erubis (2.6.6)
       abstract (>= 1.0.0)
     ezcrypto (0.7.2)
-    facebooker2 (0.0.8)
+    facebooker2 (0.0.10)
       mogli (>= 0.0.12)
       ruby-hmac
     gem_plugin (0.2.3)
     googlecharts (1.6.1)
     highline (1.6.1)
-    hoptoad_notifier (2.4.6)
+    hoptoad_notifier (2.4.8)
       activesupport
       builder
-    hpricot (0.8.3)
+    hpricot (0.8.4)
+    htmlentities (4.2.4)
     httparty (0.7.4)
       crack (= 0.1.8)
     i18n (0.5.0)
@@ -93,7 +99,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mogli (0.0.25)
+    mogli (0.0.27)
       httparty (>= 0.4.3)
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
@@ -103,7 +109,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.1.0)
+    net-ssh (2.1.3)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     newrelic_rpm (2.13.4)
@@ -113,22 +119,22 @@ GEM
       activerecord
       activesupport
     polyglot (0.3.1)
-    rack (1.2.1)
-    rack-mount (0.6.13)
+    rack (1.2.2)
+    rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
       rack (>= 1.0)
-    rails (3.0.4)
-      actionmailer (= 3.0.4)
-      actionpack (= 3.0.4)
-      activerecord (= 3.0.4)
-      activeresource (= 3.0.4)
-      activesupport (= 3.0.4)
+    rails (3.0.5)
+      actionmailer (= 3.0.5)
+      actionpack (= 3.0.5)
+      activerecord (= 3.0.5)
+      activeresource (= 3.0.5)
+      activesupport (= 3.0.5)
       bundler (~> 1.0)
-      railties (= 3.0.4)
-    railties (3.0.4)
-      actionpack (= 3.0.4)
-      activesupport (= 3.0.4)
+      railties (= 3.0.5)
+    railties (3.0.5)
+      actionpack (= 3.0.5)
+      activesupport (= 3.0.5)
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
@@ -141,15 +147,15 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.24)
-    will_paginate (2.3.15)
+    tzinfo (0.3.25)
+    will_paginate (3.0.pre2)
     ym4r (0.6.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth
+  auto_html
   capistrano
   dalli
   delayed_job
@@ -157,6 +163,7 @@ DEPENDENCIES
   googlecharts
   hoptoad_notifier
   hpricot (>= 0.6)
+  htmlentities
   jquery-rails (>= 0.2.6)
   mogli
   mongrel (>= 1.2.0.pre2)
@@ -165,10 +172,10 @@ DEPENDENCIES
   nokogiri
   oauth (>= 0.3.1)
   paperclip
-  rails (= 3.0.4)
+  rails (= 3.0.5)
   rails-dev-boost!
   rmagick (= 2.12.2)
   sunlight (>= 0.9)
   thinking-sphinx!
   twitter-auth!
-  will_paginate
+  will_paginate (~> 3.0.beta)

@@ -6,39 +6,39 @@
 		
 		<td valign="top">
 			<% if @document.is_up? %>
-				<%= t('document.revision.new.intro.endorse', :priority_name => link_to(@priority.name,@priority), :new_document_url => new_priority_document_path(@priority)) %>
+				<%= tr("This document should only be revised by people who endorse {priority_name}. Documents are meant to be a collaboration of people who basically agree, so if you disagree, please <a href='{new_document_url}'>start a new document</a> and expand on your ideas there.", "view/document_revisions/new", :priority_name => link_to(@priority.name,@priority), :new_document_url => new_priority_document_path(@priority)) %>
 				<p>
 			<% elsif @document.is_down? %>
-				<%= t('document.revision.new.intro.oppose', :priority_name => link_to(@priority.name,@priority), :new_document_url => new_priority_document_path(@priority)) %>
+				<%= tr("This document should only be revised by people who oppose {priority_name}. Documents are meant to be a collaboration of people who basically agree, so if you disagree, please <a href='{new_document_url}'>start a new document</a> and expand on your ideas there.", "view/document_revisions/new", :priority_name => link_to(@priority.name,@priority), :new_document_url => new_priority_document_path(@priority)) %>
 				<p>
 			<% end %>
 			<%= form_for :revision, :url => document_revisions_path(@document)  do |f| %>
 		    <%= f.error_messages %>
 			<p>
-		    <%= t('document.revision.new.name.label') %><br />
+		    <%= tr("Title <span class='small'>60 characters</span>", "view/document_revisions/new") %><br />
 		    <%= f.text_field :name, :size => 50, :maxlength => 60 %>		
 			</p>
 			<%= f.text_area :content, :rows => 20, :cols => 70 %>
 			<% if @priority %>
 				<p>
-				<%= t('document.revision.new.position.label', :support_radio => f.radio_button(:value, 1), :neutral_radio => f.radio_button(:value, 0), :oppose_radio => f.radio_button(:value, -1), :priority_name => link_to(@priority.name, @priority)) %>
+				<%= tr("Is this document {support_radio} in support {neutral_radio} neutral or {oppose_radio} in opposition to {priority_name}?", "view/document_revisions/new", :support_radio => f.radio_button(:value, 1), :neutral_radio => f.radio_button(:value, 0), :oppose_radio => f.radio_button(:value, -1), :priority_name => link_to(@priority.name, @priority)) %>
 			<% end %>
 			<p>
-			<%= t('document.revision.new.content.label')%><br/>
+			<%= tr("Why did you make this change?", "view/document_revisions/new")%><br/>
 			<% fields_for :comment do |c| %>
 				<%= c.text_field :content, :size => 60 %>	
 			<% end %>
 
 			<p>
-			<%= f.submit t('document.revision.new.submit'), :id => "submit", :class => "yellow_button" %>
+			<%= f.submit tr("Save document", "view/document_revisions/new"), :id => "submit", :class => "yellow_button" %>
 			<% end %>
 			<p>
-			<%= I18n.t('blurb_textile')%>
+			<%= tr("Textile BLURB", "view/document_revisions/new")%>
 		</td>	
 		
 		<td valign="top" width="150" style="padding-left: 20px;">
 			
-			<%= link_to t('document.revision.new.cancel'), @document %>
+			<%= link_to tr("Cancel this revision", "view/document_revisions/new"), @document %>
 			<%= render :partial => "revisions" %>		
 			
 		</td>		

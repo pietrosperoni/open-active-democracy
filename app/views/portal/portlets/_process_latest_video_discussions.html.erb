@@ -1,4 +1,4 @@
-<% cache(["portlets_process_latest_video_discussions",I18n.locale,Partner.current_id], :expires_in => 15.minutes) do %>
+<% cache(["portlets_process_latest_video_discussions",locale,Partner.current_id], :expires_in => 15.minutes) do %>
 <% @latest_speech_discussions = ProcessSpeechMasterVideo.get_latest_twenty %>
 <% if @latest_speech_discussions.length > 0 %>
 <%= javascript_include_tag 'jquery.mousewheel' %>
@@ -17,9 +17,9 @@
             <p>
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
-                    <%=t :speech %>
+                    <%=tr("Speech", "view/portal/portlets") %>
                     <% else %>
-                    <%=t :speeches %>
+                    <%=tr("speeches", "view/portal/portlets") %>
                     <% end %>
                     </em>
                 </span>
@@ -46,8 +46,8 @@
     <tr align="left">
         <td align="left" style="padding-left:45px;padding-top:7px;">
             <% form_tag('/process_speech_videos/search') do -%>
-            <b><%=label_tag t(:search_by_person) %></b>
-            <%=text_field_tag 'search_query' %><%= submit_tag t(:search) -%>
+            <b><%=label_tag tr("Search by member of Althingi", "view/portal/portlets") %></b>
+            <%=text_field_tag 'search_query' %><%= submit_tag tr("Search", "view/portal/portlets") -%>
             <% end %>
         </td>
     </tr>

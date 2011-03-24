@@ -3,4 +3,6 @@
 </div>
 <div id="hp_intro">
 <%= h(@point.name) %>
+<%= render :partial=>"points/report_content", :locals=>{:point=>@point} %>
+<%= render :partial=>"points/flagged", :locals=>{:point=>@point} -%>
 </div>

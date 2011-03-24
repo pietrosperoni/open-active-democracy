@@ -18,7 +18,7 @@
 					<td valign="top" style="padding-left: 8px;">
 					<div id="priority_<%= p.priority_id %>" class="priority_listing">
 						<div class="point_name" id="priority_<%= p.priority_id %>_name">
-							<% if p.value < 0 %><span class="opposed"><%= t('oppose.ed')%></span><% end %>
+							<% if p.value < 0 %><span class="opposed"><%= tr("opposed", "view/users/priorities")%></span><% end %>
 							<%= link_to_unless_current h(p.priority.name), p.priority, :class => "priority_name_link" %>
 						</div>						
 						<%= render :partial => "priorities/action_show", :locals => {:priority => p.priority, :endorsement => endorsement }%>

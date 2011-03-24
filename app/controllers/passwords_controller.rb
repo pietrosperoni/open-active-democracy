@@ -20,27 +20,27 @@ class PasswordsController < ApplicationController
   # link to the forgot password view by using new_password_path().  
   
   def new
-    @page_title = t('passwords.new.title',:government_name => current_government.name)
+    @page_title = tr("Reset your {government_name} password", "controller/passwords", :government_name => current_government.name)
   end
   
   def create
-    @page_title = t('passwords.new.title',:government_name => current_government.name)
+    @page_title = tr("Reset your {government_name} password", "controller/passwords", :government_name => current_government.name)
     users = User.find(:all, :conditions => ["email = ? and status in ('active','pending','passive')",params[:email]])
     if users.any?
       user = users[0]
       if user.has_facebook?
-        flash[:error] = t('passwords.new.facebook',:government_name => current_government.name)
+        flash[:error] = tr("Your password is handled on Facebook, not at {government_name}. Click the Facebook button to sign in.", "controller/passwords", :government_name => current_government.name)
         redirect_to :action => "new"
         return
       else
         user.reset_password
-        flash[:notice] = t('passwords.new.sent', :email => user.email)
+        flash[:notice] = tr("Sent a new temporary password to {email}", "controller/passwords", :email => user.email)
         redirect_to login_path
         return
       end      
     else
       user = nil
-      flash[:error] =  t('users.missing')
+      flash[:error] =  tr("Could not find that member", "controller/passwords")
       redirect_to :action => "new"
       return
     end
@@ -49,10 +49,10 @@ class PasswordsController < ApplicationController
   # GET /users/1/password/edit
   # Changing password
   def edit
-    @page_title = t('passwords.change.title',:government_name => current_government.name)
+    @page_title = tr("Change your {government_name} password", "controller/passwords", :government_name => current_government.name)
     @user = current_user
     if @user.has_facebook?
-      flash[:error] = t('passwords.change.facebook',:government_name => current_government.name)
+      flash[:error] = tr("Your password is the same as your Facebook password, so you must change it on Facebook.", "controller/passwords", :government_name => current_government.name)
       return
     end
   end
@@ -66,10 +66,10 @@ class PasswordsController < ApplicationController
 
     respond_to do |format|
       if @user.authenticated?(old_password) && @user.save
-        flash[:notice] = t('passwords.change.success')
+        flash[:notice] = tr("Password changed", "controller/passwords")
         format.html { redirect_to edit_password_url(@user) }
       else
-        flash[:error] = t('passwords.change.nomatch')
+        flash[:error] = tr("Password confirmation did not match", "controller/passwords")
         format.html { render :action => 'edit' }
       end
     end

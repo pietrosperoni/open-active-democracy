@@ -1,4 +1,34 @@
 OpenActiveDemocracy::Application.routes.draw do
+
+  match 'tr8n/awards/:action' => 'tr8n/awards#index'
+  match 'tr8n/chart/:action' => 'tr8n/chart#index'
+  match 'tr8n/dashboard/:action' => 'tr8n/dashboard#index'
+  match 'tr8n/forum/:action' => 'tr8n/forum#index'
+  match 'tr8n/glossary/:action' => 'tr8n/glossary#index'
+  match 'tr8n/help/:action' => 'tr8n/help#index'
+  match 'tr8n/language_cases/:action' => 'tr8n/language_cases#index'
+  match 'tr8n/language/:action' => 'tr8n/language#index'
+  match 'tr8n/phrases/:action' => 'tr8n/phrases#index'
+  match 'tr8n/translations/:action' => 'tr8n/translations#index'
+  match 'tr8n/translator/:action' => 'tr8n/translator#index'
+  match 'tr8n/home/:action' => 'tr8n/home#index'
+  match 'tr8n/login/:action' => 'tr8n/login#index'
+  match 'tr8n/admin/chart/:action' => 'tr8n/admin/chart#index'
+  match 'tr8n/admin/clientsdk/:action' => 'tr8n/admin/clientsdk#index'
+  match 'tr8n/admin/forum/:action' => 'tr8n/admin/forum#index'
+  match 'tr8n/admin/glossary/:action' => 'tr8n/admin/glossary#index'
+  match 'tr8n/admin/language/:action' => 'tr8n/admin/language#index'
+  match 'tr8n/admin/translation/:action' => 'tr8n/admin/translation#index'
+  match 'tr8n/admin/translation_key/:action' => 'tr8n/admin/translation_key#index'
+  match 'tr8n/admin/translator/:action' => 'tr8n/admin/translator#index'
+  match 'tr8n/admin/domain/:action' => 'tr8n/admin/domain#index'
+  match 'tr8n/api/v1/language/:action' => 'tr8n/api/v1/language#index'
+  match 'tr8n/api/v1/translation/:action' => 'tr8n/api/v1/translation#index'
+  match 'tr8n/api/v1/translator/:action' => 'tr8n/api/v1/translator#index'
+  match 'tr8n/' => 'tr8n/home#index'
+  namespace :tr8n do
+  end
+
   resources :categories
 
   match '/priorites/flag/:id' => 'priorities#flag'
@@ -81,6 +111,7 @@ OpenActiveDemocracy::Application.routes.draw do
   resources :priorities do
   	member do
       put :flag_inappropriate
+      get :flag
       put :bury
       put :compromised
       put :successful
@@ -158,7 +189,7 @@ OpenActiveDemocracy::Application.routes.draw do
       put :undelete
       get :unhide
     end
-    resources :following_discussion, :as=>"following"
+    resources :following_discussions, :as=>"followings"
     resources :comments do
       collection do
         get :more
@@ -174,6 +205,9 @@ OpenActiveDemocracy::Application.routes.draw do
 
   resources :points do
     member do
+      get :flag
+      post :not_abusive
+      post :abusive
       get :activity
       get :discussions
       post :quality
@@ -184,6 +218,7 @@ OpenActiveDemocracy::Application.routes.draw do
       get :newest
       get :revised 
       get :your_priorities
+      get :your_index
     end
     resources :revisions do
       member do

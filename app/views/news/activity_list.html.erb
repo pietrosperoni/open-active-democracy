@@ -2,7 +2,7 @@
 <p>
 
 <% if not logged_in? %>
-	<%= t('comments.participate_intro', :signup_url => new_user_url)%>
+	<%= tr("If you'd like to participate, <a href='{signup_url}'>please sign up</a>. Membership is free and you can even use your existing Facebook account.", "view/news/activity_list", :signup_url => new_user_url)%>
 	<p>
 <% end %>
 <% if logged_in? and (params[:action].include?("activities") or params[:action].include?("discussions")) %>
@@ -10,11 +10,11 @@
 <% end %>
 
 <% if params[:action].include?("network") and logged_in? and current_following_ids.empty? %>
-	<%= I18n.t("blurb_your_network_intro") %>
+	<%= tr("Your network intro BLURB", "view/news/activity_list") %>
 <% end %>
 
 <% if not @activities %>
-	<%= t('activities.empty')%>
+	<%= tr("No activity here yet.", "view/news/activity_list")%>
 <% else %>
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @activities} %>
 <div id="activities">

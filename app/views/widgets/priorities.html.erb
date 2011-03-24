@@ -8,7 +8,7 @@
 			<td style="padding-top: 10px;">
 			<div class="field">
 		    	<div class="field_box">
-					<%= f.select :tag_id, Tag.with_priorities.alphabetical.all.collect{|t|[t.name, t.id]}, :include_blank => t('tags.title', :tags_name => current_government.tags_name.pluralize) %>
+					<%= f.select :tag_id, Tag.with_priorities.alphabetical.all.collect{|t|[t.name, t.id]}, :include_blank => tr("All {tags_name}", "view/widgets/priorities", :tags_name => current_government.tags_name.pluralize) %>
 				</div>
 			</div>
 			</td>

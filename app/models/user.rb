@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
 
   extend ActiveSupport::Memoizable
   require 'paperclip'
-    
+  include SimpleCaptcha::ModelValidation
+
+  validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
+
   scope :active, :conditions => "users.status in ('pending','active')"
   scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
   scope :newsletter_subscribed, :conditions => "users.is_newsletter_subscribed = true and users.email is not null and users.email <> ''"
@@ -103,9 +106,8 @@ class User < ActiveRecord::Base
   has_many :following_discussions, :dependent => :destroy
   has_many :following_discussion_activities, :through => :following_discussions, :source => :activity
     
-  validates_presence_of     :login, :message => I18n.t('users.new.validation.login')
-  validates_length_of       :login, :within => 3..40
-  validates_uniqueness_of   :login, :case_sensitive => false    
+  validates_presence_of     :login, :message => tr("Please specify a name to be identified as on the site.", "model/user")
+  validates_length_of       :login, :within => 3..60
   
   validates_presence_of     :email, :unless => [:has_facebook?, :has_twitter?]
   validates_length_of       :email, :within => 3..100, :allow_nil => true, :allow_blank => true
@@ -130,6 +132,14 @@ class User < ActiveRecord::Base
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids  
+  
+  def gender
+    'unknown'
+  end
+  
+  def guest?
+    false
+  end
   
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
@@ -294,12 +304,12 @@ class User < ActiveRecord::Base
   
   def resend_activation
     make_activation_code
-    UserMailer.deliver_welcome(self)    
+    UserMailer.welcome(self).deliver
   end
   
   def send_welcome
     unless self.have_sent_welcome
-      UserMailer.deliver_welcome(self)    
+      UserMailer.welcome(self).deliver    
     end
   end
 
@@ -436,7 +446,7 @@ class User < ActiveRecord::Base
   			shown_ad = ad.shown_ads.find_by_user_id(self.id)
   			if shown_ad and not shown_ad.has_response? and shown_ad.seen_count < 4
   				shown_ad.increment!(:seen_count)
-  				return ad
+  				return ad@user
   			elsif not shown_ad
   				shown_ad = ad.shown_ads.create(:user => self)
   				return ad
@@ -598,7 +608,8 @@ class User < ActiveRecord::Base
   end
   
   def has_picture?
-    attribute_present?("picture_id") or attribute_present?("buddy_icon_file_name") 
+#    attribute_present?("picture_id") or attribute_present?("buddy_icon_file_name") 
+    attribute_present?("buddy_icon_file_name") 
   end
   
   def has_referral?
@@ -691,7 +702,7 @@ class User < ActiveRecord::Base
   def reset_password
     new_password = random_password
     self.update_attribute(:password, new_password)
-    UserMailer.deliver_new_password(self, new_password)
+    UserMailer.new_password(self, new_password).deliver
   end
   
   def random_password( size = 4 )
@@ -913,7 +924,7 @@ class User < ActiveRecord::Base
             treaty_documents = []
           end
           if not treaty_documents.empty? or not documents.empty? or not questions.empty? or not priorities.empty?
-            UserMailer.deliver_report(self,priorities,questions,documents,treaty_documents)
+            UserMailer.report(self,priorities,questions,documents,treaty_documents).deliver
           end
         end
         self.reload
@@ -937,40 +948,33 @@ class User < ActiveRecord::Base
     self.activate! if not self.activated?
   end  
   
-  def User.create_from_facebook(fb_session,partner,request)
-    return if fb_session.expired?
-    name = fb_session.user.name
+  def User.create_from_facebook(facebook_user,partner,request)
+    name = facebook_user.name
     # check for existing account with this name
-    if User.find_by_login(name)
-     name = name + "FB(#{rand(6553)})"
-    end
-    Rails.logger.info("LOGIN: ABOUT TO CREATE FROM FACEBOOK from UID #{fb_session.user.uid}")
+    Rails.logger.info("LOGIN: CREATE FROM FACEBOOK from #{facebook_user.inspect} UID #{facebook_user.id} Name #{facebook_user.name}")
     u = User.new(
      :login => name,
-     :first_name => fb_session.user.first_name,
-     :last_name => fb_session.user.last_name,       
-     :facebook_uid => fb_session.user.uid,
+     :email => facebook_user.email,
+     :first_name => facebook_user.first_name,
+     :last_name => facebook_user.last_name,       
+     :facebook_uid => facebook_user.id,
+     :facebook_id => facebook_user.id,
      :partner_referral => partner,
      :request => request
     )
-    
-    if fb_session.user.current_location
-      u.zip = fb_session.user.current_location.zip if fb_session.user.current_location.zip and fb_session.user.current_location.zip.any?  
-      u.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any?
-      u.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any?
-    end
-    if u.save
+    Rails.logger.info("LOGIN: CREATE FROM FACEBOOK user #{u.inspect}")
+
+    if u.save(:validate => false)
       u.activate!
       return u
     else
-      puts "ERROR w/ user -- " + u.errors.full_messages.join(" | ")
+      Rails.logger.error "ERROR w/ user -- " + u.errors.full_messages.join(" | ")
       return nil
     end
   end
   
-  def update_with_facebook(fb_session)
-    return if fb_session.expired?
-    self.facebook_uid = fb_session.user.uid
+  def update_with_facebook(facebook_user)
+    self.facebook_uid = facebook_user.id
     # need to do some checking on whether this facebook_uid is already attached to a diff account
     check_existing_facebook = User.active.find(:all, :conditions => ["facebook_uid = ? and id <> ?",self.facebook_uid,self.id])
     if check_existing_facebook.any?
@@ -978,11 +982,6 @@ class User < ActiveRecord::Base
         e.remove_facebook
         e.save(:validate => false)
       end
-    end
-    if fb_session.user.current_location
-      self.zip = fb_session.user.current_location.zip if fb_session.user.current_location.zip and fb_session.user.current_location.zip.any? and not self.attribute_present?("zip")
-      self.city = fb_session.user.current_location.city if fb_session.user.current_location.city and fb_session.user.current_location.city.any? and not self.attribute_present?("city")
-      self.state = fb_session.user.current_location.state if fb_session.user.current_location.state and fb_session.user.current_location.state.any? and not self.attribute_present?("state")
     end
     self.save(:validate => false)
     check_contacts # looks for any contacts with the facebook uid, and connects them

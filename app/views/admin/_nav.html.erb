@@ -3,7 +3,7 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.admin.government.edit'), edit_government_url(current_government) %>
+					<%= link_to tr("Nation info", "view/admin/_nav"), edit_government_url(current_government) %>
 				</span>
 			</li>	
 			<% if current_government.is_tags? %>
@@ -15,22 +15,22 @@
 			<% end %>
 			<li class="tab4">
 				<span class="tab_header">
-					<%= link_to t('menu.admin.graphics'), :controller => "admin", :action => "picture" %>
+					<%= link_to tr("Graphics", "view/admin/_nav"), :controller => "admin", :action => "picture" %>
 				</span>
 			</li>
 			<li class="tab5">
 				<span class="tab_header">
-					<%= link_to t('menu.admin.colors'), color_schemes_url %>
+					<%= link_to tr("Colors", "view/admin/_nav"), color_schemes_url %>
 				</span>
 			</li>	
 			<li class="tab6">
 				<span class="tab_header">
-					<%= link_to t('menu.admin.pages'), pages_url %>
+					<%= link_to tr("Pages", "view/admin/_nav"), pages_url %>
 				</span>
 			</li>					
 			<li class="tab9">
 				<span class="tab_header">
-					<%= link_to t('menu.admin.apis'), apis_government_url(current_government) %>
+					<%= link_to tr("API keys", "view/admin/_nav"), apis_government_url(current_government) %>
 				</span>
 			</li>				
 		</ul>
@@ -46,19 +46,19 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to t('menu.admin.logo'), :controller => "admin", :action => "picture" %>
+						<%= link_to tr("Logo", "view/admin/_nav"), :controller => "admin", :action => "picture" %>
 					</span>
 				</li>			
 
 				<li class="tab2">
 					<span class="tab_header">
-						<%= link_to t('menu.admin.buddy_icon'), :controller => "admin", :action => "buddy_icon" %>
+						<%= link_to tr("Buddy Icon", "view/admin/_nav"), :controller => "admin", :action => "buddy_icon" %>
 					</span>
 				</li>	
 		
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to t('menu.admin.fav_icon'), :controller => "admin", :action => "fav_icon" %>
+						<%= link_to tr("Fav Icon", "view/admin/_nav"), :controller => "admin", :action => "fav_icon" %>
 					</span>
 				</li>	
 		
@@ -78,13 +78,13 @@
 
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.color_schemes.theme'), color_schemes_url %>
+					<%= link_to tr("Choose a theme", "view/admin/_nav"), color_schemes_url %>
 				</span>
 			</li>			
 
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.color_schemes.advanced'), new_color_scheme_path(:id => current_government.color_scheme) %>
+					<%= link_to tr("Advanced", "view/admin/_nav"), new_color_scheme_path(:id => current_government.color_scheme) %>
 				</span>
 			</li>	
 	

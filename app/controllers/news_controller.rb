@@ -14,7 +14,7 @@ class NewsController < ApplicationController
   end
   
   def discussions
-    @page_title = t('news.discussions.title', :government_name => current_government.name)
+    @page_title = tr("What everyone is discussing at {government_name}", "controller/news", :government_name => current_government.name)
     @rss_url = url_for(:only_path => false, :action => "comments", :format => "rss")
     if @current_government.users_count > 5000 # only show the last 7 days worth
       @activities = Activity.active.filtered.discussions.for_all_users.last_seven_days.by_recently_updated.paginate :page => params[:page], :per_page => 15
@@ -30,7 +30,7 @@ class NewsController < ApplicationController
   end 
   
   def comments
-    @page_title = t('news.comments.title', :government_name => current_government.name)
+    @page_title = tr("Latest comments at {government_name}", "controller/news", :government_name => current_government.name)
     @comments = Comment.published.last_three_days.by_recently_created.find(:all, :include => :activity).paginate :page => params[:page]
     respond_to do |format|
       format.rss { render :template => "rss/comments" }
@@ -40,7 +40,7 @@ class NewsController < ApplicationController
   end
   
   def points
-    @page_title = t('news.points.title', :government_name => current_government.name, :briefing_name => current_government.briefing_name)
+    @page_title = tr("Latest activity in the {briefing_name} at {government_name}", "controller/news", :government_name => current_government.name, :briefing_name => current_government.briefing_name)
     @activities = Activity.active.filtered.points_and_docs.for_all_users.paginate :page => params[:page]
     @rss_url = url_for(:only_path => false, :format => "rss")
     respond_to do |format|
@@ -52,7 +52,7 @@ class NewsController < ApplicationController
   end  
   
   def activities
-    @page_title = t('news.activities.title', :government_name => current_government.name)
+    @page_title = tr("Everything happening at {government_name}", "controller/news", :government_name => current_government.name)
 #    if @current_government.users_count > 5000 # only show the last 7 days worth    
 #      @activities = Activity.active.filtered.for_all_users.last_seven_days.by_recently_created.paginate :page => params[:page]
 #    else
@@ -61,14 +61,26 @@ class NewsController < ApplicationController
     @rss_url = url_for(:only_path => false, :format => "rss")    
     respond_to do |format|
       format.html { render :action => "activity_list" }
-      format.rss { render :template => "rss/activities" }         
+      format.rss { render :template => "rss/activities" }
       format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
     end 
-  end  
+  end
+
+  def top
+    @page_title = tr("Everything happening at {government_name}", "controller/news", :government_name => current_government.name)
+    @activities = Activity.active.top.filtered.for_all_users.by_recently_created.paginate :page => params[:page]      
+    @rss_url = url_for(:only_path => false, :format => "rss")    
+    respond_to do |format|
+      format.html { render :action => "activity_list" }
+      format.rss { render :template => "rss/activities" }
+      format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
+    end 
+  end
   
   def capital
-    @page_title = t('news.capital.title', :government_name => current_government.name, :currency_name => current_government.currency_name.titleize)
+    @page_title = tr("{currency_name} at {government_name}", "controller/news", :government_name => current_government.name, :currency_name => current_government.currency_name.titleize)
     @activities = Activity.active.filtered.for_all_users.capital.by_recently_created.paginate :page => params[:page]
     @rss_url = url_for(:only_path => false, :format => "rss")          
     respond_to do |format|
@@ -80,7 +92,7 @@ class NewsController < ApplicationController
   end  
   
   def changes
-    @page_title = t('news.changes.title', :government_name => current_government.name)
+    @page_title = tr("Acquisition proposals", "controller/news", :government_name => current_government.name)
     @changes = Change.suggested.by_recently_created.paginate :page => params[:page]
     respond_to do |format|
       format.html { render :action => "change_list" }
@@ -90,7 +102,7 @@ class NewsController < ApplicationController
   end  
   
   def changes_voting
-    @page_title = t('news.changes.voting.title', :government_name => current_government.name)
+    @page_title = tr("Voting results on acquisition proposals", "controller/news", :government_name => current_government.name)
     @changes = Change.voting.by_recently_started.paginate :page => params[:page]
     respond_to do |format|
       format.html { render :action => "change_list" }
@@ -100,7 +112,7 @@ class NewsController < ApplicationController
   end
   
   def changes_activity
-    @page_title = t('news.changes.activity.title', :government_name => current_government.name)
+    @page_title = tr("M&A activity at {government_name}", "controller/news", :government_name => current_government.name)
     @activities = Activity.active.filtered.for_all_users.changes.by_recently_created.paginate :page => params[:page]
     @rss_url = url_for(:only_path => false, :format => "rss")    
     respond_to do |format|
@@ -112,7 +124,7 @@ class NewsController < ApplicationController
   end  
   
   def your_activities
-    @page_title = t('news.your_activities.title', :government_name => current_government.name)
+    @page_title = tr("What are you doing at {government_name}?", "controller/news", :government_name => current_government.name)
     @activities = current_user.activities.active.for_all_users.by_recently_created.paginate :page => params[:page]    
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -122,7 +134,7 @@ class NewsController < ApplicationController
   end
   
   def your_capital
-    @page_title = t('news.your_capital.title', :government_name => current_government.name, :currency_name => current_government.currency_name.downcase)
+    @page_title = tr("Your {currency_name} at {government_name}", "controller/news", :government_name => current_government.name, :currency_name => current_government.currency_name.downcase)
     @activities = current_user.activities.active.capital.for_all_users.by_recently_created.paginate :page => params[:page]    
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -132,7 +144,7 @@ class NewsController < ApplicationController
   end  
   
   def your_changes
-    @page_title = t('news.your_changes.title', :government_name => current_government.name)
+    @page_title = tr("Your M&A activity at {government_name}", "controller/news", :government_name => current_government.name)
     @activities = current_user.activities.active.changes.for_all_users.by_recently_created.paginate :page => params[:page]    
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -142,7 +154,7 @@ class NewsController < ApplicationController
   end  
   
   def your_points
-    @page_title = t('news.your_points.title', :government_name => current_government.name, :briefing_name => current_government.briefing_name)
+    @page_title = tr("Your {briefing_name} activity at {government_name}", "controller/news", :government_name => current_government.name, :briefing_name => current_government.briefing_name)
     # this needs some work
     @activities = current_user.activities.active.points_and_docs.by_recently_created.paginate :page => params[:page]    
     respond_to do |format|
@@ -153,7 +165,7 @@ class NewsController < ApplicationController
   end  
   
   def your_discussions
-    @page_title = t('news.your_discussions.title', :government_name => current_government.name)
+    @page_title = tr("Discussions you're following at {government_name}", "controller/news", :government_name => current_government.name)
     @activities = @user.following_discussion_activities.active.by_recently_updated.paginate :page => params[:page], :per_page => 15
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_comments", :format => "rss", :c => @user.rss_code)
     respond_to do |format|
@@ -171,7 +183,7 @@ class NewsController < ApplicationController
   
   # doesn't include activities that followers are commenting on
   def your_followers_activities
-    @page_title = t('news.your_followers_activities.title', :government_name => current_government.name)
+    @page_title = tr("Your followers' activity at {government_name}", "controller/news", :government_name => current_government.name)
     @activities = Activity.active.filtered.for_all_users.by_recently_created.paginate :conditions => ["user_id in (?)",current_user.followers.collect{|e|e.user_id}.uniq.compact], :page => params[:page]            
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -182,7 +194,7 @@ class NewsController < ApplicationController
   
   # doesn't include activities that followers are commenting on
   def your_followers_discussions
-    @page_title = t('news.your_followers_discussions.title', :government_name => current_government.name)
+    @page_title = tr("Discussions your followers are participating in", "controller/news", :government_name => current_government.name)
     @activities = Activity.active.filtered.discussions.by_recently_created.paginate :conditions => ["user_id in (?)",current_user.followers.collect{|e|e.user_id}.uniq.compact], :page => params[:page], :per_page => 15
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -192,7 +204,7 @@ class NewsController < ApplicationController
   end  
   
   def your_followers_points
-    @page_title = t('news.your_followers_points.title', :government_name => current_government.name)
+    @page_title = tr("Talking points and documents from your followers", "controller/news", :government_name => current_government.name)
     @activities = Activity.active.filtered.points_and_docs.paginate :conditions => ["user_id in (?)",current_user.followers.collect{|e|e.user_id}.uniq.compact], :page => params[:page]      
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -202,7 +214,7 @@ class NewsController < ApplicationController
   end  
   
   def your_followers_capital
-    @page_title = t('news.your_followers_capital.title', :government_name => current_government.name, :currency_name => current_government.currency_name.downcase)
+    @page_title = tr("Your followers' {currency_name}", "controller/news", :government_name => current_government.name, :currency_name => current_government.currency_name.downcase)
     @activities = Activity.active.filtered.capital.by_recently_created.paginate :conditions => ["user_id in (?)",current_user.followers.collect{|e|e.user_id}.uniq.compact], :page => params[:page]
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -212,7 +224,7 @@ class NewsController < ApplicationController
   end  
   
   def your_followers_changes
-    @page_title = t('news.your_followers_changes.title', :government_name => current_government.name)
+    @page_title = tr("M&A activity from your followers", "controller/news", :government_name => current_government.name)
     @activities = Activity.active.filtered.changes.by_recently_created.paginate :conditions => ["user_id in (?)",current_user.followers.collect{|e|e.user_id}.uniq.compact], :page => params[:page]
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -223,7 +235,7 @@ class NewsController < ApplicationController
   
   # doesn't include activities that followers are commenting on
   def your_network_activities
-    @page_title = t('news.your_network_activities.title', :government_name => current_government.name)
+    @page_title = tr("What's happening in your {government_name}?", "controller/news", :government_name => current_government.name)
     if current_following_ids.empty?
       @activities = Activity.active.filtered.for_all_users.by_recently_created.paginate :conditions => "user_id = #{current_user.id.to_s}", :page => params[:page]      
     else
@@ -238,7 +250,7 @@ class NewsController < ApplicationController
 
   # doesn't include activities that followers are commenting on
   def your_network_discussions
-    @page_title = t('news.your_network_discussions.title', :government_name => current_government.name)
+    @page_title = tr("Discussions in your network", "controller/news", :government_name => current_government.name)
     if @user.followings_count == 0
       @activities = Activity.active.filtered.discussions.by_recently_created.paginate :conditions => "user_id = #{@user.id.to_s}", :page => params[:page], :per_page => 15
     else
@@ -253,7 +265,7 @@ class NewsController < ApplicationController
   end  
   
   def your_network_points
-    @page_title = t('news.your_network_points.title', :government_name => current_government.name)
+    @page_title = tr("Talking points and documents in your network", "controller/news", :government_name => current_government.name)
     if current_following_ids.empty?
       @activities = Activity.active.filtered.points_and_docs.paginate :conditions => "user_id = #{current_user.id.to_s}", :page => params[:page]      
     else
@@ -267,7 +279,7 @@ class NewsController < ApplicationController
   end  
   
   def your_network_capital
-    @page_title = t('news.your_network_capital.title', :government_name => current_government.name, :currency_name => current_government.currency_name.titleize)
+    @page_title = tr("{currency_name} in your network", "controller/news", :government_name => current_government.name, :currency_name => current_government.currency_name.titleize)
     if current_following_ids.empty?
       @activities = Activity.active.filtered.capital.by_recently_created.paginate :conditions => "user_id = #{current_user.id.to_s}", :page => params[:page]      
     else
@@ -281,7 +293,7 @@ class NewsController < ApplicationController
   end  
   
   def your_network_changes
-    @page_title = t('news.your_network_changes.title', :government_name => current_government.name)
+    @page_title = tr("M&A activity in your network", "controller/news", :government_name => current_government.name)
     if current_following_ids.empty?
       @activities = Activity.active.filtered.changes.by_recently_created.paginate :conditions => "user_id = #{current_user.id.to_s}", :page => params[:page]      
     else
@@ -295,7 +307,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_activities
-    @page_title = t('news.your_priority_activities.title', :government_name => current_government.name)
+    @page_title = tr("What's happening on your priorities?", "controller/news", :government_name => current_government.name)
     @activities = nil
     if current_priority_ids.any?
       @activities = Activity.active.filtered.last_seven_days.by_recently_created.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -308,7 +320,7 @@ class NewsController < ApplicationController
   end
   
   def your_priority_official
-    @page_title = t('news.your_priority_official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
+    @page_title = tr("What {official_user_name} is doing on your priorities", "controller/news", :government_name => current_government.name, :official_user_name => current_government.official_user.name)
     @activities = nil
     if current_priority_ids.any?
       @activities = Activity.active.filtered.by_recently_created.paginate :conditions => ["(type like 'ActivityPriorityOfficialStatus%' or user_id = #{current_government.official_user_id}) and priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -321,7 +333,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_changes
-    @page_title = t('news.your_priority_changes.title', :government_name => current_government.name)
+    @page_title = tr("Acquisitions proposed on your priorities", "controller/news", :government_name => current_government.name)
     @changes = nil
     if current_priority_ids.any?
       @changes = Change.suggested.by_recently_created.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -334,7 +346,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_changes_voting
-    @page_title = t('news.your_priority_changes_voting.title', :government_name => current_government.name)
+    @page_title = tr("Acquisitions to vote on", "controller/news", :government_name => current_government.name)
     @changes = nil
     if current_priority_ids.any?
       @changes = Change.voting.by_recently_started.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -347,7 +359,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_changes_activity
-    @page_title = t('news.your_priority_changes_activity.title', :government_name => current_government.name)
+    @page_title = tr("M&A activity on your priorities", "controller/news", :government_name => current_government.name)
     @activities = nil
     if current_priority_ids.any?
       @activities = Activity.active.filtered.changes.for_all_users.by_recently_created.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -360,7 +372,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_discussions
-    @page_title = t('news.your_priority_discussions.title', :government_name => current_government.name)
+    @page_title = tr("Discussions on your priorities", "controller/news", :government_name => current_government.name)
     @activities = nil
     if @user.endorsements_count > 0
       @activities = Activity.active.filtered.last_seven_days.discussions.for_all_users.by_recently_updated.paginate :conditions => ["priority_id in (?)",@user.endorsements.active_and_inactive.collect{|e|e.priority_id}], :page => params[:page], :per_page => 15
@@ -374,7 +386,7 @@ class NewsController < ApplicationController
   end
   
   def your_priority_points
-    @page_title = t('news.your_priority_points.title', :government_name => current_government.name)
+    @page_title = tr("Talking points and documents on your priorities", "controller/news", :government_name => current_government.name)
     @activities = nil
     if current_priority_ids.any?  
       @activities = Activity.active.filtered.last_seven_days.points_and_docs.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -387,7 +399,7 @@ class NewsController < ApplicationController
   end
   
   def your_priorities_created_activities
-    @page_title = t('news.your_priorities_created_activities.title', :government_name => current_government.name)
+    @page_title = tr("Everything happening on priorities you created", "controller/news", :government_name => current_government.name)
     @activities = nil
     created_priority_ids = current_user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?
@@ -402,7 +414,7 @@ class NewsController < ApplicationController
   end
   
   def your_priorities_created_official
-    @page_title = t('news.your_priorities_created_official.title', :government_name => current_government.name, :official_user_name => current_government.official_user.name)
+    @page_title = tr("What {official_user_name} is doing on priorities you created", "controller/news", :government_name => current_government.name, :official_user_name => current_government.official_user.name)
     @activities = nil
     created_priority_ids = current_user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?
@@ -416,7 +428,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priorities_created_changes
-    @page_title = t('news.your_priorities_created_changes.title', :government_name => current_government.name)
+    @page_title = tr("M&A activity on priorities you created", "controller/news", :government_name => current_government.name)
     @activities = nil
     created_priority_ids = current_user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?
@@ -430,7 +442,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priorities_created_discussions
-    @page_title = t('news.your_priorities_created_discussions.title', :government_name => current_government.name)
+    @page_title = tr("Discussions on priorities you created", "controller/news", :government_name => current_government.name)
     @activities = nil
     created_priority_ids = @user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?   
@@ -445,7 +457,7 @@ class NewsController < ApplicationController
   end
   
   def your_priorities_created_points
-    @page_title = t('news.your_priorities_created_points.title', :government_name => current_government.name, :briefing_name => current_government.briefing_name)
+    @page_title = tr("{briefing_name} activity on priorities you created", "controller/news", :government_name => current_government.name, :briefing_name => current_government.briefing_name)
     @activities = nil
     created_priority_ids = current_user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?

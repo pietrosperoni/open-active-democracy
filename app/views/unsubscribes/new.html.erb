@@ -1,6 +1,6 @@
 <div id="hp_intro"><%= @page_title %></div>
 
-<%= t('unsubscribe.new.intro')%>
+<%= tr("Uncheck any of the notifications you'd like to turn off.", "view/unsubscribes/new")%>
 <p>
 
 <%= form_for(@unsubscribe) do |f| %>
@@ -10,15 +10,15 @@
     <%= f.text_field :email %>
   </p>
 	<p>
-	<%= f.check_box :is_newsletter_subscribed %> <%= t("unsubscribe.weekly") %><br/>									
-	<%= f.check_box :is_comments_subscribed %> <%= t("unsubscribe.comments") %><br/>
-	<%= f.check_box :is_point_changes_subscribed %> <%= t("unsubscribe.points")%><br/>	
-	<%= f.check_box :is_followers_subscribed %> <%= t("unsubscribe.followers")%><br/>
-	<%= f.check_box :is_votes_subscribed %> <%= t("unsubscribe.votes")%><br/>
-	<%= f.check_box :is_finished_subscribed %> <%= t("unsubscribe.finished")%><br/>	
-	<%= f.check_box :is_messages_subscribed %> <%= t("unsubscribe.messages")%><br/>
+	<%= f.check_box :is_newsletter_subscribed %> <%= tr("Weekly update on your priorities", "view/unsubscribes/new") %><br/>									
+	<%= f.check_box :is_comments_subscribed %> <%= tr("Comments on your discussions", "view/unsubscribes/new") %><br/>
+	<%= f.check_box :is_point_changes_subscribed %> <%= tr("Revisions on your documents and talking points", "view/unsubscribes/new")%><br/>	
+	<%= f.check_box :is_followers_subscribed %> <%= tr("When someone follows you or one of your contacts joins", "view/unsubscribes/new")%><br/>
+	<%= f.check_box :is_votes_subscribed %> <%= tr("When your vote is needed on an acquisition", "view/unsubscribes/new")%><br/>
+	<%= f.check_box :is_finished_subscribed %> <%= tr("When priorities are finished", "view/unsubscribes/new")%><br/>	
+	<%= f.check_box :is_messages_subscribed %> <%= tr("Private messages and profile bulletins", "view/unsubscribes/new")%><br/>
 	<p>
   <p>
-    <%= f.submit t('unsubscribe.new.submit'), :class => "yellow_button" %>
+    <%= f.submit tr("Update Email Notifications", "view/unsubscribes/new"), :class => "yellow_button" %>
   </p>
 <% end %>

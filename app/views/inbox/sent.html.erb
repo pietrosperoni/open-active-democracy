@@ -2,9 +2,9 @@
 <p>
 <% if @messages.any? %>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr><td><%= t('inbox.headers.sent')%></td>
-		<td><%= t('inbox.headers.to')%></td>
-		<td><%= t('inbox.headers.message')%></td>
+	<tr><td><%= tr("Sent:", "view/inbox/sent")%></td>
+		<td><%= tr("To:", "view/inbox/sent")%></td>
+		<td><%= tr("Message:", "view/inbox/sent")%></td>
 	</tr>
 	<% for message in @messages %>
 	<tr>

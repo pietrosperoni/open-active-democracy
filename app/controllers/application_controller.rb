@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-
+  include Tr8n::CommonMethods
   include AuthenticatedSystem
   include FaceboxRender
 
@@ -18,20 +18,23 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   
   # Make these methods visible to views as well
-  helper_method :facebook_session, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
+  helper_method :current_facebook_user, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
   before_filter :check_subdomain
   
-  before_filter :set_facebook_session, :unless => [:no_facebook?]
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
-  before_filter :check_facebook, :unless => [:is_robot?]
+#  before_filter :check_facebook, :unless => [:is_robot?]
     
   before_filter :check_blast_click, :unless => [:is_robot?]
   before_filter :check_priority, :unless => [:is_robot?]
   before_filter :check_referral, :unless => [:is_robot?]
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
+
+  before_filter :check_google_translate_setting
+
+  before_filter :init_tr8n
 
   layout :get_layout
 
@@ -50,6 +53,10 @@ class ApplicationController < ActionController::Base
         '"'     => '\\"',
         "'"     => "\\'" }
         
+  def unfrozen_instance(object)
+    eval "#{object.class}.where(:id=>object.id).first"
+  end
+        
   def escape_javascript(javascript)
     if javascript
       javascript.gsub(/(\\|<\/|\r\n|[\n\r"'])/) { JS_ESCAPE_MAP[$1] }
@@ -57,6 +64,20 @@ class ApplicationController < ActionController::Base
       ''
     end
   end  
+  
+  def check_google_translate_setting
+    if params[:gt]
+      if params[:gt]=="1"
+        Rails.logger.debug("session[:enable_google_translate] = true")
+        session[:enable_google_translate] = true
+      else
+        Rails.logger.debug("session[:enable_google_translate] = nil")
+        session[:enable_google_translate] = nil
+      end
+    end
+    
+    @google_translate_enabled_for_locale = tr8n_current_google_language_code
+  end
   
   def get_layout
     return false if not is_robot? and not current_government
@@ -183,10 +204,10 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => "install"
       return
     end
-    if not current_partner and Rails.env == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
-      redirect_to 'http://' + current_government.base_url + request.path_info
-      return
-    end    
+#    if not current_partner and Rails.env == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
+#      redirect_to 'http://' + current_government.base_url + request.path_info
+#      return
+#    end    
   end
   
   def check_referral
@@ -197,18 +218,20 @@ class ApplicationController < ActionController::Base
     end    
   end  
   
-  # if they're logged in with a wh2 account, AND connected with facebook, but don't have their facebook uid added to their account yet
+  # if they're logged in with our account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
     if logged_in? and current_facebook_user
-      @user = User.find(current_user.id)
-      if not @user.update_with_facebook(current_facebook_user.id)
-        return
+      unless current_user.facebook_uid
+        @user = User.find(current_user.id)
+        if not @user.update_with_facebook(current_facebook_user)
+          return
+        end
+        if not @user.activated?
+          @user.activate!
+        end      
+        @current_user = User.find(current_user.id)
+        flash.now[:notice] = tr("Your account is now synced with Facebook. In the future, to sign in, simply click the big blue Facebook button.", "controller/application", :government_name => current_government.name)
       end
-      if not @user.activated?
-        @user.activate!
-      end      
-      @current_user = User.find(current_user.id)
-      flash.now[:notice] = t('facebook.synced', :government_name => current_government.name)
     end      
   end
   
@@ -223,7 +246,7 @@ class ApplicationController < ActionController::Base
   end
   
   def bad_token
-    flash[:error] = t('application.bad_token')
+    flash[:error] = tr("Sorry, that last page already expired. Please try what you were doing again.", "controller/application")
     respond_to do |format|
       format.html { redirect_to request.referrer||'/' }
       format.js { redirect_from_facebox(request.referrer||'/') }
@@ -234,7 +257,7 @@ class ApplicationController < ActionController::Base
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session    
-    flash[:error] = t('application.fb_session_expired')
+    flash[:error] = tr("Your Facebook session expired.", "controller/application")
     respond_to do |format|
       format.html { redirect_to '/portal/' }
       format.js { redirect_from_facebox(request.referrer||'/') }
@@ -249,7 +272,6 @@ class ApplicationController < ActionController::Base
     include Singleton
     include ActionView::Helpers::JavaScriptHelper
   end  
-  
 end
 
 module FaceboxRender

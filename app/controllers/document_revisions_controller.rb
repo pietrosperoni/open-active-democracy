@@ -4,6 +4,13 @@ class DocumentRevisionsController < ApplicationController
   before_filter :login_required, :only => [:new, :update, :destroy, :edit, :create]
   before_filter :admin_required, :only => [:destroy, :update, :edit]
 
+  before_filter :disable
+ 
+  def disable
+    redirect_to "/"
+    false
+  end
+
   # GET /documents/1/revisions
   def index
     redirect_to @document
@@ -13,12 +20,12 @@ class DocumentRevisionsController < ApplicationController
   # GET /documents/1/revisions/1
   def show
     if @document.is_deleted?
-      flash[:error] = t('document.deleted')
+      flash[:error] = tr("That document was deleted", "controller/revisions")
       redirect_to @document.priority
       return
     end
     @revision = @document.revisions.find(params[:id])
-    @page_title = t('document.revision.show.title', :document_name => @document.name, :user_name => @revision.user.name)
+    @page_title = tr("{document_name} - revised by {user_name}", "controller/revisions", :document_name => @document.name, :user_name => @revision.user.name)
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -27,7 +34,7 @@ class DocumentRevisionsController < ApplicationController
   # GET /documents/1/revisions/1/clean
   def clean
     @revision = @document.revisions.find(params[:id])
-    @page_title = t('document.revision.show.title', :document_name => @document.name, :user_name => @revision.user.name)
+    @page_title = tr("{document_name} - revised by {user_name}", "controller/revisions", :document_name => @document.name, :user_name => @revision.user.name)
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -39,7 +46,7 @@ class DocumentRevisionsController < ApplicationController
     @revision.content = @document.content
     @revision.value = @document.value    
     @revision.name = @document.name
-    @page_title = t('document.revision.new.title', :document_name => @document.name)  
+    @page_title = tr("Revise {document_name}", "controller/revisions", :document_name => @document.name)  
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -74,7 +81,7 @@ class DocumentRevisionsController < ApplicationController
             @comment.save(:validate => false)            
           end
         end
-        flash[:notice] = t('document.revision.new.success', :document_name => @document.name)
+        flash[:notice] = tr("Saved revision of {document_name}", "controller/revisions", :document_name => @document.name)
         format.html { redirect_to(@document) }
       else
         format.html { render :action => "new" }
@@ -87,7 +94,7 @@ class DocumentRevisionsController < ApplicationController
     @revision = @document.revisions.find(params[:id])
     respond_to do |format|
       if @revision.update_attributes(params[:revision])
-        flash[:notice] = t('document.revision.new.success', :document_name => @document.name)
+        flash[:notice] = tr("Saved revision of {document_name}", "controller/revisions", :document_name => @document.name)
         format.html { redirect_to(@revision) }
       else
         format.html { render :action => "edit" }

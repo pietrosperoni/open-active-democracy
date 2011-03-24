@@ -1,109 +1,101 @@
-# coding: utf-8
-
 <% if @error %>
-<%=@error%>
+<%= @error%>
 <% else %>
-<h2>Leitarniðurstöður fyrir <span class="star"><%=@query%></span></h2><br>
-<% if params[:cached_issue_list] %>
-<h4>Kafli: <%=params[:cached_issue_list]%></h4>
-<% elsif params[:class] %>
-<h4>Tegund: <%=translate_facet_option(params[:class])%></h4>
+<h2>
+<%= tr("Search results for","search")%>
+<span class="star"><%= @query%></span>
+</h2>
+<br>
+<% if params[:class] %>
+<h4><%= tr("Type","search")%>: <%= translate_facet_option(params[:class])%></h4>
 <% end %>
 
-<div class="search_results" > 
-	<% unless @search_results.empty? %>
-		<div id="left">
-			<% @search_results.each do |result|%>
-				
-				<!-- PRITORITY --> 
-				<% if result.class == Priority %>
-				<div>
-					<h4> Umræða - <%= time_ago(result.excerpts.created_at) %></h4> 				
-					<h3><%= result.excerpts.name.html_safe %></h3>
-					<%#= result.excerpts.content %>
-					
-					<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.id %>
-					<br><br>	
-				</div>		
-				<!-- QUESTION --> 
-				<% elsif result.class == Point %>
-				<div>
-					<h4> Spurning og svar - <%= time_ago(result.excerpts.created_at) %></h4> 				
-					<h3><%= result.excerpts.name %></h3>
-					Spurning: <%= result.excerpts.content.html_safe %><br>
-					<br>
-					<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.id %>
-					<br><br>
-				</div>					
-				<!-- DOCUMENT --> 	
-				<% elsif result.class == Document %>
-				<div>	
-					<h4> Erindi - <%= time_ago(result.excerpts.created_at) %></h4> 							
-					<h3><%= result.excerpts.name %></h3>
-					<%= result.excerpts.content.html_safe %>
-					<br>
-					<%= link_to "Skoða erindi", :controller=>"documents", :action=>"show", :id=>result.id %>
-					<br><br>
-				</div>			
-				<!-- COMMENTS --> 
-				<% elsif result.class == Comment%>
-				<div>
-				  	<h4> Athugasemd - <%= time_ago(result.excerpts.created_at) %></h4>  
-					<%= result.excerpts.content.encoding %>	
-					<br>			  	
-				  	<% if result.activity.priority_id %>
-						<%=link_to "Skoða umræðuefni", :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %>
-					<% elsif result.activity.point_id  %>
-						<%= link_to "Skoða spurningu og svar", :controller=>"questions", :action=>"show", :id=>result.activity.point_id %>
-					<% end %>
-					<br><br>
-			</div>
-			
-			 <% end %>
-		
-		<% end %>
-		<%=will_paginate @search_results%>
-	</div> 
-				
-		<% else %>
-			  Ekkert fannst með þessum leitarorðum og öðrum skilyrðum sem þú hefur valið. 
-			  <br> 
-			  Prófaðu önnur leitarorð eða hreinsaðu allar síur með því að velja Allt hér fyrir ofan.
-			  <br>
-			  <%#=@query %> 
-		<% end %>
-
-	<% unless not @facets or @facets.empty?%>
-		<div id="right">	
-			<div> 
-				<h3><%= link_to "Allt", "/leita?q=#{@query}"%></h3>
-			</div>
-		
-			<% @facets.each do |facet, facet_options| %>
-			<div> 
-					<% if facet.to_s=="class" %>
-						<h3>Tegund</h3> 
-					<% elsif facet.to_s=="cached_issue_list" %>
-						<h3>Kaflar</h3> 
-					<% else %>
-						<h3><%=facet.to_s.html_safe%></h3> 
-					<% end %>
-						<ul>
-						<% facet_options.each do |option, count| %>
-							<% next if option==nil or option=="" %>
-							<% translated_option = translate_facet_option(option) %>
-							<% if translated_option==params[:cached_issue_list] or option==params[:class]%>
-								<li><b><%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %></b></li>
-							<% else %>
-								<li><%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %></li>
-							<% end %>
-						<% end %>
-						</ul> 
-			</div> 
-			<% end %>
-		</div>
-</div> 		
-<% else %>
-	Engir kaflar fundust
-<% end %>			
-<% end %>
+<table>
+  <tr>
+    <td>
+    <div class="search_results">
+      <% unless @search_results.empty? %>
+      <div id="left" style="float: left">
+        <% @search_results.each do |result|%>
+          <% if result.class == Priority %>
+            <div>
+              <h4><%= tr("Priority","search")%> - <%= time_ago(result.excerpts.created_at) %></h4>
+              <h3><%= result.excerpts.name.force_encoding("UTF-8").html_safe %></h3>
+              <%#= result.excerpts.content %>
+              <%=link_to tr("Show priority","search"), :controller=>"priorities", :action=>"show", :id=>result.id %>
+              <br>
+              <br>
+            </div>
+          <% elsif result.class == Point %>
+            <div>
+              <h4><%= tr("Point","search")%> - <%= time_ago(result.excerpts.created_at) %></h4>
+              <h3><%= result.excerpts.name.force_encoding("UTF-8").html_safe %></h3>
+              <%= tr("Point","search")%> : <%= result.excerpts.content.force_encoding("UTF-8").html_safe %>
+              <br>
+              <br>
+              <%= link_to tr("Show point","search"), :controller=>"questions", :action=>"show", :id=>result.id %>
+              <br>
+              <br>
+            </div>
+          <% elsif result.class == Comment%>
+            <div>
+              <h4><%= tr("Comment","search")%> - <%= time_ago(result.excerpts.created_at) %></h4>
+              <%= result.excerpts.content.force_encoding("UTF-8").html_safe %>
+              <br>
+              <% if result.activity.priority_id %>
+              <%= link_to tr("Show priority","search"), :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %>
+              <% elsif result.activity.point_id  %>
+              <%= link_to tr("Show point","search"), :controller=>"points", :action=>"show", :id=>result.activity.point_id %>
+              <% end %>
+              <br>
+              <br>
+            </div>
+          <% end %>
+        <% end %>
+        <%= will_paginate @search_results%>
+      </div>
+      <% else %>
+      <%= tr("No search results","search")%>
+      <br>
+      <%#=@query %>
+      <% end %>
+</div>
+</td>
+<td>
+      <% unless not @facets or @facets.empty?%>
+      <div id="right" style="float: right;">
+        <div>
+          <h3><%= link_to tr("Everything","search"), "/leita?q=#{@query}"%></h3>
+        </div>
+        <% @facets.each do |facet, facet_options| %>
+        <div>
+          <% if facet.to_s=="class" %>
+          <h3><%= tr("Type","search")%></h3>
+          <% else %>
+          <h3><%= facet.to_s.html_safe%></h3>
+          <% end %>
+          <ul>
+            <% facet_options.each do |option, count| %>
+            <% next if option==nil or option=="" %>
+            <% translated_option = translate_facet_option(option) %>
+            <% if translated_option==params[:cached_issue_list] or option==params[:class]%>
+            <li>
+              <b><%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %></b>
+            </li>
+            <% else %>
+            <li>
+              <%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %>
+            </li>
+            <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <% else %>
+    <% end %>
+    <% end %>
+</td>
+</tr>
+</table>

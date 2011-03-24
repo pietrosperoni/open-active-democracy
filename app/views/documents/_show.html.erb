@@ -1,12 +1,12 @@
 <div class="point" id="<%= document.id %>">
 <div class="point_name">
 <% if document.is_down? %>
-	<span class="opposed"><%= t('oppose.ed')%></span>
+	<span class="opposed"><%= tr("opposed", "view/documents/_show")%></span>
 <% end %>
 <%= link_to_unless_current h(document.name), document %>
 </div>
 <div class="point_byline">
-	<%= t('revisions.word_count', :count => document.word_count) %> <%= t('revisions.byline', :author_sentence => document.author_sentence) %>, <%= t('revisions.added', :time_ago => time_ago(document.created_at)) %>
+	<%= tr("{count} words", "view/documents/_show", :count => document.word_count) %> <%= tr("by {author_sentence}", "view/documents/_show", :author_sentence => document.author_sentence) %>, <%= tr("added {time_ago}", "view/documents/_show", :time_ago => time_ago(document.created_at)) %>
 </div>
 
 <% @point_value = document.value %>

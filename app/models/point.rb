@@ -39,12 +39,22 @@ class Point < ActiveRecord::Base
   has_many :unhelpfuls, :class_name => "PointQuality", :conditions => "value = false", :order => "created_at desc"
   
   has_many :capitals, :as => :capitalizable, :dependent => :nullify
+
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
   
   define_index do
     indexes name
     indexes content
-    indexes priority.category.name, :facet=>true
+    indexes priority.category.name, :facet=>true, :as=>"category_name"
     where "points.status = 'published'"    
+  end
+  
+  def category_name
+    if priority.category
+      priority.category.name
+    else
+      'No category'
+    end
   end
   
   cattr_reader :per_page
@@ -55,12 +65,16 @@ class Point < ActiveRecord::Base
   end  
   
   after_destroy :delete_point_quality_activities
-  before_destroy :remove_counts  
+  before_destroy :remove_counts
+#  after_commit :setup_revision
+  before_save :ensure_request_and_user_are_set
   
-  validates_length_of :name, :within => 3..100
-  #validates_uniqueness_of :name
-  # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  #validates_length_of :content, :maximum => 1100, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
+  validates_length_of :name, :within => 5..60, :too_long => tr("has a maximum of 60 characters", "model/point"), 
+                                               :too_short => tr("please enter more than 5 characters", "model/point")
+    #validates_uniqueness_of :name
+  # this is actually just supposed to be 500, but bumping it to 520 because the javascript counter doesn't include carriage returns in the count, whereas this does.
+  validates_length_of :content, :within => 5..520, :too_long => tr("has a maximum of 500 characters", "model/point"), 
+                                                   :too_short => tr("please enter more than 5 characters", "model/point")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
@@ -70,7 +84,6 @@ class Point < ActiveRecord::Base
   state :deleted, :enter => :do_delete
   state :buried, :enter => :do_bury
   state :abusive, :enter => :do_abusive
-
   
   event :publish do
     transitions :from => [:draft], :to => :published
@@ -92,7 +105,7 @@ class Point < ActiveRecord::Base
   event :unbury do
     transitions :from => :buried, :to => :published, :guard => Proc.new {|p| !p.published_at.blank? }
     transitions :from => :buried, :to => :draft     
-  end  
+  end
 
   event :abusive do
     transitions :from => :published, :to => :abusive
@@ -106,7 +119,7 @@ class Point < ActiveRecord::Base
   def flag_by_user(user)
     self.increment!(:flags_count)
     for r in User.active.admins
-      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+      notifications << NotificationPointFlagged.new(:sender => user, :recipient => r)    
     end
   end
 
@@ -129,6 +142,17 @@ class Point < ActiveRecord::Base
     for r in revisions
       r.delete!
     end
+  end
+
+  def setup_revision
+    Revision.create_from_point(self)
+  end
+ 
+  def ensure_request_and_user_are_set
+    self.ip_address = self.priority.ip_address
+    self.user_agent = self.priority.user_agent
+    self.user_id = self.priority.user_id
+    Rails.logger.debug("SELF PRIORITY: #{pp self.priority.inspect}")
   end
   
   def do_bury
@@ -161,7 +185,7 @@ class Point < ActiveRecord::Base
 
   def name_with_type
     return name unless is_down?
-    "[#{I18n.t(:against)}] " + name
+    "[#{tr("Against", "model/point")}] " + name
   end
 
   def text
@@ -201,6 +225,13 @@ class Point < ActiveRecord::Base
   end
   alias :is_published :is_published?
   
+  auto_html_for(:content) do
+    html_escape
+    youtube :width => 330, :height => 210
+    vimeo :width => 330, :height => 180
+    link :target => "_blank", :rel => "nofollow"
+  end  
+
   def calculate_score(tosave=false,current_endorsement=nil)
     old_score = self.score
     old_endorser_score = self.endorser_score
@@ -338,12 +369,6 @@ class Point < ActiveRecord::Base
     Government.current.homepage_url + 'points/' + to_param
   end  
   
-  auto_html_for(:content) do
-#    redcloth
-    youtube(:width => 330, :height => 210)
-    vimeo(:width => 330, :height => 180)
-    link(:rel => "nofollow")
-  end  
   
   def calculate_importance
   	PointImportanceScore.calculate_score(self.id)

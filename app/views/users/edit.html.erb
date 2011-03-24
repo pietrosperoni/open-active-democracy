@@ -11,14 +11,14 @@
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td valign="top">
 				<div class="field_label">
-					<%= t('settings.edit.first_name.label')%>
+					<%= tr("First name", "view/users/edit")%>
 				</div>
 				<div class="field_box">
 		    		<%= f.text_field :first_name, :size => 12 %> 
 				</div>
 			</td><td valign="top" style="padding-left: 3px;">
 				<div class="field_label">
-					<%= t('settings.edit.last_name.label')%>
+					<%= tr("and Last name", "view/users/edit")%>
 				</div>
 				<div class="field_box">
 		    		<%= f.text_field :last_name, :size => 15 %>
@@ -26,45 +26,45 @@
 			</td>
 			</tr>
 		</table>
-		<div class="small"><%= t('settings.edit.first_name.example')%></div>
+		<div class="small"><%= tr("(Not displayed on the site)", "view/users/edit")%></div>
 	</div>
 	
 	<div class="field">
 		<div class="field_label">
-			<%= t('settings.edit.email.label')%>
+			<%= tr("Email address", "view/users/edit")%>
 		</div>
 		<div class="field_box">
     		<%= f.text_field :email %>
 		</div>
-		<div class="small"><%= t('settings.edit.email.example')%></div>
+		<div class="small"><%= tr("(Never shared without your permission)", "view/users/edit")%></div>
 	</div>
 
 	<div class="field">
 	<div class="field_label">
-		<%= t('settings.edit.login.label')%>
+		<%= tr("How should you be identified on the site?", "view/users/edit")%>
 	</div>
 	<div class="field_box">
 		<%= f.text_field :login, :maxlength => 40, :size => 30 %>
 	</div>
-	<div class="small"><%= t('settings.edit.login.example')%></div>
+	<div class="small"><%= tr("(Can be your name, or a pseudonym)", "view/users/edit")%></div>
 	</div>
 	
 	<div class="field">
 		<div class="field_box">
-			<%= f.check_box :is_mergeable %> <%= t('settings.edit.is_mergeable.label')%>
+			<%= f.check_box :is_mergeable %> <%= tr("Merge your priorities with others meaning the same thing", "view/users/edit")%>
 		</div>
 		<div class="field_box">
-			<%= f.check_box :is_newsletter_subscribed %> <%= t('settings.edit.is_newsletter_subscribed.label')%>
+			<%= f.check_box :is_newsletter_subscribed %> <%= tr("Send a weekly email update on your priorities", "view/users/edit")%>
 		</div>
 	</div>	
 
-	<p><%= f.submit t('users.edit.submit'), :class => "yellow_button" %></p>
+	<p><%= f.submit tr("Save settings", "view/users/edit"), :class => "yellow_button" %></p>
 
 </td><td valign="top" width="300" style="padding-left: 20px;">
 	
 	<div class="field">
 		<div class="field_label">
-			<%= t('settings.edit.zip.label')%>
+			<%= tr("Zip Code", "view/users/edit")%>
 		</div>
 		<div class="field_box">
     		<%= f.text_field :zip %>
@@ -73,7 +73,7 @@
 
 	<div class="field">
 		<div class="field_label">
-			<%= t('settings.edit.website.label')%>
+			<%= tr("Website", "view/users/edit")%>
 		</div>
 		<div class="field_box">
     		<%= f.text_field :website %>
@@ -82,7 +82,7 @@
 
 	<div class="field">
 		<div class="field_label">
-			<%= t('settings.edit.birth_date.label')%>
+			<%= tr("Birth date", "view/users/edit")%>
 		</div>
 		<div class="field_box">
     		<%= f.date_select :birth_date, :include_blank => true, :start_year => 1908, :end_year => 1996,  :order => [:month, :day, :year] %>

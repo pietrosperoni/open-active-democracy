@@ -1,10 +1,10 @@
-<% cache(["latest_video_discussion_large",I18n.locale], :expires_in => 15.minutes) do %>
+<% cache(["latest_video_discussion_large",locale], :expires_in => 15.minutes) do %>
 <% @latest_speech_discussions = ProcessSpeechMasterVideo.get_latest_twenty %>
 <% if @latest_speech_discussions.length > 0 %>
 <%= javascript_include_tag 'jquery.mousewheel' %>
 <%= javascript_include_tag 'jquery.scrollable-1.0.1.min' %>
 <%= stylesheet_link_tag 'vertical_video_speeches_scroller_large' %>
-<h1><%=t :newly_processed_speeches %></h1>
+<h1><%=tr("Newly processed speeches", "view/process_speech_master_videos/_latest_video_discussions_large") %></h1>
 <!-- navigator -->
 <div class="navi"></div>
 <!-- root element -->
@@ -17,9 +17,9 @@
             <p>
                 <span><em><%=process_discussion.meeting_date.strftime("%d.%m.%Y") %>-<span><%=process_discussion.process_speech_videos.count %>
                     <% if process_discussion.process_speech_videos.count==1 %>
-                    <%=t :speech %>
+                    <%=tr("Speech", "view/process_speech_master_videos/_latest_video_discussions_large") %>
                     <% else %>
-                    <%=t :speeches %>
+                    <%=tr("speeches", "view/process_speech_master_videos/_latest_video_discussions_large") %>
                     <% end %>
                     </em>
                 </span>
@@ -45,9 +45,9 @@
     <tr align="left">
         <td align="left" style="padding-left:195px;padding-top:10px;">
             <% form_tag('/process_speech_videos/search') do -%>
-            <b><%=label_tag t(:search_by_person) %></b>
+            <b><%=label_tag tr("Search by member of Althingi", "view/process_speech_master_videos/_latest_video_discussions_large") %></b>
             <%=text_field_tag 'search_query' %>
-            <%= submit_tag t(:search) %>
+            <%= submit_tag tr("Search", "view/process_speech_master_videos/_latest_video_discussions_large") %>
             <% end %>
         </td>
     </tr>

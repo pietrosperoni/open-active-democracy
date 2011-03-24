@@ -1,0 +1,11 @@
+<%= render :partial=>"user_mailer/header.html" %>
+
+<p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
+
+<p><%= @sender.name %> <%=tr("commented on","email")%> <%= @notifiable.activity.name %>:</p>
+
+<p><%= @notifiable.content %></p>
+
+<p><%=tr("You can view or stop following this discussion here","email")%>: <%= link_to @notifiable.show_url, @notifiable.show_url %></p>
+
+<%= render :partial=>"user_mailer/footer.html" %>

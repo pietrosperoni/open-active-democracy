@@ -4,17 +4,17 @@
 		<ul id="menu_sub">
 			<li class="tab1">
 				<span class="tab_header">
-					<%= link_to t('menu.partner.account'), edit_partner_url(current_user.partner) %>
+					<%= link_to tr("Partner account", "view/partners/_nav"), edit_partner_url(current_user.partner) %>
 				</span>
 			</li>
 			<li class="tab2">
 				<span class="tab_header">
-					<%= link_to t('menu.partner.logo'), picture_partner_path(current_user.partner) %>
+					<%= link_to tr("Logo", "view/partners/_nav"), picture_partner_path(current_user.partner) %>
 				</span>
 			</li>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to t('menu.partner.email'), email_partner_path(current_user.partner) %>
+					<%= link_to tr("Email list", "view/partners/_nav"), email_partner_path(current_user.partner) %>
 				</span>
 			</li>			
 		</ul>

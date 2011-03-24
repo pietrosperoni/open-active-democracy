@@ -28,21 +28,21 @@ class Change < ActiveRecord::Base
     
   def validate
     if user.capitals_count < calculate_cost
-      errors.add(:base, I18n.t(:you_dont_have_enough_captial_to_suggest_a_takeover))
+      errors.add(:base, tr("You dont have enough captial to suggest a takeover", "model/change"))
     end
     if new_priority == priority
-      errors.add(:base, I18n.t(:you_cant_suggest_a_take_over_of_the_same_priority))
+      errors.add(:base, tr("You cant suggest a take over of the same priority", "model/change"))
     end
     if not is_endorsers and not is_opposers
-      errors.add(:base, I18n.t(:you_must_select_either_supporters_or_opposers))
+      errors.add(:base, tr("You must select either supporters or opposers", "model/change"))
     end
     if priority.has_change?
-      errors.add(:base, I18n.t(:this_priority_already_has_a_take_over_in_progress))
+      errors.add(:base, tr("This priority already has a take over in progress", "model/change"))
     end
   end
   
   validates_presence_of :priority, :user
-  validates_presence_of :new_priority, :message => I18n.t(:could_not_find_make_sure_you_entered_it_correctly)
+  validates_presence_of :new_priority, :message => tr("Could not find, make sure you entered it correctly", "model/change")
   validates_length_of :content, :maximum => 500, :allow_nil => true, :allow_blank => true  
   
   acts_as_list
@@ -159,11 +159,11 @@ class Change < ActiveRecord::Base
     hours = (minutes/60).round
     minutes_left = minutes - (hours*60)
     if hours < 1
-      return minutes_left.to_s + " #{I18n.t(:minutes_short)}."
+      return minutes_left.to_s + " #{tr("min", "model/change")}."
     elsif hours == 1
-      return hours.to_s + " #{I18n.t(:hours_short)} " + minutes_left.to_s + " #{I18n.t(:minutes_short)}."      
+      return hours.to_s + " #{tr("hr", "model/change")} " + minutes_left.to_s + " #{tr("min", "model/change")}."      
     else
-      return hours.to_s + " #{I18n.t(:hours_short)} " + minutes_left.to_s + " #{I18n.t(:minutes_short)}."
+      return hours.to_s + " #{tr("hr", "model/change")} " + minutes_left.to_s + " #{tr("min", "model/change")}."
     end
   end
   

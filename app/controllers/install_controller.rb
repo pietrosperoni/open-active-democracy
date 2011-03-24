@@ -5,7 +5,6 @@ class InstallController < ApplicationController
   protect_from_forgery :only => :blah
 
   skip_before_filter :check_installation
-  skip_before_filter :set_facebook_session
   skip_before_filter :load_actions_to_publish
   skip_before_filter :check_subdomain
   skip_before_filter :check_blast_click
@@ -59,7 +58,7 @@ class InstallController < ApplicationController
       @user.is_admin = true
       @user.save(:validate => false)
       CapitalGovernmentNew.create(:recipient => @user, :amount => 5)   
-      flash[:notice] = t('install.welcome.success_loggedin')
+      flash[:notice] = tr("Welcome to your nation!", "controller/install")
       redirect_to "/"         
     else
       render :action => "admin_user"

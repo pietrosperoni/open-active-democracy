@@ -1,27 +1,25 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= render :partial => "priorities/new_button" %>
-
 <p>
 <% if @priorities.any? %>
 	<% if params[:action] == 'official' %>
-		<%= t('tags.official.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+		<%= tr("This is the {official_user_name} agenda for {tag_name} as prioritized by all members", "view/issues/list", :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
 	<% elsif params[:action] == 'not_official' %>
-		<%= t('tags.not_official.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+		<%= tr("These are our members' {tag_name} priorities NOT on {official_user_name} agenda", "view/issues/list", :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
 	<% elsif params[:action] == 'official_opposed' %>
-		<%= t('tags.official_opposed.intro', :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+		<%= tr("These are our members' {tag_name} priorities that {official_user_name} opposes", "view/issues/list", :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
 	<% end %>
 <% else %>
-	<%= t('tags.show.empty', :tag_name => @tag_names.titleize)%>
+	<%= tr("No priorities for {tag_name} yet", "view/issues/list", :tag_name => @tag_names.titleize)%>
 <% end %>
 
 <% if @priorities.any? %>
 	<p>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= t('rank') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
+			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/issues/list") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/issues/list") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span></td>
 			<td style="padding-left: 7px; padding-bottom: 2px;"><%= will_paginate @priorities %></td>	
 		</tr>
 	<% for priority in @priorities %>

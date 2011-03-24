@@ -2,7 +2,7 @@
 <p>
 
 <% if not @activities %>
-	<%= t('activities.empty')%>
+	<%= tr("No activity here yet.", "view/news/changes_activity")%>
 <% else %>
 
 	<%= will_paginate(@activities) %>

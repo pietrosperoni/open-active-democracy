@@ -4,23 +4,23 @@ class FacebookController < ApplicationController
   protect_from_forgery :except => :multiple
 
   def invite
-    @page_title = t('facebook.invite.title', :government_name => current_government.name)
+    @page_title = tr("Invite your Facebook friends to join {government_name}", "controller/facebook", :government_name => current_government.name)
     @user = User.find(current_user.id)
     @facebook_contacts = @user.contacts.active.facebook.collect{|c|c.facebook_uid}
-    if current_facebook_user
-      app_users = current_facebook_user.user.friends_with_this_app
-      if app_users.any?
-        count = 0
-        @users = User.active.find(:all, :conditions => ["facebook_uid in (?)",app_users.collect{|u|u.uid}.uniq.compact])        
-        for user in @users
-          unless @facebook_contacts.include?(user.facebook_uid)
-            count += 1
-            current_user.follow(user)
-            @facebook_contacts << user.facebook_uid
-          end
-        end
-      end
-    end
+#    if current_facebook_user
+#      app_users = current_facebook_user.user.friends_with_this_app
+#      if app_users.any?
+#        count = 0
+#        @users = User.active.find(:all, :conditions => ["facebook_uid in (?)",app_users.collect{|u|u.uid}.uniq.compact])        
+#        for user in @users
+#          unless @facebook_contacts.include?(user.facebook_uid)
+#            count += 1
+#            current_user.follow(user)
+#            @facebook_contacts << user.facebook_uid
+#          end
+#        end
+#      end
+#    end
   end
 
   # POST /facebook/multiple
@@ -41,7 +41,7 @@ class FacebookController < ApplicationController
       end
     end
     if success > 0
-      flash[:notice] = t('facebook.invite.success', :number => success)
+      flash[:notice] = tr("Invited {number} of your Facebook friends", "controller/facebook", :number => success)
     end
     redirect_to invited_user_contacts_path(current_user)
   end

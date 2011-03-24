@@ -6,11 +6,11 @@
 		  <%= f.error_messages %>
 			<%= render :partial => "partners/form", :locals => {:f => f}%>
 		  <p>
-		    <%= f.submit t('partners.new.submit'), :class => "yellow_button" %>
+		    <%= f.submit tr("Become a partner", "view/partners/index"), :class => "yellow_button" %>
 		  </p>
 		<% end %>
 
 	</td><td valign="top" style="padding-left: 10px;">
-		<%= I18n.t('blurb_partner_intro')%>
+		<%= tr("Partner intro BLURB", "view/partners/index")%>
 	</td></tr>
 </table>

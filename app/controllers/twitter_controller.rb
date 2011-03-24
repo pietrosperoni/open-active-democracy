@@ -1,16 +1,36 @@
+require 'load_twitter_followers'
+
 class TwitterController < ApplicationController
+  
+  def oauth_callback_url
+    "http://#{Government.current.base_url}/twitter/callback"
+  end
+
+  def prepare_access_token(oauth_token, oauth_token_secret,oauth_verifier)
+    consumer = OAuth::Consumer.new(Government.first.twitter_key, Government.first.twitter_secret_key,
+      { :site => "http://api.twitter.com",
+        :scheme => :header
+      })
+    # now create the access token object from passed values
+    token_hash = { :oauth_token => oauth_token,
+                   :oauth_token_secret => oauth_token_secret,
+                   :oauth_verifier => oauth_verifier
+                 }
+    access_token = OAuth::AccessToken.from_hash(consumer, token_hash )
+    return access_token
+  end
 
   def self.consumer
-    OAuth::Consumer.new(ENV['TWITTER_KEY'],ENV['TWITTER_SECRET_KEY'],{ :site=>"http://twitter.com" })  
+    OAuth::Consumer.new(Government.first.twitter_key,Government.first.twitter_secret_key,{ :site=>"http://api.twitter.com" })  
   end
 
   def create
     store_previous_location    
-    @request_token = TwitterController.consumer.get_request_token
+    @request_token = TwitterController.consumer.get_request_token(:oauth_callback => oauth_callback_url)
     session[:request_token] = @request_token.token
     session[:request_token_secret] = @request_token.secret
     # Send to twitter.com to authorize
-    redirect_to @request_token.authorize_url.gsub('authorize', 'authenticate')
+    redirect_to @request_token.authorize_url+"&oauth_callback_url="+oauth_callback_url
     return
   end
 
@@ -18,13 +38,17 @@ class TwitterController < ApplicationController
     # Exchange the request token for an access token.
     stored_request_token = session[:request_token]
     stored_request_token_secret = session[:request_token_secret]
-    @request_token = OAuth::RequestToken.new(TwitterController.consumer, stored_request_token, stored_request_token_secret)   
-    @access_token = @request_token.get_access_token
-    @response = TwitterController.consumer.request(:get, '/account/verify_credentials.json', @access_token, { :scheme => :query_string })
+    Rails.logger.debug("stored req tok: #{stored_request_token} secret #{stored_request_token_secret}")
+    request_token = OAuth::RequestToken.new(TwitterController.consumer, session[:request_token], session[:request_token_secret])
+    @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+    Rails.logger.debug(@access_token.inspect)
+    @response = @access_token.get('/account/verify_credentials.json')
+    Rails.logger.debug("Twitter Response: #{@response.inspect}")
     if @response.class == Net::HTTPOK
+      Rails.logger.debug("Twitter Body: #{@response.body.inspect}")
       user_info = JSON.parse(@response.body)
       if not user_info['screen_name']
-        flash[:error] = t('sessions.create.failed_twitter')
+        flash[:error] = tr("Sign in from Twitter failed.", "controller/twitter")
         redirect_to Government.current.homepage_url + "twitter/failed"
         return
       else
@@ -65,17 +89,17 @@ class TwitterController < ApplicationController
   end
   
   def success
-    flash[:notice] = t('sessions.create.success', :government_name => Government.current.name, :user_name => current_user.name)
+    flash[:notice] = tr("Welcome back, {user_name}.", "controller/twitter", :government_name => Government.current.name, :user_name => current_user.name)
     redirect_back_or_default('/')
   end
   
   def connected
-    flash[:notice] = t('settings.twitter_connected')
+    flash[:notice] = tr("Your Twitter account is now linked", "controller/twitter")
     redirect_back_or_default('/')
   end
   
   def failed
-    flash[:error] = t('sessions.create.failed_twitter')
+    flash[:error] = tr("Sign in from Twitter failed.", "controller/twitter")
     redirect_back_or_default('/')
   end
 

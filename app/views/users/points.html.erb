@@ -2,7 +2,7 @@
 <p>
 
 <% if @points.empty? %>
-	<%= t('points.empty')%>
+	<%= tr("No talking points yet.", "view/users/points")%>
 <% else %>
 
 	<% for point in @points %>

@@ -5,18 +5,18 @@
 
 <% if not @users %>
 
-	<p><%= t('users.following.empty')%>
+	<p><%= tr("You are not following anyone yet.", "view/user_contacts/following")%>
 
 <% else %>
 
-	<p><%= t('users.following.intro')%>
+	<p><%= tr("These are the people you're following, ranked by their influence on the site. <br/>You can also <a href='/news/your_network_activities'>follow their updates in the news section</a>, or <a href='/priorities/network'>see all their priorities in one list</a>.", "view/user_contacts/following")%>
 
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td></td>
-			<td><span class="table_header"><%= t('rank') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.wk') %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= t('time.mo') %></span></td>
+			<td><span class="table_header"><%= tr("Rank", "view/user_contacts/following") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/user_contacts/following") %></span></td>
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/user_contacts/following") %></span></td>
 			<td style="padding-left: 7px; margin-bottom: 2px;" colspan="2"><%= will_paginate @users %></td>				
 		</tr>
 	<% for user in @users %>
@@ -26,10 +26,10 @@
 				<%= render :partial => "users/pic", :locals => {:user => user}%>
 			</td><td style="padding: 7px 5px 4px 0px;" valign="top">
 				<%= link_to user.login, user %><span class="pc"><%= user.capitals_count%><%= current_government.currency_short_name %></span>
-				<% if user.followers_count > 0 %> <%= t('users.followers.name', :count => user.followers_count)%><% end %>
+				<% if user.followers_count > 0 %> <%= tr("{count} followers", "view/user_contacts/following", :count => user.followers_count)%><% end %>
 				<% if user.has_top_priority? %>
-					<br/><%= t('endorsements.priority1') %>
-					<% if user.top_endorsement.is_down? %><span class="opposed"><%= t('oppose.ing')%></span><% end %>
+					<br/><%= tr("#1 priority:", "view/user_contacts/following") %>
+					<% if user.top_endorsement.is_down? %><span class="opposed"><%= tr("Opposing", "view/user_contacts/following")%></span><% end %>
 					<%= link_to user.top_endorsement.priority.name, user.top_endorsement.priority %>.
 				<% end %>
 			</td>

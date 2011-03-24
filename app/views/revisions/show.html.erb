@@ -8,26 +8,26 @@
 			<% if @revision.attribute_present?("content_diff")%>
 				<p>
 				<div class="notice">
-					<%= t('points.show.intro', :clean_url => clean_point_revision_url(@point,@revision))%>
+					<%= tr("This shows the changes from the previous revision. You can also <a href='{clean_url}'>see the clean version</a>", "view/revisions/show", :clean_url => clean_point_revision_url(@point,@revision))%>
 				</div>
 				<p>
 				<div class="point_content_detail">
-				<%= @revision.content_diff %>
+				<%= @revision.content_diff.html_safe %>
 				</div>
 				<% if @revision.has_website? %>
 					<div class="point_source">
-					<%= t('points.source')%> <a href="<%= @revision.website_link %>"><%= truncate(@revision.website_link,70) %></a>
+					<%= tr("Source:", "view/revisions/show")%> <a href="<%= @revision.website_link %>"><%= truncate(@revision.website_link,70) %></a>
 					</div>
 				<% end %>			
 
 			<% else %>
 			<p>
 			<div class="notice">
-				<%= t('revisions.errors.processing', :clean_url => clean_point_revision_url(@point,@revision))%>
+				<%= tr("Normally, you would see the changes made here, but there was some kind of processing error, so please check out the <a href='{clean_url}'>clean version</a>", "view/revisions/show", :clean_url => clean_point_revision_url(@point,@revision))%>
 			</div>
 			<% end %>
 			<p>
-			<div class="heading"><%= t('points.show.recent_activity')%></div>
+			<div class="heading"><%= tr("Recent activity on this talking point", "view/revisions/show")%></div>
 			<% for activity in @revision.activities.active %>
 				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>

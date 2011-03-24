@@ -1,19 +1,19 @@
-<% cache(["icelandic_parliment_priority_processes_main",I18n.locale,@priority_process.priority.id,@show_only_last_process ? "only_last_process" : "all_processes"], :expires_in => 1.hour) do %>
+<% cache(["icelandic_parliment_priority_processes_main",locale,@priority_process.priority.id,@show_only_last_process ? "only_last_process" : "all_processes"], :expires_in => 1.hour) do %>
 <% @total_discussions = ProcessDiscussion.count(:include=>[:priority_process],:conditions=>["priority_id = ?",@priority.id]) %>
 <% processes = PriorityProcess.find_all_by_priority_id(@priority.id,:order=>"stage_sequence_number") %>
 <% if @show_only_last_process %>
   <% processes = [processes.last] %>
   <h2><%=t "processes.only_last_process"%></h2>
-  <%=link_to t("processes.show_all_processes"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
+  <%=link_to tr("Show all processes", "view/priority_processes/templates"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
 <% else %>
 <br>
 <table width="100%">
     <tr align="left">
         <td align="left" style="padding-left:70px">
             <% form_tag("/process_speech_videos/search?priority_id=#{@priority.id}") do -%>
-            <b><%=label_tag t(:search_by_person) %></b>
+            <b><%=label_tag tr("Search by member of Althingi", "view/priority_processes/templates") %></b>
             <%=text_field_tag 'search_query' %>
-            <%= submit_tag t(:search) %>
+            <%= submit_tag tr("Search", "view/priority_processes/templates") %>
             <% end %>
         </td>
     </tr>
@@ -29,24 +29,24 @@
 	<% end %>
 	<% unless process_documents.empty? %>
 	<div class="althingi_process_documents">
-		<h3><%=t :althingi_process_documents %></h3>
+		<h3><%=tr("Althingi process_documents", "view/priority_processes/templates")%></h3>
 		<table>
 			<thead>
 				<tr>
 					<th class="release_date">
-						<%=t :althingi_release_date %>
+						<%=tr("Althingi release date", "view/priority_processes/templates")%>
 					</th>
 					<th class="law_document">
-						<%=t :althingi_law_document %>
+						<%=tr("Althingi law document", "view/priority_processes/templates")%>
 					</th>
 					<th class="document_type">
-						<%=t :althingi_process_document_type %>
+						<%=tr("Althingi document type", "view/priority_processes/templates")%>
 					</th>
 					<th>
-						<%=t :althingi_presenter %>
+						<%=tr("Althingi presenter", "view/priority_processes/templates")%>
 					</th>
 					<th>
-						<%=t :public_versions %>
+						<%=tr("Version from the public", "view/priority_processes/templates")%>
 					</th>
 				</tr>
 			</thead>
@@ -77,21 +77,21 @@
 	<% end %>
 	<% unless discussions.empty? %>
 		<div class="althingi_discussion">
-		<h3><%=t :althingi_discussion %></h3>
+		<h3><%=tr("Althingi discussion", "view/priority_processes/templates") %></h3>
 		<table>
 			<thead>
 				<tr>
 					<th>
-						<%=t :althingi_time_of_discussion %>
+						<%=tr("Althingi time of discussion", "view/priority_processes/templates") %>
 					</th>
 					<th>
-						<%=t :althingi_date_of_discussion %>
+						<%=tr("Althingi date of discussion", "view/priority_processes/templates") %>
 					</th>
 					<th>
-						<%=t :althingi_type_of_discussion %>
+						<%=tr("Althingi type of discussion", "view/priority_processes/templates") %>
 					</th>
 					<th>
-						<%=t :althingi_meeting %>
+						<%=tr("Althingi meeting", "view/priority_processes/templates") %>
 					</th>
 				</tr>
 			</thead>
@@ -101,7 +101,7 @@
 				<tr class="<%=cycle_class-%>">
 					<td>
 						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
-						<%=link_to t(:listen), "http://www.althingi.is"+discussion.listen_url, {:target => "_blank"} %>
+						<%=link_to tr("Listen", "view/priority_processes/templates"), "http://www.althingi.is"+discussion.listen_url, {:target => "_blank"} %>
 					</td>
 					<td>
 						<%=discussion.meeting_date.strftime("%d.%m.%Y") %>

@@ -7,8 +7,13 @@
 					<!-- <div id="footer_image"><a href="/"><%= image_tag current_government.logo.url(:icon_96), :border => 0 %></a></div>-->
 				<% end %>
 			</td>
-			<td valign="middle"><%= I18n.t("blurb_footer") %></td>
+			<td valign="middle"><%= tr("Footer BLURB", "view/shared/_footer") %></td>
 		</tr>
+		<tr>
+		  <td align="center">
+        <%= tr8n_language_strip_tag %>    
+      </td>
+	  </tr>
 	</table>
 </div>
 </div>

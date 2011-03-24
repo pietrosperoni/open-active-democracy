@@ -44,7 +44,7 @@ class SignupsController < ApplicationController
     @signup.ip_address = request.remote_ip
     respond_to do |format|
       if @signup.save
-        flash[:notice] = t('signups.saved')
+        flash[:notice] = tr("Saved signup", "controller/signups")
         format.html { redirect_to(@signup) }
       else
         format.html { render :action => "new" }
@@ -59,7 +59,7 @@ class SignupsController < ApplicationController
 
     respond_to do |format|
       if @signup.update_attributes(params[:signup])
-        flash[:notice] = t('signups.saved')
+        flash[:notice] = tr("Saved signup", "controller/signups")
         format.html { redirect_to(@signup) }
       else
         format.html { render :action => "edit" }

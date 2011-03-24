@@ -5,21 +5,21 @@
 
 		<li class="tab1">
 			<span class="tab_header">
-				<%= link_to t('menu.priorities.everyone.overview'), @priority %>
+				<%= link_to tr("Overview", "view/priorities/_nav"), @priority %>
 			</span>
 		</li>
 		<%= render :partial => "priorities/endorser_link" %>
 		<%= render :partial => "priorities/opposer_link" %>		
 		<% if @priority.documents_count > 0 %>
 			<li class="tab4 mega">
-				<span class="tab_header"><%= link_to t('menu.briefing.documents', :count => @priority.documents_count), everyone_documents_priority_url(@priority) %></span>
+				<span class="tab_header"><%= link_to tr("{count} documents", "view/priorities/_nav", :count => @priority.documents_count), everyone_documents_priority_url(@priority) %></span>
 				<div class="tab_body">
-					<%= t('menu.briefing.helpful_to')%><br/>
-					<%= link_to(t('menu.priorities.endorsers.name'), endorser_documents_priority_url(@priority)) %><% if @priority.up_documents_count > 0 %> (<%= @priority.up_documents_count %>)<% end %><br/>
-					<%= link_to(t('menu.priorities.opposers.name'), opposer_documents_priority_url(@priority)) %><% if @priority.down_documents_count > 0 %> (<%= @priority.down_documents_count %>)<% end %><br/>
-					<%= link_to(t('menu.priorities.undeclareds.name'), neutral_documents_priority_url(@priority)) %><% if @priority.neutral_documents_count > 0 %> (<%= @priority.neutral_points_count %>)<% end %><br/>
+					<%= tr("Helpful to:", "view/priorities/_nav")%><br/>
+					<%= link_to(tr("Endorsers", "view/priorities/_nav"), endorser_documents_priority_url(@priority)) %><% if @priority.up_documents_count > 0 %> (<%= @priority.up_documents_count %>)<% end %><br/>
+					<%= link_to(tr("Opposers", "view/priorities/_nav"), opposer_documents_priority_url(@priority)) %><% if @priority.down_documents_count > 0 %> (<%= @priority.down_documents_count %>)<% end %><br/>
+					<%= link_to(tr("Undeclared", "view/priorities/_nav"), neutral_documents_priority_url(@priority)) %><% if @priority.neutral_documents_count > 0 %> (<%= @priority.neutral_points_count %>)<% end %><br/>
 					<p>
-					<%= link_to t('menu.briefing.add_document.name'), new_priority_document_path(@priority), :title => t('menu.briefing.add_document.title'), :class => "qtip_left" %>
+					<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %>
 					<p>
 				</div>				
 			</li>
@@ -27,54 +27,54 @@
 		<% if @priority.points_count > 0 %>
 			<li class="tab5 mega">
 				<span class="tab_header">
-					<%= link_to t('menu.briefing.points', :count => @priority.points_count), top_points_priority_url(@priority) %>
+					<%= link_to tr("{count} talking points", "view/priorities/_nav", :count => @priority.points_count), top_points_priority_url(@priority) %>
 				</span>
 				<div class="tab_body">
-					<%= link_to(t('priorities.top_points.title'), top_points_priority_url(@priority)) %><br/>
+					<%= link_to(tr("Top points", "view/priorities/_nav"), top_points_priority_url(@priority)) %><br/>
 					<p>
-					<%= link_to t('points.top_points.add_point_for_endorse'), new_priority_point_path(@priority)+"?support=1" , :title => t('menu.briefing.add_point.title'), :class => "qtip_left" %><br/>
-					<%= link_to t('points.top_points.add_point_for_oppose'), new_priority_point_path(@priority), :title => t('menu.briefing.add_point.title'), :class => "qtip_left" %><br/>
+					<%= link_to tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority)+"?support=1" , :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
+					<%= link_to tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 					<p>
 				</div>
 			</li>
 		<% else %>
 			<li class="tab5">
 				<span class="tab_header">
-					<%= link_to t('points.top_points.new_point_short'), new_priority_point_path(@priority)+"?support=1" , :title => t('menu.briefing.add_point.title'), :class => "qtip_left" %><br/>
+					<%= link_to tr("New point", "view/priorities/_nav"), new_priority_point_path(@priority)+"?support=1" , :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				</span>
 			</li>
 		<% end %>
 		<li class="tab6">
 			<span class="tab_header">
 				<% if @priority.discussions_count == 0 %>
-					<%= link_to t('menu.briefing.discussions.name'), discussions_priority_url(@priority) %>
+					<%= link_to tr("Discussions", "view/priorities/_nav"), discussions_priority_url(@priority) %>
 				<% else %>
-					<%= link_to t('menu.briefing.discussions', :count => @priority.discussions_count), discussions_priority_url(@priority) %>
+					<%= link_to tr("{count} discussions", "view/priorities/_nav", :count => @priority.discussions_count), discussions_priority_url(@priority) %>
 				<% end %>
 			</span>
 		</li>
 		<% if @priority.changes_count > 0 or params[:controller] == 'changes' %>
 			<li class="tab7">
 				<span class="tab_header">
-					<%= link_to t('menu.news.manda'), priority_changes_url(@priority)%>
+					<%= link_to tr("M&A", "view/priorities/_nav"), priority_changes_url(@priority)%>
 				</span>
 			</li>
 		<% end %>
 		<li class="tab8">
 			<span class="tab_header">
-				<%= link_to t('menu.news.name'), activities_priority_url(@priority) %>
+				<%= link_to tr("News", "view/priorities/_nav"), activities_priority_url(@priority) %>
 			</span>
 		</li>
 		<% unless @priority.priority_processes.empty? %>
 			<li class="tab9">
 				<span class="tab_header">
-					<%= link_to t('menu.processes.name'), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
+					<%= link_to tr("Processes", "view/priorities/_nav"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
 				</span>
 			</li>
 			<% if has_process_documents? %>
 				<li class="tab10 mega">
 					<span class="tab_header">
-						<%= link_to t('menu.process_documents.name'), "#" %>
+						<%= link_to tr("Process Documents", "view/priorities/_nav"), "#" %>
 					</span>
 					<div class="tab_body">
 						<% @priority.priority_processes.each do |process| %>
@@ -88,7 +88,7 @@
 			<% if has_process_discussions? %>
 				<li class="tab11 mega">
 					<span class="tab_header">
-						<%= link_to t('menu.process_discussions.name'), "#" %>
+						<%= link_to tr("Process Discussions", "view/priorities/_nav"), "#" %>
 					</span>
 					<div class="tab_body">
 						<% @priority.priority_processes.each do |process| -%>
@@ -105,36 +105,36 @@
 		<% end %>
 		<li class="tab12 mega">
 			<span class="tab_header action">
-				<%= link_to t('menu.priorities.action'), new_priority_point_path(@priority) %>
+				<%= link_to tr("Action", "view/priorities/_nav"), new_priority_point_path(@priority) %>
 			</span>
 			<div class="tab_body">
-				<%= link_to t('menu.briefing.add_point.name'), new_priority_point_path(@priority), :title => t('menu.briefing.add_point.title'), :class => "qtip_left" %><br/>
-				<%= link_to t('menu.briefing.add_document.name'), new_priority_document_path(@priority), :title => t('menu.briefing.add_document.title'), :class => "qtip_left" %><br/>
+				<%= link_to tr("Add a talking point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
+				<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
-					<span class="greyed_out"><%= t('menu.priorities.add_ad.name') %></span><br/>
+					<span class="greyed_out"><%= tr("Buy an ad for this priority", "view/priorities/_nav") %></span><br/>
 				<% else %>
-					<%= link_to t('menu.priorities.add_ad.name'), new_priority_ad_url(@priority), :title => t('menu.priorities.add_ad.title', :currency_name => current_government.currency_name.downcase), :class => "qtip_left" %><br/>
+					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => current_government.currency_name.downcase), :class => "qtip_left" %><br/>
 				<% end %>
 				<% if @priority.has_change? %>
-					<span class="greyed_out"><%= t('menu.priorities.add_proposal.name') %></span><br/>
+					<span class="greyed_out"><%= tr("Propose an acquisition", "view/priorities/_nav") %></span><br/>
 				<% else %>
-					<%= link_to t('menu.priorities.add_proposal.name'), new_priority_change_url(@priority), :title => t('menu.priorities.add_proposal.title'), :class => "qtip_left" %><br/>
+					<%= link_to tr("Propose an acquisition", "view/priorities/_nav"), new_priority_change_url(@priority), :title => tr("Is there another priority this one should merge with?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% end %>
 				<% if logged_in? and @priority.status != 'inactive' %>
 					<% if (current_user.id == @priority.user_id and @priority.endorsements_count < 2) or current_user.is_admin? %>
-						<%= link_to t('menu.priorities.edit.name'), edit_priority_url(@priority), :title => t('menu.priorities.edit.title'), :class => "qtip_left" %>						
+						<%= link_to tr("Edit this priority", "view/priorities/_nav"), edit_priority_url(@priority), :title => tr("Edit this priority", "view/priorities/_nav"), :class => "qtip_left" %>						
 						<br/>
-						<%= link_to t('menu.priorities.delete.name'), @priority, :title => t('menu.priorities.delete.title'), :confirm => t('menu.priorities.delete.confirm', :priority_name => @priority.name), :method => :delete %><br/>
+						<%= link_to tr("Delete this priority", "view/priorities/_nav"), @priority, :title => tr("Permanently delete this priority", "view/priorities/_nav"), :confirm => tr("Are you sure you want to permanently delete {priority_name}?", "view/priorities/_nav", :priority_name => @priority.name), :method => :delete %><br/>
 					<% end %>
-					<%= link_to t('menu.priorities.flag.name'), flag_inappropriate_priority_url(@priority), :title => t('menu.priorities.flag.title'), :class => "qtip_left", :confirm => t('menu.priorities.flag.confirm'), :method => :put %><br/>
+					<%= link_to tr("Flag for review", "view/priorities/_nav"), flag_inappropriate_priority_url(@priority), :title => tr("Should the site administrator take a look at this priority? Also post a bulletin if it's not obvious what the problem is.", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to flag this priority to be reviewed by the site administrator. If it's not clear why you are flagging it, please post a bulletin so they can take appropriate action.", "view/priorities/_nav"), :method => :put %><br/>
 				<% end %>
 				<p>
 				<% if logged_in? and current_user.is_admin? %>
-					<%= link_to t('menu.priorities.bury.name'), bury_priority_url(@priority), :title => t('menu.priorities.bury.title'), :class => "qtip_left", :confirm => t('menu.priorities.bury.confirm', :priority_name => @priority.name), :method => :put %>
-					<br/><%= link_to t('menu.priorities.successful.name'), successful_priority_url(@priority), :title => t('menu.priorities.successful.title'), :class => "qtip_left", :confirm => t('menu.priorities.successful.confirm', :priority_name => @priority.name), :method => :put %>		
-					<br/><%= link_to t('menu.priorities.compromised.name'), compromised_priority_url(@priority), :title => t('menu.priorities.compromised.title'), :class => "qtip_left", :confirm => t('menu.priorities.compromised.confirm', :priority_name => @priority.name), :method => :put %>		
-					<br/><%= link_to t('menu.priorities.failed.name'), failed_priority_url(@priority), :title => t('menu.priorities.failed.title'), :class => "qtip_left", :confirm => t('menu.priorities.failed.confirm', :priority_name => @priority.name), :method => :put %>		
-					<br/><%= link_to t('menu.priorities.intheworks.name'), intheworks_priority_url(@priority), :title => t('menu.priorities.intheworks.title'), :class => "qtip_left", :confirm => t('menu.priorities.intheworks.confirm', :priority_name => @priority.name), :method => :put %>	
+					<%= link_to tr("Remove from rankings", "view/priorities/_nav"), bury_priority_url(@priority), :title => tr("Remove this priority from the rankings", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to de-list this priority from the rankings: {priority_name}. Only do this for things that are insincere, obscene or ridiculous", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>
+					<br/><%= link_to tr("Mark this successful", "view/priorities/_nav"), successful_priority_url(@priority), :title => tr("Mark this priority finished and successful", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority finished and successful: {priority_name}. Please be patient, it may take a minute or two to process if this priority has a lot of endorsements", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>		
+					<br/><%= link_to tr("Mark this compromised", "view/priorities/_nav"), compromised_priority_url(@priority), :title => tr("Mark this priority finished, but compromised", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority finished, but compromised: {priority_name}. Please be patient, it may take a minute or two to process if this priority has a lot of endorsements", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>		
+					<br/><%= link_to tr("Mark this failed", "view/priorities/_nav"), failed_priority_url(@priority), :title => tr("Mark this priority as finished and failed", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority finished and failed: {priority_name}. Please be patient, it may take a minute or two to process if this priority has a lot of endorsements", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>		
+					<br/><%= link_to tr("Mark this as in the works", "view/priorities/_nav"), intheworks_priority_url(@priority), :title => tr("Mark this priority as in the works", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority as in the works: {priority_name}.", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>	
 				<% end %>
 				
 			</div>
@@ -154,11 +154,11 @@
 								</div>
 								
 								<span class="yes_and_no_points_link_hacky add_point_for yellow_button">
-									<%=link_to(t('points.top_points.add_point_for_endorse'), new_priority_point_path(@priority,:support=>true))%>
+									<%=link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%>
 								</span>
 	
 								<span class="yes_and_no_points_link_hacky add_point_against yellow_button">
-									<%=link_to(t('points.top_points.add_point_for_oppose'), new_priority_point_path(@priority,:support=>false))%>
+									<%=link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%>
 								</span>
 	</div>
 <% else %>
@@ -172,11 +172,11 @@
 								</div>
 								
 								<span class="yes_and_no_points_link_hacky add_point_for yellow_button">
-									<%=link_to(t('points.top_points.add_point_for_endorse'), new_priority_point_path(@priority,:support=>true))%>
+									<%=link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%>
 								</span>
 	
 								<span class="yes_and_no_points_link_hacky add_point_against yellow_button">
-									<%=link_to(t('points.top_points.add_point_for_oppose'), new_priority_point_path(@priority,:support=>false))%>
+									<%=link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%>
 								</span>
 	</div>
 <% end %>

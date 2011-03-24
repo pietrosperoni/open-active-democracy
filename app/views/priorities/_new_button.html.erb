@@ -1,2 +1,5 @@
-<%= button_to "Ný hugmynd: #{Partner.current ? Partner.current.name_variations[4] : 'Skuggaborg'}", :controller=>"priorities", :action=>"new" %>
-
+<%= link_to :controller=>"priorities", :action=>"new" do %>
+  <div id="new_priority_button">
+    <%=tr("Create a new priority","Button")%>
+  </div>
+<% end %>

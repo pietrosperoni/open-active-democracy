@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td width="130px" align="left">
+          <% if defined?(attachments)%>
+            <%= image_tag attachments['logo.png'].url %>
+          <% else %>
+            <%= image_tag "logos/email.png" %>
+          <% end %>
+        </td>
+        <td>
+        <h1 style="margin-left: 15px;font-family:sans-serif,helvetica,arial"><%=tr("Your Priorities","email")%>
+        </td>
+     </tr>
+   </table>

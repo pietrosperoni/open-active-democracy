@@ -3,4 +3,4 @@
 <% else %>
 <img src="/images/icons/email_open.png" height="16" width="16" border="0" class="icon">
 <% end %>
-<%= t('notification.message.with_link', :sender_name => link_to(notification.sender.name, notification.sender), :message_url => user_messages_url(notification.sender)) %>
+<%= tr("{sender_name} sent you a <a href='{message_url}'>private message</a>", "view/notifications/_notificationmessage", :sender_name => link_to(notification.sender.name, notification.sender), :message_url => user_messages_url(notification.sender)) %>

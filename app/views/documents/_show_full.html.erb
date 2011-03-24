@@ -3,7 +3,7 @@
 		<% if document.priority %>
 			<%= official_status(document.priority) %>
 			<% if document.is_down? %>
-				<span class="opposed"><%= t('oppose.ed')%></span>
+				<span class="opposed"><%= tr("opposed", "view/documents/_show_full")%></span>
 			<% end %>
 			<%= link_to document.priority.name, document.priority %>
 		<% end %>
@@ -16,7 +16,7 @@
 	<% end %>
 	</div>
 	<div class="point_byline">
-		<%= t('revisions.word_count', :count => document.word_count) %> <%= t('revisions.byline', :author_sentence => document.author_sentence) %><% if revision %>, <%= t('revisions.revised', :time_ago => time_ago(revision.created_at)) %> <%= t('revisions.byline', :author_sentence => link_to(revision.user.name, revision.user)) %><% else %>, <%= t('revisions.added', :time_ago => time_ago(document.created_at)) %><% end %>.
+		<%= tr("{count} words", "view/documents/_show_full", :count => document.word_count) %> <%= tr("by {author_sentence}", "view/documents/_show_full", :author_sentence => document.author_sentence) %><% if revision %>, <%= tr("revised {time_ago}", "view/documents/_show_full", :time_ago => time_ago(revision.created_at)) %> <%= tr("by {author_sentence}", "view/documents/_show_full", :author_sentence => link_to(revision.user.name, revision.user)) %><% else %>, <%= tr("added {time_ago}", "view/documents/_show_full", :time_ago => time_ago(document.created_at)) %><% end %>.
 	</div>
 
 	<% @point_value = document.value %>

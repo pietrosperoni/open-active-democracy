@@ -8,7 +8,7 @@
 			<% if @document.revision_id != @revision.id %>
 			<p>
 			<div class="notice">
-				<%= t('document.revision.clean.intro', :revision_url => document_revision_url(@document,@revision), :time_ago => time_ago(@revision.created_at)) %>
+				<%= tr("Here's what this document looked like {time_ago}. You can also <a href='{revision_url}'>see the changes</a> in this version from the previous one.", "view/document_revisions/clean", :revision_url => document_revision_url(@document,@revision), :time_ago => time_ago(@revision.created_at)) %>
 			</div>
 			<% end %>
 

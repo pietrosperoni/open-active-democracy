@@ -82,10 +82,10 @@ class Message < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-#    redcloth
-    youtube(:width => 330, :height => 210)
-    vimeo(:width => 330, :height => 180)
-    link(:rel => "nofollow")
+    html_escape
+    youtube :width => 330, :height => 210
+    vimeo :width => 330, :height => 180
+    link :target => "_blank", :rel => "nofollow"
   end  
   
 end

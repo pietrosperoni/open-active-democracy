@@ -11,7 +11,7 @@
 			
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.facebook_api_key.label')%>
+						<%= tr("Facebook API key (<a href='http://www.facebook.com/developers/#/developers/createapp.php'>Get it here</a>)", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :facebook_api_key, :size => 40, :maxlength => 32 %>
@@ -19,7 +19,7 @@
 				</div>
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.facebook_secret_key.label')%>
+						<%= tr("Facebook secret key", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :facebook_secret_key, :size => 40, :maxlength => 32 %>
@@ -28,7 +28,7 @@
 
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.twitter_key.label')%>
+						<%= tr("Twitter Consumer Key (<a href='http://twitter.com/oauth_clients'>Get it here</a>)", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :twitter_key, :size => 40, :maxlength => 46 %>
@@ -36,7 +36,7 @@
 				</div>
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.twitter_secret_key.label')%>
+						<%= tr("Twitter Consumer Secret", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :twitter_secret_key, :size => 40, :maxlength => 46 %>
@@ -45,16 +45,16 @@
 			
 			<div class="field">
 				<div class="field_box">
-		  		<%= f.check_box :is_facebook %> <%= t('government.settings.is_facebook.label')%>
+		  		<%= f.check_box :is_facebook %> <%= tr("Enable Facebook integration", "view/governments/apis")%>
 				</div>
 				<div class="field_box">
-		  		<%= f.check_box :is_twitter %> <%= t('government.settings.is_twitter.label')%>
+		  		<%= f.check_box :is_twitter %> <%= tr("Enable Twitter integration", "view/governments/apis")%>
 				</div>
 			</div>			
 			
 			<div class="field">
 				<div class="field_label">
-					<%= t('government.settings.google_analytics_code.label')%>
+					<%= tr("Google Analytics code (like UA-2839551-1)", "view/governments/apis")%>
 				</div>
 				<div class="field_box">
 		  		<%= f.text_field :google_analytics_code, :size => 40, :maxlength => 15 %>
@@ -63,7 +63,7 @@
 			
 			<div class="field">
 				<div class="field_label">
-					<%= t('government.settings.quantcast_code.label')%>
+					<%= tr("Quantcast code (like p-5ftmjaPECGTTU)", "view/governments/apis")%>
 				</div>
 				<div class="field_box">
 		  		<%= f.text_field :quantcast_code, :size => 40, :maxlength => 20 %>
@@ -74,7 +74,7 @@
 			
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.yahoo_appid.label')%>
+						<%= tr("Yahoo Appid (<a href='https://developer.yahoo.com/wsregapp/'>Get it here</a>)", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :yahoo_appid, :size => 40, :maxlength => 40 %>
@@ -82,7 +82,7 @@
 				</div>
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.yahoo_secret_key.label')%>
+						<%= tr("Yahoo secret key", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :yahoo_secret_key, :size => 40, :maxlength => 32 %>
@@ -91,7 +91,7 @@
 			
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.windows_appid.label')%>
+						<%= tr("Windows Live appid (<a href='http://msdn.microsoft.com/en-us/library/cc287659.aspx'>Get it here</a>)", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :windows_appid, :size => 40, :maxlength => 32 %>
@@ -99,7 +99,7 @@
 				</div>
 				<div class="field">
 					<div class="field_label">
-						<%= t('government.settings.windows_secret_key.label')%>
+						<%= tr("Windows secret key", "view/governments/apis")%>
 					</div>
 					<div class="field_box">
 						<%= f.text_field :windows_secret_key, :size => 40, :maxlength => 32 %>
@@ -108,5 +108,5 @@
 			
 		</td></tr>
 	</table>
-    <%= f.submit t('government.settings.apis.submit'), :class => "yellow_button" %>
+    <%= f.submit tr("Save API settings", "view/governments/apis"), :class => "yellow_button" %>
 <% end %>

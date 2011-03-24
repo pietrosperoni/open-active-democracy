@@ -3,7 +3,7 @@
 <p>
 
 <% if @documents.empty? and not @priority.replaced? %>
-<%= t('document.empty')%> <%= link_to t('menu.briefing.add_document.name'), new_priority_document_path(@priority) %>
+<%= tr("No documents yet.", "view/priorities/documents")%> <%= link_to tr("Add a document", "view/priorities/documents"), new_priority_document_path(@priority) %>
 <% end %>			
 
 <% if @documents.any? %>

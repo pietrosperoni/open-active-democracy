@@ -1,7 +1,7 @@
 <% if @activity.has_priority? %>
 	<div id="priority_intro">
 		<%= link_to @activity.priority.name, @activity.priority %> &raquo;
-		<%= link_to t('comments.discussions.name', :count => @activity.priority.discussions_count), discussions_priority_url(@activity.priority) %> &raquo;
+		<%= link_to tr("{count} discussions", "view/comments/index", :count => @activity.priority.discussions_count), discussions_priority_url(@activity.priority) %> &raquo;
 	</div>
 	<p>
 <% end %>
@@ -28,7 +28,7 @@
 			
 			<% if @activity.comments_count > 0 and @activity.priority and @activity.priority.discussions_count > 1 %>
 				<p>
-				<%= link_to t('comments.discussions.more', :count => @activity.priority.discussions_count-1, :priority_name => @activity.priority.name), discussions_priority_url(@activity.priority) %>
+				<%= link_to tr("{count} more discussions in {priority_name}", "view/comments/index", :count => @activity.priority.discussions_count-1, :priority_name => @activity.priority.name), discussions_priority_url(@activity.priority) %>
 			<% end %>
 			
 		</td>	
@@ -39,7 +39,7 @@
 				<p>
 			<% end %>
 			<% if @activity.comments_count > 1 %>
-				<div class="heading"><%= t('comments.people') %></div>
+				<div class="heading"><%= tr("People commenting", "view/comments/index") %></div>
 				<% for user in @activity.commenters_count %>
 			
 				<table border="0" cellspacing="0" cellpadding="0">
@@ -47,9 +47,9 @@
 						<%= render :partial => "users/pic_48", :locals => {:user => user[0]}%>
 					</td><td valign="top" style="padding-left: 8px;">
 						<% if user[0].status == 'suspended' or user[0].status == 'deleted' %><strike><% end %>
-						<%= link_to user[0].name, user[0] %><span class="pc"><%= t('pc.name', :capital => user[0].capitals_count, :currency_short_name =>  current_government.currency_short_name) %></span>
+						<%= link_to user[0].name, user[0] %><span class="pc"><%= tr("{capital}{currency_short_name}", "view/comments/index", :capital => user[0].capitals_count, :currency_short_name => current_government.currency_short_name) %></span>
 						<% if user[0].status == 'suspended' or user[0].status == 'deleted' %></strike><% end %>
-						<div class="profile_small"><%= t('comments.name', :count => user[1]) %></div>
+						<div class="profile_small"><%= tr("{count} comments", "view/comments/index", :count => user[1]) %></div>
 					</td></tr>
 				</table>
 				<p>		

@@ -1,4 +1,4 @@
-<div id="quiz_header" align="center"><%= t('prioritizer.duel.question')%></div>
+<div id="quiz_header" align="center"><%= tr("Which priority is more important?", "view/prioritizer/_duel")%></div>
 
 <div id="prioritizer_container">
 <div id="prioritizer" align="center">
@@ -8,15 +8,15 @@
 		<table border="0" cellspacing="0" cellpadding="0" width="100%">
 
 			<tr><td valign="top" align="center" class="prioritizer_choice" width="45%" height="50">
-				<% if @endorsement1.is_down? %><span class="opposed"><%= t('oppose.ing')%></span><% end %>
+				<% if @endorsement1.is_down? %><span class="opposed"><%= tr("Opposing", "view/prioritizer/_duel")%></span><% end %>
 				<%= link_to @endorsement1.priority.name, url_for(:controller => "prioritizer", :action => "winner1", :endorsement1 => @endorsement1.id, :endorsement2 => @endorsement2.id),
                     'data-disable-with' => "",
                     'data-loader-name' => "horizontal_small",               
                      :remote=>true %>
 				</td><td valign="top" align="center" width="10%">
-					<%= t('or')%>
+					<%= tr("OR", "view/prioritizer/_duel")%>
 				</td><td valign="top" align="center" class="prioritizer_choice" width="45%" height="50">
-					<% if @endorsement2.is_down? %><span class="opposed"><%= t('oppose.ing')%></span><% end %>
+					<% if @endorsement2.is_down? %><span class="opposed"><%= tr("Opposing", "view/prioritizer/_duel")%></span><% end %>
 					<%= link_to @endorsement2.priority.name, url_for(:controller => "prioritizer", :action => "winner2", :endorsement1 => @endorsement1.id, :endorsement2 => @endorsement2.id),
                       'data-disable-with' => "",
                       'data-loader-name' => "horizontal_small",               
@@ -30,15 +30,15 @@
 		<table border="0" cellspacing="0" cellpadding="0" width="100%">
 
 			<tr><td valign="top" align="center" class="prioritizer_choice" width="45%" height="50">
-				<% if @endorsement2.is_down? %><span class="opposed"><%= t('oppose.ing')%></span><% end %>
+				<% if @endorsement2.is_down? %><span class="opposed"><%= tr("Opposing", "view/prioritizer/_duel")%></span><% end %>
 				<%= link_to @endorsement2.priority.name, url_for(:controller => "prioritizer", :action => "winner2", :endorsement1 => @endorsement1.id, :endorsement2 => @endorsement2.id),
                     'data-disable-with' => "",
                     'data-loader-name' => "horizontal_small",               
                     :remote=>true %>						
 				</td><td valign="top" align="center" width="10%">
-					<%= t('or')%>
+					<%= tr("OR", "view/prioritizer/_duel")%>
 				</td><td valign="top" align="center" class="prioritizer_choice" width="45%" height="50">
-					<% if @endorsement1.is_down? %><span class="opposed"><%= t('oppose.ing')%></span><% end %>
+					<% if @endorsement1.is_down? %><span class="opposed"><%= tr("Opposing", "view/prioritizer/_duel")%></span><% end %>
 					<%= link_to @endorsement1.priority.name, url_for(:controller => "prioritizer", :action => "winner1", :endorsement1 => @endorsement1.id, :endorsement2 => @endorsement2.id),
                       'data-disable-with' => "",
                       'data-loader-name' => "horizontal_small",               
@@ -50,7 +50,7 @@
 	<% end %>
 
 	<div id="prioritizer_skip"><div class="grey_button">
-	  <%= link_to t('prioritizer.duel.same'), url_for(:controller => "prioritizer", :action => "same", :endorsement1 => @endorsement1.id, :endorsement2 => @endorsement2.id),
+	  <%= link_to tr("About the same", "view/prioritizer/_duel"), url_for(:controller => "prioritizer", :action => "same", :endorsement1 => @endorsement1.id, :endorsement2 => @endorsement2.id),
                 'data-disable-with' => "",
                 'data-loader-name' => "horizontal_small",               
                 :remote=>true %>

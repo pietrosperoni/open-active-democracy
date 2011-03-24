@@ -57,6 +57,8 @@ h4 {
 	padding: 0px 3px 0px 3px;
 }
 
+
+
 #sidebar {
 	width: 240px;
 	float: right;
@@ -70,7 +72,7 @@ h4 {
 
 #branding {
 	font-size: 2em;
-	background-color: #F0F0F0;
+	background-color: #FEFEFE;
 }
 
 #branding a {
@@ -122,6 +124,7 @@ h4 {
 }
 #search_box {
 	padding: 5px 5px 5px 10px;
+	float: right;
 }
 #intro, #buzz_box {
 	margin-top: 10px;

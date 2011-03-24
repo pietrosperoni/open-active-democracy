@@ -51,7 +51,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        flash[:notice] = t('votes.new.success')
+        flash[:notice] = tr("Voted", "controller/votes")
         format.html { priority_change_vote(@priority,@change,@vote) }
       else
         format.html { render :action => "new" }
@@ -66,7 +66,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.update_attributes(params[:vote])
-        flash[:notice] = t('votes.new.success')
+        flash[:notice] = tr("Voted", "controller/votes")
         format.html { priority_change_vote(@priority,@change,@vote) }
       else
         format.html { render :action => "edit" }

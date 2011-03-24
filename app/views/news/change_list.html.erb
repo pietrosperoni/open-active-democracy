@@ -2,7 +2,7 @@
 <p>
 
 <% if @changes.empty? %>
-	<%= t('changes.empty')%>
+	<%= tr("No acquisition proposals", "view/news/change_list")%>
 <% else %>
 
 	<%= will_paginate(@changes) %>

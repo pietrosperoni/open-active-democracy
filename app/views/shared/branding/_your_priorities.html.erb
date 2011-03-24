@@ -1,0 +1,30 @@
+<div id="branding" style="height: 58px">
+  <table>
+    <tr>
+      <td>
+        <div id="main_logo">
+          <%= link_to :controller=>"portal", :host=>"www.yrpri.org" do %>
+            <%=get_random_logo%>
+          <% end %>
+        </div>
+      </td>
+      <% if current_partner %>
+        <td>
+          <div id="partner_logo">
+            <%= render :partial => "partners/logo" %>
+          </div>
+        </td>
+      <% end %>
+      <td>
+        <div id="branding_text">
+          <div id="branding_text_header">
+            <%=tr("Your Priorities","views/shared/_branding")%>
+          </div>
+          <div id="branding_text_sub">
+            <%=request.host%>
+          </div>
+        </div>
+      </td>  
+    </tr>
+  </table>
+</div>

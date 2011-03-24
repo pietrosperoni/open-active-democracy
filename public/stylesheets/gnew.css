@@ -1,7 +1,18 @@
+#user_info_box {
+  font-size:12px;
+  font-weight: bold;
+  line-height:1.4em;
+  padding:2px 5px 3px 8px;
+  border:1px solid #ddd !important;
+  background-color:#fff;
+}
+
+#user_info_box_picture {
+  float: right;
+}
 .top_p {
 /*margin-top: 20px; */
 }
-
 
 /* Default link color */
 
@@ -440,9 +451,7 @@ border:1px solid #DDD !Important;
 
 #header
 {
-border-bottom: 1px solid #ddd;	
-border-left: 1px solid #ddd;	
-border-right: 1px solid #ddd;	
+width: 720px;
 }
 
 #activities {

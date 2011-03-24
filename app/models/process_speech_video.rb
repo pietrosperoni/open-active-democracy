@@ -28,7 +28,7 @@ class ProcessSpeechVideo < ActiveRecord::Base
     class_id = " class=\"#{class_id}\"" if class_id
     title_txt = "title=\"#{pos ? pos.to_s+'. ' : ""}#{self.title} - #{self.modified_duration_long}|#{self.process_discussion.meeting_date.strftime("%d/%m/%y")}<br><br>\
                 #{self.process_discussion.priority_process.priority.name}<br><br>\
-                #{self.rating}/5.0 - #{self.ratings.size} #{I18n.translate :votes_counted}\"" if title
+                #{self.rating}/5.0 - #{self.ratings.size} #{t :votes_counted}\"" if title
     "<a href=\"/process_speech_videos/show/#{self.id}\"#{class_id}#{title_txt}><img src=\"#{tiny_filename}\" height=\"50\" width=\"80\" border=0 style=\"padding-#{padding_direction}:#{ancenstor_number*7}px\"></a>"
   end
 
@@ -75,11 +75,11 @@ class ProcessSpeechVideo < ActiveRecord::Base
     time = (time - minutes) / 60
     hours      =  time % 24
     if hours > 0
-      "#{hours} #{I18n.t(:hours_short)} #{minutes} #{I18n.t(:minutes_short)} #{seconds} #{I18n.t(:seconds_short)}"
+      "#{hours} #{tr("hr", "model/video")} #{minutes} #{tr("min", "model/video")} #{seconds} #{tr("sec", "model/video")}"
     elsif minutes > 0
-      "#{minutes} #{I18n.t(:minutes_short)} #{seconds} #{I18n.t(:seconds_short)}"
+      "#{minutes} #{tr("min", "model/video")} #{seconds} #{tr("sec", "model/video")}"
     else
-      "#{seconds} #{I18n.t(:seconds_short)}"
+      "#{seconds} #{tr("sec", "model/video")}"
     end
   end
   

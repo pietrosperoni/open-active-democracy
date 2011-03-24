@@ -5,18 +5,18 @@
 	<tr><td>
 		<div class="heading">
 			<% if point_value == 0 %> 
-				<%= t('points.title') %>
+				<%= tr("Talking points", "view/priorities/_points") %>
 			<% elsif point_value == 1 %>
-				<%= t('points.helpful.endorsers') %>
+				<%= tr("Talking points helpful to endorsers", "view/priorities/_points") %>
 			<% elsif point_value == -1 %>
-				<%= t('points.helpful.opposers') %>
+				<%= tr("Talking points helpful to opposers", "view/priorities/_points") %>
 			<% elsif point_value == 2 %>
-				<%= t('points.helpful.undeclared') %>
+				<%= tr("Talking points helpful to undeclared", "view/priorities/_points") %>
 			<% end %>
 		</div>
 		</td><td align="right">
 			<div class="heading_link">
-			<%= link_to t('menu.briefing.add_point.name'), new_priority_point_path(@priority), :title => t('menu.briefing.add_point.title'), :class => "qtip_left" %>
+			<%= link_to tr("Add a talking point", "view/priorities/_points"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_points"), :class => "qtip_left" %>
 			</div>
 		</td>
 	</tr>

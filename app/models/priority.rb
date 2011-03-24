@@ -62,6 +62,11 @@ class Priority < ActiveRecord::Base
   has_many :down_endorsers, :through => :endorsements, :conditions => "endorsements.status in ('active','inactive') and endorsements.value=-1", :source => :user, :class_name => "User"
     
   has_many :points, :conditions => "points.status in ('published','draft')"
+  accepts_nested_attributes_for :points
+
+  has_many :my_points, :conditions => "points.status in ('published','draft')", :class_name => "Point"
+  accepts_nested_attributes_for :my_points
+  
   has_many :incoming_points, :foreign_key => "other_priority_id", :class_name => "Point"
   has_many :published_points, :conditions => "status = 'published'", :class_name => "Point", :order => "points.helpful_count-points.unhelpful_count desc"
   has_many :points_with_deleted, :class_name => "Point", :dependent => :destroy
@@ -89,12 +94,22 @@ class Priority < ActiveRecord::Base
   
   define_index do
     indexes name
-    indexes category.name, :facet=>true
+    indexes category.name, :facet=>true, :as=>"category_name"
     where "priorities.status = 'published'"
   end  
-  
-  #validates_length_of :name, :within => 3..60
-  #validates_uniqueness_of :name
+
+  def category_name
+    if category
+      category.name
+    else
+      'No category'
+    end
+  end
+    
+  validates_length_of :name, :within => 5..60, :too_long => tr("has a maximum of 60 characters", "model/point"), 
+                                               :too_short => tr("please enter more than 5 characters", "model/point")
+  validates_uniqueness_of :name, :if => Proc.new { |priority| priority.status == 'published' }
+  validates :category_id, :presence => true
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :published, :column => :status
@@ -141,6 +156,10 @@ class Priority < ActiveRecord::Base
   
   def priority_process_root_node
     PriorityProcess.find :first, :conditions=>"root_node = 1 AND priority_id = #{self.id}"
+  end
+  
+  def content
+    self.name
   end
   
   def endorse(user,request=nil,partner=nil,referral=nil)
@@ -209,7 +228,7 @@ class Priority < ActiveRecord::Base
   end
   
   def is_buried?
-    status == I18n.t(:buried)
+    status == tr("delisted", "model/priority")
   end
   
   def is_top?
@@ -247,6 +266,16 @@ class Priority < ActiveRecord::Base
     official_status == 1
   end  
   
+  def request=(request)
+    if request
+      self.ip_address = request.remote_ip
+      self.user_agent = request.env['HTTP_USER_AGENT']
+    else
+      self.ip_address = "127.0.0.1"
+      self.user_agent = "Import"
+    end
+  end
+  
   def position_7days_change_percent
     position_7days_change.to_f/(position+position_7days_change).to_f
   end
@@ -261,15 +290,15 @@ class Priority < ActiveRecord::Base
   
   def value_name 
     if is_failed?
-      I18n.t(:priority_failed)
+      tr("Priority failed", "model/priority")
     elsif is_successful?
-      I18n.t(:priority_succesful)
+      tr("Priority succesful", "model/priority")
     elsif is_compromised?
-      I18n.t(:priority_succesful_with_compromises)
+      tr("Priority succesful with compromises", "model/priority")
     elsif is_intheworks?
-      I18n.t(:priority_in_the_works)
+      tr("Priority in the works", "model/priority")
     else
-      I18n.t(:priority_has_not_been_processed)
+      tr("Priority has not been processed", "model/priority")
     end
   end
   
@@ -333,11 +362,11 @@ class Priority < ActiveRecord::Base
   end  
   
   def official_status_name
-    return I18n.t('status.failed') if official_status == -2
-    return I18n.t('status.compromised') if official_status == -1
-    return I18n.t('status.unknown') if official_status == 0 
-    return I18n.t('status.intheworks') if official_status == 1
-    return I18n.t('status.successful') if official_status == 2
+    return tr("failed", "model/priority") if official_status == -2
+    return tr("compromised", "model/priority") if official_status == -1
+    return tr("unknown", "model/priority") if official_status == 0 
+    return tr("in the works", "model/priority") if official_status == 1
+    return tr("successful", "model/priority") if official_status == 2
   end
   
   def has_change?
@@ -355,27 +384,27 @@ class Priority < ActiveRecord::Base
   def movement_text
     s = ''
     if status == 'buried'
-      return I18n.t('buried').capitalize
+      return tr("delisted", "model/priority").capitalize
     elsif status == 'inactive'
-      return I18n.t('inactive').capitalize
+      return tr("inactive", "model/priority").capitalize
     elsif created_at > Time.now-86400
-      return I18n.t('new').capitalize
+      return tr("new", "model/priority").capitalize
     elsif position_24hr_change == 0 and position_7days_change == 0 and position_30days_change == 0
-      return I18n.t('nochange').capitalize
+      return tr("no change", "model/priority").capitalize
     end
     s += '+' if position_24hr_change > 0
     s += '-' if position_24hr_change < 0    
-    s += I18n.t('nochange') if position_24hr_change == 0
+    s += tr("no change", "model/priority") if position_24hr_change == 0
     s += position_24hr_change.abs.to_s unless position_24hr_change == 0
     s += ' today'
     s += ', +' if position_7days_change > 0
     s += ', -' if position_7days_change < 0    
-    s += ', ' + I18n.t('nochange') if position_7days_change == 0
+    s += ', ' + tr("no change", "model/priority") if position_7days_change == 0
     s += position_7days_change.abs.to_s unless position_7days_change == 0
     s += ' this week'
     s += ', and +' if position_30days_change > 0
     s += ', and -' if position_30days_change < 0    
-    s += ', and ' + I18n.t('nochange') if position_30days_change == 0
+    s += ', and ' + tr("no change", "model/priority") if position_30days_change == 0
     s += position_30days_change.abs.to_s unless position_30days_change == 0
     s += ' this month'    
     s
@@ -580,11 +609,11 @@ class Priority < ActiveRecord::Base
         time = Time.now-5.years
       end
       if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
-        stage_txt = "#{I18n.t :waits_for_discussion}"
+        stage_txt = "#{t :waits_for_discussion}"
       else
-        stage_txt = "#{priority_process.stage_sequence_number}. #{I18n.t :parliment_stage_sequence_discussion}"
+        stage_txt = "#{priority_process.stage_sequence_number}. #{t :parliment_stage_sequence_discussion}"
       end
-      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{I18n.t :since}"
+      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{t :since}"
       Rails.cache.write("latest_priority_process_at_#{self.id}", latest_priority_process_txt, :expires_in => 30.minutes)
     end
     latest_priority_process_txt
@@ -598,7 +627,7 @@ class Priority < ActiveRecord::Base
   def flag_by_user(user)
     self.increment!(:flags_count)
     for r in User.active.admins
-      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+      notifications << NotificationPriorityFlagged.new(:sender => user, :recipient => r)    
     end
   end  
 
@@ -612,8 +641,8 @@ class Priority < ActiveRecord::Base
     activities.each do |a|
       a.delete!
     end
-    for e in endorsements
-      e.delete!
+    endorsements.each do |e|
+      e.destroy
     end
     self.deleted_at = Time.now
   end

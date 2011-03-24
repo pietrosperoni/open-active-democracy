@@ -43,7 +43,7 @@ class FollowingsController < ApplicationController
 
     respond_to do |format|
       if @following.save
-        flash[:notice] = t('following.new.success', :user_name => @following.other_user.name)
+        flash[:notice] = tr("Now following {user_name}", "controller/followings", :user_name => @following.other_user.name)
         format.html { redirect_to(@following) }
       else
         format.html { render :action => "new" }
@@ -57,7 +57,7 @@ class FollowingsController < ApplicationController
 
     respond_to do |format|
       if @following.update_attributes(params[:following])
-        flash[:notice] = t('following.new.success', :user_name => @following.other_user.name)
+        flash[:notice] = tr("Now following {user_name}", "controller/followings", :user_name => @following.other_user.name)
         format.html { redirect_to(@following) }
       else
         format.html { render :action => "edit" }
@@ -69,7 +69,7 @@ class FollowingsController < ApplicationController
   def multiple
     user_ids = params[:user_ids]
     unless user_ids
-      flash[:error] = t('contacts.multiple.blank')
+      flash[:error] = tr("Please check the box next to the people you want to follow", "controller/followings")
       respond_to do |format|
         format.js { redirect_from_facebox(not_invited_user_contacts_path(@user)) }
       end

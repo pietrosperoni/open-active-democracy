@@ -5,10 +5,10 @@
 							</div>
 							
 							<span class="yes_and_no_points_link_hacky add_point_for yellow_button">
-								<%=link_to(t('points.top_points.add_point_for_endorse'), new_priority_point_path(@priority,:support=>true))%>
+								<%=link_to(tr("Add your point for endorse", "view/priorities/_endorse_oppose"), new_priority_point_path(@priority,:support=>true))%>
 							</span>
 
 							<span class="yes_and_no_points_link_hacky add_point_against yellow_button">
-								<%=link_to(t('points.top_points.add_point_for_oppose'), new_priority_point_path(@priority,:support=>false))%>
+								<%=link_to(tr("Add your point for oppose", "view/priorities/_endorse_oppose"), new_priority_point_path(@priority,:support=>false))%>
 							</span>
 </div>

@@ -8,17 +8,17 @@
 			<% if @revision.attribute_present?("content_diff")%>
 			<p>
 			<div class="notice">
-				<%= t('document.revision.show.intro', :clean_url => clean_document_revision_url(@document,@revision)) %>
+				<%= tr("This shows the changes from the previous revision. You can also <a href='{clean_url}'>see the clean version</a>", "view/document_revisions/show", :clean_url => clean_document_revision_url(@document,@revision)) %>
 			</div>
 			<%= @revision.content_diff %>
 			<% else %>
 			<p>
 			<div class="notice">
-				<%= t('revisions.errors.processing', :clean_url => clean_document_revision_url(@document,@revision))%>
+				<%= tr("Normally, you would see the changes made here, but there was some kind of processing error, so please check out the <a href='{clean_url}'>clean version</a>", "view/document_revisions/show", :clean_url => clean_document_revision_url(@document,@revision))%>
 			</div>
 			<% end %>
 			
-			<div class="heading"><%= t('revisions.activity.name') %></div>
+			<div class="heading"><%= tr("Activity on this revision", "view/document_revisions/show") %></div>
 			<% for activity in @revision.activities.active.by_recently_created %>
 				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>

@@ -108,10 +108,10 @@ class Endorsement < ActiveRecord::Base
   end
   
   def check_official
-    return unless user_id == Government.current.official_user_id
-    Priority.update_all("official_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
-    Priority.update_all("official_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
-    Priority.update_all("official_value = 0", ["id = ?",priority_id]) if status == 'deleted'
+#    return unless user_id == Government.current.official_user_id
+#    Priority.update_all("official_value = 1", ["id = ?",priority_id]) if is_up? and status == 'active'
+#    Priority.update_all("official_value = -1", ["id = ?",priority_id]) if is_down? and status == 'active'
+#    Priority.update_all("official_value = 0", ["id = ?",priority_id]) if status == 'deleted'
   end
   
   def priority_name
@@ -209,8 +209,8 @@ class Endorsement < ActiveRecord::Base
   end
 
   def value_name
-    return I18n.t(:you_supported) if is_up?
-    return I18n.t(:you_were_against) if is_down?
+    return tr("supported", "model/endorsement") if is_up?
+    return tr("opposed", "model/endorsement") if is_down?
   end
 
   def flip_up
@@ -227,9 +227,9 @@ class Endorsement < ActiveRecord::Base
   
   def remove
     if self.status == 'active'
-      if user_id == Government.current.official_user_id and priority.official_value != 0
-        Priority.update_all("official_value = 0", ["id = ?",priority_id]) 
-      end
+#      if user_id == Government.current.official_user_id and priority.official_value != 0
+#        Priority.update_all("official_value = 0", ["id = ?",priority_id]) 
+#      end
       delete_update_counts
       if self.is_up?
         ActivityEndorsementDelete.create(:user => user, :partner => partner, :priority => priority)

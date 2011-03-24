@@ -1,22 +1,22 @@
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr><td valign="top">
-		<%= I18n.t('blurb_signup_quick')%>
+		<%= tr("Signup quick BLURB", "view/sessions/new")%>
 		<p>
 		<%= render :partial => "users/form" %>
 	</td><td valign="top" style="padding-left: 40px; padding-right: 20px;">
-		<%= t('users.new.login')%>
+		<%= tr("<b>Already have an account?</b>", "view/sessions/new")%>
 		<p>
 		<%= render :partial => "sessions/form" %>
 		<p>
-		<%= link_to t('sessions.new.forgot'), new_password_path %>
+		<%= link_to tr("I forgot my password", "view/sessions/new"), new_password_path %>
 
 		<% if current_government.has_facebook_enabled? or current_government.has_twitter_enabled? %>
 			<p>
-			<%= t('sessions.new.login.options')%>
+			<%= tr("or <b>sign in instantly</b> with:", "view/sessions/new")%>
 			<p>
 
 			<% if current_government.has_facebook_enabled? %>
-			<a href="#" onclick="FB.Connect.requireSession(function(){window.location.href=window.location.href=window.location.href;}); return false;"><%= image_tag("facebook_signin.png", :border => 0)%></a>
+        <%= fb_login_and_redirect "/", :text=>tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=>tr("Sign in with Facebook","views/shared/_login"), :perms=>"email"%>
 			<p>
 			<% end %>
 			<% if current_government.has_twitter_enabled? %>

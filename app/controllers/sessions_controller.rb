@@ -1,8 +1,13 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
+  skip_before_filter :check_priority
+  skip_before_filter :check_referral
+  skip_before_filter :check_suspension
+  skip_before_filter :update_loggedin_at
+  skip_before_filter :check_blast_click
 
   def new
-    @page_title = t('sessions.new.title', :government_name => current_government.name)
+    @page_title = tr("Please sign in", "controller/sessions", :government_name => current_government.name)
     @user = User.new
     @signup = Signup.new    
     respond_to do |format|
@@ -22,9 +27,9 @@ class SessionsController < ApplicationController
               cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
             end
             redirect_back_or_default('/')
-            flash[:notice] = t('sessions.create.success', :user_name => current_user.name)
+            flash[:notice] = tr("Welcome back, {user_name}.", "controller/sessions", :user_name => current_user.name)
           else
-            flash[:error] = t('sessions.create.failed')
+            flash[:error] = tr("You were NOT signed in, please check your name and password, or click on the 'I forgot my password' to get a new password.", "controller/sessions")
             render :action => 'new'
           end          
         }
@@ -47,7 +52,7 @@ class SessionsController < ApplicationController
               session[:value] = nil
             end            
             Rails.logger.debug("BLAH -1: #{session[:return_to]}")
-            flash[:notice] = t('sessions.create.success', :user_name => current_user.name) 
+            flash[:notice] = tr("Welcome back, {user_name}.", "controller/sessions", :user_name => current_user.name) 
             current_user.remember_me unless current_user.remember_token?
             cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
             Rails.logger.debug("BLAH: #{session[:return_to]}")
@@ -55,10 +60,10 @@ class SessionsController < ApplicationController
           else
             if params[:region] == 'inline'
               render :update do |page|
-                page.replace_html 'login_message', t('sessions.create.try_again')
+                page.replace_html 'login_message', tr("Oops, try again.", "controller/sessions")
               end
             else
-              flash[:error] = t('sessions.create.try_again')
+              flash[:error] = tr("Oops, try again.", "controller/sessions")
               render_to_facebox(:action => "new")
             end
           end          
@@ -69,8 +74,9 @@ class SessionsController < ApplicationController
   def destroy
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
+    cookies.delete "fbs_#{Facebooker2.app_id}"
     reset_session    
-    flash[:notice] = t('sessions.destroy')
+    flash[:notice] = tr("Logged out. Please come again soon.", "controller/sessions")
     redirect_back_or_default('/')
   end
   

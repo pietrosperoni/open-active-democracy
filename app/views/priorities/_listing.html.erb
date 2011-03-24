@@ -1,6 +1,8 @@
 <div class="priority_name" id="priority_<%= priority.id %>_name">
-	<% if value < 0 %><span class="opposed"><%= t('oppose.ed')%></span><% end %>
-	<%= link_to_unless_current h(priority.name), priority, :class => "priority_name_link" %>
+	<% if value < 0 %><span class="opposed"><%= tr("opposed", "view/priorities/_listing")%></span><% end %>
+	<%= link_to_unless_current tg(h(priority.name)), priority, :class => "priority_name_link" %>
+ 	<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
+ 	<%= render :partial=>"priorities/flagged", :locals=>{:priority=>priority} -%>
 </div>
 
 	<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
@@ -9,7 +11,7 @@
 <% if priority.status == 'inactive' %>
 	<div class="priority_status">
 		<% if priority.replaced? %>
-			<%= t('priorities.replaced',:priority_name => link_to(priority.change.new_priority.name, priority.change.new_priority)) %>
+			<%= tr("This priority was replaced by {priority_name}", "view/priorities/_listing", :priority_name => link_to(priority.change.new_priority.name, priority.change.new_priority)) %>
 		<% end %>
 	</div>
 <% end %>

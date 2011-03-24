@@ -1,0 +1,16 @@
+<%= render :partial=>"user_mailer/header.html" %>
+
+<p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
+
+<p><%= @sender.name %> <%=tr("flagged a comment by","email")%> <%= @notifiable.user.name %>.
+   <%=tr("Here is the comment in question. Current flags count is {flags_count}.","email",
+         :flags_count => @notifiable.flags_count)%>:</p>
+
+<p><%= @notifiable.content %></p>
+
+<p><%=tr("Here's the full thread","email")%>:
+  <%= link_to @recipient.root_url+'activities/'+@notifiable.activity_id.to_s+'/comments', @recipient.root_url+'activities/'+@notifiable.activity_id.to_s+'/comments' %></p>
+
+<p><%=tr("You should review it and decide whether it violates the rules and {notifiable_user_name} should be issued a warning.", "email", :notifiable_user_name=>@notifiable.user.name)%></p>
+
+<%= render :partial=>"user_mailer/footer.html" %>

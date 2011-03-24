@@ -10,8 +10,8 @@ class Revision < ActiveRecord::Base
   has_many :activities
   has_many :notifications, :as => :notifiable, :dependent => :destroy
       
-  # this is actually just supposed to be 500, but bumping it to 510 because the javascript counter doesn't include carriage returns in the count, whereas this does.
-  validates_length_of :content, :maximum => 516, :allow_blank => true, :allow_nil => true, :too_long => I18n.t("points.new.errors.content_maximum")
+  # this is actually just supposed to be 500, but bumping it to 520 because the javascript counter doesn't include carriage returns in the count, whereas this does.
+  validates_length_of :content, :maximum => 520, :allow_blank => true, :allow_nil => true, :too_long => tr("has a maximum of 500 characters", "model/revision")
   
   # docs: http://www.practicalecommerce.com/blogs/post/122-Rails-Acts-As-State-Machine-Plugin
   acts_as_state_machine :initial => :draft, :column => :status
@@ -49,7 +49,7 @@ class Revision < ActiveRecord::Base
     self.auto_html_prepare
     begin
       Timeout::timeout(5) do   #times out after 5 seconds
-        self.content_diff = HTMLDiff.diff(RedCloth.new(point.content).to_html,RedCloth.new(self.content).to_html)
+        self.content_diff = HTMLDiff.diff(point.content,self.content).html_safe
       end
     rescue Timeout::Error
     end    
@@ -99,7 +99,7 @@ class Revision < ActiveRecord::Base
     point.name = self.name
     point.other_priority = self.other_priority
     point.author_sentence = point.user.login
-    point.author_sentence += ", breytingar " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
+    point.author_sentence += ", #{tr("changes","model/revision")} " + point.editors.collect{|a| a[0].login}.to_sentence if point.editors.size > 0
     point.published_at = Time.now
     point.save(:validate => false)
     user.increment!(:point_revisions_count)    
@@ -148,11 +148,11 @@ class Revision < ActiveRecord::Base
   
   def text
     s = point.name
-    s += " [#{I18n.t(:in_support)}]" if is_down?
-    s += " [#{I18n.t(:neutral)}]" if is_neutral?    
-    s += "\r\n#{I18n.t(:in_support_of)} " + point.other_priority.name if point.has_other_priority?
+    s += " [#{tr("In support", "model/revision")}]" if is_down?
+    s += " [#{tr("Neutral", "model/revision")}]" if is_neutral?    
+    s += "\r\n#{tr("In support of", "model/revision")} " + point.other_priority.name if point.has_other_priority?
     s += "\r\n" + content
-    s += "\r\n#{I18n.t(:originated_at)}: " + website_link if has_website?
+    s += "\r\n#{tr("Originated at", "model/revision")}: " + website_link if has_website?
     return s
   end  
   
@@ -177,17 +177,17 @@ class Revision < ActiveRecord::Base
     end
   end
   
-  def Revision.create_from_point(point_id, request)
-    p = Point.find(point_id)
+  def Revision.create_from_point(point,ip=nil,agent=nil)
     r = Revision.new
-    r.point = p
-    r.user = p.user
-    r.value = p.value
-    r.name = p.name
-    r.content = p.content
-    r.content_diff = p.content
-    r.website = p.website    
-    r.request = request
+    r.point = point
+    r.user = point.user
+    r.value = point.value
+    r.name = point.name
+    r.content = point.content
+    r.content_diff = point.content
+    r.ip_address = ip ? ip : point.ip_address
+    r.user_agent = agent ? agent : point.user_agent
+    r.website = point.website    
     r.save(:validate => false)
     r.publish!
   end
@@ -197,9 +197,9 @@ class Revision < ActiveRecord::Base
   end  
   
   auto_html_for(:content) do
-#    redcloth
-    youtube(:width => 330, :height => 210)
-    vimeo(:width => 330, :height => 180)
-    link(:rel => "nofollow")
+    html_escape
+    youtube :width => 330, :height => 210
+    vimeo :width => 330, :height => 180
+    link :target => "_blank", :rel => "nofollow"
   end  
 end
