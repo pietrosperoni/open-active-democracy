@@ -5,6 +5,8 @@
 	<% end %>				
 	<div class="point_item">
 		<h3 class="point_item_hacky"><%=numbering ? "#{i+1}. " : ""%><%= link_to_unless_current tg(h(point.name)), point %></h3>
+		<%= render :partial=>"points/report_content", :locals=>{:point=>point} %>
+    <%= render :partial=>"points/flagged", :locals=>{:point=>point} -%>
 		<div class="point_byline">
 			<%= tr("by {author_sentence}", "view/points/_short_list", :author_sentence => point.author_sentence) %> <%= tr("added {time_ago}", "view/points/_short_list", :time_ago => time_ago(point.created_at)) %>
 			<span class="point_edit">

@@ -205,6 +205,9 @@ OpenActiveDemocracy::Application.routes.draw do
 
   resources :points do
     member do
+      get :flag
+      post :not_abusive
+      post :abusive
       get :activity
       get :discussions
       post :quality

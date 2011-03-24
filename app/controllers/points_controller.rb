@@ -286,17 +286,17 @@ class PointsController < ApplicationController
   end
 
   def flag
-    @question = Question.find(params[:id])
-    @question.flag_by_user(current_user)
+    @point = Point.find(params[:id])
+    @point.flag_by_user(current_user)
 
     respond_to do |format|
       format.html { redirect_to(comments_url) }
       format.js {
         render :update do |page|
           if current_user.is_admin?
-            page.replace_html "flagged_question_info_#{@question.id}", render(:partial => "questions/flagged", :locals => {:question => @question})
+            page.replace_html "point_report_#{@point.id}", render(:partial => "points/report_content", :locals => {:point => @point})
           else
-            page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("Thanks for bringing this to our attention", "controller/points")}</div>"
+            page.replace_html "point_report_#{@point.id}", "<div class='warning_inline'>#{tr("Thanks for bringing this to our attention", "controller/points")}</div>"
           end
         end        
       }
@@ -304,25 +304,25 @@ class PointsController < ApplicationController
   end  
 
   def abusive
-    @question = Question.find(params[:id])
-    @question.do_abusive
-    @question.delete!
+    @point = Point.find(params[:id])
+    @point.do_abusive
+    @point.delete!
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_question_info_#{@question.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning sent", "controller/points")}</div>"
+          page.replace_html "point_flag_#{@point.id}", "<div class='warning_inline'>#{tr("The content has been deleted and a warning sent", "controller/points")}</div>"
         end        
       }
     end    
   end
 
   def not_abusive
-    @question = Question.find(params[:id])
-    @question.update_attribute(:flags_count, 0)
+    @point = Point.find(params[:id])
+    @point.update_attribute(:flags_count, 0)
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "flagged_question_info_#{@question.id}",""
+          page.replace_html "point_flag_#{@point.id}",""
         end        
       }
     end    

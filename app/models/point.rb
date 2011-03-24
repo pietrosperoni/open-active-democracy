@@ -39,6 +39,8 @@ class Point < ActiveRecord::Base
   has_many :unhelpfuls, :class_name => "PointQuality", :conditions => "value = false", :order => "created_at desc"
   
   has_many :capitals, :as => :capitalizable, :dependent => :nullify
+
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
   
   define_index do
     indexes name
@@ -109,7 +111,7 @@ class Point < ActiveRecord::Base
   def flag_by_user(user)
     self.increment!(:flags_count)
     for r in User.active.admins
-      notifications << NotificationCommentFlagged.new(:sender => user, :recipient => r)    
+      notifications << NotificationPointFlagged.new(:sender => user, :recipient => r)    
     end
   end
 
