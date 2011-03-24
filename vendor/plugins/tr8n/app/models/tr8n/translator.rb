@@ -51,8 +51,7 @@ class Tr8n::Translator < ActiveRecord::Base
   end
   
   def self.find_or_create(user)
-    Rails.logger.info("Trying to create user from #{user.inspect}")
-    trn = find(:first, :conditions => ["user_id = ?", user.id]) if user.class==User
+    trn = find(:first, :conditions => ["user_id = ?", user.id])
     trn = create(:user => user) unless trn
     trn
   end
@@ -60,8 +59,7 @@ class Tr8n::Translator < ActiveRecord::Base
   def self.register(user = Tr8n::Config.current_user)
     return unless user
 
-    Rails.logger.info("Trying to create user from #{user.inspect}")    
-    translator = Tr8n::Translator.find_or_create(:user => user)
+    translator = Tr8n::Translator.find_or_create(user)
     Tr8n::LanguageUser.find(:all, :conditions => ["user_id = ?", user.id]).each do |lu|
       lu.update_attributes(:translator => translator)
     end
