@@ -2,7 +2,14 @@ class DocumentsController < ApplicationController
   
   before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :destroy, :flag]
   before_filter :admin_required, :only => [:edit, :update, :abusive, :not_abusive]
+  
+  before_filter :disable
  
+  def disable
+    redirect_to "/"
+    false
+  end
+
   def index
     @page_title = tr("Your documents", "controller/documents")
     @documents = Document.published.filtered.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]

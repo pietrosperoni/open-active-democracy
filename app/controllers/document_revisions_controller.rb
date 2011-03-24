@@ -4,6 +4,13 @@ class DocumentRevisionsController < ApplicationController
   before_filter :login_required, :only => [:new, :update, :destroy, :edit, :create]
   before_filter :admin_required, :only => [:destroy, :update, :edit]
 
+  before_filter :disable
+ 
+  def disable
+    redirect_to "/"
+    false
+  end
+
   # GET /documents/1/revisions
   def index
     redirect_to @document

@@ -10,15 +10,6 @@
 					<% end %>
 				</span>
 			</li>
-			<li class="tab2">
-				<span class="tab_header">
-					<% if logged_in? %>
-					<%= link_to tr("Documents", "view/briefing/_nav"), documents_url %>
-					<% else %>
-					<%= link_to tr("Documents", "view/briefing/_nav"), newest_documents_url %>
-					<% end %>
-				</span>
-			</li>
 			<li class="tab3">
 				<span class="tab_header">
 					<%= link_to tr("Contribute research", "view/briefing/_nav"), :controller => "briefing", :action => "points" %>
@@ -56,7 +47,7 @@
 			
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to tr("All talking points", "view/briefing/_nav"), newest_points_url %>
+						<%= link_to tr("All points", "view/briefing/_nav"), newest_points_url %>
 					</span>
 				</li>			
 
@@ -120,16 +111,10 @@
 
 				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to tr("Priorities needing talking points", "view/briefing/_nav"), :controller => "briefing", :action => "points" %>
+						<%= link_to tr("Priorities needing points", "view/briefing/_nav"), :controller => "briefing", :action => "points" %>
 					</span>
 				</li>
 			
-				<li class="tab2">
-					<span class="tab_header">
-						<%= link_to tr("Priorities needing documents", "view/briefing/_nav"), :controller => "briefing", :action => "documents" %>
-					</span>
-				</li>			
-
 			</ul>
 			
 		</div>	
