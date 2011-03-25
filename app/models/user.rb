@@ -364,7 +364,7 @@ class User < ActiveRecord::Base
   end
   
   def to_param_link
-    '<a href="http://' + Government.current.base_url + '/users/' + sender.to_param + '">' + sender.name + '</a>'  
+    '<a href="http://' + Government.current.base_url_w_partner + '/users/' + sender.to_param + '">' + sender.name + '</a>'  
   end
   
   def has_top_priority?
@@ -1000,19 +1000,15 @@ class User < ActiveRecord::Base
   end  
   
   def root_url
-    if has_partner_referral?
-      return 'http://' + partner_referral.short_name + '.' + Government.current.base_url + '/'
-    else
-      return 'http://' + Government.current.base_url + '/'
-    end
+    return 'http://' + Government.current.base_url_w_partner + '/'
   end
   
   def profile_url
-    'http://' + Government.current.base_url + '/users/' + to_param
+    'http://' + Government.current.base_url_w_partner + '/users/' + to_param
   end
   
   def unsubscribe_url
-    'http://' + Government.current.base_url + '/unsubscribes/new'
+    'http://' + Government.current.base_url_w_partner + '/unsubscribes/new'
   end
   
   def self.adapter

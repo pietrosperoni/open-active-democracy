@@ -193,7 +193,7 @@ class Revision < ActiveRecord::Base
   end
   
   def url
-    'http://' + Government.current.base_url + '/points/' + point_id.to_s + '/revisions/' + id.to_s + '?utm_source=points_changed&utm_medium=email'
+    'http://' + Government.current.base_url_w_partner + '/points/' + point_id.to_s + '/revisions/' + id.to_s + '?utm_source=points_changed&utm_medium=email'
   end  
   
   auto_html_for(:content) do

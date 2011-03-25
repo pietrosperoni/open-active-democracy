@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
   
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
-    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'dev'
+    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
       @current_partner = nil
       Partner.current = @current_partner
       return nil
@@ -204,10 +204,10 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => "install"
       return
     end
-#    if not current_partner and Rails.env == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
-#      redirect_to 'http://' + current_government.base_url + request.path_info
-#      return
-#    end    
+    if not current_partner and Rails.env == 'production' and request.subdomains.any? and not ['www','dev'].include?(request.subdomains.first) and current_government.base_url != request.host
+      redirect_to 'http://' + current_government.base_url + request.path_info
+      return
+    end    
   end
   
   def check_referral

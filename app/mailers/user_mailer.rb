@@ -99,7 +99,7 @@ class UserMailer < ActionMailer::Base
       headers        "Reply-to" => Government.current.email
       @sent_on     = Time.now
       @content_type = "text/html"     
-      @body[:root_url] = 'http://' + Government.current.base_url + '/'
+      @body[:root_url] = 'http://' + Government.current.base_url_w_partner + '/'
     end    
   private
 

@@ -3,7 +3,7 @@ xml.StrategicPlanCore :StartDate => @user.created_at.year.to_s + '-' + @user.cre
   xml.Submitter :Name => @user.name
   xml.Organization do
     xml.Name @user.name.possessive + " agenda for America"
-    xml.Acronym current_government.base_url + "/users/" + @user.to_param
+    xml.Acronym current_government.base_url_w_partner + "/users/" + @user.to_param
   end
   xml.Vision current_government.tagline
   xml.Mission current_government.mission

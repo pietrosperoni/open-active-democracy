@@ -87,6 +87,14 @@ class Government < ActiveRecord::Base
   def base_url
     self.domain_name
   end
+
+  def base_url_w_partner
+    if Partner.current
+      Partner.current.short_name + '.' + self.domain_name
+    else
+      self.domain_name
+    end
+  end
   
   def homepage_url
     if Partner.current

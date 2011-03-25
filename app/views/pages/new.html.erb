@@ -26,7 +26,7 @@
 					<div class="field_label"><%= tr("URL (no spaces)", "view/pages/new")%></div>
 					<div class="field_box">
 						<table border="0" cellspacing="0" cellpadding="0">
-							<tr><td>http://<%= current_government.base_url %>/about/</td>
+							<tr><td>http://<%= current_government.base_url_w_partner %>/about/</td>
 								<td style="padding-left: 3px;"><%= f.text_field :short_name, :size => 20, :maxlength => 30 %></td>
 							</tr>
 						</table>

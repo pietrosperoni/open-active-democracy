@@ -60,32 +60,32 @@ class Partner < ActiveRecord::Base
   
   def validate
     if is_optin? and not attribute_present?("optin_text")
-      errors.add("optin_text","Please specify the opt-in language if you wish to request their permission to be added to your email list.")
+      errors.add("optin_text",tr("Please specify the opt-in language if you wish to request their permission to be added to your email list.",""))
     end
     if is_optin? and optin_text.size > 60
-      errors.add("optin_text","needs to be less than 60 characters.  Keep it short!")
+      errors.add("optin_text",tr("needs to be less than 60 characters. Keep it short!",""))
     end    
     errors.on("optin_text")    
     if is_optin? and not attribute_present?("privacy_url")
-      errors.add("privacy_url", "Please specify the URL to your privacy policy. This is required if you request the new member's permission to be added to your email list.")
+      errors.add("privacy_url", tr("Please specify the URL to your privacy policy. This is required if you request the new member's permission to be added to your email list.",""))
     end
     errors.on("privacy_url")   
     if is_optin? and not attribute_present?("subscribe_url")
-      errors.add("subscribe_url", "Please specify the URL where people can subscribe to your email list. This is required.")
+      errors.add("subscribe_url", tr("Please specify the URL where people can subscribe to your email list. This is required.",""))
     end
     errors.on("subscribe_url")
     if is_optin? and not attribute_present?("unsubscribe_url")
-      errors.add("unsubscribe_url", "Please specify the URL where people can unsubscribe to your email list. This is required.")
+      errors.add("unsubscribe_url", tr("Please specify the URL where people can unsubscribe to your email list. This is required.",""))
     end
     errors.on("unsubscribe_url")       
   end
 
-  validates_length_of       :short_name,    :within => 4..20, :message => "should be between 4 and 20 characters."
-  validates_uniqueness_of   :short_name, :case_sensitive => false, :message => "is already taken."
-  validates_length_of       :name, :within => 3..30, :message => "should be within 3 and 30 characters."
+  validates_length_of       :short_name,    :within => 2..20, :message => tr("should be between 2 and 20 characters.","")
+  validates_uniqueness_of   :short_name, :case_sensitive => false, :message => tr("is already taken.","")
+  validates_length_of       :name, :within => 2..30, :message => tr("should be within 3 and 30 characters.","")
 
-  ReservedShortnames = %w[admin blog dev ftp mail pop pop3 imap smtp stage stats status www jim jgilliam gilliam feedback facebook]
-  validates_exclusion_of :short_name, :in => ReservedShortnames, :message => 'is already taken'  
+  ReservedShortnames = %w[admin blog ftp mail pop pop3 imap smtp stage stats status www localize feedback facebook]
+  validates_exclusion_of :short_name, :in => ReservedShortnames, :message => tr('is already taken',"")
 
   def self.current  
     Thread.current[:partner]  
