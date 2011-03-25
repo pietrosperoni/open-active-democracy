@@ -7,9 +7,18 @@
 <%= render :partial => "shared/description" %>
 <%= render :partial => "shared/head" %>
 <%= render :partial => "shared/javascripts" %>
+<%= render :partial => "shared/css" %>
+<%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
+<%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
+<%= stylesheet_link_tag "/stylesheets_old/gnew" %>
+<%= stylesheet_link_tag "/stylesheets_old/partners" %>
+<% if controller_name == "users" %>
+ <%= stylesheet_link_tag "/stylesheets_old/fb_invite_hack.css" %>
+<% end %>
 <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
 <% if ["users","sessions"].include?(controller_name)  %>
+  <%= stylesheet_link_tag "/stylesheets_old/jquery.keypad" %>
   <%= javascript_include_tag "jquery.keypad.min" %>
 <% end %>
 <% if controller_name == "priorities" and action_name == "show" %>
@@ -22,10 +31,10 @@
 <%= csrf_meta_tag %>
 
 <div id="backgroundwrap">
-  <div id="header">
-    <table>
-      <tr>
-        <td width="45%">
+	<div id="header">
+	  <table>
+	    <tr>
+	      <td width="45%">
           <%= render :partial => "shared/branding/your_priorities"%>
         </td>
         <td width="55%" align="center">
@@ -53,17 +62,17 @@
         <td/>
       </tr>          
     </table>
-  </div>
-  <div id="contentwrap">
+	</div>
+	<div id="contentwrap">
     <%= render :partial => "ads/pick" %>
-    <%= render :partial => "shared/menu" %>   
-    <div id="content_text">
-      <%= yield :layout %>
-    </div>
-  </div>
+		<%= render :partial => "shared/menu" %>		
+		<div id="content_text">
+			<%= yield :layout %>
+		</div>
+	</div>
   <%= render :partial => "shared/sidebar" %>   
-  <div class="push">
-  </div>
+	<div class="push">
+	</div>
 </div>
 
 <%= render :partial => "shared/footer" %>
