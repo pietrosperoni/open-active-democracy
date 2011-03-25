@@ -106,10 +106,12 @@ class ApplicationController < ActionController::Base
     if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
       @current_partner = nil
       Partner.current = @current_partner
+      Rails.logger.info("No partner selected")
       return nil
     else
       @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
       Partner.current = @current_partner
+      Rails.logger.info("Partner selected: #{Partner.current.inspect}")
       return @current_partner
     end
   end
