@@ -85,15 +85,15 @@ class Government < ActiveRecord::Base
   end
   
   def base_url
-    if ENV['DOMAIN']
-      return ENV['DOMAIN']
-    else
-      "dev.yrpri.org"
-    end
+    self.domain_name
   end
   
   def homepage_url
-    'http://' + base_url + '/'
+    if Partner.current
+      'http://' + Partner.current.short_name + '.' + base_url + '/'
+    else
+      'http://' + base_url + '/'
+    end
   end
   
   def name_with_tagline

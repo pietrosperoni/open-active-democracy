@@ -7,25 +7,37 @@
 <%= render :partial => "shared/description" %>
 <%= render :partial => "shared/head" %>
 <%= render :partial => "shared/javascripts" %>
+<%= render :partial => "shared/css" %>
+<%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
-<%= stylesheet_link_tag "oad" %>
-<%= stylesheet_link_tag "partners" %>
+<%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
+<%= stylesheet_link_tag "/stylesheets_old/gnew" %>
+<%= stylesheet_link_tag "/stylesheets_old/partners" %>
 <% if controller_name == "users" %>
+<<<<<<< HEAD:app/views/layouts/core.html.erb
 		  <%= stylesheet_link_tag "fb_invite_hack.css" %>
 <% end %>
 <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
 <% if ["users","sessions"].include?(controller_name)  %>
 		  <%= stylesheet_link_tag "jquery.keypad" %>
 		  <%= javascript_include_tag "jquery.keypad.min" %>
+=======
+ <%= stylesheet_link_tag "/stylesheets_old/fb_invite_hack.css" %>
+<% end %>
+<%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
+<% if ["users","sessions"].include?(controller_name)  %>
+  <%= stylesheet_link_tag "/stylesheets_old/jquery.keypad" %>
+  <%= javascript_include_tag "jquery.keypad.min" %>
+>>>>>>> rvb/master:app/views/layouts/basic.html.erb
 <% end %>
 <% if controller_name == "priorities" and action_name == "show" %>
 		  <%= render :partial=>"priorities/fb_og_tags" %>
 <% end %>
-
 <%= tr8n_scripts_tag %>
 </head>
 <body>
 
+<<<<<<< HEAD:app/views/layouts/core.html.erb
 <!--
 %= render :partial => "shared/css" %>
 %= stylesheet_link_tag "newstuff" %>
@@ -186,6 +198,10 @@
 </body> 
 </html> 
 =======
+=======
+<%= csrf_meta_tag %>
+
+>>>>>>> rvb/master:app/views/layouts/basic.html.erb
 <div id="backgroundwrap">
 	<div id="header">
 	  <table>

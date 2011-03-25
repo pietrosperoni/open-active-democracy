@@ -81,8 +81,8 @@ class ApplicationController < ActionController::Base
   
   def get_layout
     return false if not is_robot? and not current_government
-    return "basic" if not current_government
-    return current_government.layout 
+    return "basic" if not Government.current
+    return Government.current.layout
   end
 
   def current_government

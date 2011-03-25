@@ -112,6 +112,15 @@
 				</div>
 			</div>
 
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Base domain name", "view/governments/edit")%>
+        </div>
+        <div class="field_box">
+        <%= f.text_field :domain_name, :size => 40, :maxlength => 60 %>
+        </div>
+      </div>
+
 			<div class="field">
 				<div class="field_label">
 					<%= tr("Administrator's public email address", "view/governments/edit")%>
