@@ -88,7 +88,7 @@
 			<% end %>
 						
 			<% if latest_discussions and not latest_discussions.empty? %>
-				<h5>Nýjasta umræða:</h5>
+				<h5><%=tr('Latest discussion',"views/priorities/_show_with_processes")%>:</h5>
 				<% for activity in latest_discussions %>
 					<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
 				<% end %>
