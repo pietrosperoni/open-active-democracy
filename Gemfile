@@ -29,6 +29,7 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'whenever', :require => false
 gem 'geoip'
 gem 'htmlentities'
 gem 'auto_html'

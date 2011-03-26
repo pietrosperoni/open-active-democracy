@@ -1,8 +1,8 @@
 class PriorityRanker
   
   def perform
+    puts "PriorityRanker.perform starting... at #{start_time=Time.now}"
     Government.current = Government.all.last
-
     if Government.current.is_tags? and Tag.count > 0
       # update the # of issues people who've logged in the last two hours have up endorsed
       users = User.find_by_sql("SELECT users.id, users.up_issues_count, count(distinct taggings.tag_id) as num_issues
@@ -46,113 +46,6 @@ class PriorityRanker
       end
     end
 
-    # ranks all the branch endorsements, if the government uses branches
-    if Government.current.is_branches?
-
-      Government.current.update_user_default_branch
-      # make sure the scores for all the positions above the max position are set to 0
-      Endorsement.update_all("score = 0", "position > #{Endorsement.max_position}")
-      for branch in Branch.all
-        # get the last version # for the different time lengths
-        v = branch.endorsement_rankings.find(:all, :select => "max(version) as version")[0]
-        if v
-          v = v.version || 0
-          v+=1
-        else
-          v = 1
-        end
-        oldest = branch.endorsement_rankings.find(:all, :select => "max(version) as version")[0].version
-        v_1hr = oldest
-        v_24hr = oldest
-        r = branch.endorsement_rankings.find(:all, :select => "max(version) as version", :conditions => "branch_endorsement_rankings.created_at < '#{Time.now-1.hour}'")[0]
-        v_1hr = r.version if r
-        r = branch.endorsement_rankings.find(:all, :select => "max(version) as version", :conditions => "branch_endorsement_rankings.created_at < '#{Time.now-1.hour}'")[0]
-        v_24hr = r.version if r
-
-        endorsement_scores = Endorsement.active.find(:all, 
-          :select => "endorsements.priority_id, sum(endorsements.score) as number, count(*) as endorsements_number", 
-          :joins => "endorsements INNER JOIN priorities ON priorities.id = endorsements.priority_id", 
-          :conditions => ["endorsements.user_id in (?)",branch.user_ids], 
-          :group => "endorsements.priority_id",       
-          :order => "number desc")
-        i = 0
-        for e in endorsement_scores
-          p = branch.endorsements.find_or_create_by_priority_id(e.priority_id.to_i)
-          p.endorsements_count = e.endorsements_number.to_i
-          p.update_counts if p.endorsements_count != p.up_endorsements_count+p.down_endorsements_count
-          p.score = e.number.to_i
-          first_time = false
-          i = i + 1
-          p.position = i
-
-          r = p.rankings.find_by_version(v_1hr)
-          if r # it's in that version
-            p.position_1hr = r.position
-          else # not in that version, find the oldest one we can
-            r = p.rankings.find(:all, :conditions => ["version < ?",v_1hr],:order => "version asc", :limit => 1)[0]
-            if r
-              p.position_1hr = r.position
-            else # this is the first time they've been ranked
-              p.position_1hr = p.position
-              first_time = true
-            end
-          end
-
-          p.position_1hr_change = p.position_1hr - i 
-          r = p.rankings.find_by_version(v_24hr)
-          if r # in that version
-            p.position_24hr = r.position
-            p.position_24hr_change = p.position_24hr - i          
-          else # didn't exist yet, so let's find the oldest one we can
-            r = p.rankings.find(:all, :conditions => ["version < ?",v_24hr],:order => "version asc", :limit => 1)[0]
-            p.position_24hr = 0
-            p.position_24hr_change = 0
-          end   
-
-          date = Time.now-5.hours-7.days
-          c = p.charts.find_by_date_year_and_date_month_and_date_day(date.year,date.month,date.day)
-          if c
-            p.position_7days = c.position
-            p.position_7days_change = p.position_7days - i   
-          else
-            p.position_7days = 0
-            p.position_7days_change = 0
-          end      
-
-          date = Time.now-5.hours-30.days
-          c = p.charts.find_by_date_year_and_date_month_and_date_day(date.year,date.month,date.day)
-          if c
-            p.position_30days = c.position
-            p.position_30days_change = p.position_30days - i   
-          else
-            p.position_30days = 0
-            p.position_30days_change = 0
-          end      
-          
-          p.save(:validate => false)
-          r = BranchEndorsementRanking.create(:version => v, :branch_endorsement => p, :position => i, :endorsements_count => p.endorsements_count)
-        end
-
-        # check if there's a new fastest rising priority for this branch
-        #rising = BranchEndorsement.rising.all[0]
-        #ActivityPriorityRising1.find_or_create_by_priority_id(rising.id) if rising
-      end
-      BranchEndorsement.connection.execute("delete from branch_endorsements where endorsements_count = 0;")      
-
-      # adjusts the boost factor for branches with less users, so it's equivalent to the largest branch
-      branches = Branch.all
-      max_users = branches.collect{|b| b.users_count}.sort.last
-      for branch in branches
-        if branch.users_count == 0
-          rank_factor = 0 
-        else
-          rank_factor = max_users.to_f / branch.users_count.to_f
-        end
-        branch.update_attribute(:rank_factor, rank_factor) if branch.rank_factor != rank_factor
-      end
-      
-    end
-
     # ranks all the priorities in the database with any endorsements.
 
     # make sure the scores for all the positions above the max position are set to 0
@@ -173,25 +66,15 @@ class PriorityRanker
     r = Ranking.find(:all, :select => "max(version) as version", :conditions => "created_at < '#{Time.now-1.hour}'")[0]
     v_24hr = r.version if r
 
-    if Government.current.is_branches?
-      priorities = Priority.find_by_sql("
-         select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, branch_endorsements.priority_id, sum(branches.rank_factor*branch_endorsements.score) as number 
-         from priorities, branch_endorsements, branches
-         where branch_endorsements.branch_id = branches.id and branch_endorsements.priority_id = priorities.id
-         and priorities.status = 'published'
-         group by priorities.id, priorities.endorsements_count,  priorities.up_endorsements_count, priorities.down_endorsements_count, branch_endorsements.priority_id
-         order by number desc")
-    else
-      priorities = Priority.find_by_sql("
-         select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
-         from users,endorsements,priorities
-         where endorsements.user_id = users.id
-         and endorsements.priority_id = priorities.id
-         and priorities.status = 'published'
-         and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
-         group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
-         order by number desc")
-    end
+    priorities = Priority.find_by_sql("
+       select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
+       from users,endorsements,priorities
+       where endorsements.user_id = users.id
+       and endorsements.priority_id = priorities.id
+       and priorities.status = 'published'
+       and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
+       group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
+       order by number desc")
 
     i = 0
     for p in priorities
@@ -266,7 +149,6 @@ class PriorityRanker
     rising = Priority.published.rising.all[0]
     ActivityPriorityRising1.find_or_create_by_priority_id(rising.id) if rising
 
-   
     # determines any changes in the #1 priority for an issue, and updates the # of distinct endorsers and opposers across the entire issue
     
     if Government.current.is_tags? and Tag.count > 0
@@ -303,13 +185,6 @@ class PriorityRanker
          elsif rising.empty?
            tag.rising_priority_id = nil
          end 
-         official = tag.priorities.published.official_endorsed
-         if official.any? and tag.official_priority_id != official[0].id
-           ActivityIssuePriorityOfficial1.create(:tag => tag, :priority_id => official[0].id)
-           tag.official_priority_id = official[0].id
-         elsif official.empty?
-           tag.official_priority_id = nil
-         end
        else
          tag.top_priority_id = nil
          tag.controversial_priority_id = nil
@@ -345,35 +220,7 @@ class PriorityRanker
     start_date = date.year.to_s + "-" + date.month.to_s + "-" + date.day.to_s
     end_date = (date+1.day).year.to_s + "-" + (date+1.day).month.to_s + "-" + (date+1.day).day.to_s
     
-    if Government.current.is_branches?
-      if BranchEndorsementChart.count(:conditions => ["date_year = ? and date_month = ? and date_day = ?", date.year, date.month, date.day]) == 0  # check to see if it's already been done for yesterday
-        for branch in Branch.all
-          priorities = BranchEndorsement.all
-          for p in priorities
-            # find the ranking
-            r = p.rankings.find(:all, :conditions => ["branch_endorsement_rankings.created_at between ? and ?",start_date,end_date], :order => "created_at desc",:limit => 1)
-            if r.any?
-              c = p.charts.find_by_date_year_and_date_month_and_date_day(date.year,date.month,date.day)
-              if not c
-                c = p.charts.new(:date_year => date.year, :date_month => date.month, :date_day => date.day)
-              end
-              c.position = r[0].position
-              previous = p.charts.find_by_date_year_and_date_month_and_date_day(previous_date.year,previous_date.month,previous_date.day) 
-              if previous
-                c.change = previous.position-c.position
-                c.change_percent = (c.change.to_f/previous.position.to_f)          
-              end
-              c.save
-            end
-            Rails.cache.delete('views/priority_chart-' + p.id.to_s)      
-          end
-          Rails.cache.delete('views/total_volume_chart') # reset the daily volume chart
-        end
-      end
-    end
-    
-    if PriorityChart.count(:conditions => ["date_year = ? and date_month = ? and date_day = ?", date.year, date.month, date.day]) == 0  # check to see if it's already been done for yesterday
-      
+    if PriorityChart.count(:conditions => ["date_year = ? and date_month = ? and date_day = ?", date.year, date.month, date.day]) == 0  # check to see if it's already been done for yesterday      
       priorities = Priority.published.find(:all)
       for p in priorities
         # find the ranking
@@ -406,12 +253,9 @@ class PriorityRanker
         u.index_30days_change = u.index_change_percent(30)
         u.save(:validate => false)
         u.expire_charts
-      end
-       
+      end       
     end
-    
-    Delayed::Job.enqueue PriorityRanker.new, -1, 47.minutes.from_now
-    
+    puts "PriorityRanker.perform stopping... at #{Time.now} total of #{Time.now-start_time}"
   end
  
 end
