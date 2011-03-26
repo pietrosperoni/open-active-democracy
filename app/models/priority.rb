@@ -95,6 +95,7 @@ class Priority < ActiveRecord::Base
   define_index do
     indexes name
     indexes category.name, :facet=>true, :as=>"category_name"
+    has partner_id
     where "priorities.status = 'published'"
   end  
 

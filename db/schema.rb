@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110326044956) do
+ActiveRecord::Schema.define(:version => 20110326180226) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(:version => 20110326044956) do
     t.integer  "flags_count",   :default => 0
     t.integer  "category_id"
     t.string   "category_name", :default => "no cat"
+    t.integer  "partner_id"
   end
 
   add_index "comments", ["activity_id"], :name => "comments_activity_id"

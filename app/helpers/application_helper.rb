@@ -73,7 +73,7 @@ module ApplicationHelper
     r << link_to(tr('{count} points',"notifications", :count => user.points_count), points_user_url(user)) if user.points_count > 0 
     r << link_to(tr('{count} documents', "notifications", :count => user.documents_count), documents_user_url(user)) if user.documents_count > 0     
     r << tr('{count} revisions', "notifications",  :count => user.revisions_count) if user.revisions_count > 0
-    tr('Revisions: {sentence}', :sentence => r.to_sentence)
+    tr('Revisions: {sentence}', "", :sentence => r.to_sentence)
   end
   
   def notifications_sentence(notifications)

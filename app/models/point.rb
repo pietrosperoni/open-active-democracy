@@ -46,6 +46,7 @@ class Point < ActiveRecord::Base
     indexes name
     indexes content
     indexes priority.category.name, :facet=>true, :as=>"category_name"
+    has partner_id
     where "points.status = 'published'"    
   end
   
