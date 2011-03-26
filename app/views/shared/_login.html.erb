@@ -1,6 +1,6 @@
 <div id="login">
 <% if @geoblocked %>
-  <a href='#' id='login_link'><%= raw tr("Sign in", "view/shared/_login" %></a>.
+  <a href='#' id='login_link'><%= raw tr("Sign in", "view/shared/_login") %></a>.
 <% else %>
   <%= raw tr("<b><a href='{signup_url}'>Sign up</a></b> or <a href='#' id='login_link'>Sign in</a>.", "view/shared/_login", :signup_url => signup_url, :government_name => current_government.name)%>
 <% end %>
