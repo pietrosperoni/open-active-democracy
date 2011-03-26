@@ -146,8 +146,13 @@ class User < ActiveRecord::Base
     false
   end
   
-  def geoblocking_disabled_for?(country_code)
-    self.geoblocking_open_countries.split.include?(country_code)
+  def geoblocking_disabled_for?(partner)
+    self.geoblocking_open_countries.split.each do |user_country|
+      partner.geoblocking_open_countries.split.each do |partner_country|
+        return true if user_country == partner_country
+      end
+    end
+    return false
   end
   
   def new_user_signedup

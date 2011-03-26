@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
         @geoblocked = true
       end
       Rails.logger.info("CURRENT DISABLED: #{logged_in_user.geoblocking_disabled_for?(@country_code)}") if logged_in_user      
-      if logged_in_user and logged_in_user.geoblocking_disabled_for?(@country_code)
+      if logged_in_user and logged_in_user.geoblocking_disabled_for?(Partner.current)
         Rails.logger.info("Geoblocking enabled for user #{logged_in_user}")
         @geoblocked = false
       end
