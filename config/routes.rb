@@ -155,6 +155,9 @@ OpenActiveDemocracy::Application.routes.draw do
       get :finished
       get :ads
       get :top
+      get :top_24hr
+      get :top_7days
+      get :top_30days
       get :rising
       get :falling
       get :controversial

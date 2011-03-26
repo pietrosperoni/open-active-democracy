@@ -20,6 +20,11 @@ class Priority < ActiveRecord::Base
   scope :alphabetical, :order => "priorities.name asc"
 
   scope :top_rank, :order => "priorities.score desc, priorities.position asc"
+
+  scope :top_24hr, :order => "priorities.position_endorsed_24hr desc"
+  scope :top_7days, :order => "priorities.position_endorsed_7days desc"
+  scope :top_30days, :order => "priorities.position_endorsed_30days desc"
+
   scope :not_top_rank, :conditions => "priorities.position > 25"
   scope :rising, :conditions => "priorities.trending_score > 0", :order => "priorities.trending_score desc"
   scope :falling, :conditions => "priorities.trending_score < 0", :order => "priorities.trending_score asc"

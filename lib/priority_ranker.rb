@@ -67,7 +67,8 @@ class PriorityRanker
     v_24hr = r.version if r
 
     priorities = Priority.find_by_sql("
-       select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
+       select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, \
+       sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
        from users,endorsements,priorities
        where endorsements.user_id = users.id
        and endorsements.priority_id = priorities.id
@@ -255,7 +256,36 @@ class PriorityRanker
         u.expire_charts
       end       
     end
-    puts "PriorityRanker.perform stopping... at #{Time.now} total of #{Time.now-start_time}"
+    puts "PriorityRanker.perform before ranged positions... at #{Time.now} total of #{Time.now-start_time}"    
+    setup_ranged_endorsment_positions
+    puts "PriorityRanker.perform stopping... at #{Time.now} total of #{Time.now-start_time}"    
   end
- 
+
+  def setup_ranged_endorsment_positions
+    setup_ranged_endorsment_position(Time.now-24.hours,"position_endorsed_24hr")
+    setup_ranged_endorsment_position(Time.now-7.days,"position_endorsed_7days")
+    setup_ranged_endorsment_position(Time.now-30.days,"position_endorsed_30days")
+  end
+  
+  private 
+
+  def setup_ranged_endorsment_position(time_since,position_db_name)
+    priorities = Priority.find_by_sql("
+       select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, \
+       sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
+       from users,endorsements,priorities
+       where endorsements.user_id = users.id
+       and endorsements.priority_id = priorities.id
+       and endorsements.created_at > '#{time_since}'
+       and priorities.status = 'published'
+       and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
+       group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
+       order by number desc")
+
+    priorities.each_with_index do |priority|
+      priority.reload
+      eval "priority.#{position_db_name} = priority.number"
+      priority.save
+    end
+  end  
 end

@@ -225,6 +225,51 @@ class PrioritiesController < ApplicationController
     end
   end
 
+  # GET /priorities/top_24hr
+  def top_24hr
+    @page_title = tr("Top priorities past 24 hours for {target}", "controller/priorities", :target => current_government.target)
+    @rss_url = top_priorities_url(:format => 'rss')   
+    @priorities = Priority.published.filtered.top_24hr.paginate :page => params[:page], :per_page => params[:per_page]
+    get_endorsements
+    respond_to do |format|
+      format.html { render :action => "list" }
+      format.rss { render :action => "list" }
+      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
+      format.xml { render :xml => @priorities.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @priorities.to_json(:except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
+
+  # GET /priorities/top_7days
+  def top_7days
+    @page_title = tr("Top priorities past 7 days for {target}", "controller/priorities", :target => current_government.target)
+    @rss_url = top_priorities_url(:format => 'rss')   
+    @priorities = Priority.published.filtered.top_7days.paginate :page => params[:page], :per_page => params[:per_page]
+    get_endorsements
+    respond_to do |format|
+      format.html { render :action => "list" }
+      format.rss { render :action => "list" }
+      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
+      format.xml { render :xml => @priorities.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @priorities.to_json(:except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
+
+  # GET /priorities/top_30days
+  def top_30days
+    @page_title = tr("Top priorities past 30 days for {target}", "controller/priorities", :target => current_government.target)
+    @rss_url = top_priorities_url(:format => 'rss')   
+    @priorities = Priority.published.filtered.top_30days.paginate :page => params[:page], :per_page => params[:per_page]
+    get_endorsements
+    respond_to do |format|
+      format.html { render :action => "list" }
+      format.rss { render :action => "list" }
+      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
+      format.xml { render :xml => @priorities.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @priorities.to_json(:except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
+
   # GET /priorities/rising
   def rising
     @page_title = tr("Priorities rising in the rankings", "controller/priorities", :target => current_government.target)
