@@ -9,7 +9,7 @@ class Category < ActiveRecord::Base
     if Partner.current and Category.where(:partner_id=>Partner.current.id).count > 0
       Category.where(:partner_id=>Partner.current.id).order("name")
     else
-      Category.order("name")
+      Category.where(:partner_id=>nil).order("name")
     end
   end
 end
