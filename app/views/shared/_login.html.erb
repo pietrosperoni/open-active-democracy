@@ -40,7 +40,6 @@
 		<%= link_to image_tag("twitter_signin.png", :border => 0), :controller => "twitter", :action => "create" %>
 		</div>
 	<% end %>
-<% end %>
 <% if @geoblocked %>
   <%= render :partial=>"shared/geoblocking_info"%>
 <% end %>
