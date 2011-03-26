@@ -103,7 +103,7 @@ class Partner < ActiveRecord::Base
     Thread.current[:partner] = partner
   end
 
-  def geoblock_disabled_for?(country_code)
+  def geoblocking_disabled_for?(country_code)
     self.geoblocking_open_countries.split.include?(country_code) != nil
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110325150703) do
+ActiveRecord::Schema.define(:version => 20110325222439) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -555,32 +555,34 @@ ActiveRecord::Schema.define(:version => 20110325150703) do
   end
 
   create_table "partners", :force => true do |t|
-    t.string   "name",                  :limit => 60
-    t.string   "short_name",            :limit => 20
+    t.string   "name",                       :limit => 60
+    t.string   "short_name",                 :limit => 20
     t.integer  "picture_id"
-    t.integer  "is_optin",              :limit => 1,   :default => 0,         :null => false
-    t.string   "optin_text",            :limit => 60
+    t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
+    t.string   "optin_text",                 :limit => 60
     t.string   "privacy_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "is_active",             :limit => 1,   :default => 1,         :null => false
-    t.string   "status",                               :default => "passive"
-    t.integer  "users_count",                          :default => 0
+    t.integer  "is_active",                  :limit => 1,   :default => 1,         :null => false
+    t.string   "status",                                    :default => "passive"
+    t.integer  "users_count",                               :default => 0
     t.string   "website"
     t.datetime "deleted_at"
-    t.string   "ip_address",            :limit => 16
-    t.boolean  "is_daily_summary",                     :default => true
+    t.string   "ip_address",                 :limit => 16
+    t.boolean  "is_daily_summary",                          :default => true
     t.string   "unsubscribe_url"
     t.string   "subscribe_url"
     t.string   "logo_file_name"
-    t.string   "logo_content_type",     :limit => 30
+    t.string   "logo_content_type",          :limit => 30
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.string   "default_tags"
     t.string   "custom_tag_checkbox"
     t.string   "custom_tag_dropdown_1"
     t.string   "custom_tag_dropdown_2"
-    t.string   "name_variations_data",  :limit => 350
+    t.string   "name_variations_data",       :limit => 350
+    t.boolean  "geoblocking_enabled",                       :default => false
+    t.string   "geoblocking_open_countries",                :default => ""
   end
 
   add_index "partners", ["short_name"], :name => "short_name"
@@ -1593,6 +1595,7 @@ ActiveRecord::Schema.define(:version => 20110325150703) do
     t.boolean  "reports_documents",                           :default => false
     t.integer  "reports_interval"
     t.datetime "last_sent_report"
+    t.string   "geoblocking_open_countries",                  :default => ""
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

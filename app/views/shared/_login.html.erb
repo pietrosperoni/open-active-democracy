@@ -1,5 +1,7 @@
 <div id="login">
-
+<% if @geoblocked %>
+<%=tr("The website is not open for login or submission in your country. If you are abroad and need access to the website please have a local person sign up for you and send you the access.","views/hared/_login")%>
+<% else %>
 	<%= raw tr("<b><a href='{signup_url}'>Sign up</a></b> or <a href='#' id='login_link'>Sign in</a>.", "view/shared/_login", :signup_url => signup_url, :government_name => current_government.name)%>
 	<div id="login_form">
 		<p>
@@ -37,5 +39,5 @@
 		<%= link_to image_tag("twitter_signin.png", :border => 0), :controller => "twitter", :action => "create" %>
 		</div>
 	<% end %>
-	
+<% end %>
 </div>

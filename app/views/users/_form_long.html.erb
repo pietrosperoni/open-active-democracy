@@ -1,7 +1,9 @@
 <div id="new_user_form">
-  <%= form_for :user,
-  'data-disable-with' => escape_t(tr("Sending","Ajax")),
-  :url => users_path(:region => "long") do |f| -%>
+<% if @geoblocked %>
+<%=tr("The website is not open for login or submission in your country. If you are abroad and need access to the website please have a local person sign up for you and send you the access.","views/hared/_login")%>
+<% else %>  
+  <%= form_for :user, 'data-disable-with' => escape_t(tr("Sending","Ajax")),
+               :url => users_path(:region => "long") do |f| -%>
   <%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form_long") %>
   <p>
     <table border="0" cellspacing="0" cellpadding="0">
@@ -109,5 +111,6 @@
       </tr>
     </table>
     <% end %>
+<% end %>
 </div>
 <%= render :partial=>"shared/keypad_javascript"%>
