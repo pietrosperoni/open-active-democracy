@@ -67,8 +67,8 @@ class ApplicationController < ActionController::Base
   end  
   
   def check_geoblocking
+    @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
     if Partner.current and Partner.current.geoblocking_enabled
-      @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
       unless Partner.current.geoblocking_disabled_for?(@country_code)
         unless current_user and current_user.geoblocking_disabled_for?(@country_code)
           @geoblocked = true

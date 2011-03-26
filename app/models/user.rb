@@ -127,14 +127,19 @@ class User < ActiveRecord::Base
   after_create :give_partner_credit
   after_create :give_user_credit
   after_create :new_user_signedup
+  after_create :set_signup_country
   
   attr_protected :remember_token, :remember_token_expired_at, :activation_code, :salt, :crypted_password, :twitter_token, :twitter_secret
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids  
   
+  def set_signup_country
+    self.geoblocking_open_countries=Thread.current[:country_code] if Thread.current[:country_code]
+  end
+  
   def gender
-    'unknown'
+    tr('unknown','')
   end
   
   def guest?
