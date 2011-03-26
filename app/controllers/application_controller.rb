@@ -70,10 +70,14 @@ class ApplicationController < ActionController::Base
     @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
     if Partner.current and Partner.current.geoblocking_enabled
       logged_in_user = current_user
+      Rails.logger.info("CURRENT LOGGED IN USER: #{logged_in_user}")
       unless Partner.current.geoblocking_disabled_for?(@country_code)
+        Rails.logger.info("Geoblocking enabled")
         @geoblocked = true
       end
-      if logged_in_user and not logged_in_user.geoblocking_disabled_for?(@country_code)
+      Rails.logger.info("CURRENT DISABLED: #{logged_in_user.geoblocking_disabled_for?(@country_code)}") if logged_in_user      
+      if logged_in_user and logged_in_user.geoblocking_disabled_for?(@country_code)
+        Rails.logger.info("Geoblocking enabled for user #{logged_in_user}")
         @geoblocked = false
       end
     end
