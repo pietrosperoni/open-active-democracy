@@ -6,13 +6,13 @@ class SearchesController < ApplicationController
     if params[:q]
       @query = params[:q]
       @page_title = tr("Search {government_name} priorites for '{query}'", "controller/searches", :government_name => current_government.name, :query => @query)
-      @facets = ThinkingSphinx.facets params[:q], :all_facets => true, :page => params[:page]
+      @facets = ThinkingSphinx.facets params[:q], :all_facets => true, :with => {:partner_id => Partner.current ? Partner.current.id : 0}, :page => params[:page]
       if params[:cached_issue_list]
         @search_results = @facets.for(:cached_issue_list=>params[:cached_issue_list])
       elsif params[:class]
         @search_results = @facets.for(:class=>params[:class].to_s)
       else
-        @search_results = ThinkingSphinx.search params[:q], :page => params[:page], :retry_stale => true
+        @search_results = ThinkingSphinx.search params[:q], :with => {:partner_id => Partner.current ? Partner.current.id : 0}, :retry_stale => true, :page => params[:page]
       end
     end
     respond_to do |format|
