@@ -104,7 +104,7 @@ class Partner < ActiveRecord::Base
   end
 
   def geoblocking_disabled_for?(country_code)
-    self.geoblocking_open_countries.split.include?(country_code) != nil
+    self.geoblocking_open_countries.split.include?(country_code)
   end
 
   def clean_urls
