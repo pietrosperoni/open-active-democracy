@@ -77,6 +77,20 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def current_locale
+    if params[:locale]
+      session[:locale] = params[:locale]
+    elsif not session[:locale]
+      if Partner.current and Partner.current.default_locale
+        session[:locale] = Partner.current.default_locale
+      else
+        session[:locale] = tr8n_user_preffered_locale
+      end
+    end
+    I18n.locale = ENABLED_I18_LOCALES.include?(session[:locale]) ? session[:locale] : "en"
+    tr8n_current_locale = session[:locale]
+  end
+
   def check_google_translate_setting
     if params[:gt]
       if params[:gt]=="1"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110325222439) do
+ActiveRecord::Schema.define(:version => 20110326034010) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -583,6 +583,7 @@ ActiveRecord::Schema.define(:version => 20110325222439) do
     t.string   "name_variations_data",       :limit => 350
     t.boolean  "geoblocking_enabled",                       :default => false
     t.string   "geoblocking_open_countries",                :default => ""
+    t.string   "default_locale"
   end
 
   add_index "partners", ["short_name"], :name => "short_name"
