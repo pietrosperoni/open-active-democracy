@@ -21,6 +21,15 @@
   <span class="small"><%= tr("(example: http://donatelife.net/)", "view/partners/_form")%></span>
 </p>
 <p>
+  <label for="default_locale"><%= tr("Default locale", "view/partners/_form")%></label><br />
+  <%= f.text_field :default_locale %><br/>
+</p>
+<%= f.check_box :geoblocking_enabled %> <%= tr("Enable geoblocking", "view/partners/_form") %><br/>
+<p>
+  <label for="geoblocking_open_countries"><%= tr("Geoblocking open countries", "view/partners/_form")%></label><br />
+  <%= f.text_field :geoblocking_open_countries %><br/>
+</p>
+<p>
   <label for="default_tags"><%= tr("Default category", "view/partners/_form")%></label><br />
   <%= f.text_field :default_tags %><br/>
 </p>
