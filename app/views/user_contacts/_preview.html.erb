@@ -5,8 +5,8 @@
 <%= tr("Subject:", "view/user_contacts/_preview")%> <%= tr("Invitation from {sender_name} to join Your Priorities","email", :sender_name=>current_user.name)%>
 
 <% @government = current_government %>
-<% @sender_name = tr("From name","views/user_contacts/_preview")%>
-<% @to_name = tr("To name","views/user_contacts/_preview")%>
+<% @sender_name = tr("Name","views/user_contacts/_preview")%>
+<% @to_name = tr("Name","views/user_contacts/_preview")%>
 <% @sender = @recipient = @user = current_user %>
 
 <div style="line-height: 20px;">

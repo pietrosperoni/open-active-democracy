@@ -1,6 +1,6 @@
 <div id="new_user_form">
 <% if @geoblocked %>
-<%=tr("The website is not open for login or submission in your country. If you are abroad and need access to the website please have a local person sign up for you and send you the access.","views/hared/_login")%>
+  <%= render :partial=>"shared/geoblocking_info"%>
 <% else %>  
   <%= form_for :user, 'data-disable-with' => escape_t(tr("Sending","Ajax")),
                :url => users_path(:region => "long") do |f| -%>
