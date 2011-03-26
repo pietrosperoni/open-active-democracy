@@ -25,6 +25,10 @@ every 5.minutes do
   rake "schedule:fix_top_endorsements"
 end
 
+every 15.minutes do
+  rake "ts:index"
+end
+
 every 45.minutes do
   rake "schedule:priority_ranker"
 end
