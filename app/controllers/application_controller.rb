@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   
   # switch to the right database for this government
   before_filter :check_subdomain
+  before_filter :check_geoblocking
   
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
 #  before_filter :check_facebook, :unless => [:is_robot?]
@@ -65,13 +66,22 @@ class ApplicationController < ActionController::Base
     end
   end  
   
+  def check_geoblocking
+    if Partner.current and Partner.current.geoblocking_enabled
+      @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3])
+      unless Partner.current.geoblock_disabled_for?(@country_code)
+        unless current_user and current_user.geoblock_disabled_for?(@country_code)
+          @geoblock = true
+        end
+      end
+    end
+  end
+  
   def check_google_translate_setting
     if params[:gt]
       if params[:gt]=="1"
-        Rails.logger.debug("session[:enable_google_translate] = true")
         session[:enable_google_translate] = true
       else
-        Rails.logger.debug("session[:enable_google_translate] = nil")
         session[:enable_google_translate] = nil
       end
     end

@@ -103,6 +103,10 @@ class Partner < ActiveRecord::Base
     Thread.current[:partner] = partner
   end
 
+  def geoblock_disabled_for?(country_code)
+    self.geoblocking_open_countries.split.include?(country_code) != nil
+  end
+
   def clean_urls
     privacy_url = 'http://' + privacy_url if not privacy_url.nil? and privacy_url[0..3] != 'http' 
     unsubscribe_url = 'http://' + unsubscribe_url if not unsubscribe_url.nil? and unsubscribe_url[0..3] != 'http'

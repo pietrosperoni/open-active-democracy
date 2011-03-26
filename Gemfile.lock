@@ -58,8 +58,8 @@ GEM
     capistrano (2.5.20)
       highline
       highline
-      net-scp
       net-scp (>= 1.0.0)
+      net-scp
       net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
@@ -79,6 +79,7 @@ GEM
       mogli (>= 0.0.12)
       ruby-hmac
     gem_plugin (0.2.3)
+    geoip (1.0.0)
     googlecharts (1.6.1)
     highline (1.6.1)
     hoptoad_notifier (2.4.8)
@@ -160,6 +161,7 @@ DEPENDENCIES
   dalli
   delayed_job
   facebooker2
+  geoip
   googlecharts
   hoptoad_notifier
   hpricot (>= 0.6)

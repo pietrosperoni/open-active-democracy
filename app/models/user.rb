@@ -141,6 +141,10 @@ class User < ActiveRecord::Base
     false
   end
   
+  def geoblock_disabled_for?(country_code)
+    self.geoblocking_open_countries.split.include?(country_code) != nil
+  end
+  
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
     resend_activation if self.has_email? and self.is_pending?
