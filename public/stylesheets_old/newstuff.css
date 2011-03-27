@@ -16,6 +16,59 @@ color: #333;
 
 }
 
+.search_results h3
+{
+  padding-top: 5px;
+}
+
+#search
+{
+  position:relative;
+  right:0;
+  top:47px;
+  width:230px;
+  left:574px;
+  left:572px !ie;
+}
+#search input.input
+{
+  height: 21px;
+  margin-right: 2px;
+  margin-top: 1px;
+  padding: 2px 3px 0;
+}
+#search input.leita
+{
+  font-size:12px;
+  height:22px !important;
+  width: 45px;
+}
+
+#search-id
+{
+  font-size:12px;
+  height:22px !important;
+  width:160px;
+  float:left;
+  margin-right: 3px;
+  margin-right: 0px !ie;
+
+}
+
+.search_results #left
+{
+float:left; 
+width: 600px;
+padding-left: 10px;
+}
+
+.search_results #right
+{
+float:right;  
+width: 200px;
+}
+
+
 .match {
 color: red;
 }

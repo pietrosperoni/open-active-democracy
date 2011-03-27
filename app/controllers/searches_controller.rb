@@ -1,14 +1,14 @@
 class SearchesController < ApplicationController  
   
   def index
-    Rails.logger.info("ISSUE LIST #{params[:cached_issue_list]} CRC #{params[:cached_issue_list].to_crc32}") if params[:cached_issue_list]
+    Rails.logger.info("Category Name #{params[:category_name]} CRC #{params[:category_name].to_crc32}") if params[:cached_issue_list]
     @page_title = tr("Search {government_name} priorities", "controller/searches", :government_name => current_government.name)
     if params[:q]
       @query = params[:q]
       @page_title = tr("Search {government_name} priorites for '{query}'", "controller/searches", :government_name => current_government.name, :query => @query)
       @facets = ThinkingSphinx.facets params[:q], :all_facets => true, :with => {:partner_id => Partner.current ? Partner.current.id : 0}, :page => params[:page]
-      if params[:cached_issue_list]
-        @search_results = @facets.for(:cached_issue_list=>params[:cached_issue_list])
+      if params[:category_name]
+        @search_results = @facets.for(:category_name=>params[:category_name])
       elsif params[:class]
         @search_results = @facets.for(:class=>params[:class].to_s)
       else

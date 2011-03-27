@@ -1,15 +1,27 @@
 <% if @error %>
 <%= @error%>
 <% else %>
+<% form_tag(searches_path, :method => 'get') do %>    
+<tr>
+  <td valign="middle">
+    <div class="magnifier_wrap">
+    <span class="magnifier_image"><img src="/images/icons/magnifier.gif" width="14" height="14" border="0"></span>
+    <span class="magnifier_box">
+    <%= text_field_tag "q", @query, :value=>@query%>
+    </span>
+    </div>  
+  </td>
+</tr>
+<% end %> 
+<br>
 <h2>
-<%= tr("Search results for","search")%>
-<span class="star"><%= @query%></span>
+<%= tr("Search results","search")%>
 </h2>
 <br>
 <% if params[:class] %>
-<h4><%= tr("Type","search")%>: <%= translate_facet_option(params[:class])%></h4>
+<h4><%= tr("All","search")%> <%= translate_facet_option(params[:class])%></h4>
+<br>
 <% end %>
-
 <table>
   <tr>
     <td>
@@ -21,8 +33,7 @@
             <div>
               <h4><%= tr("Priority","search")%> - <%= time_ago(result.excerpts.created_at) %></h4>
               <h3><%= result.excerpts.name.force_encoding("UTF-8").html_safe %></h3>
-              <%#= result.excerpts.content %>
-              <%=link_to tr("Show priority","search"), :controller=>"priorities", :action=>"show", :id=>result.id %>
+              <%=link_to tr("Show","search"), :controller=>"priorities", :action=>"show", :id=>result.id %>
               <br>
               <br>
             </div>
@@ -30,10 +41,9 @@
             <div>
               <h4><%= tr("Point","search")%> - <%= time_ago(result.excerpts.created_at) %></h4>
               <h3><%= result.excerpts.name.force_encoding("UTF-8").html_safe %></h3>
-              <%= tr("Point","search")%> : <%= result.excerpts.content.force_encoding("UTF-8").html_safe %>
+              <%= result.excerpts.content.force_encoding("UTF-8").html_safe %>
               <br>
-              <br>
-              <%= link_to tr("Show point","search"), :controller=>"questions", :action=>"show", :id=>result.id %>
+              <%= link_to tr("Show","search"), :controller=>"questions", :action=>"show", :id=>result.id %>
               <br>
               <br>
             </div>
@@ -42,11 +52,7 @@
               <h4><%= tr("Comment","search")%> - <%= time_ago(result.excerpts.created_at) %></h4>
               <%= result.excerpts.content.force_encoding("UTF-8").html_safe %>
               <br>
-              <% if result.activity.priority_id %>
-              <%= link_to tr("Show priority","search"), :controller=>"priorities", :action=>"show", :id=>result.activity.priority_id %>
-              <% elsif result.activity.point_id  %>
-              <%= link_to tr("Show point","search"), :controller=>"points", :action=>"show", :id=>result.activity.point_id %>
-              <% end %>
+              <%= link_to tr("Show","search"), result.show_url %>
               <br>
               <br>
             </div>
@@ -62,32 +68,29 @@
 </div>
 </td>
 <td>
-      <% unless not @facets or @facets.empty?%>
+      <% unless not @facets or @facets.empty? or @search_results.empty?%>
       <div id="right" style="float: right;">
         <div>
-          <h3><%= link_to tr("Everything","search"), "/leita?q=#{@query}"%></h3>
+          <h3><%= link_to tr("Everything","search"), "/search?q=#{@query}"%></h3>
+          <br>
         </div>
         <% @facets.each do |facet, facet_options| %>
         <div>
-          <% if facet.to_s=="class" %>
-          <h3><%= tr("Type","search")%></h3>
-          <% else %>
-          <h3><%= facet.to_s.html_safe%></h3>
-          <% end %>
           <ul>
             <% facet_options.each do |option, count| %>
-            <% next if option==nil or option=="" %>
-            <% translated_option = translate_facet_option(option) %>
-            <% if translated_option==params[:cached_issue_list] or option==params[:class]%>
-            <li>
-              <b><%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %></b>
-            </li>
-            <% else %>
-            <li>
-              <%= link_to "#{translated_option} (#{count})".html_safe, :params => {facet => option, :q=>@query, :page => 1} %>
-            </li>
+              <% next if option==nil or option=="" %>
+              <% translated_option = translate_facet_option(option) %>
+              <% if translated_option==params[:category_name] or option==params[:class]%>
+              <li>
+                <b><%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %></b>
+              </li>
+              <% else %>
+              <li>
+                <%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %>
+              </li>
+              <% end %>
             <% end %>
-            <% end %>
+            <br>
           </ul>
         </div>
         <% end %>

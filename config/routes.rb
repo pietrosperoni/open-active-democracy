@@ -322,6 +322,7 @@ OpenActiveDemocracy::Application.routes.draw do
   match '/new' => 'priorities#new'
   match '/controversial' => 'priorities#controversial'
   match '/vote/:action/:code' => 'vote#index'
+  match '/search' => 'searches#index'
   match '/splash' => 'splash#index'
   match '/issues' => 'issues#index'
   match '/issues.:format' => 'issues#index'
