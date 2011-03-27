@@ -265,7 +265,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    cookies.delete :auth_token
+    # cookies.delete :auth_token
     # protects against session fixation attacks, wreaks havoc with
     # request forgery protection.
     # uncomment at your own risk
