@@ -16,7 +16,7 @@
 				</div>
 				<% if @revision.has_website? %>
 					<div class="point_source">
-					<%= tr("Source:", "view/revisions/show")%> <a href="<%= @revision.website_link %>"><%= truncate(@revision.website_link,70) %></a>
+					<%= tr("Source:", "view/revisions/show")%> <a href="<%= @revision.website_link %>"><%= truncate(@revision.website_link,:length=>70) %></a>
 					</div>
 				<% end %>			
 

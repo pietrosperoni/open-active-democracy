@@ -37,7 +37,7 @@
 	</div>
 	<% if point.has_website? %>
 		<div class="point_source">
-		<%= tr("Source:", "view/points/_show_full")%> <a href="<%= point.website_link %>"><%= truncate(point.website_link,70) %></a>
+		<%= tr("Source:", "view/points/_show_full")%> <a href="<%= point.website_link %>"><%= truncate(point.website_link,:length=>70) %></a>
 		</div>
 	<% end %>
 	<div class="point_qualities">

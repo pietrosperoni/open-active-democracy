@@ -6,7 +6,7 @@
 		<% for webpage in @webpages %>
 			<div class="webpage">
 				<a href="<%= webpage.url %>"><%= webpage.title %></a>
-				<div class="webpage_footer"><%= truncate(webpage.domain,17) %>
+				<div class="webpage_footer"><%= truncate(webpage.domain,:length=>17) %>
 				<% if webpage.feed %>
 					<%= tr("via {source}", "view/issues/_feed_column", :source => '<a href="' + webpage.feed.website_link + '">' + webpage.feed.name + '</a>') %>
 				<% end %>
