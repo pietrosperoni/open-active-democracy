@@ -3,6 +3,7 @@ class PriorityRanker
   def perform
     puts "PriorityRanker.perform starting... at #{start_time=Time.now}"
     Government.current = Government.all.last
+    setup_endorsements_counts
     if Government.current.is_tags? and Tag.count > 0
       # update the # of issues people who've logged in the last two hours have up endorsed
       users = User.find_by_sql("SELECT users.id, users.up_issues_count, count(distinct taggings.tag_id) as num_issues
@@ -78,6 +79,7 @@ class PriorityRanker
        order by number desc")
 
     i = 0
+    puts "priorities.count = #{priorities.count}"
     for p in priorities
      p.score = p.number
      first_time = false
@@ -267,7 +269,16 @@ class PriorityRanker
     setup_ranged_endorsment_position(Time.now-30.days,"position_endorsed_30days")
   end
   
-  private 
+  private
+  
+  def setup_endorsements_counts
+    Priority.all.each do |p|
+      p.endorsements_count = p.endorsements.active_and_inactive.size
+      p.up_endorsements_count = p.endorsements.endorsing.active_and_inactive.size
+      p.down_endorsements_count = p.endorsements.opposing.active_and_inactive.size
+      p.save(:validate => false)      
+    end
+  end
 
   def setup_ranged_endorsment_position(time_since,position_db_name)
     priorities = Priority.find_by_sql("
