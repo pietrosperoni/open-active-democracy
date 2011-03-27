@@ -130,7 +130,7 @@ end
 after "deploy:update", "delayed_job:restart"
 
 task :before_update_code, :roles => [:app] do
-  thinking_sphinx.stop
+  #thinking_sphinx.stop
 end
 
 task :after_update_code do
@@ -141,8 +141,8 @@ task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
   run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -nfs #{deploy_to}/#{shared_dir}/private #{current_release}/private"
-  thinking_sphinx.configure
-  thinking_sphinx.start
+  #thinking_sphinx.configure
+  thinking_sphinx.restart
 end
 
 namespace :deploy do

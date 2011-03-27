@@ -1,4 +1,5 @@
 <ul class="<%=opts[:class]%>" style="<%=opts[:style]%>">
+  <li><%=link_to(trl("Back To Main Website", "Translator home link"), "/")%></li>
 <% if !Tr8n::Config.current_user or Tr8n::Config.current_user.guest? %>
   <li><%=link_to(trl("Login", "Translator login link"), "/tr8n/login")%></li>
 <% else %>
