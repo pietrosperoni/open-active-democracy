@@ -2,9 +2,13 @@
 <%# License: http://www.gnu.org/licenses/agpl-3.0.txt %>
 <div id="<%=portlet.id%>" class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
 	<div class="portlet-header ui-widget-header ui-corner-all">
+	  <% if current_user and current_user.is_admin? %>
 		<span id="<%=portlet.id%>" class="delete-portlet-button ui-icon ui-icon-circle-close"></span>
+		<% end %>
 		<span class="collapse-portlet-button ui-icon ui-icon-circle-minus"></span>
+    <% if current_user and current_user.is_admin? %>
 		<span class="ui-icon ui-icon-arrow-4-diag"></span>
+		<% end %>
     	<%=tr(portlet.portlet_template.name, "view/portal/_portlet_header")%>
 	</div>
 	<div class="portlet-content">

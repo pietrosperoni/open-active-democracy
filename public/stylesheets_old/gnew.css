@@ -445,9 +445,6 @@ font-size:11px !Important;
 -moz-border-radius:1px 1px 1px 1px;
 }
 
-.ui-widget-content {
-border:1px solid #DDD !Important;
-}
 
 #header
 {
@@ -580,7 +577,7 @@ margin-top: -10px !Important;
 
 #main-portal-div
 {
-margin-top: 30px !important;
+margin-top: 5px !important;
 }
 
 #portal_header .radio
@@ -597,7 +594,7 @@ display:none !important;
 #portal-menu-div
 {
 	width: 190px !important;
-	padding-left:12px;
+	padding-left:240px;
 }
 
 #new_button
