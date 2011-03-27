@@ -460,7 +460,7 @@ class User < ActiveRecord::Base
   			shown_ad = ad.shown_ads.find_by_user_id(self.id)
   			if shown_ad and not shown_ad.has_response? and shown_ad.seen_count < 4
   				shown_ad.increment!(:seen_count)
-  				return ad@user
+  				return ad
   			elsif not shown_ad
   				shown_ad = ad.shown_ads.create(:user => self)
   				return ad

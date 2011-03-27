@@ -1,7 +1,10 @@
 <% if ['color_schemes'].include?(params[:controller]) %>
 	<%= javascript_include_tag "colorpicker" %>
 <% end %>
-<%= javascript_include_tag "facebox","jquery.autocomplete.pack","jquery.textCounting.min", "jquery.timeago", "jquery.truncator","autoresize.jquery.min","jquery.defaultvalue","jquery.hoverIntent.minified","jquery.bgiframe.min","jquery.corners.min","application" %>
+<%= javascript_include_tag "facebox","jquery.autocomplete.pack","jquery.textCounting.min", "jquery.timeago",
+                           "jquery.truncator","autoresize.jquery.min","jquery.defaultvalue","jquery.hoverIntent.minified",
+                           "jquery.bgiframe.min","jquery.corners.min","jquery.delayedObserver",
+                           "jquery-ui-1.7.2.custom.min", "application" %>
 
 <script type="text/javascript">
 jQuery(document).ready(function() {

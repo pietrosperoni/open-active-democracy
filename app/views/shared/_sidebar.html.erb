@@ -1,6 +1,11 @@
 <div id="sidebar">
+    <%= render :partial => "shared/search" %>
+    <div id="language_selection_box">
+      <%= tr("Select language:","views/layouts/basic") %> <%= tr8n_language_selector_tag %><br>
+      <%= render :partial => "shared/google_translate_select" %>
+    </div>
+    <%= render :partial => "shared/user_info" if logged_in? %>
   <% if logged_in? %>
-    <%= render :partial => "shared/user_info" %>
     <% if current_user.warnings_count > -1 %>
       <div id="warning">
         <%= tr("{count} warnings", "view/layouts/basic", :count => current_user.warnings_count) %>
@@ -16,6 +21,8 @@
       <%= render :partial => "shared/login" %>
     <% end %>
   </div>
+
+  <%= render :partial => "priorities/new_button" %>
 
   <% if logged_in? %>
     <div id="priority_column">

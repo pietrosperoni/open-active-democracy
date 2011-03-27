@@ -71,8 +71,7 @@
 	</div>
 
 
-<% if logged_in? %>
-<% if ['yours','yours_finished','yours_created','yours_top','yours_lowest','yours_ads'].include?(params[:action]) or ( params[:controller] != 'ads' and @endorsement) or (@priority and @priority.new_record?) %>
+<% if logged_in? and ['yours','yours_finished','yours_created','yours_top','yours_lowest','yours_ads'].include?(params[:action]) or ( params[:controller] != 'ads' and @endorsement) or (@priority and @priority.new_record?) %>
 	<div id="nav_third">
 		<% if @priority and @endorsement %>
 			<div id="nav_third_<% if current_user.id == @priority.user_id %>2<% elsif @endorsement and @priority.is_finished? %>6<% elsif @endorsement %>1<% end %>">		
@@ -123,8 +122,40 @@
 			
 		</div>	
 	</div>
+<% elsif ['top','top_24hr','top_7days','top_24days'].include?(params[:action]) %>
+  <div id="nav_third">
+      <div id="nav_third_8">
+      <ul id="menu_third">
+
+        <li class="tab1">
+          <span class="tab_header">
+            <%= link_to tr("Top", "view/priorities/_browse_nav"), top_priorities_url %>
+          </span>
+        </li>
+
+        <li class="tab2">
+          <span class="tab_header">
+            <%= link_to tr("Top 24hr", "view/priorities/_browse_nav"), top_24hr_priorities_url %>
+          </span>
+        </li>
+
+        <li class="tab3">
+          <span class="tab_header">
+            <%= link_to tr("Top 7 days", "view/priorities/_browse_nav"), top_7days_priorities_url %>
+          </span>
+        </li>
+
+        <li class="tab4">
+          <span class="tab_header">
+            <%= link_to tr("Top 30 days", "view/priorities/_browse_nav"), top_30days_priorities_url %>
+          </span>
+        </li>
+      </ul>
+    </div>  
+  </div>
 <% end %>
 
+<% if logged_in? %>
 <% if ['official','not_official','official_opposed'].include?(params[:action]) %>
 	
 	<div id="nav_third">

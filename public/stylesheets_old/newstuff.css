@@ -744,12 +744,19 @@ width:130px;
 }
 
 #new_priority_button {
-  padding:2px 5px 3px 8px;
+  width: 208px;
+  padding:2px 5px 3px 5px;
   border:1px solid #ddd;
-  float: right;
-  margin-top: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 7px;
+  font-size: 1.8em;
+}
+
+#language_selection_box {
+  width: 208px;
+  padding:2px 5px 3px 5px;
+  border:1px solid #ddd;
+  margin-top: 4px;
+  margin-bottom: 7px;
 }
 
 #right_column_priorities {

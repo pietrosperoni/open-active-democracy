@@ -12,7 +12,7 @@
 			<%= tr("Your message to go underneath the link to the priority:", "view/ads/new")%>
 		</div>
 		<div class="field_box">
-    		<%= f.text_field :content, :size => 50, :maxlength => 90, :id => "somethingelse" %>
+    		<%= f.text_field :content, :size => 50, :maxlength => 90, :id => "ad_text" %>
 		</div>
 	</div>
 
@@ -39,5 +39,12 @@
 	</div>
 	<%= f.submit tr("Save and publish your Ad", "view/ads/new"), :id => "submit", :class => "yellow_button" %>
 <% end %>
-<%= observe_form 'new_ad',  :frequency => 0.5, :update => 'ad_show', :url => preview_priority_ads_url(@priority) %>
+<script type="text/javascript">
+//<![CDATA[
+$('#ad_text').delayedObserver(function() {
+    jQuery.ajax({type:'post', url:'<%=preview_priority_ads_url(@priority)+'?ad_text='%>'+$(this).val()})
+    // perform AJAX call ...
+}, 0.5);
+//]]>
+</script>
 <p>

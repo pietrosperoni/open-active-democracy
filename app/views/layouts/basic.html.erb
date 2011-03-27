@@ -34,23 +34,14 @@
 	<div id="header">
 	  <table>
 	    <tr>
-	      <td width="45%">
+	      <td width="35%">
           <%= render :partial => "shared/branding/your_priorities"%>
         </td>
-        <td width="55%" align="center">
+        <td width="65%" align="top" valing="top">
           <table>
             <tr align="center">
               <td>
-                  <%= render :partial => "priorities/new_button" %>
-              </td>
-              <td>
-                  <%= render :partial => "shared/search" %>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2"  align="center">
-                 <%=tr("Select language:","views/layouts/basic")%> <%= tr8n_language_selector_tag %>
-                 <%= render :partial => "shared/google_translate_select" %>
+                <%= render :partial => "ads/pick" %>
               </td>
             </tr>
           </table>
@@ -64,7 +55,6 @@
     </table>
 	</div>
 	<div id="contentwrap">
-    <%= render :partial => "ads/pick" %>
 		<%= render :partial => "shared/menu" %>		
 		<div id="content_text">
 			<%= yield :layout %>

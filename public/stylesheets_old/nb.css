@@ -124,7 +124,7 @@ h4 {
 }
 #search_box {
 	padding: 5px 5px 5px 10px;
-	float: right;
+	float: top;
 }
 #intro, #buzz_box {
 	margin-top: 10px;
@@ -158,8 +158,13 @@ h4 {
 	width: 170px;
 }
 .magnifier_wrap {
+  width: 212px;
 	background-color: #fff;
-	margin-top: -2px;
+	margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 3px 3px 3px 3px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .magnifier_wrap input {
 	border: none;
@@ -319,9 +324,9 @@ h4 {
 }
 
 #notification_show {
-	padding: 7px 5px 7px 15px;
-	margin: 10px 10px 10px 10px;
-	font-size: 1.2em;
+	padding: 5px 4px 5px 12px;
+	margin: 5px 5px 5px 5px;
+	font-size: 1.05em;
 	letter-spacing: 0;
 	line-height: 1.4em;
 }
@@ -331,7 +336,7 @@ h4 {
 }
 
 .notification_show_message {
-	margin-top: 2px;
+	margin-top: 0px;
 }
 .endorsement_up, .endorsement_down {
    	margin: 4px 0px 0px 0px;

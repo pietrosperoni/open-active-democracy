@@ -6,5 +6,14 @@
 		<%= render :partial => "ads/show", :locals => {:ad => ad }%>
 	</div>
 	<% end %>
+	
+<% else %>
+  
+  <% ad = Ad.active.filtered.most_paid.by_random.first %>
+  <% if ad %>
+  <div id="notification_show">
+    <%= render :partial => "ads/show", :locals => {:ad => ad }%>
+  </div>
+  <% end %>
 
 <% end %>

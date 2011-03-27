@@ -8,6 +8,7 @@ class Ad < ActiveRecord::Base
   scope :most_paid, :order => "ads.per_user_cost desc"
   scope :active_first, :order => "ads.status asc, ads.per_user_cost desc, ads.created_at desc"
   scope :by_recently_created, :order => "ads.created_at desc"
+  scope :by_random, :order=>"rand()"
   
   belongs_to :user
   belongs_to :priority
@@ -19,16 +20,16 @@ class Ad < ActiveRecord::Base
 
   def validate
     if self.calculate_per_user_cost < 0.01
-      errors.add("cost","per member must be more than 0.01" + Government.current.currency_short_name)
+      errors.add("cost",tr("per member must be more than 0.01 social points",""))
     elsif self.cost > user.capitals_count
-      errors.add("cost","is more " + Government.current.currency_name.downcase + " than you have.")
+      errors.add("cost",tr("is more social points than you have.",""))
     end    
     errors.on("cost")
 #    if priority.position < 26
 #      errors.add(:base, "You can not purchase ads for priorities in the top 25 already.")
 #    end
     if priority.is_buried?
-      errors.add(:base, "You can not purchase ads for priorities that have been buried.")
+      errors.add(:base, tr("You can not purchase ads for priorities that have been buried."))
     end    
   end
   

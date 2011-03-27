@@ -58,12 +58,13 @@ class AdsController < ApplicationController
   end
 
   def preview
+    params[:ad]={:content=>params[:ad_text]}
     @ad = @priority.ads.new(params[:ad])
     @ad.user = current_user
     respond_to do |format|    
       format.js {
         render :update do |page|
-          #page.replace_html 'ad_preview', render(:partial => "ads/show", :locals => {:ad => @ad, :endorsement => Endorsement.new})
+          page.replace_html 'ad_preview', render(:partial => "ads/show", :locals => {:ad => @ad, :endorsement => Endorsement.new})
           page.replace_html 'ad_per_user_cost', render(:partial => "ads/per_user_cost", :locals => {:ad => @ad})
           page.replace_html 'ad_ranking', render(:partial => "ads/ranking", :locals => {:ad => @ad})
         end
