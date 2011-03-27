@@ -10,10 +10,13 @@
 	             'data-disable-with' =>  escape_t(tr("Sending","Ajax")),
  	             :url => session_path(:region => "inline") do |f| -%>
 		<table border="0" cellspacing="0" cellpadding="0">
-			<tr><td class="email">
-				<input type="text" name="email" size="15" id="login_email"> <%= tr("Email address", "view/shared/_login")%>
+			<tr>
+			  <td class="email">
+			    <%= tr("Email address", "view/shared/_login")%><br>
+				  <input type="text" name="email" size="15" id="login_email"> 
 			</td></tr><tr><td class="password">
-				<input type="password" name="password" size="8" id="login_password"> <%= tr("Password", "view/shared/_login")%>
+			  <%= tr("Password", "view/shared/_login")%><br>
+				<input type="password" name="password" size="8" id="login_password"> 
 			</td></tr><tr>
 			<td class="submit">
 				<%= submit_tag tr("Sign in", "view/shared/_login"), :class => "yellow_button" %>
