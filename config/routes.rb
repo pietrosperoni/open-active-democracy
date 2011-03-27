@@ -310,7 +310,7 @@ OpenActiveDemocracy::Application.routes.draw do
   resources :process_documents
   resources :process_document_types
   resources :process_document_states
-  match '/' => 'priorities#index'
+  match '/' => 'portal#index'
   match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
   match '/signup' => 'users#new', :as => :signup
   match '/login' => 'sessions#new', :as => :login
