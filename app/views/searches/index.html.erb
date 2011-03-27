@@ -27,7 +27,45 @@
     <td>
     <div class="search_results">
       <% unless @search_results.empty? %>
-      <div id="left" style="float: left">
+
+      <div id="left" style="float: left;">
+        <div>
+          <h3><%= link_to tr("Everything","search"), "/search?q=#{@query}"%></h3>
+          <br>
+        </div>
+        <% @facets.each do |facet, facet_options| %>
+        <div>
+          <ul>
+            <% facet_options.each do |option, count| %>
+              <% next if option==nil or option=="" %>
+              <% translated_option = translate_facet_option(option) %>
+              <% if translated_option==params[:category_name] or option==params[:class]%>
+              <li>
+                <b><%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %></b>
+              </li>
+              <% else %>
+              <li>
+                <%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %>
+              </li>
+              <% end %>
+            <% end %>
+            <br>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+
+
+      <% else %>
+      <%= tr("No search results","search")%>
+      <br>
+      <%#=@query %>
+      <% end %>
+</div>
+</td>
+<td>
+      <% unless not @facets or @facets.empty? or @search_results.empty?%>
+      <div id="right" style="float: right">
         <% @search_results.each do |result|%>
           <% if result.class == Priority %>
             <div>
@@ -59,41 +97,6 @@
           <% end %>
         <% end %>
         <%= will_paginate @search_results%>
-      </div>
-      <% else %>
-      <%= tr("No search results","search")%>
-      <br>
-      <%#=@query %>
-      <% end %>
-</div>
-</td>
-<td>
-      <% unless not @facets or @facets.empty? or @search_results.empty?%>
-      <div id="right" style="float: right;">
-        <div>
-          <h3><%= link_to tr("Everything","search"), "/search?q=#{@query}"%></h3>
-          <br>
-        </div>
-        <% @facets.each do |facet, facet_options| %>
-        <div>
-          <ul>
-            <% facet_options.each do |option, count| %>
-              <% next if option==nil or option=="" %>
-              <% translated_option = translate_facet_option(option) %>
-              <% if translated_option==params[:category_name] or option==params[:class]%>
-              <li>
-                <b><%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %></b>
-              </li>
-              <% else %>
-              <li>
-                <%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %>
-              </li>
-              <% end %>
-            <% end %>
-            <br>
-          </ul>
-        </div>
-        <% end %>
       </div>
     </div>
     <% else %>
