@@ -18,21 +18,19 @@
 <%= tr("Search results","search")%>
 </h2>
 <br>
-<% if params[:class] %>
+<% if false and params[:class] %>
 <h4><%= tr("All","search")%> <%= translate_facet_option(params[:class])%></h4>
-<br>
 <% end %>
 <table>
   <tr>
     <td>
     <div class="search_results">
       <% unless @search_results.empty? %>
-
       <div id="left" style="float: left;">
-        <div>
+        <% if params[:category_name] or params[:class] %>
           <h3><%= link_to tr("Everything","search"), "/search?q=#{@query}"%></h3>
           <br>
-        </div>
+        <% end %>
         <% @facets.each do |facet, facet_options| %>
         <div>
           <ul>
@@ -54,12 +52,10 @@
         </div>
         <% end %>
       </div>
-
-
       <% else %>
-      <%= tr("No search results","search")%>
-      <br>
-      <%#=@query %>
+        <%= tr("No search results","search")%>
+        <br>
+        <%#=@query %>
       <% end %>
 </div>
 </td>
