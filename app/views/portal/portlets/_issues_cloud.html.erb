@@ -1,4 +1,4 @@
-<% cache(["portlets_issues_cloud",locale,Partner.current_id], :expires_in => 5.minutes) do %>
+<% cache(["portlets_issues_cloud",locale,Partner.current_id,@inline_translation_enabled], :expires_in => 5.minutes) do %>
   <div align="center" id="topics">
   <% for tag in Tag.find(:all, :conditions => ["up_endorsers_count > ?", (current_government.users_count/100).to_i], :order => "name asc", :include => :top_priority) %>
     <% next if ["Besti flokkurinn","Reykjavíkurframboðið","Samfylkingin","Frjálslyndi flokkurinn","Sjálfstæðisflokkurinn","Framsóknarflokkurinn","Vinstrihreyfingin grænt framboð"].include?(tag.name) %>
