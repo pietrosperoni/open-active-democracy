@@ -13,9 +13,13 @@
       <%= render :partial => "shared/google_translate_select" %>
     </div>
   <% if logged_in? %>
-    <% if current_user.warnings_count > -1 %>
+    <% if current_user.warnings_count > 0 %>
       <div id="warning">
-        <%= tr("{count} warnings", "view/layouts/basic", :count => current_user.warnings_count) %>
+         <% if current_user.warnings_count > 1 %>
+           <%= tr("{count} warnings", "view/layouts/basic", :count => current_user.warnings_count) %>
+         <% else %>
+           <%= tr("{count} warning", "view/layouts/basic", :count => current_user.warnings_count) %>
+         <% end %>
       </div>
     <% end %>
     <%= render :partial => "shared/activated" %>

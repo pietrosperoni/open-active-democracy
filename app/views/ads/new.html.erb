@@ -42,8 +42,17 @@
 <% if false %>
 <script type="text/javascript">
 //<![CDATA[
-$('#new_ad').delayedObserver(function() {
-    jQuery.ajax({type:'post', data: $(this).serialize(), url:'<%=preview_priority_ads_url(@priority)%>'})
+jQuery('form.new_ad').observeForm({
+        validation: 'label.error'
+      })
+    .bind('form.activity', function(e, msg){
+      alert("blah 2 msg");
+      jQuery.ajax({type:'post', data: msg.form.serialize(), url:'<%=preview_priority_ads_url(@priority)%>'})
+    });
+      
+
+$('form.nesssw_ad').delayedObserver(function() {
+    alert("blah ff");
     // perform AJAX call ...
 }, 0.5);
 //]]>
