@@ -168,9 +168,9 @@ class PriorityRanker
   def setup_ranged_endorsment_positions
     partners_with_nil = Partner.all<<nil
     partners_with_nil.each do |partner| 
-      setup_ranged_endorsment_position(partners_with_nil,Time.now-24.hours,"position_endorsed_24hr")
-      setup_ranged_endorsment_position(partners_with_nil,Time.now-7.days,"position_endorsed_7days")
-      setup_ranged_endorsment_position(partners_with_nil,Time.now-30.days,"position_endorsed_30days")
+      setup_ranged_endorsment_position(partner,Time.now-24.hours,"position_endorsed_24hr")
+      setup_ranged_endorsment_position(partner,Time.now-7.days,"position_endorsed_7days")
+      setup_ranged_endorsment_position(partner,Time.now-30.days,"position_endorsed_30days")
     end
   end
   
