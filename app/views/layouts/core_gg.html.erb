@@ -18,57 +18,34 @@
 		<%= tr8n_scripts_tag %>
 	</head>
 	<body>
+
 		<%= csrf_meta_tag %>
 
-		<div id="wrapper">
+		<div id="backgroundwrap">
 			<div id="mainContent">
-				<!-- Content area -->
+				<!-- HEADER-->
 				<div id="header">
-					<div id="logo">
+					<div id="branding">
 						<%= render :partial => "shared/branding/your_priorities"%>
-					</div>
-					<div id="ads">
-						<%= render :partial => "ads/pick" %>
-					</div>
-					<div id="language">
-						<%= tr("Select language:","views/layouts/basic")%> <%= tr8n_language_selector_tag %>
-						<%= render :partial => "shared/google_translate_select" %>
-					</div>
-					<div id="notice">
-						<%= flash_div :warning, :notice, :error %>
+						<div id="ads">
+							<%= render :partial => "ads/pick" %>
+						</div>
+						<div id="language">
+							<%= tr("Select language:","views/layouts/basic")%> <%= tr8n_language_selector_tag %>
+							<%= render :partial => "shared/google_translate_select" %>
+						</div>
+						<div id="notice">
+							<%= flash_div :warning, :notice, :error %>
+						</div>
 					</div>
 				</div>
-				<div id="menu">
-					<%= render :partial => "shared/menu" %>
-				</div>
-				<!-- Content boxes-->
-				<div id="content">
+				
+				
+<!-- Sidebar area -->
 
-					<div class="pageBox">
-						<div class="title">
-							Efstu mál
-						</div>
-						<div class="selector">
-							Subfilters and subnavigation
-						</div>
-						<div class="">
-						</div>
-					</div>
-					<div class="pageBox">
-						box
-					</div>
-					<div class="pageBox">
-						box
-					</div>
-					<div class="pageBox">
-						box
-					</div>
-				</div>
-			</div>
-			<!-- Sidebar area -->
 			<div id="sidebar">
 				<div id="reykjavikLink">
-					<a href="#">Your Priorities worldwide</a>
+					link
 				</div>
 				<% if logged_in? and current_user.warnings_count > 0 %>
 				<div id="warning">
@@ -94,14 +71,13 @@
 				</div>
 				<div id="newIdea">
 					<%= render :partial => "priorities/new_button" %>
-					<img src="../stylesheets/images/newidea.gif" border="0" alt="" />
 				</div>
 				<!-- User area-->
 				<div id="user">
 					<% if logged_in? %>
 					<%= render :partial => "shared/notifications" %>
-					<%= render :partial => "shared/login" %>
 					<% else %>
+					<%= render :partial => "shared/login" %>
 					<% end %>
 
 					<% if logged_in? %>
@@ -135,6 +111,33 @@
 					</div>
 				</div>
 			</div>
+
+				<div id="menu">
+					<%= render :partial => "shared/menu" %>
+				</div>
+				<!-- Content boxes-->
+				<div id="content_text">
+					<div class="pageBox">
+						<div class="selector">
+							Subfilters and subnavigation
+						</div>
+						<div class="title">
+							<%= yield :layout %>
+						</div>
+						<div class="">
+						</div>
+					</div>
+					<div class="pageBox">
+						box
+					</div>
+					<div class="pageBox">
+						box
+					</div>
+					<div class="pageBox">
+						Box
+					</div>
+				</div>
+			</div>
 		</div>
 		<div id="footer">
 			<%= render :partial => "shared/footer" %>
@@ -142,4 +145,4 @@
 			<%= render :partial => "shared/facebook_footer" %>
 		</div>
 	</body>
-</html>
+</html> 
