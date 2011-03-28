@@ -46,7 +46,8 @@ class Tr8n::TranslationsController < Tr8n::BaseController
       @translation = Tr8n::Translation.find(params[:translation_id])
     end
     
-    @translation.label = sanitize_label(params[:translation][:label])
+#    @translation.label = sanitize_label(params[:translation][:label])
+    @translation.label = params[:translation][:label] # Skip sanitation as sometimes the text includes html
     @translation.rules = parse_rules
 
     unless @translation.can_be_edited_by?(tr8n_current_translator)
