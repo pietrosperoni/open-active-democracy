@@ -296,11 +296,11 @@ de:
           new: 
             name: "%{user_name} verlinkte %{point_name} mit %{priority_name}"
             nouser: "Verlinkte %{point_name} mit %{priority_name}"
-        name: "%{user_name} änderte den Talking Point's Titel in %{point_name}"
+        name: "%{user_name} änderte den point's Titel in %{point_name}"
         neutral: 
           name: "%{user_name} änderte %{point_name}, um zu zeigen, dass %{priority_name} neutral gesehen wird"
           nouser: "Änderte %{point_name}, um zu zeigen, dass %{priority_name} neutral gesehen wird"
-        nouser: "Änderte den Talking Point's Titel in %{point_name}"
+        nouser: "Änderte den point's Titel in %{point_name}"
         opposition: 
           name: "%{user_name} änderte %{point_name}, um zu zeigen, dass %{priority_name} nicht unterstützt wird"
           nouser: "Änderte %{point_name}, um zu zeigen, dass %{priority_name} nicht unterstützt wird"

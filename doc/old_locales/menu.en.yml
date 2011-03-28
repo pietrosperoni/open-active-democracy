@@ -33,19 +33,19 @@ en:
             revised: "Revised"
             helpful_to: "Helpful to:"
             add_point: 
-                name: "Add a talking point"
+                name: "Add a point"
                 title: "Can you make a compelling point for or against this priority in less than 500 characters?"
             add_document: 
                 name: "Add a document"
                 title: "Documents let you expand on your ideas and collaborate with others in a wiki-like fashion"
             recently_revised: "Recently revised"
-            all_points: "All talking points"
+            all_points: "All points"
             all_documents: "All documents"
             all_activity: "All activity"     
             research:
                 name: "Contribute research"
                 needed: "Priorities needing %{points_name} or %{documents_name}"
-                points_needed: "Priorities needing talking points"
+                points_needed: "Priorities needing points"
                 documents_needed: "Priorities needing documents"
                 contributors:
                     name: "Contributors"
@@ -73,9 +73,9 @@ en:
                 one: "1 priority"
                 other: "%{count} priorities"
             points:
-                name: "Talking points"
-                one: "1 talking point"
-                other: "%{count} talking points"
+                name: "points"
+                one: "1 point"
+                other: "%{count} points"
         charts:
             name: "Charts and stats"
             active_issues: "Most active %{tags_name}"
@@ -248,7 +248,7 @@ en:
         process_discussions:
                 name: "Process Discussions"
         points:
-            name: "Talking points"
+            name: "points"
         portal:
             all: "All"
             add_portlet: "Add portlet"
@@ -306,7 +306,7 @@ en:
             invite: "Invite people to join"
             picture: "Add your picture"
             bio: "Add your bio"
-            points: "Write talking points for your priorities"
+            points: "Write points for your priorities"
             comments: "Join the discussion on your priorities"
         widgets:
             name: "Widgets for your site"
@@ -314,8 +314,8 @@ en:
                 short: "Priorities"
                 name: "Priority widgets"
             points: 
-                short: "Talking points"
-                name: "Talking point widgets"
+                short: "points"
+                name: "point widgets"
             discussions: 
                 short: "Discussions"
                 name: "Discussion widgets"

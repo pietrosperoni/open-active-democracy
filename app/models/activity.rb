@@ -549,7 +549,7 @@ end
 
 class ActivityPointRevisionName < Activity
   def name
-    tr("{user_name} changed the talking point's title to {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)
+    tr("{user_name} changed the point's title to {point_name}", "model/activity", :user_name => user.name, :point_name => point.name)
   end
 end
 
@@ -846,7 +846,7 @@ end
 
 class ActivityDocumentRevisionName < Activity
   def name
-    tr("{user_name} changed the talking point's title to {point_name}", "model/activity", :user_name => user.name, :point_name => document.name)
+    tr("{user_name} changed the point's title to {point_name}", "model/activity", :user_name => user.name, :point_name => document.name)
   end
 end
 

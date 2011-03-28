@@ -27,7 +27,7 @@
 			</div>
 			<% end %>
 			<p>
-			<div class="heading"><%= tr("Recent activity on this talking point", "view/revisions/show")%></div>
+			<div class="heading"><%= tr("Recent activity on this point", "view/revisions/show")%></div>
 			<% for activity in @revision.activities.active %>
 				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>

@@ -2,7 +2,7 @@
 <%= render :partial => "nav" %>
 <p>
 <% if @points.empty? and not @priority.replaced? %>
-	<%= tr("No talking points yet.", "view/priorities/points") %>
+	<%= tr("No points yet.", "view/priorities/points") %>
 <% else %>
 	<% if @points.total_pages > 1 %>
 	<%= will_paginate(@points) %>

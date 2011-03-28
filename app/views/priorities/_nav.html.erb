@@ -27,7 +27,7 @@
 		<% if @priority.points_count > 0 %>
 			<li class="tab5 mega">
 				<span class="tab_header">
-					<%= link_to tr("{count} talking points", "view/priorities/_nav", :count => @priority.points_count), top_points_priority_url(@priority) %>
+					<%= link_to tr("{count} points", "view/priorities/_nav", :count => @priority.points_count), top_points_priority_url(@priority) %>
 				</span>
 				<div class="tab_body">
 					<%= link_to(tr("Top points", "view/priorities/_nav"), top_points_priority_url(@priority)) %><br/>
@@ -108,7 +108,7 @@
 				<%= link_to tr("Action", "view/priorities/_nav"), new_priority_point_path(@priority) %>
 			</span>
 			<div class="tab_body">
-				<%= link_to tr("Add a talking point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
+				<%= link_to tr("Add a point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
 					<span class="greyed_out"><%= tr("Buy an ad for this priority", "view/priorities/_nav") %></span><br/>

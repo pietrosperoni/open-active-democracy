@@ -7,7 +7,7 @@
 		<div class="priority_action">
 			<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/portal/portlets", :count => issue.priorities_count) %></a>
 			<% if issue.points_count > 0 %>	
-			&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} talking points", "view/portal/portlets", :count => issue.points_count) %></a>
+			&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/portal/portlets", :count => issue.points_count) %></a>
 			<% end %>
 			<% if issue.documents_count > 0 %>
 			&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/portal/portlets", :count => issue.documents_count) %></a>

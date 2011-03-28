@@ -67,8 +67,8 @@ en:
             revision:
                 name: "%{sender_name} revised %{point_name}"
                 link:
-                    one: "1 talking point revision"
-                    other: "%{count} talking point revisions"                
+                    one: "1 point revision"
+                    other: "%{count} point revisions"                
         priority:
             flagged:
                 name: "%{sender_name} flagged %{priority_name} for review"

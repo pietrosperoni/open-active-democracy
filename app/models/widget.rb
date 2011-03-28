@@ -39,9 +39,9 @@ class Widget < ActiveRecord::Base
   
   def points_available
     [
-      [ "index", tr("Your talking points", "model/widget") ],
-      [ "your_priorities", tr("Talking points on your priorities", "model/widget")  ],                         
-      [ "newest", tr("Newest talking points", "model/widget")  ]
+      [ "index", tr("Your points", "model/widget") ],
+      [ "your_priorities", tr("Points on your priorities", "model/widget")  ],                         
+      [ "newest", tr("Newest points", "model/widget")  ]
     ]
   end
   

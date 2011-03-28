@@ -32,7 +32,7 @@ class WidgetsController < ApplicationController
   end
   
   def points
-    @page_title = tr("Put {government_name} talking points on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))    
+    @page_title = tr("Put {government_name} points on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))    
   end
   
   def preview

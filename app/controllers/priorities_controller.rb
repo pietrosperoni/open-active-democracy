@@ -451,7 +451,7 @@ class PrioritiesController < ApplicationController
   end
   
   def opposer_points
-    @page_title = tr("Talking points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    @page_title = tr("Points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = -1  
     @points = @priority.points.published.by_opposer_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -463,7 +463,7 @@ class PrioritiesController < ApplicationController
   end
   
   def endorser_points
-    @page_title = tr("Talking points supporting {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    @page_title = tr("Points supporting {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = 1
     @points = @priority.points.published.by_endorser_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -475,7 +475,7 @@ class PrioritiesController < ApplicationController
   end
   
   def neutral_points
-    @page_title = tr("Talking points about {priority_name}", "controller/priorities", :priority_name => @priority.name) 
+    @page_title = tr("Points about {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @point_value = 2 
     @points = @priority.points.published.by_neutral_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -487,7 +487,7 @@ class PrioritiesController < ApplicationController
   end  
   
   def everyone_points
-    @page_title = tr("Best talking points on {priority_name}", "controller/priorities", :priority_name => @priority.name) 
+    @page_title = tr("Best points on {priority_name}", "controller/priorities", :priority_name => @priority.name) 
     @point_value = 0 
     @points = @priority.points.published.by_helpfulness.paginate :page => params[:page], :per_page => params[:per_page]
     get_qualities
@@ -499,7 +499,7 @@ class PrioritiesController < ApplicationController
   end  
 
   def opposed_top_points
-    @page_title = tr("Talking points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    @page_title = tr("Points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = -1
     if params[:by_newest]
       @points = @priority.points.published.down_value.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
@@ -515,7 +515,7 @@ class PrioritiesController < ApplicationController
   end
   
   def endorsed_top_points
-    @page_title = tr("Talking points supporting {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    @page_title = tr("Points supporting {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = 1
     if params[:by_newest]
       @points = @priority.points.published.up_value.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]

@@ -267,7 +267,7 @@ namespace :fix do
     end
   end  
   
-  desc "re-process doc & talking point diffs"
+  desc "re-process doc & point diffs"
   task :diffs => :environment do
     Government.current = Government.all.last    
     models = [Document,Point]

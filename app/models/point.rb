@@ -294,7 +294,7 @@ class Point < ActiveRecord::Base
       capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => 1)
     end      
     if self.opposer_score < -0.5 and self.endorser_score < -0.5 and (old_opposer_score >= -0.5 or old_endorser_score >= -0.5)
-      # charge for a talking point that both opposers and endorsers found unhelpful
+      # charge for a point that both opposers and endorsers found unhelpful
       capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => -1)        
     end    
 

@@ -1596,7 +1596,7 @@ fr:
         label: "Copier et coller ce code dans le  HTML sur votre site internet "
       submit: "Télécharger le code"
     points:
-      title: "Mettez %{government_name} talking points on your website"
+      title: "Mettez %{government_name} points on your website"
     preview:
       label: "Cela ressemblera à ceci ,It will look like this, except with your site's font and colors:"
     priorities:

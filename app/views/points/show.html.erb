@@ -16,7 +16,7 @@
 			<% end %>
 			</div>		
 			<p>
-			<div class="heading"><%= tr("Recent activity on this talking point", "view/points/show")%></div>
+			<div class="heading"><%= tr("Recent activity on this point", "view/points/show")%></div>
 			<% for activity in @point.activities.active.by_recently_created.find(:all, :limit => 10) %>
 				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>

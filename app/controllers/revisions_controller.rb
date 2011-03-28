@@ -13,7 +13,7 @@ class RevisionsController < ApplicationController
   # GET /points/1/revisions/1
   def show
     if @point.is_deleted?
-      flash[:error] = tr("That talking point was deleted", "controller/revisions")
+      flash[:error] = tr("That point was deleted", "controller/revisions")
       redirect_to @point.priority
       return
     end    

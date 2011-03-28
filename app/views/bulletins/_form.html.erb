@@ -2,7 +2,7 @@
 <div class="bulletin_form" id="bulletin_form">
 	<div class="happening_heading">
 		<% if @point and params[:action].include?("discussions") %>
-			<%= tr("Start a discussion on this talking point", "view/bulletins/_form") %>
+			<%= tr("Start a discussion on this point", "view/bulletins/_form") %>
 		<% elsif @document and params[:action].include?("discussions") %>
 			<%= tr("Start a discussion on this document", "view/bulletins/_form") %>
 		<% elsif @user and @user != current_user %>

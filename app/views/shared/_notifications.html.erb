@@ -32,7 +32,7 @@
 						<li><%= link_to tr("Add your bio", "view/shared/_notifications"), new_user_profile_url(current_user) %></li>
 					<% end %>
 					<% if current_user.points_count < 1 and current_user.endorsements_count > 2 %>
-						<li><%= link_to tr("Write talking points for your priorities", "view/shared/_notifications"), :controller => "briefing", :action => "points" %></li>
+						<li><%= link_to tr("Write points for your priorities", "view/shared/_notifications"), :controller => "briefing", :action => "points" %></li>
 					<% end %>
 					<% if current_user.comments_count < 2 and current_user.endorsements_count > 2 %>
 						<li><%= link_to tr("Join the discussion on your priorities", "view/shared/_notifications"), :controller => "news", :action => "your_priority_discussions" %></li>

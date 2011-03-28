@@ -8,7 +8,7 @@ class PointsController < ApplicationController
   end
  
   def your_index
-    @page_title = tr("Your talking points", "controller/points", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Your points", "controller/points", :government_name => tr(current_government.name,"Name from database"))
     @points = Point.filtered.published.by_recently_created.paginate :conditions => ["user_id = ?", current_user.id], :include => :priority, :page => params[:page], :per_page => params[:per_page]
     get_qualities
     respond_to do |format|
@@ -19,7 +19,7 @@ class PointsController < ApplicationController
   end
   
   def newest
-    @page_title = tr("Newest talking points", "controller/points", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Newest points", "controller/points", :government_name => tr(current_government.name,"Name from database"))
     @points = Point.filtered.published.by_recently_created.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
     @rss_url = url_for :only_path => false, :format => "rss"
     get_qualities
@@ -73,7 +73,7 @@ class PointsController < ApplicationController
   end
   
   def your_priorities
-    @page_title = tr("Talking points on your priorities", "controller/points", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Points on your priorities", "controller/points", :government_name => tr(current_government.name,"Name from database"))
     if current_user.endorsements_count > 0    
       if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
         @points = Point.published.by_recently_created.paginate :conditions => ["(points.priority_id in (?) and points.endorser_helpful_count > 0) or (points.priority_id in (?) and points.opposer_helpful_count > 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]
@@ -94,7 +94,7 @@ class PointsController < ApplicationController
   end 
  
   def revised
-    @page_title = tr("Recently revised talking points", "controller/points", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Recently revised points", "controller/points", :government_name => tr(current_government.name,"Name from database"))
     @revisions = Revision.published.by_recently_created.find(:all, :include => :point, :conditions => "points.revisions_count > 1").paginate :page => params[:page], :per_page => params[:per_page]
     @qualities = nil
     if logged_in? and @revisions.any? # pull all their qualities on the points shown
@@ -111,7 +111,7 @@ class PointsController < ApplicationController
   def show
     @point = Point.find(params[:id])
     if @point.is_deleted?
-      flash[:error] = tr("That talking point was deleted", "controller/points")
+      flash[:error] = tr("That point was deleted", "controller/points")
       redirect_to @point.priority
       return
     end    
@@ -142,7 +142,7 @@ class PointsController < ApplicationController
   def new
     load_endorsement
     @point = @priority.points.new
-    @page_title = tr("Add a talking point to {priority_name}", "controller/points", :priority_name => @priority.name)
+    @page_title = tr("Add a point to {priority_name}", "controller/points", :priority_name => @priority.name)
     @point.value = @endorsement.value if @endorsement
     respond_to do |format|
       format.html # new.html.erb
@@ -165,7 +165,7 @@ class PointsController < ApplicationController
       if @saved
         Revision.create_from_point(@point,request.remote_ip,request.env['HTTP_USER_AGENT'])
         session[:goal] = 'point'
-        flash[:notice] = tr("Thanks for contributing your talking point", "controller/points")
+        flash[:notice] = tr("Thanks for contributing your point", "controller/points")
         if current_facebook_user
           #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
         end          

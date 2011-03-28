@@ -30,7 +30,7 @@ module ApplicationHelper
     if option=="Comment"
       tr("comments","helpers/application")
     elsif option=="Point"
-      tr("points","helpers/application")
+      tr("Points","helpers/application")
     elsif option=="Priority"
       tr("priorities","helpers/application")
     elsif option=="Document"

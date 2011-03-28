@@ -45,7 +45,7 @@
 					<%= link_to tr("Points", "view/users/_profile_nav") + " (" + (@user.points_count+@user.documents_count).to_s + ")", points_user_url(@user) %>
 				</span>
 				<div class="tab_body">
-					<%= link_to tr("{count} talking points", "view/users/_profile_nav", :count => @user.points_count), points_user_url(@user) %><br/>
+					<%= link_to tr("{count} points", "view/users/_profile_nav", :count => @user.points_count), points_user_url(@user) %><br/>
 					<%= link_to tr("{count} documents", "view/users/_profile_nav", :count => @user.documents_count), documents_user_url(@user) %>
 					<p>
 				</div>

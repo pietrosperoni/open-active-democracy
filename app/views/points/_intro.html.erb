@@ -1,19 +1,19 @@
 <% if point.is_up? %>
 	<% if point.has_other_priority? %>
-		<%= tr("Talking point supporting {priority_name} and {other_priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)) )%>		
+		<%= tr("Point supporting {priority_name} and {other_priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)) )%>		
 	<% else %>
-		<%= tr("Talking point supporting {priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)))%>
+		<%= tr("Point supporting {priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)))%>
 	<% end %>
 <% elsif point.is_down? %>
 	<% if point.has_other_priority? %>
-		<%= tr("Talking point opposing {priority_name} and supporting {other_priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)), :other_priority_name => link_to(point.other_priority.name, top_points_priority_url(point.other_priority)))%>		
+		<%= tr("Point opposing {priority_name} and supporting {other_priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)), :other_priority_name => link_to(point.other_priority.name, top_points_priority_url(point.other_priority)))%>		
 	<% else %>
-		<%= tr("Talking point opposing {priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)))%>
+		<%= tr("Point opposing {priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)))%>
 	<% end %>
 <% else %>
 	<% if point.has_other_priority? %>
-		<%= tr("Talking point about {priority_name} and {other_priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)), :other_priority_name => link_to(point.other_priority.name, top_points_priority_url(point.other_priority)))%>		
+		<%= tr("Point about {priority_name} and {other_priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)), :other_priority_name => link_to(point.other_priority.name, top_points_priority_url(point.other_priority)))%>		
 	<% else %>
-		<%= tr("Talking point about {priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)))%>
+		<%= tr("Point about {priority_name}:", "view/points/_intro", :priority_name => link_to(point.priority.name, top_points_priority_url(point.priority)))%>
 	<% end %>	
 <% end %>

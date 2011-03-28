@@ -230,7 +230,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("{user_name} talking points at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("{user_name} points at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @points = @user.points.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     if logged_in? and @points.any? # pull all their qualities on the points shown
       @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
