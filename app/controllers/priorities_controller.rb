@@ -696,7 +696,7 @@ class PrioritiesController < ApplicationController
   # POST /priorities.xml
   def create
     if not logged_in?
-      flash[:notice] = tr("First you need to fill out this quick form and agree to the rules, then you can start adding your priorities for {target}.", "controller/priorities", :target => current_government.target)
+      flash[:notice] = tr("First you need to fill out this quick form and agree to the rules, then you can start adding your priorities.", "controller/priorities", :target => current_government.target)
       session[:query] = params[:priority][:name] if params[:priority]
       access_denied
       return

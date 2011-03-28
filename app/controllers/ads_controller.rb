@@ -58,7 +58,6 @@ class AdsController < ApplicationController
   end
 
   def preview
-    params[:ad]={:content=>params[:ad_text]}
     @ad = @priority.ads.new(params[:ad])
     @ad.user = current_user
     respond_to do |format|    

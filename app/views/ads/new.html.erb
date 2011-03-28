@@ -39,23 +39,29 @@
 	</div>
 	<%= f.submit tr("Save and publish your Ad", "view/ads/new"), :id => "submit", :class => "yellow_button" %>
 <% end %>
-<% if false %>
+<br>
+<h2><%=tr("Ad Preview","ad/new")%></h2>
+<br>
+<div id="ad_preview">
+</div>
 <script type="text/javascript">
 //<![CDATA[
-jQuery('form.new_ad').observeForm({
-        validation: 'label.error'
-      })
-    .bind('form.activity', function(e, msg){
-      alert("blah 2 msg");
-      jQuery.ajax({type:'post', data: msg.form.serialize(), url:'<%=preview_priority_ads_url(@priority)%>'})
-    });
-      
+function sendForm() {
+  jQuery.ajax({type:'post', data: jQuery('form.new_ad').serialize(), url:'<%=preview_priority_ads_url(@priority)%>'})  
+}
 
-$('form.nesssw_ad').delayedObserver(function() {
-    alert("blah ff");
-    // perform AJAX call ...
+$('#ad_text').delayedObserver(function() {
+  sendForm();
 }, 0.5);
+
+$('#ad_show_ads_count').delayedObserver(function() {
+  sendForm();
+}, 0.5);
+
+$('#ad_cost').delayedObserver(function() {
+  sendForm();
+}, 0.5);
+
 //]]>
 </script>
-<% end %>
 <p>

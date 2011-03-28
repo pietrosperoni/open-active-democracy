@@ -116,7 +116,6 @@
     if (name && !activity[name]) {
       var message = {
         type: 'activity.field',
-        form: form,
         name: field.attr('name')
       }
       field.trigger('form.activity', [message]);
