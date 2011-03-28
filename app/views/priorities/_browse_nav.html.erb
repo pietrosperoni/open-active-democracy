@@ -2,7 +2,7 @@
 		<% if @priority %>
 		<div id="nav_sub_<% if @priority.new_record? %>1<% elsif @priority.is_finished? %>10<% elsif params[:controller] == 'ads' %>5<% elsif @endorsement %>1<% elsif @priority.is_top? %>4<% elsif @priority.is_official_endorsed? %>3<% elsif @priority.is_rising? %>7<% elsif @priority.is_new? %>9<% elsif @priority.is_controversial? %>6<% else %>8<% end %>">
 		<% else %>
-		<div id="nav_sub_<% if ['yours','yours_finished','yours_created','yours_top','yours_lowest','yours_ads'].include?(params[:action]) %>1<% elsif logged_in? and ['network'].include?(params[:action]) %>2<% elsif not logged_in? and ['index'].include?(params[:action]) %>2<% elsif ['official','not_official','official_opposed'].include?(params[:action]) %>3<% elsif ['top'].include?(params[:action]) %>4<% elsif ['ads'].include?(params[:action]) %>5<% elsif ['controversial'].include?(params[:action]) %>6<% elsif ['rising'].include?(params[:action]) %>7<% elsif ['random'].include?(params[:action]) %>8<% elsif ['newest'].include?(params[:action]) %>9<% elsif ['finished'].include?(params[:action]) %>10<% end %>">
+		<div id="nav_sub_<% if ['yours','yours_finished','yours_created','yours_top','yours_lowest','yours_ads'].include?(params[:action]) %>1<% elsif logged_in? and ['network'].include?(params[:action]) %>2<% elsif not logged_in? and ['index'].include?(params[:action]) %>2<% elsif ['official','not_official','official_opposed'].include?(params[:action]) %>3<% elsif ['top','top_24hr','top_7days','top_30days'].include?(params[:action]) %>4<% elsif ['ads'].include?(params[:action]) %>5<% elsif ['controversial'].include?(params[:action]) %>6<% elsif ['rising'].include?(params[:action]) %>7<% elsif ['random'].include?(params[:action]) %>8<% elsif ['newest'].include?(params[:action]) %>9<% elsif ['finished'].include?(params[:action]) %>10<% end %>">
 		<% end %>
 			<ul id="menu_sub">
 				<% if not logged_in? and current_government.homepage == 'index' %>
@@ -122,11 +122,10 @@
 			
 		</div>	
 	</div>
-<% elsif ['top','top_24hr','top_7days','top_24days'].include?(params[:action]) %>
+<% elsif ['top','top_24hr','top_7days','top_30days'].include?(params[:action]) %>
   <div id="nav_third">
-      <div id="nav_third_8">
+    <div id="nav_third_<% if ['top'].include?(params[:action]) %>11<% elsif ['top_24hr'].include?(params[:action]) %>12<% elsif ['top_7days'].include?(params[:action]) %>13<% elsif ['top_30days'].include?(params[:action]) %>14<% end %>"> 
       <ul id="menu_third">
-
         <li class="tab1">
           <span class="tab_header">
             <%= link_to tr("Top", "view/priorities/_browse_nav"), top_priorities_url %>
