@@ -24,7 +24,7 @@
 module Tr8n::HelperMethods
   include Tr8n::CommonMethods
   
-  def options_for_select_simple(options,selected)
+  def options_for_select_simple(options,selected=nil)
     out = ""
     options.each do |a,b|
       out+="<option value=\"#{b}\"#{b==selected ? "selected" : ""}>#{a}</option>"
