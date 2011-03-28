@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   # GET /pages.xml
   def index
     @pages = Page.find(:all)
-    @page_title = tr("All pages", "controller/pages", :government_name => current_government.name)
+    @page_title = tr("All pages", "controller/pages", :government_name => tr(current_government.name,"Name from database"))
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pages }

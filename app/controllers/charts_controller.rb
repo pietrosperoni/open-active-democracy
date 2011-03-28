@@ -1,7 +1,7 @@
 class ChartsController < ApplicationController
 
   def issues
-    @page_title = tr("Most active {tags_name} at {government_name}", "controller/charts", :tags_name => current_government.tags_name.pluralize.downcase, :government_name => current_government.name)
+    @page_title = tr("Most active {tags_name} at {government_name}", "controller/charts", :tags_name => current_government.tags_name.pluralize.downcase, :government_name => tr(current_government.name,"Name from database"))
     respond_to do |format|
       format.html
     end    

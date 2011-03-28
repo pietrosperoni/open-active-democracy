@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
-<p><%= tr("Ambassadors are people who recruit others to join {government_name}", "view/network/ambassadors", :government_name => current_government.name) %>
+<p><%= tr("Ambassadors are people who recruit others to join {government_name}", "view/network/ambassadors", :government_name => tr(current_government.name,"Name from database")) %>
 <% if logged_in? %>
-	<%= tr("You can be an ambassador too and earn<span class='pc'>5{currency_short_name}</span> for each person you recruit. Get started by simply <a href='{import_url}'>importing your Google, Yahoo, Windows Live, or Facebook contacts</a>.", "view/network/ambassadors", :government_name => current_government.name, :currency_short_name => current_government.currency_short_name, :import_url => user_contacts_path(current_user))%>
+	<%= tr("You can be an ambassador too and earn<span class='pc'>5{currency_short_name}</span> for each person you recruit. Get started by simply <a href='{import_url}'>importing your Google, Yahoo, Windows Live, or Facebook contacts</a>.", "view/network/ambassadors", :government_name => tr(current_government.name,"Name from database"), :currency_short_name => current_government.currency_short_name, :import_url => user_contacts_path(current_user))%>
 <% end %>
 
 <table border="0" cellspacing="0" cellpadding="0">

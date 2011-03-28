@@ -5,7 +5,7 @@ class NetworkController < ApplicationController
   before_filter :setup, :except => [:partner]
   
   def index
-    @page_title = tr("Meet the most influential people at {government_name}", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Meet the most influential people at {government_name}", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     if current_government.users_count < 100
       @users = User.active.at_least_one_endorsement.by_capital.paginate :page => params[:page], :per_page => params[:per_page]
     else
@@ -19,7 +19,7 @@ class NetworkController < ApplicationController
   end
 
   def talkative
-    @page_title = tr("Most talkative at {government_name}", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Most talkative at {government_name}", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.active.by_talkative.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -29,7 +29,7 @@ class NetworkController < ApplicationController
   end  
   
   def ambassadors
-    @page_title = tr("Ambassadors at {government_name}", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Ambassadors at {government_name}", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.active.by_invites_accepted.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -39,7 +39,7 @@ class NetworkController < ApplicationController
   end  
   
   def twitterers
-    @page_title = tr("Twitterers at {government_name}", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Twitterers at {government_name}", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.active.at_least_one_endorsement.twitterers.by_twitter_count.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -49,7 +49,7 @@ class NetworkController < ApplicationController
   end  
 
   def unverified
-    @page_title = tr("Unverified accounts", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Unverified accounts", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.pending.by_recently_created.paginate :page => params[:page], :per_page => 100
     respond_to do |format|
       format.html { render :action => "list" }
@@ -59,7 +59,7 @@ class NetworkController < ApplicationController
   end
   
   def warnings
-    @page_title = tr("Warnings", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Warnings", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.warnings.by_recently_loggedin.paginate :page => params[:page], :per_page => 100
     respond_to do |format|
       format.html
@@ -69,7 +69,7 @@ class NetworkController < ApplicationController
   end
 
   def suspended
-    @page_title = tr("Suspended accounts", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Suspended accounts", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.suspended.by_suspended_at.paginate :page => params[:page], :per_page => 100
     respond_to do |format|
       format.html { render :action => "list" }
@@ -79,7 +79,7 @@ class NetworkController < ApplicationController
   end
   
   def probation
-    @page_title = tr("Accounts on probation", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Accounts on probation", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.probation.by_probation_at.paginate :page => params[:page], :per_page => 100
     respond_to do |format|
       format.html { render :action => "list" }
@@ -89,7 +89,7 @@ class NetworkController < ApplicationController
   end  
   
   def deleted
-    @page_title = tr("Deleted accounts", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Deleted accounts", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.deleted.by_deleted_at.paginate :page => params[:page], :per_page => 100
     respond_to do |format|
       format.html { render :action => "list" }
@@ -99,7 +99,7 @@ class NetworkController < ApplicationController
   end  
 
   def newest
-    @page_title = tr("New members at {government_name}", "controller/network", :government_name => current_government.name)
+    @page_title = tr("New members at {government_name}", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     @users = User.active.at_least_one_endorsement.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -129,7 +129,7 @@ class NetworkController < ApplicationController
     else
       @partners = Partner.find(:all, :conditions => "logo_file_name is not null", :order => "rand()")
     end
-    @page_title = tr("Meet our partners", "controller/network", :government_name => current_government.name)
+    @page_title = tr("Meet our partners", "controller/network", :government_name => tr(current_government.name,"Name from database"))
     respond_to do |format|
       format.html
       format.xml { render :xml => @partners.to_xml(:except => NB_CONFIG['api_exclude_fields']) }

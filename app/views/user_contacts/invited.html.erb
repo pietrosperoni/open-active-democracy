@@ -1,4 +1,4 @@
-<div id="hp_intro"><%= tr("Find people you know at {government_name}", "view/user_contacts/invited", :government_name => current_government.name)%></div>
+<div id="hp_intro"><%= tr("Find people you know at {government_name}", "view/user_contacts/invited", :government_name => tr(current_government.name,"Name from database"))%></div>
 			
 <%= render :partial => "import_nav", :locals => {:user => current_user} %>		
 

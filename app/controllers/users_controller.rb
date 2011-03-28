@@ -127,7 +127,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
-    @page_title = tr("{user_name} at {government_name}", "controller/users", :user_name => @user.name, :government_name => current_government.name)
+    @page_title = tr("{user_name} at {government_name}", "controller/users", :user_name => @user.name, :government_name => tr(current_government.name,"Name from database"))
     @priorities = @user.endorsements.active.by_position.find(:all, :include => :priority, :limit => 5)
     @endorsements = nil
     get_following
@@ -145,7 +145,7 @@ class UsersController < ApplicationController
   def priorities
     @user = User.find(params[:id])    
     redirect_to '/' and return if check_for_suspension
-    @page_title = tr("{user_name} priorities at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} priorities at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @priorities = @user.endorsements.active.by_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]  
     @endorsements = nil
     get_following
@@ -163,7 +163,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("What {user_name} is doing at {government_name}", "controller/users", :user_name => @user.name, :government_name => current_government.name)
+    @page_title = tr("What {user_name} is doing at {government_name}", "controller/users", :user_name => @user.name, :government_name => tr(current_government.name,"Name from database"))
     @activities = @user.activities.active.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html # show.html.erb
@@ -176,7 +176,7 @@ class UsersController < ApplicationController
   def comments
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
-    @page_title = tr("{user_name} comments at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} comments at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @comments = @user.comments.published.by_recently_created.find(:all, :include => :activity).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.rss { render :template => "rss/comments" }
@@ -189,7 +189,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("{user_name} discussions at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} discussions at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @activities = @user.activities.active.discussions.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :template => "users/activities" }
@@ -202,7 +202,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("{user_name} ads at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} ads at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @ads = @user.ads.active_first.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html # show.html.erb
@@ -215,7 +215,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("{user_name} {currency_name} at {government_name}", "controller/users", :user_name => @user.name.possessive, :currency_name => current_government.currency_name.downcase, :government_name => current_government.name)
+    @page_title = tr("{user_name} {currency_name} at {government_name}", "controller/users", :user_name => @user.name.possessive, :currency_name => current_government.currency_name.downcase, :government_name => tr(current_government.name,"Name from database"))
     @activities = @user.activities.active.capital.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html {
@@ -230,7 +230,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("{user_name} talking points at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} talking points at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @points = @user.points.published.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     if logged_in? and @points.any? # pull all their qualities on the points shown
       @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
@@ -246,7 +246,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("{user_name} documents at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} documents at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @documents = @user.documents.published.by_recently_updated.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -257,7 +257,7 @@ class UsersController < ApplicationController
 
   def stratml
     @user = User.find(params[:id])
-    @page_title = tr("{user_name} priorities at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => current_government.name)
+    @page_title = tr("{user_name} priorities at {government_name}", "controller/users", :user_name => @user.name.possessive, :government_name => tr(current_government.name,"Name from database"))
     @tags = @user.issues(500)
     respond_to do |format|
       format.xml # show.html.erb
@@ -296,7 +296,7 @@ class UsersController < ApplicationController
       @user.signups << Signup.create(:partner => current_partner, :is_optin => params[:signup][:is_optin], :ip_address => request.remote_ip)
     end
       
-    flash[:notice] = tr("Welcome to {government_name}", "controller/users", :government_name => current_government.name)
+    flash[:notice] = tr("Welcome to {government_name}", "controller/users", :government_name => tr(current_government.name,"Name from database"))
     if session[:query] 
       @send_to_url = "/?q=" + session[:query]
       session[:query] = nil

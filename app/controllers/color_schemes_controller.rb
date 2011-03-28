@@ -2,7 +2,7 @@ class ColorSchemesController < ApplicationController
   # GET /color_schemes
   # GET /color_schemes.xml
   def index
-    @page_title = tr("Choose a color theme", "controller/schemes", :government_name => current_government.name)
+    @page_title = tr("Choose a color theme", "controller/schemes", :government_name => tr(current_government.name,"Name from database"))
     @color_schemes = ColorScheme.featured.all
 
     respond_to do |format|
@@ -24,7 +24,7 @@ class ColorSchemesController < ApplicationController
   # GET /color_schemes/new
   # GET /color_schemes/new.xml
   def new
-    @page_title = tr("Design for {government_name}", "controller/schemes", :government_name => current_government.name)
+    @page_title = tr("Design for {government_name}", "controller/schemes", :government_name => tr(current_government.name,"Name from database"))
     if params[:id]
       find = ColorScheme.find(params[:id]) 
       @color_scheme = find.clone if find
@@ -45,7 +45,7 @@ class ColorSchemesController < ApplicationController
   # POST /color_schemes
   # POST /color_schemes.xml
   def create
-    @page_title = tr("Design for {government_name}", "controller/schemes", :government_name => current_government.name)
+    @page_title = tr("Design for {government_name}", "controller/schemes", :government_name => tr(current_government.name,"Name from database"))
     @color_scheme = ColorScheme.new(params[:color_scheme])
     respond_to do |format|
       if @color_scheme.save

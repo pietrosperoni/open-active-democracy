@@ -1,9 +1,9 @@
-<div id="hp_intro"><%= tr("Find people you know at {government_name}", "view/user_contacts/members", :government_name => current_government.name)%></div>
+<div id="hp_intro"><%= tr("Find people you know at {government_name}", "view/user_contacts/members", :government_name => tr(current_government.name,"Name from database"))%></div>
 
 <%= render :partial => "import_nav", :locals => {:user => current_user} %>		
 
 <% if @contacts.any? %>
-	<p><%= tr("{contacts_count} of your contacts are already {government_name} members.<br/>Click the big yellow button to add them to your network.", "view/user_contacts/members", :contacts_count => @contacts.size, :government_name => current_government.name)%>
+	<p><%= tr("{contacts_count} of your contacts are already {government_name} members.<br/>Click the big yellow button to add them to your network.", "view/user_contacts/members", :contacts_count => @contacts.size, :government_name => tr(current_government.name,"Name from database"))%>
 	<% form_tag :loading => "Element.show('status');", 
                'data-disable-with' =>  escape_t(tr("Sending","Ajax")),
 	            :url => multiple_user_followings_path(current_user), :method => :put, :html => {:id => "multiple_contacts_form"} do %>

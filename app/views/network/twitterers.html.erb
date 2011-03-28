@@ -1,7 +1,7 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
 <% if not (logged_in? and current_user.has_twitter?) %>
-<%= tr("If you'd like to be added, click this button and follow the Twitter screen to authorize {government_name}/NationBuilder.", "view/network/twitterers", :government_name => current_government.name)%>
+<%= tr("If you'd like to be added, click this button and follow the Twitter screen to authorize {government_name}/NationBuilder.", "view/network/twitterers", :government_name => tr(current_government.name,"Name from database"))%>
 <p>
 <p><%= link_to image_tag("twitter_signin.png", :border => 0), :controller => "twitter", :action => "create" %>
 <% end %>

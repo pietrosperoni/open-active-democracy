@@ -1,18 +1,18 @@
 class AboutController < ApplicationController
   
   def index
-    @page_title = tr("About {government_name}", "controller/about", :government_name => current_government.name)
+    @page_title = tr("About {government_name}", "controller/about", :government_name => tr(current_government.name,"Name from database"))
   end
   
   def show
     if params[:id] == 'privacy'
-      @page_title = tr("{government_name} Privacy Policy", "controller/about", :government_name => current_government.name)       
+      @page_title = tr("{government_name} Privacy Policy", "controller/about", :government_name => tr(current_government.name,"Name from database"))       
       render :action => "privacy"
     elsif params[:id] == 'rules'
-      @page_title = tr("{government_name} Rules", "controller/about", :government_name => current_government.name)     
+      @page_title = tr("{government_name} Rules", "controller/about", :government_name => tr(current_government.name,"Name from database"))     
       render :action => "rules"
     elsif params[:id] == 'faq'
-      @page_title = tr("Answers to Frequently Asked Questions at {government_name}", "controller/about", :government_name => current_government.name)      
+      @page_title = tr("Answers to Frequently Asked Questions at {government_name}", "controller/about", :government_name => tr(current_government.name,"Name from database"))      
       render :action => "faq"
     elsif params[:id] == 'stimulus'
       @page_title = "How America rates the stimulus package"

@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   
   def authorized?
     @user = User.find(params[:user_id])
-    @page_title = tr("Your bio at {government_name}", "controller/profiles", :government_name => current_government.name)
+    @page_title = tr("Your bio at {government_name}", "controller/profiles", :government_name => tr(current_government.name,"Name from database"))
     current_user and (current_user.is_admin? or @user.id == current_user.id)
   end  
   

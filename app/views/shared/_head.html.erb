@@ -5,4 +5,4 @@
 <% if @rss_url and @page_title %>
 	<link rel="alternate" type="application/rss+xml" title="<%= @page_title %>" href="<%= @rss_url %>">
 <% end %>
-<link rel="alternate" type="application/rss+xml" title="<%= tr("Top 25 priorities at {government_name}", "view/shared/_head", :government_name => current_government.name) %>" href="<%= url_for :controller => "priorities", :action => "top", :format => "rss", :only_path => false %>">
+<link rel="alternate" type="application/rss+xml" title="<%= tr("Top 25 priorities at {government_name}", "view/shared/_head", :government_name => tr(current_government.name,"Name from database")) %>" href="<%= url_for :controller => "priorities", :action => "top", :format => "rss", :only_path => false %>">

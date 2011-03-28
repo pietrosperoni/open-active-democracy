@@ -5,7 +5,7 @@ class UserContactsController < ApplicationController
   
   # GET /users/1/contacts
   def index
-    @page_title = tr("Find people you know at {government_name}", "controller/contacts", :government_name => current_government.name)
+    @page_title = tr("Find people you know at {government_name}", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
     if @user.contacts_members_count > 0
       redirect_to members_user_contacts_path(@user) and return
     elsif @user.contacts_not_invited_count > 0
@@ -17,14 +17,14 @@ class UserContactsController < ApplicationController
   end
 
   def following
-    @page_title = tr("People you're following at {government_name}", "controller/contacts", :government_name => current_government.name)
+    @page_title = tr("People you're following at {government_name}", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
     unless current_following_ids.empty?
       @users = User.active.by_capital.find(:all, :conditions => ["id in (?)",current_following_ids]).paginate :page => params[:page], :per_page => params[:per_page]
     end
   end
   
   def members
-    @page_title = tr("Already members at {government_name}", "controller/contacts", :government_name => current_government.name)
+    @page_title = tr("Already members at {government_name}", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
     @contacts = @user.contacts.active.members.not_following.find :all, :include => :other_user, :order => "users.created_at desc"
     if @contacts.empty?
       redirect_to not_invited_user_contacts_path(@user) and return
@@ -32,18 +32,18 @@ class UserContactsController < ApplicationController
   end  
   
   def not_invited
-    @page_title = tr("Not members yet, go ahead and invite them.", "controller/contacts", :government_name => current_government.name)
+    @page_title = tr("Not members yet, go ahead and invite them.", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
     @contacts = @user.contacts.active.not_members.not_invited.with_email
   end
   
   def invited
-    @page_title = tr("People you've invited to join {government_name}", "controller/contacts", :government_name => current_government.name)
+    @page_title = tr("People you've invited to join {government_name}", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
     @contacts = @user.contacts.active.not_members.invited.with_email.recently_updated.paginate :page => params[:page], :per_page => params[:per_page]
   end  
 
   # GET /users/1/contacts/new
   def new
-    @page_title = tr("Invite people to join {government_name}", "controller/contacts", :government_name => current_government.name)
+    @page_title = tr("Invite people to join {government_name}", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
     @contact = @user.contacts.new
     respond_to do |format|
       format.html # new.html.erb
@@ -127,7 +127,7 @@ class UserContactsController < ApplicationController
           end
           @user.reload
           if @user.contacts_not_invited_count == 0 # invited all their contacts
-            flash[:notice] = tr("Thanks for inviting people to join {government_name}. We'll send you an email when they join, and you'll earn 5{currency_short_name} too.", "controller/contacts", :currency_short_name => current_government.currency_short_name, :government_name => current_government.name)
+            flash[:notice] = tr("Thanks for inviting people to join {government_name}. We'll send you an email when they join, and you'll earn 5{currency_short_name} too.", "controller/contacts", :currency_short_name => current_government.currency_short_name, :government_name => tr(current_government.name,"Name from database"))
             page.redirect_to invited_user_contacts_path(@user)
           else
             page.hide 'status'            

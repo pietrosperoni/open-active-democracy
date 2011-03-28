@@ -259,7 +259,7 @@ class ApplicationController < ActionController::Base
           @user.activate!
         end      
         @current_user = User.find(current_user.id)
-        flash.now[:notice] = tr("Your account is now synced with Facebook. In the future, to sign in, simply click the big blue Facebook button.", "controller/application", :government_name => current_government.name)
+        flash.now[:notice] = tr("Your account is now synced with Facebook. In the future, to sign in, simply click the big blue Facebook button.", "controller/application", :government_name => tr(current_government.name,"Name from database"))
       end
     end      
   end

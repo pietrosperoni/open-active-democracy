@@ -3,7 +3,7 @@ class PrioritizerController < ApplicationController
   before_filter :login_required
 
   def index
-    @page_title = tr("{government_name} Priority Quiz", "controller/prioritizer", :government_name => current_government.name)
+    @page_title = tr("{government_name} Priority Quiz", "controller/prioritizer", :government_name => tr(current_government.name,"Name from database"))
     n = choose_next
     respond_to do |format|
       format.html {render :template => "prioritizer/" + n}

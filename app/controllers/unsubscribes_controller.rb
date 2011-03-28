@@ -26,7 +26,7 @@ class UnsubscribesController < ApplicationController
     @page_title = tr("Your email report settings", "controller/unsubscribes")   
     respond_to do |format|
       if @unsubscribe.save
-        flash[:notice] = tr("You will no longer receive email updates from {government_name}", "controller/unsubscribes", :government_name => current_government.name)
+        flash[:notice] = tr("You will no longer receive email updates from {government_name}", "controller/unsubscribes", :government_name => tr(current_government.name,"Name from database"))
         format.html { redirect_to('/') }
       else
         format.html { render :action => "new" }
