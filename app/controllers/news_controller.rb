@@ -134,7 +134,7 @@ class NewsController < ApplicationController
   end
   
   def your_capital
-    @page_title = tr("Your {currency_name} at {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"), :currency_name => current_government.currency_name.downcase)
+    @page_title = tr("Your {currency_name} at {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"), :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"))
     @activities = current_user.activities.active.capital.for_all_users.by_recently_created.paginate :page => params[:page]    
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -214,7 +214,7 @@ class NewsController < ApplicationController
   end  
   
   def your_followers_capital
-    @page_title = tr("Your followers' {currency_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"), :currency_name => current_government.currency_name.downcase)
+    @page_title = tr("Your followers' {currency_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"), :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"))
     @activities = Activity.active.filtered.capital.by_recently_created.paginate :conditions => ["user_id in (?)",current_user.followers.collect{|e|e.user_id}.uniq.compact], :page => params[:page]
     respond_to do |format|
       format.html { render :action => "activity_list" }

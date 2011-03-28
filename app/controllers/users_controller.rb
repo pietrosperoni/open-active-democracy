@@ -215,7 +215,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to '/' and return if check_for_suspension
     get_following
-    @page_title = tr("{user_name} {currency_name} at {government_name}", "controller/users", :user_name => @user.name.possessive, :currency_name => current_government.currency_name.downcase, :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("{user_name} {currency_name} at {government_name}", "controller/users", :user_name => @user.name.possessive, :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"), :government_name => tr(current_government.name,"Name from database"))
     @activities = @user.activities.active.capital.by_recently_created.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html {

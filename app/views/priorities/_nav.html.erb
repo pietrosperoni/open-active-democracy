@@ -113,7 +113,7 @@
 				<% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
 					<span class="greyed_out"><%= tr("Buy an ad for this priority", "view/priorities/_nav") %></span><br/>
 				<% else %>
-					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => current_government.currency_name.downcase), :class => "qtip_left" %><br/>
+					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database")), :class => "qtip_left" %><br/>
 				<% end %>
 				<% if @priority.has_change? %>
 					<span class="greyed_out"><%= tr("Propose an acquisition", "view/priorities/_nav") %></span><br/>

@@ -1,6 +1,6 @@
 <div id="hp_intro"><%= @page_title%></div>
 <p>
-	Auglýsingar <%= tr(current_government.name,"Name from database") %> eru keyptar með <%= current_government.currency_name.downcase %>, ekki hefðbundnum peningum. Merkingin <span class="pc"><%= current_government.currency_short_name %></span> hjá nöfnum fólks vísar í þetta. Þú getur unnið þér inn <span class="pc"><%= current_government.currency_short_name %></span> á <a href="/about/faq#pc">marga vegu</a>.
+	Auglýsingar <%= tr(current_government.name,"Name from database") %> eru keyptar með <%= tr(current_government.currency_name.downcase,"Currency name from database") %>, ekki hefðbundnum peningum. Merkingin <span class="pc"><%= current_government.currency_short_name %></span> hjá nöfnum fólks vísar í þetta. Þú getur unnið þér inn <span class="pc"><%= current_government.currency_short_name %></span> á <a href="/about/faq#pc">marga vegu</a>.
 	<p>Hér sérðu þær auglýsingar sem eru í gangi núna og sláin sýnir þér hversu margir félagar hafa <span style="background-color: #009933;">&nbsp; &nbsp; </span> &nbsp;stutt, <span style="background-color: #bc0000;">&nbsp; &nbsp; </span> &nbsp;verið á móti, eða <span style="background-color: #ffcc00;">&nbsp; &nbsp; </span> &nbsp;hafa ekki svarað.  Til að kaupa auglýsingu smellti þá á hugmyndin, veldu "Aðgerð" og veldu "Kaupa auglýsingu".
 
 <% if @ads.empty? %>

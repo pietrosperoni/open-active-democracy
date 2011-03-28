@@ -1,6 +1,6 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
-<%= tr("The most influential rankings are based on the amount of {currency_name}<span class='pc'>{currency_short_name}</span> someone has earned. <br/>Learn more about<span class='pc'>{currency_short_name}</span> in the <a href='/about/faq#pc'>FAQ</a>.", "view/network/index", :currency_name => current_government.currency_name.downcase, :currency_short_name => current_government.currency_short_name)%>
+<%= tr("The most influential rankings are based on the amount of {currency_name}<span class='pc'>{currency_short_name}</span> someone has earned. <br/>Learn more about<span class='pc'>{currency_short_name}</span> in the <a href='/about/faq#pc'>FAQ</a>.", "view/network/index", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"), :currency_short_name => current_government.currency_short_name)%>
 <p>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>

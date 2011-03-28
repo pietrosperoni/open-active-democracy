@@ -114,7 +114,7 @@ class ChangesController < ApplicationController
   def approve
     @change = @priority.changes.find(params[:id])
     @change.send_later(:insta_approve!)
-    flash[:notice] = tr("Approving proposal and awarding {currency_name} to {user_name}. It may take a few minutes depending on how many endorsements and oppositions need to be adjusted.", "controller/changes", :currency_name => current_government.currency_name.downcase, :user_name => @change.user.name)
+    flash[:notice] = tr("Approving proposal and awarding {currency_name} to {user_name}. It may take a few minutes depending on how many endorsements and oppositions need to be adjusted.", "controller/changes", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"), :user_name => @change.user.name)
     redirect_to @change.new_priority
     return
   end
@@ -123,7 +123,7 @@ class ChangesController < ApplicationController
   def stop
     @change = @priority.changes.find(params[:id])
     @change.dont_send!
-    flash[:notice] = tr("Deleting this proposal, and refunding {currency_name} to {user_name}", "controller/changes", :currency_name => current_government.currency_name.downcase, :user_name => @change.user.name)
+    flash[:notice] = tr("Deleting this proposal, and refunding {currency_name} to {user_name}", "controller/changes", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"), :user_name => @change.user.name)
     ActivityPriorityAcquisitionProposalDeleted.create(:change => @change, :priority => @priority, :user => current_user)    
     redirect_to priority_change_path(@priority,@change)
     return
