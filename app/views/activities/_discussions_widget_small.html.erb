@@ -1,0 +1,17 @@
+<% if @activities and @activities.any? %>
+	<ul>
+	<% for activity in @activities %>
+	  <% activity.comments.each do |comment| %>
+  		<li>
+  		  <%= link_to comment.show_url do %>
+          <%= h(comment.user.login) %> - <%= time_ago(comment.created_at) %>
+        <% end %><br>
+        <%= comment.content %><br>
+        <br>
+  		</li>
+    <% end %>
+  <% end %>
+	</ul>	
+<% else %>
+	<%=tr("No discussions.", "widget")%>
+<% end %>

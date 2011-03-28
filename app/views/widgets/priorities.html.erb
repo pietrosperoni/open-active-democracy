@@ -31,6 +31,26 @@
 
 <% end %>
 
+<script type="text/javascript">
+//<![CDATA[
+function sendForm() {
+  jQuery.ajax({type:'post', data: jQuery('form.new_widget').serialize(), url:'<%=preview_widgets_url(@priority)%>'})  
+}
+
+
+$("#widget_tag_id").change(function(){
+  sendForm();
+});
+
+$("#widget_action_name").change(function(){
+  sendForm();
+});
+
+$("#widget_number").change(function(){
+  sendForm();
+});
+//]]>
+</script>
 
 <div id="widget_preview">
 <%= render :file => "widgets/preview.html.erb" %>

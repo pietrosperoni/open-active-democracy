@@ -17,8 +17,13 @@ GIT
       oauth (>= 0.3.1)
 
 GIT
+<<<<<<< HEAD
+  remote: git://github.com/thedarkone/rails-dev-boost.git
+  revision: 415cb19469f868497b1325ffc8b18fca75685c36
+=======
   remote: git://github.com/rbjarnason/rails-dev-boost.git
   revision: 4f7ad03b30a3bc93c1a63c4ac1e98e4427447435
+>>>>>>> rvb/master
   specs:
     rails-dev-boost (0.1.1)
 

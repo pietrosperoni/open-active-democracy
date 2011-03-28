@@ -8,7 +8,7 @@ class WidgetsController < ApplicationController
   end
   
   def priorities
-    @page_title = tr("Put {government_name} priorities on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Put priorities on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))
     if logged_in?
       @widget = Widget.new(:controller_name => "priorities", :user => current_user, :action_name => "yours")
     else
@@ -20,7 +20,7 @@ class WidgetsController < ApplicationController
   end
   
   def discussions
-    @page_title = tr("Put {government_name} discussions on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Put discussions on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))
     if logged_in?
       @widget = Widget.new(:controller_name => "news", :user => current_user, :action_name => "your_discussions")
     else
@@ -31,13 +31,15 @@ class WidgetsController < ApplicationController
     end    
   end
   
-  def points
-    @page_title = tr("Put {government_name} points on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))    
-  end
-  
   def preview
     @widget = Widget.new(params[:widget])
-    render :layout => false
+    respond_to do |format|    
+      format.js {
+        render :update do |page|
+          page.replace_html 'widget_preview', render(:partial => "widgets/preview")
+        end
+      }
+    end
   end
   
   def preview_iframe
