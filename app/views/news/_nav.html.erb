@@ -3,9 +3,14 @@
 	<% if @activity and ['activity','comments'].include?(params[:controller]) %>
 		<div id="nav_sub_<% if @activity.has_point? or @activity.has_document? %>3<% elsif @activity.is_official_user? %>4<% elsif @activity.has_change? %>6<% elsif @activity.has_capital? %>5<% elsif @activity.comments_count > 0 %>2<% else %>1<% end %>">
 	<% else %>
-		<div id="nav_sub_<% if params[:action].include?("activities") %>1<% elsif params[:action].include?("discussions") %>2<% elsif params[:action].include?("points") %>3<% elsif params[:action].include?("capital") %>5<% elsif params[:action].include?("changes") %>6<% elsif params[:action].include?("official") %>4<% end %>">
+		<div id="nav_sub_<% if params[:action].include?("top") %>0<% elsif params[:action].include?("activities") %>1<% elsif params[:action].include?("discussions") %>2<% elsif params[:action].include?("points") %>3<% elsif params[:action].include?("capital") %>5<% elsif params[:action].include?("changes") %>6<% elsif params[:action].include?("official") %>4<% end %>">
 	<% end %>
 		<ul id="menu_sub">
+      <li class="tab0">
+        <span class="tab_header">
+          <%= link_to tr("Top News", "view/news/_nav"), :controller => "news", :action => "top" %>
+        </span>
+      </li>     
 			<li class="tab1">
 				<span class="tab_header">
 					<%= link_to tr("Everything", "view/news/_nav"), :controller => "news", :action => "activities" %>
@@ -18,7 +23,7 @@
 			</li>
 			<li class="tab3">
 				<span class="tab_header">
-					<%= link_to current_government.briefing_name, :controller => "news", :action => "points" %>
+					<%= link_to tr("Points", "view/news/_nav"), :controller => "news", :action => "points" %>
 				</span>
 			</li>
 			<% if current_government.has_official? %>

@@ -40,7 +40,7 @@ class NewsController < ApplicationController
   end
   
   def points
-    @page_title = tr("Latest activity in the {briefing_name} at {government_name}", "controller/news", :government_name => current_government.name, :briefing_name => current_government.briefing_name)
+    @page_title = tr("Latest activity for points at {government_name}", "controller/news", :government_name => current_government.name)
     @activities = Activity.active.filtered.points_and_docs.for_all_users.paginate :page => params[:page]
     @rss_url = url_for(:only_path => false, :format => "rss")
     respond_to do |format|
@@ -68,7 +68,7 @@ class NewsController < ApplicationController
   end
 
   def top
-    @page_title = tr("Everything happening at {government_name}", "controller/news", :government_name => current_government.name)
+    @page_title = tr("Top News at {government_name}", "controller/news", :government_name => current_government.name)
     @activities = Activity.active.top.filtered.for_all_users.by_recently_created.paginate :page => params[:page]      
     @rss_url = url_for(:only_path => false, :format => "rss")    
     respond_to do |format|
@@ -154,7 +154,7 @@ class NewsController < ApplicationController
   end  
   
   def your_points
-    @page_title = tr("Your {briefing_name} activity at {government_name}", "controller/news", :government_name => current_government.name, :briefing_name => current_government.briefing_name)
+    @page_title = tr("Your points activity at {government_name}", "controller/news", :government_name => current_government.name)
     # this needs some work
     @activities = current_user.activities.active.points_and_docs.by_recently_created.paginate :page => params[:page]    
     respond_to do |format|
@@ -457,7 +457,7 @@ class NewsController < ApplicationController
   end
   
   def your_priorities_created_points
-    @page_title = tr("{briefing_name} activity on priorities you created", "controller/news", :government_name => current_government.name, :briefing_name => current_government.briefing_name)
+    @page_title = tr("Points activity on priorities you created", "controller/news", :government_name => current_government.name)
     @activities = nil
     created_priority_ids = current_user.created_priorities.collect{|p|p.id}
     if created_priority_ids.any?

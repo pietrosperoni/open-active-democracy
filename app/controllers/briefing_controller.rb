@@ -57,7 +57,7 @@ class BriefingController < ApplicationController
   def contributors
     @row = (params[:page].to_i-1)*25
     @row = 0 if params[:page].to_i <= 1
-    @page_title = tr("{number} people have contributed to the {briefing_name}", "controller/briefing", :number => current_government.contributors_count, :briefing_name => current_government.briefing_name)
+    @page_title = tr("{number} people have contributed to points", "controller/briefing", :number => current_government.contributors_count)
     @users = User.active.at_least_one_endorsement.contributed.by_revisions.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
