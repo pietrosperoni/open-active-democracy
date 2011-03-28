@@ -49,108 +49,10 @@ class PriorityRanker
 
     # ranks all the priorities in the database with any endorsements.
 
-    # make sure the scores for all the positions above the max position are set to 0
-    Endorsement.update_all("score = 0", "position > #{Endorsement.max_position}")      
-    # get the last version # for the different time lengths
-    v = Ranking.find(:all, :select => "max(version) as version")[0]
-    if v
-     v = v.version || 0
-     v+=1
-    else
-     v = 1
+    partners_with_nil = Partner.all<<nil
+    partners_with_nil.each do |partner|
+      update_positions_by_partner(partner)
     end
-    oldest = Ranking.find(:all, :select => "max(version) as version")[0].version
-    v_1hr = oldest
-    v_24hr = oldest
-    r = Ranking.find(:all, :select => "max(version) as version", :conditions => "created_at < '#{Time.now-1.hour}'")[0]
-    v_1hr = r.version if r
-    r = Ranking.find(:all, :select => "max(version) as version", :conditions => "created_at < '#{Time.now-1.hour}'")[0]
-    v_24hr = r.version if r
-
-    priorities = Priority.find_by_sql("
-       select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, \
-       sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
-       from users,endorsements,priorities
-       where endorsements.user_id = users.id
-       and endorsements.priority_id = priorities.id
-       and priorities.status = 'published'
-       and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
-       group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
-       order by number desc")
-
-    i = 0
-    puts "priorities.count = #{priorities.count}"
-    for p in priorities
-     p.score = p.number
-     first_time = false
-     i = i + 1
-     p.position = i
-
-     r = p.rankings.find_by_version(v_1hr)
-     if r # it's in that version
-       p.position_1hr = r.position
-     else # not in that version, find the oldest one we can
-       r = p.rankings.find(:all, :conditions => ["version < ?",v_1hr],:order => "version asc", :limit => 1)[0]
-       if r
-         p.position_1hr = r.position
-       else # this is the first time they've been ranked
-         p.position_1hr = p.position
-         first_time = true
-       end
-     end
-
-     p.position_1hr_change = p.position_1hr - i 
-     r = p.rankings.find_by_version(v_24hr)
-     if r # in that version
-       p.position_24hr = r.position
-       p.position_24hr_change = p.position_24hr - i          
-     else # didn't exist yet, so let's find the oldest one we can
-       r = p.rankings.find(:all, :conditions => ["version < ?",v_24hr],:order => "version asc", :limit => 1)[0]
-       p.position_24hr = 0
-       p.position_24hr_change = 0
-     end   
- 
-     date = Time.now-5.hours-7.days
-     c = p.charts.find_by_date_year_and_date_month_and_date_day(date.year,date.month,date.day)
-     if c
-       p.position_7days = c.position
-       p.position_7days_change = p.position_7days - i   
-     else
-       p.position_7days = 0
-       p.position_7days_change = 0
-     end      
-
-     date = Time.now-5.hours-30.days
-     c = p.charts.find_by_date_year_and_date_month_and_date_day(date.year,date.month,date.day)
-     if c
-       p.position_30days = c.position
-       p.position_30days_change = p.position_30days - i   
-     else
-       p.position_30days = 0
-       p.position_30days_change = 0
-     end      
-     
-     p.trending_score = p.position_7days_change/p.position
-     if p.down_endorsements_count == 0
-       p.is_controversial = false
-       p.controversial_score = 0
-     else
-       con = p.up_endorsements_count/p.down_endorsements_count
-       if con > 0.5 and con < 2
-         p.is_controversial = true
-       else
-         p.is_controversial = false
-       end
-       p.controversial_score = p.endorsements_count - (p.endorsements_count-p.down_endorsements_count).abs
-     end
-     Priority.update_all("position = #{p.position}, trending_score = #{p.trending_score}, is_controversial = #{p.is_controversial}, controversial_score = #{p.controversial_score}, score = #{p.score}, position_1hr = #{p.position_1hr}, position_1hr_change = #{p.position_1hr_change}, position_24hr = #{p.position_24hr}, position_24hr_change = #{p.position_24hr_change}, position_7days = #{p.position_7days}, position_7days_change = #{p.position_7days_change}, position_30days = #{p.position_30days}, position_30days_change = #{p.position_30days_change}", ["id = ?",p.id])
-     r = Ranking.create(:version => v, :priority => p, :position => i, :endorsements_count => p.endorsements_count)
-    end
-    Priority.connection.execute("update priorities set position = 0, trending_score = 0, is_controversial = false, controversial_score = 0, score = 0 where endorsements_count = 0;")
-
-    # check if there's a new fastest rising priority
-    rising = Priority.published.rising.all[0]
-    ActivityPriorityRising1.find_or_create_by_priority_id(rising.id) if rising
 
     # determines any changes in the #1 priority for an issue, and updates the # of distinct endorsers and opposers across the entire issue
     
@@ -264,12 +166,129 @@ class PriorityRanker
   end
 
   def setup_ranged_endorsment_positions
-    setup_ranged_endorsment_position(Time.now-24.hours,"position_endorsed_24hr")
-    setup_ranged_endorsment_position(Time.now-7.days,"position_endorsed_7days")
-    setup_ranged_endorsment_position(Time.now-30.days,"position_endorsed_30days")
+    partners_with_nil = Partner.all<<nil
+    partners_with_nil.each do |partner| 
+      setup_ranged_endorsment_position(partners_with_nil,Time.now-24.hours,"position_endorsed_24hr")
+      setup_ranged_endorsment_position(partners_with_nil,Time.now-7.days,"position_endorsed_7days")
+      setup_ranged_endorsment_position(partners_with_nil,Time.now-30.days,"position_endorsed_30days")
+    end
   end
   
   private
+  
+  def update_positions_by_partner(partner)
+    if partner
+      Partner.current = partner
+      partner_sql = "priorities.partner_id = #{partner.id}"
+    else
+      partner_sql = "priorities.partner_id IS NULL"
+    end
+
+    # make sure the scores for all the positions above the max position are set to 0
+    Endorsement.update_all("score = 0", "position > #{Endorsement.max_position}")      
+    # get the last version # for the different time lengths
+    v = Ranking.filtered.find(:all, :select => "max(version) as version")[0]
+    if v
+     v = v.version || 0
+     v+=1
+    else
+     v = 1
+    end
+    oldest = Ranking.filtered.find(:all, :select => "max(version) as version")[0].version
+    v_1hr = oldest
+    v_24hr = oldest
+    r = Ranking.filtered.find(:all, :select => "max(version) as version", :conditions => "created_at < '#{Time.now-1.hour}'")[0]
+    v_1hr = r.version if r
+    r = Ranking.filtered.find(:all, :select => "max(version) as version", :conditions => "created_at < '#{Time.now-1.hour}'")[0]
+    v_24hr = r.version if r
+
+    priorities = Priority.find_by_sql("
+       select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, \
+       sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
+       from users,endorsements,priorities
+       where endorsements.user_id = users.id
+       and #{partner_sql}
+       and endorsements.priority_id = priorities.id
+       and priorities.status = 'published'
+       and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
+       group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
+       order by number desc")
+
+    i = 0
+    puts "priorities.count = #{priorities.count}"
+    for p in priorities
+     p.score = p.number
+     first_time = false
+     i = i + 1
+     p.position = i
+
+     r = p.rankings.find_by_version(v_1hr)
+     if r # it's in that version
+       p.position_1hr = r.position
+     else # not in that version, find the oldest one we can
+       r = p.rankings.find(:all, :conditions => ["version < ?",v_1hr],:order => "version asc", :limit => 1)[0]
+       if r
+         p.position_1hr = r.position
+       else # this is the first time they've been ranked
+         p.position_1hr = p.position
+         first_time = true
+       end
+     end
+
+     p.position_1hr_change = p.position_1hr - i 
+     r = p.rankings.find_by_version(v_24hr)
+     if r # in that version
+       p.position_24hr = r.position
+       p.position_24hr_change = p.position_24hr - i          
+     else # didn't exist yet, so let's find the oldest one we can
+       r = p.rankings.find(:all, :conditions => ["version < ?",v_24hr],:order => "version asc", :limit => 1)[0]
+       p.position_24hr = 0
+       p.position_24hr_change = 0
+     end   
+ 
+     date = Time.now-5.hours-7.days
+     c = p.charts.find_by_date_year_and_date_month_and_date_day(date.year,date.month,date.day)
+     if c
+       p.position_7days = c.position
+       p.position_7days_change = p.position_7days - i   
+     else
+       p.position_7days = 0
+       p.position_7days_change = 0
+     end      
+
+     date = Time.now-5.hours-30.days
+     c = p.charts.find_by_date_year_and_date_month_and_date_day(date.year,date.month,date.day)
+     if c
+       p.position_30days = c.position
+       p.position_30days_change = p.position_30days - i   
+     else
+       p.position_30days = 0
+       p.position_30days_change = 0
+     end      
+     
+     p.trending_score = p.position_7days_change/p.position
+     if p.down_endorsements_count == 0
+       p.is_controversial = false
+       p.controversial_score = 0
+     else
+       con = p.up_endorsements_count/p.down_endorsements_count
+       if con > 0.5 and con < 2
+         p.is_controversial = true
+       else
+         p.is_controversial = false
+       end
+       p.controversial_score = p.endorsements_count - (p.endorsements_count-p.down_endorsements_count).abs
+     end
+     Priority.update_all("position = #{p.position}, trending_score = #{p.trending_score}, is_controversial = #{p.is_controversial}, controversial_score = #{p.controversial_score}, score = #{p.score}, position_1hr = #{p.position_1hr}, position_1hr_change = #{p.position_1hr_change}, position_24hr = #{p.position_24hr}, position_24hr_change = #{p.position_24hr_change}, position_7days = #{p.position_7days}, position_7days_change = #{p.position_7days_change}, position_30days = #{p.position_30days}, position_30days_change = #{p.position_30days_change}", ["id = ?",p.id])
+     r = Ranking.create(:version => v, :priority => p, :position => i, :endorsements_count => p.endorsements_count)
+    end
+    Priority.connection.execute("update priorities set position = 0, trending_score = 0, is_controversial = false, controversial_score = 0, score = 0 where endorsements_count = 0;")
+
+    # check if there's a new fastest rising priority
+    rising = Priority.filtered.published.rising.all[0]
+    ActivityPriorityRising1.find_or_create_by_priority_id(rising.id) if rising    
+    Partner.current = nil
+  end
   
   def setup_endorsements_counts
     Priority.all.each do |p|
@@ -280,7 +299,13 @@ class PriorityRanker
     end
   end
 
-  def setup_ranged_endorsment_position(time_since,position_db_name)
+  def setup_ranged_endorsment_position(partner,time_since,position_db_name)
+    if partner
+      Partner.current = partner
+      partner_sql = "priorities.partner_id = #{partner.id}"
+    else
+      partner_sql = "priorities.partner_id IS NULL"
+    end
     priorities = Priority.find_by_sql("
        select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, \
        sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
@@ -298,5 +323,6 @@ class PriorityRanker
       eval "priority.#{position_db_name} = priority.number"
       priority.save
     end
+    Partner.current = nil
   end  
 end
