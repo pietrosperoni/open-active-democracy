@@ -142,7 +142,7 @@ task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -nfs #{deploy_to}/#{shared_dir}/private #{current_release}/private"
   #thinking_sphinx.configure
-  thinking_sphinx.restart
+#  thinking_sphinx.restart
 end
 
 namespace :deploy do
