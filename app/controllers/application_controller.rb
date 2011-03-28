@@ -23,7 +23,10 @@ class ApplicationController < ActionController::Base
   # switch to the right database for this government
   before_filter :check_subdomain
   before_filter :check_geoblocking
-  
+
+  before_filter :session_expiry
+  before_filter :update_activity_time
+
   before_filter :load_actions_to_publish, :unless => [:is_robot?]
 #  before_filter :check_facebook, :unless => [:is_robot?]
     
@@ -32,10 +35,10 @@ class ApplicationController < ActionController::Base
   before_filter :check_referral, :unless => [:is_robot?]
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
-
   before_filter :check_google_translate_setting
-
   before_filter :init_tr8n
+
+  before_filter :setup_inline_translation_parameters
 
   layout :get_layout
 
@@ -53,6 +56,47 @@ class ApplicationController < ActionController::Base
         "\r"    => '\n',
         '"'     => '\\"',
         "'"     => "\\'" }
+
+
+  def session_expiry
+    return if controller_name == "sessions"
+    Rails.logger.info("Session expires at #{session[:expires_at]}")
+    if session[:expires_at]
+      @time_left = (session[:expires_at] - Time.now).to_i
+      if current_user and not current_facebook_user
+        unless @time_left > 0
+          Rails.logger.info("Resetting session")
+          reset_session
+          flash[:error] = tr("Your session has expired, please login again.","session")
+          redirect_to '/'
+        end
+      end
+    end
+  end
+  
+  def update_activity_time
+    if current_user and current_user.is_admin?
+      session[:expires_at] = 6.hours.from_now
+    else
+      session[:expires_at] = 1.hour.from_now
+    end
+  end
+
+  def setup_inline_translation_parameters
+    @inline_translations_allowed = false
+    @inline_translations_enabled = false
+
+    if logged_in? and Tr8n::Config.current_user_is_translator?
+      unless Tr8n::Config.current_translator.blocked?
+        @inline_translations_allowed = true
+        @inline_translations_enabled = Tr8n::Config.current_translator.enable_inline_translations?
+      end
+    elsif logged_in?
+      @inline_translations_allowed = Tr8n::Config.open_registration_mode?
+    end
+
+    @inline_translations_allowed = true if Tr8n::Config.current_user_is_admin?
+  end
         
   def unfrozen_instance(object)
     eval "#{object.class}.where(:id=>object.id).first"

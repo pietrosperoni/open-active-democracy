@@ -2,6 +2,13 @@
     <%= render :partial => "shared/search" %>
     <div id="language_selection_box">
       <%= tr("Select language:","views/layouts/basic") %> <%= tr8n_language_selector_tag %><br>
+      <% if @inline_translations_allowed %>
+        <% if @inline_translations_enabled %>
+          <%= link_to_function(trla("Stop translating"), "tr8nLanguageSelector.disableInlineTranslations();") %><br>
+        <% else %>
+          <%= link_to_function(trla("Start translating"), "tr8nLanguageSelector.enableInlineTranslations();") %><br>
+        <% end %>
+      <% end %>
       <%= render :partial => "shared/google_translate_select" %>
     </div>
     <%= render :partial => "shared/user_info" if logged_in? %>
