@@ -17,8 +17,8 @@ GIT
       oauth (>= 0.3.1)
 
 GIT
-  remote: git://github.com/thedarkone/rails-dev-boost.git
-  revision: c9428f87042d9422aad2b119c8c04de97f504148
+  remote: git://github.com/rbjarnason/rails-dev-boost.git
+  revision: 4f7ad03b30a3bc93c1a63c4ac1e98e4427447435
   specs:
     rails-dev-boost (0.1.1)
 
@@ -59,8 +59,8 @@ GEM
     capistrano (2.5.20)
       highline
       highline
-      net-scp (>= 1.0.0)
       net-scp
+      net-scp (>= 1.0.0)
       net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
