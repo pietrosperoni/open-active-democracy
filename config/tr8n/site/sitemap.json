@@ -1,5 +1,17 @@
 [
   {
+    "label":        "High priority translations for the main website",
+    "description":  "Please start here.",
+    "enabled":      true,
+    "link":         "/",    
+    "splitters":    [[0, 1]],
+    "source":       "root",
+    "sections": [
+        {"label": "High priority translations. Please start here.", "description": "All high priority texts", "link": "/",
+         "sources": ["AdminController","AdsController","BriefingController","ColorSchemesController","GovernmentsController","InboxController","IssuesController","NetworkController","NewsController","PagesController","PointsController","PrioritiesController","RevisionsController","SearchesController","SessionsController","SettingsController","TagsController","TwitterController","UsersController","about/index","about/show","admin/buddy_icon","admin/fav_icon","admin/fav_icon_save","admin/picture","ads/create","ads/new","ads/preview","ads/show","ads/skip","briefing/contributors","briefing/points","color_schemes/index","color_schemes/index","endorsements/destroy","governments/apis","governments/edit","governments/edit","inbox/notifications","issues/discussions","issues/index","issues/index","issues/points","issues/show","network/index","network/index","network/newest","news/activities","news/activities","news/capital","news/points","news/top","news/top","news/your_discussions","pages/index","points/index","points/new","points/newest","points/newest","points/quality","points/quality","points/show","points/unquality","portal/add_portlet","portal/delete_portlet","portal/index","portal/index","portal/index","priorities/abusive","priorities/ads","priorities/endorse","priorities/endorse","priorities/flag","priorities/network","priorities/new","priorities/new","priorities/newest","priorities/show","priorities/show","priorities/show","priorities/top","priorities/top","priorities/top","priorities/top","priorities/top","priorities/top","priorities/top_24hr","priorities/top_30days","priorities/top_7days","priorities/top_points","priorities/yours","priorities/yours","priorities/yours_created","profiles/new","revisions/new","searches/index","sessions/create","sessions/new","sessions/new","settings/index","settings/picture","tags/index","user_contacts/index","user_contacts/new","users/new","users/points","users/show"]}
+    ]
+  },
+  {
     "label":        "Tr8n Engine Sections",
     "description":  "Sitemap section title",
     "enabled":      true,

@@ -7,7 +7,7 @@ def tr8n_db_filename
 end
 
 def tr8n_source_filename
-  tr8n_db_path.join("tr8n.sql.gz")
+  tr8n_db_path.join("sources.json")
 end
 
 namespace :tr8n do

@@ -283,7 +283,7 @@ private
     html = "<ul class='section_list'>"
     sections.each do |section|
       html << "<li class='section_list_item'>"
-      html << "<a href='/tr8n/phrases/index?section_key=#{section.key}'>" << tr(section.label, section.description) << "</a>"
+      html << "<a href='/tr8n/phrases/index?section_key=#{section.key}&search=&phrase_type=without&phrase_status=any&phrase_lock=any'>" << tr(section.label, section.description) << "</a>"
       html << "<a href='" << section.data[:link] << "' target='_new'><img src='/tr8n/images/bullet_go.png' style='border:0px; vertical-align:middle'></a>" if section.data[:link]
 
       if section.children.size > 0
