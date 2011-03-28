@@ -53,7 +53,7 @@
 				<% end %>
 			</span>
 		</li>
-		<% if @priority.changes_count > 0 or params[:controller] == 'changes' %>
+		<% if false and @priority.changes_count > 0 or params[:controller] == 'changes' %>
 			<li class="tab7">
 				<span class="tab_header">
 					<%= link_to tr("M&A", "view/priorities/_nav"), priority_changes_url(@priority)%>
@@ -115,9 +115,9 @@
 				<% else %>
 					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database")), :class => "qtip_left" %><br/>
 				<% end %>
-				<% if @priority.has_change? %>
+				<% if false and @priority.has_change? %>
 					<span class="greyed_out"><%= tr("Propose an acquisition", "view/priorities/_nav") %></span><br/>
-				<% else %>
+				<% elsif false %>
 					<%= link_to tr("Propose an acquisition", "view/priorities/_nav"), new_priority_change_url(@priority), :title => tr("Is there another priority this one should merge with?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% end %>
 				<% if logged_in? and @priority.status != 'inactive' %>
