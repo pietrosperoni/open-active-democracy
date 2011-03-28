@@ -109,7 +109,7 @@
 					&middot; <%= link_to tr("FAQ", "view/shared/_menu"), :controller => "about", :action => "faq" %>
 					&middot; <%= link_to tr("Rules", "view/shared/_menu"), :controller => "about", :action => "rules" %>
 					&middot; <%= link_to tr("Privacy policy", "view/shared/_menu"), :controller => "about", :action => "privacy" %><br/>
-					<% cache("pages") do %>
+					<% cache("pages-#{session[:locale]}-#{@inline_translations_enabled}") do %>
 						<%= Page.all.collect{ |page| link_to(page.link_name, about_url(page.short_name))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
 					<% end %>
 				</div>				

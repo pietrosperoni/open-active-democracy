@@ -9,7 +9,7 @@
 	            :method => :delete,
 	            :confirm => escape_t(tr("Remove from this page?","Ajax")) %><% end %>
 	</div>
-	<% cache("#{notification[:type].downcase}-#{notification.id}") do %> 
+	<% cache("#{notification[:type].downcase}-#{notification.id}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
 		<%= render :partial => "notifications/#{notification[:type].downcase}", :locals => {:notification => notification} %>
 	<% end %>
 	<span class="small"><%= time_ago(notification.created_at) %></span>

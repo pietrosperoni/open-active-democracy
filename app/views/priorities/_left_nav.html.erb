@@ -19,7 +19,7 @@
 <div class="priority_rank_detail">
 	<%= render :partial => "priorities/rank_yday_week_month", :locals => {:priority => @priority}%>
 </div>
-<% cache("priority_chart-" + @priority.id.to_s) do %> 
+<% cache("priority_chart-#{session[:locale]}-#{@inline_translations_enabled}-" + @priority.id.to_s) do %> 
 	<% @charts = @priority.charts.newest_first %>
 	<% if @charts.any? and @charts.length > 2 %>
 		<% sorted = @charts.sort_by { |c| c.position } %>

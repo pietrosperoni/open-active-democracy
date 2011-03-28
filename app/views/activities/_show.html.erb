@@ -39,7 +39,7 @@
 		            :confirm => escape_t(tr("Delete from this page?","Ajax")) %>
 		<% end %>
 		</div>
-		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{locale.to_s}") do %> 
+		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
 			<%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
 		<% end %>
 		<span class="small"><%= time_ago(activity.created_at) %></span>

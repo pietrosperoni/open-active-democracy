@@ -4,7 +4,7 @@
 	<div class="heading"><%= tr("{user_name} Agenda", "view/users/_index_chart", :user_name => user.name) %></div>
 <% end %>
 
-<% cache("user_priority_chart-#{user.id.to_s}-#{user.endorsements_count.to_s}") do %> 
+<% cache("user_priority_chart-#{user.id.to_s}-#{user.endorsements_count.to_s}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
 <% cu = user.index_chart_hash %>
 <div class="priority_chart">
 <table border="0" cellspacing="0" cellpadding="0">
