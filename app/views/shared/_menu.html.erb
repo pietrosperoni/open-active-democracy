@@ -112,7 +112,32 @@
 					<% cache("pages-#{session[:locale]}-#{@inline_translations_enabled}") do %>
 						<%= Page.all.collect{ |page| link_to(page.link_name, about_url(page.short_name))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
 					<% end %>
-				</div>				
+				</div>
+				
+				<div class="tab_subhead">
+					<%= link_to tr("Charts and stats", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
+				</div>
+				<div class="tab_sublinks">
+					<% if current_government.is_tags? %>
+						<%= link_to current_government.tags_name.pluralize.titleize, :controller => "charts", :action => "issues" %> &middot; 
+					<% end %>
+					<%= link_to tr("Rising agendas", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
+					&middot; <%= link_to tr("Falling agendas", "view/shared/_menu"), :controller => "charts", :action => "losers_24hr" %>
+				</div>
+				
+				<div class="tab_subhead">
+					<%= link_to tr("Widgets for your site", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
+				</div>
+				<div class="tab_sublinks">
+					<%= link_to tr("Priorities", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
+					<!-- 
+					&middot; <%= link_to tr("Discussions", "view/shared/_menu"), :controller => "widgets", :action => "discussions" %>
+					&middot; <%= link_to tr("Talking points", "view/shared/_menu"), :controller => "widgets", :action => "points" %>					
+				-->
+				</div>
+				
+				<%= tr("About menu extra BLURB", "view/shared/_menu")%>
+				
 			</div>
 		</li>
 	</ul>

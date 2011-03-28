@@ -17,7 +17,7 @@
 			<%= tr("Is this point {support_radio} in support or {oppose_radio} in opposition to {priority_name}?", "view/revisions/new", :priority_name => link_to(@priority.name, @priority), :support_radio => f.radio_button(:value, 1), :oppose_radio => f.radio_button(:value, -1), :neutral_radio => f.radio_button(:value, 0))%>				
 			</p>
 			<p>
-			<%= tr("Explain your point.", "view/revisions/new") %> <span id="revisionContentDown"></span> <%= tr("characters left", "view/revisions/new")%>
+			<%= tr("Explain your talking point.", "view/revisions/new") %> <span id="revisionContentDown"></span> <%= tr("characters left", "view/revisions/new")%>
 			<%= f.text_area :content, :id => 'revisionContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
 			</p>
 			
