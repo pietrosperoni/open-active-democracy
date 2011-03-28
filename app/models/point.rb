@@ -46,6 +46,7 @@ class Point < ActiveRecord::Base
     indexes name
     indexes content
     indexes priority.category.name, :facet=>true, :as=>"category_name"
+    has partner_id, :as=>:partner_id, :type => :integer
     where "points.status = 'published'"    
   end
   
@@ -293,7 +294,7 @@ class Point < ActiveRecord::Base
       capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => 1)
     end      
     if self.opposer_score < -0.5 and self.endorser_score < -0.5 and (old_opposer_score >= -0.5 or old_endorser_score >= -0.5)
-      # charge for a talking point that both opposers and endorsers found unhelpful
+      # charge for a point that both opposers and endorsers found unhelpful
       capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => -1)        
     end    
 

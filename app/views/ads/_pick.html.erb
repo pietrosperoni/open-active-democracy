@@ -1,10 +1,22 @@
-<% if logged_in? and current_user.endorsements_count > 1 %>
-
-	<% ad = current_user.pick_ad(current_priority_ids) %>
-	<% if ad %>
-	<div id="notification_show">
-		<%= render :partial => "ads/show", :locals => {:ad => ad }%>
-	</div>
-	<% end %>
-
+<% unless session[:have_shown_welcome] %>
+   <%= render :partial => "ads/welcome"%>
+<% else %>
+  <% if logged_in? %>  
+  	<% ad = current_user.pick_ad(current_priority_ids) %>
+  	<% if ad %>
+  	<div id="notification_show">
+  		<%= render :partial => "ads/show", :locals => {:ad => ad }%>
+  	</div>
+  	<% end %>
+  	
+  <% else %>
+    
+    <% ad = Ad.active.filtered.most_paid.by_random.first %>
+    <% if ad %>
+    <div id="notification_show">
+      <%= render :partial => "ads/show", :locals => {:ad => ad }%>
+    </div>
+    <% end %>
+  
+  <% end %>
 <% end %>

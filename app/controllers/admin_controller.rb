@@ -36,7 +36,7 @@ class AdminController < ApplicationController
   end
 
   def picture
-    @page_title = tr("Change logo for {government_name}", "controller/admin", :government_name => current_government.name)
+    @page_title = tr("Change logo for {government_name}", "controller/admin", :government_name => tr(current_government.name,"Name from database"))
   end
 
   def picture_save
@@ -53,7 +53,7 @@ class AdminController < ApplicationController
   end
 
   def fav_icon
-    @page_title = tr("Change favicon for {government_name}", "controller/admin", :government_name => current_government.name)
+    @page_title = tr("Change favicon for {government_name}", "controller/admin", :government_name => tr(current_government.name,"Name from database"))
   end
 
   def fav_icon_save
@@ -70,7 +70,7 @@ class AdminController < ApplicationController
   end
   
   def buddy_icon
-    @page_title = tr("Change buddy icon for {government_name}", "controller/admin", :government_name => current_government.name)
+    @page_title = tr("Change buddy icon for {government_name}", "controller/admin", :government_name => tr(current_government.name,"Name from database"))
   end
 
   def buddy_icon_save

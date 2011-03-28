@@ -233,7 +233,7 @@ class IssuesController < ApplicationController
   end  
 
   def points
-    @page_title = tr("{tag_name} talking points", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("{tag_name} points", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues)
     @points = Point.by_helpfulness.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page]
     @qualities = nil

@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   skip_before_filter :check_blast_click
 
   def new
-    @page_title = tr("Please sign in", "controller/sessions", :government_name => current_government.name)
+    @page_title = tr("Please sign in", "controller/sessions", :government_name => tr(current_government.name,"Name from database"))
     @user = User.new
     @signup = Signup.new    
     respond_to do |format|

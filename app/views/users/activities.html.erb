@@ -1,7 +1,7 @@
 <%= render :partial => "header" %>
 <p>		
 <% if @activities.empty? and params[:action] == 'capital' %>
-	<%= tr("{user_name} hasn't earned any {currency_name} yet.", "view/users/activities", :user_name => @user.name, :currency_name => current_government.currency_name.downcase)%>
+	<%= tr("{user_name} hasn't earned any {currency_name} yet.", "view/users/activities", :user_name => @user.name, :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"))%>
 <% else %>
 	<% if @activities.total_pages > 1 %>
 		<%= will_paginate(@activities) %>

@@ -11,7 +11,7 @@
 	<div  class="form_header"><%=tr("Add a point", "view/points/new")%> <span class="red">* </span> </div>
 
 <%= form_for :point, :url => priority_points_path(@priority)  do |f| %>
-  <%= f.error_messages :header_message => tr("Please review", "view/points/new"), :message => tr("We need a change to your talking point", "view/points/new") %>
+  <%= f.error_messages :header_message => tr("Please review", "view/points/new"), :message => tr("We need a change to your point", "view/points/new") %>
 	<div class="field">
 		<div class="field_box">
  			<%= f.text_field :name, :size => 50, :maxlength => 60 %>
@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="field form_header">
-	    <div class="field_label form_header"><%= tr("Explain your talking point.", "view/points/new") %> <span id="pointContentDown"></span> <%= tr("characters left", "view/points/new")%></div>
+	    <div class="field_label form_header"><%= tr("Explain your point.", "view/points/new") %> <span id="pointContentDown"></span> <%= tr("characters left", "view/points/new")%></div>
 		<div class="field_box">
 	    <%= f.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
 		</div>
@@ -56,7 +56,7 @@
 		</div>
 		
 	</div>	
-	<%= f.submit tr("Save talking point", "view/points/new"), :id => "submit", :class => "yellow_button" %>
+	<%= f.submit tr("Save point", "view/points/new"), :id => "submit", :class => "yellow_button" %>
 
 <% end %>
 

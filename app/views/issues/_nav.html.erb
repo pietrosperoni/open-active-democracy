@@ -15,7 +15,7 @@
 				<% if @tag.points_count > 0 %>
 				<li class="tab3">
 					<span class="tab_header">
-						<%= link_to tr("{count} talking points", "view/issues/_nav", :count => @tag.points_count), :action => "points" %>
+						<%= link_to tr("{count} points", "view/issues/_nav", :count => @tag.points_count), :action => "points" %>
 					</span>
 				</li>
 				<% end %>

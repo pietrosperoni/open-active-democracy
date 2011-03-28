@@ -4,7 +4,7 @@ class PartnersController < ApplicationController
   before_filter :admin_required, :only => [:destroy]
 
   def index
-    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => current_government.name)
+    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => tr(current_government.name,"Name from database"))
 #    if logged_in? and current_user.attribute_present?("partner_id")
 #      redirect_to 'http://' + current_user.partner.short_name + '.' + current_government.base_url + edit_partner_path(current_user.partner)
 #    end
@@ -30,7 +30,7 @@ class PartnersController < ApplicationController
   # GET /partners/new
   # GET /partners/new.xml
   def new
-    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => current_government.name)
+    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => tr(current_government.name,"Name from database"))
     @partner = Partner.new
     respond_to do |format|
       format.html # new.html.erb
@@ -54,7 +54,7 @@ class PartnersController < ApplicationController
   def create
     @partner = Partner.new(params[:partner])
     @partner.ip_address = request.remote_ip
-    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => current_government.name)
+    @page_title = tr("Partner with {government_name}", "controller/partners", :government_name => tr(current_government.name,"Name from database"))
     respond_to do |format|
       if @partner.save
         @partner.register!

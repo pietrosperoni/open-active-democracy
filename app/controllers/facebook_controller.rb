@@ -4,7 +4,7 @@ class FacebookController < ApplicationController
   protect_from_forgery :except => :multiple
 
   def invite
-    @page_title = tr("Invite your Facebook friends to join {government_name}", "controller/facebook", :government_name => current_government.name)
+    @page_title = tr("Invite your Facebook friends to join {government_name}", "controller/facebook", :government_name => tr(current_government.name,"Name from database"))
     @user = User.find(current_user.id)
     @facebook_contacts = @user.contacts.active.facebook.collect{|c|c.facebook_uid}
 #    if current_facebook_user

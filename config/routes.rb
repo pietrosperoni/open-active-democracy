@@ -155,6 +155,9 @@ OpenActiveDemocracy::Application.routes.draw do
       get :finished
       get :ads
       get :top
+      get :top_24hr
+      get :top_7days
+      get :top_30days
       get :rising
       get :falling
       get :controversial
@@ -307,7 +310,7 @@ OpenActiveDemocracy::Application.routes.draw do
   resources :process_documents
   resources :process_document_types
   resources :process_document_states
-  match '/' => 'priorities#index'
+  match '/' => 'portal#index'
   match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
   match '/signup' => 'users#new', :as => :signup
   match '/login' => 'sessions#new', :as => :login
@@ -319,6 +322,7 @@ OpenActiveDemocracy::Application.routes.draw do
   match '/new' => 'priorities#new'
   match '/controversial' => 'priorities#controversial'
   match '/vote/:action/:code' => 'vote#index'
+  match '/search' => 'searches#index'
   match '/splash' => 'splash#index'
   match '/issues' => 'issues#index'
   match '/issues.:format' => 'issues#index'

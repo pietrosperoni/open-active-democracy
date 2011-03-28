@@ -280,8 +280,8 @@ en:
                 name: "%{user_name} deleted %{point_name}"
                 nouser: "Deleted %{point_name}"
             revision:
-                name: "%{user_name} changed the talking point's title to %{point_name}"
-                nouser: "Changed the talking point's title to %{point_name}"
+                name: "%{user_name} changed the point's title to %{point_name}"
+                nouser: "Changed the point's title to %{point_name}"
                 content:
                     name: "%{user_name} revised %{point_name}"
                     nouser: "Revised %{point_name}"

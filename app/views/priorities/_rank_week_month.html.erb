@@ -11,7 +11,7 @@
 <% else %>
 	<td valign="top" align="right" width="30" style="padding-right: 5px;">
 		<% if priority.position != 0 %>
-		<div class="priority_position" title="<%= tr("This is the {position} highest ranked priority across all {government_name} members.", "view/priorities/_rank_week_month", :position => priority.position, :government_name => current_government.name) %>">
+		<div class="priority_position" title="<%= tr("This is the {position} highest ranked priority across all {government_name} members.", "view/priorities/_rank_week_month", :position => priority.position, :government_name => tr(current_government.name,"Name from database")) %>">
 			<%= priority.position %>
 		</div>
 		<% end %>

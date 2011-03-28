@@ -35,7 +35,8 @@ class Tr8n::LanguageController < Tr8n::BaseController
   end
 
   def change_locale_in_url(to = :en)
-    params[:source_url].sub!(/(\/..$)|(\/..\/)/, "/#{to.to_s}/")
+    source_url = params[:source_url] || request.env['HTTP_REFERER']
+    source_url.sub!(/(\/..$)|(\/..\/)/, "/#{to.to_s}/") if source_url
   end
 
   def index

@@ -29,6 +29,9 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'kgio'
+gem 'whenever', :require => false
+gem 'geoip'
 gem 'htmlentities'
 gem 'auto_html'
 gem 'delayed_job'

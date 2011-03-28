@@ -1,4 +1,4 @@
-<% cache("watch", :expires_in => 10.minutes) do %>
+<% cache("watch-#{session[:locale]}-#{@inline_translations_enabled}", :expires_in => 10.minutes) do %>
 
 <div id="intro"><%= current_government.prompt %></div>
 	

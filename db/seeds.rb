@@ -24,10 +24,13 @@ if false
   Category.create(:name=>"Immigration")
   Category.create(:name=>"Other")
 else
-  Category.create(:name=>"User interface")
-  Category.create(:name=>"General")
-  Category.create(:name=>"Localization")
-  Category.create(:name=>"Data sources")
+  unless partner = Partner.find_by_short_name("dev")
+    partner = Partner.create(:name=>"development", :short_name=>"dev")
+  end
+  Category.create(:name=>"User interface", :partner_id=>partner.id)
+  Category.create(:name=>"General", :partner_id=>partner.id)
+  Category.create(:name=>"Localization", :partner_id=>partner.id)
+  Category.create(:name=>"Data sources", :partner_id=>partner.id)
 end
 
 # Create Portlet Templates

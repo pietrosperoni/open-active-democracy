@@ -9,12 +9,12 @@
 	<% for message in @messages %>
 	<tr><td valign="top" width="120">
 			<% if message.unread? %><b><% end %>
-			<%= link_to truncate(message.sender.name,18), user_messages_url(message.sender) %>
+			<%= link_to truncate(message.sender.name,:length=>18), user_messages_url(message.sender) %>
 			<% if message.unread? %></b><% end %>
 		</td>
 		<td valign="top" width="330">
 			<% if message.unread? %><b><% end %>
-			<%= link_to truncate(h(message.content),70), user_messages_url(message.sender) %>
+			<%= link_to truncate(h(message.content),:length=>70), user_messages_url(message.sender) %>
 			<% if message.unread? %></b><% end %>
 		</td>
 		<td valign="top" width="100">

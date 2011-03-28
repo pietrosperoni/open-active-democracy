@@ -1,4 +1,4 @@
-<% cache("issues_feed_column_" + tag_names) do %>
+<% cache("issues_feed_column_-#{session[:locale]}-#{@inline_translations_enabled}" + tag_names) do %>
 	<% @webpages = Webpage.tagged_with(tag_names, :on => :issues).published.newest.find(:all,:limit => 15, :include => :feed) %>
 		<% if @webpages.any? %>
 		<div class="heading"><%= tr("News from other sites", "view/issues/_feed_column")%></div>
@@ -6,7 +6,7 @@
 		<% for webpage in @webpages %>
 			<div class="webpage">
 				<a href="<%= webpage.url %>"><%= webpage.title %></a>
-				<div class="webpage_footer"><%= truncate(webpage.domain,17) %>
+				<div class="webpage_footer"><%= truncate(webpage.domain,:length=>17) %>
 				<% if webpage.feed %>
 					<%= tr("via {source}", "view/issues/_feed_column", :source => '<a href="' + webpage.feed.website_link + '">' + webpage.feed.name + '</a>') %>
 				<% end %>

@@ -26,7 +26,7 @@
     <div class="form_header">
       <%= tr("Select category","views/priorities/form")%><br>
     </div>
-    <% Category.order("name").each do |category| %>
+    <% Category.for_partner.each do |category| %>
       <%= f.radio_button :category_id, category.id %> <span class="Chapter_name"><%=category.i18n_name %></span>
     <% end %>
   </div>
@@ -43,7 +43,6 @@
   
   <br>
   <br>
-  <hr><br>
   
   <div class="form_header">
     <%=tr("Add a point in support or against","views/priorities/form")%>
@@ -74,7 +73,7 @@
     <br>
     <div class="field">
       <div class="field_label form_header">
-        <%= tr("Explain your talking point.", "view/priorities/_form") %>
+        <%= tr("Explain your point.", "view/priorities/_form") %>
         <span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%>
       </div>
       <div class="field_box">

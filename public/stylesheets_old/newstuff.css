@@ -16,6 +16,59 @@ color: #333;
 
 }
 
+.search_results h3
+{
+  padding-top: 5px;
+}
+
+#search
+{
+  position:relative;
+  right:0;
+  top:47px;
+  width:230px;
+  left:574px;
+  left:572px !ie;
+}
+#search input.input
+{
+  height: 21px;
+  margin-right: 2px;
+  margin-top: 1px;
+  padding: 2px 3px 0;
+}
+#search input.leita
+{
+  font-size:12px;
+  height:22px !important;
+  width: 45px;
+}
+
+#search-id
+{
+  font-size:12px;
+  height:22px !important;
+  width:160px;
+  float:left;
+  margin-right: 3px;
+  margin-right: 0px !ie;
+
+}
+
+.search_results #left
+{
+float:left; 
+width: 150px;
+padding-right: 5px;
+}
+
+.search_results #right
+{
+float:right;  
+width: 600px;
+}
+
+
 .match {
 color: red;
 }
@@ -554,7 +607,18 @@ width: 120px;
 }
 
 /* Selected item in navigation, I think */
-#nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a, #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_1 li.tab1 .tab_header a, #nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a, #nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a, #nav_sub_8 li.tab8 .tab_header a, #nav_sub_9 li.tab9 .tab_header a, #nav_sub_10 li.tab10 .tab_header a, #nav_third_1 li.tab1 .tab_header a, #nav_third_2 li.tab2 .tab_header a, #nav_third_3 li.tab3 .tab_header a, #nav_third_4 li.tab4 .tab_header a, #nav_third_5 li.tab5 .tab_header a, #nav_third_6 li.tab6 .tab_header a, #nav_third_7 li.tab7 .tab_header a, #nav_third_8 li.tab8 .tab_header a, #nav_third_9 li.tab9 .tab_header a, #nav_third_10 li.tab10 .tab_header a {
+#nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, 
+#nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a,
+#nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_0 li.tab0 .tab_header a, 
+#nav_sub_1 li.tab1 .tab_header a,
+#nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a,
+#nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a,
+#nav_sub_8 li.tab8 .tab_header a, #nav_sub_9 li.tab9 .tab_header a, #nav_sub_10 li.tab10 .tab_header a,
+#nav_third_1 li.tab1 .tab_header a, #nav_third_2 li.tab2 .tab_header a, #nav_third_3 li.tab3 .tab_header a,
+#nav_third_4 li.tab4 .tab_header a, #nav_third_5 li.tab5 .tab_header a, #nav_third_6 li.tab6 .tab_header a,
+#nav_third_7 li.tab7 .tab_header a, #nav_third_8 li.tab8 .tab_header a, #nav_third_9 li.tab9 .tab_header a,
+#nav_third_10 li.tab10 .tab_header a, #nav_third_11 li.tab1 .tab_header a, #nav_third_12 li.tab2 .tab_header a,
+#nav_third_13 li.tab3 .tab_header a, #nav_third_14 li.tab4 .tab_header a {
 background-color:#fff !important;
 color:#000000 !important;
 font-weight:bold !important;
@@ -691,12 +755,19 @@ width:130px;
 }
 
 #new_priority_button {
-  padding:2px 5px 3px 8px;
+  width: 208px;
+  padding:2px 5px 3px 5px;
   border:1px solid #ddd;
-  float: right;
-  margin-top: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 7px;
+  font-size: 1.8em;
+}
+
+#language_selection_box {
+  width: 208px;
+  padding:2px 5px 3px 5px;
+  border:1px solid #ddd;
+  margin-top: 4px;
+  margin-bottom: 7px;
 }
 
 #right_column_priorities {

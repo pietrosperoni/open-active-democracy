@@ -323,12 +323,12 @@ en:
                 title: "Search documents at %{government_name}"
                 results: "Document search results for '%{query}'"
             points:
-                title: "Search talking points at %{government_name}"
-                results: "Talking point search results for '%{query}'"
+                title: "Search points at %{government_name}"
+                results: "point search results for '%{query}'"
         points:
-            title: "Your priorities without any talking points"
+            title: "Your priorities without any points"
             needed:
-                empty: "All of your priorities have at least one talking point supporting your position."
+                empty: "All of your priorities have at least one point supporting your position."
         documents:
             title: "Your priorities without any documents"
             needed:
@@ -338,7 +338,7 @@ en:
     bulletins:
         new:
             name: "What's happening?"
-            point: "Start a discussion on this talking point"
+            point: "Start a discussion on this point"
             document: "Start a discussion on this document"
             profile: "Post a bulletin to %{user_name} profile"
             priority_discussion: "Start a discussion on this priority"
@@ -373,7 +373,7 @@ en:
                         other: "%{count} opposers for <span class='pc'>%{capital}%{currency_short_name}</span>"
             content:
                 label: "Explain to others why they should vote in favor of this acquisition:"
-                note: "NOTE: If 500 letters isn't enough space, use the talking points on the other priority to enumerate why that priority is good.  You should only use this space to make the case for the acquisition itself."
+                note: "NOTE: If 500 letters isn't enough space, use the points on the other priority to enumerate why that priority is good.  You should only use this space to make the case for the acquisition itself."
             submit: "Propose this acquisition"
         start: "Voting is starting, it may take a few minutes depending on how many endorsers and opposers need ballots."
         stop: "Deleting this proposal, and refunding %{currency_name} to %{user_name}"
@@ -868,7 +868,7 @@ en:
         your_followers_discussions:
             title: "Discussions your followers are participating in"
         your_followers_points:
-            title: "Talking points and documents from your followers"
+            title: "points and documents from your followers"
         your_followers_capital:
             title: "Your followers' %{currency_name}"
         your_followers_changes:
@@ -878,7 +878,7 @@ en:
         your_network_discussions:
             title: "Discussions in your network"
         your_network_points:
-            title: "Talking points and documents in your network"
+            title: "points and documents in your network"
         your_network_capital:
             title: "%{currency_name} in your network"
         your_network_changes:
@@ -890,7 +890,7 @@ en:
         your_priority_official:
             title: "What %{official_user_name} is doing on your priorities"
         your_priority_points:
-            title: "Talking points and documents on your priorities"
+            title: "points and documents on your priorities"
         your_priority_changes:
             title: "Acquisitions proposed on your priorities"
         your_priority_changes_voting:
@@ -994,58 +994,58 @@ en:
         submit: "Upload and save your picture"
         must: "Must be a gif, jpg or png"
     points:
-        name: "talking points"
-        title: "Talking points"
-        empty: "No talking points yet."
+        name: "points"
+        title: "points"
+        empty: "No points yet."
         source: "Source:"
         supporting: "Supporting %{priority_name}"
         priority:
-            intro: "Please tell us why we should endorse or oppose this priority by <a href='%{new_point_url}'>adding a talking point</a>. You can even suggest a different priority instead."
+            intro: "Please tell us why we should endorse or oppose this priority by <a href='%{new_point_url}'>adding a point</a>. You can even suggest a different priority instead."
         intro:
             endorsed:
-                first: "Talking point supporting %{priority_name}:"
-                both: "Talking point supporting %{priority_name} and %{other_priority_name}:"
+                first: "point supporting %{priority_name}:"
+                both: "point supporting %{priority_name} and %{other_priority_name}:"
             opposed:
-                first: "Talking point opposing %{priority_name}:"
-                both: "Talking point opposing %{priority_name} and supporting %{other_priority_name}:"
+                first: "point opposing %{priority_name}:"
+                both: "point opposing %{priority_name} and supporting %{other_priority_name}:"
             neutral:
-                first: "Talking point about %{priority_name}:"
-                both: "Talking point about %{priority_name} and %{other_priority_name}:"
+                first: "point about %{priority_name}:"
+                both: "point about %{priority_name} and %{other_priority_name}:"
         yours:
-            title: "Your talking points"
+            title: "Your points"
         newest:
-            title: "Newest talking points"
+            title: "Newest points"
         your_priorities:
-            title: "Talking points on your priorities"
+            title: "points on your priorities"
         revised:
-            title: "Recently revised talking points"
-            empty: "No talking points have been revised recently"
-        deleted: "That talking point was deleted"
+            title: "Recently revised points"
+            empty: "No points have been revised recently"
+        deleted: "That point was deleted"
         helpful:
-            endorsers: "Talking points helpful to endorsers"
-            opposers: "Talking points helpful to opposers"
-            undeclared: "Talking points helpful to undeclared"        
+            endorsers: "points helpful to endorsers"
+            opposers: "points helpful to opposers"
+            undeclared: "points helpful to undeclared"        
         show:
-            recent_activity: "Recent activity on this talking point"
+            recent_activity: "Recent activity on this point"
             clean:
-                intro: "Here's what this talking point looked like %{time_ago}.  You can also <a href='%{revision_url}'>see the changes</a> in this version from the previous one."
+                intro: "Here's what this point looked like %{time_ago}.  You can also <a href='%{revision_url}'>see the changes</a> in this version from the previous one."
             intro: "This shows the changes from the previous revision.  You can also <a href='%{clean_url}'>see the clean version</a>"
         new:
             errors:
-                message: "We need a change to your talking point"
+                message: "We need a change to your point"
                 header_message: "Please review"
                 content_maximum: "has a maximum of 500 characters"
-            title: "Add a talking point to %{priority_name}"
-            success: "Thanks for contributing your talking point"
-            submit: "Save talking point"
+            title: "Add a point to %{priority_name}"
+            success: "Thanks for contributing your point"
+            submit: "Save point"
             content:
-                label: "Explain your talking point."
+                label: "Explain your point."
             website:
                 label: "Include a website source link"
             position:
-                label: "Is this talking point %{support_radio} in support or %{oppose_radio} in opposition to %{priority_name}?"    
+                label: "Is this point %{support_radio} in support or %{oppose_radio} in opposition to %{priority_name}?"    
             name:
-                label: "Summarize your talking point in <span class='small'>60 characters</span>"
+                label: "Summarize your point in <span class='small'>60 characters</span>"
             other_priority_name:
                 label: "Link this to another priority <span class='small'>Just start typing the name</span>"
                 example: "Linking to another priority is optional.  If your point is in opposition, you can link to a better priority.  OR, if your point is supportive or neutral, you can highlight a more specific or related priority."
@@ -1053,7 +1053,7 @@ en:
                 label: "Why did you make this change?"
         edit:
             name: "Edit"
-            title: "Can you make this talking point more persuasive?  Go ahead, change it!"
+            title: "Can you make this point more persuasive?  Go ahead, change it!"
         update:
             success: "Saved %{point_name}"
         activity:
@@ -1061,7 +1061,7 @@ en:
         discussions:
             title: "Discussions on %{point_name}"
         destroy:
-            access_denied: "Only the author of a talking point can delete it"
+            access_denied: "Only the author of a point can delete it"
         revision:
             show:
                 title: "%{user_name} revision of %{point_name}"
@@ -1163,13 +1163,13 @@ en:
             title: "Priorities %{official_user_name} opposes"
             intro: "These are the priorities %{official_user_name} opposes, as prioritized by all members."            
         everyone_points:
-            title: "Best talking points on %{priority_name}"
+            title: "Best points on %{priority_name}"
         endorser_points:
-            title: "Talking points supporting %{priority_name}"            
+            title: "points supporting %{priority_name}"            
         neutral_points:
-            title: "Talking points about %{priority_name}"            
+            title: "points about %{priority_name}"            
         opposer_points:
-            title: "Talking points opposing %{priority_name}"            
+            title: "points opposing %{priority_name}"            
         everyone_documents:
             title: "Best documents on %{priority_name}"
         endorser_documents:
@@ -1459,13 +1459,13 @@ en:
         documents:
             title: "Documents on %{tag_name}"
         points:
-            title: "%{tag_name} talking points"
+            title: "%{tag_name} points"
         twitter:
             title: "What people are saying right now about %{tag_name}"
     unsubscribe:
         weekly: "Weekly update on your priorities"
         comments: "Comments on your discussions"
-        points: "Revisions on your documents and talking points"
+        points: "Revisions on your documents and points"
         followers: "When someone follows you or one of your contacts joins"
         finished: "When priorities are finished"
         messages: "Private messages and profile bulletins"
@@ -1517,7 +1517,7 @@ en:
         ads:
             title: "%{user_name} ads at %{government_name}"
         points:
-            title: "%{user_name} talking points at %{government_name}"
+            title: "%{user_name} points at %{government_name}"
         documents:
             title: "%{user_name} documents at %{government_name}"
         issues:
@@ -1632,7 +1632,7 @@ en:
         priorities:
             title: "Put %{government_name} priorities on your website"
         points:
-            title: "Put %{government_name} talking points on your website"
+            title: "Put %{government_name} points on your website"
         discussions:
             title: "Put %{government_name} discussions on your website"
         preview:

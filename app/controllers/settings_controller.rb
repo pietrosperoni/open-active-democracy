@@ -6,7 +6,7 @@ class SettingsController < ApplicationController
   # GET /settings
   def index
     @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
-    @page_title = tr("Your {government_name} settings", "controller/settings", :government_name => current_government.name)
+    @page_title = tr("Your {government_name} settings", "controller/settings", :government_name => tr(current_government.name,"Name from database"))
   end
 
   # PUT /settings
@@ -25,7 +25,7 @@ class SettingsController < ApplicationController
 
   # GET /settings/signups
   def signups
-    @page_title = tr("Your email notifications", "controller/settings", :government_name => current_government.name)
+    @page_title = tr("Your email notifications", "controller/settings", :government_name => tr(current_government.name,"Name from database"))
     @rss_url = url_for(:only_path => false, :controller => "rss", :action => "your_notifications", :format => "rss", :c => current_user.rss_code)
     @partners = Partner.find(:all, :conditions => "is_optin = true and status = 'active' and id <> 3")
   end
@@ -50,7 +50,7 @@ class SettingsController < ApplicationController
     
   # GET /settings/delete
   def delete
-    @page_title = tr("Delete your {government_name} account", "controller/settings", :government_name => current_government.name)
+    @page_title = tr("Delete your {government_name} account", "controller/settings", :government_name => tr(current_government.name,"Name from database"))
   end
 
   # DELETE /settings

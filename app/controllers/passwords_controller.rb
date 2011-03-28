@@ -20,16 +20,16 @@ class PasswordsController < ApplicationController
   # link to the forgot password view by using new_password_path().  
   
   def new
-    @page_title = tr("Reset your {government_name} password", "controller/passwords", :government_name => current_government.name)
+    @page_title = tr("Reset your {government_name} password", "controller/passwords", :government_name => tr(current_government.name,"Name from database"))
   end
   
   def create
-    @page_title = tr("Reset your {government_name} password", "controller/passwords", :government_name => current_government.name)
+    @page_title = tr("Reset your {government_name} password", "controller/passwords", :government_name => tr(current_government.name,"Name from database"))
     users = User.find(:all, :conditions => ["email = ? and status in ('active','pending','passive')",params[:email]])
     if users.any?
       user = users[0]
       if user.has_facebook?
-        flash[:error] = tr("Your password is handled on Facebook, not at {government_name}. Click the Facebook button to sign in.", "controller/passwords", :government_name => current_government.name)
+        flash[:error] = tr("Your password is handled on Facebook, not at {government_name}. Click the Facebook button to sign in.", "controller/passwords", :government_name => tr(current_government.name,"Name from database"))
         redirect_to :action => "new"
         return
       else
@@ -49,10 +49,10 @@ class PasswordsController < ApplicationController
   # GET /users/1/password/edit
   # Changing password
   def edit
-    @page_title = tr("Change your {government_name} password", "controller/passwords", :government_name => current_government.name)
+    @page_title = tr("Change your {government_name} password", "controller/passwords", :government_name => tr(current_government.name,"Name from database"))
     @user = current_user
     if @user.has_facebook?
-      flash[:error] = tr("Your password is the same as your Facebook password, so you must change it on Facebook.", "controller/passwords", :government_name => current_government.name)
+      flash[:error] = tr("Your password is the same as your Facebook password, so you must change it on Facebook.", "controller/passwords", :government_name => tr(current_government.name,"Name from database"))
       return
     end
   end

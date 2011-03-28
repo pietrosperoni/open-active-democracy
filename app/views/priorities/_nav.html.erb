@@ -27,7 +27,7 @@
 		<% if @priority.points_count > 0 %>
 			<li class="tab5 mega">
 				<span class="tab_header">
-					<%= link_to tr("{count} talking points", "view/priorities/_nav", :count => @priority.points_count), top_points_priority_url(@priority) %>
+					<%= link_to tr("{count} points", "view/priorities/_nav", :count => @priority.points_count), top_points_priority_url(@priority) %>
 				</span>
 				<div class="tab_body">
 					<%= link_to(tr("Top points", "view/priorities/_nav"), top_points_priority_url(@priority)) %><br/>
@@ -53,7 +53,7 @@
 				<% end %>
 			</span>
 		</li>
-		<% if @priority.changes_count > 0 or params[:controller] == 'changes' %>
+		<% if false and @priority.changes_count > 0 or params[:controller] == 'changes' %>
 			<li class="tab7">
 				<span class="tab_header">
 					<%= link_to tr("M&A", "view/priorities/_nav"), priority_changes_url(@priority)%>
@@ -108,16 +108,16 @@
 				<%= link_to tr("Action", "view/priorities/_nav"), new_priority_point_path(@priority) %>
 			</span>
 			<div class="tab_body">
-				<%= link_to tr("Add a talking point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
+				<%= link_to tr("Add a point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
 					<span class="greyed_out"><%= tr("Buy an ad for this priority", "view/priorities/_nav") %></span><br/>
 				<% else %>
-					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => current_government.currency_name.downcase), :class => "qtip_left" %><br/>
+					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database")), :class => "qtip_left" %><br/>
 				<% end %>
-				<% if @priority.has_change? %>
+				<% if false and @priority.has_change? %>
 					<span class="greyed_out"><%= tr("Propose an acquisition", "view/priorities/_nav") %></span><br/>
-				<% else %>
+				<% elsif false %>
 					<%= link_to tr("Propose an acquisition", "view/priorities/_nav"), new_priority_change_url(@priority), :title => tr("Is there another priority this one should merge with?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% end %>
 				<% if logged_in? and @priority.status != 'inactive' %>
@@ -143,41 +143,4 @@
 	</ul>
 </div>
 </div>
-<% if action_name == "show"%>
-	<div id="endorse_oppose">
-								<div id="priority_<%= @priority.id.to_s %>_button">
-									<% if controller_name == "priorities" and action_name=="show"%>
-	 								  <%= render :partial => "priorities/button", :locals => {:priority => @priority, :endorsement => @endorsement}%>
-								 	<% else %>
-	 								  <%= render :partial => "priorities/button_subs", :locals => {:priority => @priority, :endorsement => @endorsement}%>
-									<% end %>
-								</div>
-								
-								<span class="yes_and_no_points_link_hacky add_point_for yellow_button">
-									<%=link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%>
-								</span>
-	
-								<span class="yes_and_no_points_link_hacky add_point_against yellow_button">
-									<%=link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%>
-								</span>
-	</div>
-<% else %>
-	<div id="endorse_oppose_top_points">
-								<div id="priority_<%= @priority.id.to_s %>_button">
-									<% if controller_name == "priorities" and action_name=="show"%>
-	 								  <%= render :partial => "priorities/button", :locals => {:priority => @priority, :endorsement => @endorsement}%>
-								 	<% else %>
-	 								  <%= render :partial => "priorities/button_subs", :locals => {:priority => @priority, :endorsement => @endorsement}%>
-									<% end %>
-								</div>
-								
-								<span class="yes_and_no_points_link_hacky add_point_for yellow_button">
-									<%=link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%>
-								</span>
-	
-								<span class="yes_and_no_points_link_hacky add_point_against yellow_button">
-									<%=link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%>
-								</span>
-	</div>
-<% end %>
 <br>

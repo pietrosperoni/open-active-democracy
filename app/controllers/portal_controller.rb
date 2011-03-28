@@ -71,7 +71,7 @@ class PortalController < ApplicationController
   end
   
   def save_positions
-    if current_user
+    if current_user and current_user.is_admin?
       PortletPosition.transaction do
         params.each do |key,value|
           next unless key.index("portlet_id")
@@ -120,11 +120,12 @@ class PortalController < ApplicationController
   end
 
   def setup_portal
-    if not current_user or current_user.is_admin? or not logged_in?
-      @portlet_container = default_container
-    else
-      @portlet_container = user_container
-    end
+    @portlet_container = default_container
+#    if not current_user or current_user.is_admin? or not logged_in?
+#      @portlet_container = default_container
+#   else
+#      @portlet_container = user_container
+#    end
   end
 
   def get_id_from_menu_url(data)

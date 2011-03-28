@@ -11,12 +11,12 @@
 			</div>
 			<% if @point.has_website? %>
 				<div class="point_source">
-				<%= tr("Source:", "view/points/show")%> <a href="<%= @point.website_link %>"><%= truncate(@point.website_link,70) %></a>
+				<%= tr("Source:", "view/points/show")%> <a href="<%= @point.website_link %>"><%= truncate(@point.website_link,:length=>70) %></a>
 				</div>
 			<% end %>
 			</div>		
 			<p>
-			<div class="heading"><%= tr("Recent activity on this talking point", "view/points/show")%></div>
+			<div class="heading"><%= tr("Recent activity on this point", "view/points/show")%></div>
 			<% for activity in @point.activities.active.by_recently_created.find(:all, :limit => 10) %>
 				<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself" }%>
 			<% end %>

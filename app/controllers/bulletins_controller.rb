@@ -39,7 +39,7 @@ class BulletinsController < ApplicationController
       @comment.is_opposer = true if e and e.is_down?
     end    
     if @comment.save
-      @activity.send_notification
+      @activity.send_notification if @activity.class == ActivityBulletinProfileNew
       @activity.reload
       respond_to do |format|
         format.html { 

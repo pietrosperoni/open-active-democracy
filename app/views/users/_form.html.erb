@@ -1,5 +1,7 @@
 <div id="new_user_form">
-
+<% if @geoblocked %>
+  <%= render :partial=>"shared/geoblocking_info"%>
+<% else %>  
 	<%= form_for :user, :remote=>true, 
                'data-disable-with' => escape_t(tr("Sending","Ajax")),
 	             :url => users_path(:region => "short") do |f| -%>
@@ -101,6 +103,6 @@
 	<% end %>
 
 	<% end -%>
-
+<% end %>
 </div>
 <%= render :partial=>"shared/keypad_javascript"%>

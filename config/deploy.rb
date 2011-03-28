@@ -100,6 +100,9 @@ DESC
   end
 end
 
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
 set :application, "open-active-democracy"
 set :domain, "alphatest.yourpriorities.org"
 set :selected_branch, "master"
@@ -119,15 +122,15 @@ role :db,  domain, :primary => true
 namespace :delayed_job do 
     desc "Restart the delayed_job process"
     task :restart, :roles => :app do
-        run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job stop RAILS_ENV=production"
-        run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
+        run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job restart RAILS_ENV=production"
+#        run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
     end
 end
 
 after "deploy:update", "delayed_job:restart"
 
 task :before_update_code, :roles => [:app] do
-  thinking_sphinx.stop
+  #thinking_sphinx.stop
 end
 
 task :after_update_code do
@@ -138,8 +141,8 @@ task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
   run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -nfs #{deploy_to}/#{shared_dir}/private #{current_release}/private"
-  thinking_sphinx.configure
-  thinking_sphinx.start
+  #thinking_sphinx.configure
+#  thinking_sphinx.restart
 end
 
 namespace :deploy do

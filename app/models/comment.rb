@@ -1,5 +1,7 @@
 class Comment < ActiveRecord::Base
 
+  acts_as_set_partner :table_name=>"comments"
+
   scope :published, :conditions => "comments.status = 'published'"
   scope :unpublished, :conditions => "comments.status not in ('published','abusive')"
 
@@ -23,6 +25,7 @@ class Comment < ActiveRecord::Base
   define_index do
     indexes content
     indexes category_name, :facet=>true, :as=>"category_name"
+    has partner_id, :as=>:partner_id, :type => :integer
     where "comments.status = 'published'"
   end
   

@@ -1,4 +1,5 @@
 <span id="priority_<%= priority.id.to_s %>_button_small" class="priority_<%= priority.id.to_s %>_button_small">
+<% unless @geoblocked %>
 <% if endorsement and endorsement.status == 'active' %>
 
 	<% if endorsement.is_up? %>
@@ -42,5 +43,6 @@
                 'data-loader-name' => "horizontal_small",
 		            :class => "priority_add_link", :title =>  tr("I oppose this, and want to add my opposition to my priority list.", "view/priorities/_button_small") %>
 	</span>	
+<% end %>
 <% end %>
 </span>

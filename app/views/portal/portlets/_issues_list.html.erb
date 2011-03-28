@@ -1,4 +1,4 @@
-<% cache(["portlets_issues_list",locale,Partner.current_id], :expires_in => 5.minutes) do %>
+<% cache(["portlets_issues_list",locale,Partner.current_id,@inline_translations_enabled], :expires_in => 5.minutes) do %>
 <% for issue in Tag.most_priorities.item_limit(portlet.portlet_template.item_limit) %>
 	<div class="priority_listing">
 		<span class="priority_name">
@@ -7,7 +7,7 @@
 		<div class="priority_action">
 			<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/portal/portlets", :count => issue.priorities_count) %></a>
 			<% if issue.points_count > 0 %>	
-			&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} talking points", "view/portal/portlets", :count => issue.points_count) %></a>
+			&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/portal/portlets", :count => issue.points_count) %></a>
 			<% end %>
 			<% if issue.documents_count > 0 %>
 			&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/portal/portlets", :count => issue.documents_count) %></a>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110324050748) do
+ActiveRecord::Schema.define(:version => 20110328002042) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20110324050748) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "partner_id"
   end
 
   create_table "changes", :force => true do |t|
@@ -226,6 +227,7 @@ ActiveRecord::Schema.define(:version => 20110324050748) do
     t.integer  "flags_count",   :default => 0
     t.integer  "category_id"
     t.string   "category_name", :default => "no cat"
+    t.integer  "partner_id"
   end
 
   add_index "comments", ["activity_id"], :name => "comments_activity_id"
@@ -555,32 +557,35 @@ ActiveRecord::Schema.define(:version => 20110324050748) do
   end
 
   create_table "partners", :force => true do |t|
-    t.string   "name",                  :limit => 60
-    t.string   "short_name",            :limit => 20
+    t.string   "name",                       :limit => 60
+    t.string   "short_name",                 :limit => 20
     t.integer  "picture_id"
-    t.integer  "is_optin",              :limit => 1,   :default => 0,         :null => false
-    t.string   "optin_text",            :limit => 60
+    t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
+    t.string   "optin_text",                 :limit => 60
     t.string   "privacy_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "is_active",             :limit => 1,   :default => 1,         :null => false
-    t.string   "status",                               :default => "passive"
-    t.integer  "users_count",                          :default => 0
+    t.integer  "is_active",                  :limit => 1,   :default => 1,         :null => false
+    t.string   "status",                                    :default => "passive"
+    t.integer  "users_count",                               :default => 0
     t.string   "website"
     t.datetime "deleted_at"
-    t.string   "ip_address",            :limit => 16
-    t.boolean  "is_daily_summary",                     :default => true
+    t.string   "ip_address",                 :limit => 16
+    t.boolean  "is_daily_summary",                          :default => true
     t.string   "unsubscribe_url"
     t.string   "subscribe_url"
     t.string   "logo_file_name"
-    t.string   "logo_content_type",     :limit => 30
+    t.string   "logo_content_type",          :limit => 30
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.string   "default_tags"
     t.string   "custom_tag_checkbox"
     t.string   "custom_tag_dropdown_1"
     t.string   "custom_tag_dropdown_2"
-    t.string   "name_variations_data",  :limit => 350
+    t.string   "name_variations_data",       :limit => 350
+    t.boolean  "geoblocking_enabled",                       :default => false
+    t.string   "geoblocking_open_countries",                :default => ""
+    t.string   "default_locale"
   end
 
   add_index "partners", ["short_name"], :name => "short_name"
@@ -706,47 +711,47 @@ ActiveRecord::Schema.define(:version => 20110324050748) do
   add_index "portlets", ["portlet_template_id"], :name => "index_portlets_on_portlet_template_id"
 
   create_table "priorities", :force => true do |t|
-    t.integer  "position",                               :default => 0,     :null => false
+    t.integer  "position",                                :default => 0,     :null => false
     t.integer  "user_id"
-    t.string   "name",                    :limit => 250
-    t.integer  "endorsements_count",                     :default => 0,     :null => false
-    t.string   "status",                  :limit => 50
-    t.string   "ip_address",              :limit => 16
+    t.string   "name",                     :limit => 250
+    t.integer  "endorsements_count",                      :default => 0,     :null => false
+    t.string   "status",                   :limit => 50
+    t.string   "ip_address",               :limit => 16
     t.datetime "deleted_at"
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "position_1hr",                           :default => 0,     :null => false
-    t.integer  "position_24hr",                          :default => 0,     :null => false
-    t.integer  "position_7days",                         :default => 0,     :null => false
-    t.integer  "position_30days",                        :default => 0,     :null => false
-    t.integer  "position_1hr_change",                    :default => 0,     :null => false
-    t.integer  "position_24hr_change",                   :default => 0,     :null => false
-    t.integer  "position_7days_change",                  :default => 0,     :null => false
-    t.integer  "position_30days_change",                 :default => 0,     :null => false
+    t.integer  "position_1hr",                            :default => 0,     :null => false
+    t.integer  "position_24hr",                           :default => 0,     :null => false
+    t.integer  "position_7days",                          :default => 0,     :null => false
+    t.integer  "position_30days",                         :default => 0,     :null => false
+    t.integer  "position_1hr_change",                     :default => 0,     :null => false
+    t.integer  "position_24hr_change",                    :default => 0,     :null => false
+    t.integer  "position_7days_change",                   :default => 0,     :null => false
+    t.integer  "position_30days_change",                  :default => 0,     :null => false
     t.integer  "change_id"
     t.string   "cached_issue_list"
-    t.integer  "up_endorsements_count",                  :default => 0
-    t.integer  "down_endorsements_count",                :default => 0
-    t.integer  "points_count",                           :default => 0
-    t.integer  "up_points_count",                        :default => 0
-    t.integer  "down_points_count",                      :default => 0
-    t.integer  "neutral_points_count",                   :default => 0
-    t.integer  "discussions_count",                      :default => 0
-    t.integer  "relationships_count",                    :default => 0
-    t.integer  "changes_count",                          :default => 0
-    t.integer  "official_status",                        :default => 0
-    t.integer  "official_value",                         :default => 0
+    t.integer  "up_endorsements_count",                   :default => 0
+    t.integer  "down_endorsements_count",                 :default => 0
+    t.integer  "points_count",                            :default => 0
+    t.integer  "up_points_count",                         :default => 0
+    t.integer  "down_points_count",                       :default => 0
+    t.integer  "neutral_points_count",                    :default => 0
+    t.integer  "discussions_count",                       :default => 0
+    t.integer  "relationships_count",                     :default => 0
+    t.integer  "changes_count",                           :default => 0
+    t.integer  "official_status",                         :default => 0
+    t.integer  "official_value",                          :default => 0
     t.datetime "status_changed_at"
-    t.integer  "score",                                  :default => 0
-    t.integer  "up_documents_count",                     :default => 0
-    t.integer  "down_documents_count",                   :default => 0
-    t.integer  "neutral_documents_count",                :default => 0
-    t.integer  "documents_count",                        :default => 0
-    t.string   "short_url",               :limit => 20
-    t.boolean  "is_controversial",                       :default => false
-    t.integer  "trending_score",                         :default => 0
-    t.integer  "controversial_score",                    :default => 0
+    t.integer  "score",                                   :default => 0
+    t.integer  "up_documents_count",                      :default => 0
+    t.integer  "down_documents_count",                    :default => 0
+    t.integer  "neutral_documents_count",                 :default => 0
+    t.integer  "documents_count",                         :default => 0
+    t.string   "short_url",                :limit => 20
+    t.boolean  "is_controversial",                        :default => false
+    t.integer  "trending_score",                          :default => 0
+    t.integer  "controversial_score",                     :default => 0
     t.string   "external_info_1"
     t.string   "external_info_2"
     t.string   "external_info_3"
@@ -755,9 +760,12 @@ ActiveRecord::Schema.define(:version => 20110324050748) do
     t.string   "external_id"
     t.string   "external_name"
     t.integer  "partner_id"
-    t.integer  "flags_count",                            :default => 0
+    t.integer  "flags_count",                             :default => 0
     t.integer  "category_id"
-    t.string   "user_agent",              :limit => 200
+    t.string   "user_agent",               :limit => 200
+    t.integer  "position_endorsed_24hr"
+    t.integer  "position_endorsed_7days"
+    t.integer  "position_endorsed_30days"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
@@ -942,6 +950,7 @@ ActiveRecord::Schema.define(:version => 20110324050748) do
     t.integer  "endorsements_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "partner_id"
   end
 
   add_index "rankings", ["created_at"], :name => "rankings_created_at_index"
@@ -1593,6 +1602,7 @@ ActiveRecord::Schema.define(:version => 20110324050748) do
     t.boolean  "reports_documents",                           :default => false
     t.integer  "reports_interval"
     t.datetime "last_sent_report"
+    t.string   "geoblocking_open_countries",                  :default => ""
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

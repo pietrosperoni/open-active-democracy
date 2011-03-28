@@ -127,18 +127,32 @@ class User < ActiveRecord::Base
   after_create :give_partner_credit
   after_create :give_user_credit
   after_create :new_user_signedup
+  after_create :set_signup_country
   
   attr_protected :remember_token, :remember_token_expired_at, :activation_code, :salt, :crypted_password, :twitter_token, :twitter_secret
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids  
   
+  def set_signup_country
+    self.geoblocking_open_countries=Thread.current[:country_code] if Thread.current[:country_code]
+  end
+  
   def gender
-    'unknown'
+    tr('unknown','')
   end
   
   def guest?
     false
+  end
+  
+  def geoblocking_disabled_for?(partner)
+    self.geoblocking_open_countries.split.each do |user_country|
+      partner.geoblocking_open_countries.split.each do |partner_country|
+        return true if user_country == partner_country
+      end
+    end
+    return false
   end
   
   def new_user_signedup
@@ -179,9 +193,9 @@ class User < ActiveRecord::Base
   
   def give_partner_credit
     return unless partner_referral
-    ActivityPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral)
-    ActivityCapitalPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral, :capital => CapitalPartnerUserRecruited.create(:recipient => partner_referral.owner, :amount => 2, :capitalizable => self))
-    partner_referral.owner.increment!(:referrals_count)
+#    ActivityPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral)
+#    ActivityCapitalPartnerUserRecruited.create(:user => partner_referral.owner, :other_user => self, :partner => partner_referral, :capital => CapitalPartnerUserRecruited.create(:recipient => partner_referral.owner, :amount => 2, :capitalizable => self))
+#    partner_referral.owner.increment!(:referrals_count)
   end
   
   def give_user_credit
@@ -364,7 +378,7 @@ class User < ActiveRecord::Base
   end
   
   def to_param_link
-    '<a href="http://' + Government.current.base_url + '/users/' + sender.to_param + '">' + sender.name + '</a>'  
+    '<a href="http://' + Government.current.base_url_w_partner + '/users/' + sender.to_param + '">' + sender.name + '</a>'  
   end
   
   def has_top_priority?
@@ -446,7 +460,7 @@ class User < ActiveRecord::Base
   			shown_ad = ad.shown_ads.find_by_user_id(self.id)
   			if shown_ad and not shown_ad.has_response? and shown_ad.seen_count < 4
   				shown_ad.increment!(:seen_count)
-  				return ad@user
+  				return ad
   			elsif not shown_ad
   				shown_ad = ad.shown_ads.create(:user => self)
   				return ad
@@ -1000,19 +1014,15 @@ class User < ActiveRecord::Base
   end  
   
   def root_url
-    if has_partner_referral?
-      return 'http://' + partner_referral.short_name + '.' + Government.current.base_url + '/'
-    else
-      return 'http://' + Government.current.base_url + '/'
-    end
+    return 'http://' + Government.current.base_url_w_partner + '/'
   end
   
   def profile_url
-    'http://' + Government.current.base_url + '/users/' + to_param
+    'http://' + Government.current.base_url_w_partner + '/users/' + to_param
   end
   
   def unsubscribe_url
-    'http://' + Government.current.base_url + '/unsubscribes/new'
+    'http://' + Government.current.base_url_w_partner + '/unsubscribes/new'
   end
   
   def self.adapter

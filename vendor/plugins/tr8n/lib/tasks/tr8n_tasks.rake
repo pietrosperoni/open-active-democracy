@@ -6,7 +6,20 @@ def tr8n_db_filename
   tr8n_db_path.join("tr8n.sql.gz")
 end
 
+def tr8n_source_filename
+  tr8n_db_path.join("sources.json")
+end
+
 namespace :tr8n do
+  desc "Dump tr8n tables"
+  task :dump_sources => :environment do
+    sources = []
+    Tr8n::TranslationSource.all.each do |translation_source|
+      sources << translation_source.source unless translation_source.source.downcase.include?("tr8n")
+    end
+    puts "[#{sources.sort.map {|s| "\"#{s}\""}.join(",")}]"
+  end
+
   desc "Dump tr8n tables"
   task :dump_db => :environment do
     config = Rails.application.config.database_configuration

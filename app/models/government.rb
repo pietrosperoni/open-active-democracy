@@ -53,8 +53,8 @@ class Government < ActiveRecord::Base
 
   validates_presence_of     :tags_name
   validates_length_of       :tags_name, :maximum => 20
-  validates_presence_of     :briefing_name
-  validates_length_of       :briefing_name, :maximum => 20
+#  validates_presence_of     :briefing_name
+#  validates_length_of       :briefing_name, :maximum => 20
   validates_presence_of     :currency_name
   validates_length_of       :currency_name, :maximum => 30
   validates_presence_of     :currency_short_name
@@ -86,6 +86,14 @@ class Government < ActiveRecord::Base
   
   def base_url
     self.domain_name
+  end
+
+  def base_url_w_partner
+    if Partner.current
+      Partner.current.short_name + '.' + self.domain_name
+    else
+      self.domain_name
+    end
   end
   
   def homepage_url

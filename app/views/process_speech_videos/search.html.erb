@@ -1,4 +1,4 @@
-<% cache(["process_video_search", @priority_filter, @search_query.gsub(".","").parameterize_full, locale], :expires_in => 30.minutes) do -%>
+<% cache(["process_video_search", @priority_filter, @search_query.gsub(".","").parameterize_full, session[:locale]], :expires_in => 30.minutes) do -%>
 <% if @priority %>
 	<%= render :partial => "/priorities/header" %>
 	<%= render :partial => "/priorities/nav" %>

@@ -5,7 +5,7 @@
 <% end %>
 
 <% if priority.points_count > 0 %>
-	&middot; <%= link_to tr("{count} talking points", "view/priorities/_endorsement_count", :count => priority.points_count).downcase, top_points_priority_url(priority) -%>
+	&middot; <%= link_to tr("{count} points", "view/priorities/_endorsement_count", :count => priority.points_count).downcase, top_points_priority_url(priority) -%>
 <% else %>
 	&middot; <%= link_to tr("New point", "view/priorities/_endorsement_count").downcase, new_priority_point_path(priority)+"?support=1" , :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_endorsement_count"), :class => "qtip_left" %>
 <% end %>
