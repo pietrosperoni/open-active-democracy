@@ -51,11 +51,22 @@ namespace :tr8n do
       end
       country_lookup = Tr8n::IsoCountry.find(:first, :conditions => ['country_english_name LIKE ?', "%#{language.country_name}%"])
       if language_lookup and country_lookup
+        country_lookup.languages << language_lookup unless country_lookup.languages.exists?(language_lookup)
         found << "#{language.country_name} #{best_guess_default_language_name} > #{language_lookup.english_name} #{language_lookup.locale} > #{country_lookup.country_english_name} #{country_lookup.code}"
       else
         errors << "#{language.country_name} #{best_guess_default_language_name} ! #{language_lookup} #{country_lookup}"
       end
     end
+    gb = Tr8n::IsoCountry.find_by_code("GB")
+    gb.languages.delete_all
+    gb.languages << Tr8n::Language.find_by_locale("en-UK")
+    gb.save
+
+    us = Tr8n::IsoCountry.find_by_code("US")
+    us.languages.delete_all
+    us.languages << Tr8n::Language.find_by_locale("en-US")
+    us.save
+    
     puts "Found #{found.count} countries"
     puts ""
     found.each do |x| puts x end
@@ -63,6 +74,19 @@ namespace :tr8n do
     puts "Did not find #{errors.count} countries"
     puts ""
     errors.each do |x| puts x end
+ 
+    puts "No languages for:"    
+    nocount = count = 0
+    Tr8n::IsoCountry.all.each do |country|
+      if country.languages.empty?
+        puts country.inspect
+        nocount += 1
+      else
+        count += 1
+      end
+    end
+    puts "Languages for #{count} countries"
+    puts "No languages for #{nocount} countries"
   end
 
   desc "Dump tr8n tables"
