@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110328002042) do
+ActiveRecord::Schema.define(:version => 20110328231824) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -1109,6 +1109,20 @@ ActiveRecord::Schema.define(:version => 20110328002042) do
 
   add_index "tr8n_ip_locations", ["high"], :name => "index_tr8n_ip_locations_on_high"
   add_index "tr8n_ip_locations", ["low"], :name => "index_tr8n_ip_locations_on_low"
+
+  create_table "tr8n_iso_countries", :force => true do |t|
+    t.string   "code",                 :null => false
+    t.string   "country_english_name", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tr8n_iso_countries", ["code"], :name => "index_tr8n_iso_countries_on_code"
+
+  create_table "tr8n_iso_countries_tr8n_languages", :id => false, :force => true do |t|
+    t.integer "tr8n_iso_country_id"
+    t.integer "tr8n_language_id"
+  end
 
   create_table "tr8n_language_case_rules", :force => true do |t|
     t.integer  "language_case_id", :null => false

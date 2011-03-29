@@ -24,6 +24,8 @@
 class Tr8n::Language < ActiveRecord::Base
   set_table_name :tr8n_languages
 
+  has_and_belongs_to_many :tr8n_iso_countries
+
   belongs_to :fallback_language,    :class_name => 'Tr8n::Language', :foreign_key => :fallback_language_id
   
   has_many :language_rules,         :class_name => 'Tr8n::LanguageRule',        :dependent => :destroy, :order => "type asc"
