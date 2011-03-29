@@ -1,4 +1,4 @@
-"Afghanistan","Afghan Persian or Dari (official) 50%, Pashto (official) 35%, Turkic languages (primarily Uzbek and Turkmen) 11%, 30 minor languages (primarily Balochi and Pashai) 4%, much bilingualism"
+"Afghanistan","Persian or Dari (official) 50%, Pashto (official) 35%, Turkic languages (primarily Uzbek and Turkmen) 11%, 30 minor languages (primarily Balochi and Pashai) 4%, much bilingualism"
 "",
 "Akrotiri","English, Greek"
 "",
@@ -29,11 +29,11 @@ note: most people are bilingual (2000 census)"
 "",
 "Azerbaijan","Azerbaijani (Azeri) (official) 90.3%, Lezgi 2.2%, Russian 1.8%, Armenian 1.5%, other 3.3%, unspecified 1% (1999 census)"
 "",
-"Bahamas, The","English (official), Creole (among Haitian immigrants)"
+"Bahamas","English (official), Creole (among Haitian immigrants)"
 "",
 "Bahrain","Arabic (official), English, Farsi, Urdu"
 "",
-"Bangladesh","Bangla (official, also known as Bengali), English"
+"Bangladesh","Bengali , English"
 "",
 "Barbados","English"
 "",
@@ -57,7 +57,7 @@ note: most people are bilingual (2000 census)"
 "",
 "Brazil","Portuguese (official and most widely spoken language); note - less common languages include Spanish (border areas and schools), German, Italian, Japanese, English, and a large number of minor Amerindian languages"
 "",
-"British Virgin Islands","English (official)"
+"Virgin Islands","English (official)"
 "",
 "Brunei","Malay (official), English, Chinese"
 "",
@@ -65,13 +65,13 @@ note: most people are bilingual (2000 census)"
 "",
 "Burkina Faso","French (official), native African languages belonging to Sudanic family spoken by 90% of the population"
 "",
-"Burma","Burmese (official) minority ethnic groups have their own languages"
+"Myanmar","Burmese (official) minority ethnic groups have their own languages"
 "",
 "Burundi","Kirundi (official), French (official), Swahili (along Lake Tanganyika and in the Bujumbura area)"
 "",
 "Cambodia","Khmer (official) 95%, French, English"
 "",
-"Cameroon","24 major African language groups, English (official), French (official)"
+"Cameroon","French (official)"
 "",
 "Canada","English (official) 58.8%, French (official) 21.6%, other 19.6% (2006 Census)"
 "",
@@ -85,7 +85,7 @@ note: most people are bilingual (2000 census)"
 "",
 "Chile","Spanish (official), Mapudungun, German, English"
 "",
-"China","Standard Chinese or Mandarin (Putonghua, based on the Beijing dialect) (official), Yue (Cantonese), Wu (Shanghainese), Minbei (Fuzhou), Minnan (Hokkien-Taiwanese), Xiang, Gan, Hakka dialects, minority languages (see Ethnic groups entry) 
+"China","Chinese or Mandarin (Putonghua, based on the Beijing dialect) (official), Yue (Cantonese), Wu (Shanghainese), Minbei (Fuzhou), Minnan (Hokkien-Taiwanese), Xiang, Gan, Hakka dialects, minority languages (see Ethnic groups entry) 
 note: Mongolian is official in Nei Mongol, Uighur is official in Xinjiang Uygur, and Tibetan is official in Xizang (Tibet)"
 "",
 "Christmas Island","English (official), Chinese, Malay"
@@ -96,9 +96,7 @@ note: Mongolian is official in Nei Mongol, Uighur is official in Xinjiang Uygur
 "",
 "Comoros","Arabic (official), French (official), Shikomoro (a blend of Swahili and Arabic)"
 "",
-"Congo, Democratic Republic of the","French (official), Lingala (a lingua franca trade language), Kingwana (a dialect of Kiswahili or Swahili), Kikongo, Tshiluba"
-"",
-"Congo, Republic of the","French (official), Lingala and Monokutuba (lingua franca trade languages), many local languages and dialects (of which Kikongo is the most widespread)"
+"Congo","French (official), Lingala (a lingua franca trade language), Kingwana (a dialect of Kiswahili or Swahili), Kikongo, Tshiluba"
 "",
 "Cook Islands","English (official), Maori"
 "",
@@ -110,7 +108,7 @@ note: Mongolian is official in Nei Mongol, Uighur is official in Xinjiang Uygur
 "",
 "Cuba","Spanish (official)"
 "",
-"Curacao","Papiamento 81.2% (a Spanish-Portuguese-Dutch-English dialect), Dutch 8% (official), Spanish 4%, English 2.9%, other 3.9% (2001 census)"
+"Netherlands Antilles","Papiamento 81.2% (a Spanish-Portuguese-Dutch-English dialect), Dutch 8% (official), Spanish 4%, English 2.9%, other 3.9% (2001 census)"
 "",
 "Cyprus","Greek (official), Turkish (official), English"
 "",
@@ -141,10 +139,7 @@ note: English is the predominant second language"
 "",
 "Ethiopia","Amarigna (Amharic) (official) 32.7%, Oromigna (official regional) 31.6%, Tigrigna (official regional) 6.1%, Somaligna 6%, Guaragigna 3.5%, Sidamigna 3.5%, Hadiyigna 1.7%, other 14.8%, English (official) (major foreign language taught in schools), Arabic (official) (1994 census)"
 "",
-"European Union","Bulgarian, Czech, Danish, Dutch, English, Estonian, Finnish, French, Gaelic, German, Greek, Hungarian, Italian, Latvian, Lithuanian, Maltese, Polish, Portuguese, Romanian, Slovak, Slovene, Spanish, Swedish 
-note: only official languages are listed; German, the major language of Germany, Austria, and Switzerland, is the most widely spoken mother tongue - over 19% of the EU population; English is the most widely spoken language - about 49% of the EU population is conversant with it (2007)"
-"",
-"Falkland Islands (Islas Malvinas)","English"
+"Falkland Islands","English"
 "",
 "Faroe Islands","Faroese (derived from Old Norse), Danish"
 "",
@@ -159,9 +154,9 @@ overseas departments: French, Creole patois"
 "",
 "Gabon","French (official), Fang, Myene, Nzebi, Bapounou/Eschira, Bandjabi"
 "",
-"Gambia, The","English (official), Mandinka, Wolof, Fula, other indigenous vernaculars"
+"Gambia","English (official), Mandinka, Wolof, Fula, other indigenous vernaculars"
 "",
-"Gaza Strip","Arabic, Hebrew (spoken by many Palestinians), English (widely understood)"
+"Palestinian Territory","Arabic, Hebrew (spoken by many Palestinians), English (widely understood)"
 "",
 "Georgia","Georgian 71% (official), Russian 9%, Armenian 7%, Azeri 6%, other 7% 
 note: Abkhaz is the official language in Abkhazia"
@@ -192,7 +187,7 @@ note: Abkhaz is the official language in Abkhazia"
 "",
 "Haiti","French (official), Creole (official)"
 "",
-"Holy See (Vatican City)","Italian, Latin, French, various other languages"
+"Holy See","Italian, Latin, French, various other languages"
 "",
 "Honduras","Spanish (official), Amerindian dialects"
 "",
@@ -205,7 +200,7 @@ note: Abkhaz is the official language in Abkhazia"
 "India","Hindi 41%, Bengali 8.1%, Telugu 7.2%, Marathi 7%, Tamil 5.9%, Urdu 5%, Gujarati 4.5%, Kannada 3.7%, Malayalam 3.2%, Oriya 3.2%, Punjabi 2.8%, Assamese 1.3%, Maithili 1.2%, other 5.9% 
 note: English enjoys the status of subsidiary official language but is the most important language for national, political, and commercial communication; Hindi is the most widely spoken language and primary tongue of 41% of the people; there are 14 other official languages: Bengali, Telugu, Marathi, Tamil, Urdu, Gujarati, Malayalam, Kannada, Oriya, Punjabi, Assamese, Kashmiri, Sindhi, and Sanskrit; Hindustani is a popular variant of Hindi/Urdu spoken widely throughout northern India but is not an official language (2001 census)"
 "",
-"Indonesia","Bahasa Indonesia (official, modified form of Malay), English, Dutch, local dialects (the most widely spoken of which is Javanese)"
+"Indonesia","Indonesian (official, modified form of Malay), English, Dutch, local dialects (the most widely spoken of which is Javanese)"
 "",
 "Iran","Persian and Persian dialects 58%, Turkic and Turkic dialects 26%, Kurdish 9%, Luri 2%, Balochi 1%, Arabic 1%, Turkish 1%, other 2%"
 "",
@@ -231,11 +226,11 @@ note: English enjoys the status of subsidiary official language but is the most
 "",
 "Kenya","English (official), Kiswahili (official), numerous indigenous languages"
 "",
-"Kiribati","I-Kiribati, English (official)"
+"Kiribati","English (official)"
 "",
-"Korea, North","Korean"
+"North Korea","Korean"
 "",
-"Korea, South","Korean, English widely taught in junior high and high school"
+"South Korea","Korean, English widely taught in junior high and high school"
 "",
 "Kosovo","Albanian (official), Serbian (official), Bosnian, Turkish, Roma"
 "",
@@ -243,13 +238,13 @@ note: English enjoys the status of subsidiary official language but is the most
 "",
 "Kyrgyzstan","Kyrgyz 64.7% (official), Uzbek 13.6%, Russian 12.5% (official), Dungun 1%, other 8.2% (1999 census)"
 "",
-"Laos","Lao (official), French, English, and various ethnic languages"
+"Lao People's Democratic Republic","Laothian (official), French, English, and various ethnic languages"
 "",
 "Latvia","Latvian (official) 58.2%, Russian 37.5%, Lithuanian and other 4.3% (2000 census)"
 "",
 "Lebanon","Arabic (official), French, English, Armenian"
 "",
-"Lesotho","Sesotho (southern Sotho), English (official), Zulu, Xhosa"
+"Lesotho","Sesotho, English (official), Zulu, Xhosa"
 "",
 "Liberia","English 20% (official), some 20 ethnic group languages few of which can be written or used in correspondence"
 "",
@@ -261,7 +256,7 @@ note: English enjoys the status of subsidiary official language but is the most
 "",
 "Luxembourg","Luxembourgish (national language), German (administrative language), French (administrative language)"
 "",
-"Macau","Cantonese 85.7%, Hokkien 4%, Mandarin 3.2%, other Chinese dialects 2.7%, English 1.5%, Tagalog 1.3%, other 1.6% (2001 census)"
+"Macao","Chinese 85.7%, Hokkien 4%, Mandarin 3.2%, other Chinese dialects 2.7%, English 1.5%, Tagalog 1.3%, other 1.6% (2001 census)"
 "",
 "Macedonia","Macedonian (official) 66.5%, Albanian (official) 25.1%, Turkish 3.5%, Roma 1.9%, Serbian 1.2%, other 1.8% (2002 census)"
 "",
@@ -269,7 +264,7 @@ note: English enjoys the status of subsidiary official language but is the most
 "",
 "Malawi","Chichewa 57.2% (official), Chinyanja 12.8%, Chiyao 10.1%, Chitumbuka 9.5%, Chisena 2.7%, Chilomwe 2.4%, Chitonga 1.7%, other 3.6% (1998 census)"
 "",
-"Malaysia","Bahasa Malaysia (official), English, Chinese (Cantonese, Mandarin, Hokkien, Hakka, Hainan, Foochow), Tamil, Telugu, Malayalam, Panjabi, Thai 
+"Malaysia","Malay (official), English, Chinese (Cantonese, Mandarin, Hokkien, Hakka, Hainan, Foochow), Tamil, Telugu, Malayalam, Panjabi, Thai 
 note: in East Malaysia there are several indigenous languages; most widely spoken are Iban and Kadazan"
 "",
 "Maldives","Dhivehi (official) (dialect of Sinhala, script derived from Arabic), English spoken by most government officials"
@@ -291,11 +286,11 @@ note: English (official), widely spoken as a second language"
 "",
 "Micronesia, Federated States of","English (official and common language), Chuukese, Kosrean, Pohnpeian, Yapese, Ulithian, Woleaian, Nukuoro, Kapingamarangi"
 "",
-"Moldova","Moldovan (official, virtually the same as the Romanian language), Russian, Gagauz (a Turkish dialect)"
+"Moldova","Moldavian (official, virtually the same as the Romanian language), Russian, Gagauz (a Turkish dialect)"
 "",
 "Monaco","French (official), English, Italian, Monegasque"
 "",
-"Mongolia","Khalkha Mongol 90%, Turkic, Russian (1999)"
+"Mongolia","Mongolian Mongol 90%, Turkic, Russian (1999)"
 "",
 "Montenegro","Serbian 63.6%, Montenegrin (official) 22%, Bosnian 5.5%, Albanian 5.3%, unspecified 3.7% (2003 census)"
 "",
@@ -307,7 +302,7 @@ note: English (official), widely spoken as a second language"
 "",
 "Namibia","English 7% (official), Afrikaans common language of most of the population and about 60% of the white population, German 32%, indigenous languages 1% (includes Oshivambo, Herero, Nama)"
 "",
-"Nauru","Nauruan (official; a distinct Pacific Island language), English widely understood, spoken, and used for most government and commercial purposes"
+"Nauru","Nauru (official; a distinct Pacific Island language), English widely understood, spoken, and used for most government and commercial purposes"
 "",
 "Nepal","Nepali (official) 47.8%, Maithali 12.1%, Bhojpuri 7.4%, Tharu (Dagaura/Rana) 5.8%, Tamang 5.1%, Newar 3.6%, Magar 3.3%, Awadhi 2.4%, other 10%, unspecified 2.5% (2001 census) 
 note: many in government and business also speak English (2001 est.)"
@@ -351,7 +346,7 @@ note: Tok Pisin, a creole language, is widely used and understood; English is s
 "",
 "Philippines","Filipino (official; based on Tagalog) and English (official); eight major dialects - Tagalog, Cebuano, Ilocano, Hiligaynon or Ilonggo, Bicol, Waray, Pampango, and Pangasinan"
 "",
-"Pitcairn Islands","English (official), Pitkern (mixture of an 18th century English dialect and a Tahitian dialect)"
+"Pitcairn","English (official), Pitkern (mixture of an 18th century English dialect and a Tahitian dialect)"
 "",
 "Poland","Polish (official) 97.8%, other and unspecified 2.2% (2002 census)"
 "",
@@ -369,7 +364,7 @@ note: Tok Pisin, a creole language, is widely used and understood; English is s
 "",
 "Saint Barthelemy","French (primary), English"
 "",
-"Saint Helena, Ascension, and Tristan da Cunha","English"
+"Saint Helena","English"
 "",
 "Saint Kitts and Nevis","English (official)"
 "",
@@ -406,7 +401,7 @@ note: Romanian, Hungarian, Slovak, Ukrainian, and Croatian all official in Vojv
 "",
 "Slovenia","Slovenian (official) 91.1%, Serbo-Croatian 4.5%, other or unspecified 4.4%, Italian (official) Only in municipalities where Hungarian national communities reside, Hungarian (official) Only in municipalities where Hungarian national communities reside (2002 census)"
 "",
-"Solomon Islands","Melanesian pidgin in much of the country is lingua franca; English (official but spoken by only 1%-2% of the population); 120 indigenous languages"
+"Solomon Islands","English (official but spoken by only 1%-2% of the population); 120 indigenous languages"
 "",
 "Somalia","Somali (official), Arabic, Italian, English"
 "",
@@ -414,7 +409,7 @@ note: Romanian, Hungarian, Slovak, Ukrainian, and Croatian all official in Vojv
 "",
 "Spain","Castilian Spanish (official) 74%, Catalan 17%, Galician 7%, Basque 2%, are official regionally"
 "",
-"Sri Lanka","Sinhala (official and national language) 74%, Tamil (national language) 18%, other 8% 
+"Sri Lanka","Singhalese (official and national language) 74%, Tamil (national language) 18%, other 8% 
 note: English is commonly used in government and is spoken competently by about 10% of the population"
 "",
 "Sudan","Arabic (official), English (official), Nubian, Ta Bedawie, diverse dialects of Nilotic, Nilo-Hamitic, Sudanic languages 
@@ -433,7 +428,7 @@ note: German, French, Italian, and Romansch are all national and official langu
 "",
 "Syria","Arabic (official); Kurdish, Armenian, Aramaic, Circassian widely understood; French, English somewhat understood"
 "",
-"Taiwan","Mandarin Chinese (official), Taiwanese (Min), Hakka dialects"
+"Taiwan","Chinese (Traditional), Taiwanese (Min), Hakka dialects"
 "",
 "Tajikistan","Tajik (official), Russian widely used in government and business"
 "",
@@ -449,7 +444,7 @@ note: there are about 16 indigenous languages; Tetum, Galole, Mambae, and Kemak
 "",
 "Tokelau","Tokelauan (a Polynesian language), English"
 "",
-"Tonga","Tongan (official), English (official)"
+"Tonga","Tonga (official), English (official)"
 "",
 "Trinidad and Tobago","English (official), Caribbean Hindustani (a dialect of Hindi), French, Spanish, Chinese"
 "",
@@ -465,12 +460,11 @@ note: there are about 16 indigenous languages; Tetum, Galole, Mambae, and Kemak
 "",
 "Uganda","English (official national language, taught in grade schools, used in courts of law and by most newspapers and some radio broadcasts), Ganda or Luganda (most widely used of the Niger-Congo languages, preferred for native language publications in the capital and may be taught in school), other Niger-Congo languages, Nilo-Saharan languages, Swahili, Arabic"
 "",
-"Ukraine","Ukrainian (official) 67%, Russian 24%, other 9% (includes small Romanian-, Polish-, and Hungarian-speaking minorities)"
+"Ukraine","Ukranian (official) 67%, Russian 24%, other 9% (includes small Romanian-, Polish-, and Hungarian-speaking minorities)"
 "",
 "United Arab Emirates","Arabic (official), Persian, English, Hindi, Urdu"
 "",
-"United Kingdom","English 
-note: the following are recognized regional languages: Scots (about 30% of the population of Scotland), Scottish Gaelic (about 60,000 in Scotland), Welsh (about 20% of the population of Wales), Irish (about 10% of the population of Northern Ireland), Cornish (some 2,000 to 3,000 in Cornwall)"
+"United Kingdom","English"
 "",
 "United States","English 82.1%, Spanish 10.7%, other Indo-European 3.8%, Asian and Pacific island 2.7%, other 0.7% (2000 census) 
 note: Hawaiian is an official language in the state of Hawaii"
@@ -492,9 +486,6 @@ note: Hawaiian is an official language in the state of Hawaii"
 "West Bank","Arabic, Hebrew (spoken by Israeli settlers and many Palestinians), English (widely understood)"
 "",
 "Western Sahara","Hassaniya Arabic, Moroccan Arabic"
-"",
-"World","Mandarin Chinese 12.65%, Spanish 4.93%, English 4.91%, Arabic 3.31%, Hindi 2.73%, Bengali 2.71%, Portuguese 2.67%, Russian 2.16%, Japanese 1.83%, Standard German 1.35%, Javanese 1.27% (2008 est.) 
-note: percents are for ""first language"" speakers only"
 "",
 "Yemen","Arabic (official)"
 "",

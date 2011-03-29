@@ -55,6 +55,11 @@ def create_priority_from_row(row,current_user,partner)
 end
 
 namespace :utils do
+  desc "Create partners from iso countries"
+  task :dump_db => :environment do
+    
+  end
+
   desc "Dump database to tmp"
   task :dump_db => :environment do
     config = Rails.application.config.database_configuration
