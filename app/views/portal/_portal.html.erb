@@ -7,8 +7,9 @@
 <%= render :partial => "priorities/new_button" %>
 <br>
 <% else %>
-<% ["1","2"].each do |id_name|%>
-  <div id="<%=id_name%>" class="column ui-sortable column_id_<%=id_name%>" unselectable="on" style="-moz-user-select: none;">
-    <%= render(:partial => "column", :locals=>{:column_number=>id_name.to_i}) %>
-  </div>
+  <% ["1","2"].each do |id_name|%>
+    <div id="<%=id_name%>" class="column ui-sortable column_id_<%=id_name%>" unselectable="on" style="-moz-user-select: none;">
+      <%= render(:partial => "column", :locals=>{:column_number=>id_name.to_i}) %>
+    </div>
+  <% end %>
 <% end %>

@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
   before_filter :check_for_user, :only => [:yours, :yours_finished, :yours_created, :network]
       
   def index
-    @page_title = current_government.tags_name.pluralize.titleize
+    @page_title =  tr("Categories", "controller/issues")
     if request.format != 'html' or current_government.tags_page == 'list'
       @issues = Tag.filtered.most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
     end
