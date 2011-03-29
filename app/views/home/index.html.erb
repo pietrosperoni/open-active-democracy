@@ -1,0 +1,78 @@
+<table width="100%">
+  <tr>
+    <td align="center">
+      <%= image_tag "logos/large.png" %>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <h1><%=tr("Your Priorities","welcome")%></h1>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <%=tr("Welcome to Your Priorities.  You can select your country or participate in a discussion about issues that affect the World as a whole.","welcome")%>
+      <br>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <%= render :partial => "shared/language_selection_master"%>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <h2><%=tr("The Worlds Top Priorities","welcome")%></h2>
+      <% if @world_priorities.any? %>
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/list") %></span></td>
+            <td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/priorities/list") %></span></td>
+            <td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/priorities/list") %></span></td>
+          </tr>
+        <% for priority in @world_priorities %>
+          <% if @endorsements %>
+            <% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
+          <% end %>
+          <tr>
+            <%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
+            <td valign="top" style="padding-left: 8px;" colspan="3">
+            <div id="priority_<%= priority.id %>" class="priority_listing">
+              <%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
+            </div>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <% if @country_partner_priorities %>
+  <tr>
+    <td align="center">
+      <h2><%=image_tag @iso_country.large_flag_image %> <%=tr("Top priorities for","welcome")%> <%=tr(@country_partner.name,"welcome")%></h2>
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/list") %></span></td>
+            <td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/priorities/list") %></span></td>
+            <td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/priorities/list") %></span></td>
+          </tr>
+        <% for priority in @@country_partner_priorities %>
+          <% if @endorsements %>
+            <% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
+          <% end %>
+          <tr>
+            <%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
+            <td valign="top" style="padding-left: 8px;" colspan="3">
+            <div id="priority_<%= priority.id %>" class="priority_listing">
+              <%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
+            </div>
+            </td>
+          </tr>
+        <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

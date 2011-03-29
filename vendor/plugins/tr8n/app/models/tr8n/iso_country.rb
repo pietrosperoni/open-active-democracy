@@ -19,6 +19,6 @@ class Tr8n::IsoCountry < ActiveRecord::Base
   end
   
   def base_flag_url(size)
-    "/images/flags/#{size}/#{self.code.downcase}.png"
+    "/flags/#{size}/#{self.code.downcase}.png"
   end
 end

@@ -107,9 +107,23 @@ class ApplicationController < ActionController::Base
       ''
     end
   end  
+
+  # Will either fetch the current partner or return nil if there's no subdomain
+  def current_partner
+    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
+      @current_partner = nil
+      Partner.current = @current_partner
+      return nil
+    else
+      @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+      Partner.current = @current_partner
+      return @current_partner
+    end
+  end
   
   def check_geoblocking
-    @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
+    @country_code = "is" #Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
+    @iso_country = Tr8n::IsoCountry.find_by_code(@country_code.upcase)
     Rails.logger.info("Geoip country: #{@country_code} - #{current_user ? (current_user.email ? current_user.email : current_user.login) : "Anonymous"}")
     if Partner.current and Partner.current.geoblocking_enabled
       logged_in_user = current_user
@@ -128,7 +142,9 @@ class ApplicationController < ActionController::Base
     if params[:locale]
       session[:locale] = params[:locale]
     elsif not session[:locale]
-      if Partner.current and Partner.current.default_locale
+      if @iso_country and not @iso_country.languages.empty?
+        session[:locale] =  @iso_country.languages.first.locale
+      elsif Partner.current and Partner.current.default_locale
         session[:locale] = Partner.current.default_locale
       else
         session[:locale] = tr8n_user_preffered_locale
@@ -170,19 +186,6 @@ class ApplicationController < ActionController::Base
     end
     Government.current = @current_government
     return @current_government
-  end
-  
-  # Will either fetch the current partner or return nil if there's no subdomain
-  def current_partner
-    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
-      @current_partner = nil
-      Partner.current = @current_partner
-      return nil
-    else
-      @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
-      Partner.current = @current_partner
-      return @current_partner
-    end
   end
   
   def current_user_endorsements

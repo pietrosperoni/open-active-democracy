@@ -23,6 +23,16 @@ class CountryLang
 end
 
 namespace :tr8n do
+  # Example usage of iso country mapping in application controller
+  #   @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
+  #   @iso_country = Tr8n::IsoCountry.find_by_code(@country_code.upcase)
+  #   ...
+  #   if @iso_country and not @iso_country.languages.empty?
+  #     session[:locale] =  @iso_country.languages.first.locale
+  #   else
+  #     session[:locale] = tr8n_user_preffered_locale
+  #   end
+
   desc "Import and setup iso 3166 countries"
   task :import_and_setup_iso_3166 => :environment do
     iso_countries = []

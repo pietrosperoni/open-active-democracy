@@ -20,8 +20,7 @@
 	<p>
 <% end %>
 
-<% if @priorities.any? %>
-
+<% if @world_priorities.any? %>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/list") %></span></td>
@@ -31,7 +30,7 @@
 			<td></td>
 			<td align="right" width="100%"><%= rss_url(@rss_url) %></td>	
 		</tr>
-	<% for priority in @priorities %>
+	<% @world_priorities.each do |priority| %>
 		<% if @endorsements %>
 			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
 		<% end %>
@@ -44,7 +43,6 @@
 			</td>
 		</tr>
 	<% end %>
-
 	</table>
 	<p>
 	<%= will_paginate @priorities %>
