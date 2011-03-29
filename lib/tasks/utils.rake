@@ -71,7 +71,8 @@ namespace :utils do
         p.short_name = country.country_english_name.downcase.gsub(" ","-").gsub(",","").gsub("(","").gsub(")","").gsub("'","").gsub(",","").gsub(".","")
       end
       puts p.short_name
-      p.save
+      p.iso_country_id = country.id
+      p.save unless Partner.find_by_iso_country_id(country.id)
     end
   end
 
