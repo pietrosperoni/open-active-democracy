@@ -29,7 +29,7 @@
         <% elsif @iso_country %>
           <%partner=Partner.find_by_iso_country_id(@iso_country.id)%>
           <% if partner %>
-            <%=tr("No priority has been created for your country be the first by entering the website here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
+            <%=tr("No priority has been created for your country - be the first by clicking here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
           <% end %>
         <% end %>
       </td>
@@ -43,6 +43,11 @@
         <% Thread.current[:partner_overide] = @world_priorities.first.partner if @world_priorities.first.partner %>
         <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@world_priorities, :endorsements=>@endorsements}%>
         <% Thread.current[:partner_overide_id] = nil %>
+      <% else %>
+        <%partner=Partner.find_by_short_name("world")%>
+        <% if partner %>
+          <%=tr("No priority has been created for the World - be the first by clicking here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
+        <% end %>
       <% end %>
     </td>
   </tr>
@@ -55,6 +60,11 @@
         <% Thread.current[:partner_overide] = @eu_eea_priorities.first.partner if @eu_eea_priorities.first.partner %>
         <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@eu_eea_priorities, :endorsements=>@endorsements}%>
         <% Thread.current[:partner_overide_id] = nil %>
+      <% else %>
+        <%partner=Partner.find_by_short_name("eu")%>
+        <% if partner %>
+          <%=tr("No priority has been created for the European Union and EEA - be the first by clicking here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
+        <% end %>
       <% end %>
     </td>
   </tr>
