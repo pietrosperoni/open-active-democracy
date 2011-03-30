@@ -50,6 +50,8 @@ rake db:seed
 # To setup the translation software
 rake tr8n:init
 rake tr8n:import_db
+rake tr8n:import_and_setup_iso_3166 16:19
+rake utils:create_partners_from_iso
 
 Finally to start the rails server:
 rails s
