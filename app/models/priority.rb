@@ -604,6 +604,22 @@ class Priority < ActiveRecord::Base
     end
   end
   
+  def show_discussion_url
+    show_url + '/discussions'
+  end
+
+  def show_top_points_url
+    show_url + '/top_points'
+  end
+
+  def show_endorsers_url
+    show_url + '/endorsers'
+  end
+
+  def show_opposers_url
+    show_url + '/opposers'
+  end
+  
   # this uses http://is.gd
   def create_short_url
     self.short_url = open('http://is.gd/create.php?longurl=' + show_url, "UserAgent" => "Ruby-ShortLinkCreator").read[/http:\/\/is\.gd\/\w+(?=" onselect)/]

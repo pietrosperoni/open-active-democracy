@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_facebook_user, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
+  before_filter :check_for_localhost
   before_filter :check_subdomain
   before_filter :check_geoblocking
 
@@ -55,6 +56,11 @@ class ApplicationController < ActionController::Base
         '"'     => '\\"',
         "'"     => "\\'" }
 
+  def check_for_localhost
+    if Rails.env.development?
+      Thread.current[:localhost_override] = "#{request.host}:#{request.port}"
+    end
+  end
 
   def session_expiry
     return if controller_name == "sessions"
