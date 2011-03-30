@@ -118,6 +118,7 @@ class ApplicationController < ActionController::Base
          ["endorse","oppose"].include?(action_name)
         @current_partner = nil
         Partner.current = @current_partner
+        Rails.logger.info("No partner")
         return nil
       else
         redirect_to "/welcome"
@@ -125,6 +126,7 @@ class ApplicationController < ActionController::Base
     else
       @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
       Partner.current = @current_partner
+      Rails.logger.info("Partner: #{@current_partner.short_name}")
       return @current_partner
     end
   end
