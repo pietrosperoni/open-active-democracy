@@ -99,7 +99,7 @@ class Government < ActiveRecord::Base
   def homepage_url
     overide_id = Thread.current[:partner_overide_id]
     if p = Partner.current or p = (overide_id ? Partner.where(:id=>overide_id).first : nil)
-      'http://' + p.current.short_name + '.' + base_url + '/'
+      'http://' + p.short_name + '.' + base_url + '/'
     else
       'http://' + base_url + '/'
     end
