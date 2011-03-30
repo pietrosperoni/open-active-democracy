@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     else
       @country_partner_priorities = []
     end
-#    @eu_eea_priorities = @country_partner_priorities = @world_priorities = Priority.published.find(:all, :limit=>3, :order=>"rand()")
+    @eu_eea_priorities = @country_partner_priorities = @world_priorities = Priority.published.find(:all, :limit=>3, :order=>"rand()")
     
     all_priorities = []
     all_priorities += @country_partner_priorities if @country_partner_priorities

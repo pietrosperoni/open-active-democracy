@@ -27,7 +27,7 @@
         <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@country_partner_priorities, :endorsements=>@endorsements}%> 
         <% Thread.current[:partner_overide_id] = nil %>
         <% elsif @iso_country %>
-          <%=partner=Partner.find_by_iso_country_id(@iso_country.id)%>
+          <%partner=Partner.find_by_iso_country_id(@iso_country.id)%>
           <% if partner %>
             <%=tr("No priority has been created for your country be the first by entering the website here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
           <% end %>

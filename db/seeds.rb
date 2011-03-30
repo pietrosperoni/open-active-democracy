@@ -36,6 +36,8 @@ end
 p=Partner.new
 p.name = "The European Union and EEA"
 p.short_name = "eu"
+p.geoblocking_enabled = true
+p.geoblocking_open_countries = Tr8n::IsoCountry::EU_AND_EEA_COUNTRIES.join(",")
 p.save
 
 p=Partner.new
