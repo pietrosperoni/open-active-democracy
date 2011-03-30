@@ -150,7 +150,7 @@ module ApplicationHelper
     r = []
     for tag_name in list.split(', ')
       tag = current_tags.detect{|t| t.name.downcase == tag_name.downcase}
-			r << link_to(tag.title, :controller => "issues", :slug => tag.slug) if tag
+			r << link_to(tr(tag.title,"tags"), tag.show_url) if tag
 		end
 		r.to_sentence.html_safe
   end
