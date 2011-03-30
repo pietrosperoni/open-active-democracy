@@ -159,7 +159,13 @@ class ApplicationController < ActionController::Base
         session[:locale] = tr8n_user_preffered_locale
       end
     end
-    I18n.locale = ENABLED_I18_LOCALES.include?(session[:locale]) ? session[:locale] : "en"
+    session_locale = session[:locale]
+    if ENABLED_I18_LOCALES.include?(session_locale)
+      I18n.locale = session_locale
+    else
+      session_locale = session_locale.split("-")[0] if session_locale.split("-").length>1
+      I18n.locale = ENABLED_I18_LOCALES.include?(session_locale) ? session_locale : "en"
+    end
     tr8n_current_locale = session[:locale]
   end
 
