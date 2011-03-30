@@ -18,6 +18,8 @@ class Partner < ActiveRecord::Base
   has_many :users, :through => :signups
   has_many :activities
   has_many :priorities
+  
+  belongs_to :iso_country, :class_name => 'Tr8n::IsoCountry'
 
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :passive, :column => :status
