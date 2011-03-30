@@ -12,7 +12,7 @@ module AuthenticatedSystem
       if @geoblocked
         return nil
       else
-        @current_user ||= (login_from_session || login_from_facebook || login_from_basic_auth || login_from_cookie) unless @current_user == false
+        @current_user ||= (login_from_session || login_from_facebook) unless @current_user == false
       end
     end
 
