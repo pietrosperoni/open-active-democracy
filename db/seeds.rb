@@ -33,6 +33,21 @@ else
   Category.create(:name=>"Data sources", :partner_id=>partner.id)
 end
 
+p=Partner.new
+p.name = "The European Union and EEA"
+p.short_name = "eu"
+p.save
+
+p=Partner.new
+p.name = "Development"
+p.short_name = "dev"
+p.save
+
+p=Partner.new
+p.name = "The World"
+p.short_name = "world"
+p.save
+
 # Create Portlet Templates
 pc=PortletTemplateCategory.new
 pc.name="Priorities"

@@ -142,6 +142,10 @@ class Partner < ActiveRecord::Base
     return wu    
   end
   
+  def show_url
+    'http://' + self.short_name + '.' + Government.current.base_url + '/'
+  end
+  
   def custom_tag_dropdown_options(option)
     options = send("custom_tag_dropdown_#{option}")
     out = ""

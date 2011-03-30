@@ -35,8 +35,8 @@ class ApplicationController < ActionController::Base
   before_filter :check_referral, :unless => [:is_robot?]
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
-  before_filter :check_google_translate_setting
   before_filter :init_tr8n
+  before_filter :check_google_translate_setting
 
   before_filter :setup_inline_translation_parameters
 
@@ -111,9 +111,13 @@ class ApplicationController < ActionController::Base
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
     if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
-      @current_partner = nil
-      Partner.current = @current_partner
-      return nil
+      if (controller_name=="home" and action_name=="index") or Rails.env.development?
+        @current_partner = nil
+        Partner.current = @current_partner
+        return nil
+      else
+        redirect_to "/welcome"
+      end
     else
       @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
       Partner.current = @current_partner
@@ -122,7 +126,7 @@ class ApplicationController < ActionController::Base
   end
   
   def check_geoblocking
-    @country_code = "is" #Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
+    @country_code = "id" #Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
     @iso_country = Tr8n::IsoCountry.find_by_code(@country_code.upcase)
     Rails.logger.info("Geoip country: #{@country_code} - #{current_user ? (current_user.email ? current_user.email : current_user.login) : "Anonymous"}")
     if Partner.current and Partner.current.geoblocking_enabled
