@@ -23,9 +23,7 @@
         <%=image_tag @iso_country.large_flag_image %><br>
         <h2><%=tr("Top priorities for","welcome")%> <%=tr(@iso_country.country_english_name,"welcome")%></h2>
         <% if @country_partner_priorities.any? %>
-        <% Thread.current[:partner_overide] = @country_partner_priorities.first.partner if @country_partner_priorities.first.partner %>
         <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@country_partner_priorities, :endorsements=>@endorsements}%> 
-        <% Thread.current[:partner_overide_id] = nil %>
         <% elsif @iso_country %>
           <%partner=Partner.find_by_iso_country_id(@iso_country.id)%>
           <% if partner %>
@@ -40,9 +38,7 @@
       <%=image_tag "flags/64/_united-nations.png" %><br>
       <h2><%=tr("The Worlds Top Priorities","welcome")%></h2>
       <% if @world_priorities.any? %>
-        <% Thread.current[:partner_overide] = @world_priorities.first.partner if @world_priorities.first.partner %>
         <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@world_priorities, :endorsements=>@endorsements}%>
-        <% Thread.current[:partner_overide_id] = nil %>
       <% else %>
         <%partner=Partner.find_by_short_name("world")%>
         <% if partner %>
@@ -57,9 +53,7 @@
       <%=image_tag "flags/64/_european-union.png" %><br>
       <h2><%=tr("European Union and EEA Top Priorities","welcome")%></h2>
       <% if @eu_eea_priorities.any? %>
-        <% Thread.current[:partner_overide] = @eu_eea_priorities.first.partner if @eu_eea_priorities.first.partner %>
         <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@eu_eea_priorities, :endorsements=>@endorsements}%>
-        <% Thread.current[:partner_overide_id] = nil %>
       <% else %>
         <%partner=Partner.find_by_short_name("eu")%>
         <% if partner %>

@@ -166,7 +166,11 @@ class Comment < ActiveRecord::Base
   end
   
   def show_url
-    Government.current.homepage_url + 'activities/' + activity_id.to_s + '/comments#' + id.to_s
+    if self.partner_id
+      Government.current.homepage_url(self.partner) +  'activities/' + activity_id.to_s + '/comments#' + id.to_s
+    else
+      Government.current.homepage_url + 'activities/' + activity_id.to_s + '/comments#' + id.to_s
+    end
   end
   
   auto_html_for(:content) do

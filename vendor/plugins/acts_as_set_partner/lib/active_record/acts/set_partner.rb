@@ -7,6 +7,7 @@ module ActiveRecord
       
       module ClassMethods
         def acts_as_set_partner(options = {})
+          belongs_to :partner
           before_create :set_partner
       
           scope :filtered, lambda {{ :conditions=>"#{options[:table_name]}.partner_id #{Partner.current ? "= #{Partner.current.id}" : "LIKE '%' OR #{options[:table_name]}.partner_id IS NULL"}" }}

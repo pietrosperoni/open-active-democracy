@@ -8,7 +8,7 @@
 
 # Create Categories
 
-if false
+if true
   Category.create(:name=>"Welfare")
   Category.create(:name=>"Law")
   Category.create(:name=>"Arts")

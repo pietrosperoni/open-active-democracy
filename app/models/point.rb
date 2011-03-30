@@ -367,9 +367,12 @@ class Point < ActiveRecord::Base
   end
   
   def show_url
-    Government.current.homepage_url + 'points/' + to_param
-  end  
-  
+    if self.partner_id
+      Government.current.homepage_url(self.partner) + 'points/' + to_param
+    else
+      Government.current.homepage_url + 'points/' + to_param
+    end
+  end
   
   def calculate_importance
   	PointImportanceScore.calculate_score(self.id)

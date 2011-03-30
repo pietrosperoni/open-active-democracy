@@ -597,7 +597,11 @@ class Priority < ActiveRecord::Base
   end  
   
   def show_url
-    Government.current.homepage_url + 'priorities/' + to_param
+    if self.partner_id
+      Government.current.homepage_url(self.partner) + 'priorities/' + to_param
+    else
+      Government.current.homepage_url + 'priorities/' + to_param
+    end
   end
   
   # this uses http://is.gd
