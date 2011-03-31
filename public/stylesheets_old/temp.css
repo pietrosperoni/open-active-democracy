@@ -9,28 +9,39 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 #ads {			width: 380px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif); background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:14px;}
 
 
-/* 		overview classes */
+div.column .ui-widget-content {
+    background-image: url("../images/new/portal_bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+    margin: 0px;
+width: 100%;
+}
 
-.priority_listing {		}
 
-.portlet-header {	 font-size: 130%; font-weight: bold; margin:10px; padding-top:5px; border-bottom: 1px solid #fff;  }
-.portlet-content {	 margin:0 10px; padding:5px;  border-bottom: 1px solid #eee;}
+div.column .portlet-header {
+    margin: 5px 0px;
 
-.priority-display { 	float:left;	margin:4px 0px 0 0; } /* show hide arguments*/
-.priority-topic { 	float:left;	margin:0 8px ;} /* topic icon*/
-.priority-name {	margin-left: 60px;}
-.priority-name  .title { 	font-size: 110%; font-weight: bold;	}
-.priority-actions { 		margin-top:5px; }
+}
+.column_id_1 .portlet {
+    border-bottom: 1px solid #EEEEEE;
 
-.priority-actions .support a { background-color: #99cc66; border: 1px solid #669933; padding:1px 2px;	color:#fff; }
-.priority-actions .deny a { background-color: #ff9966; border: 1px solid #993333; padding:1px 2px;	color:#fff; }
-.priority-actions .sep {	font-size: 80%; color:#999; width: 20px;}
+    padding: 5px;
+}
+.column_id_2 .portlet {
+    border-bottom: 1px solid #EEEEEE;
+ margin: 0 5px !important;
+    padding: 5px;
+}
 
-.priority-actions .categories {	margin-left: 5px; }
+div#content_text table {
+    margin: 0;
+    padding: 0;
+}
 
-.priority-share {	float:right; vertical-align: top;}
-.portlet-point-item {	}
+#sidebar {
 
+    width: 216px;
+}
 
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
