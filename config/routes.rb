@@ -300,6 +300,8 @@ OpenActiveDemocracy::Application.routes.draw do
     end
   end
 
+  resource :open_id
+  
   resources :priority_processes
   resources :process_speech_master_videos
   resources :process_speech_videos

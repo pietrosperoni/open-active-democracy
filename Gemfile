@@ -29,6 +29,8 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem "ruby-openid"
+gem "rack-openid"
 gem 'kgio'
 gem 'whenever', :require => false
 gem 'geoip'
@@ -42,7 +44,7 @@ gem 'sunlight', '>= 0.9'
 gem 'googlecharts'
 gem 'oauth', '>= 0.3.1'
 #gem "twitter-auth", :require => "twitter_auth/engine"
-gem "twitter-auth", :git => "git://github.com/jaikoo/twitter-auth.git", :branch => "rails_3", :require => "twitter_auth/engine"
+#gem "twitter-auth", :git => "git://github.com/jaikoo/twitter-auth.git", :branch => "rails_3", :require => "twitter_auth/engine"
 gem 'hpricot', '>= 0.6'
 # gem 'will_paginate', :branch => "rails3"
 gem 'will_paginate', '~> 3.0.beta'
