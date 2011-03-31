@@ -391,7 +391,7 @@ class User < ActiveRecord::Base
   memoize :most_recent_activity
 
   def priority_list
-    s = "My top priorities for America:"
+    s = tr("My top priorities","user")
     row = 0
     for e in endorsements
       row=row+1
