@@ -34,28 +34,21 @@
 	<div id="header">
 	  <table>
 	    <tr>
-	      <td width="35%">
+	      <td>
           <%= render :partial => "shared/branding/your_priorities"%>
         </td>
-        <td width="65%" align="top" valing="top">
-          <table>
-            <tr align="center">
-              <td>
+        <td>
+
                 <%= render :partial => "ads/pick" %>
               </td>
             </tr>
           </table>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-            <%= flash_div :warning, :notice, :error %>
-        <td/>
-      </tr>          
-    </table>
+       
+
 	</div>
 	<div id="contentwrap">
-		<%= render :partial => "shared/menu" %>		
+		<%= render :partial => "shared/menu" %>
+<%= flash_div :warning, :notice, :error %>	
 		<div id="content_text">
 			<%= yield :layout %>
 		</div>
