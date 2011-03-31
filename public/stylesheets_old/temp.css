@@ -5,22 +5,31 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 		
 		 }
 
+#header table {width:100px;overflow:hidden}
 
-#ads {			width: 380px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif); background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:14px;}
+
+#ads {			width: 380px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:14px;}
+
+
 
 
 div.column .ui-widget-content {
+background-color:#fafafa;
     background-image: url("../images/new/portal_bg.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
-    margin: 0px;
-width: 100%;
+    margin: 0 0 10px;
+width: 345px;
 }
 
 
 div.column .portlet-header {
-    margin: 5px 0px;
-
+  color: #666666;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 5px 0;
+    text-transform: uppercase;
+    width: 335px;
 }
 .column_id_1 .portlet {
     border-bottom: 1px solid #EEEEEE;
@@ -33,10 +42,22 @@ div.column .portlet-header {
     padding: 5px;
 }
 
+.activity_border, .activity_hidden {
+
+    width: 335px;
+}
+
+
+/*
 div#content_text table {
     margin: 0;
     padding: 0;
 }
+*/
+
+
+
+
 
 #sidebar {
 
@@ -55,3 +76,5 @@ ul#menu li .tab_header a {
 ul#menu li .tab_header a, ul#menu li.hovering div.tab_body, ul#menu_sub li .tab_header a, ul#menu_sub li.hovering div.tab_body, ul#menu_third li .tab_header a, ul#menu_third li.hovering div.tab_body, ul#priority_menu li.hovering div.tab_body {
     background-color: #fff;
 }
+
+
