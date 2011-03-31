@@ -122,8 +122,9 @@ role :db,  domain, :primary => true
 namespace :delayed_job do 
     desc "Restart the delayed_job process"
     task :restart, :roles => :app do
-  #    run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job stop RAILS_ENV=production"
+  #     run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job stop RAILS_ENV=production"
   #    run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
+      run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job restart RAILS_ENV=production"
     end
 end
 
