@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_facebook_user, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
   # switch to the right database for this government
+  before_filter :check_for_localhost
   before_filter :check_subdomain
   before_filter :check_geoblocking
 
@@ -35,8 +36,8 @@ class ApplicationController < ActionController::Base
   before_filter :check_referral, :unless => [:is_robot?]
   before_filter :check_suspension, :unless => [:is_robot?]
   before_filter :update_loggedin_at, :unless => [:is_robot?]
-  before_filter :check_google_translate_setting
   before_filter :init_tr8n
+  before_filter :check_google_translate_setting
 
   before_filter :setup_inline_translation_parameters
 
@@ -55,6 +56,11 @@ class ApplicationController < ActionController::Base
         '"'     => '\\"',
         "'"     => "\\'" }
 
+  def check_for_localhost
+    if Rails.env.development?
+      Thread.current[:localhost_override] = "#{request.host}:#{request.port}"
+    end
+  end
 
   def session_expiry
     return if controller_name == "sessions"
@@ -107,9 +113,34 @@ class ApplicationController < ActionController::Base
       ''
     end
   end  
+
+  # Will either fetch the current partner or return nil if there's no subdomain
+  def current_partner
+    Rails.logger.info()
+    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
+      if (controller_name=="home" and action_name=="index") or 
+         Rails.env.development? or 
+         self.class.name.downcase.include?("tr8n") or
+         ["endorse","oppose"].include?(action_name)
+        @current_partner = nil
+        Partner.current = @current_partner
+        Rails.logger.info("No partner")
+        return nil
+      else
+        redirect_to "/welcome"
+      end
+    else
+      @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+      Partner.current = @current_partner
+      Rails.logger.info("Partner: #{@current_partner.short_name}")
+      return @current_partner
+    end
+  end
   
   def check_geoblocking
     @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
+    @country_code = "is" if @country_code == nil or @country_code == "--"
+    @iso_country = Tr8n::IsoCountry.find_by_code(@country_code.upcase)
     Rails.logger.info("Geoip country: #{@country_code} - #{current_user ? (current_user.email ? current_user.email : current_user.login) : "Anonymous"}")
     if Partner.current and Partner.current.geoblocking_enabled
       logged_in_user = current_user
@@ -128,13 +159,21 @@ class ApplicationController < ActionController::Base
     if params[:locale]
       session[:locale] = params[:locale]
     elsif not session[:locale]
-      if Partner.current and Partner.current.default_locale
+      if @iso_country and not @iso_country.languages.empty?
+        session[:locale] =  @iso_country.languages.first.locale
+      elsif Partner.current and Partner.current.default_locale
         session[:locale] = Partner.current.default_locale
       else
         session[:locale] = tr8n_user_preffered_locale
       end
     end
-    I18n.locale = ENABLED_I18_LOCALES.include?(session[:locale]) ? session[:locale] : "en"
+    session_locale = session[:locale]
+    if ENABLED_I18_LOCALES.include?(session_locale)
+      I18n.locale = session_locale
+    else
+      session_locale = session_locale.split("-")[0] if session_locale.split("-").length>1
+      I18n.locale = ENABLED_I18_LOCALES.include?(session_locale) ? session_locale : "en"
+    end
     tr8n_current_locale = session[:locale]
   end
 
@@ -170,19 +209,6 @@ class ApplicationController < ActionController::Base
     end
     Government.current = @current_government
     return @current_government
-  end
-  
-  # Will either fetch the current partner or return nil if there's no subdomain
-  def current_partner
-    if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
-      @current_partner = nil
-      Partner.current = @current_partner
-      return nil
-    else
-      @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
-      Partner.current = @current_partner
-      return @current_partner
-    end
   end
   
   def current_user_endorsements

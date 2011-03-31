@@ -1,17 +1,7 @@
 <div id="sidebar">
     <%= render :partial => "shared/search" %>
     <%= render :partial => "shared/user_info" if logged_in? %>
-    <div id="language_selection_box">
-      <%= tr("Select language:","views/layouts/basic") %> <%= tr8n_language_selector_tag %><br>
-      <% if @inline_translations_allowed %>
-        <% if @inline_translations_enabled %>
-          <%= link_to_function(trla("Stop translating"), "tr8nLanguageSelector.disableInlineTranslations();") %><br>
-        <% else %>
-          <%= link_to_function(trla("Start translating"), "tr8nLanguageSelector.enableInlineTranslations();") %><br>
-        <% end %>
-      <% end %>
-      <%= render :partial => "shared/google_translate_select" %>
-    </div>
+    <%= render :partial => "shared/language_selection_master"%>
   <% if logged_in? %>
     <% if current_user.warnings_count > 0 %>
       <div id="warning">
@@ -43,6 +33,13 @@
     <div id="intro">
       <%= tr("Intro BLURB", "view/layouts/basic") %>
     </div>
+  <% end %>
+  <% if Partner.current and Partner.current.short_name=="world"%>
+    <%=image_tag "flags/64/_united-nations.png" %><br>
+  <% elsif Partner.current and Partner.current.short_name=="eu"%>
+    <%=image_tag "flags/64/_european-union.png" %><br>
+  <% elsif Partner.current and Partner.current.iso_country %>
+    <%=image_tag Partner.current.iso_country.large_flag_image %><br>
   <% end %>
   <%= render :partial => "shared/fb_activity_feed" %>
 

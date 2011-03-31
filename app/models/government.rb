@@ -96,11 +96,15 @@ class Government < ActiveRecord::Base
     end
   end
   
-  def homepage_url
-    if Partner.current
-      'http://' + Partner.current.short_name + '.' + base_url + '/'
+  def homepage_url(partner=nil)
+    if Thread.current[:localhost_override]
+      'http://' + Thread.current[:localhost_override] + '/'
     else
-      'http://' + base_url + '/'
+      if p = partner or p = Partner.current
+        'http://' + p.short_name + '.' + base_url + '/'
+      else
+        'http://' + base_url + '/'
+      end
     end
   end
   

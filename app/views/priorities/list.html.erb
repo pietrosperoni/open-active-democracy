@@ -21,37 +21,11 @@
 <% end %>
 
 <% if @priorities.any? %>
-
-	<table border="0" cellspacing="0" cellpadding="0">
-		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/list") %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/priorities/list") %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/priorities/list") %></span></td>
-			<td style="padding-left: 7px; padding-bottom: 2px;"><nobr><%= will_paginate @priorities %></nobr></td>
-			<td></td>
-			<td align="right" width="100%"><%= rss_url(@rss_url) %></td>	
-		</tr>
-	<% for priority in @priorities %>
-		<% if @endorsements %>
-			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
-		<% end %>
-		<tr>
-			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-			<td valign="top" style="padding-left: 8px;" colspan="3">
-			<div id="priority_<%= priority.id %>" class="priority_listing">
-				<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
-			</div>
-			</td>
-		</tr>
-	<% end %>
-
-	</table>
+  <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@priorities, :endorsements=>@endorsements}%> 
 	<p>
-	<%= will_paginate @priorities %>
+  <%= will_paginate @priorities %>
 
 	<% if params[:action] == 'yours_created' %>
 		<p><%= tr("You can also follow all the <a href='/news/your_priorities_created_activities'>activity</a> and <a href='/news/your_priorities_created_discussions'>discussions</a> on priorities you created.", "view/priorities/list")%>
 	<% end %>
-
-
 <% end %>

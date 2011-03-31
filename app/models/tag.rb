@@ -39,6 +39,15 @@ class Tag < ActiveRecord::Base
   
   after_create :expire_cache
   after_destroy :expire_cache
+
+  
+  def show_url
+    if self.partner_id
+      Government.current.homepage_url(self.partner) + 'issues?slug=' + self.slug
+    else
+      Government.current.homepage_url + 'issues?slug=' + self.slug
+    end
+  end
   
   def expire_cache
     Tag.expire_cache

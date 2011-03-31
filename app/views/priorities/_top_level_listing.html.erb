@@ -1,0 +1,20 @@
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/list") %></span></td>
+    <td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/priorities/list") %></span></td>
+    <td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/priorities/list") %></span></td>
+  </tr>
+  <% for priority in priorities %>
+    <% if endorsements %>
+      <% endorsement = endorsements.detect {|e| e.priority_id == priority.id } %>
+    <% end %>
+    <tr>
+      <%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
+      <td valign="top" style="padding-left: 8px;" colspan="3">
+      <div id="priority_<%= priority.id %>" class="priority_listing">
+        <%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
+      </div>
+      </td>
+    </tr>
+  <% end %>
+ </table>

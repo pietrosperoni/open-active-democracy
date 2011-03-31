@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :only => [:resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
+  before_filter :login_required, :only => [:request_validate_user_for_country, :validate_user_for_country, :resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :make_admin, :reset_password]
   
@@ -16,6 +16,26 @@ class UsersController < ApplicationController
       format.xml { render :xml => @users.to_xml(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @users.to_json(:include => [:top_endorsement, :referral, :partner_referral], :except => NB_CONFIG['api_exclude_fields']) }
     end    
+  end
+  
+  def request_validate_user_for_country
+    unless @iso_country
+      flash[:error] = tr("Your country was not detected.", "controller/users", :user_name => @user.name)
+      redirect_to '/'
+    end
+  end
+
+  def validate_user_for_country
+    email = params[:user][:email]
+    user = User.find_by_email(email)
+    if user and @iso_country
+      user.add_iso_country_access!(@iso_country.code)
+      flash[:error] = tr("{email} has allowed access to #{@iso_country.country_english_name}.", "controller/users", :user_name => @user.name)
+      redirect_to '/'
+    else
+      flash[:error] = tr("{email} is not found.", "controller/users", :user_name => @user.name)
+      redirect_to '/'
+    end
   end
   
   def suspended

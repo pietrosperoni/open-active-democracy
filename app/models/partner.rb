@@ -18,6 +18,8 @@ class Partner < ActiveRecord::Base
   has_many :users, :through => :signups
   has_many :activities
   has_many :priorities
+  
+  belongs_to :iso_country, :class_name => 'Tr8n::IsoCountry'
 
   # docs: http://www.vaporbase.com/postings/stateful_authentication
   acts_as_state_machine :initial => :passive, :column => :status
@@ -140,6 +142,10 @@ class Partner < ActiveRecord::Base
     wu = website
     wu = 'http://' + wu if wu[0..3] != 'http'
     return wu    
+  end
+  
+  def show_url
+    'http://' + self.short_name + '.' + Government.current.base_url + '/'
   end
   
   def custom_tag_dropdown_options(option)

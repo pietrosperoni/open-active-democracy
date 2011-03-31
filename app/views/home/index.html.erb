@@ -1,0 +1,72 @@
+<table width="100%">
+  <tr>
+    <td align="center">
+      <%= image_tag "logos/large.png" %>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <h1><%=tr("Your Priorities","welcome")%></h1>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <%= render :partial=>"ads/welcome", :locals=>{:show_always=>true}%>
+      <%=tr("You can select your country or participate in a discussion about issues that affect the World as a whole.","welcome")%>
+      <br>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+        <%=image_tag @iso_country.large_flag_image %><br>
+        <h2><%=tr("Top priorities for","welcome")%> <%=tr(@iso_country.country_english_name,"welcome")%></h2>
+        <% if @country_partner_priorities.any? %>
+        <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@country_partner_priorities, :endorsements=>@endorsements}%> 
+        <% elsif @iso_country %>
+          <%partner=Partner.find_by_iso_country_id(@iso_country.id)%>
+          <% if partner %>
+            <%=tr("No priority has been created for your country - be the first by clicking here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
+          <% end %>
+        <% end %>
+      </td>
+     </tr>
+   <tr>
+    <td align="center">
+      <br><br>
+      <%=image_tag "flags/64/_united-nations.png" %><br>
+      <h2><%=tr("The Worlds Top Priorities","welcome")%></h2>
+      <% if @world_priorities.any? %>
+        <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@world_priorities, :endorsements=>@endorsements}%>
+      <% else %>
+        <%partner=Partner.find_by_short_name("world")%>
+        <% if partner %>
+          <%=tr("No priority has been created for the World - be the first by clicking here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+   <tr>
+    <td align="center">
+      <br><br>
+      <%=image_tag "flags/64/_european-union.png" %><br>
+      <h2><%=tr("European Union and EEA Top Priorities","welcome")%></h2>
+      <% if @eu_eea_priorities.any? %>
+        <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@eu_eea_priorities, :endorsements=>@endorsements}%>
+      <% else %>
+        <%partner=Partner.find_by_short_name("eu")%>
+        <% if partner %>
+          <%=tr("No priority has been created for the European Union and EEA - be the first by clicking here: ","welcome")%> <%=link_to partner.show_url, partner.show_url %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <br>
+      <%= render :partial => "shared/language_selection_master"%>
+      <br>
+    </td>
+  </tr>
+</table>
