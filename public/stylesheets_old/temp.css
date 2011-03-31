@@ -8,8 +8,8 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 #header table {width:100px;overflow:hidden}
 
 
-#ads {width: 335px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:14px;}
-
+#ads {width: 335px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:10px;}
+#ads h2 {border:none;}
 
 
 
@@ -44,7 +44,7 @@ div.column .portlet-header {
 
 .activity_border, .activity_hidden {
 
-    width: 335px;
+   /* width: 335px;*/
 }
 
 
@@ -83,10 +83,20 @@ ul#menu li .tab_header a, ul#menu li.hovering div.tab_body, ul#menu_sub li .tab_
 }
 
 #hp_intro, #hp_intro a, #quiz_header, .priority_position, .your_priority_position, .profile_name, .profile_name a, h1, h2, h3, h4 {
-    color: #3B5998;
+    color: #444;
 }
 
 div#content_text table {
     width: 100%;
 }
+
+/* hide third column on priorities show */
+.extras {
+    display: none;
+    padding-left: 0 !important;
+}
+
+
+body.priorities-top_points #content_text {background:#f7f7f7;}
+div.best-points {background:#fff;}
 

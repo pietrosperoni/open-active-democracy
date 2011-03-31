@@ -25,8 +25,9 @@
   <%= render :partial=>"priorities/fb_og_tags" %>
 <% end %>
 <%= tr8n_scripts_tag %>
+
 </head>
-<body>
+<body class="<%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
 
 <%= csrf_meta_tag %>
 
@@ -39,7 +40,7 @@
         </td>
         <td>
 
-                <%= render :partial => "ads/pick" %>
+               <%= render :partial => "ads/pick" %>
               </td>
             </tr>
           </table>
@@ -62,6 +63,6 @@
 <%= render :partial => "shared/analytics" %>
 <%= render :partial => "shared/facebook_footer" %>
 <%= render :partial => "shared/google_translate" %>
-
+<!-- <%= h(controller.controller_name) %> <%= h(controller.action_name) %> -->
 </body>
 </html>
