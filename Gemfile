@@ -29,8 +29,8 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
-#gem "ruby-openid"
-#gem "rack-openid"
+gem "ruby-openid"
+gem "rack-openid"
 gem 'kgio'
 gem 'whenever', :require => false
 gem 'geoip'
