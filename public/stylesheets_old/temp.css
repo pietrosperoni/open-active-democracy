@@ -1,0 +1,102 @@
+body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat-y; background-position: center top;
+		
+		font-family: Lucida Grande, arial, helvetica, sans-serif; 
+		margin:0px 
+		
+		 }
+
+#header table {width:100px;overflow:hidden}
+
+
+#ads {width: 335px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:10px;}
+#ads h2 {border:none;}
+
+
+
+div.column .ui-widget-content {
+background-color:#fafafa;
+    background-image: url("../images/new/portal_bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+    margin: 0 0 10px;
+width: 345px;
+}
+
+
+div.column .portlet-header {
+  color: #666666;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 5px 0;
+    text-transform: uppercase;
+    width: 335px;
+}
+.column_id_1 .portlet {
+    border-bottom: 1px solid #EEEEEE;
+
+    padding: 5px;
+}
+.column_id_2 .portlet {
+    border-bottom: 1px solid #EEEEEE;
+ margin: 0 5px !important;
+    padding: 5px;
+}
+
+.activity_border, .activity_hidden {
+
+   /* width: 335px;*/
+}
+
+
+/*
+div#content_text table {
+    margin: 0;
+    padding: 0;
+}
+*/
+
+
+
+
+
+#sidebar {
+
+    width: 216px;
+}
+
+ul#menu li .tab_header a {
+    border: 0px solid #DDDDDD;
+    font-weight: normal !important;
+    letter-spacing: normal !important;
+    margin-right: 0;
+    padding: 3px 13px 3px 10px;
+    text-decoration: none;
+}
+
+ul#menu li .tab_header a, ul#menu li.hovering div.tab_body, ul#menu_sub li .tab_header a, ul#menu_sub li.hovering div.tab_body, ul#menu_third li .tab_header a, ul#menu_third li.hovering div.tab_body, ul#priority_menu li.hovering div.tab_body {
+    background-color: #fff;
+}
+
+#nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a, #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_0 li.tab0 .tab_header a, #nav_sub_1 li.tab1 .tab_header a, #nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a, #nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a, #nav_sub_8 li.tab8 .tab_header a, #nav_sub_9 li.tab9 .tab_header a, #nav_sub_10 li.tab10 .tab_header a, #nav_third_1 li.tab1 .tab_header a, #nav_third_2 li.tab2 .tab_header a, #nav_third_3 li.tab3 .tab_header a, #nav_third_4 li.tab4 .tab_header a, #nav_third_5 li.tab5 .tab_header a, #nav_third_6 li.tab6 .tab_header a, #nav_third_7 li.tab7 .tab_header a, #nav_third_8 li.tab8 .tab_header a, #nav_third_9 li.tab9 .tab_header a, #nav_third_10 li.tab10 .tab_header a, #nav_third_11 li.tab1 .tab_header a, #nav_third_12 li.tab2 .tab_header a, #nav_third_13 li.tab3 .tab_header a, #nav_third_14 li.tab4 .tab_header a {
+    color: #153978 !important;
+ 
+}
+
+#hp_intro, #hp_intro a, #quiz_header, .priority_position, .your_priority_position, .profile_name, .profile_name a, h1, h2, h3, h4 {
+    color: #444;
+}
+
+div#content_text table {
+    width: 100%;
+}
+
+/* hide third column on priorities show */
+.extras {
+    display: none;
+    padding-left: 0 !important;
+}
+
+
+body.priorities-top_points #content_text {background:#f7f7f7;}
+div.best-points {background:#fff;}
+

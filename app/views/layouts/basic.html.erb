@@ -12,7 +12,7 @@
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
 <%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
 <%= stylesheet_link_tag "/stylesheets_old/gnew" %>
-<%= stylesheet_link_tag "/stylesheets_old/partners" %>
+<%= stylesheet_link_tag "/stylesheets_old/temp" %>
 <% if controller_name == "users" %>
  <%= stylesheet_link_tag "/stylesheets_old/fb_invite_hack.css" %>
 <% end %>
@@ -25,8 +25,9 @@
   <%= render :partial=>"priorities/fb_og_tags" %>
 <% end %>
 <%= tr8n_scripts_tag %>
+
 </head>
-<body>
+<body class="<%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
 
 <%= csrf_meta_tag %>
 
@@ -34,28 +35,21 @@
 	<div id="header">
 	  <table>
 	    <tr>
-	      <td width="35%">
+	      <td>
           <%= render :partial => "shared/branding/your_priorities"%>
         </td>
-        <td width="65%" align="top" valing="top">
-          <table>
-            <tr align="center">
-              <td>
-                <%= render :partial => "ads/pick" %>
+        <td>
+
+               <%= render :partial => "ads/pick" %>
               </td>
             </tr>
           </table>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-            <%= flash_div :warning, :notice, :error %>
-        <td/>
-      </tr>          
-    </table>
+       
+
 	</div>
 	<div id="contentwrap">
-		<%= render :partial => "shared/menu" %>		
+		<%= render :partial => "shared/menu" %>
+<%= flash_div :warning, :notice, :error %>	
 		<div id="content_text">
 			<%= yield :layout %>
 		</div>
@@ -69,6 +63,6 @@
 <%= render :partial => "shared/analytics" %>
 <%= render :partial => "shared/facebook_footer" %>
 <%= render :partial => "shared/google_translate" %>
-
+<!-- <%= h(controller.controller_name) %> <%= h(controller.action_name) %> -->
 </body>
 </html>
