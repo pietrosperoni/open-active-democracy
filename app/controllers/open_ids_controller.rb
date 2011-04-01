@@ -39,8 +39,9 @@ class OpenIdsController < ApplicationController
 
             if user.save(false)
               user.activate!
+              user.reload
               self.current_user = user
-              flash[:notice] = tr("Welcome, {user_name}.", "controller/open_ids", :government_name => Government.current.name, :user_name => current_user.name)
+              flash[:notice] = tr("Welcome, {user_name}.", "controller/open_ids", :user_name => current_user.name)
               redirect_back_or_default('/')
             else
               flash[:error] = tr("Sign in from Google failed.", "controller/open_ids")
