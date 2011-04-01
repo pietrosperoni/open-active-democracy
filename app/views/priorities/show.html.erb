@@ -7,6 +7,7 @@
 <% else %>
 	<%= render :partial => "nav" %>
 <% end %>
+<p>
 <div id="priorities_container">
 	<% if @priority.has_change? %>
 		<%= render :partial => "changes/show", :locals => {:change => @priority.change}%>

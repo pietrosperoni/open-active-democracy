@@ -96,7 +96,27 @@ div#content_text table {
     padding-left: 0 !important;
 }
 
+body.Cpriorities #content_text{
+background-color: #FAFAFA;
+    background-image: url("../images/new/content-text-bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;padding: 10px;}
 
-body.priorities-top_points #content_text {background:#f7f7f7;}
+
+
+body.Cpriorities #content_text table {border-collapse: collapse;}
+body.priorities-show #content_text table, body.priorities-top_points #content_text table{border-collapse: separate;}
+body.Cpriorities #content_text table tbody tr
+{border-bottom:1px solid #ddd;}
+
+body.Cpriorities #content_text table tbody tr td table tbody tr
+{border-bottom:0px solid #cacaca;}
+
+
+body.Cpriorities .grid_41, body.Cpriorities .grid_6, body.Cpriorities .best-points {-moz-border-radius: 1em;border-radius:1em;border:1px solid #cacaca;background:#fff;padding:10px;}
+
+
 div.best-points {background:#fff;}
 
+.comment_box {min-height:45px}
+.comment_box img{padding:4px;}
