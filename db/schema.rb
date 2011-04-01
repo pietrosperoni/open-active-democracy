@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110331020205) do
+ActiveRecord::Schema.define(:version => 20110401160800) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -451,6 +451,7 @@ ActiveRecord::Schema.define(:version => 20110331020205) do
     t.string   "fav_icon_content_type",          :limit => 30
     t.integer  "fav_icon_file_size"
     t.datetime "fav_icon_updated_at"
+    t.boolean  "google_login_enabled",                          :default => false
   end
 
   add_index "governments", ["domain_name"], :name => "index_governments_on_domain_name"
