@@ -95,7 +95,7 @@ class PortalController < ApplicationController
 
   def default_container
     portlet_container = PortletContainer.filtered.find_by_default_admin(true)
-    portlet_container = PortletContainer.find_by_default_admin(true) unless portlet_container
+    portlet_container = PortletContainer.first unless portlet_container
     unless  portlet_container
       if current_user
         portlet_container = PortletContainer.new
