@@ -1,4 +1,5 @@
 <%= link_to :controller=>"priorities", :action=>"new" do %>
+<div class="addwrapper">
   <% if Government.current.layout == "better_reykjavik" %>
   <img src="/images/new/add-button.png" alt="" id="new_priority_image"/>
   <% else %>
@@ -6,5 +7,6 @@
       <%=tr("Create a new priority","Button")%>
     </div>
   <% end %>
+</div>
 <% end %>
 

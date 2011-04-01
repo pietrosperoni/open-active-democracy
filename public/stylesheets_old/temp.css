@@ -60,9 +60,11 @@ div#content_text table {
 
 
 #sidebar {
-
+    padding-top: 27px;
     width: 216px;
 }
+
+.addwrapper {margin-bottom:5px;}
 
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
@@ -132,3 +134,27 @@ div.best-points {background:#fff;}
 
 .comment_box {min-height:45px}
 .comment_box img{padding:4px;}
+
+
+#user_info_box {
+  
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1.4em;
+     width: 205px;
+padding: 5px;
+}
+#user_info_box a {
+  
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 1.4em;
+     width: 205px;
+}
+#language_selection_box {
+    border: 1px solid #DDDDDD;
+    margin-bottom: 7px;
+    margin-top: 5px;
+    padding: 5px;
+    width: 205px;
+}

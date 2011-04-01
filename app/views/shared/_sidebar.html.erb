@@ -1,5 +1,6 @@
 <div id="sidebar">
     <%= render :partial => "shared/search" %>
+<%= render :partial => "priorities/new_button" %>
     <%= render :partial => "shared/user_info" if logged_in? %>
     <%= render :partial => "shared/language_selection_master"%>
   <% if logged_in? %>
@@ -23,7 +24,7 @@
     <% end %>
   </div>
 
-  <%= render :partial => "priorities/new_button" %>
+  
 
   <% if logged_in? %>
     <div id="priority_column">
