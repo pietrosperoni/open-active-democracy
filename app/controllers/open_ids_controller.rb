@@ -33,9 +33,9 @@ class OpenIdsController < ApplicationController
           else
             user = User.new(:identifier_url => openid.display_identifier,
                             :email => ax.get_single('http://axschema.org/contact/email'),
-                            :first_name => ax.get_single('http://axschema.org/namePerson/first'),
-                            :last_name => ax.get_single('http://axschema.org/namePerson/last'),
-                            :login => "#{ax.get_single('http://axschema.org/namePerson/first')} #{ax.get_single('http://axschema.org/namePerson/last')}".strip)
+                            :first_name => ax.get_single('http://axschema.org/namePerson/first').force_encoding("UTF-8"),
+                            :last_name => ax.get_single('http://axschema.org/namePerson/last').force_encoding("UTF-8"),
+                            :login => "#{ax.get_single('http://axschema.org/namePerson/first').force_encoding("UTF-8")} #{ax.get_single('http://axschema.org/namePerson/last').force_encoding("UTF-8")}".strip)
 
             if user.save(false)
               self.current_user = user

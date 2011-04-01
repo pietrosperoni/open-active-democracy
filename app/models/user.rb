@@ -157,9 +157,9 @@ class User < ActiveRecord::Base
   
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
-    resend_activation if self.has_email? and self.is_pending?
+    resend_activation if self.has_email? and self.is_pending? # and not self.identifier_url
   end
-  
+
   def check_contacts
     if self.has_email?
       existing_contacts = UserContact.find(:all, :conditions => ["email = ? and other_user_id is null",email], :order => "created_at asc")
