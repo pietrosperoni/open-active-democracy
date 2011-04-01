@@ -146,6 +146,16 @@ class User < ActiveRecord::Base
     false
   end
   
+  def needs_activation?
+    if self.status == "active"
+      false
+    elsif self.facebook_uid or self.identifier_url
+      false
+    else
+      true
+    end
+  end
+
   def geoblocking_disabled_for?(partner)
     self.geoblocking_open_countries.split.each do |user_country|
       partner.geoblocking_open_countries.split.each do |partner_country|
