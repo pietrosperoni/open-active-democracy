@@ -80,7 +80,7 @@ module OpenID
 
     private
     def setup_encoding(response)
-      return unless defined?(::Encoding::ASCII_8BIT)
+      return unless defined?(::Encoding::UTF_8)
       charset = response.type_params["charset"]
       return if charset.nil?
       encoding = nil
@@ -88,7 +88,7 @@ module OpenID
         encoding = Encoding.find(charset)
       rescue ArgumentError
       end
-      encoding ||= Encoding::ASCII_8BIT
+      encoding ||= ::Encoding::UTF_8
       body = response.body
       if body.respond_to?(:force_encoding)
         body.force_encoding(encoding)

@@ -38,6 +38,7 @@ class OpenIdsController < ApplicationController
                             :login => "#{ax.get_single('http://axschema.org/namePerson/first')} #{ax.get_single('http://axschema.org/namePerson/last')}".strip)
 
             if user.save(false)
+              user.activate!
               self.current_user = user
               flash[:notice] = tr("Welcome, {user_name}.", "controller/open_ids", :government_name => Government.current.name, :user_name => current_user.name)
               redirect_back_or_default('/')
