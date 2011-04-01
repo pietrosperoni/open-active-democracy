@@ -300,6 +300,8 @@ OpenActiveDemocracy::Application.routes.draw do
     end
   end
 
+  resource :open_id
+  
   resources :priority_processes
   resources :process_speech_master_videos
   resources :process_speech_videos
@@ -322,6 +324,7 @@ OpenActiveDemocracy::Application.routes.draw do
   match '/new' => 'priorities#new'
   match '/controversial' => 'priorities#controversial'
   match '/vote/:action/:code' => 'vote#index'
+  match '/welcome' => 'home#index'
   match '/search' => 'searches#index'
   match '/splash' => 'splash#index'
   match '/issues' => 'issues#index'

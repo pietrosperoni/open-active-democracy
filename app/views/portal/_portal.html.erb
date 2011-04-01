@@ -1,7 +1,15 @@
 <%# Copyright (C) 2009,2010 Róbert Viðar Bjarnason %>
 <%# License: http://www.gnu.org/licenses/agpl-3.0.txt %>
-<% ["1","2"].each do |id_name|%>
-  <div id="<%=id_name%>" class="column ui-sortable column_id_<%=id_name%>" unselectable="on" style="-moz-user-select: none;">
-    <%= render(:partial => "column", :locals=>{:column_number=>id_name.to_i}) %>
-  </div>
+<% if Priority.filtered.count == 0 %>
+<br>
+<h2><%=tr("No priorities have been created. Be the first to create a priority for your country!","portal")%></h2>
+<br>
+<%= render :partial => "priorities/new_button" %>
+<br>
+<% else %>
+  <% ["1","2"].each do |id_name|%>
+    <div id="<%=id_name%>" class="column ui-sortable column_id_<%=id_name%>" unselectable="on" style="-moz-user-select: none;">
+      <%= render(:partial => "column", :locals=>{:column_number=>id_name.to_i}) %>
+    </div>
+  <% end %>
 <% end %>

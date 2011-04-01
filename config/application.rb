@@ -2,6 +2,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'rack/openid'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -48,6 +49,8 @@ module OpenActiveDemocracy
   
     # Make Active Record use UTC-base instead of local time
     # config.active_record.default_timezone = :utc
+
+    config.middleware.use 'Rack::OpenID'
 
     config.action_view.javascript_expansions[:defaults] = %w(jquery rails)  
 

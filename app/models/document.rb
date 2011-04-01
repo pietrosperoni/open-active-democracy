@@ -320,7 +320,11 @@ class Document < ActiveRecord::Base
   end
 
   def show_url
-    Government.current.homepage_url + 'documents/' + to_param
+    if self.partner_id
+      Government.current.homepage_url(self.partner) + 'documents/' + to_param
+    else
+      Government.current.homepage_url + 'documents/' + to_param
+    end
   end
 
   auto_html_for(:content) do

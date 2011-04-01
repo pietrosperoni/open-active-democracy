@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110328002042) do
+ActiveRecord::Schema.define(:version => 20110331020205) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -586,6 +586,7 @@ ActiveRecord::Schema.define(:version => 20110328002042) do
     t.boolean  "geoblocking_enabled",                       :default => false
     t.string   "geoblocking_open_countries",                :default => ""
     t.string   "default_locale"
+    t.integer  "iso_country_id"
   end
 
   add_index "partners", ["short_name"], :name => "short_name"
@@ -1110,6 +1111,20 @@ ActiveRecord::Schema.define(:version => 20110328002042) do
   add_index "tr8n_ip_locations", ["high"], :name => "index_tr8n_ip_locations_on_high"
   add_index "tr8n_ip_locations", ["low"], :name => "index_tr8n_ip_locations_on_low"
 
+  create_table "tr8n_iso_countries", :force => true do |t|
+    t.string   "code",                 :null => false
+    t.string   "country_english_name", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tr8n_iso_countries", ["code"], :name => "index_tr8n_iso_countries_on_code"
+
+  create_table "tr8n_iso_countries_tr8n_languages", :id => false, :force => true do |t|
+    t.integer "tr8n_iso_country_id"
+    t.integer "tr8n_language_id"
+  end
+
   create_table "tr8n_language_case_rules", :force => true do |t|
     t.integer  "language_case_id", :null => false
     t.integer  "language_id"
@@ -1603,9 +1618,11 @@ ActiveRecord::Schema.define(:version => 20110328002042) do
     t.integer  "reports_interval"
     t.datetime "last_sent_report"
     t.string   "geoblocking_open_countries",                  :default => ""
+    t.string   "identifier_url"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
+  add_index "users", ["identifier_url"], :name => "index_users_on_identifier_url"
   add_index "users", ["partner_id"], :name => "user_partner_id"
   add_index "users", ["rss_code"], :name => "index_users_on_rss_code"
   add_index "users", ["status"], :name => "status"

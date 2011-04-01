@@ -54,7 +54,28 @@ def create_priority_from_row(row,current_user,partner)
   end    
 end
 
+CODE_TO_SHORTNAME = {"AE"=>"uae", "LY"=>"lybia", "VA"=>"vatican",
+                     "PS"=>"ps", "GB"=>"uk", "SY"=>"syria", "RU"=>"russia",
+                     "MD"=>"moldova", "LA"=>"lao" }
 namespace :utils do
+  desc "Create partners from iso countries"
+  task :create_partners_from_iso => :environment do
+    Tr8n::IsoCountry.all.each do |country|
+      p=Partner.new
+      p.name = country.country_english_name
+      p.geoblocking_enabled = true
+      p.geoblocking_open_countries = country.code.downcase
+      if CODE_TO_SHORTNAME[country.code]
+        p.short_name = CODE_TO_SHORTNAME[country.code]
+      else
+        p.short_name = country.country_english_name.downcase.gsub(" ","-").gsub(",","").gsub("(","").gsub(")","").gsub("'","").gsub(",","").gsub(".","")
+      end
+      puts p.short_name
+      p.iso_country_id = country.id
+      p.save unless Partner.find_by_iso_country_id(country.id)
+    end
+  end
+
   desc "Dump database to tmp"
   task :dump_db => :environment do
     config = Rails.application.config.database_configuration

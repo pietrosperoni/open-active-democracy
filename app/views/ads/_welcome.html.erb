@@ -1,4 +1,4 @@
-<% session[:have_shown_welcome] = true %>
+<% session[:have_shown_welcome] = true unless defined?(show_always) %>
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
   <td valign="top" style="padding: 15px;">

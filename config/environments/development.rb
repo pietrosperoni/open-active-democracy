@@ -24,5 +24,5 @@ OpenActiveDemocracy::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   config.cache_store = :dalli_store, '127.0.0.1:11211', { :namespace => "oad_3_#{Rails.env}_#{Rails.application.config.database_configuration[Rails.env]["git_branch"]}", 
-                                                          :expires_in => 2.minute, :compress => true, :compress_threshold => 64*1024 }
+                                                          :compress => true, :compress_threshold => 64*1024 }
 end

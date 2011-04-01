@@ -8,7 +8,7 @@
 
 # Create Categories
 
-if false
+if true
   Category.create(:name=>"Welfare")
   Category.create(:name=>"Law")
   Category.create(:name=>"Arts")
@@ -32,6 +32,23 @@ else
   Category.create(:name=>"Localization", :partner_id=>partner.id)
   Category.create(:name=>"Data sources", :partner_id=>partner.id)
 end
+
+p=Partner.new
+p.name = "The European Union and EEA"
+p.short_name = "eu"
+p.geoblocking_enabled = true
+p.geoblocking_open_countries = Tr8n::IsoCountry::EU_AND_EEA_COUNTRIES.join(",")
+p.save
+
+p=Partner.new
+p.name = "Development"
+p.short_name = "dev"
+p.save
+
+p=Partner.new
+p.name = "The World"
+p.short_name = "world"
+p.save
 
 # Create Portlet Templates
 pc=PortletTemplateCategory.new
