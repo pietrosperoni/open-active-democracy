@@ -30,6 +30,7 @@ gem 'nokogiri'
 #   gem 'webrat'
 # end
 gem "ruby-openid"
+#gem 'ruby-openid', :git => 'git://github.com/rbjarnason/ruby-openid.git', :require => 'ruby-openid'
 gem "rack-openid"
 gem 'kgio'
 gem 'whenever', :require => false
