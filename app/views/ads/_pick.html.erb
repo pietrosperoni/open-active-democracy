@@ -1,5 +1,7 @@
 <% unless session[:have_shown_welcome] %>
+  <% unless Government.current.layout=="better_reykjavik"%>
     <div id="ads"><%= render :partial => "ads/welcome"%></div>
+  <% end %>
 <% else %>
   <% if logged_in? %>  
   	<% ad = current_user.pick_ad(current_priority_ids) %>
@@ -8,16 +10,12 @@
   		<%= render :partial => "ads/show", :locals => {:ad => ad }%>
   	</div></div>
   	<% end %>
-  	
   <% else %>
-    
     <% ad = Ad.active.filtered.most_paid.by_random.first %>
     <% if ad %>
      <div id="ads"><div id="notification_show">
       <%= render :partial => "ads/show", :locals => {:ad => ad }%>
     </div></div>
     <% end %>
-  
   <% end %>
 <% end %>
-
