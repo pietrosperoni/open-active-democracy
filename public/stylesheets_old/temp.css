@@ -96,7 +96,12 @@ div#content_text table {
     padding-left: 0 !important;
 }
 
-body.Cpriorities #content_text{
+body.Cpriorities #content_text,
+body.Cpoints #content_text,
+body.Cbriefing #content_text,
+body.Cnews #content_text,
+body.Cissues #content_text
+{
 background-color: #FAFAFA;
     background-image: url("../images/new/content-text-bg.png") !important;
     background-position: left top !important;
