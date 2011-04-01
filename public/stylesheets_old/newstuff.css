@@ -111,13 +111,12 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #branding_text_header {
-  margin-left: 12px;
-  margin-top: 7px;
+  margin-left: 8px;
+  margin-top: 12px;
   font-family: sans-serif;
   font-style: normal;
-  font-variant: small-caps;
   font-weight: normal;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 100%;
   word-spacing: normal;
   letter-spacing: normal;
@@ -128,12 +127,13 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #branding_text_sub {
-  margin-left: 12px;
+  margin-left: 15px;
+  color: #999;
   font-family: sans-serif;
   font-style: normal;
   font-variant: small-caps;
-  font-weight: normal;
-  font-size: 11px;
+  font-weight: bold;
+  font-size: 16px;
   line-height: 100%;
   word-spacing: normal;
   letter-spacing: normal;
@@ -708,7 +708,7 @@ background-color:#fff;
 border: 1px solid #ddd !important;
 color:#444444;
 margin-bottom: 10px;
-margin-top: 15px;
+margin-top: 0px;
 }
 
 #login, #intro, #buzz_box {

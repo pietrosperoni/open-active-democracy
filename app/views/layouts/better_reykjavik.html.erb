@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
-
   <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%= @page_title || tr(current_government.name,"Name from database") %></title>
     <%= javascript_include_tag :defaults %>
@@ -26,13 +25,13 @@
     <% end %>
     <%= tr8n_scripts_tag %>
   </head>
-  <body class="C<%= h(controller.controller_name) %> <%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
+  <body class="<%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
     <%= csrf_meta_tag %>
     <div id="backgroundwrap">
       <div id="header">
         <table>
           <tr>
-            <td><%= render :partial => "shared/branding/your_priorities"%></td>
+            <td><%= render :partial => "shared/branding/better_reykjavik"%></td>
             <td><%= render :partial => "ads/pick" %></td>
           </tr>
         </table>
@@ -54,5 +53,4 @@
     <%= render :partial => "shared/google_translate" %>
     <!-- <%= h(controller.controller_name) %> <%= h(controller.action_name) %> -->
   </body>
-
 </html>

@@ -5,7 +5,7 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 		
 		 }
 
-#header table {width:100px;overflow:hidden}
+/* #header table {width:100px;overflow:hidden} */
 
 
 #ads {width: 335px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:10px;}
