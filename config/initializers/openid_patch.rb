@@ -1,4 +1,22 @@
 module OpenID
+  # Stuff to remove before we start looking for tags
+  REMOVED_RE = /
+    # Comments
+    <!--.*?-->
+
+    # CDATA blocks
+  | <!\[CDATA\[.*?\]\]>
+
+    # script blocks
+  | <script\b
+
+    # make sure script is not an XML namespace
+    (?!:)
+
+    [^>]*>.*?<\/script>
+
+  /mix
+  
   class StandardFetcher
 
     def fetch(url, body=nil, headers=nil, redirect_limit=REDIRECT_LIMIT)
