@@ -340,6 +340,8 @@ ul#menu li .tab_body {
 #nav_sub {
 	z-index: -1;	
 	font-size: 12px;	
+	padding-top: 3px;
+	padding-bottom: 2px;
 }
 ul#menu_sub { 
 	background-color: #fff;
@@ -380,6 +382,7 @@ ul#menu_sub li.mega .tab_header a {
 	z-index: -1;	
 	font-size: 11px;
 	margin-top: 2px;
+  margin-bottom: 4px;
 }
 
 
