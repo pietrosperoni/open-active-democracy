@@ -93,7 +93,7 @@ module Contacts
       timestamp = Time.now.utc.to_i
       path.sub!(/#ts/, timestamp.to_s)
       
-      signature = MD5.hexdigest(path + @secret)
+      signature = Digest::MD5.hexdigest(path + @secret)
       return AUTH_DOMAIN + "#{path}&sig=#{signature}"
     end
 
@@ -135,7 +135,7 @@ module Contacts
       path_without_sig = $1
       sig = $2
 
-      if sig == MD5.hexdigest(path_without_sig + @secret)
+      if sig == Digest::MD5.hexdigest(path_without_sig + @secret)
         path.match(/token=(.+?)&/)
         @token = $1
         return true
@@ -174,7 +174,7 @@ module Contacts
       timestamp = Time.now.utc.to_i
       path.sub!(/#ts/, timestamp.to_s)
 
-      signature = MD5.hexdigest(path + @secret)
+      signature = Digest::MD5.hexdigest(path + @secret)
       return AUTH_DOMAIN + "#{path}&sig=#{signature}"
     end
 
