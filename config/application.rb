@@ -81,4 +81,7 @@ module OpenActiveDemocracy
   
   require 'timeout'
   require 'authenticated_system'
+  
+  require 'load_windows_contacts'
+  require 'load_yahoo_contacts'
 end
