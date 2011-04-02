@@ -18,9 +18,6 @@ class LoadWindowsContacts
     end
     wl = Contacts::WindowsLive.new
     wcontacts = wl.contacts(path)
-    if wcontacts.empty?
-      break 
-    end
     for c in wcontacts
       begin
         if c.email
