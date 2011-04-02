@@ -835,7 +835,7 @@ class User < ActiveRecord::Base
   end
 
   def access_secret
-    nil
+    self.twitter_secret
   end
   
   if TwitterAuth.oauth?
