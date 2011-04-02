@@ -2,7 +2,7 @@ require 'contacts'
 
 require 'rubygems'
 require 'hpricot'
-require 'md5'
+require 'digest/md5'
 require 'net/https'
 require 'uri'
 require 'yaml'

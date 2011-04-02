@@ -106,8 +106,8 @@ class ImportController < ApplicationController
           format.html { redirect_to members_user_contacts(current_user.id) }
           format.js { redirect_from_facebox(members_user_contacts(current_user.id)) }
         else
-          format.html { redirect_to "users/#{current_user.to_param}/user_contacts/not_invited" }
-          format.js { redirect_from_facebox "users/#{current_user.to_param}/user_contacts/not_invited" }
+          format.html { redirect_to "/users/#{current_user.to_param}/user_contacts/not_invited" }
+          format.js { redirect_from_facebox "/users/#{current_user.to_param}/user_contacts/not_invited" }
         end
       else
         format.html
