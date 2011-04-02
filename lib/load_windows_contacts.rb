@@ -17,7 +17,7 @@ class LoadWindowsContacts
       @user.save(:validate => false)
     end
     wl = Contacts::WindowsLive.new
-    wcontacts = wl.contacts(path)
+    wcontacts = wl.contacts(@path)
     for c in wcontacts
       begin
         if c.email
