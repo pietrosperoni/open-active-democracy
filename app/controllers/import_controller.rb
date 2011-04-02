@@ -95,10 +95,10 @@ class ImportController < ApplicationController
         end
       end
       Rails.logger.debug("Before redirect to import")
-      return redirect_to(:host=>base_url_w_partner, :action => 'import', :token => token)
+      return redirect_to(:host=>Government.current.base_url_w_partner, :action => 'import', :token => token)
     else
       Rails.logger.error("Authorise_google failed")
-      redirect_to :action => "import_status", :host=>base_url_w_partner, :notice => tr("Importing your gmail contacts failed.","import")
+      redirect_to :action => "import_status", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your gmail contacts failed.","import")
     end
   end
    
