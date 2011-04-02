@@ -74,14 +74,15 @@ class ImportController < ApplicationController
   def authorise_google
     Partner.current = Partner.find(session[:google_import_partner_id]) if session[:google_import_partner_id]
     token = params[:token]
+    Rails.logger.debug("Before https")
     uri = URI.parse("https://www.google.com")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     path = '/accounts/AuthSubSessionToken'
     headers = {'Authorization' => "AuthSub token=#{token}"}
-    
-   
+    Rails.logger.debug("After https setup")
+
     #GET REQUEST ON URI WITH SPECIFIED PATH...
     resp, data = http.get(path, headers)
     #SPLIT OUT TOKEN FROM RESPONSE DATA.
