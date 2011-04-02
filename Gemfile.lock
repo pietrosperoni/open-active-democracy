@@ -8,6 +8,15 @@ GIT
       riddle (>= 1.2.2)
 
 GIT
+  remote: git://github.com/jaikoo/twitter-auth.git
+  revision: 1b3f4e753cb7c694f2042f4b2f6547d66fe460c9
+  branch: rails_3
+  specs:
+    twitter-auth (0.1.22)
+      ezcrypto (>= 0.7.2)
+      oauth (>= 0.3.1)
+
+GIT
   remote: git://github.com/rbjarnason/rails-dev-boost.git
   revision: 4f7ad03b30a3bc93c1a63c4ac1e98e4427447435
   specs:
@@ -61,13 +70,14 @@ GEM
       net-ssh-gateway
       net-ssh-gateway (>= 1.0.0)
     crack (0.1.8)
-    daemons (1.0.10)
+    daemons (1.1.2)
     dalli (1.0.3)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    ezcrypto (0.7.2)
     facebooker2 (0.0.11)
       mogli (>= 0.0.12)
       ruby-hmac
@@ -178,5 +188,6 @@ DEPENDENCIES
   ruby-openid
   sunlight (>= 0.9)
   thinking-sphinx!
+  twitter-auth!
   whenever
   will_paginate (~> 3.0.beta)
