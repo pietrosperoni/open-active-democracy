@@ -39,9 +39,22 @@
 		            :confirm => escape_t(tr("Delete from this page?","Ajax")) %>
 		<% end %>
 		</div>
-		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
-			<%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
-		<% end %>
+		<div class="user_pic_and_activity" style="vertical-align: top">
+  		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
+  		  <table style="vertical-align: top">
+  		    <tr>
+            <% if activity.user -%>
+              <td width="40x" style="vertical-align: top">
+                <%= render :partial => "users/pic_35", :locals => {:user => activity.user} %>
+              </td>
+            <% end -%>
+            <td>
+      			  <%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
+      			</td>
+  			  </tr>
+  			  </table>
+  		<% end %>
+    </div>
 		<span class="small"><%= time_ago(activity.created_at) %></span>
 
 		<% if activity.class != ActivityCommentParticipant %>
