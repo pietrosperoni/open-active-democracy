@@ -186,7 +186,7 @@ module ApplicationHelper
 		  s += number_to_percentage(user_last, :precision => precision)
 		  s += '</div>'
 		end
-		return s
+		return s.html_safe
   end
 
   def official_status(priority)

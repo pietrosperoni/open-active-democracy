@@ -8,49 +8,34 @@ class ImportController < ApplicationController
   before_filter :login_required
   protect_from_forgery :except => :windows
   
-  def google
-    if not current_user.attribute_present?("google_token") and not params[:token]
-      out_url = Contacts::Google.authentication_url(url_for(:only_path => false, :controller => "import", :action => "google"), :session => true)
-      Rails.logger.debug("Google import #{out_url}")
-      redirect_to out_url
-      return
-    elsif params[:token]
-      token = Contacts::Google.session_token(params[:token])      
-      current_user.update_attribute(:google_token,token)
-    end
-    Rails.logger.debug("IM HERE!!!!")
-    @user = User.find(current_user.id)
-    @user.is_importing_contacts = true
-    @user.imported_contacts_count = 0
-    @user.save(:validate => false)
-    Delayed::Job.enqueue LoadGoogleContacts.new(@user.id), 5
-    redirect_to :action => "import_status"
-  end
-  
   def yahoo
     if not request.request_uri.include?('token')
+      session[:import_partner_id] = Partner.current.id if Partner.current
       redirect_to Contacts::Yahoo.new.get_authentication_url
       return
     end
+    Partner.current = Partner.find(session[:import_partner_id]) if session[:import_partner_id]
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.request_uri), 5
-    redirect_to :action => "import_status"
+    redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"
   end  
 
   def windows
     if not request.post?
+      session[:import_partner_id] = Partner.current.id if Partner.current
       redirect_to Contacts::WindowsLive.new.get_authentication_url 
       return
     end
+    Partner.current = Partner.find(session[:import_partner_id]) if session[:import_partner_id]
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,request.raw_post), 5
-    redirect_to :action => "import_status"    
+    redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
   end
 
   # methods below from http://rtdptech.com/2010/12/importing-gmail-contacts-list-to-rails-application/
@@ -65,12 +50,12 @@ class ImportController < ApplicationController
     session_param = "1"
     root_url = "https://www.google.com/accounts/AuthSubRequest"
     query_string = "?scope=#{scope_param}&session=#{session_param}&next=#{next_param}"
-    session[:google_import_partner_id] = Partner.current.id if Partner.current
+    session[:import_partner_id] = Partner.current.id if Partner.current
     redirect_to root_url + query_string
   end
    
   def authorise_google
-    Partner.current = Partner.find(session[:google_import_partner_id]) if session[:google_import_partner_id]
+    Partner.current = Partner.find(session[:import_partner_id]) if session[:import_partner_id]
     token = params[:token]
     Rails.logger.debug("Before https")
     uri = URI.parse("https://www.google.com")
