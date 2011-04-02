@@ -62,7 +62,7 @@ class ImportController < ApplicationController
     # scope - Indicates that the application is requesting a token to access contacts feeds.
     # secure - Indicates whether the client is requesting a secure token.
     # session - Indicates whether the token returned can be exchanged for a multi-use (session) token.
-    next_param = PLANNER_HOST.to_s + authorise_imported_contacts_path.to_s
+    next_param = Government.current.show_url+ 'import/authorize'
     scope_param = "https://www.google.com/m8/feeds/"
     session_param = "1"
     root_url = "https://www.google.com/accounts/AuthSubRequest"
@@ -89,14 +89,14 @@ class ImportController < ApplicationController
     if resp.code == "200"
       token = ''
       data.split.each do |str|
-      if not (str =~ /Token=/).nil?
-        token = str.gsub(/Token=/, '')
+        if not (str =~ /Token=/).nil?
+          token = str.gsub(/Token=/, '')
+        end
       end
+      return redirect_to(:action => 'import', :token => token)
+    else
+      redirect_to :action => "import_status", :notice => tr("Importing your gmail contacts failed","import")
     end
-  return redirect_to(:action => 'import', :token => token)
-  else
-  redirect_to root_url , :notice => "fail"
-  end
   end
    
   #USING PERMANENT TOKEN IN THIS ACTION TO GET USER CONTACT DATA.
