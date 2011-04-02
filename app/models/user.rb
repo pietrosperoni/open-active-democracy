@@ -830,19 +830,19 @@ class User < ActiveRecord::Base
     self.first_name = names.join(' ')
   end
 
-  if TwitterAuth.oauth?
-    include TwitterAuth::OauthUser
-  else
-    include TwitterAuth::BasicUser
-  end
+#  if TwitterAuth.oauth?
+#    include TwitterAuth::OauthUser
+#  else
+#     include TwitterAuth::BasicUser
+#  end
 
-  def twitter
-    if TwitterAuth.oauth?
-      TwitterAuth::Dispatcher::Oauth.new(self)
-    else
-      TwitterAuth::Dispatcher::Basic.new(self)
-    end
-  end
+#  def twitter
+#    if TwitterAuth.oauth?
+#      TwitterAuth::Dispatcher::Oauth.new(self)
+#    else
+#      TwitterAuth::Dispatcher::Basic.new(self)
+#    end
+#  end
 
   def twitter_followers_count
     return 0 unless attribute_present?("twitter_token")
