@@ -80,10 +80,13 @@ class ImportController < ApplicationController
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     path = '/accounts/AuthSubSessionToken'
     headers = {'Authorization' => "AuthSub token=#{token}"}
+    
    
     #GET REQUEST ON URI WITH SPECIFIED PATH...
     resp, data = http.get(path, headers)
     #SPLIT OUT TOKEN FROM RESPONSE DATA.
+    Rails.logger.debug(resp)
+    Rails.logger.debug(data)
     if resp.code == "200"
       token = ''
       data.split.each do |str|
@@ -91,8 +94,10 @@ class ImportController < ApplicationController
           token = str.gsub(/Token=/, '')
         end
       end
+      Rails.logger.debug("Before redirect to import")
       return redirect_to(:host=>base_url_w_partner, :action => 'import', :token => token)
     else
+      Rails.logger.error("Authorise_google failed")
       redirect_to :action => "import_status", :host=>base_url_w_partner, :notice => tr("Importing your gmail contacts failed.","import")
     end
   end
