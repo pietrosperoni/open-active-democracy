@@ -833,6 +833,10 @@ class User < ActiveRecord::Base
   def access_token
     self.twitter_token
   end
+
+  def access_secret
+    nil
+  end
   
   if TwitterAuth.oauth?
     include TwitterAuth::OauthUser
