@@ -62,7 +62,7 @@ class ImportController < ApplicationController
     # scope - Indicates that the application is requesting a token to access contacts feeds.
     # secure - Indicates whether the client is requesting a secure token.
     # session - Indicates whether the token returned can be exchanged for a multi-use (session) token.
-    next_param = Government.current.show_url+ 'import/authorize'
+    next_param = Government.current.homepage_url+ 'import/authorise'
     scope_param = "https://www.google.com/m8/feeds/"
     session_param = "1"
     root_url = "https://www.google.com/accounts/AuthSubRequest"
@@ -95,7 +95,7 @@ class ImportController < ApplicationController
       end
       return redirect_to(:action => 'import', :token => token)
     else
-      redirect_to :action => "import_status", :notice => tr("Importing your gmail contacts failed","import")
+      redirect_to :action => "import_status", :notice => tr("Importing your gmail contacts failed.","import")
     end
   end
    
