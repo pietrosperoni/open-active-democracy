@@ -52,8 +52,8 @@ GEM
     capistrano (2.5.20)
       highline
       highline
-      net-scp (>= 1.0.0)
       net-scp
+      net-scp (>= 1.0.0)
       net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
@@ -71,7 +71,6 @@ GEM
     facebooker2 (0.0.11)
       mogli (>= 0.0.12)
       ruby-hmac
-    gem_plugin (0.2.3)
     geoip (1.0.0)
     googlecharts (1.6.1)
     highline (1.6.1)
@@ -96,9 +95,6 @@ GEM
     mime-types (1.16)
     mogli (0.0.27)
       httparty (>= 0.4.3)
-    mongrel (1.2.0.pre2)
-      daemons (~> 1.0.10)
-      gem_plugin (~> 0.2.3)
     mysql2 (0.2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -170,7 +166,6 @@ DEPENDENCIES
   jquery-rails (>= 0.2.6)
   kgio
   mogli
-  mongrel (>= 1.2.0.pre2)
   mysql2
   newrelic_rpm
   nokogiri
