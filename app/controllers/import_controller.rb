@@ -54,9 +54,7 @@ class ImportController < ApplicationController
   end
 
   # methods below from http://rtdptech.com/2010/12/importing-gmail-contacts-list-to-rails-application/
-  #THIS METHOD TO SEND USER TO THE GOOGLE AUTHENTICATION PAGE.
   def authenticate_google
-    # initiate authentication w/ gmail
     # create url with url-encoded params to initiate connection with contacts api
     # next - The URL of the page that Google should redirect the user to after authentication.
     # scope - Indicates that the application is requesting a token to access contacts feeds.
@@ -97,16 +95,14 @@ class ImportController < ApplicationController
         end
       end
       Rails.logger.debug("Before redirect to import")
-      return redirect_to(:host=>Government.current.base_url_w_partner, :action => 'import', :token => token)
+      return redirect_to(:host=>Government.current.base_url_w_partner, :action => 'import_google', :token => token)
     else
       Rails.logger.error("Authorise_google failed")
-      redirect_to :action => "import_status", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your gmail contacts failed.","import")
+      redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your gmail contacts failed.","import")
     end
   end
    
-  #USING PERMANENT TOKEN IN THIS ACTION TO GET USER CONTACT DATA.
   def import_google
-    # GET http://www.google.com/m8/feeds/contacts/default/base
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
@@ -122,11 +118,11 @@ class ImportController < ApplicationController
       if not current_user.is_importing_contacts?
         flash[:notice] = tr("Finished loading contacts", "controller/import")
         if current_user.contacts_members_count > 0
-          format.html { redirect_to :action=>"members", :controller=>"user_contacts", :id=>current_user.id }
-          format.js { redirect_from_facebox(:action=>"members", :controller=>"user_contacts", :id=>current_user.id) }
+          format.html { redirect_to members_user_contacts(current_user.id) }
+          format.js { redirect_from_facebox(members_user_contacts(current_user.id)) }
         else
-          format.html { redirect_to :action=>"not_invited", :controller=>"user_contacts", :id=>current_user.id }
-          format.js { redirect_from_facebox(:action=>"not_invited", :controller=>"user_contacts", :id=>current_user.id) }          
+          format.html { redirect_to not_invited_user_contacts(current_user.id) }
+          format.js { redirect_from_facebox(not_invited_user_contacts(current_user.id)) }          
         end
       else
         format.html

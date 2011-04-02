@@ -59,8 +59,12 @@ class UserContact < ActiveRecord::Base
   def self.import_google(token,user_id)
     uri = URI.parse("https://www.google.com")
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    cert = File.read(Rails.root.join("config/yrprirsacert.pem"))
+    pem = File.read(Rails.root.join("config/yrprirsakey.pem"))
+    http.use_ssl = true 
+    http.cert = OpenSSL::X509::Certificate.new(cert) 
+    http.key = OpenSSL::PKey::RSA.new(pem) 
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER 
     path = "/m8/feeds/contacts/default/full?max-results=10000"
     headers = {'Authorization' => "AuthSub token=#{token}", 'GData-Version' => "3.0"}
     resp, data = http.get(path, headers)
