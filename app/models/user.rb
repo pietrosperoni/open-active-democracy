@@ -829,7 +829,11 @@ class User < ActiveRecord::Base
     self.last_name = names.pop
     self.first_name = names.join(' ')
   end
-
+  
+  def access_token
+    self.twitter_token
+  end
+  
   if TwitterAuth.oauth?
     include TwitterAuth::OauthUser
   else
