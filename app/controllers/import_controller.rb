@@ -77,8 +77,12 @@ class ImportController < ApplicationController
     Rails.logger.debug("Before https")
     uri = URI.parse("https://www.google.com")
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    cert = File.read(Rails.root.join("config/yrprirsacert.pem"))
+    pem = File.read(Rails.root.join("config/yrprirsakey.pem"))
+    http.use_ssl = true 
+    http.cert = OpenSSL::X509::Certificate.new(cert) 
+    http.key = OpenSSL::PKey::RSA.new(pem) 
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER 
     path = '/accounts/AuthSubSessionToken'
     headers = {'Authorization' => "AuthSub token=#{token}"}
     Rails.logger.debug("After https setup")
