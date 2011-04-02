@@ -55,27 +55,25 @@ class ImportController < ApplicationController
 
   # methods below from http://rtdptech.com/2010/12/importing-gmail-contacts-list-to-rails-application/
   #THIS METHOD TO SEND USER TO THE GOOGLE AUTHENTICATION PAGE.
-  def authenticate
+  def authenticate_google
     # initiate authentication w/ gmail
     # create url with url-encoded params to initiate connection with contacts api
     # next - The URL of the page that Google should redirect the user to after authentication.
     # scope - Indicates that the application is requesting a token to access contacts feeds.
     # secure - Indicates whether the client is requesting a secure token.
     # session - Indicates whether the token returned can be exchanged for a multi-use (session) token.
-    next_param = Government.current.homepage_url+ 'import/authorise'
+    next_param = 'http://' + Government.current.base_url + '/import/authorise_google'
     scope_param = "https://www.google.com/m8/feeds/"
     session_param = "1"
     root_url = "https://www.google.com/accounts/AuthSubRequest"
-    #TO FIND MORE AOBUT THESE PARAMTERS AND TEHRE MEANING SEE GOOGLE API DOCS.
     query_string = "?scope=#{scope_param}&session=#{session_param}&next=#{next_param}"
+    session[:google_import_partner_id] = Partner.current.id if Partner.current
     redirect_to root_url + query_string
   end
    
-  # YOU WILL BE REDIRECTED TO THIS ACTION AFTER COMPLETION OF AUTHENTICATION PROCESS WITH TEMPORARY SINGLE USE AUTH TOKEN.
-  def authorise
-    #FIRST SINGEL USE TOKEN WILL BE RECEIVED HERE..
+  def authorise_google
+    Partner.current = Partner.find(session[:google_import_partner_id]) if session[:google_import_partner_id]
     token = params[:token]
-    #PREPAIRING FOR SECOND REQUEST WITH AUTH TOKEN IN HEADER.. WHICH WILL BE EXCHANED FOR PERMANENT AUTH TOKEN.
     uri = URI.parse("https://www.google.com")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -93,14 +91,14 @@ class ImportController < ApplicationController
           token = str.gsub(/Token=/, '')
         end
       end
-      return redirect_to(:action => 'import', :token => token)
+      return redirect_to(:host=>base_url_w_partner, :action => 'import', :token => token)
     else
-      redirect_to :action => "import_status", :notice => tr("Importing your gmail contacts failed.","import")
+      redirect_to :action => "import_status", :host=>base_url_w_partner, :notice => tr("Importing your gmail contacts failed.","import")
     end
   end
    
   #USING PERMANENT TOKEN IN THIS ACTION TO GET USER CONTACT DATA.
-  def import
+  def import_google
     # GET http://www.google.com/m8/feeds/contacts/default/base
     @user = User.find(current_user.id)
     @user.is_importing_contacts = true
