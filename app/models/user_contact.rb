@@ -55,6 +55,54 @@ class UserContact < ActiveRecord::Base
 
   after_create :add_counts
   before_destroy :remove_counts
+  
+  def self.import_google(token,user_id)
+    uri = URI.parse("https://www.google.com")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    path = "/m8/feeds/contacts/default/full?max-results=10000"
+    headers = {'Authorization' => "AuthSub token=#{token}", 'GData-Version' => "3.0"}
+    resp, data = http.get(path, headers)
+
+    @user = User.where(:id=>user_id).first
+    offset = 0
+    if not @user.is_importing_contacts? or not @user.attribute_present?("imported_contacts_count") or @user.imported_contacts_count > 0
+      @user.is_importing_contacts = true
+      @user.imported_contacts_count = 0
+      @user.save(:validate => false)
+    end
+
+    xml = REXML::Document.new(data)
+    contacts = []
+    xml.elements.each('//entry') do |entry|
+      begin
+        name = entry.elements['title'].text
+        gd_email = entry.elements['gd:email']
+        if gd_email
+          email = gd_email.attributes['address']
+          contact = @user.contacts.find_by_email(email)
+          contact = @user.contacts.new unless contact
+          contact.name = name
+          contact.email = email
+          contact.other_user = User.find_by_email(contact.email)
+          if @user.followings_count > 0 and contact.other_user
+            contact.following = followings.find_by_other_user_id(contact.other_user_id)
+          end
+          contact.save(:validate => false)          
+          offset += 1
+          @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0
+        end
+      rescue
+        next
+      end
+    end
+    @user.calculate_contacts_count
+    @user.imported_contacts_count = offset
+    @user.is_importing_contacts = false
+    @user.google_crawled_at = Time.now    
+    @user.save(:validate => false)
+  end
 
   def add_counts
     return if attribute_present?("following_id") # already in the followings_count

@@ -102,28 +102,13 @@ class ImportController < ApplicationController
   #USING PERMANENT TOKEN IN THIS ACTION TO GET USER CONTACT DATA.
   def import
     # GET http://www.google.com/m8/feeds/contacts/default/base
-    token = params[:token]
-    uri = URI.parse("https://www.google.com")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    path = "/m8/feeds/contacts/default/full?max-results=10000"
-    headers = {'Authorization' => "AuthSub token=#{token}",
-    'GData-Version' => "3.0"}
-    resp, data = http.get(path, headers)
-    # extract the name and email address from the response data
-    # HERE USING REXML TO PARSE GOOGLE GIVEN XML DATA
-    xml = REXML::Document.new(data)
-    contacts = []
-    xml.elements.each('//entry') do |entry|
-      person = {}
-      person['name'] = entry.elements['title'].text
-      gd_email = entry.elements['gd:email']
-      person['email'] = gd_email.attributes['address'] if gd_email
-      @imported_contact = current_user.imported_contacts.create(person)
-    end
-    
-    redirect_to root_urL , :notice => "imported successfully"
+    @user = User.find(current_user.id)
+    @user.is_importing_contacts = true
+    @user.imported_contacts_count = 0
+    @user.save(:validate => false)
+
+    UserContact.delay.import_google(params[:token],@user.id)
+    redirect_to :action => "import_status"
   end
 
   def import_status

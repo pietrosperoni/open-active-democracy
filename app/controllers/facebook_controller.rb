@@ -8,7 +8,7 @@ class FacebookController < ApplicationController
     @user = User.find(current_user.id)
     @facebook_contacts = @user.contacts.active.facebook.collect{|c|c.facebook_uid}
     if current_facebook_user
-      app_users = facebook_session.user.friends
+      app_users = current_facebook_user.friends
       if app_users.any?
         count = 0
         @users = User.active.find(:all, :conditions => ["facebook_uid in (?)",app_users.collect{|u|u.id}.uniq.compact])
