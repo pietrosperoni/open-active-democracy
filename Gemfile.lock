@@ -8,15 +8,6 @@ GIT
       riddle (>= 1.2.2)
 
 GIT
-  remote: git://github.com/jaikoo/twitter-auth.git
-  revision: 1b3f4e753cb7c694f2042f4b2f6547d66fe460c9
-  branch: rails_3
-  specs:
-    twitter-auth (0.1.22)
-      ezcrypto (>= 0.7.2)
-      oauth (>= 0.3.1)
-
-GIT
   remote: git://github.com/rbjarnason/rails-dev-boost.git
   revision: 4f7ad03b30a3bc93c1a63c4ac1e98e4427447435
   specs:
@@ -61,8 +52,8 @@ GEM
     capistrano (2.5.20)
       highline
       highline
-      net-scp
       net-scp (>= 1.0.0)
+      net-scp
       net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
@@ -77,7 +68,6 @@ GEM
       daemons
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    ezcrypto (0.7.2)
     facebooker2 (0.0.11)
       mogli (>= 0.0.12)
       ruby-hmac
@@ -193,6 +183,5 @@ DEPENDENCIES
   ruby-openid
   sunlight (>= 0.9)
   thinking-sphinx!
-  twitter-auth!
   whenever
   will_paginate (~> 3.0.beta)
