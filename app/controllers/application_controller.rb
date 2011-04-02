@@ -121,7 +121,7 @@ class ApplicationController < ActionController::Base
       if (controller_name=="home" and action_name=="index") or 
          Rails.env.development? or 
          self.class.name.downcase.include?("tr8n") or
-         ["endorse","oppose"].include?(action_name)
+         ["endorse","oppose","authorise_google"].include?(action_name)
         @current_partner = nil
         Partner.current = @current_partner
         Rails.logger.info("No partner")

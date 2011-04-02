@@ -136,6 +136,8 @@ end
 
 task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/db/sphinx #{current_release}/db/sphinx"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/yrprirsakey.pem #{current_release}/config/yrprirsakey.pem"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/yrprirsacert.pem #{current_release}/config/yrprirsacert.pem"
   run "ln -s #{deploy_to}/#{shared_dir}/config/database.yml #{current_release}/config/database.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"

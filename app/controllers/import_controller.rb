@@ -86,10 +86,7 @@ class ImportController < ApplicationController
     path = '/accounts/AuthSubSessionToken'
     headers = {'Authorization' => "AuthSub token=#{token}"}
     Rails.logger.debug("After https setup")
-
-    #GET REQUEST ON URI WITH SPECIFIED PATH...
     resp, data = http.get(path, headers)
-    #SPLIT OUT TOKEN FROM RESPONSE DATA.
     Rails.logger.debug(resp)
     Rails.logger.debug(data)
     if resp.code == "200"
