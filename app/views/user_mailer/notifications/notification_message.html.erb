@@ -6,6 +6,6 @@
 
 <p><%= @notifiable.content %></p>
 
-<p><%=tr("You can answer here","email")%>: <%= @sender.profile_url+'/messages' %> </p>
+<p><%=tr("You can answer here","email")%>: <%= link_to @sender.profile_url+'/messages', @sender.profile_url+'/messages' %> </p>
 
 <%= render :partial=>"user_mailer/footer.html" %>

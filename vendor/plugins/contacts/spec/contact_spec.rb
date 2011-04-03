@@ -26,16 +26,4 @@ describe Contacts::Contact do
     end
   end
   
-  describe '#inspect' do
-    it "should be nice" do
-      @contact = Contacts::Contact.new('max@example.com', 'Max Power', 'maxpower')
-      @contact.inspect.should == '#<Contacts::Contact "Max Power" (max@example.com)>'
-    end
-    
-    it "should be nice without email" do
-      @contact = Contacts::Contact.new(nil, 'Max Power', 'maxpower')
-      @contact.inspect.should == '#<Contacts::Contact "Max Power">'
-    end
-  end
-  
 end

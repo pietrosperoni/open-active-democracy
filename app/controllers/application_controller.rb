@@ -152,6 +152,10 @@ class ApplicationController < ActionController::Base
         @geoblocked = false
       end
     end
+    unless session["have_shown_geoblock_warning_#{@country_code}"]
+      flash.now[:notice] = tr("This part of the website is only open for viewing in your country.","geoblocking")
+      session["have_shown_geoblock_warning_#{@country_code}"] = true
+    end
   end
   
   def current_locale

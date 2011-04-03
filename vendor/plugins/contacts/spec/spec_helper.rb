@@ -1,84 +1,20 @@
-require 'rubygems'
-gem 'rspec', '~> 1.1.3'
-require 'spec'
-gem 'mocha', '~> 0.9.0'
-require 'mocha'
-
-require 'cgi'
 require 'fake_web'
+
 FakeWeb.allow_net_connect = false
 
-module SampleFeeds
-  FEED_DIR = File.dirname(__FILE__) + '/feeds/'
-  
-  def sample_xml(name)
-    File.read "#{FEED_DIR}#{name}.xml"
-  end
+RSpec.configure do |config| 
 end
 
-module HttpMocks
-  def mock_response(type = :success)
-    klass = case type
-    when :success  then Net::HTTPSuccess
-    when :redirect then Net::HTTPRedirection
-    when :fail     then Net::HTTPClientError
-    else type
-    end
-    
-    klass.new(nil, nil, nil)
-  end
-  
-  def mock_connection(ssl = true)
-    connection = mock('HTTP connection')
-    connection.stubs(:start)
-    connection.stubs(:finish)
-    if ssl
-      connection.expects(:use_ssl=).with(true)
-      connection.expects(:verify_mode=).with(OpenSSL::SSL::VERIFY_NONE)
-    end
-    connection
-  end
+def fake_responses
+  FakeWeb.register_uri(:post, 'https://www.google.com/accounts/OAuthGetRequestToken', :body => 'oauth_token=faketoken&oauth_token_secret=faketokensecret')
+  FakeWeb.register_uri(:post, 'https://www.google.com/accounts/OAuthGetAccessToken', :body => 'oauth_token=fake&oauth_token_secret=fake')
+  FakeWeb.register_uri(:get, 'https://www.google.com/m8/feeds/contacts/default/thin?max-results=200', :body => feeds('google-many.xml'))
+  FakeWeb.register_uri(:post, 'https://api.login.yahoo.com/oauth/v2/get_request_token', :body => 'oauth_token=faketoken&oauth_token_secret=faketokensecret')
+  FakeWeb.register_uri(:post, 'https://api.login.yahoo.com/oauth/v2/get_token', :body => 'oauth_token=fake&oauth_token_secret=fake&xoauth_yahoo_guid=tester')
+  FakeWeb.register_uri(:get, 'http://social.yahooapis.com/v1/user/tester/contacts?count=200&sort=asc&sort-fields=email&format=json', :body => feeds('yh_contacts.txt'))
+  FakeWeb.register_uri(:get, 'https://livecontacts.services.live.com/users/@L@/rest/invitationsbyemail', :body => feeds('wl_contacts.xml'))
 end
 
-Spec::Runner.configure do |config|
-  config.include SampleFeeds, HttpMocks
-  # config.predicate_matchers[:swim] = :can_swim?
-  
-  config.mock_with :mocha
-end
-
-module Mocha
-  module ParameterMatchers
-    def query_string(entries, partial = false)
-      QueryStringMatcher.new(entries, partial)
-    end
-  end
-end
-
-class QueryStringMatcher < Mocha::ParameterMatchers::Base
-  
-  def initialize(entries, partial)
-    @entries = entries
-    @partial = partial
-  end
-  
-  def matches?(available_parameters)
-    string = available_parameters.shift.split('?').last
-    broken = string.split('&').map { |pair| pair.split('=').map { |value| CGI.unescape(value) } }
-    hash = Hash[*broken.flatten]
-    
-    if @partial
-      has_entry_matchers = @entries.map do |key, value|
-        Mocha::ParameterMatchers::HasEntry.new(key, value)
-      end
-      Mocha::ParameterMatchers::AllOf.new(*has_entry_matchers).matches?([hash])
-    else
-      @entries == hash
-    end
-  end
-  
-  def mocha_inspect
-    "query_string(#{@entries.mocha_inspect})"
-  end
-  
+def feeds(*path)
+  File.join(File.dirname(__FILE__), "feeds", path)
 end
