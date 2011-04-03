@@ -11,7 +11,8 @@ class ImportController < ApplicationController
   def yahoo
     if not request.request_uri.include?('token')
       session[:import_partner_id] = Partner.current.id if Partner.current
-      session[:yahoo_consumer] = consumer = Contacts::Yahoo.new      
+      consumer = Contacts::Yahoo.new
+      session[:yahoo_consumer] = consumer.serialize
       redirect_to consumer.authentication_url
       return
     end
@@ -32,7 +33,8 @@ class ImportController < ApplicationController
   def windows
     if not request.post?
       session[:import_partner_id] = Partner.current.id if Partner.current
-      session[:windows_consumer] = consumer = Contacts::WindowsLive.new      
+      consumer = Contacts::WindowsLive.new
+      session[:windows_consumer] = consumer.serialize
       redirect_to consumer.authentication_url
       return
     end
