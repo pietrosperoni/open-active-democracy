@@ -32,8 +32,8 @@ class LoadYahooContacts
         Rails.logger.info "Processing contact #{c.inspect}"
 #        begin
           if c.email
-            contact = UserContact.find_by_email(c.email)
-            contact = UserContact.new unless contact
+            contact = @user.contacts.find_by_email(email)
+            contact = @user.contacts.new unless contact
             contact.name = c.name
             contact.email = c.email
             contact.other_user = User.find_by_email(contact.email)

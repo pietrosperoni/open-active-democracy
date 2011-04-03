@@ -41,8 +41,9 @@ class ImportController < ApplicationController
     if not request.post?
       session[:import_partner_id] = Partner.current.id if Partner.current
       consumer = Contacts::WindowsLive.new
+      url = consumer.authentication_url
       session[:windows_consumer] = consumer.serialize
-      redirect_to consumer.authentication_url
+      redirect_to url
       return
     end
     Partner.current = Partner.find(session[:import_partner_id]) if session[:import_partner_id]
@@ -51,7 +52,8 @@ class ImportController < ApplicationController
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     if session[:windows_consumer]
-      Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,session[:windows_consumer],params), 5
+      #Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,session[:windows_consumer],params), 5
+      LoadWindowsContacts.new(@user.id,session[:windows_consumer],params).perform
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
       Rails.logger.error("Authorise windows live failed")

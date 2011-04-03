@@ -23,23 +23,26 @@ class LoadWindowsContacts
     else
       raise "Windows contacts import not authorized"
     end
-    @contacts.each do |c|
-      begin
-        if c.email
-          contact = contacts.find_by_email(c.email)
-          contact = contacts.new unless contact
-          contact.name = c.name
-          contact.email = c.email
-          contact.other_user = User.find_by_email(contact.email)
-          if @user.followings_count > 0 and contact.other_user
-            contact.following = followings.find_by_other_user_id(contact.other_user_id)
+    if @contacts
+      @contacts.each do |c|
+        Rails.logger.info "Processing contact #{c.inspect}"
+#        begin
+          if c.email
+            contact = @user.contacts.find_by_email(email)
+            contact = @user.contacts.new unless contact
+            contact.name = c.name
+            contact.email = c.email
+            contact.other_user = User.find_by_email(contact.email)
+            if @user.followings_count > 0 and contact.other_user
+              contact.following = followings.find_by_other_user_id(contact.other_user_id)
+            end
+            contact.save(:validate => false)          
+            offset += 1
+            @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
           end
-          contact.save(:validate => false)          
-          offset += 1
-          @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0
-        end
-      rescue
-        next
+ #       rescue
+  #        next
+  #      end
       end
     end
     @user.calculate_contacts_count
