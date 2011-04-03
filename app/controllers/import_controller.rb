@@ -13,7 +13,7 @@ class ImportController < ApplicationController
       session[:import_partner_id] = Partner.current.id if Partner.current
       consumer = Contacts::Yahoo.new
       url = consumer.authentication_url
-      Rails.cache.write("yahoo_consumer_#{current_user.id}", consumer)
+      Rails.cache.write("yahoo_consumer_#{current_user.id}", consumer.serialize)
       Rails.logger.info("Serilized out yahoo consumer #{consumer}")      
       redirect_to url
       return
