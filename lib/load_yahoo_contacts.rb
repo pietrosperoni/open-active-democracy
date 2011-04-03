@@ -21,7 +21,7 @@ class LoadYahooContacts
     if consumer.authorize(@params)
       @contacts = consumer.contacts
     else
-      raise "Windows contacts import not authorized"
+      raise "Yahoo contacts import not authorized"
     end
     @contacts.each do |c|
       begin
