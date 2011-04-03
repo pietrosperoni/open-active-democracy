@@ -22,10 +22,11 @@ class ImportController < ApplicationController
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     if session[:yahoo_consumer]
+      Rails.logger.default("Serilized yahoo consumer #{session[:yahoo_consumer]}")
       Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
-      Rails.logger.error("Authorise windows live failed")
+      Rails.logger.error("Authorise yahoo failed")
       redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your windows live contacts failed.","import")     
     end
   end  

@@ -18,31 +18,37 @@ class LoadYahooContacts
       @user.save(:validate => false)
     end
     consumer = Contacts::Yahoo.deserialize(@consumer)
+    puts "Deserialized yahoo consumer #{consumer}"
+    Rails.logger.info "Deserialized yahoo consumer #{consumer}"
     consumer.authentication_url
+    puts "Deserialized yahoo consumer #{consumer}"
+    Rails.logger.info "Deserialized yahoo consumer #{consumer}"
     if consumer.authorize(@params)
       @contacts = consumer.contacts
     else
       raise "Yahoo contacts import not authorized"
     end
-    @contacts.each do |c|
-      begin
-        if c.email
-          contact = contacts.find_by_email(c.email)
-          contact = contacts.new unless contact
-          contact.name = c.name
-          contact.email = c.email
-          contact.other_user = User.find_by_email(contact.email)
-          if @user.followings_count > 0 and contact.other_user
-            contact.following = followings.find_by_other_user_id(contact.other_user_id)
+    if @contacts
+      @contacts.each do |c|
+        begin
+          if c.email
+            contact = contacts.find_by_email(c.email)
+            contact = contacts.new unless contact
+            contact.name = c.name
+            contact.email = c.email
+            contact.other_user = User.find_by_email(contact.email)
+            if @user.followings_count > 0 and contact.other_user
+              contact.following = followings.find_by_other_user_id(contact.other_user_id)
+            end
+            contact.save(:validate => false)          
+            offset += 1
+            @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
           end
-          contact.save(:validate => false)          
-          offset += 1
-          @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
+        rescue
+          next
         end
-      rescue
-        next
       end
-    end    
+    end
     @user.calculate_contacts_count
     @user.imported_contacts_count = offset
     @user.is_importing_contacts = false
