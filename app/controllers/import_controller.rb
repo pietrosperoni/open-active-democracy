@@ -22,7 +22,7 @@ class ImportController < ApplicationController
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     if session[:yahoo_consumer]
-      Rails.logger.default("Serilized yahoo consumer #{session[:yahoo_consumer]}")
+      Rails.logger.info("Serilized yahoo consumer #{session[:yahoo_consumer]}")
       Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
