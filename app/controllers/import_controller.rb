@@ -11,7 +11,8 @@ class ImportController < ApplicationController
   def yahoo
     if not request.request_uri.include?('token')
       session[:import_partner_id] = Partner.current.id if Partner.current
-      redirect_to Contacts::Yahoo.new.get_authentication_url
+      session[:yahoo_consumer] = consumer = Contacts::Yahoo.new      
+      redirect_to consumer.authentication_url
       return
     end
     Partner.current = Partner.find(session[:import_partner_id]) if session[:import_partner_id]
@@ -19,14 +20,20 @@ class ImportController < ApplicationController
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
-    Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.request_uri), 5
-    redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"
+    if session[:yahoo_consumer]
+      Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
+      redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
+    else
+      Rails.logger.error("Authorise windows live failed")
+      redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your windows live contacts failed.","import")     
+    end
   end  
 
   def windows
     if not request.post?
       session[:import_partner_id] = Partner.current.id if Partner.current
-      redirect_to Contacts::WindowsLive.new.get_authentication_url 
+      session[:windows_consumer] = consumer = Contacts::WindowsLive.new      
+      redirect_to consumer.authentication_url
       return
     end
     Partner.current = Partner.find(session[:import_partner_id]) if session[:import_partner_id]
@@ -34,8 +41,13 @@ class ImportController < ApplicationController
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
-    Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,request.raw_post), 5
-    redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
+    if session[:windows_consumer]
+      Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,request.session[:windows_consumer],params), 5
+      redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
+    else
+      Rails.logger.error("Authorise windows live failed")
+      redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your windows live contacts failed.","import")     
+    end
   end
 
   # methods below from http://rtdptech.com/2010/12/importing-gmail-contacts-list-to-rails-application/

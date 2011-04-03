@@ -2,9 +2,10 @@ class LoadWindowsContacts
   
   attr_accessor :id
   
-  def initialize(id,path)
+  def initialize(id,consumer,params)
     @id = id
-    @path = path
+    @consumer = consumer
+    @params = params
   end
 
   def perform
@@ -16,9 +17,13 @@ class LoadWindowsContacts
       @user.imported_contacts_count = 0
       @user.save(:validate => false)
     end
-    wl = Contacts::WindowsLive.new
-    wcontacts = wl.contacts(@path)
-    for c in wcontacts
+    consumer = Contacts.deserialize(@consumer)
+    if consumer.authorize(@params)
+      @contacts = consumer.contacts
+    else
+      raise "Windows contacts import not authorized"
+    end
+    @contacts.each do |c|
       begin
         if c.email
           contact = contacts.find_by_email(c.email)
