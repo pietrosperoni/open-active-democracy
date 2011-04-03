@@ -944,8 +944,10 @@ margin-right: 4px !Important;
 }
 
 .icon {
-float:left;
-padding-bottom:0px !important;
+  z-index: 20;
+  position: relative;
+  top: 3px;
+  right: 25px;
 }
 
 .point_name {
