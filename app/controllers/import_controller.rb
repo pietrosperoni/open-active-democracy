@@ -12,9 +12,10 @@ class ImportController < ApplicationController
     if not request.request_uri.include?('token')
       session[:import_partner_id] = Partner.current.id if Partner.current
       consumer = Contacts::Yahoo.new
+      url = consumer.authentication_url
       Rails.cache.write("yahoo_consumer_#{current_user.id}", consumer)
-      Rails.logger.info("Serilized out yahoo consumer #{consumer}")
-      redirect_to consumer.authentication_url
+      Rails.logger.info("Serilized out yahoo consumer #{consumer}")      
+      redirect_to url
       return
     end
     Partner.current = Partner.find(session[:import_partner_id]) if session[:import_partner_id]
