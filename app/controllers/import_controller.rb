@@ -12,8 +12,8 @@ class ImportController < ApplicationController
     if not request.request_uri.include?('token')
       session[:import_partner_id] = Partner.current.id if Partner.current
       consumer = Contacts::Yahoo.new
-      session[:yahoo_consumer] = consumer
-      Rails.logger.info("Serilized out yahoo consumer #{session[:yahoo_consumer]}")
+      Rails.cache.write("yahoo_consumer_#{current_user.id}", consumer)
+      Rails.logger.info("Serilized out yahoo consumer #{consumer}")
       redirect_to consumer.authentication_url
       return
     end
@@ -22,17 +22,19 @@ class ImportController < ApplicationController
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
-    if session[:yahoo_consumer]
-      Rails.logger.info("Serilized yahoo consumer #{session[:yahoo_consumer]}")
+    consumer = Rails.cache.read("yahoo_consumer_#{current_user.id}")
+    if consumer
+      Rails.logger.info("Serilized yahoo consumer #{consumer}")
       #Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
-      lyc = LoadYahooContacts.new(@user.id,session[:yahoo_consumer],params)
+      lyc = LoadYahooContacts.new(@user.id,consumer,params)
       lyc.perform
+      Rails.cache.delete("yahoo_consumer_#{current_user.id}")
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
       Rails.logger.error("Authorise yahoo failed")
       redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your windows live contacts failed.","import")     
     end
-  end  
+  end
 
   def windows
     if not request.post?
