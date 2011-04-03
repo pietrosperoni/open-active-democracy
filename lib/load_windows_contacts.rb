@@ -25,8 +25,7 @@ class LoadWindowsContacts
     end
     if @contacts
       @contacts.each do |c|
-        Rails.logger.info "Processing contact #{c.inspect}"
-#        begin
+        begin
           if c.email
             contact = @user.contacts.find_by_email(c.email)
             contact = @user.contacts.new unless contact
@@ -40,16 +39,15 @@ class LoadWindowsContacts
             offset += 1
             @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
           end
- #       rescue
-  #        next
-  #      end
+        rescue
+          next
+        end
       end
     end
     @user.calculate_contacts_count
     @user.imported_contacts_count = offset
     @user.is_importing_contacts = false
     @user.save(:validate => false)
-  end
-  
+  end  
 end
 

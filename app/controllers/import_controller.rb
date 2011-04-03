@@ -13,8 +13,6 @@ class ImportController < ApplicationController
       session[:import_partner_id] = Partner.current.id if Partner.current
       consumer = Contacts::Yahoo.new
       url = consumer.authentication_url
-      Rails.cache.write("yahoo_consumer_#{current_user.id}", consumer.serialize)
-      Rails.logger.info("Serilized out yahoo consumer #{consumer}")      
       redirect_to url
       return
     end
@@ -25,10 +23,7 @@ class ImportController < ApplicationController
     @user.save(:validate => false)
     consumer = Rails.cache.read("yahoo_consumer_#{current_user.id}")
     if consumer
-      Rails.logger.info("Serilized yahoo consumer #{consumer}")
-      #Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
-      lyc = LoadYahooContacts.new(@user.id,consumer,params)
-      lyc.perform
+      Delayed::Job.enqueue LoadYahooContacts.new(@user.id,consumer,params), 5
       Rails.cache.delete("yahoo_consumer_#{current_user.id}")
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
@@ -43,6 +38,7 @@ class ImportController < ApplicationController
       consumer = Contacts::WindowsLive.new
       url = consumer.authentication_url
       session[:windows_consumer] = consumer.serialize
+      Rails.logger.debug(url)
       redirect_to url
       return
     end
@@ -52,9 +48,8 @@ class ImportController < ApplicationController
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     if session[:windows_consumer]
-      #Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,session[:windows_consumer],params), 5
-      LoadWindowsContacts.new(@user.id,session[:windows_consumer],params).perform
-      redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
+      Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,session[:windows_consumer],params), 5
+      redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"
     else
       Rails.logger.error("Authorise windows live failed")
       redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your windows live contacts failed.","import")     
@@ -126,8 +121,8 @@ class ImportController < ApplicationController
       if not current_user.is_importing_contacts?
         flash[:notice] = tr("Finished loading contacts", "controller/import")
         if current_user.contacts_members_count > 0
-          format.html { redirect_to members_user_contacts(current_user.id) }
-          format.js { redirect_from_facebox(members_user_contacts(current_user.id)) }
+          format.html { redirect_to "/users/#{current_user.to_param}/user_contacts/not_invited" }
+          format.js { redirect_from_facebox "/users/#{current_user.to_param}/user_contacts/not_invited" }
         else
           format.html { redirect_to "/users/#{current_user.to_param}/user_contacts/not_invited" }
           format.js { redirect_from_facebox "/users/#{current_user.to_param}/user_contacts/not_invited" }

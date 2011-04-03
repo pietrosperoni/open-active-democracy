@@ -18,19 +18,14 @@ class LoadYahooContacts
       @user.save(:validate => false)
     end
     consumer = Contacts::Yahoo.deserialize(@consumer)
-    Rails.logger.info "Deserialized yahoo consumer #{consumer.inspect} #{@params}"
-    #consumer.authentication_url
-#    Rails.logger.info "Deserialized yahoo consumer #{consumer.inspect}"
     if consumer.authorize(@params)
       @contacts = consumer.contacts
     else
       raise "Yahoo contacts import not authorized"
     end
-    Rails.logger.info "Yahoo consumer contacts #{consumer.contacts}"
     if @contacts
       @contacts.each do |c|
-        Rails.logger.info "Processing contact #{c.inspect}"
-#        begin
+        begin
           if c.email
             contact = @user.contacts.find_by_email(c.email)
             contact = @user.contacts.new unless contact
@@ -44,9 +39,9 @@ class LoadYahooContacts
             offset += 1
             @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
           end
- #       rescue
-  #        next
-  #      end
+        rescue
+          next
+        end
       end
     end
     @user.calculate_contacts_count
