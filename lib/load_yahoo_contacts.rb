@@ -18,16 +18,15 @@ class LoadYahooContacts
       @user.save(:validate => false)
     end
     consumer = Contacts::Yahoo.deserialize(@consumer)
-    puts "Deserialized yahoo consumer #{consumer}"
-    Rails.logger.info "Deserialized yahoo consumer #{consumer}"
+    Rails.logger.info "Deserialized yahoo consumer #{consumer.inspect}"
     consumer.authentication_url
-    puts "Deserialized yahoo consumer #{consumer}"
-    Rails.logger.info "Deserialized yahoo consumer #{consumer}"
+    Rails.logger.info "Deserialized yahoo consumer #{consumer.inspect}"
     if consumer.authorize(@params)
       @contacts = consumer.contacts
     else
       raise "Yahoo contacts import not authorized"
     end
+    Rails.logger.info "Yahoo consumer contacts #{consumer.contacts}"
     if @contacts
       @contacts.each do |c|
         begin

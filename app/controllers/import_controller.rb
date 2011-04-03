@@ -13,6 +13,7 @@ class ImportController < ApplicationController
       session[:import_partner_id] = Partner.current.id if Partner.current
       consumer = Contacts::Yahoo.new
       session[:yahoo_consumer] = consumer.serialize
+      Rails.logger.info("Serilized out yahoo consumer #{session[:yahoo_consumer]}")
       redirect_to consumer.authentication_url
       return
     end
@@ -24,7 +25,7 @@ class ImportController < ApplicationController
     if session[:yahoo_consumer]
       Rails.logger.info("Serilized yahoo consumer #{session[:yahoo_consumer]}")
       #Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
-      lyc = LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params)
+      lyc = LoadYahooContacts.new(@user.id,session[:yahoo_consumer],params)
       lyc.perform
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
@@ -47,7 +48,7 @@ class ImportController < ApplicationController
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
     if session[:windows_consumer]
-      Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,request.session[:windows_consumer],params), 5
+      Delayed::Job.enqueue LoadWindowsContacts.new(@user.id,session[:windows_consumer],params), 5
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
       Rails.logger.error("Authorise windows live failed")
