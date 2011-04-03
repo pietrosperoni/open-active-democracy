@@ -23,7 +23,9 @@ class ImportController < ApplicationController
     @user.save(:validate => false)
     if session[:yahoo_consumer]
       Rails.logger.info("Serilized yahoo consumer #{session[:yahoo_consumer]}")
-      Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
+      #Delayed::Job.enqueue LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params), 5
+      lyc = LoadYahooContacts.new(@user.id,request.session[:yahoo_consumer],params)
+      lyc.perform
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
       Rails.logger.error("Authorise yahoo failed")
