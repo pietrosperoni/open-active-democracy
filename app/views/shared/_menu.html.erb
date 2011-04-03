@@ -2,11 +2,7 @@
 <% if ['priorities','changes','ads','prioritizer'].include?(params[:controller]) %>
 	<% nav = 2 %>
 <% elsif ['news','comments'].include?(params[:controller]) %>
-	<% if logged_in? %>
 		<% nav = 4 %>
-	<% else %>
-		<% nav = 5 %>
-	<% end %>
 <% elsif ['issues'].include?(params[:controller]) %>
 	<% nav = 1 %>
 <% elsif ['network','users','user_contacts','import','messages','inbox','facebook'].include?(params[:controller]) or (params[:controller] == 'partners' and not logged_in?) %>
