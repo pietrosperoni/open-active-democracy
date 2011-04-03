@@ -61,5 +61,6 @@ gem 'thinking-sphinx',
 gem 'jquery-rails', '>= 0.2.6'
 
 group :development do
+  gem 'mongrel', '>= 1.2.0.pre2'  
   gem 'rails-dev-boost', :git => 'git://github.com/rbjarnason/rails-dev-boost.git', :require => 'rails_development_boost'
 end
