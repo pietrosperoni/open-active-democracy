@@ -28,7 +28,7 @@ class LoadWindowsContacts
         Rails.logger.info "Processing contact #{c.inspect}"
 #        begin
           if c.email
-            contact = @user.contacts.find_by_email(email)
+            contact = @user.contacts.find_by_email(c.email)
             contact = @user.contacts.new unless contact
             contact.name = c.name
             contact.email = c.email
