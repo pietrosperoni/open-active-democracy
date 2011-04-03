@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: 088d9aa6b15a35e48fab817d4d1118b050ae89f0
+  revision: a37767f3cd25b160e636c7bdfabb4d8d5e95c6f7
   branch: rails3
   specs:
-    thinking-sphinx (2.0.2)
+    thinking-sphinx (2.0.3)
       activerecord (>= 3.0.3)
       riddle (>= 1.2.2)
 
@@ -61,8 +61,8 @@ GEM
     capistrano (2.5.20)
       highline
       highline
-      net-scp
       net-scp (>= 1.0.0)
+      net-scp
       net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
@@ -70,7 +70,7 @@ GEM
       net-ssh-gateway
       net-ssh-gateway (>= 1.0.0)
     crack (0.1.8)
-    daemons (1.1.2)
+    daemons (1.0.10)
     dalli (1.0.3)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
@@ -81,6 +81,7 @@ GEM
     facebooker2 (0.0.11)
       mogli (>= 0.0.12)
       ruby-hmac
+    gem_plugin (0.2.3)
     geoip (1.0.0)
     googlecharts (1.6.1)
     highline (1.6.1)
@@ -105,6 +106,9 @@ GEM
     mime-types (1.16)
     mogli (0.0.27)
       httparty (>= 0.4.3)
+    mongrel (1.2.0.pre2)
+      daemons (~> 1.0.10)
+      gem_plugin (~> 0.2.3)
     mysql2 (0.2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -152,7 +156,7 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.25)
+    tzinfo (0.3.26)
     whenever (0.6.7)
       aaronh-chronic (>= 0.3.9)
       activesupport (>= 2.3.4)
@@ -176,6 +180,7 @@ DEPENDENCIES
   jquery-rails (>= 0.2.6)
   kgio
   mogli
+  mongrel (>= 1.2.0.pre2)
   mysql2
   newrelic_rpm
   nokogiri
