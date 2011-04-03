@@ -13,6 +13,7 @@ class ImportController < ApplicationController
       session[:import_partner_id] = Partner.current.id if Partner.current
       consumer = Contacts::Yahoo.new
       url = consumer.authentication_url
+      session[:yahoo_consumer] = consumer.serialize
       redirect_to url
       return
     end
@@ -21,14 +22,14 @@ class ImportController < ApplicationController
     @user.is_importing_contacts = true
     @user.imported_contacts_count = 0
     @user.save(:validate => false)
-    consumer = Rails.cache.read("yahoo_consumer_#{current_user.id}")
+    consumer = session[:yahoo_consumer]
     if consumer
       Delayed::Job.enqueue LoadYahooContacts.new(@user.id,consumer,params), 5
-      Rails.cache.delete("yahoo_consumer_#{current_user.id}")
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"    
     else
       Rails.logger.error("Authorise yahoo failed")
-      redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your windows live contacts failed.","import")     
+      flash[:notice] = tr("Importing your yahoo live contacts failed.","import")
+      redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner
     end
   end
 
@@ -38,7 +39,6 @@ class ImportController < ApplicationController
       consumer = Contacts::WindowsLive.new
       url = consumer.authentication_url
       session[:windows_consumer] = consumer.serialize
-      Rails.logger.debug(url)
       redirect_to url
       return
     end
@@ -52,7 +52,8 @@ class ImportController < ApplicationController
       redirect_to :host=>Government.current.base_url_w_partner, :action => "import_status"
     else
       Rails.logger.error("Authorise windows live failed")
-      redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner, :notice => tr("Importing your windows live contacts failed.","import")     
+      flash[:notice] = tr("Importing your windows live contacts failed.","import")
+      redirect_to :action => "find", :controller=>"network", :host=>Government.current.base_url_w_partner
     end
   end
 
