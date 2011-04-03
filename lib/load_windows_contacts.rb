@@ -17,7 +17,7 @@ class LoadWindowsContacts
       @user.imported_contacts_count = 0
       @user.save(:validate => false)
     end
-    consumer = Contacts.deserialize(@consumer)
+    consumer = Contacts::WindowsLive.deserialize(@consumer)
     if consumer.authorize(@params)
       @contacts = consumer.contacts
     else

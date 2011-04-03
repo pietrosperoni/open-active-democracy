@@ -17,7 +17,7 @@ class LoadYahooContacts
       @user.imported_contacts_count = 0
       @user.save(:validate => false)
     end
-    consumer = Contacts.deserialize(@consumer)
+    consumer = Contacts::Yahoo.deserialize(@consumer)
     if consumer.authorize(@params)
       @contacts = consumer.contacts
     else
