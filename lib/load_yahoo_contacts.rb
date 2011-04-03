@@ -29,7 +29,8 @@ class LoadYahooContacts
     Rails.logger.info "Yahoo consumer contacts #{consumer.contacts}"
     if @contacts
       @contacts.each do |c|
-        begin
+        Rails.logger.info "Processing contact #{c.inspect}"
+#        begin
           if c.email
             contact = contacts.find_by_email(c.email)
             contact = contacts.new unless contact
@@ -43,9 +44,9 @@ class LoadYahooContacts
             offset += 1
             @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
           end
-        rescue
-          next
-        end
+ #       rescue
+  #        next
+  #      end
       end
     end
     @user.calculate_contacts_count
