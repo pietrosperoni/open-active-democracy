@@ -12,9 +12,6 @@
     <%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
     <%= stylesheet_link_tag "/stylesheets_old/gnew" %>
     <%= stylesheet_link_tag "/stylesheets_old/temp" %>
-    <% if controller_name == "users" %>
-      <%= stylesheet_link_tag "/stylesheets_old/fb_invite_hack.css" %>
-    <% end %>
     <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
     <% if ["users","sessions"].include?(controller_name)  %>
       <%= stylesheet_link_tag "/stylesheets_old/jquery.keypad" %>
