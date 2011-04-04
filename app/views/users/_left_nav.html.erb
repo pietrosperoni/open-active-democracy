@@ -4,6 +4,7 @@
     <div class="heading">
       <%= tr("{user_name} Agenda", "view/users/_left_nav", :user_name => @user.name)%>
     </div>
+    <br>
 
     <table border="0" cellspacing="0" cellpadding="0" width="100%">
     	<tr>
@@ -20,7 +21,7 @@
     		</td>
     	</tr>
     </table>
-    <p>
+    <p><br>
     <% end %>
   <% end %>
   <% number_of_users_showing = 7 %>
@@ -30,10 +31,9 @@
       <%= link_to following.other_user.login, following.other_user.profile_url %><br>
     <% end %>
     <%= link_to tr("{user_number} more users...", "view/users/_profile_nav", :user_number=>@user.followings_count-number_of_users_showing), following_user_url(@user) if @user.followings_count>number_of_users_showing %> <br/>
-    <br>
   <% end %>
   <% if @user.followers_count > 0 %>
-    <%=tr("{user_count} users following me","view/users/_profile_nav", :user_count=>@user.followers_count)%><br>
+    <%=tr("{user_count} users following","view/users/_profile_nav", :user_count=>@user.followers_count)%><br>
     <% @user.followers.up.limit(number_of_users_showing).each do |following|%>
       <%= link_to following.user.login, following.user.profile_url %><br>
     <% end %>
