@@ -146,6 +146,16 @@ class User < ActiveRecord::Base
     false
   end
   
+  def needs_activation?
+    if self.status == "active"
+      false
+    elsif self.facebook_uid or self.identifier_url
+      false
+    else
+      true
+    end
+  end
+
   def geoblocking_disabled_for?(partner)
     self.geoblocking_open_countries.split.each do |user_country|
       partner.geoblocking_open_countries.split.each do |partner_country|
@@ -157,9 +167,9 @@ class User < ActiveRecord::Base
   
   def new_user_signedup
     ActivityUserNew.create(:user => self, :partner => partner)    
-    resend_activation if self.has_email? and self.is_pending?
+    resend_activation if self.has_email? and self.is_pending? # and not self.identifier_url
   end
-  
+
   def check_contacts
     if self.has_email?
       existing_contacts = UserContact.find(:all, :conditions => ["email = ? and other_user_id is null",email], :order => "created_at asc")
@@ -819,11 +829,19 @@ class User < ActiveRecord::Base
     self.last_name = names.pop
     self.first_name = names.join(' ')
   end
+  
+  def access_token
+    self.twitter_token
+  end
 
+  def access_secret
+    self.twitter_secret
+  end
+  
   if TwitterAuth.oauth?
     include TwitterAuth::OauthUser
   else
-    include TwitterAuth::BasicUser
+     include TwitterAuth::BasicUser
   end
 
   def twitter
@@ -845,6 +863,7 @@ class User < ActiveRecord::Base
   def follow_twitter_friends
     count = 0
     friend_ids = twitter.get('/friends/ids.json?id='+twitter_id.to_s)
+    Rails.logger.debug("follow_twitter_friends #{friend_ids.count} friends")
     if friend_ids.any?
       if following_user_ids.any?
         users = User.active.find(:all, :conditions => ["twitter_id in (?) and id not in (?)",friend_ids, following_user_ids])
@@ -1029,20 +1048,20 @@ class User < ActiveRecord::Base
     return 'mysql'
   end
   
-def do_abusive!(parent_notifications)
-   if self.warnings_count == 0 # this is their first warning, get a warning message
-    parent_notifications << NotificationWarning1.new(:recipient => self)
-  elsif self.warnings_count == 1 # 2nd warning
-    parent_notifications << NotificationWarning2.new(:recipient => self)
-  elsif self.warnings_count == 2 # third warning, on probation
-    parent_notifications << NotificationWarning3.new(:recipient => self)      
-    self.probation!
-  elsif self.warnings_count >= 3 # fourth or more warning, suspended
-    parent_notifications << NotificationWarning4.new(:recipient => self)      
-    self.suspend!
+  def do_abusive!(parent_notifications)
+     if self.warnings_count == 0 # this is their first warning, get a warning message
+      parent_notifications << NotificationWarning1.new(:recipient => self)
+    elsif self.warnings_count == 1 # 2nd warning
+      parent_notifications << NotificationWarning2.new(:recipient => self)
+    elsif self.warnings_count == 2 # third warning, on probation
+      parent_notifications << NotificationWarning3.new(:recipient => self)      
+      self.probation!
+    elsif self.warnings_count >= 3 # fourth or more warning, suspended
+      parent_notifications << NotificationWarning4.new(:recipient => self)      
+      self.suspend!
+    end
+    self.increment!("warnings_count")
   end
-  self.increment!("warnings_count")
-end
 
   protected
   

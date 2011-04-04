@@ -1,0 +1,24 @@
+<%= tr("Select people from your Facebook, Gmail, Yahoo or Windows Live contacts to invite and recieve 5 social points for everybody that accepts the invitiation.", "view/user_contacts/index")%>
+<p><br>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <td valign="middle" align="middle">
+    <% if current_government.has_facebook_enabled? %>
+      <% if current_facebook_user %>
+        <%= link_to image_tag("facebook-logo.jpg", :border => 0), :controller => "facebook", :action => "invite", :html => {:class => "import_button"}  %>
+      <% else %>
+        <a href="#" onClick="FB.login(function() { window.location='<%= url_for(:only_path => false, :controller => 'facebook', :action => 'invite') %>'; });"><%= image_tag("facebook-logo.jpg", :border => 0) %></a>
+      <% end %>
+      <br><br>
+    <% end %>   
+    <%= link_to image_tag("gmail-logo.jpg", :border => 0), :controller => "import", :action => "authenticate_google" %><br>
+    <br>
+    <% if current_government.has_yahoo_enabled? %>
+      <%= link_to image_tag("yahoo-mail-logo.jpg", :border => 0), :controller => "import", :action => "yahoo" %><br><br>
+    <% end %>
+    <% if current_government.has_windows_enabled? %>
+      <%= link_to image_tag("windows-live-hotmail-logo.gif", :border => 0), :controller => "import", :action => "windows" %>
+    <% end %>
+    </td>
+  </tr>
+</table>

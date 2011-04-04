@@ -1,4 +1,4 @@
-<% if @priorities.any? %>
+<% if @priorities and @priorities.any? %>
 
 	<% if ['finished','yours_finished'].include?(params[:action]) %>
 		<ul>

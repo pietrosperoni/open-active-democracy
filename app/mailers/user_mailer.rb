@@ -112,7 +112,11 @@ class UserMailer < ActionMailer::Base
 
       # decode HTML entities
       he = HTMLEntities.new
-      txt = he.decode(txt)
+      begin
+        txt = he.decode(txt)
+      rescue
+        txt = txt
+      end
 
       # handle headings (H1-H6)
       txt.gsub!(/[ \t]*<h([0-9]+)[^>]*>(.*)<\/h[0-9]+>/i) do |s|

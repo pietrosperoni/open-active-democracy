@@ -1,32 +1,43 @@
-<% if @user.endorsements_count > 4 %>
+<div id="user_sidebar">
+  <% if @user.endorsements_count > 4 %>    
+    <% if @user.index_7days_change != 0 or @user.index_30days_change != 0 or @user.index_24hr_change != 0%>
+    <div class="heading">
+      <%= tr("{user_name} Agenda", "view/users/_left_nav", :user_name => @user.name)%>
+    </div>
+    <br>
 
-<div class="heading">
-<%= tr("{user_name} Agenda", "view/users/_left_nav", :user_name => @user.name)%>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    	<tr>
+    		<td><span class="table_header"><%= tr("Yday", "view/users/_left_nav") %></span></td>		
+    		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Week", "view/users/_left_nav") %></span></td>
+    		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Month", "view/users/_left_nav") %></span></td>
+    	</tr>
+    	<tr><td valign="top" class="user_agenda_change">
+    		<%= agenda_change(@user,'24hr') %>
+    		</td><td valign="top" class="user_agenda_change">
+    			<%= agenda_change(@user,'7days') %>
+    		</td><td valign="top" class="user_agenda_change">
+    			<%= agenda_change(@user,'30days') %>
+    		</td>
+    	</tr>
+    </table>
+    <p><br>
+    <% end %>
+  <% end %>
+  <% number_of_users_showing = 7 %>
+  <% if @user.followings_count > 0 %>
+    <%=tr("Following {user_count} users","view/users/_profile_nav", :user_count=>@user.followings_count)%><br>
+    <% @user.followings.up.limit(number_of_users_showing).each do |following|%>
+      <%= link_to following.other_user.login, following.other_user.profile_url %><br>
+    <% end %>
+    <%= link_to tr("{user_number} more users...", "view/users/_profile_nav", :user_number=>@user.followings_count-number_of_users_showing), following_user_url(@user) if @user.followings_count>number_of_users_showing %> <br/>
+  <% end %>
+  <% if @user.followers_count > 0 %>
+    <%=tr("{user_count} users following","view/users/_profile_nav", :user_count=>@user.followers_count)%><br>
+    <% @user.followers.up.limit(number_of_users_showing).each do |following|%>
+      <%= link_to following.user.login, following.user.profile_url %><br>
+    <% end %>
+    <%= link_to tr("{user_number} more users...", "view/users/_profile_nav", :user_number=>@user.followers_count-number_of_users_showing), followers_user_url(@user) if @user.followers_count>number_of_users_showing %> <br/>
+    <br>
+  <% end %>
 </div>
-
-<% if @user.index_7days_change != 0 or @user.index_30days_change != 0 or @user.index_24hr_change != 0%>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr>
-		<td><span class="table_header"><%= tr("Yday", "view/users/_left_nav") %></span></td>		
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Week", "view/users/_left_nav") %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Month", "view/users/_left_nav") %></span></td>
-	</tr>
-	<tr><td valign="top" class="user_agenda_change">
-		<%= agenda_change(@user,'24hr') %>
-		</td><td valign="top" class="user_agenda_change">
-			<%= agenda_change(@user,'7days') %>
-		</td><td valign="top" class="user_agenda_change">
-			<%= agenda_change(@user,'30days') %>
-		</td>
-	</tr>
-</table>
-<p>
-<% end %>
-
-
-<% end %>
-
-<% if ['show','priorities'].include?(params[:action]) and @user.is_active? %>
-<p>
-<%= render :partial => "shared/addthis" %>		
-<% end %>

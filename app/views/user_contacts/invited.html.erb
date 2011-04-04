@@ -14,7 +14,7 @@
 		<% elsif c.has_facebook? %>
 			<fb:name uid="<%= c.facebook_uid %>" /></fb:name>
 		<% end %>
-		 <span class="small"><%= time_ago c.sent_at %></span><br/>
+		 <span class="small"><%= time_ago c.sent_at if c.sent_at %></span><br/>
 	<% end %>					
 	<p>
 	<%= will_paginate (@contacts) %>

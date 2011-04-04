@@ -9,4 +9,4 @@
 <%= tr("completed so far", "view/import/status") %>
 </span>
 
-<%= periodically_call_remote :url => { :action => "status"}, :frequency => 5 %>
+<%= periodically_call_remote :url => { :action => "import_status"}, :frequency => 5 %>

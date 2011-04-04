@@ -122,9 +122,9 @@ role :db,  domain, :primary => true
 namespace :delayed_job do 
     desc "Restart the delayed_job process"
     task :restart, :roles => :app do
-  #     run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job stop RAILS_ENV=production"
-  #    run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
-      run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job restart RAILS_ENV=production"
+      run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job stop RAILS_ENV=production"
+      run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
+  #    run "cd #{current_path}; RAILS_ENV=production ruby script/delayed_job restart RAILS_ENV=production"
     end
 end
 
@@ -136,12 +136,16 @@ end
 
 task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/db/sphinx #{current_release}/db/sphinx"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/yrprirsakey.pem #{current_release}/config/yrprirsakey.pem"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/yrprirsacert.pem #{current_release}/config/yrprirsacert.pem"
+  run "ln -s #{deploy_to}/#{shared_dir}/config/contacts.yml #{current_release}/config/contacts.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/database.yml #{current_release}/config/database.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
   run "ln -nfs #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
   run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -nfs #{deploy_to}/#{shared_dir}/private #{current_release}/private"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/twitter_auth.yml #{current_release}/config/twitter_auth.yml"
   #thinking_sphinx.configure
 #  thinking_sphinx.restart
 end

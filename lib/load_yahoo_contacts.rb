@@ -2,9 +2,10 @@ class LoadYahooContacts
   
   attr_accessor :id
   
-  def initialize(id,path)
+  def initialize(id,consumer,params)
     @id = id
-    @path = path
+    @consumer = consumer
+    @params = params
   end
 
   def perform
@@ -16,30 +17,33 @@ class LoadYahooContacts
       @user.imported_contacts_count = 0
       @user.save(:validate => false)
     end
-    yahoo = Contacts::Yahoo.new
-    ycontacts = yahoo.contacts(@path)
-    if ycontacts.empty?
-      break 
+    consumer = Contacts::Yahoo.deserialize(@consumer)
+    if consumer.authorize(@params)
+      @contacts = consumer.contacts
+    else
+      raise "Yahoo contacts import not authorized"
     end
-    for c in ycontacts
-      begin
-        if c.email
-          contact = contacts.find_by_email(c.email)
-          contact = contacts.new unless contact
-          contact.name = c.name
-          contact.email = c.email
-          contact.other_user = User.find_by_email(contact.email)
-          if @user.followings_count > 0 and contact.other_user
-            contact.following = followings.find_by_other_user_id(contact.other_user_id)
+    if @contacts
+      @contacts.each do |c|
+        begin
+          if c.email
+            contact = @user.contacts.find_by_email(c.email)
+            contact = @user.contacts.new unless contact
+            contact.name = c.name
+            contact.email = c.email
+            contact.other_user = User.find_by_email(contact.email)
+            if @user.followings_count > 0 and contact.other_user
+              contact.following = followings.find_by_other_user_id(contact.other_user_id)
+            end
+            contact.save(:validate => false)          
+            offset += 1
+            @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
           end
-          contact.save(:validate => false)          
-          offset += 1
-          @user.update_attribute(:imported_contacts_count,offset) if offset % 20 == 0        
+        rescue
+          next
         end
-      rescue
-        next
       end
-    end    
+    end
     @user.calculate_contacts_count
     @user.imported_contacts_count = offset
     @user.is_importing_contacts = false

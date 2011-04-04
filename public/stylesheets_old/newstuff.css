@@ -102,6 +102,29 @@ hr { border-top: 3px solid #e5e5e5; }
   margin-top: 0px;
 }
 
+#network_sidebar {
+  padding-right: 4px;
+  vertical-align: top;
+  top: 0px;
+  right: 5px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+#network_sidebar {
+  width: 220px;
+  float: right;
+  padding-right: 4px;
+  vertical-align: top;
+  top: 0px;
+  right: 5px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+#network_sidebar td {
+  vertical-align: top;
+}
 #contentwrap {
 	width: 720px;
 	margin-left: 4px;
@@ -111,13 +134,12 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #branding_text_header {
-  margin-left: 12px;
-  margin-top: 7px;
+  margin-left: 8px;
+  margin-top: 12px;
   font-family: sans-serif;
   font-style: normal;
-  font-variant: small-caps;
   font-weight: normal;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 100%;
   word-spacing: normal;
   letter-spacing: normal;
@@ -128,12 +150,13 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #branding_text_sub {
-  margin-left: 12px;
+  margin-left: 15px;
+  color: #999;
   font-family: sans-serif;
   font-style: normal;
   font-variant: small-caps;
-  font-weight: normal;
-  font-size: 11px;
+  font-weight: bold;
+  font-size: 16px;
   line-height: 100%;
   word-spacing: normal;
   letter-spacing: normal;
@@ -339,7 +362,9 @@ ul#menu li .tab_body {
 /* second nav */
 #nav_sub {
 	z-index: -1;	
-	font-size: 11px;	
+	font-size: 12px;	
+	padding-top: 3px;
+	padding-bottom: 2px;
 }
 ul#menu_sub { 
 	background-color: #fff;
@@ -378,8 +403,9 @@ ul#menu_sub li.mega .tab_header a {
 	background-color: #fff;
 /*	margin-top: 4px; */
 	z-index: -1;	
-	font-size: 10px;
+	font-size: 11px;
 	margin-top: 2px;
+  margin-bottom: 4px;
 }
 
 
@@ -398,14 +424,8 @@ ul#menu_third li .tab_header a {
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
-<<<<<<< HEAD
-		border: 1px solid #ddd;
-	background-color: #fff !important;
-
-=======
   border: 0px solid #ddd;
   background-color: #fff !important;
->>>>>>> rvb/master
 }
 
 ul#menu_third li{ 
@@ -610,6 +630,7 @@ width: 120px;
 #nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, 
 #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a,
 #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_0 li.tab0 .tab_header a, 
+#nav_sub_0 li.tab0 .tab_header a,
 #nav_sub_1 li.tab1 .tab_header a,
 #nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a,
 #nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a,
@@ -708,7 +729,7 @@ background-color:#fff;
 border: 1px solid #ddd !important;
 color:#444444;
 margin-bottom: 10px;
-margin-top: 15px;
+margin-top: 0px;
 }
 
 #login, #intro, #buzz_box {
@@ -947,8 +968,10 @@ margin-right: 4px !Important;
 }
 
 .icon {
-float:left;
-padding-bottom:0px !important;
+  z-index: 20;
+  position: relative;
+  top: 19px;
+  right: 18px;
 }
 
 .point_name {

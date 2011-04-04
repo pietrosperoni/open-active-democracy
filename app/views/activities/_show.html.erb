@@ -39,25 +39,37 @@
 		            :confirm => escape_t(tr("Delete from this page?","Ajax")) %>
 		<% end %>
 		</div>
-		<% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
-			<%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
-		<% end %>
-		<span class="small"><%= time_ago(activity.created_at) %></span>
-
-		<% if activity.class != ActivityCommentParticipant %>
-			<% if activity.comments_count > 0 %>
-				<span class="comment_link" title="<%=escape_t(tr("Send comment","Ajax"))%>">
-				<%= link_to_unless_current pluralize(activity.comments_count, title="#{escape_t(tr("Comment","Ajax"))}"), activity_comments_url(activity) %>
-				</span>
-			<% else %>
-				<span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="<%=escape_t(tr("Send comment","Ajax"))%>">	
-  				<%= link_to tr("Comment", "view/activities/_show"), new_activity_comment_url(activity), :method => :get,
-                      'data-disable-with' => "",
-                      'data-loader-name' => "horizontal_small",
-  				            :remote=>true %>
-				</span>
-			<% end %>
-		<% end %>
+		<div class="user_pic_and_activity" style="vertical-align: top">
+  		  <table style="vertical-align: top">
+  		    <tr>
+              <td width="35x" height="35px" style="vertical-align: top">
+               <% if activity.user -%>
+                 <%= render :partial => "users/pic_35", :locals => {:user => activity.user} %>
+               <% end -%>
+              </td>
+            <td>
+              <% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
+      	   		  <%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
+              <% end %>
+              <span class="small"><%= time_ago(activity.created_at) %></span>
+              <% if activity.class != ActivityCommentParticipant %>
+                <% if activity.comments_count > 0 %>
+                  <span class="comment_link" title="<%=escape_t(tr("Send comment","Ajax"))%>">
+                  <%= link_to_unless_current pluralize(activity.comments_count, title="#{escape_t(tr("Comment","Ajax"))}"), activity_comments_url(activity) %>
+                  </span>
+                <% else %>
+                  <span class="comment_link" id="comment_link_<%= activity.id.to_s %>" title="<%=escape_t(tr("Send comment","Ajax"))%>">  
+                    <%= link_to tr("Comment", "view/activities/_show"), new_activity_comment_url(activity), :method => :get,
+                                'data-disable-with' => "",
+                                'data-loader-name' => "horizontal_small",
+                                :remote=>true %>
+                  </span>
+                <% end %>
+              <% end %>
+      			</td>
+  			  </tr>
+ 		   </table>
+    </div>
 	</div>
 
 	<% if activity.class != ActivityCommentParticipant and activity.class != ActivityBulletinProfileAuthor %>

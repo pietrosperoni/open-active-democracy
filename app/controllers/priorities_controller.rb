@@ -128,7 +128,7 @@ class PrioritiesController < ApplicationController
   # GET /priorities/ads
   def ads
     @page_title = tr("Ads running at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
-    @ads = Ad.active_first.paginate :include => [:user, :priority], :page => params[:page], :per_page => params[:per_page]
+    @ads = Ad.filtered.active_first.paginate :include => [:user, :priority], :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
       format.xml { render :xml => @ads.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }

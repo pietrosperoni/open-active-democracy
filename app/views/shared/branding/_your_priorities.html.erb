@@ -4,10 +4,21 @@
       <td>
         <div id="main_logo">
           <%= link_to :controller=>"portal", :host=>"www.yrpri.org" do %>
-            <%= image_tag "/images/new/logo.gif"%>
+            <%= image_tag "/images/logos/header.png"%>
           <% end %>
         </div>
       </td>
+      <td>
+        <div id="branding_text">
+          <div id="branding_text_header">
+            <%=tr("Your Priorities","views/shared/_branding")%>
+          </div>
+          <div id="branding_text_sub">
+            <%=request.host%>
+          </div>
+        </div>
+      </td>
+
       <% if false and current_partner %>
         <td>
           <div id="partner_logo">

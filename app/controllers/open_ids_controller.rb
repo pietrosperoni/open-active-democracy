@@ -38,8 +38,10 @@ class OpenIdsController < ApplicationController
                             :login => "#{ax.get_single('http://axschema.org/namePerson/first')} #{ax.get_single('http://axschema.org/namePerson/last')}".strip)
 
             if user.save(false)
+              user.activate!
+              user.reload # Need to reload the user otherwise the welcome message triggers Encoding::CompatibilityError: incompatible character encodings: UTF-8 and ASCII-8BIT
               self.current_user = user
-              flash[:notice] = tr("Welcome, {user_name}.", "controller/open_ids", :government_name => Government.current.name, :user_name => current_user.name)
+              flash[:notice] = tr("Welcome, {user_name}.", "controller/open_ids", :user_name => current_user.name)
               redirect_back_or_default('/')
             else
               flash[:error] = tr("Sign in from Google failed.", "controller/open_ids")

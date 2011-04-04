@@ -2,11 +2,7 @@
 <% if ['priorities','changes','ads','prioritizer'].include?(params[:controller]) %>
 	<% nav = 2 %>
 <% elsif ['news','comments'].include?(params[:controller]) %>
-	<% if logged_in? %>
 		<% nav = 4 %>
-	<% else %>
-		<% nav = 5 %>
-	<% end %>
 <% elsif ['issues'].include?(params[:controller]) %>
 	<% nav = 1 %>
 <% elsif ['network','users','user_contacts','import','messages','inbox','facebook'].include?(params[:controller]) or (params[:controller] == 'partners' and not logged_in?) %>
@@ -43,9 +39,15 @@
 		<li class="tab3">
 			<span class="tab_header"><%= link_to tr("Points", "view/shared/_menu"), :controller => "points" %></span>
 		</li>
-		<li class="tab5">
-			<span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), :controller => "network" %></span>
-		</li>
+		<% if logged_in? %>
+  		<li class="tab5">
+  			<span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), following_user_contacts_path(current_user) %></span>
+  		</li>
+		<% else %>
+      <li class="tab5">
+        <span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), :controller => "network" %></span>
+      </li>
+		<% end %>
     <li class="tab1">
       <span class="tab_header"><%= link_to tr("Categories","Menu system"), :controller => "issues" %></span>
     </li>

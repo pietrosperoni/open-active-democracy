@@ -29,7 +29,7 @@ every 15.minutes do
   rake "ts:index"
 end
 
-every 45.minutes do
+every 30.minutes do
   rake "schedule:priority_ranker"
 end
 

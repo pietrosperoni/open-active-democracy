@@ -625,6 +625,15 @@ Tr8n.Lightbox.prototype = {
 **** Tr8n Utils
 ****************************************************************************/
 
+function getMetaContents(mn){
+  var m = document.getElementsByTagName('meta');
+  for(var i in m){
+   if(m[i].name == mn){
+     return m[i].content;
+   }
+  }
+}
+
 Tr8n.Utils = {
 
   hideFlash: function() {
@@ -726,8 +735,10 @@ Tr8n.Utils = {
         }
       }
     }
-
+    
     request.open(options.method, url, true);
+    var token = getMetaContents('csrf-token')
+    if (token) request.setRequestHeader('X-CSRF-Token', token);
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.setRequestHeader('Accept', 'text/javascript, text/html, application/xml, text/xml, */*');
     request.send(options.parameters);

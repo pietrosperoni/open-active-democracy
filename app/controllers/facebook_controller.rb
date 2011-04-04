@@ -7,20 +7,20 @@ class FacebookController < ApplicationController
     @page_title = tr("Invite your Facebook friends to join {government_name}", "controller/facebook", :government_name => tr(current_government.name,"Name from database"))
     @user = User.find(current_user.id)
     @facebook_contacts = @user.contacts.active.facebook.collect{|c|c.facebook_uid}
-#    if current_facebook_user
-#      app_users = current_facebook_user.user.friends_with_this_app
-#      if app_users.any?
-#        count = 0
-#        @users = User.active.find(:all, :conditions => ["facebook_uid in (?)",app_users.collect{|u|u.uid}.uniq.compact])        
-#        for user in @users
-#          unless @facebook_contacts.include?(user.facebook_uid)
-#            count += 1
-#            current_user.follow(user)
-#            @facebook_contacts << user.facebook_uid
-#          end
-#        end
-#      end
-#    end
+    if current_facebook_user
+      app_users = current_facebook_user.friends
+      if app_users.any?
+        count = 0
+        @users = User.active.find(:all, :conditions => ["facebook_uid in (?)",app_users.collect{|u|u.id}.uniq.compact])
+        for user in @users
+          unless @facebook_contacts.include?(user.facebook_uid)
+            count += 1
+            current_user.follow(user)
+            @facebook_contacts << user.facebook_uid
+          end
+        end
+      end
+    end
   end
 
   # POST /facebook/multiple
@@ -30,10 +30,11 @@ class FacebookController < ApplicationController
       redirect_to :controller => "network", :action => "find"
       return
     end
-    @fb_users = current_facebook_user.users(params[:ids])
+    @fb_users = current_facebook_user.friends
     success = 0
-    for fb_user in @fb_users
-      @contact = @user.contacts.create(:name => fb_user.name, :facebook_uid => fb_user.uid, :is_from_realname => 1)
+    @fb_users.each do |fb_user|
+      next unless params[:ids].include?(fb_user.id.to_s)
+      @contact = @user.contacts.create(:name => fb_user.name, :facebook_uid => fb_user.id, :is_from_realname => 1)
       if @contact
         success += 1
         @contact.invite!

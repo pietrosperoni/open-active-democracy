@@ -30,6 +30,7 @@ gem 'nokogiri'
 #   gem 'webrat'
 # end
 gem "ruby-openid"
+#gem 'ruby-openid', :git => 'git://github.com/rbjarnason/ruby-openid.git', :require => 'ruby-openid'
 gem "rack-openid"
 gem 'kgio'
 gem 'whenever', :require => false
@@ -38,7 +39,7 @@ gem 'htmlentities'
 gem 'auto_html'
 gem 'delayed_job'
 gem 'rmagick','2.12.2'
-gem 'mongrel', '>= 1.2.0.pre2'
+#gem 'mongrel', '>= 1.2.0.pre2'
 gem 'paperclip'
 gem 'sunlight', '>= 0.9'  
 gem 'googlecharts'
@@ -60,5 +61,6 @@ gem 'thinking-sphinx',
 gem 'jquery-rails', '>= 0.2.6'
 
 group :development do
+  gem 'mongrel', '>= 1.2.0.pre2'  
   gem 'rails-dev-boost', :git => 'git://github.com/rbjarnason/rails-dev-boost.git', :require => 'rails_development_boost'
 end

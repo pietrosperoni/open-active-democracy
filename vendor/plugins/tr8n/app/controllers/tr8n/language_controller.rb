@@ -258,10 +258,12 @@ class Tr8n::LanguageController < Tr8n::BaseController
       elsif language_action == "switch_language"
         tr8n_current_translator.switched_language!(Tr8n::Language.find_by_locale(params[:locale]))
         change_locale_in_url(params[:locale])
+        cookies.permanent[:last_selected_language]=params[:locale]
       end
     elsif language_action == "switch_language"  # non-translator mode
       Tr8n::LanguageUser.create_or_touch(tr8n_current_user, Tr8n::Language.find_by_locale(params[:locale]))
-     change_locale_in_url(params[:locale])
+      change_locale_in_url(params[:locale])
+      cookies.permanent[:last_selected_language]=params[:locale]
     elsif language_action == "become_translator" # non-translator mode
       Tr8n::Translator.register
     elsif language_action == "enable_inline_mode" or language_action == "toggle_inline_mode" # non-translator mode

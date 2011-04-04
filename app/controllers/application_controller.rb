@@ -116,12 +116,11 @@ class ApplicationController < ActionController::Base
 
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
-    Rails.logger.info()
     if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
       if (controller_name=="home" and action_name=="index") or 
          Rails.env.development? or 
          self.class.name.downcase.include?("tr8n") or
-         ["endorse","oppose"].include?(action_name)
+         ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
         @current_partner = nil
         Partner.current = @current_partner
         Rails.logger.info("No partner")
@@ -153,19 +152,35 @@ class ApplicationController < ActionController::Base
         @geoblocked = false
       end
     end
+    if @geoblocked
+      unless session["have_shown_geoblock_warning_#{@country_code}"]
+        flash.now[:notice] = tr("This part of the website is only open for viewing in your country.","geoblocking")
+        session["have_shown_geoblock_warning_#{@country_code}"] = true
+      end
+    end
   end
   
   def current_locale
     if params[:locale]
       session[:locale] = params[:locale]
+      cookies.permanent[:last_selected_language] = session[:locale]
+      Rails.logger.debug("Set language from params")
     elsif not session[:locale]
-      if @iso_country and not @iso_country.languages.empty?
+      if cookies[:last_selected_language]
+        session[:locale] = cookies[:last_selected_language]
+        Rails.logger.debug("Set language from cookie")
+      elsif @iso_country and not @iso_country.languages.empty?
         session[:locale] =  @iso_country.languages.first.locale
+        Rails.logger.debug("Set language from geoip")
       elsif Partner.current and Partner.current.default_locale
         session[:locale] = Partner.current.default_locale
+        Rails.logger.debug("Set language from partner")
       else
         session[:locale] = tr8n_user_preffered_locale
+        Rails.logger.debug("Set language from tr8n")
       end
+    else
+      Rails.logger.debug("Set language from session")
     end
     session_locale = session[:locale]
     if ENABLED_I18_LOCALES.include?(session_locale)

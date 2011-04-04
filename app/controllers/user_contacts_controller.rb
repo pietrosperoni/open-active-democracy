@@ -38,7 +38,7 @@ class UserContactsController < ApplicationController
   
   def invited
     @page_title = tr("People you've invited to join {government_name}", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
-    @contacts = @user.contacts.active.not_members.invited.with_email.recently_updated.paginate :page => params[:page], :per_page => params[:per_page]
+    @contacts = @user.contacts.active.not_members.invited.recently_updated.paginate :page => params[:page], :per_page => params[:per_page]
   end  
 
   # GET /users/1/contacts/new

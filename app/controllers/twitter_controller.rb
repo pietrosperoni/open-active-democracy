@@ -71,8 +71,6 @@ class TwitterController < ApplicationController
           end
           if u # now it's time to update memcached (or their cookie if in single govt mode) that we've got their acct
             self.current_user = u
-            self.current_user.remember_me unless current_user.remember_token?
-            cookies[:auth_token] = { :value => self.current_user.remember_token, :expires => self.current_user.remember_token_expires_at }
             redirect_to Government.current.homepage_url + "twitter/success"
           else
             redirect_to Government.current.homepage_url + "twitter/failed"
