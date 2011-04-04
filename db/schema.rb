@@ -1622,7 +1622,7 @@ ActiveRecord::Schema.define(:version => 20110331020205) do
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
-  add_index "users", ["identifier_url"], :name => "index_users_on_identifier_url"
+  add_index "users", ["identifier_url"], :name => "index_users_on_identifier_url", :unique => true
   add_index "users", ["partner_id"], :name => "user_partner_id"
   add_index "users", ["rss_code"], :name => "index_users_on_rss_code"
   add_index "users", ["status"], :name => "status"
