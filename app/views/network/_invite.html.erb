@@ -7,7 +7,7 @@
       <% if current_facebook_user %>
         <%= link_to image_tag("facebook-logo.jpg", :border => 0), :url => {:controller => "facebook", :action => "invite"}, :html => {:class => "import_button"}  %>
       <% else %>
-        <a href="#" onClick="FB.Connect.requireSession(function() { window.location='<%= url_for(:only_path => false, :controller => 'facebook', :action => 'invite') %>'; });"><%= image_tag("facebook-logo.jpg", :border => 0) %></a>
+        <a href="#" onClick="FB.login(function() { window.location='<%= url_for(:only_path => false, :controller => 'facebook', :action => 'invite') %>'; });"><%= image_tag("facebook-logo.jpg", :border => 0) %></a>
       <% end %>
       <br><br>
     <% end %>   
