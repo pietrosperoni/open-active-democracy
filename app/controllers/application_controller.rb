@@ -164,7 +164,9 @@ class ApplicationController < ActionController::Base
     if params[:locale]
       session[:locale] = params[:locale]
     elsif not session[:locale]
-      if @iso_country and not @iso_country.languages.empty?
+      if cookies[:last_selected_language]
+        session[:locale] = cookies[:last_selected_language]
+      elsif @iso_country and not @iso_country.languages.empty?
         session[:locale] =  @iso_country.languages.first.locale
       elsif Partner.current and Partner.current.default_locale
         session[:locale] = Partner.current.default_locale

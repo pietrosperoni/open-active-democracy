@@ -11,14 +11,17 @@
 		<% end %>
 	<% end %>
 
-	<% if current_user.endorsements_count > 1 %>		
+	<% if current_user.endorsements_count > 1 %>
+	    <% display_box = false %>
 			<div id="next_steps_box">
 				<%= tr("There's a lot you can do at {government_name}. Here's how to get started:", "view/shared/_notifications", :government_name => tr(current_government.name,"Name from database"))%>
 				<ol>
 					<% if current_user.followings_count < 2 %>
+					  <% display_box = true %>
 						<li><%= link_to tr("Find people you know", "view/shared/_notifications"), user_contacts_path(current_user) %></li>
 					<% end %>
 					<% if current_user.referrals_count == 0 %>
+            <% display_box = true %>
 						<% if current_facebook_user %>
 							<li><%= link_to tr("Invite your Facebook friends", "view/shared/_notifications"), :controller => "facebook", :action => "invite" %></li>
 						<% else %>
@@ -26,21 +29,29 @@
 						<% end %>
 					<% end %>
 					<% if not current_user.has_picture? and not current_user.has_facebook? %>
+            <% display_box = true %>
 						<li><%= link_to tr("Add your picture", "view/shared/_notifications"), picture_settings_url %></li>
 					<% end %>		
 					<% if not current_user.profile %>
+            <% display_box = true %>
 						<li><%= link_to tr("Add your bio", "view/shared/_notifications"), new_user_profile_url(current_user) %></li>
 					<% end %>
-					<% if current_user.points_count < 1 and current_user.endorsements_count > 2 %>
+					<% if current_user.points_count < 2 and current_user.endorsements_count > 2 %>
+            <% display_box = true %>
 						<li><%= link_to tr("Write points for your priorities", "view/shared/_notifications"), :controller => "briefing", :action => "points" %></li>
 					<% end %>
 					<% if current_user.comments_count < 2 and current_user.endorsements_count > 2 %>
+            <% display_box = true %>
 						<li><%= link_to tr("Join the discussion on your priorities", "view/shared/_notifications"), :controller => "news", :action => "your_priority_discussions" %></li>
 					<% end %>
 				</ol>
 				<%= tr("You can get involved whenever and however often you like. We're open 24 hours a day.", "view/shared/_notifications", :government_name => tr(current_government.name,"Name from database"))%>
-			</div>
-	
+			</div>	
+			<% unless display_box %>
+  			<script type="text/javascript">
+  			  jQuery("#next_steps_box").hide();
+  			</script>
+			<% end %>
 	<% end %>
 	
 <% end %>
