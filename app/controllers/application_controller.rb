@@ -163,6 +163,7 @@ class ApplicationController < ActionController::Base
   def current_locale
     if params[:locale]
       session[:locale] = params[:locale]
+      cookies[:last_selected_language] = session[:locale]
       Rails.logger.debug("Set language from params")
     elsif not session[:locale]
       if cookies[:last_selected_language]
