@@ -163,16 +163,23 @@ class ApplicationController < ActionController::Base
   def current_locale
     if params[:locale]
       session[:locale] = params[:locale]
+      Rails.logger.debug("Set language from params")
     elsif not session[:locale]
       if cookies[:last_selected_language]
         session[:locale] = cookies[:last_selected_language]
+        Rails.logger.debug("Set language from cookie")
       elsif @iso_country and not @iso_country.languages.empty?
         session[:locale] =  @iso_country.languages.first.locale
+        Rails.logger.debug("Set language from geoip")
       elsif Partner.current and Partner.current.default_locale
         session[:locale] = Partner.current.default_locale
+        Rails.logger.debug("Set language from partner")
       else
         session[:locale] = tr8n_user_preffered_locale
+        Rails.logger.debug("Set language from tr8n")
       end
+    else
+      Rails.logger.debug("Set language from session")
     end
     session_locale = session[:locale]
     if ENABLED_I18_LOCALES.include?(session_locale)
