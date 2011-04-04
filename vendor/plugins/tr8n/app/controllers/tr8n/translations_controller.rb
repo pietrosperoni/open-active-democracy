@@ -105,6 +105,7 @@ class Tr8n::TranslationsController < Tr8n::BaseController
   # ajax based method - collects votes for a translation
   def vote
     translation = Tr8n::Translation.find(params[:translation_id])
+    Rails.logger.debug("Current translator in vote #{tr8n_current_translator}")
     translation.vote!(tr8n_current_translator, params[:vote])
     translation_key = translation.translation_key
 
