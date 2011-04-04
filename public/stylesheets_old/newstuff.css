@@ -102,6 +102,20 @@ hr { border-top: 3px solid #e5e5e5; }
   margin-top: 0px;
 }
 
+#network_sidebar {
+  width: 220px;
+  float: right;
+  padding-right: 4px;
+  vertical-align: top;
+  top: 0px;
+  right: 5px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+#network_sidebar td {
+  vertical-align: top;
+}
 #contentwrap {
 	width: 720px;
 	margin-left: 4px;
@@ -607,6 +621,7 @@ width: 120px;
 #nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, 
 #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a,
 #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_0 li.tab0 .tab_header a, 
+#nav_sub_0 li.tab0 .tab_header a,
 #nav_sub_1 li.tab1 .tab_header a,
 #nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a,
 #nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a,
