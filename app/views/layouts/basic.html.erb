@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
+<html <%=(Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left) ? "dir=\"rtl\"".html_safe : "" -%> xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
 
   <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%= @page_title || tr(current_government.name,"Name from database") %></title>
@@ -22,6 +22,15 @@
       <%= render :partial=>"priorities/fb_og_tags" %>
     <% end %>
     <%= tr8n_scripts_tag %>
+    <% if Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left %>
+      <style type="text/css">
+        #sidebar {
+          float: left !important;
+          position:relative;
+       }
+      </style>
+    <% end %>
+
   </head>
   <body class="C<%= h(controller.controller_name) %> <%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
     <%= csrf_meta_tag %>
@@ -40,14 +49,25 @@
         <% if ["network","user_contacts"].include?(controller_name) -%>
           <table width="100%">
             <tr>
-              <td>
-                <div id="content_text">
-                  <%= yield :layout %>
-                </div>
-              </td>
-              <td>
-                <%= render :partial=>"network/sidebar" %>
-              </td>
+             <% if Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left %>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+              <% else %>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+              <% end %>
             </tr>
           </table>
         <% else %>
