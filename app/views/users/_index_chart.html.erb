@@ -12,11 +12,11 @@
 		<td valign="top" rowspan="3" colspan="3">
 			<%= image_tag Gchart.line(:size => '130x80', :data => cu[:adjusted_percentages], :line_colors => "13499b", :chart_background => 'EEEEEE', :min_value => 0, :max_value => cu[:max_percentage]*2, :custom => "chg=0,50,1,0"), :title => tr("Tracks the movement of {user_name} priorities in the rankings over the last 30 days. The more people who endorse priorities on {user_name} agenda at a high priority, the higher it rises.", "view/users/_index_chart", :user_name => user.name), :class => "qtip_left", :size => "130x80" %>
 		</td>			
-		<td valign="top" class="chart_label_plus" height="17">+<%= number_to_percentage(cu[:max_percentage]*100, :precision => 2) %></td>
+		<td valign="top" class="chart_label_plus" height="17">+<%= number_to_percentage(cu[:max_percentage]*100, :precision => 0) %></td>
 
 	</tr>
 	<tr><td valign="middle" class="chart_label" height="47">0</td></tr>
-	<tr><td valign="bottom" class="chart_label_minus" height="15"><%= number_to_percentage(cu[:max_percentage]*-100, :precision => 2) %></td></tr>
+	<tr><td valign="bottom" class="chart_label_minus" height="15"><%= number_to_percentage(cu[:max_percentage]*-100, :precision => 0) %></td></tr>
 	</tr>
 	<% if current_government.official_user_id == user.id %>
 	
