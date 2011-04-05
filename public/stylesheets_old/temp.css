@@ -189,7 +189,12 @@ ul#priority_menu div.tab_body {
 .comment_list_empty {
     padding: 0 0 0 29px;
 }
-.activity_border, .activity_hidden {border:0px solid #fff !important;margin-bottom: 5px;}
+.activity_border, .activity_hidden {
+border:none;
+border-bottom: 1px solid #DDDDDD !important;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
 .comment_list {padding: 0 0 0 24px;}
 .comment_box img {width:22px;height:22px}
 
@@ -210,6 +215,43 @@ div.best-points {background:#fff;}
     margin-top: 1px;
     padding: 1px;
 }
+div.new_comment_facebook {}
+
+
+
+.priority_remove_oppose, .priority_remove {
+    font-size: 0.7em;
+    font-weight: bold;
+    margin: 0 3px 0 0;
+    padding: 1px 2px 1px 3px;
+    text-transform: uppercase;
+}
+
+.priority_endorsement_count {
+    font-size: 1em;
+    left: 0px;
+    position: static;
+    top: 0px;
+}
+
+
+.endorsed, .opposed, .compromised {
+    bottom: 1px;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0 3px 1px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
 
 .grey_button_wide, .import_button, .notice {
     background-color: #F0F0F0;
@@ -224,6 +266,12 @@ div.best-points {background:#fff;}
 .suggest_button:hover, .yellow_button:hover, .grey_button_wide:hover {
     border: 2px solid #13499B !important;
 }
+
+
+
+
+
+
 #user_info_box {
   
     font-size: 10px;

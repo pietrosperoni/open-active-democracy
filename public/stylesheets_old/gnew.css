@@ -456,9 +456,9 @@ margin-bottom: 10px;
 }
 
 .activity_border, .activity_hidden {
-border:1px solid #ddd !Important;
+/*border:1px solid #ddd !Important;
 margin-bottom: 10px;
-margin-left: 0px;
+margin-left: 0px;*/
 }
 
 #activities {
