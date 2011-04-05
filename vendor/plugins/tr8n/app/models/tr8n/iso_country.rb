@@ -31,6 +31,8 @@ class Tr8n::IsoCountry < ActiveRecord::Base
     two = []
     three = []
     four = []
+    five = []
+    six = []
     flip = 1
     self.by_name.all.each do |a|
       if flip==1
@@ -44,9 +46,15 @@ class Tr8n::IsoCountry < ActiveRecord::Base
         flip = 4
       elsif flip==4
         four << a
+        flip = 5
+      elsif flip==5
+        five << a
+        flip = 6
+      elsif flip==6
+        six << a
         flip = 1
       end
     end
-    [one,two,three,four]
+    [one,two,three,four,five,six]
   end
 end
