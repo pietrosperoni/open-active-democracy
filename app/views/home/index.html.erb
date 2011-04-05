@@ -57,8 +57,10 @@
       <td align="center">
         <br><br>
         <%partner=Partner.find_by_short_name("eu")%>
-        <%=image_tag "flags/64/_european-union.png" %><br>
-        <h2><%=tr("European Union and EEA Top Priorities","welcome")%></h2>
+        <% link_to partner.show_url do %>
+          <%=image_tag "flags/64/_european-union.png" %><br>
+          <h2><%=tr("European Union and EEA Top Priorities","welcome")%></h2>
+        <% end %>
         <% if @eu_eea_priorities.any? %>
           <%= render :partial=>"priorities/top_level_listing", :locals=>{:priorities=>@eu_eea_priorities, :endorsements=>@endorsements}%>
         <% else %>
