@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: a37767f3cd25b160e636c7bdfabb4d8d5e95c6f7
+  revision: 088d9aa6b15a35e48fab817d4d1118b050ae89f0
   branch: rails3
   specs:
-    thinking-sphinx (2.0.3)
+    thinking-sphinx (2.0.2)
       activerecord (>= 3.0.3)
       riddle (>= 1.2.2)
 
@@ -17,15 +17,19 @@ GIT
       oauth (>= 0.3.1)
 
 GIT
+<<<<<<< HEAD
+  remote: git://github.com/thedarkone/rails-dev-boost.git
+  revision: 415cb19469f868497b1325ffc8b18fca75685c36
+=======
   remote: git://github.com/rbjarnason/rails-dev-boost.git
   revision: 4f7ad03b30a3bc93c1a63c4ac1e98e4427447435
+>>>>>>> rvb/master
   specs:
     rails-dev-boost (0.1.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.7)
     aaronh-chronic (0.3.9)
     abstract (1.0.0)
     actionmailer (3.0.5)
@@ -55,8 +59,7 @@ GEM
       activesupport (= 3.0.5)
     activesupport (3.0.5)
     arel (2.0.9)
-    auto_html (1.3.6)
-      RedCloth
+    auto_html (1.3.4)
     builder (2.1.2)
     capistrano (2.5.20)
       highline
@@ -78,18 +81,18 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     ezcrypto (0.7.2)
-    facebooker2 (0.0.11)
+    facebooker2 (0.0.10)
       mogli (>= 0.0.12)
       ruby-hmac
     gem_plugin (0.2.3)
     geoip (1.0.0)
     googlecharts (1.6.1)
     highline (1.6.1)
-    hoptoad_notifier (2.4.9)
+    hoptoad_notifier (2.4.8)
       activesupport
       builder
     hpricot (0.8.4)
-    htmlentities (4.3.0)
+    htmlentities (4.2.4)
     httparty (0.7.4)
       crack (= 0.1.8)
     i18n (0.5.0)
@@ -109,7 +112,7 @@ GEM
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
-    mysql2 (0.2.7)
+    mysql2 (0.2.6)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -117,7 +120,7 @@ GEM
     net-ssh (2.1.3)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
-    newrelic_rpm (2.14.1)
+    newrelic_rpm (2.13.4)
     nokogiri (1.4.4)
     oauth (0.4.4)
     paperclip (2.3.8)
@@ -127,9 +130,6 @@ GEM
     rack (1.2.2)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
-    rack-openid (1.3.1)
-      rack (>= 1.1.0)
-      ruby-openid (>= 2.1.8)
     rack-test (0.5.7)
       rack (>= 1.0)
     rails (3.0.5)
@@ -149,14 +149,13 @@ GEM
     riddle (1.2.2)
     rmagick (2.12.2)
     ruby-hmac (0.4.0)
-    ruby-openid (2.1.8)
     sunlight (1.0.7)
       json (>= 1.1.3)
       ym4r (>= 0.6.1)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.26)
+    tzinfo (0.3.25)
     whenever (0.6.7)
       aaronh-chronic (>= 0.3.9)
       activesupport (>= 2.3.4)
@@ -186,11 +185,9 @@ DEPENDENCIES
   nokogiri
   oauth (>= 0.3.1)
   paperclip
-  rack-openid
   rails (= 3.0.5)
   rails-dev-boost!
   rmagick (= 2.12.2)
-  ruby-openid
   sunlight (>= 0.9)
   thinking-sphinx!
   twitter-auth!

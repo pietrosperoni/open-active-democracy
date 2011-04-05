@@ -1,8 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
-
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title><%= @page_title || tr(current_government.name,"Name from database") %></title>
+	<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title><%= @page_title || current_government.name_with_tagline %></title>
 		<%= javascript_include_tag :defaults %>
 		<%= render :partial => "shared/description" %>
 		<%= render :partial => "shared/head" %>
@@ -20,55 +19,33 @@
 	</head>
 	<body>
 
-		<div id="wrapper">
-			<div id="mainContent">
-				<!-- Content area -->
-				<div id="header">
-					<div id="logo">
-						<%= render :partial => "shared/branding/your_priorities"%>
-					</div>
-					<div id="ads">
-						<%= render :partial => "ads/pick" %>
-					</div>
-					<div id="language">
-						<%= tr("Select language:","views/layouts/basic")%> <%= tr8n_language_selector_tag %>
-						<%= render :partial => "shared/google_translate_select" %>
-					</div>
-					<div id="notice">
-						<%= flash_div :warning, :notice, :error %>
-					</div>
-				</div>
-				<div id="menu">
-					<%= render :partial => "shared/menu" %>
-				</div>
-				<!-- Content boxes-->
-				<div id="content">
+		<%= csrf_meta_tag %>
 
-					<div class="pageBox">
-						<div class="title">
-							Efstu mál
+		<div id="backgroundwrap">
+			<div id="mainContent">
+				<!-- HEADER-->
+				<div id="header">
+					<div id="branding">
+						<%= render :partial => "shared/branding/your_priorities"%>
+						<div id="ads">
+							<%= render :partial => "ads/pick" %>
 						</div>
-						<div class="selector">
-							Subfilters and subnavigation
+						<div id="language">
+							<%= tr("Select language:","views/layouts/basic")%> <%= tr8n_language_selector_tag %>
+							<%= render :partial => "shared/google_translate_select" %>
 						</div>
-						<div class="">
+						<div id="notice">
+							<%= flash_div :warning, :notice, :error %>
 						</div>
-					</div>
-					<div class="pageBox">
-						box
-					</div>
-					<div class="pageBox">
-						box
-					</div>
-					<div class="pageBox">
-						box
 					</div>
 				</div>
-			</div>
-			<!-- Sidebar area -->
+				
+				
+<!-- Sidebar area -->
+
 			<div id="sidebar">
 				<div id="reykjavikLink">
-					<a href="#">Your Priorities worldwide</a>
+					link
 				</div>
 				<% if logged_in? and current_user.warnings_count > 0 %>
 				<div id="warning">
@@ -94,14 +71,13 @@
 				</div>
 				<div id="newIdea">
 					<%= render :partial => "priorities/new_button" %>
-					<img src="../stylesheets/images/newidea.gif" border="0" alt="" />
 				</div>
 				<!-- User area-->
 				<div id="user">
 					<% if logged_in? %>
 					<%= render :partial => "shared/notifications" %>
-					<%= render :partial => "shared/login" %>
 					<% else %>
+					<%= render :partial => "shared/login" %>
 					<% end %>
 
 					<% if logged_in? %>
@@ -135,6 +111,33 @@
 					</div>
 				</div>
 			</div>
+
+				<div id="menu">
+					<%= render :partial => "shared/menu" %>
+				</div>
+				<!-- Content boxes-->
+				<div id="content_text">
+					<div class="pageBox">
+						<div class="selector">
+							Subfilters and subnavigation
+						</div>
+						<div class="title">
+							<%= yield :layout %>
+						</div>
+						<div class="">
+						</div>
+					</div>
+					<div class="pageBox">
+						box
+					</div>
+					<div class="pageBox">
+						box
+					</div>
+					<div class="pageBox">
+						Box
+					</div>
+				</div>
+			</div>
 		</div>
 		<div id="footer">
 			<%= render :partial => "shared/footer" %>
@@ -142,4 +145,4 @@
 			<%= render :partial => "shared/facebook_footer" %>
 		</div>
 	</body>
-</html>
+</html> 
