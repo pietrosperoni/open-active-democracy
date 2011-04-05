@@ -69,12 +69,16 @@ class TwitterController < ApplicationController
             u = User.create_from_twitter(user_info, @access_token.token, @access_token.secret, request) 
             Delayed::Job.enqueue LoadTwitterFollowers.new(u.id), 1
           end
-          if u # now it's time to update memcached (or their cookie if in single govt mode) that we've got their acct
-            self.current_user = u
-            redirect_to Government.current.homepage_url + "twitter/success"
+          if @geoblocked
+            redirect_to Government.current.homepage_url + "twitter/geoblocked"
           else
-            redirect_to Government.current.homepage_url + "twitter/failed"
-          end 
+            if u # now it's time to update memcached (or their cookie if in single govt mode) that we've got their acct
+              self.current_user = u
+              redirect_to Government.current.homepage_url + "twitter/success"
+            else
+              redirect_to Government.current.homepage_url + "twitter/failed"
+            end
+          end
           return
         end
       end
@@ -84,6 +88,11 @@ class TwitterController < ApplicationController
       redirect_to Government.current.homepage_url + "twitter/failed"
       return
     end
+  end
+
+  def geoblocked
+    flash[:notice] = tr("This part of the website is not avilable for login in your country.", "controller/twitter", :government_name => Government.current.name, :user_name => current_user.name)
+    redirect_back_or_default('/')
   end
   
   def success
