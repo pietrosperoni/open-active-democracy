@@ -6,6 +6,10 @@ class Tr8n::IsoCountry < ActiveRecord::Base
 
   EU_AND_EEA_COUNTRIES = ["at", "be", "bg", "cy", "cz", "dk", "ee", "fi", "fr", "de", "gr", "hu", "ie", "it", "lv", "lt", "lu", "mt", "nl", "pl", "pt", "ro", "sk", "si", "es", "se", "gb","is","no","li","ch"]
 
+  def self.country_in_eu_or_eea?(country_code)
+    EU_AND_EEA_COUNTRIES.include?(country_code.downcase)
+  end
+
   def large_flag_image
     base_flag_url(64)
   end
