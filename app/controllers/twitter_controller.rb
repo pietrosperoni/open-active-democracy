@@ -69,15 +69,16 @@ class TwitterController < ApplicationController
             u = User.create_from_twitter(user_info, @access_token.token, @access_token.secret, request) 
             Delayed::Job.enqueue LoadTwitterFollowers.new(u.id), 1
           end
-          if @geoblocked
-            redirect_to Government.current.homepage_url + "twitter/geoblocked"
-          else
-            if u # now it's time to update memcached (or their cookie if in single govt mode) that we've got their acct
-              self.current_user = u
-              redirect_to Government.current.homepage_url + "twitter/success"
+          if u # now it's time to update memcached (or their cookie if in single govt mode) that we've got their acct
+            self.current_user = u
+            check_geoblocking
+            if @geoblocked
+              redirect_to Government.current.homepage_url + "twitter/geoblocked"
             else
-              redirect_to Government.current.homepage_url + "twitter/failed"
+              redirect_to Government.current.homepage_url + "twitter/success"
             end
+          else
+            redirect_to Government.current.homepage_url + "twitter/failed"
           end
           return
         end
