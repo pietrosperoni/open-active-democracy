@@ -11,7 +11,7 @@ img {border:none}
 #ads {width: 335px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 5px 5px 5px 65px; height: 80px; font-size:10px;}
 #ads h2 {border:none;}
 
-
+td.right {width:60px}
 
 div.column .ui-widget-content {
 background-color:#fafafa;
@@ -142,13 +142,50 @@ table.show-with-processes-table td{padding:0}
     clear: both;
     width: auto;position: relative;
 }
+
+#priority_nav1 ul#priority_menu {
+    height: 21px !important;
+    margin: 0 10px;
+}
+
 ul#priority_menu li {
-    border: 1px solid #DDDDDD;
+    border: 0px solid #DDDDDD;
     display: inline;
     left: 0;
     position: relative;
     top: 0;
+margin:0;
+padding:0;
 }
+#priority_nav1 li.tab1 .tab_header a,ul#priority_menu li .tab_header a {
+    border: 1px solid #ddd;
+    font-size: 0.95em;
+    font-weight: normal !important;
+    letter-spacing: normal !important;
+    margin-right: 0;
+    padding: 3px 5px;
+    text-decoration: none;background:#fff;
+}
+
+ul#priority_menu li.mega .tab_header a {
+    background: #fff url("/images/mega_down_arrow.gif") no-repeat scroll right center;
+    margin-right: 0;
+    padding: 3px 13px 3px 7px;
+    text-decoration: none;
+}
+
+
+ul#priority_menu li .tab_header a:hover {
+    border: 1px solid #ccc;
+background:#fff;
+}
+
+ul#priority_menu div.tab_body {
+    left: 0;
+    position: absolute;
+    top: auto;
+}
+
 .comment_list_empty {
     padding: 0 0 0 29px;
 }
@@ -166,7 +203,13 @@ div.best-points {background:#fff;}
     letter-spacing:inherit;
     padding: 0;
 }
-
+.comment_link_add {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 0px solid #DDDDDD;
+    letter-spacing: 0.5px;
+    margin-top: 1px;
+    padding: 1px;
+}
 
 .grey_button_wide, .import_button, .notice {
     background-color: #F0F0F0;
