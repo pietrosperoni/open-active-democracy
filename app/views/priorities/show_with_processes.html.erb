@@ -9,8 +9,8 @@
 	<%= render :partial => "nav" %>
 <% end %>
 
-<p>
-<table border="0" cellspacing="0" cellpadding="0">
+
+<table class="show-with-processes-table">
 	<tr>
 		
 		<td valign="top" class="add_note">
@@ -25,7 +25,7 @@
 			<% if @priority.points_count == 0 %>
 				<%= tr("Please tell us why we should endorse or oppose this priority by <a href='{new_point_url}'>adding a point</a>. You can even suggest a different priority instead.", "view/priorities/show_with_processes", :new_point_url => new_priority_point_path(@priority))%>
 			<% else %>
-			<br>
+		
 				<table id="" class="container_13">
 					<tr>
 						<td class="grid_41">

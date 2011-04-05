@@ -2,7 +2,7 @@
 	<%= link_to_unless_current tr("Voting has not started yet", "view/changes/_status"), priority_change_url(change.priority,change) %>
 	<% if logged_in? and current_user.is_admin? %>
 		<p>
-		<table border="0" cellspacing="0" cellpadding="0">
+		<table class="changes-status">
 			<tr><td valign="top">
 				<%= button_to tr("Start the voting", "view/changes/_status"), start_priority_change_url(change.priority,change), :method => :put, :confirm => tr("This will send an email encouraging the affected people to vote.", "view/changes/_status"), :class => "grey_button" %>
 			</td><td valign="top" style="padding-left: 10px;">
