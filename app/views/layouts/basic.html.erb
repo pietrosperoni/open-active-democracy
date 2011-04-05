@@ -8,9 +8,10 @@
     <%= render :partial => "shared/head" %>
     <%= render :partial => "shared/javascripts" %>
     <%= render :partial => "shared/css" %>
-    <%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
+
     <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
-    <%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
+<%= stylesheet_link_tag "/stylesheets_old/color" %>    
+<%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
     <%= stylesheet_link_tag "/stylesheets_old/gnew" %>
     <%= stylesheet_link_tag "/stylesheets_old/temp" %>
     <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
