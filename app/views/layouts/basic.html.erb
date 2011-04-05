@@ -56,21 +56,21 @@
             <tr>
              <% if Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left %>
                 <td>
-                  <div id="content_text">
-                    <%= yield :layout %>
-                  </div>
-                </td>
-                <td>
-                  <%= render :partial=>"network/sidebar" %>
-                </td>
-              <% else %>
-                <td>
                   <%= render :partial=>"network/sidebar" %>
                 </td>
                 <td>
                   <div id="content_text">
                     <%= yield :layout %>
                   </div>
+                </td>
+             <% else %>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
                 </td>
               <% end %>
             </tr>
