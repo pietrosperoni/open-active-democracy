@@ -974,6 +974,13 @@ margin-right: 4px !Important;
   right: 18px;
 }
 
+.notification_icon {
+  float:left;
+  position: relative;
+  right: 5px;
+  padding-bottom:7px;
+}
+
 .point_name {
 font-size:13px !important;
 }
