@@ -177,6 +177,12 @@ class Tr8n::Language < ActiveRecord::Base
     end
   end
 
+  def self.top_languages
+    Tr8n::Cache.fetch("top_languages") do 
+      find(:all, :conditions => ["enabled = ? and completeness is not null and completeness > 5", true], :order => "completeness desc", :limit=>5)
+    end
+  end
+
   def self.featured_languages
     Tr8n::Cache.fetch("featured_languages") do 
       find(:all, :conditions => ["enabled = ? and featured_index is not null and featured_index > 0", true], :order => "featured_index desc")
