@@ -98,43 +98,7 @@
 			</div>
 		</li>		
 		<% end %>
-		<li class="tab7 mega">
-			<span class="tab_header">
-				<%= link_to tr("About", "view/shared/_menu"), "#" %>
-			</span>
-			<div class="tab_body">
-				<div class="tab_subhead"><%= link_to tr("About the site", "view/shared/_menu"), :controller => "about" %></div>
-				<div class="tab_sublinks">
-					<%= link_to tr("About", "view/shared/_menu"), :controller => "about" %>
-					&middot; <%= link_to tr("FAQ", "view/shared/_menu"), :controller => "about", :action => "faq" %>
-					&middot; <%= link_to tr("Rules", "view/shared/_menu"), :controller => "about", :action => "rules" %>
-					&middot; <%= link_to tr("Privacy policy", "view/shared/_menu"), :controller => "about", :action => "privacy" %><br/>
-					<% cache("pages-#{session[:locale]}-#{@inline_translations_enabled}") do %>
-						<%= Page.all.collect{ |page| link_to(page.link_name, about_url(page.short_name))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
-					<% end %>
-				</div>				
-
-        <div class="tab_subhead">
-          <%= link_to tr("Charts and stats", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
-        </div>
-        <div class="tab_sublinks">
-          <% if current_government.is_tags? %>
-            <%= link_to tr("Categories","view/shared/_menu"), :controller => "charts", :action => "issues" %> &middot; 
-          <% end %>
-          <%= link_to tr("Rising agendas", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
-                         &middot; <%= link_to tr("Falling agendas", "view/shared/_menu"), :controller => "charts", :action => "losers_24hr" %>
-        </div>
-
-        <div class="tab_subhead">
-          <%= link_to tr("Widgets for your site", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
-        </div>
-        <div class="tab_sublinks">
-           <%= link_to tr("Priorities", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
-           &middot; <%= link_to tr("Discussions", "view/shared/_menu"), :controller => "widgets", :action => "discussions" %>
-        </div>
-				
-			</div>
-		</li>
+		
 	</ul>
 	
 	<% if current_government.has_fav_icon? %>

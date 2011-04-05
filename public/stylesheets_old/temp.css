@@ -66,6 +66,24 @@ div#content_text table {
 
 .addwrapper {margin-bottom:5px;}
 
+#new_priority_button {
+ border: 0px solid #DDDDDD;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 7px;
+    padding: 26px 0 30px 27px;
+    width: 198px;
+}
+
+div.addwrapper  {
+    background-color: #FFFFFF;
+    background-image: url("../images/new/add-light-button-bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+    border: medium none;
+}
+
+
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
     font-weight: normal !important;
@@ -269,16 +287,23 @@ div.new_comment_facebook {}
 
 
 
-
+div.userwrap {
+background-color: #fff;
+    background-image: url("../images/new/user-bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+}
 
 
 #user_info_box {
-  
     font-size: 10px;
     font-weight: bold;
     line-height: 1.4em;
-     width: 205px;
-padding: 5px;
+    padding: 5px;
+    width: 205px;
+background:none;
+border: 0px solid #DDDDDD;
+
 }
 #user_info_box a {
   
@@ -288,12 +313,27 @@ padding: 5px;
      width: 205px;
 }
 #language_selection_box {
-    border: 1px solid #DDDDDD;
+    border: 0px solid #DDDDDD;
     margin-bottom: 7px;
     margin-top: 5px;
     padding: 5px;
     width: 205px;
 }
 
+.flash_error, #not_activated_header, #warning, .fieldWithErrors input, #errorExplanation h2 {
+    background: none;
+    border-left: 0px solid #EEEEEE;
+    border-right: 0px solid #EEEEEE;
+    border-top: 0px solid #EEEEEE;
+    color: #BC0000;
+    font-weight: bold; padding: 4px 0 0 8px;
+}
 
+#intro, #buzz_box, #not_activated, #notification_show, #errorExplanation, .bulletin_form, .change_vote_now, #contacts, #contacts_small, .invite_text, .notice {
+    background: none;
+    border: 0px solid #DDDDDD !important;
+    color: #444444;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
 
