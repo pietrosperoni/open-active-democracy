@@ -24,6 +24,9 @@ class OpenIdsController < ApplicationController
           user.save(false)
           flash[:notice] = tr("Your Google account is now linked", "controller/open_ids")
           redirect_back_or_default('/')
+        elsif @geoblocked
+          flash[:notice] = tr("This part of the website is not avilable for login in your country.", "controller/twitter")
+          redirect_back_or_default('/')
         else
           user = User.where(:identifier_url => openid.display_identifier).first
           if user

@@ -91,7 +91,7 @@ class TwitterController < ApplicationController
   end
 
   def geoblocked
-    flash[:notice] = tr("This part of the website is not avilable for login in your country.", "controller/twitter", :government_name => Government.current.name, :user_name => current_user.name)
+    flash[:notice] = tr("This part of the website is not avilable for login in your country.", "controller/twitter")
     redirect_back_or_default('/')
   end
   
