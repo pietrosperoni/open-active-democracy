@@ -729,12 +729,12 @@ border:1px solid #DDDDDD;
 
 
 .flash_error, #not_activated_header, #warning, .fieldWithErrors input, #errorExplanation h2 {
-background-color:#ccc;
+/*background-color:#ccc;
 color:#333;
 font-weight:bold;
 border-left: 1px solid #eee;
 border-top: 1px solid #eee;
-border-right: 1px solid #eee;
+border-right: 1px solid #eee;*/
 }
 
 #user_name {
