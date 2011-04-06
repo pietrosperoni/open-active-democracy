@@ -136,16 +136,16 @@ end
 
 task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/db/sphinx #{current_release}/db/sphinx"
-  run "ln -nfs /mnt/shared/config/yrprirsakey.pem #{current_release}/config/yrprirsakey.pem"
-  run "ln -nfs /mnt/shared/config/yrprirsacert.pem #{current_release}/config/yrprirsacert.pem"
-  run "ln -s   /mnt/shared/config/contacts.yml #{current_release}/config/contacts.yml"
-  run "ln -s   /mnt/shared/config/database.yml #{current_release}/config/database.yml"
-  run "ln -s   /mnt/shared/config/facebooker.yml #{current_release}/config/facebooker.yml"
-  run "ln -s   /mnt/shared/config/newrelic.yml #{current_release}/config/newrelic.yml"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/yrprirsakey.pem #{current_release}/config/yrprirsakey.pem"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/yrprirsacert.pem #{current_release}/config/yrprirsacert.pem"
+  run "ln -s   #{deploy_to}/#{shared_dir}/config/contacts.yml #{current_release}/config/contacts.yml"
+  run "ln -s   #{deploy_to}/#{shared_dir}/config/database.yml #{current_release}/config/database.yml"
+  run "ln -s   #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
+  run "ln -s   #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/twitter_auth.yml #{current_release}/config/twitter_auth.yml"
   run "ln -nfs /mnt/shared/system #{current_release}/public/system"
-  run "ln -nfs /mnt/shared/config/twitter_auth.yml #{current_release}/config/twitter_auth.yml"
-  #thinking_sphinx.configure
-  #thinking_sphinx.restart
+  thinking_sphinx.configure
+  thinking_sphinx.start
 end
 
 namespace :deploy do

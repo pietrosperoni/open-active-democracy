@@ -47,6 +47,8 @@ OpenActiveDemocracy::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  config.logger = SyslogLogger.new(program_name = 'YrPri')
+
   config.cache_store = :dalli_store, '127.0.0.1:11211', { :namespace => "oad_3_#{Rails.env}_#{Rails.application.config.database_configuration[Rails.env]["git_branch"]}", 
                                                           :compress => true, :compress_threshold => 64*1024 }
 end
