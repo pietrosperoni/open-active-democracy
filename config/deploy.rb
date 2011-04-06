@@ -131,7 +131,7 @@ end
 after "deploy:update", "delayed_job:restart"
 
 task :before_update_code, :roles => [:app] do
-  #thinking_sphinx.stop
+  thinking_sphinx.stop
 end
 
 task :after_update_code do
