@@ -60,13 +60,14 @@ class ApplicationController < ActionController::Base
     params.merge({:geoblocked=>@geoblocked, :host=>request.host, :country_code=>@country_code,
                   :locale=>session[:locale], :google_translate=>session[:enable_google_translate],
                   :have_shown_welcome=>session[:have_shown_welcome], 
-                  :last_selected_language=>cookies[:last_selected_language]})
+                  :last_selected_language=>cookies[:last_selected_language],
+                  :flash=>flash.map {|k,v| "#{v}" }.join.parameterize})
   end
 
   def do_action_cache?
     if logged_in?
       false
-    elsif request.format.html? and flash.empty?
+    elsif request.format.html?
       true
     else
       false
