@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
   def do_action_cache?
     if logged_in?
       false
-    elsif request.format.html?
+    elsif request.format.html? and flash.empty?
       true
     else
       false
