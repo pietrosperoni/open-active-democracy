@@ -192,8 +192,8 @@ ul#menu li .tab_header a, ul#menu li.mega .tab_header a, ul#menu_sub li .tab_hea
 }
 
 ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul#menu .tab_header a:hover, ul#menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover { 
-	background: #13499b; /* 13499b */
-	color: #ffffff; /* fff */
+	/*background: #13499b;  13499b */
+	/*color: #ffffff;  fff */
 }
 ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_third li.hovering div.tab_body, ul#priority_menu li.hovering div.tab_body { 
 	border: solid 2px #13499b; /* 13499b */

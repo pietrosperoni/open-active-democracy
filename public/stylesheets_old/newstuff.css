@@ -663,16 +663,16 @@ ul#menu li.mega .tab_header a:hover, ul#menu li.mega.hovering .tab_header a, ul#
 -moz-background-clip:border !important;
 -moz-background-inline-policy:continuous !important;
 -moz-background-origin:padding !important;
-background: #7a7878 none repeat scroll 0 0 !important;
-color:#FFFFFF !important;
+/*background: #7a7878 none repeat scroll 0 0 !important;*/
+/*color:#FFFFFF !important;*/
 }
 
 ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul#menu .tab_header a:hover, ul#menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover {
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
-background:#7a7878 none repeat scroll 0 0 !important;
-color:#FFFFFF !important;
+/*background:#7a7878 none repeat scroll 0 0 !important;*/
+/*color:#FFFFFF !important;*/
 }
 
 /*
