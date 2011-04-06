@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
+<html <%=(Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left) ? "dir=\"rtl\"".html_safe : "" -%> xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
 
   <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%= @page_title || tr(current_government.name,"Name from database") %></title>
@@ -8,9 +8,10 @@
     <%= render :partial => "shared/head" %>
     <%= render :partial => "shared/javascripts" %>
     <%= render :partial => "shared/css" %>
-    <%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
+
     <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
-    <%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
+<%= stylesheet_link_tag "/stylesheets_old/color" %>    
+<%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
     <%= stylesheet_link_tag "/stylesheets_old/gnew" %>
     <%= stylesheet_link_tag "/stylesheets_old/temp" %>
     <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
@@ -22,6 +23,20 @@
       <%= render :partial=>"priorities/fb_og_tags" %>
     <% end %>
     <%= tr8n_scripts_tag %>
+    <% if Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left %>
+      <style type="text/css">
+        #sidebar {
+          float: left !important;
+          position:relative;
+       }
+       .icon {
+          float:right;
+          left: 0px;
+          right: -37px;
+        }
+      </style>
+    <% end %>
+
   </head>
   <body class="C<%= h(controller.controller_name) %> <%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
     <%= csrf_meta_tag %>
@@ -40,14 +55,25 @@
         <% if ["network","user_contacts"].include?(controller_name) -%>
           <table width="100%">
             <tr>
-              <td>
-                <div id="content_text">
-                  <%= yield :layout %>
-                </div>
-              </td>
-              <td>
-                <%= render :partial=>"network/sidebar" %>
-              </td>
+             <% if Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left %>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+             <% else %>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+              <% end %>
             </tr>
           </table>
         <% else %>

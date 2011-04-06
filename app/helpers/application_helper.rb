@@ -167,7 +167,7 @@ module ApplicationHelper
     return s.html_safe
   end
   
-  def agenda_change(user,period,precision=2)
+  def agenda_change(user,period,precision=0)
     if period == '7days'
 		  user_last = user.index_7days_change*100
 		elsif period == '24hr'

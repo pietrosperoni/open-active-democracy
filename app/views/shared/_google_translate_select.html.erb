@@ -1,3 +1,10 @@
 <% if @google_translate_enabled_for_locale %>
- <%=tr("Use Google Translate","views/shared/_google_translate_select")%> <INPUT TYPE="checkbox" NAME="enable_google_translate" VALUE="1" <%= session[:enable_google_translate] ? "CHECKED" : "" %> onClick="toggleGoogleTranslate(this)">
+ <br>
+ <%=tr("Use Google Translate for content submitted by other users?","views/shared/_google_translate_select")%> <INPUT TYPE="checkbox" NAME="enable_google_translate" VALUE="1" <%= session[:enable_google_translate] ? "CHECKED" : "" %> onClick="toggleGoogleTranslate(this)">
+<% if session[:enable_google_translate] %>
+  <div id='google_branding' style="margin-top:7px;"></div>
+  <script type="application/javascript">
+    google.language.getBranding('google_branding');
+  </script>
+<% end %>
 <% end %>

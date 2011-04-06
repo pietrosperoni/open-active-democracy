@@ -2,7 +2,7 @@
   <%= tr("Select language:","views/layouts/basic") %> <%= tr8n_language_selector_tag %><br>
   <% if @inline_translations_allowed %>
     <% if @inline_translations_enabled %>
-      <%= link_to_function(trla("Stop translating"), "tr8nLanguageSelector.disableInlineTranslations();") %><br>
+      <strong><u><br><%= link_to_function(trla("Stop translating"), "tr8nLanguageSelector.disableInlineTranslations();") %></u></strong><br>
     <% else %>
       <%= link_to_function(trla("Start translating"), "tr8nLanguageSelector.enableInlineTranslations();") %><br>
     <% end %>

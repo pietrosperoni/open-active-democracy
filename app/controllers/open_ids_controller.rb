@@ -41,8 +41,14 @@ class OpenIdsController < ApplicationController
               user.activate!
               user.reload # Need to reload the user otherwise the welcome message triggers Encoding::CompatibilityError: incompatible character encodings: UTF-8 and ASCII-8BIT
               self.current_user = user
-              flash[:notice] = tr("Welcome, {user_name}.", "controller/open_ids", :user_name => current_user.name)
-              redirect_back_or_default('/')
+              check_geoblocking
+              if @geoblocked
+                flash[:notice] = tr("This part of the website is not avilable for login in your country.", "controller/twitter")
+                redirect_back_or_default('/')
+              else
+                flash[:notice] = tr("Welcome, {user_name}.", "controller/open_ids", :user_name => current_user.name)
+                redirect_back_or_default('/')
+              end
             else
               flash[:error] = tr("Sign in from Google failed.", "controller/open_ids")
               redirect_back_or_default('/')

@@ -248,13 +248,16 @@ class Tr8n::LanguageController < Tr8n::BaseController
       end
 
       if language_action == "enable_inline_mode"
-        Rails.logger.debug tr8n_current_translator.inspect
-        Rails.logger.debug tr8n_current_translator.frozen?
         tr8n_current_translator.enable_inline_translations!
       elsif language_action == "disable_inline_mode"
         Rails.logger.debug tr8n_current_translator.inspect
         Rails.logger.debug tr8n_current_translator.frozen?
         tr8n_current_translator.disable_inline_translations!
+      elsif language_action == "switch_and_enable_inline"  # non-translator mode
+        tr8n_current_translator.switched_language!(Tr8n::Language.find_by_locale(params[:locale]))
+        change_locale_in_url(params[:locale])
+        cookies.permanent[:last_selected_language]=params[:locale]
+        tr8n_current_translator.enable_inline_translations!
       elsif language_action == "switch_language"
         tr8n_current_translator.switched_language!(Tr8n::Language.find_by_locale(params[:locale]))
         change_locale_in_url(params[:locale])
@@ -266,6 +269,11 @@ class Tr8n::LanguageController < Tr8n::BaseController
       cookies.permanent[:last_selected_language]=params[:locale]
     elsif language_action == "become_translator" # non-translator mode
       Tr8n::Translator.register
+    elsif language_action == "switch_and_enable_inline"  # non-translator mode
+      Tr8n::Translator.register.enable_inline_translations!
+      Tr8n::LanguageUser.create_or_touch(tr8n_current_user, Tr8n::Language.find_by_locale(params[:locale]))
+      change_locale_in_url(params[:locale])
+      cookies.permanent[:last_selected_language]=params[:locale]
     elsif language_action == "enable_inline_mode" or language_action == "toggle_inline_mode" # non-translator mode
       Tr8n::Translator.register.enable_inline_translations!
     end

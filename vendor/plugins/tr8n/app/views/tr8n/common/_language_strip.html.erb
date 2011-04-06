@@ -1,6 +1,6 @@
 <% if Tr8n::Config.enabled? and (Tr8n::Config.open_registration_mode? or Tr8n::Config.current_user_is_translator?) %>
   <div class="tr8n_language_strip" style="font-size:12px;">
-	  <% featured_languages = Tr8n::Language.featured_languages %>
+	  <% featured_languages = [Tr8n::Language.find_by_locale("en")]+Tr8n::Language.top_languages %>
 
   	<% featured_languages.each do |lang| %>
 		    <%= tr8n_language_name_tag(lang, opts) %> &nbsp;
