@@ -534,11 +534,11 @@ width:262px !important;
  
  h2
 {
-font-size: 13px;
+
 /* Might damage something somewhere
 height: 1.5em;
 */
-border-bottom:1px solid #CCCCCC;
+
 font-weight:bold;
 padding-top: 5px;
 display:block;
