@@ -3,6 +3,11 @@ class PointsController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :quality, :unquality, :your_priorities, :your_index, :destroy, :update_importance]
   before_filter :admin_required, :only => [:edit, :update]
 
+  caches_action :newest, :revised,
+                :if => proc {|c| c.do_action_cache?},
+                :cache_path => proc {|c| c.action_cache_path},
+                :expires_in => 5.minutes
+
   def index
     redirect_to :action=>:newest
   end

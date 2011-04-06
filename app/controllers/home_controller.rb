@@ -1,4 +1,9 @@
 class HomeController < ApplicationController
+
+  caches_action :index,
+                :if => proc {|c| c.do_action_cache? },
+                :cache_path => proc {|c| c.action_cache_path},
+                :expires_in => 5.minutes
   
   layout "home"
   

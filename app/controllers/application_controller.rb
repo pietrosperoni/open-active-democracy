@@ -55,6 +55,23 @@ class ApplicationController < ActionController::Base
         "\r"    => '\n',
         '"'     => '\\"',
         "'"     => "\\'" }
+  
+  def action_cache_path
+    params.merge({:geoblocked=>@geoblocked, :host=>request.host, :country_code=>@country_code,
+                  :locale=>session[:locale], :google_translate=>session[:enable_google_translate],
+                  :have_shown_welcome=>session[:have_shown_welcome], 
+                  :last_selected_language=>cookies[:last_selected_language]})
+  end
+
+  def do_action_cache?
+    if logged_in?
+      false
+    elsif request.format.html?
+      true
+    else
+      false
+    end
+  end
 
   def check_for_localhost
     if Rails.env.development?
@@ -140,7 +157,7 @@ class ApplicationController < ActionController::Base
     @country_code = Thread.current[:country_code] = (session[:country_code] ||= GeoIP.new(Rails.root.join("lib/geoip/GeoIP.dat")).country(request.remote_ip)[3]).downcase
     @country_code = "is" if @country_code == nil or @country_code == "--"
     @iso_country = Tr8n::IsoCountry.find_by_code(@country_code.upcase)
-    Rails.logger.info("Geoip country: #{@country_code} - #{current_user ? (current_user.email ? current_user.email : current_user.login) : "Anonymous"}")
+    Rails.logger.info("Geoip country: #{@country_code} - locale #{session[:locale]} - #{current_user ? (current_user.email ? current_user.email : current_user.login) : "Anonymous"}")
     if Partner.current and Partner.current.geoblocking_enabled
       logged_in_user = current_user
       unless Partner.current.geoblocking_disabled_for?(@country_code)

@@ -8,6 +8,13 @@ class PrioritiesController < ApplicationController
                                              :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
 
+  caches_action :index, :top, :top_24hr, :top_7days, :top_30days,
+                :ads, :controversial, :rising, :newest, :finished, :show,
+                :top_points, :discussions,
+                :if => proc {|c| c.do_action_cache?},
+                :cache_path => proc {|c| c.action_cache_path},
+                :expires_in => 5.minutes
+
   layout :get_layout
 
   # GET /priorities

@@ -4,6 +4,11 @@ class UsersController < ApplicationController
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :make_admin, :reset_password]
   
+  caches_action :show,
+                :if => proc {|c| c.do_action_cache? },
+                :cache_path => proc {|c| c.action_cache_path},
+                :expires_in => 5.minutes
+
   def index
     if params[:q]
       @users = User.active.find(:all, :conditions => ["login LIKE ?", "#{h(params[:q])}%"], :order => "users.login asc")

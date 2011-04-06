@@ -3,6 +3,11 @@ class NetworkController < ApplicationController
   before_filter :login_required, :only => [:find]
   before_filter :admin_required, :only => [:unverified, :deleted, :suspended, :probation, :warnings]
   before_filter :setup, :except => [:partner]
+
+  caches_action :index, :talkative, :ambassadors, :newest,
+                :if => proc {|c| c.do_action_cache? },
+                :cache_path => proc {|c| c.action_cache_path},
+                :expires_in => 5.minutes
   
   def index
     @page_title = tr("Meet the most influential people at {government_name}", "controller/network", :government_name => tr(current_government.name,"Name from database"))

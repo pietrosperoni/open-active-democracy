@@ -17,6 +17,10 @@ class PortalController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :destroy, :add_portlet, :save_positions, :delete_portlet]
   before_filter :admin_required, :only => [:edit, :update]
 
+  caches_action :index, :if => proc {|c| c.do_action_cache? },
+                        :cache_path => proc {|c| c.action_cache_path},
+                        :expires_in => 5.minutes
+
   def index
     setup_portal
     
