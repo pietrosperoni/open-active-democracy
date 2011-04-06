@@ -64,7 +64,25 @@ div#content_text table {
     width: 216px;
 }
 
-.addwrapper {margin-bottom:5px;}
+
+
+#new_priority_button {
+ border: 0px solid #DDDDDD;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 7px;
+    padding: 26px 0 30px 27px;
+    width: 198px;
+}
+
+div.addwrapper  {
+    background-color: #FFFFFF;
+    background-image: url("../images/new/add-light-button-bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+    border: medium none;
+}
+
 
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
@@ -116,6 +134,39 @@ background-color: #fff;
 
 body.portal-index #content_text {background:none;padding:0}
 
+div.endorse-wrap {
+   background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CACACA;
+    border-radius: 1em 1em 1em 1em;
+    float: left;
+    padding: 10px;
+    width: 323px;
+}
+div.oppose-wrap {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CACACA;
+    border-radius: 1em 1em 1em 1em;
+    float: left;
+    margin-left: 10px;
+    padding: 10px;
+    width: 323px;
+}
+div.add-endorse {margin-bottom:10px}
+div.add-endorse a {
+background-image: url("../images/new/add-endorse.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+padding: 10px 30px;
+}
+div.add-oppose {margin-bottom:10px}
+div.add-oppose a {
+background-image: url("../images/new/add-oppose.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+padding: 10px 30px;
+}
+
+
 body.Cpriorities #content_text table.show-with-processes-table td {padding:0}
 body.priorities-show #content_text table, body.priorities-top_points #content_text table{}
 
@@ -131,6 +182,11 @@ body.Cpriorities #content_text table tbody tr td table tbody tr
 body.Cpriorities #content_text table.container_13,#content_text table#top_points_table {border-collapse: separate;border-spacing: 10px 5px;}
 body.Cpriorities #content_text table.container_13 td.grid_41, body.Cpriorities .grid_6, body.Cpriorities .best-points {-moz-border-radius: 1em;border-radius:1em;border:1px solid #cacaca;background:#fff;padding:10px;}
 table.show-with-processes-table td{padding:0}
+
+
+
+
+
 
 
 .container_12, .container_13 {
@@ -217,7 +273,7 @@ div.best-points {background:#fff;}
 }
 div.new_comment_facebook {}
 
-
+.comment_more {background:none}
 
 .priority_remove_oppose, .priority_remove {
     font-size: 0.7em;
@@ -269,16 +325,23 @@ div.new_comment_facebook {}
 
 
 
-
+div.userwrap {
+background-color: #fff;
+    background-image: url("../images/new/user-bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+}
 
 
 #user_info_box {
-  
     font-size: 10px;
     font-weight: bold;
     line-height: 1.4em;
-     width: 205px;
-padding: 5px;
+    padding: 5px;
+    width: 205px;
+background:none;
+border: 0px solid #DDDDDD;
+
 }
 #user_info_box a {
   
@@ -288,12 +351,27 @@ padding: 5px;
      width: 205px;
 }
 #language_selection_box {
-    border: 1px solid #DDDDDD;
+    border: 0px solid #DDDDDD;
     margin-bottom: 7px;
     margin-top: 5px;
     padding: 5px;
     width: 205px;
 }
 
+.flash_error, #not_activated_header, #warning, .fieldWithErrors input, #errorExplanation h2 {
+    background: none;
+    border-left: 0px solid #EEEEEE;
+    border-right: 0px solid #EEEEEE;
+    border-top: 0px solid #EEEEEE;
+    color: #BC0000;
+    font-weight: bold; padding: 4px 0 0 8px;
+}
 
+#intro, #buzz_box, #not_activated, #notification_show, #errorExplanation, .bulletin_form, .change_vote_now, #contacts, #contacts_small, .invite_text, .notice {
+    background: none;
+    border: 0px solid #DDDDDD !important;
+    color: #444444;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
 
