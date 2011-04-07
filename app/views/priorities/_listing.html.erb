@@ -5,7 +5,7 @@
 </div>
 
 	<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
-	<%= render :partial => "priorities/action_show", :locals => {:priority => priority, :endorsement => endorsement } unless defined?(noaction) %>
+	<%= render :partial => "priorities/action_show", :locals => {:priority => priority, :endorsement => endorsement, :noaction=> defined?(noaction) ? true : false }  %>
 
 <% if priority.status == 'inactive' %>
 	<div class="priority_status">
