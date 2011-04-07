@@ -13,7 +13,7 @@
 
 	<% if current_user.endorsements_count > 1 %>		
 			<div id="next_steps_box">
-				<%= tr("There's a lot you can do at {government_name}. Here's how to get started:", "view/shared/_notifications", :government_name => tr(current_government.name,"Name from database"))%>
+				<h4><%= tr("There's a lot you can do at {government_name}. Here's how to get started:", "view/shared/_notifications", :government_name => tr(current_government.name,"Name from database"))%></h4>
 				<ol>
 					<% if current_user.followings_count < 2 %>
 						<li><%= link_to tr("Find people you know", "view/shared/_notifications"), user_contacts_path(current_user) %></li>
@@ -38,7 +38,7 @@
 						<li><%= link_to tr("Join the discussion on your priorities", "view/shared/_notifications"), :controller => "news", :action => "your_priority_discussions" %></li>
 					<% end %>
 				</ol>
-				<%= tr("You can get involved whenever and however often you like. We're open 24 hours a day.", "view/shared/_notifications", :government_name => tr(current_government.name,"Name from database"))%>
+				<p><%= tr("You can get involved whenever and however often you like. We're open 24 hours a day.", "view/shared/_notifications", :government_name => tr(current_government.name,"Name from database"))%></p>
 			</div>
 	
 	<% end %>

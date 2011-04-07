@@ -706,12 +706,12 @@ margin-top: 0px;
 }
 
 #login, #intro, #buzz_box {
-margin-top: 5px !Important;
+/*margin-top: 5px !Important;
 background-color:#fff !important;
 border: 1px solid #eee !important;
 font-size:11px;
 line-height:1.4em;
-padding:10px 10px 5px 15px;
+padding:10px 10px 5px 15px;*/
 }
 
 
@@ -773,9 +773,9 @@ padding:0 !important;
 font-size:12px;
 font-weight: bold;
 line-height:1.4em;
-padding:2px 5px 3px 8px;
-border:1px solid #ddd !important;
-background-color:#fff;
+padding:2px 10px;
+/*border:1px solid #ddd !important;
+background-color:#fff;*/
 }
 
 #notification_box ol , #next_steps_box  ol{
@@ -783,11 +783,17 @@ font-size:11px;
 font-weight: normal;
 padding-left:18px;
 }
-
+#not_activated_header {
+background:none;
+color:#BC0000; 
+font-size: 1.2em;
+  margin-top: 0px;
+  padding: 4px 0 2px 10px;
+}
 #not_activated {
 font-size:11px;
 line-height:1.4em;
-padding:7px 5px 3px 8px;
+padding:0 10px;
 }
 
 #right_column_priorities a, #notification_box a, #next_steps_box a, #notification_box ol a, #next_steps_box  ol a, #not_activated a 

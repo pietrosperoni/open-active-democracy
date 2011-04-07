@@ -28,7 +28,7 @@ a, .endorsement_down, .tag_button, .yellow_button, .grey_button_wide {
 }
 
 #priority_column, #top_right_column {
-	background-color: #f0f0f0; /* f0f0f0 */
+	/*background-color: #f0f0f0;*/ /* f0f0f0 */
 	color: #444444; /* 444 */	
 }
 

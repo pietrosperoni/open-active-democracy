@@ -64,7 +64,8 @@ div#content_text table {
 
 #sidebar {
     padding-top: 27px;
-    width: 216px;
+    width: 220px;
+right:0;
 }
 
 
@@ -317,7 +318,7 @@ div.new_comment_facebook {}
 
 
 div.userwrap {
-background-color: #fff;
+background-color: #f7f9fb;
     background-image: url("../images/new/user-bg.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
@@ -332,7 +333,7 @@ background-color: #fff;
     width: 205px;
 background:none;
 border: 0px solid #DDDDDD;
-
+padding:10px 10px 0;
 }
 #user_info_box a {
   
@@ -343,10 +344,10 @@ border: 0px solid #DDDDDD;
 }
 #language_selection_box {
     border: 0px solid #DDDDDD;
-    margin-bottom: 7px;
-    margin-top: 5px;
-    padding: 5px;
-    width: 205px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 10px;
+    width: 205px; line-height: 1.4em;
 }
 
 .flash_error, #not_activated_header, #warning, .fieldWithErrors input, #errorExplanation h2 {
@@ -362,7 +363,15 @@ border: 0px solid #DDDDDD;
     background: none;
     border: 0px solid #DDDDDD !important;
     color: #444444;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     margin-top: 0;
 }
-
+#notification_box p, #next_steps_box p{
+  font-size: .9em;
+  line-height: 1.4em;
+font-weight:normal;
+}
+ #next_steps_box ol {
+list-style-position: inside;
+padding:0;
+}
