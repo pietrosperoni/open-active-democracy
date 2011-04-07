@@ -158,9 +158,10 @@ body.priorities-show #content_text table td, body.priorities-top_points #content
 
 body.Cpriorities #content_text table tbody tr td table tbody tr
 {border-bottom:0px solid #cacaca;}
-
+/*
 body.Cpriorities #content_text table.container_13,#content_text table#top_points_table {border-collapse: separate;border-spacing: 10px 5px;}
 body.Cpriorities #content_text table.container_13 td.grid_41, body.Cpriorities .grid_6, body.Cpriorities .best-points {-moz-border-radius: 1em;border-radius:1em;border:1px solid #cacaca;background:#fff;padding:10px;}
+*/
 table.show-with-processes-table td{padding:0}
 
 
