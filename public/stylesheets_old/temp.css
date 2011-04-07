@@ -147,6 +147,8 @@ padding: 10px 30px;
 }
 
 
+
+
 body.Cpriorities #content_text table.show-with-processes-table td {padding:0}
 body.priorities-show #content_text table, body.priorities-top_points #content_text table{}
 
@@ -197,7 +199,7 @@ padding:0;
 #priority_nav1 li.tab1 .tab_header a,ul#priority_menu li .tab_header a {
     /*border: 1px solid #ddd;*/
     font-size: 0.95em;
-    font-weight: normal !important;
+    font-weight: bold !important;
     letter-spacing: normal !important;
     margin-right: 0;
     padding: 3px 5px;
@@ -221,10 +223,13 @@ color:#000 !important;
 }
 
 ul#priority_menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover {
-    background: none repeat scroll 0 0 ;
+    background: none no-repeat scroll 0 0 ;
     color: #FFFFFF;
 }
-
+#priority_nav1 li.tab1 .tab_header a, #priority_nav1 li.tab1.mega .tab_header a, #priority_nav2 li.tab2 .tab_header a, #priority_nav2 li.tab2.mega .tab_header a, #priority_nav3 li.tab3 .tab_header a, #priority_nav3 li.tab3.mega .tab_header a, #priority_nav4 li.tab4 .tab_header a, #priority_nav4 li.tab4.mega .tab_header a, #priority_nav5 li.tab5 .tab_header a, #priority_nav5 li.tab5.mega .tab_header a, #priority_nav6 li.tab6 .tab_header a, #priority_nav6 li.tab6.mega .tab_header a, #priority_nav7 li.tab7 .tab_header a, #priority_nav7 li.tab7.mega .tab_header a, #priority_nav8 li.tab8 .tab_header a, #priority_nav8 li.tab8.mega .tab_header a, #priority_nav9 li.tab9 .tab_header a, #priority_nav9 li.tab9.mega .tab_header a, #priority_nav10 li.tab10 .tab_header a, #priority_nav10 li.tab10.mega .tab_header a {
+  color: #6699CC !important;
+  padding-top: 3px;
+}
 ul#menu li.mega .tab_header a:hover, ul#menu li.mega.hovering .tab_header a, ul#menu_sub li.mega .tab_header a:hover, ul#menu_sub li.mega.hovering .tab_header a, ul#menu_third li.mega .tab_header a:hover, ul#menu_third li.mega.hovering .tab_header a, ul#priority_menu li.mega .tab_header a:hover, ul#priority_menu li.hovering .tab_header a {
     background: url("/images/mega_down_arrow_white.gif") no-repeat scroll right center;
     color: #FFFFFF;
@@ -234,6 +239,14 @@ ul#priority_menu div.tab_body {
     position: absolute;
     top: 15px;
 }
+
+ul#priority_menu li#endorser_link a {background-image: url("../images/new/arrow-up.png");
+    background-position: left center;
+    background-repeat: no-repeat;padding:0 0 0 14px;}
+ul#priority_menu li#opposer_link a {background-image: url("../images/new/arrow-down.png");
+    background-position: left center;
+    background-repeat: no-repeat;padding:0 0 0 14px ;}
+
 
 .comment_list_empty {
     padding: 0 0 0 29px;

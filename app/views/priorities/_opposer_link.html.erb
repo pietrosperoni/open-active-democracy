@@ -1,5 +1,5 @@
 <li class="tab3" id="opposer_link">
 	<span class="tab_header">
-	<%= link_to tr("{count} opposers", "view/priorities/_opposer_link", :count => @priority.down_endorsements_count).html_safe, opposers_priority_url(@priority) %>
+	<%= link_to tr("{count} ", "view/priorities/_opposer_link", :count => @priority.down_endorsements_count).html_safe, opposers_priority_url(@priority) %>
 	</span>
 </li>
