@@ -75,8 +75,9 @@ font-size:11px !important;
 
 
 .priority_add {
+/*
 padding: 1px !important;
-}
+*/}
 
 .priority_add_link
 {
@@ -95,13 +96,13 @@ padding-right: 5px;
 padding-top: 1px !important; 
 }
 
-.priority_add {
+.priority_add {/*
 padding-top:0px !important;
 padding-bottom:0px !important;
 padding-left:2px !important;
 padding-right:2px !important;
 font-size: 9px !important;
-font-weight: bold !important;
+font-weight: bold !important;*/
 }
 
 div#content_text table 
@@ -625,6 +626,7 @@ background:url("images/ui-bg_inset-soft_50_c9c9c9_1x100.png") repeat-x scroll 50
 	float: left;
 	border:1px solid #ddd;
 	height: 17px;
+
 }
 
 #google_search .button

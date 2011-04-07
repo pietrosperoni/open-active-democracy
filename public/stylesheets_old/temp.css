@@ -41,7 +41,7 @@ div.column .portlet-header {
 }
 .column_id_2 .portlet {
     border-bottom: 1px solid #EEEEEE;
- margin: 0 5px !important;
+margin: 0 0 10px 5px !important;
     padding: 5px;
 }
 
@@ -57,10 +57,13 @@ div#content_text table {
     padding: 0;
 }
 */
-
-
-
-
+.priority_add {
+font-size:11px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding: 0;
+  text-transform: uppercase;
+}
 
 #sidebar {
     padding-top: 0px;
@@ -281,8 +284,18 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 
+span.priority_add a {padding:0 2px;font-size: 9px;color:#fff !important;font-weight:bold;text-decoration:none;}
+a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22;}
+a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;}
+.point_name span{display:none;}
+.opposed, .red_button, .priority_remove_oppose {
+    background-color: #B92D19;
+}
+.green_button, .priority_remove, .endorsed, .flash_notice {
+    background-color: #439A22;
+}
 .priority_remove_oppose, .priority_remove {
-    font-size: 0.7em;
+    font-size: 10px;
     font-weight: bold;
     margin: 0 3px 0 0;
     padding: 1px 2px 1px 3px;
@@ -290,16 +303,18 @@ div.new_comment_facebook {}
 }
 
 .priority_endorsement_count {
-    font-size: 1em;
+    font-size: 11px;
     left: 0px;
     position: static;
     top: 0px;
 }
-
+.priority_endorsement_count a {
+color:#444 !important;
+}
 
 .endorsed, .opposed, .compromised {
     bottom: 1px;
-    font-size: 1em;
+    /*font-size: 1em;*/
     font-weight: bold;
     padding: 0 3px 1px;
     position: relative;
