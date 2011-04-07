@@ -57,10 +57,16 @@ div#content_text table {
     padding: 0;
 }
 */
-
-
-
-
+.priority_add {
+font-size:11px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding: 0;
+  text-transform: uppercase;
+}
+span.priority_add a {padding:0 2px;font-size: .8em;color:#fff !important;font-weight:bold;text-decoration:none;}
+a.priority_add_link1 {background:#E49E6E;border:1px solid #B92D19;}
+a.priority_add_link2 {background:#A0C47D;border:1px solid #439A22;}
 
 #sidebar {
     padding-top: 0px;
@@ -281,8 +287,13 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 
+
+.opposed, .red_button, .priority_remove_oppose {
+    background-color: #B92D19;
+}
+
 .priority_remove_oppose, .priority_remove {
-    font-size: 0.7em;
+    font-size: 0.8em;
     font-weight: bold;
     margin: 0 3px 0 0;
     padding: 1px 2px 1px 3px;
@@ -290,7 +301,7 @@ div.new_comment_facebook {}
 }
 
 .priority_endorsement_count {
-    font-size: 1em;
+    font-size: 11px;
     left: 0px;
     position: static;
     top: 0px;

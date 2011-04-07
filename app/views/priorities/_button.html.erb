@@ -28,7 +28,7 @@
       :remote=>true, :method => :post,
       'data-disable-with' => escape_t(tr("Endorsing","Ajax")),
       'data-loader-name' => "horizontal_small",
-      :class => "priority_add_link", :title => tr("I support this, add it to my priority list", "view/priorities/_button") %>
+      :class => "priority_add_link1", :title => tr("I support this, add it to my priority list", "view/priorities/_button") %>
   </div>
   <div class="endorse_or">
     <%= tr("OR", "view/priorities/_button") %>
@@ -38,6 +38,6 @@
       :remote=>true, :method => :post,
       'data-disable-with' => escape_t(tr("Opposing","Ajax")),
       'data-loader-name' => "horizontal_small",
-      :class => "priority_add_link", :title => tr("I oppose this, and want to add my opposition to my priority list.", "view/priorities/_button") %>
+      :class => "priority_add_link2", :title => tr("I oppose this, and want to add my opposition to my priority list.", "view/priorities/_button") %>
   </div>
 <% end %>

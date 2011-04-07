@@ -1,6 +1,6 @@
 
 body {
-	background-color: #; /* fff */
+	 /*background-color: #; fff */
 	color: #000000; /* 000 */
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -38,7 +38,7 @@ a, .endorsement_down, .tag_button, .yellow_button, .grey_button_wide {
 }
 
 #footer_container {
-	background-color: #; /* f0f0f0 */
+	/*background-color: #;  f0f0f0 */
 	color: #; /* 444 */	
 }
 
@@ -80,7 +80,7 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 	color: #;
 }
 .tag_button a, .grey_button a {
-	color: #;
+	/*color: #;*/
 }
 
 .tag_button:hover, .grey_button:hover {
@@ -123,17 +123,17 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 .suggest_button, .yellow_button {
 	background-color: #ffff99; /* FFFF99 */
 	border: solid 3px #ffcc00;
-	color: #;
+	/*color: #;*/
 }
 .suggest_button a, .yellow_button a {
-	color: #;	
+	/*color: #;	*/
 }
 .priority_add {
-	background-color: #ffff99; /* FFFF99 */
-	border: solid 1px #ffcc00;		
+	/*background-color: #ffff99;*/ /* FFFF99 */
+	/*border: solid 1px #ffcc00;		*/
 }
 .priority_add a {
-    color: #;
+   /* color: #;*/
 }
 .suggest_button:hover, .yellow_button:hover, .grey_button_wide:hover {
 	border: solid 3px #13499b;
