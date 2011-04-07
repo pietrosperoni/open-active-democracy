@@ -1,6 +1,12 @@
-
-<%= tr("Signup intro BLURB", "view/users/new")%>
+<%= tr("<h2>Join the network setting the agenda for {{government.target}}</h2>", "view/users/new")%>
+<%= tr("<p>Sign up below to set your own priorities for {{government.target}}.  You'll get your own page, which you can send to friends and colleagues urging them to sign on to support your priorities.</p>", "view/users/new")%>
+<%= tr("{% if government.is_facebook? %}<p>It's <i>free</i>, and you don't even have to create an account if you're already on Facebook, just click the big blue button.</p>{% else %}
+", "view/users/new")%>
+<%= tr("<p>It's all free.</p>", "view/users/new")%>
+{% endif %}
 
 <%= render :partial => "form_long" %>
 
-<%= tr("Rules BLURB", "view/users/new")%>
+<%= tr("<h2>Our Rules</h2>", "view/users/new")%>
+<%= tr("<p>1. <b>Only 1 account per person.</b>  If you're found to have multiple active accounts, all of your accounts will be disabled and your priorities removed from the site.</p>", "view/users/new")%>
+<%= tr("<p>2. <b>Please be civil.</b>  Government is serious, please consider this forum like you would a town hall or a legislative body.  No personal attacks of any kind are allowed.</p>", "view/users/new")%>

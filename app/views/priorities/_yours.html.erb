@@ -53,8 +53,10 @@
 			<p>
 		<% end %>
 		<div style="padding: 0px 10px 10px 10px;">
-			<%= tr("Sorting instruct BLURB", "view/priorities/_yours")%>
-		</div>
+<%= tr("<p>Click on an <span class=\\"priority_add\\">endorse</span> or <span class=\\"priority_add\\">oppose</span> button to add a priority to your list.  Then drag and drop to change the order.</p>", "view/priorities/_yours")%>
+<%= tr("<p>The big numbers you see next to each priority is the overall rank across all members.  The higher your endorsement or opposition is in your list, the more it impacts the rankings.</p>", "view/priorities/_yours")%>
+<%= tr("<p>Need inspiration? Try a few <a href=\"/priorities/random\">random priorities</a>.</p>", "view/priorities/_yours")%>		
+		  </div>
 	<% end %>
 
 	<% if current_user.endorsements_count > 25 %>
@@ -66,7 +68,8 @@
 	<% if current_user.endorsements_count > 4 %>
 
 		<div style="padding: 0px 0px 10px 20px;">
-			<%= tr("Sorting instruct adv BLURB", "view/priorities/_yours")%>
+<%= tr("<p>Drag and drop to re-order your list or click the # to change its priority.</p>", "view/priorities/_yours")%>
+<%= tr("<p>Need help prioritizing?  Try the <a href='/prioritizer' title=\"The quiz is a fun and simple way to organize your priorities\">priority quiz</a>.</p>", "view/priorities/_yours")%>
 		</div>
 	
 	<% end %>

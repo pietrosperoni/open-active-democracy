@@ -68,5 +68,5 @@
 </table>
 
 <% if @issues.current_page == 1 and @issues.size > 0 %>
-	<p><%= tr("Overview more BLURB", "view/priorities/index")%>
+<%= tr("<p>You can also <a href=\"/issues\">browse all {government.tags_name_plural | downcase}</a>, see the <a href=\"/priorities/top\">top ranked priorites</a>, <a href=\"/priorities/random\">random priorities</a>, or the <a href=\"/priorities/rising\">fastest rising priorities</a>.</p>", "view/priorities/index")%>
 <% end %>
