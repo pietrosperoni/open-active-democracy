@@ -1,3 +1,6 @@
+ @import url("menu.css");
+
+
 body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat-y; background-position: center top;
 		
 		font-family: Lucida Grande, arial, helvetica, sans-serif; 
@@ -61,7 +64,8 @@ div#content_text table {
 
 #sidebar {
     padding-top: 0px;
-    width: 216px;
+    width: 220px;
+    right:0;
 }
 
 
@@ -84,30 +88,6 @@ div.addwrapper  {
 }
 
 
-ul#menu li .tab_header a {
-    border: 0px solid #DDDDDD;
-    font-weight: normal !important;
-    letter-spacing: normal !important;
-    margin-right: 0;
-    padding: 3px 13px 3px 10px;
-    text-decoration: none;
-}
-
-ul#menu li .tab_header a, ul#menu li.hovering div.tab_body, ul#menu_sub li .tab_header a, ul#menu_sub li.hovering div.tab_body, ul#menu_third li .tab_header a, ul#menu_third li.hovering div.tab_body, ul#priority_menu li.hovering div.tab_body {
-    background-color: #fff;display:inline-block;
-}
-
-#nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a, #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a, #nav_sub_0 li.tab0 .tab_header a, #nav_sub_1 li.tab1 .tab_header a, #nav_sub_2 li.tab2 .tab_header a, #nav_sub_3 li.tab3 .tab_header a, #nav_sub_4 li.tab4 .tab_header a, #nav_sub_5 li.tab5 .tab_header a, #nav_sub_6 li.tab6 .tab_header a, #nav_sub_7 li.tab7 .tab_header a, #nav_sub_8 li.tab8 .tab_header a, #nav_sub_9 li.tab9 .tab_header a, #nav_sub_10 li.tab10 .tab_header a, #nav_third_1 li.tab1 .tab_header a, #nav_third_2 li.tab2 .tab_header a, #nav_third_3 li.tab3 .tab_header a, #nav_third_4 li.tab4 .tab_header a, #nav_third_5 li.tab5 .tab_header a, #nav_third_6 li.tab6 .tab_header a, #nav_third_7 li.tab7 .tab_header a, #nav_third_8 li.tab8 .tab_header a, #nav_third_9 li.tab9 .tab_header a, #nav_third_10 li.tab10 .tab_header a, #nav_third_11 li.tab1 .tab_header a, #nav_third_12 li.tab2 .tab_header a, #nav_third_13 li.tab3 .tab_header a, #nav_third_14 li.tab4 .tab_header a {
-    /*color: #153978 !important;*/
-}
-
-ul#menu li, ul#menu_sub li, ul#menu_third li {
-    display: inline;
-    height: auto;
-    left: 0;
-    position: relative;
-    top: 0;
-}
 
 #hp_intro, #hp_intro a, #quiz_header, .priority_position, .your_priority_position, .profile_name, .profile_name a, h1, h2, h3, h4 {
     color: #444;
@@ -338,7 +318,7 @@ div.new_comment_facebook {}
 
 
 div.userwrap {
-background-color: #fff;
+background-color: #f7f9fb;
     background-image: url("../images/new/user-bg.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
@@ -353,7 +333,7 @@ background-color: #fff;
     width: 205px;
 background:none;
 border: 0px solid #DDDDDD;
-
+padding:10px 10px 0;
 }
 #user_info_box a {
   
@@ -364,26 +344,34 @@ border: 0px solid #DDDDDD;
 }
 #language_selection_box {
     border: 0px solid #DDDDDD;
-    margin-bottom: 7px;
-    margin-top: 5px;
-    padding: 5px;
-    width: 205px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 10px;
+    width: 205px; line-height: 1.4em;
 }
 
 .flash_error, #not_activated_header, #warning, .fieldWithErrors input, #errorExplanation h2 {
-    background: none;
+    /*background: none;
     border-left: 0px solid #EEEEEE;
     border-right: 0px solid #EEEEEE;
     border-top: 0px solid #EEEEEE;
     color: #BC0000;
-    font-weight: bold; padding: 4px 0 0 8px;
+    font-weight: bold; padding: 4px 0 0 8px;*/
 }
 
 #intro, #buzz_box, #not_activated, #notification_show, #errorExplanation, .bulletin_form, .change_vote_now, #contacts, #contacts_small, .invite_text, .notice {
     background: none;
     border: 0px solid #DDDDDD !important;
     color: #444444;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     margin-top: 0;
 }
-
+#notification_box p, #next_steps_box p{
+  font-size: .9em;
+  line-height: 1.4em;
+font-weight:normal;
+}
+ #next_steps_box ol {
+list-style-position: inside;
+padding:0;
+}
