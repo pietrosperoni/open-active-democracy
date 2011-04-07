@@ -287,6 +287,8 @@ div.new_comment_facebook {}
 span.priority_add a {padding:0 2px;font-size: 9px;color:#fff !important;font-weight:bold;text-decoration:none;}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;}
+a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
+a.priority_add_link2:hover {background:#B92D19;border:1px solid #B92D19;}
 .point_name span{display:none;}
 .opposed, .red_button, .priority_remove_oppose {
     background-color: #B92D19;
