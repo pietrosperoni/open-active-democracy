@@ -7,7 +7,7 @@
 	<%= tr("Here are just your priorities and the <a href='{url}'>{count} people in your network</a>, not all of {government_name}.", "view/issues/network", :count => current_user.followings_count, :url => following_user_contacts_path(current_user), :government_name => tr(current_government.name,"Name from database"))%>
 <% end %>
 
-<%= tr("Network intro BLURB", "view/issues/network")%>
+<%= tr("<p>You can add people to your network by clicking their name, and then the <span class=\"priority_add\">follow</span> button on their profile.  A good way to start your network is to <a href=\"/network/find\">import your Google, Yahoo or Facebook contacts</a> to find people you already know.</p>", "view/issues/network")%>
 <p>
 <% if current_user.followings_count > 0 %>
 	<table border="0" cellspacing="0" cellpadding="0">
