@@ -25,17 +25,10 @@
 			</li>
 		<% end %>
 		<% if @priority.points_count > 0 %>
-			<li class="tab5 mega">
+			<li class="tab5">
 				<span class="tab_header">
 					<%= link_to tr("{count} points", "view/priorities/_nav", :count => @priority.points_count), top_points_priority_url(@priority) %>
 				</span>
-				<div class="tab_body">
-					<%= link_to(tr("Top points", "view/priorities/_nav"), top_points_priority_url(@priority)) %><br/>
-					<p>
-					<%= link_to tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority)+"?support=1" , :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
-					<%= link_to tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
-					<p>
-				</div>
 			</li>
 		<% else %>
 			<li class="tab5">

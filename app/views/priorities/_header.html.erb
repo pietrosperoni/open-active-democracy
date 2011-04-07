@@ -17,7 +17,7 @@
       <%= render :partial => "priorities/rank_week_month", :locals => {:priority => @priority } %>
       <td valign="top" style="padding-left: 8px;" colspan="3">
       <div id="priority_<%= @priority.id %>" class="priority_listing">
-        <%= render :partial => "priorities/listing", :locals => {:priority => @priority, :endorsement => @endorsement, :value => 0} %>
+        <%= render :partial => "priorities/listing", :locals => {:priority => @priority, :endorsement => @endorsement, :value => 0, :noaction=>true} %>
       </div>
       </td>
     </tr>
