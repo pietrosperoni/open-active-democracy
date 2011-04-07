@@ -41,7 +41,7 @@ div.column .portlet-header {
 }
 .column_id_2 .portlet {
     border-bottom: 1px solid #EEEEEE;
- margin: 0 5px !important;
+margin: 0 0 10px 5px !important;
     padding: 5px;
 }
 
