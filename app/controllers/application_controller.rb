@@ -159,6 +159,7 @@ class ApplicationController < ActionController::Base
     @country_code = "is" if @country_code == nil or @country_code == "--"
     @iso_country = Tr8n::IsoCountry.find_by_code(@country_code.upcase)
     Rails.logger.info("Geoip country: #{@country_code} - locale #{session[:locale]} - #{current_user ? (current_user.email ? current_user.email : current_user.login) : "Anonymous"}")
+    Rails.logger.info(request.user_agent)
     if Partner.current and Partner.current.geoblocking_enabled
       logged_in_user = current_user
       unless Partner.current.geoblocking_disabled_for?(@country_code)
