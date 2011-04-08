@@ -26,11 +26,11 @@ Font sizes to use
 */
 
 /* Font coordination */
-
+/*
 #nav {
 font-size:13px !important;
 }
-
+*/
 ul#priority_menu li .tab_header a {
 font-size:11px !Important;
 }
@@ -324,16 +324,16 @@ margin-top: 30px;
 {
 	width: 710px !Important;
 }
-
+/*
 ul#menu li, ul#menu_sub li, ul#menu_third li {
 display:inline-block;
-*display:inline;
+display:inline;
 height: 22px;
 left:0;
 position:relative;
 top:0;
 }
-
+*/
 ul#priority_menu li {
 display:inline-block;
 left:0;
@@ -749,19 +749,20 @@ border: 1px solid red;
 }
 
 #toolbar a
-{
-color: #5272b5 !important;	
+{/*
+color: #5272b5 !important;	*/
 }
 
-
+/*
 ul#menu li .tab_header a, ul#menu li.hovering div.tab_body, ul#menu_sub li .tab_header a, ul#menu_sub li.hovering div.tab_body, ul#menu_third li .tab_header a, ul#menu_third li.hovering div.tab_body, ul#priority_menu li.hovering div.tab_body {
 background-color:#F8F8F8;
 }
-
+*/
+/*
 ul#menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
 background:url("/images/mega_down_arrow.gif") no-repeat scroll right center #F8f8f8;
 }
-
+*/
 .change, #blurb_ad_new, #blurb_acquisition_new, .edit_priority
 {
 	margin-top: 18px;

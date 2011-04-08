@@ -1,4 +1,4 @@
-<div id="toolbar">
+<div id="toolbar" class="clearfix">
 <% if ['priorities','changes','ads','prioritizer'].include?(params[:controller]) %>
 	<% nav = 2 %>
 <% elsif ['news','comments'].include?(params[:controller]) %>
@@ -17,7 +17,7 @@
 	<% nav = 0 %>
 <% end %>
 <div id="nav">
-<div id="nav<%= nav %>">	
+<div id="nav<%= nav %>" class="clearfix">	
 
 	<% if false and current_government.has_fav_icon? %>
 		<table border="0" cellspacing="0" cellpadding="0" width="100%">

@@ -7,6 +7,10 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 		margin:0px 
 		
 		 }
+.clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+.clearfix, .container {display:block;}
+.clear {clear:both;}
+
 
 /* #header table {width:100px;overflow:hidden} */
 img {border:none}

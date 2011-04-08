@@ -203,7 +203,7 @@ border: none 0px #fff !important;
 	font-weight: bold;
 	padding: 2px 0px 2px 10px;
 }
-
+/*
 #toolbar {
 	padding: 0px 0px 3px 0px;
 	background-color: #fff !important;
@@ -219,7 +219,7 @@ border: none 0px #fff !important;
 	font-size: 14px;
 	z-index: -1;
 }
-
+*/
 #footer { clear: both; width: 960px; }
 
 ul#menu, ul#priority_menu {
@@ -289,12 +289,12 @@ ul#priority_menu li {
 }
 
 ul#menu li .tab_header a { 
-	padding: 3px 13px 3px 10px; 
+	/*padding: 3px 13px 3px 10px; 
 	margin-right: 0px; 
 	text-decoration: none;
 	letter-spacing: normal !important;
 	font-weight: normal !important;
-	border: solid 1px #ddd;
+	border: solid 1px #ddd;*/
 }
 
 ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_third li.hovering div.tab_body { 
@@ -304,7 +304,7 @@ ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_
 	z-index: 10;
 
 }
-
+/*
 ul#menu li.mega .tab_header a {
 	padding: 3px 13px 3px 10px; 
 	margin-right: 0px; 
@@ -358,24 +358,28 @@ ul#menu li .tab_body {
 	border-top: 0px;
 	background: #f0f0f0;
 }
-
+*/
 /* second nav */
+/*
 #nav_sub {
 	z-index: -1;	
 	font-size: 12px;	
 	padding-top: 3px;
 	padding-bottom: 2px;
 }
+*/
+/*
 ul#menu_sub { 
 	background-color: #fff;
 	text-align: left;
 	margin: 0px;
 	margin-bottom: 0px !important;
 	list-style-type: none;
-/*	padding-bottom: 4px;
-	padding: 0px 10px 2px 0px; */
+	padding-bottom: 4px;
+	padding: 0px 10px 2px 0px; 
 }
-
+*/
+/*
 ul#menu_sub li .tab_header a {
 	padding: 3px 10px; 
 	margin: 0px;
@@ -396,19 +400,22 @@ ul#menu_sub li.mega .tab_header a {
 	text-decoration: none;	
 	background: transparent url('/images/mega_down_arrow.gif') center right no-repeat;	
 }
+*/
 /* second nav */
 
 /* third nav */
+
+/*
 #nav_third {
-	background-color: #fff;
+	background-color: #fff;*/
 /*	margin-top: 4px; */
-	z-index: -1;	
-	font-size: 11px;
+/*	z-index: -1;*/	
+/*	font-size: 11px;
 	margin-top: 2px;
   margin-bottom: 4px;
 }
-
-
+*/
+/*
 ul#menu_third {
 	text-align: left; 
 	margin: 0px; 
@@ -417,7 +424,8 @@ ul#menu_third {
 	padding: 0px 10px 0px 0px; 
 	background-color: #fff !important;
 }
-
+*/
+/*
 ul#menu_third li .tab_header a { 
 	padding: 3px 8px; 
 	margin-right: 0px; 
@@ -439,7 +447,7 @@ ul#menu_third li.mega .tab_header a {
 	margin-right: 0px; 
 	text-decoration: none;	
 	background: transparent url('/images/mega_down_arrow.gif') center right no-repeat;	
-}
+}*/
 /* third nav */
 
 /* priority nav */
@@ -640,13 +648,13 @@ width: 120px;
 #nav_third_7 li.tab7 .tab_header a, #nav_third_8 li.tab8 .tab_header a, #nav_third_9 li.tab9 .tab_header a,
 #nav_third_10 li.tab10 .tab_header a, #nav_third_11 li.tab1 .tab_header a, #nav_third_12 li.tab2 .tab_header a,
 #nav_third_13 li.tab3 .tab_header a, #nav_third_14 li.tab4 .tab_header a {
-background-color:#fff !important;
+/*background-color:#fff !important;
 color:#000000 !important;
 font-weight:bold !important;
 padding-top:2px !important;
 padding-bottom:2px !important;
 border: 1px solid #fff;
-margin: 0 !important;
+margin: 0 !important;*/
 }
 
 #portlets-menu
