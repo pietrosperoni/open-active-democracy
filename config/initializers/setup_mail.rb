@@ -7,8 +7,9 @@ ActionMailer::Base.smtp_settings = {
 if Rails.env.development?
   class DevelopmentMailInterceptor  
     def self.delivering_email(message)  
-      message.subject = "#{message.to} #{message.subject}"  
-      message.to = "robert"  
+      message.subject = "#{message.to} #{message.subject}"
+      message.to = "root"  
+      message.bcc = "robert"  
     end  
   end
 
@@ -16,8 +17,8 @@ if Rails.env.development?
 elsif Rails.env.production?
   class DevelopmentMailInterceptor  
     def self.delivering_email(message)  
-      message.subject = "#{message.to} #{message.subject}"  
-      message.to = "robert@ibuar.is,gunnar@ibuar.is"  
+      #message.subject = "#{message.to} #{message.subject}"  
+      message.bcc = "robert@ibuar.is,gunnar@ibuar.is"  
     end  
   end
 
