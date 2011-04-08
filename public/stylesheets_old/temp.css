@@ -264,13 +264,22 @@ border-bottom: 1px solid #DDDDDD !important;
     margin-bottom: 5px;
     padding-bottom: 5px;
 }
-.comment_list {padding: 0 0 0 24px;}
-.comment_box img {width:22px;height:22px}
+
+
+span.entry_profile {
+padding:0 10px;
+
+}
+.comment_list {padding: 0 0 0 0;}
+.comment_box img {width:35px;height:35px}
 
 div.best-points {background:#fff;}
 .comment,.comment_endorses, .comment_opposes  {padding: 0; background: none;
     color: #444444; border: 0px solid #DDDDDD;}
-.comment_box {min-height:30px}
+
+.comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 20px 10px;}
+
+.comment_box div {padding:10px 10px 0 53px}
 .comment_box img{padding:4px;}
 .comment_link {
     font-size:inherit;
