@@ -3,7 +3,7 @@
 <% end %>
 <%= javascript_include_tag "facebox","jquery.autocomplete.pack","jquery.textCounting.min", "jquery.timeago",
                            "jquery.truncator","autoresize.jquery.min","jquery.defaultvalue","jquery.hoverIntent.minified",
-                           "jquery.bgiframe.min","jquery.corners.min","jquery.delayedObserver",
+                           "jquery.bgiframe.min","jquery.corner","jquery.delayedObserver",
                            "jquery-ui-1.7.2.custom.min", "application" %>
 
 <script type="text/javascript">
@@ -18,5 +18,6 @@ jQuery(document).ready(function() {
 	jQuery("input#right_priority_box").DefaultValue("<%= tr("Add a priority to your list", "view/shared/_javascripts").html_safe %>") 
 	jQuery(".comment_content").truncate({max_length: 1000, more: "<%= tr("show full comment", "view/shared/_javascripts") %>", less: "<%= tr("hide full comment", "view/shared/_javascripts") %>"});
 	<%= render :partial => "shared/javascripts_reloadable" %>
+$('div.ui-widget-content').corner();
 });
 </script>
