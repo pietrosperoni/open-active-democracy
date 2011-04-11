@@ -60,7 +60,18 @@ ul#menu_sub li .tab_header {
 
 
 
-ul#menu li.tab1 .tab_header,ul#menu_sub li.tab10 .tab_header {background-image:none}
+ul#menu li.tab1 .tab_header,
+body.news-top ul#menu_sub li.tab5 .tab_header,
+ul#menu_sub li.tab10 .tab_header,
+body.briefing-contributors ul#menu_sub li.tab4 .tab_header,
+body.Cpoints ul#menu_sub li.tab4 .tab_header,
+body.briefing-points ul#menu_sub li.tab4 .tab_header,
+ul#menu_sub li.tab7 .tab_header,
+body.news-capital ul#menu_third li.tab2 .tab_header,
+body.briefing-points ul#menu_third li.tab1 .tab_header,
+ul#menu_third li.tab4 .tab_header,
+ul#menu_third li.tab7 .tab_header,
+ul#menu_third li.tab6 .tab_header  {background-image:none}
 
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
@@ -198,5 +209,7 @@ margin: 7px 8px 0 0px;
 display:inline-block;
 }
 
-
+#nav_sub ul#menu_sub li.mega .tab_header a {
+padding: 3px 12px 0 8px;
+}
 
