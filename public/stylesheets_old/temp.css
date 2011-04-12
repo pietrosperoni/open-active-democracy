@@ -280,7 +280,8 @@ div.best-points {background:#fff;}
 
 .comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 20px 10px;margin:0 0 10px 0}
 
-.comment_box div {padding:10px 10px 0 53px}
+.comment_content_1,.comment_content_2 {padding:10px 10px 0 53px}
+div.buddy-icon {float:left}
 .comment_box img{padding:4px;}
 .comment_link {
     font-size:inherit;
@@ -298,7 +299,7 @@ div.best-points {background:#fff;}
 .comment_link_add form {
 
 }
-
+div.delete-comment {clear:both;text-align: right;}
 
 .comment_link_add {
     background: url("/images/new/backgrounds-sprite.png") repeat-x scroll 0 -480px #FFFFFF;
@@ -472,3 +473,12 @@ font-weight:normal;
 list-style-position: inside;
 padding:0;
 }
+
+
+.point_content_detail {
+    font-size: 1em;
+    line-height: 1.4em;
+    margin: 2px 0 5px;
+}
+
+
