@@ -19,5 +19,11 @@ jQuery(document).ready(function() {
 	jQuery(".comment_content").truncate({max_length: 1000, more: "<%= tr("show full comment", "view/shared/_javascripts") %>", less: "<%= tr("hide full comment", "view/shared/_javascripts") %>"});
 	<%= render :partial => "shared/javascripts_reloadable" %>
 $('div.ui-widget-content').corner();
+$('div.userwrap').corner();
+$('div.endorse-wrap').corner();
+$('div.oppose-wrap').corner();
+$('div.comment_box').corner();
+ 
+
 });
 </script>
