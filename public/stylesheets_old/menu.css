@@ -7,7 +7,7 @@
 #nav a {
 	text-decoration: none;
 }
-#nav a:hover {
+#toolbar a:hover {
 	text-decoration: underline !important;
 }
 #nav {
@@ -23,6 +23,8 @@
     margin: 1px 0 2px;
     z-index: -1;
 }
+
+#nav_sub_3,#nav_sub_5 {float:left}
 
 #nav_third #menu_sub {margin:7px 0 0 0 }
 
