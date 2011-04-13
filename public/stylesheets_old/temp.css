@@ -394,8 +394,24 @@ color:#444 !important;
 }
 
 
+div.endorse-wrap div.sub_header,div.oppose-wrap div.sub_header  {
+  border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 6px;
+    width: 100%;
+}
 
-
+div.endorse-wrap h2 {
+color: #439A22;
+    float: left;
+    text-transform: uppercase;
+    width: 230px !important;
+}
+div.oppose-wrap h2 {
+text-transform: uppercase;
+color:#B92D19;
+float: left;
+width: 230px !important;
+}
 
 
 
