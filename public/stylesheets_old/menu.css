@@ -17,7 +17,14 @@
 	z-index: -1;
 }
 
+#nav_sub {
+    float: left;
+    font-size: 1.2em;
+    margin: 1px 0 2px;
+    z-index: -1;
+}
 
+#nav_third #menu_sub {margin:7px 0 0 0 }
 
 #toolbar a {
   color: #003399 !important;
@@ -257,7 +264,7 @@ padding: 3px 12px 0 8px;
     float: left;
     font-size: 0.8em;
     font-weight: bold;
-    padding: 3px 10px 0 14px;
+    padding: 4px 10px 0 14px;
     text-transform: uppercase;
 }
 
