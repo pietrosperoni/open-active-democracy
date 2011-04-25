@@ -7,7 +7,7 @@
 #nav a {
 	text-decoration: none;
 }
-#nav a:hover {
+#toolbar a:hover {
 	text-decoration: underline !important;
 }
 #nav {
@@ -17,7 +17,16 @@
 	z-index: -1;
 }
 
+#nav_sub {
+    float: left;
+    font-size: 1.2em;
+    margin: 1px 0 2px;
+    z-index: -1;
+}
 
+#nav_sub_3,#nav_sub_5 {float:left}
+
+#nav_third #menu_sub {margin:7px 0 0 0 }
 
 #toolbar a {
   color: #003399 !important;
@@ -84,7 +93,10 @@ body.news-capital ul#menu_third li.tab2 .tab_header,
 body.briefing-points ul#menu_third li.tab1 .tab_header,
 ul#menu_third li.tab4 .tab_header,
 ul#menu_third li.tab7 .tab_header,
-ul#menu_third li.tab6 .tab_header  {background-image:none}
+ul#menu_third li.tab6 .tab_header  {/*background-image:none*/}
+
+ul#menu li.tab1 .tab_header {background-image:none}
+
 
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
@@ -251,4 +263,15 @@ display:inline-block;
 #nav_sub ul#menu_sub li.mega .tab_header a {
 padding: 3px 12px 0 8px;
 }
+
+#issue_nav_name {
+    color: #AAAAAA;
+    float: left;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 4px 10px 0 14px;
+    text-transform: uppercase;
+}
+
+div#nav_sub_2 {float:left;}
 
