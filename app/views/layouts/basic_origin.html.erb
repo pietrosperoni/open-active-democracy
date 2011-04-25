@@ -10,15 +10,15 @@
 <%= render :partial => "shared/css" %>
 <%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
 <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
-<%= stylesheet_link_tag "/stylesheets_old/newstuff" %>
-<%= stylesheet_link_tag "/stylesheets_old/gnew" %>
-<%= stylesheet_link_tag "/stylesheets_old/partners" %>
+<%= stylesheet_link_tag "/stylesheets/newstuff" %>
+<%= stylesheet_link_tag "/stylesheets/gnew" %>
+<%= stylesheet_link_tag "/stylesheets/partners" %>
 <% if controller_name == "users" %>
- <%= stylesheet_link_tag "/stylesheets_old/fb_invite_hack.css" %>
+ <%= stylesheet_link_tag "/stylesheets/fb_invite_hack.css" %>
 <% end %>
 <%= javascript_include_tag "skuggathing" unless controller_name=="priority_processes" %>
 <% if ["users","sessions"].include?(controller_name)  %>
-  <%= stylesheet_link_tag "/stylesheets_old/jquery.keypad" %>
+  <%= stylesheet_link_tag "/stylesheets/jquery.keypad" %>
   <%= javascript_include_tag "jquery.keypad.min" %>
 <% end %>
 <% if controller_name == "priorities" and action_name == "show" %>
