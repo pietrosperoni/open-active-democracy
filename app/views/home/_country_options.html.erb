@@ -8,7 +8,7 @@
               <% if partner = Partner.find_by_iso_country_id(country.id) %>
                 <div class="country">
                   <% link_to partner.show_url do %>
-                     <%= image_tag country.medium_flag_image, :size=>"32x32" %><br>
+                     <%= image_tag country.medium_flag_image, :size=>"32x32", :border=>0 %><br>
                      <%=country.country_english_name%></div>
                   <% end %>
                 <% end %>
