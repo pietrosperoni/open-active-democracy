@@ -62,12 +62,22 @@ div#content_text table {
     padding: 0;
 }
 */
-.priority_add {
-font-size:11px;
+.notification_show_footer {
+  float: left;
+  margin-left: -38px;
+  margin-top: 10px;
+}
+.notification_show_footer .priority_add {
+	font-size:11px;
   margin-right: 0px;
   margin-top: 0px;
   padding: 0;
   text-transform: uppercase;
+}
+.notification_show_footer .priority_add a {
+	background-color: #CCC;
+	font-size: 0.7em !important;
+	border: 1px solid #999999;
 }
 
 #sidebar {
@@ -351,7 +361,7 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 
-span.priority_add a {padding:0 2px;font-size: 0.7em;color:#fff !important;font-weight:bold;text-decoration:none;}
+span.priority_add a {padding:0 2px;font-size: 0.9em;color:#fff !important;font-weight:bold;text-decoration:none;}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;}
 a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}

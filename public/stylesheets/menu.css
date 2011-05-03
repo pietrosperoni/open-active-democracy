@@ -180,6 +180,7 @@ ul#menu1 .tab_body {
 	position: absolute;
 	top: 20px;
 	right: -9px;
+	left: 0;
 	width:197px;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
