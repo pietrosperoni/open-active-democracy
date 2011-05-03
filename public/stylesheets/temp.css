@@ -351,7 +351,7 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 
-span.priority_add a {padding:0 2px;font-size: 9px;color:#fff !important;font-weight:bold;text-decoration:none;}
+span.priority_add a {padding:0 2px;font-size: 0.7em;color:#fff !important;font-weight:bold;text-decoration:none;}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;}
 a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
@@ -364,8 +364,16 @@ img.point_report {float:right;}
     background-color: #B92D19;
 }
 .green_button, .priority_remove, .endorsed, .flash_notice {
-    background-color: #439A22;
+    background-color: #3a5a99;
 }
+
+.flash_notice {
+    font-weight: normal;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+
 .priority_remove_oppose, .priority_remove {
     font-size: 9px;
     font-weight: bold;
@@ -467,6 +475,7 @@ padding:10px 10px 0;
     margin-bottom: 0px;
     margin-top: 0;
 }
+#intro {border: solid 1px #EEE !important; margin-top: 5px; width: 191px;}
 #notification_box p, #next_steps_box p{
   font-size: .9em;
   line-height: 1.4em;

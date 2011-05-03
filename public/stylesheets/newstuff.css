@@ -253,6 +253,7 @@ ul#menu li, ul#menu_sub li, ul#menu_third li, ul#priority_menu li {
 }
 .tab_subhead, .tab_subhead a {
 	font-weight: bold;
+	color: #666 !important;
 }
 .tab_subhead {
 	font-size: 13px;
@@ -689,7 +690,7 @@ letter-spacing: normal !important;
 
 .tab_body 
 {
-border: 1px solid #7a7878 !important;
+border: 1px solid #CCC !important;
 margin-top: 2px !important;
 }
 

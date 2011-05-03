@@ -120,6 +120,10 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 	color: #ffffff; /* FFF */
 }
 
+.close_notify {
+    color: #fff !important;
+}
+
 .suggest_button, .yellow_button {
 	background-color: #ffff99; /* FFFF99 */
 	border: solid 3px #ffcc00;
