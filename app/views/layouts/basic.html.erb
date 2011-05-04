@@ -8,7 +8,9 @@
     <%= render :partial => "shared/head" %>
     <%= render :partial => "shared/javascripts" %>
     <%= render :partial => "shared/css" %>
-
+		<!--[if IE]>
+      <%= stylesheet_link_tag "/stylesheets/iehacks" %>
+    <![endif]-->
     <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
 <%= stylesheet_link_tag "/stylesheets/color" %>    
 <%= stylesheet_link_tag "/stylesheets/newstuff" %>
