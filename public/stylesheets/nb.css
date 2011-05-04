@@ -446,10 +446,11 @@ del {
 }
 #footer {
 	font-size: 1.1em;
-	text-align: left;
+	text-align: center;
 	padding: 5px 30px 10px 30px;
 	line-height: 1.4em;
 	clear: both;
+	margin-left: -63px;
 }
 #footer_container {
 	margin-top: 10px;

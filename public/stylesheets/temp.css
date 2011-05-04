@@ -22,12 +22,12 @@ img {border:none}
 td.right {width:60px}
 
 div.column .ui-widget-content {
-background-color:#fafafa;
+	  background-color:#fafafa;
     background-image: url("../images/new/portal_bg.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
     margin: 0 0 10px;
-width: 345px;
+		width: 345px;
 }
 
 
@@ -126,7 +126,7 @@ border-width:0;
 #content_text
 {
 background-color: #fff;
-    background-image: url("../images/new/content-text-bg.png") !important;
+/*background-image: url("../images/new/content-text-bg.png") !important;*/
     background-position: left top !important;
     background-repeat: no-repeat;padding: 10px;margin-top:10px;}
 

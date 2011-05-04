@@ -131,6 +131,7 @@ hr { border-top: 3px solid #e5e5e5; }
 	float: left;
 	position: relative;
 	padding: 0px 0px 0px 0px !important;
+  margin-right: 0;
 }
 
 #branding_text_header {
@@ -220,7 +221,7 @@ border: none 0px #fff !important;
 	z-index: -1;
 }
 */
-#footer { clear: both; width: 960px; }
+#footer { clear: both; width: 720px; }
 
 ul#menu, ul#priority_menu {
 	text-align: left; 

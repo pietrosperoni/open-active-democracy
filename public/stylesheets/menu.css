@@ -180,11 +180,12 @@ ul#menu1 .tab_body {
 	position: absolute;
 	top: 20px;
 	right: -9px;
-	left: 0;
 	width:197px;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
+
+
 }
 /*
 ul#menu_sub .tab_body, ul#menu_third .tab_body {
