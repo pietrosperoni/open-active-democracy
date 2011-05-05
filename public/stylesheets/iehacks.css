@@ -1,0 +1,14 @@
+ul#menu1 .tab_body {
+		float: left !important;
+		margin: 10px 0 0 -10px;
+		left: -148px !important;
+}
+
+
+#contentwrap {
+	margin-right: 10px !important;
+}
+
+#footer {
+	margin: 50px 0 0 150px !important;
+}
