@@ -446,11 +446,10 @@ del {
 }
 #footer {
 	font-size: 1.1em;
-	text-align: center;
 	padding: 5px 30px 10px 30px;
 	line-height: 1.4em;
 	clear: both;
-	margin-left: -63px;
+	margin:0 auto;
 }
 #footer_container {
 	margin-top: 10px;
@@ -1414,4 +1413,14 @@ ul#priority_menu li.tab12 div.tab_body {
 	border: 1px solid #000000;
 }
 
+.fblike {
+	/*position: relative;*/
+	width: auto;
+	float: left;
+	display: none;
+}
 
+.button_count .like_button_dark .like_button_no_like .liketext, .button_count .connect_widget_like_button 
+.liketext{
+	display: none;
+}

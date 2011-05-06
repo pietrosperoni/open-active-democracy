@@ -95,8 +95,8 @@ hr { border-top: 3px solid #e5e5e5; }
 	float: right;
 	overflow: hidden;
 	padding-right: 4px;
-  position:absolute;
-  top: 0px;
+  position:relative;
+  top: -90px;
   right: 5px;
   padding-top: 0px;
   margin-top: 0px;
@@ -221,7 +221,7 @@ border: none 0px #fff !important;
 	z-index: -1;
 }
 */
-#footer { clear: both; width: 720px; }
+#footer { clear: both; width: 960px; }
 
 ul#menu, ul#priority_menu {
 	text-align: left; 
@@ -691,7 +691,7 @@ letter-spacing: normal !important;
 
 .tab_body 
 {
-border: 1px solid #CCC !important;
+/*border: 1px solid #CCC !important;*/
 margin-top: 2px !important;
 }
 
@@ -984,7 +984,7 @@ margin-right: 4px !Important;
 }
 */
 .icon {
-  z-index: 20;
+  z-index: 0;
   position: relative;
   top: 18px;
   right: 16px;
