@@ -8,7 +8,12 @@
     <%= render :partial => "shared/head" %>
     <%= render :partial => "shared/javascripts" %>
     <%= render :partial => "shared/css" %>
-
+		<!--[if IE]>
+      <%= stylesheet_link_tag "/stylesheets/iehacks" %>
+    <![endif]-->
+		<!--[if IE 7]>
+      <%= stylesheet_link_tag "/stylesheets/ie7" %>
+    <![endif]-->
     <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
 <%= stylesheet_link_tag "/stylesheets/color" %>    
 <%= stylesheet_link_tag "/stylesheets/newstuff" %>
@@ -82,14 +87,16 @@
           </div>
         <% end %>
       </div>
-      <%= render :partial => "shared/sidebar" %>
-      <div class="push">
+      <%= render :partial => "shared/sidebar" %>		
+			<div class="push">
       </div>
+			<div class="clear"></div>
     </div>
     <%= render :partial => "shared/footer" %>
-    <%= render :partial => "shared/analytics" %>
-    <%= render :partial => "shared/facebook_footer" %>
-    <%= render :partial => "shared/google_translate" %>
+		<%= render :partial => "shared/analytics" %>
+	  <%= render :partial => "shared/facebook_footer" %>
+	  <%= render :partial => "shared/google_translate" %>	
+
     <!-- <%= h(controller.controller_name) %> <%= h(controller.action_name) %> -->
   </body>
 
