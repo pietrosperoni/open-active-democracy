@@ -22,12 +22,12 @@ img {border:none}
 td.right {width:60px}
 
 div.column .ui-widget-content {
-background-color:#fafafa;
+	  background-color:#fafafa;
     background-image: url("../images/new/portal_bg.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
     margin: 0 0 10px;
-width: 345px;
+		width: 345px;
 }
 
 
@@ -62,12 +62,23 @@ div#content_text table {
     padding: 0;
 }
 */
-.priority_add {
-font-size:11px;
+.notification_show_footer {
+  float: left;
+  margin-left: -38px;
+  margin-top: 10px;
+	padding: 0;
+}
+.notification_show_footer .priority_add {
+	font-size:11px;
   margin-right: 0px;
   margin-top: 0px;
   padding: 0;
   text-transform: uppercase;
+}
+.notification_show_footer .priority_add a {
+	background-color: #CCC;
+	font-size: 0.7em !important;
+	border: 1px solid #999999;
 }
 
 #sidebar {
@@ -113,14 +124,16 @@ border-width:0;
     padding-left: 0 !important;
 }
 
+#signup-bg {}
+
 #content_text
 {
 background-color: #fff;
-    background-image: url("../images/new/content-text-bg.png") !important;
+background-image: url("../images/new/content-text-bg.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;padding: 10px;margin-top:10px;}
 
-body.portal-index #content_text {background:none;padding:0}
+body.portal-index #content_text {background:none;padding:0; background-repeat: no-repeat;}
 
 div.endorse-wrap {
    background: none repeat scroll 0 0 #FFFFFF;
@@ -351,7 +364,7 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 
-span.priority_add a {padding:0 2px;font-size: 9px;color:#fff !important;font-weight:bold;text-decoration:none;}
+span.priority_add a {padding:0 2px;font-size: 0.9em;color:#fff !important;font-weight:bold;text-decoration:none;}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;}
 a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
@@ -364,8 +377,16 @@ img.point_report {float:right;}
     background-color: #B92D19;
 }
 .green_button, .priority_remove, .endorsed, .flash_notice {
-    background-color: #439A22;
+    background-color: #3a5a99;
 }
+
+.flash_notice {
+    font-weight: normal;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+
 .priority_remove_oppose, .priority_remove {
     font-size: 9px;
     font-weight: bold;
@@ -467,6 +488,7 @@ padding:10px 10px 0;
     margin-bottom: 0px;
     margin-top: 0;
 }
+#intro {border: solid 1px #EEE !important; margin-top: 5px; width: 191px;}
 #notification_box p, #next_steps_box p{
   font-size: .9em;
   line-height: 1.4em;

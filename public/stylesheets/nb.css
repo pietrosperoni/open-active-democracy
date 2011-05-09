@@ -332,7 +332,8 @@ h4 {
 }
 
 #notification_show a {
-	text-decoration: underline;
+	text-decoration: none;
+	font-size:9.5px;
 }
 
 .notification_show_message {
@@ -445,10 +446,10 @@ del {
 }
 #footer {
 	font-size: 1.1em;
-	text-align: left;
 	padding: 5px 30px 10px 30px;
 	line-height: 1.4em;
 	clear: both;
+	margin:0 auto;
 }
 #footer_container {
 	margin-top: 10px;
@@ -571,7 +572,7 @@ del {
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 10px;
-	padding: 0px 1px 0px 2px;
+	padding: 0;
 	margin-right: 3px;
 	margin-top: 3px;
 }
@@ -1412,4 +1413,14 @@ ul#priority_menu li.tab12 div.tab_body {
 	border: 1px solid #000000;
 }
 
+.fblike {
+	/*position: relative;*/
+	width: auto;
+	float: left;
+	display: none;
+}
 
+.button_count .like_button_dark .like_button_no_like .liketext, .button_count .connect_widget_like_button 
+.liketext{
+	display: none;
+}

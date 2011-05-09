@@ -24,7 +24,7 @@
 }
 
 ul#menu,ul#menu1,ul#menu_sub,ul#menu_third  {width:100%;float:left;padding:0}
-ul#menu1  {width:100%;float:right;padding:0}
+ul#menu1  {width:100%;float:right;padding:0; margin: 10px}
 
 
 ul#menu_third  {border-top:0px solid #e5e5e5;margin:2px 4px 0 4px;padding:3px 0 0;}
@@ -177,9 +177,18 @@ ul#menu .tab_body {
 	left: 0px;
 }
 ul#menu1 .tab_body {
-	position: absolute;
-	top: 20px;
-	right: 0px;width:190px;
+    background-image: url("../images/new/about-box2.jpg");
+    height: 141px;
+    padding: 14px !important;
+    position: absolute;
+    right: -9px;
+    top: 20px;
+    width: 194px;
+	/*-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;*/
+
+
 }
 /*
 ul#menu_sub .tab_body, ul#menu_third .tab_body {
