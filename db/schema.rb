@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110401160800) do
+ActiveRecord::Schema.define(:version => 20110501160800) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(:version => 20110401160800) do
     t.text     "content_html"
     t.integer  "flags_count",   :default => 0
     t.integer  "category_id"
-    t.string   "category_name", :default => "no cat"
+    t.string   "category_name"
     t.integer  "partner_id"
   end
 
@@ -559,6 +559,7 @@ ActiveRecord::Schema.define(:version => 20110401160800) do
 
   create_table "partners", :force => true do |t|
     t.string   "name",                       :limit => 60
+    t.string   "name_variations_data",       :limit => 300
     t.string   "short_name",                 :limit => 20
     t.integer  "picture_id"
     t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
@@ -583,7 +584,6 @@ ActiveRecord::Schema.define(:version => 20110401160800) do
     t.string   "custom_tag_checkbox"
     t.string   "custom_tag_dropdown_1"
     t.string   "custom_tag_dropdown_2"
-    t.string   "name_variations_data",       :limit => 350
     t.boolean  "geoblocking_enabled",                       :default => false
     t.string   "geoblocking_open_countries",                :default => ""
     t.string   "default_locale"
@@ -763,15 +763,17 @@ ActiveRecord::Schema.define(:version => 20110401160800) do
     t.string   "external_name"
     t.integer  "partner_id"
     t.integer  "flags_count",                             :default => 0
-    t.integer  "category_id"
     t.string   "user_agent",               :limit => 200
+    t.integer  "category_id"
     t.integer  "position_endorsed_24hr"
     t.integer  "position_endorsed_7days"
     t.integer  "position_endorsed_30days"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
+  add_index "priorities", ["official_status"], :name => "index_priorities_on_obama_status"
   add_index "priorities", ["official_status"], :name => "index_priorities_on_official_status"
+  add_index "priorities", ["official_value"], :name => "index_priorities_on_obama_value"
   add_index "priorities", ["official_value"], :name => "index_priorities_on_official_value"
   add_index "priorities", ["position"], :name => "priorities_position_index"
   add_index "priorities", ["status"], :name => "priorities_status_index"
@@ -1614,7 +1616,6 @@ ActiveRecord::Schema.define(:version => 20110401160800) do
     t.integer  "facebook_id"
     t.boolean  "reports_enabled",                             :default => false
     t.boolean  "reports_discussions",                         :default => false
-    t.boolean  "reports_questions",                           :default => false
     t.boolean  "reports_documents",                           :default => false
     t.integer  "reports_interval"
     t.datetime "last_sent_report"
