@@ -177,11 +177,13 @@ ul#menu .tab_body {
 	left: 0px;
 }
 ul#menu1 .tab_body {
-	position: absolute;
-	background-image:url(images/about-box.jpg);
-	top: 20px;
-	right: -9px;
-	width:197px;
+    background-image: url("../images/new/about-box2.jpg");
+    height: 141px;
+    padding: 14px !important;
+    position: absolute;
+    right: -9px;
+    top: 20px;
+    width: 194px;
 	/*-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;*/
