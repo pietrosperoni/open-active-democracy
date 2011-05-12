@@ -32,7 +32,7 @@ div.column .ui-widget-content {
 
 
 div.column .portlet-header {
-  color: #666666;
+  	color: #555;
     font-size: 12px;
     font-weight: normal;
     margin: 5px 0;
@@ -128,10 +128,14 @@ border-width:0;
 
 #content_text
 {
-background-color: #fff;
-background-image: url("../images/new/content-text-bg.png") !important;
+		background-color: #fff;
+		background-image: url("../images/new/content-text-bg.png") !important;
     background-position: left top !important;
-    background-repeat: no-repeat;padding: 10px;margin-top:10px;}
+    background-repeat: no-repeat;
+		padding: 10px;
+		margin-top: 0px;
+		min-height: 300px;
+}
 
 body.portal-index #content_text {background:none;padding:0; background-repeat: no-repeat;}
 
@@ -393,6 +397,8 @@ img.point_report {float:right;}
     margin: 0 3px 0 0;
     padding: 1px 2px 1px 3px;
     text-transform: uppercase;
+		background-color: #A0C47D;
+		border: solid 1px #439A22;
 }
 
 .priority_endorsement_count {
