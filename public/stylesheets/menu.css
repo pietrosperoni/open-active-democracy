@@ -28,7 +28,7 @@ ul#menu1  {width:100%;float:right;padding:0; margin: 10px}
 
 
 ul#menu_third  {border-top:0px solid #e5e5e5;margin:2px 4px 0 4px;padding:3px 0 0;}
-ul#menu_sub {margin:1px 2px 0 2px}
+ul#menu_sub {margin:1px 2px 7px 2px}
 ul#menu li,ul#menu1 li, ul#menu_sub li, ul#menu_third li {
     display: inline;
     height: auto;
