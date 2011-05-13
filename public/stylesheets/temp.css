@@ -446,10 +446,11 @@ color:#444 !important;
 
 
 div.userwrap {
-background-color: #f7f9fb;
-    background-image: url("../images/new/user-bg.png") !important;
-    background-position: left top !important;
+		background-color: #F0F2F5;
+    background-image: url("../images/new/user-bg3.png") !important;
+    background-position:top !important;
     background-repeat: no-repeat;
+		padding-bottom: 10px;
 }
 
 
