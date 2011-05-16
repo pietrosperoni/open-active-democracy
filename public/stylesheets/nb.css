@@ -1418,10 +1418,13 @@ ul#priority_menu li.tab12 div.tab_body {
 	/*position: relative;*/
 	width: auto;
 	float: left;
-	display: none;
+	/*display: none;*/
+  margin-bottom: 10px;
+  margin-top: 20px;
+  position: absolute;
 }
 
 .button_count .like_button_dark .like_button_no_like .liketext, .button_count .connect_widget_like_button 
 .liketext{
-	display: none;
+	/*display: none;*/
 }
