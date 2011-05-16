@@ -11,13 +11,13 @@
      </tr>
      <tr>
      <% end %>
-     <td width="122px" height="25px" align="right">
+     
        <div class="fblike">
 
 <fb:like href="<%=priority.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light">
 
 </div>
-     </td>
+    
      <td width="25px" height="25px" align="right">
        <%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
      </td>

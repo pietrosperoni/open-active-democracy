@@ -12,7 +12,7 @@
 }
 #nav {
 	background-color: #fff;
-	margin-top: 7px !important;
+	margin-top: -10px !important;
 	font-size: 13px;
 	z-index: -1;
 }
@@ -24,11 +24,11 @@
 }
 
 ul#menu,ul#menu1,ul#menu_sub,ul#menu_third  {width:100%;float:left;padding:0}
-ul#menu1  {width:100%;float:right;padding:0; margin: 10px}
+ul#menu1  {width:100%;float:right;padding:0; margin: 1px 0 10px 10px;}
 
 
 ul#menu_third  {border-top:0px solid #e5e5e5;margin:2px 4px 0 4px;padding:3px 0 0;}
-ul#menu_sub {margin:1px 2px 0 2px}
+ul#menu_sub {margin:1px 2px 7px 2px}
 ul#menu li,ul#menu1 li, ul#menu_sub li, ul#menu_third li {
     display: inline;
     height: auto;
@@ -177,13 +177,14 @@ ul#menu .tab_body {
 	left: 0px;
 }
 ul#menu1 .tab_body {
-    background-image: url("../images/new/about-box2.jpg");
-    height: 141px;
+    background-image: url("../images/new/about-box3.png");
+    height: 140px;
     padding: 14px !important;
     position: absolute;
-    right: -9px;
+    right: 0;
     top: 20px;
-    width: 194px;
+    width: 192px;
+		background-color: transparent;
 	/*-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;*/

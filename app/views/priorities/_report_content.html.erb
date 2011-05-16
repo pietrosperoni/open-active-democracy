@@ -1,6 +1,6 @@
 <% if logged_in? and current_user.id != priority.user_id  %>
 <div id="priority_report_<%=priority.id%>">
-       <%= link_to image_tag("comment_report.gif", :align => "center", :border => 0, :class => "priority_report"),
+       <%= link_to image_tag("report.png", :align => "center", :border => 0, :class => "priority_report"),
                    flag_priority_url(priority.id), :method => :get,
                    :remote=>true,
                    'data-disable-with' => "",

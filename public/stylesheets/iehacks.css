@@ -1,6 +1,7 @@
+ul#menu1 {margin: 1px -10px 10px 10px !important;}
 ul#menu1 .tab_body {
 		float: left !important;
-		margin: 10px 0 0 -13px;
+		margin: 10px 0 0 -10px;
 		left: -148px !important;
 }
 
@@ -9,5 +10,6 @@ ul#menu1 .tab_body {
 }
 
 .notification_show_footer {
-	margin: 17px 0 0 -77px !important;
+	margin: 0px 0 0 -77px !important;
 }
+

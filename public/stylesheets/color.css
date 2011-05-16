@@ -58,6 +58,7 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 
 .endorsement_down, .endorsement_up, .pc, .profile_pc {
 	border: dotted 1px #dddddd; /* ddd */
+	background-color: #FFF;
 }
 
 .pc, .pc a, .pc_under, .pc_under a, .profile_pc, .profile_pc a {
