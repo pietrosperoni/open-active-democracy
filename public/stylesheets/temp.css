@@ -159,17 +159,23 @@ div.oppose-wrap {
 }
 div.add-endorse {margin-bottom:10px}
 div.add-endorse a {
-background-image: url("../images/new/add-endorse.png") !important;
+		background-image: url("../images/new/add-endorse.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
-padding: 10px 30px;
+		padding: 10px 30px;
+    color: #439A22 !important;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 div.add-oppose {margin-bottom:10px}
 div.add-oppose a {
-background-image: url("../images/new/add-oppose.png") !important;
+		background-image: url("../images/new/add-oppose.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
-padding: 10px 30px;
+		padding: 10px 30px;
+		color: #BC0000 !important;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 
@@ -205,12 +211,12 @@ table.show-with-processes-table td{padding:0}
 
 #priority_nav, #priority_nav1, #priority_menu {
     clear: both;
-    width: auto;position: relative;height:30px
+    width: auto;position: relative;height:20px
 }
 
 #priority_nav1 ul#priority_menu {
     height: 21px !important;
-    margin: 10px 10px 0;
+    margin-top: 16px;
 }
 
 ul#priority_menu li {
@@ -304,7 +310,8 @@ div.buddy-icon {float:left}
 .comment_link {
     font-size:inherit;
     letter-spacing:inherit;
-    padding: 0;
+    padding-left: 20px;
+		background: url("../images/new/comment-icon4.png") no-repeat left;
 }
 .comment_link_add {
     background: none;
@@ -517,4 +524,14 @@ padding:0;
     margin: 2px 0 5px;
 }
 
-
+.sub_header {
+	font-size: 0.9em !important;
+	font-weight: bold;
+	border-bottom : solid 1px #EEE;
+	margin: 15px 0 20px;
+	padding-bottom: 5px;
+}
+.sub_header a {
+	margin-left: 10px;
+}
+.separator {margin-left: 10px;}
