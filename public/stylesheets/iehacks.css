@@ -1,7 +1,7 @@
-ul#menu1 {margin: 1px -10px 10px 10px !important;}
+ul#menu1 {margin: 1px 0 10px 10px !important;}
 ul#menu1 .tab_body {
 		float: left !important;
-		margin: 10px 0 0 -10px;
+		margin: 10px  0 -10px -16px !important;
 		left: -148px !important;
 }
 
@@ -13,3 +13,8 @@ ul#menu1 .tab_body {
 	margin: 0px 0 0 -77px !important;
 }
 
+.fblike {
+	color: #CCC !important;
+	z-index: 9999 !important;
+	margin-top: -500px;
+}
