@@ -284,10 +284,11 @@ ul#priority_menu li#opposer_link a {background-image: url("../images/new/arrow-d
     padding: 0 0 0 29px;
 }
 .activity_border, .activity_hidden {
-border:none;
-border-bottom: 1px solid #DDDDDD !important;
+		border:none;
+		border-bottom: 1px solid #DDDDDD !important;
     margin-bottom: 5px;
     padding-bottom: 5px;
+		overflow: hidden;
 }
 
 

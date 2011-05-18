@@ -1424,9 +1424,16 @@ ul#priority_menu li.tab12 div.tab_body {
   margin-bottom: 10px;
   margin-top: 20px;
   position: absolute;
+	color: red;
 }
 
 .button_count .like_button_dark .like_button_no_like .liketext, .button_count .connect_widget_like_button 
 .liketext{
 	/*display: none;*/
+}
+
+.user_pic_and_activity {
+	float: left;
+	margin-left: -12px;
+	width: 320px;
 }
