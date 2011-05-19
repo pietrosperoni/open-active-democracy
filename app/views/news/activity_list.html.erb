@@ -17,7 +17,7 @@
 	<%= tr("No activity here yet.", "view/news/activity_list")%>
 <% else %>
 <%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @activities} %>
-<div id="activities">
+<div id="activities" class="single">
 <% for activity in @activities %>
 	<% if ['your_activity','your_capital','your_changes'].include?(params[:action]) %>
 		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_nouser"} %>
