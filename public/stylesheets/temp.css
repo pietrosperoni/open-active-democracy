@@ -111,6 +111,7 @@ div.addwrapper  {
 
 #hp_intro, #hp_intro a, #quiz_header, .priority_position, .your_priority_position, .profile_name, .profile_name a, h1, h2, h3, h4 {
     color: #444;
+		border-bottom: solid 1px #FFF;
 }
 
 div#content_text table {
@@ -216,7 +217,7 @@ table.show-with-processes-table td{padding:0}
 
 #priority_nav1 ul#priority_menu {
     height: 21px !important;
-    margin-top: 16px;
+    margin-top: 2px;
 }
 
 ul#priority_menu li {
@@ -290,7 +291,6 @@ ul#priority_menu li#opposer_link a {background-image: url("../images/new/arrow-d
     padding-bottom: 5px;
 		overflow: hidden;
 }
-
 
 span.entry_profile {
 padding:0 10px;
