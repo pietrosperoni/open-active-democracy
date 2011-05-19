@@ -558,6 +558,7 @@ del {
 	margin-bottom: 4px;
 	padding-bottom: 5px;
 }
+.single .priority_listing {margin-left:20px;}
 .priority_name, .priority_name_add {
   	font-size: 12px;
 	font-weight: bold;
@@ -765,6 +766,7 @@ del {
 	font-weight: bold;
 	/*padding-top: 13px;*/
 	text-align: left;
+	border: none !important;
 }
 .priority_added {
 	padding-top: 10px;
@@ -819,7 +821,7 @@ del {
 	font-weight: bold;
 	text-align: left;
 	position: relative;
-	width: 20px;
+	width: 10px;
 	/*top: 9px;	
 	padding-top: 4px;*/	
 }
@@ -1421,11 +1423,14 @@ ul#priority_menu li.tab12 div.tab_body {
 	width: auto;
 	float: left;
 	/*display: none;*/
-  margin-bottom: 10px;
-  margin-top: 20px;
-  position: absolute;
+  margin-bottom: 0;
+  margin-top: 5px;
+  position: relative;
 	color: red;
 }
+
+.fblike img {margin-right: 5px;}
+
 
 .button_count .like_button_dark .like_button_no_like .liketext, .button_count .connect_widget_like_button 
 .liketext{
@@ -1436,4 +1441,10 @@ ul#priority_menu li.tab12 div.tab_body {
 	float: left;
 	margin-left: -12px;
 	width: 320px;
+}
+.single .user_pic_and_activity {width:auto;}
+
+.category {
+	margin: -45px 0 0 120px;
+	float: left;
 }

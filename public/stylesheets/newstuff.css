@@ -1013,17 +1013,13 @@ font-size: 13px !important;
 .priority_name, .priority_name_add {
 /*float:left;*/
 margin-right:1px;
-font-size: 1.4em !Important;
+font-size: 1.083em!important;
 font-family:helvetica,arial,sans-serif !important;
 padding-bottom: 0px;
 /*margin-top:3px;*/
 }
-
-.priority_name_single {
-	margin-right:1px;
-	font-size: 1.4em !Important;
-	font-family:helvetica,arial,sans-serif !important;
-	padding-bottom: 0px;
+.single .priority_name {
+	font-size: 1.4em !important;	
 }
 
 
