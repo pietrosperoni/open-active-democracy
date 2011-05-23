@@ -104,8 +104,8 @@ set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
 
 set :application, "open-active-democracy"
-set :domain, "o2"
-set :selected_branch, "master"
+set :domain, "o4"
+set :selected_branch, "betrireykjavik"
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
 set :deploy_to, "/home/yrpri/sites/#{application}/#{selected_branch}"
@@ -143,7 +143,7 @@ task :after_update_code do
   run "ln -s   #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s   #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
   run "ln -nfs #{deploy_to}/#{shared_dir}/config/twitter_auth.yml #{current_release}/config/twitter_auth.yml"
-  run "ln -nfs /mnt/shared/system #{current_release}/public/system"
+#  run "ln -nfs /mnt/shared/system #{current_release}/public/system"
   thinking_sphinx.configure
   thinking_sphinx.start
 end
