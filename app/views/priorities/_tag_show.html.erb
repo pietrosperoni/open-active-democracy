@@ -1,6 +1,6 @@
 <div id="priority_<%= priority.id %>_tags" class="priority_tags">
 <% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
-
+<br>
 	<% for tag in priority.issues %>
 	<span class="tag_name"><%= link_to tr(tag.title,"tags"), tag.show_url %></span>
 	<span class="tag_count"><%= tag.priorities_count %></span>
