@@ -9,7 +9,7 @@
 		</div>
 	</td>		
 <% else %>
-	<td valign="top" align="right" width="30" style="padding-right: 5px;">
+	<td valign="top" align="right" width="13" style="padding-right: 5px; padding-top: 0px;">
 		<% if priority.position != 0 %>
 		<div class="priority_position" title="<%= tr("This is the {position} highest ranked priority across all {government_name} members.", "view/priorities/_rank_week_month", :position => priority.position, :government_name => tr(current_government.name,"Name from database")) %>">
 			<%= priority.position %>
@@ -17,7 +17,7 @@
 		<% end %>
 	</td>
 	<% if priority.is_new? %>
-	<td valign="top" align="center" colspan="2">
+	<td valign="top" align="left" colspan="2">
 		<div class="position_new"><%= tr("new", "view/priorities/_rank_week_month") %></div>
 	</td>
 	<% elsif priority.position_7days_change == 0 and priority.position_30days_change == 0 %>

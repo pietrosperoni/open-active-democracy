@@ -32,7 +32,7 @@ div.column .ui-widget-content {
 
 
 div.column .portlet-header {
-  color: #666666;
+  	color: #555;
     font-size: 12px;
     font-weight: normal;
     margin: 5px 0;
@@ -65,7 +65,7 @@ div#content_text table {
 .notification_show_footer {
   float: left;
   margin-left: -38px;
-  margin-top: 10px;
+  margin-top: 0;
 	padding: 0;
 }
 .notification_show_footer .priority_add {
@@ -90,13 +90,14 @@ div#content_text table {
 
 
 #new_priority_button {
- border: 0px solid #DDDDDD;
+ 		border: 0px solid #DDDDDD;
     font-size: 1.5em;
     font-weight: bold;
     margin-top: 7px;
     padding: 26px 0 30px 27px;
     width: 198px;
 }
+#new_priority_button a:hover {text-decoration: none !important;}
 
 div.addwrapper  {
     background-color: #FFFFFF;
@@ -110,6 +111,7 @@ div.addwrapper  {
 
 #hp_intro, #hp_intro a, #quiz_header, .priority_position, .your_priority_position, .profile_name, .profile_name a, h1, h2, h3, h4 {
     color: #444;
+		border-bottom: solid 1px #FFF;
 }
 
 div#content_text table {
@@ -128,10 +130,14 @@ border-width:0;
 
 #content_text
 {
-background-color: #fff;
-background-image: url("../images/new/content-text-bg.png") !important;
+		background-color: #fff;
+		background-image: url("../images/new/content-text-bg.png") !important;
     background-position: left top !important;
-    background-repeat: no-repeat;padding: 10px;margin-top:10px;}
+    background-repeat: no-repeat;
+		padding: 10px;
+		margin-top: 0px;
+		min-height: 300px;
+}
 
 body.portal-index #content_text {background:none;padding:0; background-repeat: no-repeat;}
 
@@ -154,17 +160,23 @@ div.oppose-wrap {
 }
 div.add-endorse {margin-bottom:10px}
 div.add-endorse a {
-background-image: url("../images/new/add-endorse.png") !important;
+		background-image: url("../images/new/add-endorse.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
-padding: 10px 30px;
+		padding: 10px 30px;
+    color: #439A22 !important;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 div.add-oppose {margin-bottom:10px}
 div.add-oppose a {
-background-image: url("../images/new/add-oppose.png") !important;
+		background-image: url("../images/new/add-oppose.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
-padding: 10px 30px;
+		padding: 10px 30px;
+		color: #BC0000 !important;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 
@@ -200,12 +212,12 @@ table.show-with-processes-table td{padding:0}
 
 #priority_nav, #priority_nav1, #priority_menu {
     clear: both;
-    width: auto;position: relative;height:30px
+    width: auto;position: relative;height:20px
 }
 
 #priority_nav1 ul#priority_menu {
     height: 21px !important;
-    margin: 0 10px;
+    margin-top: 2px;
 }
 
 ul#priority_menu li {
@@ -273,12 +285,12 @@ ul#priority_menu li#opposer_link a {background-image: url("../images/new/arrow-d
     padding: 0 0 0 29px;
 }
 .activity_border, .activity_hidden {
-border:none;
-border-bottom: 1px solid #DDDDDD !important;
+		border:none;
+		border-bottom: 1px solid #DDDDDD !important;
     margin-bottom: 5px;
     padding-bottom: 5px;
+		overflow: hidden;
 }
-
 
 span.entry_profile {
 padding:0 10px;
@@ -299,7 +311,8 @@ div.buddy-icon {float:left}
 .comment_link {
     font-size:inherit;
     letter-spacing:inherit;
-    padding: 0;
+    padding-left: 20px;
+		background: url("../images/new/comment-icon4.png") no-repeat left;
 }
 .comment_link_add {
     background: none;
@@ -376,8 +389,9 @@ img.point_report {float:right;}
 .opposed, .red_button, .priority_remove_oppose {
     background-color: #B92D19;
 }
-.green_button, .priority_remove, .endorsed, .flash_notice {
-    background-color: #3a5a99;
+.green_button, .priority_remove, .endorsed {
+    background-color: #A0C47D !important;
+		border: solid 1px #439A22 !important;
 }
 
 .flash_notice {
@@ -385,6 +399,7 @@ img.point_report {float:right;}
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
+		background-color: #003399;
 }
 
 .priority_remove_oppose, .priority_remove {
@@ -393,6 +408,8 @@ img.point_report {float:right;}
     margin: 0 3px 0 0;
     padding: 1px 2px 1px 3px;
     text-transform: uppercase;
+		background-color: #E49E6E;
+		border: solid 1px #B92D19;
 }
 
 .priority_endorsement_count {
@@ -440,10 +457,11 @@ color:#444 !important;
 
 
 div.userwrap {
-background-color: #f7f9fb;
-    background-image: url("../images/new/user-bg.png") !important;
-    background-position: left top !important;
+		background-color: #F0F2F5;
+    background-image: url("../images/new/user-bg3.png") !important;
+    background-position:top !important;
     background-repeat: no-repeat;
+		padding-bottom: 10px;
 }
 
 
@@ -506,4 +524,14 @@ padding:0;
     margin: 2px 0 5px;
 }
 
-
+.sub_header {
+	font-size: 0.9em !important;
+	font-weight: bold;
+	border-bottom : solid 1px #EEE;
+	margin: 15px 0 20px;
+	padding-bottom: 5px;
+}
+.sub_header a {
+	margin-left: 10px;
+}
+.separator {margin-left: 10px;}

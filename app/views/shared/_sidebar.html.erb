@@ -2,13 +2,7 @@
     <%= render :partial => "shared/partner_large_flag" %>
     <%= render :partial => "shared/search" %>
 
-
-<%= render :partial => "priorities/new_button" %>
-
-
-<div class="userwrap">
-
-<div>
+		<div>
 <ul id="menu1">
 <li class="tab7 mega">
 			<span class="tab_header">
@@ -50,6 +44,12 @@
 		</li>
 </ul></div>
 
+<%= render :partial => "priorities/new_button" %>
+
+<div class="userwrap">
+
+
+
     <%= render :partial => "shared/user_info" if logged_in? %>
     <%= render :partial => "shared/language_selection_master"%>
   <% if logged_in? %>
@@ -77,7 +77,7 @@
  </div> 
 
   <% if logged_in? %>
-    <div id="priority_column">
+    <div id="priority_column" class="userwrap" style="border-radius: 10px">
       <%= render :partial => "shared/your_priorities" %>
     </div>
   <% else %>
