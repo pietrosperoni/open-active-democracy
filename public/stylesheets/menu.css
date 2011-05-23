@@ -185,6 +185,7 @@ ul#menu1 .tab_body {
     top: 20px;
     width: 192px;
 		background-color: transparent;
+		z-index: 5;
 	/*-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;*/
@@ -262,3 +263,15 @@ display:inline-block;
 padding: 3px 12px 0 8px;
 }
 
+.profile-nav {
+	margin: 25px 0 0 100px;
+	position: absolute;
+}
+
+.tweet {
+	position: absolute;
+	left: 75px;
+	top: -1px;
+}
+
+.priorityin_profile {margin-left: -20px;}

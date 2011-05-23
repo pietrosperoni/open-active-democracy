@@ -555,10 +555,11 @@ del {
 	margin-bottom: 12px;
 }
 .priority_listing {
-	margin-bottom: 4px;
+	margin: 0 0 4px 0;
 	padding-bottom: 5px;
 }
 .single .priority_listing {margin-left:20px;}
+.top_level_priority_listing {margin-left:20px;}
 .priority_name, .priority_name_add {
   	font-size: 12px;
 	font-weight: bold;
@@ -820,7 +821,7 @@ del {
 	font-size: 11px;;	
 	font-weight: bold;
 	text-align: left;
-	position: relative;
+	position: absolute;
 	width: 10px;
 	/*top: 9px;	
 	padding-top: 4px;*/	
@@ -1431,10 +1432,11 @@ ul#priority_menu li.tab12 div.tab_body {
 
 .fblike img {margin-right: 5px;}
 
-
+.connect_widget_vertical_center connect_widget_button_cell{margin-top: -10px !important;}
 .button_count .like_button_dark .like_button_no_like .liketext, .button_count .connect_widget_like_button 
 .liketext{
 	/*display: none;*/
+	margin: -10px 0 0 !important;
 }
 
 .user_pic_and_activity {
@@ -1445,6 +1447,6 @@ ul#priority_menu li.tab12 div.tab_body {
 .single .user_pic_and_activity {width:auto;}
 
 .category {
-	margin: -45px 0 0 120px;
+	margin: -41px 0 0 132px;
 	float: left;
 }

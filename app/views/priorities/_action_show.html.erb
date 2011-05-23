@@ -14,8 +14,11 @@
 		<tr>
 		<td>
      <div class="fblike">
-     <%= image_tag("new/share-facebook.png", :alt => "fblike-icon") %><%= image_tag("new/share-twitter.png", :alt => "tweet-share") %>	
-     </div>
+     <fb:like href="<%=priority.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light">
+<div class="tweet">
+<%= image_tag("new/share-twitter.png", :alt => "tweet-share") %>	
+</div>    
+ </div>
 		</td>
      <td width="25px" height="25px" align="right">
        <%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
