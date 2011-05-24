@@ -3,7 +3,6 @@
 <% if endorsement and endorsement.status == 'active' %>
 
 	<% if endorsement.is_up? %>
-		<span><%= image_tag("new/arrow-up.png", :alt => "arrow-up") %></span>
 		<span class="priority_remove" id="priority_add_<%= priority.id.to_s %>">
 			<%= tr("YOU ENDORSED", "view/priorities/_button_small") %>
 			<%= link_to "&nbsp;x".html_safe, endorsement_path(endorsement, :region => region), 
@@ -14,7 +13,6 @@
 			            :class => "priority_remove_link", :title => tr("Remove from my list of priorities", "view/priorities/_button_small") %>
 		</span>
 	<% else %>
-		<span><%= image_tag("new/arrow-up.png", :alt => "arrow-up") %></span>
 		<span class="priority_remove_oppose" id="priority_add_<%= priority.id.to_s %>">
 			<%= tr("YOU OPPOSED", "view/priorities/_button_small") %>
 			<%= link_to "&nbsp;x".html_safe, endorsement_path(endorsement, :region => region),
@@ -28,7 +26,6 @@
 	<% end %>
 	
 <% else %>
-	<span><%= image_tag("new/arrow-up.png", :alt => "arrow-up") %></span>
 	<span class="priority_add" id="priority_add_<%= priority.id.to_s %>">
 		<%= link_to tr("endorse", "view/priorities/_button_small"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => 1),
                 :method => :post,
