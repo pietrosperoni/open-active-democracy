@@ -111,6 +111,7 @@ div.addwrapper  {
 
 #hp_intro, #hp_intro a, #quiz_header, .priority_position, .your_priority_position, .profile_name, .profile_name a, h1, h2, h3, h4 {
     color: #444;
+		border-bottom: solid 1px #FFF;
 }
 
 div#content_text table {
@@ -216,7 +217,7 @@ table.show-with-processes-table td{padding:0}
 
 #priority_nav1 ul#priority_menu {
     height: 21px !important;
-    margin-top: 16px;
+    margin-top: 2px;
 }
 
 ul#priority_menu li {
@@ -284,12 +285,12 @@ ul#priority_menu li#opposer_link a {background-image: url("../images/new/arrow-d
     padding: 0 0 0 29px;
 }
 .activity_border, .activity_hidden {
-border:none;
-border-bottom: 1px solid #DDDDDD !important;
+		border:none;
+		border-bottom: 1px solid #DDDDDD !important;
     margin-bottom: 5px;
     padding-bottom: 5px;
+		overflow: hidden;
 }
-
 
 span.entry_profile {
 padding:0 10px;
@@ -395,10 +396,11 @@ img.point_report {float:right;}
 
 .flash_notice {
     font-weight: normal;
-    -moz-border-radius: 7px;
+    /*-moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
-		background-color: #003399;
+		background-color: #003399;*/
+		background-image: url("../images/new/flash_notice.jpg"); 
 }
 
 .priority_remove_oppose, .priority_remove {
@@ -461,7 +463,6 @@ div.userwrap {
     background-position:top !important;
     background-repeat: no-repeat;
 		padding-bottom: 10px;
-		z-index: -1;
 }
 
 

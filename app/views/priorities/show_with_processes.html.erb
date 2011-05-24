@@ -175,7 +175,7 @@
 			<% end %>		
 			<p>
 			<div class="heading"><%= tr("What's happening on this priority", "view/priorities/show_with_processes")%></div>
-			<div id="activities">
+			<div id="activities" class="single">
 			<% for activity in @activities %>
 			<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_noself"} %>
 			<% end %>

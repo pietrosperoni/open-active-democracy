@@ -1,5 +1,9 @@
-ul#menu1 li.mega .tab_header a {margin-right: 20px !important;}
-
+ul#menu1 li.mega .tab_header a {margin-right: 10px !important;}
+ul#menu1 .tab_body {
+		float: left !important;
+		margin-left: -20px !important;
+		left: -148px !important;
+}
 .notification_show_footer {
 	position: absolute !important;	
 	padding:0 0px !important;
@@ -7,3 +11,9 @@ ul#menu1 li.mega .tab_header a {margin-right: 20px !important;}
 }
 .pc_under {margin-top: -2px !important;}
 
+ul#menu1 .tab_body {z-index:1;}
+#language_selection_box {z-index:0;}
+
+#new_priority_button {
+	margin-top: -32px !important;
+}

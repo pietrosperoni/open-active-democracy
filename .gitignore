@@ -1,5 +1,6 @@
 .DS_Store
 .project
+.rvmrc
 *.git
 vendor/plugins/rails_css_refactor
 vendor/plugins/i18n_to_tr8n
