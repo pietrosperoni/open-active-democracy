@@ -136,7 +136,8 @@ class ApplicationController < ActionController::Base
   def current_partner
     if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
       if (controller_name=="home" and action_name=="index") or 
-         Rails.env.development? or 
+         Rails.env.development? or
+         request.host.include?("betrireykjavik") or
          self.class.name.downcase.include?("tr8n") or
          ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
         @current_partner = nil
