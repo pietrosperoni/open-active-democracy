@@ -3,23 +3,31 @@
   <tr>
     <td align="left" <%= "colspan=\"2\"".html_safe unless defined?(noaction) and noaction == true -%>>
     	<div class="priority_actions">
+
+			<ul>
+				<li style="list-style: none; float:left;">
      		<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :endorsement => endorsement, :region => "priority_inline"} %>
+				</li>
+				<li style="list-style: none; float:right;">
+					<div class="fblike">
+							 <fb:like href="<%=priority.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"></fb:like>
+					 </div>
+    		</li>
+			</ul>
+			<div class="clear"></div>
+			<div>
         <%= render :partial => "priorities/endorsement_count", :locals => {:priority => priority } unless defined?(noaction) and noaction == true %>    		
     	</div>
+			</div>
      </td>
      <% unless defined?(noaction) and noaction == true -%>
      </tr>
      
      <% end %>
+		
+	
+     
 		<tr>
-		<td>
-     <div class="fblike">
-     <fb:like href="<%=priority.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"></fb:like>
-<div class="tweet">
-<%= image_tag("new/share-twitter.png", :alt => "tweet-share") %>	
-</div>    
- </div>
-		</td>
      <td width="25px" height="25px" align="right">
        <%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
      </td>

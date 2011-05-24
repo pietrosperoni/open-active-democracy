@@ -377,7 +377,7 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 
-span.priority_add a {padding:0 2px;font-size: 0.9em;color:#fff !important;font-weight:bold;text-decoration:none;}
+span.priority_add a {padding:1px 6px;font-family: arial; font-size: 1em;color:#fff !important;font-weight:bold;text-decoration:none;}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;}
 a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
@@ -420,7 +420,7 @@ img.point_report {float:right;}
     top: 0px;
 }
 .priority_endorsement_count a {
-color:#444 !important;
+		color:#888 !important;
 }
 
 .endorsed, .opposed, .compromised {
