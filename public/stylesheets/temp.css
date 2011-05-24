@@ -396,10 +396,11 @@ img.point_report {float:right;}
 
 .flash_notice {
     font-weight: normal;
-    -moz-border-radius: 7px;
+    /*-moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
-		background-color: #003399;
+		background-color: #003399;*/
+		background-image: url("../images/new/flash_notice.jpg"); 
 }
 
 .priority_remove_oppose, .priority_remove {
