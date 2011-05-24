@@ -572,9 +572,9 @@ del {
 	margin-bottom: 2px;	
 }
 .priority_add  {
-	font-weight: bold;
+	font-weight: normal !important;
 	text-transform: uppercase;
-	font-size: 10px;
+	font-size: 11px;
 	padding: 0;
 	margin-right: 3px;
 	margin-top: 3px;
@@ -1423,9 +1423,10 @@ ul#priority_menu li.tab12 div.tab_body {
 	/*position: relative;*/
 	width: 50px;
 	float: left;
+	margin-right: 22px;
 	/*display: none;*/
   /*margin-bottom: 0;*/
-  margin-top: 5px;
+  margin-top: -1px;
   position: relative;
 }
 
@@ -1446,6 +1447,6 @@ ul#priority_menu li.tab12 div.tab_body {
 .single .user_pic_and_activity {width:auto;}
 
 .category {
-	margin: -41px 0 0 126px;
-	float: left;
+	margin-left: 5px;
+	float: right;
 }
