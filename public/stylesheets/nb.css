@@ -1423,7 +1423,7 @@ ul#priority_menu li.tab12 div.tab_body {
 	/*position: relative;*/
 	width: 50px;
 	float: left;
-	margin-right: 20px;
+	margin-right: 22px;
 	/*display: none;*/
   /*margin-bottom: 0;*/
   margin-top: -1px;
@@ -1447,6 +1447,6 @@ ul#priority_menu li.tab12 div.tab_body {
 .single .user_pic_and_activity {width:auto;}
 
 .category {
-	margin: -41px 0 0 126px;
-	float: left;
+	margin-left: 5px;
+	float: right;
 }

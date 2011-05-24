@@ -269,9 +269,7 @@ padding: 3px 12px 0 8px;
 }
 
 .tweet {
-	position: absolute;
-	left: 75px;
-	top: -1px;
+	margin-top: 23px;
 }
 
 .priorityin_profile {margin-left: -20px;}

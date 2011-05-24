@@ -402,6 +402,7 @@ img.point_report {float:right;}
     border-radius: 7px;
 		background-color: #003399;*/
 		background-image: url("../images/new/flash_notice.jpg"); 
+		margin: 5px 0;
 }
 
 .priority_remove_oppose, .priority_remove {

@@ -7,6 +7,7 @@
 			<ul>
 				<li style="list-style: none; float:left;">
      		<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :endorsement => endorsement, :region => "priority_inline"} %>
+				<div class="move_test"></div>
 				</li>
 				<li style="list-style: none; float:right;">
 					<div class="fblike">
@@ -14,23 +15,30 @@
 					 </div>
     		</li>
 			</ul>
+			</div>
+		</td>
+	 </tr>
+	 <tr>
+		<td>
 			<div class="clear"></div>
+		<ul>
+			<li style="float:left; list-style: none;">
 			<div>
         <%= render :partial => "priorities/endorsement_count", :locals => {:priority => priority } unless defined?(noaction) and noaction == true %>    		
     	</div>
-			</div>
-     </td>
+			</li>
+     
      <% unless defined?(noaction) and noaction == true -%>
-     </tr>
+    
      
      <% end %>
-		
-	
-     
-		<tr>
-     <td width="25px" height="25px" align="right">
+			<li style="float:right; margin-right: 35px; list-style:none;">
+	 		<span style="float:right;">
        <%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
-     </td>
-   </tr>
+    	</span>
+			</li>
+		</ul>
+		</td>	
+	 </tr>
  </table>
 <% end %>
