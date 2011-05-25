@@ -4,7 +4,7 @@ class PrioritiesController < ApplicationController
                                            :tag, :tag_save, :opposed, :endorsed, :destroy, :new]
   before_filter :admin_required, :only => [:bury, :successful, :compromised, :intheworks, :failed]
   before_filter :load_endorsement, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, 
-                                             :opposed_top_points, :endorsed_top_points, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
+                                             :opposed_top_points, :endorsed_top_points, :points_overview, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
                                              :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
 
@@ -535,6 +535,10 @@ class PrioritiesController < ApplicationController
       format.xml { render :xml => @points.to_xml(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @points.to_json(:include => [:priority, :other_priority], :except => NB_CONFIG['api_exclude_fields']) }
     end
+  end
+
+  def points_overview
+    render :partial=>"priorities/points_overview_for", :layout=>false
   end
 
   def top_points
