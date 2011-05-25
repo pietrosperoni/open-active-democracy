@@ -126,8 +126,8 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 }
 
 .suggest_button, .yellow_button {
-	background-color: #ffff99; /* FFFF99 */
-	border: solid 3px #ffcc00;
+	/* background-color: #ffff99; FFFF99 
+	border: solid 3px #ffcc00;*/
 	/*color: #;*/
 }
 .suggest_button a, .yellow_button a {
