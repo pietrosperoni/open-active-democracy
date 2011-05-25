@@ -177,20 +177,25 @@ ul#menu .tab_body {
 	left: 0px;
 }
 ul#menu1 .tab_body {
-    background-image: url("../images/new/about-box3.png");
-    height: 140px;
-    padding: 14px !important;
     position: absolute;
     right: 0;
-    top: 20px;
-    width: 192px;
+    top: 10px;
+    width: 190px;
+		z-index: 5;	
 		background-color: transparent;
-		z-index: 5;
-	/*-moz-border-radius: 8px;
+}
+.test {
+	position:relative;
+	behavior:url(javascripts/PIE.htc);
+	moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
-	border-radius: 8px;*/
-
-
+	border-radius: 8px;
+	border: solid 1px #CCC;
+	padding: 14px 14px 5px; !important;
+	width: 190px;
+	right: 20px;
+  top: 3px;
+	background-color: #FFF;
 }
 /*
 ul#menu_sub .tab_body, ul#menu_third .tab_body {
