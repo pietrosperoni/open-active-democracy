@@ -186,7 +186,7 @@ ul#menu1 .tab_body {
 }
 .test {
 	position:relative;
-	behavior:url(javascripts/PIE.htc);
+	behavior:url(../javascripts/PIE.htc);
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;

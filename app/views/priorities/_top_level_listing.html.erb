@@ -4,10 +4,10 @@
     <% if endorsements %>
       <% endorsement = endorsements.detect {|e| e.priority_id == priority.id } %>
     <% end %>
-    <tr>	
+    <tr class="border">	
   		<td style="padding: 7px 0 7px;">
   			<table>
-  			<tr>
+  			<tr class="border">
   			<td style="width: 20px;">
   				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon") %>
           <script type="text/javascript">
@@ -16,8 +16,10 @@
                   if (!slide.data("loaded")) {
                       slide.load('<%=points_overview_priority_url(priority)%>');
                       slide.data("loaded", true);
+											$('.border').css('border-bottom','none');
                   } else {
                       slide.slideToggle("slow");
+											$('.border').css('border-bottom','none');
                   };
               });
           </script>
