@@ -21,6 +21,7 @@ class Point < ActiveRecord::Base
 
   scope :revised, :conditions => "revisions_count > 1"
   scope :top, :order => "points.score desc"
+  scope :one, :limit => 1
   scope :five, :limit => 5
   scope :since, lambda{|time| {:conditions=>["questions.created_at>?",time]}}
 
