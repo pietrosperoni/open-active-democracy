@@ -21,6 +21,8 @@ color: #333;
   padding-top: 5px;
 }
 
+.search_results ul li {list-style: none;}
+
 #search
 {
   position:relative;
