@@ -107,12 +107,21 @@ DIST_SOURCES = $(libsphinx_a_SOURCES) $(indexer_SOURCES) \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+<<<<<<< HEAD
 ACLOCAL = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run aclocal-1.10
 AMTAR = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run tar
 AUTOCONF = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run autoconf
 AUTOHEADER = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run autoheader
 AUTOMAKE = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run automake-1.10
 AWK = mawk
+=======
+ACLOCAL = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run aclocal-1.10
+AMTAR = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run tar
+AUTOCONF = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run automake-1.10
+AWK = gawk
+>>>>>>> rifa/master
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -Wall -g -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG
@@ -142,7 +151,11 @@ LIBRT = -lrt
 LIBS = -lm -lz -lexpat  -L/usr/local/lib -lrt  -lpthread
 LTLIBOBJS = 
 MAINT = #
+<<<<<<< HEAD
 MAKEINFO = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run makeinfo
+=======
+MAKEINFO = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run makeinfo
+>>>>>>> rifa/master
 MKDIR_P = /bin/mkdir -p
 MYSQL_CFLAGS = -I/usr/include/mysql  -DBIG_JOINS=1  -fno-strict-aliasing   -DUNIV_LINUX -DUNIV_LINUX
 MYSQL_LIBS = -Wl,-Bsymbolic-functions -rdynamic -L/usr/lib/mysql -lmysqlclient
@@ -161,10 +174,17 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 0.9.9
+<<<<<<< HEAD
 abs_builddir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/src
 abs_srcdir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/src
 abs_top_builddir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9
 abs_top_srcdir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9
+=======
+abs_builddir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9/src
+abs_srcdir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9/src
+abs_top_builddir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9
+abs_top_srcdir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9
+>>>>>>> rifa/master
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
@@ -173,18 +193,30 @@ am__quote =
 am__tar = ${AMTAR} chof - "$$tardir"
 am__untar = ${AMTAR} xf -
 bindir = ${exec_prefix}/bin
+<<<<<<< HEAD
 build_alias = 
+=======
+build_alias = make
+>>>>>>> rifa/master
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
+<<<<<<< HEAD
 host_alias = 
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
 install_sh = $(SHELL) /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/install-sh
+=======
+host_alias = make
+htmldir = ${docdir}
+includedir = ${prefix}/include
+infodir = ${datarootdir}/info
+install_sh = $(SHELL) /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/install-sh
+>>>>>>> rifa/master
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -201,7 +233,11 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
+<<<<<<< HEAD
 target_alias = 
+=======
+target_alias = make
+>>>>>>> rifa/master
 top_builddir = ..
 top_srcdir = ..
 SRC_SPHINX = sphinx.cpp sphinxexcerpt.cpp sphinxquery.cpp \

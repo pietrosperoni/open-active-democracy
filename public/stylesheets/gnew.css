@@ -55,6 +55,8 @@ font-size:11px !important;
 font-style:normal !important;
 color: #999;
 line-height: 150%;
+float: none;
+margin: 0 5px 0 0;
 }
 
 #content_text {
@@ -143,8 +145,8 @@ border-left: 1px solid #333 !Important;	*/
 }
 
 .suggest_button, .yellow_button {
-background-color:#FFFF99;
-border:1px solid #FFCC00 !important;
+/*background-color:#FFFF99;
+border:1px solid #FFCC00 !important;*/
 }
 
 .endorse_or
@@ -382,8 +384,8 @@ table#add_portlet
 
 .button-to input
 {
-	background-color:#FFFF99;
-	border:1px solid #FFCC00;
+	/*background-color:#FFFF99;
+	border:1px solid #FFCC00;*/
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default 

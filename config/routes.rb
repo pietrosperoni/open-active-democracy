@@ -133,6 +133,7 @@ OpenActiveDemocracy::Application.routes.draw do
       get :neutral_points
       get :everyone_points
       get :top_points
+      get :points_overview
       get :endorsed_points
       get :opposed_top_points
       get :endorsed_top_points
@@ -142,6 +143,7 @@ OpenActiveDemocracy::Application.routes.draw do
       get :everyone_documents
       get :comments
       get :documents
+			get :points_overview
   	end
   	collection do
       get :yours
