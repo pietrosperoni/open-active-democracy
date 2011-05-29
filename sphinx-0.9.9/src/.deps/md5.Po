@@ -4,7 +4,11 @@ md5.o: md5.cpp md5.h /usr/include/string.h /usr/include/features.h \
  /usr/include/gnu/stubs-32.h \
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stddef.h \
+=======
+ /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h \
+>>>>>>> rifa/master
 =======
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h \
 >>>>>>> rifa/master
@@ -31,7 +35,11 @@ md5.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stddef.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h:
 >>>>>>> rifa/master

@@ -2,7 +2,11 @@ GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   revision: f95544f356b14f090e0f132bcecd3a29c957040d
+=======
+  revision: 8e5c8569b1624916c6da1e604d4fa844c60a633e
+>>>>>>> rifa/master
 =======
   revision: 8e5c8569b1624916c6da1e604d4fa844c60a633e
 >>>>>>> rifa/master
@@ -153,6 +157,9 @@ GEM
 =======
     rake (0.8.7)
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
@@ -169,7 +176,11 @@ GEM
     tzinfo (0.3.27)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     whenever (0.6.7)
+=======
+    whenever (0.6.8)
+>>>>>>> rifa/master
 =======
     whenever (0.6.8)
 >>>>>>> rifa/master

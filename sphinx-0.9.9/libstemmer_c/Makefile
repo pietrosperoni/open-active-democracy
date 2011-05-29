@@ -141,6 +141,7 @@ CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACLOCAL = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run aclocal-1.10
 AMTAR = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run tar
 AUTOCONF = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run autoconf
@@ -150,6 +151,8 @@ AWK = mawk
 =======
 =======
 >>>>>>> rifa/master
+=======
+>>>>>>> rifa/master
 ACLOCAL = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run aclocal-1.10
 AMTAR = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run tar
 AUTOCONF = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run autoconf
@@ -157,6 +160,9 @@ AUTOHEADER = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/m
 AUTOMAKE = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run automake-1.10
 AWK = gawk
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
@@ -191,7 +197,11 @@ LTLIBOBJS =
 MAINT = #
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 MAKEINFO = ${SHELL} /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/config/missing --run makeinfo
+=======
+MAKEINFO = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run makeinfo
+>>>>>>> rifa/master
 =======
 MAKEINFO = ${SHELL} /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/missing --run makeinfo
 >>>>>>> rifa/master
@@ -218,6 +228,7 @@ STRIP =
 VERSION = 0.9.9
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 abs_builddir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/libstemmer_c
 abs_srcdir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/libstemmer_c
 abs_top_builddir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9
@@ -225,11 +236,16 @@ abs_top_srcdir = /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9
 =======
 =======
 >>>>>>> rifa/master
+=======
+>>>>>>> rifa/master
 abs_builddir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9/libstemmer_c
 abs_srcdir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9/libstemmer_c
 abs_top_builddir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9
 abs_top_srcdir = /home/acep/wgs/open-active-democracy/sphinx-0.9.9
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
@@ -243,7 +259,11 @@ am__untar = ${AMTAR} xf -
 bindir = ${exec_prefix}/bin
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 build_alias = 
+=======
+build_alias = make
+>>>>>>> rifa/master
 =======
 build_alias = make
 >>>>>>> rifa/master
@@ -258,6 +278,7 @@ dvidir = ${docdir}
 exec_prefix = ${prefix}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 host_alias = 
 htmldir = ${docdir}
 includedir = ${prefix}/include
@@ -266,12 +287,17 @@ install_sh = $(SHELL) /home/gunnar/Workspace/open-active-democracy/sphinx-0.9.9/
 =======
 =======
 >>>>>>> rifa/master
+=======
+>>>>>>> rifa/master
 host_alias = make
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
 install_sh = $(SHELL) /home/acep/wgs/open-active-democracy/sphinx-0.9.9/config/install-sh
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
@@ -293,7 +319,11 @@ srcdir = .
 sysconfdir = ${prefix}/etc
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 target_alias = 
+=======
+target_alias = make
+>>>>>>> rifa/master
 =======
 target_alias = make
 >>>>>>> rifa/master

@@ -5,7 +5,11 @@ sphinx.o: sphinx.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/gnu/stubs-32.h \
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stddef.h \
+=======
+ /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h \
+>>>>>>> rifa/master
 =======
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h \
 >>>>>>> rifa/master
@@ -22,6 +26,7 @@ sphinx.o: sphinx.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
  /usr/include/alloca.h /usr/include/bits/stdlib.h /usr/include/stdio.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stdarg.h \
@@ -41,6 +46,8 @@ sphinx.o: sphinx.cpp sphinx.h sphinxstd.h ../config/config.h \
 =======
 =======
 >>>>>>> rifa/master
+=======
+>>>>>>> rifa/master
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
@@ -55,6 +62,9 @@ sphinx.o: sphinx.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/limits.h \
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/syslimits.h \
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
@@ -72,6 +82,7 @@ sphinx.o: sphinx.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/bits/fcntl.h /usr/include/bits/uio.h \
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  /usr/include/bits/stat.h /usr/include/bits/fcntl2.h \
  /usr/include/sys/stat.h /usr/include/math.h /usr/include/bits/huge_val.h \
  /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
@@ -85,6 +96,8 @@ sphinx.o: sphinx.cpp sphinx.h sphinxstd.h ../config/config.h \
 =======
 =======
 >>>>>>> rifa/master
+=======
+>>>>>>> rifa/master
  /usr/include/sys/stat.h /usr/include/bits/stat.h \
  /usr/include/bits/fcntl2.h /usr/include/math.h \
  /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
@@ -96,6 +109,9 @@ sphinx.o: sphinx.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/zconf.h /usr/include/zlibdefs.h /usr/include/sys/time.h \
  yysphinxselect.h yysphinxselect.c
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
@@ -122,7 +138,11 @@ sphinxstd.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stddef.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h:
 >>>>>>> rifa/master
@@ -180,7 +200,11 @@ sphinxstd.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stdarg.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h:
 >>>>>>> rifa/master
@@ -202,8 +226,11 @@ sphinxstd.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stdint.h:
 
+=======
+>>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
 =======
@@ -226,7 +253,11 @@ sphinxstd.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/include/i386-linux-gnu/asm/errno.h:
+=======
+/usr/include/asm/errno.h:
+>>>>>>> rifa/master
 =======
 /usr/include/asm/errno.h:
 >>>>>>> rifa/master
@@ -246,6 +277,11 @@ sphinxstd.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/usr/include/signal.h:
+
+>>>>>>> rifa/master
 =======
 /usr/include/signal.h:
 
@@ -260,9 +296,15 @@ sphinxexpr.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include-fixed/limits.h:
 
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include-fixed/syslimits.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/limits.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/syslimits.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/limits.h:
 
@@ -330,6 +372,11 @@ sphinxfilter.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/usr/include/sys/stat.h:
+
+>>>>>>> rifa/master
 =======
 /usr/include/sys/stat.h:
 
@@ -344,8 +391,11 @@ sphinxfilter.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/include/sys/stat.h:
 
+=======
+>>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
 =======
@@ -370,7 +420,11 @@ sphinxfilter.h:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/float.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/float.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include/float.h:
 >>>>>>> rifa/master

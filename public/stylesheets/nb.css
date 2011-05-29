@@ -1424,7 +1424,11 @@ ul#priority_menu li.tab12 div.tab_body {
 	width: 50px;
 	float: left;
 	margin-right: 22px;
+<<<<<<< HEAD
   margin-top: -1px;
+=======
+  /*margin-top: -1px;*/
+>>>>>>> rifa/master
   position: relative;
 }
 
@@ -1446,4 +1450,9 @@ ul#priority_menu li.tab12 div.tab_body {
 .category {
 	margin-left: 5px;
 	float: right;
+}
+
+.report {
+	float: right;
+	margin-left: 10px;
 }

@@ -6,16 +6,26 @@
 
 			<ul>
 				<li style="list-style: none; float:left;">
-     		<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :endorsement => endorsement, :region => "priority_inline"} %>
+     			<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :endorsement => endorsement, :region => "priority_inline"} %>
+					
+				</li>
 				<div class="move_test"></div>
+
+				<li style="float:right;list-style:none;">
+	 				<span class="report">
+       			<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
+    			</span>
 				</li>
 
+<<<<<<< HEAD
 				<li style="float:right; margin-left: 7px; list-style:none;">
 	 				<span style="float:right;">
        			<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
     			</span>
 				</li>
 
+=======
+>>>>>>> rifa/master
 				<li style="list-style: none; float:right;">
 					<div class="fblike">
 							 <fb:like href="<%=priority.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"></fb:like>
