@@ -4,7 +4,11 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-32.h \
 <<<<<<< HEAD
+<<<<<<< HEAD
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stddef.h \
+=======
+ /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h \
+>>>>>>> rifa/master
 =======
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h \
 >>>>>>> rifa/master
@@ -18,6 +22,7 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
  /usr/include/alloca.h /usr/include/bits/stdlib.h /usr/include/stdio.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+<<<<<<< HEAD
 <<<<<<< HEAD
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
@@ -34,6 +39,8 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include-fixed/limits.h \
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include-fixed/syslimits.h \
 =======
+=======
+>>>>>>> rifa/master
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
@@ -47,6 +54,9 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/bits/setjmp.h sphinxexpr.h \
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/limits.h \
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/syslimits.h \
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
@@ -60,6 +70,7 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/mysql/my_alloc.h sphinxversion.h sphinxutils.h \
  sphinxexcerpt.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
 <<<<<<< HEAD
+<<<<<<< HEAD
  /usr/include/bits/uio.h /usr/include/bits/stat.h \
  /usr/include/bits/fcntl2.h /usr/include/signal.h \
  /usr/include/bits/signum.h /usr/include/bits/siginfo.h \
@@ -72,6 +83,8 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/asm-generic/socket.h \
  /usr/include/i386-linux-gnu/asm/sockios.h \
 =======
+=======
+>>>>>>> rifa/master
  /usr/include/bits/uio.h /usr/include/sys/stat.h /usr/include/bits/stat.h \
  /usr/include/bits/fcntl2.h /usr/include/bits/signum.h \
  /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h \
@@ -81,6 +94,9 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/sys/uio.h /usr/include/bits/socket.h \
  /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
  /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
  /usr/include/asm-generic/sockios.h /usr/include/bits/socket2.h \
  /usr/include/bits/in.h /usr/include/sys/file.h /usr/include/sys/time.h \
@@ -89,7 +105,11 @@ searchd.o: searchd.cpp sphinx.h sphinxstd.h ../config/config.h \
  /usr/include/rpc/netdb.h /usr/include/bits/netdb.h llsphinxql.c \
  yysphinxql.h yysphinxql.c \
 <<<<<<< HEAD
+<<<<<<< HEAD
  /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/float.h
+=======
+ /usr/lib/gcc/i486-linux-gnu/4.4.3/include/float.h
+>>>>>>> rifa/master
 =======
  /usr/lib/gcc/i486-linux-gnu/4.4.3/include/float.h
 >>>>>>> rifa/master
@@ -115,7 +135,11 @@ sphinxstd.h:
 /usr/include/gnu/stubs-32.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stddef.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stddef.h:
 >>>>>>> rifa/master
@@ -169,7 +193,11 @@ sphinxstd.h:
 /usr/include/wchar.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stdarg.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include/stdarg.h:
 >>>>>>> rifa/master
@@ -187,8 +215,11 @@ sphinxstd.h:
 /usr/include/ctype.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/stdint.h:
 
+=======
+>>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
 /usr/include/stdint.h:
@@ -208,7 +239,11 @@ sphinxstd.h:
 /usr/include/linux/errno.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/include/i386-linux-gnu/asm/errno.h:
+=======
+/usr/include/asm/errno.h:
+>>>>>>> rifa/master
 =======
 /usr/include/asm/errno.h:
 >>>>>>> rifa/master
@@ -224,6 +259,11 @@ sphinxstd.h:
 /usr/include/bits/sched.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/usr/include/signal.h:
+
+>>>>>>> rifa/master
 =======
 /usr/include/signal.h:
 
@@ -233,9 +273,15 @@ sphinxstd.h:
 sphinxexpr.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include-fixed/limits.h:
 
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include-fixed/syslimits.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/limits.h:
+
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/syslimits.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include-fixed/limits.h:
 
@@ -293,6 +339,11 @@ sphinxexcerpt.h:
 /usr/include/bits/uio.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/usr/include/sys/stat.h:
+
+>>>>>>> rifa/master
 =======
 /usr/include/sys/stat.h:
 
@@ -302,8 +353,11 @@ sphinxexcerpt.h:
 /usr/include/bits/fcntl2.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/include/signal.h:
 
+=======
+>>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
 /usr/include/bits/signum.h:
@@ -321,8 +375,11 @@ sphinxexcerpt.h:
 /usr/include/bits/sigthread.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/include/sys/stat.h:
 
+=======
+>>>>>>> rifa/master
 =======
 >>>>>>> rifa/master
 /usr/include/netinet/in.h:
@@ -336,17 +393,23 @@ sphinxexcerpt.h:
 /usr/include/bits/sockaddr.h:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/include/i386-linux-gnu/asm/socket.h:
 
 /usr/include/asm-generic/socket.h:
 
 /usr/include/i386-linux-gnu/asm/sockios.h:
 =======
+=======
+>>>>>>> rifa/master
 /usr/include/asm/socket.h:
 
 /usr/include/asm-generic/socket.h:
 
 /usr/include/asm/sockios.h:
+<<<<<<< HEAD
+>>>>>>> rifa/master
+=======
 >>>>>>> rifa/master
 
 /usr/include/asm-generic/sockios.h:
@@ -380,7 +443,11 @@ yysphinxql.h:
 yysphinxql.c:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /usr/lib/i386-linux-gnu/gcc/i686-linux-gnu/4.5.2/include/float.h:
+=======
+/usr/lib/gcc/i486-linux-gnu/4.4.3/include/float.h:
+>>>>>>> rifa/master
 =======
 /usr/lib/gcc/i486-linux-gnu/4.4.3/include/float.h:
 >>>>>>> rifa/master
