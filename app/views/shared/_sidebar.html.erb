@@ -9,6 +9,7 @@
 				<%= link_to tr("About", "view/shared/_menu"), "#" %>
 			</span>
 			<div class="tab_body">
+			<div class="test">
 				<div class="tab_subhead"><%= link_to tr("About the site", "view/shared/_menu"), :controller => "about" %></div>
 				<div class="tab_sublinks">
 					<%= link_to tr("About", "view/shared/_menu"), :controller => "about" %>
@@ -39,7 +40,7 @@
            <%= link_to tr("Priorities", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
            &middot; <%= link_to tr("Discussions", "view/shared/_menu"), :controller => "widgets", :action => "discussions" %>
         </div>
-				
+				</div>
 			</div>
 		</li>
 </ul></div>

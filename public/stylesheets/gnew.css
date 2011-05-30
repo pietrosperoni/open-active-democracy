@@ -55,6 +55,8 @@ font-size:11px !important;
 font-style:normal !important;
 color: #999;
 line-height: 150%;
+float: none;
+margin: 0 5px 0 0;
 }
 
 #content_text {

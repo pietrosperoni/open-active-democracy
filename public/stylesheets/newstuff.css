@@ -21,6 +21,8 @@ color: #333;
   padding-top: 5px;
 }
 
+.search_results ul li {list-style: none;}
+
 #search
 {
   position:relative;
@@ -543,7 +545,13 @@ div.meta { width: 120px !important; }
 .tag_button 
 { 
 	font-size: 10px !important; 
+	width: auto;
+	float: right;
+	margin: 0;
 }
+
+.win.chrome .tag_button{margin:-16px -3px 0 0 !important;}
+
 .container_12, .container_13 
 { 
 /*	position: relative; */

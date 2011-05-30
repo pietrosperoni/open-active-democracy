@@ -4,6 +4,10 @@ ul#menu1 .tab_body {
 		margin: 10px  0 -10px -20px !important;
 		left: -148px !important;
 }
+.test {
+	top: 0 !important;
+	right: 10px !important;
+}
 
 #contentwrap {
 	margin-right: 10px !important;

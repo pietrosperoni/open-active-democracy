@@ -2,6 +2,8 @@
 $(function(){
 	$('.move_test').replaceWith($('.category'));
 	$('.replace_fblike').replaceWith($('.fblike'));
+	$('.replace_report').replaceWith($('.report'));
+	
 });
 </script>
 
@@ -25,16 +27,24 @@ $(function(){
       <td valign="top" style="padding-left: 8px;" colspan="3">
 		<ul>
 			<li style="float:left; list-style: none;">
-      <div id="priority_<%= @priority.id %>" class="priority_listing">
-        <%= render :partial => "priorities/listing", :locals => {:priority => @priority, :endorsement => @endorsement, :value => 0, :noaction=>true} %>
-      </div>
+      	<div id="priority_<%= @priority.id %>" class="priority_listing">
+        	<%= render :partial => "priorities/listing", :locals => {:priority => @priority, :endorsement => @endorsement, :value => 0, :noaction=>true} %>
+      	</div>
 			</li>
-			<li style="float: right; list-style: none;">
-			<div class="replace_fblike">
-					
-			</div>
-			<div class="tweet"><%= image_tag("new/share-twitter.png", :alt => "tweet-share") %></div>
 
+			<li style="float: right; list-style: none;">
+				<div class="replace_report"></div>
+			</li>
+
+			<li style="float: right; list-style: none;">
+				<div class="tweet"><%= image_tag("new/share-twitter.png", :alt => "tweet-share") %></div>
+
+			</li>
+
+			<li style="float: right; list-style: none;">
+				<div class="replace_fblike">
+					
+				</div>	
 			</li>
 		</ul>
 
