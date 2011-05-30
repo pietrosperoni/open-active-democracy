@@ -44,10 +44,18 @@ $(function(){
 
     var ie8com = document.documentMode && document.documentMode == 8;
     if (ie8com) {
-        jQuery("#nav li .sub").css("margin-top",-39);
-        jQuery("#nav li .sub").css("margin-left",200);
-        jQuery("#body .right-body .bonus").css("margin-top",-4);
-        jQuery(".little-arrow").css("margin-top",4);
+        jQuery("a.priority_add_link2").css("margin-left",5);
+				jQuery("priority_tag").css("margin-left",-40);
+    }
+
+		var ie7com = document.documentMode && document.documentMode == 7;
+    if (ie7com) {
+        jQuery("a.priority_add_link2").css("float","left");
+				jQuery("a.priority_add_link2").css("margin-left",5);
+				jQuery(".fblike").css("margin-top",-15);
+				jQuery("#user_info_box").css("z-index",-1);
+				jQuery("#user_info_box").css("position","relative");
+				jQuery(".test").css("z-index",100);
     }
     
 				

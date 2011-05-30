@@ -147,12 +147,13 @@ border-width:0;
 body.portal-index #content_text {background:none;padding:0; background-repeat: no-repeat;}
 
 div.endorse-wrap {
-   background: none repeat scroll 0 0 #FFFFFF;
+  /*background: none repeat scroll 0 0 #FFFFFF;*/
+		background-color: #FFF;
     border: 1px solid #CACACA;
-    -webkit-border-radius: 1em;
-		-moz-border-radius: 1em;
-		border-radius: 1em;
-		behavior:url(../javascripts/PIE.htc);
+    -webkit-border-radius: 1em !important;
+		-moz-border-radius: 1em !important;
+		border-radius: 1em !important;
+		behavior:url(../javascripts/PIE.htc) !important;
 		position: relative;
     float: left;
     padding: 10px;
@@ -469,7 +470,7 @@ img.point_report {float:right;}
 }
 
 .suggest_button:hover, .yellow_button:hover, .grey_button_wide:hover {
-    border: 2px solid #13499B !important;
+    border: 1px solid #13499B !important;
 }
 
 
@@ -554,3 +555,5 @@ padding:0;
 }
 .separator {margin-left: 10px;}
 ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul#menu .tab_header a:hover, ul#menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover{background-color:#eef2f4 !important;}
+
+#top_right_column {background-color:transparent !important;}

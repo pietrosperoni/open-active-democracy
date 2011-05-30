@@ -1,5 +1,20 @@
-<div id="hp_intro"><%= @page_title %></div>
-<p>
+<script type="text/javascript">
+$(function(){
+	$('.rss2_move').replaceWith($('.rss_feed'));
+	
+});
+</script>
+
+<ul>
+	<li style="float:left; list-style:none;">
+		<div id="hp_intro" style="border-bottom:none;"><%= @page_title %></div>
+	</li>
+	<li style="float:right; list-style:none;">
+		<div class="rss2_move"></div>
+	</li>
+<ul>
+<div class="clear"></div>
+<div style="border-top:solid 1px #FFF; width:100%; margin-bottom: 20px;"></div>
 <% if not @points or @points.empty? %>
 	<%= tr("No points yet.", "view/points/index")%>
 <% else %>
@@ -12,7 +27,7 @@
 		<%= render :partial => "points/show_full", :locals => {:point => point, :quality => quality, :revision => nil}%>
 	<% end %>
 
-	<p>
+	
 	<%= will_paginate(@points) %>
 
 <% end %>
