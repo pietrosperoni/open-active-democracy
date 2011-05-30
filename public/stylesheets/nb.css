@@ -1424,9 +1424,11 @@ ul#priority_menu li.tab12 div.tab_body {
 	width: 50px;
 	float: left;
 	margin-right: 22px;
-	/*display: none;*/
-  /*margin-bottom: 0;*/
+<<<<<<< HEAD
   margin-top: -1px;
+=======
+  /*margin-top: -1px;*/
+>>>>>>> rifa/master
   position: relative;
 }
 
@@ -1435,7 +1437,6 @@ ul#priority_menu li.tab12 div.tab_body {
 .connect_widget_vertical_center connect_widget_button_cell{margin-top: -10px !important;}
 .button_count .like_button_dark .like_button_no_like .liketext, .button_count .connect_widget_like_button 
 .liketext{
-	/*display: none;*/
 	margin: -10px 0 0 !important;
 }
 
@@ -1449,4 +1450,9 @@ ul#priority_menu li.tab12 div.tab_body {
 .category {
 	margin-left: 5px;
 	float: right;
+}
+
+.report {
+	float: right;
+	margin-left: 10px;
 }

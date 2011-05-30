@@ -176,7 +176,7 @@ DEPENDENCIES
   kgio
   mogli
   mongrel (>= 1.2.0.pre2)
-  mysql2
+  mysql2 (= 0.2.7)
   newrelic_rpm
   nokogiri
   oauth (>= 0.3.1)
