@@ -822,6 +822,7 @@ padding:2px 10px;
 /*border:1px solid #ddd !important;
 background-color:#fff;*/
 }
+#notification_box, #next_steps_box h4{border-bottom:none;}
 
 #notification_box ol , #next_steps_box  ol{
 font-size:11px;
