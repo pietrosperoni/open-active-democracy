@@ -1,10 +1,3 @@
-<script type="text/javascript">
-$(function(){
-	//$('.cek').replaceWith($('.priority_report'));
-
-});
-</script>
-
 <% if not ['inactive','buried'].include?(priority.status) %>
 <table width="100%">
   <tr>
@@ -20,7 +13,7 @@ $(function(){
 					<div class="move_test"></div>
 				</li>
 
-				<li style="float:right; list-style:none">
+				<li style="float:right; list-style:none; width:30px;">
 					<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
 		  	</li>
 

@@ -149,11 +149,11 @@ body.portal-index #content_text {background:none;padding:0; background-repeat: n
 div.endorse-wrap {
   /*background: none repeat scroll 0 0 #FFFFFF;*/
 		background-color: #FFF;
-    border: 1px solid #CACACA;
+    border: 1px solid #cacaca;
     -webkit-border-radius: 1em !important;
 		-moz-border-radius: 1em !important;
 		border-radius: 1em !important;
-		behavior:url(../javascripts/PIE.htc) !important;
+		behavior:url(../javascripts/PIE.htc);
 		position: relative;
     float: left;
     padding: 10px;
@@ -193,7 +193,6 @@ div.add-oppose a {
     font-size: 1.1em;
     font-weight: bold;
 }
-
 
 
 
@@ -411,11 +410,13 @@ img.point_report {float:right;}
 
 .flash_notice {
     font-weight: normal;
-    /*-moz-border-radius: 7px;
+    -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
-		background-color: #003399;*/
-		background-image: url("../images/new/flash_notice.jpg"); 
+		behavior:url(../javascripts/PIE.htc);
+		position: relative;
+		background-color: #003399;
+		/*background-image: url("../images/new/flash_notice.jpg");*/ 
 		margin: 5px 0;
 }
 
@@ -481,6 +482,8 @@ div.userwrap {
     background-position:top !important;
     background-repeat: no-repeat;
 		padding-bottom: 10px;
+		position: relative;
+		z-index: 0;
 }
 
 

@@ -3,6 +3,7 @@ ul#menu1 .tab_body {
 		float: left !important;
 		margin-left: -20px !important;
 		left: -148px !important;
+		margin-top: 0px !important;
 }
 .notification_show_footer {
 	position: absolute !important;	
@@ -16,5 +17,13 @@ ul#menu1 .tab_body {z-index:1;}
 
 #new_priority_button {
 	margin-top: -32px !important;
+}
+
+.fblike {
+	margin-top: 0px !important;
+}
+
+.endorse-wrap, .oppose-wrap {
+	border: solid 1px !important;
 }
 
