@@ -4,8 +4,6 @@ $(function(){
     if (chrome) {
         jQuery(".tag_button").css("margin-top",-16);
 				jQuery(".tag_button").css("margin-right",-1);
-        /*jQuery(".cb-save").css("margin-left",-79);
-        jQuery(".cb-save label").css("margin-left",-76);*/
     }
 				 
 				 
@@ -56,6 +54,15 @@ $(function(){
 				jQuery("#user_info_box").css("z-index",-1);
 				jQuery("#user_info_box").css("position","relative");
 				jQuery(".test").css("z-index",100);
+    }
+
+
+    var ie9com = document.documentMode && document.documentMode == 9;
+    if (ie9com) {
+				/*jQuery(".category").css("margin-left",10);
+				jQuery(".category").css("margin-top",-15);
+        jQuery("a.priority_add_link2").css("margin-left",5);
+				jQuery("priority_tag").css("margin-left",-40);*/
     }
     
 				
