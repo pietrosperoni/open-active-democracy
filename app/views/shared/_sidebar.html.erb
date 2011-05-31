@@ -3,13 +3,13 @@
     <%= render :partial => "shared/search" %>
 
 		<div>
-<ul id="menu1">
-<li class="tab7 mega">
+<ul id="menu1" style="z-index: 500;">
+<li class="tab7 mega" style="z-index: 500;">
 			<span class="tab_header">
 				<%= link_to tr("About", "view/shared/_menu"), "#" %>
 			</span>
 			<div class="tab_body">
-			<div class="test">
+			<div class="test" style="z-index: 500;">
 				<div class="tab_subhead"><%= link_to tr("About the site", "view/shared/_menu"), :controller => "about" %></div>
 				<div class="tab_sublinks">
 					<%= link_to tr("About", "view/shared/_menu"), :controller => "about" %>
@@ -48,10 +48,7 @@
 <%= render :partial => "priorities/new_button" %>
 
 <div class="userwrap">
-
-
-
-    <%= render :partial => "shared/user_info" if logged_in? %>
+		<%= render :partial => "shared/user_info" if logged_in? %>
     <%= render :partial => "shared/language_selection_master"%>
   <% if logged_in? %>
     <% if current_user.warnings_count > 0 %>

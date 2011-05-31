@@ -226,6 +226,7 @@ h4 {
     float:right;
     margin-right:10px;
     text-decoration:none;
+		color: #FFF !important;
 }
 .notification_sentence {
 	margin-right: -3px;
@@ -341,8 +342,10 @@ h4 {
 	margin-top: 0px;
 }
 .endorsement_up, .endorsement_down {
-   	margin: 4px 0px 0px 0px;
+   	margin: 1px 0px 0px 0px;
    	padding: 2px 2px 2px 4px;
+		background-color: #FFFFFF;
+    border: 1px dotted #666666 !important;
 }
 .endorsement_down {
    text-decoration:line-through;
@@ -1421,14 +1424,10 @@ ul#priority_menu li.tab12 div.tab_body {
 
 .fblike {
 	/*position: relative;*/
-	width: 50px;
-	float: left;
-	margin-right: 22px;
-<<<<<<< HEAD
-  margin-top: -1px;
-=======
-  /*margin-top: -1px;*/
->>>>>>> rifa/master
+  float: left;
+  margin-right: 0;
+  overflow: hidden;
+  width: 80px;
   position: relative;
 }
 
@@ -1448,11 +1447,14 @@ ul#priority_menu li.tab12 div.tab_body {
 .single .user_pic_and_activity {width:auto;}
 
 .category {
-	margin-left: 5px;
+	margin-left: -20px;
 	float: left;
 }
 
-.report {
+.priority_report {
 	float: right;
 	margin-left: 10px;
+}
+img.warn {
+
 }
