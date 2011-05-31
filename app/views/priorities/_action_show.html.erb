@@ -1,3 +1,10 @@
+<script type="text/javascript">
+$(function(){
+	//$('.cek').replaceWith($('.priority_report'));
+
+});
+</script>
+
 <% if not ['inactive','buried'].include?(priority.status) %>
 <table width="100%">
   <tr>
@@ -7,21 +14,15 @@
 			<ul>
 				<li style="list-style: none; float:left;">
      			<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :endorsement => endorsement, :region => "priority_inline"} %>
-					
-				</li>
-				<div class="move_test"></div>
-
-				<li style="float:right;list-style:none;">
-	 				<span class="report">
-       			<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
-    			</span>
 				</li>
 
-				<li style="float:right; margin-left: 7px; list-style:none;">
-	 				<span style="float:right;">
-       			<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
-    			</span>
+				<li style="float:right; list-style:none;">
+					<div class="move_test"></div>
 				</li>
+
+				<li style="float:right; list-style:none">
+					<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
+		  	</li>
 
 				<li style="list-style: none; float:right;">
 					<div class="fblike">

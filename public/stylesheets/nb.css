@@ -1421,14 +1421,10 @@ ul#priority_menu li.tab12 div.tab_body {
 
 .fblike {
 	/*position: relative;*/
-	width: 50px;
-	float: left;
-	margin-right: 22px;
-<<<<<<< HEAD
-  margin-top: -1px;
-=======
-  /*margin-top: -1px;*/
->>>>>>> rifa/master
+  float: left;
+  margin-right: 0;
+  overflow: hidden;
+  width: 80px;
   position: relative;
 }
 
@@ -1452,7 +1448,10 @@ ul#priority_menu li.tab12 div.tab_body {
 	float: left;
 }
 
-.report {
+.priority_report {
 	float: right;
 	margin-left: 10px;
+}
+img.warn {
+
 }
