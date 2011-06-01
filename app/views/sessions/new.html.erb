@@ -1,23 +1,31 @@
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr><td valign="top">
-		<%= tr("<b>First time?</b>  Create an account:", "view/sessions/new")%>
-		<p>
+		<div style="margin-bottom: 10px; border-bottom: dashed 1px #CCC; font-size: 1.3em; padding-bottom:5px;">
+		<%= tr("<b>First time?</b> Create an account:", "view/sessions/new")%>
+		</div>
+		
 		<%= render :partial => "users/form" %>
-	</td><td valign="top" style="padding-left: 40px; padding-right: 20px;">
-		<%= tr("<b>Already have an account?</b>", "view/sessions/new")%>
-		<p>
-		<%= render :partial => "sessions/form" %>
-		<p>
-		<%= link_to tr("I forgot my password", "view/sessions/new"), new_password_path %>
+	</td>
 
+	<td valign="top" style="padding-left: 100px; padding-right: 20px;">
+		<div style="margin-bottom: 10px; border-bottom: dashed 1px #CCC; font-size: 1.3em; padding-bottom:5px;">
+		<%= tr("<b>Already have an account?</b>", "view/sessions/new")%>
+		</div>
+		
+		<%= render :partial => "sessions/form" %>
+		
+		<div style="margin-top: 10px;">
+		<%= link_to tr("I forgot my password", "view/sessions/new"), new_password_path %>
+		</div>
+		
 		<% if current_government.has_facebook_enabled? or current_government.has_twitter_enabled? %>
-			<p>
-			<%= tr("or <b>sign in instantly</b> with:", "view/sessions/new")%>
-			<p>
+			
+			<p><%= tr("or <b>sign in instantly</b> with:", "view/sessions/new")%></p>
+			
 
 			<% if current_government.has_facebook_enabled? %>
         <%= fb_login_and_redirect "/", :text=>tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=>tr("Sign in with Facebook","views/shared/_login"), :perms=>"email"%>
-			<p>
+			
 			<% end %>
 			<% if current_government.has_twitter_enabled? %>
 			<%= link_to image_tag("twitter_signin.png", :border => 0), :controller => "twitter", :action => "create" %>
@@ -31,4 +39,4 @@
 	</tr>
 	
 </table>
-<p>
+

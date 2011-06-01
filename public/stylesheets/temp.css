@@ -409,15 +409,7 @@ img.point_report {float:right;}
 }
 
 .flash_notice {
-    font-weight: normal;
-    -moz-border-radius: 7px;
-    -webkit-border-radius: 7px;
-    border-radius: 7px;
-		behavior:url(../javascripts/PIE.htc);
-		position: relative;
-		background-color: #003399;
-		/*background-image: url("../images/new/flash_notice.jpg");*/ 
-		margin: 5px 0;
+		background-color: #003399;		
 }
 
 .priority_remove_oppose, .priority_remove {
@@ -451,18 +443,9 @@ img.point_report {float:right;}
     text-transform: uppercase;
 }
 
-
-
-
-
-
-
-
-
-
 .grey_button_wide, .import_button, .notice {
     background-color: #F0F0F0;
-    border: 2px solid #CCCCCC;
+    border: 1px solid #CCCCCC;
 }
 
 .suggest_button, .yellow_button {
@@ -560,3 +543,9 @@ padding:0;
 ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul#menu .tab_header a:hover, ul#menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover, ul#priority_menu li .tab_header a:hover{background-color:#eef2f4 !important;}
 
 #top_right_column {background-color:transparent !important;}
+
+#simple_captcha {
+    border: none !important;
+    margin-bottom: 20px !important;
+    padding: 5px !important;
+}
