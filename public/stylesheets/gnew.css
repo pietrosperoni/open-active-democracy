@@ -345,7 +345,7 @@ border: 1px solid #ddd;
 }
 
 #new_user_form .suggest_button, #new_user_form .yellow_button {
-width:174px;
+width:auto;
 }
 
 /* Portlet stuff */

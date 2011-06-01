@@ -5,35 +5,37 @@
   <%= form_for :user, 'data-disable-with' => escape_t(tr("Sending","Ajax")),
                :url => users_path(:region => "long") do |f| -%>
   <%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form_long") %>
-  <p>
-    <table border="0" cellspacing="0" cellpadding="0">
+ 
+    <table border="0" cellspacing="0" cellpadding="0" style="margin: 10px 0;">
       <tr>
         <td valign="top">
         <div class="field">
           <table border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td valign="top">
-              <div class="field_label">
-                <%= tr("First name", "view/users/_form_long")%>
-              </div>
-              <div class="field_box">
-                <%= f.text_field :first_name, :size => 12 %>
-              </div>
-              </td>
-              <td valign="top" style="padding-left: 3px;">
-              <div class="field_label">
-                <%= tr("and Last name", "view/users/_form_long")%>
-              </div>
-              <div class="field_box">
-                <%= f.text_field :last_name, :size => 15 %>
-              </div>
-              </td>
+		            <div class="field_label">
+		              <%= tr("First name", "view/users/_form_long")%>
+		            </div>
+		            <div class="field_box">
+		              <%= f.text_field :first_name, :size => 12 %>
+		            </div>
+		           </td>
+
+               <td valign="top" style="padding-left: 3px;">
+				          <div class="field_label">
+				            <%= tr("and Last name", "view/users/_form_long")%>
+				          </div>
+				          <div class="field_box">
+				            <%= f.text_field :last_name, :size => 15 %>
+				          </div>
+               </td>
             </tr>
           </table>
-          <div class="small">
+          <div class="small" style="margin-bottom: 10px;">
             <%= tr("(Not displayed on the site)", "view/users/_form_long")%>
           </div>
         </div>
+
         <div class="field">
           <div class="field_label">
             <%= tr("Email address", "view/users/_form_long")%>
@@ -45,7 +47,8 @@
             <%= tr("(Never shared without your permission)", "view/users/_form_long")%>
           </div>
         </div>
-        </td>
+      </td>
+
         <td valign="top" style="padding-left: 10px;">
         <div class="field">
           <div class="field_label">
@@ -54,7 +57,7 @@
           <div class="field_box">
             <%= f.text_field :login, :maxlength => 40, :size => 30 %>
           </div>
-          <div class="small">
+          <div class="small" style="margin-bottom:10px;">
             <%= tr("(Can be your name, or a pseudonym)", "view/users/_form_long")%>
           </div>
         </div>
@@ -62,36 +65,29 @@
           <table border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td valign="top">
-              <div class="field_label">
-                <%= tr("Password", "view/users/_form_long")%>
-              </div>
-              <div class="field_box">
-                <%= f.password_field :password, :size => 13 %>
-              </div>
+		            <div class="field_label">
+		              <%= tr("Password", "view/users/_form_long")%>
+		            </div>
+		            <div class="field_box">
+		              <%= f.password_field :password, :size => 13 %>
+		            </div>
               </td>
+
               <td valign="top" style="padding-left: 3px;">
-              <div class="field_label">
-                <%= tr("and re-type it", "view/users/_form_long")%>
-              </div>
-              <div class="field_box">
-                <%= f.password_field :password_confirmation, :size => 13 %>
-              </div>
+		            <div class="field_label">
+		              <%= tr("and re-type it", "view/users/_form_long")%>
+		            </div>
+		            <div class="field_box">
+		              <%= f.password_field :password_confirmation, :size => 13 %>
+		            </div>
               </td>
-              </tr>
-              </table>
-              </td>
+             </tr>
+           </table>
+				</div>
+       </td>
               <td valign="top" style="padding-left: 10px; padding-top: 0px;">
               <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
-              <p>
-              <br>
-              <p>
-              <br>
-              <p>
-              <br>
-              <p>
-              <br>
-              <p>
-              <br>
+              
               <% if @priority %>
                 <% if @value == 1 %>
                 <%= submit_tag tr("Endorse and signup", "view/users/_form_long"), :class => "yellow_button" %>
@@ -101,15 +97,14 @@
                 <%= submit_tag tr("Signup", "view/users/_form_long"), :class => "yellow_button" %>
                 <% end %>
               <% else %>
+							<div style="float:right; margin:20px 30px 0 0;">
               <%= submit_tag tr("Signup", "view/users/_form_long"), :class => "yellow_button" %>
+							</div>
               <% end %>
             </td>
             </tr>
           </table>
-        </div>
-        </td>
-      </tr>
-    </table>
+        
     <% end %>
 <% end %>
 </div>

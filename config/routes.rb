@@ -143,6 +143,7 @@ OpenActiveDemocracy::Application.routes.draw do
       get :everyone_documents
       get :comments
       get :documents
+      get :points_overview
   	end
   	collection do
       get :yours
