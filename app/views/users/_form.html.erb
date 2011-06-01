@@ -7,26 +7,26 @@
 	             :url => users_path(:region => "short") do |f| -%>
 	<%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form") %>
 	
-	<div class="field">
+	<div class="field" style="width:300px;">
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tr><td valign="top">
 				<div class="field_label">
 					<%= tr("First name", "view/users/_form")%>
 				</div>
 				<div class="field_box">
-		    		<%= f.text_field :first_name, :size => 12 %> 
+		    		<%= f.text_field :first_name, :size => 20 %> 
 				</div>
 			</td><td valign="top" style="padding-left: 3px;">
 				<div class="field_label">
 					<%= tr("and Last name", "view/users/_form")%>
 				</div>
 				<div class="field_box">
-		    		<%= f.text_field :last_name, :size => 15 %>
+		    		<%= f.text_field :last_name, :size => 20 %>
 				</div>
 			</td>
 			</tr>
 		</table>
-		<div class="small"><%= tr("(Not displayed on the site)", "view/users/_form")%></div>
+		<div class="small" style="margin-bottom: 10px;"><%= tr("(Not displayed on the site)", "view/users/_form")%></div>
 	</div>
 
 	<div class="field">
@@ -36,20 +36,20 @@
 		<div class="field_box">
 			<%= f.text_field :email %>
 		</div>
-		<div class="small"><%= tr("(Never shared without your permission)", "view/users/_form")%></div>
+		<div class="small" style="margin-bottom: 10px;"><%= tr("(Never shared without your permission)", "view/users/_form")%></div>
 	</div>
 
-	<div class="field">
+	<div class="field" style="width:300px; padding-bottom: 10px;">
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr><td valign="top">
 			<div class="field_label"><%= tr("Password", "view/users/_form")%></div>
 			<div class="field_box">
-			<%= f.password_field :password, :size => 13 %>
+			<%= f.password_field :password, :size => 20 %>
 			</div>
 		</td><td valign="top" style="padding-left: 3px;">
 			<div class="field_label"><%= tr("and re-type it", "view/users/_form")%></div>
 			<div class="field_box">
-			<%= f.password_field :password_confirmation, :size => 13 %>
+			<%= f.password_field :password_confirmation, :size => 20 %>
 			</div>
 		</td>
 		</tr>
@@ -63,7 +63,7 @@
 	<div class="field_box">
 		<%= f.text_field :login, :maxlength => 40, :size => 30 %>
 	</div>
-	<div class="small"><%= tr("(Can be your name, or a pseudonym)", "view/users/_form")%></div>
+	<div class="small" style="margin-bottom: 10px;"><%= tr("(Can be your name, or a pseudonym)", "view/users/_form")%></div>
 	</div>
 
 	<% if current_partner and current_partner.is_optin? %>
@@ -80,16 +80,7 @@
 
 	<% end %>
   <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
-  <p>
-  <br>
-  <p>
-  <br>
-  <p>
-  <br>
-  <p>
-  <br>
-  <p>
-  <br>
+  
 	<% if @priority %>
 		<% if @value == 1 %>
 			<%= submit_tag tr("Endorse and signup", "view/users/_form"), :class => "yellow_button" %>			

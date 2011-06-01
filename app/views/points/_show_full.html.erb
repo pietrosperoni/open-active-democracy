@@ -1,11 +1,23 @@
 <div class="point" id="<%= point.id %>">
+<table>
+	<tr style="border-bottom: solid 1px #EEE;">
+		<td>
+			<div style="width:35px; height:35px; border: solid 1px #666; margin-right: 10px;">
+				<%= image_tag("new/sample.jpg", :alt => "sample") %>			
+			</div>
+		</td>	
+	
+		<td style=" padding-bottom: 5px;">		
+
 	<div class="point_other">
 		<%= official_status(point.priority) %>
 		<% if point.is_down? %>
 			<span class="opposed"><%= tr("opposed", "view/points/_show_full")%></span>
 		<% end %>
 		<%= link_to point.priority.name, point.priority %>
-	</div>			
+	</div>	
+
+
 	<div class="point_name">
 	<%= link_to_unless_current h(point.name), point %>
  	<%= render :partial=>"points/report_content", :locals=>{:point=>point} %>
@@ -44,5 +56,8 @@
 	  <% if defined?(quality) %>
   		<%= render :partial => "points/button_small", :locals => {:point => point, :quality => quality} %>
 		<% end %>
-	</div>				
+	</div>	
+		</td>
+	</tr>
+</table>			
 </div>
