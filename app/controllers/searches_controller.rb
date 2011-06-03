@@ -5,7 +5,7 @@ class SearchesController < ApplicationController
     @page_title = tr("Search {government_name} priorities", "controller/searches", :government_name => tr(current_government.name,"Name from database"))
     if params[:q]
       @query = params[:q]
-      @page_title = tr("Search {government_name} priorites for '{query}'", "controller/searches", :government_name => tr(current_government.name,"Name from database"), :query => @query)
+      @page_title = tr("Search for '{query}'", "controller/searches", :government_name => tr(current_government.name,"Name from database"), :query => @query)
       @facets = ThinkingSphinx.facets params[:q], :all_facets => true, :with => {:partner_id => Partner.current ? Partner.current.id : 0}, :star => true, :page => params[:page]
       if params[:category_name]
         @search_results = @facets.for(:category_name=>params[:category_name])

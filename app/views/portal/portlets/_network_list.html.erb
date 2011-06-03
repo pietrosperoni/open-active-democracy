@@ -1,11 +1,5 @@
 <% cache(["portlets_network_influencial",locale,Partner.current_id,@inline_translations_enabled], :expires_in => 5.minutes) do %>
 <table border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td></td>
-		<td><span class="table_header"><%= tr("Rank", "view/portal/portlets") %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/portal/portlets") %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/portal/portlets") %></span></td>
-	</tr>
 <% if current_government.users_count < 100 %>
   <% users = User.active.at_least_one_endorsement.by_capital.item_limit(portlet.portlet_template.item_limit) %>
 <% else %>

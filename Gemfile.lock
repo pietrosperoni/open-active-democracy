@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: 3be602b8d8f82739d09e68ade4452ffcd5e06062
+  revision: 909ab5ea4373994568568035e65778342c73b2c9
   branch: rails3
   specs:
     thinking-sphinx (2.0.5)
@@ -66,7 +66,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     crack (0.1.8)
     daemons (1.0.10)
-    dalli (1.0.4)
+    dalli (1.0.5)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
