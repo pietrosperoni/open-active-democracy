@@ -3,7 +3,7 @@
 	<tr style="border-bottom: solid 1px #EEE;">
 		<td>
 			<div style="width:35px; height:35px; border: solid 1px #666; margin-right: 10px;">
-				<%= image_tag("new/sample.jpg", :alt => "sample") %>			
+        <%= render :partial => "users/pic", :locals => {:user => point.user}%>
 			</div>
 		</td>	
 	
