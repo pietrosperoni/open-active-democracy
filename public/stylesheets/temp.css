@@ -549,3 +549,12 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
     margin-bottom: 20px !important;
     padding: 5px !important;
 }
+
+.simple_captcha_image {
+	width: 110px;
+	height: 35px;
+}
+
+.simple_captcha_field {
+	width: 157px;
+}
