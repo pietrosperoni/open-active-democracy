@@ -9,7 +9,7 @@
 			            :method => :delete,
                   :remote=>true,
                   'data-disable-with' => "",
-                  'data-loader-name' => "circle",
+                  'data-loader-name' => "spinner",
 			            :class => "priority_remove_link", :title => tr("Remove from my list of priorities", "view/priorities/_button_small") %>
 		</span>
 	<% else %>
@@ -19,30 +19,36 @@
 			            :method => :delete,
                   :remote=>true,
                   'data-disable-with' => "",
-                  'data-loader-name' => "circle",
+                  'data-loader-name' => "spinner",
 			            :class => "priority_remove_link",
 			            :title => tr("Remove from my list of priorities", "view/priorities/_button_small") %>
 		</span>
 	<% end %>
 	
 <% else %>
-	<span class="priority_add" id="priority_add_<%= priority.id.to_s %>">
-		<%= link_to tr("endorse", "view/priorities/_button_small"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => 1),
-                :method => :post,
-                :remote => true,
-                'data-disable-with' => escape_t(tr("Endorsing","Ajax")),
-                'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link1", :title =>  tr("I support this, add it to my priority list", "view/priorities/_button_small") %>		
-	</span>
-	<span class="endorse_or"><%= tr("OR", "view/priorities/_button_small") %></span>
-	<span class="priority_add" id="priority_add_<%= priority.id.to_s %>">
-		<%= link_to tr("oppose", "view/priorities/_button_small"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => -1),
-                :method => :post,
-                :remote => true,
-                'data-disable-with' => escape_t(tr("Opposing","Ajax")),
-                'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link2", :title =>  tr("I oppose this, and want to add my opposition to my priority list.", "view/priorities/_button_small") %>
-	</span>	
+<div style="overflow:hidden;">
+
+		<span class="priority_add" id="priority_add_<%= priority.id.to_s %>">
+			<%= link_to tr("endorse", "view/priorities/_button_small"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => 1),
+		              :method => :post,
+		              :remote => true,
+		              'data-disable-with' => escape_t(tr("Endorsing","Ajax")),
+		              'data-loader-name' => "horizontal_small",
+				          :class => "priority_add_link1", :title =>  tr("I support this, add it to my priority list", "view/priorities/_button_small") %>		
+		</span>
+
+		<span class="endorse_or"><%= tr("OR", "view/priorities/_button_small") %></span>
+		<span class="priority_add" id="priority_add_<%= priority.id.to_s %>">
+			<%= link_to tr("oppose", "view/priorities/_button_small"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => -1),
+		              :method => :post,
+		              :remote => true,
+		              'data-disable-with' => escape_t(tr("Opposing","Ajax")),
+		              'data-loader-name' => "horizontal_small",
+				          :class => "priority_add_link2", :title =>  tr("I oppose this, and want to add my opposition to my priority list.", "view/priorities/_button_small") %>
+		</span>	
+
+</div>
+<div class="clear"></div>
 <% end %>
 <% end %>
 </span>

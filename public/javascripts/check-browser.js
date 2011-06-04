@@ -54,6 +54,9 @@ $(function(){
 				jQuery("#user_info_box").css("z-index",-1);
 				jQuery("#user_info_box").css("position","relative");
 				jQuery(".test").css("z-index",100);
+				jQuery(".tag_button").css("margin-top",-15);
+				/*jQuery(".button_small_li").css("width",150);*/
+				jQuery(".category").css("margin-left",-20);
     }
 
 
