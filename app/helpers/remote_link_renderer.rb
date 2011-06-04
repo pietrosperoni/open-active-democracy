@@ -1,9 +1,12 @@
 class RemoteLinkRenderer #< WillPaginate::LinkRenderer
   def prepare(collection, options, template)
     @remote = options.delete(:remote) || {}
-    super
+    #super
   end
   
+  def to_html
+    self.to_s
+  end
   protected
     def page_link(page, text, attributes = {})
       @template.link_to_remote(text, {:url => url_for(page), :method => :get}.merge(@remote))
