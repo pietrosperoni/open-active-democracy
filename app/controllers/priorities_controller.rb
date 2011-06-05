@@ -718,10 +718,10 @@ class PrioritiesController < ApplicationController
     @priority = Priority.new(params[:priority])
     tags = []
     tags << tr(@priority.category.name,"Category name from database") if @priority.category
-    tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
     params.each do |p,v|
       tags << v if p.include?("special_checkbox_tag_")
     end
+    tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
     unless tags.empty?
       @priority.issue_list = tags.join(",")
     end
