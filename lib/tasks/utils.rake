@@ -62,19 +62,6 @@ CODE_TO_SHORTNAME = {"AE"=>"uae", "LY"=>"lybia", "VA"=>"vatican",
 namespace :utils do
   desc "Create BR categories"
   task :create_br_categories => :environment do
-    Category.create(:name=>"Framkvæmdir")
-    Category.create(:name=>"Skipulagsmál")
-    Category.create(:name=>"Samgöngur")
-    Category.create(:name=>"Velferðarmál")
-    Category.create(:name=>"Ferðamál")
-    Category.create(:name=>"Umhverfismál")
-    Category.create(:name=>"Menntamál")
-    Category.create(:name=>"Frístundir og útivist")
-    Category.create(:name=>"Íþróttir")
-    Category.create(:name=>"Menning og listir")
-    Category.create(:name=>"Mannréttindi")
-    Category.create(:name=>"Stjórnsýsla")
-    Category.create(:name=>"Alls konar")  
   end
 
   desc "Create partners from iso countries"
