@@ -20,8 +20,6 @@
 				function OnChangeTopPriorities(dropdown)
 				{
 				    var myindex  = dropdown.selectedIndex
-				    var SelValue = dropdown.options[myindex].value
-                    alert(SelValue);
  	                jQuery('#<%="portlet_contents_#{portlet.id}"%>').load("/portal/load_column_item?portlet_id="+<%=portlet.id%>+"&dyn_type="+myindex, function() {
 	                    FB.XFBML.parse(document.getElementById('<%="portlet_contents_#{portlet.id}"%>'));
 					});
