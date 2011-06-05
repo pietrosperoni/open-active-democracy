@@ -30,7 +30,7 @@ class PortalController < ApplicationController
   end
 
   def load_column_item
-    @porlet = Portlet.find(params[:portlet_id])
+    @portlet = Portlet.find(params[:portlet_id])
     dyn_item = params[:dyn_item].to_i
     if dyn_item == 0
       @locals_data_function = "setup_priorities_top"
