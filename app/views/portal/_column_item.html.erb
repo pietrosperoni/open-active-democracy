@@ -1,5 +1,4 @@
 <% partial_name = portlet.portlet_template.partial_name %>
 <% portlet_locals = send(locals_data_function,portlet.portlet_template.item_limit) %>
-<%=locals_data_function%><br>
 <%= render(:partial => "/portal/portlets/#{partial_name}", :locals=>{:portlet=>portlet, :portlet_locals=>portlet_locals}) %>
 <%= render(:partial => "portlet_footer", :locals=>{:portlet=>portlet, :portlet_locals=>portlet_locals}) %>
