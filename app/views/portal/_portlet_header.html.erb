@@ -22,7 +22,7 @@
 				    var myindex  = dropdown.selectedIndex
 				    var SelValue = dropdown.options[myindex].value
                     alert(SelValue);
- 	                jQuery(<%="portlet_contents_#{portlet.id}"%>).load("/portal/load_column_item?portlet_id="+<%=portlet.id%>+"&dyn_type="+myindex);
+ 	                jQuery('#<%="portlet_contents_#{portlet.id}"%>').load("/portal/load_column_item?portlet_id="+<%=portlet.id%>+"&dyn_type="+myindex);
 				    return true;
 				}
 				//-->				
