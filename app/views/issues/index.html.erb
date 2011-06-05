@@ -1,27 +1,37 @@
 <%= tr("Here, you can find priorities organized by categories, and add your own.", "view/issues/index") %>
 
-<% for issue in @issues %>
-	<div class="priority_listing">
-		<span class="priority_name">
-		<a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
-		</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
-		<div class="priority_action">
-			<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
-			<% if issue.points_count > 0 %>	
-			&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/issues/index", :count => issue.points_count) %></a>
-			<% end %>
-			<% if issue.documents_count > 0 %>
-			&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/issues/index", :count => issue.documents_count) %></a>
-			<% end %>
-			<% if issue.discussions_count > 0 %>
-			&middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/issues/index", :count => issue.discussions_count) %></a>
-			<% end %>
-			<% if logged_in? and current_user.is_admin? %>
-				&nbsp; <span class="tag_button"><%= link_to tr("Edit", "view/issues/index"), edit_tag_url(issue) %></span>
-			<% end %>
+<table>
+<tr>
+<td>
+	<% for issue in @issues %>
+		<div class="priority_listing">
+			<span class="priority_name">
+			<a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
+			</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
+			<div class="priority_action">
+				<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
+				<% if issue.points_count > 0 %>	
+				&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/issues/index", :count => issue.points_count) %></a>
+				<% end %>
+				<% if issue.documents_count > 0 %>
+				&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/issues/index", :count => issue.documents_count) %></a>
+				<% end %>
+				<% if issue.discussions_count > 0 %>
+				&middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/issues/index", :count => issue.discussions_count) %></a>
+				<% end %>
+				<% if logged_in? and current_user.is_admin? %>
+					&nbsp; <span class="tag_button"><%= link_to tr("Edit", "view/issues/index"), edit_tag_url(issue) %></span>
+				<% end %>
+			</div>
 		</div>
-	</div>
-<% end %>
-
+	<% end %>
+</td>
+<td>
+  <% Government.current.default_tags_checkbox.split(",").each do |special_tag| %>
+     <%=link_to special_tag, "/issues/#{special.tag.parameterize_full}"%><br>
+  <% end %>
+</td>
+</tr>
+</table>
 <p>
 <%= will_paginate(@issues) %>
