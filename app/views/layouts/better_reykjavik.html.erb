@@ -43,9 +43,35 @@
       <div id="contentwrap">
         <%= render :partial => "shared/menu" %>
         <%= flash_div :warning, :notice, :error %>
-        <div id="content_text">
-          <%= yield :layout %>
-        </div>
+        <% if ["network","user_contacts"].include?(controller_name) -%>
+          <table width="100%">
+            <tr>
+             <% if Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left %>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+             <% else %>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+              <% end %>
+            </tr>
+          </table>
+        <% else %>
+          <div id="content_text">
+            <%= yield :layout %>
+          </div>
+        <% end %>
       </div>
       <%= render :partial => "shared/sidebar" %>
       <div class="push">
