@@ -27,3 +27,6 @@ ul#menu1 .tab_body {z-index:1;}
 	border: solid 1px !important;
 }
 
+#content_text {
+	min-height: 0 !important;
+}
