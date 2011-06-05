@@ -9,7 +9,7 @@
 		<% end %>
     	<%=tr(portlet.portlet_template.name, "view/portal/_portlet_header")%>
         <% if portlet.portlet_template.name == "priorities.top.name" -%>
-			<select name="top_priorities_select" onchange='OnChangeTopPriorities(this.form.top_priorities_select);>
+			<select name="top_priorities_select" onchange='OnChangeTopPriorities(this.form.top_priorities_select);'>
 				<option><%=tr("All", "view/portal/_portlet_header")%></option>
 				<option><%=tr("24 hour", "view/portal/_portlet_header")%></option>
 				<option><%=tr("7 days", "view/portal/_portlet_header")%></option>
