@@ -41,7 +41,7 @@ class PortalController < ApplicationController
     elsif dyn_item == 3
       @locals_data_function = "setup_priorities_top_30days"
     end
-    render :partial=>"column_item"
+    render :partial=>"column_item", :locals=>{:portlet=>@portlet, :locals_data_function=>@locals_data_function}
   end
 
   def add_portlet
