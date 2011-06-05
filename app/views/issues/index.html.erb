@@ -28,7 +28,7 @@
 </td>
 <td>
   <% Government.current.default_tags_checkbox.split(",").each do |special_tag| %>
-     <%=link_to special_tag, "/issues/#{special.tag.parameterize_full}"%><br>
+     <%=link_to special_tag, "/issues/#{special_tag.parameterize_full}"%><br>
   <% end %>
 </td>
 </tr>
