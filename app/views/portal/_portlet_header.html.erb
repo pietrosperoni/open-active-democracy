@@ -8,7 +8,7 @@
 		<span class="ui-icon ui-icon-arrow-4-diag"></span>
 		<% end %>
     	<%=tr(portlet.portlet_template.name, "view/portal/_portlet_header")%>
-        <% if portlet.portlet_template.name == "Top Priorities" -%>
+        <% if portlet.portlet_template.name == "priorities.top.name" -%>
 			<select name="top_priorities_select" onchange='OnChangeTopPriorities(this.form.top_priorities_select);>
 				<option><%=tr("All", "view/portal/_portlet_header")%></option>
 				<option><%=tr("24 hour", "view/portal/_portlet_header")%></option>
@@ -22,6 +22,7 @@
 				    var myindex  = dropdown.selectedIndex
 				    var SelValue = dropdown.options[myindex].value
                     alert(SelValue);
+ 	                jQuery(<%="portlet_contents_#{portlet.id}"%>).load("/portal/load_column_item?portlet_id="+<%=portlet.id%>+"&dyn_type="+myindex);
 				    return true;
 				}
 				//-->				

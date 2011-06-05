@@ -29,6 +29,21 @@ class PortalController < ApplicationController
     end
   end
 
+  def load_column_item
+    @porlet = Portlet.find(params[:portlet_id])
+    dyn_item = params[:dyn_item].to_i
+    if dyn_item == 0
+      @locals_data_function = "setup_priorities_top"
+    elsif dyn_item == 1
+      @locals_data_function = "setup_priorities_top_24hr"
+    elsif dyn_item == 2
+      @locals_data_function = "setup_priorities_top_7days"
+    elsif dyn_item == 3
+      @locals_data_function = "setup_priorities_top_30days"
+    end
+    render :partial=>"column_item"
+  end
+
   def add_portlet
     setup_portal
     portlet=Portlet.new
