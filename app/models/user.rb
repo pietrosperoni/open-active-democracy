@@ -120,6 +120,10 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => [:should_validate_password?]
   validates_confirmation_of :password, :if => [:should_validate_password?]
 
+  validates_presence_of     :post_code, :message => tr("Please enter your postcode.", "model/user")
+  validates_presence_of     :age_group, :message => tr("Please select your age group.", "model/user")
+  validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user")
+
   before_save :encrypt_password
   before_create :make_rss_code
   after_save :update_signups

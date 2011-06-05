@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   before_filter :init_tr8n
   before_filter :check_google_translate_setting
+  before_filter :check_missing_user_parameters
 
   before_filter :setup_inline_translation_parameters
 
@@ -71,6 +72,15 @@ class ApplicationController < ActionController::Base
       true
     else
       false
+    end
+  end
+  
+  def check_missing_user_parameters
+    if logged_in? and Government.current.layout == "better_reykjavik" and controller_name!="settings"
+      unless current_user.email and current_user.my_gender and current_user.post_code and current_user.age_group
+        flash[:notice] = "Please make sure you have registered all relevant information about you for this website."
+        redirect_to :controller=>"settings"
+      end
     end
   end
 

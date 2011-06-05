@@ -50,6 +50,33 @@
 	</div>
 	<div class="small"><%= tr("(Can be your name, or a pseudonym)", "view/settings/index")%></div>
 	</div>
+
+		<div class="field">
+			<div class="field_label">
+				<%= tr("Post code", "view/users/_form")%>
+			</div>
+			<div class="field_box">
+				<%= f.text_field :post_code, :size => 5 %>
+			</div>
+ 		</div>
+
+	    <div class="field">
+	      <div class="field_label">
+	        <%= tr("Age group", "view/users/_form_long")%>
+	      </div>
+	      <div class="field_box">
+	        <%= f.select :age_group, options_for_select([tr("12 years and younger"),tr("13 to 17 years"),tr("18 to 25 years"),tr("26 to 69 years"),tr("70 years and older")],@user.age_group) %>
+	      </div>
+	    </div>
+
+        <div class="field">
+          <div class="field_label">
+            <%= tr("Gender", "view/users/_form_long")%>
+          </div>
+          <div class="field_box">
+             <%= f.select :my_gender, options_for_select([tr("Male"),tr("Female")],@user.my_gender) %>
+          </div>
+        </div>
 	
 	<div class="field">
 		<div class="field_box">
@@ -66,15 +93,6 @@
 	
 	<div class="field">
 		<div class="field_label">
-			<%= tr("Zip Code", "view/settings/index")%>
-		</div>
-		<div class="field_box">
-    		<%= f.text_field :zip %>
-		</div>
-	</div>
-
-	<div class="field">
-		<div class="field_label">
 			<%= tr("Website", "view/settings/index")%>
 		</div>
 		<div class="field_box">
@@ -82,15 +100,6 @@
 		</div>
 	</div>
 
-	<div class="field">
-		<div class="field_label">
-			<%= tr("Birth date", "view/settings/index")%>
-		</div>
-		<div class="field_box">
-    		<%= f.date_select :birth_date, :include_blank => true, :start_year => 1908, :end_year => 1996,  :order => [:month, :day, :year] %>
-		</div>
-	</div>
-	
 	<% if (current_government.has_facebook_enabled? and not current_facebook_user) or (current_government.has_twitter_enabled? and not current_user.has_twitter?) %>
 		<h2><%= tr("Connect to Social Networks", "view/settings/index")%></h2>
 	

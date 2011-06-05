@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110603170208) do
+ActiveRecord::Schema.define(:version => 20110605211530) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -1622,6 +1622,9 @@ ActiveRecord::Schema.define(:version => 20110603170208) do
     t.datetime "last_sent_report"
     t.string   "geoblocking_open_countries",                  :default => ""
     t.string   "identifier_url"
+    t.string   "age_group"
+    t.string   "post_code"
+    t.string   "my_gender"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
