@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110605211530) do
+ActiveRecord::Schema.define(:version => 20110605214718) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -453,6 +453,7 @@ ActiveRecord::Schema.define(:version => 20110605211530) do
     t.datetime "fav_icon_updated_at"
     t.boolean  "google_login_enabled",                          :default => false
     t.string   "default_tags_checkbox"
+    t.text     "message_to_users"
   end
 
   add_index "governments", ["domain_name"], :name => "index_governments_on_domain_name"
