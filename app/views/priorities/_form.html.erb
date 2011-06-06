@@ -24,8 +24,10 @@
 
   <div id="priority_category">
     <div class="form_header">
-      <%= tr("Select category","views/priorities/form")%><br>
+      <%= tr("Select category","views/priorities/form")%>
+			<span class="red">*</span><br>
     </div>
+		
     <% Category.for_partner.each do |category| %>
       <%= f.radio_button :category_id, category.id %> <span class="Chapter_name"><%=category.i18n_name %></span>
     <% end %>
@@ -41,9 +43,9 @@
     <%= text_field_tag :custom_tags, "", :maxlength => 200 %>
   </span>
   
-  <br>
-  <br>
-  
+  <br/>
+  <br/>
+  <br/>
   <div class="form_header">
     <%=tr("Add a point in support or against","views/priorities/form")%>
     <span class="red">*</span>
@@ -63,10 +65,10 @@
     <div class="field form_header">
       <div class="field_label">
         <div id="point_supports">
-          <%= point_form.radio_button :value, 1, :checked=>true %> <%=tr("Yes, this point supports this priority","views/priorities/form")%>
+          <%= point_form.radio_button :value, 1, :checked=>true %> <span class="point_supports_label"><%=tr("Yes, this point supports this priority","views/priorities/form")%></span>
         </div>
         <div id="point_opposes">
-          <%= point_form.radio_button :value, -1 %> <%=tr("No, this point is against this priority","views/priorities/form")%>
+          <%= point_form.radio_button :value, -1 %> <span class="point_opposes_label"><%=tr("No, this point is against this priority","views/priorities/form")%></span>
         </div>
       </div>
     </div>

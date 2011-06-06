@@ -806,6 +806,7 @@ del {
 	text-align: center;		
 	position: relative;
 	top: 13px;	
+	margin-right: -20px;
 }
 .position_up {
 	background-image: url("/images/green_up.gif");
@@ -1456,7 +1457,18 @@ ul#priority_menu li.tab12 div.tab_body {
 	/*margin-left: -20px;*/
 	float: left;
 	width: auto;
+	max-width: 270px;
+	text-align: right;
 }
+
+.category_list {
+	float:right;
+	max-width:250px;
+  text-align:right;
+}
+
+.single .category_list {text-align:left; position: absolute; max-width:500px;}
+.single .category {text-align:left; position: absolute; max-width:500px;}
 
 .priority_report {
 	float: right;

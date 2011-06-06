@@ -546,7 +546,7 @@ div.meta { width: 120px !important; }
 { 
 	font-size: 10px !important; 
 	width: auto;
-	float: right;
+	/*float: right;*/
 	margin: 0 !important;
 }
 
@@ -771,6 +771,7 @@ input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifi
 background-color:#fff;
 border:1px solid #DDDDDD;
 }
+
 
 
 .flash_error, #not_activated_header, #warning, .fieldWithErrors input, #errorExplanation h2 {
@@ -1030,10 +1031,12 @@ font-size: 1.083em!important;
 font-family:helvetica,arial,sans-serif !important;
 padding-bottom: 0px;
 /*margin-top:3px;*/
+width: 270px;
 }
 .single .priority_name {
 	font-size: 1.4em !important;	
 	margin-bottom: 8px;
+	width: auto;
 }
 
 
