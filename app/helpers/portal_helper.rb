@@ -29,6 +29,21 @@ module PortalHelper
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>top_priorities_url}
   end
 
+  def setup_priorities_top_24hr(limit)
+    get_cached_priorities("Priority.published.filtered.top_24hr.item_limit(#{limit})")
+    {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>top_24hr_priorities_url}
+  end
+
+  def setup_priorities_top_7days(limit)
+    get_cached_priorities("Priority.published.filtered.top_7days.item_limit(#{limit})")
+    {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>top_7days_priorities_url}
+  end
+
+  def setup_priorities_top_30days(limit)
+    get_cached_priorities("Priority.published.filtered.top_30days.item_limit(#{limit})")
+    {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>top_30days_priorities_url}
+  end
+
   def setup_priorities_rising(limit)
     get_cached_priorities("Priority.published.filtered.rising.item_limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>rising_priorities_url}

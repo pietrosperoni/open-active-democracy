@@ -1,3 +1,5 @@
+# coding: utf-8
+
 def create_tags(row)
   tags = []
   tags << row[1]
@@ -58,6 +60,10 @@ CODE_TO_SHORTNAME = {"AE"=>"uae", "LY"=>"lybia", "VA"=>"vatican",
                      "PS"=>"ps", "GB"=>"uk", "SY"=>"syria", "RU"=>"russia",
                      "MD"=>"moldova", "LA"=>"lao" }
 namespace :utils do
+  desc "Create BR categories"
+  task :create_br_categories => :environment do
+  end
+
   desc "Create partners from iso countries"
   task :create_partners_from_iso => :environment do
     Tr8n::IsoCountry.all.each do |country|

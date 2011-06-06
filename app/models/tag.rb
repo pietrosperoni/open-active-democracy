@@ -42,10 +42,10 @@ class Tag < ActiveRecord::Base
 
   
   def show_url
-    if self.partner_id
-      Government.current.homepage_url(self.partner) + 'issues?slug=' + self.slug
+    if self.partner_id and Government.current.layout != "better_reykjavik"
+      Government.current.homepage_url(self.partner) + 'issues/' + self.slug
     else
-      Government.current.homepage_url + 'issues?slug=' + self.slug
+      Government.current.homepage_url + 'issues/' + self.slug
     end
   end
   

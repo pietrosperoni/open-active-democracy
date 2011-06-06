@@ -8,5 +8,25 @@
 		<span class="ui-icon ui-icon-arrow-4-diag"></span>
 		<% end %>
     	<%=tr(portlet.portlet_template.name, "view/portal/_portlet_header")%>
+        <% if portlet.portlet_template.name == "priorities.top.name" -%>
+			<select name="top_priorities_select" onchange='OnChangeTopPriorities(this);'>
+				<option><%=tr("All", "view/portal/_portlet_header")%></option>
+				<option><%=tr("24 hour", "view/portal/_portlet_header")%></option>
+				<option><%=tr("7 days", "view/portal/_portlet_header")%></option>
+				<option><%=tr("30 days", "view/portal/_portlet_header")%></option>
+			</select>
+            <SCRIPT LANGUAGE="javascript">
+				<!--
+				function OnChangeTopPriorities(dropdown)
+				{
+				    var myindex  = dropdown.selectedIndex
+ 	                jQuery('#<%="portlet_contents_#{portlet.id}"%>').load("/portal/load_column_item?portlet_id="+<%=portlet.id%>+"&dyn_type="+myindex, function() {
+	                    FB.XFBML.parse(document.getElementById('<%="portlet_contents_#{portlet.id}"%>'));
+					});
+				    return true;
+				}
+				//-->				
+			</SCRIPT>
+        <% end %>
 	</div>
 	<div class="portlet-content">
