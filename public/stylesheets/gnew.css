@@ -419,7 +419,7 @@ display: none !important;
 .red
 {
 color:#BC0000;
-font-size: 20px;
+font-size: 18px;
 top: 5px !Important; 
 position: relative;
 }
@@ -776,3 +776,26 @@ background-color:#F8F8F8;
 color:#D61A1A;
 padding-top:3px;
 }*/
+
+.Chapter_name {margin-right: 8px; margin-bottom: 15px; position:relative;}
+
+#priority_category {width:630px;}
+
+#priority_category input {
+	margin-bottom: 10px; 
+	border: none !important;
+	background-color: transparent !important;
+}
+#point_supports input, #point_opposes input {
+	margin-bottom: 10px; 
+	border: none !important;
+	background-color: transparent !important;
+}
+.point_supports_label, .point_opposes_label {
+	position: relative;
+}
+
+#language_selection_box input {
+	border: none !important;
+	background-color: transparent !important;
+}

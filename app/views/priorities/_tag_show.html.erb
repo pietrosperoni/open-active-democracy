@@ -1,28 +1,28 @@
 <div id="priority_<%= priority.id %>_tags" class="priority_tags">
-<% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
-	<span class="tag_button">
-    <%= link_to "tag", tag_priority_path(priority), 
-                :method => :post,
-                :remote=>true,
-                'data-disable-with' => "",
-                'data-loader-name' => "horizontal_small" %>
-	</span>
-<% end %>
-
 
 <% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
-	<div style="float:right;">
+	<div class="category_list">
 	<% for tag in priority.issues %>
 	<span class="tag_name"><%= link_to tr(tag.title,"tags"), tag.show_url %></span>
 	<span class="tag_count"><%= tag.priorities_count %></span>
 	<% end %>
+
+	<% if logged_in? and (current_user.is_tagger? or current_user.is_admin?)%>
+		<span class="tag_button">
+		  <%= link_to "tag", tag_priority_path(priority), 
+		              :method => :post,
+		              :remote=>true,
+		              'data-disable-with' => "",
+		              'data-loader-name' => "horizontal_small" %>
+		</span>
+	<% end %>
+
 </div>
 <% elsif priority.attribute_present?("cached_issue_list") %>
 
 	<%= tags_sentence(priority.cached_issue_list) %>
 		
 <% end %>
-
 
 
 </div>
