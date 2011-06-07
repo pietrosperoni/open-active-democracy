@@ -1,5 +1,8 @@
-<%# Copyright (C) 2009,2010 Róbert Viðar Bjarnason %>
-<%# License: http://www.gnu.org/licenses/agpl-3.0.txt %>
+<% if Government.current.message_to_users and Government.current.message_to_users!="" %>
+	<div id="message_to_users">
+	<%=Government.current.message_to_users%>
+	</div>
+<% end %>
 <% if Priority.filtered.count == 0 %>
 <br>
 <h2><%=tr("No priorities have been created. Be the first to create a priority for your country!","portal")%></h2>

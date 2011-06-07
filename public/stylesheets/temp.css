@@ -287,10 +287,10 @@ ul#priority_menu div.tab_body {
     top: 15px;
 }
 
-ul#priority_menu li#endorser_link a {background-image: url("../images/new/arrow-up.png");
+ul#priority_menu li#endorser_link a {
     background-position: left center;
     background-repeat: no-repeat;padding:0 0 0 14px;}
-ul#priority_menu li#opposer_link a {background-image: url("../images/new/arrow-down.png");
+ul#priority_menu li#opposer_link a {
     background-position: left center;
     background-repeat: no-repeat;padding:0 0 0 14px ;}
 

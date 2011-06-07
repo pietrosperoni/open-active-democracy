@@ -47,7 +47,34 @@
             <%= tr("(Never shared without your permission)", "view/users/_form_long")%>
           </div>
         </div>
-      </td>
+
+		<div class="field">
+			<div class="field_label">
+				<%= tr("Post code", "view/users/_form")%>
+			</div>
+			<div class="field_box">
+				<%= f.text_field :post_code, :size => 5 %>
+			</div>
+ 		</div>
+
+	    <div class="field">
+	      <div class="field_label">
+	        <%= tr("Age group", "view/users/_form_long")%>
+	      </div>
+	      <div class="field_box">
+	        <%= f.select :age_group, options_for_select([tr("12 years and younger"),tr("13 to 17 years"),tr("18 to 25 years"),tr("26 to 69 years"),tr("70 years and older")], @user ? @user.age_group : tr("26 to 69 years")) %>
+	      </div>
+	    </div>
+
+        <div class="field">
+          <div class="field_label">
+            <%= tr("Gender", "view/users/_form_long")%>
+          </div>
+          <div class="field_box">
+             <%= f.select :my_gender, options_for_select([tr("Male"),tr("Female")], @user ? @user.my_gender : tr("Male")) %>
+          </div>
+        </div>
+       </td>
 
         <td valign="top" style="padding-left: 10px;">
         <div class="field">
@@ -98,7 +125,7 @@
                 <% end %>
               <% else %>
 							<div style="float:right; margin:20px 30px 0 0;">
-              <%= submit_tag tr("Signup", "view/users/_form_long"), :class => "yellow_button" %>
+              					<%= submit_tag tr("Signup", "view/users/_form_long"), :class => "yellow_button" %>
 							</div>
               <% end %>
             </td>

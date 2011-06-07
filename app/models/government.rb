@@ -60,7 +60,7 @@ class Government < ActiveRecord::Base
   validates_presence_of     :currency_short_name
   validates_length_of       :currency_short_name, :maximum => 3
   
-  validates_inclusion_of    :homepage, :in => Homepage::NAMES.collect{|n|n[0]}
+ # validates_inclusion_of    :homepage, :in => Homepage::NAMES.collect{|n|n[0]}
   validates_inclusion_of    :tags_page, :in => Homepage::TAGS.collect{|n|n[0]}
   
   after_save :clear_cache
