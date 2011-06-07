@@ -85,7 +85,7 @@ GEM
       builder
     hpricot (0.8.4)
     htmlentities (4.3.0)
-    httparty (0.7.7)
+    httparty (0.7.8)
       crack (= 0.1.8)
     i18n (0.5.0)
     jquery-rails (1.0.9)
