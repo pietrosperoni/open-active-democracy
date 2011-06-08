@@ -67,6 +67,11 @@ $(function(){
 				jQuery(".Chapter_name_2").css("top",-11);
 				jQuery("#priority_category2").css("width",600);
 				jQuery("div.column .portlet-header select").css("margin-top",-15);
+				jQuery(".gt_text").css("margin-top",0);
+				jQuery(".cb").css("margin-top",-2);
+				jQuery(".cb").css("margin-left",-8);
+				jQuery(".cb").css("margin-right",-2);
+				jQuery(".cb").css("padding-left",3);
     }
 
 
