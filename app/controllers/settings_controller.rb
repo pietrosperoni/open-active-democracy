@@ -15,7 +15,7 @@ class SettingsController < ApplicationController
       if @user.update_attributes(params[:user])
         flash[:notice] = tr("Saved your settings", "controller/settings")
         format.html { 
-          redirect_to(settings_url) 
+          redirect_to("/") 
         }
       else
         format.html { render :action => "index" }
