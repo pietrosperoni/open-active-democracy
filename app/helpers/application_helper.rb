@@ -17,13 +17,21 @@ module ApplicationHelper
   include Tr8n::BaseHelper
   include Wf::HelperMethods
 
+ def options_for_select_simple(options,selected=nil)
+    out = ""
+    options.each do |a,b|
+      out+="<option value=\"#{b}\"#{b==selected ? "selected" : ""}>#{a}</option>"
+    end
+    out.html_safe
+  end
+
   def get_random_logo
     logo_filename = Pathname.new(Dir.glob(Rails.root.join("public","images","logos").to_s+'/*').sort_by { rand }.first).basename
     %Q{<img src="/images/logos/#{logo_filename}"/>}.html_safe    
   end
 
   def tg(text)
-    "<span class=\"to_translate\">#{text}</span>".html_safe
+    "<span class=\"to_translate\">#{text.html_safe}</span>".html_safe
   end
 
   def translate_facet_option(option)

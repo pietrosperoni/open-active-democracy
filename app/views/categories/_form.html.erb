@@ -1,4 +1,4 @@
-<%= form_for(@category) do |f| %>
+<%= form_for @category, :html => {:multipart => true} do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -10,6 +10,11 @@
       </ul>
     </div>
   <% end %>
+
+   <p><label for="picture"><%= tr("Upload your picture", "view/settings/picture")%></label>
+   <p>
+   <%= f.file_field :icon %><br/>
+
 
   <div class="field">
     <%= f.label :name %><br />
