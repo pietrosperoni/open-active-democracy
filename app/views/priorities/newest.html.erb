@@ -1,4 +1,21 @@
-<div id="hp_intro"><%= @page_title %></div>
+<script type="text/javascript">
+$(function(){
+	$('.rss3_move').replaceWith($('.rss_feed'));
+	
+});
+</script>
+<div style="width:auto;">
+<ul>
+	<li style="float:left; list-style:none; border-bottom:none;">
+		<div style="border-bottom:none;" id="hp_intro"><%= @page_title %></div>
+	</li>
+	<li style="float:right; list-style:none">
+		<div class="rss3_move"></div>
+	</li>
+<ul>
+</div>
+<div class="clear"></div>
+<div style="border-bottom: solid 1px #FFF; margin:-10px 0 10px;"></div>
 
 
 <table border="0" cellspacing="0" cellpadding="0" width="100%">

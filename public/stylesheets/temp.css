@@ -30,7 +30,6 @@ div.column .ui-widget-content {
 		width: 345px;
 }
 
-
 div.column .portlet-header {
   	color: #555;
     font-size: 12px;
@@ -39,6 +38,18 @@ div.column .portlet-header {
     text-transform: uppercase;
     width: 335px;
 }
+
+div.column .portlet-header select {
+    background: none repeat scroll 0 0 transparent;
+    border: 1px solid #CCCCCC;
+    float: right;
+    font-size: 0.8em;
+		padding: 1px;
+		height: 21px;
+}
+
+div.column .portlet-header select option {padding: 2px 5px; border: none;}
+
 .column_id_1 .portlet {
     border-bottom: 1px solid #EEEEEE;
 
@@ -46,7 +57,7 @@ div.column .portlet-header {
 }
 .column_id_2 .portlet {
     border-bottom: 1px solid #EEEEEE;
-margin: 0 0 10px 5px !important;
+		margin: 0 0 10px 5px !important;
     padding: 5px;
 }
 
@@ -94,7 +105,7 @@ div#content_text table {
  		border: 0px solid #DDDDDD;
     font-size: 1.5em;
     font-weight: bold;
-    margin-top: 7px;
+    margin: 30px 0 20px;
     padding: 26px 0 30px 27px;
     width: 198px;
 }
@@ -391,7 +402,16 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 .priority_add {background-color: transparent !important; border:none !important; width:100px;}
-span.priority_add a {padding:0 6px;font-family: arial; font-size: 1em;color:#fff !important;font-weight:bold;text-decoration:none;}
+span.priority_add a {
+	padding:0 6px;
+	font-family: arial; 
+	font-size: 1em;
+	color:#fff !important;
+	font-weight:bold;
+	text-decoration:none;
+	float: left;
+	margin-right: 7px;
+}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;width: auto;float:right;}
 a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
@@ -490,7 +510,7 @@ padding:10px 10px 0;
 #language_selection_box {
     border: 0px solid #DDDDDD;
     margin-bottom: 0px;
-    margin-top: 0px;
+    margin-top: -15px;
     padding: 10px;
     width: 205px; line-height: 1.4em;
 }
@@ -558,3 +578,5 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .simple_captcha_field {
 	width: 157px;
 }
+
+.link_test {width:400px;}

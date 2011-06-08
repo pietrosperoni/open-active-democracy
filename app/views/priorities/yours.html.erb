@@ -1,4 +1,15 @@
-<h1><%= @page_title %></h1>
+<div style="width:auto;">
+<ul>
+	<li style="float:left; list-style:none; border-bottom:none;">
+		<div style="border-bottom:none;" id="hp_intro"><%= @page_title %></div>
+	</li>
+	<li style="float:right; list-style:none">
+		<%= image_tag("feed-icon-14x14.png", :alt => "rss-icon") %>	
+	</li>
+<ul>
+</div>
+<div class="clear"></div>
+<div style="border-bottom: solid 1px #FFF; margin:-10px 0 10px;"></div>
 
 <% if params[:action] == 'yours_finished' %>
 	<%= tr("Like a to do list, when priorities you've endorsed or opposed are finished, they will fall off your list and be placed here.", "view/priorities/yours")%>

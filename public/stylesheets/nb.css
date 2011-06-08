@@ -568,7 +568,7 @@ del {
 	padding-bottom: 5px;
 }
 .single .priority_listing {margin-left:20px;}
-.top_level_priority_listing {margin-left:20px;}
+.top_level_priority_listing {/*margin-left:20px;*/}
 .priority_name, .priority_name_add {
   	font-size: 12px;
 	font-weight: bold;
@@ -585,7 +585,7 @@ del {
 	text-transform: uppercase;
 	font-size: 11px;
 	padding: 0;
-	margin-right: 3px;
+	/*margin-right: 3px;*/
 	margin-top: 3px;
 }
 .partner_logo {
@@ -806,6 +806,7 @@ del {
 	text-align: center;		
 	position: relative;
 	top: 13px;	
+	margin-right: -20px;
 }
 .position_up {
 	background-image: url("/images/green_up.gif");
@@ -1453,9 +1454,21 @@ ul#priority_menu li.tab12 div.tab_body {
 .single .user_pic_and_activity {width:auto;}
 
 .category {
-	margin-left: -20px;
+	/*margin-left: -20px;*/
 	float: left;
+	width: auto;
+	max-width: 200px;
+	text-align: right;
 }
+
+.category_list {
+	float:right;
+	max-width:250px;
+  text-align:right;
+}
+
+.single .category_list {text-align:left; position: absolute; max-width:500px;}
+.single .category {text-align:left; position: absolute; max-width:500px;}
 
 .priority_report {
 	float: right;
