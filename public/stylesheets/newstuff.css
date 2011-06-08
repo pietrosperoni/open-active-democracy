@@ -1031,8 +1031,13 @@ font-size: 1.083em!important;
 font-family:helvetica,arial,sans-serif !important;
 padding-bottom: 0px;
 /*margin-top:3px;*/
-width: 270px;
+
 }
+
+.top_level .priority_name, .priority_name_add {
+	width: 330px;
+}
+
 .single .priority_name {
 	font-size: 1.4em !important;	
 	margin-bottom: 8px;
