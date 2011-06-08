@@ -61,6 +61,11 @@ $(function(){
 				jQuery(".Chapter_name").css("top",-8);
 				jQuery("#priority_category input, #point_supports input").css("margin-bottom",5);
 				jQuery(".point_supports_label, .point_opposes_label").css("top",-8);
+				jQuery(".white_line").css("margin-top",-10);
+				jQuery("#priority_category input").css("margin-left",-3);
+				jQuery("#priority_category input").css("margin-right",-3);
+				jQuery(".Chapter_name_2").css("top",-11);
+				jQuery("#priority_category2").css("width",600);
     }
 
 

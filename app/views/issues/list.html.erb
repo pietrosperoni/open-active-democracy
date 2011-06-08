@@ -19,8 +19,8 @@
 		<tr>
 			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/issues/list") %></span></td>
 			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/issues/list") %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span></td>
-			<td style="padding-left: 7px; padding-bottom: 2px;"><%= will_paginate @priorities %></td>	
+			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span><%= will_paginate @priorities %></td>
+			
 		</tr>
 	<% for priority in @priorities %>
 		<% if @endorsements %>
