@@ -1,4 +1,4 @@
-<table class="top-level-table">
+<table class="top-level-table top_level">
   
   <% for priority in priorities %>
     <% if endorsements %>
@@ -32,7 +32,7 @@
   			<td>
         	<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
   			</td>      
-  			<td valign="top" style="padding-left: 8px; padding-top: 0px;" colspan="3">
+  			<td valign="top" style="padding-left: 3px; padding-top: 0px;" colspan="3">
         <div id="priority_<%= priority.id %>" class="top_level_priority_listing">
           <%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
         </div>
