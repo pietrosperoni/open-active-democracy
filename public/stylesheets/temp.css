@@ -30,7 +30,6 @@ div.column .ui-widget-content {
 		width: 345px;
 }
 
-
 div.column .portlet-header {
   	color: #555;
     font-size: 12px;
@@ -39,6 +38,18 @@ div.column .portlet-header {
     text-transform: uppercase;
     width: 335px;
 }
+
+div.column .portlet-header select {
+    background: none repeat scroll 0 0 transparent;
+    border: 1px solid #CCCCCC;
+    float: right;
+    font-size: 0.8em;
+		padding: 1px;
+		height: 21px;
+}
+
+div.column .portlet-header select option {padding: 2px 5px; border: none;}
+
 .column_id_1 .portlet {
     border-bottom: 1px solid #EEEEEE;
 
@@ -46,7 +57,7 @@ div.column .portlet-header {
 }
 .column_id_2 .portlet {
     border-bottom: 1px solid #EEEEEE;
-margin: 0 0 10px 5px !important;
+		margin: 0 0 10px 5px !important;
     padding: 5px;
 }
 
@@ -499,7 +510,7 @@ padding:10px 10px 0;
 #language_selection_box {
     border: 0px solid #DDDDDD;
     margin-bottom: 0px;
-    margin-top: -10px;
+    margin-top: -15px;
     padding: 10px;
     width: 205px; line-height: 1.4em;
 }
