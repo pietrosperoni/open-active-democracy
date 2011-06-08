@@ -171,6 +171,23 @@ namespace :utils do
       end
   end
 
+  desc "Expoirt priority categories"
+  task(:export_priority_categories => :environment) do
+    csv_data = CSV.generate do |csv|
+      csv << Category.all.collect {|c| "#{c.name} - #{c.id}"}
+      csv << []
+      csv << ["Priority name","Category id"]
+      Priority.all.each do |p|
+        if p.category
+          csv << ["\"#{p.name.gsub("\"","")}\"",p.category.id]
+        else
+          csv << ["\"#{p.name.gsub("\"","")}\"",0]
+        end
+      end
+    end
+    puts csv_data
+  end
+
   desc "Import priorities"
   task(:import_priorities => :environment) do
     @current_government = Government.last
