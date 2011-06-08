@@ -241,7 +241,7 @@ class Endorsement < ActiveRecord::Base
   
   def do_finish
     remove_from_list
-    notifications << NotificationPriorityFinished.new(:recipient => self.user)
+    #notifications << NotificationPriorityFinished.new(:recipient => self.user)
   end  
   
   def do_replace

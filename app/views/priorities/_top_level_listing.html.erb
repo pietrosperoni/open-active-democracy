@@ -25,7 +25,9 @@
           </script>
   			</td>
   			<td style="width: 70px;">
-  				<%= image_tag("new/topic_umhverfi.png", :alt => "plus-icon") %>		
+            <% if priority.category and priority.category.icon %>
+				<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+            <% end %>
   			</td>
   			<td>
         	<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>

@@ -839,6 +839,9 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @previous_name = @priority.name
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    if params[:priority] and params[:priority][:category]
+      params[:priority][:category] = Category.find(params[:priority][:category])
+    end
     respond_to do |format|
       if params[:commit]=="Vista hugmynd"
         if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]

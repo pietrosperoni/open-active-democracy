@@ -1,6 +1,6 @@
 <% if Government.current.message_to_users and Government.current.message_to_users!="" %>
 	<div id="message_to_users">
-	<%=Government.current.message_to_users%>
+	<%=Government.current.message_to_users.html_safe%>
 	</div>
 <% end %>
 <% if Priority.filtered.count == 0 %>

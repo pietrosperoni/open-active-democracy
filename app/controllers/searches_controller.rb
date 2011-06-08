@@ -7,7 +7,7 @@ class SearchesController < ApplicationController
     @page_title = tr("Search {government_name} priorities", "controller/searches", :government_name => tr(current_government.name,"Name from database"))
     if params[:q]
       if Government.current.layout == "better_reykjavik"
-        @query = Iconv.new('ascii//translit', 'utf-8').iconv(params[:q])
+        @query = params[:q].parameterize_full
       else
         @query = params[:q]
       end
