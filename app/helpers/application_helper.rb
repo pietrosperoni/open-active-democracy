@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def tg(text)
-    "<span class=\"to_translate\">#{text}</span>".html_safe
+    "<span class=\"to_translate\">#{text.html_safe}</span>".html_safe
   end
 
   def translate_facet_option(option)
