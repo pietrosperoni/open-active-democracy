@@ -66,6 +66,7 @@ $(function(){
 				jQuery("#priority_category input").css("margin-right",-3);
 				jQuery(".Chapter_name_2").css("top",-11);
 				jQuery("#priority_category2").css("width",600);
+				jQuery("div.column .portlet-header select").css("margin-top",-15);
     }
 
 

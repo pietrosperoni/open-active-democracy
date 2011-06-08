@@ -48,7 +48,7 @@ div.column .portlet-header select {
 		height: 21px;
 }
 
-div.column .portlet-header select option {padding: 2px 5px; border: none;}
+div.column .portlet-header select option {padding: 2px 5px; border: none; text-transform: uppercase;}
 
 .column_id_1 .portlet {
     border-bottom: 1px solid #EEEEEE;
