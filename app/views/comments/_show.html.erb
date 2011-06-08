@@ -8,20 +8,26 @@
 	<% else %>
 	<!-- Comment box -->		
 	<div class="comment_box">
-		<div class="buddy-icon"><%= render :partial => "users/pic_35", :locals => {:user => comment.user}%></div>
-		<span class="entry_profile">
-		<%= h(comment.user.login) %>
-			 - <%= time_ago(comment.created_at) %> 
-	       <% if logged_in? and current_user.id != comment.user_id  %>
-			 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"),
-			             flag_activity_comment_url(comment.activity_id,comment),:method => :get,
-                   :remote=>true,
-                   'data-disable-with' => "",
-                   'data-loader-name' => "circle",
-			             :confirm => tr("Is this comment from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => comment.user.name),
-			             :title => tr("Report", "view/comments/_show") %>
-		   <% end %>
-		</span>
+        <table>
+	        <tr>
+		        <td>
+					<div class="buddy-icon" style="float:left;"><%= render :partial => "users/pic_35", :locals => {:user => comment.user}%></div>
+					<span class="entry_profile"  style="float:left;">
+					<%= h(comment.user.login) %>
+						 - <%= time_ago(comment.created_at) %> 
+				       <% if logged_in? and current_user.id != comment.user_id  %>
+						 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"),
+						             flag_activity_comment_url(comment.activity_id,comment),:method => :get,
+			                   :remote=>true,
+			                   'data-disable-with' => "",
+			                   'data-loader-name' => "circle",
+						             :confirm => tr("Is this comment from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => comment.user.name),
+						             :title => tr("Report", "view/comments/_show") %>
+					   <% end %>
+					</span>
+		        </td>
+	        </tr>
+        </table>
 		
 		<% if !defined? shortentext%>
 			<% shortentext="1" %>
