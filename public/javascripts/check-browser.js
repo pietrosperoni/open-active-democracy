@@ -4,6 +4,7 @@ $(function(){
     if (chrome) {
         jQuery(".tag_button").css("margin-top",-16);
 				jQuery(".tag_button").css("margin-right",-1);
+				jQUery("div.column .portlet-header select option").css("text-transform","uppercase");
     }
 				 
 				 
@@ -47,6 +48,11 @@ $(function(){
 				jQuery(".Chapter_name").css("top",-3);
 				jQuery("#priority_category input, #point_supports input, #point_opposes input").css("margin-bottom",5);
 				jQuery(".point_supports_label, .point_opposes_label").css("top",-3);
+				jQuery("#priority_category").css("width",650);
+				jQuery("#priority_category2").css("width",670);
+				jQuery(".Chapter_name_2").css("top",-2);
+				jQuery(".Chapter_name_2").css("left",-2);
+				jQuery("#priority_category2 input").css("margin-bottom",5);
     }
 
 		var ie7com = document.documentMode && document.documentMode == 7;
@@ -77,10 +83,19 @@ $(function(){
 
     var ie9com = document.documentMode && document.documentMode == 9;
     if (ie9com) {
-				/*jQuery(".category").css("margin-left",10);
-				jQuery(".category").css("margin-top",-15);
-        jQuery("a.priority_add_link2").css("margin-left",5);
-				jQuery("priority_tag").css("margin-left",-40);*/
+				jQuery(".gt_text").css("margin-top",0);
+				jQuery(".cb").css("margin-top",-2);
+				jQuery(".cb").css("margin-left",-8);
+				jQuery(".cb").css("margin-right",-2);
+				jQuery(".cb").css("padding-left",3);
+				jQuery(".Chapter_name").css("top",-3);
+				jQuery(".Chapter_name").css("left",-3);
+				jQuery("#priority_category input, #point_supports input").css("margin-bottom",3);
+				jQuery("#priority_category").css("width",670);
+				jQuery(".Chapter_name_2").css("top",-2);
+				jQuery(".Chapter_name_2").css("left",-2);
+				jQuery("#priority_category2").css("width",670);
+				jQuery("#priority_category2 input").css("margin-bottom",5);
     }
     
 				
@@ -88,6 +103,11 @@ $(function(){
         jQuery("#nav li .sub").css("margin-top",-39);
         jQuery(".cb-save").css("margin-left",-79);
         jQuery(".cb-save label").css("margin-left",-76);
+				jQuery(".gt_text").css("margin-top",0);
+				jQuery(".cb").css("margin-top",-2);
+				jQuery(".cb").css("margin-left",-8);
+				jQuery(".cb").css("margin-right",-2);
+				jQuery(".cb").css("padding-left",3);
     }
 		
 });
