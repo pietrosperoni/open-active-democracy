@@ -209,7 +209,7 @@ h4 {
 
 .flash_error, .flash_notice {
     width:100%;
-    z-index:105;
+    /*z-index:105;*/
     text-align:center;
 		display: none;
 		padding: 5px 0px 5px 0px;

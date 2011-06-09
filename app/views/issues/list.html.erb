@@ -15,11 +15,13 @@
 
 <% if @priorities.any? %>
 	<p>
-	<table border="0" cellspacing="0" cellpadding="0">
+	<table border="0" cellspacing="0" cellpadding="0" class="top_level">
 		<tr>
+			<td></td>
+			<td></td>
 			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/issues/list") %></span></td>
 			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/issues/list") %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span><%= will_paginate @priorities %></td>
+			<td style="padding-left: 3px;" colspan="1"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span><%= will_paginate @priorities %></td>
 			
 		</tr>
 	<% for priority in @priorities %>
@@ -27,6 +29,27 @@
 			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
 		<% end %>
 		<tr>
+			<td style="width: 20px;">
+  				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon") %>
+          <script type="text/javascript">
+            jQuery("#plus_for_<%=priority.id%>").click(function () {
+                  var slide = jQuery("#points_overview_for_<%=priority.id%>");
+                  if (!slide.data("loaded")) {
+                      slide.load('<%=points_overview_priority_url(priority)%>');
+                      slide.data("loaded", true);
+											$('.border').css('border-bottom','none');
+                  } else {
+                      slide.slideToggle("slow");
+											$('.border').css('border-bottom','none');
+                  };
+              });
+          </script>
+  			</td>
+				<td style="width: 70px;">
+            <% if priority.category and priority.category.icon %>
+				<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+            <% end %>
+  			</td>
 			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
 			<td valign="top" style="padding-left: 8px;">
 			<div id="priority_<%= priority.id %>" class="priority_listing">

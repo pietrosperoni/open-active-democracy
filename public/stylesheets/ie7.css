@@ -15,9 +15,6 @@ ul#menu1 .tab_body {
 ul#menu1 .tab_body {z-index:1;}
 #language_selection_box {z-index:0;}
 
-#new_priority_button {
-	margin-top: -32px !important;
-}
 
 .fblike {
 	margin-top: 0px !important;

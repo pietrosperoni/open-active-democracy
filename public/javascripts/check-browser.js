@@ -32,7 +32,7 @@ $(function(){
 				 
     var Linux = navigator.appVersion.indexOf("Linux") !=-1;
 				if (Linux && chrome){
-						jQuery(".fblike").css("margin-right",24);
+						jQuery(".fblike").css("margin-right",24);alert("chrome");
 					}
 
     var Linux = navigator.appVersion.indexOf("Linux") !=-1;
@@ -78,6 +78,7 @@ $(function(){
 				jQuery(".cb").css("margin-left",-8);
 				jQuery(".cb").css("margin-right",-2);
 				jQuery(".cb").css("padding-left",3);
+				jQuery("#new_priority_button").css("margin-top",30);
     }
 
 
