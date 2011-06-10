@@ -4,7 +4,7 @@
                    flag_point_url(point.id), :method => :get,
                    :remote=>true,
                    'data-disable-with' => "",
-                   'data-loader-name' => "circle",
+                   'data-loader-name' => "spinner",
                    :confirm => tr("Is this point from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => point.priority.user.name),
                    :title => tr("Report", "view/comments/_show") %>
 </div>
