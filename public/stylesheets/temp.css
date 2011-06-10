@@ -46,6 +46,7 @@ div.column .portlet-header select {
     font-size: 0.8em;
 		padding: 1px;
 		height: 21px;
+		text-transform: none;
 }
 
 div.column .portlet-header select option {padding: 2px 5px; border: none; text-transform: none !important;}

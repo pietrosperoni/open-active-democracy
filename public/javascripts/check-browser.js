@@ -78,7 +78,7 @@ $(function(){
 				jQuery(".cb").css("margin-left",-8);
 				jQuery(".cb").css("margin-right",-2);
 				jQuery(".cb").css("padding-left",3);
-				jQuery("#new_priority_button").css("margin-top",30);
+				jQuery(".addwrapper").css("margin-top",35);
     }
 
 

@@ -548,6 +548,7 @@ div.meta { width: 120px !important; }
 	width: auto;
 	/*float: right;*/
 	margin: 0 !important;
+	display: inline-block;
 }
 
 .win.chrome .tag_button{margin:-16px -3px 0 0 !important;}
