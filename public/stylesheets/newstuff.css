@@ -548,6 +548,7 @@ div.meta { width: 120px !important; }
 	width: auto;
 	/*float: right;*/
 	margin: 0 !important;
+	display: inline-block;
 }
 
 .win.chrome .tag_button{margin:-16px -3px 0 0 !important;}
@@ -1054,8 +1055,8 @@ padding-bottom: 0px;
 
 
 .pagination {
-	margin-top: -1px;
-	margin-bottom: 5px;
+	margin: -1px 0 5px 10px;
+	float: left;
 }
 
 .tiny_info, #tiny_info 
@@ -1090,4 +1091,13 @@ padding-bottom: 0px;
 	list-style: none; 
 	float:left; 
 	width:auto;
+}
+
+.white_line {
+	border-bottom: solid 1px #FFF; 
+	margin: 0 0 10px;
+}
+
+.pre_text {
+	margin-bottom: 10px;
 }

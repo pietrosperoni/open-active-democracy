@@ -25,19 +25,21 @@
 		<div class="position_nochange" title="<%= tr("This priority hasn't moved up or down in the rankings at all this month.", "view/priorities/_rank_week_month") %>"><%= tr("UNCH", "view/priorities/_rank_week_month").upcase %></div>
 	</td>		
 	<% else %>
-	<td valign="top" width="27" style="padding-left: 0px;">
+	<td valign="top" width="27" colspan="0" style="padding-left: 0px;">
 		<% if priority.position_7days_change > 0 %>
 			<div class="position_up" title="<%= tr("This priority moved up {count} spots in the rankings this week", "view/priorities/_rank_week_month", :count => priority.position_7days_change.abs) %>"><%= priority.position_7days_change.abs %></div>
 		<% elsif priority.position_7days_change < 0 %>
 			<div class="position_down" title="<%= tr("This priority moved down {count} spots in the rankings this week", "view/priorities/_rank_week_month", :count => priority.position_7days_change.abs) %>"><%= priority.position_7days_change.abs %></div>
 		<% end %>
 	</td>
-	<td valign="top" style="padding-left: 3px;">
+
 		<% if priority.position_30days_change > 0 %>
+	<td valign="top" style="padding-left: 3px;">
 			<div class="position_up" title="<%= tr("This priority moved up {count} spots in the rankings this month", "view/priorities/_rank_week_month", :count => priority.position_30days_change.abs) %>"><%= priority.position_30days_change.abs %></div>
 		<% elsif priority.position_30days_change < 0 %>
 			<div class="position_down" title="<%= tr("This priority moved down {count} spots in the rankings this month", "view/priorities/_rank_week_month", :count => priority.position_30days_change.abs) %>"><%= priority.position_30days_change.abs %></div>
+	</td>
 		<% end %>
-	</td>		
+		
 	<% end %>			
 <% end %>				

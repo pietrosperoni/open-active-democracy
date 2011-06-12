@@ -209,7 +209,7 @@ h4 {
 
 .flash_error, .flash_notice {
     width:100%;
-    z-index:105;
+    /*z-index:105;*/
     text-align:center;
 		display: none;
 		padding: 5px 0px 5px 0px;
@@ -580,7 +580,7 @@ del {
 	font-weight: bold;
 	margin-bottom: 2px;	
 }
-.priority_add  {
+.priority_add, .priority_add_follow, .priority_add_ignore {
 	font-weight: normal !important;
 	text-transform: uppercase;
 	font-size: 11px;
@@ -853,6 +853,7 @@ del {
 .table_header {
 	font-size: 0.8em;
 	text-transform:uppercase;
+	float: left;
 }
 .user_agenda_change {
 	font-size: 0.8em;
@@ -1468,7 +1469,7 @@ ul#priority_menu li.tab12 div.tab_body {
 }
 
 .single .category_list {text-align:left; position: absolute; max-width:500px;}
-.single .category {text-align:left; position: absolute; max-width:500px;}
+.single .category {text-align:left; position: absolute; max-width:500px; display: inline-table;}
 
 .priority_report {
 	float: right;

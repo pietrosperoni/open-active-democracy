@@ -16,11 +16,13 @@ $(function(){
 	</ul>
 
 <div class="clear"></div>
-	<div style="border-top:solid 1px #FFF; width:100%; margin-bottom: 20px;">
+	<div class="white_line"></div>
 		<% if not logged_in? %>
+		<div class="pre_text">
 			<%= tr("If you'd like to participate, <a href='{signup_url}'>please sign up</a>. Membership is free and you can even use your existing Facebook account.", "view/news/activity_list", :signup_url => new_user_url)%>
+		</div>
 		<% end %>
-	</div>
+
 <% if logged_in? and (params[:action].include?("activities") or params[:action].include?("discussions")) %>
 	<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>	
 <% end %>

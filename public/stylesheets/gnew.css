@@ -778,10 +778,12 @@ padding-top:3px;
 }*/
 
 .Chapter_name {margin-right: 8px; margin-bottom: 15px; position:relative;}
+.Chapter_name_2 {margin-right: 8px; margin-bottom: 15px; position:relative;}
 
-#priority_category {width:630px;}
+#priority_category {width:619px;}
+#priority_category2 {width:500px;}
 
-#priority_category input {
+#priority_category input, #priority_category2 input {
 	margin-bottom: 10px; 
 	border: none !important;
 	background-color: transparent !important;
@@ -799,3 +801,9 @@ padding-top:3px;
 	border: none !important;
 	background-color: transparent !important;
 }
+
+.pre_text {margin-bottom: 10px;}
+
+.gt_text {margin: 2px 0 0 3px;}
+
+.cb {margin-top: 5px; margin-left: -2px;}
