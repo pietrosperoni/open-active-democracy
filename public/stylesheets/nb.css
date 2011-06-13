@@ -568,7 +568,7 @@ del {
 	padding-bottom: 5px;
 }
 .single .priority_listing {margin-left:20px;}
-.top_level_priority_listing {/*margin-left:20px;*/}
+.top_level_priority_listing {padding-top:7px;}
 .priority_name, .priority_name_add {
   	font-size: 12px;
 	font-weight: bold;

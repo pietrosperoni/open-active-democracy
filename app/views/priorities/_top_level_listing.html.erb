@@ -5,10 +5,10 @@
       <% endorsement = endorsements.detect {|e| e.priority_id == priority.id } %>
     <% end %>
     <tr class="border">	
-  		<td style="padding: 7px 0 7px;">
+  		<td style="padding: 0px 0 7px;">
   			<table>
   			<tr class="border">
-  			<td style="width: 20px;">
+  			<td style="width: 20px; padding-top: 7px;">
   				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon") %>
           <script type="text/javascript">
             jQuery("#plus_for_<%=priority.id%>").click(function () {

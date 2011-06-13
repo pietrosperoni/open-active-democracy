@@ -28,8 +28,8 @@
 		<% if @endorsements %>
 			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
 		<% end %>
-		<tr>
-			<td style="width: 20px;">
+		<tr style="border-bottom: solid 1px #CCC;">
+			<td style="width: 20px; padding-top: 7px;">
   				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon") %>
           <script type="text/javascript">
             jQuery("#plus_for_<%=priority.id%>").click(function () {
@@ -51,7 +51,7 @@
             <% end %>
   			</td>
 			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-			<td valign="top" style="padding-left: 8px;">
+			<td valign="top" style="padding-left: 8px; padding-top: 7px;">
 			<div id="priority_<%= priority.id %>" class="priority_listing">
 				<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
 			</div>
