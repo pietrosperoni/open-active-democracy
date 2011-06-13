@@ -490,7 +490,7 @@ div.userwrap {
     background-image: url("../images/new/user-bg3.png") !important;
     background-position:top !important;
     background-repeat: no-repeat;
-		padding-bottom: 10px;
+		padding-bottom: 0;
 		position: relative;
 		z-index: 0;
 }

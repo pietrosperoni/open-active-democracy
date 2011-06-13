@@ -530,7 +530,7 @@ ul#priority_menu li.tab9 div.tab_body {
 .althingi_process_container table tr.even td { background: #f5f5f5; }
 
 /* Hliðarstikan */
-#top_right_column { margin-top: 6px; }
+#top_right_column { margin-top: -17px; }
 #search_priorities form input { width: 170px; font-size: 10px; }
 #your_priorities table { width: 200px;}
 
