@@ -79,6 +79,10 @@ $(function(){
 				jQuery(".cb").css("margin-right",-2);
 				jQuery(".cb").css("padding-left",3);
 				jQuery(".addwrapper").css("margin-top",35);
+				jQuery(".bellow_translate").css("margin-top",10);
+				jQuery(".bellow_translate").css("width",200);
+				jQuery(".bellow_translate").css("margin-left",-17);
+				jQuery(".bellow_translate").css("position","relative");
     }
 
 
