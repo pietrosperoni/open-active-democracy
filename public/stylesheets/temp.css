@@ -408,14 +408,14 @@ div.new_comment_facebook {}
 .comment_more {background:none}
 .priority_add {background-color: transparent !important; border:none !important; width:100px;}
 span.priority_add a, span.priority_add_follow a, span.priority_add_ignore a {
-	padding:0 6px;
-	font-family: arial; 
-	font-size: 1em;
-	color:#fff !important;
-	font-weight:bold;
-	text-decoration:none;
-	float: left;
-	margin-right: 7px;
+    color: #FFFFFF !important;
+    float: left;
+    font-family: arial;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-right: 7px;
+    padding: 0 5px 1px;
+    text-decoration: none;
 }
 span.priority_add_ignore a {background:#E49E6E;border:1px solid #B92D19;width: auto;}
 a.priority_add_link1, span.priority_add_follow a {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
