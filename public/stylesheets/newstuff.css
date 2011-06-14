@@ -1115,3 +1115,20 @@ margin-top:7px;
 }
 
 #intro p {font-size: 0.8em;}
+
+#message_to_users {
+		background:url("/images/new/information_box_bg.png") repeat-x;
+		-moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+		behavior:url(../javascripts/PIE.htc);
+		padding: 5px 10px 10px 75px;
+}
+
+#message_to_users p {margin-top: 10px;}
+
+.information_icon {
+    left: 31px;
+    position: absolute;
+    top: 45px;
+}
