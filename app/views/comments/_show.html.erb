@@ -18,7 +18,7 @@
 					<%= h(comment.user.login) %>
 						 - <%= time_ago(comment.created_at) %> 
 				       <% if logged_in? and current_user.id != comment.user_id  %>
-						 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"),
+						 <%= link_to image_tag("report.png", :align => "right", :border => 0, :class => "comment_report"),
 						             flag_activity_comment_url(comment.activity_id,comment),:method => :get,
 			                   :remote=>true,
 			                   'data-disable-with' => "",

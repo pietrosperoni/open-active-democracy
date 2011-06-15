@@ -1,6 +1,7 @@
 <% if Government.current.message_to_users and Government.current.message_to_users!="" %>
 	<div id="message_to_users">
 	<div class="information_icon"><%= image_tag("new/information_icon.png", :alt => "icon") %></div>
+	<a class="close_notify2" href="#">x</a>
 	<%=Government.current.message_to_users.html_safe%>
 	</div>
 <% end %>

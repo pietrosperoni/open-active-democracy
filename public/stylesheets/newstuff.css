@@ -1122,13 +1122,28 @@ margin-top:7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
 		behavior:url(../javascripts/PIE.htc);
+		position: relative;
 		padding: 5px 10px 10px 75px;
 }
 
 #message_to_users p {margin-top: 10px;}
 
+.close_notify2 {
+	color:#000;
+	float: right;
+  margin-right: 0px;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.close_notify2 a {text-decoration: none !important;}
+
 .information_icon {
     left: 31px;
     position: absolute;
-    top: 45px;
+    top: 15px;
 }
+
+.comment_report {padding: 0 !important;float: right;}
+
+.priority_icon_portlet {margin: 5px 0 0 10px;}

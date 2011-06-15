@@ -331,7 +331,7 @@ div.best-points {background:#fff;}
 .comment,.comment_endorses, .comment_opposes  {padding: 0; background: none;
     color: #444444; border: 0px solid #DDDDDD;}
 
-.comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 20px 10px;margin:0 0 10px 0}
+.comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 20px 10px;margin:0 0 10px 50px;}
 
 .comment_content_1,.comment_content_2 {padding:10px 10px 0 10px}
 div.buddy-icon {float:left}
@@ -359,10 +359,12 @@ div.delete-comment {clear:both;text-align: right;}
     background: url("/images/new/backgrounds-sprite.png") repeat-x scroll 0 -480px #FFFFFF;
     border: 1px solid #C1C1C1;
     border-radius: 4px 4px 4px 4px;
+		behavior:url(../javascripts/PIE.htc);
+		position: relative;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16) inset;
     width: auto;padding:0;margin:0 0 10px 0;
 		/*margin: 35px 0 10px 20px;*/
-		margin: 10px 0;
+		margin: 10px 0 0 50px;
 }
 .comment_link_add textarea {border:none;background:none;margin:5px;}
 
