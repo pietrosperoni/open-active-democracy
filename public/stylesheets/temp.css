@@ -421,7 +421,7 @@ span.priority_add a {
 }
 
 span.priority_add_follow a, span.priority_add_ignore a {
-    color: #CCC !important;
+    color: #aaa !important;
     float: left;
     font-family: arial;
     font-size: 0.9em;
@@ -431,10 +431,10 @@ span.priority_add_follow a, span.priority_add_ignore a {
     text-decoration: none;
 }
 
-span.priority_add_ignore a, .priority_remove2 {background:#555 !important; border:1px solid #000 !important;width: auto; color: #CCC !important;}
+span.priority_add_ignore a, .priority_remove2 {background:#555 !important; border:1px solid #000 !important;width: auto; color: #aaa !important;}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;width: auto;float:right;}
-span.priority_add_follow a {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #CCC;}
+span.priority_add_follow a {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #aaa;}
 a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
 a.priority_add_link2:hover {background:#B92D19;border:1px solid #B92D19;}
 .point_name span{display:none;}
