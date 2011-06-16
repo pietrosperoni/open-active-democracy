@@ -2,20 +2,20 @@
 <p>
 <%= tr("The most influential rankings are based on the amount of {currency_name}<span class='pc'>{currency_short_name}</span> someone has earned. <br/>Learn more about<span class='pc'>{currency_short_name}</span> in the <a href='/about/faq#pc'>FAQ</a>.", "view/network/index", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database"), :currency_short_name => current_government.currency_short_name)%>
 <p>
-<table border="0" cellspacing="0" cellpadding="0">
+<table border="1" cellspacing="0" cellpadding="0">
 	<tr>
 		<td></td>
 		<td><span class="table_header"><%= tr("Rank", "view/network/index") %></span></td>
 		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/network/index") %></span></td>
 		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/network/index") %></span></td>
-		<td style="padding-left: 7px; margin-bottom: 2px;" colspan="2"><%= will_paginate @users %></td>				
+		<!--<td style="padding-left: 7px; margin-bottom: 2px;" colspan="2"><%= will_paginate @users %></td>-->				
 	</tr>
 <% for user in @users %>
 	<tr><td valign="top"></td>
 		<%= render :partial => "priorities/rank_week_month", :locals => {:priority => user } %>
 		<td valign="top" width="26" style="padding: 10px 5px 4px 7px;">
 			<%= render :partial => "users/pic", :locals => {:user => user}%>
-		</td><td style="padding: 7px 5px 4px 0px;" valign="top">
+		</td><td style="padding: 7px 5px 4px 0px;" valign="top" colspan="5">
 			<%= link_to user.login, user %><span class="pc"><%= user.capitals_count%><%= current_government.currency_short_name %></span><% if user.followers_count > 0 %> <%= tr("{count} followers", "view/network/index", :count => user.followers_count)%><% end %>
 			<% if user.has_top_priority? and user.top_endorsement.priority %>
 				<br/><%= tr("#1 priority:", "view/network/index") %>
