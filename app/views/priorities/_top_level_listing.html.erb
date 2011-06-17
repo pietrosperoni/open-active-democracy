@@ -24,7 +24,8 @@
               });
           </script>
   			</td>
-  			<td style="width: 55px;">
+  			<td class="category_icon">
+
             <% if priority.category and priority.category.icon %>
 				<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
             <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110605214718) do
+ActiveRecord::Schema.define(:version => 20110607232520) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -116,6 +116,10 @@ ActiveRecord::Schema.define(:version => 20110605214718) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "partner_id"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type", :limit => 30
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "changes", :force => true do |t|
@@ -770,6 +774,7 @@ ActiveRecord::Schema.define(:version => 20110605214718) do
     t.integer  "position_endorsed_24hr"
     t.integer  "position_endorsed_7days"
     t.integer  "position_endorsed_30days"
+    t.text     "finished_status_message"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
