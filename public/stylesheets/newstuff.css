@@ -114,13 +114,12 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #network_sidebar {
-  width: 220px;
+  width: 200px;
   float: right;
-  padding-right: 4px;
+  padding: 0 4px 0 13px;
   vertical-align: top;
   top: 0px;
   right: 5px;
-  padding-top: 0px;
   margin-top: 0px;
 }
 

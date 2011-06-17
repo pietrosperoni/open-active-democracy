@@ -505,7 +505,9 @@ padding-left: 5px;
 
 .position_nochange 
 {
-padding-top: 2px;
+padding-top: 8px;
+position: relative;
+top: 0;
 }
 
 .priority_tags

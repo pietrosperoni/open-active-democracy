@@ -4,7 +4,7 @@ $(function(){
     if (chrome) {
         jQuery(".tag_button").css("margin-top",-16);
 				jQuery(".tag_button").css("margin-right",-1);
-				jQUery("div.column .portlet-header select option").css("text-transform","uppercase");
+				jQuery("div.column .portlet-header select option").css("text-transform","uppercase");
     }
 				 
 				 
