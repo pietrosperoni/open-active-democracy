@@ -32,12 +32,11 @@ $(function(){
 				 
     var Linux = navigator.appVersion.indexOf("Linux") !=-1;
 				if (Linux && chrome){
-						jQuery(".fblike").css("margin-right",24);alert("chrome");
+						jQuery(".fblike").css("margin-right",24);
 					}
 
     var Linux = navigator.appVersion.indexOf("Linux") !=-1;
 				if (Linux && firefox){
-						alert("fflinux");
 						jQuery(".fblike").css("margin-right",24);
 					}
 
