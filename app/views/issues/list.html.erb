@@ -28,8 +28,8 @@
 		<% if @endorsements %>
 			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
 		<% end %>
-		<tr>
-			<td style="width: 20px;">
+		<tr style="border-bottom: solid 1px #CCC;">
+			<td style="width: 20px; padding-top: 7px;">
   				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon") %>
           <script type="text/javascript">
             jQuery("#plus_for_<%=priority.id%>").click(function () {
@@ -45,7 +45,7 @@
               });
           </script>
   			</td>
-				<td style="width: 70px;">
+				<td class="category_icon">
             <% if priority.category and priority.category.icon %>
 				<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
             <% end %>

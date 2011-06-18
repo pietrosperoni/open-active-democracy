@@ -4,10 +4,10 @@
 	<%= tr("No points have been revised recently", "view/points/revised")%>
 <% else %>
 	
-	<% if @revisions.total_pages > 1 %>
+	<!--<% if @revisions.total_pages > 1 %>
 		<%= will_paginate(@revisions) %>
 		<p>
-	<% end %>
+	<% end %>-->
 	<% for revision in @revisions %>
 		<% quality = nil %>
 		<% if @qualities %>

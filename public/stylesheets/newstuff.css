@@ -114,13 +114,12 @@ hr { border-top: 3px solid #e5e5e5; }
 }
 
 #network_sidebar {
-  width: 220px;
+  width: 200px;
   float: right;
-  padding-right: 4px;
+  padding: 0 4px 0 13px;
   vertical-align: top;
   top: 0px;
   right: 5px;
-  padding-top: 0px;
   margin-top: 0px;
 }
 
@@ -530,7 +529,7 @@ ul#priority_menu li.tab9 div.tab_body {
 .althingi_process_container table tr.even td { background: #f5f5f5; }
 
 /* Hliðarstikan */
-#top_right_column { margin-top: 6px; }
+#top_right_column { margin-top: -17px; }
 #search_priorities form input { width: 170px; font-size: 10px; }
 #your_priorities table { width: 200px;}
 
@@ -1028,10 +1027,10 @@ font-size: 13px !important;
 .priority_name, .priority_name_add {
 /*float:left;*/
 margin-right:1px;
-font-size: 1.083em!important;
+font-size: 1.2em !important;
 font-family:helvetica,arial,sans-serif !important;
 padding-bottom: 0px;
-/*margin-top:3px;*/
+margin-top:7px;
 
 }
 
@@ -1100,4 +1099,106 @@ padding-bottom: 0px;
 
 .pre_text {
 	margin-bottom: 10px;
+}
+
+.reykjavik_icon {
+	width: 100%;
+	text-align:right;
+	margin-top: 10px;
+}
+
+.bellow_translate {
+	margin: 25px 0 15px -15px;
+	border-bottom: solid 1px #CCC;
+	width: 200px;
+}
+
+#intro p {font-size: 0.8em;}
+
+#message_to_users {
+		background:url("/images/new/information_box_bg.png") repeat-x;
+		-moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+		behavior:url(../javascripts/PIE.htc);
+		position: relative;
+		padding: 5px 10px 10px 75px;
+}
+
+#message_to_users p {margin-top: 10px;}
+
+.close_notify2 {
+	color:#000;
+	float: right;
+  margin-right: 0px;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.close_notify2 a {text-decoration: none !important;}
+
+.information_icon {
+    left: 31px;
+    position: absolute;
+    top: 15px;
+}
+
+.comment_report {padding: 0 !important;float: right;}
+
+.priority_icon_portlet {margin: 5px 0 0 10px;}
+
+.border_miss_avatar {
+	border: solid 1px #CCC;
+	height: 35px;
+	width: 35px;
+}
+
+.border_miss_avatar48 {
+	border: solid 1px #CCC;
+	height: 48px;
+	width: 48px;
+}
+
+.image_96 {
+	border: solid 1px #CCC;
+	width: 96px;
+	height: 96px;
+}
+
+.fb_avatar {
+	/*border: solid 1px #CCC;
+	width: 35px;
+	height: 35px;*/
+	margin-top: -5px;
+}
+
+.field_label2 {margin-top: 10px;}
+
+.content {
+		background-image: url("../images/new/content-text-bg.png") !important;
+    background-position: left top !important;
+    background-repeat: no-repeat;
+		padding: 10px;
+}
+
+.submit_button {
+	background-image: url("../images/new/bg_submit2.png");
+	background-repeat: repeat-x;
+	/*height: 30px;*/
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+		behavior:url(../javascripts/PIE.htc);
+		position: relative;
+		color: #FFF;
+	border: solid #FFF 1px;
+box-shadow: 0px 0px 1px #000;
+-moz-box-shadow: 0px 0px 1px #000;
+-webkit-box-shadow: 0px 0px 1px #000;
+	padding: 2px 10px;
+}
+
+.category_icon {
+	width: 55px;
+	padding-top: 10px;
 }

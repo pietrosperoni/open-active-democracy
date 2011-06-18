@@ -10,13 +10,15 @@
 	<div class="comment_box">
         <table>
 	        <tr>
-		        <td>
+		        <td width="20">
 					<div class="buddy-icon" style="float:left;"><%= render :partial => "users/pic_35", :locals => {:user => comment.user}%></div>
+						</td>
+						<td>
 					<span class="entry_profile"  style="float:left;">
 					<%= h(comment.user.login) %>
 						 - <%= time_ago(comment.created_at) %> 
 				       <% if logged_in? and current_user.id != comment.user_id  %>
-						 <%= link_to image_tag("comment_report.gif", :align => "right", :border => 0, :class => "comment_report"),
+						 <%= link_to image_tag("report.png", :align => "right", :border => 0, :class => "comment_report"),
 						             flag_activity_comment_url(comment.activity_id,comment),:method => :get,
 			                   :remote=>true,
 			                   'data-disable-with' => "",
@@ -24,12 +26,9 @@
 						             :confirm => tr("Is this comment from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => comment.user.name),
 						             :title => tr("Report", "view/comments/_show") %>
 					   <% end %>
-					</span>
-		        </td>
-	        </tr>
-        </table>
-		
-		<% if !defined? shortentext%>
+					</span><br/>
+
+<% if !defined? shortentext%>
 			<% shortentext="1" %>
 		<% end %>		
 				
@@ -38,6 +37,11 @@
 		<% else %>
 			<div class="comment_content_2" id="comment_content_<%= comment.id.to_s %>"><%= comment.content_html.html_safe %></div>
 		<% end %>
+		        </td>
+	        </tr>
+        </table>
+		
+		
 
 		<% if logged_in? and not comment.deleted? and ((@comments and comment == @comments.last and current_user.id == comment.user_id) or current_user.is_admin?) %>
 <div class="delete-comment">

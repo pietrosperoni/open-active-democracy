@@ -126,7 +126,7 @@ div.addwrapper  {
 
 #hp_intro, #hp_intro a, #quiz_header, .priority_position, .your_priority_position, .profile_name, .profile_name a, h1, h2, h3, h4 {
     color: #444;
-		border-bottom: solid 1px #FFF;
+		/*border-bottom: solid 1px #FFF;*/
 }
 
 div#content_text table {
@@ -331,9 +331,9 @@ div.best-points {background:#fff;}
 .comment,.comment_endorses, .comment_opposes  {padding: 0; background: none;
     color: #444444; border: 0px solid #DDDDDD;}
 
-.comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 20px 10px;margin:0 0 10px 0}
+.comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 20px 10px;margin:0 0 10px 50px;}
 
-.comment_content_1,.comment_content_2 {padding:10px 10px 0 53px}
+.comment_content_1,.comment_content_2 {padding:10px 10px 0 10px}
 div.buddy-icon {float:left}
 .comment_box img{padding:4px;}
 .comment_link {
@@ -359,9 +359,12 @@ div.delete-comment {clear:both;text-align: right;}
     background: url("/images/new/backgrounds-sprite.png") repeat-x scroll 0 -480px #FFFFFF;
     border: 1px solid #C1C1C1;
     border-radius: 4px 4px 4px 4px;
+		behavior:url(../javascripts/PIE.htc);
+		position: relative;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16) inset;
     width: auto;padding:0;margin:0 0 10px 0;
-		margin: 35px 0 10px 20px;
+		/*margin: 35px 0 10px 20px;*/
+		margin: 10px 0 0 50px;
 }
 .comment_link_add textarea {border:none;background:none;margin:5px;}
 
@@ -406,19 +409,32 @@ div.new_comment_facebook {}
 
 .comment_more {background:none}
 .priority_add {background-color: transparent !important; border:none !important; width:100px;}
-span.priority_add a, span.priority_add_follow a, span.priority_add_ignore a {
-	padding:0 6px;
-	font-family: arial; 
-	font-size: 1em;
-	color:#fff !important;
-	font-weight:bold;
-	text-decoration:none;
-	float: left;
-	margin-right: 7px;
+span.priority_add a {
+    color: #FFFFFF !important;
+    float: left;
+    font-family: arial;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-right: 7px;
+    padding: 0 5px 1px;
+    text-decoration: none;
 }
-span.priority_add_ignore a {background:#E49E6E;border:1px solid #B92D19;width: auto;}
-a.priority_add_link1, span.priority_add_follow a {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
+
+span.priority_add_follow a, span.priority_add_ignore a {
+    color: #aaa !important;
+    float: left;
+    font-family: arial;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-right: 7px;
+    padding: 0 5px 1px;
+    text-decoration: none;
+}
+
+span.priority_add_ignore a, .priority_remove2 {background:#555 !important; border:1px solid #000 !important;width: auto; color: #aaa !important;}
+a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;width: auto;float:right;}
+span.priority_add_follow a {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #aaa;}
 a.priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
 a.priority_add_link2:hover {background:#B92D19;border:1px solid #B92D19;}
 .point_name span{display:none;}
@@ -433,11 +449,17 @@ img.point_report {float:right;}
 		border: solid 1px #439A22 !important;
 }
 
+.priority_remove1 {
+	background-color: #FFF !important;
+	border: solid 1px #CCC !important;
+	color: #333 !important;
+}
+
 .flash_notice {
 		background-color: #003399;		
 }
 
-.priority_remove_oppose, .priority_remove {
+.priority_remove_oppose, .priority_remove, .priority_remove1, .priority_remove2 {
     font-size: 0.9em;
     font-weight: bold;
     margin: 0 3px 0 0;
@@ -448,6 +470,8 @@ img.point_report {float:right;}
 		width: auto;
 		float:left;
 }
+
+.priority_remove_link1 {color: #CCC !important;}
 
 .priority_endorsement_count {
     font-size: 11px;
@@ -489,7 +513,7 @@ div.userwrap {
     background-image: url("../images/new/user-bg3.png") !important;
     background-position:top !important;
     background-repeat: no-repeat;
-		padding-bottom: 10px;
+		padding-bottom: 0;
 		position: relative;
 		z-index: 0;
 }

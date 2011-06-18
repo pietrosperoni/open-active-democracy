@@ -1,5 +1,5 @@
 <div id="language_selection_box">
-  <%= tr("Select language:","views/layouts/basic") %> <%= tr8n_language_selector_tag %><br/>
+  <%= tr("Select language:","views/layouts/basic") %> <%= tr8n_language_selector_tag %>
   <% if @inline_translations_allowed %>
     <% if @inline_translations_enabled %>
       <strong><u><br/><%= link_to_function(trla("Stop translating"), "tr8nLanguageSelector.disableInlineTranslations();") %></u></strong><br/>

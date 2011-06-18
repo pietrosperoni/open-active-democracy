@@ -158,7 +158,7 @@ h4 {
 	width: 170px;
 }
 .magnifier_wrap {
-  width: 212px;
+  width: 208px;
 	background-color: #fff;
 	margin-top: 10px;
   margin-bottom: 5px;
@@ -568,7 +568,7 @@ del {
 	padding-bottom: 5px;
 }
 .single .priority_listing {margin-left:20px;}
-.top_level_priority_listing {/*margin-left:20px;*/}
+.top_level_priority_listing {/*padding-top:7px;*/}
 .priority_name, .priority_name_add {
   	font-size: 12px;
 	font-weight: bold;
@@ -1448,7 +1448,7 @@ ul#priority_menu li.tab12 div.tab_body {
 }
 
 .user_pic_and_activity {
-	float: left;
+	/*float: left;*/
 	margin-left: -12px;
 	width: 320px;
 }

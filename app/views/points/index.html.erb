@@ -20,7 +20,7 @@ $(function(){
 <% if not @points or @points.empty? %>
 	<%= tr("No points yet.", "view/points/index")%>
 <% else %>
-	<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @points} %>
+	<!--<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @points} %>-->
 	<% for point in @points %>
 		<% quality = nil %>
 		<% if @qualities %>

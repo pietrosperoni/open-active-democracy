@@ -1,13 +1,13 @@
 <div class="point" id="<%= point.id %>">
 <table>
 	<tr style="border-bottom: solid 1px #EEE;">
-		<td>
-			<div style="width:35px; height:35px; border: solid 1px #666; margin-right: 10px;">
+		<td width="20">
+			<div style="width:35px; height:35px; border: solid 1px #CCC; margin-right: 10px;">
         <%= render :partial => "users/pic", :locals => {:user => point.user}%>
 			</div>
 		</td>	
 	
-		<td style=" padding-bottom: 5px;">		
+		<td style="padding-bottom: 5px;">		
 
 	<div class="point_other">
 		<%= official_status(point.priority) %>
