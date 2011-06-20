@@ -52,6 +52,7 @@ $(function(){
 				jQuery(".Chapter_name_2").css("top",-2);
 				jQuery(".Chapter_name_2").css("left",-2);
 				jQuery("#priority_category2 input").css("margin-bottom",5);
+				jQuery(".test").css("margin-left",60);
     }
 
 		var ie7com = document.documentMode && document.documentMode == 7;
@@ -82,6 +83,7 @@ $(function(){
 				jQuery(".bellow_translate").css("width",200);
 				jQuery(".bellow_translate").css("margin-left",-17);
 				jQuery(".bellow_translate").css("position","relative");
+				jQuery(".test").css("margin-left",60);
     }
 
 
@@ -100,6 +102,7 @@ $(function(){
 				jQuery(".Chapter_name_2").css("left",-2);
 				jQuery("#priority_category2").css("width",670);
 				jQuery("#priority_category2 input").css("margin-bottom",5);
+				jQuery(".test").css("margin-left",63);
     }
     
 				
