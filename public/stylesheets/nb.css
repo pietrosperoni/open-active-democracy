@@ -833,8 +833,7 @@ del {
 	text-align: left;
 	position: absolute;
 	width: 10px;
-	/*top: 9px;	
-	padding-top: 4px;*/	
+	padding-top: 7px;
 }
 .priority_rank_detail {
 	margin-bottom: 5px;

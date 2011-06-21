@@ -1,5 +1,5 @@
 <ul>
-	<li style="float:left; list-style: none;">
+	<li class="list_left">
 		<div class="priority_name" id="priority_<%= priority.id %>_name">
 			<% if value < 0 %><span class="opposed"><%= tr("opposed", "view/priorities/_listing")%></span><% end %>
 		
@@ -9,7 +9,7 @@
 		</div>
 	</li>
 
-	<li style="float:right; list-style: none;">
+	<li class="list_right">
 		<div class="category">	
 				<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
 		</div>

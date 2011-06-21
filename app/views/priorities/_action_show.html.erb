@@ -9,15 +9,15 @@
      			<%= render :partial => "priorities/button_small", :locals => {:priority => priority, :endorsement => endorsement, :region => "priority_inline"} %>
 				</li>
 
-				<li style="float:left; list-style:none;">
+				<li class="list_left">
 					<div class="move_test"></div>
 				</li>
 
-				<li style="float:right; list-style:none; width:30px;">
+				<li class="list_report">
 					<%=render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
 		  	</li>
 
-				<li style="list-style: none; float:right;">
+				<li class="list_right">
 					<div class="fblike">
 							 <fb:like href="<%=priority.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"></fb:like>
 					 </div>

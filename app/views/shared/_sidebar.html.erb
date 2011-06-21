@@ -65,7 +65,8 @@
     <% end %>
 
     <%= render :partial => "shared/activated" %>
-  <% end %>
+ 
+	<% end %>
 
   <div id="top_right_column">
     <% if logged_in? %>
@@ -74,11 +75,11 @@
       <%= render :partial => "shared/login" %>
     <% end %>
   </div>
-
  </div> 
 
+
   <% if logged_in? %>
-    <div id="priority_column" class="userwrap" style="border-radius: 10px">
+    <div id="priority_column" class="userwrap">
       <%= render :partial => "shared/your_priorities" %>
     </div>
   <% else %>
@@ -86,6 +87,7 @@
     <div id="intro">
       <%= tr("<p>Getting involved is easy and fun.  Just join and start setting your priorities, like a to do list.  The more people who make your priority their own priority, the higher it <a href=\"/priorities/rising\">rises in the charts</a>. The more people who <a href=\"/signup\">join the network</a>, the more clout we have to make our agenda happen.</p>", "view/layouts/basic") %>
     </div>
+
     <% end %>
   <% end %>
   <%= render :partial => "shared/fb_activity_feed" %>
