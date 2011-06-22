@@ -120,9 +120,9 @@ module ApplicationHelper
         r << link_to(tr('{count} point revision(s)', "notifications", :count => u[1]), :controller => "inbox", :action => "notifications")
       elsif u[0] == 'NotificationPriorityFinished' 
         r << link_to(tr('{count} prioritie(s) finished', "notifications", :count => u[1]), yours_finished_priorities_url)
-      elsif u[0] == 'NotificationChangeVote' 
+      elsif false and u[0] == 'NotificationChangeVote' 
         r << link_to(tr('{count} merger vote(s)', "notifications",:count => u[1]), :controller => "news", :action => "changes_voting")
-      elsif u[0] == 'NotificationChangeProposed' 
+      elsif false and u[0] == 'NotificationChangeProposed' 
         r << link_to(tr('{count} merger(s) proposed', "notifications", :count => u[1]), :controller => "news", :action => "changes_voting")
       end 
     end     
