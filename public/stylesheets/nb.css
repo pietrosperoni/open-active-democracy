@@ -118,7 +118,7 @@ h4 {
 	font-weight: bold;
 }
 #login, #intro, #buzz_box {
-	padding: 10px 10px 5px 15px;
+	padding: 0px 10px 5px 15px;
 	line-height: 1.4em;
 	font-size: 1.2em;	
 }

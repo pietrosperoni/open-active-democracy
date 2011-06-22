@@ -539,9 +539,9 @@ div.userwrap2 {
     line-height: 1.4em;
     padding: 5px;
     width: 205px;
-background:none;
-border: 0px solid #DDDDDD;
-padding:10px 10px 0;
+		background:none;
+		border: 0px solid #DDDDDD;
+		padding:10px 10px 0;
 }
 #user_info_box a {
   
@@ -578,11 +578,11 @@ padding:10px 10px 0;
 #notification_box p, #next_steps_box p{
   font-size: .9em;
   line-height: 1.4em;
-font-weight:normal;
+	font-weight:normal;
 }
  #next_steps_box ol {
-list-style-position: inside;
-padding:0;
+	list-style-position: inside;
+	padding:0;
 }
 
 
@@ -667,7 +667,21 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .left_scale {
 	padding-left: 3px;
 }
+.left_scale8 {
+	padding-left: 8px;
+}
+.right_scale {
+	padding-right: 5px;
+}
 
 .line_bellow {
 	border-bottom: solid 1px #CCC;
+}
+
+#next_steps_box {
+	padding: 10px !important;
+}
+
+#user_sidebar {
+	padding-left: 20px;
 }

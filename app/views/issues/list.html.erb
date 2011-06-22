@@ -19,9 +19,9 @@
 		<!--<tr>
 			<td></td>
 			<td></td>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/issues/list") %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/issues/list") %></span></td>
-			<td style="padding-left: 3px;" colspan="1"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span><%= will_paginate @priorities %></td>
+			<td align="right" class="right_scale"><span class="table_header"><%= tr("Rank", "view/issues/list") %></span></td>
+			<td class="left_scale"><span class="table_header"><%= tr("Wk", "view/issues/list") %></span></td>
+			<td class="left_scale" colspan="1"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span><%= will_paginate @priorities %></td>
 			
 		</tr>-->
 	<% for priority in @priorities %>
@@ -51,7 +51,7 @@
             <% end %>
   			</td>
 			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-			<td valign="top" style="padding-left: 8px;">
+			<td valign="top" class="left_scale8">
 			<div id="priority_<%= priority.id %>" class="priority_listing">
 				<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
 			</div>
