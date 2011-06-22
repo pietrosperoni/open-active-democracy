@@ -11,7 +11,7 @@ tmp/restart.txt
 public/pictures/**/*
 config/*.pem
 config/contacts.yml
-config/database.yml*
+config/database.yml
 config/facebooker.yml
 config/s3.yml
 config/newrelic.yml
