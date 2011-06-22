@@ -21,11 +21,11 @@
 
 set :output, "/home/yrpri/sites/open-active-democracy/betrireykjavik/shared/log/cron_log.log"
 
-every 10.minutes do
+every 5.minutes do
   rake "schedule:fix_top_endorsements"
 end
 
-every 20.minutes do
+every 15.minutes do
   rake "ts:index"
 end
 
