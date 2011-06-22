@@ -17,7 +17,7 @@
 		<% end %>
 	</td>
 	<% if priority.is_new? %>
-	<td valign="top" align="left" width="30" style="padding-top: 7px;">
+	<td valign="top" align="left" width="30">
 		<div class="position_new"><%= tr("new", "view/priorities/_rank_week_month") %></div>
 	</td>
 	<% elsif priority.position_7days_change == 0 and priority.position_30days_change == 0 %>

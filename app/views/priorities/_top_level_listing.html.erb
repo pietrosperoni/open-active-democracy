@@ -25,16 +25,9 @@
           </script>
   			</td>
   			<td class="category_icon">
-<<<<<<< HEAD
 	            <% if priority.category and priority.category.icon -%>
 					<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
 	            <% end %>
-=======
-
-            <% if priority.category and priority.category.icon %>
-				<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
-            <% end %>
->>>>>>> gg/master
   			</td>
   			<td>
         	<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
