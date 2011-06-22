@@ -667,3 +667,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .left_scale {
 	padding-left: 3px;
 }
+
+.line_bellow {
+	border-bottom: solid 1px #CCC;
+}

@@ -28,9 +28,9 @@
 		<% if @endorsements %>
 			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
 		<% end %>
-		<tr style="border-bottom: solid 1px #CCC;">
-			<td style="width: 20px; padding-top: 7px;">
-  				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon") %>
+		<tr class="line_bellow">
+			<td>
+  				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon", :class => "plus_sign") %>
           <script type="text/javascript">
             jQuery("#plus_for_<%=priority.id%>").click(function () {
                   var slide = jQuery("#points_overview_for_<%=priority.id%>");
