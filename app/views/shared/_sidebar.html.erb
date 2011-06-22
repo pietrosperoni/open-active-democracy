@@ -6,13 +6,13 @@
     <%= render :partial => "shared/search" %>
 
 		<div>
-<ul id="menu1" style="z-index: 500;">
-<li class="tab7 mega" style="z-index: 500;">
+<ul id="menu1">
+<li class="tab7 mega">
 			<span class="tab_header">
 				<%= link_to tr("About", "view/shared/_menu"), "#" %>
 			</span>
 			<div class="tab_body">
-			<div class="test" style="z-index: 500;">
+			<div class="test">
 				<div class="tab_subhead"><%= link_to tr("About the site", "view/shared/_menu"), :controller => "about" %></div>
 				<div class="tab_sublinks">
 					<%= link_to tr("About", "view/shared/_menu"), :controller => "about" %>
@@ -65,20 +65,21 @@
     <% end %>
 
     <%= render :partial => "shared/activated" %>
-  <% end %>
+ 
+	<% end %>
 
-  <div id="top_right_column">
+
     <% if logged_in? %>
       <%= render :partial => "shared/notifications" %>
     <% else %>
       <%= render :partial => "shared/login" %>
     <% end %>
-  </div>
 
  </div> 
 
+
   <% if logged_in? %>
-    <div id="priority_column" class="userwrap" style="border-radius: 10px">
+    <div id="priority_column" class="userwrap">
       <%= render :partial => "shared/your_priorities" %>
     </div>
   <% else %>
@@ -86,6 +87,7 @@
     <div id="intro">
       <%= tr("<p>Getting involved is easy and fun.  Just join and start setting your priorities, like a to do list.  The more people who make your priority their own priority, the higher it <a href=\"/priorities/rising\">rises in the charts</a>. The more people who <a href=\"/signup\">join the network</a>, the more clout we have to make our agenda happen.</p>", "view/layouts/basic") %>
     </div>
+
     <% end %>
   <% end %>
   <%= render :partial => "shared/fb_activity_feed" %>

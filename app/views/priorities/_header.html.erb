@@ -24,15 +24,15 @@ $(function(){
 <table class="priority-show-table single">
     <tr>
       <%= render :partial => "priorities/rank_week_month", :locals => {:priority => @priority } %>
-      <td valign="top" style="padding-left: 8px;" colspan="3">
+      <td valign="top" colspan="3">
 				<ul>
-					<li style="float:left; list-style: none; width:360px;">
+					<li class="list_priority_overview">
 				  	<div id="priority_<%= @priority.id %>" class="priority_listing">
 				    	<%= render :partial => "priorities/listing", :locals => {:priority => @priority, :endorsement => @endorsement, :value => 0, :noaction=>true} %>
 				  	</div>
 					</li>
 
-					<li style="float: right; list-style: none; width: 30px;">
+					<li class="list_report">
 						<div class="replace_report" style="margin-left:10px !important;"></div>
 					</li>
 
@@ -41,7 +41,7 @@ $(function(){
 
 					</li>
 
-					<li style="float: right; list-style: none;">
+					<li class="list_right">
 						<div class="replace_fblike">
 					
 						</div>	

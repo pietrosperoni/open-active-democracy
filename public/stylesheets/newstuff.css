@@ -840,7 +840,7 @@ font-size: 1.2em;
 #not_activated {
 font-size:11px;
 line-height:1.4em;
-padding:0 10px;
+padding:10px 10px;
 }
 
 #right_column_priorities a, #notification_box a, #next_steps_box a, #notification_box ol a, #next_steps_box  ol a, #not_activated a 
@@ -1108,7 +1108,7 @@ margin-top:7px;
 }
 
 .bellow_translate {
-	margin: 25px 0 15px -15px;
+	margin: 25px 0 8px -15px;
 	border-bottom: solid 1px #CCC;
 	width: 200px;
 }
@@ -1148,19 +1148,19 @@ margin-top:7px;
 .priority_icon_portlet {margin: 5px 0 0 10px;}
 
 .border_miss_avatar {
-	border: solid 1px #CCC;
+	border: solid 1px #f4f4f4;
 	height: 35px;
 	width: 35px;
 }
 
 .border_miss_avatar48 {
-	border: solid 1px #CCC;
+	border: solid 1px #f4f4f4;
 	height: 48px;
 	width: 48px;
 }
 
 .image_96 {
-	border: solid 1px #CCC;
+	border: solid 1px #f4f4f4;
 	width: 96px;
 	height: 96px;
 }
@@ -1201,4 +1201,8 @@ box-shadow: 0px 0px 1px #000;
 .category_icon {
 	width: 55px;
 	padding-top: 10px;
+}
+
+.add_point_field {
+	margin-bottom: -10px;
 }

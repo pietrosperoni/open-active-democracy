@@ -118,7 +118,7 @@ h4 {
 	font-weight: bold;
 }
 #login, #intro, #buzz_box {
-	padding: 10px 10px 5px 15px;
+	padding: 0px 10px 5px 15px;
 	line-height: 1.4em;
 	font-size: 1.2em;	
 }
@@ -833,8 +833,7 @@ del {
 	text-align: left;
 	position: absolute;
 	width: 10px;
-	/*top: 9px;	
-	padding-top: 4px;*/	
+	padding-top: 7px;
 }
 .priority_rank_detail {
 	margin-bottom: 5px;

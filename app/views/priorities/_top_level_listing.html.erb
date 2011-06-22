@@ -5,11 +5,11 @@
       <% endorsement = endorsements.detect {|e| e.priority_id == priority.id } %>
     <% end %>
     <tr class="border">	
-  		<td style="padding: 0px 0 7px;">
+  		<td class="top_listing">
   			<table>
   			<tr class="border">
-  			<td style="width: 20px; padding-top: 7px;">
-  				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon") %>
+  			<td>
+  				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon", :class => "plus_sign") %>
           <script type="text/javascript">
             jQuery("#plus_for_<%=priority.id%>").click(function () {
                   var slide = jQuery("#points_overview_for_<%=priority.id%>");
@@ -33,7 +33,7 @@
   			<td>
         	<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
   			</td>      
-  			<td valign="top" style="padding-left: 3px; padding-top: 0px;" colspan="3">
+  			<td valign="top" class="left_scale" colspan="3">
         <div id="priority_<%= priority.id %>" class="top_level_priority_listing">
           <%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
         </div>

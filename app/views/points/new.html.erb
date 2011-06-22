@@ -7,17 +7,17 @@
 		<td valign="top">
 
  <%=tr("<b>Add a talking point</b>.<p>What is the best argument for or against this priority?  Others will be able to edit it, and we keep a record of revisions, just like Wikipedia. Keep it concise and focused on just one point, you can add additional ones later.  Only the <span class=\"red\">\*</span> fields are required.</p>", "view/points/new")%>
-
+<br/>
 	<div  class="form_header"><%=tr("Add a point", "view/points/new")%> <span class="red">* </span> </div>
 
 <%= form_for :point, :url => priority_points_path(@priority)  do |f| %>
   <%= f.error_messages :header_message => tr("Please review", "view/points/new"), :message => tr("We need a change to your point", "view/points/new") %>
-	<div class="field">
+	<div class="add_point_field">
 		<div class="field_box">
  			<%= f.text_field :name, :size => 50, :maxlength => 60 %>
 		</div>
 	</div>
-
+<br/>
 	<div class="field">
 		<div class="field_label">
 			<div id="point_supports" class="form_header">
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 	</div>
-
+<br/>
 	<div class="field form_header">
 	    <div class="field_label form_header"><%= tr("Explain your point.", "view/points/new") %> <span id="pointContentDown"></span> <%= tr("characters left", "view/points/new")%></div>
 		<div class="field_box">
@@ -38,14 +38,14 @@
 
 	</div>				
 					<div class="tiny_info_no_pad"><%=tr("Other people will be able to edit your points, similar to Wikipedia","views/priorities/form")%></div> 
-	
+<br/>
 	<div class="field form_header">
 		<div class="field_label"><%= tr("Include a website source link", "view/points/new") %></div>
 		<div class="field_box">
 			<%= f.text_field :website, :size => 50 %>	
 		</div>
 	</div>
-	
+<br/>
 	<div class="field form_header">
 		<div class="field_label">
 			<%= tr("Link this to another priority <span class='small'>Just start typing the name</span>", "view/points/new") %>
@@ -54,9 +54,9 @@
 			<%= f.text_field :other_priority_name, :size => 50, :autocomplete => "off" %>			
 <!--			<%= tr("Linking to another priority is optional. If your point is in opposition, you can link to a better priority. OR, if your point is supportive or neutral, you can highlight a more specific or related priority.", "view/points/new")%>-->
 		</div>
-		
+<br/>	
 	</div>	
-	<%= f.submit tr("Save point", "view/points/new"), :id => "submit", :class => "yellow_button" %>
+	<%= f.submit tr("Save point", "view/points/new"), :id => "submit", :class => "submit_button" %>
 
 <% end %>
 
