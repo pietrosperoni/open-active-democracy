@@ -43,6 +43,6 @@ every 55.minutes do
   rake "schedule:user_ranker"
 end
 
-every 15.minutes do
+every 10.minutes do
   rake "schedule:fix_counts"
 end
