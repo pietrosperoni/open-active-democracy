@@ -64,6 +64,7 @@ namespace :schedule do
       multiple_endorsements = user.endorsements.active.find(:all, :conditions => ["priority_id = ?",priority.id], :order => "endorsements.position")
       if multiple_endorsements.length > 1
         for c in 1..multiple_endorsements.length-1
+          puts "Destroying endorsement #{multiple_endorsements[c]}"
           multiple_endorsements[c].destroy
         end
       end
