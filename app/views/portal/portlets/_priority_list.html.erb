@@ -22,7 +22,9 @@
 			<tr>
 				<td colspan="3" align="center" width="20">
 					<div class="priority_icon_portlet">
-						<%= image_tag("new/priority_icon.png", :alt => "icon") %>
+			            <% if priority.category and priority.category.icon -%>
+							<%= link_to (image_tag priority.category.icon.url(:icon_32), :size => "32x32", :border => 0), priority.category.to_url %>
+			            <% end %>
 					</div>
 				</td>
 			</tr>
