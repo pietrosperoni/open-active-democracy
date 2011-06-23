@@ -685,3 +685,12 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 #user_sidebar {
 	padding-left: 20px;
 }
+
+.add_talking_point h3 {
+	font-size: 14px !important;
+}
+
+.priority_icon_single {
+    margin: 24px 0 0 22px;
+    position: absolute;
+}
