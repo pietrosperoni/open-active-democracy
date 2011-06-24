@@ -166,7 +166,17 @@ h4 {
   margin-left: 0px;
   margin-right: 0px;
 }
-.magnifier_wrap input {
+.magnifier_wrap2 {
+  width: 190px;
+	background-color: #fff;
+	margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 3px 3px 3px 3px;
+  margin-left: 0px;
+  margin-right: 0px;
+  border: 1px solid #DDDDDD;
+}
+.magnifier_wrap input, .magnifier_wrap2 input {
 	border: none;
 	font-size: 13px;
 	padding: 0px 0px 0px 2px;

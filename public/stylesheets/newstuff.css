@@ -119,8 +119,9 @@ hr { border-top: 3px solid #e5e5e5; }
   padding: 0 4px 0 13px;
   vertical-align: top;
   top: 0px;
-  right: 5px;
+  right: 0px;
   margin-top: 0px;
+	position: relative;
 }
 
 #network_sidebar td {

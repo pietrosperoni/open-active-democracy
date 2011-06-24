@@ -1,6 +1,11 @@
-<div id="hp_intro"><%= @page_title %></div>
-<p>
-	
+<table>
+	<tr>
+		<td width="460">
+			<div id="hp_intro"><%= @page_title %></div>
+		<p>
+		</td>
+	</tr>
+</table>
 <%= render :partial => "import_nav", :locals => {:user => current_user } %>
 
 <% if not @users %>
