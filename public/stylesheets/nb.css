@@ -787,6 +787,7 @@ del {
 	/*padding-top: 13px;*/
 	text-align: left;
 	border: none !important;
+	width: 20px;
 }
 .priority_added {
 	padding-top: 10px;
@@ -844,6 +845,7 @@ del {
 	position: relative;
 	width: 10px;
 	padding-top: 7px;
+	margin-right: 10px;
 }
 .priority_rank_detail {
 	margin-bottom: 5px;

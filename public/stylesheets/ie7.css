@@ -27,3 +27,20 @@ ul#menu1 .tab_body {z-index:1;}
 #content_text {
 /*	min-height: 0 !important;*/
 }
+
+.warning_inline {
+	left: -235px !important;
+	margin-right: 0 !important;
+}
+
+.single .warning_inline {
+  left: -575px !important;
+}
+
+.single2 .warning_inline {
+  left: -525px !important;
+}
+
+.single3 .warning_inline {
+	left: 0px !important;
+}

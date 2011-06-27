@@ -694,3 +694,31 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
     margin: 24px 0 0 22px;
     position: absolute;
 }
+
+.warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline {
+	  background-color: #003399;
+    float: right;
+		color: #FFF;
+    margin: 25px 67px 2px 0;
+    padding: 1px 5px;
+		-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+		behavior:url(../javascripts/PIE.htc);
+		position: relative;
+    width: 200px;
+		text-align: center;
+		left: 0px;
+}
+
+.single .warning_inline {
+    margin: 72px 397px 2px 0 !important;
+}
+
+.single2 .warning_inline {
+    margin: 25px 347px 2px 0 !important;
+}
+
+.single3 .warning_inline {
+    margin: 3px 115px 2px 0 !important;
+}
