@@ -2,7 +2,7 @@ ul#menu1 li.mega .tab_header a {margin-right: 10px !important;}
 ul#menu1 .tab_body {
 		float: left !important;
 		margin-left: -20px !important;
-		left: -148px !important;
+		/*left: -148px !important;*/
 		margin-top: 0px !important;
 }
 .notification_show_footer {
