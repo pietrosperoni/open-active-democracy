@@ -141,8 +141,10 @@ class DocumentRevision < ActiveRecord::Base
   end
   
   def request=(request)
-    self.ip_address = request.remote_ip
-    self.user_agent = request.env['HTTP_USER_AGENT']
+    if request
+      self.ip_address = request.remote_ip
+      self.user_agent = request.env['HTTP_USER_AGENT']
+    end
   end
   
   def DocumentRevision.create_from_document(document_id, request)

@@ -151,10 +151,15 @@ class Point < ActiveRecord::Base
   end
  
   def ensure_request_and_user_are_set
-    self.ip_address = self.priority.ip_address
-    self.user_agent = self.priority.user_agent
-    self.user_id = self.priority.user_id
-    Rails.logger.debug("SELF PRIORITY: #{pp self.priority.inspect}")
+    if self.priority
+      self.ip_address = self.priority.ip_address
+      self.user_agent = self.priority.user_agent
+      self.user_id = self.priority.user_id
+      Rails.logger.debug("SELF PRIORITY: #{pp self.priority.inspect}")
+    else
+      Rails.logger.error("No Priority for point id: #{self.id}")
+      puts "No Priority for point id: #{self.id}"
+    end
   end
   
   def do_bury
