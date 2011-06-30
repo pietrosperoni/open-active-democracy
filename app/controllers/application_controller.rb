@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   before_filter :update_loggedin_at, :unless => [:is_robot?]
   before_filter :init_tr8n
   before_filter :check_google_translate_setting
-  before_filter :check_missing_user_parameters
+  before_filter :check_missing_user_parameters, :except=>[:destroy]
 
   before_filter :setup_inline_translation_parameters
 
