@@ -9,7 +9,7 @@
 		</div>
 	</td>		
 <% else %>
-	<td valign="top" align="right" width="30" class="priority_rank">
+	<td valign="top" align="left" width="30" class="priority_rank">
 		<% if priority.position != 0 %>
 		<div class="priority_position" title="<%= tr("This is the {position} highest ranked priority across all {government_name} members.", "view/priorities/_rank_week_month", :position => priority.position, :government_name => tr(current_government.name,"Name from database")) %>">
 			<%= priority.position %>
@@ -21,11 +21,11 @@
 		<div class="position_new"><%= tr("new", "view/priorities/_rank_week_month") %></div>
 	</td>
 	<% elsif priority.position_7days_change == 0 and priority.position_30days_change == 0 %>
-	<td valign="top" align="center" colspan="1">
+	<td valign="top" align="center" colspan="1" width="10">
 		<div class="position_nochange" title="<%= tr("This priority hasn't moved up or down in the rankings at all this month.", "view/priorities/_rank_week_month") %>"><%= tr("UNCH", "view/priorities/_rank_week_month").upcase %></div>
 	</td>		
 	<% else %>
-	<td valign="top" width="27" colspan="0" style="padding-left: 0px; padding-top: 7px;">
+	<td valign="top" width="30" colspan="0" style="padding-left: 0px; padding-top: 7px;">
 		<% if priority.position_7days_change > 0 %>
 			<div class="position_up" title="<%= tr("This priority moved up {count} spots in the rankings this week", "view/priorities/_rank_week_month", :count => priority.position_7days_change.abs) %>"><%= priority.position_7days_change.abs %></div>
 		<% elsif priority.position_7days_change < 0 %>
