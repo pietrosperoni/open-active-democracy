@@ -56,7 +56,7 @@ font-style:normal !important;
 color: #999;
 line-height: 150%;
 float: none;
-margin: 0 5px 0 0;
+margin: 0 5px 0 0 !important;
 }
 
 #content_text {

@@ -24,6 +24,13 @@ $(function(){
 <table class="priority-show-table single">
     <tr>
       <%= render :partial => "priorities/rank_week_month", :locals => {:priority => @priority } %>
+
+	    <% if @priority.category and @priority.category.icon -%>
+			<div class="priority_icon_single">
+				<%= image_tag @priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+			</div>
+	    <% end %>
+
       <td valign="top" colspan="3">
 				<ul>
 					<li class="list_priority_overview">
@@ -36,7 +43,7 @@ $(function(){
 						<div class="replace_report" style="margin-left:10px !important;"></div>
 					</li>
 
-					<li style="float: right; list-style: none;">
+					<li class="list_right">
 						<div class="tweet"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
 
 					</li>

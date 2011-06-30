@@ -911,7 +911,7 @@ class PrioritiesController < ApplicationController
           if current_user.is_admin?
             page.replace_html "priority_report_#{@priority.id}", render(:partial => "priorities/report_content", :locals => {:priority => @priority})
           else
-            page.replace_html "priority_report_#{@priority.id}", "<div class='warning_inline'> #{tr("Thanks for bringing this to our attention", "controller/priorities")}</div>"
+            page.replace_html "priority_report_#{@priority.id}","<div class='warning_inline'> #{tr("Thanks for bringing this to our attention", "controller/priorities")}</div>"
           end
         end        
       }

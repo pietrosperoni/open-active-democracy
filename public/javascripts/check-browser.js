@@ -83,7 +83,9 @@ $(function(){
 				jQuery(".bellow_translate").css("width",200);
 				jQuery(".bellow_translate").css("margin-left",-17);
 				jQuery(".bellow_translate").css("position","relative");
-				jQuery(".test").css("margin-left",60);
+				jQuery(".test").css("margin-left",-10);
+				jQuery(".warning_inline").css("position","absolute");
+				jQuery(".warning_inline").css("font-size",20);
     }
 
 
