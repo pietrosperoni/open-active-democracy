@@ -56,7 +56,7 @@ font-style:normal !important;
 color: #999;
 line-height: 150%;
 float: none;
-margin: 0 5px 0 0 !important;
+/*margin: 0 5px 0 0 !important;*/
 }
 
 #content_text {
@@ -418,9 +418,11 @@ display: none !important;
 
 .red
 {
-color:#BC0000;
-font-size: 18px;
-top: 5px !Important; 
+    color: #BC0000;
+    font-size: 1.1em;
+    font-weight: bolder;
+    margin-right: 3px;
+/*top: 5px !Important;*/ 
 position: relative;
 }
 

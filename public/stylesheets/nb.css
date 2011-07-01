@@ -744,9 +744,9 @@ del {
 	text-align: center;
 }
 .or {
-	font-size: 0.7em;
-	position: relative;
-	right: 3px;
+    font-size: 0.7em;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .big_x {
 	position:relative;
@@ -1479,7 +1479,7 @@ ul#priority_menu li.tab12 div.tab_body {
   text-align:right;
 }
 
-.single .category_list {text-align:left; position: absolute; max-width:500px;}
+.single .category_list {text-align:left; position: absolute; max-width:500px;min-width:300px;}
 .single .category {text-align:left; position: absolute; max-width:500px; display: inline-table;}
 
 .priority_report {

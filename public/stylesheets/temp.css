@@ -695,7 +695,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
     position: absolute;
 }
 
-.warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline {
+.warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline, .warning_inline2, .warning_inline_point {
 	  background-color: #003399;
     float: right;
 		color: #FFF;
@@ -706,19 +706,38 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
     border-radius: 4px;
 		behavior:url(../javascripts/PIE.htc);
 		position: relative;
-    width: 200px;
+    min-width: 200px;
+		max-width: 370px;
 		text-align: center;
 		left: 0px;
+		font-size: 1em;
+}
+
+.warning_inline2 {
+		margin: 0  0 0 28px !important;
+		float: none !important;
+		left: none !important;
+}
+
+.warning_inline_point {
+    float: left;
+    margin: 5px 0 -4px !important;
+    width: 292px !important;
 }
 
 .single .warning_inline {
     margin: 72px 397px 2px 0 !important;
+		min-width: 200px;
 }
 
 .single2 .warning_inline {
     margin: 25px 347px 2px 0 !important;
 }
-
+.single2 .warning_inline2 {
+    font-size: 0.8em;
+		max-width: 400px !important;
+		margin: 5px 0 5px 0px !important;
+}
 .single3 .warning_inline {
     margin: 3px 115px 2px 0 !important;
 }

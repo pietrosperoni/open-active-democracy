@@ -1,6 +1,6 @@
 <% if priority.flags_count > 0 and priority.status == 'published' and logged_in? and current_user.is_admin? %>
 <div id="priority_flag_<%= priority.id %>">
-	<div class="warning_inline" id="priority_flag_<%= priority.id.to_s %>">
+	<div class="warning_inline2" id="priority_flag_<%= priority.id.to_s %>">
 		<span class="red"><%= tr("{count} flags", "view/priorities/_flagged", :count => priority.flags_count)%></span>. <%= tr("Issue {user_name} warning {warnings_count}", "view/priorities/_flagged", :user_name => priority.user.login, :warnings_count => priority.user.warnings_count) %>
 		<span class="tag_button">
 			<%= link_to tr("YES", "view/priorities/_flagged"), "/priorities/abusive/#{priority.id}",
@@ -19,4 +19,5 @@
 		</span>		
 	</div>
 </div>
+<div class="clear"></div>
 <% end %>
