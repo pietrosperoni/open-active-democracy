@@ -25,43 +25,41 @@
 			<% if @priority.points_count == 0 %>
 				<%= tr("Please tell us why we should endorse or oppose this priority by <a href='{new_point_url}'>adding a point</a>. You can even suggest a different priority instead.", "view/priorities/show_with_processes", :new_point_url => new_priority_point_path(@priority))%>
 			<% else %>
-		<div class="endorse-wrap"><div class="add-endorse"><%=link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%></div>
+					<div class="endorse-wrap">
+                            <div class="add-endorse"><%=link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%></div>
 							<div class="sub_header">
 								<%=tr("Best points for endorse", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
-							
 							</div>
 							<div id="pro_top">
-								<%= render :partial => "points/long_list", :locals => {:id => "pro_top", :point=>@priority.points.published.by_helpfulness.up_value.first } %>
+								<%= render :partial => "points/long_list", :locals => {:id => "pro_top", :point=>best_up_point=@priority.points.published.by_helpfulness.up_value.first } %>
 							</div>
-			<div class="sub_header">
-							<%=tr("Newest points for endorse", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
-							
-						</div>
-						<div id="pro_new">
-							<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "pro_new", :point => @priority.points.published.by_recently_created.up_value.first} %>
-						</div>
-
-
-</div>
-
-<div class="oppose-wrap">
-<div class="add-oppose"><%=link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%></div>
+							<% unless best_up_point == @priority.points.published.by_recently_created.up_value.first %>
+								<div class="sub_header">
+					 			<%=tr("Newest points for endorse", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
+								</div>
+								<div id="pro_new">
+									<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "pro_new", :point => @priority.points.published.by_recently_created.up_value.first} %>
+								</div>
+                            <% end %>
+		 	                </div>
+							<div class="oppose-wrap">
+							<div class="add-oppose">
+ 						   <%=link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%></div>
 							<div class="sub_header">
 								<%=tr("Best points for oppose", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
 								
 							</div>
 							<div id="con_top">
-								<%= render :partial => "points/long_list", :locals => {:id => "con_top", :point => @priority.points.published.by_helpfulness.down_value.first
-					} %>
+								<%= render :partial => "points/long_list", :locals => {:id => "con_top", :point =>best_down_point=@priority.points.published.by_helpfulness.down_value.first} %>
 							</div>
-
-		<div class="sub_header">
-							<%=tr("Newest points for oppose", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
-							
-						</div>
-						<div id="con_new">
-							<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "con_new", :point => @priority.points.published.by_recently_created.down_value.first} %>
-						</div>
+						<% unless best_down_point == @priority.points.published.by_recently_created.down_value.first%>
+	 			            <div class="sub_header">
+								<%=tr("Newest points for oppose", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>	
+							</div>
+							<div id="con_new">
+								<%= render :partial => "points/long_list", :locals => {:newest_points=>true, :id => "con_new", :point => @priority.points.published.by_recently_created.down_value.first} %>
+							</div>
+                        <% end %>
 
 
 </div>

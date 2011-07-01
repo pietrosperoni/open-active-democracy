@@ -25,9 +25,11 @@ $(function(){
     <tr>
       <%= render :partial => "priorities/rank_week_month", :locals => {:priority => @priority } %>
 
-					<div class="priority_icon_single">
-						<%= image_tag("../images/new/1-framkvaemdir.png", :alt => "icon")%>
-					</div>
+	    <% if @priority.category and @priority.category.icon -%>
+			<div class="priority_icon_single">
+				<%= image_tag @priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+			</div>
+	    <% end %>
 
       <td valign="top" colspan="3">
 				<ul>
