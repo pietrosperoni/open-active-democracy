@@ -52,7 +52,7 @@ $(function(){
 				jQuery(".Chapter_name_2").css("top",-2);
 				jQuery(".Chapter_name_2").css("left",-2);
 				jQuery("#priority_category2 input").css("margin-bottom",5);
-				jQuery(".test").css("margin-left",60);
+				/*jQuery(".test").css("margin-left",60);*/
     }
 
 		var ie7com = document.documentMode && document.documentMode == 7;
@@ -104,7 +104,7 @@ $(function(){
 				jQuery(".Chapter_name_2").css("left",-2);
 				jQuery("#priority_category2").css("width",670);
 				jQuery("#priority_category2 input").css("margin-bottom",5);
-				jQuery(".test").css("margin-left",63);
+				/*jQuery(".test").css("margin-left",63);*/
     }
     
 				
