@@ -63,6 +63,10 @@ float: none;
 font-size:11px !important;
 }
 
+#content_text ul {
+margin-left: 15px;
+}
+
 .yes_and_no_points_link_hacky a {
 font-size:11px !important;
 }
@@ -725,7 +729,7 @@ float:right;
 margin-top:17px;
 }
 
-#scroll_in_portal ul {
+#scroll_in_portal ul ul {
 list-style: none;
 width: 35%;
 margin-bottom: 4px;
