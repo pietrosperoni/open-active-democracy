@@ -69,9 +69,15 @@ background-position: right center;
 
 }
 
-ul#menu_sub li:active {
-	margin: 0 7px 0 0 !important;
-}
+#nav ul#menu li .tab_header {
+    background-position: right center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    margin-right: -3px;
+    padding: 0 4px 0 0;
+} 
 
 ul#menu_sub li .tab_header {
     font-weight: normal;
@@ -100,7 +106,7 @@ ul#menu li .tab_header a {
     padding: 3px 10px 10px 10px;
     text-decoration: none;
 float:left;
-margin: 7px 8px 0 0px;
+margin: 7px 1px 0 0px;
 display:inline-block;
 
 }
@@ -123,8 +129,8 @@ ul#menu li .tab_header a, ul#menu li.hovering div.tab_body, ul#menu_sub li .tab_
 
 
 ul#menu li.tab0 .tab_header a {
-margin: 7px 8px 0 0px;
-padding: 3px 10px 10px 10px;
+  margin: 7px 0 0 5px;
+  padding: 3px 10px 10px;
 }
 
 #nav0 li.tab0 .tab_header a,#nav1 li.tab1 .tab_header a, #nav2 li.tab2 .tab_header a, #nav3 li.tab3 .tab_header a, #nav4 li.tab4 .tab_header a, #nav5 li.tab5 .tab_header a, #nav6 li.tab6 .tab_header a, #nav7 li.tab7 .tab_header a, #nav8 li.tab8 .tab_header a {
@@ -136,7 +142,7 @@ background-repeat: no-repeat;
 background-position: center bottom;
     text-decoration: none;
 float:left;
-margin: 7px 8px 0 0px;
+margin: 7px 10px 0 10px;
 display:inline-block;
 }
 
@@ -267,7 +273,7 @@ font-weight:bold !important;
 background-color:#eef2f4;
     text-decoration: none;
 float:left;
-margin: 7px 8px 0 0px;
+margin: 0px 7px 0 0!important;
 display:inline-block;
 }
 
