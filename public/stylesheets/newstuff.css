@@ -1185,9 +1185,9 @@ margin-top:7px;
 }
 
 .submit_button {
-	background-image: url("../images/new/bg_submit2.png");
+	background-image: url("../images/new/bg_submit.png");
 	background-repeat: repeat-x;
-	/*height: 30px;*/
+	font-weight: bold;
 	-moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1199,6 +1199,7 @@ margin-top:7px;
 	-moz-box-shadow: 0px 0px 2px #000;
 	-webkit-box-shadow: 0px 0px 2px #000;
 	padding: 2px 10px;
+	margin-top: 1px;
 }
 
 .category_icon {
