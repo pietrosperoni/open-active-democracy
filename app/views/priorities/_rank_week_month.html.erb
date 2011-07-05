@@ -21,7 +21,7 @@
 		<div class="position_new"><%= tr("new", "view/priorities/_rank_week_month") %></div>
 	</td>
 	<% elsif priority.position_7days_change == 0 and priority.position_30days_change == 0 %>
-	<td valign="top" align="center" colspan="1" width="10">
+	<td valign="top" align="center" colspan="1" width="30">
 		<div class="position_nochange" title="<%= tr("This priority hasn't moved up or down in the rankings at all this month.", "view/priorities/_rank_week_month") %>"><%= tr("UNCH", "view/priorities/_rank_week_month").upcase %></div>
 	</td>		
 	<% else %>

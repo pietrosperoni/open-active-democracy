@@ -510,6 +510,7 @@ padding-left: 5px;
 padding-top: 8px;
 position: relative;
 top: 0;
+text-transform: capitalize;
 }
 
 .priority_tags
