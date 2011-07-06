@@ -575,11 +575,11 @@ del {
 }
 .priority_listing, .portlet .priority_listing {
 	margin: 0 0 4px 0;
-	padding: 0 0 5px 15px;
+	padding-bottom: 5px;
 }
 .portlet .priority_listing {
 	margin: 0 0 4px 0 !important;
-	padding-bottom: 5px;
+	padding: 0 0 5px 15px;
 }
 .single .priority_listing {margin-left:20px;}
 .top_level_priority_listing {/*padding-top:7px;*/}
@@ -1493,6 +1493,6 @@ ul#priority_menu li.tab12 div.tab_body {
 	float: right;
 	margin-left: 10px;
 }
-img.warn {
 
-}
+.user_pic_network {padding: 10px 5px 4px 7px;}
+.user_text {padding: 7px 5px 4px 0px;}

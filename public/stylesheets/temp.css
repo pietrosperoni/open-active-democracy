@@ -741,3 +741,5 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .single3 .warning_inline {
     margin: 3px 115px 2px 0 !important;
 }
+.user_pic_box {padding: 8px 5px 4px 7px;}
+.people_text {padding: 5px 5px 4px 0px;}

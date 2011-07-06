@@ -1200,6 +1200,7 @@ margin-top:7px;
 	-webkit-box-shadow: 0px 0px 2px #000;
 	padding: 2px 10px;
 	margin-top: 1px;
+	width: auto !important;
 }
 
 .category_icon {
