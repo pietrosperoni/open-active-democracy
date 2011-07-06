@@ -6,6 +6,14 @@
 			<%= link_to_unless_current tg(h(priority.name)), priority.show_url, :class => "priority_name_link" %>
 
 		 	<%= render :partial=>"priorities/flagged", :locals=>{:priority=>priority} -%>
+
+<script type="text/javascript">
+$(function(){
+	$('#test2').replaceWith($('#priority_flag_<%= priority.id.to_s %>'));
+});
+</script>
+
+
 		</div>
 	</li>
 

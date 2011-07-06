@@ -356,12 +356,12 @@ div.buddy-icon {float:left}
 div.delete-comment {clear:both;text-align: right;}
 
 .comment_link_add {
-    background: url("/images/new/backgrounds-sprite.png") repeat-x scroll 0 -480px #FFFFFF;
+    /*background: url("/images/new/backgrounds-sprite.png") repeat-x scroll 0 -480px #FFFFFF;*/
     border: 1px solid #C1C1C1;
-    border-radius: 4px 4px 4px 4px;
-		behavior:url(../javascripts/PIE.htc);
+    /*border-radius: 4px 4px 4px 4px;
+		behavior:url(../javascripts/PIE.htc);*/
 		position: relative;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16) inset;
+    /*box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16) inset;*/
     width: auto;padding:0;margin:0 0 10px 0;
 		/*margin: 35px 0 10px 20px;*/
 		margin: 10px 0 0 50px;
@@ -369,10 +369,10 @@ div.delete-comment {clear:both;text-align: right;}
 .comment_link_add textarea {border:none;background:none;margin:5px;}
 
 .new_comment_facebook {
-    background: url("/images/new/backgrounds-sprite.png") repeat-x scroll 0 -480px #FFFFFF;
+    /*background: url("/images/new/backgrounds-sprite.png") repeat-x scroll 0 -480px #FFFFFF;
     border-radius: 0 0 4px 4px;
     border-top: 1px dotted #D6D6D6;
-    box-shadow: 0 1px 0 #FFFFFF inset, 0 -1px 3px rgba(0, 0, 0, 0.04) inset;
+    box-shadow: 0 1px 0 #FFFFFF inset, 0 -1px 3px rgba(0, 0, 0, 0.04) inset;*/
     font-size: 12px;
     line-height: 15px;
     position: relative;
@@ -695,7 +695,10 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
     position: absolute;
 }
 
+<<<<<<< HEAD
 .warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline {
+=======
+.warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline, .warning_inline2, .warning_inline_point {
 	  background-color: #003399;
     float: right;
 		color: #FFF;
@@ -706,19 +709,40 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
     border-radius: 4px;
 		behavior:url(../javascripts/PIE.htc);
 		position: relative;
-    width: 200px;
+    min-width: 200px;
+		max-width: 370px;
 		text-align: center;
 		left: 0px;
+		font-size: 1em;
+}
+
+.warning_inline2 {
+		margin: 0  0 0 28px !important;
+		float: none !important;
+		left: none !important;
+}
+
+.warning_inline_point {
+    float: left;
+    margin: 5px 0 -4px !important;
+    width: 292px !important;
 }
 
 .single .warning_inline {
     margin: 72px 397px 2px 0 !important;
+		min-width: 200px;
 }
 
 .single2 .warning_inline {
     margin: 25px 347px 2px 0 !important;
 }
-
+.single2 .warning_inline2 {
+    font-size: 0.8em;
+		max-width: 400px !important;
+		margin: 5px 0 5px 0px !important;
+}
 .single3 .warning_inline {
     margin: 3px 115px 2px 0 !important;
 }
+.user_pic_box {padding: 8px 5px 4px 7px;}
+.people_text {padding: 5px 5px 4px 0px;}

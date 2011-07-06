@@ -56,11 +56,14 @@ font-style:normal !important;
 color: #999;
 line-height: 150%;
 float: none;
-margin: 0 5px 0 0 !important;
 }
 
 #content_text {
 font-size:11px !important;
+}
+
+#content_text ul {
+margin-left: 15px;
 }
 
 .yes_and_no_points_link_hacky a {
@@ -418,9 +421,11 @@ display: none !important;
 
 .red
 {
-color:#BC0000;
-font-size: 18px;
-top: 5px !Important; 
+    color: #BC0000;
+    font-size: 1.1em;
+    font-weight: bolder;
+    margin-right: 3px;
+/*top: 5px !Important;*/ 
 position: relative;
 }
 
@@ -508,6 +513,7 @@ padding-left: 5px;
 padding-top: 8px;
 position: relative;
 top: 0;
+text-transform: capitalize;
 }
 
 .priority_tags
@@ -723,7 +729,7 @@ float:right;
 margin-top:17px;
 }
 
-#scroll_in_portal ul {
+#scroll_in_portal ul ul {
 list-style: none;
 width: 35%;
 margin-bottom: 4px;
