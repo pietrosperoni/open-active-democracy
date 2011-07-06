@@ -8,20 +8,19 @@
                     <%= f.text_area :content, :size => "60x1", :class=>"comment_content_display_value comment_content_autoresize_#{activity.id.to_s}", :id => "comment_content_#{activity.id.to_s}" %>
 
 
+</div>
 <div class="new_comment_facebook">
-
-	<div class="senda">
+		<div class="senda">
 				  <span id="submit_span_<%=activity.id%>">
-                    <%= f.submit tr("Send comment", "view/comments/_new_inline"), :disable_with => escape_t(tr("Sending","Ajax")) %>
+                    <%= f.submit tr("Send comment", "view/comments/_new_inline"), :disable_with => escape_t(tr("Sending","Ajax")), :class => "submit_button" %>
 				  </span>
 				  <span id = "loading_span_<%=activity.id%>" style = "display: none;">
 				    <%= image_tag("submit-loader.gif")%>
 				  </span>
-	</div>		
+	</div>	
 </div>
-	
         <% end %>
-</div>
+
 
 <!-- <div id="comment_error_<%= activity.id.to_s %>" class="comment_error"></div> -->
 <script type="text/javascript">

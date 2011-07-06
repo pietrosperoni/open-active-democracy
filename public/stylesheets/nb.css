@@ -573,9 +573,13 @@ del {
 .related_priority {
 	margin-bottom: 12px;
 }
-.priority_listing {
+.priority_listing, .portlet .priority_listing {
 	margin: 0 0 4px 0;
 	padding-bottom: 5px;
+}
+.portlet .priority_listing {
+	margin: 0 0 4px 0 !important;
+	padding: 0 0 5px 15px;
 }
 .single .priority_listing {margin-left:20px;}
 .top_level_priority_listing {/*padding-top:7px;*/}
@@ -807,29 +811,31 @@ del {
 	padding-top:3px;
 }
 .position_down {
-	background-image: url("/images/red_down.gif");
-	background-repeat: no-repeat;
-	background-position: bottom center;	
-	width: 15px;
-	padding-bottom: 6px;	
-	font-size: 0.8em;
-	color: #000033;
-	text-align: center;		
-	position: relative;
-	top: 13px;	
-	margin-right: -20px;
+    background-image: url("/images/red_down.gif");
+    background-position: 17px 5px;
+    background-repeat: no-repeat;
+    color: #000033;
+    font-size: 0.8em;
+    margin: 7px 0 0;
+    padding-bottom: 6px;
+    padding-right: 8px;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width: 20px;
 }
 .position_up {
-	background-image: url("/images/green_up.gif");
-	background-repeat: no-repeat;
-	background-position: top center;
-	width: 15px;
-	padding-top: 7px;
-	font-size: 0.8em;
-	color: #000033;	
-	text-align: center;	
-	position: relative;
-	top: 7px;
+    background-image: url("/images/green_up.gif");
+    background-position: right center;
+    background-repeat: no-repeat;
+    color: #000033;
+    font-size: 0.8em;
+    margin: 7px 0 0;
+    padding-right: 8px;
+    position: relative;
+    text-align: center;
+    top: 0;
+    width: 15px;
 }
 .position_nochange {
 	font-size: 0.8em;
@@ -879,7 +885,7 @@ del {
 .bulletin_form textarea {
 	font-family: Arial;
 	font-size: 1em;
-	height: 30px;
+	height: 50px;
 }
 #short_url {
 	width:85px;
@@ -1487,6 +1493,6 @@ ul#priority_menu li.tab12 div.tab_body {
 	float: right;
 	margin-left: 10px;
 }
-img.warn {
 
-}
+.user_pic_network {padding: 10px 5px 4px 7px;}
+.user_text {padding: 7px 5px 4px 0px;}

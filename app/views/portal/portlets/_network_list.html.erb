@@ -3,8 +3,8 @@
 	<tr>
 		<td></td>
 		<td><span class="table_header"><%= tr("Rank", "view/portal/portlets") %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/portal/portlets") %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/portal/portlets") %></span></td>
+		<td class="left_scale"><span class="table_header"><%= tr("Wk", "view/portal/portlets") %></span></td>
+		<td class="left_scale"><span class="table_header"><%= tr("Mo", "view/portal/portlets") %></span></td>
 	</tr>
 <% if current_government.users_count < 100 %>
   <% users = User.active.at_least_one_endorsement.by_capital.item_limit(portlet.portlet_template.item_limit) %>
@@ -14,9 +14,9 @@
 <% for user in users %>
 	<tr><td valign="top"></td>
  		<%= render :partial => "priorities/rank_week_month", :locals => {:priority => user } %>
-		<td valign="top" width="26" style="padding: 10px 5px 4px 7px;">
+		<td valign="top" width="26" class="user_pic_network ">
 			<%= render :partial => "users/pic", :locals => {:user => user}%>
-		</td><td style="padding: 7px 5px 4px 0px;" valign="top">
+		</td><td class="user_text" valign="top">
 			<%= link_to user.login, user %><span class="pc"><%= user.capitals_count%><%= current_government.currency_short_name %></span><% if user.followers_count > 0 %> <%= tr("{count} followers", "view/portal/portlets", :count => user.followers_count)%><% end %>
 			<% if user.has_top_priority? and user.top_endorsement.priority %>
 				<br/><%= tr("#1 priority:", "view/portal/portlets") %>
