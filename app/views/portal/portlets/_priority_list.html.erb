@@ -1,5 +1,5 @@
 <% if portlet_locals[:priorities].any? %>
-	<table border="0" cellspacing="0" cellpadding="0">
+	<table border="0" cellspacing="0" cellpadding="0" class="portlet">
 		<tr>
 			<td align="center" style="padding-right: 1px;"><span class="table_header" title="Staða hugmynds"><%#= tr("Rank", "view/portal/portlets") %></span></td>
 			<td style="padding-left: 1px;"><span class="table_header" title="Breyting síðan í síðustu viku"><%#= tr("Wk", "view/portal/portlets") %></span></td>
@@ -15,9 +15,9 @@
 			<td>
 			<table border="0">
 			<tr>
-				<td width="20">
+				
 			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-				</td>
+				
 			</tr>
 			<tr>
 				<td colspan="3" align="center" width="20">
@@ -30,7 +30,7 @@
 			</tr>
 			</table>
 			</td>		
-			<td valign="top" style="padding-left: 15px;" colspan="4">
+			<td valign="top" colspan="4">
 			<div id="priority_<%= priority.id %>" class="priority_listing">
 				<%= render :partial => "portal/portlets/priorities_listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
 			</div>

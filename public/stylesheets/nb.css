@@ -573,8 +573,12 @@ del {
 .related_priority {
 	margin-bottom: 12px;
 }
-.priority_listing {
+.priority_listing, .portlet .priority_listing {
 	margin: 0 0 4px 0;
+	padding: 0 0 5px 15px;
+}
+.portlet .priority_listing {
+	margin: 0 0 4px 0 !important;
 	padding-bottom: 5px;
 }
 .single .priority_listing {margin-left:20px;}
@@ -812,7 +816,7 @@ del {
     background-repeat: no-repeat;
     color: #000033;
     font-size: 0.8em;
-    margin-right: 0;
+    margin: 7px 0 0;
     padding-bottom: 6px;
     padding-right: 8px;
     position: relative;
@@ -826,7 +830,7 @@ del {
     background-repeat: no-repeat;
     color: #000033;
     font-size: 0.8em;
-    margin-right: 0;
+    margin: 7px 0 0;
     padding-right: 8px;
     position: relative;
     text-align: center;

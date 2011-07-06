@@ -25,7 +25,7 @@
 		<div class="position_nochange" title="<%= tr("This priority hasn't moved up or down in the rankings at all this month.", "view/priorities/_rank_week_month") %>"><%= tr("UNCH", "view/priorities/_rank_week_month").upcase %></div>
 	</td>		
 	<% else %>
-	<td valign="top" width="30" colspan="0" style="padding-left: 0px; padding-top: 7px;">
+	<td valign="top" width="30" colspan="0">
 		<% if priority.position_7days_change > 0 %>
 			<div class="position_up" title="<%= tr("This priority moved up {count} spots in the rankings this week", "view/priorities/_rank_week_month", :count => priority.position_7days_change.abs) %>"><%= priority.position_7days_change.abs %></div>
 		<% elsif priority.position_7days_change < 0 %>
