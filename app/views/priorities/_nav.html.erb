@@ -114,22 +114,15 @@
 				<% elsif false %>
 					<%= link_to tr("Propose an acquisition", "view/priorities/_nav"), new_priority_change_url(@priority), :title => tr("Is there another priority this one should merge with?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% end %>
-				<% if logged_in? and @priority.status != 'inactive' %>
+				<% if logged_in? %>
 					<% if (current_user.id == @priority.user_id and @priority.endorsements_count < 2) or current_user.is_admin? %>
-						<%= link_to tr("Edit this priority", "view/priorities/_nav"), edit_priority_url(@priority), :title => tr("Edit this priority", "view/priorities/_nav"), :class => "qtip_left" %>						
-						<br/>
-						<%= link_to tr("Delete this priority", "view/priorities/_nav"), @priority, :title => tr("Permanently delete this priority", "view/priorities/_nav"), :confirm => tr("Are you sure you want to permanently delete {priority_name}?", "view/priorities/_nav", :priority_name => @priority.name), :method => :delete %><br/>
+						<%= link_to tr("Edit this priority", "view/priorities/_nav"), edit_priority_url(@priority), :title => tr("Edit this priority", "view/priorities/_nav"), :class => "qtip_left" %><br>
 					<% end %>
+					<% if @priority.status != 'inactive' %>
 					<%= link_to tr("Flag for review", "view/priorities/_nav"), flag_inappropriate_priority_url(@priority), :title => tr("Should the site administrator take a look at this priority? Also post a bulletin if it's not obvious what the problem is.", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to flag this priority to be reviewed by the site administrator. If it's not clear why you are flagging it, please post a bulletin so they can take appropriate action.", "view/priorities/_nav"), :method => :put %><br/>
+				    <% end %>
 				<% end %>
 				<p>
-				<% if logged_in? and current_user.is_admin? %>
-					<%= link_to tr("Remove from rankings", "view/priorities/_nav"), bury_priority_url(@priority), :title => tr("Remove this priority from the rankings", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to de-list this priority from the rankings: {priority_name}. Only do this for things that are insincere, obscene or ridiculous", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>
-					<br/><%= link_to tr("Mark this successful", "view/priorities/_nav"), successful_priority_url(@priority), :title => tr("Mark this priority finished and successful", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority finished and successful: {priority_name}. Please be patient, it may take a minute or two to process if this priority has a lot of endorsements", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>		
-					<br/><%= link_to tr("Mark this compromised", "view/priorities/_nav"), compromised_priority_url(@priority), :title => tr("Mark this priority finished, but compromised", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority finished, but compromised: {priority_name}. Please be patient, it may take a minute or two to process if this priority has a lot of endorsements", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>		
-					<br/><%= link_to tr("Mark this failed", "view/priorities/_nav"), failed_priority_url(@priority), :title => tr("Mark this priority as finished and failed", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority finished and failed: {priority_name}. Please be patient, it may take a minute or two to process if this priority has a lot of endorsements", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>		
-					<br/><%= link_to tr("Mark this as in the works", "view/priorities/_nav"), intheworks_priority_url(@priority), :title => tr("Mark this priority as in the works", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority as in the works: {priority_name}.", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>	
-				<% end %>
 				</div>
 			</div>
 		</li>
