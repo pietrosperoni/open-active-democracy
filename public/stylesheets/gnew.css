@@ -67,6 +67,10 @@ font-size:11px !important;
 margin-left: 15px;
 }
 
+#content_text .priority_actions ul {
+margin-left: 0px;
+}
+
 .yes_and_no_points_link_hacky a {
 font-size:11px !important;
 }
