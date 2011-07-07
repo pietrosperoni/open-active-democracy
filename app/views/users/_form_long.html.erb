@@ -31,7 +31,7 @@
                </td>
             </tr>
           </table>
-          <div class="small" style="margin-bottom: 10px;">
+          <div class="small scale_bottom">
             <%= tr("(Not displayed on the site)", "view/users/_form_long")%>
           </div>
         </div>
@@ -84,7 +84,7 @@
           <div class="field_box">
             <%= f.text_field :login, :maxlength => 40, :size => 30 %>
           </div>
-          <div class="small" style="margin-bottom:10px;">
+          <div class="small scale_bottom">
             <%= tr("(Can be your name, or a pseudonym)", "view/users/_form_long")%>
           </div>
         </div>
@@ -117,15 +117,15 @@
               
               <% if @priority %>
                 <% if @value == 1 %>
-                <%= submit_tag tr("Endorse and signup", "view/users/_form_long"), :class => "yellow_button" %>
+                <%= submit_tag tr("Endorse and signup", "view/users/_form_long"), :class => "submit_button" %>
                 <% elsif @value == -1 %>
-                <%= submit_tag tr("Oppose and signup", "view/users/_form_long"), :class => "yellow_button" %>
+                <%= submit_tag tr("Oppose and signup", "view/users/_form_long"), :class => "submit_button" %>
                 <% else %>
-                <%= submit_tag tr("Signup", "view/users/_form_long"), :class => "yellow_button" %>
+                <%= submit_tag tr("Signup", "view/users/_form_long"), :class => "submit_button" %>
                 <% end %>
               <% else %>
 							<div style="float:right; margin:20px 30px 0 0;">
-              					<%= submit_tag tr("Signup", "view/users/_form_long"), :class => "yellow_button" %>
+              					<%= submit_tag tr("Signup", "view/users/_form_long"), :class => "submit_button" %>
 							</div>
               <% end %>
             </td>
