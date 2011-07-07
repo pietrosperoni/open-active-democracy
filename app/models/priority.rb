@@ -308,24 +308,55 @@ class Priority < ActiveRecord::Base
     end
   end
   
+  def change_status!(change_status)
+    if change_status == 0
+      reactivate!
+    elsif change_status == 2
+      successful!
+    elsif change_status == -2
+      failed!
+    elsif change_status == -1
+      in_the_works!
+    end
+  end
+
+  def reactivate!
+    self.status_changed_at = Time.now
+    self.official_status = 0
+    self.status = 'published'
+#    self.change = nil
+    self.save(:validate => false)
+#    deactivate_endorsements  
+  end
+  
   def failed!
-    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
+#    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
     self.official_status = -2
     self.status = 'inactive'
-    self.change = nil
+#    self.change = nil
     self.save(:validate => false)
-    deactivate_endorsements  
+#    deactivate_endorsements  
   end
   
   def successful!
-    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
+#    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
     self.official_status = 2
     self.status = 'inactive'
-    self.change = nil    
+#    self.change = nil    
     self.save(:validate => false)
-    deactivate_endorsements
+#    deactivate_endorsements
+  end  
+
+  def in_the_works!
+#    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
+    self.status_changed_at = Time.now
+    self.official_status = -1
+    self.status = 'inactive'
+#    self.change = nil    
+    self.save(:validate => false)
+#    deactivate_endorsements
   end  
   
   def compromised!
@@ -333,11 +364,11 @@ class Priority < ActiveRecord::Base
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
-    self.change = nil    
+ #   self.change = nil    
     self.save(:validate => false)
-    deactivate_endorsements
+ #   deactivate_endorsements
   end  
-  
+
   def deactivate_endorsements
     for e in endorsements.active
       e.finish!

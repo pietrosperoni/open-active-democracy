@@ -839,8 +839,12 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @previous_name = @priority.name
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
-    if params[:priority] and params[:priority][:category]
-      params[:priority][:category] = Category.find(params[:priority][:category])
+    if params[:priority] 
+      params[:priority][:category] = Category.find(params[:priority][:category]) if params[:priority][:category]
+      if params[:priority][:official_status] and params[:priority][:official_status].to_i != @priority.official_status
+        @change_status = params[:priority][:official_status].to_i
+        #params[:priority].delete(:official_status)
+      end
     end
     respond_to do |format|
       if params[:commit]=="Vista hugmynd"
@@ -875,6 +879,8 @@ class PrioritiesController < ApplicationController
             end
           }
         end
+        @priority.reload
+        @priority.change_status!(@change_status) if @change_status
       else
         Rails.logger.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
         redirect_to(@priority)
