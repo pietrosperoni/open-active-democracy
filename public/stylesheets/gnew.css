@@ -71,6 +71,10 @@ margin-left: 15px;
 margin-left: 0px;
 }
 
+#content_text  .top_level_priority_listing ul {
+margin-left: 0px;
+}
+
 .yes_and_no_points_link_hacky a {
 font-size:11px !important;
 }
