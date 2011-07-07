@@ -101,6 +101,7 @@
 				<%= link_to tr("Action", "view/priorities/_nav"), new_priority_point_path(@priority) %>
 			</span>
 			<div class="tab_body">
+			<div class="box_style">
 				<%= link_to tr("Add a point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
@@ -129,7 +130,7 @@
 					<br/><%= link_to tr("Mark this failed", "view/priorities/_nav"), failed_priority_url(@priority), :title => tr("Mark this priority as finished and failed", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority finished and failed: {priority_name}. Please be patient, it may take a minute or two to process if this priority has a lot of endorsements", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>		
 					<br/><%= link_to tr("Mark this as in the works", "view/priorities/_nav"), intheworks_priority_url(@priority), :title => tr("Mark this priority as in the works", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to mark this priority as in the works: {priority_name}.", "view/priorities/_nav", :priority_name => @priority.name), :method => :put %>	
 				<% end %>
-				
+				</div>
 			</div>
 		</li>
 
