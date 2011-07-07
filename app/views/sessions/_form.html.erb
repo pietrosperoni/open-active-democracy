@@ -4,7 +4,7 @@
 		<div class="field_label">
 			<%= tr("Email address", "view/sessions/_form")%>
 		</div>
-		<div class="field_box" style="margin-bottom: 10px;">
+		<div class="field_box scale_bottom">
 			<%= text_field_tag :email %>
 		</div>
 	</div>
@@ -13,9 +13,9 @@
 		<div class="field_label">
 			<%= tr("Password", "view/sessions/_form")%>
 		</div>
-		<div class="field_box" style="margin-bottom: 10px;">
+		<div class="field_box scale_bottom">
 			<%= password_field_tag :password %>
 		</div>
 	</div>	
-	<%= submit_tag tr("Sign in", "view/sessions/_form"), :class => "yellow_button" %>
+	<%= submit_tag tr("Sign in", "view/sessions/_form"), :class => "submit_button" %>
 <% end -%>

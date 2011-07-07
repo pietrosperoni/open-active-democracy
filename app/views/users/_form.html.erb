@@ -111,14 +111,14 @@
   
 	<% if @priority %>
 		<% if @value == 1 %>
-			<%= submit_tag tr("Endorse and signup", "view/users/_form"), :class => "yellow_button" %>			
+			<%= submit_tag tr("Endorse and signup", "view/users/_form"), :class => "submit_button" %>			
 		<% elsif @value == -1 %>					
-			<%= submit_tag tr("Oppose and signup", "view/users/_form"), :class => "yellow_button" %>
+			<%= submit_tag tr("Oppose and signup", "view/users/_form"), :class => "submit_button" %>
 		<% else %>
-			<%= submit_tag tr("Signup", "view/users/_form"), :class => "yellow_button" %>				
+			<%= submit_tag tr("Signup", "view/users/_form"), :class => "submit_button" %>				
 		<% end %>
 	<% else %>
-		<%= submit_tag tr("Signup", "view/users/_form"), :class => "yellow_button" %>
+		<%= submit_tag tr("Signup", "view/users/_form"), :class => "submit_button" %>
 	<% end %>
 
 	<% end -%>

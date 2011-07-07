@@ -298,7 +298,18 @@ ul#menu li.mega .tab_header a:hover, ul#menu li.mega.hovering .tab_header a, ul#
 ul#priority_menu div.tab_body {
     left: 0;
     position: absolute;
-    top: 15px;
+    padding: 0 !important;
+		border: none !important;
+}
+
+.box_style {
+	position:relative;
+	behavior:url(../javascripts/PIE.htc);
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	border: solid 1px #CCC;
+	padding: 10px;
 }
 
 ul#priority_menu li#endorser_link a {
@@ -554,7 +565,7 @@ div.userwrap2 {
     border: 0px solid #DDDDDD;
     margin-bottom: 0px;
     margin-top: -15px;
-    padding: 10px;
+    padding: 10px 0 10px 15px;
     width: 205px; line-height: 1.4em;
 }
 
@@ -677,6 +688,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .line_bellow {
 	border-bottom: solid 1px #CCC;
 }
+.scale_bottom {margin-bottom:10px;}
 
 #next_steps_box {
 	padding: 10px !important;
@@ -695,9 +707,6 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
     position: absolute;
 }
 
-<<<<<<< HEAD
-.warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline {
-=======
 .warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline, .warning_inline2, .warning_inline_point {
 	  background-color: #003399;
     float: right;

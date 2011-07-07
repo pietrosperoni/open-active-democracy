@@ -998,10 +998,10 @@ margin-right: 4px !Important;
 }
 */
 .icon {
-  z-index: 0;
-  position: relative;
-  top: 18px;
-  right: 16px;
+    left: 0;
+    margin: 19px 0 0 19px;
+    position: absolute;
+    z-index: 0;
 }
 
 .notification_icon {
@@ -1111,7 +1111,7 @@ margin-top:7px;
 .bellow_translate {
 	margin: 25px 0 8px -15px;
 	border-bottom: solid 1px #CCC;
-	width: 200px;
+	width: 190px;
 }
 
 #intro p {font-size: 0.8em;}
@@ -1214,4 +1214,12 @@ margin-top:7px;
 
 .yourpri_logo {
 	text-align: center;
+}
+
+.portlet-content .comment_link_add {
+    border: 1px solid #C1C1C1;
+    margin: 0 0 0 15px;
+    padding: 0;
+    position: relative;
+    width: auto;
 }

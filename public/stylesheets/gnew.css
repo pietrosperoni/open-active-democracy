@@ -56,6 +56,7 @@ font-style:normal !important;
 color: #999;
 line-height: 150%;
 float: none;
+/*margin: 0 5px 0 0 !important;*/
 }
 
 #content_text {
@@ -64,6 +65,14 @@ font-size:11px !important;
 
 #content_text ul {
 margin-left: 15px;
+}
+
+#content_text .priority_actions ul {
+margin-left: 0px;
+}
+
+#content_text  .top_level_priority_listing ul {
+margin-left: 0px;
 }
 
 .yes_and_no_points_link_hacky a {
