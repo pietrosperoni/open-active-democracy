@@ -1,9 +1,9 @@
 <table border="0" cellspacing="0" cellpadding="0" width="150">
 	<tr>
-		<td align="center" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/priorities/_rank_yday_week_month") %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Yday", "view/priorities/_rank_yday_week_month") %></span></td>		
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Week", "view/priorities/_rank_yday_week_month") %></span></td>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Month", "view/priorities/_rank_yday_week_month") %></span></td>
+		<td align="center" class="right_scale"><span class="table_header"><%= tr("Rank", "view/priorities/_rank_yday_week_month") %></span></td>
+		<td class="left_scale"><span class="table_header"><%= tr("Yday", "view/priorities/_rank_yday_week_month") %></span></td>		
+		<td class="left_scale"><span class="table_header"><%= tr("Week", "view/priorities/_rank_yday_week_month") %></span></td>
+		<td class="left_scale"><span class="table_header"><%= tr("Month", "view/priorities/_rank_yday_week_month") %></span></td>
 	</tr>
 	<tr>
 		<% if priority.status == 'buried' %>
@@ -44,14 +44,14 @@
 					<div class="position_down" title="<%= tr("This priority moved down {count} spots in the rankings in the last 24 hours", "view/priorities/_rank_yday_week_month", :count => priority.position_24hr_change.abs) %>"><%= priority.position_24hr_change.abs %></div>
 				<% end %>
 			</td>			
-			<td valign="top" align="center" style="padding-left: 2px;">
+			<td valign="top" align="center" class="left_scale">
 				<% if priority.position_7days_change > 0 %>
 					<div class="position_up" title="<%= tr("This priority moved up {count} spots in the rankings this week", "view/priorities/_rank_yday_week_month", :count => priority.position_7days_change.abs) %>"><%= priority.position_7days_change.abs %></div>
 				<% elsif priority.position_7days_change < 0 %>
 					<div class="position_down" title="<%= tr("This priority moved down {count} spots in the rankings this week", "view/priorities/_rank_yday_week_month", :count => priority.position_7days_change.abs) %>"><%= priority.position_7days_change.abs %></div>
 				<% end %>
 			</td>
-			<td valign="top" align="center" style="padding-left: 3px;">
+			<td valign="top" align="center" class="left_scale">
 				<% if priority.position_30days_change > 0 %>
 					<div class="position_up" title="<%= tr("This priority moved up {count} spots in the rankings this month", "view/priorities/_rank_yday_week_month", :count => priority.position_30days_change.abs) %>"><%= priority.position_30days_change.abs %></div>
 				<% elsif priority.position_30days_change < 0 %>

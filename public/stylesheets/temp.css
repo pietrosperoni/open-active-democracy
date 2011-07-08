@@ -684,7 +684,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .right_scale {
 	padding-right: 5px;
 }
-
+.top_scale {padding-top: 3px;}
 .line_bellow {
 	border-bottom: solid 1px #CCC;
 }
@@ -755,3 +755,8 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 .user_pic_box {padding: 8px 5px 4px 7px;}
 .people_text {padding: 5px 5px 4px 0px;}
+
+.ads_text {
+	font-size: 0.8em; 
+	line-height:1.5em;
+}
