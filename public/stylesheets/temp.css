@@ -682,6 +682,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .tag_scale {margin-left:5px;}
 .right_scale {padding-right: 5px;}
 .top_scale {padding-top: 3px;}
+.top_scale10 {padding-top:10px;}
 .line_bellow {border-bottom: solid 1px #CCC;}
 .scale_bottom {margin-bottom:10px;}
 
@@ -764,3 +765,4 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .bg_yes_votes {background-color: #ffcc00;}
 .bg_no_votes {background-color: #ffff99;}
 .form_error_td {padding-left: 10px; padding-top: 3px;}
+.user_name_chart {padding: 7px 5px 4px 0px;}
