@@ -1480,7 +1480,10 @@ ul#priority_menu li.tab12 div.tab_body {
 	margin-left: -12px;
 	width: 320px;
 }
-.single .user_pic_and_activity {width:auto;}
+.single .user_pic_and_activity {
+	width:auto;
+	margin-left: -7px;
+}
 
 .category {
 	/*margin-left: -20px;*/

@@ -6,10 +6,10 @@ $(function(){
 </script>
 <div style="width:auto;">
 <ul>
-	<li style="float:left; list-style:none; border-bottom:none;">
-		<div style="border-bottom:none;" id="hp_intro"><%= @page_title %></div>
+	<li class="list_left">
+		<div id="hp_intro"><%= @page_title %></div>
 	</li>
-	<li style="float:right; list-style:none">
+	<li class="list_right">
 		<div class="rss3_move"></div>
 	</li>
 <ul>
@@ -22,7 +22,7 @@ $(function(){
 	<tr>
 		<td></td>
 		<td align="right"><span class="table_header"><%= tr("Added", "view/priorities/newest")%></span></td>
-		<td style="padding-left: 7px; margin-bottom: 2px;"><%= will_paginate @priorities %></td>	
+			<!--<%= will_paginate @priorities %>-->
 		<td align="right"><%= rss_url(@rss_url) %></td>						
 	</tr>
 <% for priority in @priorities %>
@@ -35,7 +35,7 @@ $(function(){
 			<nobr><%= time_ago(priority.created_at) %></nobr>
 			</div>
 		</td>
-		<td valign="top" style="padding-left: 8px;" colspan="2">
+		<td valign="top" class="left_scale8" colspan="2">
 		<div id="priority_<%= priority.id %>" class="priority_listing">
 			<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
 		</div>
