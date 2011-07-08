@@ -17,11 +17,11 @@
 				</div>
 			</td>		
 		<% else %>
-			<td valign="top" align="right" width="30" style="padding-right: 5px;">
+			<td valign="top" align="right" width="30" class="right_scale">
 				<div class="priority_position" title="<%= tr("This is the {position} highest ranked priority across all {government_name} members.", "view/priorities/_rank_yday_week_month", :position => priority.position, :government_name => tr(current_government.name,"Name from database")) %>">
 					<% if priority.position != 0 %>
 						<% if priority.position > 999 %>
-							<span style="font-size: 0.8em;"><%= priority.position %></span>
+							<span class="size08"><%= priority.position %></span>
 						<% else %>
 							<%= priority.position %>
 						<% end %>
@@ -37,7 +37,7 @@
 				<div class="position_nochange" title="<%= tr("This priority hasn't moved up or down in the rankings at all this month.", "view/priorities/_rank_yday_week_month") %>"><%= tr("UNCH", "view/priorities/_rank_yday_week_month").upcase %></div>
 			</td>		
 			<% else %>
-			<td valign="top" align="center" style="padding-left: 2px;">
+			<td valign="top" align="center" class="left_scale">
 				<% if priority.position_24hr_change > 0 %>
 					<div class="position_up" title="<%= tr("This priority moved up {count} spots in the rankings in the last 24 hours", "view/priorities/_rank_yday_week_month", :count => priority.position_24hr_change.abs) %>"><%= priority.position_24hr_change.abs %></div>
 				<% elsif priority.position_24hr_change < 0 %>

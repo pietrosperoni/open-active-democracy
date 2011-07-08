@@ -760,3 +760,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 	font-size: 0.8em; 
 	line-height:1.5em;
 }
+.size08 {font-size: 0.8em;}
+.rules {margin: 20px 0 0 15px;}
+.rules h5 {margin-top: 10px;}
+.top_position {vertical-align:top;}
