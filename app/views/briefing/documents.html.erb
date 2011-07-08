@@ -7,10 +7,10 @@
 <%= tr("<p>As a bonus, if you add a document that others find helpful, you will earn<span class=\"pc\">1 sp/span>, which can be spent in a variety of ways, including buying <a href=\"/priorities/ads\">ads</a> for your priorities.  More details on how { government.currency_name | downcase}<span class=\"pc\">sp</span> works <a href=\"/about/faq#pc\">here</a>.</p>", "view/briefing/documents")%>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td align="right" style="padding-right: 5px;"><span class="table_header"><%= tr("Rank", "view/briefing/documents") %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/briefing/documents") %></span></td>
-			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/briefing/documents") %></span></td>
-			<td style="padding-left: 7px; padding-bottom: 2px;"><%= will_paginate @priorities %></td>	
+			<td align="right" class="right_scale"><span class="table_header"><%= tr("Rank", "view/briefing/documents") %></span></td>
+			<td class="left_scale"><span class="table_header"><%= tr("Wk", "view/briefing/documents") %></span></td>
+			<td class="left_scale"><span class="table_header"><%= tr("Mo", "view/briefing/documents") %></span></td>
+			<td class="pagination"><%= will_paginate @priorities %></td>	
 		</tr>
 	<% for priority in @priorities %>
 		<% if @endorsements %>
@@ -18,7 +18,7 @@
 		<% end %>
 		<tr>
 			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-			<td valign="top" style="padding-left: 8px;">
+			<td valign="top" class="left_scale8">
 			<div id="priority_<%= priority.id %>" class="priority_listing">
 				<div class="priority_name" id="priority_<%= priority.id %>_name">
 					<%= link_to_unless_current h(priority.name), new_priority_document_path(priority), :class => "priority_name_link" %>

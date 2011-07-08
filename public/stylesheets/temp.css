@@ -757,3 +757,6 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .bg_endorsed_ads {background-color: #009933;}
 .bg_opposed_ads {background-color: #bc0000;}
 .bg_response_ads {padding-top: 22px; padding-left: 10px;}
+.user_pic_contributors {padding: 10px 5px 4px 7px;}
+.td_pc {padding: 5px 5px 4px 0px;}
+.pagination {padding-left: 7px; padding-bottom: 2px;}
