@@ -39,7 +39,7 @@
       <%= tr("Finished Status", "view/users/_form_long")%>
     </div>
     <div class="field_box">
-       <%= f.select :status, options_for_select_simple([[tr("Published","status_messages"),"published"],[tr("In Progress","status_messages"),"in_progress"],[tr("Successful","status_messages"),"successful"],[tr("Failed","status_messages"),"failed"]], @priority.status) %>
+       <%= f.select :official_status, options_for_select_simple([[tr("Published","status_messages"),"0"],[tr("In Progress","status_messages"),"-1"],[tr("Successful","status_messages"),"2"],[tr("Failed","status_messages"),"-2"]], @priority.official_status.to_s) %>
     </div>
   </div>
 

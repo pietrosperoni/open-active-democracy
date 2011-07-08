@@ -6,9 +6,9 @@
 	<tr><td valign="top">
 		<div class="priority_position"><%= @row %></div>
 		</td>
-		<td valign="top" width="26" style="padding: 10px 5px 4px 7px;">
+		<td valign="top" width="26" class="user_pic_contributors">
 			<%= render :partial => "users/pic", :locals => {:user => user}%>
-		</td><td style="padding: 5px 5px 4px 0px;" valign="top">
+		</td><td class="td_pc" valign="top">
 			<%= link_to user.login, user %><span class="pc"><%= user.capitals_count%><%= current_government.currency_short_name %></span>
 			<%= revisions_sentence(user) %>
 			<% if user.has_top_priority? %>

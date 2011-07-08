@@ -13,12 +13,12 @@
 
 .column_id_1 .portlet
 {
- margin:0 10px; padding:5px;  border-bottom: 1px solid #eee;
+ /*margin:0 10px;*/ padding:5px;  border-bottom: 1px solid #eee;
 }
 
 .column_id_2 .portlet
 {
- margin:0 10px; padding:5px;  border-bottom: 1px solid #eee;
+ /*margin:0 10px;*/ padding:5px;  border-bottom: 1px solid #eee;
 }
 
 .column_id_2 .portlet, .column_id_1 .portlet  

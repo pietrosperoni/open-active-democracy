@@ -54,8 +54,11 @@ $(function(){
 						</div>	
 					</li>
 				</ul>
-									<div class="clear"></div>
-					<div class="replace_notice"></div>
+				<div class="clear"></div>
+				<div class="replace_notice"></div>
+			    <% if @priority.status == "inactive" and [-1,-2,2].include?(@priority.official_status) %>
+					<%= @priority.finished_status_message %>
+				<% end %>
       </td>
     </tr>
 		<tr><td height="10"></td></tr>

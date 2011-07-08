@@ -5,7 +5,7 @@
 		<% else %>
 			<%= link_to_unless_current (image_tag Gchart.pie(:data => [change.yes_votes,change.no_votes], :custom => "chco=ffcc00,ffff99", :size => "100x100"), :title => tr("Vote results", "view/changes/_chart"), :size => "100x100", :border => 0), priority_change_url(change.priority,change) %>
 		<% end %>
-	</td><td valign="top" style="padding-top: 22px;">
+	</td><td valign="top" class="top_scale22">
 		<% if change.status == 'approved' %>
 			<span class="endorsed">
 			<%= link_to_unless_current tr("APPROVED", "view/changes/_chart"), priority_change_url(change.priority,change) %>
@@ -26,7 +26,7 @@
 			<% end %>
 		<% end %>
 		<br/>
-		<span style="background-color: #ffcc00;">&nbsp; &nbsp; </span> &nbsp;<%= tr("{count} yes votes", "view/changes/_chart", :count => change.yes_votes) %><br/>
-		<span style="background-color: #ffff99;">&nbsp; &nbsp; </span> &nbsp;<%= tr("{count} no votes", "view/changes/_chart", :count => change.no_votes) %>	
+		<span class="bg_yes_votes">&nbsp; &nbsp; </span> &nbsp;<%= tr("{count} yes votes", "view/changes/_chart", :count => change.yes_votes) %><br/>
+		<span class="bg_no_votes">&nbsp; &nbsp; </span> &nbsp;<%= tr("{count} no votes", "view/changes/_chart", :count => change.no_votes) %>	
 	</td></tr>
 </table>

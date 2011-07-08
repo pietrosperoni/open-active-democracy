@@ -1,11 +1,11 @@
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
-	<td valign="top" style="padding-top: 3px;">
+	<td valign="top" class="top_scale">
 		<%= render :partial => "users/pic", :locals => {:user => ad.user}%>
 		<div class="pc_under"><%= ad.user.capitals_count%><%= current_government.currency_short_name %></div>
 	</td>
 
-	<td valign="top" style="padding-left: 7px;">
+	<td valign="top" class="left_scale8">
 		<%= tr("{user_name} asks you to consider {priority_name}", "view/ads/_show", :user_name => link_to(ad.user.name, ad.user), :priority_name => link_to(ad.priority.name, ad.priority))%>
 		<% if ad.has_content? %>
 		<div class="notification_show_message">
@@ -40,7 +40,7 @@
 			
 			<% unless ad.new_record? %>
 
-			<span class="tag_button" id="notification_show_<%= ad.priority.id %>_skip" style="margin-left: 5px;">
+			<span class="tag_button tag_scale" id="notification_show_<%= ad.priority.id %>_skip">
 				<%= link_to tr("Skip", "view/ads/_show"), skip_priority_ad_path(ad.priority,ad), 
                     :method => :post,
                     :remote=>true,
