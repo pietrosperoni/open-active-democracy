@@ -678,6 +678,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .left_scale {padding-left: 3px;}
 .left_scale8 {padding-left: 8px;}
 .left_scale20 {padding-left:20px;}
+.left_scale10 {padding-left: 10px;}
 .tag_scale {margin-left:5px;}
 .right_scale {padding-right: 5px;}
 .top_scale {padding-top: 3px;}
@@ -760,3 +761,6 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .user_pic_contributors {padding: 10px 5px 4px 7px;}
 .td_pc {padding: 5px 5px 4px 0px;}
 .pagination {padding-left: 7px; padding-bottom: 2px;}
+.bg_yes_votes {background-color: #ffcc00;}
+.bg_no_votes {background-color: #ffff99;}
+.form_error_td {padding-left: 10px; padding-top: 3px;}
