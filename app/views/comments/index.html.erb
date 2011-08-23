@@ -33,7 +33,7 @@
 			
 		</td>	
 		
-		<td valign="top" width="180" style="padding-left: 30px;">
+		<td valign="top" width="180" class="left_scale30">
 			<% if @activity.comments_count > 0 %>
 				<%= render :partial => "activities/button", :locals => {:activity => @activity, :following => @following}%>
 				<p>
@@ -45,7 +45,7 @@
 				<table border="0" cellspacing="0" cellpadding="0">
 					<tr><td valign="top" width="48">
 						<%= render :partial => "users/pic_48", :locals => {:user => user[0]}%>
-					</td><td valign="top" style="padding-left: 8px;">
+					</td><td valign="top" class="left_scale8">
 						<% if user[0].status == 'suspended' or user[0].status == 'deleted' %><strike><% end %>
 						<%= link_to user[0].name, user[0] %><span class="pc"><%= tr("{capital}{currency_short_name}", "view/comments/index", :capital => user[0].capitals_count, :currency_short_name => current_government.currency_short_name) %></span>
 						<% if user[0].status == 'suspended' or user[0].status == 'deleted' %></strike><% end %>

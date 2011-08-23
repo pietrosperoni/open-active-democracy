@@ -5,9 +5,9 @@
 		<table class="changes-status">
 			<tr><td valign="top">
 				<%= button_to tr("Start the voting", "view/changes/_status"), start_priority_change_url(change.priority,change), :method => :put, :confirm => tr("This will send an email encouraging the affected people to vote.", "view/changes/_status"), :class => "grey_button" %>
-			</td><td valign="top" style="padding-left: 10px;">
+			</td><td valign="top" class="left_scale10">
 				<%= button_to tr("Approve without a vote", "view/changes/_status"), approve_priority_change_url(change.priority,change), :method => :put, :confirm => tr("This will approve the acquisition immediately without holding a vote.", "view/changes/_status"), :class => "grey_button" %>
-			</td><td valign="top" style="padding-left: 10px;">
+			</td><td valign="top" class="left_scale10">
 				<%= button_to tr("Don't hold a vote", "view/changes/_status"), stop_priority_change_url(change.priority,change), :method => :put, :confirm => tr("This will delete the proposal, refund the {currency_name}, and not hold a vote.", "view/changes/_status", :currency_name => current_government.currency_name), :class => "grey_button" %>
 			</td></tr>
 		</table>
