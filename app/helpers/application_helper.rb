@@ -206,6 +206,8 @@ module ApplicationHelper
   		out = '<span class="compromised">' + priority.official_status_name + '</span>'
   	elsif priority.is_intheworks?
   		out = '<span>' + priority.official_status_name + '</span>'
+        else
+          out = ""
   	end
   	out.html_safe
   end
