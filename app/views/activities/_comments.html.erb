@@ -7,7 +7,7 @@
 		<% @comments = activity.comments.published_and_abusive.by_first_created.find(:all, :include => :user) %>
     <% comments_without_abuse = @comments.reject {|x| x.status == 'abusive'} %>
     <%= render :partial => "comments/show", :locals => {:comment => comments_without_abuse.first} if comments_without_abuse.first %>
-		<% if comments_without_abuse.length > 10000000 %>
+		<% if comments_without_abuse.length > 10 %>
 			<div class="comment_more">
             <% if activity.priority and activity.priority.class==Priority%>
             <% Rails.logger.info activity.priority %>
