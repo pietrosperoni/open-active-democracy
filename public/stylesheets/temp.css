@@ -701,7 +701,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 
 .warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline, .warning_inline2, .warning_inline_point {
-	  background-color: #003399;
+	  background-color: #f99;
     float: right;
 		color: #FFF;
     margin: 25px 67px 2px 0;
