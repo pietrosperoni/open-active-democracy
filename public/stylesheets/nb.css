@@ -802,8 +802,9 @@ del {
 	text-align: center;
 }
 .portlet .priority_inactive {
-	  background: none repeat scroll 0 0 #E49E6E;
+/*	  background: none repeat scroll 0 0 #E49E6E;
     border: 1px solid #B92D19;
+*/	
 }
 .single2 .priority_inactive {
 	padding-top: 10px;
