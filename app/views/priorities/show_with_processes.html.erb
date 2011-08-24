@@ -15,7 +15,7 @@
 		
 		<td valign="top" class="add_note">
 			<p class="top_p">
-			<% if @priority.has_change? %>
+			<% if false and @priority.has_change? %>
 				<%= render :partial => "changes/show", :locals => {:change => @priority.change}%>
 				<p>
 				<%= render :partial => "changes/status", :locals => {:change => @priority.change}%>
