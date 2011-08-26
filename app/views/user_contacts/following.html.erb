@@ -22,7 +22,7 @@
 			<td><span class="table_header"><%= tr("Rank", "view/user_contacts/following") %></span></td>
 			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Wk", "view/user_contacts/following") %></span></td>
 			<td style="padding-left: 3px;"><span class="table_header"><%= tr("Mo", "view/user_contacts/following") %></span></td>
-			<td style="padding-left: 7px; margin-bottom: 2px;" colspan="2"><%= will_paginate @users %></td>				
+			<td style="padding-left: 7px; margin-bottom: 2px;" colspan="2"></td>
 		</tr>
 	<% for user in @users %>
 		<tr><td valign="top"></td>
@@ -43,6 +43,5 @@
 
 	</table>				
 	<p>
-	<%= will_paginate(@users) %>
 
 <% end %>

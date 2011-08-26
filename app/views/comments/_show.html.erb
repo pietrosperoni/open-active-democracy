@@ -11,10 +11,10 @@
         <table>
 	        <tr>
 		        <td width="20">
-					<div class="buddy-icon" style="float:left;"><%= render :partial => "users/pic_35", :locals => {:user => comment.user}%></div>
+					<div class="buddy-icon" class="list_left"><%= render :partial => "users/pic_35", :locals => {:user => comment.user}%></div>
 						</td>
 						<td>
-					<span class="entry_profile"  style="float:left;">
+					<span class="entry_profile"  class="list_left">
 					<%= h(comment.user.login) %>
 						 - <%= time_ago(comment.created_at) %> 
 				       <% if logged_in? and current_user.id != comment.user_id  %>

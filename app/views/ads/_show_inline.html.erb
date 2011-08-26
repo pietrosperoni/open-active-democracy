@@ -8,11 +8,11 @@
 	<% end %>
 
 	<table border="0" cellspacing="0" cellpadding="0">
-		<tr><td valign="top" style="padding-top: 3px;">
+		<tr><td valign="top" class="top_scale right_scale" width="200">
 			<%= render :partial => "ads/progress_bar", :locals => {:ad => ad}%>			
 		</td>
-		<td valign="top" style="padding-left: 5px;">
-		<span style="font-size: 0.8em; line-height:1.5em;">
+		<td valign="top" class="left_scale8">
+		<span class="ads_text">
 		<%= tr("Shown to {seen_count} of {total_count} members so far<br/>{user_name} spent <span class='pc'>{cost}{currency_short_name}</span> or <span class='pc'>{per_user_cost}{currency_short_name}</span> per member", "view/ads/_show_inline", :user_name => link_to(ad.user.name, ad.user), :cost => ad.cost, :seen_count => ad.shown_ads_count, :total_count => ad.show_ads_count, :currency_short_name => current_government.currency_short_name, :per_user_cost => ad.per_user_cost) %>
 		</span>
 		</td>

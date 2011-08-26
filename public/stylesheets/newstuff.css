@@ -1147,8 +1147,13 @@ margin-top:7px;
 }
 
 .comment_report {padding: 0 !important;float: right;}
-
-.priority_icon_portlet {margin: 5px 0 0 10px;}
+#activities .comment_report {
+	padding: 0 !important;
+	float: right;
+	position: absolute;
+	right: 20px;
+}
+.priority_icon_portlet {/*margin: 5px 0 0 10px;*/margin-top: 5px;}
 
 .border_miss_avatar {
 	border: solid 1px #f4f4f4;
