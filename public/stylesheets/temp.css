@@ -32,7 +32,7 @@ div.column .ui-widget-content {
 
 div.column .portlet-header {
   	color: #555;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     margin: 5px 0;
     text-transform: uppercase;
@@ -498,10 +498,10 @@ img.point_report {float:right;}
     bottom: 1px;
     /*font-size: 1em;*/
     font-weight: bold;
-    padding: 0 3px 1px;
+    padding: 1px 3px 0px;
     position: relative;
     text-transform: uppercase;
-	border: 1px solid #439A22;
+	border: 1px solid #f66;
 }
 
 .grey_button_wide, .import_button, .notice {
