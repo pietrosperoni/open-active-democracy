@@ -351,7 +351,7 @@ div.buddy-icon {float:left}
     font-size:inherit;
     letter-spacing:inherit;
     padding-left: 20px;
-		background: url("../images/new/comment-icon4.png") no-repeat left;
+    background: url("../images/new/comment-icon4.png") no-repeat left;
 }
 .comment_link_add {
     background: none;
