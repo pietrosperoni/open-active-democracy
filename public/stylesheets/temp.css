@@ -32,7 +32,7 @@ div.column .ui-widget-content {
 
 div.column .portlet-header {
   	color: #555;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     margin: 5px 0;
     text-transform: uppercase;
@@ -442,7 +442,7 @@ span.priority_add_follow a, span.priority_add_ignore a {
     text-decoration: none;
 }
 
-span.priority_add_ignore a, .priority_remove2 {background:#555 !important; border:1px solid #000 !important;width: auto; color: #aaa !important;}
+span.priority_add_ignore a, .priority_remove2 {background:#fff !important; border:1px solid #ccc !important;width: auto; color: #aaa !important;}
 a.priority_add_link1 {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
 a.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;width: auto;float:right;}
 span.priority_add_follow a {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #aaa;}
@@ -498,10 +498,10 @@ img.point_report {float:right;}
     bottom: 1px;
     /*font-size: 1em;*/
     font-weight: bold;
-    padding: 0 3px 1px;
+    padding: 1px 3px 0px;
     position: relative;
     text-transform: uppercase;
-	border: 1px solid #439A22;
+	border: 1px solid #f66;
 }
 
 .grey_button_wide, .import_button, .notice {
@@ -697,7 +697,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .add_talking_point h3 {font-size: 14px !important;}
 
 .priority_icon_single {
-    margin: 24px 0 0 22px;
+    margin: 34px 0 0 8px;
     position: absolute;
 }
 
@@ -770,3 +770,14 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .bg_no_votes {background-color: #ffff99;}
 .form_error_td {padding-left: 10px; padding-top: 3px;}
 .user_name_chart {padding: 7px 5px 4px 0px;}
+
+.finished_priority
+{
+	margin-left: 25px;
+	}
+	
+	
+.submit_button
+{
+	cursor:pointer;
+	}

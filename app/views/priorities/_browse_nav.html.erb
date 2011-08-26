@@ -12,11 +12,26 @@
 					</span>
 				</li>
 				<% end %>			
-				<li class="tab1">
+				<li class="tab9">
 					<span class="tab_header">
-						<%= link_to tr("Yours", "view/priorities/_browse_nav"), yours_priorities_url %>
+						<%= link_to tr("New", "view/priorities/_browse_nav"), newest_priorities_url %>
 					</span>
 				</li>
+				<li class="tab8">
+					<span class="tab_header">
+						<%= link_to tr("Random", "view/priorities/_browse_nav"), random_priorities_url %>
+					</span>
+				</li>
+				<li class="tab4">
+					<span class="tab_header">
+						<%= link_to tr("Top", "view/priorities/_browse_nav"), top_priorities_url %>
+					</span>
+				</li>
+				<li class="tab10">
+					<span class="tab_header">
+						<%= link_to tr("Finished", "view/priorities/_browse_nav"), finished_priorities_url %>
+					</span>
+				</li>														
 				<% if logged_in? %>
 				<li class="tab2">
 					<span class="tab_header">
@@ -31,16 +46,6 @@
 						</span>
 					</li>
 				<% end %>
-				<li class="tab4">
-					<span class="tab_header">
-						<%= link_to tr("Top", "view/priorities/_browse_nav"), top_priorities_url %>
-					</span>
-				</li>
-				<li class="tab5">
-					<span class="tab_header">
-						<%= link_to tr("Ads", "view/priorities/_browse_nav"), ads_priorities_url %>
-					</span>
-				</li>			
 				<li class="tab6">
 					<span class="tab_header">
 						<%= link_to tr("Controversial", "view/priorities/_browse_nav"), controversial_priorities_url %>
@@ -51,21 +56,16 @@
 						<%= link_to tr("Rising", "view/priorities/_browse_nav"), rising_priorities_url %>
 					</span>
 				</li>
-				<li class="tab8">
+				<li class="tab1">
 					<span class="tab_header">
-						<%= link_to tr("Random", "view/priorities/_browse_nav"), random_priorities_url %>
+						<%= link_to tr("Yours", "view/priorities/_browse_nav"), yours_priorities_url %>
 					</span>
 				</li>
-				<li class="tab9">
+				<li class="tab5">
 					<span class="tab_header">
-						<%= link_to tr("New", "view/priorities/_browse_nav"), newest_priorities_url %>
+						<%= link_to tr("Ads", "view/priorities/_browse_nav"), ads_priorities_url %>
 					</span>
-				</li>
-				<li class="tab10">
-					<span class="tab_header">
-						<%= link_to tr("Finished", "view/priorities/_browse_nav"), finished_priorities_url %>
-					</span>
-				</li>														
+				</li>			
 			</ul>
 		</div>
 	</div>

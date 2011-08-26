@@ -581,7 +581,7 @@ del {
 	margin: 0 0 4px 0 !important;
 	padding: 0 0 5px 15px;
 }
-.single .priority_listing {margin-left:20px;}
+.single .priority_listing {margin-left:0px;}
 .top_level_priority_listing {/*padding-top:7px;*/}
 .priority_name, .priority_name_add {
   	font-size: 12px;
@@ -708,8 +708,12 @@ del {
 	bottom: 1px;
 }
 .bio {
-	margin-top: -10px;
+	margin-top: 10px;
 }
+.bio p, .bio br {
+	margin-bottom: 7px;
+}
+
 .point_edit {
 	font-style:normal;
 }
