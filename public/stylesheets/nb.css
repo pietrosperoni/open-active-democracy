@@ -795,7 +795,9 @@ del {
 	/*padding-top: 13px;*/
 	text-align: left;
 	border: none !important;
-	width: 20px;
+	float: right;
+	padding-top: 8px;
+/*	width: 20px;*/
 }
 .priority_added {
 	padding-top: 10px;
