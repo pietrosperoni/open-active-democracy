@@ -795,8 +795,15 @@ del {
 	/*padding-top: 13px;*/
 	text-align: left;
 	border: none !important;
-	width: 20px;
+	float: right;
+	padding-top: 8px;
+/*	width: 20px;*/
 }
+
+.priority_rank {
+	padding-right: 5px;
+}
+
 .priority_added {
 	padding-top: 10px;
 }
@@ -1515,3 +1522,9 @@ ul#priority_menu li.tab12 div.tab_body {
 
 .user_pic_network {padding: 10px 5px 4px 7px;}
 .user_text {padding: 7px 5px 4px 0px;}
+
+.ambassadors_images
+{
+		padding: 7px 5px 4px 7px;
+}
+	
