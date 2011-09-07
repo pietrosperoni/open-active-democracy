@@ -78,7 +78,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     ezcrypto (0.7.2)
-    facebooker2 (0.0.12)
+    facebooker2 (0.0.11)
       mogli (>= 0.0.12)
       ruby-hmac
     gem_plugin (0.2.3)
@@ -105,7 +105,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mogli (0.0.32)
+    mogli (0.0.30)
       hashie (~> 1.1.0)
       httparty (>= 0.4.3)
       multi_json (~> 1.0.3)
@@ -181,7 +181,7 @@ DEPENDENCIES
   capistrano
   dalli
   delayed_job
-  facebooker2
+  facebooker2 (= 0.0.11)
   geoip
   googlecharts
   hoptoad_notifier
@@ -189,7 +189,7 @@ DEPENDENCIES
   htmlentities
   jquery-rails (>= 0.2.6)
   kgio
-  mogli
+  mogli (= 0.0.30)
   mongrel (>= 1.2.0.pre2)
   mysql2 (= 0.2.7)
   newrelic_rpm
