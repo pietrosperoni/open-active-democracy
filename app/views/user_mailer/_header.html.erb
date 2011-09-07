@@ -7,11 +7,19 @@
     <table>
       <tr>
         <td width="130px" align="left">
-          <% if defined?(attachments)%>
-            <%= image_tag "logos/email.png" %>
-            <% #image_tag attachments['logo.png'].url %>
+          <% if @government.layout.include?("better_reykjavik") %>
+            <% if defined?(attachments)%>
+              <%= image_tag "logos/email.png" %>
+              <% #image_tag attachments['logo.png'].url %>
+            <% else %>
+               <%= image_tag "logos/BR_email.png" %>
+            <% end %>
           <% else %>
-            <%= image_tag "logos/email.png" %>
+              <% if defined?(attachments)%>
+                <%= image_tag attachments['logo.png'].url %>
+              <% else %>
+                <%= image_tag "logos/email.png" %>
+              <% end %>
           <% end %>
         </td>
         <td>

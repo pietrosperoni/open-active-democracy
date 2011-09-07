@@ -29,7 +29,7 @@
 	</div>
 <% else %>
 
-	<div class="single activity" id="activity_<%= activity.id %>">
+	<div class="activity single" id="activity_<%= activity.id %>">
 		<div class="activity_x">
 		<% if logged_in? and (current_user.is_admin? or current_user.id == activity.user_id) %>
 		<%= link_to 'x', activity_url(activity.id), :method => :delete,
@@ -39,10 +39,10 @@
 		            :confirm => escape_t(tr("Delete from this page?","Ajax")) %>
 		<% end %>
 		</div>
-		<div class="user_pic_and_activity" style="vertical-align: top">
-  		  <table style="vertical-align: top">
+		<div class="user_pic_and_activity" class="top_position">
+  		  <table class="top_position">
   		    <tr>
-              <td width="35x" height="35px" style="vertical-align: top">
+              <td width="35x" height="35px" class="top_position">
                <% if activity.user -%>
                  <%= render :partial => "users/pic_35", :locals => {:user => activity.user} %>
                <% end -%>

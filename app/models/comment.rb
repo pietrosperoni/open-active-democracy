@@ -52,9 +52,9 @@ class Comment < ActiveRecord::Base
   
   def set_category
     if self.activity.priority_id
-      self.category_name = self.activity.priority.category.name
+      self.category_name = self.activity.priority.category.name if self.activity.priority.category
     elsif self.activity.point_id
-      self.category_name = self.activity.point.priority.category.name
+      self.category_name = self.activity.point.priority.category.name if self.activity.point.priority.category
     else
       self.category_name = tr('No category','search')
     end

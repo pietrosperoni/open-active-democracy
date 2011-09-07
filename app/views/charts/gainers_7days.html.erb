@@ -4,17 +4,17 @@
 <p>
 <table border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td style="padding-left: 3px;"><span class="table_header"><%= tr("Change", "view/charts/gainers_") %></span></td>
-		<td style="padding-left: 7px; margin-bottom: 2px;" colspan="2"><%= will_paginate @users %></td>				
+		<td class="left_scale"><span class="table_header"><%= tr("Change", "view/charts/gainers_") %></span></td>
+		<td class=".pagination" colspan="2"><%= will_paginate @users %></td>				
 	</tr>
 <% for user in @users %>
 	<tr>
-		<td align="right" valign="top" style="padding-top: 10px;">
+		<td align="right" valign="top" class="top_scale10">
 			<%= agenda_change(user,'7days') %>
 		</td>
-		<td valign="top" width="26" style="padding: 10px 5px 4px 7px;">
+		<td valign="top" width="26" class="user_pic_contributors">
 			<%= render :partial => "users/pic", :locals => {:user => user}%>
-		</td><td style="padding: 7px 5px 4px 0px;" valign="top">
+		</td><td class="user_name_chart" valign="top">
 			<%= render :partial => "users/name_top", :locals => {:user => user }%>
 		</td>
 	</tr>

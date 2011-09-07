@@ -19,7 +19,7 @@ class UserContactsController < ApplicationController
   def following
     @page_title = tr("People you're following at {government_name}", "controller/contacts", :government_name => tr(current_government.name,"Name from database"))
     unless current_following_ids.empty?
-      @users = User.active.by_capital.find(:all, :conditions => ["id in (?)",current_following_ids]).paginate :page => params[:page], :per_page => params[:per_page]
+      @users = User.active.by_capital.find(:all, :conditions => ["id in (?)",current_following_ids]) #:page => params[:page], :per_page => params[:per_page]
     end
   end
   
