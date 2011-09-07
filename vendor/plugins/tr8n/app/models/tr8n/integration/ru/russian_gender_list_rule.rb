@@ -21,7 +21,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
-class Tr8n::RussianGenderListRule < Tr8n::GenderListRule
+class Tr8n::Integration::Ru::RussianGenderListRule < Tr8n::GenderListRule
 
   # params: [object, one element male, one element female, one element unknown, at least two elements]
   # {user_list | one element male, one element female, one element unknown, at least two elements}
