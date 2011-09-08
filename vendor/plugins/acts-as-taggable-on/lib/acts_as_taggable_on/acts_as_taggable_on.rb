@@ -294,7 +294,7 @@ module ActiveRecord
               base_tags.delete(*old_tags) if old_tags.any?
               new_tag_names.each do |new_tag_name|
                 new_tag = Tag.find_or_create_with_like_by_name(new_tag_name)
-                unless Tagging.where(:tag_id=new_tag.id, :context=> tag_type, :taggable_id=>self.id, :tagger=>owner.id)
+                unless Tagging.where(:tag_id=>new_tag.id, :context=> tag_type, :taggable_id=>self.id, :tagger=>owner.id)
                   Tagging.create(:tag_id => new_tag.id, :context => tag_type,
                                  :taggable => self, :tagger => owner)
                 else
