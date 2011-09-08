@@ -3,6 +3,7 @@ class PriorityRanker
   def perform
     puts "PriorityRanker.perform starting... at #{start_time=Time.now}"
     Government.current = Government.all.last
+    puts "0 #{Tag.find(123).priorities.count}"
     setup_endorsements_counts
     puts "1 #{Tag.find(123).priorities.count}"
     if Government.current.is_tags? and Tag.count > 0
@@ -300,12 +301,14 @@ class PriorityRanker
   end
   
   def setup_endorsements_counts
+    puts "0.1 #{Tag.find(123).priorities.count}"
     Priority.all.each do |p|
       p.endorsements_count = p.endorsements.active_and_inactive.size
       p.up_endorsements_count = p.endorsements.endorsing.active_and_inactive.size
       p.down_endorsements_count = p.endorsements.opposing.active_and_inactive.size
       p.save(:validate => false)      
     end
+    puts "0.2 #{Tag.find(123).priorities.count}"
   end
 
   def setup_ranged_endorsment_position(partner,time_since,position_db_name)
