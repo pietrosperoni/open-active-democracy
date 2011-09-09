@@ -3,9 +3,7 @@ class PriorityRanker
   def perform
     puts "PriorityRanker.perform starting... at #{start_time=Time.now}"
     Government.current = Government.all.last
-    puts "0 #{Tag.find(123).priorities.count}"
     setup_endorsements_counts
-    puts "1 #{Tag.find(123).priorities.count}"
     if Government.current.is_tags? and Tag.count > 0
       # update the # of issues people who've logged in the last two hours have up endorsed
       users = User.find_by_sql("SELECT users.id, users.up_issues_count, count(distinct taggings.tag_id) as num_issues
@@ -34,7 +32,6 @@ class PriorityRanker
         User.update_all("down_issues_count = #{u.num_issues}", "id = #{u.id}") unless u.down_issues_count == u.num_issues
       end
     end
-    puts "2 #{Tag.find(123).priorities.count}"
 
     # update the user's vote factor score
     users = User.active.all
@@ -49,7 +46,6 @@ class PriorityRanker
         end
       end
     end
-    puts "3 #{Tag.find(123).priorities.count}"
 
     # ranks all the priorities in the database with any endorsements.
 
@@ -57,7 +53,6 @@ class PriorityRanker
     partners_with_nil.each do |partner|
       update_positions_by_partner(partner)
     end
-    puts "4 #{Tag.find(123).priorities.count}"
 
     # determines any changes in the #1 priority for an issue, and updates the # of distinct endorsers and opposers across the entire issue
     
@@ -122,7 +117,6 @@ class PriorityRanker
        Tag.connection.execute("update tags set up_endorsers_count = 0, down_endorsers_count = 0 where id not in (#{keep.uniq.compact.join(',')})")
       end
     end
-    puts "5 #{Tag.find(123).priorities.count}"
 
     # now, check to see if the charts have been updated in the last day
     
@@ -166,11 +160,9 @@ class PriorityRanker
         u.expire_charts
       end       
     end
-    puts "6 #{Tag.find(123).priorities.count}"
 
     puts "PriorityRanker.perform before ranged positions... at #{Time.now} total of #{Time.now-start_time}"    
     setup_ranged_endorsment_positions
-    puts "7 #{Tag.find(123).priorities.count}"
 
     puts "PriorityRanker.perform stopping... at #{Time.now} total of #{Time.now-start_time}"
   end
@@ -301,14 +293,35 @@ class PriorityRanker
   end
   
   def setup_endorsements_counts
-    puts "0.1 #{Tag.find(123).priorities.count}"
     Priority.all.each do |p|
       p.endorsements_count = p.endorsements.active_and_inactive.size
       p.up_endorsements_count = p.endorsements.endorsing.active_and_inactive.size
       p.down_endorsements_count = p.endorsements.opposing.active_and_inactive.size
       p.save(:validate => false)      
     end
-    puts "0.2 #{Tag.find(123).priorities.count}"
+  end
+
+  def delete_duplicate_taggins_create_key(tagging)
+    "#{tagging.tag_id}_#{tagging.taggable_id}_#{tagging.taggable_type}_#{tagging.context}"
+  end
+
+  def delete_duplicate_taggins
+    old = {}
+    deleted_count = 0
+    Tagging.all.each do |t|
+      if old[delete_duplicate_taggins_create_key(t)]
+        deleted_count+=1
+        t.destroy
+      else
+        old[delete_duplicate_taggins_create_key(t)]=t
+      end
+    end
+    puts deleted_count
+  end
+
+  def add_missing_tags_for_priorities
+
+
   end
 
   def setup_ranged_endorsment_position(partner,time_since,position_db_name)
