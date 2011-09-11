@@ -117,7 +117,7 @@ class PriorityRanker
        Tag.connection.execute("update tags set up_endorsers_count = 0, down_endorsers_count = 0 where id not in (#{keep.uniq.compact.join(',')})")
       end
     end
-    
+
     # now, check to see if the charts have been updated in the last day
     
     date = Time.now-4.hours-1.day
@@ -160,9 +160,11 @@ class PriorityRanker
         u.expire_charts
       end       
     end
+
     puts "PriorityRanker.perform before ranged positions... at #{Time.now} total of #{Time.now-start_time}"    
     setup_ranged_endorsment_positions
-    puts "PriorityRanker.perform stopping... at #{Time.now} total of #{Time.now-start_time}"    
+
+    puts "PriorityRanker.perform stopping... at #{Time.now} total of #{Time.now-start_time}"
   end
 
   def setup_ranged_endorsment_positions
@@ -297,6 +299,29 @@ class PriorityRanker
       p.down_endorsements_count = p.endorsements.opposing.active_and_inactive.size
       p.save(:validate => false)      
     end
+  end
+
+  def delete_duplicate_taggins_create_key(tagging)
+    "#{tagging.tag_id}_#{tagging.taggable_id}_#{tagging.taggable_type}_#{tagging.context}"
+  end
+
+  def delete_duplicate_taggins
+    old = {}
+    deleted_count = 0
+    Tagging.all.each do |t|
+      if old[delete_duplicate_taggins_create_key(t)]
+        deleted_count+=1
+        t.destroy
+      else
+        old[delete_duplicate_taggins_create_key(t)]=t
+      end
+    end
+    puts deleted_count
+  end
+
+  def add_missing_tags_for_priorities
+
+
   end
 
   def setup_ranged_endorsment_position(partner,time_since,position_db_name)

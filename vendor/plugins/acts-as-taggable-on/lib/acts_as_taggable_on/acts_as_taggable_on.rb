@@ -278,7 +278,7 @@ module ActiveRecord
         def save_cached_tag_list
           self.class.tag_types.map(&:to_s).each do |tag_type|
             if self.class.send("caching_#{tag_type.singularize}_list?")
-              self["cached_#{tag_type.singularize}_list"] = send("#{tag_type.singularize}_list").to_s
+              self["cached_#{tag_type.singularize}_list"] = send("#{tag_type.singularizse}_list").to_s
             end
           end
         end
@@ -294,8 +294,12 @@ module ActiveRecord
               base_tags.delete(*old_tags) if old_tags.any?
               new_tag_names.each do |new_tag_name|
                 new_tag = Tag.find_or_create_with_like_by_name(new_tag_name)
-                Tagging.create(:tag_id => new_tag.id, :context => tag_type, 
-                               :taggable => self, :tagger => owner)
+                unless Tagging.where(:tag_id=>new_tag ? new_tag.id : nil, :context=> tag_type, :taggable_id=>self.id, :tagger_id=>owner ? owner.id : nil)
+                  Tagging.create(:tag_id => new_tag.id, :context => tag_type,
+                                 :taggable => self, :tagger => owner)
+                else
+                  #puts "Trying to create a duplicate tag for #{self.inspect} - #{new_tag.inspect}"
+                end
               end
             end
           end

@@ -121,6 +121,10 @@
 					<% if @priority.status != 'inactive' %>
 					<%= link_to tr("Flag for review", "view/priorities/_nav"), flag_inappropriate_priority_url(@priority), :title => tr("Should the site administrator take a look at this priority? Also post a bulletin if it's not obvious what the problem is.", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to flag this priority to be reviewed by the site administrator. If it's not clear why you are flagging it, please post a bulletin so they can take appropriate action.", "view/priorities/_nav"), :method => :put %><br/>
 				    <% end %>
+                  <% if current_user.is_admin? %>
+                     <%= link_to tr("Delete this priority", "view/priorities/_nav"), @priority, :title => tr("Permanently delete this priority", "view/priorities/_nav"), :confirm => tr("Are you sure you want to permanently delete {priority_name}?", "view/priorities/_nav", :priority_name => @priority.name), :method => :delete %><br/>
+                  <% end %>
+
 				<% end %>
 				<p>
 				</div>

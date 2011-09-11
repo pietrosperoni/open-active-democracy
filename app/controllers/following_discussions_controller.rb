@@ -66,7 +66,8 @@ class FollowingDiscussionsController < ApplicationController
       format.js {
         render :update do |page|
           if params[:region] == 'activity_show'
-            page.replace 'activity_add_' + @activity.id.to_s, render(:partial =>"shared/follow_icons", :locals => {:activity => @activity, :following => nil})
+            page.redirect_to activity_comments_url(@activity)
+            #page.replace 'activity_add_' + @activity.id.to_s, render(:partial =>"shared/follow_icons", :locals => {:activity => @activity, :following => nil})
           end          
         end     
       }

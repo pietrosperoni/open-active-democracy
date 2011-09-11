@@ -206,10 +206,10 @@ module ApplicationHelper
   		out = '<span class="compromised">' + priority.official_status_name + '</span>'
   	elsif priority.is_intheworks?
   		out = '<span>' + priority.official_status_name + '</span>'
-        else
-          out = ""
+    else
+      out = ""
   	end
-  	out.html_safe
+  	out.html_safe if out
   end
   
   def liquidize(content, arguments)
