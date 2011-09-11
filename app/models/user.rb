@@ -124,6 +124,8 @@ class User < ActiveRecord::Base
   validates_presence_of     :age_group, :message => tr("Please select your age group.", "model/user")
   validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user")
 
+  validates_acceptance_of :terms, :message => tr("Please accept the terms and conditions", "model/user")
+
   before_save :encrypt_password
   before_create :make_rss_code
   after_save :update_signups
@@ -136,7 +138,7 @@ class User < ActiveRecord::Base
   attr_protected :remember_token, :remember_token_expired_at, :activation_code, :salt, :crypted_password, :twitter_token, :twitter_secret
   
   # Virtual attribute for the unencrypted password
-  attr_accessor :password, :partner_ids  
+  attr_accessor :password, :partner_ids, :terms
   
   def set_signup_country
     self.geoblocking_open_countries=Thread.current[:country_code] if Thread.current[:country_code]
