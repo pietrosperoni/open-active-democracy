@@ -94,6 +94,9 @@
 	<div class="small" style="margin-bottom: 10px;"><%= tr("(Can be your name, or a pseudonym)", "view/users/_form")%></div>
 	</div>
 
+    // Terms<br>
+    <%= check_box("user", "terms") %>
+
 	<% if current_partner and current_partner.is_optin? %>
 
 		<%= check_box_tag "user[partner_ids][]", current_partner.id, 1 %>
