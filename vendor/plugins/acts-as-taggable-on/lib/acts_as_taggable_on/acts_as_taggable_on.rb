@@ -289,7 +289,7 @@ module ActiveRecord
             owner = instance_variable_get("@#{tag_type.singularize}_list").owner
             new_tag_names = instance_variable_get("@#{tag_type.singularize}_list") - tags_on(tag_type).map(&:name)
             old_tags = tags_on(tag_type).reject { |tag| instance_variable_get("@#{tag_type.singularize}_list").include?(tag.name) }
-          
+            puts new_tag_names.inspect
             self.class.transaction do
               base_tags.delete(*old_tags) if old_tags.any?
               new_tag_names.each do |new_tag_name|
@@ -298,7 +298,7 @@ module ActiveRecord
                   Tagging.create(:tag_id => new_tag.id, :context => tag_type,
                                  :taggable => self, :tagger => owner)
                 else
-                  #puts "Trying to create a duplicate tag for #{self.inspect} - #{new_tag.inspect}"
+                  puts "Trying to create a duplicate tag for #{self.inspect} - #{new_tag.inspect}"
                 end
               end
             end
