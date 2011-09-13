@@ -320,8 +320,26 @@ class PriorityRanker
   end
 
   def add_missing_tags_for_priorities
-
-
+    Priority.all.each do |p|
+      if p.category
+        the_tags = []
+        the_tags<<p.category.name
+        p.taggings.each do |tagging|
+          if tagging.tag
+            the_tags << tagging.tag.name
+          else
+            puts "NONONO #{tagging.tag_id}"
+            tagging.destroy
+          end
+        end
+        puts the_tags.uniq.join(",")
+        p.issue_list = the_tags.uniq.join(",")
+        puts "XXXX #{p.issue_list}"
+        p.save
+      else
+        puts "MISSING CATEGORY: #{p.name}"
+      end
+    end
   end
 
   def setup_ranged_endorsment_position(partner,time_since,position_db_name)

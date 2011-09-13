@@ -717,7 +717,7 @@ class PrioritiesController < ApplicationController
 
     @priority = Priority.new(params[:priority])
     tags = []
-    tags << tr(@priority.category.name,"Category name from database") if @priority.category
+    tags << @priority.category.name if @priority.category
     params.each do |p,v|
       tags << v if p.include?("special_checkbox_tag_")
     end
