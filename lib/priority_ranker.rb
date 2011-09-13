@@ -340,7 +340,6 @@ class PriorityRanker
         puts "MISSING CATEGORY: #{p.name}"
       end
     end
-
   end
 
   def setup_ranged_endorsment_position(partner,time_since,position_db_name)

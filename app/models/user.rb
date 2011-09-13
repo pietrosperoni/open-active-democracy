@@ -124,7 +124,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :age_group, :message => tr("Please select your age group.", "model/user")
   validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user")
 
-  validates_acceptance_of :terms, :message => tr("Please accept the terms and conditions", "model/user")
+  validates_acceptance_of   :terms, :message => tr("Please accept the terms and conditions", "model/user")
 
   before_save :encrypt_password
   before_create :make_rss_code
