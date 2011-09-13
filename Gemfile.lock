@@ -54,6 +54,9 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    airbrake (3.0.4)
+      activesupport
+      builder
     arel (2.0.10)
     auto_html (1.4.2)
       RedCloth
@@ -86,9 +89,6 @@ GEM
     googlecharts (1.6.7)
     hashie (1.1.0)
     highline (1.6.2)
-    hoptoad_notifier (2.4.11)
-      activesupport
-      builder
     hpricot (0.8.4)
     htmlentities (4.3.0)
     httparty (0.7.8)
@@ -177,6 +177,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   auto_html
   capistrano
   dalli
@@ -184,7 +185,6 @@ DEPENDENCIES
   facebooker2 (= 0.0.11)
   geoip
   googlecharts
-  hoptoad_notifier
   hpricot (>= 0.6)
   htmlentities
   jquery-rails (>= 0.2.6)
