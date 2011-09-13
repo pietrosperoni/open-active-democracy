@@ -1,6 +1,7 @@
 <div id="new_user_form">
 <% if @geoblocked %>
   <%= render :partial=>"shared/geoblocking_info"%>
+  
 <% else %>  
 	<%= form_for :user, :remote=>true, 
                'data-disable-with' => escape_t(tr("Sending","Ajax")),
@@ -113,6 +114,7 @@
     <%= check_box("user", "terms") %>
 		<%= tr("I accept the terms of Open Reykjavík detailed below", "view/users/_form")%>
 		<br />
+		
 	<% if @priority %>
 		<% if @value == 1 %>
 			<%= submit_tag tr("Endorse and signup", "view/users/_form"), :class => "submit_button" %>			
@@ -128,4 +130,7 @@
 	<% end -%>
 <% end %>
 </div>
+
 <%= render :partial=>"shared/keypad_javascript"%>
+
+<%= render :partial => "users/rules_info" %>
