@@ -47,7 +47,7 @@
                  <%= render :partial => "users/pic_35", :locals => {:user => activity.user} %>
                <% end -%>
               </td>
-            <td class="left_scale8">
+            <td class="left_scale8 activity_content" id="temptest">
               <% cache("#{activity[:type].downcase}#{suffix}-#{activity.id}-#{session[:locale]}-#{@inline_translations_enabled}") do %> 
       	   		  <%= render :partial => "activities/#{activity[:type].downcase}#{suffix}", :locals => {:activity => activity} %>
               <% end %>
