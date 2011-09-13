@@ -94,8 +94,6 @@
 	<div class="small" style="margin-bottom: 10px;"><%= tr("(Can be your name, or a pseudonym)", "view/users/_form")%></div>
 	</div>
 
-    // Terms<br>
-    <%= check_box("user", "terms") %>
 
 	<% if current_partner and current_partner.is_optin? %>
 
@@ -112,6 +110,9 @@
 	<% end %>
   <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
   
+    <%= check_box("user", "terms") %>
+		<%= tr("I accept the terms of Open Reykjavík detailed below", "view/users/_form")%>
+		<br />
 	<% if @priority %>
 		<% if @value == 1 %>
 			<%= submit_tag tr("Endorse and signup", "view/users/_form"), :class => "submit_button" %>			
