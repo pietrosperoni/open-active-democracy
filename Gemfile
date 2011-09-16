@@ -51,9 +51,11 @@ gem "twitter-auth", :git => "git://github.com/jaikoo/twitter-auth.git", :branch 
 gem 'hpricot', '>= 0.6'
 # gem 'will_paginate', :branch => "rails3"
 gem 'will_paginate', '~> 3.0.beta'
+#gem 'mogli','0.0.30'
+#gem 'facebooker2','0.0.11'
 gem 'mogli'
 gem 'facebooker2'
-gem 'hoptoad_notifier'
+gem 'airbrake'
 gem "newrelic_rpm"
 gem 'dalli'
 gem 'thinking-sphinx',

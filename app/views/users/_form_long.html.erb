@@ -6,7 +6,7 @@
                :url => users_path(:region => "long") do |f| -%>
   <%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form_long") %>
  
-    <table border="0" cellspacing="0" cellpadding="0" style="margin: 10px 0;">
+    <table border="0" cellspacing="0" cellpadding="0" style="margin: 10px 0; width:500px !important;">
       <tr>
         <td valign="top">
         <div class="field">
@@ -112,11 +112,13 @@
            </table>
 				</div>
        </td>
-              <td valign="top" style="padding-left: 10px; padding-top: 0px;">
+       </tr>
+       <tr>
+              <td valign="top" style="padding-top: 10px;" colspan="2">
               <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
 
-               // Terms<br>
                <%= check_box("user", "terms") %>
+		<%= tr("I accept the terms of detailed below", "view/users/_form_long")%>
 
               <% if @priority %>
                 <% if @value == 1 %>
@@ -127,7 +129,7 @@
                 <%= submit_tag tr("Signup", "view/users/_form_long"), :class => "submit_button" %>
                 <% end %>
               <% else %>
-							<div style="float:right; margin:20px 30px 0 0;">
+							<div >
               					<%= submit_tag tr("Signup", "view/users/_form_long"), :class => "submit_button" %>
 							</div>
               <% end %>
