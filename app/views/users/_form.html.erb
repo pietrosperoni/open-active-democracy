@@ -39,7 +39,7 @@
 		</div>
 		<div class="small" style="margin-bottom: 10px;"><%= tr("(Never shared without your permission)", "view/users/_form")%></div>
 	</div>
-
+        <% if Government.current.layout == "better_reykjavik" %>
 		<div class="field">
 			<div class="field_label">
 				<%= tr("Post code", "view/users/_form")%>
@@ -66,7 +66,7 @@
              <%= f.select :my_gender, options_for_select([tr("Male"),tr("Female")]) %>
           </div>
         </div>
-
+      <% end %>
 
 	<div class="field" style="width:300px; padding-bottom: 10px;">
 	<table border="0" cellspacing="0" cellpadding="0">
