@@ -1,8 +1,14 @@
 <div id="sidebar">
+  <% if Government.current.layout == "better_reykjavik" %>
 	<div class="reykjavik_icon">		
-		<a href="http://www.reykjavik.is"><%= image_tag("new/reykjavik_icon.png", :alt => "shortcut") %></a>  
+		<a href="http://www.reykjavik.is"><%= image_tag("new/reykjavik_icon.png", :alt => "www.reykjavik.is") %></a>
 	</div>
-		<%= render :partial => "shared/partner_large_flag" %>
+  <% else %>
+    <div class="yrpri_icon">
+		<a href="http://yrpri.org"><%= image_tag("new/reykjavik_icon.png", :alt => "Your Priorities Worldwide") %></a>
+	</div>
+  <% end %>
+	<%= render :partial => "shared/partner_large_flag" %>
     <%= render :partial => "shared/search" %>
 
 		<div>
