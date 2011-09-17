@@ -1474,7 +1474,6 @@ ul#priority_menu li.tab12 div.tab_body {
 	/*position: relative;*/
   float: left;
   margin-right: 0;
-  overflow: hidden;
   width: 80px;
   position: relative;
 }
