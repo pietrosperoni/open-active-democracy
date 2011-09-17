@@ -198,6 +198,7 @@ DEPENDENCIES
   rack-openid
   rails (= 3.0.7)
   rails-dev-boost!
+  rake (= 0.9.2)
   rmagick (= 2.12.2)
   ruby-openid
   sunlight (>= 0.9)

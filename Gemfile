@@ -30,6 +30,7 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'rake', '0.9.2'
 #gem 'rake', '0.8.7'
 gem "ruby-openid"
 #gem 'ruby-openid', :git => 'git://github.com/rbjarnason/ruby-openid.git', :require => 'ruby-openid'
