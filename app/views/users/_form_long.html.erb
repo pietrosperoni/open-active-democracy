@@ -118,7 +118,7 @@
               <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
 
                <%= check_box("user", "terms") %>
-		<%= tr("I accept the terms of Open Reykjavík detailed below", "view/users/_form_long")%>
+		<%= tr("I accept the terms of detailed below", "view/users/_form_long")%>
 
               <% if @priority %>
                 <% if @value == 1 %>
