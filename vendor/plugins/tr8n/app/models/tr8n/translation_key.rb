@@ -185,11 +185,13 @@ class Tr8n::TranslationKey < ActiveRecord::Base
   end
 
   def lock!(language = Tr8n::Config.current_language, translator = Tr8n::Config.current_translator)
-    lock_for(language).lock!(translator)
+    tkey = lock_for(language)
+    Tr8n::TranslationKeyLock.find(tkey.id).lock!(translator)
   end
 
   def unlock!(language = Tr8n::Config.current_language, translator = Tr8n::Config.current_translator)
-    lock_for(language).unlock!(translator)
+    tkey = lock_for(language)
+    Tr8n::TranslationKeyLock.find(tkey.id).unlock!(translator)
   end
 
   def unlock_all!

@@ -278,7 +278,7 @@ module ActiveRecord
         def save_cached_tag_list
           self.class.tag_types.map(&:to_s).each do |tag_type|
             if self.class.send("caching_#{tag_type.singularize}_list?")
-              self["cached_#{tag_type.singularize}_list"] = send("#{tag_type.singularizse}_list").to_s
+              self["cached_#{tag_type.singularize}_list"] = send("#{tag_type.singularize}_list").to_s
             end
           end
         end

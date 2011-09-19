@@ -814,8 +814,8 @@ class PrioritiesController < ApplicationController
             page<<"$('.priority_#{@priority.id.to_s}_button_small').replaceWith('#{escape_javascript(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}')"
             page<<"$('.priority_#{@priority.id.to_s}_endorsement_count').replaceWith('#{escape_javascript(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority}))}')"
           elsif params[:region] == 'ad_top' and @ad
-            page.replace 'notification_show', render(:partial => "ads/pick")
-            page << 'jQuery("#notification_show").corners();'
+            page.replace 'ads', render(:partial => "ads/pick")
+            #page << 'jQuery("#notification_show");'
           else
             page << "alert('error');"
           end

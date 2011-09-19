@@ -143,7 +143,7 @@ module AuthenticatedSystem
         Rails.logger.info("LOGIN: About to fb create")
         begin          
           current_facebook_user.fetch
-          raise Mogli::Client::OAuthException unless current_facebook_user.has_permission?(:email)
+          #raise Mogli::Client::OAuthException unless current_facebook_user.has_permission?(:email)
         rescue Mogli::Client::OAuthException
           Rails.logger.error("LOGIN: Error in current_facebook_user.fetch")
           return false

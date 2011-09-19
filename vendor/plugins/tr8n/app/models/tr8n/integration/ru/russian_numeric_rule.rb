@@ -25,7 +25,7 @@
 # function for the default transform_tokens 
 # if your default site language is Russian
 
-class Tr8n::RussianNumericRule < Tr8n::NumericRule
+class Tr8n::Integration::Ru::RussianNumericRule < Tr8n::NumericRule
 
   # FORM: [object, (ends in 1, but not in 11), (ends in 2, 3, 4 and is not 12, 13, 14), (ends in 0, 5, 6, 7, 8, 9, 11, 12, 13, 14)]
   # {count | собака, собаки, собак}

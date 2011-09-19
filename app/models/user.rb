@@ -120,9 +120,9 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => [:should_validate_password?]
   validates_confirmation_of :password, :if => [:should_validate_password?]
 
-  validates_presence_of     :post_code, :message => tr("Please enter your postcode.", "model/user")
-  validates_presence_of     :age_group, :message => tr("Please select your age group.", "model/user")
-  validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user")
+  validates_presence_of     :post_code, :message => tr("Please enter your postcode.", "model/user"), :if => :using_br?
+  validates_presence_of     :age_group, :message => tr("Please select your age group.", "model/user"), :if => :using_br?
+  validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user"), :if => :using_br?
 
   validates_acceptance_of   :terms, :message => tr("Please accept the terms and conditions", "model/user")
 
@@ -139,7 +139,11 @@ class User < ActiveRecord::Base
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids, :terms
-  
+
+  def using_br?
+    Government.current.layout == "better_reykjavik"
+  end
+
   def set_signup_country
     self.geoblocking_open_countries=Thread.current[:country_code] if Thread.current[:country_code]
   end

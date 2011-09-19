@@ -19,7 +19,7 @@
 					<%= link_to(tr("Opposers", "view/priorities/_nav"), opposer_documents_priority_url(@priority)) %><% if @priority.down_documents_count > 0 %> (<%= @priority.down_documents_count %>)<% end %><br/>
 					<%= link_to(tr("Undeclared", "view/priorities/_nav"), neutral_documents_priority_url(@priority)) %><% if @priority.neutral_documents_count > 0 %> (<%= @priority.neutral_points_count %>)<% end %><br/>
 					<p>
-					<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %>
+					<% link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %>
 					<p>
 				</div>				
 			</li>
@@ -103,7 +103,7 @@
 			<div class="tab_body">
 			<div class="box_style">
 				<%= link_to tr("Add a point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
-				<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
+				<% link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
 				<% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
 					<span class="greyed_out"><%= tr("Buy an ad for this priority", "view/priorities/_nav") %></span><br/>
 				<% else %>
