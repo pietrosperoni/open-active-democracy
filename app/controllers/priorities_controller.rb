@@ -849,13 +849,7 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       if params[:commit]=="Vista hugmynd"
         if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
-          # already renamed?
-          @activity = ActivityPriorityRenamed.find_by_user_id_and_priority_id(current_user.id,@priority.id)
-          if @activity
-            @activity.update_attribute(:updated_at,Time.now)
-          else
-            @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
-          end
+          @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
           format.html { 
             flash[:notice] = tr("Saved {priority_name}", "controller/priorities", :priority_name => @priority.name)
             redirect_to(@priority)         
