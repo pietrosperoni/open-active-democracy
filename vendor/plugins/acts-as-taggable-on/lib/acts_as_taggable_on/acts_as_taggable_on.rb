@@ -289,12 +289,12 @@ module ActiveRecord
             owner = instance_variable_get("@#{tag_type.singularize}_list").owner
             new_tag_names = instance_variable_get("@#{tag_type.singularize}_list") - tags_on(tag_type).map(&:name)
             old_tags = tags_on(tag_type).reject { |tag| instance_variable_get("@#{tag_type.singularize}_list").include?(tag.name) }
-            puts new_tag_names.inspect
+            #puts new_tag_names.inspect
             self.class.transaction do
               base_tags.delete(*old_tags) if old_tags.any?
               new_tag_names.each do |new_tag_name|
                 new_tag = Tag.find_or_create_with_like_by_name(new_tag_name)
-                puts "new_tag: #{new_tag.inspect} self_id: #{self.id}"
+                #puts "new_tag: #{new_tag.inspect} self_id: #{self.id}"
                 unless Tagging.where(:tag_id=>new_tag ? new_tag.id : nil, :context=> tag_type, :taggable_id=>self.id, :tagger_id=>owner ? owner.id : nil).first
                   Tagging.create(:tag_id => new_tag.id, :context => tag_type,
                                  :taggable => self, :tagger => owner)

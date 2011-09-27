@@ -33,6 +33,9 @@ class PriorityRanker
       end
     end
 
+    # Delete all endorsements that do not have positions
+    Endorsement.delete_all("position IS NULL")
+
     # update the user's vote factor score
     users = User.active.all
     for u in users
@@ -179,6 +182,7 @@ class PriorityRanker
   private
   
   def update_positions_by_partner(partner)
+    puts "update positions by partners #{partner}"
     if partner
       Partner.current = partner
       partner_sql = "priorities.partner_id = #{partner.id}"
@@ -343,6 +347,7 @@ class PriorityRanker
   end
 
   def setup_ranged_endorsment_position(partner,time_since,position_db_name)
+    puts "Processing #{position_db_name}"
     if partner
       Partner.current = partner
       partner_sql = "priorities.partner_id = #{partner.id}"
@@ -362,9 +367,10 @@ class PriorityRanker
        group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
        order by number desc")
 
-    priorities.each_with_index do |priority|
+    puts "Found #{priorities.count} in range"
+    priorities.each_with_index do |priority,index|
       priority.reload
-      eval "priority.#{position_db_name} = priority.number"
+      eval "priority.#{position_db_name} = #{index+1}"
       priority.save
     end
     priorities = Priority.find_by_sql("
@@ -380,6 +386,7 @@ class PriorityRanker
        group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
        order by number desc")
 
+    puts "Found #{priorities.count} NOT in range"
     priorities.each_with_index do |priority|
       priority.reload
       eval "priority.#{position_db_name} = nil"
