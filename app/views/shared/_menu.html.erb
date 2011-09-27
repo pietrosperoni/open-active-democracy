@@ -42,6 +42,12 @@
 		<li class="tab5">
 			<span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), following_user_contacts_path(current_user) %></span>
 		</li>
+		<li class="tab1">
+			<span class="tab_header"><%= link_to tr("Categories","Menu system"), :controller => "issues" %></span>
+		</li>
+		<li class="tab4">
+			<span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), :controller => "news", :action=>"top" %></span>
+		</li>
 		<% else %>
 		<li class="tab5">
 			<span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), :controller => "network" %></span>
