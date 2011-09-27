@@ -12,7 +12,15 @@
 	<td valign="top" align="left" width="30" class="priority_rank">
 		<% if priority.position != 0 %>
 		<div class="priority_position" title="<%= tr("This is the {position} highest ranked priority across all {government_name} members.", "view/priorities/_rank_week_month", :position => priority.position, :government_name => tr(current_government.name,"Name from database")) %>">
-			<%= priority.position %>
+		  <% if action_name=="top_24hr" %>
+            <%= priority.position_endorsed_24hr %>
+          <% elsif action_name=="top_7days" %>
+            <%= priority.position_endorsed_7days %>
+          <% elsif action_name=="top_30days" %>
+            <%= priority.position_endorsed_30days %>
+          <% else %>
+            <%= priority.position %>
+          <% end %>
 		</div>
 		<% end %>
 	</td>
