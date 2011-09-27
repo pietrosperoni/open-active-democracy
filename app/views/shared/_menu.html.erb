@@ -1,8 +1,9 @@
 <div id="toolbar" class="clearfix">
+
 <% if ['priorities','changes','ads','prioritizer'].include?(params[:controller]) %>
 	<% nav = 2 %>
 <% elsif ['news','comments'].include?(params[:controller]) %>
-		<% nav = 4 %>
+	<% nav = 4 %>
 <% elsif ['issues'].include?(params[:controller]) %>
 	<% nav = 1 %>
 <% elsif ['network','users','user_contacts','import','messages','inbox','facebook'].include?(params[:controller]) or (params[:controller] == 'partners' and not logged_in?) %>
@@ -16,6 +17,7 @@
 <% else %>
 	<% nav = 0 %>
 <% end %>
+
 <div id="nav">
 <div id="nav<%= nav %>" class="clearfix">	
 
@@ -30,9 +32,6 @@
 		<li class="tab0">
 			<span class="tab_header"><%= link_to tr("Home","Menu system"), :controller => "portal" %></span>
 		</li>
-    <li class="tab4">
-      <span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), :controller => "news", :action=>"top" %></span>
-    </li>
 		<li class="tab2">
 			<span class="tab_header"><%= link_to tr("Priorities", "view/shared/_menu"), :controller => "priorities", :action=>"top_24hr" %></span>
 		</li>
@@ -40,17 +39,20 @@
 			<span class="tab_header"><%= link_to tr("Points", "view/shared/_menu"), :controller => "points" %></span>
 		</li>
 		<% if logged_in? %>
-  		<li class="tab5">
-  			<span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), following_user_contacts_path(current_user) %></span>
-  		</li>
+		<li class="tab5">
+			<span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), following_user_contacts_path(current_user) %></span>
+		</li>
 		<% else %>
-      <li class="tab5">
-        <span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), :controller => "network" %></span>
-      </li>
+		<li class="tab5">
+			<span class="tab_header"><%= link_to tr("People", "view/shared/_menu"), :controller => "network" %></span>
+		</li>
+		<li class="tab1">
+			<span class="tab_header"><%= link_to tr("Categories","Menu system"), :controller => "issues" %></span>
+		</li>
+		<li class="tab4">
+			<span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), :controller => "news", :action=>"top" %></span>
+		</li>
 		<% end %>
-    <li class="tab1">
-      <span class="tab_header"><%= link_to tr("Categories","Menu system"), :controller => "issues" %></span>
-    </li>
 		<% if logged_in? and current_user.is_admin? %>
 		<li class="tab6 mega">
 			<span class="tab_header">
