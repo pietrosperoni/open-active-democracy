@@ -354,8 +354,9 @@ class PriorityRanker
        sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
        from users,endorsements,priorities
        where endorsements.user_id = users.id
+       and #{partner_sql}
        and endorsements.priority_id = priorities.id
-       and endorsements.created_at > '#{time_since}'
+       and endorsements.created_at >= '#{time_since}'
        and priorities.status = 'published'
        and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
        group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
@@ -364,6 +365,24 @@ class PriorityRanker
     priorities.each_with_index do |priority|
       priority.reload
       eval "priority.#{position_db_name} = priority.number"
+      priority.save
+    end
+    priorities = Priority.find_by_sql("
+       select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, \
+       sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
+       from users,endorsements,priorities
+       where endorsements.user_id = users.id
+       and #{partner_sql}
+       and endorsements.priority_id = priorities.id
+       and endorsements.created_at < '#{time_since}'
+       and priorities.status = 'published'
+       and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
+       group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
+       order by number desc")
+
+    priorities.each_with_index do |priority|
+      priority.reload
+      eval "priority.#{position_db_name} = nil"
       priority.save
     end
     Partner.current = nil
