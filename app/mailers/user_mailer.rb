@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
-         :subject=>tr("Thank you for registering at {government_name}","email", :government_name => tr(current_government.name,"Name from database")) do |format|
+         :subject=>tr("Thank you for registering at {government_name}","email", :government_name => tr(Government.current.name,"Name from database")) do |format|
            format.text { render :text=>convert_to_text(render_to_string("welcome.html")) }
            format.html
          end
@@ -29,7 +29,7 @@ class UserMailer < ActionMailer::Base
     mail :to => @recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
-         :subject => tr("Invitation from {sender_name} to join {government_name}","email", :sender_name=>sender_name, :government_name => tr(current_government.name,"Name from database")) do |format|
+         :subject => tr("Invitation from {sender_name} to join {government_name}","email", :sender_name=>sender_name, :government_name => tr(Government.current.name,"Name from database")) do |format|
            format.text { render :text=>convert_to_text(render_to_string("invitation.html")) }
            format.html
          end
