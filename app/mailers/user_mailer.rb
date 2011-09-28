@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
     if @government.layout.include?("better_reykjavik")
       attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/BR_email.png"))
     else
-      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/YourPriorities_large.png"))
     end
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
