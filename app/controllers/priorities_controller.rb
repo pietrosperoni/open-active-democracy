@@ -116,7 +116,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/yours_finished
   def yours_finished
-    @page_title = tr("Your finished priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Your priorities in progress at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
     @priorities = @user.endorsements.finished.find(:all, :order => "priorities.status_changed_at desc", :include => :priority).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "yours" }
@@ -324,7 +324,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/finished
   def finished
-    @page_title = tr("Finished priorities", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Priorities in progress", "controller/priorities", :target => current_government.target)
     @priorities = Priority.finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "list" }
