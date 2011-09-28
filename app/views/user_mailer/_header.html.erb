@@ -23,7 +23,7 @@
           <% end %>
         </td>
         <td>
-        <h1 style="margin-left: 15px;font-family:sans-serif,helvetica,arial"><%=tr("Your Priorities","email")%>
+        <h1 style="margin-left: 15px;font-family:sans-serif,helvetica,arial"><%=tr("{government_name}","email", :government_name => tr(@government.name,"Name from database"))%>
         </td>
      </tr>
    </table>

@@ -78,7 +78,7 @@ class PointsController < ApplicationController
   end
   
   def your_priorities
-    @page_title = tr("Points on your priorities", "controller/points", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Points on {government_name}", "controller/points", :government_name => tr(current_government.name,"Name from database"))
     if current_user.endorsements_count > 0    
       if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
         @points = Point.published.by_recently_created.paginate :conditions => ["(points.priority_id in (?) and points.endorser_helpful_count > 0) or (points.priority_id in (?) and points.opposer_helpful_count > 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]

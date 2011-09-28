@@ -1,4 +1,4 @@
-<h1><%= tr("About Your Priorities", "view/about/index") %></h1>
+<h1><%= tr("About {government_name}", "view/about/index", :government_name => tr(current_government.name,"Name from database")) %></h1>
 <br>
 <p><%= tr("We believe the people of the world need good online democracy tools to find and choose their top priorities. And together discover which priorities they want to implement and in what order.", "view/about/index") %></p>
 <br>

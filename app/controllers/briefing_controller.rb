@@ -7,7 +7,7 @@ class BriefingController < ApplicationController
   end
   
    def points
-     @page_title = tr("Your priorities with few points", "controller/briefing")
+     @page_title = tr("{government_name} with few points", "controller/briefing", :government_name => tr(current_government.name,"Name from database"))
      if current_user.endorsements_count > 0    
        if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
          @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_points_count < 2) or (priorities.id in (?) and priorities.down_points_count < 2)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]
@@ -31,7 +31,7 @@ class BriefingController < ApplicationController
    end
 
   def documents
-    @page_title = tr("Your priorities without any documents", "controller/briefing")
+    @page_title = tr("{government_name} without any documents", "controller/briefing", :government_name => tr(current_government.name,"Name from database"))
     if current_user.endorsements_count > 0    
       if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
         @priorities = Priority.published.filtered.top_rank.paginate :conditions => ["(priorities.id in (?) and priorities.up_documents_count = 0) or (priorities.id in (?) and priorities.down_documents_count = 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :page => params[:page], :per_page => params[:per_page]

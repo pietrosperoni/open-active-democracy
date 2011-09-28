@@ -2,8 +2,8 @@
 
 <p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
 
-<p><%=tr("Thanks for the referral! {sender_name} accepted your invitation to join Your Priorities.\
- You've earned 5 social points, and are now following {sender_name} updates in your news.","email", :sender_name=>@sender.name)%>:</p>
+<p><%=tr("Thanks for the referral! {sender_name} accepted your invitation to join {government_name}.\
+ You've earned 5 social points, and are now following {sender_name} updates in your news.","email", :sender_name=>@sender.name, :government_name => tr(current_government.name,"Name from database"))%>:</p>
 
 <p><%= link_to @recipient.root_url+'news', @recipient.root_url+'news' %></p>
 

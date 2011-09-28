@@ -312,7 +312,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_activities
-    @page_title = tr("What's happening on your priorities?", "controller/news", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("What's happening on {government_name}?", "controller/news", :government_name => tr(current_government.name,"Name from database"))
     @activities = nil
     if current_priority_ids.any?
       @activities = Activity.active.filtered.last_seven_days.by_recently_created.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -325,7 +325,7 @@ class NewsController < ApplicationController
   end
   
   def your_priority_official
-    @page_title = tr("What {official_user_name} is doing on your priorities", "controller/news", :government_name => tr(current_government.name,"Name from database"), :official_user_name => current_government.official_user.name)
+    @page_title = tr("What {official_user_name} is doing on {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"), :official_user_name => current_government.official_user.name)
     @activities = nil
     if current_priority_ids.any?
       @activities = Activity.active.filtered.by_recently_created.paginate :conditions => ["(type like 'ActivityPriorityOfficialStatus%' or user_id = #{current_government.official_user_id}) and priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -338,7 +338,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_changes
-    @page_title = tr("Acquisitions proposed on your priorities", "controller/news", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Acquisitions proposed on {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"))
     @changes = nil
     if current_priority_ids.any?
       @changes = Change.suggested.by_recently_created.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -364,7 +364,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_changes_activity
-    @page_title = tr("M&A activity on your priorities", "controller/news", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("M&A activity on {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"))
     @activities = nil
     if current_priority_ids.any?
       @activities = Activity.active.filtered.changes.for_all_users.by_recently_created.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]
@@ -377,7 +377,7 @@ class NewsController < ApplicationController
   end  
   
   def your_priority_discussions
-    @page_title = tr("Discussions on your priorities", "controller/news", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Discussions on {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"))
     @activities = nil
     if @user.endorsements_count > 0
       @activities = Activity.active.filtered.last_seven_days.discussions.for_all_users.by_recently_updated.paginate :conditions => ["priority_id in (?)",@user.endorsements.active_and_inactive.collect{|e|e.priority_id}], :page => params[:page], :per_page => 15
@@ -391,7 +391,7 @@ class NewsController < ApplicationController
   end
   
   def your_priority_points
-    @page_title = tr("Points and documents on your priorities", "controller/news", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Points and documents on {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"))
     @activities = nil
     if current_priority_ids.any?  
       @activities = Activity.active.filtered.last_seven_days.points_and_docs.paginate :conditions => ["priority_id in (?)",current_priority_ids], :page => params[:page]

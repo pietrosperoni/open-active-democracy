@@ -68,7 +68,7 @@
 			<!-- Sidebar area -->
 			<div id="sidebar">
 				<div id="reykjavikLink">
-					<a href="#">Your Priorities worldwide</a>
+					<a href="#"><%=tr("{government_name} worldwide","welcome", :government_name => tr(current_government.name,"Name from database"))%></a>
 				</div>
 				<% if logged_in? and current_user.warnings_count > 0 %>
 				<div id="warning">

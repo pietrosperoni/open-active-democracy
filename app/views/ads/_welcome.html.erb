@@ -1,6 +1,6 @@
 <% session[:have_shown_welcome] = true unless defined?(show_always) %>
 <div>
-    <h2><%=tr("Welcome to Your Priorities","welcome")%></h2>
-        <%=tr("Welcome to this beta version of the Your Priorities website.","welcome")%>
+    <h2><%=tr("Welcome to {government_name}","welcome", :government_name => tr(current_government.name,"Name from database"))%></h2>
+        <%=tr("Welcome to this beta version of the {government_name} website.","welcome", :government_name => tr(current_government.name,"Name from database"))%>
   </div>
 

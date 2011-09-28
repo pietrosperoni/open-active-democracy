@@ -299,7 +299,7 @@ module ActiveRecord
                   Tagging.create(:tag_id => new_tag.id, :context => tag_type,
                                  :taggable => self, :tagger => owner)
                 else
-                  puts "Trying to create a duplicate tag for #{self.inspect} - #{new_tag.inspect}"
+                  puts "Trying to create a duplicate tag for priority id #{self.id} - tag id #{new_tag.id}"
 
                 end
               end
