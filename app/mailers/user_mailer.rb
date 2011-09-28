@@ -6,7 +6,11 @@ class UserMailer < ActionMailer::Base
     @recipient = @user = user
     @government = Government.current
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    if @government.layout.include?("better_reykjavik")
+      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/BR_email.png"))
+    else
+      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    end
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",

@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <table>
-      <tr>
-        <td width="130px" align="left">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<table>
+  <tr>
+    <td width="130px" align="left">
+      <% if defined?(attachments) %>
+          <%= image_tag attachments['logo.png'].url %>
+      <% else %>
           <% if @government.layout.include?("better_reykjavik") %>
-            <% if defined?(attachments)%>
-              <%= image_tag "logos/email.png" %>
-              <% #image_tag attachments['logo.png'].url %>
-            <% else %>
-               <%= image_tag "logos/BR_email.png" %>
-            <% end %>
+              <%= image_tag "logos/BR_email.png" %>
           <% else %>
-              <% if defined?(attachments)%>
-                <%= image_tag attachments['logo.png'].url %>
-              <% else %>
-                <%= image_tag "logos/email.png" %>
-              <% end %>
+              <%= image_tag "logos/email.png" %>
           <% end %>
-        </td>
-        <td>
-        <h1 style="margin-left: 15px;font-family:sans-serif,helvetica,arial"><%=tr("{government_name}","email", :government_name => tr(@government.name,"Name from database"))%>
-        </td>
-     </tr>
-   </table>
+      <% end %>
+    </td>
+    <td>
+      <h1 style="margin-left: 15px;font-family:sans-serif,helvetica,arial"><%= tr("{government_name}", "email", :government_name => tr(@government.name, "Name from database")) %>
+    </td>
+  </tr>
+</table>
