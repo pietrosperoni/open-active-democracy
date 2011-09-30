@@ -1,5 +1,7 @@
 <% if @error %>
-<%= @error%>
+  <%= @error%>
+<% elsif not @search_results %>
+  <%= tr("No search results","_searches") %>
 <% else %>
 <% form_tag(searches_path, :method => 'get') do %>    
 <tr>
