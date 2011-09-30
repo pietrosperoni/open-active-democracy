@@ -41,13 +41,7 @@
 	</td><td valign="top" width="160" style="padding-left: 20px;">
 		<p>
 		<% if logged_in? and current_user.endorsements_count > 4 %>
-			<% if current_government.has_official? %>
-				<%= render :partial => "users/index_chart_with_official", :locals => {:user => current_user }%>
-			<% else %>
-				<%= render :partial => "users/index_chart", :locals => {:user => current_user }%>
-			<% end %>
-		<% elsif current_government.has_official? %>
-			<%= render :partial => "users/index_chart", :locals => {:user => current_government.official_user }%>
+			<%= render :partial => "users/index_chart", :locals => {:user => current_user }%>
 		<% end %>
 		
 		<% @finished = Priority.finished.by_most_recent_status_change.all(:limit => 5) %>

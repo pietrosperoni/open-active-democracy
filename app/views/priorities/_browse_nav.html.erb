@@ -39,13 +39,6 @@
 					</span>
 				</li>
 				<% end %>
-				<% if current_government.has_official? %>			
-					<li class="tab3">
-						<span class="tab_header">
-							<%= link_to current_government.official_user_short_name, official_priorities_url %>
-						</span>
-					</li>
-				<% end %>
 				<li class="tab6">
 					<span class="tab_header">
 						<%= link_to tr("Controversial", "view/priorities/_browse_nav"), controversial_priorities_url %>
