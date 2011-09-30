@@ -26,7 +26,7 @@ class IssuesController < ApplicationController
       flash[:error] = tr("That {tags_name} doesn't exist anymore", "controller/issues", :tags_name => current_government.tags_name.downcase)
       redirect_to "/" and return 
     end
-    @page_title = tr("{tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("{tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.top_rank.paginate(:page => params[:page], :per_page => params[:per_page])
     get_endorsements    
     respond_to do |format|
@@ -40,7 +40,7 @@ class IssuesController < ApplicationController
   alias :top :show
 
   def yours
-    @page_title = tr("Your {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("Your {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = @user.priorities.tagged_with(@tag_names, :on => :issues).paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements if logged_in?
     respond_to do |format|
@@ -75,7 +75,7 @@ class IssuesController < ApplicationController
   end  
   
   def network
-    @page_title = tr("Your network's {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("Your network's {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @tag_priorities = Priority.published.filtered.tagged_with(@tag_names, :on => :issues)
     if @user.followings_count > 0
       @priorities = Endorsement.active.find(:all, 
@@ -133,7 +133,7 @@ class IssuesController < ApplicationController
   end  
 
   def rising
-    @page_title = tr("Rising {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("Rising {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.rising.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
@@ -145,7 +145,7 @@ class IssuesController < ApplicationController
   end
   
   def falling
-    @page_title = tr("Falling {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)         
+    @page_title = tr("Falling {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues).falling.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
@@ -157,7 +157,7 @@ class IssuesController < ApplicationController
   end  
 
   def controversial
-    @page_title = tr("Controversial {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)       
+    @page_title = tr("Controversial {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.controversial.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
@@ -170,7 +170,7 @@ class IssuesController < ApplicationController
 
   # this doesn't work in pgsql :(
   def random
-    @page_title = tr("Random {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("Random {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     if User.adapter == 'postgresql'
       flash[:error] = "This page doesn't work, sorry."
       redirect_to "/issues/" + @tag.slug
@@ -188,7 +188,7 @@ class IssuesController < ApplicationController
   end
 
   def finished
-    @page_title = tr("Finished {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("Finished {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues).finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -199,7 +199,7 @@ class IssuesController < ApplicationController
   end
 
   def newest
-    @page_title = tr("New {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("New {tag_name} priorities", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.newest.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
@@ -211,7 +211,7 @@ class IssuesController < ApplicationController
   end
   
   def discussions
-    @page_title = tr("Discussions on {tag_name}", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("Discussions on {tag_name}", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues)
     @activities = Activity.active.filtered.discussions.for_all_users.by_recently_updated.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page], :per_page => 10
     respond_to do |format|
@@ -222,7 +222,7 @@ class IssuesController < ApplicationController
   end  
   
   def documents
-    @page_title = tr("Documents on {tag_name}", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("Documents on {tag_name}", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues)
     @documents = Document.by_helpfulness.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
@@ -233,7 +233,7 @@ class IssuesController < ApplicationController
   end  
 
   def points
-    @page_title = tr("{tag_name} points", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("{tag_name} points", "controller/issues", :tag_name => @tag_names.titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues)
     @points = Point.by_helpfulness.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page]
     @qualities = nil
@@ -248,7 +248,7 @@ class IssuesController < ApplicationController
   end
   
   def twitter
-    @page_title = tr("What people are saying right now about {tag_name}", "controller/issues", :tag_name => @tag_names.titleize, :target => current_government.target)
+    @page_title = tr("What people are saying right now about {tag_name}", "controller/issues", :tag_name => @tag_names.titleize)
   end
   
   private

@@ -13,7 +13,7 @@
 			action="<%= url_for :controller => 'facebook', :action => 'multiple', :only_path => false %>" 
 			method="POST" 
 			type="<%= tr(current_government.name,"Name from database") %>"
-			content="<%= tr(current_government.name,"Name from database") %>. <%= current_government.mission %><fb:req-choice url='<%= url_for new_user_path(:referral_id => current_user.id, :only_path => false) %>' label='<%= tr("Yes, I want to get involved", "view/facebook/invite") %>' />"
+			content="<%= tr(current_government.mission,"Name from database") %><fb:req-choice url='<%= url_for new_user_path(:referral_id => current_user.id, :only_path => false) %>' label='<%= tr("Yes, I want to get involved", "view/facebook/invite") %>' />"
 			invite="true">
 			<fb:multi-friend-selector
 			 exclude_ids = "<%= current_following_facebook_uids.join(',') %>,<%= @facebook_contacts.join(',') %>"

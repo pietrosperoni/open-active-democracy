@@ -1,7 +1,7 @@
 <% if params[:controller] == 'priorities' and @priority %>
 <meta name="description" content="<%= tr("{prompt} {priority_name}. Learn more at {government_name}", "view/shared/_description", :prompt => current_government.prompt, :government_name => tr(current_government.name,"Name from database"), :priority_name => @priority.name) %> ">
 <% elsif params[:controller] == 'users' and @user and @user.has_top_priority? %>
-<meta name="description" content="<%= tr("{user_name} top priority for: {priority_name}", "view/shared/_description", :user_name => @user.name, :target => current_government.target, :priority_name => @user.top_endorsement.priority.name) %>">
+<meta name="description" content="<%= tr("{user_name} top priority for: {priority_name}", "view/shared/_description", :user_name => @user.name, :priority_name => @user.top_endorsement.priority.name) %>">
 <% else %>
 <meta name="description" content="<%= tr(current_government.name,"Name from database") %>">
 <% end %>
