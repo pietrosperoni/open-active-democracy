@@ -2,7 +2,7 @@
 
 <p><%=tr("Hi","email")%> <%= @recipient.first_name.capitalize %>,</p>
 
-<p><%=tr("Congratulations! You just earned 1 social point because {sender_name} is now following your updates at {government_name}.","email", :sender_name=>@sender.name, :government_name => tr(current_government.name,"Name from database"))%></p>
+<p><%=tr("Congratulations! You just earned 1 social point because {sender_name} is now following your updates at {government_name}.","email", :sender_name=>@sender.name, :government_name => tr(@government.name,"Name from database"))%></p>
 
 <p><%=tr("Learn more about","email")%> <%= @sender.name %>:<br>
 <%= link_to @sender.profile_url, @sender.profile_url %></p>
