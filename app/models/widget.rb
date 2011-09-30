@@ -22,7 +22,7 @@ class Widget < ActiveRecord::Base
 
   def discussions_available
     a = Array.new
-    if user
+    if false and user
       a << [ "your_discussions", tr("Your discussions", "model/widget") ]
       a << [ "your_network_discussions", tr("Discussions in your network", "model/widget") ]
       a << [ "your_priorities_discussions", tr("Discussions on your priorities", "model/widget") ]
