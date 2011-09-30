@@ -5,12 +5,6 @@ class Widget < ActiveRecord::Base
 
   def priorities_available
     a = Array.new
-    if user
-      a << [ "yours", tr("Your priorities", "model/widget") ]
-      a << [ "yours_finished", tr("Your finished priorities", "model/widget") ]
-      a << [ "yours_created", tr("Priorities you created", "model/widget") ]
-      a << [ "network", tr("Your network's priorities", "model/widget") ]
-    end
     a << [ "top", tr("Top priorities", "model/widget") ]
     a << [ "rising", tr("Rising priorities", "model/widget") ]
     a << [ "falling", tr("Falling priorities", "model/widget") ]
