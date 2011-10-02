@@ -144,7 +144,7 @@ task :after_update_code do
   run "ln -s   #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
   run "ln -nfs #{deploy_to}/#{shared_dir}/config/twitter_auth.yml #{current_release}/config/twitter_auth.yml"
   run "ln -nfs #{deploy_to}/#{shared_dir}/production #{current_release}/public/production"
-  run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
+  #run "ln -nfs #{deploy_to}/#{shared_dir}/system #{current_release}/public/system"
   run "ln -nfs #{deploy_to}/#{shared_dir}/private #{current_release}/private"
 #  run "ln -nfs /mnt/shared/system #{current_release}/public/system"
   thinking_sphinx.configure

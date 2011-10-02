@@ -1,3 +1,4 @@
+# coding: utf-8
 class ProcessParser
 
   @@stage_sequence_number = @@discussion_sequence_number = @@process_document_sequence_number = 0

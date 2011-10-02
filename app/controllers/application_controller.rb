@@ -150,6 +150,7 @@ class ApplicationController < ActionController::Base
       if (controller_name=="home" and action_name=="index") or 
          Rails.env.development? or
          request.host.include?("betrireykjavik") or
+         request.host.include?("skuggathing") or
          self.class.name.downcase.include?("tr8n") or
          ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
         @current_partner = nil

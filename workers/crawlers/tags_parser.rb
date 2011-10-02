@@ -1,3 +1,4 @@
+# coding: utf-8
 class TagsParser
   def self.get_tags(html_doc,tags_to_collect)
     millivis_addr = html_doc.xpath("/html/body/table/tr[2]/td/table/tr/td[2]/div/p/a[1]")[0]['href']
