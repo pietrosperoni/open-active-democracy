@@ -1,0 +1,22 @@
+    mysqldump -u root -h localhost  --lock-all-tables --ignore-table=odd_dev_2.user_rankings --add-drop-table --default-character-set=latin1 --insert-ignore --skip-set-charset -p odd_dev_2 > /home/robert/skuggathing.011011iso.sql
+    Translation from BR to new BR
+    mysqldump —user=username —password=password —default-character-set=latin1 —skip-set-charset dbname > dump.sql
+
+    sed -e 's/CHARSET=latin1/CHARSET=utf8/g' b2.sql > b2b.sql
+    mysql —user=username —password=password —execute=”DROP DATABASE dbname; CREATE DATABASE dbname CHARACTER SET utf8 COLLATE utf8_general_ci;”
+    mysql —user=username —password=password —default-character-set=utf8 dbname
+
+    mysql -u root --default-character-set=utf8 -p oad_shadow_development < skuggathing.011011utf8.sql
+
+    bundle exec rake tr8n:import_db
+    bundle exec rake tr8n:import_and_setup_iso_3166
+
+    t= Tr8n::Config.current_language
+    t.english_name = "English"
+    t.save
+
+    User.all.each do |u|
+      u.facebook_id = u.facebook_uid
+      u.save
+    end
+

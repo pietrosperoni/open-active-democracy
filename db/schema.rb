@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -565,7 +566,6 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
 
   create_table "partners", :force => true do |t|
     t.string   "name",                       :limit => 60
-    t.string   "name_variations_data",       :limit => 300
     t.string   "short_name",                 :limit => 20
     t.integer  "picture_id"
     t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
@@ -590,6 +590,7 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.string   "custom_tag_checkbox"
     t.string   "custom_tag_dropdown_1"
     t.string   "custom_tag_dropdown_2"
+    t.string   "name_variations_data",       :limit => 350
     t.boolean  "geoblocking_enabled",                       :default => false
     t.string   "geoblocking_open_countries",                :default => ""
     t.string   "default_locale"

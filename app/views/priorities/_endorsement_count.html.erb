@@ -17,10 +17,4 @@
 <% if priority.priority_processes.count > 0 %> 
 	&middot; <%= priority.latest_priority_process_at %>
 <% end %>
-
-<% if priority.is_official_endorsed? %> 
-	&middot; <%= current_government.official_user_short_name %> <span class="endorsed"><%= tr("endorses", "view/priorities/_endorsement_count")%></span>
-<% elsif priority.is_official_opposed? %> 
-	&middot; <%= current_government.official_user_short_name %> <span class="opposed"><%= tr("opposes", "view/priorities/_endorsement_count")%></span>
-<% end %>
 </span>

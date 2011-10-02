@@ -22,24 +22,24 @@ class ProcessSpeechVideo < ActiveRecord::Base
   acts_as_rateable  
 
   def get_image_tag(padding_direction="top", image_size="smaller", class_id=nil, title=false, pos=nil)
-    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+Rails.env+"/process_speech_videos/#{self.id}/"
     tiny_filename = "#{speech_video_path}#{image_size}_thumb_#{rand(5-2)+2}.png"
     ancenstor_number = self.ancestors.length
     class_id = " class=\"#{class_id}\"" if class_id
     title_txt = "title=\"#{pos ? pos.to_s+'. ' : ""}#{self.title} - #{self.modified_duration_long}|#{self.process_discussion.meeting_date.strftime("%d/%m/%y")}<br><br>\
                 #{self.process_discussion.priority_process.priority.name}<br><br>\
-                #{self.rating}/5.0 - #{self.ratings.size} #{t :votes_counted}\"" if title
+                #{self.rating}/5.0 - #{self.ratings.size} #{tr("Votes counted","vote_texts")}\"" if title
     "<a href=\"/process_speech_videos/show/#{self.id}\"#{class_id}#{title_txt}><img src=\"#{tiny_filename}\" height=\"50\" width=\"80\" border=0 style=\"padding-#{padding_direction}:#{ancenstor_number*7}px\"></a>"
   end
 
   def get_video_link_tag
-    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+Rails.env+"/process_speech_videos/#{self.id}/"
     "#{speech_video_path}speech.flv"
   end
   
   def get_playlist_image_url(image_size="tiny")
     image_size+="_" unless image_size==""
-    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+Rails.env+"/process_speech_videos/#{self.id}/"
     "#{speech_video_path}#{image_size}thumb_#{rand(5-2)+2}.png"
   end
 
@@ -84,12 +84,12 @@ class ProcessSpeechVideo < ActiveRecord::Base
   end
   
   def video_share_screenshot_image
-    speech_video_path = "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/"
+    speech_video_path = "/"+Rails.env+"/process_speech_videos/#{self.id}/"
     "#{speech_video_path}small_thumb_#{rand(5-2)+2}.png"
   end
 
   def video_share_url
-    "/"+ENV['Rails.env']+"/process_speech_videos/#{self.id}/speech.flv"
+    "/"+Rails.env+"/process_speech_videos/#{self.id}/speech.flv"
   end
     
   def get_menu_title

@@ -54,9 +54,9 @@ class ProcessDocument < ActiveRecord::Base
         self.external_type.downcase_is.index("stjórnartillaga")) and 
        (not self.priority_process.priority.name.downcase_is.index("fjárlög") and
         not self.priority_process.priority.name.downcase_is.index("fjáraukalög"))
-      "<a href=\"/process_documents/show/#{to_param}\">#{external_type}</a>"
+      "<a href=\"/process_documents/show/#{to_param}\">#{external_type}</a>".html_safe
     else
-      "<a href=\"#{self.external_link}\">#{external_type}</a>"
+      "<a href=\"#{self.external_link}\">#{external_type}</a>".html_safe
     end
   end
 end

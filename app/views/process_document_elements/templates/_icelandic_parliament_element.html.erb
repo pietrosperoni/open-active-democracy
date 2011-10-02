@@ -1,4 +1,4 @@
-<%="#{element.content.gsub("/pdf/thing","http://www.althingi.is/pdf/thing")}" %>
+<%="#{element.content.force_encoding('UTF-8').encode("UTF-8",invalid: :replace,undef: :replace,replace: '?').gsub("/pdf/thing","http://www.althingi.is/pdf/thing")}".html_safe %>
 <% if [12,13,15,16,17,19].include?(element.content_type) %>
 <i><%=tr("Rate this article", "view/process_document_elements/templates") %>:</i>
 <table width="100%">
@@ -12,7 +12,7 @@
                     <td valign="top">
                         <div id="change_proposals_master_panel_for_<%=element.sequence_number%>">
                             <%= render :partial => "process_document_elements/templates/#{document.template_name}_change_proposals",
-									   :locals => {:document=> document, :change_target => element, 
+									   :locals => {:document=> document, :change_target => element,
 									   :open_panel => document.has_change_proposal_for_sequence_number?(element.sequence_number) } %>
                         </div>
                     </td>
