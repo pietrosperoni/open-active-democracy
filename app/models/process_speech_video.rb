@@ -29,18 +29,18 @@ class ProcessSpeechVideo < ActiveRecord::Base
     title_txt = "title=\"#{pos ? pos.to_s+'. ' : ""}#{self.title} - #{self.modified_duration_long}|#{self.process_discussion.meeting_date.strftime("%d/%m/%y")}<br><br>\
                 #{self.process_discussion.priority_process.priority.name}<br><br>\
                 #{self.rating}/5.0 - #{self.ratings.size} #{tr("Votes counted","vote_texts")}\"" if title
-    "<a href=\"/process_speech_videos/show/#{self.id}\"#{class_id}#{title_txt}><img src=\"#{tiny_filename}\" height=\"50\" width=\"80\" border=0 style=\"padding-#{padding_direction}:#{ancenstor_number*7}px\"></a>"
+    "<a href=\"/process_speech_videos/show/#{self.id}\"#{class_id}#{title_txt}><img src=\"#{tiny_filename}\" height=\"50\" width=\"80\" border=0 style=\"padding-#{padding_direction}:#{ancenstor_number*7}px\"></a>".html_safe
   end
 
   def get_video_link_tag
     speech_video_path = "/"+Rails.env+"/process_speech_videos/#{self.id}/"
-    "#{speech_video_path}speech.flv"
+    "#{speech_video_path}speech.flv".html_safe
   end
   
   def get_playlist_image_url(image_size="tiny")
     image_size+="_" unless image_size==""
     speech_video_path = "/"+Rails.env+"/process_speech_videos/#{self.id}/"
-    "#{speech_video_path}#{image_size}thumb_#{rand(5-2)+2}.png"
+    "#{speech_video_path}#{image_size}thumb_#{rand(5-2)+2}.png".html_safe
   end
 
   def inpoint_s
@@ -85,19 +85,19 @@ class ProcessSpeechVideo < ActiveRecord::Base
   
   def video_share_screenshot_image
     speech_video_path = "/"+Rails.env+"/process_speech_videos/#{self.id}/"
-    "#{speech_video_path}small_thumb_#{rand(5-2)+2}.png"
+    "#{speech_video_path}small_thumb_#{rand(5-2)+2}.png".html_safe
   end
 
   def video_share_url
-    "/"+Rails.env+"/process_speech_videos/#{self.id}/speech.flv"
+    "/"+Rails.env+"/process_speech_videos/#{self.id}/speech.flv".html_safe
   end
     
   def get_menu_title
-    "#{self.process_discussion.meeting_date.strftime("%d/%m/%y")} #{self.process_discussion.from_time.strftime("%H:%M")}-#{self.process_discussion.to_time.strftime("%H:%M")}"
+    "#{self.process_discussion.meeting_date.strftime("%d/%m/%y")} #{self.process_discussion.from_time.strftime("%H:%M")}-#{self.process_discussion.to_time.strftime("%H:%M")}".html_safe
   end
 
   def video_share_swf_player_url(host)
-    "http://#{host}/swf/flowplayer.swf?config={%22clip%22:{%22url%22:%22http://#{host}/production/process_speech_videos/#{self.id}/speech.flv%22,%22embedded%22:true}}"
+    "http://#{host}/swf/flowplayer.swf?config={%22clip%22:{%22url%22:%22http://#{host}/production/process_speech_videos/#{self.id}/speech.flv%22,%22embedded%22:true}}".html_safe
   end
 
   def video_share_width

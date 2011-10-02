@@ -166,6 +166,5 @@ Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems')].each do |vendored
   $: << File.join(vendored_notifier, 'lib')
 end
 
-
-        require './config/boot'
-        require 'airbrake/capistrano'
+require './config/boot'
+require 'airbrake/capistrano'
