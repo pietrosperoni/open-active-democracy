@@ -97,6 +97,7 @@ module PortalHelper
         Rails.cache.write(key, @priorities, :expires_in => 5.minutes)
       end
     end
+    @priorities = @priorities.compact
   end
 
   def get_endorsements
