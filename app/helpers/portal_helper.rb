@@ -97,13 +97,12 @@ module PortalHelper
         Rails.cache.write(key, @priorities, :expires_in => 5.minutes)
       end
     end
-    @priorities = @priorities.compact
   end
 
   def get_endorsements
     endorsements = nil
-    Rails.logger.debug("get endorsments: #{@priorities.inspect}")
-    if logged_in? and @priorities # pull all their endorsements on the priorities shown
+    #Rails.logger.debug("get endorsments: #{@priorities.inspect}")
+    if logged_in? # pull all their endorsements on the priorities shown
       endorsements = current_user.endorsements.active.find(:all, :conditions => ["priority_id in (?)", @priorities.collect {|c| c.id}])
     end
     endorsements

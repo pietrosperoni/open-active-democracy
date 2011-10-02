@@ -36,7 +36,13 @@ class PriorityProcess < ActiveRecord::Base
     last_weeks_documents = ProcessDocument.find(:all, :limit=>limit, :order=>"external_date DESC")
     @processes_changed_past_7_days = []
     if not last_weeks_discussion.empty? or not last_weeks_documents.empty?
-      @processes_changed_past_7_days = last_weeks_discussion += last_weeks_documents
+      if not last_weeks_discussion.empty? and not last_weeks_documents.empty?
+        @processes_changed_past_7_days = last_weeks_discussion += last_weeks_documents
+      elsif not last_weeks_discussion.empty?
+        @processes_changed_past_7_days = last_weeks_discussion
+      elsif not last_weeks_documents.empty?
+        @processes_changed_past_7_days = last_weeks_documents
+      end
       @processes_changed_past_7_days = @processes_changed_past_7_days.sort do |a,b|
         if a.class.to_s=="ProcessDiscussion"
           compare_time_a = a.to_time
