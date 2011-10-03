@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607232520) do
+ActiveRecord::Schema.define(:version => 20111003164138) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -853,8 +853,8 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.integer  "sequence_number"
     t.integer  "process_document_id"
     t.integer  "parent_id"
-    t.binary   "content",             :limit => 2147483647
-    t.binary   "content_text_only",   :limit => 2147483647
+    t.string   "content"
+    t.string   "content_text_only"
     t.string   "content_number"
     t.datetime "created_at"
     t.datetime "updated_at"

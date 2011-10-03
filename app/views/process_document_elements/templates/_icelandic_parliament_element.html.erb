@@ -1,4 +1,4 @@
-<%="#{element.content.force_encoding('UTF-8').encode("UTF-8",invalid: :replace,undef: :replace,replace: '?').gsub("/pdf/thing","http://www.althingi.is/pdf/thing")}".html_safe %>
+<%="#{element.content.gsub("/pdf/thing","http://www.althingi.is/pdf/thing")}".html_safe %>
 <% if [12,13,15,16,17,19].include?(element.content_type) %>
 <i><%=tr("Rate this article", "view/process_document_elements/templates") %>:</i>
 <table width="100%">
