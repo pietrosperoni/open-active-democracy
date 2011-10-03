@@ -207,7 +207,7 @@ class ProcessParser
       current_priority = old_priority
       puts "OLD PRIORITY "+old_priority.inspect
     else
-      current_priority.save
+      current_priority.save(false)
       puts current_priority.inspect
     end
        
