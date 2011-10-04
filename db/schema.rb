@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111003164138) do
+ActiveRecord::Schema.define(:version => 20111004133715) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -776,6 +776,7 @@ ActiveRecord::Schema.define(:version => 20111003164138) do
     t.integer  "position_endorsed_7days"
     t.integer  "position_endorsed_30days"
     t.text     "finished_status_message"
+    t.integer  "external_session_id"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"

@@ -22,7 +22,7 @@
 set :output, "/home/robert/sites/open-active-democracy/shadow/shared/log/cron_log.log"
 
 every 1.hour do
-  command "cd /home/robert/sites/open-active-democracy/shadow/current/workers/crawlers; RAILS_ENV=production bundle exec ruby law_crawler.rb RAILS_ENV=production"
+  command "cd /home/robert/sites/open-active-democracy/shadow/current/workers/crawlers; RAILS_ENV=production bundle exec ruby law_crawler.rb"
 end
 
 every 5.minutes do
@@ -36,7 +36,7 @@ end
 every :reboot do
   rake "ts:index"
   rake "ts:start"
-  command "cd /home/robert/sites/open-active-democracy/shadow/current; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
+  command "cd /home/robert/sites/open-active-democracy/shadow/current; RAILS_ENV=production ruby script/delayed_job start"
 end
 
 every 50.minutes do

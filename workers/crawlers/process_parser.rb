@@ -154,11 +154,10 @@ class ProcessParser
         raise
       end
     end
-    
-    ur = URI.parse(url)
-    ur_params = CGI.parse(ur.select(:query).to_s)
-    ltg = ur_params["ltg"]
-    mnr = ur_params["mnr"]
+
+    ur_params = CGI.parse(URI.parse(url).query)
+    ltg = ur_params["ltg"].first
+    mnr = ur_params["mnr"].first
     
     if process_type == PROCESS_TYPE_LOG
       info_2 = "#{mnr}. mál lagafrumvarp"
@@ -193,7 +192,8 @@ class ProcessParser
     current_priority.external_info_3 = info_3
     current_priority.external_link = url
     current_priority.external_presenter = presenter
-    current_priority.external_id = external_id
+    current_priority.external_id = mnr
+    current_priority.external_session_id = ltg
     current_priority.external_name = external_name
     current_priority.name = (html_doc/"h1.FyrirsognStorSv").text.strip
     current_priority.user = current_user
@@ -202,10 +202,27 @@ class ProcessParser
     
     puts "***************************************** New Process *****************************************"
     puts "Process info 1: #{current_priority.external_info_1} 2: #{info_2} 3: #{info_3}"
-    old_priority = Priority.find_by_external_link(url)
+    old_priority = Priority.find_by_external_id_and_external_session_id(mnr, ltg)
     if old_priority
-      current_priority = old_priority
       puts "OLD PRIORITY "+old_priority.inspect
+
+      if old_priority.external_link != current_priority.external_link
+        puts "UPDATING EXTERNAL LINK: #{old_priority.external_link}"
+        old_priority.external_link = current_priority.external_link
+      end
+
+      old_tags     = old_priority.issue_list.to_a
+      current_tags = current_priority.issue_list.to_a
+      new_tags     = current_tags - old_tags
+
+      unless new_tags.empty?
+        puts "ADDING NEW TAGS: #{new_tags}"
+        combined_tags = old_tags | new_tags
+        old_priority.issue_list = combined_tags.join(", ")
+        old_priority.save(false)
+      end
+
+      current_priority = old_priority
     else
       current_priority.save(false)
       puts current_priority.inspect
@@ -254,14 +271,14 @@ class ProcessParser
         puts "---------------------"      
         next_sibling = row.next_sibling
         @@process_document_sequence_number = @@discussion_sequence_number = 0
-        while next_sibling and next_sibling.inspect[0..3]!="<div" and not next_sibling.inspect.include?("FyrirsognMidSv")
-          if next_sibling.inspect[0..5]=="<table"
+        while next_sibling and next_sibling.to_s[0..3]!="<div" and not next_sibling.to_s.include?("FyrirsognMidSv")
+          if next_sibling.to_s[0..5]=="<table"
             puts "============"      
             puts next_sibling.at("tr[1]/td[1]").text
             puts "============"
             if next_sibling.at("tr[1]/td[1]").text=="Þingskjöl"
               process_documents(next_sibling,current_process,process_document_type,process_type)
-            elsif (next_sibling.at("tr[1]/td[1]").inner_html)=="Umræða"
+            elsif (next_sibling.at("tr[1]/td[1]").text)=="Umræða"
               process_discussion(next_sibling,current_process)
             end
             puts "++++++++++++"

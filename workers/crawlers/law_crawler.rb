@@ -26,29 +26,28 @@ require 'nokogiri'
 require 'open-uri'
 require 'timeout'
 
-Rails.env='production'
-#Rails.env='development'
-
 require '../../config/boot'
-require "#{Rails.root.to_s}/config/environment"
+require "../../config/environment"
 
-require 'law_proposal_document_element'
-require 'process_parser'
-require 'tags_parser'
+require './law_proposal_document_element'
+require './process_parser'
+require './tags_parser'
 
 PROCESS_TYPE_LOG = 1
 PROCESS_TYPE_THINGSALYKTUNARTILLAGA = 2
+PARLIAMENTARY_SESSIONS = ARGV
 
 class ProcessCrawler
 end
 
 class AlthingiCrawler < ProcessCrawler
 
- def update_all_processes(process_type)
+ def update_all_processes(process_type, session=nil)
+   session_tag = session ? "&validthing=#{session}" : ""
    if process_type == PROCESS_TYPE_LOG
-     html_doc = Nokogiri::HTML(open('http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=l'))
+     html_doc = Nokogiri::HTML(open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=l#{session_tag}"))
    elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-     html_doc = Nokogiri::HTML(open('http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv'))
+     html_doc = Nokogiri::HTML(open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv#{session_tag}"))
    end
 
    next_sibling = html_doc.xpath('/html/body/table/tr[2]/td/table/tr/td/table[2]/tr/td[2]/div/table')
@@ -59,19 +58,20 @@ class AlthingiCrawler < ProcessCrawler
      external_process_id = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip
      puts "External Process Id:"+external_process_id
      process_name = ""
-     process_name+=next_sibling.at("tr[#{tr_count}]/td[2]").text.strip
-     process_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")['href']
+     process_name+=next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+     puts process_name
+     process_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[3]/a[@href]")['href']
      puts "Process URL: "+process_url
-     if next_sibling.at("tr[#{tr_count}]/td[2]/a[@title]") and
-        next_sibling.at("tr[#{tr_count}]/td[2]/a[@title]")['title']!=""
-       process_name+=" ("+next_sibling.at("tr[#{tr_count}]/td[2]/a[@title]")['title'].strip+")"
+     if next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]") and
+        next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]")['title']!=""
+       process_name+=" ("+next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]")['title'].strip+")"
      end
      puts "Process name: "+process_name      
      process_author = ""
-     process_author+=next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
-     if next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]") and 
-        next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]")['title']!=""
-       process_author+=" ("+next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]")['title'].strip+")"
+     process_author+=next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
+     if next_sibling.at("tr[#{tr_count}]/td[4]/a[@title]") and
+        next_sibling.at("tr[#{tr_count}]/td[4]/a[@title]")['title']!=""
+       process_author+=" ("+next_sibling.at("tr[#{tr_count}]/td[4]/a[@title]")['title'].strip+")"
      end
      puts "Process author: "+process_author
      tr_count+=1
@@ -101,8 +101,18 @@ end
 
 acrawler = AlthingiCrawler.new
 #acrawler.update_icesave
-acrawler.update_all_processes(PROCESS_TYPE_LOG)
-acrawler.update_all_processes(PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
+
+if PARLIAMENTARY_SESSIONS.empty?
+  puts "PROCESSING LATEST PARLIAMENTARY SESSION ONLY"
+  acrawler.update_all_processes(PROCESS_TYPE_LOG)
+  acrawler.update_all_processes(PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
+else
+  PARLIAMENTARY_SESSIONS.each do |session|
+    puts "PROCESSING PARLIAMENTARY SESSION #{session}"
+    acrawler.update_all_processes(PROCESS_TYPE_LOG, session)
+    acrawler.update_all_processes(PROCESS_TYPE_THINGSALYKTUNARTILLAGA, session)
+  end
+end
 
 #acrawler.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=135&mnr=107", "PRESENTER", "ID", "NAME", PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
 #acrawler.get_process("http://www.althingi.is/dba-bin/ferill.pl?ltg=135&mnr=62", "PRESENTER", "ID", "NAME", PROCESS_TYPE_THINGSALYKTUNARTILLAGA)
