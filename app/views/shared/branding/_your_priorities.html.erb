@@ -11,7 +11,7 @@
       <td>
         <div id="branding_text">
           <div id="branding_text_header">
-            <%=tr("Your Priorities","views/shared/_branding")%>
+            <%=tr("{government_name}","views/shared/_branding", :government_name => tr(current_government.name,"Name from database"))%>
           </div>
           <div id="branding_text_sub">
             <%=request.host%>

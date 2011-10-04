@@ -7,21 +7,22 @@
 
 
 <% if current_facebook_user %>
-	<fb:serverfbml>
+	<fb:serverfbml width="625px">
 		<script type="text/fbml">
 			<fb:request-form 
 			action="<%= url_for :controller => 'facebook', :action => 'multiple', :only_path => false %>" 
 			method="POST" 
 			type="<%= tr(current_government.name,"Name from database") %>"
-			content="<%= tr(current_government.name,"Name from database") %>.  <%= current_government.mission %><fb:req-choice url='<%= url_for new_user_path(:referral_id => current_user.id, :only_path => false) %>' label='<%= tr("Yes, I want to get involved", "view/facebook/invite") %>' />"
+			content="<%= tr(current_government.mission,"Name from database") %><fb:req-choice url='<%= url_for new_user_path(:referral_id => current_user.id, :only_path => false) %>' label='<%= tr("Yes, I want to get involved", "view/facebook/invite") %>' />"
 			invite="true">
 			<fb:multi-friend-selector
 			 exclude_ids = "<%= current_following_facebook_uids.join(',') %>,<%= @facebook_contacts.join(',') %>"
 			 actiontext="<%= tr("Invite your Facebook friends to join your network at {government_name}", "view/facebook/invite", :government_name => tr(current_government.name,"Name from database")) %>" 
 			 showborder="true"
 			 rows="4"
+			 cols="4"
 			 bypass="cancel"
-			 style="width: 500px;" />
+			 style="width: 600px;" />
 			<p>
 			</fb:request-form>
 		</script>
@@ -31,10 +32,10 @@
 <% if @users %>
 	<% if @users.size == 0 %>
 	
-		<%= tr("None of your Facebook friends are {government_name} members yet.", "view/facebook/invite", :government_name => tr(current_government.name,"Name from database")) %>
+		<br><%= tr("None of your Facebook friends are {government_name} members yet.", "view/facebook/invite", :government_name => tr(current_government.name,"Name from database")) %>
 		
 	<% else %>
-		<%= tr("{count} of your Facebook friends are already {government_name} members, and have been added to <a href='{network_url}'>your network</a>.<br/>You can <a href='{news_url}'>follow their updates in the news section</a>.", "view/facebook/invite", :count => @users.size, :government_name => tr(current_government.name,"Name from database"), :network_url => following_user_contacts_path(current_user), :news_url => url_for(:controller => "news", :action => "your_network_activities"))%>
+		<br><%= tr("There are {count} of your Facebook friends members of {government_name}, and have been added to <a href='{network_url}'>your network</a>.<br/>You can <a href='{news_url}'>follow their updates in the news section</a>.".html_safe, "view/facebook/invite", :count => @users.size, :government_name => tr(current_government.name,"Name from database"), :network_url => following_user_contacts_path(current_user), :news_url => url_for(:controller => "news", :action => "your_network_activities")).html_safe %>
 		<div id="contacts_small">
 		<table border="0" cellspacing="0" cellpadding="0">
 		<% for user in @users %>

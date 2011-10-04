@@ -11,20 +11,6 @@
 <div class="clear"></div>
 <div class="white_line"></div>
 <p>
-<% if current_government.has_official? %>
-
-	<% if params[:action] == 'not_official' %>
-	<%= tr("These are the priorities NOT on {official_user_name} agenda as prioritized by all members.", "view/priorities/list", :official_user_name => current_government.official_user.name)%>
-	<p>
-	<% elsif params[:action] == 'official' %>
-	<%= tr("These are the priorities {official_user_name} endorses, as prioritized by all members.", "view/priorities/list", :official_user_name => current_government.official_user.name)%>
-	<p>
-	<% elsif params[:action] == 'official_opposed' %>
-	<%= tr("These are the priorities {official_user_name} opposes, as prioritized by all members.", "view/priorities/list", :official_user_name => current_government.official_user.name)%>
-	<p>
-	<% end %>
-	
-<% end %>
 
 <% if params[:action] == 'yours_created' %>
 	<%= tr("This is where priorities you've created go, so you can easily reference them and track their progress.", "view/priorities/list")%>

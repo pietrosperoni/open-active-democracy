@@ -126,7 +126,8 @@ class Government < ActiveRecord::Base
   end  
   
   def has_official?
-    attribute_present?("official_user_id")
+    false
+    #attribute_present?("official_user_id")
   end
 
   def official_user_name

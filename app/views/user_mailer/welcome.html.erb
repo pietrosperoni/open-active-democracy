@@ -2,19 +2,19 @@
 
 <p><%=tr("Hi","email")%> <%= @user.first_name %>,</p>
 
-<p><%=tr("Welcome to Your Priorities","email")%></p>
+<p><%=tr("Welcome to {government_name}","email", :government_name => tr(@government.name,"Name from database"))%></p>
 
 <% if @user.needs_activation? -%>
-<p><%=tr("Please confirm your account so you can fully take part in Your Priorities. If you do not confirm your account your support for priorities is not included in global priority calculations.","email")%></p>
+<p><%=tr("Please confirm your account so you can fully take part in {government_name}. If you do not confirm your account your support for priorities is not included in global priority calculations.","email", :government_name => tr(@government.name,"Name from database"))%></p>
 
 <p><%=tr("Visit this link to confirm your account","email")%>: <%= link_to @user.root_url+'activate/'+@user.activation_code+'?utm_source=activation&utm_medium=email', @user.root_url+'activate/'+@user.activation_code+'?utm_source=activation&utm_medium=email'%></p>
 <% end %>
 
 <p><%=tr("Find people you know","email")%>: <%= link_to @user.root_url+'network/find?utm_source=signup&utm_medium=email',@user.root_url+'network/find?utm_source=signup&utm_medium=email' %></p>
 
-<p><%=tr("You earn 5 social points for everyone you invite that register with Your Priorities. Social points are a way to see how socially active \
+<p><%=tr("You earn 5 social points for everyone you invite that register with {government_name}. Social points are a way to see how socially active \
           and constructive people are. You earn social points when other people find your points for or against priorities useful. \
-          You can use your social points to buy \"ads\" for your favorite priorities on the website.","email") %> 
+          You can use your social points to buy \"ads\" for your favorite priorities on the website.","email", :government_name => tr(@government.name,"Name from database")) %>
 <%=tr("More here","email")%>: <%= link_to @user.root_url+'about/faq#pc', @user.root_url+'about/faq#pc'%><p/>
 
 <%= render :partial=>"footer.html" %>

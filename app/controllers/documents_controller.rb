@@ -33,7 +33,7 @@ class DocumentsController < ApplicationController
   end  
   
   def your_priorities
-    @page_title = tr("Newest documents on your priorities", "controller/documents")
+    @page_title = tr("Newest documents on {government_name}", "controller/documents", :government_name => tr(current_government.name,"Name from database"))
     if current_user.endorsements_count > 0    
       if current_user.up_endorsements_count > 0 and current_user.down_endorsements_count > 0
         @documents = Document.published.by_recently_created.paginate :conditions => ["(documents.priority_id in (?) and documents.endorser_helpful_count > 0) or (documents.priority_id in (?) and documents.opposer_helpful_count > 0)",current_user.endorsements.active_and_inactive.endorsing.collect{|e|e.priority_id}.uniq.compact,current_user.endorsements.active_and_inactive.opposing.collect{|e|e.priority_id}.uniq.compact], :include => :priority, :page => params[:page], :per_page => params[:per_page]

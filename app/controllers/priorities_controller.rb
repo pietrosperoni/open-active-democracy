@@ -116,7 +116,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/yours_finished
   def yours_finished
-    @page_title = tr("Your finished priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
+    @page_title = tr("Your priorities in progress at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
     @priorities = @user.endorsements.finished.find(:all, :order => "priorities.status_changed_at desc", :include => :priority).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "yours" }
@@ -219,7 +219,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/top
   def top
-    @page_title = tr("Top priorities", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Top priorities", "controller/priorities")
     @rss_url = top_priorities_url(:format => 'rss')   
     @priorities = Priority.published.filtered.top_rank.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -234,7 +234,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/top_24hr
   def top_24hr
-    @page_title = tr("Top priorities past 24 hours", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Top priorities past 24 hours", "controller/priorities")
     @rss_url = top_priorities_url(:format => 'rss')   
     @priorities = Priority.published.filtered.top_24hr.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -249,7 +249,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/top_7days
   def top_7days
-    @page_title = tr("Top priorities past 7 days", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Top priorities past 7 days", "controller/priorities")
     @rss_url = top_priorities_url(:format => 'rss')   
     @priorities = Priority.published.filtered.top_7days.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -264,7 +264,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/top_30days
   def top_30days
-    @page_title = tr("Top priorities past 30 days", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Top priorities past 30 days", "controller/priorities")
     @rss_url = top_priorities_url(:format => 'rss')   
     @priorities = Priority.published.filtered.top_30days.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -279,7 +279,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/rising
   def rising
-    @page_title = tr("Priorities rising in the rankings", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Priorities rising in the rankings", "controller/priorities")
     @rss_url = rising_priorities_url(:format => 'rss')           
     @priorities = Priority.published.filtered.rising.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -294,7 +294,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/falling
   def falling
-    @page_title = tr("Priorities falling in the rankings", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Priorities falling in the rankings", "controller/priorities")
     @rss_url = falling_priorities_url(:format => 'rss')
     @priorities = Priority.published.filtered.falling.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -309,7 +309,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/controversial  
   def controversial
-    @page_title = tr("Most controversial priorities", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Most controversial priorities", "controller/priorities")
     @rss_url = controversial_priorities_url(:format => 'rss')       
     @priorities = Priority.published.filtered.controversial.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -324,7 +324,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/finished
   def finished
-    @page_title = tr("Finished priorities", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Priorities in progress", "controller/priorities")
     @priorities = Priority.finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "list" }
@@ -337,7 +337,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/random
   def random
-    @page_title = tr("Random priorities", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Random priorities", "controller/priorities")
     if User.adapter == 'postgresql'
       @priorities = Priority.published.filtered.paginate :order => "RANDOM()", :page => params[:page], :per_page => params[:per_page]
     else
@@ -355,7 +355,7 @@ class PrioritiesController < ApplicationController
 
   # GET /priorities/newest
   def newest
-    @page_title = tr("Newest priorities", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Newest priorities", "controller/priorities")
     @rss_url = newest_priorities_url(:format => 'rss')     
     @priorities = Priority.published.filtered.newest.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -370,7 +370,7 @@ class PrioritiesController < ApplicationController
   
   # GET /priorities/untagged
   def untagged
-    @page_title = tr("Untagged (or uncategorized) priorities", "controller/priorities", :target => current_government.target)
+    @page_title = tr("Untagged (or uncategorized) priorities", "controller/priorities")
     @rss_url = untagged_priorities_url(:format => 'rss')            
     @priorities = Priority.published.filtered.untagged.paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
@@ -707,7 +707,7 @@ class PrioritiesController < ApplicationController
   # POST /priorities.xml
   def create
     if not logged_in?
-      flash[:notice] = tr("First you need to fill out this quick form and agree to the rules, then you can start adding your priorities.", "controller/priorities", :target => current_government.target)
+      flash[:notice] = tr("First you need to fill out this quick form and agree to the rules, then you can start adding your priorities.", "controller/priorities")
       session[:query] = params[:priority][:name] if params[:priority]
       access_denied
       return
@@ -814,8 +814,8 @@ class PrioritiesController < ApplicationController
             page<<"$('.priority_#{@priority.id.to_s}_button_small').replaceWith('#{escape_javascript(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}')"
             page<<"$('.priority_#{@priority.id.to_s}_endorsement_count').replaceWith('#{escape_javascript(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority}))}')"
           elsif params[:region] == 'ad_top' and @ad
-            page.replace 'ads', render(:partial => "ads/pick")
-            #page << 'jQuery("#notification_show");'
+            page.replace 'notification_show', render(:partial => "ads/pick")
+            page << 'jQuery("#notification_show").corners();'
           else
             page << "alert('error');"
           end

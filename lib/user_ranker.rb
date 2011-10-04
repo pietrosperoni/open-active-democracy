@@ -88,7 +88,7 @@ class UserRanker
           c.volume_count = c.up_count + c.down_count
           c.save
           if p.created_at+2.days > Time.now # within last two days, check to see if we've given them their priroity debut activity
-            ActivityUserRankingDebut.create(:user => p, :user_chart => c) unless ActivityUserRankingDebut.find_by_user_id(p.id)
+            ActivityUserRankingDebut.create(:user => p, :position => c.position) unless ActivityUserRankingDebut.find_by_user_id(p.id)
           end          
         end
       end

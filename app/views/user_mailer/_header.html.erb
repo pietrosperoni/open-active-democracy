@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <table>
-      <tr>
-        <td width="130px" align="left">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<table>
+  <tr>
+    <td width="130px" align="left">
+      <% if defined?(attachments) %>
+          <%= image_tag attachments['logo.png'].url, :alt=>tr("{government_name}", "email", :government_name => tr(@government.name, "Name from database")) %>
+      <% else %>
           <% if @government.layout.include?("better_reykjavik") %>
-            <% if defined?(attachments)%>
-              <%= image_tag "logos/email.png" %>
-              <% #image_tag attachments['logo.png'].url %>
-            <% else %>
-               <%= image_tag "logos/BR_email.png" %>
-            <% end %>
+              <h1><%= image_tag "logos/BR_email.png", :alt=>tr("{government_name}", "email", :government_name => tr(@government.name, "Name from database")) %></h1>
           <% else %>
-              <% if defined?(attachments)%>
-                <%= image_tag attachments['logo.png'].url %>
-              <% else %>
-                <%= image_tag "logos/email.png" %>
-              <% end %>
+              <h1><%= image_tag "logos/YourPriorities_large.png", :alt=>tr("{government_name}", "email", :government_name => tr(@government.name, "Name from database")) %></h1>
           <% end %>
-        </td>
-        <td>
-        <h1 style="margin-left: 15px;font-family:sans-serif,helvetica,arial"><%=tr("Your Priorities","email")%>
-        </td>
-     </tr>
-   </table>
+      <% end %>
+    </td>
+  </tr>
+</table>

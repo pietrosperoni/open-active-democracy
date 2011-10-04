@@ -21,9 +21,9 @@ class Priority < ActiveRecord::Base
 
   scope :top_rank, :order => "priorities.score desc, priorities.position asc"
 
-  scope :top_24hr, :order => "priorities.position_endorsed_24hr desc"
-  scope :top_7days, :order => "priorities.position_endorsed_7days desc"
-  scope :top_30days, :order => "priorities.position_endorsed_30days desc"
+  scope :top_24hr, :conditions => "priorities.position_endorsed_24hr IS NOT NULL", :order => "priorities.position_endorsed_24hr asc"
+  scope :top_7days, :conditions => "priorities.position_endorsed_7days IS NOT NULL", :order => "priorities.position_endorsed_7days asc"
+  scope :top_30days, :conditions => "priorities.position_endorsed_30days IS NOT NULL", :order => "priorities.position_endorsed_30days asc"
 
   scope :not_top_rank, :conditions => "priorities.position > 25"
   scope :rising, :conditions => "priorities.trending_score > 0", :order => "priorities.trending_score desc"

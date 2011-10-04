@@ -1,7 +1,7 @@
 <h1><%= tr("Our rules", "view/about/rules")%></h1>
 <div class="rules">
 
-	<h5><%= tr("By signing up for Your Priorities (YP) I declare:", "view/about/rules")%></h5>
+	<h5><%= tr("By signing up for {government_name} I declare:", "view/about/rules", :government_name => tr(current_government.name,"Name from database"))%></h5>
 
 	<ul>
 		<li><%= tr("Information given about myself is correct and I can recive and read email sent to the email address I supply. ", "view/about/rules")%></li>

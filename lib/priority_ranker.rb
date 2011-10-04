@@ -1,5 +1,6 @@
 class PriorityRanker
-  
+  @@all_priorities = Hash.new
+
   def perform
     puts "PriorityRanker.perform starting... at #{start_time=Time.now}"
     Government.current = Government.all.last
@@ -32,6 +33,9 @@ class PriorityRanker
         User.update_all("down_issues_count = #{u.num_issues}", "id = #{u.id}") unless u.down_issues_count == u.num_issues
       end
     end
+
+    # Delete all endorsements that do not have positions
+    Endorsement.delete_all("position IS NULL")
 
     # update the user's vote factor score
     users = User.active.all
@@ -179,6 +183,7 @@ class PriorityRanker
   private
   
   def update_positions_by_partner(partner)
+    puts "update positions by partners #{partner}"
     if partner
       Partner.current = partner
       partner_sql = "priorities.partner_id = #{partner.id}"
@@ -343,28 +348,48 @@ class PriorityRanker
   end
 
   def setup_ranged_endorsment_position(partner,time_since,position_db_name)
+    puts "Processing #{position_db_name}"
     if partner
       Partner.current = partner
       partner_sql = "priorities.partner_id = #{partner.id}"
     else
       partner_sql = "priorities.partner_id IS NULL"
     end
+    @@all_priorities[partner_sql] = Priority.find(:all, :conditions=>partner_sql) unless @@all_priorities[partner_sql]
+    puts @@all_priorities[partner_sql].count
     priorities = Priority.find_by_sql("
        select priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, \
        sum(((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value)*users.score) as number
        from users,endorsements,priorities
        where endorsements.user_id = users.id
+       and #{partner_sql}
        and endorsements.priority_id = priorities.id
-       and endorsements.created_at > '#{time_since}'
+       and endorsements.created_at >= '#{time_since}'
        and priorities.status = 'published'
        and endorsements.status = 'active' and endorsements.position <= #{Endorsement.max_position}
        group by priorities.id, priorities.endorsements_count, priorities.up_endorsements_count, priorities.down_endorsements_count, endorsements.priority_id
        order by number desc")
 
-    priorities.each_with_index do |priority|
-      priority.reload
-      eval "priority.#{position_db_name} = priority.number"
-      priority.save
+    puts "Found #{priorities.count} in range"
+    Priority.transaction do
+      priorities.each_with_index do |priority,index|
+        priority.reload
+        eval_cmd = "priority.#{position_db_name} = #{index+1}"
+        puts "#{priority.id} - #{eval_cmd}"
+        eval eval_cmd
+        priority.save
+      end
+    end
+
+    not_in_range_priorites = @@all_priorities[partner_sql]-priorities
+
+    puts "Found #{not_in_range_priorites.count} NOT in range"
+    Priority.transaction do
+      not_in_range_priorites.each do |priority|
+        priority.reload
+        eval "priority.#{position_db_name} = nil"
+        priority.save
+      end
     end
     Partner.current = nil
   end  

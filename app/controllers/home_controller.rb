@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   end  
   
   def index
-    @page_title = tr("Your Priorities Welcome","shared/language_selection_master")
+    @page_title = tr("{government_name} Welcome","shared/language_selection_master",:government_name => tr(current_government.name,"Name from database"))
     @world_priorities = Priority.where(:partner_id=>Partner.find_by_short_name("world").id).published.top_rank.limit(3)
     @eu_eea_priorities = Priority.where(:partner_id=>Partner.find_by_short_name("eu").id).published.top_rank.limit(3)
     @country_partner = Partner.where(:iso_country_id=>@iso_country.id).first if @iso_country

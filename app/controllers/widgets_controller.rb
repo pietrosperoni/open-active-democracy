@@ -10,7 +10,7 @@ class WidgetsController < ApplicationController
   def priorities
     @page_title = tr("Put priorities on your website", "controller/widgets", :government_name => tr(current_government.name,"Name from database"))
     if logged_in?
-      @widget = Widget.new(:controller_name => "priorities", :user => current_user, :action_name => "yours")
+      @widget = Widget.new(:controller_name => "priorities", :user => current_user, :action_name => "top")
     else
       @widget = Widget.new(:controller_name => "priorities", :action_name => "top")
     end

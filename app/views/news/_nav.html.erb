@@ -26,13 +26,6 @@
 					<%= link_to tr("Points", "view/news/_nav"), :controller => "news", :action => "points" %>
 				</span>
 			</li>
-			<% if current_government.has_official? %>
-				<li class="tab4">
-					<span class="tab_header">
-						<%= link_to tr("{official_user_name} activity", "view/news/_nav", :official_user_name => current_government.official_user_short_name), :controller => "news", :action => "official" %>
-					</span>
-				</li>
-			<% end %>			
 			<li class="tab5">
 				<span class="tab_header">
 					<%= link_to current_government.currency_name.titleize, :controller => "news", :action => "capital" %>

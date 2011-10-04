@@ -2,7 +2,7 @@
 <p>
 <%= tr("From:", "view/user_contacts/_preview")%> <%= current_government.admin_name %> &lt;<%= current_government.admin_email %>&gt;<br/>
 <%= tr("To:", "view/user_contacts/_preview")%> <span class="highlight">Their Name &lt;theiremail@address.com&gt;</span><br/>
-<%= tr("Subject:", "view/user_contacts/_preview")%> <%= tr("Invitation from {sender_name} to join Your Priorities","email", :sender_name=>current_user.name)%>
+<%= tr("Subject:", "view/user_contacts/_preview")%> <%= tr("Invitation from {sender_name} to join {government_name}","email", :sender_name=>current_user.name, :government_name => tr(current_government.name,"Name from database"))%>
 
 <% @government = current_government %>
 <% @sender_name = tr("Name","views/user_contacts/_preview")%>

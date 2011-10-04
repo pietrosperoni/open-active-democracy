@@ -35,7 +35,7 @@ every :reboot do
   command "cd /home/yrpri/sites/open-active-democracy/master/current; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
 end
 
-every 30.minutes do
+every 50.minutes do
   rake "schedule:priority_ranker"
 end
 
