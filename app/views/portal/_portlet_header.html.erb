@@ -11,7 +11,7 @@
         <% if portlet.portlet_template.name.downcase == "top" -%>
 			<select name="top_priorities_select" onchange='OnChangeTopPriorities(this);'>
 				<option><%=tr("24 hour", "view/portal/_portlet_header")%></option>
-				<option><%=tr("7 days", "view/portal/_portlet_header")%></option>
+				<option selected><%=tr("7 days", "view/portal/_portlet_header")%></option>
 				<option><%=tr("30 days", "view/portal/_portlet_header")%></option>
 				<option><%=tr("All", "view/portal/_portlet_header")%></option>
 			</select>
