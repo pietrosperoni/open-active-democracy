@@ -16,7 +16,7 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 /* #header table {width:100px;overflow:hidden} */
 img {border:none}
 
-#ads {width: 335px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 3px 5px 5px 65px; height: 80px; font-size:10px;}
+#ads {width: 305px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 3px 5px 5px 65px; height: 80px; font-size:10px;}
 #ads h2 {border:none;}
 
 td.right {width:60px}
@@ -754,6 +754,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .rules {margin: 20px 0 0 15px;}
 .rules h5 {margin-top: 10px;}
 .top_position {vertical-align:top;}
+.top_position img {padding-right: 3px;}
 .per_user_cost {padding:3px 0 0 5px;}
 .top_scale22 {padding-top: 22px;}
 .bg_endorsed_ads {background-color: #009933;}

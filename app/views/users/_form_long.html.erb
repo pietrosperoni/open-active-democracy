@@ -48,6 +48,8 @@
           </div>
         </div>
 
+       <% if Government.current.layout == "better_reykjavik" %>
+
 		<div class="field">
 			<div class="field_label">
 				<%= tr("Post code", "view/users/_form")%>
@@ -56,6 +58,7 @@
 				<%= f.text_field :post_code, :size => 5 %>
 			</div>
  		</div>
+
 
 	    <div class="field">
 	      <div class="field_label2">
@@ -73,7 +76,7 @@
           <div class="field_box">
              <%= f.select :my_gender, options_for_select([tr("Male"),tr("Female")], @user ? @user.my_gender : tr("Male")) %>
           </div>
-        </div>
+        </div><% end %>
        </td>
 
         <td valign="top" style="padding-left: 10px;">
@@ -118,7 +121,7 @@
               <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
 
                <%= check_box("user", "terms") %>
-		<%= tr("I accept the terms of detailed below", "view/users/_form_long")%>
+		<%= tr("I accept the terms detailed below", "view/users/_form_long")%>
 
               <% if @priority %>
                 <% if @value == 1 %>

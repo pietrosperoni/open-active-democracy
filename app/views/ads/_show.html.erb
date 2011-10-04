@@ -2,14 +2,13 @@
 	<tr>
 	<td valign="top" class="top_scale">
 		<%= render :partial => "users/pic", :locals => {:user => ad.user}%>
-		<div class="pc_under"><%= ad.user.capitals_count%><%= current_government.currency_short_name %></div>
 	</td>
 
 	<td valign="top" class="left_scale8">
 		<%= tr("{user_name} asks you to consider {priority_name}", "view/ads/_show", :user_name => link_to(ad.user.name, ad.user), :priority_name => link_to(ad.priority.name, ad.priority))%>
 		<% if ad.has_content? %>
 		<div class="notification_show_message">
-		"<%= h(ad.content) %>"<span class="show_all_ads"><%= link_to tr("Put your message here", "view/ads/_show"), ads_priorities_url %></span>
+		"<%= h(ad.content) %>"<span class="show_all_ads"></span>
 		</div>
 		<% end %>
 
@@ -50,7 +49,7 @@
 			</span>
 
 			<% end %>
-
+            <br>
 			<%= render :partial => "priorities/endorsement_count", :locals => {:priority => ad.priority }%>
 			
 		</div>
