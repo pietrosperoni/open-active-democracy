@@ -58,6 +58,7 @@ gem 'facebooker2'
 gem 'airbrake'
 gem "newrelic_rpm"
 gem 'dalli'
+gem 'sys-filesystem'
 gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
   :branch  => 'rails3',

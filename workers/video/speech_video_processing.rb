@@ -100,14 +100,14 @@ class SpeechVideoProcessing < VideoProcessing
         timepoints.sort.each do |time|
           filename = "thumb_#{pngid+=1}.png"
           if video.title.downcase.index("forseti")
-            croptop = 30
-            cropbottom = 190
+            pos_x = 190
+            pos_y = 45
           else
-            croptop = 110
-            cropbottom = 110
+            pos_x = 210
+            pos_y = 145
           end
           @@shell.execute("ffmpeg -ss #{[time/3600, time/60 % 60, time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} -i #{speech_video_filename} \
-          -an -croptop #{croptop} -cropbottom #{cropbottom} -cropright 150 -cropleft 238 -an -r 1 -vframes 1 -y #{speech_video_path}#{filename}")
+          -an -r 1 -vframes 1 -vf crop=252:156:#{pos_x}:#{pos_y} -y #{speech_video_path}#{filename}")
           @@shell.execute("convert #{speech_video_path}#{filename} -resize 160x99 #{speech_video_path}small_#{filename}")
           @@shell.execute("convert #{speech_video_path}#{filename} -resize 80x50 #{speech_video_path}smaller_#{filename}")
           @@shell.execute("convert #{speech_video_path}#{filename} -resize 45x28 #{speech_video_path}tiny_#{filename}")

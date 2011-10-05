@@ -42,7 +42,7 @@ class VideoProcessing
     IO.popen("cat /proc/loadavg") do |pipe|
       pipe.each("\r") do |line|
         results = line
-        $defout.flush
+        pipe.flush
       end
     end
     results.split[0..2].map{|e| e.to_f}
@@ -76,7 +76,7 @@ class MasterProcessing < VideoProcessing
   def self.download_master_video(master_video)
     master_video_path = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/"
     master_video_filename = "#{master_video_path}master.wmv"
-    url_to_mmsh = "mmsh"+master_video.url[4..master_video.url.length]
+    url_to_mmsh = master_video.url.sub(/^\w+:/, 'mmsh:')
     FileUtils.mkpath(master_video_path)
     @@shell.execute("cvlc #{url_to_mmsh} --tcp-caching=120000 --http-caching=120000 --mms-caching=120000 --mms-timeout=120000 :demux=dump :demuxdump-file=#{master_video_filename} vlc://quit", "codec failed")
   end
