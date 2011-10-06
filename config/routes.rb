@@ -303,8 +303,11 @@ OpenActiveDemocracy::Application.routes.draw do
   end
 
   resource :open_id
-  
-  resources :priority_processes
+  resources :priority_processes do
+    member do
+      get :show_all_for_priority
+    end
+  end
   resources :process_speech_master_videos
   resources :process_speech_videos
   resources :process_discussions
