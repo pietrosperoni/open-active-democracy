@@ -23,7 +23,7 @@
 <div class="althingi_process_container">
 	<% process_documents = current_process.process_documents %>
 	<% discussions = current_process.process_discussions %>
-	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
+	<h2><%=tr("{sequence_number}. Stage Sequence Number","althingi",:sequence_number=>current_process.stage_sequence_number) %></h2>
 	<% if i==0 %>
 	  <%=link_to 'Málið á Alþingi', current_process.priority.external_link, {:target => "_blank", :class => "extlink"}%>
 	<% end %>
