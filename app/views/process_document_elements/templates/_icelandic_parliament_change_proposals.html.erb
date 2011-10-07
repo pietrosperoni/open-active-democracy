@@ -41,7 +41,7 @@
 	            <td>
 	                <%= link_to change_proposal_author,
 	                            url_for(:controller => "process_document_elements", :action => "view_element",
-                    	                :source_id => change_proposal.id, :sequence_number => change_target.sequence_number),
+                    	                :id => change_proposal.id, :sequence_number => change_target.sequence_number),
                               :remote=>true,
                               'data-disable-with' => "",
                               'data-loader-name' => "horizontal_small",
@@ -69,12 +69,12 @@
 	            <td>
 	                <%= link_to "x",
 	                            url_for(:controller => "process_document_elements", :action => "delete_change_proposal",
-                    	                :source_id => change_proposal.id, :sequence_number => change_target.sequence_number),
+                    	                :id => change_proposal.id, :sequence_number => change_target.sequence_number),
                               :remote=>true,
                               'data-disable-with' => "",
                               'data-loader-name' => "circle",
             	                :class => "participateLink", :name => "",
-             	                :title => change_proposal_title %>
+             	                :title => tr("Delete change proposal", "view/process_document_elements/templates") %>
 	            </td>
             <% else %>
 	            <td>

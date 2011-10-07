@@ -313,7 +313,14 @@ OpenActiveDemocracy::Application.routes.draw do
   resources :process_discussions
   resources :process_documents
   resources :process_types
-  resources :process_document_elements
+  resources :process_document_elements do
+    member do
+      get :new_change_proposal
+      get :delete_change_proposal
+      get :view_element
+      get :cancel_new_change_proposal
+    end
+  end
   resources :process_documents
   resources :process_document_types
   resources :process_document_states

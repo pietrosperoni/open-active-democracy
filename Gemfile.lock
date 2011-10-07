@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: f4465d3ac0e6fdd4aaad72aab2f91a7d3916afd1
+  revision: 5805ca85ddc265762bf14a2bc7396a8a4c4226d8
   branch: rails3
   specs:
     thinking-sphinx (2.0.7)
@@ -71,6 +71,9 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     chronic (0.6.4)
+    ckeditor (3.6.2)
+      mime-types (~> 1.16)
+      orm_adapter (~> 0.0.5)
     cocaine (0.2.0)
     daemons (1.0.10)
     dalli (1.1.2)
@@ -90,7 +93,7 @@ GEM
     highline (1.6.2)
     hpricot (0.8.4)
     htmlentities (4.3.0)
-    httparty (0.8.0)
+    httparty (0.8.1)
       multi_json
       multi_xml
     i18n (0.5.0)
@@ -125,7 +128,8 @@ GEM
     newrelic_rpm (3.1.2)
     nokogiri (1.5.0)
     oauth (0.4.5)
-    paperclip (2.4.2)
+    orm_adapter (0.0.5)
+    paperclip (2.4.3)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
@@ -184,6 +188,7 @@ DEPENDENCIES
   airbrake
   auto_html
   capistrano
+  ckeditor
   dalli
   delayed_job
   facebooker2

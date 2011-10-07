@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111005191056) do
+ActiveRecord::Schema.define(:version => 20111007141235) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -151,6 +151,20 @@ ActiveRecord::Schema.define(:version => 20111005191056) do
   add_index "changes", ["status"], :name => "changes_status_index"
   add_index "changes", ["type"], :name => "changes_type_index"
   add_index "changes", ["user_id"], :name => "changes_user_id_index"
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -854,8 +868,8 @@ ActiveRecord::Schema.define(:version => 20111005191056) do
     t.integer  "sequence_number"
     t.integer  "process_document_id"
     t.integer  "parent_id"
-    t.string   "content"
-    t.string   "content_text_only"
+    t.text     "content"
+    t.text     "content_text_only"
     t.string   "content_number"
     t.datetime "created_at"
     t.datetime "updated_at"
