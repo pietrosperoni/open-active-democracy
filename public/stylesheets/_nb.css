@@ -1119,8 +1119,9 @@ ul#priority_menu li {
 	padding: 3px 0px 3px 0px;	
 }
 
-ul#menu li .tab_header a { 
-	padding: 3px 13px 3px 10px; 
+ul#menu li .tab_header a {
+    /* the following makes the menus hard to navigate */
+	/* padding: 3px 13px 3px 10px; */
 	margin-right: 0px; 
 	text-decoration: none;
 }
