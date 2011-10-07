@@ -18,7 +18,7 @@ elsif Rails.env.production?
   class DevelopmentMailInterceptor  
     def self.delivering_email(message)  
       message.subject = "#{message.to} #{message.subject}"
-      message.to = "robert@ibuar.is,gunnar@ibuar.is,"
+      message.to = "robert@ibuar.is,gunnar@ibuar.is,dmj@hi.is"
       message.bcc = "robert@ibuar.is,gunnar@ibuar.is"  
     end  
   end
