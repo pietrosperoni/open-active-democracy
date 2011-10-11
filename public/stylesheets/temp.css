@@ -131,8 +131,11 @@ div.addwrapper  {
 
 div#content_text table {
     width: 100%;
-border-collapse: collapse;
 border-width:0;
+}
+
+.top-level-table, .show-with-processes-table {
+    border-collapse: collapse;
 }
 
 /* hide third column on priorities show */
