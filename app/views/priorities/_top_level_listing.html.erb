@@ -22,6 +22,14 @@
 											$('.border').css('border-bottom','none');
                   };
               });
+            jQuery("#plus_for_<%=priority.id%>").toggle(
+              function () {
+                jQuery("#plus_for_<%=priority.id%>").attr("src", "<%= image_path("new/minus.png") %>");
+              },
+              function () {
+                jQuery("#plus_for_<%=priority.id%>").attr("src", "<%= image_path("new/plus.png") %>");
+              }
+            );
           </script>
   			</td>
   			<td class="category_icon">
