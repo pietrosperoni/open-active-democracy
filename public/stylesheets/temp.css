@@ -187,8 +187,8 @@ div.oppose-wrap {
     padding: 10px;
     width: 323px;
 }
-div.add-endorse {margin-bottom:10px}
-div.add-endorse a {
+
+span#endorse-title {
 		background-image: url("../images/new/add-endorse.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
@@ -197,8 +197,7 @@ div.add-endorse a {
     font-size: 1.1em;
     font-weight: bold;
 }
-div.add-oppose {margin-bottom:10px}
-div.add-oppose a {
+span#oppose-title {
 		background-image: url("../images/new/add-oppose.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
@@ -208,7 +207,11 @@ div.add-oppose a {
     font-weight: bold;
 }
 
-
+div.header-add { margin-bottom: 10px; }
+.header-add .priority_add {
+    float: right;
+    margin-top: 0px;
+}
 
 body.Cpriorities #content_text table.show-with-processes-table td {padding:0}
 body.priorities-show #content_text table, body.priorities-top_points #content_text table{}
@@ -419,7 +422,7 @@ comment_link_add answer_box {
 div.new_comment_facebook {}
 
 .comment_more {background:none}
-.priority_add {background-color: transparent !important; border:none !important; width:100px;}
+.priority_add {background-color: transparent !important; border:none !important;}
 span.priority_add a {
     color: #FFFFFF !important;
     float: left;
