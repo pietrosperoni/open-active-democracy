@@ -2,8 +2,15 @@
 <p>
 	
 <% if @ads.empty? %>
-<%= tr("<p>Ads at {government.name} are bought with social points, not money. That's what the <span class=\"pc\">sp</span> next to people's names refers to.  You can earn<span class=\"pc\">social points</span> in a variety of ways, <a href=\"/about/faq\#pc\">details are here</a>.  </p>", "view/priorities/yours_ads")%>
-<%= tr("<p>To place an ad, click on one of your priorities, then the \"Action\" and \"Purchase an ad\".<p>", "view/priorities/yours_ads")%>
+<p><%= tr("Ads at {government_name} are bought with social points, not money. That's what the {span_start}sp{span_end} next to people's names refers to.  You can earn {span_start}social points{span_end} in a variety of ways, {a_start}details are here{a_end}.  ",
+          "view/priorities/yours_ads",
+          government_name: @current_government.name,
+          span_start: '<span class="pc">',
+          span_end: '</span>',
+          a_start: '<a href="/about/faq#pc">',
+          a_end: '</a>'
+       )%></p>
+<p><%= tr("To place an ad, click on one of your priorities, then the \"Action\" and \"Purchase an ad\".", "view/priorities/yours_ads")%></p>
 <% else %>
 
 	<%= tr("These are your ads, and the bars show how many members have <span class='endorsed'>&nbsp; &nbsp;</span> &nbsp;endorsed, <span class='opposed'>&nbsp; &nbsp;</span> &nbsp;opposed, or <span class='compromised'>&nbsp; &nbsp;</span> &nbsp;not responded yet. <br/>To place an ad, click on one of your priorities, then Action > Purchase an ad.", "view/priorities/yours_ads")%>
