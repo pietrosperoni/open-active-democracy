@@ -673,6 +673,10 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 	margin-right: 5px;
 }
 
+.point_fblike {
+    float: right;
+}
+
 .top_listing {
 	padding-bottom: 7px;
 }
