@@ -22,6 +22,7 @@
 				<div class="tab_subhead"><%= link_to tr("About the site", "view/shared/_menu"), :controller => "about" %></div>
 				<div class="tab_sublinks">
 					<%= link_to tr("About", "view/shared/_menu"), :controller => "about" %>
+                    &middot; <%= link_to tr("Reykjavík city council", "view/shared/_menu"), :controller => "about", :action => "council" %><br/>
 					&middot; <%= link_to tr("FAQ", "view/shared/_menu"), :controller => "about", :action => "faq" %>
 					&middot; <%= link_to tr("Rules", "view/shared/_menu"), :controller => "about", :action => "rules" %>
 					&middot; <%= link_to tr("Privacy policy", "view/shared/_menu"), :controller => "about", :action => "privacy" %><br/>
