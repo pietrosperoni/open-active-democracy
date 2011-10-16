@@ -1,181 +1,244 @@
 <div id="hp_intro"><%= @page_title %></div>
 <p>
 
-<%= form_for(@government) do |f| %>
+  <%= form_for(@government) do |f| %>
 
-  <%= f.error_messages %>
+      <%= f.error_messages %>
 
-	<table border="0" cellspacing="0" cellpadding="0">
-		
-		<tr><td valign="top">
+    <table border="0" cellspacing="0" cellpadding="0">
 
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Name of Nation", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  		<%= f.text_field :name, :size => 40, :maxlength => 60 %>
-				</div>
-			</div>
-
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Tagline", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  		<%= f.text_field :tagline, :size => 40, :maxlength => 100 %>
-				</div>
-			</div>
-	
-			<div class="field">
-				<div class="field_label">
-					<%= tr("What are you running?", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  		<%= f.text_field :target, :size => 40, :maxlength => 30 %>
-				</div>
-			</div>	
-	
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Prompt", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  		<%= f.text_field :prompt, :size => 40, :maxlength => 100 %>
-				</div>
-			</div>
-				
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Mission statement", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  		<%= f.text_field :mission, :size => 40, :maxlength => 100 %>
-				</div>
-			</div>				
-				
-			<div class="field">
-				<table border="0" cellspacing="0" cellpadding="0">
-					<tr><td valign="top">
-						<div class="field_label">
-							<%= tr("Official User", "view/governments/edit")%>
-						</div>
-						<div class="field_box">
-				  		<%= f.text_field :official_user_name, :size => 20, :maxlength => 40 %>
-						</div>
-					</td><td valign="top">
-						<div class="field_label">
-							<%= tr("Nickname", "view/governments/edit")%>
-						</div>
-						<div class="field_box">
-				  		<%= f.text_field :official_user_short_name, :size => 15, :maxlength => 25 %>
-						</div>				
-					</td></tr>
-				</table>
-			</div>
-			
-			<div class="field">
-				<table border="0" cellspacing="0" cellpadding="0">
-					<tr><td valign="top">
-						<div class="field_label">
-							<%= tr("Currency name (like 'political capital')", "view/governments/edit")%>
-						</div>
-						<div class="field_box">
-				  		<%= f.text_field :currency_name, :size => 30, :maxlength => 30 %>
-						</div>
-					</td><td valign="top">
-						<div class="field_label">
-							<%= tr("Short (like 'pc')", "view/governments/edit")%>
-						</div>
-						<div class="field_box">
-				  		<%= f.text_field :currency_short_name, :size => 5, :maxlength => 3 %>
-						</div>						
-					</td></tr>
-				</table>
-			</div>			
-			
-			<div class="field">
-				<div class="field_label">
-					Language:
-					<%= f.select :language_code, [1,2,3] %>
-				</div>
-			</div>
-			
-		</td><td valign="top" style="padding-left: 20px;">
-			
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Administrator Name", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-				<%= f.text_field :admin_name, :size => 40, :maxlength => 60 %>
-				</div>
-			</div>
+    <tr>
+    <td valign="top">
 
       <div class="field">
         <div class="field_label">
-          <%= tr("Base domain name", "view/governments/edit")%>
+          <%= tr("Name of Nation", "view/governments/edit") %>
         </div>
         <div class="field_box">
-        <%= f.text_field :domain_name, :size => 40, :maxlength => 60 %>
+          <%= f.text_field :name, :size => 40, :maxlength => 60 %>
         </div>
       </div>
 
       <div class="field">
         <div class="field_label">
-          <%= tr("Default tags checkboxes", "view/governments/edit")%>
+          <%= tr("Tagline", "view/governments/edit") %>
         </div>
         <div class="field_box">
-        <%= f.text_field :default_tags_checkbox, :size => 60, :maxlength => 220 %>
+          <%= f.text_field :tagline, :size => 40, :maxlength => 100 %>
         </div>
       </div>
 
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Administrator's public email address", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-				<%= f.text_field :admin_email, :size => 40, :maxlength => 100 %>
-				</div>
-			</div>
-			
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Notification 'from' email address", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  		<%= f.text_field :email, :size => 40, :maxlength => 100 %>
-				</div>
-			</div>
-			
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Name for tags: (singular, like Category or Issue)", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  		<%= f.text_field :tags_name, :size => 40, :maxlength => 20 %>
-				</div>
-			</div>		
+      <div class="field">
+        <div class="field_label">
+          <%= tr("What are you running?", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :target, :size => 40, :maxlength => 30 %>
+        </div>
+      </div>
 
-			<div class="field">
-				<div class="field_label">
-					<%= tr("Message to users from the service", "view/governments/edit")%>
-				</div>
-				<div class="field_box">
-		  			<%= f.text_area :message_to_users, :rows => 7, :cols=>20 %>
-				</div>
-			</div>		
-						
-			<div class="field">
-			<div class="field_box">
-	  		<%= f.check_box :is_suppress_empty_priorities %> <%= tr("Hide priorities with 0 endorsers/opposers", "view/governments/edit")%>
-			</div>		
-			<div class="field_box">
-	  		<%= f.check_box :is_tags %> <%= tr("Enable {tags_name}", "view/governments/edit", :tags_name => current_government.tags_name.pluralize.downcase)%>
-			</div>		
-			</div>			
-			
-		</td></tr>
-	</table>
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Prompt", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :prompt, :size => 40, :maxlength => 100 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Mission statement", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :mission, :size => 40, :maxlength => 100 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td valign="top">
+              <div class="field_label">
+                <%= tr("Official User", "view/governments/edit") %>
+              </div>
+              <div class="field_box">
+                <%= f.text_field :official_user_name, :size => 20, :maxlength => 40 %>
+              </div>
+            </td>
+            <td valign="top">
+              <div class="field_label">
+                <%= tr("Nickname", "view/governments/edit") %>
+              </div>
+              <div class="field_box">
+                <%= f.text_field :official_user_short_name, :size => 15, :maxlength => 25 %>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="field">
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td valign="top">
+              <div class="field_label">
+                <%= tr("Currency name (like 'political capital')", "view/governments/edit") %>
+              </div>
+              <div class="field_box">
+                <%= f.text_field :currency_name, :size => 30, :maxlength => 30 %>
+              </div>
+            </td>
+            <td valign="top">
+              <div class="field_label">
+                <%= tr("Short (like 'pc')", "view/governments/edit") %>
+              </div>
+              <div class="field_box">
+                <%= f.text_field :currency_short_name, :size => 5, :maxlength => 3 %>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          Language:
+          <%= f.select :language_code, [1, 2, 3] %>
+        </div>
+      </div>
+
+    </td>
+    <td valign="top" style="padding-left: 20px;">
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Administrator Name", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :admin_name, :size => 40, :maxlength => 60 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Base domain name", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :domain_name, :size => 40, :maxlength => 60 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Default tags checkboxes", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :default_tags_checkbox, :size => 60, :maxlength => 220 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Administrator's public email address", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :admin_email, :size => 40, :maxlength => 100 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Notification 'from' email address", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :email, :size => 40, :maxlength => 100 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Name for tags: (singular, like Category or Issue)", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :tags_name, :size => 40, :maxlength => 20 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Message to users from the service", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_area :message_to_users, :rows => 7, :cols=>15 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Message for ads", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_area :message_for_ads, :rows => 7, :cols=>20 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Message for issues", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_area :message_for_issues, :rows => 7, :cols=>20 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Message for network", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_area :message_for_network, :rows => 7, :cols=>20 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Message for finished", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_area :message_for_finished, :rows => 7, :cols=>20 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Message for new priority", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_area :message_for_new_priority, :rows => 7, :cols=>20 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
+          <%= tr("Message for new news", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_area :message_for_news, :rows => 7, :cols=>20 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_box">
+          <%= f.check_box :is_suppress_empty_priorities %> <%= tr("Hide priorities with 0 endorsers/opposers", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.check_box :is_tags %> <%= tr("Enable {tags_name}", "view/governments/edit", :tags_name => current_government.tags_name.pluralize.downcase) %>
+        </div>
+      </div>
+
+    </td>
+    </tr>
+    </table>
     <%= f.submit tr("Save Nation Settings", "view/governments/edit"), :class => "submit_button" %>
 <% end %>

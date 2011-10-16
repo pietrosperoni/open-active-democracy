@@ -11,7 +11,7 @@
 
 defaults: &defaults
   enable_tr8n:                true      # enables the engine
-  enable_key_source_tracking: false     # builds the site map sources
+  enable_key_source_tracking: true     # builds the site map sources
   enable_key_caller_tracking: false     # tracks all calls to labels with their traces - for debugging only
 
   enable_glossary_hints:      true      # shows glossary in the translator
@@ -75,7 +75,7 @@ defaults: &defaults
   #
   #############################################################################
   caching:
-    enabled:                  false
+    enabled:                  true
     adapter:                  ActiveSupport::Cache
     store:                    [mem_cache_store, 'localhost:11211']
     version:                  1 # you can change the version to invalidate the cache

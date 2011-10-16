@@ -83,7 +83,7 @@ module AuthenticatedSystem
         format.js do
           store_previous_location
           render :update do |page|
-            page.redirect_to "http://#{request.host}/sessions/new"
+            page.redirect_to "/sessions/new"
           end
           #render_to_facebox(:template => "sessions/new")
         end        

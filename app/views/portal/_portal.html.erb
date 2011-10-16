@@ -1,15 +1,7 @@
 <% if Government.current.message_to_users and Government.current.message_to_users!="" %>
-	<div id="message_to_users">
-		<div class="information_icon"><%= image_tag("new/information_icon.png", :alt => "icon") %></div>
-		<a id="close_information_box" class="close_notify2" href="#">x</a>
-		<%=Government.current.message_to_users.html_safe%>
-	</div>
-<script type="text/javascript">
-	$('#close_information_box').click(function() {
-	  $('#message_to_users').hide('fast');
-	});
-</script>
+  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_to_users.html_safe } %>
 <% end %>
+
 <% if Priority.filtered.count == 0 %>
 <br>
 <h2><%=tr("No priorities have been created. Be the first to create a priority for your country!","portal")%></h2>

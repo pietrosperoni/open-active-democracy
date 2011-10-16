@@ -1,0 +1,11 @@
+<div id="message_to_users">
+  <div class="information_icon"><%= image_tag("new/information_icon.png", :alt => "icon") %></div>
+  <a id="close_information_box" class="close_notify2" href="#">x</a>
+  <%= tr(message_text,"message_from_database") %>
+</div>
+
+<script type="text/javascript">
+	$('#close_information_box').click(function() {
+	  $('#message_to_users').hide('fast');
+	});
+</script>
