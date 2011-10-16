@@ -8,7 +8,7 @@
   <%= render :partial=>"points/report_content", :locals=>{:point=>point} %>
   <%= render :partial=>"points/flagged", :locals=>{:point=>point} -%>
 
-<div class="scale" style="height: 10px;"></div>
+<div class="scale" style="height: 4px;"></div>
 	<div class="point_byline">
 		<%= tr("by {author_sentence}", "view/points/_long_list", :author_sentence => point.author_sentence) %> &middot; <%= tr("added {time_ago}", "view/points/_long_list", :time_ago => time_ago(point.created_at)) %>
 		<span class="point_edit">

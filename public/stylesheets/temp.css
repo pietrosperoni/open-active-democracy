@@ -437,6 +437,18 @@ span.priority_add a {
     text-decoration: none;
 }
 
+span.priority_add a:hover {
+    color: #FFFFFF !important;
+    float: left;
+    font-family: arial;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-right: 7px;
+    padding: 0 5px 1px;
+    text-decoration: none;
+}
+
+
 span.priority_add_follow a, span.priority_add_ignore a {
     color: #aaa !important;
     float: left;
@@ -603,6 +615,9 @@ div.userwrap2 {
 	padding:0;
 }
 
+.connect_widget,  .fb_edge_widget_with_comment {
+    float: right !important;
+}
 
 .point_content_detail {
     font-size: 1em;
@@ -614,7 +629,7 @@ div.userwrap2 {
 	font-size: 0.9em !important;
 	font-weight: bold;
 	border-bottom : solid 1px #EEE;
-	margin: 15px 0 20px;
+	margin: 15px 0 10px;
 	padding-bottom: 5px;
 }
 .sub_header a {
@@ -674,7 +689,17 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 
 .point_fblike {
-    float: right;
+    float: right !important;
+}
+
+.point_fblike td {
+    float: right !important;
+}
+
+
+.connect_widget .connect_bar_widget_interactive_area {
+    float: right !important;
+	background-color: red !important;
 }
 
 .top_listing {
