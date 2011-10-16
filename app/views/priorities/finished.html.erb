@@ -1,3 +1,7 @@
+<% if Government.current.message_for_finished and Government.current.message_for_finished!="" -%>
+  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_finished.html_safe } %>
+<% end %>
+
 <div id="hp_intro"><%= @page_title %></div>
 
 <% for priority in @priorities %>

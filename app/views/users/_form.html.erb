@@ -21,7 +21,7 @@
     </div>
   <% end %>
 
-        <%= form_for :user, :remote=>true, 
+        <%= form_for :user,
                'data-disable-with' => escape_t(tr("Sending","Ajax")),
 	             :url => users_path(:region => "short") do |f| -%>
 	<%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form") %>
