@@ -615,9 +615,7 @@ div.userwrap2 {
 	padding:0;
 }
 
-.connect_widget,  .fb_edge_widget_with_comment {
-    float: right !important;
-}
+
 
 .point_content_detail {
     font-size: 1em;
@@ -689,17 +687,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 
 .point_fblike {
-    float: right !important;
-}
-
-.point_fblike td {
-    float: right !important;
-}
-
-
-.connect_widget .connect_bar_widget_interactive_area {
-    float: right !important;
-	background-color: red !important;
+    float: right;
 }
 
 .top_listing {
