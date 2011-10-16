@@ -348,11 +348,11 @@ div.best-points {background:#fff;}
 .comment,.comment_endorses, .comment_opposes  {padding: 0; background: none;
     color: #444444; border: 0px solid #DDDDDD;}
 
-.comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 20px 10px;margin:0 0 10px 50px;}
+.comment_box {min-height:30px;  border-radius: 1em 1em 1em 1em;background-color:#f4f4f4;padding:10px 10px 10px 10px;margin:0 0 10px 50px;}
 
 .comment_content_1,.comment_content_2 {padding:10px 10px 0 10px}
 div.buddy-icon {float:left}
-.comment_box img{padding:4px;}
+.comment_box img{padding: 3px 0px 4px;}
 .comment_link {
     font-size:inherit;
     letter-spacing:inherit;
