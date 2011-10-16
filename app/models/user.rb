@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   require 'paperclip'
   include SimpleCaptcha::ModelValidation
 
-  validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
+  #validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
 
   scope :active, :conditions => "users.status in ('pending','active')"
   scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
@@ -108,6 +108,8 @@ class User < ActiveRecord::Base
     
   validates_presence_of     :login, :message => tr("Please specify a name to be identified as on the site.", "model/user")
   validates_length_of       :login, :within => 3..60
+  validates_presence_of     :first_name, :message => tr("Please specify your first name.", "model/user")
+  validates_presence_of     :last_name, :message => tr("Please specify your first name.", "model/user")
   
   validates_presence_of     :email, :unless => [:has_facebook?, :has_twitter?]
   validates_length_of       :email, :within => 3..100, :allow_nil => true, :allow_blank => true

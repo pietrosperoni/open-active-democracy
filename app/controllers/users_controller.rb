@@ -303,9 +303,13 @@ class UsersController < ApplicationController
     @user.partner_referral = current_partner
 
     begin
-      @user.save! #save first
+      if verify_recaptcha(:model => @user, :message => tr("Please try reCAPTCHA again","users")) and @user.save! #save first
+        @valid = true
+      else
+        @valid = false
+      end
       rescue ActiveRecord::RecordInvalid
-        @valid = false    
+        @valid = false
     end   
 
     if not @valid
