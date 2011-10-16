@@ -48,6 +48,8 @@
                 'data-disable-with' => escape_t(tr("Unelpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "quality_unhelpful_link", :title => tr("This is not helpful", "view/points/_button_small") %>
-	</span>	
+	</span>
+
+    <span class="point_fblike"><fb:like href="<%=point.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"></fb:like></span>
 <% end %>
 </div>

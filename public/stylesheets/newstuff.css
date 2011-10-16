@@ -1084,7 +1084,12 @@ margin-top:7px;
 }
 
 .field_with_errors {
-  border: 1px solid red;
+  border: 1px solid red !important;
+  display: inline-block !important;
+}
+
+.field_with_errors textarea {
+
 }
 
 .button_small_li {

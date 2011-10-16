@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   require 'paperclip'
   include SimpleCaptcha::ModelValidation
 
-  validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
+  #validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
 
   scope :active, :conditions => "users.status in ('pending','active')"
   scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
@@ -108,6 +108,8 @@ class User < ActiveRecord::Base
     
   validates_presence_of     :login, :message => tr("Please specify a name to be identified as on the site.", "model/user")
   validates_length_of       :login, :within => 3..60
+  validates_presence_of     :first_name, :message => tr("Please specify your first name.", "model/user")
+  validates_presence_of     :last_name, :message => tr("Please specify your first name.", "model/user")
   
   validates_presence_of     :email, :unless => [:has_facebook?, :has_twitter?]
   validates_length_of       :email, :within => 3..100, :allow_nil => true, :allow_blank => true
@@ -125,6 +127,10 @@ class User < ActiveRecord::Base
   validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user"), :if => :using_br?
 
   validates_acceptance_of   :terms, :message => tr("Please accept the terms and conditions", "model/user")
+
+  #validates_inclusion_of    :my_gender, in: [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")],
+  #                          message: tr("Please select your gender.", "model/user"), :if => :using_br?
+  #validates_inclusion_of    :age_group, in: [tr("Male", "model/user"),tr("Female", "model/user")], message: tr("Please select your gender.", "model/user"), :if => :using_br?
 
   before_save :encrypt_password
   before_create :make_rss_code

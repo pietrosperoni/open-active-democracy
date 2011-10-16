@@ -3,7 +3,7 @@
 <% elsif params[:controller] == 'users' and @user and @user.has_top_priority? %>
 <meta name="description" content="<%= tr("{user_name} top priority for: {priority_name}", "view/shared/_description", :user_name => @user.name, :priority_name => @user.top_endorsement.priority.name) %>">
 <% else %>
-<meta name="description" content="<%= tr(current_government.name,"Name from database") %>">
+<meta name="description" content="<%= tr(current_government.description,"Description from database") %>">
 <% end %>
 <% if current_government.has_logo? and not controller_name=="process_speech_videos" and not controller_name=="process_documents" %>
 <link rel="image_src" href="<%= current_government.logo.url %>" />

@@ -69,7 +69,7 @@ class Government < ActiveRecord::Base
   def last_minute_checks
     self.homepage = 'top' if not self.is_tags? and self.homepage == 'index'
   end
-  
+
   def clear_cache
     Rails.cache.delete('government')
     return true

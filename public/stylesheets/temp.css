@@ -131,8 +131,11 @@ div.addwrapper  {
 
 div#content_text table {
     width: 100%;
-border-collapse: collapse;
 border-width:0;
+}
+
+.top-level-table, .show-with-processes-table {
+    border-collapse: collapse;
 }
 
 /* hide third column on priorities show */
@@ -187,8 +190,8 @@ div.oppose-wrap {
     padding: 10px;
     width: 323px;
 }
-div.add-endorse {margin-bottom:10px}
-div.add-endorse a {
+
+span#endorse-title {
 		background-image: url("../images/new/add-endorse.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
@@ -197,8 +200,7 @@ div.add-endorse a {
     font-size: 1.1em;
     font-weight: bold;
 }
-div.add-oppose {margin-bottom:10px}
-div.add-oppose a {
+span#oppose-title {
 		background-image: url("../images/new/add-oppose.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
@@ -208,7 +210,11 @@ div.add-oppose a {
     font-weight: bold;
 }
 
-
+div.header-add { margin-bottom: 10px; }
+.header-add .priority_add {
+    float: right;
+    margin-top: 0px;
+}
 
 body.Cpriorities #content_text table.show-with-processes-table td {padding:0}
 body.priorities-show #content_text table, body.priorities-top_points #content_text table{}
@@ -419,7 +425,7 @@ comment_link_add answer_box {
 div.new_comment_facebook {}
 
 .comment_more {background:none}
-.priority_add {background-color: transparent !important; border:none !important; width:100px;}
+.priority_add {background-color: transparent !important; border:none !important;}
 span.priority_add a {
     color: #FFFFFF !important;
     float: left;
@@ -430,6 +436,18 @@ span.priority_add a {
     padding: 0 5px 1px;
     text-decoration: none;
 }
+
+span.priority_add a:hover {
+    color: #FFFFFF !important;
+    float: left;
+    font-family: arial;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-right: 7px;
+    padding: 0 5px 1px;
+    text-decoration: none;
+}
+
 
 span.priority_add_follow a, span.priority_add_ignore a {
     color: #aaa !important;
@@ -598,6 +616,7 @@ div.userwrap2 {
 }
 
 
+
 .point_content_detail {
     font-size: 1em;
     line-height: 1.4em;
@@ -608,7 +627,7 @@ div.userwrap2 {
 	font-size: 0.9em !important;
 	font-weight: bold;
 	border-bottom : solid 1px #EEE;
-	margin: 15px 0 20px;
+	margin: 15px 0 10px;
 	padding-bottom: 5px;
 }
 .sub_header a {
@@ -658,7 +677,6 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .list_priority_overview {
 	float: left;
 	list-style: none;
-	width: 360px;
 	padding-left: 8px;
 }
 
@@ -666,6 +684,10 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .plus_sign {
 	padding-top: 7px;
 	margin-right: 5px;
+}
+
+.point_fblike {
+    float: right;
 }
 
 .top_listing {

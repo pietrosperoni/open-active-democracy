@@ -1,3 +1,7 @@
+<% if Government.current.message_for_ads and Government.current.message_for_ads!="" -%>
+  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_ads.html_safe } %>
+<% end %>
+
 <div id="hp_intro"><%= @page_title%></div>
 <p>
 <%=tr("Ads are bought with Social Points your earn at {government_name}, not regular money.  You can earn social points <a href=\"/about/faq#pc\">in many ways.</a>","ads", :government_name => tr(current_government.name,"Name from database"))%><br><br>

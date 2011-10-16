@@ -59,6 +59,12 @@ float: none;
 /*margin: 0 5px 0 0 !important;*/
 }
 
+.tag_button_hack br {
+margin-bottom: 7px;
+}
+
+
+
 #content_text {
 font-size:11px !important;
 }
@@ -580,6 +586,7 @@ padding-bottom: 3px;
 .point_qualities
 {
 padding-bottom: 3px;
+    padding-top: 6px;
 }
 
 .point_source

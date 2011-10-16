@@ -1,3 +1,7 @@
+<% if Government.current.message_for_issues and Government.current.message_for_issues!="" -%>
+  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_issues.html_safe } %>
+<% end %>
+
 <div style="width:auto;">
 <ul>
 	<li class="list_left">
