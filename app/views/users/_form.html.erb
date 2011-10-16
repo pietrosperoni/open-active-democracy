@@ -128,8 +128,11 @@
 
 	<% end %>
 
-    <%= recaptcha_tags %>
-  
+
+                <script>
+                  var RecaptchaOptions = { theme : 'clean' };
+                </script>
+                 <%= recaptcha_tags %><br>
     <%= check_box("user", "terms") %>
 		<%= tr("I accept the terms detailed below.", "view/users/_form")%>
 		<br />

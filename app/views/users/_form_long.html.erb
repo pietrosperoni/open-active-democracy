@@ -118,8 +118,12 @@
        </tr>
        <tr>
               <td valign="top" style="padding-top: 10px;" colspan="2">
-                <%= recaptcha_tags %>
-               <%= check_box("user", "terms") %>
+
+                <script>
+                  var RecaptchaOptions = { theme : 'clean' };
+                </script>
+                <%= recaptcha_tags %><br>
+                <%= check_box("user", "terms") %>
 		<%= tr("I accept the terms detailed below", "view/users/_form_long")%>
 
               <% if @priority %>
