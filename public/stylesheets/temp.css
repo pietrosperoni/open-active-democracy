@@ -107,8 +107,8 @@ div#content_text table {
     font-size: 1.5em;
     font-weight: bold;
     margin: 30px 0 20px;
-    padding: 26px 0 30px 27px;
-    width: 198px;
+    padding: 12px 0 30px 14px;
+     width: 148px;
 		text-decoration: none !important;
 		cursor: pointer;
 }
@@ -116,7 +116,7 @@ div#content_text table {
 
 div.addwrapper  {
     background-color: #FFFFFF;
-    background-image: url("../images/new/add-light-button-bg.png") !important;
+    background-image: url("../images/add-button.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
     border: medium none;

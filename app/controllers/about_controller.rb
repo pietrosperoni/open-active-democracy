@@ -17,7 +17,7 @@ class AboutController < ApplicationController
     elsif params[:id] == 'contributors'
       @page_title = tr("Contributors to {government_name}", "controller/about", :government_name => tr(current_government.name,"Name from database"))
       render :action => "contributors"
-    elsif params[:id] == 'council'
+    elsif params[:id] == 'council' and Government.current.layout == "better_reykjavik"
       @page_title = tr("Reykjavik city council", "controller/council")
       render :action => 'council'
     else
