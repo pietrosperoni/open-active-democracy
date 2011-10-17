@@ -6,11 +6,7 @@ class UserMailer < ActionMailer::Base
     @recipient = @user = user
     @government = Government.current
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    if @government.layout.include?("better_reykjavik")
-      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/BR_email.png"))
-    else
-      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/YourPriorities_large.png"))
-    end
+    attachments.inline['logo.png'] = get_conditional_logo
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
@@ -29,7 +25,7 @@ class UserMailer < ActionMailer::Base
     @recipients = ""
     @recipients += to_name + ' ' if to_name
     @recipients += '<' + to_email + '>'
-    attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    attachments.inline['logo.png'] = get_conditional_logo
     mail :to => @recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
@@ -44,7 +40,7 @@ class UserMailer < ActionMailer::Base
     @new_password = new_password
     @government = Government.current
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    attachments.inline['logo.png'] = get_conditional_logo
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
          :from => "#{Government.current.name} <#{Government.current.admin_email}>",
@@ -62,7 +58,7 @@ class UserMailer < ActionMailer::Base
     @notifiable = notifiable
     Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}  #{@n.inspect} notifiable: #{@notifiable}")
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    attachments.inline['logo.png'] = get_conditional_logo
     Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}")
     mail :to => recipients,
          :reply_to => Government.current.admin_email,
@@ -104,8 +100,17 @@ class UserMailer < ActionMailer::Base
       @sent_on     = Time.now
       @content_type = "text/html"     
       @body[:root_url] = 'http://' + Government.current.base_url_w_partner + '/'
-    end    
+    end
+
   private
+
+    def get_conditional_logo
+      if @government.layout.include?("better_reykjavik")
+        File.read(Rails.root.join("public/images/logos/BR_email.png"))
+      else
+        File.read(Rails.root.join("public/images/logos/YourPriorities_large.png"))
+      end
+    end
 
     # Returns the text in UTF-8 format with all HTML tags removed
     # From: https://github.com/jefflab/mail_style/tree/master/lib
