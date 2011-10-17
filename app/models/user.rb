@@ -128,9 +128,9 @@ class User < ActiveRecord::Base
 
   validates_acceptance_of   :terms, :message => tr("Please accept the terms and conditions", "model/user")
 
-  #validates_inclusion_of    :my_gender, in: [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")],
-  #                          message: tr("Please select your gender.", "model/user"), :if => :using_br?
-  #validates_inclusion_of    :age_group, in: [tr("Male", "model/user"),tr("Female", "model/user")], message: tr("Please select your gender.", "model/user"), :if => :using_br?
+  validates_inclusion_of    :age_group, in: [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")],
+                            message: tr("Please select your gender.", "model/user"), :if => :using_br?
+  validates_inclusion_of    :my_gender, in: [tr("Male", "model/user"),tr("Female", "model/user")], message: tr("Please select your gender.", "model/user"), :if => :using_br?
 
   before_save :encrypt_password
   before_create :make_rss_code
