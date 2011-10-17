@@ -735,6 +735,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 		text-align: center;
 		left: 0px;
 		font-size: 1em;
+    z-index: 1000;
 }
 
 .warning_inline2 {
