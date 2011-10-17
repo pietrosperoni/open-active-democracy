@@ -1,3 +1,7 @@
+<% if action_name == "finished" and Government.current.message_for_finished and Government.current.message_for_finished!="" -%>
+  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_finished.html_safe } %>
+<% end %>
+
 <div style="width:auto;">
 <ul>
 	<li class="list_left">
