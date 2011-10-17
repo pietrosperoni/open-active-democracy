@@ -493,25 +493,25 @@ end
 
 class ActivityIssuePriority1 < Activity
   def name
-    tr("{priority_name} is the new #1 priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the new #1 priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityControversial1 < Activity
   def name
-    tr("{priority_name} is the most controversial priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the most controversial priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityRising1 < Activity
   def name
-    tr("{priority_name} is the fastest rising priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the fastest rising priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityOfficial1 < Activity
   def name
-    tr("{priority_name} is the new #1 priority on {official_user_name} {tag_name} agenda", "model/activity", :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
+    tr("{priority_name} is the new #1 priority on {official_user_name} {tag_name} agenda", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"), :official_user_name => Government.current.official_user.name.possessive)
   end
 end
 

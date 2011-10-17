@@ -75,7 +75,7 @@ class TagsController < ApplicationController
     respond_to do |format|
       if @tag.update_attributes(params[:tag])
         Tag.expire_cache
-        flash[:notice] = tr("Saved {tag_name}", "controller/tags", :tag_name => @tag.title)
+        flash[:notice] = tr("Saved {tag_name}", "controller/tags", :tag_name => tr(@tag.title,"model/category"))
         format.html { redirect_to(edit_tag_url(@tag)) }
         format.xml  { head :ok }
       else

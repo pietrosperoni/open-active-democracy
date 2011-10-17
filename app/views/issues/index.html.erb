@@ -24,7 +24,7 @@
 	<% for issue in @issues %>
 		<div class="priority_listing">
 			<span class="priority_name">
-			<a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
+			<a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
 			</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
 			<div class="priority_action">
 				<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
@@ -50,7 +50,7 @@
          <% issue = Tag.find_by_slug(special_tag.parameterize_full) %>
             <div class="priority_listing">
                 <span class="priority_name">
-                <a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
+                <a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
                 </span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
                 <div class="priority_action">
                     <a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
