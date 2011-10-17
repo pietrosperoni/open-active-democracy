@@ -4,8 +4,8 @@
 <div class="clearfix">
 <div class="endorse-wrap">
 <div class="best-points">
-          <div class="add-endorse">
-            <%= link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%>
+          <div class="header-add">
+            <%= render partial: "points_header", locals: { priority: @priority, support: true } %>
           </div>
 
 					<div class="sub_header">
@@ -28,8 +28,8 @@
 </div>
 
 <div class="oppose-wrap">
-            <div class="add-oppose">
-              <%= link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%>
+            <div class="header-add">
+              <%= render partial: "points_header", locals: { priority: @priority, support: false } %>
             </div>
 <div class="sub_header pro">
                 <%=tr("Points Against", "view/priorities/top_points") %><%=get_points_number_text(@points_top_down.length,@total_down_points) %><span class="separator">|</span><%=link_to(tr("All points for oppose", "view/priorities/top_points"), opposed_top_points_priority_url(@priority)) %>

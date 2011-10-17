@@ -27,11 +27,7 @@
 			<% else %>
 					<div class="endorse-wrap">
                             <div class="header-add">
-                              <span id="endorse-title"><%= tr("Points for", "view/priorities/_nav") %></span>
-                              <span class="priority_add" id="priority_add_<%= @priority.id.to_s %>">
-                                <%= link_to tr("Add point for", "view/priorities/_nav"), new_priority_point_path(@priority, support: true),
-                                    :class => "priority_add_link1", :title => tr("I endorse this and want to explain why.", "view/priorities/_nav") %>
-                              </span>
+                              <%= render partial: "points_header", locals: { priority: @priority, support: true } %>
                             </div>
 							<div class="sub_header">
 								<%=tr("Best points for endorse", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
@@ -50,11 +46,7 @@
 		 	                </div>
 							<div class="oppose-wrap">
 							<div class="header-add">
- 						        <span id="oppose-title"><%= tr("Points against", "view/priorities/_nav") %></span>
-                                <span class="priority_add" id="priority_add_<%= @priority.id.to_s %>">
-                                  <%= link_to tr("Add point against", "view/priorities/_nav"), new_priority_point_path(@priority, support: false),
-                                      :class => "priority_add_link2", :title => tr("I oppose this and want to explain why.", "view/priorities/_button") %>
-                                </span>
+                                <%= render partial: "points_header", locals: { priority: @priority, support: false } %>
                             </div>
 							<div class="sub_header">
 								<%=tr("Best points for oppose", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
