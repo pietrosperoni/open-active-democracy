@@ -45,8 +45,7 @@ OpenActiveDemocracy::Application.configure do
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
-  #config.active_support.deprecation = :notify
-  config.active_support.deprecation.silenced = true
+  config.active_support.deprecation = :notify
   
   config.cache_store = :dalli_store, '127.0.0.1:11211', { :namespace => "oad_3_#{Rails.env}_#{Rails.application.config.database_configuration[Rails.env]["git_branch"]}", 
                                                           :compress => true, :compress_threshold => 64*1024 }
