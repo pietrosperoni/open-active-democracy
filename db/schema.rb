@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111016203629) do
+ActiveRecord::Schema.define(:version => 20111017185935) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20111016203629) do
     t.string   "icon_content_type", :limit => 30
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.text     "description"
   end
 
   create_table "changes", :force => true do |t|

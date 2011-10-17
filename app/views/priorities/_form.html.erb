@@ -1,3 +1,6 @@
+<%= javascript_include_tag "jquery.qtip.min" %>
+<%= stylesheet_link_tag "/stylesheets/jquery.qtip.min.css" %>
+
 <% if Government.current.message_for_new_priority and Government.current.message_for_new_priority!="" -%>
   <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_new_priority.html_safe } %>
 <% end %>
@@ -31,9 +34,10 @@
       <%= tr("Select category","views/priorities/form")%>
 			<span class="red">*</span><br>
     </div>
-		
+
     <% Category.for_partner.each do |category| %>
-      <%= f.radio_button :category_id, category.id %> <span class="Chapter_name"><%=category.i18n_name %></span>
+      <%= f.radio_button :category_id, category.id %> <span class="Chapter_name" id="category_<%= category.id %>"><%=category.i18n_name %></span>
+      <span class="invisible" id="category_<%= category.id %>_text"><%= tr(category.description, "Description from database") %></span>
     <% end %>
   </div>
 
@@ -119,3 +123,20 @@
   
   <b><%= submit_tag tr("Create priority", "view/priorities/_form"), :class => "submit_button" %></b>
 <% end %>
+
+<script type="text/javascript">
+$(function(){
+    $('.Chapter_name').each(
+        function() {
+            var category_id = $(this).attr("id");
+            var tooltip_text = $('#'+category_id+'_text').html();
+            if (tooltip_text) {
+                $(this).qtip({
+                    content: tooltip_text,
+                    show: { delay: 300 }
+                })
+            }
+        }
+    )
+});
+</script>
