@@ -50,8 +50,10 @@ class PrioritiesController < ApplicationController
   def yours
     @page_title = tr("Your priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
     @priorities = @user.endorsements.active.by_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @rss_url = yours_priorities_url(:format => 'rss')
     respond_to do |format|
-      format.html 
+      format.html
+      format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
       format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -97,6 +99,7 @@ class PrioritiesController < ApplicationController
   # GET /priorities/network
   def network
     @page_title = tr("Your network's priorities", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
+    @rss_url = network_priorities_url(:format => 'rss')
     if @user.followings_count > 0
       @priorities = Endorsement.active.find(:all, 
         :select => "endorsements.priority_id, sum((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value) as score, count(*) as endorsements_number, priorities.*", 
@@ -108,6 +111,7 @@ class PrioritiesController < ApplicationController
     end
     respond_to do |format|
       format.html
+      format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
       format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -325,6 +329,7 @@ class PrioritiesController < ApplicationController
   # GET /priorities/finished
   def finished
     @page_title = tr("Priorities in progress", "controller/priorities")
+    @rss_url = finished_priorities_url(:format => 'rss')
     @priorities = Priority.finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "list" }
