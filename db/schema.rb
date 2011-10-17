@@ -834,8 +834,9 @@ ActiveRecord::Schema.define(:version => 20111017220256) do
 
   create_table "priority_status_change_logs", :force => true do |t|
     t.integer  "priority_id"
-    t.text     "content",     :null => false
     t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "content",     :null => false
   end
 
   create_table "process_discussions", :force => true do |t|
