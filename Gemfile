@@ -56,7 +56,8 @@ gem 'will_paginate', '~> 3.0.beta'
 #gem 'facebooker2','0.0.11'
 gem 'mogli'
 gem 'facebooker2'
-gem 'airbrake'
+#gem 'airbrake'
+gem "airbrake", :git => "git://github.com/airbrake/airbrake.git"
 gem "newrelic_rpm"
 gem 'dalli'
 gem 'thinking-sphinx',

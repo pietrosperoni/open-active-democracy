@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/airbrake/airbrake.git
+  revision: e000eb9f29b6e0276dff349203364e70697d55de
+  specs:
+    airbrake (3.0.4)
+      activesupport
+      builder
+
+GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
   revision: 1c0002e8ee8a70cb5675a5570944488616105c6a
   branch: rails3
@@ -54,9 +62,6 @@ GEM
       activemodel (= 3.0.10)
       activesupport (= 3.0.10)
     activesupport (3.0.10)
-    airbrake (3.0.4)
-      activesupport
-      builder
     arel (2.0.10)
     auto_html (1.4.2)
       RedCloth
@@ -187,7 +192,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  airbrake
+  airbrake!
   auto_html
   capistrano
   dalli
