@@ -54,7 +54,8 @@ class BulletinsController < ApplicationController
             page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => ""})
 #            page["bulletin-form-submit"].enable  
             page["bulletin_content"].focus()
-#            page["new_comment"].reset
+#            page["bulletin_content"].clear()
+            page << "$('textarea#bulletin_content').val('');"
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
             if current_facebook_user
               #page << fb_connect_stream_publish(UserPublisher.create_comment(current_facebook_user, @comment, @activity))

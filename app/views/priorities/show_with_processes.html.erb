@@ -92,10 +92,6 @@
 
 			<% latest_discussions = @priority.activities.discussions.by_recently_updated.item_limit(1)%>
 
-			<% if logged_in? %>
-				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
-			<% end %>
-						
 			<% if latest_discussions and not latest_discussions.empty? %>
 				<h5><%=tr('Latest discussion',"views/priorities/_show_with_processes")%>:</h5>
 				<% for activity in latest_discussions %>
@@ -106,7 +102,10 @@
 				</h5>
 			<% end %>
 
-			
+          <% if logged_in? %>
+                          <%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
+          <% end %>
+
 		<div id="althingi_video_discussions">
 			<% if @priority_process %>
 			  <%= render :partial => "process_speech_master_videos/latest_video_discussions_medium" %>
