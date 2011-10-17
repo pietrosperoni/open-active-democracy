@@ -96,7 +96,8 @@
     <div class="field">
       <div class="field_label form_header">
         <%= tr("Explain your point.", "view/priorities/_form") %>
-        <span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%>
+        <span class="characters"><span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%></span>
+        <span class="red">*</span>
       </div>
       <div class="field_box">
         <%= point_form.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
