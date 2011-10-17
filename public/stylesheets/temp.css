@@ -805,3 +805,6 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .invisible { display: none; }
 
 .characters { float: right; }
+.finished_priority ul {
+list-style: disc;
+}

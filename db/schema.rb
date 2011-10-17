@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111017185935) do
+ActiveRecord::Schema.define(:version => 20111017220256) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -831,6 +831,12 @@ ActiveRecord::Schema.define(:version => 20111017185935) do
   end
 
   add_index "priority_processes", ["process_type_id"], :name => "index_priority_processes_on_process_type_id"
+
+  create_table "priority_status_change_logs", :force => true do |t|
+    t.integer  "priority_id"
+    t.text     "content",     :null => false
+    t.datetime "created_at"
+  end
 
   create_table "process_discussions", :force => true do |t|
     t.datetime "meeting_date"

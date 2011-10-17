@@ -49,7 +49,17 @@
     </div>
   </div>
 
-  <div class="field">
+    <% if PriorityStatusChangeLog.find_by_priority_id(@priority.id) %>
+        <div class="finished_priority">
+          <ul>
+        <% PriorityStatusChangeLog.where(priority_id: @priority.id).order("created_at").each do |changelog| %>
+              <li><p><%= changelog.content %></p></li>
+          <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
     <div class="field_label">
       <%= tr("Status message", "view/governments/edit")%>
     </div>

@@ -89,6 +89,7 @@ class Priority < ActiveRecord::Base
   has_many :sent_changes, :class_name => "Change", :conditions => "status = 'sent'", :order => "updated_at desc"
   has_many :declined_changes, :class_name => "Change", :conditions => "status = 'declined'", :order => "updated_at desc"
   has_many :changes_with_deleted, :class_name => "Change", :order => "updated_at desc", :dependent => :destroy
+  has_many :priority_status_change_logs, dependent: :destroy
 
   has_many :priority_processes
   
