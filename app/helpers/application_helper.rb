@@ -170,7 +170,7 @@ module ApplicationHelper
   def rss_url(url)
     return "" unless url
     s = '<span class="rss_feed"><a href="' + url + '">'
-    s += image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0
+    s += image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0, :alt => 'rss-icon'
     s += '</a></span>'
     return s.html_safe
   end

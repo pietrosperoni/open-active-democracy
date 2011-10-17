@@ -1,16 +1,10 @@
-<script type="text/javascript">
-$(function(){
-	$('.rss3_move').replaceWith($('.rss_feed'));
-	
-});
-</script>
 <div style="width:auto;">
 <ul>
 	<li class="list_left">
 		<div id="hp_intro"><%= @page_title %></div>
 	</li>
 	<li class="list_right">
-		<div class="rss3_move"></div>
+        <%= rss_url(@rss_url) %>
 	</li>
 <ul>
 </div>
@@ -23,7 +17,6 @@ $(function(){
 		<td></td>
 		<td align="right"><span class="table_header"><%= tr("Added", "view/priorities/newest")%></span></td>
 			<!--<%= will_paginate @priorities %>-->
-		<td align="right"><%= rss_url(@rss_url) %></td>						
 	</tr>
 <% for priority in @priorities %>
 	<% if @endorsements %>
