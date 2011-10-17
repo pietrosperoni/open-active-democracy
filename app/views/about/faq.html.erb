@@ -1,26 +1,34 @@
 <h1><%= tr("Answers to Frequently Asked Questions", "view/about/br_faq") %></h1>
 <br>
 <% if current_government.layout=="better_reykjavik" %>
-    <p><%= tr("<a name=\"remove_endorsement\"></a><b>Q: What is {government_name}?</b>", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
+    <p><%= tr("<a name=\"what_is\"></a><b>Q: What is {government_name}?</b>", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
     <p><%= tr("A: {government_name} is a website that allows people from all over the world to prioritise which issues matter the most to them", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
     <br>
 
-    <p><%= tr("<a name=\"remove_endorsement\"></a><b>Q: Who runs the {government_name} service?</b>", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
+    <p><%= tr("<a name=\"who_runs\"></a><b>Q: Who runs the {government_name} service?</b>", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
     <p><%= tr("A: The Citizens Foundation, a non-profit organisation that is based in Iceland", "view/about/br_faq") %></p>
     <br>
 
-    <p><%= tr("<a name=\"remove_endorsement\"></a><b>Q: Can everyone use {government_name}?</b>", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
+    <p><%= tr("<a name=\"can_everyone_use\"></a><b>Q: Can everyone use {government_name}?</b>", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
     <p><%= tr("A: Yes, everyone can view everything without logging in but you need to create a free account to participate", "view/about/br_faq") %></p>
     <br>
 
-    <p><%= tr("<a name=\"remove_endorsement\"></a><b>Q: What happens to the priorities?</b>", "view/about/br_faq") %></p>
+    <p><%= tr("<a name=\"what_happens\"></a><b>Q: What happens to the priorities?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: That is really up to the people and the rulers. {government_name} is not affiliated with any government but our hope is that local politicians will see how much they have to gain by fulfilling the will of their people.", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
     <br>
 
-    <p><%= tr("<a name=\"remove_endorsement\"></a><b>Q: What are the rules?</b>", "view/about/br_faq") %></p>
+    <p><%= tr("<a name=\"what_are_the_rules\"></a><b>Q: What are the rules?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: See <a href=\"/about/rules\">the rules</a> for detailed information.", "view/about/br_faq") %></p>
     <br>
 
+    <p><%= tr("<a name=\"city_responsible\"></a><b>Q: How can I know what projects are the responsibility of the city?</b>", "view/about/br_faq") %></p>
+    <p><%= tr("A: Part of the citys administration is split into eight specialist councils. the committee for sport and leisure, the committee for culture and tourism, the committee for education, the planning committee, the committee for the environment and the welfare committee. <a href=\"/about/council\">More information about each councils responsibilites.</a><br /><br />  When a priority is added to Better Reykjavik the users must decide which category it fits in. The categories are: Administrataion, Construction projects, Culture & Arts, Education, Environment, Human rights, Leisure & Outdoors, Miscellaneous, Planning, Sports, Tourism, Transportation and Welfare. Please choose Miscellaneous when it's not clear in which category the priority should go. The choice of categories decides which specialist council will be allocated the priority if it gets enough support. ", "view/about/br_faq") %></p>
+    <br>
+
+    <p><%= tr("<a name=\"dont_know_category\"></a><b>Q: What if I don't know in which category the priority belongs to?</b>", "view/about/br_faq") %></p>
+    <p><%= tr("A: Better Reykjavik editors will notify if the priority is obviously in the wrong category and move it to the correct one. ", "view/about/br_faq") %></p>
+    <br>
+    
     <p><%= tr("<a name=\"remove_endorsement\"></a><b>Q: How do I remove an endorsement from my list?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: Click the grey X next to it in your list on the right.  In general, throughout the site, whenever you see an X, that will get rid of that endorsement/following/opposition/etc.", "view/about/br_faq") %></p>
     <br>
@@ -39,22 +47,29 @@
     <p><%= tr("<a name=\"rankings\"></a><b>Q: How do the rankings work?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: It's not simply a matter of how many endorsements or oppositions a priority has.  The ranking is heavily influenced by how sincerely a person uses the site.One of the challenges in building something like this on the internet is that some people will sign in every day, some people will sign in once a month, and some people will sign in once and never come back. We don't want any of these groups to skew the rankings of the priorities.  For instance, you shouldn't have to sign in to the site every single day to update your priorities, most people simply won't do that, and it would give too much power to the people with the most time.  But you also shouldn't be able to leave a fake email address, endorse one thing, never come back, and have that count as much as someone who's put together a broad list of priorities.  And if someone endorses one priority, and then opposes a hundred other priorities, that opposition should count less.So how does someone use the site sincerely?  The ideal person is someone who leaves a real email address, and verifies it (You would see a notice at the top of the page if you haven't verified), endorse and oppose priorities in a variety of different categories, occasionally giving a reason why in the comments, and comes back at least once a month. The other major factor is how high someone has it on their list of priorities.  So if a lot of people have something as their #1 priority, that gives it a bigger boost than something most people rank as 20th priority.", "view/about/br_faq") %></p>
     <br>
+    
+    
+    <p><%= tr("<a name=\"how_long\"></a><b>Q: How long can I support or oppose a priority?</b>", "view/about/br_faq") %></p>
+    <p><%= tr("A: Every last weekday of each month, at 12:00 the five top priorities from Better Reykjavik and the top priority from each category are given to the specialist councils of the city. After that you can no longer endorse or support those priorities. Other priorities will however continue to be open for discussion.  ", "view/about/br_faq") %></p>
+    <br>
+
+    
     <p><%= tr("<a name=\"index\"></a><b>Q: What is the \"[my name] Index\"?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: Think of your priorities as a stock portfolio, or a mutual fund.  That index represents how your priorities are moving up and down in the rankings, just like the stock markets.  At a glance, you can see whether your priorities are becoming more important, or less.The \"volume\" you see underneath is how many endorsements or oppositions people made at {government_name} that day.", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
     <br>
     <p><%= tr("<a name=\"priority_chart\"></a><b>Q: The chart on each priority's page?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: That shows how the priority has moved up and down in the rankings for the last 3 months (or less if it hasn't been around that long).  The volume underneath is the number of endorsements (green) or oppositions (red) on any given day.", "view/about/br_faq") %></p>
     <br>
-    <p><%= tr("<a name=\"pc\"></a><b>Q: What is \"sp\"?</b>", "view/about/br_faq") %></p>
+    <p><%= tr("<a name=\"pc\"></a><b>Q: What is \"s\"?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: Social Points.  It's a way to track your influence at {government_name}, and determine the \"<a href=\"/network\">most influential</a>\" chart.
     You can spend your Social points by <a href=\"/priorities/ads\">putting ads</a> for your favorite priorities at the top of all the {government_name} pages, or proposing acquisitions.", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
     <br>
-    <p><%= tr("<a name=\"earnpc\"></a><b>Q: How do I earn Social points (sp)?</b>", "view/about/br_faq") %></p>
-    <p><%= tr("<ul><li><span class=\"pc\">+1sp</span> when someone follows you. <span class=\"pc\">-1sp</span> when someone ignores you.", "view/about/br_faq") %></p>
-    <p><%= tr("<li><span class=\"pc\">+1sp</span> if either endorsers or opposers find your talking point helpful.", "view/about/br_faq") %></p>
-    <p><%= tr("<li>an additional<span class=\"pc\">+1sp</span> if <i>both</i> endorsers and opposers find your talking point or document helpful.", "view/about/br_faq") %></p>
-    <p><%= tr("<li><span class=\"pc\">+5sp</span> when someone accepts your invitation to join {government_name}.", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
-    <p><%= tr("<li><span class=\"pc\">+?sp</span> when an acquisition you proposed is approved by 70%+, you will receive double the pc you spent proposing the acquisition.</ul>", "view/about/br_faq") %></p>
+    <p><%= tr("<a name=\"earnpc\"></a><b>Q: How do I earn Social points (s)?</b>", "view/about/br_faq") %></p>
+    <p><%= tr("<ul><li><span class=\"pc\">+1s</span> when someone follows you. <span class=\"pc\">-1s</span> when someone ignores you.", "view/about/br_faq") %></p>
+    <p><%= tr("<li><span class=\"pc\">+1s</span> if either endorsers or opposers find your talking point helpful.", "view/about/br_faq") %></p>
+    <p><%= tr("<li>an additional<span class=\"pc\">+1s</span> if <i>both</i> endorsers and opposers find your talking point or document helpful.", "view/about/br_faq") %></p>
+    <p><%= tr("<li><span class=\"pc\">+5s</span> when someone accepts your invitation to join {government_name}.", "view/about/br_faq", :government_name => tr(current_government.name,"Name from database")) %></p>
+    <p><%= tr("<li><span class=\"pc\">+?s</span> when an acquisition you proposed is approved by 70%+, you will receive double the pc you spent proposing the acquisition.</ul>", "view/about/br_faq") %></p>
     <br>
     <p><%= tr("<a name=\"spellcheck\"></a><b>Q: Can I have spell check?</b>", "view/about/br_faq") %></p>
     <p><%= tr("A: There is no spell check built into the site itself, but you can enable it in your browser to work on all sites, not just this one.", "view/about/br_faq") %></p>
