@@ -1,7 +1,11 @@
 <%= render :partial => "priorities/header" %>
 <%= render :partial => "priorities/nav" %>
 
-<%= tr("<p><b>Buy an ad for this priority</b>.  You can spend some of your social points and put this priority with your message at the top of all the pages on {government_name}.  Whichever ad has the most<span class=\"pc\">{{ government.currency_short_name }}</span> spent per member is shown first until the member responds, the more you spend, the faster it's seen.  Ads are only shown to logged in members who have not already endorsed or opposed the priority, so your<span class=\"pc\">sp</span> is not wasted.</p>", "view/ads/new", :government_name => tr(current_government.name,"Name from database"))%>
+<%= tr("<p><b>Buy an ad for this priority</b>.  You can spend some of your social points and put this priority with your message at the top of all the pages on {government_name}.  Whichever ad has the most<span class=\"pc\">{currency_short_name}</span> spent per member is shown first until the member responds, the more you spend, the faster it's seen.  Ads are only shown to logged in members who have not already endorsed or opposed the priority, so your<span class=\"pc\">sp</span> is not wasted.</p>",
+       "view/ads/new",
+       :government_name => tr(current_government.name,"Name from database"),
+       :currency_short_name => tr(current_government.currency_short_name, "Name from database"
+       ))%>
 <%= tr("<p>You cannot buy<span class=\"pc\">sp</span> with real money, but you can earn it in a variety of ways, like <a href=\"/network/find\">inviting people to join</a>, and writing helpful <a href=\"../points/new\">talking points</a>.  <a href=\"/about/faq#pc\">Details here</a>.</p>", "view/ads/new")%>
 <p>
 <%= form_for(@ad, :url => priority_ads_path(@priority)) do |f| %>
