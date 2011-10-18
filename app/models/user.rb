@@ -128,9 +128,12 @@ class User < ActiveRecord::Base
 
   validates_acceptance_of   :terms, :message => tr("Please accept the terms and conditions", "model/user")
 
-  validates_inclusion_of    :age_group, in: [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")],
-                            message: tr("Please select your gender.", "model/user"), :if => :using_br?
-  validates_inclusion_of    :my_gender, in: [tr("Male", "model/user"),tr("Female", "model/user")], message: tr("Please select your gender.", "model/user"), :if => :using_br?
+ # validates_inclusion_of    :age_group, :in => lambda {|foo| foo.allowed_for_age_group},
+ #                           message: tr("Please select your gender.", "model/user"), :if => :using_br?
+ # validates_inclusion_of    :my_gender, :in => lambda {|foo| foo.allowed_for_gender}, message: tr("Please select your gender.", "model/user"), :if => :using_br?
+
+  validate :validate_age_group
+  validate :validate_gender
 
   before_save :encrypt_password
   before_create :make_rss_code
@@ -145,6 +148,31 @@ class User < ActiveRecord::Base
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids, :terms
+
+
+  def validate_age_group
+    if using_br?
+      unless allowed_for_age_group.include?(self.age_group)
+        self.errors.add(:age_group ,tr("Please select your age group", "model/user"))
+      end
+    end
+  end
+
+  def validate_gender
+    if using_br?
+      unless allowed_for_gender.include?(self.my_gender)
+        self.errors.add(:my_gender ,tr("Please select gender", "model/user"))
+      end
+    end
+  end
+
+  def allowed_for_age_group
+    [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")]
+  end
+
+  def allowed_for_gender
+    [tr("Male", "model/user"),tr("Female", "model/user")]
+  end
 
   def using_br?
     Government.current.layout == "better_reykjavik"
