@@ -25,8 +25,6 @@
 			            :class => "quality_remove", :title => tr("This is no longer unhelpful", "view/points/_button_small") %>
 		</span>	
 	<% end %>
-
-    <span class="point_fblike"><fb:like href="<%=point.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"></fb:like></span>
 <% end %>
 
 <%= render :partial => "points/helpful_count", :locals => {:point => point} %>
@@ -47,9 +45,13 @@
 		<%= link_to tr("NO", "view/points/_button_small"), quality_point_path(point, :region => "point_inline", :value => false),
                 :method=>:post,
                 :remote=>true,
-                'data-disable-with' => escape_t(tr("Unelpful","Ajax")),
+                'data-disable-with' => escape_t(tr("Unhelpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
 		            :class => "quality_unhelpful_link", :title => tr("This is not helpful", "view/points/_button_small") %>
 	</span>
 <% end %>
 </div>
+
+<% if quality or !logged_in? %>
+  <span class="point_fblike"><fb:like href="<%=point.show_url%>" layout="button_count" ref="priority" show-faces="false" width="120" action="<%=tr("like","facebook")%>" colorscheme="light"></fb:like></span>
+<% end %>
