@@ -28,17 +28,19 @@
 			
 			<p>
 			<%= tr("Link this to another priority <span class='small'>Just start typing the name</span>", "view/revisions/new") %>
-			<%= f.text_field :other_priority_name, :size => 50, :autocomplete => "off" %>			
-			<%= tr("Linking to another priority is optional. If your point is in opposition, you can link to a better priority. OR, if your point is supportive or neutral, you can highlight a more specific or related priority.", "view/revisions/new")%>
-			</p>			
+			<%= f.text_field :other_priority_name, :size => 50, :autocomplete => "off" %>
+			</p>
+            <p><%= tr("Linking to another priority is optional. If your point is in opposition, you can link to a better priority. OR, if your point is supportive or neutral, you can highlight a more specific or related priority.", "view/revisions/new")%></p>
+            <br />
 			
 			<p>
-			<%= tr("Why did you make this change?", "view/revisions/new") %><br/>
-			<% fields_for :comment do |c| %>
+			<%= tr("Why did you make this change?", "view/revisions/new") %><br />
+			<%= fields_for :comment do |c| %>
 				<%= c.text_field :content, :size => 50 %>	
 			<% end %>
 			</p>
-			
+
+            <br />
 			<p>
 			<%= f.submit tr("Save point", "view/revisions/new"), :id => "submit", :class => "yellow_button" %>
 			</p>
