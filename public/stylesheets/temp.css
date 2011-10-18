@@ -666,7 +666,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 .list_right {
 	list-style: none;
-  float:left;
+  float:right;
   margin-bottom: 2px;
 }
 .list_report {
