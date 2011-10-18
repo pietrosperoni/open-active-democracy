@@ -427,7 +427,13 @@ div.new_comment_facebook {}
 .comment_more {background:none}
 .priority_add {background-color: transparent !important; border:none !important;}
 
-span.priority_add a, span.priority_add_working {
+span.priority_add_working {
+    margin-right: 7px;
+    padding: 1px 5px 1px;
+    height: 16px;
+}
+
+span.priority_add a {
     color: #FFFFFF !important;
     float: left;
     font-family: arial;
