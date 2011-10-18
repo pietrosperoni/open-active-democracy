@@ -32,7 +32,8 @@
 			<%= link_to tr("endorse", "view/priorities/_button_small"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => 1),
 		              :method => :post,
 		              :remote => true,
-                      'data-disable-with' => '<span class="priority_add_link1 priority_add_working"><img src="images/ajax/horizontal_small.gif" /></span>',
+                      'data-loader-name' => "no_loader",
+                      'data-disable-with' => '<span class="priority_add_link1 priority_add_working"><img src="/images/ajax/horizontal_small.gif" /></span>',
 				          :class => "priority_add_link1", :title =>  tr("I support this, add it to my priority list", "view/priorities/_button_small") %>
 		</span>
 
@@ -41,7 +42,8 @@
 			<%= link_to tr("oppose", "view/priorities/_button_small"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => region, :value => -1),
 		              :method => :post,
 		              :remote => true,
-		              'data-disable-with' => '<span class="priority_add_link2 priority_add_working"><img src="images/ajax/horizontal_small.gif" /></span>',
+                      'data-loader-name' => "no_loader",
+		              'data-disable-with' => '<span class="priority_add_link2 priority_add_working"><img src="/images/ajax/horizontal_small.gif" /></span>',
 				          :class => "priority_add_link2", :title =>  tr("I oppose this, and want to add my opposition to my priority list.", "view/priorities/_button_small") %>
 		</span>	
 
