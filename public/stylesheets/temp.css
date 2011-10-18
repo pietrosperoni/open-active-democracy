@@ -106,8 +106,8 @@ div#content_text table {
  		border: 0px solid #DDDDDD;
     font-size: 1.5em;
     font-weight: bold;
-    margin: 30px 0 20px;
-    padding: 12px 0 30px 14px;
+    margin: 30px 0 8px;
+    padding: 12px 0 16px 14px;
      width: 148px;
 		text-decoration: none !important;
 		cursor: pointer;
@@ -816,3 +816,8 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .finished_priority ul {
 list-style: disc;
 }
+
+.socmedia_buttons {
+    padding-bottom: 28px;
+    margin-left: 10px;
+   }
