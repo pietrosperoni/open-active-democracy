@@ -33,7 +33,7 @@
                 :remote=>true,
                 'data-disable-with' => escape_t(tr("Helpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link", :title => tr("This is helpful", "view/points/_button") %>								
+		            :class => "", :title => tr("This is helpful", "view/points/_button") %>
 	</div>
 	<div class="endorse_or"><%= tr("OR", "view/points/_button") %></div>
 	<div class="grey_button_wide" id="priority_add_oppose_<%= point.id.to_s %>">
@@ -42,6 +42,6 @@
                 :remote=>true,
                 'data-disable-with' => escape_t(tr("Unhelpful","Ajax")),
                 'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link", :title => tr("This is not helpful", "view/points/_button") %>								
+		            :class => "", :title => tr("This is not helpful", "view/points/_button") %>
 	</div>	
 <% end %>
