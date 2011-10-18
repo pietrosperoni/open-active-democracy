@@ -195,7 +195,7 @@ span#endorse-title {
 		background-image: url("../images/new/add-endorse.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
-		padding: 10px 30px;
+		padding: 8px 30px;
     color: #439A22 !important;
     font-size: 1.1em;
     font-weight: bold;
@@ -204,7 +204,7 @@ span#oppose-title {
 		background-image: url("../images/new/add-oppose.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
-		padding: 10px 30px;
+		padding: 8px 30px;
 		color: #BC0000 !important;
     font-size: 1.1em;
     font-weight: bold;
@@ -666,7 +666,8 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 .list_right {
 	list-style: none;
-  float:right;
+  float:left;
+  margin-bottom: 2px;
 }
 .list_report {
 	float:right;
