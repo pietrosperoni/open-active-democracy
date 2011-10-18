@@ -2,11 +2,11 @@ class IssuesController < ApplicationController
   
   before_filter :get_tag_names, :except => :index
   before_filter :check_for_user, :only => [:yours, :yours_finished, :yours_created, :network]
-      
+
   def index
     @page_title =  tr("Categories", "controller/issues")
     if request.format != 'html' or current_government.tags_page == 'list'
-      @issues = Tag.filtered.most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
+      @issues = Tag.filtered.not_in_default_tags(default_tags).most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
     end
     respond_to do |format|
       format.html {
@@ -277,6 +277,14 @@ class IssuesController < ApplicationController
     else
       access_denied and return
     end
-  end  
-  
+  end
+
+  def default_tags
+    if current_government.default_tags_checkbox
+      current_government.default_tags_checkbox.split(",").map{|t| t.parameterize_full[0..60]}
+    else
+      [""]
+    end
+  end
 end
+
