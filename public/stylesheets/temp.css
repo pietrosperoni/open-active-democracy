@@ -590,7 +590,7 @@ div.userwrap2 {
 #language_selection_box {
     border: 0px solid #DDDDDD;
     margin-bottom: 0px;
-    margin-top: -15px;
+    /*margin-top: -15px;*/
     padding: 10px 0 10px 15px;
     width: 205px; line-height: 1.4em;
 }
@@ -820,4 +820,4 @@ list-style: disc;
 .socmedia_buttons {
     padding-bottom: 28px;
     margin-left: 10px;
-   }
+}
