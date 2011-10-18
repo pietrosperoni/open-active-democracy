@@ -44,8 +44,8 @@
 							<% if @document %>
 								<input type="hidden" name="activity[document_id]" value="<%= @document.id %>">
 							<% end %>
-							<% if @user and @user != current_user %>
-								<input type="hidden" name="activity[other_user_id]" value="<%= @user.id %>">
+							<% if @user %>
+								<input type="hidden" name="activity[user_id]" value="<%= @user.id %>">
 							<% end %>												
 					</td>
 				</tr>

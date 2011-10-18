@@ -22,12 +22,11 @@ class BulletinsController < ApplicationController
   end
 
   def create
-    params[:activity][:user_id] = current_user.id
-    if params[:activity][:other_user_id] # this is a post to another person's profile
-      @activity = ActivityBulletinProfileNew.create(:user => User.find(params[:activity][:other_user_id]), :other_user => current_user)
-      ActivityBulletinProfileAuthor.create(:activity => @activity, :user => current_user, :other_user => @activity.user, :is_user_only => true)
-    else
+    if params[:activity][:user_id] == current_user.id
       @activity = ActivityBulletinNew.create(params[:activity])
+    else # this is a post to another person's profile
+      @activity = ActivityBulletinProfileNew.create(:user => User.find(params[:activity][:user_id]), :other_user => current_user)
+      ActivityBulletinProfileAuthor.create(:activity => @activity, :user => current_user, :other_user => @activity.user, :is_user_only => true)
     end
     @comment = @activity.comments.new(params[:comment])
     @comment.user = current_user
