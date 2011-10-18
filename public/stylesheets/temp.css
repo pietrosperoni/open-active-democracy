@@ -470,7 +470,7 @@ span.priority_add_follow a, span.priority_add_ignore a {
 span.priority_add_ignore a, .priority_remove2 {background:#fff !important; border:1px solid #ccc !important;width: auto; color: #aaa !important;}
 .priority_add_link1 {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
 .priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;width: auto;float:right;}
-span.priority_add_follow a {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #aaa;}
+span.priority_add_follow a, .priority_add_link {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #aaa;}
 .priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
 .priority_add_link2:hover {background:#B92D19;border:1px solid #B92D19;}
 .point_name span{display:none;}
