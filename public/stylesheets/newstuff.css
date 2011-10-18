@@ -1235,3 +1235,18 @@ margin-top:7px;
     width: auto;
 }
 
+#infopage h4
+{
+		margin-top: 10px;
+}
+
+
+#infopage li
+{
+		margin-left: 5px;
+}
+
+#infopage p
+{
+		margin-top: 5px;
+}
