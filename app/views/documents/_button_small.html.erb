@@ -33,7 +33,7 @@
 
 <% if not quality and logged_in? %>
 	<%= tr("Is this helpful?", "view/documents/_button_small")%>
-	<span class="tag_button" id="priority_add_<%= document.id.to_s %>">
+	<span class="tag_button" id="priority_add_endorse_<%= document.id.to_s %>">
 		<%= link_to tr("YES", "view/documents/_button_small"), quality_document_path(document, :region => "document_inline", :value => 1), 
                 :method => :post,
                 :remote=>true,
@@ -43,7 +43,7 @@
 		
 	<span class="or"><%= tr("OR", "view/documents/_button_small") %></span>
 
-	<span class="tag_button" id="priority_add_<%= document.id.to_s %>">
+	<span class="tag_button" id="priority_add_oppose_<%= document.id.to_s %>">
 		<%= link_to tr("NO", "view/documents/_button_small"), quality_document_path(document, :region => "document_inline", :value => 0),
                 :method => :post,
                 :remote=>true,

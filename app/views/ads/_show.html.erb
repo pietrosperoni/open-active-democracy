@@ -15,7 +15,7 @@
 		<div class="notification_show_footer">
 			<span id="priority_<%= ad.priority.id %>_button_small">
 
-					<span class="priority_add" id="priority_add_<%= ad.priority.id %>">
+					<span class="priority_add" id="priority_add_endorse_<%= ad.priority.id %>">
 						<%= link_to tr("endorse", "view/ads/_show"), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => 1, :ad_id => ad),
                         :method => :post,
 						            :remote=>true,
@@ -24,12 +24,10 @@
 						            :class => "priority_add_link", :title => tr("I support this, add it to my priority list", "view/ads/_show") %>		
 					</span>
 					<span class="endorse_or"><%= tr("OR", "view/ads/_show") %></span>
-					<span class="priority_add" id="priority_add_<%= ad.priority.id %>">
+					<span class="priority_add" id="priority_add_oppose_<%= ad.priority.id %>">
 						<%= link_to tr("oppose", "view/ads/_show"), endorse_priority_path(ad.priority, :referral_id => ad.user, :region => "ad_top", :value => -1, :ad_id => ad),
                         :method => :post,
                         :remote=>true,
-                        'data-disable-with' => escape_t(tr("Endorsing","Ajax")),
-                        'data-loader-name' => "horizontal_small",
                         'data-disable-with' => escape_t(tr("Opposing","Ajax")),
                         'data-loader-name' => "horizontal_small",
 						            :class => "priority_add_link", :title => tr("I oppose this, and want to add my opposition to my priority list.", "view/ads/_show") %>		

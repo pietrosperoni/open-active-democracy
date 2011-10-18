@@ -5,7 +5,7 @@
 <% end %>
 <% if quality %>
 	<% if quality.is_helpful? %>
-		<span class="tag_button tag_button_hack" id="point_helpful_<%= point.id.to_s %>">
+		<span class="tag_button tag_button_hack" id="point_helpful_yes_<%= point.id.to_s %>">
 			<%= tr("HELPFUL", "view/points/_button_small")%>  
 			<%= link_to "&nbsp;x".html_safe, unquality_point_path(point, :region => "point_inline"), 
                   :method=>:post,
@@ -15,7 +15,7 @@
 			            :class => "quality_remove", :title => tr("This is no longer helpful", "view/points/_button_small") %>
 		</span>
 	<% else %>
-		<span class="tag_button tag_button_hack" id="point_helpful_<%= point.id.to_s %>">
+		<span class="tag_button tag_button_hack" id="point_helpful_no_<%= point.id.to_s %>">
 			<%= tr("NOT HELPFUL", "view/points/_button_small")%> 
 			<%= link_to "&nbsp;x".html_safe, unquality_point_path(point, :region => "point_inline"), 
                   :method=>:post,
@@ -31,7 +31,7 @@
 
 <% if not quality and logged_in? %>
 	<br><%= tr("Is this helpful?", "view/points/_button_small")%>
-	<span class="tag_button tag_button_hack" id="priority_add_<%= point.id.to_s %>">
+	<span class="tag_button tag_button_hack" id="priority_helpful_yes_<%= point.id.to_s %>">
 		<%= link_to tr("YES", "view/points/_button_small"), quality_point_path(point, :region => "point_inline", :value => true),
                 :method=>:post,
                 :remote=>true,
@@ -41,7 +41,7 @@
 		
 	<span class="or"><%= tr("OR", "view/points/_button_small") %></span>
 
-	<span class="tag_button tag_button_hack" id="priority_add_<%= point.id.to_s %>">
+	<span class="tag_button tag_button_hack" id="point_helpful_no_<%= point.id.to_s %>">
 		<%= link_to tr("NO", "view/points/_button_small"), quality_point_path(point, :region => "point_inline", :value => false),
                 :method=>:post,
                 :remote=>true,
