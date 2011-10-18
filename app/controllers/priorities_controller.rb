@@ -736,7 +736,10 @@ class PrioritiesController < ApplicationController
     @saved = @priority.save
     
     if @saved
-      @priority.points.first.setup_revision
+      first_point = @priority.points.first
+      first_point.setup_revision
+      first_point.reload
+      quality = first_point.point_qualities.find_or_create_by_user_id_and_value(current_user.id, true)
       @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
       if current_user.endorsements_count > 24
         session[:endorsement_page] = (@endorsement.position/25).to_i+1
