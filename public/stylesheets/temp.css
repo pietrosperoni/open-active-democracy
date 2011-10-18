@@ -579,6 +579,7 @@ div.userwrap2 {
 		background:none;
 		border: 0px solid #DDDDDD;
 		padding:10px 10px 0;
+    margin-bottom: -10px;
 }
 #user_info_box a {
   
@@ -820,4 +821,19 @@ list-style: disc;
 .socmedia_buttons {
     padding-bottom: 28px;
     margin-left: 10px;
+}
+
+.gamlabetri
+{
+		width: 240px;
+		float:auto;
+		margin-top: 20px;
+		margin-bottom: 15px;
+}
+
+.gamlabetri img
+{
+		margin-left: 37px;
+		border: 1px solid #ccc;
+		padding: 10px;
 }
