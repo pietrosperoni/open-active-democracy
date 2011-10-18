@@ -30,8 +30,8 @@ every 15.minutes do
 end
 
 every :reboot do
-  rake "ts:index"
-  rake "ts:start"
+  command "cd /home/yrpri/sites/open-active-democracy/betrireykjavik/current; bundle exec rake ts:index RAILS_ENV=production"
+  command "cd /home/yrpri/sites/open-active-democracy/betrireykjavik/current; bundle exec rake ts:start RAILS_ENV=production"
   command "cd /home/yrpri/sites/open-active-democracy/betrireykjavik/current; RAILS_ENV=production ruby script/delayed_job start RAILS_ENV=production"
 end
 
