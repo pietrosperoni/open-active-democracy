@@ -27,8 +27,13 @@ jQuery(document).ready(function() {
   jQuery('a[data-remote]').live("ajax:beforeSend", function(){
       var $clicked = $(this);
       $disable_with = $clicked.attr("data-disable-with");
-      $loader_name = $clicked.attr("data-loader-name");
-      $clicked.replaceWith($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
+      if ($clicked.attr("data-loader-name")!="no_loader") {
+        $loader_name = $clicked.attr("data-loader-name");
+        $clicked.replaceWith($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
+      } else {
+        $clicked.replaceWith($disable_with);
+      }
+
     // $clicked.href("#");
     });
 
