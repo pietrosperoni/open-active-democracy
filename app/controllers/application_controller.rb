@@ -223,6 +223,9 @@ class ApplicationController < ActionController::Base
       if cookies[:last_selected_language]
         session[:locale] = cookies[:last_selected_language]
         Rails.logger.debug("Set language from cookie")
+      elsif Government.current.layout == "better_reykjavik"
+        session[:locale] = "is"
+        Rails.logger.info("Set language from better reykjavik")
       elsif @iso_country and not @iso_country.languages.empty?
         session[:locale] =  @iso_country.languages.first.locale
         Rails.logger.debug("Set language from geoip")
