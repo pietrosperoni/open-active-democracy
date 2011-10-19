@@ -3,8 +3,8 @@
 <% if not @priorities or @priorities.empty? %>
 	<%= tr("All of your priorities have at least one point supporting your position.", "view/briefing/points")%>
 <% else %>
-	<%= tr("<p>These are your priorities that don't yet have any talking points supporting your position.  Talking points show up on a priority's page and help others decide whether to support it.  Click on the priority's title to add a point.</p>", "view/briefing/points")%>
-	<%= tr("<p>As a bonus, if you add a talking point that others find helpful, you will earn<span class=\"pc\">1 sp</span>, which can be spent in a variety of ways, including buying <a href=\"/priorities/ads\">ads</a> for your priorities.  More details on how {{ government.currency_name | downcase}}<span class=\"pc\"> sp</span> works <a href=\"/about/faq#pc\">here</a>.</p>", "view/briefing/points")%>
+	<%= tr("<p>These are your priorities that have very few talking points supporting your position.  Talking points show up on a priority's page and help others decide whether to support it.  Click on the priority's title to add a point.</p>", "view/briefing/points")%>
+	<%= tr("<p>As a bonus, if you add a talking point that others find helpful, you will earn<span class=\"pc\">1 sp</span>, which can be spent in a variety of ways, including buying <a href=\"/priorities/ads\">ads</a> for your priorities.  More details on how {currency_name}<span class=\"pc\"> sp</span> works <a href=\"/about/faq#pc\">here</a>.</p>", "view/briefing/points", currency_name: current_government.currency_name)%>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="right" class="right_scale"><span class="table_header"><%= tr("Rank", "view/briefing/points") %></span></td>
