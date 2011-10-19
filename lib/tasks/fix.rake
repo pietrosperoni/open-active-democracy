@@ -179,7 +179,11 @@ namespace :fix do
     u.referrals_count = 0
     u.imported_contacts_count = 0
     u.save(false)
-
+    Government.last.default_tags_checkbox.split(",").each do |t|
+      tag=Tag.new
+      tag.name = t
+      tag.save
+    end
   end
 
   desc "delete activities that don't have objects which are now nil"
