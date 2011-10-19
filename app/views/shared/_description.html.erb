@@ -2,12 +2,14 @@
     <meta name="description" content="<%= tr("{prompt} {priority_name}. Learn more at {government_name}", "view/shared/_description", :prompt => current_government.prompt, :government_name => tr(current_government.name,"Name from database"), :priority_name => @priority.name) %> ">
     <meta itemprop="name" content="<%= tr("{priority_name}", "view/shared/_description", :priority_name => @priority.name) %>">
     <meta itemprop="description" content="<%= tr("{prompt} {priority_name}. Learn more at {government_name}", "view/shared/_description", :prompt => current_government.prompt, :government_name => tr(current_government.name,"Name from database"), :priority_name => @priority.name) %>">
+    <meta itemprop="image" content="http://<%= request.host_with_port+current_government.logo.url %>">
 <% elsif params[:controller] == 'users' and @user and @user.has_top_priority? %>
     <meta name="description" content="<%= tr("{user_name} top priority for: {priority_name}", "view/shared/_description", :user_name => @user.name, :priority_name => @user.top_endorsement.priority.name) %>">
 <% else %>
     <meta name="description" content="<%= tr(current_government.description,"Description from database") %>">
     <meta itemprop="name" content="<%= tr(current_government.name,"Name from database") %>">
     <meta itemprop="description" content="<%= tr(current_government.description,"Description from database") %>">
+    <meta itemprop="image" content="http://<%= request.host_with_port+current_government.logo.url %>">
 <% end %>
 <% if current_government.has_logo? and not controller_name=="process_speech_videos" and not controller_name=="process_documents" %>
     <link rel="image_src" href="<%= current_government.logo.url %>" />
