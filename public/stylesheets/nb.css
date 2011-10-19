@@ -1503,7 +1503,7 @@ ul#priority_menu li.tab12 div.tab_body {
 	width: auto;
 	max-width: 200px;
 	text-align: right;
-	margin-top: 6px;
+	margin-top: 8px;
 }
 
 .category_list {
@@ -1518,6 +1518,7 @@ ul#priority_menu li.tab12 div.tab_body {
 .priority_report {
 	float: right;
 	margin-left: 10px;
+    margin-top: -4px;
 }
 
 .user_pic_network {padding: 10px 5px 4px 7px;}
