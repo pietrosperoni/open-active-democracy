@@ -1,6 +1,17 @@
-<meta property="og:title" content="<%=@priority.name%>"/>
-<meta property="og:type" content="website"/>
-<meta property="og:image" content="http://<%=request.host%>/images/logos/48px-Crystal_Clear_app_linneighborhood.png"/>
-<meta property="og:url" content="<%=@priority.show_url%>"/>
-<meta property="og:site_name" content="<%=tr(current_government.name,"Name from database")%>"/>
-<meta property="fb:app_id" content="<%=Facebooker2.app_id%>"/>
+<% if controller_name == "priorities" and action_name == "show" %>
+    <meta property="og:title" content="<%=@priority.name%>"/>
+    <meta property="og:description" content="<%= tr("{prompt} {priority_name}. Learn more at {government_name}", "view/shared/_description", :prompt => current_government.prompt, :government_name => tr(current_government.name,"Name from database"), :priority_name => @priority.name) %>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="http://<%= request.host_with_port+current_government.logo.url %>"/>
+    <meta property="og:url" content="<%=@priority.show_url%>"/>
+    <meta property="og:site_name" content="<%=tr(current_government.name,"Name from database")%>"/>
+    <meta property="fb:app_id" content="<%=Facebooker2.app_id%>"/>
+<% else %>
+    <meta property="og:title" content="<%=tr(current_government.name,"Name from database")%>"/>
+    <meta property="og:description" content="<%= tr(current_government.description,"Description from database") %>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="http://<%= request.host_with_port+current_government.logo.url %>"/>
+    <meta property="og:url" content="http://<%= request.host_with_port %>"/>
+    <meta property="og:site_name" content="<%=tr(current_government.name,"Name from database")%>"/>
+    <meta property="fb:app_id" content="<%=Facebooker2.app_id%>"/>
+<% end %>
