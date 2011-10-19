@@ -18,7 +18,7 @@ $(function(){
 	</li>
 
 	<li class="list_right">
-		<div class="category"><%= render :partial=>"priorities/report_content", :locals=>{:priority=>priority, :skip_div=>true} %>
+		<div class="category"><%= render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
 				<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
 		</div>
 	</li>

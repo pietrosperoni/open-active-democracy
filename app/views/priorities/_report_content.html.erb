@@ -1,7 +1,5 @@
 <% if logged_in? and current_user.id != priority.user_id  %>
-  <% unless defined?(skip_div) -%>
-    <div id="priority_report_<%=priority.id%>" class="report1">
-  <% end %>
+  <span id="priority_report_<%=priority.id%>" class="report1">
        <%= link_to image_tag("report.png", :align => "center", :border => 0, :class => "priority_report warn"),
                    flag_priority_url(priority.id), :method => :get,
                    :remote=>true,
@@ -9,7 +7,5 @@
                    'data-loader-name' => "circle",
                    :confirm => tr("Is this priority from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => priority.user.name),
                    :title => tr("Report", "view/comments/_show") %>
-    <% unless defined?(skip_div) -%>
-    </div>
-    <% end %>
+   </span>
 <% end %>
