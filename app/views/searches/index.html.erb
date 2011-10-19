@@ -45,7 +45,7 @@
               </li>
               <% else %>
               <li>
-                <%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %>
+                <%= link_to "#{tr(translated_option, "model/category")} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %>
               </li>
               <% end %>
             <% end %>
