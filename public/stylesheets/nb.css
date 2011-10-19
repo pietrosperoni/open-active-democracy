@@ -1513,7 +1513,7 @@ ul#priority_menu li.tab12 div.tab_body {
 }
 
 .single .category_list {text-align:left; position: absolute; max-width:340px;min-width:300px;}
-.single .category {text-align:left; position: absolute; max-width:340px; display: inline-table; margin-top:0;}
+.single .category {text-align:left; position: absolute; max-width:340px; margin-top:0;}
 
 .priority_report {
 	float: right;
