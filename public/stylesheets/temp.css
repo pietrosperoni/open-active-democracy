@@ -16,7 +16,7 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 /* #header table {width:100px;overflow:hidden} */
 img {border:none}
 
-#encouragements {width: 305px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 3px 5px 5px 65px; height: 80px; font-size:10px;}
+#encouragements {width: 339px; margin-left: 30px; background-image: url(../images/new/ad_bg2.gif) !important; background-repeat: no-repeat; padding: 3px 5px 5px 0px; height: 80px; font-size:10px;}
 #encouragements h2 {border:none;}
 
 td.right {width:60px}
@@ -76,7 +76,6 @@ div#content_text table {
 */
 .notification_show_footer {
   float: left;
-  margin-left: -45px;
   margin-top: 0;
 	padding: 0;
 }

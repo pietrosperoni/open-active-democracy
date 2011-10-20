@@ -42,15 +42,15 @@
                     :method => :post,
                     :remote=>true,
                     'data-disable-with' => escape_t(tr("Skipping","Ajax")),
-                    'data-loader-name' => "horizontal_small",
-				            :class => "priority_add_link" %>		
+                    'data-loader-name' => "horizontal_small"%>
 			</span>
 
 			<% end %>
-            <br>
-			<%= render :partial => "priorities/endorsement_count", :locals => {:priority => ad.priority }%>
-			
-		</div>
+        </div>
+      <div class="clear"></div>
+        <div class="notification_show_counts">
+         <%= render :partial => "priorities/endorsement_count", :locals => {:priority => ad.priority }%>
+        </div>
 		
 	</td>
 	</tr>
