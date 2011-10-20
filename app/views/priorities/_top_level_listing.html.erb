@@ -32,11 +32,32 @@
             );
           </script>
   			</td>
-  			<td class="category_icon">
-	            <% if priority.category and priority.category.icon -%>
-					<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
-	            <% end %>
-  			</td>
+            <% if defined? timeago %>
+            <td>
+                <table>
+                    <tr>
+  			            <td class="category_icon">
+	                        <% if priority.category and priority.category.icon -%>
+					            <%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+	                        <% end %>
+  			            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="priority_added">
+                                <%= time_ago(priority.created_at) %>
+                            </span>
+                        <td>
+                    </tr>
+                </table>
+            </td>
+            <% else %>
+              <td class="category_icon">
+                <% if priority.category and priority.category.icon -%>
+                  <%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+                <% end %>
+              </td>
+            <% end %>
   			<td>
         	<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
   			</td>      
