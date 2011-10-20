@@ -5,7 +5,7 @@ end %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
   <head itemscope itemtype="http://schema.org/WebPage" xmlns:og="http://ogp.me/ns#">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><%= @page_title || tr(current_government.name,"Name from database") %></title>
+    <title><%= @page_title ? "#{@page_title} - #{tr(current_government.name,"Name from database")}" : tr(current_government.name,"Name from database") %></title>
 		<!--[if IE]>
       <%= stylesheet_link_tag "/stylesheets/iehacks" %>
     <![endif]-->
