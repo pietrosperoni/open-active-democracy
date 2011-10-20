@@ -13,7 +13,7 @@
 		</td>
 		<td valign="top" class="left_scale8">
 		<span class="encouragements_text">
-		<%= tr("Shown to {seen_count} of {total_count} members so far<br/>{user_name} spent <span class='pc'>{cost}{currency_short_name}</span> or <span class='pc'>{per_user_cost}{currency_short_name}</span> per member", "view/ads/_show_inline", :user_name => link_to(ad.user.name, ad.user), :cost => ad.cost, :seen_count => ad.shown_ads_count, :total_count => ad.show_ads_count, :currency_short_name => current_government.currency_short_name, :per_user_cost => ad.per_user_cost) %>
+		<%= tr("Shown to {seen_count} of {total_count} members so far<br />{user_name} spent <span class='pc'>{cost}{currency_short_name}</span> or <span class='pc'>{per_user_cost}{currency_short_name}</span> per member", "view/ads/_show_inline", :user_name => link_to(ad.user.name, ad.user), :cost => ad.cost, :seen_count => ad.shown_ads_count, :total_count => ad.show_ads_count, :currency_short_name => current_government.currency_short_name, :per_user_cost => ad.per_user_cost) %>
 		</span>
 		</td>
 		</tr>
