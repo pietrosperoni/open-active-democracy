@@ -34,7 +34,7 @@
   			</td>
             <% if defined? timeago %>
             <td>
-                <table>
+                <table style="width:70px">
                     <tr>
   			            <td class="category_icon">
 	                        <% if priority.category and priority.category.icon -%>
@@ -47,7 +47,7 @@
                             <span class="priority_added">
                                 <%= time_ago(priority.created_at) %>
                             </span>
-                        <td>
+                        </td>
                     </tr>
                 </table>
             </td>
