@@ -356,10 +356,7 @@ h4 {
 
 .notification_show_message {
 	margin-top: 0px;
-    margin-bottom: 3px;
-}
-.notification_show_counts {
-    margin-top: -1px;
+    margin-bottom: 2px;
 }
 .endorsement_up, .endorsement_down {
    	margin: 1px 0px 0px 0px;
