@@ -16,8 +16,8 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 /* #header table {width:100px;overflow:hidden} */
 img {border:none}
 
-#ads {width: 305px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 3px 5px 5px 65px; height: 80px; font-size:10px;}
-#ads h2 {border:none;}
+#encouragements {width: 305px; margin-left: 0px; background-image: url(../images/new/ad_bg.gif) !important; background-repeat: no-repeat; padding: 3px 5px 5px 65px; height: 80px; font-size:10px;}
+#encouragements h2 {border:none;}
 
 td.right {width:60px}
 
@@ -778,7 +778,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .user_pic_box {padding: 8px 5px 4px 7px;}
 .people_text {padding: 5px 5px 4px 0px;}
 
-.ads_text {
+.encouragements_text {
 	font-size: 0.8em; 
 	line-height:1.5em;
 }
@@ -789,9 +789,9 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 .top_position img {padding-right: 3px;}
 .per_user_cost {padding:3px 0 0 5px;}
 .top_scale22 {padding-top: 22px;}
-.bg_endorsed_ads {background-color: #009933;}
-.bg_opposed_ads {background-color: #bc0000;}
-.bg_response_ads {padding-top: 22px; padding-left: 10px;}
+.bg_endorsed_encouragements {background-color: #009933;}
+.bg_opposed_encouragements {background-color: #bc0000;}
+.bg_response_encouragements {padding-top: 22px; padding-left: 10px;}
 .user_pic_contributors {padding: 10px 5px 4px 7px;}
 .td_pc {padding: 5px 5px 4px 0px;}
 .pagination {padding-left: 7px; padding-bottom: 2px;}

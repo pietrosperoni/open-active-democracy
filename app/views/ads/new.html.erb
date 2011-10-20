@@ -55,15 +55,15 @@ function sendForm() {
   jQuery.ajax({type:'post', data: jQuery('form.new_ad').serialize(), url:'<%=preview_priority_ads_url(@priority)%>'})  
 }
 
-$('#ad_text').delayedObserver(function() {
+$('#encouragement_text').delayedObserver(function() {
   sendForm();
 }, 0.5);
 
-$('#ad_show_ads_count').delayedObserver(function() {
+$('#encouragement_show_encouragements_count').delayedObserver(function() {
   sendForm();
 }, 0.5);
 
-$('#ad_cost').delayedObserver(function() {
+$('#encouragement_cost').delayedObserver(function() {
   sendForm();
 }, 0.5);
 //]]>

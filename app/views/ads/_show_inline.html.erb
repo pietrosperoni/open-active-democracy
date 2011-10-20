@@ -1,8 +1,8 @@
-<div id="ad_<%= ad.id %>" class="ad_show_inline">
+<div id="encouragement_<%= ad.id %>" class="encouragement_show_inline">
 
 	<span class="point_name"><%= link_to ad.priority.name, priority_ad_url(ad.priority,ad) %></span>
 	<% if ad.attribute_present?("content") %>
-	<div class="ad_message">
+	<div class="encouragement_message">
 	"<%= h(ad.content) %>"
 	</div>
 	<% end %>
@@ -12,7 +12,7 @@
 			<%= render :partial => "ads/progress_bar", :locals => {:ad => ad}%>			
 		</td>
 		<td valign="top" class="left_scale8">
-		<span class="ads_text">
+		<span class="encouragements_text">
 		<%= tr("Shown to {seen_count} of {total_count} members so far<br/>{user_name} spent <span class='pc'>{cost}{currency_short_name}</span> or <span class='pc'>{per_user_cost}{currency_short_name}</span> per member", "view/ads/_show_inline", :user_name => link_to(ad.user.name, ad.user), :cost => ad.cost, :seen_count => ad.shown_ads_count, :total_count => ad.show_ads_count, :currency_short_name => current_government.currency_short_name, :per_user_cost => ad.per_user_cost) %>
 		</span>
 		</td>
