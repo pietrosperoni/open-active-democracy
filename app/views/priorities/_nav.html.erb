@@ -58,6 +58,13 @@
 				<%= link_to tr("News", "view/priorities/_nav"), activities_priority_url(@priority) %>
 			</span>
 		</li>
+        <% if current_user and current_user.capitals_count>0 -%>
+        <li class="tab8">
+			<span class="tab_header">
+				<%= link_to tr("Buy an ad", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database")), :class => "qtip_left" %>
+			</span>
+		</li>
+        <% end %>
 		<% unless @priority.priority_processes.empty? %>
 			<li class="tab9">
 				<span class="tab_header">
