@@ -100,8 +100,8 @@ DESC
   end
 end
 
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
+#set :whenever_command, "bundle exec whenever"
+#require "whenever/capistrano"
 
 set :application, "open-active-democracy"
 set :domain, "br1"

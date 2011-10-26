@@ -91,14 +91,20 @@ namespace :utils do
     database = current_config['database']
     user = current_config['username']
     password = current_config['password']
+    host = current_config['host']
     
     path = Rails.root.join("tmp","sqldump")
     filename = path.join("#{database}_#{Time.new.strftime("%d%m%y_%H%M%S")}.sql.gz")
 
     FileUtils.mkdir_p(path)
-    command = "mysqldump --add-drop-table -u #{user} --password=#{password} #{database} | gzip > #{filename}"
+    command = "mysqldump --add-drop-table -u #{user} -h #{host} --password=#{password} #{database} | gzip > #{filename}"
     puts "Excuting #{command}"
     system command
+    if ENV['scpit']
+      command = "scp #{filename} yrpri@88.208.206.52:/home/yrpri/backups/#{filename}.gz"
+      puts "Excuting #{command}"
+      system command
+    end
   end
 
   desc "Archive processes"
