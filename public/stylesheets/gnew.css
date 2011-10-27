@@ -538,6 +538,7 @@ text-transform: capitalize;
 .priority_tags
 {
 padding-bottom: 4px; 	
+margin-left: 2px;
 }
 
 h2 {

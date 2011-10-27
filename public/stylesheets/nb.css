@@ -1508,9 +1508,9 @@ ul#priority_menu li.tab12 div.tab_body {
 }
 
 .category_list {
-	float:right;
-	max-width:250px;
-  text-align:right;
+/*	float:right; */
+	max-width:410px;
+/*  text-align:right;*/
 }
 
 .single .category_list {text-align:left; position: absolute; max-width:340px;min-width:300px;}

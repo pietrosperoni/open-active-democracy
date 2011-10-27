@@ -15,11 +15,11 @@ $(function(){
 
 
 		</div>
+
 	</li>
 
 	<li class="list_right">
 		<div class="category"><%= render :partial=>"priorities/report_content", :locals=>{:priority=>priority} %>
-				<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
 		</div>
 	</li>
 </ul>
@@ -34,3 +34,4 @@ $(function(){
 		<% end %>
 	</div>
 <% end %>
+						<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
