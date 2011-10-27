@@ -22,7 +22,12 @@
         mm = mins - hours * 60;
         ss = secs - mins * 60;
 
-        if (dd>0) {
+        if (dd==1) {
+            text_to_show =
+              dd + ' dagur ' +
+              hh + ' klst. ' +
+              mm + ' mín. ';
+        } else if (dd>1) {
             text_to_show =
               dd + ' dagar ' +
               hh + ' klst. ' +
