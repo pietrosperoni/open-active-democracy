@@ -17,6 +17,20 @@ module ApplicationHelper
   include Tr8n::BaseHelper
   include Wf::HelperMethods
 
+ def last_weekday_of_the_month_at_noon(now_date,original_now_date=nil)
+   original_now_date = now_date unless original_now_date
+   current_date = now_date.end_of_month
+   while [0,6].include?(current_date.wday)
+     current_date = current_date-1
+   end
+   current_date = current_date.midnight+12.hours
+   if current_date<=original_now_date
+     last_weekday_of_the_month_at_noon(now_date.next_month,original_now_date)
+   else
+     current_date
+   end
+ end
+
  def options_for_select_simple(options,selected=nil)
     out = ""
     options.each do |a,b|
