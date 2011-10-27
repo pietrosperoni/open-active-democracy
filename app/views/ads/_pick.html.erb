@@ -9,7 +9,7 @@
   	</div></div>
   	<% end %>
   <% else %>
-    <% ad = Ad.active.filtered.most_paid.by_random.first %>
+    <% ad = Ad.active.filtered.by_random.first %>
     <% if ad %>
      <div id="encouragements"><div id="notification_show">
       <%= render :partial => "ads/show", :locals => {:ad => ad }%>
