@@ -1,0 +1,9 @@
+<%= render :partial=>"header.html" %>
+
+<p><%=tr("Hi","email")%> <%= @user.first_name %>,</p>
+
+<p><%= tr("The priority {priority} has been updated. Its status is {status}. Here is the status message:", "email", priority: @priority.name, status: @status) %></p>
+
+<p><%= @message %></p>
+
+<%= render :partial=>"footer.html" %>

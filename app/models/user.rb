@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
 
   scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :all_endorsers_and_opposers_for_priority, lambda { |priority_id| User.joins(:endorsements).where(endorsements: {priority_id: priority_id}); }
 
   belongs_to :picture
   has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_35 => "35x35#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
@@ -1107,6 +1108,20 @@ class User < ActiveRecord::Base
       self.suspend!
     end
     self.increment!("warnings_count")
+  end
+
+  def self.send_status_email(priority_id, status, message)
+    status_types = {
+      '-2' => tr("Failed","status_messages"),
+      '-1' => tr("In Progress","status_messages"),
+       '0' => tr("Published","status_messages"),
+       '2' => tr("Successful","status_messages")
+    }
+    status = status_types[status]
+    priority = Priority.find(priority_id)
+    all_endorsers_and_opposers_for_priority(priority_id).each do |user|
+      UserMailer.priority_status_message(priority, status, message, user).deliver
+    end
   end
 
   protected
