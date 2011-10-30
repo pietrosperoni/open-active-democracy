@@ -337,7 +337,7 @@ class Priority < ActiveRecord::Base
     self.status = 'inactive'
 #    self.change = nil
     self.save(:validate => false)
-    deactivate_endorsements
+    #deactivate_endorsements
   end
   
   def successful!
@@ -347,7 +347,7 @@ class Priority < ActiveRecord::Base
     self.status = 'inactive'
 #    self.change = nil    
     self.save(:validate => false)
-    deactivate_endorsements
+    #deactivate_endorsements
   end  
 
   def in_the_works!
@@ -358,7 +358,7 @@ class Priority < ActiveRecord::Base
 #    self.change = nil
     deactivate_ads_and_refund
     self.save(:validate => false)
-    deactivate_endorsements
+    #deactivate_endorsements
   end  
   
   def compromised!
@@ -368,7 +368,7 @@ class Priority < ActiveRecord::Base
     self.status = 'inactive'
  #   self.change = nil    
     self.save(:validate => false)
-    deactivate_endorsements
+    #deactivate_endorsements
   end
 
   def deactivate_ads_and_refund
