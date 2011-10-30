@@ -330,7 +330,7 @@ class PrioritiesController < ApplicationController
   def finished
     @page_title = tr("Priorities in progress", "controller/priorities")
     @rss_url = finished_priorities_url(:format => 'rss')
-    @priorities = Priority.finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
+    @priorities = Priority.finished.not_deleted.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "list" }
       format.rss { render :action => "list" }

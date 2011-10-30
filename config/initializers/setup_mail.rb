@@ -8,8 +8,8 @@ if Rails.env.development?
   class DevelopmentMailInterceptor  
     def self.delivering_email(message)  
       message.subject = "#{message.to} #{message.subject}"
-      message.to = "root@localhost"
-      #message.bcc = "robert@localhost"
+      message.to = "robert@localhost"
+      message.cc = "root@localhost"
     end  
   end
 

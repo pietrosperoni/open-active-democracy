@@ -15,6 +15,8 @@ class Priority < ActiveRecord::Base
   scope :published, :conditions => "priorities.status = 'published'"
   scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
 
+  scope :not_deleted, :conditions => "priorities.status <> 'deleted'"
+
   scope :flagged, :conditions => "flags_count > 0"
 
   scope :alphabetical, :order => "priorities.name asc"
@@ -134,7 +136,7 @@ class Priority < ActiveRecord::Base
   end
   
   event :delete do
-    transitions :from => [:passive, :draft, :published], :to => :deleted
+    transitions :from => [:inactive, :passive, :draft, :published], :to => :deleted
   end
 
   event :undelete do
