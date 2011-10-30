@@ -700,6 +700,12 @@ class ActivityCapitalGovernmentNew < Activity
   end
 end
 
+class ActivityCapitalAdRefunded < Activity
+  def name
+    tr("{user_name} was refunded {capital}{currency_short_name} for an ad for priority {priority_name} because the priority is now in progress", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name)
+  end
+end
+
 class ActivityFollowingNew < Activity
   def name
     tr("{user_name} is now following {other_user_name}", "model/activity", :user_name => user.name, :other_user_name => other_user.name)
