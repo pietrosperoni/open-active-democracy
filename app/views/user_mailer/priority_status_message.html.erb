@@ -6,9 +6,9 @@
           "email",
           priority_name: @priority.name,
           priority_link: @priority.show_url,
-          support_or_endorse_text: @support_or_endorse_text.html_safe,
+          support_or_endorse_text: @support_or_endorse_text,
           government_name: tr(Government.current.name, "Name from database")) %></p>
 
-<p><%= @message %></p>
+<p><%= @message.html_safe %></p>
 
 <%= render :partial=>"footer.html" %>
