@@ -331,33 +331,33 @@ class Priority < ActiveRecord::Base
   end
   
   def failed!
-#    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
     self.official_status = -2
     self.status = 'inactive'
 #    self.change = nil
     self.save(:validate => false)
-#    deactivate_endorsements  
+    deactivate_endorsements
   end
   
   def successful!
-#    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
     self.official_status = 2
     self.status = 'inactive'
 #    self.change = nil    
     self.save(:validate => false)
-#    deactivate_endorsements
+    deactivate_endorsements
   end  
 
   def in_the_works!
-#    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusInTheWorks.create(:priority => self, :user => user)
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
 #    self.change = nil    
     self.save(:validate => false)
-#    deactivate_endorsements
+    deactivate_endorsements
   end  
   
   def compromised!
@@ -367,7 +367,7 @@ class Priority < ActiveRecord::Base
     self.status = 'inactive'
  #   self.change = nil    
     self.save(:validate => false)
- #   deactivate_endorsements
+    deactivate_endorsements
   end  
 
   def deactivate_endorsements

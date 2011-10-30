@@ -1120,7 +1120,8 @@ class User < ActiveRecord::Base
     status = status_types[status]
     priority = Priority.find(priority_id)
     all_endorsers_and_opposers_for_priority(priority_id).each do |user|
-      UserMailer.priority_status_message(priority, status, message, user).deliver
+      position = Endorsement.where(priority_id: priority_id, user_id: user.id).first.value
+      UserMailer.priority_status_message(priority, status, message, user, position).deliver
     end
   end
 

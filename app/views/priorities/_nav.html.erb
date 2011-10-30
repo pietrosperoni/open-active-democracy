@@ -126,6 +126,7 @@
 						<%= link_to tr("Edit this priority", "view/priorities/_nav"), edit_priority_url(@priority), :title => tr("Edit this priority", "view/priorities/_nav"), :class => "qtip_left" %><br>
 					<% end %>
                   <% if current_user.is_admin? %>
+                     <%= link_to tr("Update this priority's status", "view/priorities/_nav"), update_status_priority_url(@priority), :title => tr("Update this priority's status", "view/priorities/_nav"), :class => "qtip_left" %><br>
                      <%= link_to tr("Delete this priority", "view/priorities/_nav"), @priority, :title => tr("Permanently delete this priority", "view/priorities/_nav"), :confirm => tr("Are you sure you want to permanently delete {priority_name}?", "view/priorities/_nav", :priority_name => @priority.name), :method => :delete %><br/>
                   <% end %>
 

@@ -2,7 +2,12 @@
 
 <p><%=tr("Hi","email")%> <%= @user.first_name %>,</p>
 
-<p><%= tr("The priority {priority} has been updated. Its status is {status}. Here is the status message:", "email", priority: @priority.name, status: @status) %></p>
+<p><%= tr('The status of the priority <a href="{priority_link}">{priority_name}</a> {support_or_endorse_text} has been changed on {government_name}.',
+          "email",
+          priority_name: @priority.name,
+          priority_link: url_for(@priority),
+          support_or_endorse_text: @support_or_endorse_text,
+          government_name: tr(Government.current.name, "Name from database")) %></p>
 
 <p><%= @message %></p>
 

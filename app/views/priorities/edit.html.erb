@@ -34,42 +34,7 @@
     </div>
   </div>
 
-  <div class="field">
-    <div class="field_label">
-      <%= tr("Finished Status", "view/users/_form_long")%>
-    </div>
-    <div class="field_box">
-       <%= f.select :official_status, options_for_select_simple([[tr("Published","status_messages"),"0"],[tr("In Progress","status_messages"),"-1"],[tr("Successful","status_messages"),"2"],[tr("Failed","status_messages"),"-2"]], @priority.official_status.to_s) %>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="field_box">
-      <%= check_box_tag :send_status_email_to_everybody %> <%= tr("Send status message to all users that support and oppose.", "view/settings/index")%>
-    </div>
-  </div>
-
-    <% if PriorityStatusChangeLog.find_by_priority_id(@priority.id) %>
-        <div class="finished_priority">
-          <ul>
-        <% PriorityStatusChangeLog.where(priority_id: @priority.id).order("created_at").each do |changelog| %>
-              <li><p><%= changelog.content %></p></li>
-          <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-    <div class="field_label">
-      <%= tr("Status message", "view/governments/edit")%>
-    </div>
-    <div class="field_box">
-        <%= f.text_area :finished_status_message, :rows => 12, :cols=>70 %>
-    </div>
-  </div>    
-
-
-	<p>
+	<br />
 	<%= f.submit tr("Save priority", "view/priorities/edit"), :class => "yellow_button" %>
 	
 <% end %>

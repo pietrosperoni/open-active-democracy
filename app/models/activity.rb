@@ -814,7 +814,7 @@ end
 
 class ActivityPriorityOfficialStatusInTheWorks < Activity
   def name
-    tr("{priority_name} is in the works", "model/activity", :priority_name => priority.name)
+    tr("{priority_name} is in progress", "model/activity", :priority_name => priority.name)
   end
 end
 
