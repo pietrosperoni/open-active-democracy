@@ -854,11 +854,7 @@ class PrioritiesController < ApplicationController
     )
     @priority_status_changelog.save
 
-    if params[:priority][:finished_status_message]
-      User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_message])
-    end
-
-    if params[:priority] 
+    if params[:priority]
       params[:priority][:category] = Category.find(params[:priority][:category]) if params[:priority][:category]
       if params[:priority][:official_status] and params[:priority][:official_status].to_i != @priority.official_status
         @change_status = params[:priority][:official_status].to_i
@@ -903,7 +899,14 @@ class PrioritiesController < ApplicationController
         }
       end
       @priority.reload
-      @priority.change_status!(@change_status) if @change_status
+
+      if @change_status
+        @priority.change_status!(@change_status)
+        @priority.delay.deactivate_endorsements
+      end
+      if params[:priority][:finished_status_message]
+        User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_message])
+      end
     end
   end
 
