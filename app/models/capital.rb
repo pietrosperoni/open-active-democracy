@@ -168,5 +168,8 @@ end
 class CapitalAcquisitionProposalApproved < Capital
 end
 
+class CapitalAdRefunded < Capital
+end
+
 class CapitalInactive < Capital  
 end

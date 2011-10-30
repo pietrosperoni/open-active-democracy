@@ -355,7 +355,8 @@ class Priority < ActiveRecord::Base
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
-#    self.change = nil    
+#    self.change = nil
+    deactivate_ads_and_refund
     self.save(:validate => false)
     deactivate_endorsements
   end  
@@ -368,7 +369,21 @@ class Priority < ActiveRecord::Base
  #   self.change = nil    
     self.save(:validate => false)
     deactivate_endorsements
-  end  
+  end
+
+  def deactivate_ads_and_refund
+    self.ads.active.each do |ad|
+      ad.finish!
+      user = ad.user
+      refund = ad.cost - ad.spent
+      refund = 1 if refund > 0 and refund < 1
+      refund = refund.abs.to_i
+      if refund
+        user.increment!(:capital_count, refund)
+        ActivityCapitalAdRefunded.create(:user => user, :priority => self, :capital => CapitalAdRefunded.create(:recipient => user, :amount => refund))
+      end
+    end
+  end
 
   def deactivate_endorsements
     for e in endorsements.active
