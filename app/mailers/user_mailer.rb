@@ -15,7 +15,26 @@ class UserMailer < ActionMailer::Base
            format.html
          end
   end
-  
+
+  def priority_status_message(priority, status, status_message, user, position)
+    @priority = priority
+    @government = Government.current
+    @status = status
+    @message = status_message
+    @support_or_endorse_text = position == 1 ? tr("which you support", "email") : tr("which you oppose", "email")
+    attachments.inline['logo.png'] = get_conditional_logo
+
+    @recipient = @user = user
+    recipient = "#{user.real_name.titleize} <#{user.email}>"
+    mail to:       recipient,
+         reply_to: Government.current.admin_email,
+         from:     "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
+         subject:  tr('The status of the priority "{priority}" has been changed', "email", :priority => priority.name) do |format|
+      format.text { render text: convert_to_text(render_to_string("priority_status_message.html")) }
+      format.html
+    end
+  end
+
   def invitation(user,sender_name,to_name,to_email)
     @sender = @recipient = @user = user
     @government = Government.current

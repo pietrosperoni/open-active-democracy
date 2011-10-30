@@ -854,6 +854,9 @@ class PrioritiesController < ApplicationController
     )
     @priority_status_changelog.save
 
+    if params[:priority][:finished_status_message]
+      User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_message])
+    end
 
     if params[:priority] 
       params[:priority][:category] = Category.find(params[:priority][:category]) if params[:priority][:category]
@@ -863,7 +866,7 @@ class PrioritiesController < ApplicationController
       end
     end
     respond_to do |format|
-      if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
+      if params[:priority][:name] and @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
         # already renamed?
         @activity = ActivityPriorityRenamed.find_by_user_id_and_priority_id(current_user.id,@priority.id)
         if @activity
@@ -885,7 +888,12 @@ class PrioritiesController < ApplicationController
           end
         }
       else
-        format.html { render :action => "edit" }
+        format.html {
+          if params[:priority][:finished_status_message]
+            flash[:notice] = tr('Status updated with "{status_text}"', "controller/priorities", status_text: params[:priority][:finished_status_message])
+          end
+          redirect_to(@priority)
+        }
         format.js {
           render :update do |page|
             page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
@@ -1063,7 +1071,19 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to yours_created_priorities_url }    
     end
-  end  
+  end
+
+  def update_status
+    @priority = Priority.find(params[:id])
+    @page_name = tr("Edit the status of {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    if not current_user.is_admin?
+      flash[:error] = tr("You cannot change a priority's name once other people have endorsed it.", "controller/priorities")
+      redirect_to @priority and return
+    end
+    respond_to do |format|
+      format.html
+    end
+  end
 
   private
   

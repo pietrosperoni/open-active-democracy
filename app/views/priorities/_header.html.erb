@@ -16,13 +16,8 @@ $(function(){
     <tr>
       <%= render :partial => "priorities/rank_week_month", :locals => {:priority => @priority } %>
 
-	    <% if @priority.category and @priority.category.icon -%>
-			<div class="priority_icon_single">
-				<%= image_tag @priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
-			</div>
-	    <% end %>
 
-      <td valign="top" colspan="3">
+      <td valign="top" colspan="3" rowspan="2">
 				<ul>
 					<li class="list_priority_overview">
 				  	<div id="priority_<%= @priority.id %>" class="priority_listing">
@@ -58,6 +53,17 @@ $(function(){
                   <% end %>
                 </div>
 				<% end %>
+				
+      </td>
+      </tr><tr><td>
+      
+      	    <% if @priority.category and @priority.category.icon -%>
+			<div class="priority_icon_single">
+				<%= image_tag @priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+			</div>
+	    <% end %>
+
+
       </td>
     </tr>
 </table>
