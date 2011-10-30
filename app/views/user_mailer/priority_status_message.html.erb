@@ -5,8 +5,8 @@
 <p><%= tr('The status of the priority <a href="{priority_link}">{priority_name}</a> {support_or_endorse_text} has been changed on {government_name}.',
           "email",
           priority_name: @priority.name,
-          priority_link: url_for(@priority),
-          support_or_endorse_text: @support_or_endorse_text,
+          priority_link: @priority.show_url,
+          support_or_endorse_text: @support_or_endorse_text.html_safe,
           government_name: tr(Government.current.name, "Name from database")) %></p>
 
 <p><%= @message %></p>

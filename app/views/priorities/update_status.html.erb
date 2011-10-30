@@ -1,15 +1,9 @@
 <%= render :partial => "header" %>
 <%= render :partial => "nav" %>
 
-    <% if PriorityStatusChangeLog.find_by_priority_id(@priority.id) %>
-        <div class="finished_priority">
-          <ul>
-        <% PriorityStatusChangeLog.where(priority_id: @priority.id).order("created_at").each do |changelog| %>
-              <li><p><%= changelog.content %></p></li>
-          <% end %>
-          </ul>
-        </div>
-    <% end %>
+<% if PriorityStatusChangeLog.find_by_priority_id(@priority.id) %>
+  <%= render :partial => "priorities/priority_status_changelogs" %>
+<% end %>
 
 <p>
 <%= form_for(@priority) do |f| %>

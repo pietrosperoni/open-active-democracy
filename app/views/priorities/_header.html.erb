@@ -47,11 +47,7 @@ $(function(){
 				<div class="clear"></div>
 				<div class="replace_notice"></div>
 			    <% if @priority.status == "inactive" and [-1,-2,2].include?(@priority.official_status) %>
-				<div class="finished_priority">
-                  <% PriorityStatusChangeLog.where(priority_id: @priority).order("created_at").each do |changelog| %>
-                    <p><%= changelog.content %></p>
-                  <% end %>
-                </div>
+                    <%= render :partial => "priorities/priority_status_changelogs" %>
 				<% end %>
 				
       </td>
