@@ -3,39 +3,31 @@
 		<%= tr("{count} endorsers found this helpful.", "view/points/_helpful_count", :count => point.endorser_helpful_count, :other_count => point.endorser_unhelpful_count) %>
 	<% elsif point.endorser_helpful_count == 0 and point.endorser_unhelpful_count > 0 %>
 		<%= tr("{count} endorsers found this <i>not</i> helpful.", "view/points/_helpful_count", :count => point.endorser_helpful_count, :other_count => point.endorser_unhelpful_count) %>	
-	<% elsif point.endorser_helpful_count > 0 and point.endorser_unhelpful_count > 0 and point.endorser_helpful_count >= point.unhelpful_count %>
+	<% elsif point.endorser_helpful_count > 0 and point.endorser_unhelpful_count > 0 %>
 		<%= tr("{count} endorsers found this helpful, {other_count} didn't.", "view/points/_helpful_count", :count => point.endorser_helpful_count, :other_count => point.endorser_unhelpful_count) %>	
-	<% elsif point.endorser_helpful_count > 0 and point.endorser_unhelpful_count > 0 and point.endorser_helpful_count < point.unhelpful_count %>
-		<%= tr("{count} endorsers found this <i>not</i> helpful, {other_count} did.", "view/points/_helpful_count", :count => point.endorser_helpful_count, :other_count => point.endorser_unhelpful_count) %>
 	<% end %>
 <% elsif params[:action] == 'opposer_points' or @point_value == -1 %>
 	<% if point.opposer_helpful_count > 0 and point.opposer_unhelpful_count == 0 %>
 		<%= tr("{count} opposers found this helpful.", "view/points/_helpful_count", :count => point.opposer_helpful_count, :other_count => point.opposer_unhelpful_count) %>
 	<% elsif point.opposer_helpful_count == 0 and point.opposer_unhelpful_count > 0 %>
 		<%= tr("{count} opposers found this <i>not</i> helpful.", "view/points/_helpful_count", :count => point.opposer_helpful_count, :other_count => point.opposer_unhelpful_count) %>	
-	<% elsif point.opposer_helpful_count > 0 and point.opposer_unhelpful_count > 0 and point.opposer_helpful_count >= point.opposer_unhelpful_count %>
+	<% elsif point.opposer_helpful_count > 0 and point.opposer_unhelpful_count > 0 %>
 		<%= tr("{count} opposers found this helpful, {other_count} didn't.", "view/points/_helpful_count", :count => point.opposer_helpful_count, :other_count => point.opposer_unhelpful_count) %>	
-	<% elsif point.opposer_helpful_count > 0 and point.opposer_unhelpful_count > 0 and point.opposer_helpful_count < point.opposer_unhelpful_count %>
-		<%= tr("{count} opposers found this <i>not</i> helpful, {other_count} did.", "view/points/_helpful_count", :count => point.opposer_helpful_count, :other_count => point.opposer_unhelpful_count) %>
 	<% end %>
 <% elsif params[:action] == 'neutral_points' or @point_value == 2 %>
 	<% if point.neutral_helpful_count > 0 and point.neutral_unhelpful_count == 0 %>
 		<%= tr("{count} undeclareds found this helpful.", "view/points/_helpful_count", :count => point.neutral_helpful_count, :other_count => point.neutral_unhelpful_count) %>
 	<% elsif point.neutral_helpful_count == 0 and point.neutral_unhelpful_count > 0 %>
 		<%= tr("{count} undeclareds found this <i>not</i> helpful.", "view/points/_helpful_count", :count => point.neutral_helpful_count, :other_count => point.neutral_unhelpful_count) %>	
-	<% elsif point.neutral_helpful_count > 0 and point.neutral_unhelpful_count > 0 and point.neutral_helpful_count >= point.neutral_unhelpful_count %>
+	<% elsif point.neutral_helpful_count > 0 and point.neutral_unhelpful_count > 0 %>
 		<%= tr("{count} undeclareds found this helpful, {other_count} didn't.", "view/points/_helpful_count", :count => point.neutral_helpful_count, :other_count => point.neutral_unhelpful_count) %>	
-	<% elsif point.neutral_helpful_count > 0 and point.neutral_unhelpful_count > 0 and point.neutral_helpful_count < point.neutral_unhelpful_count %>
-		<%= tr("{count} undeclareds found this <i>not</i> helpful, {other_count} didn't.", "view/points/_helpful_count", :count => point.neutral_helpful_count, :other_count => point.neutral_unhelpful_count) %>
 	<% end %>
 <% else %>
 	<% if point.helpful_count > 0 and point.unhelpful_count == 0 %>
 		<%= tr("{count} people found this helpful.", "view/points/_helpful_count", :count => point.helpful_count, :other_count => point.unhelpful_count) %>
 	<% elsif point.helpful_count == 0 and point.unhelpful_count > 0 %>
 		<%= tr("{count} people found this <i>not</i> helpful.", "view/points/_helpful_count", :count => point.helpful_count, :other_count => point.unhelpful_count) %>	
-	<% elsif point.helpful_count > 0 and point.unhelpful_count > 0 and point.helpful_count >= point.unhelpful_count %>
+	<% elsif point.helpful_count > 0 and point.unhelpful_count > 0 %>
 		<%= tr("{count} people found this helpful, {other_count} didn't.", "view/points/_helpful_count", :count => point.helpful_count, :other_count => point.unhelpful_count) %>	
-	<% elsif point.helpful_count > 0 and point.unhelpful_count > 0 and point.helpful_count < point.unhelpful_count %>
-		<%= tr("{count} people found this <i>not</i> helpful, {other_count} didn't.", "view/points/_helpful_count", :count => point.helpful_count, :other_count => point.unhelpful_count) %>
 	<% end %>
 <% end %>
