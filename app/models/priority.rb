@@ -331,7 +331,7 @@ class Priority < ActiveRecord::Base
   end
   
   def failed!
-    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusFailed.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -2
     self.status = 'inactive'
@@ -341,7 +341,7 @@ class Priority < ActiveRecord::Base
   end
   
   def successful!
-    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusSuccessful.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = 2
     self.status = 'inactive'
@@ -351,7 +351,7 @@ class Priority < ActiveRecord::Base
   end  
 
   def in_the_works!
-    ActivityPriorityOfficialStatusInTheWorks.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusInTheWorks.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
@@ -361,7 +361,7 @@ class Priority < ActiveRecord::Base
   end  
   
   def compromised!
-    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusCompromised.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
