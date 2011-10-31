@@ -53,7 +53,8 @@ class Priority < ActiveRecord::Base
   scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
 
   scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
-  
+  scope :by_random, :order => "rand()"
+
   scope :item_limit, lambda{|limit| {:limit=>limit}}  
   
   belongs_to :user
