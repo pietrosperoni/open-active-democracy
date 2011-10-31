@@ -487,7 +487,8 @@ class User < ActiveRecord::Base
   end 
   
   def quality_factor
-    return 1 if qualities_count < 10
+    # TODO: this needs to me rethought, since it penalizes users for rating points
+    return 1 #if qualities_count < 10
     rev_count = document_revisions_count+point_revisions_count
     return 10/qualities_count.to_f if rev_count == 0
     i = (rev_count*2).to_f/qualities_count.to_f
