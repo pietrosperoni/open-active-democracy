@@ -21,7 +21,13 @@ class PointQuality < ActiveRecord::Base
       point.endorser_helpful_count += 1 if is_endorser?
       point.neutral_helpful_count += 1 if is_neutral?      
       point.opposer_helpful_count += 1 if is_opposer?
-      point.calculate_score
+
+      if point.point_qualities.count > 1
+        point.delay.calculate_score(true)
+      else
+        point.calculate_score(true)
+      end
+
       point.save(:validate => false)
       ActivityPointHelpful.create(:point => point, :user => user, :priority => point.priority)      
     end
@@ -30,7 +36,7 @@ class PointQuality < ActiveRecord::Base
       point.endorser_unhelpful_count += 1 if is_endorser?
       point.neutral_unhelpful_count += 1 if is_neutral?      
       point.opposer_unhelpful_count += 1 if is_opposer?
-      point.calculate_score
+      point.delay.calculate_score(true)
       point.save(:validate => false)
       ActivityPointUnhelpful.create(:point => point, :user => user, :priority => point.priority)
     end
@@ -43,7 +49,7 @@ class PointQuality < ActiveRecord::Base
       point.endorser_helpful_count -= 1 if is_endorser?
       point.neutral_helpful_count -= 1 if is_neutral?      
       point.opposer_helpful_count -= 1 if is_opposer?
-      point.send_later(:calculate_score, true)
+      point.delay.calculate_score(true)
       point.save(:validate => false)
       ActivityPointHelpfulDelete.create(:point => point, :user => user, :priority => point.priority)        
     end
@@ -52,7 +58,7 @@ class PointQuality < ActiveRecord::Base
       point.endorser_unhelpful_count -= 1 if is_endorser?
       point.neutral_unhelpful_count -= 1 if is_neutral?      
       point.opposer_unhelpful_count -= 1 if is_opposer?
-      point.send_later(:calculate_score, true)
+      point.delay.calculate_score(true)
       point.save(:validate => false)
       ActivityPointUnhelpfulDelete.create(:point => point, :user => user, :priority => point.priority)      
     end
