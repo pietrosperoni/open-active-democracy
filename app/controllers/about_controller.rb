@@ -20,9 +20,10 @@ class AboutController < ApplicationController
     elsif params[:id] == 'council' and Government.current.layout == "better_reykjavik"
       @page_title = tr("Reykjavik city council", "controller/council")
       render :action => 'council'
-    else
-      @page = Page.find_by_short_name(params[:id])
+    elsif @page = Page.find_by_short_name(params[:id])
       @page_title = @page.name
+    else
+      render file: "/public/404.html", status: :not_found, layout: false
     end
   end
   
