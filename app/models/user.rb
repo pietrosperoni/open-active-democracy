@@ -439,7 +439,7 @@ class User < ActiveRecord::Base
   end
   
   def has_top_priority?
-    attribute_present?("top_endorsement_id") and top_endorsement?
+    attribute_present?("top_endorsement_id") and top_endorsement
   end
 
   def most_recent_activity
