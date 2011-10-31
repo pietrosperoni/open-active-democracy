@@ -1532,5 +1532,6 @@ ul#priority_menu li.tab12 div.tab_body {
 	
 #profile_header
 {
-padding-bottom: 10px;	
+padding-bottom: 10px;
+min-height: 95px;
 }
