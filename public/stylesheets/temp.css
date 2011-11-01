@@ -21,6 +21,8 @@ img {border:none}
 
 td.right {width:60px}
 
+p  {margin-bottom: 5px;}
+
 div.column .ui-widget-content {
 	  background-color:#fafafa;
     background-image: url("../images/new/portal_bg.png") !important;
@@ -757,7 +759,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 
 .warning_inline2 {
-		margin: 0  0 0 28px !important;
+/*		margin: 0  0 0 28px !important;*/
 		float: none !important;
 		left: none !important;
 }
@@ -769,7 +771,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 }
 
 .single .warning_inline {
-    margin: 72px 397px 2px 0 !important;
+    margin: 32px 197px 2px 0 !important;
 		min-width: 200px;
 }
 
@@ -853,3 +855,8 @@ list-style: disc;
 .encouragement_click {
     background-color: #CCC;
 }
+
+.youtube-player
+{
+	margin-top: 5px;
+	}

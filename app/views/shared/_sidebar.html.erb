@@ -21,35 +21,35 @@
 			<div class="test">
 				<div class="tab_subhead"><%= link_to tr("About the site", "view/shared/_menu"), :controller => "about" %></div>
 				<div class="tab_sublinks">
-					<%= link_to tr("About", "view/shared/_menu"), :controller => "about" %>
-                    <% if Government.current.layout == "better_reykjavik" -%>    
-                    &middot; <%= link_to tr("Reykjavík city council", "view/shared/_menu"), :controller => "about", :action => "council" %><br/>
-                    <% end %>
-					&middot; <%= link_to tr("FAQ", "view/shared/_menu"), :controller => "about", :action => "faq" %>
-					&middot; <%= link_to tr("Rules", "view/shared/_menu"), :controller => "about", :action => "rules" %>
+					&middot; <%= link_to tr("About", "view/shared/_menu"), :controller => "about" %><br/>
+					 <% if Government.current.layout == "better_reykjavik" -%>    
+					&middot; <%= link_to tr("Reykjavík city council", "view/shared/_menu"), :controller => "about", :action => "council" %><br/>
+					<% end %>
+					&middot; <%= link_to tr("FAQ", "view/shared/_menu"), :controller => "about", :action => "faq" %><br/>
+					&middot; <%= link_to tr("Rules", "view/shared/_menu"), :controller => "about", :action => "rules" %><br/>
 					&middot; <%= link_to tr("Privacy policy", "view/shared/_menu"), :controller => "about", :action => "privacy" %><br/>
-          &middot; <%= link_to tr("Contributors", "view/shared/_menu"), :controller => "about", :action => "contributors" %><br/>
+					&middot; <%= link_to tr("Contributors", "view/shared/_menu"), :controller => "about", :action => "contributors" %><br/>
 					<% cache("pages-#{session[:locale]}-#{@inline_translations_enabled}") do %>
 						<%= Page.all.collect{ |page| link_to(page.link_name, about_url(page.short_name))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
-					<% end %>
+						<% end %>
 				</div>				
 
         <div class="tab_subhead">
-          <%= link_to tr("Charts and stats", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
+		<%= link_to tr("Charts and stats", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
         </div>
         <div class="tab_sublinks">
-          <% if current_government.is_tags? %>
-            <%= link_to tr("Categories","view/shared/_menu"), :controller => "charts", :action => "issues" %> &middot; 
-          <% end %>
-          <%= link_to tr("Rising agendas", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
-                         &middot; <%= link_to tr("Falling agendas", "view/shared/_menu"), :controller => "charts", :action => "losers_24hr" %>
+		<% if current_government.is_tags? %>
+		&middot; <%= link_to tr("Active categories","view/shared/_menu"), :controller => "charts", :action => "issues" %> <br />
+		<% end %>
+		&middot; <%= link_to tr("Rising agendas", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %><br />
+		 &middot; <%= link_to tr("Falling agendas", "view/shared/_menu"), :controller => "charts", :action => "losers_24hr" %>
         </div>
 
         <div class="tab_subhead">
           <%= link_to tr("Widgets for your site", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
         </div>
         <div class="tab_sublinks">
-           <%= link_to tr("Priorities", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
+           &middot; <%= link_to tr("Priorities", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %><br />
            &middot; <%= link_to tr("Discussions", "view/shared/_menu"), :controller => "widgets", :action => "discussions" %>
         </div>
 				</div>
