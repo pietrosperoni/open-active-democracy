@@ -180,6 +180,7 @@ class Comment < ActiveRecord::Base
     youtube(:width => 330, :height => 210)
     vimeo(:width => 330, :height => 180)
     link :target => "_blank", :rel => "nofollow"
+    simple_format
   end
   
 end
