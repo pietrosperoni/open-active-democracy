@@ -323,7 +323,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
         next
       end
       new_parent_header_element = LawProposalDocumentElement.new
-      new_parent_header_element.content = paragraph.inspect
+      new_parent_header_element.content = paragraph.to_s.encode('UTF-8')
       new_parent_header_element.content_text_only = paragraph.text
       new_parent_header_element.sequence_number = sequence_number+=1
       new_parent_header_element.process_document_id = process_document_id
@@ -346,7 +346,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
             puts "ADDIN DIV SKIP #{div_skip_count}"
           end
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.inspect
+            all_content_until_next_header+= next_sibling.to_s.encode('UTF-8')
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling
@@ -365,7 +365,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
           end
           first = false
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.inspect
+            all_content_until_next_header+= next_sibling.to_s.encode('UTF-8')
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling
