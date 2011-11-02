@@ -126,6 +126,8 @@ class UserMailer < ActionMailer::Base
     def get_conditional_logo
       if @government.layout.include?("better_reykjavik")
         File.read(Rails.root.join("public/images/logos/BR_email.png"))
+      elsif @government.layout.include?("better_iceland")
+        File.read(Rails.root.join("public/images/logos/betraIsland-merki.png"))
       else
         File.read(Rails.root.join("public/images/logos/YourPriorities_large.png"))
       end
