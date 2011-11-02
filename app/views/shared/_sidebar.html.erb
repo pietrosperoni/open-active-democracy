@@ -3,7 +3,7 @@
 	<div class="reykjavik_icon">		
 		<a href="http://www.reykjavik.is"><%= image_tag("new/reykjavik_icon.png", :alt => "www.reykjavik.is") %></a>
 	</div>
-  <% else %>
+  <% elsif Government.current.layout != "better_iceland" %>
     <div class="yrpri_icon">
 		<a href="http://yrpri.org"><%= image_tag("new/yourprioritiesworldwide.png", :alt => "Your Priorities Worldwide") %></a>
 	</div>
@@ -88,9 +88,12 @@
  </div> 
 
 
+<% if Government.current.layout == "better_reykjavik" %>
   <div class="gamlabetri">
-<a href="http://betrireykjavik.skuggaborg.is/portal"><img src="/images/new/gamlabr.png" alt="Allar hugmyndirnar af upphaflegu Betri Reykjavík"></a>
-</div>
+    <a href="http://betrireykjavik.skuggaborg.is/portal"><img src="/images/new/gamlabr.png" alt="Allar hugmyndirnar af upphaflegu Betri Reykjavík"></a>
+    </div>
+<% end %>
+
   <% if logged_in? %>
     <div id="priority_column" class="userwrap">
       <%= render :partial => "shared/your_priorities" %>
