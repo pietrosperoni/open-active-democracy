@@ -1,9 +1,9 @@
 # Be sure to restart your server when you modify this file.
 
 if Rails.env.production?
-  OpenActiveDemocracy::Application.config.session_store :cookie_store, :key => '_betri_session', :domain => "betrireykjavik.is"
+  OpenActiveDemocracy::Application.config.session_store :cookie_store, :key => '_betra_island_session', :domain => "betraisland.is"
 else
-  OpenActiveDemocracy::Application.config.session_store :cookie_store, :key => '_betri_session'  
+  OpenActiveDemocracy::Application.config.session_store :cookie_store, :key => '_betra_island_session'
 end
 
 # Use the database for sessions instead of the cookie-based default,
