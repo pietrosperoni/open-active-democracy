@@ -159,7 +159,7 @@ border-width:0;
 }
 
 .border{
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #ddd;
 }
 
 body.portal-index #content_text {background:none;padding:0; background-repeat: no-repeat;}
@@ -223,8 +223,6 @@ body.priorities-show #content_text table, body.priorities-top_points #content_te
 
 
 body.priorities-show #content_text table td, body.priorities-top_points #content_text table td {}
-#content_text table.top-level-table tbody tr
-{border-bottom:1px solid #ddd;}
 
 body.Cpriorities #content_text table tbody tr td table tbody tr
 {border-bottom:0px solid #cacaca;}
