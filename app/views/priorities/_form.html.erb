@@ -134,7 +134,8 @@ $(function(){
             if (tooltip_text) {
                 $(this).qtip({
                     content: tooltip_text,
-                    show: { delay: 300 }
+                    show: { delay: 300 },
+                    hide: { delay: 500, fixed: true }
                 })
             }
         }
