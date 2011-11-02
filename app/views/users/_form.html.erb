@@ -3,7 +3,25 @@
   <%= render :partial=>"shared/geoblocking_info"%>
   
 <% else %>  
-	<%= form_for :user, :remote=>true, 
+       <%= tr("You can sign up with one click using Facebook, Twitter or GMail or you can sign up below using your own email.", "view/users/_form")%><br>
+	<% if current_government.has_facebook_enabled? %>
+    <div style="margin-bottom: 10px; margin-top: 7px;">
+    <%= fb_login_and_redirect "/", :text=>tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=>tr("Sign in with Facebook","views/shared/_login"), :perms=>"email"%>
+    </div>
+        <% end %>
+  <p>   
+        <% if current_government.has_twitter_enabled? %>
+                <div style="margin-bottom: 5px;">
+                <%= link_to image_tag("twitter_signin.png", :border => 0, :title=>tr("Sign in with Twitter","_login")), :controller => "twitter", :action => "create" %>
+                </div>
+        <% end %>
+  <% if current_government.google_login_enabled %>
+    <div style="margin-bottom: 5px;margin-top: 5px;">
+    <%= link_to image_tag("logos/Gmail_logo.png", :border => 0, :title=>tr("Sign in with Gmail","_login")), :controller => "open_ids", :action => "new" %><br>
+    </div>
+  <% end %>
+
+        <%= form_for :user,
                'data-disable-with' => escape_t(tr("Sending","Ajax")),
 	             :url => users_path(:region => "short") do |f| -%>
 	<%= error_messages_for :user, :header_message => tr("There was a problem creating your account", "view/users/_form") %>
@@ -39,7 +57,7 @@
 		</div>
 		<div class="small" style="margin-bottom: 10px;"><%= tr("(Never shared without your permission)", "view/users/_form")%></div>
 	</div>
-
+        <% if Government.current.layout == "better_reykjavik" %>
 		<div class="field">
 			<div class="field_label">
 				<%= tr("Post code", "view/users/_form")%>
@@ -54,7 +72,7 @@
 	        <%= tr("Age group", "view/users/_form_long")%>
 	      </div>
 	      <div class="field_box">
-	        <%= f.select :age_group, options_for_select([tr("12 years and younger"),tr("13 to 17 years"),tr("18 to 25 years"),tr("26 to 69 years"),tr("70 years and older")]) %>
+	        <%= f.select :age_group, options_for_select([tr("Select age group", "model/user"), tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")], tr("Select age group", "model/user")) %>
 	      </div>
 	    </div>
 
@@ -63,10 +81,10 @@
             <%= tr("Gender", "view/users/_form_long")%>
           </div>
           <div class="field_box">
-             <%= f.select :my_gender, options_for_select([tr("Male"),tr("Female")]) %>
+             <%= f.select :my_gender, options_for_select([tr("Select gender", "model/user"), tr("Male", "model/user"),tr("Female", "model/user")], tr("Select gender", "model/user")) %>
           </div>
         </div>
-
+      <% end %>
 
 	<div class="field" style="width:300px; padding-bottom: 10px;">
 	<table border="0" cellspacing="0" cellpadding="0">
@@ -109,8 +127,12 @@
 		</span>
 
 	<% end %>
-  <%= show_simple_captcha(:object=>"user", :image_style => "random", :distortion=>"medium", :code_type=>'numeric', :label=>tr("(enter code from the image)")) %>
-  
+
+
+                <script>
+                  var RecaptchaOptions = { theme : 'clean' };
+                </script>
+                 <%= recaptcha_tags %><br>
     <%= check_box("user", "terms") %>
 		<%= tr("I accept the terms detailed below.", "view/users/_form")%>
 		<br />

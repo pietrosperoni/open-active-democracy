@@ -493,25 +493,25 @@ end
 
 class ActivityIssuePriority1 < Activity
   def name
-    tr("{priority_name} is the new #1 priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the new #1 priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityControversial1 < Activity
   def name
-    tr("{priority_name} is the most controversial priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the most controversial priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityRising1 < Activity
   def name
-    tr("{priority_name} is the fastest rising priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the fastest rising priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityOfficial1 < Activity
   def name
-    tr("{priority_name} is the new #1 priority on {official_user_name} {tag_name} agenda", "model/activity", :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
+    tr("{priority_name} is the new #1 priority on {official_user_name} {tag_name} agenda", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"), :official_user_name => Government.current.official_user.name.possessive)
   end
 end
 
@@ -700,6 +700,12 @@ class ActivityCapitalGovernmentNew < Activity
   end
 end
 
+class ActivityCapitalAdRefunded < Activity
+  def name
+    tr("{user_name} was refunded {capital}{currency_short_name} for an ad for priority {priority_name} because the priority is now in progress", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name)
+  end
+end
+
 class ActivityFollowingNew < Activity
   def name
     tr("{user_name} is now following {other_user_name}", "model/activity", :user_name => user.name, :other_user_name => other_user.name)
@@ -814,7 +820,7 @@ end
 
 class ActivityPriorityOfficialStatusInTheWorks < Activity
   def name
-    tr("{priority_name} is in the works", "model/activity", :priority_name => priority.name)
+    tr("{priority_name} is in progress", "model/activity", :priority_name => priority.name)
   end
 end
 

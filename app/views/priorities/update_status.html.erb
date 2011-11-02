@@ -1,0 +1,34 @@
+<%= render :partial => "header" %>
+<%= render :partial => "nav" %>
+
+<% if PriorityStatusChangeLog.find_by_priority_id(@priority.id) %>
+  <%= render :partial => "priorities/priority_status_changelogs" %>
+<% end %>
+
+<p>
+<%= form_for(@priority) do |f| %>
+  <%= f.error_messages %>
+
+  <div class="field">
+    <div class="field_label">
+      <%= tr("Finished Status", "view/users/_form_long")%>
+    </div>
+    <div class="field_box">
+       <%= f.select :official_status, options_for_select_simple([[tr("Published","status_messages"),"0"],[tr("In Progress","status_messages"),"-1"],[tr("Successful","status_messages"),"2"],[tr("Failed","status_messages"),"-2"]], @priority.official_status.to_s) %>
+    </div>
+  </div>
+
+    <div class="field">
+    <div class="field_label">
+      <%= tr("New status message", "view/priorities/status")%>
+    </div>
+    <div class="field_box">
+        <%= f.text_area :finished_status_message, :rows => 12, :cols=>70 %>
+    </div>
+  </div>    
+
+
+	<p>
+	<%= f.submit tr("Update status", "view/priorities/status"), :class => "yellow_button" %>
+	
+<% end %>

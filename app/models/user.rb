@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   require 'paperclip'
   include SimpleCaptcha::ModelValidation
 
-  validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
+  #validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
 
   scope :active, :conditions => "users.status in ('pending','active')"
   scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
 
   scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :all_endorsers_and_opposers_for_priority, lambda { |priority_id| User.joins(:endorsements).where(endorsements: {priority_id: priority_id}); }
 
   belongs_to :picture
   has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_35 => "35x35#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
@@ -108,6 +109,8 @@ class User < ActiveRecord::Base
     
   validates_presence_of     :login, :message => tr("Please specify a name to be identified as on the site.", "model/user")
   validates_length_of       :login, :within => 3..60
+  validates_presence_of     :first_name, :message => tr("Please specify your first name.", "model/user")
+  validates_presence_of     :last_name, :message => tr("Please specify your first name.", "model/user")
   
   validates_presence_of     :email, :unless => [:has_facebook?, :has_twitter?]
   validates_length_of       :email, :within => 3..100, :allow_nil => true, :allow_blank => true
@@ -120,11 +123,18 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => [:should_validate_password?]
   validates_confirmation_of :password, :if => [:should_validate_password?]
 
-  validates_presence_of     :post_code, :message => tr("Please enter your postcode.", "model/user")
-  validates_presence_of     :age_group, :message => tr("Please select your age group.", "model/user")
-  validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user")
+  validates_presence_of     :post_code, :message => tr("Please enter your postcode.", "model/user"), :if => :using_br?
+  validates_presence_of     :age_group, :message => tr("Please select your age group.", "model/user"), :if => :using_br?
+  validates_presence_of     :my_gender, :message => tr("Please select your gender.", "model/user"), :if => :using_br?
 
   validates_acceptance_of   :terms, :message => tr("Please accept the terms and conditions", "model/user")
+
+ # validates_inclusion_of    :age_group, :in => lambda {|foo| foo.allowed_for_age_group},
+ #                           message: tr("Please select your gender.", "model/user"), :if => :using_br?
+ # validates_inclusion_of    :my_gender, :in => lambda {|foo| foo.allowed_for_gender}, message: tr("Please select your gender.", "model/user"), :if => :using_br?
+
+  validate :validate_age_group
+  validate :validate_gender
 
   before_save :encrypt_password
   before_create :make_rss_code
@@ -139,7 +149,36 @@ class User < ActiveRecord::Base
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids, :terms
-  
+
+
+  def validate_age_group
+    if using_br?
+      unless allowed_for_age_group.include?(self.age_group)
+        self.errors.add(:age_group ,tr("Please select your age group", "model/user"))
+      end
+    end
+  end
+
+  def validate_gender
+    if using_br?
+      unless allowed_for_gender.include?(self.my_gender)
+        self.errors.add(:my_gender ,tr("Please select gender", "model/user"))
+      end
+    end
+  end
+
+  def allowed_for_age_group
+    [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")]
+  end
+
+  def allowed_for_gender
+    [tr("Male", "model/user"),tr("Female", "model/user")]
+  end
+
+  def using_br?
+    Government.current.layout == "better_reykjavik"
+  end
+
   def set_signup_country
     self.geoblocking_open_countries=Thread.current[:country_code] if Thread.current[:country_code]
   end
@@ -400,7 +439,7 @@ class User < ActiveRecord::Base
   end
   
   def has_top_priority?
-    attribute_present?("top_endorsement_id")
+    attribute_present?("top_endorsement_id") and top_endorsement
   end
 
   def most_recent_activity
@@ -1069,6 +1108,22 @@ class User < ActiveRecord::Base
       self.suspend!
     end
     self.increment!("warnings_count")
+  end
+
+  def self.send_status_email(priority_id, status, message)
+    status_types = {
+      '-2' => tr("Failed","status_messages"),
+      '-1' => tr("In Progress","status_messages"),
+       '0' => tr("Published","status_messages"),
+       '2' => tr("Successful","status_messages")
+    }
+    status = status_types[status]
+    priority = Priority.find(priority_id)
+    Tr8n::Config.init('is', Tr8n::Config.current_user)
+    all_endorsers_and_opposers_for_priority(priority_id).each do |user|
+      position = Endorsement.where(priority_id: priority_id, user_id: user.id).first.value
+      UserMailer.priority_status_message(priority, status, message, user, position).deliver
+    end
   end
 
   protected

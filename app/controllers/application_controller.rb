@@ -81,7 +81,14 @@ class ApplicationController < ActionController::Base
     if logged_in? and Government.current.layout == "better_reykjavik" and controller_name!="settings"
       unless current_user.email and current_user.my_gender and current_user.post_code and current_user.age_group
         flash[:notice] = "Please make sure you have registered all relevant information about you for this website."
-        redirect_to :controller=>"settings"
+        if request.format.js?
+          render :update do |page|
+            page.redirect_to :controller => "settings"
+          end
+          return false
+        else
+          redirect_to :controller=>"settings"
+        end
       end
     end
   end
@@ -146,25 +153,46 @@ class ApplicationController < ActionController::Base
 
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
-    if request.host.include?("localtunnel") or request.subdomains.size == 0 or request.host.include?(current_government.domain_name) or request.subdomains.first == 'www'
-      if (controller_name=="home" and action_name=="index") or 
-         Rails.env.development? or
-         request.host.include?("betrireykjavik") or
-         request.host.include?("skuggathing") or
-         self.class.name.downcase.include?("tr8n") or
-         ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
-        @current_partner = nil
-        Partner.current = @current_partner
-        Rails.logger.info("No partner")
-        return nil
+    if request.host.include?("betrireykjavik")
+      if request.subdomains.size == 0 or request.host.include?(current_government.domain_name) or request.subdomains.first == 'www'
+        if (controller_name=="home" and action_name=="index") or
+           Rails.env.development? or
+           request.host.include?("betrireykjavik") or
+           self.class.name.downcase.include?("tr8n") or
+           ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
+          @current_partner = nil
+          Partner.current = @current_partner
+          Rails.logger.info("No partner")
+          return nil
+        else
+          redirect_to "/welcome"
+        end
       else
-        redirect_to "/welcome"
+        @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+        Partner.current = @current_partner
+        Rails.logger.info("Partner: #{@current_partner.short_name}")
+        return @current_partner
       end
     else
-      @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
-      Partner.current = @current_partner
-      Rails.logger.info("Partner: #{@current_partner.short_name}")
-      return @current_partner
+       if request.subdomains.size == 0 or request.host == current_government.base_url or request.subdomains.first == 'www'
+        if (controller_name=="home" and action_name=="index") or
+           Rails.env.development? or
+           request.host.include?("betrireykjavik") or
+           self.class.name.downcase.include?("tr8n") or
+           ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
+          @current_partner = nil
+          Partner.current = @current_partner
+          Rails.logger.info("No partner")
+          return nil
+        else
+          redirect_to "/welcome"
+        end
+      else
+        @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+        Partner.current = @current_partner
+        Rails.logger.info("Partner: #{@current_partner.short_name}")
+        return @current_partner
+      end
     end
   end
   
@@ -178,7 +206,7 @@ class ApplicationController < ActionController::Base
       logged_in_user = current_user
       unless Partner.current.geoblocking_disabled_for?(@country_code)
         Rails.logger.info("Geoblocking enabled")
-        @geoblocked = true
+        @geoblocked = true unless current_user and current_user.is_admin?
       end
       if logged_in_user and logged_in_user.geoblocking_disabled_for?(Partner.current)
         Rails.logger.info("Geoblocking disabled for user #{logged_in_user.login}")
@@ -202,6 +230,9 @@ class ApplicationController < ActionController::Base
       if cookies[:last_selected_language]
         session[:locale] = cookies[:last_selected_language]
         Rails.logger.debug("Set language from cookie")
+      elsif Government.current.layout == "better_reykjavik"
+        session[:locale] = "is"
+        Rails.logger.info("Set language from better reykjavik")
       elsif @iso_country and not @iso_country.languages.empty?
         session[:locale] =  @iso_country.languages.first.locale
         Rails.logger.debug("Set language from geoip")

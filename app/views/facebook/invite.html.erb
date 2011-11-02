@@ -19,6 +19,7 @@
 			 exclude_ids = "<%= current_following_facebook_uids.join(',') %>,<%= @facebook_contacts.join(',') %>"
 			 actiontext="<%= tr("Invite your Facebook friends to join your network at {government_name}", "view/facebook/invite", :government_name => tr(current_government.name,"Name from database")) %>" 
 			 showborder="true"
+             import_external_friends="false"
 			 rows="4"
 			 cols="4"
 			 bypass="cancel"

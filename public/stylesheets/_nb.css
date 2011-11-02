@@ -386,14 +386,14 @@ del {
 	padding: 4px 0px 2px 0px;	
 	letter-spacing: 0.5px;	
 }
-.show_all_ads {
+.show_all_encouragements {
 	font-size: 0.7em;
 	padding-left: 8px;
 }
-.ad_show {
+.encouragement_show {
 	margin-top: 5px;
 }
-.ad_show_inline {
+.encouragement_show_inline {
 	margin-top: 12px;
 }
 #activities {

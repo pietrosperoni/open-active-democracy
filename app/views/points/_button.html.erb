@@ -1,6 +1,6 @@
 <% if quality %>
 	<% if quality.is_helpful? %>
-		<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
+		<div class="grey_button_wide" id="priority_add_endorse_<%= point.id.to_s %>">
 			<%= tr("HELPFUL", "view/points/_button")%>
 			<span class="big_x">
 			<%= link_to "X", unquality_point_path(point, :region => "point_detail"),
@@ -13,7 +13,7 @@
 			</span>
 		</div>			
 	<% else %>
-	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
+	<div class="grey_button_wide" id="priority_add_oppose_<%= point.id.to_s %>">
 		<%= tr("NOT HELPFUL", "view/points/_button")%>
 		<span class="big_x">
 		<%= link_to "X", unquality_point_path(point, :region => "point_detail"), 
@@ -27,21 +27,21 @@
 	</div>	
 	<% end %>
 <% else %>
-	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
+	<div class="grey_button_wide" id="priority_add_endorse_<%= point.id.to_s %>">
 		<%= link_to tr("Helpful?", "view/points/_button"), quality_point_path(point, :region => "point_detail", :value => true), 
                 :method => :post,
                 :remote=>true,
-                'data-disable-with' => escape_t(tr("Helpful","Ajax")),
-                'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link", :title => tr("This is helpful", "view/points/_button") %>								
+                'data-disable-with' => '<span class="grey_button_wide priority_add_working"><img src="/images/ajax/horizontal_small.gif" /></span>',
+                'data-loader-name' => "no_loader",
+		            :class => "", :title => tr("This is helpful", "view/points/_button") %>
 	</div>
 	<div class="endorse_or"><%= tr("OR", "view/points/_button") %></div>
-	<div class="grey_button_wide" id="priority_add_<%= point.id.to_s %>">
+	<div class="grey_button_wide" id="priority_add_oppose_<%= point.id.to_s %>">
 		<%= link_to tr("Not Helpful?", "view/points/_button"), quality_point_path(point, :region => "point_detail", :value => false),
                 :method => :post,
                 :remote=>true,
-                'data-disable-with' => escape_t(tr("Unhelpful","Ajax")),
-                'data-loader-name' => "horizontal_small",
-		            :class => "priority_add_link", :title => tr("This is not helpful", "view/points/_button") %>								
+                'data-disable-with' => '<span class="grey_button_wide priority_add_working"><img src="/images/ajax/horizontal_small.gif" /></span>',
+                'data-loader-name' => "no_loader",
+		            :class => "", :title => tr("This is not helpful", "view/points/_button") %>
 	</div>	
 <% end %>

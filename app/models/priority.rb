@@ -15,6 +15,8 @@ class Priority < ActiveRecord::Base
   scope :published, :conditions => "priorities.status = 'published'"
   scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
 
+  scope :not_deleted, :conditions => "priorities.status <> 'deleted'"
+
   scope :flagged, :conditions => "flags_count > 0"
 
   scope :alphabetical, :order => "priorities.name asc"
@@ -51,7 +53,8 @@ class Priority < ActiveRecord::Base
   scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
 
   scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
-  
+  scope :by_random, :order => "rand()"
+
   scope :item_limit, lambda{|limit| {:limit=>limit}}  
   
   belongs_to :user
@@ -89,6 +92,7 @@ class Priority < ActiveRecord::Base
   has_many :sent_changes, :class_name => "Change", :conditions => "status = 'sent'", :order => "updated_at desc"
   has_many :declined_changes, :class_name => "Change", :conditions => "status = 'declined'", :order => "updated_at desc"
   has_many :changes_with_deleted, :class_name => "Change", :order => "updated_at desc", :dependent => :destroy
+  has_many :priority_status_change_logs, dependent: :destroy
 
   has_many :priority_processes
   
@@ -133,7 +137,7 @@ class Priority < ActiveRecord::Base
   end
   
   event :delete do
-    transitions :from => [:passive, :draft, :published], :to => :deleted
+    transitions :from => [:inactive, :passive, :draft, :published], :to => :deleted
   end
 
   event :undelete do
@@ -330,44 +334,59 @@ class Priority < ActiveRecord::Base
   end
   
   def failed!
-#    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusFailed.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -2
     self.status = 'inactive'
 #    self.change = nil
     self.save(:validate => false)
-#    deactivate_endorsements  
+    #deactivate_endorsements
   end
   
   def successful!
-#    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusSuccessful.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = 2
     self.status = 'inactive'
 #    self.change = nil    
     self.save(:validate => false)
-#    deactivate_endorsements
+    #deactivate_endorsements
   end  
 
   def in_the_works!
-#    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusInTheWorks.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
-#    self.change = nil    
+#    self.change = nil
+    deactivate_ads_and_refund
     self.save(:validate => false)
-#    deactivate_endorsements
+    #deactivate_endorsements
   end  
   
   def compromised!
-    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusCompromised.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
  #   self.change = nil    
     self.save(:validate => false)
- #   deactivate_endorsements
-  end  
+    #deactivate_endorsements
+  end
+
+  def deactivate_ads_and_refund
+    self.ads.active.each do |ad|
+      ad.finish!
+      user = ad.user
+      refund = ad.cost - ad.spent
+      refund = 1 if refund > 0 and refund < 1
+      refund = refund.abs.to_i
+      if refund
+        user.increment!(:capital_count, refund)
+        ActivityCapitalAdRefunded.create(:user => user, :priority => self, :capital => CapitalAdRefunded.create(:recipient => user, :amount => refund))
+      end
+    end
+  end
 
   def deactivate_endorsements
     for e in endorsements.active

@@ -75,7 +75,7 @@ defaults: &defaults
   #
   #############################################################################
   caching:
-    enabled:                  false
+    enabled:                  true
     adapter:                  ActiveSupport::Cache
     store:                    [mem_cache_store, 'localhost:11211']
     version:                  1 # you can change the version to invalidate the cache

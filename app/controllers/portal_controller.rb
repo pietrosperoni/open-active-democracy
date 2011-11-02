@@ -95,6 +95,7 @@ class PortalController < ApplicationController
         params.each do |key,value|
           next unless key.index("portlet_id")
           portlet_id = key.split("-")[1].to_i
+          next unless Portlet.exists?(portlet_id)
           portlet = Portlet.find(portlet_id, :include=>:portlet_container)
           dp = PortletPosition.find_by_portlet_id(portlet_id)
           dp.css_column = value.split("|")[0].to_i

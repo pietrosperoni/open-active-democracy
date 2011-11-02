@@ -1,4 +1,19 @@
-<div id="hp_intro"><%= @page_title %></div>
+<% if Government.current.message_for_finished and Government.current.message_for_finished!="" -%>
+  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_finished.html_safe } %>
+<% end %>
+
+<div style="width:auto;">
+<ul>
+	<li class="list_left">
+		<div id="hp_intro"><%= @page_title %></div>
+	</li>
+	<li class="list_right">
+        <%= rss_url(@rss_url) %>
+	</li>
+<ul>
+</div>
+<div class="clear"></div>
+<div class="white_line"></div>
 
 <% for priority in @priorities %>
 	<%= render :partial => "priorities/listing_finished", :locals => {:priority => priority }%>

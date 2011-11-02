@@ -23,7 +23,7 @@ a, .endorsement_down, .tag_button, .yellow_button, .grey_button_wide {
 	color: #999999; /* 999 */
 }
 
-.greyed_out, .comment_hidden, .comment_hidden a, .nochange, .position_nochange, .activity_hidden, .activity_hidden a, .show_all_ads a, .small, .tag_count {
+.greyed_out, .comment_hidden, .comment_hidden a, .nochange, .position_nochange, .activity_hidden, .activity_hidden a, .show_all_encouragements a, .small, .tag_count {
 	color: #999999; /* 999 */
 }
 

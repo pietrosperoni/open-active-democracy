@@ -364,7 +364,7 @@ class PointsController < ApplicationController
     def get_qualities
       @qualities = nil
       if logged_in? and @points.any? # pull all their qualities on the points shown
-        @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
+        @qualities = PointQuality.all(:conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
       end    
     end    
     

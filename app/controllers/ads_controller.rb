@@ -79,7 +79,7 @@ class AdsController < ApplicationController
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace 'notification_show', render(:partial => "ads/pick")
+          page.replace 'encouragements', render(:partial => "ads/pick")
         end
       }
     end

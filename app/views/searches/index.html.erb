@@ -39,13 +39,17 @@
             <% facet_options.each do |option, count| %>
               <% next if option==nil or option=="" %>
               <% translated_option = translate_facet_option(option) %>
-              <% if translated_option==params[:category_name] or option==params[:class]%>
-              <li>
-                <b><%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %></b>
-              </li>
+              <% if translated_option==params[:category_name] %>
+                  <li>
+                    <b><%= link_to "#{tr(translated_option, "model/category")} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %></b>
+                  </li>
+              <% elsif option==params[:class]%>
+                  <li>
+                    <b><%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %></b>
+                  </li>
               <% else %>
               <li>
-                <%= link_to "#{translated_option.humanize} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %>
+                <%= link_to "#{tr(translated_option, "model/category")} (#{count})".html_safe, "/search?q=#{@query}&#{facet}=#{option}" %>
               </li>
               <% end %>
             <% end %>

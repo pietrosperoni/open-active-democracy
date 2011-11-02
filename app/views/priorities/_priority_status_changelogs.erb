@@ -1,0 +1,7 @@
+<div class="finished_priority">
+  <ul>
+    <% PriorityStatusChangeLog.where(priority_id: @priority.id).order("created_at").each do |changelog| %>
+        <li><p><%= changelog.content.html_safe %></p></li>
+    <% end %>
+  </ul>
+</div>

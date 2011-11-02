@@ -1,7 +1,7 @@
 <script language="javascript">
 	/* widget config */
 	var jtw_divname                = '';  /* unique id of the widget */
-	var jtw_search                 = '<%= @tag_names.titleize %>';  /* keywords or phrase */
+	var jtw_search                 = '<%= tr(@tag_names, "model/category").titleize %>';  /* keywords or phrase */
 	var jtw_width                  = 'auto';  /* width of widget in px, %, or auto */
 	var jtw_height                 = 'auto';  /* height of widget in px, %, or auto */
 	var jtw_scroll                 = 'no';  /* add scroll bar to widget, 'yes' or 'no' */

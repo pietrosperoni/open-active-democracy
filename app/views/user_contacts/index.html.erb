@@ -14,7 +14,7 @@
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
   <tr>
     <td valign="middle" align="middle">
-      <%= link_to image_tag("gmail-logo.jpg", :border => 0), :controller => "import", :action => "authenticate_google" %>
+      <%= link_to image_tag("gmail-logo.jpg", :border => 0), :controller => "import", :action => "authenticate_google" unless current_government.layout=="better_reykjavik" %>
     </td>
     <% if current_government.has_yahoo_enabled? %>
         <td valign="middle" align="middle">

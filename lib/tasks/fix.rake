@@ -1,4 +1,190 @@
-namespace :fix do  
+namespace :fix do
+  desc "reset database"
+  task :reset_database_YES => :environment do
+    puts "1"
+    connection = ActiveRecord::Base.connection();
+    connection.execute("DELETE FROM activities;")
+    connection.execute("DELETE FROM ads;")
+    connection.execute("DELETE FROM blasts;")
+    connection.execute("DELETE FROM capitals;")
+    connection.execute("DELETE FROM changes;")
+    connection.execute("DELETE FROM client_applications;")
+    connection.execute("DELETE FROM comments;")
+    connection.execute("DELETE FROM constituents;")
+    connection.execute("DELETE FROM delayed_jobs;")
+    connection.execute("DELETE FROM document_qualities;")
+    connection.execute("DELETE FROM document_revisions;")
+    connection.execute("DELETE FROM documents;")
+    connection.execute("DELETE FROM endorsements;")
+    puts "2"
+    connection.execute("DELETE FROM facebook_templates;")
+    connection.execute("DELETE FROM feeds;")
+    connection.execute("DELETE FROM following_discussions;")
+    connection.execute("DELETE FROM followings;")
+    connection.execute("DELETE FROM legislators;")
+    connection.execute("DELETE FROM letters;")
+    connection.execute("DELETE FROM messages;")
+    connection.execute("DELETE FROM notifications;")
+    connection.execute("DELETE FROM pages;")
+    connection.execute("DELETE FROM partners;")
+    connection.execute("DELETE FROM pictures;")
+    connection.execute("DELETE FROM point_qualities;")
+    connection.execute("DELETE FROM points;")
+    connection.execute("DELETE FROM priorities;")
+    connection.execute("DELETE FROM priority_charts;")
+    connection.execute("DELETE FROM priority_processes;")
+    puts "3"
+    connection.execute("DELETE FROM priority_status_change_logs;")
+    connection.execute("DELETE FROM process_discussions;")
+    connection.execute("DELETE FROM process_document_elements;")
+    connection.execute("DELETE FROM process_document_states;")
+    connection.execute("DELETE FROM process_document_types;")
+    connection.execute("DELETE FROM process_documents;")
+    connection.execute("DELETE FROM process_speech_master_videos;")
+    connection.execute("DELETE FROM process_speech_videos;")
+    connection.execute("DELETE FROM process_types;")
+    connection.execute("DELETE FROM profiles;")
+    connection.execute("DELETE FROM rankings;")
+    connection.execute("DELETE FROM ratings;")
+    puts "4"
+    connection.execute("DELETE FROM relationships;")
+    connection.execute("DELETE FROM revisions;")
+    connection.execute("DELETE FROM shown_ads;")
+    connection.execute("DELETE FROM signups;")
+    connection.execute("DELETE FROM tag_subscriptions;")
+    connection.execute("DELETE FROM taggings;")
+    connection.execute("DELETE FROM tags;")
+    connection.execute("DELETE FROM unsubscribes;")
+    connection.execute("DELETE FROM user_charts;")
+    connection.execute("DELETE FROM user_contacts;")
+    connection.execute("DELETE FROM user_rankings;")
+    connection.execute("DELETE FROM users WHERE id != 1;")
+    connection.execute("DELETE FROM votes;")
+    connection.execute("DELETE FROM webpages;")
+    puts "5"
+
+    connection.execute("OPTIMIZE TABLE activities;")
+    connection.execute("OPTIMIZE TABLE ads;")
+    connection.execute("OPTIMIZE TABLE blasts;")
+    connection.execute("OPTIMIZE TABLE capitals;")
+    connection.execute("OPTIMIZE TABLE changes;")
+    connection.execute("OPTIMIZE TABLE client_applications;")
+    connection.execute("OPTIMIZE TABLE comments;")
+    connection.execute("OPTIMIZE TABLE constituents;")
+    connection.execute("OPTIMIZE TABLE delayed_jobs;")
+    connection.execute("OPTIMIZE TABLE document_qualities;")
+    connection.execute("OPTIMIZE TABLE document_revisions;")
+    puts "6"
+    connection.execute("OPTIMIZE TABLE documents;")
+    connection.execute("OPTIMIZE TABLE endorsements;")
+    connection.execute("OPTIMIZE TABLE facebook_templates;")
+    connection.execute("OPTIMIZE TABLE feeds;")
+    connection.execute("OPTIMIZE TABLE following_discussions;")
+    connection.execute("OPTIMIZE TABLE followings;")
+    connection.execute("OPTIMIZE TABLE legislators;")
+    connection.execute("OPTIMIZE TABLE letters;")
+    connection.execute("OPTIMIZE TABLE messages;")
+    connection.execute("OPTIMIZE TABLE notifications;")
+    connection.execute("OPTIMIZE TABLE pages;")
+    connection.execute("OPTIMIZE TABLE partners;")
+    connection.execute("OPTIMIZE TABLE pictures;")
+    connection.execute("OPTIMIZE TABLE point_qualities;")
+    puts "7"
+    connection.execute("OPTIMIZE TABLE points;")
+    connection.execute("OPTIMIZE TABLE priorities;")
+    connection.execute("OPTIMIZE TABLE priority_charts;")
+    connection.execute("OPTIMIZE TABLE priority_processes;")
+    connection.execute("OPTIMIZE TABLE priority_status_change_logs;")
+    connection.execute("OPTIMIZE TABLE process_discussions;")
+    connection.execute("OPTIMIZE TABLE process_document_elements;")
+    connection.execute("OPTIMIZE TABLE process_document_states;")
+    connection.execute("OPTIMIZE TABLE process_document_types;")
+    connection.execute("OPTIMIZE TABLE process_documents;")
+    connection.execute("OPTIMIZE TABLE process_speech_master_videos;")
+    connection.execute("OPTIMIZE TABLE process_speech_videos;")
+    connection.execute("OPTIMIZE TABLE process_types;")
+    puts "8"
+    connection.execute("OPTIMIZE TABLE profiles;")
+    connection.execute("OPTIMIZE TABLE rankings;")
+    connection.execute("OPTIMIZE TABLE ratings;")
+    connection.execute("OPTIMIZE TABLE relationships;")
+    connection.execute("OPTIMIZE TABLE revisions;")
+    connection.execute("OPTIMIZE TABLE shown_ads;")
+    connection.execute("OPTIMIZE TABLE signups;")
+    connection.execute("OPTIMIZE TABLE tag_subscriptions;")
+    connection.execute("OPTIMIZE TABLE taggings;")
+    connection.execute("OPTIMIZE TABLE tags;")
+    puts "9"
+    connection.execute("OPTIMIZE TABLE unsubscribes;")
+    connection.execute("OPTIMIZE TABLE user_charts;")
+    connection.execute("OPTIMIZE TABLE user_contacts;")
+    connection.execute("OPTIMIZE TABLE user_rankings;")
+    puts "10"
+    connection.execute("OPTIMIZE TABLE users;")
+    connection.execute("OPTIMIZE TABLE votes;")
+    connection.execute("OPTIMIZE TABLE webpages;")
+    puts "11"
+      #categories
+      #color_schemes
+      #governments
+      #portlet_containers
+      #portlet_positions
+      #portlet_template_categories
+      #portlet_templates
+      #portlets
+      #schema_migrations
+      #simple_captcha_data
+      #widgets
+
+    u=User.first
+    u.endorsements_count = 0
+    u.up_endorsements_count = 0
+    u.down_endorsements_count = 0
+    u.up_issues_count = 0
+    u.down_issues_count = 0
+    u.comments_count = 0
+    u.score = 0.1
+    u.capitals_count = 0
+    u.twitter_count = 0
+    u.followers_count = 0
+    u.followings_count = 0
+    u.ignorers_count = 0
+    u.ignorings_count = 0
+    u.position_24hr = 0
+    u.position_7days = 0
+    u.position_30days = 0
+    u.position_24hr_change = 0
+    u.position_7days_change = 0
+    u.position_30days_change = 0
+    u.position = 0
+    u.ads_count = 0
+    u.changes_count = 0
+    u.top_endorsement_id = nil
+    u.contacts_count = 0
+    u.contacts_members_count = 0
+    u.contacts_invited_count = 0
+    u.contacts_not_invited_count = 0
+    u.documents_count = 0
+    u.document_revisions_count = 0
+    u.points_count = 0
+    u.index_24hr_change = 0.0
+    u.index_7days_change = 0.0
+    u.index_30days_change = 0.0
+    u.received_notifications_count = 0
+    u.unread_notifications_count = 0
+    u.point_revisions_count = 0
+    u.qualities_count = 0
+    u.constituents_count = 0
+    u.warnings_count = 0
+    u.referrals_count = 0
+    u.imported_contacts_count = 0
+    u.save(false)
+    Government.last.default_tags_checkbox.split(",").each do |t|
+      tag=Tag.new
+      tag.name = t
+      tag.save
+    end
+  end
 
   desc "delete activities that don't have objects which are now nil"
   task :abandoned_activities => :environment do

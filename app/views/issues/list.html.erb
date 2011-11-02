@@ -3,64 +3,14 @@
 <p>
 <% if @priorities.any? %>
 	<% if params[:action] == 'official' %>
-		<%= tr("This is the {official_user_name} agenda for {tag_name} as prioritized by all members", "view/issues/list", :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+		<%= tr("This is the {official_user_name} agenda for {tag_name} as prioritized by all members", "view/issues/list", :tag_name => tr(@tag_names, "model/category").titleize, :official_user_name => current_government.official_user.name)%>
 	<% elsif params[:action] == 'not_official' %>
-		<%= tr("These are our members' {tag_name} priorities NOT on {official_user_name} agenda", "view/issues/list", :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+		<%= tr("These are our members' {tag_name} priorities NOT on {official_user_name} agenda", "view/issues/list", :tag_name => tr(@tag_names, "model/category").titleize, :official_user_name => current_government.official_user.name)%>
 	<% elsif params[:action] == 'official_opposed' %>
-		<%= tr("These are our members' {tag_name} priorities that {official_user_name} opposes", "view/issues/list", :tag_name => @tag_names.titleize, :official_user_name => current_government.official_user.name)%>
+		<%= tr("These are our members' {tag_name} priorities that {official_user_name} opposes", "view/issues/list", :tag_name => tr(@tag_names, "model/category").titleize, :official_user_name => current_government.official_user.name)%>
 	<% end %>
+    <%= render :partial => "priorities/top_level_listing", :locals=>{:priorities=>@priorities, :endorsements=>@endorsements} %>
+    <p><%= will_paginate @priorities %></p>
 <% else %>
-	<%= tr("No priorities for {tag_name} yet", "view/issues/list", :tag_name => @tag_names.titleize)%>
-<% end %>
-
-<% if @priorities.any? %>
-	<p>
-	<table border="0" cellspacing="0" cellpadding="0" class="top_level">
-		<!--<tr>
-			<td></td>
-			<td></td>
-			<td align="right" class="right_scale"><span class="table_header"><%= tr("Rank", "view/issues/list") %></span></td>
-			<td class="left_scale"><span class="table_header"><%= tr("Wk", "view/issues/list") %></span></td>
-			<td class="left_scale" colspan="1"><span class="table_header"><%= tr("Mo", "view/issues/list") %></span><%= will_paginate @priorities %></td>
-			
-		</tr>-->
-	<% for priority in @priorities %>
-		<% if @endorsements %>
-			<% endorsement = @endorsements.detect {|e| e.priority_id == priority.id } %>
-		<% end %>
-		<tr class="line_bellow">
-			<td>
-  				<%= image_tag("new/plus.png", :id=>"plus_for_#{priority.id}", :alt => "plus-icon", :class => "plus_sign") %>
-          <script type="text/javascript">
-            jQuery("#plus_for_<%=priority.id%>").click(function () {
-                  var slide = jQuery("#points_overview_for_<%=priority.id%>");
-                  if (!slide.data("loaded")) {
-                      slide.load('<%=points_overview_priority_url(priority)%>');
-                      slide.data("loaded", true);
-											$('.border').css('border-bottom','none');
-                  } else {
-                      slide.slideToggle("slow");
-											$('.border').css('border-bottom','none');
-                  };
-              });
-          </script>
-  			</td>
-				<td class="category_icon">
-            <% if priority.category and priority.category.icon %>
-				<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
-            <% end %>
-  			</td>
-			<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
-			<td valign="top" class="left_scale8">
-			<div id="priority_<%= priority.id %>" class="priority_listing">
-				<%= render :partial => "priorities/listing", :locals => {:priority => priority, :endorsement => endorsement, :value => 0} %>
-			</div>
-			</td>
-		</tr>
-	<% end %>
-
-	</table>
-	<p>
-	<%= will_paginate @priorities %>
-
+	<%= tr("No priorities for {tag_name} yet", "view/issues/list", :tag_name => tr(@tag_names, "model/category").titleize)%>
 <% end %>

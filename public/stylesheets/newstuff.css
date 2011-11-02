@@ -1016,7 +1016,7 @@ font-size:13px !important;
 }
 
 .profile_name {
-font-size:16px !important;
+font-size:13px !important;
 line-height: 1.5em;
 border-bottom: none !important;
 }
@@ -1036,13 +1036,13 @@ margin-top:7px;
 }
 
 .top_level .priority_name, .priority_name_add {
-	width: 330px;
+	width: 320px;
 }
 
 .single .priority_name {
 	font-size: 1.4em !important;	
 	margin-bottom: 8px;
-	width: auto;
+	width: 470px;
 }
 
 
@@ -1084,7 +1084,12 @@ margin-top:7px;
 }
 
 .field_with_errors {
-  border: 1px solid red;
+  border: 1px solid red !important;
+  display: inline-block !important;
+}
+
+.field_with_errors textarea {
+
 }
 
 .button_small_li {
@@ -1108,11 +1113,13 @@ margin-top:7px;
 	margin-top: 10px;
 }
 
+/*
 .bellow_translate {
 	margin: 25px 0 8px -15px;
 	border-bottom: solid 1px #CCC;
 	width: 190px;
 }
+*/
 
 #intro p {font-size: 0.8em;}
 
@@ -1218,6 +1225,7 @@ margin-top:7px;
 }
 
 .yourpri_logo {
+	margin-top: 20px;
 	text-align: center;
 }
 
@@ -1229,3 +1237,18 @@ margin-top:7px;
     width: auto;
 }
 
+#infopage h4
+{
+		margin-top: 10px;
+}
+
+
+#infopage li
+{
+		margin-left: 5px;
+}
+
+#infopage p
+{
+		margin-top: 5px;
+}

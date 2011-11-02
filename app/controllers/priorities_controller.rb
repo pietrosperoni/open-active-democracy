@@ -50,8 +50,10 @@ class PrioritiesController < ApplicationController
   def yours
     @page_title = tr("Your priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
     @priorities = @user.endorsements.active.by_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @rss_url = yours_priorities_url(:format => 'rss')
     respond_to do |format|
-      format.html 
+      format.html
+      format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
       format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -97,6 +99,7 @@ class PrioritiesController < ApplicationController
   # GET /priorities/network
   def network
     @page_title = tr("Your network's priorities", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
+    @rss_url = network_priorities_url(:format => 'rss')
     if @user.followings_count > 0
       @priorities = Endorsement.active.find(:all, 
         :select => "endorsements.priority_id, sum((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value) as score, count(*) as endorsements_number, priorities.*", 
@@ -108,6 +111,7 @@ class PrioritiesController < ApplicationController
     end
     respond_to do |format|
       format.html
+      format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
       format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -325,7 +329,8 @@ class PrioritiesController < ApplicationController
   # GET /priorities/finished
   def finished
     @page_title = tr("Priorities in progress", "controller/priorities")
-    @priorities = Priority.finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = finished_priorities_url(:format => 'rss')
+    @priorities = Priority.finished.not_deleted.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "list" }
       format.rss { render :action => "list" }
@@ -731,8 +736,11 @@ class PrioritiesController < ApplicationController
     @saved = @priority.save
     
     if @saved
-      @priority.points.first.setup_revision
+      first_point = @priority.points.first
+      first_point.setup_revision
+      first_point.reload
       @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
+      quality = first_point.point_qualities.find_or_create_by_user_id_and_value(current_user.id, true)
       if current_user.endorsements_count > 24
         session[:endorsement_page] = (@endorsement.position/25).to_i+1
         session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
@@ -814,8 +822,8 @@ class PrioritiesController < ApplicationController
             page<<"$('.priority_#{@priority.id.to_s}_button_small').replaceWith('#{escape_javascript(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}')"
             page<<"$('.priority_#{@priority.id.to_s}_endorsement_count').replaceWith('#{escape_javascript(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority}))}')"
           elsif params[:region] == 'ad_top' and @ad
-            page.replace 'notification_show', render(:partial => "ads/pick")
-            page << 'jQuery("#notification_show").corners();'
+            page.replace 'encouragements', render(:partial => "ads/pick")
+            #page << 'if (jQuery("#notification_show").length > 0) { jQuery("#notification_show").corners(); }'
           else
             page << "alert('error');"
           end
@@ -839,7 +847,14 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @previous_name = @priority.name
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
-    if params[:priority] 
+
+    @priority_status_changelog = PriorityStatusChangeLog.new(
+        priority_id: @priority.id,
+        content: params[:priority][:finished_status_message]
+    )
+    @priority_status_changelog.save
+
+    if params[:priority]
       params[:priority][:category] = Category.find(params[:priority][:category]) if params[:priority][:category]
       if params[:priority][:official_status] and params[:priority][:official_status].to_i != @priority.official_status
         @change_status = params[:priority][:official_status].to_i
@@ -847,37 +862,50 @@ class PrioritiesController < ApplicationController
       end
     end
     respond_to do |format|
-      if params[:commit]=="Vista hugmynd"
-        if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
-          @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
-          format.html { 
-            flash[:notice] = tr("Saved {priority_name}", "controller/priorities", :priority_name => @priority.name)
-            redirect_to(@priority)         
-          }
-          format.js {
-            render :update do |page|
-              page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}          
-              page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}                      
-              page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
-              page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
-              # page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
-            end
-          }
+      if params[:priority][:name] and @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
+        # already renamed?
+        @activity = ActivityPriorityRenamed.find_by_user_id_and_priority_id(current_user.id,@priority.id)
+        if @activity
+          @activity.update_attribute(:updated_at,Time.now)
         else
-          format.html { render :action => "edit" }
-          format.js {
-            render :update do |page|
-              page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
-              page.insert_html :top, 'activities', render(:partial => "priorities/new_inline", :locals => {:priority => @priority})
-              page['priority_name'].focus
-            end
-          }
+          @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
         end
-        @priority.reload
-        @priority.change_status!(@change_status) if @change_status
+        format.html {
+          flash[:notice] = tr("Saved {priority_name}", "controller/priorities", :priority_name => @priority.name)
+          redirect_to(@priority)
+        }
+        format.js {
+          render :update do |page|
+            page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
+            page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}
+            page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
+            page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
+            # page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
+          end
+        }
       else
-        Rails.logger.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
-        redirect_to(@priority)
+        format.html {
+          if params[:priority][:finished_status_message]
+            flash[:notice] = tr('Status updated with "{status_text}"', "controller/priorities", status_text: params[:priority][:finished_status_message])
+          end
+          redirect_to(@priority)
+        }
+        format.js {
+          render :update do |page|
+            page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
+            page.insert_html :top, 'activities', render(:partial => "priorities/new_inline", :locals => {:priority => @priority})
+            page['priority_name'].focus
+          end
+        }
+      end
+      @priority.reload
+
+      if @change_status
+        @priority.change_status!(@change_status)
+        @priority.delay.deactivate_endorsements
+      end
+      if params[:priority][:finished_status_message]
+        User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_message])
       end
     end
   end
@@ -1046,7 +1074,19 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to yours_created_priorities_url }    
     end
-  end  
+  end
+
+  def update_status
+    @priority = Priority.find(params[:id])
+    @page_name = tr("Edit the status of {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    if not current_user.is_admin?
+      flash[:error] = tr("You cannot change a priority's name once other people have endorsed it.", "controller/priorities")
+      redirect_to @priority and return
+    end
+    respond_to do |format|
+      format.html
+    end
+  end
 
   private
   

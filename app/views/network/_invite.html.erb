@@ -10,8 +10,8 @@
         <a href="#" onClick="FB.login(function() { window.location='<%= url_for(:only_path => false, :controller => 'facebook', :action => 'invite') %>'; });"><%= image_tag("facebook-logo.jpg", :border => 0) %></a>
       <% end %>
       <br><br>
-    <% end %>   
-    <%= link_to image_tag("gmail-logo.jpg", :border => 0), :controller => "import", :action => "authenticate_google" %><br>
+    <% end %>
+    <%= link_to image_tag("gmail-logo.jpg", :border => 0), :controller => "import", :action => "authenticate_google" unless current_government.layout=="better_reykjavik" %><br>
     <br>
     <% if current_government.has_yahoo_enabled? %>
       <%= link_to image_tag("yahoo-mail-logo.jpg", :border => 0), :controller => "import", :action => "yahoo" %><br><br>

@@ -1,15 +1,15 @@
-class RemoteLinkRenderer #< WillPaginate::LinkRenderer
-  def prepare(collection, options, template)
-    @remote = options.delete(:remote) || {}
-    #super
-  end
-  
-  def to_html
-    self.to_s
-  end
-  protected
-    def page_link(page, text, attributes = {})
-      @template.link_to_remote(text, {:url => url_for(page), :method => :get}.merge(@remote))
-    end
-end
+class RemoteLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
+ private
 
+  def link(text, target, attributes = {})
+    if target.is_a? Fixnum
+      attributes[:rel] = rel_value(target)
+      target = "/users/endorsements?page=#{target}"
+    end
+    attributes[:href] = target
+    attributes['data-disable-with'] = ""
+    attributes['data-loader-name'] = "circle"
+    attributes['data-remote'] = 'true'
+    tag(:a, text, attributes)
+  end
+end

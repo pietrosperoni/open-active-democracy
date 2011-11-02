@@ -19,7 +19,7 @@
 					<%= link_to(tr("Opposers", "view/priorities/_nav"), opposer_documents_priority_url(@priority)) %><% if @priority.down_documents_count > 0 %> (<%= @priority.down_documents_count %>)<% end %><br/>
 					<%= link_to(tr("Undeclared", "view/priorities/_nav"), neutral_documents_priority_url(@priority)) %><% if @priority.neutral_documents_count > 0 %> (<%= @priority.neutral_points_count %>)<% end %><br/>
 					<p>
-					<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %>
+					<% link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %>
 					<p>
 				</div>				
 			</li>
@@ -58,6 +58,13 @@
 				<%= link_to tr("News", "view/priorities/_nav"), activities_priority_url(@priority) %>
 			</span>
 		</li>
+        <% if current_user and current_user.capitals_count>0 and @priority.status == 'published' -%>
+        <li class="tab8">
+			<span class="tab_header">
+				<%= link_to tr("Buy an ad", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database")), :class => "qtip_left" %>
+			</span>
+		</li>
+        <% end %>
 		<% unless @priority.priority_processes.empty? %>
 			<li class="tab9">
 				<span class="tab_header">
@@ -103,12 +110,14 @@
 			<div class="tab_body">
 			<div class="box_style">
 				<%= link_to tr("Add a point", "view/priorities/_nav"), new_priority_point_path(@priority), :title => tr("Can you make a compelling point for or against this priority in less than 500 characters?", "view/priorities/_nav"), :class => "qtip_left" %><br/>
-				<%= link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
-				<% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
-					<span class="greyed_out"><%= tr("Buy an ad for this priority", "view/priorities/_nav") %></span><br/>
-				<% else %>
-					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database")), :class => "qtip_left" %><br/>
-				<% end %>
+				<% link_to tr("Add a document", "view/priorities/_nav"), new_priority_document_path(@priority), :title => tr("Documents let you expand on your ideas and collaborate with others in a wiki-like fashion", "view/priorities/_nav"), :class => "qtip_left" %><br/>
+				<% if @priority.status == 'published' %>
+                    <% if 1==2 and (@priority.position < 26 and @priority.position > 0) or @priority.is_buried? %>
+    					<span class="greyed_out"><%= tr("Buy an ad for this priority", "view/priorities/_nav") %></span><br/>
+    				<% else %>
+    					<%= link_to tr("Buy an ad for this priority", "view/priorities/_nav"), new_priority_ad_url(@priority), :title => tr("Spend some of your {currency_name} to put this priority at the top of the page for everyone to consider.", "view/priorities/_nav", :currency_name => tr(current_government.currency_name.downcase,"Currency name from database")), :class => "qtip_left" %><br/>
+				    <% end %>
+                  <% end %>
 				<% if false and @priority.has_change? %>
 					<span class="greyed_out"><%= tr("Propose an acquisition", "view/priorities/_nav") %></span><br/>
 				<% elsif false %>
@@ -118,10 +127,8 @@
 					<% if (current_user.id == @priority.user_id and @priority.endorsements_count < 2) or current_user.is_admin? %>
 						<%= link_to tr("Edit this priority", "view/priorities/_nav"), edit_priority_url(@priority), :title => tr("Edit this priority", "view/priorities/_nav"), :class => "qtip_left" %><br>
 					<% end %>
-					<% if @priority.status != 'inactive' %>
-					<%= link_to tr("Flag for review", "view/priorities/_nav"), flag_inappropriate_priority_url(@priority), :title => tr("Should the site administrator take a look at this priority? Also post a bulletin if it's not obvious what the problem is.", "view/priorities/_nav"), :class => "qtip_left", :confirm => tr("You are about to flag this priority to be reviewed by the site administrator. If it's not clear why you are flagging it, please post a bulletin so they can take appropriate action.", "view/priorities/_nav"), :method => :put %><br/>
-				    <% end %>
                   <% if current_user.is_admin? %>
+                     <%= link_to tr("Update this priority's status", "view/priorities/_nav"), update_status_priority_url(@priority), :title => tr("Update this priority's status", "view/priorities/_nav"), :class => "qtip_left" %><br>
                      <%= link_to tr("Delete this priority", "view/priorities/_nav"), @priority, :title => tr("Permanently delete this priority", "view/priorities/_nav"), :confirm => tr("Are you sure you want to permanently delete {priority_name}?", "view/priorities/_nav", :priority_name => @priority.name), :method => :delete %><br/>
                   <% end %>
 

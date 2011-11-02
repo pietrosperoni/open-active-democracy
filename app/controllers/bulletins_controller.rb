@@ -22,6 +22,7 @@ class BulletinsController < ApplicationController
   end
 
   def create
+    params[:activity] ||= {}
     params[:activity][:user_id] = current_user.id
     if params[:activity][:other_user_id] # this is a post to another person's profile
       @activity = ActivityBulletinProfileNew.create(:user => User.find(params[:activity][:other_user_id]), :other_user => current_user)
@@ -54,7 +55,8 @@ class BulletinsController < ApplicationController
             page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => ""})
 #            page["bulletin-form-submit"].enable  
             page["bulletin_content"].focus()
-#            page["new_comment"].reset
+#            page["bulletin_content"].clear()
+            page << "$('textarea#bulletin_content').val('');"
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
             if current_facebook_user
               #page << fb_connect_stream_publish(UserPublisher.create_comment(current_facebook_user, @comment, @activity))

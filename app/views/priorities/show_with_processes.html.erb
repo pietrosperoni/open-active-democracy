@@ -26,7 +26,9 @@
 				<%= tr("Please tell us why we should endorse or oppose this priority by <a href='{new_point_url}'>adding a point</a>. You can even suggest a different priority instead.", "view/priorities/show_with_processes", :new_point_url => new_priority_point_path(@priority))%>
 			<% else %>
 					<div class="endorse-wrap">
-                            <div class="add-endorse"><%=link_to(tr("Add your point for endorse", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>true))%></div>
+                            <div class="header-add">
+                              <%= render partial: "points_header", locals: { priority: @priority, support: true } %>
+                            </div>
 							<div class="sub_header">
 								<%=tr("Best points for endorse", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
 							</div>
@@ -43,8 +45,9 @@
                             <% end %>
 		 	                </div>
 							<div class="oppose-wrap">
-							<div class="add-oppose">
- 						   <%=link_to(tr("Add your point for oppose", "view/priorities/_nav"), new_priority_point_path(@priority,:support=>false))%></div>
+							<div class="header-add">
+                                <%= render partial: "points_header", locals: { priority: @priority, support: false } %>
+                            </div>
 							<div class="sub_header">
 								<%=tr("Best points for oppose", "view/priorities/show_with_processes")%><span class="separator">|</span><%=link_to(tr("All best points", "view/priorities/show_with_processes"), top_points_priority_url(@priority))%>
 								
@@ -81,10 +84,6 @@
 
 			<% latest_discussions = @priority.activities.discussions.by_recently_updated.item_limit(1)%>
 
-			<% if logged_in? %>
-				<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
-			<% end %>
-						
 			<% if latest_discussions and not latest_discussions.empty? %>
 				<h5><%=tr('Latest discussion',"views/priorities/_show_with_processes")%>:</h5>
 				<% for activity in latest_discussions %>
@@ -95,7 +94,10 @@
 				</h5>
 			<% end %>
 
-			
+          <% if logged_in? %>
+                          <%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
+          <% end %>
+
 		<div id="althingi_video_discussions">
 			<% if @priority_process %>
 			  <%= render :partial => "process_speech_master_videos/latest_video_discussions_medium" %>

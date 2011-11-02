@@ -1,7 +1,11 @@
+<% if request.env['HTTP_USER_AGENT'] =~ /facebook|googlebot/i
+  Tr8n::Config.init('is', Tr8n::Config.current_user)
+end %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
-  <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><%= @page_title || tr(current_government.name,"Name from database") %></title>
+  <head itemscope itemtype="http://schema.org/WebPage" xmlns:og="http://ogp.me/ns#">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= @page_title ? "#{@page_title} - #{tr(current_government.name,"Name from database")}" : tr(current_government.name,"Name from database") %></title>
 		<!--[if IE]>
       <%= stylesheet_link_tag "/stylesheets/iehacks" %>
     <![endif]-->
@@ -9,7 +13,6 @@
       <%= stylesheet_link_tag "/stylesheets/ie7" %>
     <![endif]-->    
 		<%= javascript_include_tag :defaults %>
-    <%= render :partial => "shared/description" %>
     <%= render :partial => "shared/head" %>
     <%= render :partial => "shared/javascripts" %>
     <%= render :partial => "shared/css" %>
@@ -21,13 +24,12 @@
     <%= javascript_include_tag "check-browser", "skuggathing" unless controller_name=="priority_processes" %>
 
     <% if ["users","sessions"].include?(controller_name)  %>
-      <%= stylesheet_link_tag "/stylesheets/jquery.keypad" %>
+      <%= stylesheet_link_tag "/stylesheets/jquery.keypad.css" %>
       <%= javascript_include_tag "jquery.keypad.min", "check-browser" %>
     <% end %>
-    <% if controller_name == "priorities" and action_name == "show" %>
-      <%= render :partial=>"priorities/fb_og_tags" %>
-    <% end %>
     <%= tr8n_scripts_tag %>
+    <%= render :partial => "shared/description" %>
+    <%= render :partial=>"priorities/fb_og_tags" %>
   </head>
   <body class="C<%= h(controller.controller_name) %> <%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
     <%= csrf_meta_tag %>

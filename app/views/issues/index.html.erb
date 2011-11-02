@@ -1,12 +1,16 @@
+<% if Government.current.message_for_issues and Government.current.message_for_issues!="" -%>
+  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_issues.html_safe } %>
+<% end %>
+
 <div style="width:auto;">
 <ul>
 	<li class="list_left">
 		<div style="border-bottom:none;" id="hp_intro"><%= @page_title %></div>
 	</li>
 	<li class="list_right">
-		<%= image_tag("feed-icon-14x14.png", :alt => "rss-icon") %>	
+		<% image_tag("feed-icon-14x14.png", :alt => "rss-icon") %>
 	</li>
-<ul>
+</ul>
 </div>
 <div class="clear"></div>
 <div class="white_line"></div>
@@ -20,7 +24,7 @@
 	<% for issue in @issues %>
 		<div class="priority_listing">
 			<span class="priority_name">
-			<a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
+			<a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
 			</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
 			<div class="priority_action">
 				<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
@@ -41,28 +45,30 @@
 	<% end %>
 </td>
 <td>
-  <% Government.current.default_tags_checkbox.split(",").each do |special_tag| %>
-     <% issue = Tag.find_by_slug(special_tag.parameterize_full) %>
-		<div class="priority_listing">
-			<span class="priority_name">
-			<a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
-			</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
-			<div class="priority_action">
-				<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
-				<% if issue.points_count > 0 %>	
-				&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/issues/index", :count => issue.points_count) %></a>
-				<% end %>
-				<% if issue.documents_count > 0 %>
-				&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/issues/index", :count => issue.documents_count) %></a>
-				<% end %>
-				<% if issue.discussions_count > 0 %>
-				&middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/issues/index", :count => issue.discussions_count) %></a>
-				<% end %>
-				<% if logged_in? and current_user.is_admin? %>
-					&nbsp; <span class="tag_button"><%= link_to tr("Edit", "view/issues/index"), edit_tag_url(issue) %></span>
-				<% end %>
-			</div>
-		</div>
+  <% if Government.current.default_tags_checkbox %>
+      <% Government.current.default_tags_checkbox.split(",").each do |special_tag| %>
+         <% issue = Tag.find_by_slug(special_tag.parameterize_full) %>
+            <div class="priority_listing">
+                <span class="priority_name">
+                <a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
+                </span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
+                <div class="priority_action">
+                    <a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
+                    <% if issue.points_count > 0 %>
+                    &middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/issues/index", :count => issue.points_count) %></a>
+                    <% end %>
+                    <% if issue.documents_count > 0 %>
+                    &middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/issues/index", :count => issue.documents_count) %></a>
+                    <% end %>
+                    <% if issue.discussions_count > 0 %>
+                    &middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/issues/index", :count => issue.discussions_count) %></a>
+                    <% end %>
+                    <% if logged_in? and current_user.is_admin? %>
+                        &nbsp; <span class="tag_button"><%= link_to tr("Edit", "view/issues/index"), edit_tag_url(issue) %></span>
+                    <% end %>
+                </div>
+            </div>
+      <% end %>
   <% end %>
 </td>
 </tr>

@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
   end
   
   def to_url
-    "/issues/#{i18n_name.parameterize_full[0..60]}"
+    "/issues/#{self.name.parameterize_full[0..60]}"
   end
   
   def self.for_partner

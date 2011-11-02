@@ -3,24 +3,16 @@
 		<div class="position_nochange"><%= tr("delisted", "view/priorities/_rank_week_month") %></div>
 	</td>
 <% elsif priority.status == 'inactive' %>
-	<td valign="top" colspan="3" align="right">
+	<td valign="top" colspan="1" align="right" height="20" width="60">
 		<div class="priority_inactive">
 		<%= official_status(priority) %>
 		</div>
 	</td>		
 <% else %>
-	<td valign="top" align="left" width="30" class="priority_rank">
+	<td valign="top" align="left" width="10" class="priority_rank">
 		<% if priority.position != 0 %>
 		<div class="priority_position" title="<%= tr("This is the {position} highest ranked priority across all {government_name} members.", "view/priorities/_rank_week_month", :position => priority.position, :government_name => tr(current_government.name,"Name from database")) %>">
-		  <% if false and action_name=="top_24hr" %>
-            <%= priority.position_endorsed_24hr %>
-          <% elsif false and action_name=="top_7days" %>
-            <%= priority.position_endorsed_7days %>
-          <% elsif false and action_name=="top_30days" %>
-            <%= priority.position_endorsed_30days %>
-          <% else %>
-            <%= priority.position %>
-          <% end %>
+			<%= priority.position %>
 		</div>
 		<% end %>
 	</td>

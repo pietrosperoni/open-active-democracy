@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007141235) do
+ActiveRecord::Schema.define(:version => 20111017220256) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
     t.string   "icon_content_type", :limit => 30
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.text     "description"
   end
 
   create_table "changes", :force => true do |t|
@@ -151,20 +152,6 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
   add_index "changes", ["status"], :name => "changes_status_index"
   add_index "changes", ["type"], :name => "changes_type_index"
   add_index "changes", ["user_id"], :name => "changes_user_id_index"
-
-  create_table "ckeditor_assets", :force => true do |t|
-    t.string   "data_file_name",                  :null => false
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.integer  "assetable_id"
-    t.string   "assetable_type",    :limit => 30
-    t.string   "type",              :limit => 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "client_applications", :force => true do |t|
     t.string   "name"
@@ -473,6 +460,14 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
     t.boolean  "google_login_enabled",                          :default => false
     t.string   "default_tags_checkbox"
     t.text     "message_to_users"
+    t.text     "description"
+    t.text     "message_for_ads"
+    t.text     "message_for_issues"
+    t.text     "message_for_network"
+    t.text     "message_for_finished"
+    t.text     "message_for_points"
+    t.text     "message_for_new_priority"
+    t.text     "message_for_news"
   end
 
   add_index "governments", ["domain_name"], :name => "index_governments_on_domain_name"
@@ -580,6 +575,7 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
 
   create_table "partners", :force => true do |t|
     t.string   "name",                       :limit => 60
+    t.string   "name_variations_data",       :limit => 300
     t.string   "short_name",                 :limit => 20
     t.integer  "picture_id"
     t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
@@ -604,7 +600,6 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
     t.string   "custom_tag_checkbox"
     t.string   "custom_tag_dropdown_1"
     t.string   "custom_tag_dropdown_2"
-    t.string   "name_variations_data",       :limit => 350
     t.boolean  "geoblocking_enabled",                       :default => false
     t.string   "geoblocking_open_countries",                :default => ""
     t.string   "default_locale"
@@ -790,7 +785,6 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
     t.integer  "position_endorsed_7days"
     t.integer  "position_endorsed_30days"
     t.text     "finished_status_message"
-    t.integer  "external_session_id"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
@@ -838,6 +832,13 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
 
   add_index "priority_processes", ["process_type_id"], :name => "index_priority_processes_on_process_type_id"
 
+  create_table "priority_status_change_logs", :force => true do |t|
+    t.integer  "priority_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "content",     :null => false
+  end
+
   create_table "process_discussions", :force => true do |t|
     t.datetime "meeting_date"
     t.string   "external_id"
@@ -868,8 +869,8 @@ ActiveRecord::Schema.define(:version => 20111007141235) do
     t.integer  "sequence_number"
     t.integer  "process_document_id"
     t.integer  "parent_id"
-    t.text     "content"
-    t.text     "content_text_only"
+    t.binary   "content",             :limit => 2147483647
+    t.binary   "content_text_only",   :limit => 2147483647
     t.string   "content_number"
     t.datetime "created_at"
     t.datetime "updated_at"

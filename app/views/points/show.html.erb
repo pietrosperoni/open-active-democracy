@@ -1,4 +1,8 @@
-<%= render :partial => "points/header" %>
+<% quality = nil %>
+<% if logged_in? %>
+    <% quality = PointQuality.first(conditions: {user_id: current_user.id, point_id: @point.id}) %>
+<% end %>
+<%= render :partial => "points/header", locals: { quality: quality } %>
 <%= render :partial => "points/nav" %>
 
 <table border="0" cellspacing="0" cellpadding="0" width="100%">

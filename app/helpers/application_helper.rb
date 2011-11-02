@@ -17,6 +17,20 @@ module ApplicationHelper
   include Tr8n::BaseHelper
   include Wf::HelperMethods
 
+ def last_weekday_of_the_month_at_noon(now_date,original_now_date=nil)
+   original_now_date = now_date unless original_now_date
+   current_date = now_date.end_of_month
+   while [0,6].include?(current_date.wday)
+     current_date = current_date-1
+   end
+   current_date = current_date.midnight+12.hours
+   if current_date<=original_now_date
+     last_weekday_of_the_month_at_noon(now_date.next_month,original_now_date)
+   else
+     current_date
+   end
+ end
+
  def options_for_select_simple(options,selected=nil)
     out = ""
     options.each do |a,b|
@@ -158,7 +172,7 @@ module ApplicationHelper
     r = []
     for tag_name in list.split(', ')
       tag = current_tags.detect{|t| t.name.downcase == tag_name.downcase}
-			r << link_to(tr(tag.title,"tags"), tag.show_url) if tag
+			r << link_to(tr(tag.title,"model/category"), tag.show_url) if tag
 		end
 		r.to_sentence.html_safe
   end
@@ -170,7 +184,7 @@ module ApplicationHelper
   def rss_url(url)
     return "" unless url
     s = '<span class="rss_feed"><a href="' + url + '">'
-    s += image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0
+    s += image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0, :alt => 'rss-icon'
     s += '</a></span>'
     return s.html_safe
   end

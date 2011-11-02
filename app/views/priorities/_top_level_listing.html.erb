@@ -22,14 +22,43 @@
 											$('.border').css('border-bottom','none');
                   };
               });
+            jQuery("#plus_for_<%=priority.id%>").toggle(
+              function () {
+                jQuery("#plus_for_<%=priority.id%>").attr("src", "<%= image_path("new/minus.png") %>");
+              },
+              function () {
+                jQuery("#plus_for_<%=priority.id%>").attr("src", "<%= image_path("new/plus.png") %>");
+              }
+            );
           </script>
   			</td>
-  			<td class="category_icon">
-	            <% if priority.category and priority.category.icon -%>
-					<%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
-	            <% end %>
-  			</td>
-  			<td>
+            <% if defined? timeago %>
+            <td style="width:50px">
+                <table>
+                    <tr>
+  			            <td class="category_icon">
+	                        <% if priority.category and priority.category.icon -%>
+					            <%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+	                        <% end %>
+  			            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="priority_added">
+                                <%= time_ago(priority.created_at) %>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <% else %>
+              <td class="category_icon">
+                <% if priority.category and priority.category.icon -%>
+                  <%= image_tag priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+                <% end %>
+              </td>
+            <% end %>
+  			<td width="5">
         	<%= render :partial => "priorities/rank_week_month", :locals => {:priority => priority } %>
   			</td>      
   			<td valign="top" class="left_scale" colspan="3">
