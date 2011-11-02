@@ -108,7 +108,7 @@ set :domain, "br1"
 set :selected_branch, "shadow"
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
-set :deploy_to, "/home/robert/sites/#{application}/#{selected_branch}"
+set :deploy_to, "/home/betraisland/sites/#{application}/#{selected_branch}"
 set :branch, "#{selected_branch}"
 set :user, "betraisland"
 set :deploy_via, :remote_cache
