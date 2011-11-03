@@ -1,7 +1,7 @@
 rails_env: production
 video_server_id: 1
-max_load_average: 3.0
+max_load_average: 5.0
 load_factor: 1
-master_path: /home/robert/master
+master_path_for_filesystem_stats: /home
 only_get_masters: false
 skip_masters: false
