@@ -33,22 +33,27 @@ class ProcessParser
       process_document.sequence_number=@@process_document_sequence_number+=1
       process_document.priority_process_id = current_process.id
       process_document.stage_sequence_number = @@stage_sequence_number
-      puts process_document.external_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
+      process_document.external_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
+      puts "ProcessDocument date: #{process_document.external_date}"
       if next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")
-        puts process_document.external_id = next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]").text.strip
-        puts process_document.external_link = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")['href']
+        process_document.external_id = next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]").text.strip
+        puts "ProcessDocument external id: #{process_document.external_id}"
+        process_document.external_link = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")['href']
+        puts "ProcessDocument url: #{process_document.external_link}"
       end
       if next_sibling.at("tr[#{tr_count}]/td[3]").text
-        puts process_document.external_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+        process_document.external_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+        puts "ProcessDocument external type: #{process_document.external_type}"
       else
-        puts "ProcessDocument Type: unkown"
+        puts "ProcessDocument external type unkown"
       end
       if next_sibling.at("tr[#{tr_count}]/td[4]").text
-        puts process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
+        process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip.gsub(/\n+/, ' ')
+        puts "ProcessDocument author: #{process_document.external_author}"
       else
-        puts "ProcessDocument Author: unkown"
+        puts "ProcessDocument author unknown"
       end
-      
+
       if not ARGV.empty? and ARGV[0] == "force_refresh_on_document_parsing"
         oldpd = ProcessDocument.find_by_external_link(process_document.external_link)
         if oldpd
@@ -60,14 +65,13 @@ class ProcessParser
       end
 
       unless oldpd = ProcessDocument.find_by_external_link(process_document.external_link)
-        puts "EXTERNAL_TYPE: #{process_document.external_type} STAT3: #{process_document.external_type[0..3]}"
-        if process_document.external_type.index("frumvarp") or process_document.external_type.index("lög")
-          document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
-        elsif process_document.external_type.downcase.index("þingsályktun") or process_document.external_type.downcase.index("stjórnartillaga")
+        if process_document.external_type =~ /frumvarp/i or process_document.external_type =~ /lög/i
+            process_document.external_type =~ /þingsályktun/i or process_document.external_type =~ /stjórnartillaga/i
           document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
         else #TODO: Hack to get things saved
           document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
         end         
+
         if document
           unless old_process = PriorityProcess.find(:first, :conditions=>["priority_id = ? AND stage_sequence_number = ?",
                                                     current_process.priority_id, current_process.stage_sequence_number])
@@ -80,9 +84,8 @@ class ProcessParser
           process_document.process_document_type_id = process_document_type.id
           process_document.save
         end
-        puts process_document.inspect
       else
-        puts "Found old process document: " + oldpd.inspect
+        puts "Found old ProcessDocument"
       end
       tr_count+=1
       puts ""
@@ -97,27 +100,35 @@ class ProcessParser
       process_discussion.priority_process_id = current_process.id
       process_discussion.stage_sequence_number = @@stage_sequence_number
       if next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0]
-        puts "From time: "+date_from_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[0..4]
-        puts "To time: "+ date_to_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[6..10]
-        puts "SAME TIME" if date_from_time==date_to_time
+        date_from_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[0..4]
+        puts "ProcessDiscussion from time: "+date_from_time
+        date_to_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[6..10]
+        puts "ProcessDiscussion to time: "+date_to_time
+        puts "ProcessDiscussion SAME TIME" if date_from_time==date_to_time
         process_discussion.from_time = DateTime.strptime(date_from_time, "%d.%m.%Y %H:%M")
         process_discussion.to_time = DateTime.strptime(date_to_time, "%d.%m.%Y %H:%M")
-        puts process_discussion.transcript_url="http://www.althingi.is"+next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0]['href']
+        process_discussion.transcript_url="http://www.althingi.is"+next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0]['href']
+        puts "ProcessDiscussion url: "+process_discussion.transcript_url
       end
       if next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[1]
-        puts process_discussion.listen_url=next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[1]['href']
+        process_discussion.listen_url=next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[1]['href']
+        puts "ProcessDiscussion listen url: "+process_discussion.listen_url
       end
-      puts process_discussion.meeting_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
+      process_discussion.meeting_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
+      puts "ProcessDiscussion meeting date: #{process_discussion.meeting_date}"
       if next_sibling.at("tr[#{tr_count}]/td[3]").text
-        puts process_discussion.meeting_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+        process_discussion.meeting_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+        puts "ProcessDiscussion meeting type: "+process_discussion.meeting_type
       else
-        puts "Meeting Type: unkown"
+        puts "ProcessDiscussion meeting type unknown"
       end
       if next_sibling.at("tr[#{tr_count}]/td[4]").text
-        puts process_discussion.meeting_info = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip        
-        puts process_discussion.meeting_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")['href'] if next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")
+        process_discussion.meeting_info = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
+        puts "ProcessDiscussion meeting info: "+process_discussion.meeting_info
+        process_discussion.meeting_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")['href'] if next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")
+        puts "ProcessDiscussion meeting url: "+process_discussion.meeting_url
       else
-        puts "Meeting Number: unkown"
+        puts "ProcessDiscussion meeting number: unknown"
       end
       unless date_from_time==date_to_time
         unless oldpd = ProcessDiscussion.find(:first, :conditions => ["transcript_url = ?", process_discussion.transcript_url])
@@ -129,9 +140,8 @@ class ProcessParser
           end
           process_discussion.priority_process_id = current_process.id
           process_discussion.save
-          puts process_discussion.inspect
         else
-          puts "Found old process discussion: " + oldpd.inspect
+          puts "Found old ProcessDiscussion"
         end
       end
       tr_count+=1
@@ -141,31 +151,37 @@ class ProcessParser
   def self.get_process(url, presenter, external_id, external_name, process_type)
     html_doc = nil
     retries = 10
+    puts "Downloading process #{external_id}"
     begin
       Timeout::timeout(120){
-        html_doc = Nokogiri::HTML(open(url))
+        html_doc = open(url).read
       }
     rescue
       retries -= 1
       if retries > 0
         sleep 0.42 and retry
-        puts "retry"
+        puts "Retrying downoad of process #{external_id}"
       else
         raise
       end
     end
 
+    Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+      html_doc = tidy.clean(html_doc)
+    end
+    html_doc = Nokogiri::HTML(html_doc)
+
     ur_params = CGI.parse(URI.parse(url).query)
     ltg = ur_params["ltg"].first
     mnr = ur_params["mnr"].first
-    
+
     if process_type == PROCESS_TYPE_LOG
       info_2 = "#{mnr}. mál lagafrumvarp"
     elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
       info_2 = "#{mnr}. mál þingsályktunartillaga" 
     end
-    info_3 = "#{ltg}. löggjafarþingi." 
-    
+    info_3 = "#{ltg}. löggjafarþingi."
+
     tags_to_collect = []
     
     if process_type == PROCESS_TYPE_LOG
@@ -199,15 +215,12 @@ class ProcessParser
     current_priority.user = current_user
     current_priority.ip_address = "127.0.0.1"
     current_priority.issue_list = TagsParser.get_tags(html_doc,tags_to_collect)
-    
-    puts "***************************************** New Process *****************************************"
-    puts "Process info 1: #{current_priority.external_info_1} 2: #{info_2} 3: #{info_3}"
+    puts "Process tags: #{current_priority.issue_list}"
+
     old_priority = Priority.find_by_external_id_and_external_session_id(mnr, ltg)
     if old_priority
-      puts "OLD PRIORITY "+old_priority.inspect
-
       if old_priority.external_link != current_priority.external_link
-        puts "UPDATING EXTERNAL LINK: #{old_priority.external_link}"
+        puts "UPDATING EXTERNAL LINK FOR OLD PRIORITY: #{old_priority.external_link}"
         old_priority.external_link = current_priority.external_link
       end
 
@@ -216,7 +229,7 @@ class ProcessParser
       new_tags     = current_tags - old_tags
 
       unless new_tags.empty?
-        puts "ADDING NEW TAGS: #{new_tags}"
+        puts "ADDING NEW TAGS TO OLD PRIORITY: #{new_tags}"
         combined_tags = old_tags | new_tags
         old_priority.issue_list = combined_tags.join(", ")
         old_priority.save(false)
@@ -225,9 +238,8 @@ class ProcessParser
       current_priority = old_priority
     else
       current_priority.save(false)
-      puts current_priority.inspect
     end
-       
+
     unless process_type_record = ProcessType.find_by_process_type("Althingi Process")
       process_type_record = ProcessType.new
       process_type_record.process_type = "Althingi Process"
@@ -265,10 +277,8 @@ class ProcessParser
     else
      (html_doc/"h2.FyrirsognMidSv").each do |row|
         # Process stage_sequence
-        puts row.text.strip
         #@@stage_sequence_number = get_stage_sequence_number(row.text.strip, process_type).to_i
-        puts "Stage sequence number: #{@@stage_sequence_number}"
-        puts "---------------------"      
+        puts "Stage sequence number: #{@@stage_sequence_number} (#{row.text.strip})"
         next_sibling = row.next_sibling
         @@process_document_sequence_number = @@discussion_sequence_number = 0
         while next_sibling and next_sibling.to_s[0..3]!="<div" and not next_sibling.to_s.include?("FyrirsognMidSv")
@@ -281,7 +291,6 @@ class ProcessParser
             elsif (next_sibling.at("tr[1]/td[1]").text)=="Umræða"
               process_discussion(next_sibling,current_process)
             end
-            puts "++++++++++++"
           end
           next_sibling = next_sibling.next_sibling
         end
