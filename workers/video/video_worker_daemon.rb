@@ -31,7 +31,7 @@ require File.dirname(__FILE__) + "/../../config/environment"
 include Sys
 
 MASTER_TEST_MAX_COUNTER = 500000
-MIN_FREE_SPACE_GB = 10
+MIN_FREE_SPACE_GB = 30
 SLEEP_WAITING_FOR_FREE_SPACE_TIME = 120
 SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN = 120
 SLEEP_WAITING_BETWEEN_RUNS = 5
@@ -99,7 +99,7 @@ class VideoWorker
   def run
     info("Starting loop")
     loop do
-      stat = Filesystem.stat(@worker_config["master_path"]+"/")
+      stat = Filesystem.stat(@worker_config["master_path_for_filesystem_stats"]+"/")
       freeGB = (stat.block_size * stat.blocks_available) /1024 / 1024 / 1024
       if @last_report_time+EMAIL_REPORTING_INTERVALS<Time.now.to_i
         #email_progress_report(freeGB) unless Rails.env=="development"

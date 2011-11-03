@@ -143,9 +143,11 @@ task :after_update_code do
   run "ln -s   #{deploy_to}/#{shared_dir}/config/facebooker.yml #{current_release}/config/facebooker.yml"
   run "ln -s   #{deploy_to}/#{shared_dir}/config/newrelic.yml #{current_release}/config/newrelic.yml"
   run "ln -nfs #{deploy_to}/#{shared_dir}/config/twitter_auth.yml #{current_release}/config/twitter_auth.yml"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/pids #{current_release}/pids"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/video_temp #{current_release}/video_temp"
 
   run "ln -nfs /mnt/shared/system_bi #{current_release}/public/system"
-  run "ln -nfs /mnt/shared/private_bi #{current_release}/public/private"
+  run "ln -nfs /mnt/shared/private_bi #{current_release}/private"
   run "ln -nfs /mnt/shared/production_bi #{current_release}/public/production"
 
 #  run "ln -nfs /mnt/shared/system #{current_release}/public/system"

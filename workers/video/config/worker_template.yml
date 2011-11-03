@@ -1,4 +1,4 @@
-rails_env: development
+rails_env: production
 video_server_id: 1
 max_load_average: 3.0
 load_factor: 1
