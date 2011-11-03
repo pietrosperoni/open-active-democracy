@@ -14,7 +14,7 @@ options = {
     :monitor    => true,
     :log_output => true,
     :multiple => true,
-    :dir => Rails.root.join("pids"),
+    :dir =>File.open( File.dirname(__FILE__) + "../../pids"),
     :script     => "video_worker_daemon.rb" 
   }
 
