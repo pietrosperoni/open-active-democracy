@@ -99,7 +99,7 @@ class SpeechVideoProcessing < VideoProcessing
         @@logger.info("Timepoints: #{timepoints.inspect} video duration: #{video.duration_s}")
         timepoints.sort.each do |time|
           filename = "thumb_#{pngid+=1}.png"
-          if video.title.downcase.index("forseti")
+          if video.title =~ /forseti/i
             pos_x = 190
             pos_y = 45
           else

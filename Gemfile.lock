@@ -17,6 +17,16 @@ GIT
       riddle (>= 1.3.3)
 
 GIT
+  remote: git://github.com/hinrik/auto_html.git
+  revision: d6617706f746df09ff7d4dba34cfebdf5f86e746
+  specs:
+    auto_html (1.4.2)
+      RedCloth
+      redcarpet
+      rinku
+      tag_helper
+
+GIT
   remote: git://github.com/jaikoo/twitter-auth.git
   revision: 1b3f4e753cb7c694f2042f4b2f6547d66fe460c9
   branch: rails_3
@@ -63,11 +73,6 @@ GEM
       activesupport (= 3.0.10)
     activesupport (3.0.10)
     arel (2.0.10)
-    auto_html (1.4.2)
-      RedCloth
-      redcarpet
-      rinku
-      tag_helper
     builder (2.1.2)
     capistrano (2.9.0)
       highline
@@ -183,6 +188,7 @@ GEM
     sys-filesystem (0.3.4)
     tag_helper (0.0.3)
     thor (0.14.6)
+    tidy-ext (0.1.11)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
@@ -198,7 +204,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake!
-  auto_html
+  auto_html!
   capistrano
   ckeditor
   dalli
@@ -226,6 +232,7 @@ DEPENDENCIES
   sunlight (>= 0.9)
   sys-filesystem
   thinking-sphinx!
+  tidy-ext
   twitter-auth!
   whenever
   will_paginate (~> 3.0)

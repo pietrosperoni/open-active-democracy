@@ -22,6 +22,7 @@ gem 'capistrano'
 # Bundle the extra gems:
 # gem 'bj'
 gem 'nokogiri'
+gem 'tidy-ext'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
@@ -39,7 +40,7 @@ gem 'kgio'
 gem 'whenever', :require => false
 gem 'geoip'
 gem 'htmlentities'
-gem 'auto_html'
+gem 'auto_html', :git => "git://github.com/hinrik/auto_html.git"
 gem 'delayed_job'
 gem 'rmagick','2.12.2'
 #gem 'mongrel', '>= 1.2.0.pre2'

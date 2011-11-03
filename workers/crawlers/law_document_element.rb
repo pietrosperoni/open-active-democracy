@@ -48,19 +48,25 @@ class LawDocumentElement < ProcessDocumentElement
     html_source_doc = nil
     retries = 10
 
+    puts "Downloading law document"
     begin
       Timeout::timeout(120){
-        html_source_doc = Nokogiri::HTML(open(url))
+        html_source_doc = open(url).read
       }
     rescue
       retries -= 1
       if retries > 0
         sleep 0.42 and retry
-        puts "retry"
+        puts "Retrying downloading for law document"
       else
         raise
       end
     end
+
+    Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+      html_source_doc = tidy.clean(html_source_doc)
+    end
+    html_source_doc = Nokogiri::HTML(html_source_doc)
 
     if html_source_doc.text.index("Vefskjalið er ekki tilbúið")
       puts "ProcessDocument not yet ready"

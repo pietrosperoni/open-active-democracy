@@ -23,6 +23,7 @@
 
 require 'rubygems'
 require 'nokogiri'
+require 'tidy'
 require 'open-uri'
 require 'timeout'
 
@@ -45,23 +46,27 @@ class AlthingiCrawler < ProcessCrawler
  def update_all_processes(process_type, session=nil)
    session_tag = session ? "&validthing=#{session}" : ""
    if process_type == PROCESS_TYPE_LOG
-     html_doc = Nokogiri::HTML(open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=l#{session_tag}"))
+     buffer = open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=l#{session_tag}").read
    elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-     html_doc = Nokogiri::HTML(open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv#{session_tag}"))
+     buffer = open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv#{session_tag}").read
    end
 
+   Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+     buffer = tidy.clean(buffer)
+   end
+   html_doc = Nokogiri::HTML(buffer)
+
    next_sibling = html_doc.xpath('/html/body/table/tr[2]/td/table/tr/td/table[2]/tr/td[2]/div/table')
-   puts "============"      
-   
+   puts "============"
+
    tr_count = 2
    while next_sibling.at("tr[#{tr_count}]/td[1]")
      external_process_id = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip
-     puts "External Process Id:"+external_process_id
+     puts "Found process with external id "+external_process_id
      process_name = ""
      process_name+=next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
-     puts process_name
      process_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[3]/a[@href]")['href']
-     puts "Process URL: "+process_url
+     puts "Process url: "+process_url
      if next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]") and
         next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]")['title']!=""
        process_name+=" ("+next_sibling.at("tr[#{tr_count}]/td[3]/a[@title]")['title'].strip+")"
@@ -75,6 +80,7 @@ class AlthingiCrawler < ProcessCrawler
      end
      puts "Process author: "+process_author
      tr_count+=1
+
      ProcessParser.get_process(process_url, process_author, external_process_id, process_name, process_type)
      sleep 1
      puts ""
