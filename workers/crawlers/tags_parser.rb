@@ -4,7 +4,7 @@ class TagsParser
   def self.get_tags(html_doc,tags_to_collect)
     millivis_addr = html_doc.xpath("/html/body/table/tr[2]/td/table/tr/td[2]/div/p/a[1]")[0]['href']
     html_doc = open(URI.encode("http://www.althingi.is#{millivis_addr}")).read
-    Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+    Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
       html_doc = tidy.clean(html_doc)
     end
     html_doc = Nokogiri::HTML(html_doc)
