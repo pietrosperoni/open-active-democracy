@@ -48,7 +48,7 @@ class ProcessParser
         puts "ProcessDocument external type unkown"
       end
       if next_sibling.at("tr[#{tr_count}]/td[4]").text
-        process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip.gsub(/\n+/, ' ')
+        process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
         puts "ProcessDocument author: #{process_document.external_author}"
       else
         puts "ProcessDocument author unknown"
@@ -166,7 +166,7 @@ class ProcessParser
       end
     end
 
-    Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+    Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
       html_doc = tidy.clean(html_doc)
     end
     html_doc = Nokogiri::HTML(html_doc)

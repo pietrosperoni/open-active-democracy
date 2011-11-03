@@ -51,7 +51,7 @@ class AlthingiCrawler < ProcessCrawler
      buffer = open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv#{session_tag}").read
    end
 
-   Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+   Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
      buffer = tidy.clean(buffer)
    end
    html_doc = Nokogiri::HTML(buffer)

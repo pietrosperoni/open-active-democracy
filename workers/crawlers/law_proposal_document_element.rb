@@ -289,7 +289,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
       end
     end
 
-    Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+    Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
       html_source_doc = tidy.clean(html_source_doc)
     end
     html_source_doc = Nokogiri::HTML(html_source_doc)
