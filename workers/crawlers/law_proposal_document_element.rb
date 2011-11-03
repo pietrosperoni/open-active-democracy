@@ -116,7 +116,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
     elsif is_report_about_law_header?
       self.content_type = TYPE_HEADER_REPORT_ABOUT_LAW
     else
-      puts "Error: Could not find header type for #{self.content}"
+      #puts "Error: Could not find header type for:\n<<<<<\n#{self.content.to_s}\n>>>>>\n"
     end
   end
       
@@ -140,7 +140,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
     elsif parent.content_type == TYPE_HEADER_REPORT_ABOUT_LAW
       self.content_type = TYPE_REPORT_ABOUT_LAW
     else
-      puts "Error: Could not find content type for #{self.content} parent: #{parent.inspect}"
+      #puts "Error: Could not find content type for \n<<<<<\n#{self.content.to_s}\n>>>>>\n"
     end
   end
 
@@ -149,11 +149,11 @@ class LawProposalDocumentElement < ProcessDocumentElement
   end
 
   def is_chapter_header?
-    content.downcase =~ /kafli/
+    content_text_only =~ /kafli/
   end
   
   def is_thingsalyktinuar_tillaga?
-    content.index("Þingsályktun") or content.index("Tillaga til þingsályktunar")
+    content_text_only =~ /þingsályktun/i or content_text_only =~ /Tillaga til þingsályktunar/i
   end
 
   def is_main_article_header?
@@ -165,7 +165,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
       
       re=(re1+re2+re3+re4)
       m=Regexp.new(re,Regexp::IGNORECASE);
-      if m.match(self.content.gsub(/<!-- Tab -->/," ").gsub(/&nbsp;/," "))
+      if m.match(self.content_text_only)
         matched_text_only = m.match(self.content_text_only)
         if matched_text_only and matched_text_only.length>1
           self.content_number=matched_text_only[1];
@@ -209,8 +209,8 @@ class LawProposalDocumentElement < ProcessDocumentElement
     
     re=(re1+re2+re3+re4+re5+re6)
     m=Regexp.new(re,Regexp::IGNORECASE);
-    if m.match(self.content)
-        self.content_number=m.match(self.content)[3];  # Store the chapter number
+    if m.match(self.content_text_only)
+        self.content_number=m.match(self.content_text_only)[3];  # Store the chapter number
         return true
     end
   end
@@ -227,8 +227,8 @@ class LawProposalDocumentElement < ProcessDocumentElement
     
     re=(re1+re2+re3+re4+re5+re6)
     m=Regexp.new(re,Regexp::IGNORECASE);
-    if m.match(self.content.downcase.gsub(/&nbsp;/,""))
-        self.content_number=m.match(self.content)[3]; # Store the article number
+    if m.match(self.content_text_only)
+        self.content_number=m.match(self.content_text_only)[3]; # Store the article number
         return true
     else
       return false
@@ -248,46 +248,51 @@ class LawProposalDocumentElement < ProcessDocumentElement
   end
     
   def compare_to_content_euc(string, debug=false)
-    input1=string.downcase
+    input1=string
     puts "INPUT1: #{input1}" if debug
-    input2=self.content.downcase
+    input2=self.content_text_only
     puts "INPUT2: #{input2}" if debug
-    m=Regexp.new(input1)
+    m=Regexp.new(input1, Regexp::IGNORECASE)
     m.match(input2)
   end
 
   def self.skip_tokens(next_sibling)
-    next_sibling.inspect[0..3]==" Tab" or
-    next_sibling.inspect[0..8]==" WP Style" or 
-    next_sibling.inspect[0..7]==" WP Pair" or 
-    next_sibling.inspect[0..6]==" Para N" or
-    next_sibling.inspect[0..6]=="<script" or
-    next_sibling.inspect[0..6]=="<noscri" or
-    next_sibling.inspect[0..3]=="<!--"
+    next_sibling.to_s[0..3]==" Tab" or
+    next_sibling.to_s[0..8]==" WP Style" or
+    next_sibling.to_s[0..7]==" WP Pair" or
+    next_sibling.to_s[0..6]==" Para N" or
+    next_sibling.to_s[0..6]=="<script" or
+    next_sibling.to_s[0..6]=="<noscri" or
+    next_sibling.to_s[0..3]=="<!--"
   end
 
   def self.create_elements(doc, process_id, process_document_id, url, process_type)
-    puts "GET DOCUMENT HTML FOR: #{url} process_document: #{process_document_id} process_type: #{process_type}"
     html_source_doc = nil
     retries = 10
 
     begin
+      puts "Downloading ProcessDocument"
       Timeout::timeout(120){
         if process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-          html_source_doc = Nokogiri::HTML(open(url))
+          html_source_doc = open(url).read
         else
-          html_source_doc = Nokogiri::HTML(remove_not_needed_divs(open(url).read))
+          html_source_doc = remove_not_needed_divs(open(url).read)
         end
       }
     rescue
       retries -= 1
       if retries > 0
         sleep 0.42 and retry
-        puts "retry"
+        puts "Retrying download of ProcessDocument"
       else
         raise
       end
     end
+
+    Tidy.open({ "char-encoding" => "utf8" }) do |tidy|
+      html_source_doc = tidy.clean(html_source_doc)
+    end
+    html_source_doc = Nokogiri::HTML(html_source_doc)
 
     if html_source_doc.text.index("Vefskjalið er ekki tilbúið")
       puts "ProcessDocument not yet ready"
@@ -295,10 +300,10 @@ class LawProposalDocumentElement < ProcessDocumentElement
     end
 
     if ProcessDocument.find_by_external_link(url)
-      puts "Found document at: #{url}"
+      puts "Found ProcessDocument at: #{url}"
       return nil
     end
-    
+
     doc.priority_process_id = process_id
     doc.process_document_id = process_document_id
     #doc.category_id = 1
@@ -313,17 +318,16 @@ class LawProposalDocumentElement < ProcessDocumentElement
     sequence_number = process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA ? 1 : 0
 
     process_document_id = doc.id
-    
     div_skip_count = 0
-    
+
     html_source_doc.xpath('//div').each do |paragraph|
       if div_skip_count != 0 # and process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
         div_skip_count-=1
-        puts "DIV SKIP"
         next
       end
+
       new_parent_header_element = LawProposalDocumentElement.new
-      new_parent_header_element.content = paragraph.to_s.encode('UTF-8')
+      new_parent_header_element.content = paragraph.to_s.encoding.name == 'UTF-8' ? paragraph.to_s : paragraph.to_s.encode('UTF-8')
       new_parent_header_element.content_text_only = paragraph.text
       new_parent_header_element.sequence_number = sequence_number+=1
       new_parent_header_element.process_document_id = process_document_id
@@ -335,44 +339,41 @@ class LawProposalDocumentElement < ProcessDocumentElement
       next_sibling = paragraph.next_sibling
       all_content_until_next_header = ""
       all_content_until_next_header_text_only = ""
-      puts "PROCESSING HEADER TYPE: "+new_parent_header_element.content_type_s
+
       if new_parent_header_element.content_type == TYPE_HEADER_MAIN_ARTICLE and process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
         puts "Thingsaliktunartillaga main content"
         while next_sibling and not next_sibling.text.index("Greinargerð") and not next_sibling.text.index("Samþykkt á Alþingi") and not
                next_sibling.text.index("Athugasemdir við þingsályktunartillögu þessa.")
-          puts "SIBLING " + next_sibling.inspect
-          if next_sibling.inspect.index("<div ")
-            div_skip_count += (next_sibling.inspect.split("<div ").count)-1
-            puts "ADDIN DIV SKIP #{div_skip_count}"
+          if next_sibling.to_s.index("<div ")
+            div_skip_count += (next_sibling.to_s.split("<div ").count)-1
           end
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.to_s.encode('UTF-8')
+            all_content_until_next_header+= next_sibling.to_s
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling
         end
-      else # not process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
+      else
         while true
-          puts "NEXT SIBLING " + next_sibling.inspect
-          puts "NEXT NEXT SIBLING " + next_sibling.next_sibling.inspect if next_sibling and next_sibling.next_sibling
-          if next_sibling.inspect.index("<div") and next_sibling.inspect.index("center") and next_sibling.inspect.index("<i>")
+          if next_sibling and next_sibling.text =~ /^\s*[0-9]+\.\s*gr\.\s*$/
+            break
+          elsif next_sibling and next_sibling.to_s.index("<div") and next_sibling.to_s.index("center") and next_sibling.to_s.index("<i>")
             div_skip_count += 1
-            puts "ADDING TO DIV COUNT"
-          elsif next_sibling and (next_sibling.inspect[0..3]=="<div" or next_sibling.inspect[0..7]=="<b> <div")
+          elsif next_sibling and (next_sibling.to_s[0..3]=="<div" or next_sibling.to_s[0..7]=="<b> <div")
             break
           elsif not next_sibling
             break
           end
           first = false
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.to_s.encode('UTF-8')
+            all_content_until_next_header+= next_sibling.to_s
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling
         end
       end
       new_main_element = LawProposalDocumentElement.new
-      new_main_element.content = all_content_until_next_header
+      new_main_element.content = all_content_until_next_header.encoding.name == 'UTF-8' ? all_content_until_next_header : all_content_until_next_header.encode('UTF-8')
       new_main_element.content_text_only = all_content_until_next_header_text_only
       new_main_element.sequence_number = sequence_number+=1
       new_main_element.parent_id = new_parent_header_element.id
@@ -387,15 +388,18 @@ class LawProposalDocumentElement < ProcessDocumentElement
       puts "Element sequence number: #{element.sequence_number}"
       puts "Element content type: #{element.content_type_s} - #{element.content_type}"
       puts "Element content number: #{element.content_number}"
-      puts "#{element.content_text_only}"
-      puts "---------------------------------------------------------------------------------"
+      #if !element.content_number
+      #  puts "fail element: #{element.content_text_only}"
+      #end
+      #puts "#{element.content_text_only}"
+      #puts "---------------------------------------------------------------------------------"
     end
-    
-    puts "HTML"
-    
-    for element in elements
-      puts "#{element.content}"
-    end
+
+    #puts "HTML"
+    #
+    #for element in elements
+    #  puts "#{element.content}"
+    #end
     return doc
   end  
 end

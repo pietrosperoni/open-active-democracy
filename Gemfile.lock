@@ -188,6 +188,7 @@ GEM
     sys-filesystem (0.3.4)
     tag_helper (0.0.3)
     thor (0.14.6)
+    tidy-ext (0.1.11)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
@@ -231,6 +232,7 @@ DEPENDENCIES
   sunlight (>= 0.9)
   sys-filesystem
   thinking-sphinx!
+  tidy-ext
   twitter-auth!
   whenever
   will_paginate (~> 3.0)
