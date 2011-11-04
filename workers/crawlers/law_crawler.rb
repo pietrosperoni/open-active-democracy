@@ -21,18 +21,13 @@
 # Implement law_document_element.rb for parsing actual passed laws, currently law_proposal_document_element.rb only covers law proposals not the final 
 # version of the document that is in a completly different html format.
 
-require 'rubygems'
-require 'nokogiri'
-require 'tidy'
-require 'open-uri'
-require 'timeout'
-
 require '../../config/boot'
 require "../../config/environment"
 
 require './law_proposal_document_element'
 require './process_parser'
 require './tags_parser'
+require './crawler_utils'
 
 PROCESS_TYPE_LOG = 1
 PROCESS_TYPE_THINGSALYKTUNARTILLAGA = 2
@@ -45,21 +40,14 @@ class AlthingiCrawler < ProcessCrawler
 
  def update_all_processes(process_type, session=nil)
    session_tag = session ? "&validthing=#{session}" : ""
+
    if process_type == PROCESS_TYPE_LOG
-     buffer = open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=l#{session_tag}").read
+     url = "http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=l#{session_tag}"
    elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-     buffer = open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv#{session_tag}").read
+     url = "http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv#{session_tag}"
    end
 
-   # The HTML is encoded in the document's source encoding. Tidy's 'raw'
-   # mode sucks, and there seems to be no way for Tidy to detect the
-   # encoding, so we ensure that Tidy always gets UTF-8 data
-   buffer.encode!('UTF-8')
-   Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
-     buffer = tidy.clean(buffer)
-   end
-   html_doc = Nokogiri::HTML(buffer)
-
+   html_doc = CrawlerUtils.fetch_html(url)
    next_sibling = html_doc.xpath('/html/body/table/tr[2]/td/table/tr/td/table[2]/tr/td[2]/div/table')
    puts "============"
 
@@ -109,6 +97,7 @@ end
 
 acrawler = AlthingiCrawler.new
 #acrawler.update_icesave
+CrawlerUtils.update_categories
 
 if PARLIAMENTARY_SESSIONS.empty?
   puts "PROCESSING LATEST PARLIAMENTARY SESSION ONLY"

@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+require './crawler_utils'
+
 LAW_TYPE_HEADER_MAIN = 1
 LAW_TYPE_HEADER_CHAPTER= 2
 LAW_TYPE_HEADER_MAIN_ARTICLE = 3
@@ -45,33 +47,7 @@ class LawDocumentElement < ProcessDocumentElement
 
   def self.create_elements(doc, process_id, process_document_id, url, process_type)
     puts "GET LAW DOCUMENT HTML FOR: #{url} process_document: #{process_document_id} process_type: #{process_type}"
-    html_source_doc = nil
-    retries = 10
-
-    puts "Downloading law document"
-    begin
-      Timeout::timeout(120){
-        html_source_doc = open(url).read
-      }
-    rescue
-      retries -= 1
-      if retries > 0
-        sleep 0.42 and retry
-        puts "Retrying downloading for law document"
-      else
-        raise
-      end
-    end
-
-    # The HTML is encoded in the document's source encoding. Tidy's 'raw'
-    # mode sucks, and there seems to be no way for Tidy to detect the
-    # encoding, so we ensure that Tidy always gets UTF-8 data
-    html_source_doc.encode!('UTF-8')
-    Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
-      html_source_doc = tidy.clean(html_source_doc)
-    end
-    html_source_doc = Nokogiri::HTML(html_source_doc)
-
+    html_source_doc = CrawlerUtils.fetch_html(url)
     if html_source_doc.text.index("Vefskjalið er ekki tilbúið")
       puts "ProcessDocument not yet ready"
       return nil

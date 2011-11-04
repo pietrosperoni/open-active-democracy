@@ -1,4 +1,7 @@
 # coding: utf-8
+
+require './crawler_utils'
+
 class ProcessParser
 
   @@stage_sequence_number = @@discussion_sequence_number = @@process_document_sequence_number = 0
@@ -149,32 +152,7 @@ class ProcessParser
   end
   
   def self.get_process(url, presenter, external_id, external_name, process_type)
-    html_doc = nil
-    retries = 10
-    puts "Downloading process #{external_id}"
-    begin
-      Timeout::timeout(120){
-        html_doc = open(url).read
-      }
-    rescue
-      retries -= 1
-      if retries > 0
-        sleep 0.42 and retry
-        puts "Retrying downoad of process #{external_id}"
-      else
-        raise
-      end
-    end
-
-    # The HTML is encoded in the document's source encoding. Tidy's 'raw'
-    # mode sucks, and there seems to be no way for Tidy to detect the
-    # encoding, so we ensure that Tidy always gets UTF-8 data
-    html_doc.encode!('UTF-8')
-    Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
-      html_doc = tidy.clean(html_doc)
-    end
-    html_doc = Nokogiri::HTML(html_doc)
-
+    html_doc = CrawlerUtils.fetch_html(url)
     ur_params = CGI.parse(URI.parse(url).query)
     ltg = ur_params["ltg"].first
     mnr = ur_params["mnr"].first
@@ -186,27 +164,26 @@ class ProcessParser
     end
     info_3 = "#{ltg}. löggjafarþingi."
 
-    tags_to_collect = []
-    
     if process_type == PROCESS_TYPE_LOG
-      tags_to_collect << "lagafrumvörp"
-      unless current_user = User.find_by_email("lagafrumvorp@skuggathing.is")
+      proposal_tag = "Law proposal"
+      unless current_user = User.find_by_email("lagafrumvorp@ibuar.is")
         current_user=User.new
-        current_user.email = "lagafrumvorp@skuggathing.is"
+        current_user.email = "lagafrumvorp@ibuar.is"
         current_user.login = "Lagafrumvörp frá Alþingi"
         current_user.save(:validate => false)
       end
     elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-      tags_to_collect << "þingsályktunartillögur"
-      unless current_user = User.find_by_email("thingsalyktunartillaga@skuggathing.is")
+      proposal_tag = "Parliamentary resolution proposal"
+      unless current_user = User.find_by_email("thingsalyktunartillaga@ibuar.is")
         current_user=User.new
-        current_user.email = "thingsalyktunartillaga@skuggathing.is"
+        current_user.email = "thingsalyktunartillaga@ibuar.is"
         current_user.login = "Þingsályktunartillögur frá Alþingi"
         current_user.save(:validate => false)
       end
     end
     
     current_priority = Priority.new
+
     current_priority.external_info_1 = (html_doc/"h1.FyrirsognStorSv").text.strip
     current_priority.external_info_2 = info_2
     current_priority.external_info_3 = info_3
@@ -218,7 +195,21 @@ class ProcessParser
     current_priority.name = (html_doc/"h1.FyrirsognStorSv").text.strip
     current_priority.user = current_user
     current_priority.ip_address = "127.0.0.1"
-    current_priority.issue_list = TagsParser.get_tags(html_doc,tags_to_collect)
+    current_priority.category_id =
+
+    placeholder_tag = nil
+    if category_id = CrawlerUtils.get_process_category_id(mnr)
+      current_priority.category_id = category_id
+      puts "Process category_id: #{current_priority.category_id}"
+    else
+      current_priority.category_id = Category.find_or_create_by_name('Miscellaneous').id
+      puts "Process category id unknown"
+      placeholder_tag = Tag.find_or_create_by_name('Uncategorized proposals').name
+    end
+
+    primary_issues = [proposal_tag]
+    primary_issues << placeholder_tag if placeholder_tag
+    current_priority.issue_list = [[primary_issues] | CrawlerUtils.get_process_tag_names(mnr) | TagsParser.get_tags(html_doc)].join(', ')
     puts "Process tags: #{current_priority.issue_list}"
 
     old_priority = Priority.find_by_external_id_and_external_session_id(mnr, ltg)
