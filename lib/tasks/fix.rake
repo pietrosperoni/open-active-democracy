@@ -1,4 +1,11 @@
 namespace :fix do
+  desc "reset process documents"
+  task :reset_process_documents => :environment do
+    connection = ActiveRecord::Base.connection();
+    connection.execute("DELETE FROM process_documents;")
+    connection.execute("DELETE FROM process_document_elements;")
+  end
+
   desc "reset database"
   task :reset_database_YES => :environment do
     puts "1"
