@@ -89,8 +89,8 @@
             </div>
           <% elsif result.class == ProcessDocumentElement %>
             <div>
-              <h4 style="color: #777; border-bottom: none;"><%= tr("Law Article","search")%> - <%= time_ago(result.excerpts.process_document.external_date) %></h4>
-              <span style="color: #3B5998; border-bottom: none; font-size:1.083em; font-weight:bold;"><%= link_to result.excerpts.priority.name.force_encoding("UTF-8").html_safe, :controller=>"process_documents", :action=>"show", :anchor =>"gr_#{result.excerpts.id}", :id=>result.priority.id %></span></br>
+              <h4 style="color: #777; border-bottom: none;"><%= tr("Law Article","search")%> - <%= time_ago(result.process_document.external_date) %></h4>
+              <span style="color: #3B5998; border-bottom: none; font-size:1.083em; font-weight:bold;"><%= link_to result.excerpts.priority.name.force_encoding("UTF-8").html_safe, :controller=>"process_documents", :action=>"show", :anchor =>"gr_#{result.id}", :id=>result.priority.id %></span></br>
               <%= result.excerpts.content_text_only.force_encoding("UTF-8").html_safe %>
               <br/>
               <!--<%#= link_to tr("Show","search"), :controller=>"questions", :action=>"show", :id=>result.id %>-->
