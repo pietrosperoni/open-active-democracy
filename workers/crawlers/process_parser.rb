@@ -209,7 +209,7 @@ class ProcessParser
 
     primary_issues = [proposal_tag]
     primary_issues << placeholder_tag if placeholder_tag
-    current_priority.issue_list = [[primary_issues] | CrawlerUtils.get_process_tag_names(mnr) | TagsParser.get_tags(html_doc)].join(', ')
+    current_priority.issue_list = [[primary_issues] | CrawlerUtils.get_process_tag_names(mnr) | TagsParser.get_tags(html_doc)].join(',')
     puts "Process tags: #{current_priority.issue_list}"
 
     old_priority = Priority.find_by_external_id_and_external_session_id(mnr, ltg)

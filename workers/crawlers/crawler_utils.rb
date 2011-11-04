@@ -14,6 +14,7 @@ module CrawlerUtils
   @@category_mappings = {}
   @@seen_categories = {}
   @@seen_tags = {}
+  @@seen_subtags = {}
 
   def self.get_process_category_id(id)
     return if not @@category_mappings[id]
@@ -74,6 +75,8 @@ module CrawlerUtils
         raise
       end
       top_category = @@translations[top_category]
+      @@seen_categories[top_category] ||= Category.find_or_create_by_name(top_category).id
+      @@seen_tags[top_category] ||= Tag.find_or_create_by_name(top_category).name
 
       sub_category_cell.search('a').each do |sub_category_link|
         sub_category = sub_category_link.text
@@ -83,17 +86,15 @@ module CrawlerUtils
           raise
         end
         sub_category = @@translations[sub_category]
+        @@seen_tags[sub_category] ||= Tag.find_or_create_by_name(sub_category).name
+        @@seen_subtags[top_category] ||= {}
+        @@seen_subtags[top_category][sub_category] ||= self.add_category_subtag(@@seen_categories[top_category], sub_category)
         sub_category_url = "http://www.althingi.is/vefur/#{sub_category_link['href']}"
         sub_category_page = CrawlerUtils.fetch_html(sub_category_url)
         sub_category_table = sub_category_page.xpath("/html/body/table/tr[2]/td/table/tr/td/table[2]/tr/td[2]/div/table")
 
         processes = sub_category_table.search('tr')[1..-1].each do |row|
           process_number = row.at('td[1]').text
-
-          @@seen_categories[top_category] ||= Category.find_or_create_by_name(top_category).id
-          @@seen_tags[top_category] ||= Tag.find_or_create_by_name(top_category).name
-          @@seen_tags[sub_category] ||= Tag.find_or_create_by_name(sub_category).name
-
           @@category_mappings[process_number] ||= {}
           @@category_mappings[process_number][:category_id] = @@seen_categories[top_category]
           @@category_mappings[process_number][:tag_names] ||= {}
@@ -102,5 +103,18 @@ module CrawlerUtils
         end
       end
     end
+  end
+
+  private
+
+  def self.add_category_subtag(category_id, tag)
+    category = Category.find(category_id)
+    sub_tags = category.sub_tags
+    sub_tags = sub_tags ? sub_tags.split(',') : []
+    if (sub_tags - [tag]).size == sub_tags.size
+      category.sub_tags = (sub_tags | [tag]).join(',')
+      category.save
+    end
+    return true
   end
 end
