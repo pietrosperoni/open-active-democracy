@@ -49,7 +49,7 @@ config = YAML::load(File.open(File.dirname(__FILE__) + "/../../config/database.y
 
 class VideoWorker
   def initialize(config)
-    @logger = Logger.new(File.dirname(__FILE__) + "/video_"+Rails.env+".log")
+    @logger = Logger.new(File.dirname(__FILE__) + "/../../logs/video_"+Rails.env+".log")
     @shell = Shell.new(self)
     @worker_config = config
     @counter = 0

@@ -1,4 +1,27 @@
 namespace :fix do
+
+  desc "tweak videos"
+  task :tweak_videos => :environment do
+    ProcessSpeechMasterVideo.all.each do |m|
+      if m.id<9
+        m.published = true
+        m.in_progress = false
+        m.save
+      elsif m.id<11
+        m.published = false
+        m.in_processing = true
+        m.save
+      end
+    end
+    ProcessSpeechVideo.all.each do |m|
+      if m.id<281
+        m.published = true
+        m.in_processing = false
+        m.save
+      end
+    end
+  end
+
   desc "reset process documents"
   task :reset_process_documents => :environment do
     connection = ActiveRecord::Base.connection();
