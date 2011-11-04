@@ -14,8 +14,9 @@ options = {
     :monitor    => true,
     :log_output => true,
     :multiple => true,
-    :dir =>File.open( File.dirname(__FILE__) + "../../pids"),
+    :dir =>File.open( File.dirname(__FILE__) + "./../../pids"),
     :script     => "video_worker_daemon.rb" 
   }
 
 Daemons.run(File.join(File.dirname(__FILE__), 'video_worker_daemon.rb'), options)
+                            cap deploy
