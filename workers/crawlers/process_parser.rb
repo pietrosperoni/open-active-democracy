@@ -25,7 +25,7 @@ class ProcessParser
       end
     end
   end
-  
+
   def self.process_documents(next_sibling,current_process,process_document_type,process_type)
     tr_count = 3
     while next_sibling.at("tr[#{tr_count}]/td[1]")
@@ -45,7 +45,7 @@ class ProcessParser
         process_document.external_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
         puts "ProcessDocument external type: #{process_document.external_type}"
       else
-        puts "ProcessDocument external type unkown"
+        puts "ProcessDocument external type unknown"
       end
       if next_sibling.at("tr[#{tr_count}]/td[4]").text
         process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
@@ -166,6 +166,10 @@ class ProcessParser
       end
     end
 
+    # The HTML is encoded in the document's source encoding. Tidy's 'raw'
+    # mode sucks, and there seems to be no way for Tidy to detect the
+    # encoding, so we ensure that Tidy always gets UTF-8 data
+    html_doc.encode!('UTF-8')
     Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
       html_doc = tidy.clean(html_doc)
     end

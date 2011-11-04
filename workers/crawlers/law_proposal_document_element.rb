@@ -157,7 +157,12 @@ class LawProposalDocumentElement < ProcessDocumentElement
   end
 
   def is_main_article_header?
-    unless is_comments_about_main_article_header?      
+    unless is_comments_about_main_article_header?
+      if numeral = LawProposalDocumentElement.has_roman_numeral(self.content)
+        self.content_number = LawProposalDocumentElement.roman_to_arabic(numeral)
+        return true
+      end
+
       re1='(\\d+)'  # Integer Number 1
       re2='(\\.)' # Any Single Character 1
       re3='(\\s+)'  # White Space 1
@@ -179,6 +184,53 @@ class LawProposalDocumentElement < ProcessDocumentElement
     else
       return false
     end
+  end
+
+  def self.has_roman_numeral(input)
+    re1 = "<b>\s*"
+    re2 = '(M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}))' # roman numeral
+    re3 = '(\\.)'
+    re = (re1+re2+re3)
+    m=Regexp.new(re,Regexp::IGNORECASE);
+    if m.match(input)
+      matched = m.match(input)
+      if matched and matched.length>1
+        return matched[1];
+      end
+    end
+    return nil
+  end
+
+  def self.roman_to_arabic(roman)
+    roman_to_arabic = {
+        'I' => 1,
+        'V' => 5,
+        'X' => 10,
+        'L' => 50,
+        'C' => 100,
+        'D' => 500,
+        'M' => 1000,
+    }
+
+    roman_digit = {
+        1    => 'IV',
+        10   => 'XL',
+        100  => 'CD',
+        1000 => 'MMMMMM',
+    }
+
+    figure = roman_digit.keys.sort.reverse
+    figure.each { |f| roman_digit[f] = roman_digit[f].split(//, 2) }
+
+    last_digit = 1000
+    arabic = 0
+    roman.upcase.split(//).each do |char|
+      digit = roman_to_arabic[char]
+      arabic -= 2 * last_digit if last_digit < digit
+      last_digit = digit
+      arabic += last_digit
+    end
+    return arabic
   end
 
   def is_temporary_article_header?
@@ -269,7 +321,6 @@ class LawProposalDocumentElement < ProcessDocumentElement
   def self.create_elements(doc, process_id, process_document_id, url, process_type)
     html_source_doc = nil
     retries = 10
-
     begin
       puts "Downloading ProcessDocument"
       Timeout::timeout(120){
@@ -289,6 +340,10 @@ class LawProposalDocumentElement < ProcessDocumentElement
       end
     end
 
+    # The HTML is encoded in the document's source encoding. Tidy's 'raw'
+    # mode sucks, and there seems to be no way for Tidy to detect the
+    # encoding, so we ensure that Tidy always gets UTF-8 data
+    html_source_doc.encode!('UTF-8')
     Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
       html_source_doc = tidy.clean(html_source_doc)
     end
@@ -327,7 +382,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
       end
 
       new_parent_header_element = LawProposalDocumentElement.new
-      new_parent_header_element.content = paragraph.to_s.encoding.name == 'UTF-8' ? paragraph.to_s : paragraph.to_s.encode('UTF-8')
+      new_parent_header_element.content = paragraph.to_s
       new_parent_header_element.content_text_only = paragraph.text
       new_parent_header_element.sequence_number = sequence_number+=1
       new_parent_header_element.process_document_id = process_document_id
@@ -341,9 +396,8 @@ class LawProposalDocumentElement < ProcessDocumentElement
       all_content_until_next_header_text_only = ""
 
       if new_parent_header_element.content_type == TYPE_HEADER_MAIN_ARTICLE and process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-        puts "Thingsaliktunartillaga main content"
         while next_sibling and not next_sibling.text.index("Greinargerð") and not next_sibling.text.index("Samþykkt á Alþingi") and not
-               next_sibling.text.index("Athugasemdir við þingsályktunartillögu þessa.")
+               next_sibling.text.index("Athugasemdir við þingsályktunartillögu þessa.") and not LawProposalDocumentElement.has_roman_numeral(next_sibling.to_s)
           if next_sibling.to_s.index("<div ")
             div_skip_count += (next_sibling.to_s.split("<div ").count)-1
           end
@@ -355,11 +409,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
         end
       else
         while true
-          if next_sibling and next_sibling.text =~ /^\s*[0-9]+\.\s*gr\.\s*$/
-            break
-          elsif next_sibling and next_sibling.to_s.index("<div") and next_sibling.to_s.index("center") and next_sibling.to_s.index("<i>")
-            div_skip_count += 1
-          elsif next_sibling and (next_sibling.to_s[0..3]=="<div" or next_sibling.to_s[0..7]=="<b> <div")
+          if next_sibling and (next_sibling.to_s[0..3]=="<div" or next_sibling.to_s[0..7]=="<b> <div")
             break
           elsif not next_sibling
             break
@@ -373,7 +423,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
         end
       end
       new_main_element = LawProposalDocumentElement.new
-      new_main_element.content = all_content_until_next_header.encoding.name == 'UTF-8' ? all_content_until_next_header : all_content_until_next_header.encode('UTF-8')
+      new_main_element.content = all_content_until_next_header
       new_main_element.content_text_only = all_content_until_next_header_text_only
       new_main_element.sequence_number = sequence_number+=1
       new_main_element.parent_id = new_parent_header_element.id
@@ -384,22 +434,6 @@ class LawProposalDocumentElement < ProcessDocumentElement
       elements << new_main_element
     end
 
-    for element in elements
-      puts "Element sequence number: #{element.sequence_number}"
-      puts "Element content type: #{element.content_type_s} - #{element.content_type}"
-      puts "Element content number: #{element.content_number}"
-      #if !element.content_number
-      #  puts "fail element: #{element.content_text_only}"
-      #end
-      #puts "#{element.content_text_only}"
-      #puts "---------------------------------------------------------------------------------"
-    end
-
-    #puts "HTML"
-    #
-    #for element in elements
-    #  puts "#{element.content}"
-    #end
     return doc
   end  
 end

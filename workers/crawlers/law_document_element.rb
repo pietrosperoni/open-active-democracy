@@ -63,6 +63,10 @@ class LawDocumentElement < ProcessDocumentElement
       end
     end
 
+    # The HTML is encoded in the document's source encoding. Tidy's 'raw'
+    # mode sucks, and there seems to be no way for Tidy to detect the
+    # encoding, so we ensure that Tidy always gets UTF-8 data
+    html_source_doc.encode!('UTF-8')
     Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
       html_source_doc = tidy.clean(html_source_doc)
     end

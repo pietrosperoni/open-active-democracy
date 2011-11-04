@@ -51,6 +51,10 @@ class AlthingiCrawler < ProcessCrawler
      buffer = open("http://www.althingi.is/vefur/thingmalalisti.html?cmalteg=afv#{session_tag}").read
    end
 
+   # The HTML is encoded in the document's source encoding. Tidy's 'raw'
+   # mode sucks, and there seems to be no way for Tidy to detect the
+   # encoding, so we ensure that Tidy always gets UTF-8 data
+   buffer.encode!('UTF-8')
    Tidy.open({ "char-encoding" => "utf8", "wrap" => 0 }) do |tidy|
      buffer = tidy.clean(buffer)
    end
@@ -82,8 +86,6 @@ class AlthingiCrawler < ProcessCrawler
      tr_count+=1
 
      ProcessParser.get_process(process_url, process_author, external_process_id, process_name, process_type)
-     sleep 1
-     puts ""
    end
   end
 
