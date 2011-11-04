@@ -5,7 +5,7 @@ namespace :fix do
     ProcessSpeechMasterVideo.all.each do |m|
       if m.id<9
         m.published = true
-        m.in_progress = false
+        m.in_processing = false
         m.save
       elsif m.id<11
         m.published = false
