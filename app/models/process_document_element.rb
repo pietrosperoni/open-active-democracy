@@ -32,6 +32,10 @@ class ProcessDocumentElement < ActiveRecord::Base
     process_document.priority_process.priority
   end
 
+  def category_name
+    process_document.priority_process.priority.category.name
+  end
+
   def touch_document
     self.process_document.touch
   end
