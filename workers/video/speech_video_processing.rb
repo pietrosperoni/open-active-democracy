@@ -103,8 +103,8 @@ class SpeechVideoProcessing < VideoProcessing
             pos_x = 190
             pos_y = 45
           else
-            pos_x = 210
-            pos_y = 145
+            pos_x = 252
+            pos_y = 125
           end
           @@shell.execute("ffmpeg -ss #{[time/3600, time/60 % 60, time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} -i #{speech_video_filename} \
           -an -r 1 -vframes 1 -vf crop=252:156:#{pos_x}:#{pos_y} -y #{speech_video_path}#{filename}")
