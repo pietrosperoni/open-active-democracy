@@ -1,144 +1,163 @@
 <%= javascript_include_tag "jquery.qtip.min" %>
+<%= javascript_include_tag "manage_new_priority_radio_tags" %>
 <%= stylesheet_link_tag "/stylesheets/jquery.qtip.min.css" %>
 
 <% if Government.current.message_for_new_priority and Government.current.message_for_new_priority!="" -%>
-  <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_new_priority.html_safe } %>
+    <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_new_priority.html_safe} %>
 <% end %>
 
 <% if params[:notice] %>
-  <%=  params[:notice] %>
+    <%= params[:notice] %>
 <% end %>
 
 <%= form_for @priority do |f| %>
-  <%= f.error_messages %>
-  
-  <% if @tag_names %>
-    <%= hidden_field_tag :tag_names, @tag_names %>
-  <% end %>
-  
-  <h3><%=tr("Create a new priority","views/priorities/form")%></h3>
-  <br>
-  <div id="your_priority" class="form_header">
-    <%=tr("What is your priority?","views/priorities/form")%>
-    <span class="red">*</span>
-  </div>
+    <%= f.error_messages %>
 
-  <span class="priority_name">
+    <% if @tag_names %>
+        <%= hidden_field_tag :tag_names, @tag_names %>
+    <% end %>
+
+    <h3><%= tr("Create a new priority", "views/priorities/form") %></h3>
+    <br>
+    <div id="your_priority" class="form_header">
+      <%= tr("What is your priority?", "views/priorities/form") %>
+      <span class="red">*</span>
+    </div>
+
+    <span class="priority_name">
     <%= f.text_field :name, :size => 60, :maxlength => 60, :autocomplete =>"off" %>
   </span>
 
-  <br><br>
+    <br><br>
 
-  <div id="priority_category">
-    <div class="form_header">
-      <%= tr("Select category","views/priorities/form")%>
-			<span class="red">*</span><br>
+    <div id="priority_category">
+      <div class="form_header">
+        <%= tr("Select category", "views/priorities/form") %>
+        <span class="red">*</span><br>
+      </div>
+
+      <ul>
+          <% Category.for_partner.each_with_index do |category,index| %>
+              <li><%= f.radio_button :category_id, category.id, :onclick=>"updateSubTags(#{category.id})" %>
+              <span class="Chapter_name" id="category_<%= category.id %>"><%= category.i18n_name %></span>
+              <span class="invisible" id="category_<%= category.id %>_text"><%= tr(category.description, "Description from database") %></span></li>
+
+              <% if category.sub_tags and category.sub_tags!="" %>
+                <ul id="category_subtags_<%=category.id%>" class="sub_tags" style="display:none">
+                  <% category.sub_tags.split(",").each do |sub_tag| %>
+                      <li>
+                      <%= radio_button_tag "sub_tag_#{category.id}}", sub_tag %>
+                      <span class="Subtag_name" id="subtag_<%=category.id%>_<%= sub_tag %>"><%= tr(sub_tag, "Description from database") %></span></li>
+                  <% end %>
+                </ul>
+              <% end %>
+          <% end %>
+        </ul>
+
     </div>
 
-    <% Category.for_partner.each do |category| %>
-      <%= f.radio_button :category_id, category.id %> <span class="Chapter_name" id="category_<%= category.id %>"><%=category.i18n_name %></span>
-      <span class="invisible" id="category_<%= category.id %>_text"><%= tr(category.description, "Description from database") %></span>
+    <% if Government.current.default_tags_checkbox and Government.current.default_tags_checkbox!="" %>
+        <br>
+        <div id="priority_category2">
+          <div class="form_header">
+            <%= tr("Select neighborhood (if applicable)", "views/priorities/form") %>
+            <br>
+          </div>
+          <% Government.current.default_tags_checkbox.split(",").each_with_index do |special_tag, i| %>
+              <%= check_box_tag "special_checkbox_tag_#{i}", special_tag %>
+              <span class="Chapter_name_2"><%= special_tag %></span>
+          <% end %>
+        </div>
     <% end %>
-  </div>
 
-  <% if Government.current.default_tags_checkbox and Government.current.default_tags_checkbox!="" %>
-      <br>
-	  <div id="priority_category2">
-	    <div class="form_header">
-	      <%= tr("Select neighborhood (if applicable)","views/priorities/form")%><br>
-	    </div>
-      <% Government.current.default_tags_checkbox.split(",").each_with_index do |special_tag,i| %>
-	    <%= check_box_tag "special_checkbox_tag_#{i}", special_tag %> <span class="Chapter_name_2"><%=special_tag %></span> 
-	  <% end %>
-	  </div>
-  <% end %>
+    <br>
 
-  <br>
+    <div class="form_header">
+      <%= tr("Write your own categories, seperated by comma", "views/priorities/form") %>
+    </div>
 
-  <div class="form_header">
-    <%=tr("Write your own categories, seperated by comma","views/priorities/form")%>
-  </div>
-
-  <span class="custom_tag">
+    <span class="custom_tag">
     <%= text_field_tag :custom_tags, "", :maxlength => 200 %>
   </span>
-  
-  <br/>
-  <br/>
-  <br/>
-  <div class="form_header">
-    <%=tr("Add a point in support or against","views/priorities/form")%>
-    <span class="red">*</span>
-  </div>
 
-  <%= f.fields_for(:points) do |point_form| %>
-    <div class="field">
-      <div class="field_box">
-        <%= point_form.text_field :name, :size => 60, :maxlength => 60 %>
-      </div>
-      <div class="field_label">
-        <div class="tiny_info"><em>
-          <%=tr("To convince other people about this priority a strong point is important","views/priorities/form")%>
-        </em></div>
-      </div>
-    </div>
-    <div class="field form_header">
-      <div class="field_label">
-        <div id="point_supports">
-          <%= point_form.radio_button :value, 1, :checked=>true %> <span class="point_supports_label"><%=tr("Yes, this point supports this priority","views/priorities/form")%></span>
-        </div>
-        <div id="point_opposes">
-          <%= point_form.radio_button :value, -1 %> <span class="point_opposes_label"><%=tr("No, this point is against this priority","views/priorities/form")%></span>
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="field">
-      <div class="field_label form_header">
-        <%= tr("Explain your point.", "view/priorities/_form") %>
-        <span class="characters"><span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form")%></span>
-        <span class="red">*</span>
-      </div>
-      <div class="field_box">
-        <%= point_form.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
-      </div>
-      <div class="tiny_info_no_pad">
-        <%=tr("Other people will be able to edit your points, similar to Wikipedia","views/priorities/form")%>
-      </div>
-    </div>
-    
-    <br>
-    
-    <div class="field">
-      <div class="form_header">
-        <%=tr("Add a link to an external website","views/priorities/form")%>
-      </div>
-      <div class="field_box">
-        <%= point_form.text_field :website, :size => 50 %>
-      </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="form_header">
+      <%= tr("Add a point in support or against", "views/priorities/form") %>
+      <span class="red">*</span>
     </div>
 
-  <% end %>
-  
-  <br>
-  
-  <b><%= submit_tag tr("Create priority", "view/priorities/_form"), :class => "submit_button" %></b>
+    <%= f.fields_for(:points) do |point_form| %>
+        <div class="field">
+          <div class="field_box">
+            <%= point_form.text_field :name, :size => 60, :maxlength => 60 %>
+          </div>
+          <div class="field_label">
+            <div class="tiny_info"><em>
+              <%= tr("To convince other people about this priority a strong point is important", "views/priorities/form") %>
+            </em></div>
+          </div>
+        </div>
+        <div class="field form_header">
+          <div class="field_label">
+            <div id="point_supports">
+              <%= point_form.radio_button :value, 1, :checked=>true %>
+              <span class="point_supports_label"><%= tr("Yes, this point supports this priority", "views/priorities/form") %></span>
+            </div>
+            <div id="point_opposes">
+              <%= point_form.radio_button :value, -1 %>
+              <span class="point_opposes_label"><%= tr("No, this point is against this priority", "views/priorities/form") %></span>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="field">
+          <div class="field_label form_header">
+            <%= tr("Explain your point.", "view/priorities/_form") %>
+            <span class="characters"><span id="pointContentDown"></span> <%= tr("characters left", "view/priorities/_form") %></span>
+            <span class="red">*</span>
+          </div>
+          <div class="field_box">
+            <%= point_form.text_area :content, :id => 'pointContent', :button => 'submit', :rows => 5, :cols => 60, :maxLength => 500 %>
+          </div>
+          <div class="tiny_info_no_pad">
+            <%= tr("Other people will be able to edit your points, similar to Wikipedia", "views/priorities/form") %>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="field">
+          <div class="form_header">
+            <%= tr("Add a link to an external website", "views/priorities/form") %>
+          </div>
+          <div class="field_box">
+            <%= point_form.text_field :website, :size => 50 %>
+          </div>
+        </div>
+
+    <% end %>
+
+    <br>
+
+    <b><%= submit_tag tr("Create priority", "view/priorities/_form"), :class => "submit_button" %></b>
 <% end %>
 
 <script type="text/javascript">
-$(function(){
-    $('.Chapter_name').each(
-        function() {
-            var category_id = $(this).attr("id");
-            var tooltip_text = $('#'+category_id+'_text').html();
-            if (tooltip_text) {
-                $(this).qtip({
-                    content: tooltip_text,
-                    show: { delay: 300 },
-                    hide: { delay: 500, fixed: true }
-                })
-            }
-        }
-    )
-});
+    $(function() {
+        $('.Chapter_name').each(
+                function() {
+                    var category_id = $(this).attr("id");
+                    var tooltip_text = $('#' + category_id + '_text').html();
+                    if (tooltip_text) {
+                        $(this).qtip({
+                            content: tooltip_text,
+                            show: { delay: 300 },
+                            hide: { delay: 500, fixed: true }
+                        })
+                    }
+                }
+        )
+    });
 </script>

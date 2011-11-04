@@ -726,7 +726,11 @@ class PrioritiesController < ApplicationController
     params.each do |p,v|
       tags << v if p.include?("special_checkbox_tag_")
     end
+    params.each do |a,b|
+      tags << b if a.include?("sub_tag_")
+    end
     tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
+
     unless tags.empty?
       @priority.issue_list = tags.join(",")
     end
