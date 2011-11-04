@@ -21,7 +21,17 @@ class ProcessDocumentElement < ActiveRecord::Base
   before_destroy :touch_document
   
   acts_as_rateable
-  
+
+  define_index do
+     indexes content_text_only
+     indexes process_document.priority_process.priority.category.name, :facet=>true, :as=>"category_name"
+     has nil, :as=>:partner_id, :type => :integer
+   end
+
+  def priority
+    process_document.priority_process.priority
+  end
+
   def touch_document
     self.process_document.touch
   end

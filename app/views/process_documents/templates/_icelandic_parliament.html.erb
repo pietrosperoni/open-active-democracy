@@ -37,9 +37,11 @@
 	  <% end %>
 
 	  <% if render_it %>
+        <a name="gr_<%=element.id%>">
 	      <div id="process_document_element_number_<%=element.sequence_number%>">
 	         <%= render :partial => "process_document_elements/templates/#{@document.process_document_type.template_name}_element", :locals => {:document=> @document, :element => element} %>
 	      </div>
+        </a>
      <% end %>
     <% end %>
 </p>
