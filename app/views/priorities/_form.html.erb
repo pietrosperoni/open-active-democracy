@@ -38,9 +38,13 @@
 
       <ul>
           <% Category.for_partner.each_with_index do |category,index| %>
-              <li><%= f.radio_button :category_id, category.id, :onclick=>"updateSubTags(#{category.id})" %>
-              <span class="Chapter_name" id="category_<%= category.id %>"><%= category.i18n_name %></span>
-              <span class="invisible" id="category_<%= category.id %>_text"><%= tr(category.description, "Description from database") %></span></li>
+              <li>
+                <%= f.radio_button :category_id, category.id, :onclick=>"updateSubTags(#{category.id})" %>
+                <span class="Chapter_name" id="category_<%= category.id %>"><%= category.i18n_name %></span>
+                <% if category.description -%>
+                  <span class="invisible" id="category_<%= category.id %>_text"><%= tr(category.description, "Description from database") %></span>
+                <% end %>
+              </li>
 
               <% if category.sub_tags and category.sub_tags!="" %>
                 <ul id="category_subtags_<%=category.id%>" class="sub_tags" style="display:none">
