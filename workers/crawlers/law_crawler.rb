@@ -86,8 +86,6 @@ class AlthingiCrawler < ProcessCrawler
      tr_count+=1
 
      ProcessParser.get_process(process_url, process_author, external_process_id, process_name, process_type)
-     sleep 1
-     puts ""
    end
   end
 

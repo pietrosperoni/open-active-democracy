@@ -45,7 +45,7 @@ class ProcessParser
         process_document.external_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
         puts "ProcessDocument external type: #{process_document.external_type}"
       else
-        puts "ProcessDocument external type unkown"
+        puts "ProcessDocument external type unknown"
       end
       if next_sibling.at("tr[#{tr_count}]/td[4]").text
         process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
