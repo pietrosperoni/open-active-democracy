@@ -21,10 +21,10 @@
 				<%= render :partial => "changes/status", :locals => {:change => @priority.change}%>
 				<p>
 			<% end %>
-			
-			<% if false and @priority.points_count == 0 %>
-				<%= tr("Please tell us why we should endorse or oppose this priority by <a href='{new_point_url}'>adding a point</a>. You can even suggest a different priority instead.", "view/priorities/show_with_processes", :new_point_url => new_priority_point_path(@priority))%>
-			<% else %>
+
+              <%=if @priority.points_count == 0 %>
+              <br><br>
+              <% end %>
 					<div class="endorse-wrap">
                             <div class="header-add">
                               <%= render partial: "points_header", locals: { priority: @priority, support: true } %>
@@ -80,7 +80,6 @@
         </table>
         <br>
 
-			<% end %>
 
 			<% latest_discussions = @priority.activities.discussions.by_recently_updated.item_limit(1)%>
 

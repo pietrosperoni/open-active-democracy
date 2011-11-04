@@ -153,6 +153,20 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
   add_index "changes", ["type"], :name => "changes_type_index"
   add_index "changes", ["user_id"], :name => "changes_user_id_index"
 
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+
   create_table "client_applications", :force => true do |t|
     t.string   "name"
     t.string   "url"
@@ -785,6 +799,7 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
     t.integer  "position_endorsed_7days"
     t.integer  "position_endorsed_30days"
     t.text     "finished_status_message"
+    t.integer  "external_session_id"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
@@ -869,8 +884,8 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
     t.integer  "sequence_number"
     t.integer  "process_document_id"
     t.integer  "parent_id"
-    t.binary   "content",             :limit => 2147483647
-    t.binary   "content_text_only",   :limit => 2147483647
+    t.text     "content"
+    t.text     "content_text_only"
     t.string   "content_number"
     t.datetime "created_at"
     t.datetime "updated_at"
