@@ -25,7 +25,7 @@ class ProcessDocumentElement < ActiveRecord::Base
   define_index do
      indexes content_text_only
      indexes process_document.priority_process.priority.category.name, :facet=>true, :as=>"category_name"
-     has nil, :as=>:partner_id, :type => :integer
+     has "0", :as=>:partner_id, :type => :integer
    end
 
   def priority
