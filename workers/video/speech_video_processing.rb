@@ -85,36 +85,6 @@ class SpeechVideoProcessing < VideoProcessing
       @@shell.execute("flvtool2 -U -c #{speech_video_second_tmp_filename}")
       @@shell.execute("rm #{speech_video_first_tmp_filename}")
       @@shell.execute("mv #{speech_video_second_tmp_filename} #{speech_video_filename}")
-      begin
-        timepoints = []
-        slice_time_sec = video.duration_s/5
-        slice_id = 1
-        timepoints << [7,video.duration_s-1].min
-        3.times do
-          timepoints << slice_id*slice_time_sec
-          slice_id+=1
-        end
-        timepoints << [video.duration_s-7,1].max
-        pngid=0
-        @@logger.info("Timepoints: #{timepoints.inspect} video duration: #{video.duration_s}")
-        timepoints.sort.each do |time|
-          filename = "thumb_#{pngid+=1}.png"
-          if video.title =~ /forseti/i
-            pos_x = 190
-            pos_y = 45
-          else
-            pos_x = 252
-            pos_y = 125
-          end
-          @@shell.execute("ffmpeg -ss #{[time/3600, time/60 % 60, time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} -i #{speech_video_filename} \
-          -an -r 1 -vframes 1 -vf crop=252:156:#{pos_x}:#{pos_y} -y #{speech_video_path}#{filename}")
-          @@shell.execute("convert #{speech_video_path}#{filename} -resize 160x99 #{speech_video_path}small_#{filename}")
-          @@shell.execute("convert #{speech_video_path}#{filename} -resize 80x50 #{speech_video_path}smaller_#{filename}")
-          @@shell.execute("convert #{speech_video_path}#{filename} -resize 45x28 #{speech_video_path}tiny_#{filename}")
-        end
-      rescue
-        @@logger.error("ERROR CREATING THUMBNAILS")
-      end
       video.reload :lock=>true
       video.published = 1
       video.in_processing = 0

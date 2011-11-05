@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104190954) do
+ActiveRecord::Schema.define(:version => 20111104234345) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -957,8 +957,9 @@ ActiveRecord::Schema.define(:version => 20111104190954) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "in_processing", :default => false
-    t.boolean  "published",     :default => false
+    t.boolean  "in_processing",     :default => false
+    t.boolean  "published",         :default => false
+    t.boolean  "renew_screenshots", :default => false
   end
 
   add_index "process_speech_master_videos", ["url"], :name => "index_process_speech_master_videos_on_url", :unique => true
