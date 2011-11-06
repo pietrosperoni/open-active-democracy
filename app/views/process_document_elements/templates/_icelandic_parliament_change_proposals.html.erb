@@ -69,7 +69,7 @@
 	            <td>
 	                <%= link_to "x",
 	                            url_for(:controller => "process_document_elements", :action => "delete_change_proposal",
-                    	                :id => change_proposal.id, :sequence_number => change_target.sequence_number),
+                    	                :source_id => change_proposal.id, :sequence_number => change_target.sequence_number),
                               :remote=>true,
                               'data-disable-with' => "",
                               'data-loader-name' => "circle",

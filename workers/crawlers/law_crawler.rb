@@ -28,6 +28,9 @@ require './law_proposal_document_element'
 require './process_parser'
 require './tags_parser'
 require './crawler_utils'
+require './law_document_element'
+require './law_proposal_document_element'
+require './law_change_document_element'
 
 PROCESS_TYPE_LOG = 1
 PROCESS_TYPE_THINGSALYKTUNARTILLAGA = 2
