@@ -255,7 +255,7 @@ class Priority < ActiveRecord::Base
     ['published','inactive'].include?(status)
   end
   alias :is_published :is_published?
-    
+
   def is_finished?
     official_status > 1 or official_status < 0
   end
@@ -685,14 +685,14 @@ class Priority < ActiveRecord::Base
         time = Time.now-5.years
       end
       if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
-        stage_txt = "#{t :waits_for_discussion}"
+        stage_txt = "#{tr("Waiting for discussion","althingi_texts")}"
       else
-        stage_txt = "#{priority_process.stage_sequence_number}. #{t :parliment_stage_sequence_discussion}"
+        stage_txt = "#{priority_process.stage_sequence_number}. #{tr("Discussion stage","althingi_texts")}"
       end
-      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{t :since}"
+      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)}"
       Rails.cache.write("latest_priority_process_at_#{self.id}", latest_priority_process_txt, :expires_in => 30.minutes)
     end
-    latest_priority_process_txt
+    latest_priority_process_txt.html_safe if latest_priority_process_txt
   end
 
   def do_abusive

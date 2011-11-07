@@ -5,8 +5,11 @@ class IssuesController < ApplicationController
 
   def index
     @page_title =  tr("Categories", "controller/issues")
-    if request.format != 'html' or current_government.tags_page == 'list'
+    #if request.format != 'html' or current_government.tags_page == 'list'
+    if default_tags and default_tags.length>1
       @issues = Tag.filtered.not_in_default_tags(default_tags).most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
+    else
+      @issues = Tag.filtered.most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
     end
     respond_to do |format|
       format.html {

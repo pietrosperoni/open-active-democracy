@@ -858,3 +858,11 @@ list-style: disc;
 {
 	margin-top: 5px;
 	}
+
+#priority_category li {
+    list-style-type: none;
+}
+#priority_category ul ul li {
+    padding-left: 10px;
+}
+

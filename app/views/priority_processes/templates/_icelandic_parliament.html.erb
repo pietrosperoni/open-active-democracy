@@ -1,4 +1,4 @@
-<% cache(["icelandic_parliment_priority_processes_main",session[:locale],@priority_process.priority.id,@show_only_last_process ? "only_last_process" : "all_processes"], :expires_in => 1.hour) do %>
+<% cache(["icelandic_parliment_priority_processes_main",session[:locale],@priority_process.priority.id,current_user ? "logged_in" : "anon",@show_only_last_process ? "only_last_process" : "all_processes"], :expires_in => 1.hour) do %>
 <% @total_discussions = ProcessDiscussion.count(:include=>[:priority_process],:conditions=>["priority_id = ?",@priority.id]) %>
 <% processes = PriorityProcess.find_all_by_priority_id(@priority.id,:order=>"stage_sequence_number") %>
 <% if @show_only_last_process %>
@@ -23,7 +23,7 @@
 <div class="althingi_process_container">
 	<% process_documents = current_process.process_documents %>
 	<% discussions = current_process.process_discussions %>
-	<h2><%="#{current_process.stage_sequence_number}. "+t(:stage_sequence_discussion) %></h2>
+	<h2><%=tr("{sequence_number}. Stage Sequence Number","althingi",:sequence_number=>current_process.stage_sequence_number) %></h2>
 	<% if i==0 %>
 	  <%=link_to 'Málið á Alþingi', current_process.priority.external_link, {:target => "_blank", :class => "extlink"}%>
 	<% end %>
@@ -57,7 +57,7 @@
 						<%=document.external_date.strftime("%d.%m.%Y") %>
 					</td>
 					<td>
-						<%= link_to document.external_id, document.external_link,{:target=>"_blank"}%>
+						<%= link_to document.external_id, document.external_link, {:target => "_blank", :class => "extlink"}%>
 					</td>
 					<td>
 						<%=document.external_type %>

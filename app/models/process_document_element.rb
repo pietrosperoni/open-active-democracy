@@ -16,13 +16,42 @@
 class ProcessDocumentElement < ActiveRecord::Base
   belongs_to :user
   belongs_to :process_document
+  has_many :sentences
   
   after_save :touch_document
   before_destroy :touch_document
+
+  scope :articles, :conditions => "content_type = 3"
   
   acts_as_rateable
-  
+
+  define_index do
+     indexes content_text_only
+     indexes process_document.priority_process.priority.category.name, :facet=>true, :as=>"category_name"
+     has "0", :as=>:partner_id, :type => :integer
+   end
+
+  def priority
+    process_document.priority_process.priority
+  end
+
+  def category_name
+    process_document.priority_process.priority.category.name
+  end
+
   def touch_document
     self.process_document.touch
   end
+  def touch_document
+    self.process_document.touch
+  end
+
+  def children
+    ProcessDocumentElement.all(:conditions => "parent_id = #{id}")
+  end
+
+  def user_proposals
+    ProcessDocumentElement.all(:conditions => "parent_id = #{id} and not user_id is null")
+  end
+
 end

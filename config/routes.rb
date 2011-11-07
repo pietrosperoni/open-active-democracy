@@ -32,6 +32,7 @@ OpenActiveDemocracy::Application.routes.draw do
   resources :categories
 
   match '/priorites/flag/:id' => 'priorities#flag'
+  match '/priorites/show_feed/:id' => 'priorities#show_feed'
   match '/priorites/abusive/:id' => 'priorities#abusive'
   match '/priorites/not_abusive/:id' => 'priorities#not_abusive'
   match '/questions/flag/:id' => 'questions#flag'
@@ -304,14 +305,24 @@ OpenActiveDemocracy::Application.routes.draw do
   end
 
   resource :open_id
-  
-  resources :priority_processes
+  resources :priority_processes do
+    member do
+      get :show_all_for_priority
+    end
+  end
   resources :process_speech_master_videos
   resources :process_speech_videos
   resources :process_discussions
   resources :process_documents
   resources :process_types
-  resources :process_document_elements
+  resources :process_document_elements do
+    member do
+      get :new_change_proposal
+      get :delete_change_proposal
+      get :view_element
+      get :cancel_new_change_proposal
+    end
+  end
   resources :process_documents
   resources :process_document_types
   resources :process_document_states

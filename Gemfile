@@ -22,6 +22,7 @@ gem 'capistrano'
 # Bundle the extra gems:
 # gem 'bj'
 gem 'nokogiri'
+gem 'tidy-ext'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
@@ -60,6 +61,7 @@ gem 'facebooker2'
 gem "airbrake", :git => "git://github.com/airbrake/airbrake.git"
 gem "newrelic_rpm"
 gem 'dalli'
+gem 'sys-filesystem'
 gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
   :branch  => 'rails3',
@@ -70,3 +72,5 @@ group :development do
   gem 'mongrel', '>= 1.2.0.pre2'  
   gem 'rails-dev-boost', :git => 'git://github.com/rbjarnason/rails-dev-boost.git', :require => 'rails_development_boost'
 end
+
+gem 'ckeditor'

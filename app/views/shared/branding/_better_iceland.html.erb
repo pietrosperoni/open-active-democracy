@@ -1,0 +1,24 @@
+<div id="branding" style="height: 85px">
+  <table>
+    <tr>
+      <td>
+        <div id="main_logo">
+          <%= link_to :controller=>"portal", :host=>request.host_with_port do %>
+            <%= image_tag "/images/new/betraIsland-merki_340x74.png"%>
+          <% end %>
+        </div>
+      </td>
+      <% if false and current_partner %>
+        <td>
+          <div id="partner_logo">
+            <%= render :partial => "partners/logo" %>
+          </div>
+        </td>
+      <% end %>
+      <td>
+
+
+      </td>  
+    </tr>
+  </table>
+</div>

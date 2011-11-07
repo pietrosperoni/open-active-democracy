@@ -15,10 +15,18 @@
 
 module ProcessSpeechVideosHelper
   def video_share_title(video)
-    "#{video.title} #{t(:about_process)} #{video.process_discussion.priority_process.priority.external_info_1} - #{video.process_discussion.stage_sequence_number}. #{t(:stage_sequence_discussion)}"
+    tr("{video_title} about process {external_info_1} - {sequence_number}. discussion","video",
+       video_title: video.title,
+       external_info_1: video.process_discussion.priority_process.priority.external_info_1,
+       sequence_number: video.process_discussion.stage_sequence_number)
   end
 
   def video_share_description(video)
-    "#{video.title} #{t(:about_process)} #{video.process_discussion.priority_process.priority.external_info_1} (#{video.process_discussion.priority_process.priority.external_info_2}) / #{video.process_discussion.priority_process.priority.external_info_3} - #{video.process_discussion.stage_sequence_number}. #{t(:stage_sequence_discussion)}"
+    tr("{video_title} about process {external_info_1} {external_info_2} / {external_info_3} - {sequence_number}. discussion", "video",
+       video_title: video.title,
+       external_info_1: video.process_discussion.priority_process.priority.external_info_1,
+       external_info_2: video.process_discussion.priority_process.priority.external_info_1,
+       external_info_3: video.process_discussion.priority_process.priority.external_info_1,
+       sequence_number: video.process_discussion.stage_sequence_number)
   end
 end

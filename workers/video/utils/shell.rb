@@ -16,10 +16,10 @@ class Shell
     IO.popen(command) do |pipe|
       pipe.each("\r") do |line|
         @logger.debug(line)
-        $defout.flush
+        pipe.flush
         if breakon and line.index(breakon)
           @logger.error("Breaking on: #{breakon}")
-          $defout.flush
+          pipe.flush
           raise MediaFormatException
           break
         end

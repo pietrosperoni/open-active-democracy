@@ -1,0 +1,7 @@
+$('.endless_scroll_inner_wrap').append("<%=escape_javascript(render :partial => 'activity_list')%>");
+pageTracker._trackPageview('/news/top_feed')
+<% unless @activities.blank? %>
+    $('#endless_scroll_ul').attr('last', '<%=@activities.to_a.last.changed_at%>');
+<% else %>
+    $('#infinite-scroll').detach();
+<% end %>

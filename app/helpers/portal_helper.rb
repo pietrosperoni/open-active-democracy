@@ -71,8 +71,8 @@ module PortalHelper
   end
   
   def setup_priorities_process_icesave(limit)
-    @priorities = [Priority.find(1), Priority.find(264), Priority.find(224), Priority.find(147),Priority.find(93)]
-    {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>nil}    
+    #@priorities = [Priority.find(1), Priority.find(264), Priority.find(224), Priority.find(147),Priority.find(93)]
+    {:priorities=>@priorities, :endorsements=>get_endorsements, :more=>nil}
   end
 
   def setup_priorities_random(limit)
@@ -91,12 +91,17 @@ module PortalHelper
     @priorities = Rails.cache.read(key)
     if not @priorities
       eval("@priorities = #{code_function}")
-      Rails.cache.write(key, @priorities.all, :expires_in => 5.minutes) if @priorities
+      if @priorities and @priorities.respond_to?('all')
+        Rails.cache.write(key, @priorities.all, :expires_in => 5.minutes)
+      elsif @priorities
+        Rails.cache.write(key, @priorities, :expires_in => 5.minutes)
+      end
     end
   end
 
   def get_endorsements
     endorsements = nil
+    #Rails.logger.debug("get endorsments: #{@priorities.inspect}")
     if logged_in? # pull all their endorsements on the priorities shown
       endorsements = current_user.endorsements.active.find(:all, :conditions => ["priority_id in (?)", @priorities.collect {|c| c.id}])
     end

@@ -113,7 +113,7 @@ namespace :utils do
       if ENV['current_thing_id']
         logg = "#{ENV['current_thing_id']}. log"
         puts "Archiving all processes except for thing: #{logg}"
-        Process.find(:all).each do |c|
+        PriorityProcess.find(:all).each do |c|
           puts c.external_info_3
           unless c.external_info_3.index(logg)
             puts "ARCHIVING"

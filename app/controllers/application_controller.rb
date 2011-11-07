@@ -153,7 +153,27 @@ class ApplicationController < ActionController::Base
 
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
-    if request.host.include?("betrireykjavik")
+    if request.host.include?("betraisland")
+      if request.subdomains.size == 0 or request.host.include?(current_government.domain_name) or request.subdomains.first == 'www'
+        if (controller_name=="home" and action_name=="index") or
+           Rails.env.development? or
+           request.host.include?("betraisland") or
+           self.class.name.downcase.include?("tr8n") or
+           ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
+          @current_partner = nil
+          Partner.current = @current_partner
+          Rails.logger.info("No partner")
+          return nil
+        else
+          redirect_to "/welcome"
+        end
+      else
+        @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+        Partner.current = @current_partner
+        Rails.logger.info("Partner: #{@current_partner.short_name}")
+        return @current_partner
+      end
+    elsif request.host.include?("betrireykjavik")
       if request.subdomains.size == 0 or request.host.include?(current_government.domain_name) or request.subdomains.first == 'www'
         if (controller_name=="home" and action_name=="index") or
            Rails.env.development? or

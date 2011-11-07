@@ -1,0 +1,14 @@
+<div id="activities" class="single">
+  <% if not @activities.empty? %>
+    <% for activity in @activities %>
+        <% if ['your_activity','your_capital','your_changes'].include?(params[:action]) %>
+            <%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_nouser"} %>
+        <% else %>
+            <%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
+        <% end %>
+     <% end %>
+  <% else %>
+    <span style="text-align:center;"><%=tr("The end","_activites") %></span>
+  <% end %>
+</div>
+

@@ -49,7 +49,7 @@ class RatingsController < ApplicationController
           # page.visual_effect :highlight, "star-ratings-block-#{rateable.id}_#{rateable.class.name}", {:restorecolor=>"#ffffff", :startcolor=>"#bbffbc", :endcolor=>"#ffffff"}
         end
       else
-        page << "alert('#{t(:please_login_before_rating)}')"
+        page << "alert('#{tr("Please log in before rating")}')"
       end
     end
   end

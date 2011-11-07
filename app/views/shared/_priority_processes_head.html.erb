@@ -1,8 +1,7 @@
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <%= stylesheet_link_tag 'priority_processes' %>
-        <%= javascript_include_tag :defaults %>
         <%= javascript_include_tag "slider.js" %>
-        <%= javascript_include_tag :fckeditor %>
+        <%= javascript_include_tag "/javascripts/ckeditor/ckeditor.js" %>
         <% if controller_name == "process_speech_videos" and action_name == "show" %>
           <%= render :partial => "process_speech_videos/share_metadata", :locals => {:process_speech_video=> @process_speech_video } %>
         <% elsif controller_name == "processes" and action_name == "show" %>

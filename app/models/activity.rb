@@ -13,8 +13,10 @@ class Activity < ActiveRecord::Base
   scope :capital, :conditions => "type like '%Capital%'"
   scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
 
-  scope :top, :conditions => "type in ('ActivityPointNew','ActivityDocumentNew','ActivityPriorityNew','ActivityBulletinNew')"
-  
+  scope :top, :order=>"changed_at DESC", :conditions => "type in ('ActivityPointNew','ActivityDocumentNew','ActivityPriorityNew','ActivityBulletinNew')"
+  scope :top_discussions, :order=>"changed_at DESC", :conditions => "type in ('ActivityBulletinNew')", :limit=>5
+
+  scope :feed, lambda{|last| {:conditions=>["changed_at < ? ", last], :order=>"changed_at DESC", :limit=>5}}
   scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
   scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
   scope :last_thirty_days, :conditions => "activities.changed_at > '#{Time.now-30.days}'"    

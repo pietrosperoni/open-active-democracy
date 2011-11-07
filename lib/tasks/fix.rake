@@ -1,4 +1,34 @@
 namespace :fix do
+
+  desc "tweak videos"
+  task :tweak_videos => :environment do
+    ProcessSpeechMasterVideo.all.each do |m|
+      if m.id<9
+        m.published = true
+        m.in_processing = false
+        m.save
+      elsif m.id<11
+        m.published = false
+        m.in_processing = true
+        m.save
+      end
+    end
+    ProcessSpeechVideo.all.each do |m|
+      if m.id<281
+        m.published = true
+        m.in_processing = false
+        m.save
+      end
+    end
+  end
+
+  desc "reset process documents"
+  task :reset_process_documents => :environment do
+    connection = ActiveRecord::Base.connection();
+    connection.execute("DELETE FROM process_documents;")
+    connection.execute("DELETE FROM process_document_elements;")
+  end
+
   desc "reset database"
   task :reset_database_YES => :environment do
     puts "1"
@@ -9,6 +39,7 @@ namespace :fix do
     connection.execute("DELETE FROM capitals;")
     connection.execute("DELETE FROM changes;")
     connection.execute("DELETE FROM client_applications;")
+    connection.execute("DELETE FROM categories;")
     connection.execute("DELETE FROM comments;")
     connection.execute("DELETE FROM constituents;")
     connection.execute("DELETE FROM delayed_jobs;")
@@ -179,10 +210,12 @@ namespace :fix do
     u.referrals_count = 0
     u.imported_contacts_count = 0
     u.save(false)
-    Government.last.default_tags_checkbox.split(",").each do |t|
-      tag=Tag.new
-      tag.name = t
-      tag.save
+    if Government.last.default_tags_checkbox
+      Government.last.default_tags_checkbox.split(",").each do |t|
+        tag=Tag.new
+        tag.name = t
+        tag.save
+      end
     end
   end
 

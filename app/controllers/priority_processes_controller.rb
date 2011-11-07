@@ -20,7 +20,7 @@ class PriorityProcessesController < ApplicationController
   # GET /processes
   # GET /processes.xml
   def index
-      @processes = Process.find(:all, :order=>"external_id DESC")
+      @processes = PriorityProcess.find(:all, :order=>"external_id DESC")
     
     respond_to do |format|
       format.html # index.html.erb
@@ -32,7 +32,7 @@ class PriorityProcessesController < ApplicationController
   # GET /processes/1.xml
   # GET /processes/1.json
   def show
-    @my_process = @priority_process = Process.find(params[:id])
+    @my_process = @priority_process = PriorityProcess.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,7 +44,7 @@ class PriorityProcessesController < ApplicationController
   # GET /processes/new
   # GET /processes/new.xml
   def new
-    @priority_process = Process.new
+    @priority_process = PriorityProcess.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -54,13 +54,13 @@ class PriorityProcessesController < ApplicationController
 
   # GET /processes/1/edit
   def edit
-    @priority_process = Process.find(params[:id])
+    @priority_process = PriorityProcess.find(params[:id])
   end
 
   # POST /processes
   # POST /processes.xml
   def create
-    @priority_process = Process.new(params[:process])
+    @priority_process = PriorityProcess.new(params[:process])
 
     respond_to do |format|
       if @priority_process.save
@@ -77,7 +77,7 @@ class PriorityProcessesController < ApplicationController
   # PUT /processes/1
   # PUT /processes/1.xml
   def update
-    @priority_process = Process.find(params[:id])
+    @priority_process = PriorityProcess.find(params[:id])
 
     respond_to do |format|
       if @priority_process.update_attributes(params[:process])
@@ -94,7 +94,7 @@ class PriorityProcessesController < ApplicationController
   # DELETE /processes/1
   # DELETE /processes/1.xml
   def destroy
-    @priority_process = Process.find(params[:id])
+    @priority_process = PriorityProcess.find(params[:id])
     @priority_process.destroy
 
     respond_to do |format|
@@ -104,9 +104,9 @@ class PriorityProcessesController < ApplicationController
   end
 
   def show_all_for_priority
-    @priority = Priority.find(params[:id])    
+    @priority = Priority.find(params[:id])
     @priority_process = @priority.priority_process_root_node
-    @page_title = tr("Show all", "controller/processes", :priority_name => @priority.name) 
+    @page_title = tr("Show all", "controller/processes", :priority_name => @priority.name)
     respond_to do |format|
       format.html
       format.xml  { render :xml => @document }
