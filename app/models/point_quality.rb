@@ -18,9 +18,17 @@ class PointQuality < ActiveRecord::Base
   def add_point_counts
     if self.is_helpful?
       point.helpful_count += 1
-      point.endorser_helpful_count += 1 if is_endorser?
-      point.neutral_helpful_count += 1 if is_neutral?      
-      point.opposer_helpful_count += 1 if is_opposer?
+
+      if is_endorser?
+        point.endorser_helpful_count += 1
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => 1)
+      elsif is_neutral?
+        point.neutral_helpful_count += 1
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => 1)
+      elsif is_opposer?
+        point.opposer_helpful_count += 1
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => 1)
+      end
 
       if point.point_qualities.count > 1
         point.delay.calculate_score(true)
@@ -30,34 +38,54 @@ class PointQuality < ActiveRecord::Base
 
       point.save(:validate => false)
       ActivityPointHelpful.create(:point => point, :user => user, :priority => point.priority)      
-    end
-    if not self.is_helpful?
+    else
       point.unhelpful_count += 1
-      point.endorser_unhelpful_count += 1 if is_endorser?
-      point.neutral_unhelpful_count += 1 if is_neutral?      
-      point.opposer_unhelpful_count += 1 if is_opposer?
+      if is_endorser?
+        point.endorser_helpful_count -= 1
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => -1)
+      elsif is_neutral?
+        point.neutral_helpful_count -= 1
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => -1)
+      elsif is_opposer?
+        point.opposer_helpful_count -= 1
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => -1)
+      end
+
       point.delay.calculate_score(true)
       point.save(:validate => false)
       ActivityPointUnhelpful.create(:point => point, :user => user, :priority => point.priority)
     end
     user.increment!(:qualities_count)
   end
-  
+
   def remove_point_counts
     if self.is_helpful?
       point.helpful_count -= 1
-      point.endorser_helpful_count -= 1 if is_endorser?
-      point.neutral_helpful_count -= 1 if is_neutral?      
-      point.opposer_helpful_count -= 1 if is_opposer?
+      if is_endorser?
+        point.endorser_helpful_count -= 1
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => -1, :is_undo => true)
+      elsif is_neutral?
+        point.neutral_helpful_count -= 1
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => -1, :is_undo => true)
+      elsif is_opposer?
+        point.opposer_helpful_count -= 1
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => -1, :is_undo => true)
+      end
       point.delay.calculate_score(true)
       point.save(:validate => false)
       ActivityPointHelpfulDelete.create(:point => point, :user => user, :priority => point.priority)        
-    end
-    if not self.is_helpful?
+    else
       point.unhelpful_count -= 1
-      point.endorser_unhelpful_count -= 1 if is_endorser?
-      point.neutral_unhelpful_count -= 1 if is_neutral?      
-      point.opposer_unhelpful_count -= 1 if is_opposer?
+      if is_endorser?
+        point.endorser_helpful_count += 1
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => 1, :is_undo => true)
+      elsif is_neutral?
+        point.neutral_helpful_count += 1
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => 1, :is_undo => true)
+      elsif is_opposer?
+        point.opposer_helpful_count += 1
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => 1, :is_undo => true)
+      end
       point.delay.calculate_score(true)
       point.save(:validate => false)
       ActivityPointUnhelpfulDelete.create(:point => point, :user => user, :priority => point.priority)      

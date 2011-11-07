@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104190954) do
+ActiveRecord::Schema.define(:version => 20111107165737) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20111104190954) do
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_undo",                          :default => false
   end
 
   add_index "capitals", ["recipient_id"], :name => "capitals_recipient_id_index"
