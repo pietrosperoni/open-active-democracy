@@ -84,8 +84,9 @@ class MasterProcessing < VideoProcessing
   def self.convert_master_to_flash(master_video)
     master_video_filename = "#{Rails.root.to_s}/video_temp/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.wmv"
     master_video_flv_tmp_filename = "#{Rails.root.to_s}/video_temp/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.tmp.flv"
-    master_video_flv_filename = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}/master.flv"
-    FileUtils.mkpath(master_video_flv_filename)
+    master_video_flv_filename_path = "#{Rails.root.to_s}/private/"+ENV['Rails.env']+"/process_speech_master_videos/#{master_video.id}"
+    master_video_flv_filename = "#{master_video_flv_filename_path}/master.flv"
+    FileUtils.mkpath(master_video_flv_filename_path)
     @@shell.execute("mencoder -of lavf -ovc lavc -lavcopts vcodec=flv:vbitrate=1000:keyint=25:vqmin=3:acodec=libmp3lame:abitrate=160\
      -srate 44100 -af channels=1 -delay 0.20 -oac lavc -lavcopts acodec=libmp3lame:abitrate=160 -ofps 25 -vf \"harddup,crop=812:476:16:3,scale=640:375\"\
      #{master_video_filename} -o #{master_video_flv_tmp_filename}")
