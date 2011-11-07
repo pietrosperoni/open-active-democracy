@@ -16,9 +16,12 @@
 class ProcessDocumentElement < ActiveRecord::Base
   belongs_to :user
   belongs_to :process_document
+  has_many :sentences
   
   after_save :touch_document
   before_destroy :touch_document
+
+  scope :articles, :conditions => "content_type = 3"
   
   acts_as_rateable
 
@@ -39,4 +42,16 @@ class ProcessDocumentElement < ActiveRecord::Base
   def touch_document
     self.process_document.touch
   end
+  def touch_document
+    self.process_document.touch
+  end
+
+  def children
+    ProcessDocumentElement.all(:conditions => "parent_id = #{id}")
+  end
+
+  def user_proposals
+    ProcessDocumentElement.all(:conditions => "parent_id = #{id} and not user_id is null")
+  end
+
 end

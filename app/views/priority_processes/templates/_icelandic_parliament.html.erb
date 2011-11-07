@@ -57,7 +57,7 @@
 						<%=document.external_date.strftime("%d.%m.%Y") %>
 					</td>
 					<td>
-						<%= link_to document.external_id, document.external_link,{:target=>"_blank"}%>
+						<%= link_to document.external_id, document.external_link, {:target => "_blank", :class => "extlink"}%>
 					</td>
 					<td>
 						<%=document.external_type %>

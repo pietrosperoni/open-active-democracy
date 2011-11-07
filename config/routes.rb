@@ -32,6 +32,7 @@ OpenActiveDemocracy::Application.routes.draw do
   resources :categories
 
   match '/priorites/flag/:id' => 'priorities#flag'
+  match '/priorites/show_feed/:id' => 'priorities#show_feed'
   match '/priorites/abusive/:id' => 'priorities#abusive'
   match '/priorites/not_abusive/:id' => 'priorities#not_abusive'
   match '/questions/flag/:id' => 'questions#flag'

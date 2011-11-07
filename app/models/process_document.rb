@@ -24,6 +24,7 @@ class ProcessDocument < ActiveRecord::Base
   belongs_to :process_document_type
 
   has_many :process_document_elements
+  has_many :generated_proposals
 
   def to_param
     "#{id}-#{self.priority_process.priority.name.parameterize_full}-#{external_type.parameterize_full}"
@@ -56,7 +57,15 @@ class ProcessDocument < ActiveRecord::Base
         not self.priority_process.priority.name.downcase_is.index("fjáraukalög"))
       "<a href=\"/process_documents/show/#{to_param}\">#{external_type}</a>".html_safe
     else
-      "<a href=\"#{self.external_link}\">#{external_type}</a>".html_safe
+      "<a href=\"#{self.external_link}\" target='_blank'>#{external_type}</a>".html_safe
     end
+  end
+  def title(show_text_only = false)
+    element = process_document_elements.first(:conditions => "content_type = 1")
+    show_text_only ? element.content_text_only : element.content
+  end
+
+  def find_changes_grouped_by_user
+    process_document_elements.all(:conditions => "not user_id is null", :group => "user_id")
   end
 end

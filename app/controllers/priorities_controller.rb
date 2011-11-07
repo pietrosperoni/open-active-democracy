@@ -3,7 +3,7 @@ class PrioritiesController < ApplicationController
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
                                            :tag, :tag_save, :opposed, :endorsed, :destroy, :new]
   before_filter :admin_required, :only => [:bury, :successful, :compromised, :intheworks, :failed]
-  before_filter :load_endorsement, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, 
+  before_filter :load_endorsement, :only => [:show, :show_feed, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points,
                                              :opposed_top_points, :endorsed_top_points, :points_overview, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
                                              :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
@@ -391,33 +391,18 @@ class PrioritiesController < ApplicationController
   def show
     @page_title = @priority.name
     @priority_process = @priority.priority_process_root_node
-    @show_only_last_process = true
-    point_ids = []
-    if @priority.up_points_count > 0
-      @endorser_points = @priority.points.published.by_endorser_helpfulness.find(:all, :limit => 3)
-      point_ids += @endorser_points.collect {|c| c.id}
-    end
-    if @priority.down_points_count > 0
-      if point_ids.any? 
-        @opposer_points = @priority.points.published.by_opposer_helpfulness.find(:all, :conditions => ["id not in (?)",point_ids], :limit => 3)
-      else
-        @opposer_points = @priority.points.published.by_opposer_helpfulness.find(:all, :limit => 3)
-      end
-      point_ids += @opposer_points.collect {|c| c.id}
-    end
-    if @priority.neutral_points_count > 0
-      if point_ids.any?
-        @neutral_points = @priority.points.published.by_neutral_helpfulness.find(:all, :conditions => ["id not in (?)",point_ids], :limit => 3)
-      else
-        @neutral_points = @priority.points.published.by_neutral_helpfulness.find(:all, :limit => 3)
-      end
-      point_ids += @neutral_points.collect {|c| c.id}        
-    end
-    @point_ids = point_ids.uniq.compact
-    @qualities = nil
-    if logged_in? # pull all their qualities on the priorities shown
-      @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", point_ids,current_user.id])
-    end
+    @show_only_last_process = false
+    @point_value = 0
+    @points_top_up = @priority.points.published.by_helpfulness.up_value.five
+    @points_top_down = @priority.points.published.by_helpfulness.down_value.five
+    @points_new_up = @priority.points.published.by_recently_created.up_value.five.reject {|p| @points_top_up.include?(p)}
+    @points_new_down = @priority.points.published.by_recently_created.down_value.five.reject {|p| @points_top_down.include?(p)}
+    @total_up_points = @priority.points.published.up_value.count
+    @total_down_points = @priority.points.published.down_value.count
+    @total_up_points_new = [0,@total_up_points-@points_top_up.length].max
+    @total_down_points_new = [0,@total_down_points-@points_top_down.length].max
+    get_qualities([@points_new_up,@points_new_down,@points_top_up,@points_top_down])
+
     document_ids = []
     if @priority.up_documents_count > 0
       @endorser_documents = @priority.documents.published.by_endorser_helpfulness.find(:all, :limit => 3)
@@ -441,7 +426,7 @@ class PrioritiesController < ApplicationController
     end
     @document_ids = document_ids.uniq.compact    
     
-    @activities = @priority.activities.active.for_all_users.by_recently_updated.paginate :include => :user, :page => params[:page]
+    @activities = @priority.activities.active.top_discussions.for_all_users :include => :user
     if logged_in? and @endorsement
       if @endorsement.is_up?
         @relationships = @priority.relationships.endorsers_endorsed.by_highest_percentage.find(:all, :include => :other_priority).group_by {|o|o.other_priority}
@@ -461,7 +446,15 @@ class PrioritiesController < ApplicationController
       format.json { render :json => @priority.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end
   end
-  
+
+  def show_feed
+    last = params[:last].blank? ? Time.now + 1.second : Time.parse(params[:last])
+    @activities = @priority.activities.active.top_discussions.feed(last).for_all_users :include => :user
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def opposer_points
     @page_title = tr("Points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = -1  
