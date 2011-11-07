@@ -232,16 +232,17 @@ class ProcessParser
     current_priority.name = (html_doc/"h1.FyrirsognStorSv").text.strip
     current_priority.user = current_user
     current_priority.ip_address = "127.0.0.1"
-    current_priority.category_id =
+    uncategorized_id = Category.find_or_create_by_name('Miscellaneous').id
+    untagged_name = Tag.find_or_create_by_name('Uncategorized proposals').name
 
     placeholder_tag = nil
     if category_id = CrawlerUtils.get_process_category_id(mnr)
       current_priority.category_id = category_id
       puts "Process category_id: #{current_priority.category_id}"
     else
-      current_priority.category_id = Category.find_or_create_by_name('Miscellaneous').id
+      current_priority.category_id = uncategorized_id
       puts "Process category id unknown"
-      placeholder_tag = Tag.find_or_create_by_name('Uncategorized proposals').name
+      placeholder_tag = untagged_name
     end
 
     primary_issues = [proposal_tag]
@@ -265,6 +266,14 @@ class ProcessParser
         combined_tags = old_tags | new_tags
         old_priority.issue_list = combined_tags.join(",")
         old_priority.save(false)
+      end
+
+      if old_priority.category_id == uncategorized_id and new_category_id = CrawlerUtils.get_process_category_id(mnr)
+        puts "CATEGORIZING OLD PRIORITY: #{new_category_id}"
+        old_priority.category = new_category_id
+        old_issue_list = old_priority.issue_list.to_a
+        new_issue_list = old_issue_list - [untagged_name]
+        old_priority.category = (new_issue_list | CrawlerUtils.get_process_tag_names(mnr)).join(',')
       end
 
       current_priority = old_priority
