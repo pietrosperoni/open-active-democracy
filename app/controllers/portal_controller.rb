@@ -143,7 +143,7 @@ class PortalController < ApplicationController
   def setup_portal
     @portlet_container = default_container
     last = params[:last].blank? ? Time.now + 1.second : Time.parse(params[:last])
-    @activities = Activity.active.top.feed(last).filtered.for_all_users
+    @activities = Activity.active.top.feed(last).filtered.for_all_users.with_20
 #    if not current_user or current_user.is_admin? or not logged_in?
 #      @portlet_container = default_container
 #   else

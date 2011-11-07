@@ -15,6 +15,7 @@ class Activity < ActiveRecord::Base
 
   scope :top, :order=>"changed_at DESC", :conditions => "type in ('ActivityPointNew','ActivityDocumentNew','ActivityPriorityNew','ActivityBulletinNew')"
   scope :top_discussions, :order=>"changed_at DESC", :conditions => "type in ('ActivityBulletinNew')", :limit=>5
+  scope :with_20, :limit=> 20
 
   scope :feed, lambda{|last| {:conditions=>["changed_at < ? ", last], :order=>"changed_at DESC", :limit=>5}}
   scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
