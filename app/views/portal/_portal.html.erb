@@ -17,7 +17,7 @@
 <% end %>
 <% unless @activities.blank?%>
 <ul id="endless_scroll_ul" class='list' last="<%=@activities.to_a.last.changed_at%>">
-<%= render :template => 'news/activity_list' %>
+<%= render :template => 'news/activity_list_simple' %>
 <div id="infinite-scroll">
 </div>
   <div class="endless_scroll_inner_wrap"></div>

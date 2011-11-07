@@ -11,12 +11,12 @@ class FixCommentContentHtml < ActiveRecord::Migration
 
 
   def self.up
-    Comment.transaction do
-      Comment.all.each do |comment|
-        comment.content_html = help.simple_format(comment.content_html)
-        comment.save
-      end
-    end
+    #Comment.transaction do
+    #  Comment.all.each do |comment|
+    #    comment.content_html = help.simple_format(comment.content_html)
+    #    comment.save
+    #  end
+    #end
   end
 
   def self.down

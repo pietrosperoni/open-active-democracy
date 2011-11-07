@@ -406,6 +406,20 @@ ActiveRecord::Schema.define(:version => 20111104190954) do
   add_index "followings", ["other_user_id"], :name => "followings_other_user_id_index"
   add_index "followings", ["user_id"], :name => "followings_user_id_index"
 
+  create_table "generated_proposal_elements", :force => true do |t|
+    t.integer  "generated_proposal_id"
+    t.integer  "process_document_element_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "generated_proposals", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "process_document_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "governments", :force => true do |t|
     t.string   "status",                         :limit => 30
     t.string   "short_name",                     :limit => 20
@@ -1046,6 +1060,13 @@ ActiveRecord::Schema.define(:version => 20111104190954) do
   add_index "revisions", ["point_id"], :name => "index_revisions_on_point_id"
   add_index "revisions", ["status"], :name => "index_revisions_on_status"
   add_index "revisions", ["user_id"], :name => "index_revisions_on_user_id"
+
+  create_table "sentences", :force => true do |t|
+    t.integer  "process_document_element_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shown_ads", :force => true do |t|
     t.integer  "ad_id"

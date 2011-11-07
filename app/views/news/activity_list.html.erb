@@ -1,4 +1,4 @@
-<% if Government.current.message_for_news and Government.current.message_for_news!="" -%>
+<% if Government.current.message_for_news and Government.current.message_for_news!="" and not params[:controller].include?("portal") -%>
   <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_news.html_safe } %>
 <% end %>
 <script type="text/javascript">

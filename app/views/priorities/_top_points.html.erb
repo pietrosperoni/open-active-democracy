@@ -14,7 +14,7 @@
             </div>
 </div>
 
-
+<% unless @points_new_up.empty? %>
 <div class="sub_header">
                 <%=tr("Newest Points For", "view/priorities/top_points") %><%=get_points_number_text(@points_new_up.length,@total_up_points_new,true) %><span class="separator">|</span><%=link_to(tr("All points for endorse", "view/priorities/top_points"), endorsed_top_points_priority_url(@priority,:by_newest=>true)) %>
 
@@ -22,7 +22,8 @@
             <div id="pro_new">
                 <%= render :partial => "points/short_list", :locals => {:newest_points=>true, :id => "pro_new", :points => @points_new_up, :numbering=>false} %>
             </div>
-</div>
+      <% end %>
+      </div>
 
 <div class="oppose-wrap">
             <div class="header-add">
@@ -35,7 +36,7 @@
             <div id="con_top">
                 <%= render :partial => "points/short_list", :locals => {:id => "con_top", :points => @points_top_down, :numbering=>true} %>
             </div>
-
+ <% unless @points_new_down.empty? %>
   <div class="sub_header">
                 <%=tr("Newest Points Against", "view/priorities/top_points") %><%=get_points_number_text(@points_new_down.length,@total_down_points_new,true) %><span class="separator">|</span><%=link_to(tr("All points for oppose", "view/priorities/top_points"), opposed_top_points_priority_url(@priority,:by_newest=>true)) %>
 
@@ -44,7 +45,7 @@
                 <%= render :partial => "points/short_list", :locals => {:newest_points=>true, :id => "con_new", :points => @points_new_down, :numbering=>false} %>
             </div>
 
-
+<% end %>
 </div>
 
 </div>

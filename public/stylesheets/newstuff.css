@@ -999,7 +999,7 @@ margin-right: 4px !Important;
 */
 .icon {
     left: 0;
-    margin: 19px 0 0 24px;
+    margin: 19px 0 0 26px;
     position: absolute;
     z-index: 0;
 }
@@ -1056,7 +1056,7 @@ margin-top:7px;
 
 .pagination {
 	margin: -1px 0 5px 10px;
-	float: left;
+/*	float: left; */
 }
 
 .tiny_info, #tiny_info 

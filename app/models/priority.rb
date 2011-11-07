@@ -225,11 +225,11 @@ class Priority < ActiveRecord::Base
   end
   
   def up_endorsements_count
-    Endorsement.where(:priority_id=>self.id, :status=>'active', :value=>1).count
+    Endorsement.where(:priority_id=>self.id, :value=>1).count
   end
   
   def down_endorsements_count
-    Endorsement.where(:priority_id=>self.id, :status=>'active', :value=>-1).count
+    Endorsement.where(:priority_id=>self.id, :value=>-1).count
   end
   
   def is_controversial?

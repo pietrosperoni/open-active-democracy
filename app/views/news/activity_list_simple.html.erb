@@ -1,0 +1,8 @@
+<div class="clear"></div>
+<% if not @activities %>
+	<%= tr("No activity here yet.", "view/news/activity_list")%>
+<% else %>
+    <div id="activities" class="single">
+    <%= render :partial=>"news/activity_list" %>
+    </div>
+<% end %>
