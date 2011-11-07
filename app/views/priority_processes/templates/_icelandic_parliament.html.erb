@@ -3,7 +3,7 @@
 <% processes = PriorityProcess.find_all_by_priority_id(@priority.id,:order=>"stage_sequence_number") %>
 <% if @show_only_last_process %>
   <% processes = [processes.last] %>
-  <h2><%=t "processes.only_last_process"%></h2>
+  <h2><%= tr("Only last process", "view/priority_processes/templates") %></h2>
   <%=link_to tr("Show all processes", "view/priority_processes/templates"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
 <% else %>
 <br>
