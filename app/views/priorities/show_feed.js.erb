@@ -1,0 +1,6 @@
+$('.endless_scroll_inner_wrap').append("<%=escape_javascript(render :partial => 'news/activity_list')%>");
+<% unless @activities.blank? %>
+    $('#endless_scroll_ul_priority_show').attr('last', '<%=@activities.to_a.last.changed_at%>');
+<% else %>
+    $('#infinite-scroll').detach();
+<% end %>

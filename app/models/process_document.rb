@@ -57,7 +57,7 @@ class ProcessDocument < ActiveRecord::Base
         not self.priority_process.priority.name.downcase_is.index("fjáraukalög"))
       "<a href=\"/process_documents/show/#{to_param}\">#{external_type}</a>".html_safe
     else
-      "<a href=\"#{self.external_link}\">#{external_type}</a>".html_safe
+      "<a href=\"#{self.external_link}\" target='_blank'>#{external_type}</a>".html_safe
     end
   end
   def title(show_text_only = false)

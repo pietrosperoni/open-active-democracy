@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
 
-  before_filter :login_required, :except => [:index, :top, :discussions, :points, :activities, :capitals, :official, :changes, :changes_voting, :changes_activity, :ads, :videos, :comments, :your_discussions, :your_priority_discussions, :your_network_discussions, :your_priorities_created_discussions]
+  before_filter :login_required, :except => [:index, :top, :top_feed, :discussions, :points, :activities, :capitals, :official, :changes, :changes_voting, :changes_activity, :ads, :videos, :comments, :your_discussions, :your_priority_discussions, :your_network_discussions, :your_priorities_created_discussions]
   before_filter :check_for_user, :only => [:your_discussions, :your_priority_discussions, :your_network_discussions, :your_priorities_created_discussions]
 
   caches_action :top, :discussions, :activities, :points,
@@ -74,7 +74,7 @@ class NewsController < ApplicationController
 
   def top
     @page_title = tr("Top News at {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"))
-    @activities = Activity.active.top.filtered.for_all_users.by_recently_created.paginate :page => params[:page]      
+    @activities = Activity.active.top.filtered.for_all_users.paginate :page => params[:page]
     @rss_url = url_for(:only_path => false, :format => "rss")    
     respond_to do |format|
       format.html { render :action => "activity_list" }
@@ -83,7 +83,21 @@ class NewsController < ApplicationController
       format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
     end 
   end
-  
+
+  def top_feed
+    @page_title = tr("Top News at {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"))
+    last = params[:last].blank? ? Time.now + 1.second : Time.parse(params[:last])
+    @activities = Activity.active.top.feed(last).filtered.for_all_users
+    @rss_url = url_for(:only_path => false, :format => "rss")
+    respond_to do |format|
+      format.js
+      format.html { render :action => "activity_list" }
+      format.rss { render :template => "rss/activities" }
+      format.xml { render :xml => @activities.to_xml(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @activities.to_json(:include => [:user, :comments], :except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
+
   def capital
     @page_title = tr("{currency_name} at {government_name}", "controller/news", :government_name => tr(current_government.name,"Name from database"), :currency_name => current_government.currency_name.titleize)
     @activities = Activity.active.filtered.for_all_users.capital.by_recently_created.paginate :page => params[:page]
