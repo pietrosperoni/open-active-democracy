@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101131405) do
+ActiveRecord::Schema.define(:version => 20111104190954) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
+    t.string   "sub_tags"
   end
 
   create_table "changes", :force => true do |t|
@@ -390,6 +391,20 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
 
   add_index "followings", ["other_user_id"], :name => "followings_other_user_id_index"
   add_index "followings", ["user_id"], :name => "followings_user_id_index"
+
+  create_table "generated_proposal_elements", :force => true do |t|
+    t.integer  "generated_proposal_id"
+    t.integer  "process_document_element_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "generated_proposals", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "process_document_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "governments", :force => true do |t|
     t.string   "status",                         :limit => 30
@@ -785,6 +800,7 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
     t.integer  "position_endorsed_7days"
     t.integer  "position_endorsed_30days"
     t.text     "finished_status_message"
+    t.integer  "external_session_id"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
@@ -869,8 +885,8 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
     t.integer  "sequence_number"
     t.integer  "process_document_id"
     t.integer  "parent_id"
-    t.binary   "content",             :limit => 2147483647
-    t.binary   "content_text_only",   :limit => 2147483647
+    t.text     "content"
+    t.text     "content_text_only"
     t.string   "content_number"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1030,6 +1046,13 @@ ActiveRecord::Schema.define(:version => 20111101131405) do
   add_index "revisions", ["point_id"], :name => "index_revisions_on_point_id"
   add_index "revisions", ["status"], :name => "index_revisions_on_status"
   add_index "revisions", ["user_id"], :name => "index_revisions_on_user_id"
+
+  create_table "sentences", :force => true do |t|
+    t.integer  "process_document_element_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shown_ads", :force => true do |t|
     t.integer  "ad_id"
