@@ -263,7 +263,7 @@ class ProcessParser
       unless new_tags.empty?
         puts "ADDING NEW TAGS TO OLD PRIORITY: #{new_tags}"
         combined_tags = old_tags | new_tags
-        old_priority.issue_list = combined_tags.join(", ")
+        old_priority.issue_list = combined_tags.join(",")
         old_priority.save(false)
       end
 
