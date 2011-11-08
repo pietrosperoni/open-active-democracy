@@ -77,7 +77,7 @@ class VideoWorker
           pos_x = 190
           pos_y = 45
         else
-          pos_x = 252
+          pos_x = 232
           pos_y = 125
         end
         @shell.execute("ffmpeg -ss #{[time/3600, time/60 % 60, time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} -i #{speech_video_filename} \
