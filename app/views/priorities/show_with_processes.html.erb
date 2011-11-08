@@ -125,7 +125,6 @@
       <% end %>
       <p>
 
-      <div class="heading"><%= tr("What's happening on this priority", "view/priorities/show_with_processes") %></div>
       <% unless @activities.blank? %>
           <ul id="endless_scroll_ul_priority_show" class='list' last="<%= @activities.to_a.last.changed_at %>" priority_id='<%=@priority.id%>'>
             <%= render :template => 'news/activity_list_simple' %>

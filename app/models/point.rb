@@ -264,47 +264,11 @@ class Point < ActiveRecord::Base
       end
     end
 
-    opposer_difference = self.opposer_score - old_opposer_score
-    endorser_difference = self.endorser_score - old_endorser_score
-    neutral_difference = self.neutral_score - old_neutral_score
-
-    # did any particular group find this helpful?
-    if opposer_difference >= 1
-      capitals << CapitalPointHelpfulOpposers.new(:recipient => user, :amount => 1)  
-    end    
-    if endorser_difference >= 1
-      capitals << CapitalPointHelpfulEndorsers.new(:recipient => user, :amount => 1)
-    end    
-    if neutral_difference >= 1
-      capitals << CapitalPointHelpfulUndeclareds.new(:recipient => user, :amount => 1)
-    end        
-    
-    # did people find this actually unhelpful?
-    if endorser_difference <= -1
-      capitals << CapitalPointHelpfulEndorsers.new(:recipient => user, :amount => -1)
-    end
-    if opposer_difference <= -1
-      capitals << CapitalPointHelpfulOpposers.new(:recipient => user, :amount => -1)
-    end
-    if neutral_difference <= -1
-      capitals << CapitalPointHelpfulUndeclareds.new(:recipient => user, :amount => -1)
-    end
-
-    # TODO: this needs to be rethought
-    # did both endorsers & opposers find this helpful or unhelpful?
-    #if self.opposer_score > 1 and self.endorser_score > 1 and (old_opposer_score <= 1 or old_endorser_score <= 1)
-    #  capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => 1)
-    #end
-    #if self.opposer_score < -0.5 and self.endorser_score < -0.5 and (old_opposer_score >= -0.5 or old_endorser_score >= -0.5)
-    #  # charge for a point that both opposers and endorsers found unhelpful
-    #  capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => -1)
-    #end
-
     if old_score != self.score and tosave
       self.save(:validate => false)
     end    
   end
-  
+
   def opposers_helpful?
     opposer_score > 0
   end
