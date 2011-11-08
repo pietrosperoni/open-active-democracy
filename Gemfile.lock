@@ -27,6 +27,14 @@ GIT
       tag_helper
 
 GIT
+  remote: git://github.com/hinrik/flvedit.git
+  revision: b69cad77d605ccb4c3736295a0b9e6c7f5163010
+  specs:
+    flvedit (0.7.3)
+      backports (>= 1.7.1)
+      packable (>= 1.3.2)
+
+GIT
   remote: git://github.com/jaikoo/twitter-auth.git
   revision: 1b3f4e753cb7c694f2042f4b2f6547d66fe460c9
   branch: rails_3
@@ -73,6 +81,7 @@ GEM
       activesupport (= 3.0.10)
     activesupport (3.0.10)
     arel (2.0.10)
+    backports (2.3.0)
     builder (2.1.2)
     capistrano (2.9.0)
       highline
@@ -144,6 +153,8 @@ GEM
     nokogiri (1.5.0)
     oauth (0.4.5)
     orm_adapter (0.0.5)
+    packable (1.3.2)
+      backports
     paperclip (2.4.5)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
@@ -210,6 +221,7 @@ DEPENDENCIES
   dalli
   delayed_job
   facebooker2
+  flvedit!
   geoip
   googlecharts
   hpricot (>= 0.6)
