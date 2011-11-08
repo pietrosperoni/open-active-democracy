@@ -69,7 +69,6 @@ class SpeechVideoProcessing < VideoProcessing
                        -t #{[duration_s/3600, duration_s/60 % 60, duration_s % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} \
                        -i #{master_video_filename} -acodec copy -vcodec copy -y #{speech_video_first_tmp_filename}")
     end
-#    @@shell.execute("flvtool2 -M -c -a -k -m #{cut_points.inspect.gsub(" ","").gsub("\"","\\\"")} #{master_video_filename}")
 
     master_video.process_speech_videos.each do |video|
       video.in_processing = true
@@ -79,12 +78,13 @@ class SpeechVideoProcessing < VideoProcessing
       speech_video_path = "#{Rails.root.to_s}/public/"+ENV['Rails.env']+"/process_speech_videos/#{video.id}/"
       speech_video_first_tmp_filename = speech_video_path+"speech.tmp_1.flv"
       speech_video_second_tmp_filename = speech_video_path+"speech.tmp_2.flv"
+      speech_video_third_tmp_filename = speech_video_path+"speech.tmp_3.flv"
       speech_video_filename = speech_video_path+"speech.flv"
       @@shell.execute("mencoder -of lavf -ovc lavc -lavcopts vcodec=flv:vbitrate=400:keyint=230:vqmin=3 -oac copy -ofps 25 -vf \"harddup\"\
        #{speech_video_first_tmp_filename} -o #{speech_video_second_tmp_filename}")
-      @@shell.execute("flvtool2 -U -c #{speech_video_second_tmp_filename}")
-      @@shell.execute("rm #{speech_video_first_tmp_filename}")
-      @@shell.execute("mv #{speech_video_second_tmp_filename} #{speech_video_filename}")
+      @@shell.execute("flvedit #{speech_video_second_tmp_filename} -u --save #{speech_video_third_tmp_filename}")
+      @@shell.execute("rm #{speech_video_first_tmp_filename} #{speech_video_second_tmp_filename}")
+      @@shell.execute("mv #{speech_video_third_tmp_filename} #{speech_video_filename}")
       video.reload :lock=>true
       video.published = 1
       video.in_processing = 0

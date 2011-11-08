@@ -74,3 +74,5 @@ group :development do
 end
 
 gem 'ckeditor'
+
+gem 'flvedit', git: "git://github.com/hinrik/flvedit.git"
