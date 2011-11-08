@@ -76,13 +76,15 @@ class SpeechVideoProcessing < VideoProcessing
       @@logger.info("VIDEO TO PROCESS: #{video.title}")
       @@logger.info("PROCESS: #{video.process_discussion.meeting_url}")
       speech_video_path = "#{Rails.root.to_s}/public/"+ENV['Rails.env']+"/process_speech_videos/#{video.id}/"
+      flvedit_path = "#{Rails.root.to_s}/workers/video/flvedit"
+      flvedit_lib = "#{Rails.root.to_s}/workers/video/lib"
       speech_video_first_tmp_filename = speech_video_path+"speech.tmp_1.flv"
       speech_video_second_tmp_filename = speech_video_path+"speech.tmp_2.flv"
       speech_video_third_tmp_filename = speech_video_path+"speech.tmp_3.flv"
       speech_video_filename = speech_video_path+"speech.flv"
       @@shell.execute("mencoder -of lavf -ovc lavc -lavcopts vcodec=flv:vbitrate=400:keyint=230:vqmin=3 -oac copy -ofps 25 -vf \"harddup\"\
        #{speech_video_first_tmp_filename} -o #{speech_video_second_tmp_filename}")
-      @@shell.execute("flvedit #{speech_video_second_tmp_filename} -u --save #{speech_video_third_tmp_filename}")
+      @@shell.execute("ruby -I#{flvedit_lib} #{flvedit_path} #{speech_video_second_tmp_filename} -u --save #{speech_video_third_tmp_filename}")
       @@shell.execute("rm #{speech_video_first_tmp_filename} #{speech_video_second_tmp_filename}")
       @@shell.execute("mv #{speech_video_third_tmp_filename} #{speech_video_filename}")
       video.reload :lock=>true
