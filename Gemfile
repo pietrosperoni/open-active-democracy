@@ -75,4 +75,4 @@ end
 
 gem 'ckeditor'
 
-gem 'flvedit', git: "git://github.com/hinrik/flvedit.git"
+#gem 'flvedit', git: "git://github.com/hinrik/flvedit.git"
