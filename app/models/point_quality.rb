@@ -21,13 +21,13 @@ class PointQuality < ActiveRecord::Base
 
       if is_endorser?
         point.endorser_helpful_count += 1
-        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => 1)
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.author_user, :amount => 1)
       elsif is_neutral?
         point.neutral_helpful_count += 1
-        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => 1)
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.author_user, :amount => 1)
       elsif is_opposer?
         point.opposer_helpful_count += 1
-        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => 1)
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.author_user, :amount => 1)
       end
 
       if point.point_qualities.count > 1
@@ -42,13 +42,13 @@ class PointQuality < ActiveRecord::Base
       point.unhelpful_count += 1
       if is_endorser?
         point.endorser_helpful_count -= 1
-        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => -1)
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.author_user, :amount => -1)
       elsif is_neutral?
         point.neutral_helpful_count -= 1
-        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => -1)
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.author_user, :amount => -1)
       elsif is_opposer?
         point.opposer_helpful_count -= 1
-        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => -1)
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.author_user, :amount => -1)
       end
 
       point.delay.calculate_score(true)
@@ -63,13 +63,13 @@ class PointQuality < ActiveRecord::Base
       point.helpful_count -= 1
       if is_endorser?
         point.endorser_helpful_count -= 1
-        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => -1, :is_undo => true)
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.author_user, :amount => -1, :is_undo => true)
       elsif is_neutral?
         point.neutral_helpful_count -= 1
-        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => -1, :is_undo => true)
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.author_user, :amount => -1, :is_undo => true)
       elsif is_opposer?
         point.opposer_helpful_count -= 1
-        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => -1, :is_undo => true)
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.author_user, :amount => -1, :is_undo => true)
       end
       point.delay.calculate_score(true)
       point.save(:validate => false)
@@ -78,13 +78,13 @@ class PointQuality < ActiveRecord::Base
       point.unhelpful_count -= 1
       if is_endorser?
         point.endorser_helpful_count += 1
-        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.user, :amount => 1, :is_undo => true)
+        point.capitals << CapitalPointHelpfulEndorsers.new(:recipient => point.author_user, :amount => 1, :is_undo => true)
       elsif is_neutral?
         point.neutral_helpful_count += 1
-        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.user, :amount => 1, :is_undo => true)
+        point.capitals << CapitalPointHelpfulUndeclareds.new(:recipient => point.author_user, :amount => 1, :is_undo => true)
       elsif is_opposer?
         point.opposer_helpful_count += 1
-        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.user, :amount => 1, :is_undo => true)
+        point.capitals << CapitalPointHelpfulOpposers.new(:recipient => point.author_user, :amount => 1, :is_undo => true)
       end
       point.delay.calculate_score(true)
       point.save(:validate => false)

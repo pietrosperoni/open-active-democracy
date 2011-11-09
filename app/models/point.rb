@@ -32,7 +32,8 @@ class Point < ActiveRecord::Base
   
   has_many :revisions, :dependent => :destroy
   has_many :activities, :dependent => :destroy, :order => "activities.created_at desc"
-  
+
+  has_one :author_user, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User", :order => "revisions.created_at ASC"
   has_many :author_users, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User"
   
   has_many :point_qualities, :order => "created_at desc", :dependent => :destroy
