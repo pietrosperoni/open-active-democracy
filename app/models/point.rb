@@ -34,6 +34,7 @@ class Point < ActiveRecord::Base
   has_many :activities, :dependent => :destroy, :order => "activities.created_at desc"
 
   has_one :author_user, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User", :order => "revisions.created_at ASC"
+  has_one :last_author, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User", :order => "revisions.created_at DESC"
   has_many :author_users, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User"
   
   has_many :point_qualities, :order => "created_at desc", :dependent => :destroy
@@ -115,7 +116,7 @@ class Point < ActiveRecord::Base
   end
 
   def do_abusive
-    self.user.do_abusive!(notifications)
+    self.last_author.do_abusive!(notifications)
     self.update_attribute(:flags_count, 0)
   end
 
