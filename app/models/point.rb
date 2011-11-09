@@ -138,10 +138,10 @@ class Point < ActiveRecord::Base
     activities.each do |a|
       a.delete!
     end
-    capital_earned = capitals.sum(:amount)
-    if capital_earned != 0
-      self.capitals << CapitalPointHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1)) 
-    end    
+    #capital_earned = capitals.sum(:amount)
+    #if capital_earned != 0
+    #  self.capitals << CapitalPointHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1))
+    #end
     priority.save(:validate => false)
     for r in revisions
       r.delete!
