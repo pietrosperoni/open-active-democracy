@@ -14,17 +14,6 @@
 		</div>
 	</div>
 
-	<% if current_government.is_tags? and (current_user.is_tagger? or current_user.is_admin?) %>
-		<div class="field">
-			<div class="field_label">
-				<%= tr("{tags_name} (separated multiple with commas)", "view/priorities/edit", :tags_name => current_government.tags_name)%>
-			</div>
-			<div class="field_box">
-				<%= f.text_field :issue_list, :size => 40, :maxlength => 60 %>
-			</div>
-		</div>
-	<% end %>
-
   <div class="field">
     <div class="field_label">
       <%= tr("Category", "view/users/_form_long")%>
