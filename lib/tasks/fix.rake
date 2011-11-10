@@ -1,3 +1,25 @@
+
+def remove_all_endorsements_except
+  # 15436
+  # 2818
+  # 18254
+
+  ids = [14,10,3,60,99,14,108,56,22,10,28,25,55,121,99,7,68,113,135].uniq
+  # Check if any endorsements in ids
+  total = 0
+  ids.each.each do |id|
+    puts total+=Endorsement.find_all_by_priority_id(id).count
+  end
+  puts total
+  Endorsement.delete_all(["endorsements.priority_id NOT IN (?)",ids])
+  Endorsement.all.each_with_index do |e,i|
+    puts i
+    e.status = "finished"
+    e.position = nil
+    e.save
+  end
+end
+
 namespace :fix do
 
   desc "tweak videos"
