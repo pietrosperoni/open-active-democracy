@@ -174,6 +174,7 @@ class UserContact < ActiveRecord::Base
   
   def do_send
     return if attribute_present?("sent_at") # only send it once
+    Tr8n::Config.init('is', Tr8n::Config.current_user) if Government.last.layout == "better_reykjavik" or Government.last.layout == "better_iceland"
     send_email
   end
 
