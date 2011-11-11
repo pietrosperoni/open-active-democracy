@@ -123,6 +123,7 @@ OpenActiveDemocracy::Application.routes.draw do
       get :opposed
       get :activities
       get :endorsers
+      get :by_priority_processes
       get :opposers
       get :discussions
       put :create_short_url
