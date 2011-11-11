@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+require './crawler_utils'
+
 ORIGINAL_LAW_TYPE_HEADER_CHAPTER = 1
 ORIGINAL_LAW_TYPE_HEADER_MAIN_ARTICLE = 2
 ORIGINAL_LAW_TYPE_HEADER_MAIN_PARAGRAPH = 3
@@ -51,22 +53,7 @@ class LawOriginalDocumentElement < ProcessDocumentElement
   
   def self.create_elements(doc, process_id, process_document_id, url, process_type)
     puts "GET ORIGINAL LAW DOCUMENT HTML FOR: #{url} process_document: #{process_document_id} process_type: #{process_type}"
-    html_source_doc = nil
-    retries = 10
-
-    begin
-      Timeout::timeout(120){
-        html_source_doc = Nokogiri::HTML(open(url))
-      }
-    rescue
-      retries -= 1
-      if retries > 0
-        sleep 0.42 and retry
-        puts "retry"
-      else
-        raise
-      end
-    end
+    html_source_doc = CrawlerUtils.fetch_html(url)
 
     if html_source_doc.text.index("Vefskjalið er ekki tilbúið")
       puts "ProcessDocument not yet ready"

@@ -15,30 +15,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require './crawler_utils'
-
-TYPE_HEADER_MAIN = 1
-TYPE_HEADER_CHAPTER= 2
-TYPE_HEADER_MAIN_ARTICLE = 3
-TYPE_HEADER_TEMPORARY_ARTICLE = 4
-TYPE_HEADER_ESSAY = 5
-TYPE_HEADER_COMMENTS_MAIN = 6
-TYPE_HEADER_COMMENTS_ABOUT_CHAPTERS = 7
-TYPE_HEADER_COMMENTS_ABOUT_MAIN_ARTICLES = 8
-TYPE_HEADER_COMMENTS_ABOUT_TEMPORARY_ARTICLE = 9
-TYPE_HEADER_COMMENTS_ABOUT_WHOLE_DOCUMENT = 10
-TYPE_CHAPTER = 11
-TYPE_MAIN_ARTICLE = 12
-TYPE_TEMPORARY_ARTICLE = 13
-TYPE_COMMENTS_ABOUT_CHAPTERS = 14
-TYPE_COMMENTS_ABOUT_MAIN_ARTICLES = 15
-TYPE_COMMENTS_ABOUT_TEMPORARY_ARTICLES = 16
-TYPE_COMMENTS_ABOUT_WHOLE_DOCUMENT = 17
-TYPE_HEADER_MAIN_CONTENT = 18
-TYPE_ESSAY_MAIN_CONTENT = 19
-TYPE_HEADER_REPORT_ABOUT_LAW = 20
-TYPE_REPORT_ABOUT_LAW = 21
+require 'htmlentities'
 
 class LawProposalDocumentElement < ProcessDocumentElement
+
+  @@decoder = HTMLEntities.new
 
   def self.remove_not_needed_divs!(html)
     new_html = ""
@@ -118,7 +99,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
     elsif is_report_about_law_header?
       self.content_type = TYPE_HEADER_REPORT_ABOUT_LAW
     else
-      #puts "Error: Could not find header type for:\n<<<<<\n#{self.content.to_s}\n>>>>>\n"
+      puts "Error: Couldn't find header type for: #{self.content.to_s[0..50].inspect}"
     end
   end
       
@@ -142,7 +123,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
     elsif parent.content_type == TYPE_HEADER_REPORT_ABOUT_LAW
       self.content_type = TYPE_REPORT_ABOUT_LAW
     else
-      #puts "Error: Could not find content type for \n<<<<<\n#{self.content.to_s}\n>>>>>\n"
+      puts "Error: Couldn't find content type for: #{self.content.to_s[0..50].inspect}"
     end
   end
 
@@ -358,7 +339,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
       end
 
       new_parent_header_element = LawProposalDocumentElement.new
-      new_parent_header_element.content = paragraph.to_s
+      new_parent_header_element.content = @@decoder.decode(paragraph.to_s)
       new_parent_header_element.content_text_only = paragraph.text
       new_parent_header_element.sequence_number = sequence_number+=1
       new_parent_header_element.process_document_id = process_document_id
@@ -378,7 +359,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
             div_skip_count += (next_sibling.to_s.split("<div ").count)-1
           end
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.to_s
+            all_content_until_next_header+= @@decoder.decode(next_sibling.to_s)
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling
@@ -393,7 +374,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
           end
           first = false
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.to_s
+            all_content_until_next_header+= @@decoder.decode(next_sibling.to_s)
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling

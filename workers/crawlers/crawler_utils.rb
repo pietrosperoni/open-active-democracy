@@ -8,6 +8,29 @@ require 'tidy'
 require 'open-uri'
 require 'timeout'
 require 'yaml'
+require 'htmlentities'
+
+TYPE_HEADER_MAIN = 1
+TYPE_HEADER_CHAPTER= 2
+TYPE_HEADER_MAIN_ARTICLE = 3
+TYPE_HEADER_TEMPORARY_ARTICLE = 4
+TYPE_HEADER_ESSAY = 5
+TYPE_HEADER_COMMENTS_MAIN = 6
+TYPE_HEADER_COMMENTS_ABOUT_CHAPTERS = 7
+TYPE_HEADER_COMMENTS_ABOUT_MAIN_ARTICLES = 8
+TYPE_HEADER_COMMENTS_ABOUT_TEMPORARY_ARTICLE = 9
+TYPE_HEADER_COMMENTS_ABOUT_WHOLE_DOCUMENT = 10
+TYPE_CHAPTER = 11
+TYPE_MAIN_ARTICLE = 12
+TYPE_TEMPORARY_ARTICLE = 13
+TYPE_COMMENTS_ABOUT_CHAPTERS = 14
+TYPE_COMMENTS_ABOUT_MAIN_ARTICLES = 15
+TYPE_COMMENTS_ABOUT_TEMPORARY_ARTICLES = 16
+TYPE_COMMENTS_ABOUT_WHOLE_DOCUMENT = 17
+TYPE_HEADER_MAIN_CONTENT = 18
+TYPE_ESSAY_MAIN_CONTENT = 19
+TYPE_HEADER_REPORT_ABOUT_LAW = 20
+TYPE_REPORT_ABOUT_LAW = 21
 
 module CrawlerUtils
   @@translations = YAML.load_file('./althingi_categories.yml')
@@ -28,7 +51,6 @@ module CrawlerUtils
 
   def self.fetch_html(url)
     retries = 10
-    html = nil
 
     begin
       Timeout::timeout(120){
@@ -48,7 +70,7 @@ module CrawlerUtils
         # preprocess the html if the caller desires
         yield(html_source) if block_given?
 
-        html = Nokogiri::HTML(html_source)
+        return Nokogiri::HTML(html_source)
       }
     rescue
       retries -= 1
@@ -58,8 +80,6 @@ module CrawlerUtils
         raise
       end
     end
-
-    return html
   end
 
   def self.update_categories

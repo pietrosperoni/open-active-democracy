@@ -1,16 +1,12 @@
-require 'rubygems'
-gem 'nokogiri', '=1.3.3'; require 'nokogiri'
-require 'open-uri'
-
-RAILS_ENV='development'
-
+# coding: utf-8
 require '../../config/boot'
-require "#{RAILS_ROOT}/config/environment"
+require "../../config/environment"
 
-require 'law_document_element'
-require 'law_proposal_document_element'
-require 'process_parser'
-require 'tags_parser'
+require './law_document_element'
+require './law_proposal_document_element'
+require './process_parser'
+require './tags_parser'
+require './crawler_utils'
 
 def get_original_law(id)
   process_document = ProcessDocument.find(id)
@@ -28,7 +24,9 @@ def get_original_law(id)
   end
 
   # Crawl the current/original law
-  doc, law_now, process_document = Nokogiri::HTML(open("http://www.althingi.is/lagas/nuna/#{law_now}.html")), law_now, process_document
+  doc = CrawlerUtils.fetch_html("http://www.althingi.is/lagas/nuna/#{law_now}.html")
+
+  return doc, law_now
 end
 
 def new_element(content, parent_element, process_document, content_type)
@@ -59,7 +57,7 @@ end
 #
 # Get the original law
 #
-doc, law_now, process_document = get_original_law(142)
+doc, law_now = get_original_law(50)
 
 #
 # Create new process document for the original law

@@ -14,27 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-TYPE_HEADER_MAIN = 1
-TYPE_HEADER_CHAPTER= 2
-TYPE_HEADER_MAIN_ARTICLE = 3
-TYPE_HEADER_TEMPORARY_ARTICLE = 4
-TYPE_HEADER_ESSAY = 5
-TYPE_HEADER_COMMENTS_MAIN = 6
-TYPE_HEADER_COMMENTS_ABOUT_CHAPTERS = 7
-TYPE_HEADER_COMMENTS_ABOUT_MAIN_ARTICLES = 8
-TYPE_HEADER_COMMENTS_ABOUT_TEMPORARY_ARTICLE = 9
-TYPE_HEADER_COMMENTS_ABOUT_WHOLE_DOCUMENT = 10
-TYPE_CHAPTER = 11
-TYPE_MAIN_ARTICLE = 12
-TYPE_TEMPORARY_ARTICLE = 13
-TYPE_COMMENTS_ABOUT_CHAPTERS = 14
-TYPE_COMMENTS_ABOUT_MAIN_ARTICLES = 15
-TYPE_COMMENTS_ABOUT_TEMPORARY_ARTICLES = 16
-TYPE_COMMENTS_ABOUT_WHOLE_DOCUMENT = 17
-TYPE_HEADER_MAIN_CONTENT = 18
-TYPE_ESSAY_MAIN_CONTENT = 19
-TYPE_HEADER_REPORT_ABOUT_LAW = 20
-TYPE_REPORT_ABOUT_LAW = 21
+require './crawler_utils'
 
 class LawChangeDocumentElement < ProcessDocumentElement
 
@@ -257,34 +237,13 @@ class LawChangeDocumentElement < ProcessDocumentElement
 
   def self.line_is_a_new_element(line)
     result = ""
-    line.scan(/<!-- Para Num \d \[\d\] -->(.*?)(<!-- Para Num End -->)/) { |match| result = match[0] }
+    line.scan(/<!-- Para Num \d \[\d+\] -->(.*?)(<!-- Para Num End -->)/) { |match| result = match[0] }
     result.empty? ? false : result
   end
 
   def self.create_elements(doc, process_id, process_document_id, url, process_type)
     puts "GET DOCUMENT HTML FOR: #{url} process_document: #{process_document_id} process_type: #{process_type}"
-    html_source_doc = nil
-    retries = 10
-
-    begin
-      Timeout::timeout(120){
-        html_source_doc = Nokogiri::HTML(open(url))
-        # if process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-          # html_source_doc = Nokogiri::HTML(open(url))
-
-        # else
-        #   html_source_doc = Nokogiri::HTML(remove_not_needed_divs(open(url).read))
-        # end
-      }
-    rescue
-      retries -= 1
-      if retries > 0
-        sleep 0.42 and retry
-        puts "retry"
-      else
-        raise
-      end
-    end
+    html_source_doc = CrawlerUtils.fetch_html(url)
 
     # if html_source_doc.index("Vefskjalið er ekki tilbúið")
     #   puts "ProcessDocument not yet ready"
