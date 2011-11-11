@@ -31,8 +31,8 @@
 </div>
 <a class="next<%=@latest_speech_discussions.length<5 ? "disabled" : ""%>"></a>
 <table width="100%">
-    <tr align="left">
-        <td align="left" style="padding-left:70px">
+    <tr>
+        <td class="video_search">
             <% form_tag("/process_speech_videos/search?priority_id=#{@priority.id}") do -%>
             <b><%=label_tag tr("Search by member of Althingi", "view/process_speech_master_videos/_latest_video_discussions_medium") %></b>
             <%=text_field_tag 'search_query' %>

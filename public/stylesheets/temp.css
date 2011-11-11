@@ -467,8 +467,32 @@ span.priority_add_follow a, span.priority_add_ignore a {
 }
 
 span.priority_add_ignore a, .priority_remove2 {background:#fff !important; border:1px solid #ccc !important;width: auto; color: #aaa !important;}
-.priority_add_link1 {background:#A0C47D;border:1px solid #439A22; width: auto; float:left;}
-.priority_add_link2 {background:#E49E6E;border:1px solid #B92D19;width: auto;float:right;}
+
+.priority_add_link1 
+{
+	background:#A0C47D;
+	border:1px solid #439A22; 
+	width: auto; 
+	float:left;
+	    -webkit-border-radius: 0.4em;
+		-moz-border-radius: 0.4em;
+		border-radius: 0.4em;
+		behavior:url(../javascripts/PIE.htc);
+}
+
+.priority_add_link2 
+{
+	background:#E49E6E;
+	border:1px solid #B92D19;
+	width: auto;
+	float:right;
+		-webkit-border-radius: 0.4em;
+		-moz-border-radius: 0.4em;
+		border-radius: 0.4em;
+		behavior:url(../javascripts/PIE.htc);
+
+}
+
 span.priority_add_follow a, .priority_add_link {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #aaa;}
 .priority_add_link1:hover {background:#439A22;border:1px solid #439A22;}
 .priority_add_link2:hover {background:#B92D19;border:1px solid #B92D19;}
@@ -734,7 +758,7 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 */
 
 .priority_icon_single {
-    margin: 10px 0 0 0;
+/*    margin: 10px 0 0 0;*/
 	text-align: center;
 }
 .warning_inline, .single .warning_inline, .single2 .warning_inline, .single3 .warning_inline, .warning_inline2, .warning_inline_point {
@@ -848,6 +872,11 @@ list-style: disc;
 		margin-left: 37px;
 		border: 1px solid #ccc;
 		padding: 10px;
+			    -webkit-border-radius: 0.4em;
+		-moz-border-radius: 0.4em;
+		border-radius: 0.4em;
+		behavior:url(../javascripts/PIE.htc);
+
 }
 
 .encouragement_click {

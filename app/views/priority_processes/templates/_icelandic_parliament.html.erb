@@ -6,10 +6,12 @@
   <h2><%=t "processes.only_last_process"%></h2>
   <%=link_to tr("Show all processes", "view/priority_processes/templates"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
 <% else %>
+
+<!--
 <br>
 <table width="100%">
-    <tr align="left">
-        <td align="left" style="padding-left:70px">
+    <tr>
+        <td>
             <% form_tag("/process_speech_videos/search?priority_id=#{@priority.id}") do -%>
             <b><%=label_tag tr("Search by member of Althingi", "view/priority_processes/templates") %></b>
             <%=text_field_tag 'search_query' %>
@@ -18,6 +20,8 @@
         </td>
     </tr>
 </table>
+-->
+
 <% end %>
 <% processes.each_with_index do |current_process,i| %>
 <div class="althingi_process_container">
@@ -25,7 +29,7 @@
 	<% discussions = current_process.process_discussions %>
 	<h2><%=tr("{sequence_number}. Stage Sequence Number","althingi",:sequence_number=>current_process.stage_sequence_number) %></h2>
 	<% if i==0 %>
-	  <%=link_to 'Málið á Alþingi', current_process.priority.external_link, {:target => "_blank", :class => "extlink"}%>
+	  <%=link_to 'Málið á Alþingi', current_process.priority.external_link, {:target => "_blank", :class => "extlink right"}%>
 	<% end %>
 	<% unless process_documents.empty? %>
 	<div class="althingi_process_documents">
@@ -33,40 +37,40 @@
 		<table>
 			<thead>
 				<tr>
-					<th class="release_date">
+					<td class="release_date">
 						<%=tr("Althingi release date", "view/priority_processes/templates")%>
-					</th>
-					<th class="law_document">
+					</td>
+					<td class="law_document">
 						<%=tr("Althingi law document", "view/priority_processes/templates")%>
-					</th>
-					<th class="document_type">
+					</td>
+					<td class="document_type">
 						<%=tr("Althingi document type", "view/priority_processes/templates")%>
-					</th>
-					<th>
+					</td>
+					<td>
 						<%=tr("Althingi presenter", "view/priority_processes/templates")%>
-					</th>
-					<th>
+					</td>
+					<td>
 						<%=tr("Version from the public", "view/priority_processes/templates")%>
-					</th>
+					</td>
 				</tr>
 			</thead>
 			<tbody>
 				<% process_documents.each do |document| %>
 				<tr class="<%= cycle("even", "odd", :name => "zebra") -%>">
 					<td>
-						<%=document.external_date.strftime("%d.%m.%Y") %>
+						<p><%=document.external_date.strftime("%d.%m.%Y") %></p>
 					</td>
 					<td>
-						<%= link_to document.external_id, document.external_link, {:target => "_blank", :class => "extlink"}%>
+						<p><%= link_to document.external_id, document.external_link, {:target => "_blank", :class => "extlink"}%></p>
 					</td>
 					<td>
-						<%=document.external_type %>
+						<p><%=document.external_type %></p>
 					</td>
 					<td>
-						<%=document.external_author %>
+						<p><%=document.external_author %></p>
 					</td>
-					<td width="230px" align="center">
-						<%=document.get_process_document_link%>
+					<td>
+						<p><%=document.get_process_document_link%></p>
 					</td>
 				</tr>
 			</tbody>
@@ -81,18 +85,18 @@
 		<table>
 			<thead>
 				<tr>
-					<th>
+					<td>
 						<%=tr("Althingi time of discussion", "view/priority_processes/templates") %>
-					</th>
-					<th>
+					</td>
+					<td>
 						<%=tr("Althingi date of discussion", "view/priority_processes/templates") %>
-					</th>
-					<th>
+					</td>
+					<td>
 						<%=tr("Althingi type of discussion", "view/priority_processes/templates") %>
-					</th>
-					<th>
+					</td>
+					<td>
 						<%=tr("Althingi meeting", "view/priority_processes/templates") %>
-					</th>
+					</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -100,17 +104,17 @@
 			    <% cycle_class = cycle("even", "odd", :name => "zebra") -%>
 				<tr class="<%=cycle_class-%>">
 					<td>
-						<%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
-						<%=link_to tr("Listen", "view/priority_processes/templates"), "http://www.althingi.is"+discussion.listen_url, {:target => "_blank"} %>
+						<p><%=link_to "#{discussion.from_time.strftime('%H:%M')}-#{discussion.to_time.strftime('%H:%M')}", discussion.transcript_url,{:target => "_blank"}%> - 
+						<%=link_to tr("Listen", "view/priority_processes/templates"), "http://www.althingi.is"+discussion.listen_url, {:target => "_blank"} %></p>
 					</td>
 					<td>
-						<%=discussion.meeting_date.strftime("%d.%m.%Y") %>
+						<p><%=discussion.meeting_date.strftime("%d.%m.%Y") %></p>
 					</td>
 					<td>
-						<%=discussion.meeting_type %>
+						<p><%=discussion.meeting_type %></p>
 					</td>
 					<td>
-						<%=link_to discussion.meeting_info, discussion.meeting_url,{:target => "_blank"}%>
+						<p><%=link_to discussion.meeting_info, discussion.meeting_url,{:target => "_blank"}%></p>
 					</td>
 				</tr>
 				<% if discussion.process_speech_videos.has_any? %>

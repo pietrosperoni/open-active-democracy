@@ -6,6 +6,7 @@ div.scrollable_medium {
 	overflow:hidden;
 	width: 484px; 
 	height:120px;	
+	padding-bottom: 4px;
 }
 
 #latest_video_discussion_thumbs h3 {
