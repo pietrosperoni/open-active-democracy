@@ -66,6 +66,7 @@ class MasterProcessing < VideoProcessing
       master_video.reload :lock=>true
       master_video.in_processing = false
       master_video.published = true
+      master_video.renew_screenshots = false
       master_video.save
     else
       @@logger.info("no more master videos to process")

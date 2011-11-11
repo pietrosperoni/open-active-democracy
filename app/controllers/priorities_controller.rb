@@ -845,14 +845,24 @@ class PrioritiesController < ApplicationController
     @previous_name = @priority.name
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
 
-    @priority_status_changelog = PriorityStatusChangeLog.new(
-        priority_id: @priority.id,
-        content: params[:priority][:finished_status_message]
-    )
-    @priority_status_changelog.save
-
     if params[:priority]
-      params[:priority][:category] = Category.find(params[:priority][:category]) if params[:priority][:category]
+      if params[:priority][:category]
+        old_category = @priority.category
+        new_category = Category.find(params[:priority][:category])
+        params[:priority][:category] = new_category
+        current_issues = @priority.issue_list
+        remove_issues = [old_category.name]
+        add_issues = [new_category.name]
+        new_issues = add_issues | (current_issues - remove_issues)
+        params[:priority][:issue_list] = new_issues.join(',')
+      end
+      if params[:priority][:finished_status_message]
+        @priority_status_changelog = PriorityStatusChangeLog.new(
+            priority_id: @priority.id,
+            content: params[:priority][:finished_status_message]
+        )
+        @priority_status_changelog.save
+      end
       if params[:priority][:official_status] and params[:priority][:official_status].to_i != @priority.official_status
         @change_status = params[:priority][:official_status].to_i
         #params[:priority].delete(:official_status)

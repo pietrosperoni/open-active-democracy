@@ -643,9 +643,17 @@ end
 class ActivityCapitalPointHelpfulEndorsers < Activity
   def name
     if capital.amount > 0
-      tr("{user_name} earned {capital}{currency_short_name} because endorsers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      if capital.is_undo?
+        tr("{user_name} earned {capital}{currency_short_name} because endorsers didn't find {point_name} unhelpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} earned {capital}{currency_short_name} because endorsers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     elsif capital.amount < 0
-      tr("{user_name} lost {capital}{currency_short_name} because endorsers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      if capital.is_undo?
+        tr("{user_name} lost {capital}{currency_short_name} because endorsers didn't found {point_name} helpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} lost {capital}{currency_short_name} because endorsers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     end
   end
 end
@@ -653,9 +661,17 @@ end
 class ActivityCapitalPointHelpfulOpposers < Activity
   def name
     if capital.amount > 0
-      tr("{user_name} earned {capital}{currency_short_name} because opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      if capital.is_undo?
+        tr("{user_name} earned {capital}{currency_short_name} because opposers didn't find {point_name} unhelpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} earned {capital}{currency_short_name} because opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     elsif capital.amount < 0
-      tr("{user_name} lost {capital}{currency_short_name} because opposers found {point_name} unelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      if capital.is_undo?
+        tr("{user_name} lost {capital}{currency_short_name} because opposers didn't find {point_name} helpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} lost {capital}{currency_short_name} because opposers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     end
   end
 end
@@ -663,9 +679,18 @@ end
 class ActivityCapitalPointHelpfulUndeclareds < Activity
   def name
     if capital.amount > 0
-      tr("{user_name} earned {capital}{currency_short_name} because undeclareds found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      if capital.is_undo?
+        tr("{user_name} earned {capital}{currency_short_name} because undeclareds didn't find {point_name} unhelpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} earned {capital}{currency_short_name} because undeclareds found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     elsif capital.amount < 0
-      tr("{user_name} lost {capital}{currency_short_name} because undeclares found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      if capital.is_undo?
+        tr("{user_name} lost {capital}{currency_short_name} because undeclareds didn't find {point_name} helpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+
+      else
+        tr("{user_name} lost {capital}{currency_short_name} because undeclareds found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     end
   end
 end

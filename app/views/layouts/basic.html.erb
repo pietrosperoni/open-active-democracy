@@ -3,7 +3,6 @@
 
   <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%= @page_title || tr(current_government.name,"Name from database") %></title>
-    <%= javascript_include_tag :defaults %>
     <%= render :partial => "shared/description" %>
     <%= render :partial => "shared/head" %>
     <%= render :partial => "shared/javascripts" %>
