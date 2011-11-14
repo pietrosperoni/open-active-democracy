@@ -7,21 +7,6 @@
   <%=link_to tr("Show all processes", "view/priority_processes/templates"), :controller=>"priority_processes", :action=>"show_all_for_priority", :id=>@priority %>
 <% else %>
 
-<!--
-<br>
-<table width="100%">
-    <tr>
-        <td>
-            <% form_tag("/process_speech_videos/search?priority_id=#{@priority.id}") do -%>
-            <b><%=label_tag tr("Search by member of Althingi", "view/priority_processes/templates") %></b>
-            <%=text_field_tag 'search_query' %>
-            <%= submit_tag tr("Search", "view/priority_processes/templates") %>
-            <% end %>
-        </td>
-    </tr>
-</table>
--->
-
 <% end %>
 <% processes.each_with_index do |current_process,i| %>
 <div class="althingi_process_container">
