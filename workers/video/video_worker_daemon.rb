@@ -87,8 +87,11 @@ class VideoWorker
         @shell.execute("convert #{speech_video_path}#{filename} -resize 45x28 #{speech_video_path}tiny_#{filename}")
       end
     rescue
-      raise
-      #@@logger.error("ERROR CREATING THUMBNAILS")
+      video.reload
+      video.in_processing = true
+      video.published = false
+      video.save
+      error("ERROR CREATING THUMBNAILS for video id #{video.id}")
     end
   end
 

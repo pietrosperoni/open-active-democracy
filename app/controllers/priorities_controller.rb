@@ -95,7 +95,20 @@ class PrioritiesController < ApplicationController
       format.json { render :json => @priorities.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end
   end  
-  
+
+  def by_priority_processes
+    @page_title = tr("Priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
+    @priorities = Priority.find(:all, :order=>"count(priority_processes)", :include=>:priority_processe).paginate :page => params[:page], :per_page => params[:per_page]
+    get_endorsements
+    respond_to do |format|
+      format.html { render :action => "list" }
+      format.rss { render :action => "list" }
+      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }
+      format.xml { render :xml => @priorities.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @priorities.to_json(:except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
+
   # GET /priorities/network
   def network
     @page_title = tr("Your network's priorities", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))

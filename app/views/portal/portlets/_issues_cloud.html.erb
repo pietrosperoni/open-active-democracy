@@ -1,7 +1,7 @@
 <% if Government.last.layout=="better_iceland" %>
     <% cache(["portlets_issues_cloud", locale, Partner.current_id, @inline_translations_enabled], :expires_in => 5.minutes) do %>
         <div align="center" id="topics">
-          <% for tag in Tag.find(:all, :conditions => ["priorities_count > ?", 10], :order => "name asc", :include => :top_priority) %>
+          <% for tag in Tag.find(:all, :conditions => ["priorities_count > ?", 12], :order => "name asc", :include => :top_priority) %>
               <% next if ["Law proposals", "Parliamentary Resolution Proposals", "Frjálslyndi flokkurinn", "Sjálfstæðisflokkurinn", "Framsóknarflokkurinn", "Vinstrihreyfingin grænt framboð"].include?(tag.name) %>
               <nobr>
                 <a href="/issues/<%= tag.slug %>" style="font-size: <% if tag.priorities_count > 4 %><%= 15+((tag.priorities_count.to_f/Priority.count.to_f)*20).to_i %>px; <% else %> 11px; font-weight:normal;<% end %> padding-left: 3px; padding-right: 3px; line-height: 1.35em;"
