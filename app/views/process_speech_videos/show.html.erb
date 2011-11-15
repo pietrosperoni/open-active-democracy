@@ -32,7 +32,7 @@ jQuery(function() {
 			if (globalFirstClip==true) {
 				globalFirstClip=false;
 			} else {
-				new Ajax.Request('/process_speech_videos/show/846?only_update_details=1&clip_info='+clip.url, {asynchronous:true, evalScripts:true });
+				jQuery.ajax('/process_speech_videos/show/150?only_update_details=1&clip_info='+clip.url);
 			}
         }
     }
