@@ -240,7 +240,7 @@ module ApplicationHelper
   end
 
   def get_short_star_rating(asset,br=false)
-    "#{sprintf("%.1f",asset.rating)}/5.0 #{br ? "<br>" : ""} <small>(#{asset.ratings.size} #{tr("votes counted")})</small>".html_safe
+    "#{sprintf("%.1f",asset.rating)}/5.0 #{br ? "<br>" : ""} <small>(#{asset.ratings.size} #{tr("votes counted", "vote_texts")})</small>".html_safe
   end
   
 #  def will_paginate_with_i18n(collection, options = {}) 
