@@ -104,7 +104,7 @@ end
 #require "whenever/capistrano"
 
 set :application, "open-active-democracy"
-set :domain, "br1"
+set :domain, "br2"
 set :selected_branch, "shadow"
 set :repository, "git://github.com/rbjarnason/open-active-democracy.git"
 set :use_sudo, false
@@ -115,9 +115,10 @@ set :deploy_via, :remote_cache
 
 set :scm, "git"
 
-role :app, domain
-role :web, domain
-role :db,  domain, :primary => true
+role :app, "br1", :primary => true
+role :app, "br2"
+role :app, "br3"
+role :web, "br1","br2","br3"
 
 namespace :delayed_job do 
     desc "Restart the delayed_job process"
