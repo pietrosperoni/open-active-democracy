@@ -366,10 +366,10 @@ class LawProposalDocumentElement < ProcessDocumentElement
         end
       else
         while next_sibling and not next_sibling.text.index("Athugasemdir við lagafrumvarp þetta.")
-          if next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*<i>/
+          if next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*<i>/ or next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*/ and next_sibling.text =~ /\s*(?:Flm\.:|um breytingu)/
             div_skip_count += (next_sibling.to_s.split("<div ").count)-1
           end
-          if next_sibling and (next_sibling.to_s[0..7]=="<b> <div" or next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*[^<\s]/)
+          if next_sibling and (next_sibling.to_s[0..7]=="<b> <div" or next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*(?!<[ib]>)/ and next_sibling.text !~ /\s*(?:Flm\.:|um breytingu)/)
             break
           end
           first = false

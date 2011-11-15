@@ -62,6 +62,8 @@ namespace :fix do
     connection.execute("DELETE FROM changes;")
     connection.execute("DELETE FROM client_applications;")
     connection.execute("DELETE FROM categories;")
+    connection.execute("DELETE FROM generated_proposal_elements;")
+    connection.execute("DELETE FROM generated_proposals;")
     connection.execute("DELETE FROM comments;")
     connection.execute("DELETE FROM constituents;")
     connection.execute("DELETE FROM delayed_jobs;")

@@ -1307,3 +1307,9 @@ margin-top:7px;
 {
 		margin-top: 5px;
 }
+
+.uidiff_link {
+    float: right;
+    font-size: 115%;
+    font-weight: bold;
+}

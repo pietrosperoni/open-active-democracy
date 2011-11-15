@@ -2,8 +2,8 @@
   <div id="diff-document-title"><%= @priority.name %></div>
   <div id="diff-document-sub-title"><%= @proposal.process_document.title(true) %></div>
   <ul id="differentiator-tabs">
-    <li><a href="/uidiff/edit/<%= @proposal.id %>">Edit</a></li>
-    <li class="open"><a href="#" onclick="return false;">Preview</a></li>
+    <li><a href="/uidiff/edit/<%= @proposal.id %>"><%= tr('Edit', 'uidiff/_form') %></a></li>
+    <li class="open"><a href="#" onclick="return false;"><%= tr('Preview', 'uidiff/_form') %></a></li>
   </ul>
   <div id="differentiator-content">
     <div class="diff-content-wide">
@@ -17,7 +17,7 @@
                 <% paragraph.each_with_index do |item,iindex| %>
                   <p <%= "style='padding-left:20px'" if iindex > 0 %>>
                     <% item[:sentences].each do |sentence| %>
-                      <span class="sentence"><%= sentence %></span>
+                      <span class="sentence"><%= sentence.html_safe %></span>
                     <% end %>
                   </p>
                   <br />
@@ -31,7 +31,7 @@
         <% @proposal.generated_proposal_elements.each_with_index do |element, index| %>
           <strong><%= index+1 %>. gr.</strong><br />
           <br />
-          <%= element.process_document_element.content %>
+          <%= element.process_document_element.content.html_safe %>
           <br />
         <% end %>
         -->

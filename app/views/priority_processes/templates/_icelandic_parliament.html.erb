@@ -41,6 +41,7 @@
 			</thead>
 			<tbody>
 				<% process_documents.each do |document| %>
+                    <% next if document.external_type == "lög" %>
 				<tr class="<%= cycle("even", "odd", :name => "zebra") -%>">
 					<td>
 						<p><%=document.external_date.strftime("%d.%m.%Y") %></p>

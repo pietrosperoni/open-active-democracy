@@ -80,6 +80,7 @@
                     <div class="box_style">
 						<% @priority.priority_processes.each do |process| %>
 	 					  <% process.process_documents.each do |document| %>
+                            <% next if document.external_type == "lög" %>
 						    <%=document.get_process_document_link%><br/>
  						  <% end %>
 						<% end %>

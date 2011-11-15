@@ -40,7 +40,7 @@ class UidiffController < ApplicationController
     # Get the list of document elements from the proposal
     for element in elements
       gp.generated_proposal_elements.build({
-        :process_document_element => element
+        :process_document_element_id => element.id
       })
     end
     

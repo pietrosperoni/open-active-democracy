@@ -7,6 +7,7 @@ require './law_proposal_document_element'
 require './process_parser'
 require './tags_parser'
 require './crawler_utils'
+require 'htmlentities'
 
 def get_original_law(id)
   process_document = ProcessDocument.find(id)
@@ -22,11 +23,7 @@ def get_original_law(id)
     law_id = law_id.rjust(3,"0") # Law numbers should always be three letters
     law_now = law_year + law_id
   end
-
-  # Crawl the current/original law
-  doc = CrawlerUtils.fetch_html("http://www.althingi.is/lagas/nuna/#{law_now}.html")
-
-  return doc, law_now
+  return law_now, process_document.priority_process_id
 end
 
 def new_element(content, parent_element, process_document, content_type)
@@ -54,61 +51,71 @@ def new_element(content, parent_element, process_document, content_type)
   e
 end
 
-#
-# Get the original law
-#
-doc, law_now = get_original_law(50)
 
-#
-# Create new process document for the original law
-#
-process_document = ProcessDocument.new
-process_document.sequence_number = 1
-process_document.priority_process = process_document.priority_process #current_process.id
-process_document.stage_sequence_number = 1
-# process_document.external_date = ""
-process_document.external_id = law_now
-process_document.external_link = "http://www.althingi.is/lagas/nuna/#{law_now}.html"
-process_document.external_type = "lög"
-process_document.external_author = ""
+[69, 78].each do |process_doc_id|
+  #
+  # Get the original law
+  #
+  law_now, priority_process_id = get_original_law(process_doc_id)
 
-# Using regular expressions to find text for each node of Gx, GxMx and GxMxLx
-header_element = nil; paragraph_element = nil
-doc.to_s.scan(/me="(.*?)">(.*?)(<a na|<\/html>)/m) do |match|
-  id = match[0]
-  body = match[1]
+  next unless law_now
+  next if ProcessDocument.find_by_external_id(law_now)
 
-  # Find headers
-  id.scan(/G\d+$/) do |element_match|
-    header_element = new_element(body, nil, process_document, TYPE_HEADER_MAIN_ARTICLE)
-  end
-  
-  # Find paragraphs
-  id.scan(/G(\d+)M(\d+)$/) do |element_match|
+  # Crawl the current/original law
+  doc = CrawlerUtils.fetch_html("http://www.althingi.is/lagas/nuna/#{law_now}.html")
+
+  #
+  # Create new process document for the original law
+  #
+  process_document = ProcessDocument.new
+  process_document.priority_process_id = priority_process_id
+  process_document.sequence_number = 1
+  process_document.priority_process = process_document.priority_process #current_process.id
+  process_document.stage_sequence_number = 1
+  # process_document.external_date = ""
+  process_document.external_id = law_now
+  process_document.external_link = "http://www.althingi.is/lagas/nuna/#{law_now}.html"
+  process_document.external_type = "lög"
+  process_document.external_author = ""
+
+  # Using regular expressions to find text for each node of Gx, GxMx and GxMxLx
+  header_element = nil; paragraph_element = nil
+  decoder = HTMLEntities.new
+  decoder.decode(doc.to_s).scan(/me="(.*?)">(.*?)(<a na|<\/html>)/m) do |match|
+    id = match[0]
+    body = match[1]
+
+    # Find headers
+    id.scan(/G\d+$/) do |element_match|
+      header_element = new_element(body, nil, process_document, TYPE_HEADER_MAIN_ARTICLE)
+    end
+
+    # Find paragraphs
+    id.scan(/G(\d+)M(\d+)$/) do |element_match|
+      # puts "=====================================================================\n"
+      # puts "#{header_element} #{id}\n"
+      # puts "=====================================================================\n"
+      # puts Nokogiri::HTML(body).text + "\n"
+      # puts "\n\n"
+      paragraph_element = new_element(body, header_element, process_document, TYPE_MAIN_ARTICLE)
+    end
+
+    # Find lists
+    id.scan(/G(\d+)M(\d+)L(\d+)$/) do |element_match|
+      # puts "=====================================================================\n"
+      # puts "#{header_element} #{paragraph_element} #{id}\n"
+      # puts "=====================================================================\n"
+      # puts Nokogiri::HTML(body).text + "\n" # TYPE_MAIN_ARTICLE
+      # puts "\n\n"
+      list_element = new_element(body, paragraph_element, process_document, TYPE_MAIN_ARTICLE)
+    end
+
+    # # body "<!-- #{id} --> #{body}"
+    #
     # puts "=====================================================================\n"
-    # puts "#{header_element} #{id}\n"
+    # puts id + "\n"
     # puts "=====================================================================\n"
     # puts Nokogiri::HTML(body).text + "\n"
     # puts "\n\n"
-    paragraph_element = new_element(body, header_element, process_document, TYPE_MAIN_ARTICLE)
   end
-
-  # Find lists
-  id.scan(/G(\d+)M(\d+)L(\d+)$/) do |element_match|
-    # puts "=====================================================================\n"
-    # puts "#{header_element} #{paragraph_element} #{id}\n"
-    # puts "=====================================================================\n"
-    # puts Nokogiri::HTML(body).text + "\n" # TYPE_MAIN_ARTICLE
-    # puts "\n\n"
-    list_element = new_element(body, paragraph_element, process_document, TYPE_MAIN_ARTICLE)
-  end
-
-  # # body "<!-- #{id} --> #{body}"
-  # 
-  # puts "=====================================================================\n"
-  # puts id + "\n"
-  # puts "=====================================================================\n"
-  # puts Nokogiri::HTML(body).text + "\n"
-  # puts "\n\n"
 end
-
