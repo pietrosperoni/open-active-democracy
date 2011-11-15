@@ -33,7 +33,7 @@ jQuery(function() {
 			if (globalFirstClip==true) {
 				globalFirstClip=false;
 			} else {
-				jQuery.ajax('/process_speech_videos/show/150?only_update_details=1&clip_info='+clip.url);
+				jQuery.ajax({url:'/process_speech_videos/show/150?only_update_details=1&clip_info='+clip.url, dataType: 'script'});
 			}
         }
     }
