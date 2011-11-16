@@ -52,10 +52,11 @@ def new_element(content, parent_element, process_document, content_type)
 end
 
 
-[69, 78].each do |process_doc_id|
+[207, 263].each do |process_doc_external_id|
   #
   # Get the original law
   #
+  process_doc_id = ProcessDocument.find_by_external_id(process_doc_external_id).id
   law_now, priority_process_id = get_original_law(process_doc_id)
 
   next unless law_now
