@@ -292,7 +292,7 @@ class Combiner
         if law_elements[article_id][paragraph_id]
           if law_elements[article_id][paragraph_id][item_id]
             law_element_sentences = law_elements[article_id][paragraph_id][item_id][:sentences]
-            sentences = action[:malsl] ? action[:malsl] : (law_element_sentences ? law_element_sentences.enum_with_index.map { |x,i| i+1 } : [])
+            sentences = action[:malsl] ? action[:malsl] : (law_element_sentences ? law_element_sentences.each_with_index.map { |x,i| i+1 } : [])
 
             sentences.each { |sentence_id|
               results = parse_action(action, law_element_sentences[sentence_id.to_i-1])
