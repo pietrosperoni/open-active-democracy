@@ -56,45 +56,6 @@ class VideoWorker
     @last_report_time = 0
   end
 
-  def create_thumbnails(video)
-    speech_video_path = "#{Rails.root.to_s}/public/"+ENV['Rails.env']+"/process_speech_videos/#{video.id}/"
-    speech_video_filename = speech_video_path+"speech.flv"
-    begin
-      timepoints = []
-      slice_time_sec = video.duration_s/5
-      slice_id = 1
-      timepoints << [7,video.duration_s-1].min
-      3.times do
-        timepoints << slice_id*slice_time_sec
-        slice_id+=1
-      end
-      timepoints << [video.duration_s-7,1].max
-      pngid=0
-      #@@logger.info("Timepoints: #{timepoints.inspect} video duration: #{video.duration_s}")
-      timepoints.sort.each do |time|
-        filename = "thumb_#{pngid+=1}.png"
-        if video.title =~ /forseti/i
-          pos_x = 190
-          pos_y = 45
-        else
-          pos_x = 232
-          pos_y = 125
-        end
-        @shell.execute("ffmpeg -ss #{[time/3600, time/60 % 60, time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':')} -i #{speech_video_filename} \
-          -an -r 1 -vframes 1 -vf crop=252:156:#{pos_x}:#{pos_y} -y #{speech_video_path}#{filename}")
-        @shell.execute("convert #{speech_video_path}#{filename} -resize 160x99 #{speech_video_path}small_#{filename}")
-        @shell.execute("convert #{speech_video_path}#{filename} -resize 80x50 #{speech_video_path}smaller_#{filename}")
-        @shell.execute("convert #{speech_video_path}#{filename} -resize 45x28 #{speech_video_path}tiny_#{filename}")
-      end
-    rescue
-      video.reload
-      video.in_processing = true
-      video.published = false
-      video.save
-      error("ERROR CREATING THUMBNAILS for video id #{video.id}")
-    end
-  end
-
   def log_time
     t = Time.now
     "%02d/%02d %02d:%02d:%02d.%06d" % [t.day, t.month, t.hour, t.min, t.sec, t.usec]
@@ -179,7 +140,7 @@ class VideoWorker
   def poll_for_work
     ProcessSpeechMasterVideo.find(:all, conditions: "published = 1 AND in_processing = 0 AND url != '' AND renew_screenshots = 1").each do |master_video|
       master_video.process_speech_videos.each do |speech_video|
-        create_thumbnails(speech_video)
+        SpeechVideoProcessing.create_thumbnails(@shell,@logger,speech_video)
       end
       master_video.renew_screenshots = false
       master_video.save
