@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107165737) do
+ActiveRecord::Schema.define(:version => 20111807165737) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -606,7 +606,7 @@ ActiveRecord::Schema.define(:version => 20111107165737) do
   create_table "partners", :force => true do |t|
     t.string   "name",                       :limit => 60
     t.string   "name_variations_data",       :limit => 300
-    t.string   "short_name",                 :limit => 20
+    t.string   "short_name",                 :limit => 50
     t.integer  "picture_id"
     t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
     t.string   "optin_text",                 :limit => 60
