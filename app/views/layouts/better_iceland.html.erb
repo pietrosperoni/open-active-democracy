@@ -20,6 +20,8 @@ end %>
     <%= stylesheet_link_tag "/stylesheets/newstuff" %>
     <%= stylesheet_link_tag "/stylesheets/gnew" %>
     <%= stylesheet_link_tag "/stylesheets/temp" %>
+    <%= javascript_include_tag "differentiator" %>"
+    <%= stylesheet_link_tag "/stylesheets/differentiator" %>
     <%= javascript_include_tag "check-browser", "skuggathing" unless controller_name=="priority_processes" %>
 
     <% if ["users","sessions"].include?(controller_name)  %>

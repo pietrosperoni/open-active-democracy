@@ -1,4 +1,4 @@
-<% unless session[:have_shown_welcome] or Government.current.layout=="better_reykjavik"%>
+<% unless session[:have_shown_welcome] or Government.current.layout=="better_reykjavik" or Government.current.layout=="better_iceland" %>
     <div id="encouragements"><%= render :partial => "ads/welcome"%></div>
 <% else %>
   <% if logged_in? %>  
