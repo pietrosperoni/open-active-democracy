@@ -45,7 +45,8 @@ class Priority < ActiveRecord::Base
   scope :finished, :conditions => "priorities.official_status in (-2,-1,2)"
   
   scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
-  scope :item_limit, lambda{|limit| {:limit=>limit}} 
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :only_ids, :select => "priorities.id"
   
   scope :alphabetical, :order => "priorities.name asc"
   scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
