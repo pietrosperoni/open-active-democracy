@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :only => [:request_validate_user_for_country, :validate_user_for_country, :resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
+  before_filter :login_required, :only => [:destroy, :request_validate_user_for_country, :validate_user_for_country, :resend_activation, :follow, :unfollow, :endorse, :subscriptions, :disable_facebook]
   before_filter :current_user_required, :only => [:resend_activation]
   before_filter :admin_required, :only => [:list_suspended, :suspend, :unsuspend, :impersonate, :edit, :update, :signups, :make_admin, :reset_password]
   
@@ -492,6 +492,17 @@ class UsersController < ApplicationController
         end
       }
     end
+  end
+
+   # DELETE /user
+  def destroy
+    @user = User.find(current_user.id)
+    @user.delete!
+    self.current_user.forget_me
+    cookies.delete :auth_token
+    reset_session
+    flash[:notice] = tr("Your account was deleted. Good bye!", "controller/settings")
+    redirect_to "/" and return
   end
 
   # PUT /users/1/suspend

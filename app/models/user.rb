@@ -353,9 +353,9 @@ class User < ActiveRecord::Base
     for c in sent_capitals
       c.destroy
     end
-    for c in constituents
-      c.destroy
-    end
+    #for c in constituents
+    #  c.destroy
+    #end
     self.facebook_uid = nil
   end
   
