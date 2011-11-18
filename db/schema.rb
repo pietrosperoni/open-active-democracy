@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111807165737) do
+ActiveRecord::Schema.define(:version => 20111812165737) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -744,6 +744,7 @@ ActiveRecord::Schema.define(:version => 20111807165737) do
     t.integer  "column_count",                 :default => 1
     t.boolean  "caching_disabled",             :default => false
     t.integer  "item_limit"
+    t.string   "tag"
   end
 
   add_index "portlet_templates", ["portlet_template_category_id"], :name => "index_portlet_templates_on_portlet_template_category_id"
