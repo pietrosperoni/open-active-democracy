@@ -29,6 +29,18 @@
 
   <br><br>
 
+
+    <% if current_partner and Government.current.layout == "better_reykjavik" %>
+        <div id="priority_category">
+          <div class="form_header">
+            <%= tr("Select priority type","views/priorities/form") %><span class="red">*</span><br>
+          </div>
+          <%= f.radio_button :priority_type, 'Maintenance projects', checked: true %> <span class="Chapter_name"><%= tr('Maintenance projects', "views/priorities/form") %></span>
+          <%= f.radio_button :priority_type, 'New development projects' %> <span class="Chapter_name"><%= tr('New development projects', "views/priorities/form") %></span>
+        </div>
+    <% end %>
+
+
   <div id="priority_category">
     <div class="form_header">
       <%= tr("Select category","views/priorities/form")%>
@@ -46,7 +58,7 @@
     <% end %>
   </div>
 
-  <% if Government.current.default_tags_checkbox and Government.current.default_tags_checkbox!="" %>
+  <% if Government.current.default_tags_checkbox and Government.current.default_tags_checkbox!="" and not (current_partner and Government.current.layout == "better_reykjavik") %>
       <br>
 	  <div id="priority_category2">
 	    <div class="form_header">

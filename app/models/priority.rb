@@ -95,7 +95,9 @@ class Priority < ActiveRecord::Base
   has_many :priority_status_change_logs, dependent: :destroy
 
   has_many :priority_processes
-  
+
+  attr_accessor :priority_type
+
   belongs_to :change # if there is currently a pending change, it will be attached
   
   acts_as_taggable_on :issues
