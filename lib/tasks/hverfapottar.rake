@@ -17,13 +17,10 @@ namespace :hverfapottar do
       'Grafarholt og Úlfarsárdalur' => 'grafarholt',
     }
 
-    Partner.transaction do
-      hverfi.each do |name, short_name|
-        next if Partner.find_by_name(name)
-        Partner.create(name: name, short_name: "betri-hverfi-#{short_name}")
-      end
+    partner_tags = ["Maintenance projects", "New development projects"]
 
-      ["Maintenance projects", "New development projects"].each do |tag_name|
+    Partner.transaction do
+      partner_tags.each do |tag_name|
         Tag.find_or_create_by_name(tag_name)
         template_name = "priorities.#{tag_name.downcase.gsub(/\s/, '_')}"
         template = PortletTemplate.find_or_create_by_name(template_name)
@@ -33,6 +30,15 @@ namespace :hverfapottar do
         template.partial_name = "priority_list"
         template.locals_data_function = "setup_priorities_tagged"
         template.save
+      end
+
+      hverfi.each do |name, short_name|
+        next if Partner.find_by_name(name)
+        Partner.create(
+          name: name,
+          short_name: "betri-hverfi-#{short_name}",
+          required_tags: partner_tags.join(','),
+        )
       end
     end
   end

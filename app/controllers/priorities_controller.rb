@@ -726,9 +726,9 @@ class PrioritiesController < ApplicationController
   
     Rails.logger.debug("Point character length: #{params[:priority][:points_attributes]["0"][:content].length} #{params[:priority][:name].length}")
 
-    if current_partner and Government.current.layout == "better_reykjavik" and not params[:priority][:priority_type]
-      # default to maintenance projects
-      params[:priority][:priority_type] = tr('Maintenance projects', "views/priorities/form")
+    if current_partner and current_partner.required_tags and not params[:priority][:priority_type]
+      # default to the first tag
+      params[:priority][:priority_type] = current_partner.required_tags.split(',')[0]
     end
 
     @priority = Priority.new(params[:priority])
@@ -742,9 +742,11 @@ class PrioritiesController < ApplicationController
     end
     tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
 
-    if current_partner and Government.current.layout == "better_reykjavik"
-      tags << params[:priority][:priority_type]
+    if current_partner
       tags << current_partner.name
+      if current_partner.required_tags
+        tags << params[:priority][:priority_type]
+      end
     end
 
     unless tags.empty?

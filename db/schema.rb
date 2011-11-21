@@ -634,6 +634,7 @@ ActiveRecord::Schema.define(:version => 20111812165738) do
     t.string   "geoblocking_open_countries",                :default => ""
     t.string   "default_locale"
     t.integer  "iso_country_id"
+    t.string   "required_tags"
   end
 
   add_index "partners", ["short_name"], :name => "short_name"
