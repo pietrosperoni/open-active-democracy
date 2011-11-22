@@ -882,7 +882,8 @@ class PrioritiesController < ApplicationController
       if params[:priority][:finished_status_message]
         @priority_status_changelog = PriorityStatusChangeLog.new(
             priority_id: @priority.id,
-            content: params[:priority][:finished_status_message]
+            content: params[:priority][:finished_status_message],
+            subject: params[:priority][:finished_status_message],
         )
         @priority_status_changelog.save
       end

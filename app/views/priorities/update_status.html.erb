@@ -18,7 +18,26 @@
     </div>
   </div>
 
-    <div class="field">
+  <div class="field">
+      <div class="field_label">
+        <%= tr("New status date", "view/priorities/status")%>
+      </div>
+      <div class="field_box">
+          <%= f.date_field :finished_status_date %>
+      </div>
+    </div>
+
+  <div class="field">
+      <div class="field_label">
+        <%= tr("New status subject", "view/priorities/status")%>
+      </div>
+      <div class="field_box">
+          <%= f.text_field :finished_status_subject, :max_length=>60 %>
+      </div>
+    </div>
+
+
+  <div class="field">
     <div class="field_label">
       <%= tr("New status message", "view/priorities/status")%>
     </div>
