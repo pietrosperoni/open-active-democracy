@@ -1111,7 +1111,7 @@ class User < ActiveRecord::Base
     self.increment!("warnings_count")
   end
 
-  def self.send_status_email(priority_id, status, message)
+  def self.send_status_email(priority_id, status, date, subject, message)
     status_types = {
       '-2' => tr("Failed","status_messages"),
       '-1' => tr("In Progress","status_messages"),
@@ -1123,7 +1123,7 @@ class User < ActiveRecord::Base
     Tr8n::Config.init('is', Tr8n::Config.current_user) if Government.last.layout == "better_reykjavik" or Government.last.layout == "better_iceland"
     all_endorsers_and_opposers_for_priority(priority_id).each do |user|
       position = Endorsement.where(priority_id: priority_id, user_id: user.id).first.value
-      UserMailer.priority_status_message(priority, status, message, user, position).deliver
+      UserMailer.priority_status_update(priority, status, date, subject, message, user, position).deliver
     end
   end
 

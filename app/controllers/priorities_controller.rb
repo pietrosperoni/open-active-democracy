@@ -888,7 +888,7 @@ class PrioritiesController < ApplicationController
         params[:priority][:issue_list] = new_issues.join(',')
       end
       if params[:priority][:finished_status_message]
-        @priority_status_changelog = PriorityStatusChangeLog.new(
+        change_log = @priority_status_changelog = PriorityStatusChangeLog.new(
             priority_id: @priority.id,
             date: params[:priority][:finished_status_date],
             content: params[:priority][:finished_status_message],
@@ -944,8 +944,9 @@ class PrioritiesController < ApplicationController
         @priority.change_status!(@change_status)
         @priority.delay.deactivate_endorsements
       end
-      if params[:priority][:finished_status_message]
-        User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_message])
+      if change_log
+        @priority.create_status_update(change_log)
+        User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_date], params[:priority][:finished_status_subject], params[:priority][:finished_status_message])
       end
     end
   end

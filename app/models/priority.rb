@@ -396,7 +396,11 @@ class Priority < ActiveRecord::Base
       e.finish!
     end    
   end
-  
+
+  def create_status_update(priority_status_change_log)
+    return ActivityPriorityStatusUpdate.create(priority: self, priority_status_change_log: priority_status_change_log)
+  end
+
   def reactivate!
     self.status = 'published'
     self.change = nil

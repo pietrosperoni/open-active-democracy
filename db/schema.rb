@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20112312165738) do
+ActiveRecord::Schema.define(:version => 20112312175738) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20112312165738) do
     t.integer  "position"
     t.integer  "followers_count",                    :default => 0
     t.datetime "changed_at"
+    t.integer  "priority_status_change_log_id"
   end
 
   add_index "activities", ["activity_id"], :name => "activity_activity_id"

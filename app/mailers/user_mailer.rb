@@ -16,10 +16,12 @@ class UserMailer < ActionMailer::Base
          end
   end
 
-  def priority_status_message(priority, status, status_message, user, position)
+  def priority_status_update(priority, status, status_date, status_subject, status_message, user, position)
     @priority = priority
     @government = Government.current
     @status = status
+    @date = date
+    @subject = subject
     @message = status_message
     @support_or_endorse_text = position == 1 ? tr("which you support", "email") : tr("which you oppose", "email")
     attachments.inline['logo.png'] = get_conditional_logo
