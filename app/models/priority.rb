@@ -421,11 +421,11 @@ class Priority < ActiveRecord::Base
   end  
   
   def official_status_name
-    return tr("failed", "model/priority") if official_status == -2
-    return tr("compromised", "model/priority") if official_status == -1
-    return tr("unknown", "model/priority") if official_status == 0 
-    return tr("in the works", "model/priority") if official_status == 1
-    return tr("successful", "model/priority") if official_status == 2
+    return tr("Failed", "status_messages") if official_status == -2
+    return tr("In Progress", "status_messages") if official_status == -1
+    return tr("Unknown", "status_messages") if official_status == 0
+    return tr("Published", "status_messages") if official_status == 1
+    return tr("Successful", "status_messages") if official_status == 2
   end
   
   def has_change?
