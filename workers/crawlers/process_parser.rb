@@ -140,32 +140,32 @@ class ProcessParser
       process_discussion.priority_process_id = current_process.id
       process_discussion.stage_sequence_number = @@stage_sequence_number
       if next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0]
-        date_from_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[0..4]
+        date_from_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[0].text.strip[0..4]
         puts "ProcessDiscussion from time: "+date_from_time
-        date_to_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[6..10]
+        date_to_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[0].text.strip[6..10]
         puts "ProcessDiscussion to time: "+date_to_time
         puts "ProcessDiscussion SAME TIME" if date_from_time==date_to_time
         process_discussion.from_time = DateTime.strptime(date_from_time, "%d.%m.%Y %H:%M")
         process_discussion.to_time = DateTime.strptime(date_to_time, "%d.%m.%Y %H:%M")
-        process_discussion.transcript_url="http://www.althingi.is"+next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0]['href']
+        process_discussion.transcript_url="http://www.althingi.is"+next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[0]['href']
         puts "ProcessDiscussion url: "+process_discussion.transcript_url
       end
-      if next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[1]
-        process_discussion.listen_url=next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[1]['href']
+      if next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[1]
+        process_discussion.listen_url=next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[1]['href']
         puts "ProcessDiscussion listen url: "+process_discussion.listen_url
       end
       process_discussion.meeting_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
       puts "ProcessDiscussion meeting date: #{process_discussion.meeting_date}"
-      if next_sibling.at("tr[#{tr_count}]/td[3]").text
-        process_discussion.meeting_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+      if next_sibling.at("tr[#{tr_count}]/td[4]").text
+        process_discussion.meeting_type = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
         puts "ProcessDiscussion meeting type: "+process_discussion.meeting_type
       else
         puts "ProcessDiscussion meeting type unknown"
       end
-      if next_sibling.at("tr[#{tr_count}]/td[4]").text
-        process_discussion.meeting_info = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
+      if next_sibling.at("tr[#{tr_count}]/td[2]").text
+        process_discussion.meeting_info = next_sibling.at("tr[#{tr_count}]/td[2]").text.strip
         puts "ProcessDiscussion meeting info: "+process_discussion.meeting_info
-        process_discussion.meeting_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")['href'] if next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")
+        process_discussion.meeting_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")['href'] if next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")
         puts "ProcessDiscussion meeting url: "+process_discussion.meeting_url
       else
         puts "ProcessDiscussion meeting number: unknown"
