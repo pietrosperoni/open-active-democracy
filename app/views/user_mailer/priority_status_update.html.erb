@@ -9,7 +9,7 @@
           support_or_endorse_text: @support_or_endorse_text,
           government_name: tr(Government.current.name, "Name from database")) %></p>
 
-<p><%= l @date %></p>
+<p><%= @date.strftime("%d. %m %Y") %></p>
 
 <p><%= @status_subject %></p>
 
