@@ -23,7 +23,8 @@
         <%= tr("New status date", "view/priorities/status")%>
       </div>
       <div class="field_box">
-          <%= f.date_field :finished_status_date %>
+
+          <%= date_select("priority", "finished_status_date")%>
       </div>
     </div>
 

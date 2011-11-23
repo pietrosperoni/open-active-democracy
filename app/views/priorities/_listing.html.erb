@@ -35,3 +35,7 @@ $(function(){
 	</div>
 <% end %>
 						<%= render :partial => "priorities/tag_show", :locals => { :priority => priority }%>
+
+<% if action_name != "show" and status = priority.priority_status_change_logs.last %>
+    <%= render partial: "priorities/latest_status_update", locals: { status: status } %>
+<% end %>

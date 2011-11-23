@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111812165738) do
+ActiveRecord::Schema.define(:version => 20112312165738) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -819,7 +819,7 @@ ActiveRecord::Schema.define(:version => 20111812165738) do
     t.text     "finished_status_message"
     t.integer  "external_session_id"
     t.string   "finished_status_subject"
-    t.datetime "finished_status_date"
+    t.date     "finished_status_date"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
@@ -871,9 +871,9 @@ ActiveRecord::Schema.define(:version => 20111812165738) do
     t.integer  "priority_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "content",     :null => false
-    t.string   "subject"
-    t.datetime "date"
+    t.text     "content"
+    t.string   "subject",     :null => false
+    t.date     "date"
   end
 
   create_table "process_discussions", :force => true do |t|

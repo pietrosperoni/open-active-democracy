@@ -1,3 +1,5 @@
+require 'date'
+
 class PrioritiesController < ApplicationController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
@@ -871,6 +873,10 @@ class PrioritiesController < ApplicationController
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
 
     if params[:priority]
+      if params[:priority]["finished_status_date(1i)"]
+        # TODO: isn't there an easier way to do this?
+        params[:priority][:finished_status_date] = Date.new(params[:priority].delete("finished_status_date(1i)").to_i, params[:priority].delete("finished_status_date(2i)").to_i, params[:priority].delete("finished_status_date(3i)").to_i)
+      end
       if params[:priority][:category]
         old_category = @priority.category
         new_category = Category.find(params[:priority][:category])
@@ -884,8 +890,9 @@ class PrioritiesController < ApplicationController
       if params[:priority][:finished_status_message]
         @priority_status_changelog = PriorityStatusChangeLog.new(
             priority_id: @priority.id,
+            date: params[:priority][:finished_status_date],
             content: params[:priority][:finished_status_message],
-            subject: params[:priority][:finished_status_message],
+            subject: params[:priority][:finished_status_subject]
         )
         @priority_status_changelog.save
       end
