@@ -926,7 +926,7 @@ class PrioritiesController < ApplicationController
       else
         format.html {
           if params[:priority][:finished_status_message]
-            flash[:notice] = tr('Status updated with "{status_text}"', "controller/priorities", status_text: params[:priority][:finished_status_message])
+            flash[:notice] = tr('Status updated with "{status_text}"', "controller/priorities", status_text: params[:priority][:finished_status_subject])
           end
           redirect_to(@priority)
         }
