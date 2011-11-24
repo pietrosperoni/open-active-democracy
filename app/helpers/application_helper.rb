@@ -17,6 +17,17 @@ module ApplicationHelper
   include Tr8n::BaseHelper
   include Wf::HelperMethods
 
+  def my_simple_format(text, html_options={}, options={})
+    text = ''.html_safe if text.nil?
+    start_tag = tag('p', html_options, true)
+    text = sanitize(text) unless options[:sanitize] == false
+    text.gsub!(/\r\n?/, "\n")                    # \r\n and \r -> \n
+    text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")  # 2+ newline  -> paragraph
+    text.gsub!(/([^\n]\n)(?=[^\n])/, '\1<br />') # 1 newline   -> br
+    text.insert 0, start_tag
+    text.html_safe.safe_concat("</p>")
+  end
+
  def last_weekday_of_the_month_at_noon(now_date,original_now_date=nil)
    original_now_date = now_date unless original_now_date
    current_date = now_date.end_of_month
