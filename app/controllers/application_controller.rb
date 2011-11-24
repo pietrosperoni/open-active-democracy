@@ -154,12 +154,12 @@ class ApplicationController < ActionController::Base
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
     if Rails.env.development?
-      if session[:set_partner_id]
-        return @current_partner = Partner.current = Partner.find(session[:set_partner_id])
-      elsif params[:partner_short_name]
+      if params[:partner_short_name]
         Partner.current = @current_partner ||= Partner.find_by_short_name(params[:partner_short_name])
         session[:set_partner_id] = @current_partner.id
         return @current_partner
+      elsif session[:set_partner_id]
+        return @current_partner = Partner.current = Partner.find(session[:set_partner_id])
       end
     end
     if request.host.include?("betraisland")

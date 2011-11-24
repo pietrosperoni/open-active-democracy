@@ -1,4 +1,13 @@
 
+class Helper
+  include Singleton
+  include ActionView::Helpers::SanitizeHelper
+end
+
+def self.help
+  Helper.instance
+end
+
 def remove_all_endorsements_except
   # 15436
   # 2818
@@ -21,6 +30,23 @@ def remove_all_endorsements_except
 end
 
 namespace :fix do
+
+  desc "Update priority change logs"
+  task :update_change_logs => :environment do
+    PriorityStatusChangeLog.transaction do
+      PriorityStatusChangeLog.all.each do |status|
+        new_subject = help.strip_tags(status.content)
+        if new_subject.empty?
+          status.destroy
+        else
+          status.subject = new_subject
+          status.content = nil
+          status.date = status.updated_at
+          status.save
+        end
+      end
+    end
+  end
 
   desc "tweak videos"
   task :tweak_videos => :environment do

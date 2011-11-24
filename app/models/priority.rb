@@ -45,7 +45,8 @@ class Priority < ActiveRecord::Base
   scope :finished, :conditions => "priorities.official_status in (-2,-1,2)"
   
   scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
-  scope :item_limit, lambda{|limit| {:limit=>limit}} 
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :only_ids, :select => "priorities.id"
   
   scope :alphabetical, :order => "priorities.name asc"
   scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
@@ -95,7 +96,9 @@ class Priority < ActiveRecord::Base
   has_many :priority_status_change_logs, dependent: :destroy
 
   has_many :priority_processes
-  
+
+  attr_accessor :priority_type
+
   belongs_to :change # if there is currently a pending change, it will be attached
   
   acts_as_taggable_on :issues
@@ -393,7 +396,11 @@ class Priority < ActiveRecord::Base
       e.finish!
     end    
   end
-  
+
+  def create_status_update(priority_status_change_log)
+    return ActivityPriorityStatusUpdate.create(priority: self, priority_status_change_log: priority_status_change_log)
+  end
+
   def reactivate!
     self.status = 'published'
     self.change = nil
@@ -418,11 +425,11 @@ class Priority < ActiveRecord::Base
   end  
   
   def official_status_name
-    return tr("failed", "model/priority") if official_status == -2
-    return tr("compromised", "model/priority") if official_status == -1
-    return tr("unknown", "model/priority") if official_status == 0 
-    return tr("in the works", "model/priority") if official_status == 1
-    return tr("successful", "model/priority") if official_status == 2
+    return tr("Failed", "status_messages") if official_status == -2
+    return tr("In Progress", "status_messages") if official_status == -1
+    return tr("Unknown", "status_messages") if official_status == 0
+    return tr("Published", "status_messages") if official_status == 1
+    return tr("Successful", "status_messages") if official_status == 2
   end
   
   def has_change?

@@ -1309,3 +1309,9 @@ margin-top:7px;
 {
 		margin-top: 5px;
 }
+
+
+.finished_status {
+    font-size: 0.8em;
+    font-weight: normal;
+}

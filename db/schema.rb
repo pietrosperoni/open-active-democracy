@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107165737) do
+ActiveRecord::Schema.define(:version => 20112312175738) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20111107165737) do
     t.integer  "position"
     t.integer  "followers_count",                    :default => 0
     t.datetime "changed_at"
+    t.integer  "priority_status_change_log_id"
   end
 
   add_index "activities", ["activity_id"], :name => "activity_activity_id"
@@ -606,7 +607,7 @@ ActiveRecord::Schema.define(:version => 20111107165737) do
   create_table "partners", :force => true do |t|
     t.string   "name",                       :limit => 60
     t.string   "name_variations_data",       :limit => 300
-    t.string   "short_name",                 :limit => 20
+    t.string   "short_name",                 :limit => 50
     t.integer  "picture_id"
     t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
     t.string   "optin_text",                 :limit => 60
@@ -634,6 +635,7 @@ ActiveRecord::Schema.define(:version => 20111107165737) do
     t.string   "geoblocking_open_countries",                :default => ""
     t.string   "default_locale"
     t.integer  "iso_country_id"
+    t.string   "required_tags"
   end
 
   add_index "partners", ["short_name"], :name => "short_name"
@@ -744,6 +746,7 @@ ActiveRecord::Schema.define(:version => 20111107165737) do
     t.integer  "column_count",                 :default => 1
     t.boolean  "caching_disabled",             :default => false
     t.integer  "item_limit"
+    t.string   "tag"
   end
 
   add_index "portlet_templates", ["portlet_template_category_id"], :name => "index_portlet_templates_on_portlet_template_category_id"
@@ -816,6 +819,8 @@ ActiveRecord::Schema.define(:version => 20111107165737) do
     t.integer  "position_endorsed_30days"
     t.text     "finished_status_message"
     t.integer  "external_session_id"
+    t.string   "finished_status_subject"
+    t.date     "finished_status_date"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
@@ -867,7 +872,9 @@ ActiveRecord::Schema.define(:version => 20111107165737) do
     t.integer  "priority_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "content",     :null => false
+    t.text     "content"
+    t.string   "subject",     :null => false
+    t.date     "date"
   end
 
   create_table "process_discussions", :force => true do |t|

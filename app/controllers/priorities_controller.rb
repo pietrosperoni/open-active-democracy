@@ -1,3 +1,5 @@
+require 'date'
+
 class PrioritiesController < ApplicationController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
@@ -726,6 +728,11 @@ class PrioritiesController < ApplicationController
   
     Rails.logger.debug("Point character length: #{params[:priority][:points_attributes]["0"][:content].length} #{params[:priority][:name].length}")
 
+    if current_partner and current_partner.required_tags and not params[:priority][:priority_type]
+      # default to the first tag
+      params[:priority][:priority_type] = current_partner.required_tags.split(',')[0]
+    end
+
     @priority = Priority.new(params[:priority])
     tags = []
     tags << @priority.category.name if @priority.category
@@ -736,6 +743,13 @@ class PrioritiesController < ApplicationController
       tags << b if a.include?("sub_tag_")
     end
     tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
+
+    if current_partner
+      tags << current_partner.name
+      if current_partner.required_tags
+        tags << params[:priority][:priority_type]
+      end
+    end
 
     unless tags.empty?
       @priority.issue_list = tags.join(",")
@@ -859,6 +873,10 @@ class PrioritiesController < ApplicationController
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
 
     if params[:priority]
+      if params[:priority]["finished_status_date(1i)"]
+        # TODO: isn't there an easier way to do this?
+        params[:priority][:finished_status_date] = Date.new(params[:priority].delete("finished_status_date(1i)").to_i, params[:priority].delete("finished_status_date(2i)").to_i, params[:priority].delete("finished_status_date(3i)").to_i)
+      end
       if params[:priority][:category]
         old_category = @priority.category
         new_category = Category.find(params[:priority][:category])
@@ -870,9 +888,11 @@ class PrioritiesController < ApplicationController
         params[:priority][:issue_list] = new_issues.join(',')
       end
       if params[:priority][:finished_status_message]
-        @priority_status_changelog = PriorityStatusChangeLog.new(
+        change_log = @priority_status_changelog = PriorityStatusChangeLog.new(
             priority_id: @priority.id,
-            content: params[:priority][:finished_status_message]
+            date: params[:priority][:finished_status_date],
+            content: params[:priority][:finished_status_message],
+            subject: params[:priority][:finished_status_subject]
         )
         @priority_status_changelog.save
       end
@@ -906,7 +926,7 @@ class PrioritiesController < ApplicationController
       else
         format.html {
           if params[:priority][:finished_status_message]
-            flash[:notice] = tr('Status updated with "{status_text}"', "controller/priorities", status_text: params[:priority][:finished_status_message])
+            flash[:notice] = tr('Status updated with "{status_text}"', "controller/priorities", status_text: params[:priority][:finished_status_subject])
           end
           redirect_to(@priority)
         }
@@ -924,8 +944,9 @@ class PrioritiesController < ApplicationController
         @priority.change_status!(@change_status)
         @priority.delay.deactivate_endorsements
       end
-      if params[:priority][:finished_status_message]
-        User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_message])
+      if change_log
+        @priority.create_status_update(change_log)
+        User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_date], params[:priority][:finished_status_subject], params[:priority][:finished_status_message])
       end
     end
   end
