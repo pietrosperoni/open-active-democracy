@@ -108,7 +108,7 @@ class Priority < ActiveRecord::Base
     indexes name
     indexes category.name, :facet=>true, :as=>"category_name"
     has partner_id, :as=>:partner_id, :type => :integer
-    where "priorities.status = 'published'"
+    where "priorities.status in ('published','inactive')"
   end  
 
   def category_name
