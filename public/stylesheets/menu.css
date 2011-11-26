@@ -64,13 +64,13 @@ ul#menu li .tab_header,ul#menu_sub li .tab_header,ul#menu_third li .tab_header {
 padding: 0 4px 0;
 display:inline-block;
 float:left;
-background-image: url('../images/new/menu-div-bg.png');
-background-repeat: no-repeat;
-background-position: right center;
-
+	background-image: url('../images/new/menu-div-bg.png');
+    background-position: right center;
+    background-repeat: no-repeat;
 }
 
 #nav ul#menu li .tab_header {
+	background-image: url('../images/new/menu-div-bg.png');
     background-position: right center;
     background-repeat: no-repeat;
     display: inline-block;
@@ -97,7 +97,10 @@ body.news-capital ul#menu_third li.tab2 .tab_header,
 body.briefing-points ul#menu_third li.tab1 .tab_header,
 ul#menu_third li.tab4 .tab_header,
 ul#menu_third li.tab7 .tab_header,
-ul#menu_third li.tab6 .tab_header  {background-image:none}
+ul#menu_third li.tab6 .tab_header  
+{
+/*	background-image:none; */
+}
 
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
