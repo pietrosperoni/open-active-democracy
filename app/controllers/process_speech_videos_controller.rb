@@ -58,7 +58,8 @@ class ProcessSpeechVideosController < ApplicationController
       @process_speech_video = ProcessSpeechVideo.find(id_s.to_i)
       @priority = @process_speech_video.process_discussion.priority_process.priority
       render :update do |page|  
-        page.replace_html "process_speech_detail", :partial => "video_detail", :locals => {:process_speech_video=> @process_speech_video }  
+        page.replace_html "process_speech_detail", :partial => "video_detail", :locals => {:process_speech_video=> @process_speech_video }
+        page << "FB.XFBML.parse(document.getElementById('fb_video_detail'));"
         # page.visual_effect :highlight, "process_speech_detail",  {:restorecolor=>"#ffffff", :startcolor=>"#cccccc", :endcolor=>"#ffffff"}  
       end
     else

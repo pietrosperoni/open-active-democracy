@@ -20,9 +20,10 @@ class Combiner
     
       # Paragraphs
       article.children.each { |element|
+        article_id = /\A\[*(\d+)/.match(article.content_text_only)[1].to_i
         sub_paragraph_index = 0
         paragraph_index += 1
-        article_id = article.content_text_only.to_i
+
         elements[article_id] = [] unless elements[article_id]
         elements[article_id][paragraph_index] = [] unless elements[article_id][paragraph_index]
         elements[article_id][paragraph_index][0] = {
@@ -31,8 +32,8 @@ class Combiner
         }
         # Töluliðir
         element.children.each { |sub_element|
+          article_id = /\A\[*(\d+)/.match(article.content_text_only)[1].to_i
           sub_paragraph_index += 1
-          article_id = article.content_text_only.to_i
           elements[article_id][paragraph_index][sub_paragraph_index] = {
             :text => sub_element.content_text_only,
             :sentences => sub_element.sentences.map { |s| s.body }
@@ -291,7 +292,7 @@ class Combiner
         if law_elements[article_id][paragraph_id]
           if law_elements[article_id][paragraph_id][item_id]
             law_element_sentences = law_elements[article_id][paragraph_id][item_id][:sentences]
-            sentences = action[:malsl] ? action[:malsl] : (law_element_sentences ? law_element_sentences.enum_with_index.map { |x,i| i+1 } : [])
+            sentences = action[:malsl] ? action[:malsl] : (law_element_sentences ? law_element_sentences.each_with_index.map { |x,i| i+1 } : [])
 
             sentences.each { |sentence_id|
               results = parse_action(action, law_element_sentences[sentence_id.to_i-1])

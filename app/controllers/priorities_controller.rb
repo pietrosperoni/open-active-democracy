@@ -100,7 +100,7 @@ class PrioritiesController < ApplicationController
 
   def by_priority_processes
     @page_title = tr("Priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
-    @priorities = Priority.find(:all, :order=>"count(priority_processes)", :include=>:priority_processe).paginate :page => params[:page], :per_page => params[:per_page]
+    @priorities = Priority.find(:all, :order=>"count(priority_processes)", :include=>:priority_process).paginate :page => params[:page], :per_page => params[:per_page]
     get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }

@@ -1,17 +1,19 @@
+# coding: utf-8
+
+require './crawler_utils'
+
 class TagsParser
-  def self.get_tags(html_doc,tags_to_collect)
+  def self.get_tags(html_doc)
     millivis_addr = html_doc.xpath("/html/body/table/tr[2]/td/table/tr/td[2]/div/p/a[1]")[0]['href']
-    html_doc = Nokogiri::HTML(open(URI.encode("http://www.althingi.is#{millivis_addr}")))
-    (html_doc/"div.FyrirsognMidSv").each do |top|
-       if top.text.index("Efnisorð")
-         next_sibling = top.next_sibling
-         while (next_sibling.inspect[0..6]=="<a href")
-           tags_to_collect << next_sibling.text.gsub(", "," og ")
-           next_sibling=next_sibling.next_sibling.next_sibling.next_sibling
-         end
-       end
-     end
-     puts tags_to_collect.inspect
-     tags_to_collect.join(", ")
+    html_doc = CrawlerUtils.fetch_html("http://www.althingi.is#{millivis_addr}")
+    tags_to_collect = []
+    (html_doc/"div.AlmTexti").each do |top|
+      if top.text.index("Efnisorð")
+        (top/"li/a").each do |tag_link|
+          tags_to_collect << tag_link.text.gsub(", "," og ")
+        end
+      end
+    end
+    tags_to_collect
   end
 end

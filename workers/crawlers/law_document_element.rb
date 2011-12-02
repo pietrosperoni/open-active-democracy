@@ -1,3 +1,4 @@
+# coding: utf-8
 # Copyright (C) 2008,2009,2010 Róbert Viðar Bjarnason
 #
 # This program is free software: you can redistribute it and/or modify
@@ -12,6 +13,8 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+require './crawler_utils'
 
 LAW_TYPE_HEADER_MAIN = 1
 LAW_TYPE_HEADER_CHAPTER= 2
@@ -44,23 +47,7 @@ class LawDocumentElement < ProcessDocumentElement
 
   def self.create_elements(doc, process_id, process_document_id, url, process_type)
     puts "GET LAW DOCUMENT HTML FOR: #{url} process_document: #{process_document_id} process_type: #{process_type}"
-    html_source_doc = nil
-    retries = 10
-
-    begin
-      Timeout::timeout(120){
-        html_source_doc = Nokogiri::HTML(open(url))
-      }
-    rescue
-      retries -= 1
-      if retries > 0
-        sleep 0.42 and retry
-        puts "retry"
-      else
-        raise
-      end
-    end
-
+    html_source_doc = CrawlerUtils.fetch_html(url)
     if html_source_doc.text.index("Vefskjalið er ekki tilbúið")
       puts "ProcessDocument not yet ready"
       return nil
@@ -88,8 +75,16 @@ class LawDocumentElement < ProcessDocumentElement
     
     div_skip_count = 0
 
-    #TBD    
+    if law_number = html_source_doc.xpath('//font//a').scan(/nr. (\d{1,3})\/(\d{4})/).first
+      law_id = law_number[0]
+      law_year = law_number[1]
+      law_id = "0" + law_id if law_id.size < 3
+      law_now = law_year + law_id
+    end
 
+    html_source_doc.xpath('//div').each do |paragraph|
+      #TBD
+    end
     for element in elements
       puts "Element sequence number: #{element.sequence_number}"
       puts "Element content type: #{element.content_type_s} - #{element.content_type}"

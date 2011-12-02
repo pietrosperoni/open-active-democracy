@@ -41,11 +41,11 @@
         </tr>
       </table>
 
-      <div id="althingi_video_discussions">
-        <% if @priority_process %>
-            <%= render :partial => "process_speech_master_videos/latest_video_discussions_medium" %>
-        <% end %>
-      </div>
+
+      <% if @priority_process %>
+          <%= render :partial => "process_speech_master_videos/latest_video_discussions_medium" %>
+      <% end %>
+
       <% if @priority_process %>
           <%= render :partial => "priority_processes/templates/#{@priority_process.process_type.template_name}" %>
       <% end %>

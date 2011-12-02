@@ -1,3 +1,4 @@
+# coding: utf-8
 # Copyright (C) 2008,2009,2010 Róbert Viðar Bjarnason
 #
 # This program is free software: you can redistribute it and/or modify
@@ -13,31 +14,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-TYPE_HEADER_MAIN = 1
-TYPE_HEADER_CHAPTER= 2
-TYPE_HEADER_MAIN_ARTICLE = 3
-TYPE_HEADER_TEMPORARY_ARTICLE = 4
-TYPE_HEADER_ESSAY = 5
-TYPE_HEADER_COMMENTS_MAIN = 6
-TYPE_HEADER_COMMENTS_ABOUT_CHAPTERS = 7
-TYPE_HEADER_COMMENTS_ABOUT_MAIN_ARTICLES = 8
-TYPE_HEADER_COMMENTS_ABOUT_TEMPORARY_ARTICLE = 9
-TYPE_HEADER_COMMENTS_ABOUT_WHOLE_DOCUMENT = 10
-TYPE_CHAPTER = 11
-TYPE_MAIN_ARTICLE = 12
-TYPE_TEMPORARY_ARTICLE = 13
-TYPE_COMMENTS_ABOUT_CHAPTERS = 14
-TYPE_COMMENTS_ABOUT_MAIN_ARTICLES = 15
-TYPE_COMMENTS_ABOUT_TEMPORARY_ARTICLES = 16
-TYPE_COMMENTS_ABOUT_WHOLE_DOCUMENT = 17
-TYPE_HEADER_MAIN_CONTENT = 18
-TYPE_ESSAY_MAIN_CONTENT = 19
-TYPE_HEADER_REPORT_ABOUT_LAW = 20
-TYPE_REPORT_ABOUT_LAW = 21
+require './crawler_utils'
+require 'htmlentities'
 
 class LawProposalDocumentElement < ProcessDocumentElement
 
-  def self.remove_not_needed_divs(html)
+  @@decoder = HTMLEntities.new
+
+  def self.remove_not_needed_divs!(html)
     new_html = ""
     if html.length<1560916
       begin
@@ -57,7 +41,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
       puts "Skipping to long html doc..."
       new_html=html
     end
-    new_html
+    html = new_html
   end
   
   def parent
@@ -115,7 +99,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
     elsif is_report_about_law_header?
       self.content_type = TYPE_HEADER_REPORT_ABOUT_LAW
     else
-      puts "Error: Could not find header type for #{self.content}"
+      puts "Error: Couldn't find header type for: #{self.content.to_s[0..50].inspect}"
     end
   end
       
@@ -139,7 +123,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
     elsif parent.content_type == TYPE_HEADER_REPORT_ABOUT_LAW
       self.content_type = TYPE_REPORT_ABOUT_LAW
     else
-      puts "Error: Could not find content type for #{self.content} parent: #{parent.inspect}"
+      puts "Error: Couldn't find content type for: #{self.content.to_s[0..50].inspect}"
     end
   end
 
@@ -148,15 +132,20 @@ class LawProposalDocumentElement < ProcessDocumentElement
   end
 
   def is_chapter_header?
-    content.downcase =~ /kafli/
+    content_text_only =~ /kafli/
   end
   
   def is_thingsalyktinuar_tillaga?
-    content.index("Þingsályktun") or content.index("Tillaga til þingsályktunar")
+    content_text_only =~ /þingsályktun/i or content_text_only =~ /Tillaga til þingsályktunar/i
   end
 
   def is_main_article_header?
-    unless is_comments_about_main_article_header?      
+    unless is_comments_about_main_article_header?
+      if numeral = LawProposalDocumentElement.has_roman_numeral(self.content)
+        self.content_number = LawProposalDocumentElement.roman_to_arabic(numeral)
+        return true
+      end
+
       re1='(\\d+)'  # Integer Number 1
       re2='(\\.)' # Any Single Character 1
       re3='(\\s+)'  # White Space 1
@@ -164,7 +153,7 @@ class LawProposalDocumentElement < ProcessDocumentElement
       
       re=(re1+re2+re3+re4)
       m=Regexp.new(re,Regexp::IGNORECASE);
-      if m.match(self.content.gsub(/<!-- Tab -->/," ").gsub(/&nbsp;/," "))
+      if m.match(self.content_text_only)
         matched_text_only = m.match(self.content_text_only)
         if matched_text_only and matched_text_only.length>1
           self.content_number=matched_text_only[1];
@@ -178,6 +167,53 @@ class LawProposalDocumentElement < ProcessDocumentElement
     else
       return false
     end
+  end
+
+  def self.has_roman_numeral(input)
+    re1 = "<b>\s*"
+    re2 = '(M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}))' # roman numeral
+    re3 = '(\\.)'
+    re = (re1+re2+re3)
+    m=Regexp.new(re,Regexp::IGNORECASE);
+    if m.match(input)
+      matched = m.match(input)
+      if matched and matched.length>1
+        return matched[1];
+      end
+    end
+    return nil
+  end
+
+  def self.roman_to_arabic(roman)
+    roman_to_arabic = {
+        'I' => 1,
+        'V' => 5,
+        'X' => 10,
+        'L' => 50,
+        'C' => 100,
+        'D' => 500,
+        'M' => 1000,
+    }
+
+    roman_digit = {
+        1    => 'IV',
+        10   => 'XL',
+        100  => 'CD',
+        1000 => 'MMMMMM',
+    }
+
+    figure = roman_digit.keys.sort.reverse
+    figure.each { |f| roman_digit[f] = roman_digit[f].split(//, 2) }
+
+    last_digit = 1000
+    arabic = 0
+    roman.upcase.split(//).each do |char|
+      digit = roman_to_arabic[char]
+      arabic -= 2 * last_digit if last_digit < digit
+      last_digit = digit
+      arabic += last_digit
+    end
+    return arabic
   end
 
   def is_temporary_article_header?
@@ -208,8 +244,8 @@ class LawProposalDocumentElement < ProcessDocumentElement
     
     re=(re1+re2+re3+re4+re5+re6)
     m=Regexp.new(re,Regexp::IGNORECASE);
-    if m.match(self.content)
-        self.content_number=m.match(self.content)[3];  # Store the chapter number
+    if m.match(self.content_text_only)
+        self.content_number=m.match(self.content_text_only)[3];  # Store the chapter number
         return true
     end
   end
@@ -226,8 +262,8 @@ class LawProposalDocumentElement < ProcessDocumentElement
     
     re=(re1+re2+re3+re4+re5+re6)
     m=Regexp.new(re,Regexp::IGNORECASE);
-    if m.match(self.content.downcase.gsub(/&nbsp;/,""))
-        self.content_number=m.match(self.content)[3]; # Store the article number
+    if m.match(self.content_text_only)
+        self.content_number=m.match(self.content_text_only)[3]; # Store the article number
         return true
     else
       return false
@@ -247,45 +283,27 @@ class LawProposalDocumentElement < ProcessDocumentElement
   end
     
   def compare_to_content_euc(string, debug=false)
-    input1=string.downcase
+    input1=string
     puts "INPUT1: #{input1}" if debug
-    input2=self.content.downcase
+    input2=self.content_text_only
     puts "INPUT2: #{input2}" if debug
-    m=Regexp.new(input1)
+    m=Regexp.new(input1, Regexp::IGNORECASE)
     m.match(input2)
   end
 
   def self.skip_tokens(next_sibling)
-    next_sibling.inspect[0..3]==" Tab" or
-    next_sibling.inspect[0..8]==" WP Style" or 
-    next_sibling.inspect[0..7]==" WP Pair" or 
-    next_sibling.inspect[0..6]==" Para N" or
-    next_sibling.inspect[0..6]=="<script" or
-    next_sibling.inspect[0..6]=="<noscri" or
-    next_sibling.inspect[0..3]=="<!--"
+    next_sibling.to_s[0..3]==" Tab" or
+    next_sibling.to_s[0..8]==" WP Style" or
+    next_sibling.to_s[0..7]==" WP Pair" or
+    next_sibling.to_s[0..6]==" Para N" or
+    next_sibling.to_s[0..6]=="<script" or
+    next_sibling.to_s[0..6]=="<noscri" or
+    next_sibling.to_s[0..3]=="<!--"
   end
 
   def self.create_elements(doc, process_id, process_document_id, url, process_type)
-    puts "GET DOCUMENT HTML FOR: #{url} process_document: #{process_document_id} process_type: #{process_type}"
-    html_source_doc = nil
-    retries = 10
-
-    begin
-      Timeout::timeout(120){
-        if process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-          html_source_doc = Nokogiri::HTML(open(url))
-        else
-          html_source_doc = Nokogiri::HTML(remove_not_needed_divs(open(url).read))
-        end
-      }
-    rescue
-      retries -= 1
-      if retries > 0
-        sleep 0.42 and retry
-        puts "retry"
-      else
-        raise
-      end
+    html_source_doc = CrawlerUtils.fetch_html(url) do |source|
+      remove_not_needed_divs!(source)
     end
 
     if html_source_doc.text.index("Vefskjalið er ekki tilbúið")
@@ -294,10 +312,10 @@ class LawProposalDocumentElement < ProcessDocumentElement
     end
 
     if ProcessDocument.find_by_external_link(url)
-      puts "Found document at: #{url}"
+      puts "Found ProcessDocument at: #{url}"
       return nil
     end
-    
+
     doc.priority_process_id = process_id
     doc.process_document_id = process_document_id
     #doc.category_id = 1
@@ -312,17 +330,16 @@ class LawProposalDocumentElement < ProcessDocumentElement
     sequence_number = process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA ? 1 : 0
 
     process_document_id = doc.id
-    
     div_skip_count = 0
-    
+
     html_source_doc.xpath('//div').each do |paragraph|
       if div_skip_count != 0 # and process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
         div_skip_count-=1
-        puts "DIV SKIP"
         next
       end
+
       new_parent_header_element = LawProposalDocumentElement.new
-      new_parent_header_element.content = paragraph.inspect
+      new_parent_header_element.content = @@decoder.decode(paragraph.to_s)
       new_parent_header_element.content_text_only = paragraph.text
       new_parent_header_element.sequence_number = sequence_number+=1
       new_parent_header_element.process_document_id = process_document_id
@@ -334,37 +351,30 @@ class LawProposalDocumentElement < ProcessDocumentElement
       next_sibling = paragraph.next_sibling
       all_content_until_next_header = ""
       all_content_until_next_header_text_only = ""
-      puts "PROCESSING HEADER TYPE: "+new_parent_header_element.content_type_s
+
       if new_parent_header_element.content_type == TYPE_HEADER_MAIN_ARTICLE and process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-        puts "Thingsaliktunartillaga main content"
         while next_sibling and not next_sibling.text.index("Greinargerð") and not next_sibling.text.index("Samþykkt á Alþingi") and not
-               next_sibling.text.index("Athugasemdir við þingsályktunartillögu þessa.")
-          puts "SIBLING " + next_sibling.inspect
-          if next_sibling.inspect.index("<div ")
-            div_skip_count += (next_sibling.inspect.split("<div ").count)-1
-            puts "ADDIN DIV SKIP #{div_skip_count}"
+               next_sibling.text.index("Athugasemdir við þingsályktunartillögu þessa.") and not LawProposalDocumentElement.has_roman_numeral(next_sibling.to_s)
+          if next_sibling.to_s.index("<div ")
+            div_skip_count += (next_sibling.to_s.split("<div ").count)-1
           end
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.inspect
+            all_content_until_next_header+= @@decoder.decode(next_sibling.to_s)
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling
         end
-      else # not process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-        while true
-          puts "NEXT SIBLING " + next_sibling.inspect
-          puts "NEXT NEXT SIBLING " + next_sibling.next_sibling.inspect if next_sibling and next_sibling.next_sibling
-          if next_sibling.inspect.index("<div") and next_sibling.inspect.index("center") and next_sibling.inspect.index("<i>")
-            div_skip_count += 1
-            puts "ADDING TO DIV COUNT"
-          elsif next_sibling and (next_sibling.inspect[0..3]=="<div" or next_sibling.inspect[0..7]=="<b> <div")
-            break
-          elsif not next_sibling
+      else
+        while next_sibling and not next_sibling.text.index("Athugasemdir við lagafrumvarp þetta.")
+          if next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*<i>/ or next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*/ and next_sibling.text =~ /\s*(?:Flm\.:|um breytingu)/
+            div_skip_count += (next_sibling.to_s.split("<div ").count)-1
+          end
+          if next_sibling and (next_sibling.to_s[0..7]=="<b> <div" or next_sibling.to_s =~ /\A\s*<div[^>]+?>\s*(?!<[ib]>)/ and next_sibling.text !~ /\s*(?:Flm\.:|um breytingu)/)
             break
           end
           first = false
           unless skip_tokens(next_sibling)
-            all_content_until_next_header+= next_sibling.inspect
+            all_content_until_next_header+= @@decoder.decode(next_sibling.to_s)
             all_content_until_next_header_text_only+= next_sibling.text
           end          
           next_sibling = next_sibling.next_sibling
@@ -382,19 +392,6 @@ class LawProposalDocumentElement < ProcessDocumentElement
       elements << new_main_element
     end
 
-    for element in elements
-      puts "Element sequence number: #{element.sequence_number}"
-      puts "Element content type: #{element.content_type_s} - #{element.content_type}"
-      puts "Element content number: #{element.content_number}"
-      puts "#{element.content_text_only}"
-      puts "---------------------------------------------------------------------------------"
-    end
-    
-    puts "HTML"
-    
-    for element in elements
-      puts "#{element.content}"
-    end
     return doc
   end  
 end

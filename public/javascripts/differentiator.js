@@ -37,7 +37,7 @@ function render_element_classes() {
     jQuery(element).removeClass("selected");
   });
   // Add selected class
-  diffelements.each(function(element_id) {
+  jQuery.each(diffelements, function(element_id) {
     var element = jQuery("#diff-content-change-" + element_id);
     var user_id = element.attr("rel");
     element.addClass("selected");
@@ -81,7 +81,8 @@ function diff_save() {
   var form = document.forms["diffform"];
   var current_id = jQuery("#diff-current-preview-id").html();
 
-  if (!diff_changes_made && current_id != "") {
+  // TODO: reevaluate this
+  if (false && !diff_changes_made && current_id != "") {
     location.href = "/uidiff/preview/" + current_id;
   } else {
     form.elements["change_elements"].value = diffelements.join(",");

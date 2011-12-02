@@ -1,6 +1,30 @@
+# coding: utf-8
+
+require './crawler_utils'
+
 class ProcessParser
 
   @@stage_sequence_number = @@discussion_sequence_number = @@process_document_sequence_number = 0
+
+  def get_original_law_id(process_document)
+    # Get elements with TYPE_HEADER_MAIN and TYPE_HEADER_MAIN_CONTENT
+    elements = process_document.process_document_elements.all(:conditions => "content_type IN (1,18)")
+
+    # Combine the two types into one string
+    header = ""; elements.each {|element| header += element.content_text_only.strip}
+
+    # Find the current/original law number
+    # nr. 116/2006 => 2006116
+    # nr. 96/2009 => 2009096
+    # nr. 19 12. febrúar 1940 => 1940019
+    if law_number = header.scan(/nr. (\d{1,3})(.*)(\d{4})/o).first
+      law_id = law_number[0]
+      law_year = law_number[2]
+      law_id = law_id.rjust(3,"0") # Law numbers should always be three letters
+      law_now = law_year + law_id
+    end
+    law_now
+  end
 
   def self.get_stage_sequence_number(txt, process_type)
     if process_type == PROCESS_TYPE_LOG
@@ -24,7 +48,7 @@ class ProcessParser
       end
     end
   end
-  
+
   def self.process_documents(next_sibling,current_process,process_document_type,process_type)
     tr_count = 3
     while next_sibling.at("tr[#{tr_count}]/td[1]")
@@ -32,22 +56,27 @@ class ProcessParser
       process_document.sequence_number=@@process_document_sequence_number+=1
       process_document.priority_process_id = current_process.id
       process_document.stage_sequence_number = @@stage_sequence_number
-      puts process_document.external_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
+      process_document.external_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
+      puts "ProcessDocument date: #{process_document.external_date}"
       if next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")
-        puts process_document.external_id = next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]").text.strip
-        puts process_document.external_link = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")['href']
+        process_document.external_id = next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]").text.strip
+        puts "ProcessDocument external id: #{process_document.external_id}"
+        process_document.external_link = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")['href']
+        puts "ProcessDocument url: #{process_document.external_link}"
       end
       if next_sibling.at("tr[#{tr_count}]/td[3]").text
-        puts process_document.external_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+        process_document.external_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
+        puts "ProcessDocument external type: #{process_document.external_type}"
       else
-        puts "ProcessDocument Type: unkown"
+        puts "ProcessDocument external type unknown"
       end
       if next_sibling.at("tr[#{tr_count}]/td[4]").text
-        puts process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
+        process_document.external_author = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
+        puts "ProcessDocument author: #{process_document.external_author}"
       else
-        puts "ProcessDocument Author: unkown"
+        puts "ProcessDocument author unknown"
       end
-      
+
       if not ARGV.empty? and ARGV[0] == "force_refresh_on_document_parsing"
         oldpd = ProcessDocument.find_by_external_link(process_document.external_link)
         if oldpd
@@ -59,14 +88,15 @@ class ProcessParser
       end
 
       unless oldpd = ProcessDocument.find_by_external_link(process_document.external_link)
-        puts "EXTERNAL_TYPE: #{process_document.external_type} STAT3: #{process_document.external_type[0..3]}"
-        if process_document.external_type.index("frumvarp") or process_document.external_type.index("lög")
+        if process_document.external_type =~ /frumvarp/i or process_document.external_type =~ /lög/i
+            process_document.external_type =~ /þingsályktun/i or process_document.external_type =~ /stjórnartillaga/i
           document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
-        elsif process_document.external_type.downcase.index("þingsályktun") or process_document.external_type.downcase.index("stjórnartillaga")
-          document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
+        elsif process_document.external_type.downcase.index("breytingartillaga") # breytingartillaga
+          document = LawChangeDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
         else #TODO: Hack to get things saved
           document = LawProposalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link,process_type)
         end         
+
         if document
           unless old_process = PriorityProcess.find(:first, :conditions=>["priority_id = ? AND stage_sequence_number = ?",
                                                     current_process.priority_id, current_process.stage_sequence_number])
@@ -78,10 +108,24 @@ class ProcessParser
           process_document.priority_process_id = current_process.id
           process_document.process_document_type_id = process_document_type.id
           process_document.save
+          
+          #
+          # Create new process document for the original law
+          #
+          # puts "STARTING TO CRAWL ORIGINAL LAW FOR PROCESS DOCUMENT WITH PROCESS_ID = #{current_process.id}"
+          # process_law_document = ProcessDocument.new
+          # process_law_document.sequence_number = @@process_document_sequence_number+=1
+          # process_law_document.priority_process = current_process.id
+          # process_law_document.stage_sequence_number = @@stage_sequence_number
+          # process_law_document.external_id = law_now = get_original_law_id(process_document)
+          # process_law_document.external_link = "http://www.althingi.is/lagas/nuna/#{law_now}.html"
+          # process_law_document.external_type = "upprunaleg lög"
+          # process_law_document.external_author = ""
+          # # process_law_document.external_date = ""
+          # # FFJ:working on: original_law_document = LawOriginalDocumentElement.create_elements(process_document, process_document.priority_process_id, process_document.id, process_document.external_link, process_type)          
         end
-        puts process_document.inspect
       else
-        puts "Found old process document: " + oldpd.inspect
+        puts "Found old ProcessDocument"
       end
       tr_count+=1
       puts ""
@@ -96,27 +140,35 @@ class ProcessParser
       process_discussion.priority_process_id = current_process.id
       process_discussion.stage_sequence_number = @@stage_sequence_number
       if next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0]
-        puts "From time: "+date_from_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[0..4]
-        puts "To time: "+ date_to_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0].text.strip[6..10]
-        puts "SAME TIME" if date_from_time==date_to_time
+        date_from_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[0].text.strip[0..4]
+        puts "ProcessDiscussion from time: "+date_from_time
+        date_to_time = next_sibling.at("tr[#{tr_count}]/td[1]").text.strip + " " + next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[0].text.strip[6..10]
+        puts "ProcessDiscussion to time: "+date_to_time
+        puts "ProcessDiscussion SAME TIME" if date_from_time==date_to_time
         process_discussion.from_time = DateTime.strptime(date_from_time, "%d.%m.%Y %H:%M")
         process_discussion.to_time = DateTime.strptime(date_to_time, "%d.%m.%Y %H:%M")
-        puts process_discussion.transcript_url="http://www.althingi.is"+next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[0]['href']
+        process_discussion.transcript_url="http://www.althingi.is"+next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[0]['href']
+        puts "ProcessDiscussion url: "+process_discussion.transcript_url
       end
-      if next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[1]
-        puts process_discussion.listen_url=next_sibling.search("tr[#{tr_count}]/td[2]/a[@href]")[1]['href']
+      if next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[1]
+        process_discussion.listen_url=next_sibling.search("tr[#{tr_count}]/td[3]/a[@href]")[1]['href']
+        puts "ProcessDiscussion listen url: "+process_discussion.listen_url
       end
-      puts process_discussion.meeting_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
-      if next_sibling.at("tr[#{tr_count}]/td[3]").text
-        puts process_discussion.meeting_type = next_sibling.at("tr[#{tr_count}]/td[3]").text.strip
-      else
-        puts "Meeting Type: unkown"
-      end
+      process_discussion.meeting_date = DateTime.strptime(next_sibling.at("tr[#{tr_count}]/td[1]").text.strip, "%d.%m.%Y")
+      puts "ProcessDiscussion meeting date: #{process_discussion.meeting_date}"
       if next_sibling.at("tr[#{tr_count}]/td[4]").text
-        puts process_discussion.meeting_info = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip        
-        puts process_discussion.meeting_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")['href'] if next_sibling.at("tr[#{tr_count}]/td[4]/a[@href]")
+        process_discussion.meeting_type = next_sibling.at("tr[#{tr_count}]/td[4]").text.strip
+        puts "ProcessDiscussion meeting type: "+process_discussion.meeting_type
       else
-        puts "Meeting Number: unkown"
+        puts "ProcessDiscussion meeting type unknown"
+      end
+      if next_sibling.at("tr[#{tr_count}]/td[2]").text
+        process_discussion.meeting_info = next_sibling.at("tr[#{tr_count}]/td[2]").text.strip
+        puts "ProcessDiscussion meeting info: "+process_discussion.meeting_info
+        process_discussion.meeting_url = "http://www.althingi.is"+next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")['href'] if next_sibling.at("tr[#{tr_count}]/td[2]/a[@href]")
+        puts "ProcessDiscussion meeting url: "+process_discussion.meeting_url
+      else
+        puts "ProcessDiscussion meeting number: unknown"
       end
       unless date_from_time==date_to_time
         unless oldpd = ProcessDiscussion.find(:first, :conditions => ["transcript_url = ?", process_discussion.transcript_url])
@@ -128,9 +180,8 @@ class ProcessParser
           end
           process_discussion.priority_process_id = current_process.id
           process_discussion.save
-          puts process_discussion.inspect
         else
-          puts "Found old process discussion: " + oldpd.inspect
+          puts "Found old ProcessDiscussion"
         end
       end
       tr_count+=1
@@ -138,78 +189,98 @@ class ProcessParser
   end
   
   def self.get_process(url, presenter, external_id, external_name, process_type)
-    html_doc = nil
-    retries = 10
-    begin
-      Timeout::timeout(120){
-        html_doc = Nokogiri::HTML(open(url))
-      }
-    rescue
-      retries -= 1
-      if retries > 0
-        sleep 0.42 and retry
-        puts "retry"
-      else
-        raise
-      end
-    end
-    
-    ur = URI.parse(url)
-    ur_params = CGI.parse(ur.select(:query).to_s)
-    ltg = ur_params["ltg"]
-    mnr = ur_params["mnr"]
-    
+    html_doc = CrawlerUtils.fetch_html(url)
+    ur_params = CGI.parse(URI.parse(url).query)
+    ltg = ur_params["ltg"].first
+    mnr = ur_params["mnr"].first
+
     if process_type == PROCESS_TYPE_LOG
       info_2 = "#{mnr}. mál lagafrumvarp"
     elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
       info_2 = "#{mnr}. mál þingsályktunartillaga" 
     end
-    info_3 = "#{ltg}. löggjafarþingi." 
-    
-    tags_to_collect = []
-    
+    info_3 = "#{ltg}. löggjafarþingi."
+
     if process_type == PROCESS_TYPE_LOG
-      tags_to_collect << "lagafrumvörp"
-      unless current_user = User.find_by_email("lagafrumvorp@skuggathing.is")
+      proposal_tag = "Law proposals"
+      unless current_user = User.find_by_email("lagafrumvorp@ibuar.is")
         current_user=User.new
-        current_user.email = "lagafrumvorp@skuggathing.is"
+        current_user.email = "lagafrumvorp@ibuar.is"
         current_user.login = "Lagafrumvörp frá Alþingi"
         current_user.save(:validate => false)
       end
     elsif process_type == PROCESS_TYPE_THINGSALYKTUNARTILLAGA
-      tags_to_collect << "þingsályktunartillögur"
-      unless current_user = User.find_by_email("thingsalyktunartillaga@skuggathing.is")
+      proposal_tag = "Parliamentary resolution proposals"
+      unless current_user = User.find_by_email("thingsalyktunartillaga@ibuar.is")
         current_user=User.new
-        current_user.email = "thingsalyktunartillaga@skuggathing.is"
+        current_user.email = "thingsalyktunartillaga@ibuar.is"
         current_user.login = "Þingsályktunartillögur frá Alþingi"
         current_user.save(:validate => false)
       end
     end
     
     current_priority = Priority.new
+
     current_priority.external_info_1 = (html_doc/"h1.FyrirsognStorSv").text.strip
     current_priority.external_info_2 = info_2
     current_priority.external_info_3 = info_3
     current_priority.external_link = url
     current_priority.external_presenter = presenter
-    current_priority.external_id = external_id
+    current_priority.external_id = mnr
+    current_priority.external_session_id = ltg
     current_priority.external_name = external_name
     current_priority.name = (html_doc/"h1.FyrirsognStorSv").text.strip
     current_priority.user = current_user
     current_priority.ip_address = "127.0.0.1"
-    current_priority.issue_list = TagsParser.get_tags(html_doc,tags_to_collect)
-    
-    puts "***************************************** New Process *****************************************"
-    puts "Process info 1: #{current_priority.external_info_1} 2: #{info_2} 3: #{info_3}"
-    old_priority = Priority.find_by_external_link(url)
-    if old_priority
-      current_priority = old_priority
-      puts "OLD PRIORITY "+old_priority.inspect
+    uncategorized_id = Category.find_or_create_by_name('Miscellaneous').id
+    untagged_name = Tag.find_or_create_by_name('Uncategorized proposals').name
+
+    placeholder_tag = nil
+    if category_id = CrawlerUtils.get_process_category_id(mnr)
+      current_priority.category_id = category_id
+      puts "Process category_id: #{current_priority.category_id}"
     else
-      current_priority.save
-      puts current_priority.inspect
+      current_priority.category_id = uncategorized_id
+      puts "Process category id unknown"
+      placeholder_tag = untagged_name
     end
-       
+
+    primary_issues = [proposal_tag]
+    primary_issues << placeholder_tag if placeholder_tag
+    current_priority.issue_list = [[primary_issues] | CrawlerUtils.get_process_tag_names(mnr) | TagsParser.get_tags(html_doc)].join(',')
+    puts "Process tags: #{current_priority.issue_list}"
+
+    old_priority = Priority.find_by_external_id_and_external_session_id(mnr, ltg)
+    if old_priority
+      if old_priority.external_link != current_priority.external_link
+        puts "UPDATING EXTERNAL LINK FOR OLD PRIORITY: #{old_priority.external_link}"
+        old_priority.external_link = current_priority.external_link
+      end
+
+      old_tags     = old_priority.issue_list.to_a
+      current_tags = current_priority.issue_list.to_a
+      new_tags     = current_tags - old_tags
+
+      unless new_tags.empty?
+        puts "ADDING NEW TAGS TO OLD PRIORITY: #{new_tags}"
+        combined_tags = old_tags | new_tags
+        old_priority.issue_list = combined_tags.join(",")
+        old_priority.save(false)
+      end
+
+      if old_priority.category_id == uncategorized_id and new_category_id = CrawlerUtils.get_process_category_id(mnr)
+        puts "CATEGORIZING OLD PRIORITY: #{new_category_id}"
+        old_priority.category = new_category_id
+        old_issue_list = old_priority.issue_list.to_a
+        new_issue_list = old_issue_list - [untagged_name]
+        old_priority.category = (new_issue_list | CrawlerUtils.get_process_tag_names(mnr)).join(',')
+      end
+
+      current_priority = old_priority
+    else
+      current_priority.save(false)
+    end
+
     unless process_type_record = ProcessType.find_by_process_type("Althingi Process")
       process_type_record = ProcessType.new
       process_type_record.process_type = "Althingi Process"
@@ -247,23 +318,20 @@ class ProcessParser
     else
      (html_doc/"h2.FyrirsognMidSv").each do |row|
         # Process stage_sequence
-        puts row.text.strip
         #@@stage_sequence_number = get_stage_sequence_number(row.text.strip, process_type).to_i
-        puts "Stage sequence number: #{@@stage_sequence_number}"
-        puts "---------------------"      
+        puts "Stage sequence number: #{@@stage_sequence_number} (#{row.text.strip})"
         next_sibling = row.next_sibling
         @@process_document_sequence_number = @@discussion_sequence_number = 0
-        while next_sibling and next_sibling.inspect[0..3]!="<div" and not next_sibling.inspect.include?("FyrirsognMidSv")
-          if next_sibling.inspect[0..5]=="<table"
+        while next_sibling and next_sibling.to_s[0..3]!="<div" and not next_sibling.to_s.include?("FyrirsognMidSv")
+          if next_sibling.to_s[0..5]=="<table"
             puts "============"      
             puts next_sibling.at("tr[1]/td[1]").text
             puts "============"
             if next_sibling.at("tr[1]/td[1]").text=="Þingskjöl"
               process_documents(next_sibling,current_process,process_document_type,process_type)
-            elsif (next_sibling.at("tr[1]/td[1]").inner_html)=="Umræða"
+            elsif (next_sibling.at("tr[1]/td[1]").text)=="Umræða"
               process_discussion(next_sibling,current_process)
             end
-            puts "++++++++++++"
           end
           next_sibling = next_sibling.next_sibling
         end

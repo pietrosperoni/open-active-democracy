@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+ 
+#--
+# Copyright (c) 2009 Marc-Andre Lafortune
+# Release under the (modified) BSD License (see gem's LICENSE file)
+#++
+ 
+begin
+  require 'flvedit'
+rescue LoadError
+  begin
+    require 'rubygems'
+    require 'flvedit'
+  rescue LoadError
+    require 'lib/flvedit'
+  end
+end
+FLV::Edit::Runner.new(ARGV).run

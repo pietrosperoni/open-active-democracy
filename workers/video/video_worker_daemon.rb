@@ -138,6 +138,13 @@ class VideoWorker
   end
 
   def poll_for_work
+    ProcessSpeechMasterVideo.find(:all, conditions: "published = 1 AND in_processing = 0 AND url != '' AND renew_screenshots = 1").each do |master_video|
+      master_video.process_speech_videos.each do |speech_video|
+        SpeechVideoProcessing.create_thumbnails(@shell,@logger,speech_video)
+      end
+      master_video.renew_screenshots = false
+      master_video.save
+    end
     unless @worker_config["only_get_masters"] and @worker_config["only_get_masters"]==true
       info "process_discussion"
       run_counter = 0

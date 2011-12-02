@@ -24,6 +24,12 @@ jQuery(function ($) {
 });
 
 jQuery(document).ready(function() {
+  jQuery('form[data-remote]').bind("ajax:before", function(){
+    for (instance in CKEDITOR.instances){
+      CKEDITOR.instances[instance].updateElement();
+    }
+  });
+
   jQuery('a[data-remote]').live("ajax:beforeSend", function(){
       var $clicked = $(this);
       $disable_with = $clicked.attr("data-disable-with");
@@ -70,7 +76,6 @@ jQuery(document).ready(function() {
 	  jQuery('#login_form').show('fast');
 	  return false;
 	});
-
 });
 
 function toggleAll(name)

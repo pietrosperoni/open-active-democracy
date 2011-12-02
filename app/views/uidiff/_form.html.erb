@@ -9,8 +9,8 @@
   <div id="diff-document-title"><%= @proposal.priority_process.priority.name %></div>
   <div id="diff-document-sub-title"><%= @proposal.title(true) %></div>
   <ul id="differentiator-tabs">
-    <li class="open"><a href="#" onclick="return false;">Edit</a></li>
-    <li><a href="#" onclick="return diff_save();">Preview</a></li>
+    <li class="open"><a href="#" onclick="return false;"><%= tr('Edit', 'uidiff/_form') %></a></li>
+    <li><a href="#" onclick="return diff_save();"><%= tr('Preview', 'uidiff/_form') %></a></li>
   </ul>
   <div id="differentiator-content">
     <div class="diff-articles">
@@ -32,7 +32,7 @@
           <li>
             <a name="G<%= pe.id %>" class="header"><%= pe.content_text_only %></a>
             <div class="indent">
-              <p><%= pe.children.first.content %></p>
+              <p><%= pe.children.first.content.html_safe %></p>
               <% unless pe.user_proposals.blank? %>
               <div class="changes">
                 <label>Breytingartillögur</label>

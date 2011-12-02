@@ -1,6 +1,8 @@
+
 <% cache(["latest_video_discussion_medium",session[:locale],@priority.id], :expires_in => 15.minutes) do %>
 <% @latest_speech_discussions = ProcessSpeechMasterVideo.get_all(@priority) %>
 <% if @latest_speech_discussions.length > 0 %>
+<div id="althingi_video_discussions">
 <%= javascript_include_tag 'jquery.mousewheel' %>
 <%= javascript_include_tag 'jquery.scrollable-1.0.1.min' %>
 <%= stylesheet_link_tag 'vertical_video_speeches_scroller_medium' %>
@@ -50,5 +52,6 @@
         });
     });
 </script>
+</div>
 <% end %>
 <% end %>

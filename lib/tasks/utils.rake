@@ -61,6 +61,12 @@ CODE_TO_SHORTNAME = {"AE"=>"uae", "LY"=>"lybia", "VA"=>"vatican",
                      "MD"=>"moldova", "LA"=>"lao" }
 namespace :utils do
   desc "Create BR categories"
+  task :delete_all_from_process_documents => :environment do
+    ProcessDocumentElement.delete_all
+    ProcessDocument.delete_all
+  end
+
+  desc "Create BR categories"
   task :create_br_categories => :environment do
   end
 

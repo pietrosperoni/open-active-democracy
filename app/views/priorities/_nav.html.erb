@@ -77,11 +77,14 @@
 						<%= link_to tr("Process Documents", "view/priorities/_nav"), "#" %>
 					</span>
 					<div class="tab_body">
+                    <div class="box_style">
 						<% @priority.priority_processes.each do |process| %>
 	 					  <% process.process_documents.each do |document| %>
+                            <% next if document.external_type == "lög" %>
 						    <%=document.get_process_document_link%><br/>
  						  <% end %>
 						<% end %>
+                    </div>
 					</div>				
 				</li>
    	        <% end %>
@@ -91,6 +94,7 @@
 						<%= link_to tr("Process Discussions", "view/priorities/_nav"), "#" %>
 					</span>
 					<div class="tab_body">
+                    <div class="box_style">
 						<% @priority.priority_processes.each do |process| -%>
 	 					  <% process.process_discussions.each do |discussion| -%>
 					  	    <% video = discussion.process_speech_videos.get_first_published -%>
@@ -99,7 +103,8 @@
 							<% end %>
  						  <% end %>
 						<% end %>
-					</div>				
+                    </div>
+					</div>
 				</li>
    	        <% end %>
 		<% end %>

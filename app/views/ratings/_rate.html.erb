@@ -16,7 +16,7 @@
                     'data-loader-name' => "circle",               
                     :remote=>true,
                     :class => "#{@convert[x-1]}-stars", :name => "#{pluralize(x,tr("Star", "view/ratings/_rate"))} #{tr("out of 5", "view/ratings/_rate")}",
-                    :title => tr("rate this", "view/ratings/_rate")+"#{x}"+tr("out of five") %>
+                    :title => tr("rate this", "view/ratings/_rate")+" #{x} "+tr("out of 5", "view/ratings/_rate") %>
       </li>
     <% end -%>
 </ul>
