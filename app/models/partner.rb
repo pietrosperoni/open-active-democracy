@@ -84,7 +84,7 @@ class Partner < ActiveRecord::Base
     errors.on("unsubscribe_url")       
   end
 
-  validates_length_of       :short_name,    :within => 2..20, :message => tr("should be between 2 and 20 characters.","")
+  validates_length_of       :short_name,    :within => 2..50, :message => tr("should be between 2 and 50 characters.","")
   validates_uniqueness_of   :short_name, :case_sensitive => false, :message => tr("is already taken.","")
   validates_length_of       :name, :within => 2..30, :message => tr("should be within 3 and 30 characters.","")
 

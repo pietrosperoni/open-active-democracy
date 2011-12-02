@@ -561,7 +561,6 @@ ul#priority_menu li.tab9 div.tab_body {
     -webkit-border-radius: 0.4em;
 		-moz-border-radius: 0.4em;
 		border-radius: 0.4em;
-		behavior:url(../javascripts/PIE.htc);
 }
 
 .althingi_process_container table td 
@@ -825,7 +824,6 @@ border:1px solid #DDDDDD;
 	    -webkit-border-radius: 0.4em;
 		-moz-border-radius: 0.4em;
 		border-radius: 0.4em;
-		behavior:url(../javascripts/PIE.htc);
 }
 
 
@@ -1297,6 +1295,10 @@ margin-top:7px;
 		margin-top: 10px;
 }
 
+#deletepage li
+{
+		margin-left: 15px;
+}
 
 #infopage li
 {
@@ -1308,8 +1310,8 @@ margin-top:7px;
 		margin-top: 5px;
 }
 
-.uidiff_link {
-    float: right;
-    font-size: 115%;
-    font-weight: bold;
+
+.finished_status {
+    font-size: 11px;
+    font-weight: normal;
 }

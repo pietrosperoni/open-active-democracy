@@ -9,6 +9,8 @@
           support_or_endorse_text: @support_or_endorse_text,
           government_name: tr(Government.current.name, "Name from database")) %></p>
 
-<p><%= @message.html_safe %></p>
+<p><%= @date.strftime("%d.%m.%Y") %></p>
+
+<%= my_simple_format(@message) %>
 
 <%= render :partial=>"footer.html" %>

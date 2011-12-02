@@ -16,7 +16,17 @@ body {  background-image: url('../images/new/bg.gif'); background-repeat: repeat
 /* #header table {width:100px;overflow:hidden} */
 img {border:none}
 
-#encouragements {width: 339px; margin-left: 30px; background-image: url(../images/new/ad_bg2.gif) !important; background-repeat: no-repeat; padding: 3px 5px 5px 0px; height: 80px; font-size:10px;}
+#encouragements {
+	width: 339px; margin-left: 30px; 
+/*
+	background-image: url(../images/new/ad_bg2.gif) !important; background-repeat: no-repeat; 
+height: 80px;
+
+*/
+	padding: 3px 0px 0px 0px;  font-size:10px;
+	border: 0px solid #99f;
+}
+
 #encouragements h2 {border:none;}
 
 td.right {width:60px}
@@ -24,10 +34,11 @@ td.right {width:60px}
 p  {margin-bottom: 5px;}
 
 div.column .ui-widget-content {
-	  background-color:#fafafa;
+/*	  background-color:#fafafa;
     background-image: url("../images/new/portal_bg.png") !important;
     background-position: left top !important;
     background-repeat: no-repeat;
+	*/
     margin: 0 0 10px;
 		width: 345px;
 }
@@ -472,25 +483,18 @@ span.priority_add_ignore a, .priority_remove2 {background:#fff !important; borde
 {
 	background:#A0C47D;
 	border:1px solid #439A22; 
-	width: auto; 
-	float:left;
 	    -webkit-border-radius: 0.4em;
 		-moz-border-radius: 0.4em;
 		border-radius: 0.4em;
-		behavior:url(../javascripts/PIE.htc);
 }
 
 .priority_add_link2 
 {
 	background:#E49E6E;
 	border:1px solid #B92D19;
-	width: auto;
-	float:right;
 		-webkit-border-radius: 0.4em;
 		-moz-border-radius: 0.4em;
 		border-radius: 0.4em;
-		behavior:url(../javascripts/PIE.htc);
-
 }
 
 span.priority_add_follow a, .priority_add_link {background:#FFF;border:1px solid #CCC; width: auto; float:left; color: #aaa;}
@@ -502,10 +506,16 @@ img.point_report {float:right;}
 
 .opposed, .red_button, .priority_remove_oppose {
     background-color: #e49e6e;
+    -webkit-border-radius: 0.4em;
+		-moz-border-radius: 0.4em;
+		border-radius: 0.4em;
 }
 .green_button, .priority_remove, .endorsed {
     background-color: #A0C47D !important;
 		border: solid 1px #439A22 !important;
+    -webkit-border-radius: 0.4em;
+		-moz-border-radius: 0.4em;
+		border-radius: 0.4em;
 }
 
 .priority_remove1 {
@@ -875,7 +885,6 @@ list-style: disc;
 			    -webkit-border-radius: 0.4em;
 		-moz-border-radius: 0.4em;
 		border-radius: 0.4em;
-		behavior:url(../javascripts/PIE.htc);
 
 }
 

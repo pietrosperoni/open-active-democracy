@@ -16,10 +16,12 @@ class UserMailer < ActionMailer::Base
          end
   end
 
-  def priority_status_message(priority, status, status_message, user, position)
+  def priority_status_update(priority, status, status_date, status_subject, status_message, user, position)
     @priority = priority
     @government = Government.current
     @status = status
+    @date = status_date
+    @status_subject = status_subject
     @message = status_message
     @support_or_endorse_text = position == 1 ? tr("which you support", "email") : tr("which you oppose", "email")
     attachments.inline['logo.png'] = get_conditional_logo
@@ -30,7 +32,7 @@ class UserMailer < ActionMailer::Base
          reply_to: Government.current.admin_email,
          from:     "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
          subject:  tr('The status of the priority "{priority}" has been changed', "email", :priority => priority.name) do |format|
-      format.text { render text: convert_to_text(render_to_string("priority_status_message.html")) }
+      format.text { render text: convert_to_text(render_to_string("priority_status_update.html")) }
       format.html
     end
   end

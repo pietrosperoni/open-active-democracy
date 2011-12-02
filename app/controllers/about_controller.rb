@@ -20,6 +20,15 @@ class AboutController < ApplicationController
     elsif params[:id] == 'council' and Government.current.layout == "better_reykjavik"
       @page_title = tr("Reykjavik city council", "controller/council")
       render :action => 'council'
+    elsif params[:id] == 'partners'
+      @page_title = tr("Partners", "controller/about")
+      render :action => 'partners'
+    elsif params[:id] == 'partner_rules'
+      @page_title = tr("Partner rules", "controller/about")
+      render :action => 'partner_rules'
+    elsif params[:id] == 'choose_partner'
+      @page_title = tr("Choose a partner", "controller/about")
+      render :action => 'choose_partner'
     elsif @page = Page.find_by_short_name(params[:id])
       @page_title = @page.name
     else

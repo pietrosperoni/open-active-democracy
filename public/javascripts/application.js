@@ -93,4 +93,3 @@ function setAll(name,state)
     if (!boxes[i].disabled)
    		{	boxes[i].checked = state ; }
 }
-

@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
-  
+
   before_filter :get_tag_names, :except => :index
+  before_filter :set_counts, :except => :index
   before_filter :check_for_user, :only => [:yours, :yours_finished, :yours_created, :network]
 
   def index
@@ -30,8 +31,8 @@ class IssuesController < ApplicationController
       redirect_to "/" and return 
     end
     @page_title = tr("{tag_name} priorities", "controller/issues", :tag_name => tr(@tag_names, "model/category").titleize)
-    @priorities = Priority.tagged_with(@tag_names, :on => :issues).published.top_rank.paginate(:page => params[:page], :per_page => params[:per_page])
-    get_endorsements    
+    @priorities = Priority.filtered.tagged_with(@tag_names, :on => :issues).published.top_rank.paginate(:page => params[:page], :per_page => params[:per_page])
+    get_endorsements
     respond_to do |format|
       format.html { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }            
@@ -216,7 +217,7 @@ class IssuesController < ApplicationController
   def discussions
     @page_title = tr("Discussions on {tag_name}", "controller/issues", :tag_name => tr(@tag_names, "model/category").titleize)
     @priorities = Priority.tagged_with(@tag_names, :on => :issues)
-    @activities = Activity.active.filtered.discussions.for_all_users.by_recently_updated.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page], :per_page => 10
+    @activities = Activity.filtered.active.filtered.discussions.for_all_users.by_recently_updated.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page], :per_page => 10
     respond_to do |format|
       format.html
       format.xml { render :xml => @activities.to_xml(:include => :comments, :except => NB_CONFIG['api_exclude_fields']) }
@@ -226,7 +227,7 @@ class IssuesController < ApplicationController
   
   def documents
     @page_title = tr("Documents on {tag_name}", "controller/issues", :tag_name => tr(@tag_names, "model/category").titleize)
-    @priorities = Priority.tagged_with(@tag_names, :on => :issues)
+    @priorities = Priority.filtered.tagged_with(@tag_names, :on => :issues)
     @documents = Document.by_helpfulness.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html
@@ -237,8 +238,8 @@ class IssuesController < ApplicationController
 
   def points
     @page_title = tr("{tag_name} points", "controller/issues", :tag_name => tr(@tag_names, "model/category").titleize)
-    @priorities = Priority.tagged_with(@tag_names, :on => :issues)
-    @points = Point.by_helpfulness.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page]
+    @priorities = Priority.filtered.tagged_with(@tag_names, :on => :issues)
+    @points = Point.filtered.by_helpfulness.find(:all, :conditions => ["priority_id in (?)",@priorities.collect{|p| p.id}]).paginate :page => params[:page], :per_page => params[:per_page]
     @qualities = nil
     if logged_in? and @points.any? # pull all their qualities on the points shown
       @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
@@ -255,6 +256,15 @@ class IssuesController < ApplicationController
   end
   
   private
+
+  def set_counts
+    if @tag_names
+      priorities = Priority.filtered.tagged_with(@tag_names, :on => :issues).published.only_ids
+      @priorities_count = priorities.count
+      @points_count = Point.filtered.by_helpfulness.count(:all, :conditions => ["priority_id in (?)",priorities.collect{|p| p.id}])
+      @discussions_count = Activity.filtered.active.filtered.discussions.for_all_users.by_recently_updated.count(:all, :conditions => ["priority_id in (?)",priorities.collect{|p| p.id}])
+    end
+  end
   def get_tag_names
     @tag = Tag.find_by_slug(params[:slug])
     if not @tag

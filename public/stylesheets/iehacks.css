@@ -1,5 +1,5 @@
-ul#menu1 {margin: 1px 0 10px 10px !important;}
-ul#menu1 .tab_body {
+ul.menu {margin: 1px 0 10px 10px !important;}
+ul.menu .tab_body {
 	float: left !important;
 	/*margin: 10px  0 -10px -20px !important;
 	left: -148px !important;*/

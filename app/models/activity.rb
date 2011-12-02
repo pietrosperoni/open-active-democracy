@@ -46,7 +46,8 @@ class Activity < ActiveRecord::Base
   belongs_to :document_revision
   belongs_to :capital
   belongs_to :ad
-  
+
+  belongs_to :priority_status_change_log
   has_many :comments, :order => "comments.created_at asc", :dependent => :destroy
   has_many :published_comments, :class_name => "Comment", :foreign_key => "activity_id", :conditions => "comments.status = 'published'", :order => "comments.created_at asc"
   has_many :commenters, :through => :published_comments, :source => :user, :select => "DISTINCT users.*"
@@ -855,6 +856,12 @@ end
 class ActivityPriorityOfficialStatusSuccessful < Activity
   def name
     tr("{priority_name} was completed successfully", "model/activity", :priority_name => priority.name)
+  end
+end
+
+class ActivityPriorityStatusUpdate < Activity
+  def name
+    tr("{priority_name}'s status was updated: {subject}", "model/activity", priority_name: priority.name)
   end
 end
 
