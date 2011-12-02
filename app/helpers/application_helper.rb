@@ -263,4 +263,12 @@ module ApplicationHelper
   def escape_t(text)
     text.gsub("\"","")
   end
+
+  def partner_link(short_name)
+    if Rails.env.development?
+      return "http://" + request.host_with_port + "/?partner_short_name=#{short_name}"
+    else
+      return "http://" + short_name + request.host
+    end
+  end
 end

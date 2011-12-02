@@ -155,11 +155,14 @@ class ApplicationController < ActionController::Base
   def current_partner
     if Rails.env.development?
       if params[:partner_short_name]
-        Partner.current = @current_partner ||= Partner.find_by_short_name(params[:partner_short_name])
-        session[:set_partner_id] = @current_partner.id
+        @current_partner = Partner.find_by_short_name(params[:partner_short_name])
+        Partner.current = @current_partner
+        session[:set_partner_id] = @current_partner.id if @current_partner
         return @current_partner
       elsif session[:set_partner_id]
         return @current_partner = Partner.current = Partner.find(session[:set_partner_id])
+      else
+        return nil
       end
     end
     if request.host.include?("betraisland")

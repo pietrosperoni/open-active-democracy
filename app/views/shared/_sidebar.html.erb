@@ -2,7 +2,7 @@
   <% if Government.current.layout == "better_reykjavik" %>
     <% if current_partner %>
         <div class="reykjavik_icon">
-            <a href="http://betrireykjavik.is"><%= image_tag("new/reykjavik_icon.png", :alt => "betrireykjavik.is") %></a>
+            <a href="http://betrireykjavik.is"><%= image_tag("new/betrireykjavik_fra_bh.png", :alt => "betrireykjavik.is") %></a>
         </div>
     <% else %>
 	    <div class="reykjavik_icon">
@@ -18,8 +18,29 @@
 	<%= render :partial => "shared/partner_large_flag" %>
     <%= render :partial => "shared/search" %>
 
-		<div>
-<ul id="menu1">
+  <div>
+    <% if current_partner %>
+        <ul class="menu partner_menu">
+          <li class="tab7 mega">
+    			<span class="tab_header">
+				<%= link_to tr("About partners", "view/shared/_menu"), "#" %>
+			</span>
+            <div class="tab_body">
+              <div class="test">
+                <div class="tab_sublinks">
+                  &middot; <%= link_to tr("About partners", "view/shared/_menu"), :controller => "about", :action => "partners" %><br/>
+                  &middot; <%= link_to tr("Choose a partner", "view/shared/_menu"), :controller => "about", :action => "choose_partner" %><br/>
+                  &middot; <%= link_to tr("Partner rules", "view/shared/_menu"), :controller => "about", :action => "partner_rules" %><br/>
+                  <% cache("pages-#{session[:locale]}-#{@inline_translations_enabled}") do %>
+                      <%= Page.all.collect{ |page| link_to(page.link_name, about_url(page.short_name))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+    <% end %>
+<ul class="menu">
 <li class="tab7 mega">
 			<span class="tab_header">
 				<%= link_to tr("About", "view/shared/_menu"), "#" %>

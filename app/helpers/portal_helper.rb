@@ -51,7 +51,7 @@ module PortalHelper
 
   def setup_priorities_tagged(limit, tag_name = nil)
     tag = Tag.find_or_create_by_name(tag_name)
-    get_cached_priorities("Priority.tagged_with('#{tag.name}', :on => :issues).published.limit(#{limit})")
+    get_cached_priorities("Priority.filtered.tagged_with('#{tag.name}', :on => :issues).published.limit(#{limit})")
     {:priorities=>@priorities, :endorsements=>get_endorsements, :more=> "/issues/#{tag.to_url}"}
   end
 

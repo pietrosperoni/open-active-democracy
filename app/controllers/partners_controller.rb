@@ -126,5 +126,5 @@ class PartnersController < ApplicationController
       format.html { redirect_to(partners_url) }
     end
   end
-  
+
 end
