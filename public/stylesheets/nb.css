@@ -342,8 +342,8 @@ h4 {
 }
 
 #notification_show {
-	padding: 0px 4px 5px 12px;
-	margin: 0px 5px 5px 5px;
+	padding: 0px 4px 10px 12px;
+/*	margin: 0px 5px 5px 5px;*/
 	font-size: 1.05em;
 	letter-spacing: 0;
 	line-height: 1.4em;

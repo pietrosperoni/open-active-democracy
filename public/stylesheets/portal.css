@@ -35,7 +35,10 @@
 .ui-widget-content {
       margin:0 10px; padding:5px;  border-bottom: 1px solid #eee;
       border: none !important;
-      background-image: url('images/portal_bg.png') !important; background-repeat:no-repeat; background-position:top !important;  
+/*
+background-image: url('images/portal_bg.png') !important; background-repeat:no-repeat;
+*/
+background-position:top !important;  
       width: 340px;  padding:10px; margin:0 0 10px 10px;
       float:left;
 }
