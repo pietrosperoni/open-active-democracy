@@ -100,7 +100,7 @@ class PortalController < ApplicationController
           dp = PortletPosition.find_by_portlet_id(portlet_id)
           dp.css_column = value.split("|")[0].to_i
           dp.css_position = value.split("|")[1].to_i
-          if portlet.portlet_container.user_id == current_user.id 
+          if portlet.portlet_container.user_id == current_user.id or (current_user and current_user.is_admin?)
             dp.save
           else
             Rails.logger.error("Wrong user trying to save the wrong thing")

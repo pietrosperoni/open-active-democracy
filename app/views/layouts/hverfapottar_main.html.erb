@@ -1,0 +1,88 @@
+<% if request.env['HTTP_USER_AGENT'] =~ /facebook|googlebot/i
+  Tr8n::Config.init('is', Tr8n::Config.current_user)
+end %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="is" lang="is" xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head itemscope itemtype="http://schema.org/WebPage" xmlns:og="http://ogp.me/ns#">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= @page_title ? "#{@page_title} - #{tr(current_government.name,"Name from database")}" : tr(current_government.name,"Name from database") %></title>
+		<!--[if IE]>
+      <%= stylesheet_link_tag "/stylesheets/iehacks" %>
+    <![endif]-->
+		<!--[if IE 7]>
+      <%= stylesheet_link_tag "/stylesheets/ie7" %>
+    <![endif]-->
+    <%= render :partial => "shared/head" %>
+    <%= render :partial => "shared/javascripts" %>
+    <%= render :partial => "shared/css" %>
+    <%= render :partial => "color_schemes/css", :locals => {:id => current_government.color_scheme_id } %>
+    <%= render :partial => "shared/priority_processes_head" if controller_name.index("process") %>
+    <%= stylesheet_link_tag "/stylesheets/newstuff" %>
+    <%= stylesheet_link_tag "/stylesheets/gnew" %>
+    <%= stylesheet_link_tag "/stylesheets/temp" %>
+    <%= javascript_include_tag "check-browser", "skuggathing" unless controller_name=="priority_processes" %>
+
+    <% if ["users","sessions"].include?(controller_name)  %>
+      <%= stylesheet_link_tag "/stylesheets/jquery.keypad.css" %>
+      <%= javascript_include_tag "jquery.keypad.min", "check-browser" %>
+    <% end %>
+    <%= tr8n_scripts_tag %>
+    <%= render :partial => "shared/description" %>
+    <%= render :partial=>"priorities/fb_og_tags" %>
+  </head>
+  <body class="C<%= h(controller.controller_name) %> <%= h(controller.controller_name) %>-<%= h(controller.action_name) %>">
+    <%= csrf_meta_tag %>
+    <div id="backgroundwrap">
+      <div id="header">
+        <table>
+          <tr>
+            <td><%= render :partial => "shared/branding/hverfapottar_main"%></td>
+            <td><%= render :partial => "ads/pick" %></td>
+          </tr>
+        </table>
+      </div>
+      <div id="contentwrap">
+        <%= render :partial => "shared/menu" %>
+        <%= flash_div :warning, :notice, :error %>
+        <% if ["network","user_contacts"].include?(controller_name) -%>
+          <table width="100%">
+            <tr>
+             <% if Tr8n::Config.current_language and Tr8n::Config.current_language.right_to_left %>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+             <% else %>
+                <td>
+                  <div id="content_text">
+                    <%= yield :layout %>
+                  </div>
+                </td>
+                <td>
+                  <%= render :partial=>"network/sidebar" %>
+                </td>
+              <% end %>
+            </tr>
+          </table>
+        <% else %>
+          <div id="content_text">
+            <%= yield :layout %>
+          </div>
+        <% end %>
+      </div>
+      <%= render :partial => "shared/sidebar" %>
+      <div class="push">
+      </div>
+			<div class="clear"></div>
+    </div>
+    <%= render :partial => "shared/footer" %>
+    <%= render :partial => "shared/analytics" %>
+    <%= render :partial => "shared/facebook_footer" %>
+    <%= render :partial => "shared/google_translate" %>
+    <!-- <%= h(controller.controller_name) %> <%= h(controller.action_name) %> -->
+  </body>
+</html>

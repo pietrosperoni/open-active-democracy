@@ -19,7 +19,7 @@
     <%= render :partial => "shared/search" %>
 
   <div>
-    <% if current_partner %>
+    <% if current_partner or (controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner')%>
         <ul class="menu partner_menu">
           <li class="tab7 mega">
     			<span class="tab_header">
