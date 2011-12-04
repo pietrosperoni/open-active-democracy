@@ -59,7 +59,7 @@
 			<span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), :controller => "news", :action=>"top" %></span>
 		</li>
 		<% end %>
-        <% if current_partner or (controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner')%>
+        <% if true or current_partner or (controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner')%>
           <li class="tab7 mega">
     		<span class="tab_header">
 				<%= link_to tr("About partners", "view/shared/_menu"), "#" %>
