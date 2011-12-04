@@ -59,6 +59,20 @@
 			<span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), :controller => "news", :action=>"top" %></span>
 		</li>
 		<% end %>
+        <% if current_partner or (controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner')%>
+          <li class="tab7 mega">
+    		<span class="tab_header">
+				<%= link_to tr("About partners", "view/shared/_menu"), "#" %>
+			</span>
+            <div class="tab_body">
+                <div class="tab_subhead">
+                  &middot; <%= link_to tr("About partners", "view/shared/_menu"), :controller => "about", :action => "partners" %><br/>
+                  &middot; <%= link_to tr("Choose a partner", "view/shared/_menu"), :controller => "about", :action => "choose_partner" %><br/>
+                  &middot; <%= link_to tr("Partner rules", "view/shared/_menu"), :controller => "about", :action => "partner_rules" %><br/>
+                </div>
+            </div>
+          </li>
+        <% end %>
 		<% if logged_in? and current_user.is_admin? %>
 		<li class="tab6 mega">
 			<span class="tab_header">
