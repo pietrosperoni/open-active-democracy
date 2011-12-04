@@ -66,9 +66,11 @@
 			</span>
             <div class="tab_body">
                 <div class="tab_subhead">
-                  &middot; <%= link_to tr("About partners", "view/shared/_menu"), :controller => "about", :action => "partners" %><br/>
-                  &middot; <%= link_to tr("Choose a partner", "view/shared/_menu"), :controller => "about", :action => "choose_partner" %><br/>
-                  &middot; <%= link_to tr("Partner rules", "view/shared/_menu"), :controller => "about", :action => "partner_rules" %><br/>
+                  &middot; <%= link_to tr("About partners", "controller/about"), :controller => "about", :action => "partners" %><br/>
+                  &middot; <%= link_to tr("Choose a partner", "controller/about"), :controller => "about", :action => "choose_partner" %><br/>
+                  &middot; <%= link_to tr("What kind of priorities", "controller/about"), :controller => "about", :action => "partner_what_kind" %><br/>
+                  &middot; <%= link_to tr("Partner rules", "controller/about"), :controller => "about", :action => "partner_rules" %><br/>
+                  &middot; <%= link_to tr("From priorities to action", "controller/about"), :controller => "about", :action => "partner_from_priorities_to_action" %><br/>
                 </div>
             </div>
           </li>
