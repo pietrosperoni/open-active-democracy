@@ -19,27 +19,6 @@
     <%= render :partial => "shared/search" %>
 
   <div>
-    <% if current_partner or (controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner')%>
-        <ul class="menu partner_menu">
-          <li class="tab7 mega">
-    			<span class="tab_header">
-				<%= link_to tr("About partners", "view/shared/_menu"), "#" %>
-			</span>
-            <div class="tab_body">
-              <div class="test">
-                <div class="tab_sublinks">
-                  &middot; <%= link_to tr("About partners", "view/shared/_menu"), :controller => "about", :action => "partners" %><br/>
-                  &middot; <%= link_to tr("Choose a partner", "view/shared/_menu"), :controller => "about", :action => "choose_partner" %><br/>
-                  &middot; <%= link_to tr("Partner rules", "view/shared/_menu"), :controller => "about", :action => "partner_rules" %><br/>
-                  <% cache("pages-#{session[:locale]}-#{@inline_translations_enabled}") do %>
-                      <%= Page.all.collect{ |page| link_to(page.link_name, about_url(page.short_name))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-    <% end %>
 <ul class="menu">
 <li class="tab7 mega">
 			<span class="tab_header">
