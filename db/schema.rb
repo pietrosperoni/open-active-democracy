@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(:version => 20112312175738) do
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
     t.integer  "partner_id"
-    t.string   "type",                 :limit => 60
-    t.string   "status",               :limit => 8
+    t.string   "type",                          :limit => 60
+    t.string   "status",                        :limit => 8
     t.integer  "priority_id"
     t.datetime "created_at"
-    t.boolean  "is_user_only",                       :default => false
-    t.integer  "comments_count",                     :default => 0
+    t.boolean  "is_user_only",                                :default => false
+    t.integer  "comments_count",                              :default => 0
     t.integer  "activity_id"
     t.integer  "vote_id"
     t.integer  "change_id"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20112312175738) do
     t.integer  "document_id"
     t.integer  "document_revision_id"
     t.integer  "position"
-    t.integer  "followers_count",                    :default => 0
+    t.integer  "followers_count",                             :default => 0
     t.datetime "changed_at"
     t.integer  "priority_status_change_log_id"
   end
@@ -965,8 +965,9 @@ ActiveRecord::Schema.define(:version => 20112312175738) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "in_processing", :default => false
-    t.boolean  "published",     :default => false
+    t.boolean  "in_processing",     :default => false
+    t.boolean  "published",         :default => false
+    t.boolean  "renew_screenshots", :default => true
   end
 
   add_index "process_speech_master_videos", ["url"], :name => "index_process_speech_master_videos_on_url", :unique => true
