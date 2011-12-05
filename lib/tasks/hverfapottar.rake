@@ -46,7 +46,7 @@ namespace :hverfapottar do
   desc "add hverfapottar portlets"
   task :add_portlets => :environment do
     PortletTemplate.create(
-        name: "priorities.new_development_projects",
+        name: "New Development Projects",
         portlet_template_category_id: 1,
         locals_data_function: "setup_priorities_tagged",
         partial_name: "priority_list",
@@ -54,7 +54,7 @@ namespace :hverfapottar do
         item_limit: 3
     )
     PortletTemplate.create(
-        name: "priorities.maintenance_projects",
+        name: "Maintenance Projects",
         portlet_template_category_id: 1,
         locals_data_function: "setup_priorities_tagged",
         partial_name: "priority_list",

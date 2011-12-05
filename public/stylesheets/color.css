@@ -201,7 +201,12 @@ ul#menu_sub .tab_header a:hover, ul#menu_third .tab_header a:hover, .ac_over, ul
 	/*color: #ffffff;  fff */
 }
 ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_third li.hovering div.tab_body, ul#priority_menu li.hovering div.tab_body { 
-	border: solid 2px #13499b; /* 13499b */
+	position:relative;
+	behavior:url(../javascripts/PIE.htc);
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	border: solid 1px #CCC;
 }
 
 ul#menu li.mega .tab_header a:hover, ul#menu li.mega.hovering .tab_header a, ul#menu_sub li.mega .tab_header a:hover, ul#menu_sub li.mega.hovering .tab_header a, ul#menu_third li.mega .tab_header a:hover, ul#menu_third li.mega.hovering .tab_header a, ul#priority_menu li.mega .tab_header a:hover, ul#priority_menu li.hovering .tab_header a  { 
