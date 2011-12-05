@@ -849,3 +849,8 @@ padding-top:3px;
 .gt_text {margin: 2px 0 0 3px;}
 
 .cb {margin-top: 5px; margin-left: -2px;}
+
+.betrihverfi #content_text 
+{
+background-image: none !important;
+}
