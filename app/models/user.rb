@@ -1122,6 +1122,7 @@ class User < ActiveRecord::Base
     priority = Priority.find(priority_id)
     Tr8n::Config.init('is', Tr8n::Config.current_user) if Government.last.layout == "better_reykjavik" or Government.last.layout == "better_iceland"
     all_endorsers_and_opposers_for_priority(priority_id).each do |user|
+      next unless user.is_finished_subscribed
       position = Endorsement.where(priority_id: priority_id, user_id: user.id).first.value
       UserMailer.priority_status_update(priority, status, date, subject, message, user, position).deliver
     end
