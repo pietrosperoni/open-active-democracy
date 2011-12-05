@@ -304,7 +304,6 @@ class ApplicationController < ActionController::Base
   end
   
   def get_layout
-    Rails.logger.info(action_name)
     return false if not is_robot? and not current_government
     return "basic" if not Government.current
     return "hverfapottar_main" if controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner'

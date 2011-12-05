@@ -24,13 +24,13 @@
   color: #003399 !important;
 }
 
-ul#menu,ul.menu,ul#menu_sub,ul#menu_third  {width:100%;float:left;padding:0}
-ul.menu  {width:100%;float:right;padding:0; margin: 1px 0 10px 10px; z-index: 500;}
+ul#menu,ul#menu1,ul#menu_sub,ul#menu_third  {width:100%;float:left;padding:0}
+ul#menu1  {width:100%;float:right;padding:0; margin: 1px 0 10px 10px; z-index: 500;}
 
 
 ul#menu_third  {border-top:0px solid #e5e5e5;margin:-3px 10px 5px;padding:3px 0 0;}
 ul#menu_sub {margin:1px 10px 5px}
-ul#menu li,ul.menu li, ul#menu_sub li, ul#menu_third li {
+ul#menu li,ul#menu1 li, ul#menu_sub li, ul#menu_third li {
     display: inline;
     height: auto;
     left: 0;
@@ -40,7 +40,7 @@ float:left;
 padding:0;
 }
 
-ul.menu li {
+ul#menu1 li {
     display: inline;
     height: auto;
     left: 0;
@@ -64,13 +64,13 @@ ul#menu li .tab_header,ul#menu_sub li .tab_header,ul#menu_third li .tab_header {
 padding: 0 4px 0;
 display:inline-block;
 float:left;
-	background-image: url('../images/new/menu-div-bg.png');
-    background-position: right center;
-    background-repeat: no-repeat;
+background-image: url('../images/new/menu-div-bg.png');
+background-repeat: no-repeat;
+background-position: right center;
+
 }
 
 #nav ul#menu li .tab_header {
-	background-image: url('../images/new/menu-div-bg.png');
     background-position: right center;
     background-repeat: no-repeat;
     display: inline-block;
@@ -97,10 +97,7 @@ body.news-capital ul#menu_third li.tab2 .tab_header,
 body.briefing-points ul#menu_third li.tab1 .tab_header,
 ul#menu_third li.tab4 .tab_header,
 ul#menu_third li.tab7 .tab_header,
-ul#menu_third li.tab6 .tab_header  
-{
-/*	background-image:none; */
-}
+ul#menu_third li.tab6 .tab_header  {background-image:none}
 
 ul#menu li .tab_header a {
     border: 0px solid #DDDDDD;
@@ -151,7 +148,7 @@ display:inline-block;
 }
 
 
-ul#menu li.mega .tab_header a,ul.menu li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
+ul#menu li.mega .tab_header a,ul#menu1 li.mega .tab_header a, ul#menu_sub li.mega .tab_header a, ul#menu_third li.mega .tab_header a {
 background:url("/images/mega_down_arrow.gif") no-repeat scroll right center transparent;
 }
 
@@ -167,7 +164,7 @@ ul#menu li.hovering div.tab_body, ul#menu_sub li.hovering div.tab_body, ul#menu_
 
 }
 
-ul.menu li.hovering div.tab_body {
+ul#menu1 li.hovering div.tab_body { 
 	display: block; 
 	padding: 10px 10px 2px 10px;	
 	margin-top: 1px;
@@ -181,7 +178,7 @@ ul#menu li.mega .tab_header a {
 	text-decoration: none;	margin: 7px 8px 0 0px;
 float:left;display:inline-block;
 }
-ul.menu li.mega .tab_header a {
+ul#menu1 li.mega .tab_header a {
 	padding: 3px 13px 3px 10px; 
 	margin-right: 0px; 
 	text-decoration: none;	margin:0px;
@@ -192,7 +189,7 @@ ul#menu .tab_body {
 	top: 27px;
 	left: 0px;
 }
-ul.menu .tab_body {
+ul#menu1 .tab_body {
     position: absolute;
     right: 0;
     top: 10px;

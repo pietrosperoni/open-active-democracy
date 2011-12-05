@@ -735,6 +735,7 @@ class PrioritiesController < ApplicationController
 
     @priority = Priority.new(params[:priority])
     tags = []
+    tags << "Betri hverfi" if current_partner and Government.current.layout=="better_reykjavik"
     tags << @priority.category.name if @priority.category
     params.each do |p,v|
       tags << v if p.include?("special_checkbox_tag_")

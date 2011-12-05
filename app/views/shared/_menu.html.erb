@@ -59,21 +59,23 @@
 			<span class="tab_header"><%= link_to tr("News", "view/shared/_menu"), :controller => "news", :action=>"top" %></span>
 		</li>
 		<% end %>
-        <% if true or current_partner or (controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner')%>
-          <li class="tab7 mega">
-    		<span class="tab_header">
-				<%= link_to tr("About partners", "view/shared/_menu"), "/about/choose_partner" %>
-			</span>
-            <div class="tab_body">
-                <div class="tab_subhead">
-                  &middot; <%= link_to tr("About partners", "controller/about"), :controller => "about", :action => "partners" %><br/>
-                  &middot; <%= link_to tr("Choose a partner", "controller/about"), :controller => "about", :action => "choose_partner" %><br/>
-                  &middot; <%= link_to tr("What kind of priorities", "controller/about"), :controller => "about", :action => "partner_what_kind" %><br/>
-                  &middot; <%= link_to tr("Partner rules", "controller/about"), :controller => "about", :action => "partner_rules" %><br/>
-                  &middot; <%= link_to tr("From priorities to action", "controller/about"), :controller => "about", :action => "partner_from_priorities_to_action" %><br/>
+        <% if  Government.current.layout=="better_reykjavik" %>
+            <% if true or current_partner or (controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner')%>
+              <li class="tab7 mega">
+                <span class="tab_header">
+                    <%= link_to tr("About partners", "view/shared/_menu"), "/about/choose_partner" %>
+                </span>
+                <div class="tab_body">
+                    <div class="tab_subhead">
+                      &middot; <%= link_to tr("About partners", "controller/about"), :controller => "about", :action => "partners" %><br/>
+                      &middot; <%= link_to tr("Choose a partner", "controller/about"), :controller => "about", :action => "choose_partner" %><br/>
+                      &middot; <%= link_to tr("What kind of priorities", "controller/about"), :controller => "about", :action => "partner_what_kind" %><br/>
+                      &middot; <%= link_to tr("Partner rules", "controller/about"), :controller => "about", :action => "partner_rules" %><br/>
+                      &middot; <%= link_to tr("From priorities to action", "controller/about"), :controller => "about", :action => "partner_from_priorities_to_action" %><br/>
+                    </div>
                 </div>
-            </div>
-          </li>
+              </li>
+            <% end %>
         <% end %>
 		<% if logged_in? and current_user.is_admin? %>
 		<li class="tab6 mega">
