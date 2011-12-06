@@ -3,7 +3,7 @@
 namespace :hverfapottar do
 
   desc "printout dns names"
-  task :init => :environment do
+  task :print_dns_names => :environment do
     hverfi = {
       'Árbær'       => 'arbaer',
       'Breiðholt'   => 'breidholt',
@@ -18,9 +18,10 @@ namespace :hverfapottar do
     }
     dns_names = ""
     hverfi.each do |name, short_name|
-      puts "betri-hverfi-#{short_name}.betrireykjavik.is",
+      puts "betri-hverfi-#{short_name}.betrireykjavik.is"
       dns_names += "betri-hverfi-#{short_name}.betrireykjavik.is "
     end
+    puts dns_names
   end
 
   desc "initialize hverfapottar"
