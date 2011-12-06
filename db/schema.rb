@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20112312175738) do
+ActiveRecord::Schema.define(:version => 20112312175739) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -636,6 +636,7 @@ ActiveRecord::Schema.define(:version => 20112312175738) do
     t.string   "default_locale"
     t.integer  "iso_country_id"
     t.string   "required_tags"
+    t.text     "message_for_new_priority"
   end
 
   add_index "partners", ["short_name"], :name => "short_name"

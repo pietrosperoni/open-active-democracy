@@ -1,7 +1,9 @@
 <%= javascript_include_tag "jquery.qtip.min" %>
 <%= stylesheet_link_tag "/stylesheets/jquery.qtip.min.css" %>
 
-<% if Government.current.message_for_new_priority and Government.current.message_for_new_priority!="" -%>
+<% if current_partner and current_partner.message_for_new_priority %>
+    <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => current_partner.message_for_new_priority.html_safe} %>
+<% elsif Government.current.message_for_new_priority and Government.current.message_for_new_priority!="" -%>
     <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_new_priority.html_safe} %>
 <% end %>
 

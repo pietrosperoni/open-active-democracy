@@ -16,8 +16,9 @@ namespace :hverfapottar do
       'Háaleiti- og bústaðir' => 'haaleiti',
       'Grafarholt og Úlfarsárdalur' => 'grafarholt',
     }
-
     partner_tags = ["Maintenance projects", "New development projects"]
+
+    PortletContainer.delete_all("partner_id IS NOT NULL")
 
     Partner.transaction do
       partner_tags.each do |tag_name|
@@ -38,6 +39,7 @@ namespace :hverfapottar do
           name: name,
           short_name: "betri-hverfi-#{short_name}",
           required_tags: partner_tags.join(','),
+          message_for_new_priority: "Priorities added as neighborhood projects must be either smaller new construction or maintenance projects which can affect the environment and possibilities for outdoors enjoyment, adds facilities for games and recreation or be projects which encourages cycling, better facilities and possibilities for pedestrians or users of the bus system.",
         )
       end
     end
