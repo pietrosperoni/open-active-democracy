@@ -2,6 +2,27 @@
 
 namespace :hverfapottar do
 
+  desc "printout dns names"
+  task :init => :environment do
+    hverfi = {
+      'Árbær'       => 'arbaer',
+      'Breiðholt'   => 'breidholt',
+      'Grafarvogur' => 'grafarvogur',
+      'Hlíðar'      => 'hlidar',
+      'Kjalarnes'   => 'kjalarnes',
+      'Laugardalur' => 'laugardalur',
+      'Miðborg'     => 'midborg',
+      'Vesturbær'   => 'vesturbaer',
+      'Háaleiti- og bústaðir' => 'haaleiti',
+      'Grafarholt og Úlfarsárdalur' => 'grafarholt',
+    }
+    dns_names = ""
+    hverfi.each do |name, short_name|
+      puts "betri-hverfi-#{short_name}.betrireykjavik.is",
+      dns_names += "betri-hverfi-#{short_name}.betrireykjavik.is "
+    end
+  end
+
   desc "initialize hverfapottar"
   task :init => :environment do
     hverfi = {
