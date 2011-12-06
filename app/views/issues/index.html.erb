@@ -45,7 +45,7 @@
 	<% end %>
 </td>
 <td>
-  <% if Government.current.default_tags_checkbox %>
+  <% if Government.current.default_tags_checkbox and not current_partner %>
       <% Government.current.default_tags_checkbox.split(",").each do |special_tag| %>
          <% issue = Tag.find_by_slug(special_tag.parameterize_full) %>
             <div class="priority_listing">
