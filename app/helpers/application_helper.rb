@@ -1,16 +1,5 @@
 # Methods added to this helper will be available to all templates in the application.
 
-module ActionView
-  module Helpers
-    module TextHelper
-      def simple_format_with_strip(text)
-        simple_format_without_strip(sanitize(text))
-      end
-      alias_method_chain :simple_format, :strip
-    end
-  end
-end
-
 module ApplicationHelper
 #  include WillPaginate::ViewHelpers 
   include Tr8n::HelperMethods

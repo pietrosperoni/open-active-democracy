@@ -17,16 +17,6 @@ GIT
       riddle (>= 1.5.0)
 
 GIT
-  remote: git://github.com/hinrik/auto_html.git
-  revision: 206e893ca535b1d7e614a40a798926ec3f48af47
-  specs:
-    auto_html (1.4.2)
-      RedCloth
-      redcarpet
-      rinku
-      tag_helper
-
-GIT
   remote: git://github.com/jaikoo/twitter-auth.git
   revision: 1b3f4e753cb7c694f2042f4b2f6547d66fe460c9
   branch: rails_3
@@ -73,6 +63,11 @@ GEM
       activesupport (= 3.0.11)
     activesupport (3.0.11)
     arel (2.0.10)
+    auto_html (1.4.2)
+      RedCloth
+      redcarpet
+      rinku
+      tag_helper
     builder (2.1.2)
     capistrano (2.9.0)
       highline
@@ -204,7 +199,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake!
-  auto_html!
+  auto_html
   capistrano
   ckeditor
   dalli
