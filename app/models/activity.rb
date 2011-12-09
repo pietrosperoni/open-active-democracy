@@ -861,7 +861,7 @@ end
 
 class ActivityPriorityStatusUpdate < Activity
   def name
-    tr("{priority_name}'s status was updated: {subject}", "model/activity", priority_name: priority.name)
+    tr("{priority_name}'s status was updated", "model/activity", priority_name: priority.name)
   end
 end
 
