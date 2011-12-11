@@ -1,24 +1,24 @@
 GIT
   remote: git://github.com/airbrake/airbrake.git
-  revision: e000eb9f29b6e0276dff349203364e70697d55de
+  revision: 84db730c9a09ff106e4a598f56658f836411c295
   specs:
-    airbrake (3.0.4)
+    airbrake (3.0.8)
       activesupport
       builder
 
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: 1c0002e8ee8a70cb5675a5570944488616105c6a
+  revision: 58932dbe360653b8f6a8da955f2053b9f49d32fb
   branch: rails3
   specs:
-    thinking-sphinx (2.0.9)
+    thinking-sphinx (2.0.10)
       activerecord (>= 3.0.3)
       builder (>= 2.1.2)
-      riddle (>= 1.3.3)
+      riddle (>= 1.5.0)
 
 GIT
   remote: git://github.com/hinrik/auto_html.git
-  revision: d6617706f746df09ff7d4dba34cfebdf5f86e746
+  revision: 206e893ca535b1d7e614a40a798926ec3f48af47
   specs:
     auto_html (1.4.2)
       RedCloth
@@ -44,7 +44,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.8)
+    RedCloth (4.2.9)
     abstract (1.0.0)
     actionmailer (3.0.10)
       actionpack (= 3.0.10)
@@ -80,29 +80,29 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    chronic (0.6.4)
+    chronic (0.6.6)
     ckeditor (3.6.3)
       mime-types (~> 1.16)
       orm_adapter (~> 0.0.5)
     cocaine (0.2.0)
     daemons (1.0.10)
-    dalli (1.1.2)
+    dalli (1.1.4)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
     erubis (2.6.6)
       abstract (>= 1.0.0)
     ezcrypto (0.7.2)
-    facebooker2 (0.0.13)
+    facebooker2 (0.0.14)
       mogli (>= 0.0.33)
       ruby-hmac
     gem_plugin (0.2.3)
     geoip (1.1.1)
-    googlecharts (1.6.7)
+    googlecharts (1.6.8)
     hashie (1.1.0)
-    highline (1.6.2)
-    hpricot (0.8.4)
-    htmlentities (4.3.0)
+    highline (1.6.8)
+    hpricot (0.8.5)
+    htmlentities (4.3.1)
     httmultiparty (0.3.6)
       httparty (>= 0.7.3)
       multipart-post
@@ -110,18 +110,18 @@ GEM
       multi_json
       multi_xml
     i18n (0.5.0)
-    jquery-rails (1.0.16)
+    jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
-    json (1.6.1)
+    json (1.6.3)
     kgio (2.6.0)
     mail (2.2.19)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.16)
-    mogli (0.0.35)
+    mime-types (1.17.2)
+    mogli (0.0.36)
       hashie (~> 1.1.0)
       httmultiparty (>= 0.3.6)
       httparty (>= 0.4.3)
@@ -129,9 +129,9 @@ GEM
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
-    multi_json (1.0.3)
+    multi_json (1.0.4)
     multi_xml (0.4.1)
-    multipart-post (1.1.3)
+    multipart-post (1.1.4)
     mysql2 (0.2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -140,16 +140,16 @@ GEM
     net-ssh (2.2.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    newrelic_rpm (3.2.0)
+    newrelic_rpm (3.3.0)
     nokogiri (1.5.0)
     oauth (0.4.5)
     orm_adapter (0.0.5)
-    paperclip (2.4.4)
+    paperclip (2.4.5)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
-    polyglot (0.3.2)
+    polyglot (0.3.3)
     rack (1.2.4)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
@@ -172,13 +172,13 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (~> 0.14.4)
-    rake (0.9.2)
-    rdoc (3.10)
+    rake (0.9.2.2)
+    rdoc (3.11)
       json (~> 1.4)
     recaptcha (0.3.1)
-    redcarpet (1.17.2)
-    riddle (1.4.0)
-    rinku (1.2.2)
+    redcarpet (2.0.0)
+    riddle (1.5.0)
+    rinku (1.5.0)
     rmagick (2.12.2)
     ruby-hmac (0.4.0)
     ruby-openid (2.1.8)
@@ -192,7 +192,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.30)
+    tzinfo (0.3.31)
     whenever (0.7.0)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
