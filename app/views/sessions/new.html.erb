@@ -24,7 +24,7 @@
 			
 
 			<% if current_government.has_facebook_enabled? %>
-        <%= fb_login_and_redirect "/", :text=>tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=>tr("Sign in with Facebook","views/shared/_login"), :perms=>"email"%>
+        <%= fb_login_and_redirect "/", :text=>tr("Sign in with Facebook","views/shared/_login"), :size=>"small", :title=>tr("Sign in with Facebook","views/shared/_login"), :scope=>"email"%>
 			
 			<% end %>
 			<% if current_government.has_twitter_enabled? %>
