@@ -72,14 +72,10 @@
         <% if Government.current.default_tags_checkbox and Government.current.default_tags_checkbox!="" and not (current_partner and current_partner.required_tags) %>
             <br>
             <div id="priority_category2">
-              <div class="form_header">
-                <%= tr("Select neighborhood (if applicable)", "views/priorities/form") %>
-                <br>
-              </div>
-              <% Government.current.default_tags_checkbox.split(",").each_with_index do |special_tag, i| %>
-                  <%= check_box_tag "special_checkbox_tag_#{i}", special_tag %>
-                  <span class="Chapter_name_2"><%= special_tag %></span>
-              <% end %>
+<b>Ef setja á inn hugmynd að hverfisverkefni, undir Betri hverfi, verður fyrst að <a href="http://betrireykjavik.is/about/choose_partner">velja hverfið hér</a> og smella síðan á hnappinn Settu inn nýja hugmynd.</b>
+
+<br />
+<br />
             </div>
         <% end %>
 
