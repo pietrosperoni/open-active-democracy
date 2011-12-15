@@ -20,56 +20,34 @@
 
 <table>
 <tr>
-<td>
-	<% for issue in @issues %>
-		<div class="priority_listing">
-			<span class="priority_name">
-			<a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
-			</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
-			<div class="priority_action">
-				<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
-				<% if issue.points_count > 0 %>	
-				&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/issues/index", :count => issue.points_count) %></a>
-				<% end %>
-				<% if issue.documents_count > 0 %>
-				&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/issues/index", :count => issue.documents_count) %></a>
-				<% end %>
-				<% if issue.discussions_count > 0 %>
-				&middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/issues/index", :count => issue.discussions_count) %></a>
-				<% end %>
-				<% if logged_in? and current_user.is_admin? %>
-					&nbsp; <span class="tag_button"><%= link_to tr("Edit", "view/issues/index"), edit_tag_url(issue) %></span>
-				<% end %>
-			</div>
-		</div>
-	<% end %>
+<td width="33%">
+  <h3><%= tr("Standard categories", "views/issues/index") %></h3>
+  <br>
+    <%= render partial: 'issue_listing', locals: { issues: @categories } %>
 </td>
-<td>
-  <% if Government.current.default_tags_checkbox and not current_partner %>
-      <% Government.current.default_tags_checkbox.split(",").each do |special_tag| %>
-         <% issue = Tag.find_by_slug(special_tag.parameterize_full) %>
-            <div class="priority_listing">
-                <span class="priority_name">
-                <a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
-                </span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
-                <div class="priority_action">
-                    <a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/issues/index", :count => issue.priorities_count) %></a>
-                    <% if issue.points_count > 0 %>
-                    &middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/issues/index", :count => issue.points_count) %></a>
-                    <% end %>
-                    <% if issue.documents_count > 0 %>
-                    &middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/issues/index", :count => issue.documents_count) %></a>
-                    <% end %>
-                    <% if issue.discussions_count > 0 %>
-                    &middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/issues/index", :count => issue.discussions_count) %></a>
-                    <% end %>
-                    <% if logged_in? and current_user.is_admin? %>
-                        &nbsp; <span class="tag_button"><%= link_to tr("Edit", "view/issues/index"), edit_tag_url(issue) %></span>
-                    <% end %>
-                </div>
-            </div>
+<td width="33%">
+  <% if not @partner_tags.empty? %>
+      <h3><%= tr("Better neighborhoods", "views/issues/index") %></h3>
+      <br>
+      <% issues = @partner_tags %>
+      <% issues.unshift(Tag.find_by_slug('betri-hverfi')) if Government.current.layout == 'better_reykjavik' %>
+      <%= render partial: 'issue_listing', locals: { issues: issues } %>
+  <% end %>
+  <% if not current_partner %>
+      <h3><%= tr("By neighborhood", "views/issues/index") %></h3>
+      <br>
+      <% if Government.current.default_tags_checkbox and not current_partner %>
+          <% issues = Government.current.default_tags_checkbox.split(",").collect { |tag| Tag.find_by_slug(tag.parameterize_full) } %>
+          <%= render partial: 'issue_listing', locals: { issues: issues } %>
       <% end %>
   <% end %>
+</td>
+<td width="33%">
+  <h3><%= tr("Custom categories", "views/issues/index") %></h3>
+  <br>
+  <% issues = @issues %>
+  <% issues = issues.delete_if { |issue| issue.slug == 'betri-hverfi'} if Government.current.layout == 'better_reykjavik' %>
+  <%= render partial: 'issue_listing', locals: { issues: issues } %>
 </td>
 </tr>
 </table>
