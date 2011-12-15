@@ -160,8 +160,9 @@ module AuthenticatedSystem
             return false
           end
         end
-    rescue
-      return false
+      rescue
+        return false
+      end
     end
     
     def login_from_basic_auth
