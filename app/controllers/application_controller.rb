@@ -63,8 +63,8 @@ class ApplicationController < ActionController::Base
   
   def reset_mogli_session_for_client
     reset_session
-    redirect_to "/"
-    return false
+    #redirect_to "/"
+    #return false
   end
   
   def action_cache_path
