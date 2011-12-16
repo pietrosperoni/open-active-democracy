@@ -10,7 +10,13 @@
     <%= f.text_field :email %>
   </p>
 	<p>
-	<%= f.check_box :is_newsletter_subscribed %> <%= tr("Weekly update on your priorities", "view/unsubscribes/new") %><br/>									
+    <div class="option_group" style="line-height: 1">
+      <h4><%= tr("Periodic updates on your priorities", "view/settings/signups") %></h4>
+      <%= f.radio_button :report_frequency, 2 %> <%= tr("Weekly", "view/settings/signups") %>
+      <%= f.radio_button :report_frequency, 1 %> <%= tr("Monthly", "view/settings/signups") %>
+      <%= f.radio_button :report_frequency, 0 %> <%= tr("Never", "view/settings/signups") %>
+    </div>
+    <br>
 	<%= f.check_box :is_comments_subscribed %> <%= tr("Comments on your discussions", "view/unsubscribes/new") %><br/>
 	<%= f.check_box :is_point_changes_subscribed %> <%= tr("Revisions on your documents and points", "view/unsubscribes/new")%><br/>	
 	<%= f.check_box :is_followers_subscribed %> <%= tr("When someone follows you or one of your contacts joins", "view/unsubscribes/new")%><br/>

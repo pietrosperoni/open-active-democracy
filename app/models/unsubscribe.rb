@@ -24,7 +24,7 @@ class Unsubscribe < ActiveRecord::Base
     user.is_comments_subscribed = self.is_comments_subscribed
     user.is_finished_subscribed = self.is_finished_subscribed    
     user.is_votes_subscribed = self.is_votes_subscribed
-    user.is_newsletter_subscribed = self.is_newsletter_subscribed
+    user.report_frequency = self.report_frequency
     user.is_followers_subscribed = self.is_followers_subscribed    
     user.is_point_changes_subscribed = self.is_point_changes_subscribed
     user.is_messages_subscribed = self.is_messages_subscribed

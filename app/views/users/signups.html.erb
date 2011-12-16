@@ -4,7 +4,10 @@
 
 	<%= f.error_messages %>
 
-	<%= f.check_box :is_newsletter_subscribed %> <%= tr("Weekly update on your priorities", "view/users/signups") %><br/>									
+    <h4><%= tr("Periodic updates on your priorities", "view/settings/signups") %></h4>
+    <%= f.radio_button :report_frequency, 2 %> <%= tr("Weekly", "view/settings/signups") %>
+    <%= f.radio_button :report_frequency, 1 %> <%= tr("Monthly", "view/settings/signups") %>
+    <%= f.radio_button :report_frequency, 0 %> <%= tr("Never", "view/settings/signups") %>
 	<%= f.check_box :is_comments_subscribed %> <%= tr("Comments on your discussions", "view/users/signups") %><br/>
 	<%= f.check_box :is_point_changes_subscribed %> <%= tr("Revisions on your documents and points", "view/users/signups")%><br/>	
 	<%= f.check_box :is_followers_subscribed %> <%= tr("When someone follows you or one of your contacts joins", "view/users/signups")%><br/>		

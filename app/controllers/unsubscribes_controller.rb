@@ -8,7 +8,7 @@ class UnsubscribesController < ApplicationController
     @unsubscribe = Unsubscribe.new
     @unsubscribe.is_comments_subscribed = true
     @unsubscribe.is_votes_subscribed = true
-    @unsubscribe.is_newsletter_subscribed = true
+    @unsubscribe.report_frequency = 2
     @unsubscribe.is_point_changes_subscribed = true
     @unsubscribe.is_followers_subscribed = true
     @unsubscribe.is_finished_subscribed = true    

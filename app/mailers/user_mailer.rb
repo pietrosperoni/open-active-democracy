@@ -37,6 +37,30 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def user_report(user, important, important_to_followers, near_top, frequency)
+    freq_to_word = {
+        2 => tr("Weekly", 'email'),
+        1 => tr("Monthly", 'email')
+    }
+    freq = freq_to_word[frequency]
+    subject = tr("{frequency} status report from {government_name}", 'email', frequency: freq, government_name: Government.current.name)
+    @government = Government.current
+    @important = important
+    @important_to_followers = important_to_followers
+    @near_top = near_top
+    @recipient = @user = user
+    recipient = "#{user.real_name.titleize} <#{user.email}>"
+    attachments.inline['logo.png'] = get_conditional_logo
+    mail to:       recipient,
+         reply_to: Government.current.admin_email,
+         from:     "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
+         subject:  subject do |format|
+      format.text { render text: convert_to_text(render_to_string("user_report.html")) }
+      format.html
+    end
+
+  end
+
   def invitation(user,sender_name,to_name,to_email)
     @sender = @recipient = @user = user
     @government = Government.current
@@ -94,7 +118,7 @@ class UserMailer < ActionMailer::Base
     @government = Government.current
     @recipients  = "#{user.login} <#{user.email}>"
     @from        = "#{tr(Government.current.name,"Name from database")} <#{Government.current.email}>"
-    headers        "Reply-to" => Government.last.email
+    headers        "Reply-to" => Government.current.email
     @sent_on     = Time.now
     @content_type = "text/html"
     @priorities = priorities

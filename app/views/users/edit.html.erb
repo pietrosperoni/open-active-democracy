@@ -53,12 +53,15 @@
 		<div class="field_box">
 			<%= f.check_box :is_mergeable %> <%= tr("Merge your priorities with others meaning the same thing", "view/users/edit")%>
 		</div>
-		<div class="field_box">
-			<%= f.check_box :is_newsletter_subscribed %> <%= tr("Send a weekly email update on your priorities", "view/users/edit")%>
-		</div>
-	</div>	
+      <div class="field_box">
+        <h4><%= tr("Periodic updates on your priorities", "view/settings/signups") %></h4>
+        <%= f.radio_button :report_frequency, 2, %> <%= tr("Weekly", "view/settings/signups") %>
+        <%= f.radio_button :report_frequency, 1 %> <%= tr("Monthly", "view/settings/signups") %>
+        <%= f.radio_button :report_frequency, 0 %> <%= tr("Never", "view/settings/signups") %>
+      </div>
+    </div>
 
-	<p><%= f.submit tr("Save settings", "view/users/edit"), :class => "yellow_button" %></p>
+      <p><%= f.submit tr("Save settings", "view/users/edit"), :class => "yellow_button" %></p>
 
 </td><td valign="top" width="300" style="padding-left: 20px;">
 	

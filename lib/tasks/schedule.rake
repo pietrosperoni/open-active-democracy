@@ -3,6 +3,18 @@ require 'priority_ranker'
 require 'user_ranker'
 
 namespace :schedule do
+  desc "Send weekly reports"
+  task :send_weekly_reports => :environment do
+    Government.current = Government.all.last
+    User.send_report_emails(2)
+  end
+
+  desc "Send monthly reports"
+  task :send_monthly_reports => :environment do
+    Government.current = Government.all.last
+    User.send_report_emails(1)
+  end
+
   desc "Fix top endorsements"
   task :fix_top_endorsements => :environment do
     o = FixTopEndorsements.new

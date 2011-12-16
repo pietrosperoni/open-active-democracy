@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20112312175739) do
+ActiveRecord::Schema.define(:version => 20112312175740) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -1527,7 +1527,6 @@ ActiveRecord::Schema.define(:version => 20112312175739) do
     t.datetime "updated_at"
     t.boolean  "is_comments_subscribed",      :default => false
     t.boolean  "is_votes_subscribed",         :default => false
-    t.boolean  "is_newsletter_subscribed",    :default => false
     t.boolean  "is_point_changes_subscribed", :default => false
     t.boolean  "is_messages_subscribed",      :default => false
     t.boolean  "is_followers_subscribed",     :default => true
@@ -1616,7 +1615,6 @@ ActiveRecord::Schema.define(:version => 20112312175739) do
     t.string   "referrer",                     :limit => 200
     t.boolean  "is_comments_subscribed",                      :default => true
     t.boolean  "is_votes_subscribed",                         :default => true
-    t.boolean  "is_newsletter_subscribed",                    :default => true
     t.boolean  "is_tagger",                                   :default => false
     t.integer  "endorsements_count",                          :default => 0
     t.integer  "up_endorsements_count",                       :default => 0
@@ -1695,6 +1693,7 @@ ActiveRecord::Schema.define(:version => 20112312175739) do
     t.string   "age_group"
     t.string   "post_code"
     t.string   "my_gender"
+    t.integer  "report_frequency",                            :default => 2
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

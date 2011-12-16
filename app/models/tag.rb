@@ -187,7 +187,7 @@ class Tag < ActiveRecord::Base
     and taggings.taggable_type = 'Priority'
     and endorsements.status = 'active'
     and endorsements.user_id = users.id
-    and users.is_newsletter_subscribed = true
+    and users.report_frequency != 0
     and users.status in ('active','pending')",id])
   end
   
