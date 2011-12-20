@@ -18,7 +18,11 @@ module Delayed
 
     def perform
       Government.current = Government.first
-      Partner.current = Partner.find(custom_data) if custom_data
+      if custom_data
+        Partner.current = Partner.find(custom_data)
+      else
+        Partner.current = nil
+      end
       object.send(method_name, *args) if object
     end
     
@@ -27,7 +31,11 @@ module Delayed
   class PerformableMailer < PerformableMethod
     def perform
       Government.current = Government.first
-      Partner.current = Partner.find(custom_data) if custom_data
+      if custom_data
+        Partner.current = Partner.find(custom_data)
+      else
+        Partner.current = nil
+      end
       object.send(method_name, *args).deliver
     end
   end
