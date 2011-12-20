@@ -160,7 +160,8 @@ module AuthenticatedSystem
             return false
           end
         end
-      rescue
+      rescue Mogli::Client::OAuthException
+        Rails.logger.error("Mogli::Client::OAuthException")
         return false
       end
     end
