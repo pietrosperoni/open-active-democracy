@@ -137,27 +137,32 @@ module AuthenticatedSystem
     
     # Called from #current_user. Then try to login from facebook
     def login_from_facebook
-      if current_facebook_user
-        Rails.logger.info("LOGIN: fbuid #{current_facebook_user.id}")
-        if u = User.find_by_facebook_uid(current_facebook_user.id)
-          Rails.logger.info("LOGIN: fb FOUND ONE")          
-          return u
+      begin
+        if current_facebook_user
+          Rails.logger.info("LOGIN: fbuid #{current_facebook_user.id}")
+          if u = User.find_by_facebook_uid(current_facebook_user.id)
+            Rails.logger.info("LOGIN: fb FOUND ONE")          
+            return u
+          end
+          Rails.logger.info("LOGIN: About to fb create")
+          begin          
+            current_facebook_user.fetch
+            #raise Mogli::Client::OAuthException unless current_facebook_user.has_permission?(:email)
+          rescue Mogli::Client::OAuthException
+            Rails.logger.error("LOGIN: Error in current_facebook_user.fetch")
+            return false
+          end
+          u = User.create_from_facebook(current_facebook_user,current_partner,request)
+          if u
+            session[:goal] = 'signup'
+            return u
+          else
+            return false
+          end
         end
-        Rails.logger.info("LOGIN: About to fb create")
-        begin          
-          current_facebook_user.fetch
-          #raise Mogli::Client::OAuthException unless current_facebook_user.has_permission?(:email)
-        rescue Mogli::Client::OAuthException
-          Rails.logger.error("LOGIN: Error in current_facebook_user.fetch")
-          return false
-        end
-        u = User.create_from_facebook(current_facebook_user,current_partner,request)
-        if u
-          session[:goal] = 'signup'
-          return u
-        else
-          return false
-        end
+      rescue Mogli::Client::OAuthException
+        Rails.logger.error("Mogli::Client::OAuthException")
+        return false
       end
     end
     
