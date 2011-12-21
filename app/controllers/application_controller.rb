@@ -19,8 +19,6 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
   
-  #rescue_from Mogli::Client::OAuthException, :with=>:reset_mogli_session_for_client
-  
   # Make these methods visible to views as well
   helper_method :current_facebook_user, :government_cache, :current_partner, :current_user_endorsements, :current_priority_ids, :current_following_ids, :current_ignoring_ids, :current_following_facebook_uids, :current_government, :current_tags, :facebook_session, :is_robot?, :js_help
   
@@ -60,13 +58,7 @@ class ApplicationController < ActionController::Base
         "\r"    => '\n',
         '"'     => '\\"',
         "'"     => "\\'" }
-  
-  def reset_mogli_session_for_client
-    #reset_session
-    redirect_to "/sessions/destroy"
-    return false
-  end
-  
+ 
   def action_cache_path
     params.merge({:geoblocked=>@geoblocked, :host=>request.host, :country_code=>@country_code,
                   :locale=>session[:locale], :google_translate=>session[:enable_google_translate],
