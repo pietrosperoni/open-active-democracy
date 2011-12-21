@@ -4,6 +4,6 @@ http://<%= @government.base_url_w_partner %><br>
 <br>
 ---<br>
 <%=tr("This is an automatic email from {government_name}","email", :government_name => tr(@government.name,"Name from database"))%> <%=tr("sent to","email")%> <%= @recipient.email %>.
-<%=tr("If you do not want to receive this sort of email please adjust your email settings here","email")%>: <%= link_to @user.unsubscribe_url, @user.unsubscribe_url %>
+<%=tr("If you do not want to receive this sort of email please adjust your email settings here","email")%>: <%= link_to controller: "settings", action: "signups" %>
   </body>
 </html>
