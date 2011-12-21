@@ -23,7 +23,7 @@
 					<% end %>
 					<% if current_user.referrals_count == 0 %>
             <% display_box = true %>
-						<% if current_facebook_user %>
+						<% if current_facebook_user_if_on_facebook %>
 							<li><%= link_to tr("Invite your Facebook friends", "view/shared/_notifications"), :controller => "facebook", :action => "invite" %></li>
 						<% else %>
 							<li><%= link_to tr("Invite people to join", "view/shared/_notifications"), new_user_contact_url(current_user) %></li>

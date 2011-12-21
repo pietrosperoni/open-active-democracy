@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
         "\r"    => '\n',
         '"'     => '\\"',
         "'"     => "\\'" }
-  
+ 
   def action_cache_path
     params.merge({:geoblocked=>@geoblocked, :host=>request.host, :country_code=>@country_code,
                   :locale=>session[:locale], :google_translate=>session[:enable_google_translate],

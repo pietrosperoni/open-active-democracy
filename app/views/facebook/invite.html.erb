@@ -1,4 +1,4 @@
-<% if not current_facebook_user %>
+<% if not current_facebook_user_if_on_facebook %>
 <div id="hp_intro"><%= @page_title %></div>
 <%= tr("Click this button to connect to Facebook and find your friends.", "view/facebook/invite")%>
 <p>
@@ -6,7 +6,7 @@
 <% end %>			
 
 
-<% if current_facebook_user %>
+<% if current_facebook_user_if_on_facebook %>
 	<fb:serverfbml width="625px">
 		<script type="text/fbml">
 			<fb:request-form 
