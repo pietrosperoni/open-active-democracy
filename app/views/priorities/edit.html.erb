@@ -19,7 +19,7 @@
       <%= tr("Category", "view/users/_form_long")%>
     </div>
     <div class="field_box">
-       <%= f.select :category, options_for_select_simple(Category.all.collect{|s|[s.name,s.id]}, @priority.category.id) %>
+       <%= f.select :category, options_for_select_simple(Category.all.collect{|s|[s.i18n_name,s.id]}, @priority.category.id) %>
     </div>
   </div>
 
