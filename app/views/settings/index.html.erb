@@ -100,12 +100,12 @@
 		</div>
 	</div>
 
-	<% if (current_government.has_facebook_enabled? and not current_facebook_user) or (current_government.has_twitter_enabled? and not current_user.has_twitter?) %>
+	<% if (current_government.has_facebook_enabled? and not current_facebook_user_if_on_facebook) or (current_government.has_twitter_enabled? and not current_user.has_twitter?) %>
 		<h2><%= tr("Connect to Social Networks", "view/settings/index")%></h2>
 	
 		<%= tr("We will never post to your Facebook or Twitter stream without your explicit permission first.", "view/settings/index")%>
 		<p>
-		<% if current_government.has_facebook_enabled? and not current_facebook_user %>
+		<% if current_government.has_facebook_enabled? and not current_facebook_user_if_on_facebook %>
 			<%= fb_login_and_redirect url_for, :size => :medium, :background => :white, :length => :long %>
 		<% end %>
 	
