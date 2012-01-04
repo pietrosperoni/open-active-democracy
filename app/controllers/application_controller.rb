@@ -104,7 +104,7 @@ class ApplicationController < ActionController::Base
     Rails.logger.info("Session expires at #{session[:expires_at]}")
     if session[:expires_at]
       @time_left = (session[:expires_at] - Time.now).to_i
-      if current_user and not current_facebook_user
+      if current_user and not current_facebook_user_if_on_facebook
         unless @time_left > 0
           Rails.logger.info("Resetting session")
           reset_session
@@ -429,10 +429,20 @@ class ApplicationController < ActionController::Base
       @referral = nil
     end    
   end  
-  
+
+  def current_facebook_user_if_on_facebook
+    ret_user = nil
+    begin
+      ret_user = current_facebook_user
+    rescue Mogli::Client::OAuthException
+      return nil
+    end
+    ret_user
+  end
+
   # if they're logged in with our account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
-    if logged_in? and current_facebook_user
+    if logged_in? and current_facebook_user_if_on_facebook
       unless current_user.facebook_uid
         @user = User.find(current_user.id)
         if not @user.update_with_facebook(current_facebook_user)
@@ -453,7 +463,7 @@ class ApplicationController < ActionController::Base
   end
   
   def no_facebook?
-    return false if logged_in? and current_facebook_user
+    return false if logged_in? and current_facebook_user_if_on_facebook
     return true
   end
   

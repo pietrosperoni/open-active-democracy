@@ -58,9 +58,6 @@ class BulletinsController < ApplicationController
 #            page["bulletin_content"].clear()
             page << "$('textarea#bulletin_content').val('');"
             page << "pageTracker._trackPageview('/goal/comment')" if current_government.has_google_analytics?
-            if current_facebook_user
-              #page << fb_connect_stream_publish(UserPublisher.create_comment(current_facebook_user, @comment, @activity))
-            end            
           end        
         }        
       end

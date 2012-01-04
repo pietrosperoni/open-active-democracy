@@ -171,9 +171,6 @@ class PointsController < ApplicationController
         Revision.create_from_point(@point,request.remote_ip,request.env['HTTP_USER_AGENT'])
         session[:goal] = 'point'
         flash[:notice] = tr("Thanks for contributing your point", "controller/points")
-        if current_facebook_user
-          #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
-        end          
         @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
         format.html { redirect_to(priority_url(@priority)) }
       else

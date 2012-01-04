@@ -853,14 +853,6 @@ class PrioritiesController < ApplicationController
             page << "alert('error');"
           end
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          # page.visual_effect :highlight, 'your_priorities'
-          if current_facebook_user
-            if @value == 1
-              #page << fb_connect_stream_publish(UserPublisher.create_endorsement(current_facebook_user, @endorsement, @priority))
-            else
-              #page << fb_connect_stream_publish(UserPublisher.create_opposition(current_facebook_user, @endorsement, @priority))
-            end
-          end
         end
       }
     end
