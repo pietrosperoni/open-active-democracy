@@ -866,6 +866,15 @@ class PrioritiesController < ApplicationController
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
 
     if params[:priority]
+      if params[:priority][:priority_type] and current_partner and current_partner.required_tags
+        required_tags = current_partner.required_tags.split(',')
+        issues = @priority.issue_list
+        if not issues.include?(params[:priority][:priority_type])
+          new_issues = issues - required_tags
+          new_issues << params[:priority][:priority_type]
+          @priority.issue_list = new_issues.join(',')
+        end
+      end
       if params[:priority]["finished_status_date(1i)"]
         # TODO: isn't there an easier way to do this?
         params[:priority][:finished_status_date] = Date.new(params[:priority].delete("finished_status_date(1i)").to_i, params[:priority].delete("finished_status_date(2i)").to_i, params[:priority].delete("finished_status_date(3i)").to_i)

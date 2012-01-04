@@ -14,6 +14,18 @@
 		</div>
 	</div>
 
+    <% if current_partner and current_partner.required_tags %>
+        <div class="field">
+          <div class="field_label">
+            <%= tr("Priority type", "views/priorities/form") %>
+          </div>
+          <% current_partner.required_tags.split(',').each do |partner_tag| %>
+              <%= f.radio_button :priority_type, partner_tag, checked: @priority.issue_list.include?(partner_tag) %>
+              <span class="Chapter_name"><%= tr(partner_tag, "views/priorities/form") %></span>
+          <% end %>
+        </div>
+    <% end %>
+
   <div class="field">
     <div class="field_label">
       <%= tr("Category", "view/users/_form_long")%>
