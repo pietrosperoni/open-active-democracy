@@ -350,6 +350,7 @@ OpenActiveDemocracy::Application.routes.draw do
   match '/issues/:slug/:action.:format' => 'issues#index'
   match '/portal' => 'portal#index'
   match '/pictures/:short_name/:action/:id' => 'pictures#index'
+  match "/betri_hverfi" => redirect("/about/choose_partner")
   match ':controller' => '#index'
   match ':controller/:action' => '#index'
   match ':controller/:action.:format' => '#index'
