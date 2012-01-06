@@ -1,0 +1,16 @@
+<div class="finished_priority">
+  <ul>
+    <% PriorityStatusChangeLog.where(priority_id: @priority.id).order("created_at desc").each do |changelog| %>
+      <li>
+        <div class="finished_status">
+          <span class="finished_status_date"><%= changelog.date.strftime("%d.%m.%Y") %></span>
+          <% if changelog.content %>
+              <blockquote><%= simple_format(changelog.content.html_safe) %></blockquote>
+          <% elsif changelog.subject %>
+              <blockquote><%= changelog.subject %></blockquote>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

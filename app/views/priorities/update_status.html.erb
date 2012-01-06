@@ -1,0 +1,50 @@
+<%= render :partial => "header" %>
+<%= render :partial => "nav" %>
+
+<p>
+<%= form_for(@priority) do |f| %>
+  <%= f.error_messages %>
+
+  <div class="field">
+    <div class="field_label">
+      <%= tr("Finished Status", "view/users/_form_long")%>
+    </div>
+    <div class="field_box">
+       <%= f.select :official_status, options_for_select_simple([[tr("Published","status_messages"),"0"],[tr("In Progress","status_messages"),"-1"],[tr("Successful","status_messages"),"2"],[tr("Failed","status_messages"),"-2"]], @priority.official_status.to_s) %>
+    </div>
+  </div>
+
+  <div class="field">
+      <div class="field_label">
+        <%= tr("New status date", "view/priorities/status")%>
+      </div>
+      <div class="field_box">
+
+          <%= date_select("priority", "finished_status_date")%>
+      </div>
+    </div>
+
+  <div class="field">
+      <div class="field_label">
+        <%= tr("New status subject", "view/priorities/status")%>
+      </div>
+      <div class="field_box">
+          <%= f.text_field :finished_status_subject, :max_length=>60 %>
+      </div>
+    </div>
+
+
+  <div class="field">
+    <div class="field_label">
+      <%= tr("New status message", "view/priorities/status")%>
+    </div>
+    <div class="field_box">
+        <%= f.text_area :finished_status_message, :rows => 12, :cols=>70 %>
+    </div>
+  </div>    
+
+
+	<p>
+	<%= f.submit tr("Update status", "view/priorities/status"), :class => "yellow_button" %>
+	
+<% end %>

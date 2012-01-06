@@ -1,0 +1,16 @@
+<%= render :partial=>"header.html" %>
+
+<p><%=tr("Hi","email")%> <%= @user.first_name %>,</p>
+
+<p><%= tr('The status of the priority <a href="{priority_link}">{priority_name}</a> {support_or_endorse_text} has been changed on {government_name}.',
+          "email",
+          priority_name: @priority.name,
+          priority_link: @priority.show_url,
+          support_or_endorse_text: @support_or_endorse_text,
+          government_name: tr(Government.current.name, "Name from database")) %></p>
+
+<p><%= @date.strftime("%d.%m.%Y") %></p>
+
+<%= my_simple_format(@message) %>
+
+<%= render :partial=>"footer.html" %>
