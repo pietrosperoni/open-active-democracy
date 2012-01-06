@@ -112,9 +112,9 @@ class Notification < ActiveRecord::Base
 
   # you can override this in subclasses to specify a different rule for whether the person is subscribed
   def is_recipient_subscribed?
-    recipient.is_newsletter_subscribed?
+    recipient.report_frequency != 0
   end
-  
+
 end
 
 class NotificationChangeVote < Notification

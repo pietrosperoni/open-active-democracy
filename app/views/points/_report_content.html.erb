@@ -5,7 +5,7 @@
                    :remote=>true,
                    'data-disable-with' => "",
                    'data-loader-name' => "spinner",
-                   :confirm => tr("Is this point from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => point.priority.user.name),
+                   :confirm => tr("Is this point from {user_name} a personal attack or a violation of the rules?", "view/comments/_show", :user_name => point.last_author.name),
                    :title => tr("Report", "view/comments/_show") %>
 </div>
 <% end %>

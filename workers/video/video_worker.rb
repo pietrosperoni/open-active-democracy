@@ -9,10 +9,12 @@ ENV['Rails.env'] = worker_config['rails_env']
 
 options = {
     :app_name   => "video_worker_"+ENV['Rails.env'],
-    :dir_mode   => :script,
+    :dir_mode   => :normal,
     :backtrace  => true,
     :monitor    => true,
     :log_output => true,
+    :multiple => true,
+    :dir =>File.open( File.dirname(__FILE__) + "/../../pids"),
     :script     => "video_worker_daemon.rb" 
   }
 

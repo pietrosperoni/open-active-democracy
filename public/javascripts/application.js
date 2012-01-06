@@ -24,11 +24,22 @@ jQuery(function ($) {
 });
 
 jQuery(document).ready(function() {
+  jQuery('form[data-remote]').bind("ajax:before", function(){
+    for (instance in CKEDITOR.instances){
+      CKEDITOR.instances[instance].updateElement();
+    }
+  });
+
   jQuery('a[data-remote]').live("ajax:beforeSend", function(){
       var $clicked = $(this);
       $disable_with = $clicked.attr("data-disable-with");
-      $loader_name = $clicked.attr("data-loader-name");
-      $clicked.replaceWith($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
+      if ($clicked.attr("data-loader-name")!="no_loader") {
+        $loader_name = $clicked.attr("data-loader-name");
+        $clicked.replaceWith($disable_with+' <img src=\"/images/ajax/'+$loader_name+'.gif\">');
+      } else {
+        $clicked.replaceWith($disable_with);
+      }
+
     // $clicked.href("#");
     });
 
@@ -40,7 +51,7 @@ jQuery(document).ready(function() {
 	//jQuery("#top_right_column, #toolbar").corners("bottom");
 	
 	jQuery("abbr[class*=timeago]").timeago();	
-	jQuery(":input[type=textarea]").textCounting({lengthExceededClass: 'count_over'});
+	jQuery("#pointContent").NobleCount('#pointContentDown',{ on_negative: 'go_red', on_positive: 'go_green', max_chars: 500 });
 	jQuery("input#priority_name, input#change_new_priority_name, input#point_other_priority_name, input#revision_other_priority_name, input#right_priority_box").autocomplete("/priorities.js");
 	jQuery("input#user_login_search, input#government_official_user_name").autocomplete("/users.js");
 	jQuery('#bulletin_content, #blurb_content, #message_content, #document_content, #email_template_content, #page_content').autoResize({extraSpace : 20})
@@ -65,7 +76,6 @@ jQuery(document).ready(function() {
 	  jQuery('#login_form').show('fast');
 	  return false;
 	});
-
 });
 
 function toggleAll(name)

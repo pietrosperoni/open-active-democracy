@@ -1,9 +1,11 @@
+require 'date'
+
 class PrioritiesController < ApplicationController
 
   before_filter :login_required, :only => [:yours_finished, :yours_ads, :yours_top, :yours_lowest, :consider, :flag_inappropriate, :comment, :edit, :update, 
                                            :tag, :tag_save, :opposed, :endorsed, :destroy, :new]
   before_filter :admin_required, :only => [:bury, :successful, :compromised, :intheworks, :failed]
-  before_filter :load_endorsement, :only => [:show, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points, 
+  before_filter :load_endorsement, :only => [:show, :show_feed, :activities, :endorsers, :opposers, :opposer_points, :endorser_points, :neutral_points, :everyone_points,
                                              :opposed_top_points, :endorsed_top_points, :points_overview, :top_points, :discussions, :everyone_points, :documents, :opposer_documents, 
                                              :endorser_documents, :neutral_documents, :everyone_documents]
   before_filter :check_for_user, :only => [:yours, :network, :yours_finished, :yours_created]
@@ -50,8 +52,10 @@ class PrioritiesController < ApplicationController
   def yours
     @page_title = tr("Your priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
     @priorities = @user.endorsements.active.by_position.paginate :include => :priority, :page => params[:page], :per_page => params[:per_page]
+    @rss_url = yours_priorities_url(:format => 'rss')
     respond_to do |format|
-      format.html 
+      format.html
+      format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
       format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -93,10 +97,24 @@ class PrioritiesController < ApplicationController
       format.json { render :json => @priorities.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end
   end  
-  
+
+  def by_priority_processes
+    @page_title = tr("Priorities at {government_name}", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
+    @priorities = Priority.find(:all, :order=>"count(priority_processes)", :include=>:priority_process).paginate :page => params[:page], :per_page => params[:per_page]
+    get_endorsements
+    respond_to do |format|
+      format.html { render :action => "list" }
+      format.rss { render :action => "list" }
+      format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }
+      format.xml { render :xml => @priorities.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
+      format.json { render :json => @priorities.to_json(:except => NB_CONFIG['api_exclude_fields']) }
+    end
+  end
+
   # GET /priorities/network
   def network
     @page_title = tr("Your network's priorities", "controller/priorities", :government_name => tr(current_government.name,"Name from database"))
+    @rss_url = network_priorities_url(:format => 'rss')
     if @user.followings_count > 0
       @priorities = Endorsement.active.find(:all, 
         :select => "endorsements.priority_id, sum((#{Endorsement.max_position+1}-endorsements.position)*endorsements.value) as score, count(*) as endorsements_number, priorities.*", 
@@ -108,6 +126,7 @@ class PrioritiesController < ApplicationController
     end
     respond_to do |format|
       format.html
+      format.rss { render :action => "list" }
       format.js { render :layout => false, :text => "document.write('" + js_help.escape_javascript(render_to_string(:layout => false, :template => 'priorities/list_widget_small')) + "');" }      
       format.xml { render :xml => @priorities.to_xml(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @priorities.to_json(:include => [:priority], :except => NB_CONFIG['api_exclude_fields']) }
@@ -325,7 +344,8 @@ class PrioritiesController < ApplicationController
   # GET /priorities/finished
   def finished
     @page_title = tr("Priorities in progress", "controller/priorities")
-    @priorities = Priority.finished.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
+    @rss_url = finished_priorities_url(:format => 'rss')
+    @priorities = Priority.finished.not_deleted.by_most_recent_status_change.paginate :page => params[:page], :per_page => params[:per_page]
     respond_to do |format|
       format.html { render :action => "list" }
       format.rss { render :action => "list" }
@@ -386,33 +406,18 @@ class PrioritiesController < ApplicationController
   def show
     @page_title = @priority.name
     @priority_process = @priority.priority_process_root_node
-    @show_only_last_process = true
-    point_ids = []
-    if @priority.up_points_count > 0
-      @endorser_points = @priority.points.published.by_endorser_helpfulness.find(:all, :limit => 3)
-      point_ids += @endorser_points.collect {|c| c.id}
-    end
-    if @priority.down_points_count > 0
-      if point_ids.any? 
-        @opposer_points = @priority.points.published.by_opposer_helpfulness.find(:all, :conditions => ["id not in (?)",point_ids], :limit => 3)
-      else
-        @opposer_points = @priority.points.published.by_opposer_helpfulness.find(:all, :limit => 3)
-      end
-      point_ids += @opposer_points.collect {|c| c.id}
-    end
-    if @priority.neutral_points_count > 0
-      if point_ids.any?
-        @neutral_points = @priority.points.published.by_neutral_helpfulness.find(:all, :conditions => ["id not in (?)",point_ids], :limit => 3)
-      else
-        @neutral_points = @priority.points.published.by_neutral_helpfulness.find(:all, :limit => 3)
-      end
-      point_ids += @neutral_points.collect {|c| c.id}        
-    end
-    @point_ids = point_ids.uniq.compact
-    @qualities = nil
-    if logged_in? # pull all their qualities on the priorities shown
-      @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", point_ids,current_user.id])
-    end
+    @show_only_last_process = false
+    @point_value = 0
+    @points_top_up = @priority.points.published.by_helpfulness.up_value.five
+    @points_top_down = @priority.points.published.by_helpfulness.down_value.five
+    @points_new_up = @priority.points.published.by_recently_created.up_value.five.reject {|p| @points_top_up.include?(p)}
+    @points_new_down = @priority.points.published.by_recently_created.down_value.five.reject {|p| @points_top_down.include?(p)}
+    @total_up_points = @priority.points.published.up_value.count
+    @total_down_points = @priority.points.published.down_value.count
+    @total_up_points_new = [0,@total_up_points-@points_top_up.length].max
+    @total_down_points_new = [0,@total_down_points-@points_top_down.length].max
+    get_qualities([@points_new_up,@points_new_down,@points_top_up,@points_top_down])
+
     document_ids = []
     if @priority.up_documents_count > 0
       @endorser_documents = @priority.documents.published.by_endorser_helpfulness.find(:all, :limit => 3)
@@ -436,7 +441,7 @@ class PrioritiesController < ApplicationController
     end
     @document_ids = document_ids.uniq.compact    
     
-    @activities = @priority.activities.active.for_all_users.by_recently_updated.paginate :include => :user, :page => params[:page]
+    @activities = @priority.activities.active.top_discussions.for_all_users :include => :user
     if logged_in? and @endorsement
       if @endorsement.is_up?
         @relationships = @priority.relationships.endorsers_endorsed.by_highest_percentage.find(:all, :include => :other_priority).group_by {|o|o.other_priority}
@@ -456,7 +461,15 @@ class PrioritiesController < ApplicationController
       format.json { render :json => @priority.to_json(:except => NB_CONFIG['api_exclude_fields']) }
     end
   end
-  
+
+  def show_feed
+    last = params[:last].blank? ? Time.now + 1.second : Time.parse(params[:last])
+    @activities = @priority.activities.active.top_discussions.feed(last).for_all_users :include => :user
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def opposer_points
     @page_title = tr("Points opposing {priority_name}", "controller/priorities", :priority_name => @priority.name)
     @point_value = -1  
@@ -715,13 +728,30 @@ class PrioritiesController < ApplicationController
   
     Rails.logger.debug("Point character length: #{params[:priority][:points_attributes]["0"][:content].length} #{params[:priority][:name].length}")
 
+    if current_partner and current_partner.required_tags and not params[:priority][:priority_type]
+      # default to the first tag
+      params[:priority][:priority_type] = current_partner.required_tags.split(',')[0]
+    end
+
     @priority = Priority.new(params[:priority])
     tags = []
+    tags << "Betri hverfi" if current_partner and Government.current.layout=="better_reykjavik"
     tags << @priority.category.name if @priority.category
     params.each do |p,v|
       tags << v if p.include?("special_checkbox_tag_")
     end
+    params.each do |a,b|
+      tags << b if a.include?("sub_tag_")
+    end
     tags += params[:custom_tags].split(",").collect {|t| t.strip} if params[:custom_tags] and params[:custom_tags]!=""
+
+    if current_partner
+      tags << current_partner.name
+      if current_partner.required_tags
+        tags << params[:priority][:priority_type]
+      end
+    end
+
     unless tags.empty?
       @priority.issue_list = tags.join(",")
     end
@@ -731,8 +761,11 @@ class PrioritiesController < ApplicationController
     @saved = @priority.save
     
     if @saved
-      @priority.points.first.setup_revision
+      first_point = @priority.points.first
+      first_point.setup_revision
+      first_point.reload
       @endorsement = @priority.endorse(current_user,request,current_partner,@referral)
+      quality = first_point.point_qualities.find_or_create_by_user_id_and_value(current_user.id, true)
       if current_user.endorsements_count > 24
         session[:endorsement_page] = (@endorsement.position/25).to_i+1
         session[:endorsement_page] -= 1 if @endorsement.position == (session[:endorsement_page]*25)-25
@@ -814,20 +847,12 @@ class PrioritiesController < ApplicationController
             page<<"$('.priority_#{@priority.id.to_s}_button_small').replaceWith('#{escape_javascript(render(:partial => "priorities/button_small", :locals => {:priority => @priority, :endorsement => @endorsement, :region => params[:region]}))}')"
             page<<"$('.priority_#{@priority.id.to_s}_endorsement_count').replaceWith('#{escape_javascript(render(:partial => "priorities/endorsement_count", :locals => {:priority => @priority}))}')"
           elsif params[:region] == 'ad_top' and @ad
-            page.replace 'notification_show', render(:partial => "ads/pick")
-            page << 'jQuery("#notification_show").corners();'
+            page.replace 'encouragements', render(:partial => "ads/pick")
+            #page << 'if (jQuery("#notification_show").length > 0) { jQuery("#notification_show").corners(); }'
           else
             page << "alert('error');"
           end
           page.replace_html 'your_priorities_container', :partial => "priorities/yours"
-          # page.visual_effect :highlight, 'your_priorities'
-          if current_facebook_user
-            if @value == 1
-              #page << fb_connect_stream_publish(UserPublisher.create_endorsement(current_facebook_user, @endorsement, @priority))
-            else
-              #page << fb_connect_stream_publish(UserPublisher.create_opposition(current_facebook_user, @endorsement, @priority))
-            end
-          end
         end
       }
     end
@@ -839,51 +864,91 @@ class PrioritiesController < ApplicationController
     @priority = Priority.find(params[:id])
     @previous_name = @priority.name
     @page_name = tr("Edit {priority_name}", "controller/priorities", :priority_name => @priority.name)
-    if params[:priority] 
-      params[:priority][:category] = Category.find(params[:priority][:category]) if params[:priority][:category]
+
+    if params[:priority]
+      if params[:priority][:priority_type] and current_partner and current_partner.required_tags
+        required_tags = current_partner.required_tags.split(',')
+        issues = @priority.issue_list
+        if not issues.include?(params[:priority][:priority_type])
+          new_issues = issues - required_tags
+          new_issues << params[:priority][:priority_type]
+          @priority.issue_list = new_issues.join(',')
+        end
+      end
+      if params[:priority]["finished_status_date(1i)"]
+        # TODO: isn't there an easier way to do this?
+        params[:priority][:finished_status_date] = Date.new(params[:priority].delete("finished_status_date(1i)").to_i, params[:priority].delete("finished_status_date(2i)").to_i, params[:priority].delete("finished_status_date(3i)").to_i)
+      end
+      if params[:priority][:category]
+        old_category = @priority.category
+        new_category = Category.find(params[:priority][:category])
+        params[:priority][:category] = new_category
+        current_issues = @priority.issue_list
+        remove_issues = [old_category.name]
+        add_issues = [new_category.name]
+        new_issues = add_issues | (current_issues - remove_issues)
+        params[:priority][:issue_list] = new_issues.join(',')
+      end
+      if params[:priority][:finished_status_message]
+        change_log = @priority_status_changelog = PriorityStatusChangeLog.new(
+            priority_id: @priority.id,
+            date: params[:priority][:finished_status_date],
+            content: params[:priority][:finished_status_message],
+            subject: params[:priority][:finished_status_subject]
+        )
+        @priority_status_changelog.save
+      end
       if params[:priority][:official_status] and params[:priority][:official_status].to_i != @priority.official_status
         @change_status = params[:priority][:official_status].to_i
         #params[:priority].delete(:official_status)
       end
     end
     respond_to do |format|
-      if params[:commit]=="Vista hugmynd"
-        if @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
-          # already renamed?
-          @activity = ActivityPriorityRenamed.find_by_user_id_and_priority_id(current_user.id,@priority.id)
-          if @activity
-            @activity.update_attribute(:updated_at,Time.now)
-          else
-            @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
-          end
-          format.html { 
-            flash[:notice] = tr("Saved {priority_name}", "controller/priorities", :priority_name => @priority.name)
-            redirect_to(@priority)         
-          }
-          format.js {
-            render :update do |page|
-              page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}          
-              page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}                      
-              page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
-              page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
-              # page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
-            end
-          }
+      if params[:priority][:name] and @priority.update_attributes(params[:priority]) and @previous_name != params[:priority][:name]
+        # already renamed?
+        @activity = ActivityPriorityRenamed.find_by_user_id_and_priority_id(current_user.id,@priority.id)
+        if @activity
+          @activity.update_attribute(:updated_at,Time.now)
         else
-          format.html { render :action => "edit" }
-          format.js {
-            render :update do |page|
-              page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
-              page.insert_html :top, 'activities', render(:partial => "priorities/new_inline", :locals => {:priority => @priority})
-              page['priority_name'].focus
-            end
-          }
+          @activity = ActivityPriorityRenamed.create(:user => current_user, :priority => @priority)
         end
-        @priority.reload
-        @priority.change_status!(@change_status) if @change_status
+        format.html {
+          flash[:notice] = tr("Saved {priority_name}", "controller/priorities", :priority_name => @priority.name)
+          redirect_to(@priority)
+        }
+        format.js {
+          render :update do |page|
+            page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
+            page.select('#activity_and_comments_' + @activity.id.to_s).each {|item| item.remove}
+            page.insert_html :top, 'activities', render(:partial => "activities/show", :locals => {:activity => @activity, :suffix => "_noself"})
+            page.replace_html 'priority_' + @priority.id.to_s + '_name', render(:partial => "priorities/name", :locals => {:priority => @priority})
+            # page.visual_effect :highlight, 'priority_' + @priority.id.to_s + '_name'
+          end
+        }
       else
-        Rails.logger.info("CHANGE NAME ERROR!!! #{@priority.inspect}")
-        redirect_to(@priority)
+        format.html {
+          if params[:priority][:finished_status_message]
+            flash[:notice] = tr('Status updated with "{status_text}"', "controller/priorities", status_text: params[:priority][:finished_status_subject])
+          end
+          redirect_to(@priority)
+        }
+        format.js {
+          render :update do |page|
+            page.select('#priority_' + @priority.id.to_s + '_edit_form').each {|item| item.remove}
+            page.insert_html :top, 'activities', render(:partial => "priorities/new_inline", :locals => {:priority => @priority})
+            page['priority_name'].focus
+          end
+        }
+      end
+      @priority.reload
+
+      if @change_status
+        @priority.change_status!(@change_status)
+        @priority.delay.deactivate_endorsements
+      end
+      if change_log
+        @priority.create_status_update(change_log)
+        User.delay.send_status_email(@priority.id, params[:priority][:official_status], params[:priority][:finished_status_date], params[:priority][:finished_status_subject], params[:priority][:finished_status_message])
       end
     end
   end
@@ -1052,7 +1117,19 @@ class PrioritiesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to yours_created_priorities_url }    
     end
-  end  
+  end
+
+  def update_status
+    @priority = Priority.find(params[:id])
+    @page_name = tr("Edit the status of {priority_name}", "controller/priorities", :priority_name => @priority.name)
+    if not current_user.is_admin?
+      flash[:error] = tr("You cannot change a priority's name once other people have endorsed it.", "controller/priorities")
+      redirect_to @priority and return
+    end
+    respond_to do |format|
+      format.html
+    end
+  end
 
   private
   

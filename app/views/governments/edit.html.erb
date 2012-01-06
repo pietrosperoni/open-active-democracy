@@ -30,6 +30,15 @@
 
       <div class="field">
         <div class="field_label">
+          <%= tr("Meta Description", "view/governments/edit") %>
+        </div>
+        <div class="field_box">
+          <%= f.text_field :description, :size => 40 %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_label">
           <%= tr("What are you running?", "view/governments/edit") %>
         </div>
         <div class="field_box">

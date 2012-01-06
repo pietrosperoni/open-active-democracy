@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   scope :active, :conditions => "users.status in ('pending','active')"
   scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
-  scope :newsletter_subscribed, :conditions => "users.is_newsletter_subscribed = true and users.email is not null and users.email <> ''"
+  scope :newsletter_subscribed, :conditions => "users.report_frequency != 0 and users.email is not null and users.email <> ''"
   scope :comments_unsubscribed, :conditions => "users.is_comments_subscribed = false"  
   scope :twitterers, :conditions => "users.twitter_login is not null and users.twitter_login <> ''"
   scope :authorized_twitterers, :conditions => "users.twitter_token is not null"
@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   scope :by_30days_losers, :conditions => "users.endorsements_count > 4", :order => "users.index_30days_change asc"  
 
   scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :all_endorsers_and_opposers_for_priority, lambda { |priority_id| User.joins(:endorsements).where(endorsements: {priority_id: priority_id}); }
 
   belongs_to :picture
   has_attached_file :buddy_icon, :styles => { :icon_24 => "24x24#", :icon_35 => "35x35#", :icon_48 => "48x48#", :icon_96 => "96x96#" }
@@ -128,9 +129,12 @@ class User < ActiveRecord::Base
 
   validates_acceptance_of   :terms, :message => tr("Please accept the terms and conditions", "model/user")
 
-  #validates_inclusion_of    :my_gender, in: [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")],
-  #                          message: tr("Please select your gender.", "model/user"), :if => :using_br?
-  #validates_inclusion_of    :age_group, in: [tr("Male", "model/user"),tr("Female", "model/user")], message: tr("Please select your gender.", "model/user"), :if => :using_br?
+ # validates_inclusion_of    :age_group, :in => lambda {|foo| foo.allowed_for_age_group},
+ #                           message: tr("Please select your gender.", "model/user"), :if => :using_br?
+ # validates_inclusion_of    :my_gender, :in => lambda {|foo| foo.allowed_for_gender}, message: tr("Please select your gender.", "model/user"), :if => :using_br?
+
+  validate :validate_age_group
+  validate :validate_gender
 
   before_save :encrypt_password
   before_create :make_rss_code
@@ -145,6 +149,31 @@ class User < ActiveRecord::Base
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :partner_ids, :terms
+
+
+  def validate_age_group
+    if using_br?
+      unless allowed_for_age_group.include?(self.age_group)
+        self.errors.add(:age_group ,tr("Please select your age group", "model/user"))
+      end
+    end
+  end
+
+  def validate_gender
+    if using_br?
+      unless allowed_for_gender.include?(self.my_gender)
+        self.errors.add(:my_gender ,tr("Please select gender", "model/user"))
+      end
+    end
+  end
+
+  def allowed_for_age_group
+    [tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")]
+  end
+
+  def allowed_for_gender
+    [tr("Male", "model/user"),tr("Female", "model/user")]
+  end
 
   def using_br?
     Government.current.layout == "better_reykjavik"
@@ -324,9 +353,9 @@ class User < ActiveRecord::Base
     for c in sent_capitals
       c.destroy
     end
-    for c in constituents
-      c.destroy
-    end
+    #for c in constituents
+    #  c.destroy
+    #end
     self.facebook_uid = nil
   end
   
@@ -370,7 +399,7 @@ class User < ActiveRecord::Base
   
   def is_subscribed=(value)
     if not value
-      self.is_newsletter_subscribed = false
+      self.report_frequency = 0
       self.is_comments_subscribed = false
       self.is_votes_subscribed = false
       self.is_point_changes_subscribed = false      
@@ -380,7 +409,7 @@ class User < ActiveRecord::Base
       self.is_votes_subscribed = false
       self.is_admin_subscribed = false
     else
-      self.is_newsletter_subscribed = true
+      self.report_frequency = 0
       self.is_comments_subscribed = true
       self.is_votes_subscribed = true     
       self.is_point_changes_subscribed = true
@@ -410,7 +439,7 @@ class User < ActiveRecord::Base
   end
   
   def has_top_priority?
-    attribute_present?("top_endorsement_id")
+    attribute_present?("top_endorsement_id") and top_endorsement
   end
 
   def most_recent_activity
@@ -458,7 +487,8 @@ class User < ActiveRecord::Base
   end 
   
   def quality_factor
-    return 1 if qualities_count < 10
+    # TODO: this needs to me rethought, since it penalizes users for rating points
+    return 1 #if qualities_count < 10
     rev_count = document_revisions_count+point_revisions_count
     return 10/qualities_count.to_f if rev_count == 0
     i = (rev_count*2).to_f/qualities_count.to_f
@@ -1079,6 +1109,83 @@ class User < ActiveRecord::Base
       self.suspend!
     end
     self.increment!("warnings_count")
+  end
+
+  def self.send_status_email(priority_id, status, date, subject, message)
+    status_types = {
+      '-2' => tr("Failed","status_messages"),
+      '-1' => tr("In Progress","status_messages"),
+       '0' => tr("Published","status_messages"),
+       '2' => tr("Successful","status_messages")
+    }
+    status = status_types[status]
+    priority = Priority.find(priority_id)
+    Tr8n::Config.init('is', Tr8n::Config.current_user) if Government.last.layout == "better_reykjavik" or Government.last.layout == "better_iceland"
+    all_endorsers_and_opposers_for_priority(priority_id).each do |user|
+      next unless user.is_finished_subscribed
+      position = Endorsement.where(priority_id: priority_id, user_id: user.id).first.value
+      UserMailer.priority_status_update(priority, status, date, subject, message, user, position).deliver
+    end
+  end
+
+  def self.send_report_emails(frequency)
+    Tr8n::Config.init('is', Tr8n::Config.current_user) if Government.last.layout == "better_reykjavik" or Government.last.layout == "better_iceland"
+    top_priorities = {}
+    priority_followers = {}
+    top_category_score = {}
+    Government.current.default_tags_checkbox.split(',').each do |tag|
+      category = Tag.find_by_name(tag)
+      top_priorities[category] = Priority.filtered.tagged_with(category, :on => :issues).published.top_rank.limit(3)
+      top_category_score[category] = top_priorities[category].shift.score
+      top_priorities[category].each do |priority|
+        priority_followers[priority.id] = all_endorsers_and_opposers_for_priority(priority.id).collect { |u| u.id }
+      end
+    end
+
+    User.where("status = 'active' AND report_frequency = ? AND is_admin = 0", frequency).each do |user|
+      # the user's top 5 ranked priorities
+      important = user.endorsements.active.by_position.limit(5).collect { |e| Priority.find(e.priority) }
+      next if important.empty?
+
+      # priorities in 2nd/3rd place which the user has not endorsed/opposed,
+      # but at least a quarter of his/her followers has
+      important_to_followers = []
+
+      # priorities the user has endorsed/opposed which are in 2nd or 3rd
+      # place in a category
+      near_top = []
+
+      top_priorities.each do |category, priorities|
+        priorities.each_with_index do |priority, index|
+          follower_count = user.followers.count
+          if priority_followers[priority.id].include?(user.id)
+            position = Endorsement.find(:first, conditions: { user_id: user.id, priority_id: priority.id }).value
+            near_top << {
+                priority: priority,
+                position: index+2,
+                category: category,
+                endorsement: position,
+                distance: top_category_score[category] - priority.score,
+            }
+          else
+            follower_endorsements = Endorsement.find(:all, conditions: ["priority_id = ? AND user_id IN (?)", priority.id, user.follower_ids]).count
+            if follower_endorsements > follower_count / 10
+              important_to_followers << { priority: priority, position: index+2, category: category, follower_endorsements: follower_endorsements }
+            end
+          end
+        end
+      end
+
+      # only retain at most 3 which have the most support from the user's followers
+      important_to_followers.sort! { |x,y| x[:follower_endorsements] <=> y[:follower_endorsements] }
+      important_to_followers = important_to_followers[0..2] if important_to_followers.count > 3
+
+      # only retain at most 3 which are closest to being in 1st place in a category
+      near_top.sort! { |x,y| x[:distance] <=> y[:distance] }
+      near_top = near_top[0..2] if near_top.count > 3
+
+      UserMailer.user_report(user, important, important_to_followers, near_top, frequency).deliver
+    end
   end
 
   protected

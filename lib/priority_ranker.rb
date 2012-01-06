@@ -35,7 +35,7 @@ class PriorityRanker
     end
 
     # Delete all endorsements that do not have positions
-    Endorsement.delete_all("position IS NULL")
+    #Endorsement.delete_all("position IS NULL")
 
     # update the user's vote factor score
     users = User.active.all

@@ -15,6 +15,8 @@ class Priority < ActiveRecord::Base
   scope :published, :conditions => "priorities.status = 'published'"
   scope :unpublished, :conditions => "priorities.status not in ('published','abusive')"
 
+  scope :not_deleted, :conditions => "priorities.status <> 'deleted'"
+
   scope :flagged, :conditions => "flags_count > 0"
 
   scope :alphabetical, :order => "priorities.name asc"
@@ -43,7 +45,8 @@ class Priority < ActiveRecord::Base
   scope :finished, :conditions => "priorities.official_status in (-2,-1,2)"
   
   scope :by_user_id, lambda{|user_id| {:conditions=>["user_id=?",user_id]}}
-  scope :item_limit, lambda{|limit| {:limit=>limit}} 
+  scope :item_limit, lambda{|limit| {:limit=>limit}}
+  scope :only_ids, :select => "priorities.id"
   
   scope :alphabetical, :order => "priorities.name asc"
   scope :newest, :order => "priorities.published_at desc, priorities.created_at desc"
@@ -51,7 +54,8 @@ class Priority < ActiveRecord::Base
   scope :untagged, :conditions => "(priorities.cached_issue_list is null or priorities.cached_issue_list = '')", :order => "priorities.endorsements_count desc, priorities.created_at desc"
 
   scope :by_most_recent_status_change, :order => "priorities.status_changed_at desc"
-  
+  scope :by_random, :order => "rand()"
+
   scope :item_limit, lambda{|limit| {:limit=>limit}}  
   
   belongs_to :user
@@ -89,9 +93,12 @@ class Priority < ActiveRecord::Base
   has_many :sent_changes, :class_name => "Change", :conditions => "status = 'sent'", :order => "updated_at desc"
   has_many :declined_changes, :class_name => "Change", :conditions => "status = 'declined'", :order => "updated_at desc"
   has_many :changes_with_deleted, :class_name => "Change", :order => "updated_at desc", :dependent => :destroy
+  has_many :priority_status_change_logs, dependent: :destroy
 
   has_many :priority_processes
-  
+
+  attr_accessor :priority_type
+
   belongs_to :change # if there is currently a pending change, it will be attached
   
   acts_as_taggable_on :issues
@@ -101,7 +108,7 @@ class Priority < ActiveRecord::Base
     indexes name
     indexes category.name, :facet=>true, :as=>"category_name"
     has partner_id, :as=>:partner_id, :type => :integer
-    where "priorities.status = 'published'"
+    where "priorities.status in ('published','inactive')"
   end  
 
   def category_name
@@ -133,7 +140,7 @@ class Priority < ActiveRecord::Base
   end
   
   event :delete do
-    transitions :from => [:passive, :draft, :published], :to => :deleted
+    transitions :from => [:inactive, :passive, :draft, :published], :to => :deleted
   end
 
   event :undelete do
@@ -221,11 +228,11 @@ class Priority < ActiveRecord::Base
   end
   
   def up_endorsements_count
-    Endorsement.where(:priority_id=>self.id, :status=>'active', :value=>1).count
+    Endorsement.where(:priority_id=>self.id, :value=>1).count
   end
   
   def down_endorsements_count
-    Endorsement.where(:priority_id=>self.id, :status=>'active', :value=>-1).count
+    Endorsement.where(:priority_id=>self.id, :value=>-1).count
   end
   
   def is_controversial?
@@ -251,7 +258,7 @@ class Priority < ActiveRecord::Base
     ['published','inactive'].include?(status)
   end
   alias :is_published :is_published?
-    
+
   def is_finished?
     official_status > 1 or official_status < 0
   end
@@ -330,51 +337,70 @@ class Priority < ActiveRecord::Base
   end
   
   def failed!
-#    ActivityPriorityOfficialStatusFailed.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusFailed.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -2
     self.status = 'inactive'
 #    self.change = nil
     self.save(:validate => false)
-#    deactivate_endorsements  
+    #deactivate_endorsements
   end
   
   def successful!
-#    ActivityPriorityOfficialStatusSuccessful.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusSuccessful.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = 2
     self.status = 'inactive'
 #    self.change = nil    
     self.save(:validate => false)
-#    deactivate_endorsements
+    #deactivate_endorsements
   end  
 
   def in_the_works!
-#    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusInTheWorks.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
-#    self.change = nil    
+#    self.change = nil
+    deactivate_ads_and_refund
     self.save(:validate => false)
-#    deactivate_endorsements
+    #deactivate_endorsements
   end  
   
   def compromised!
-    ActivityPriorityOfficialStatusCompromised.create(:priority => self, :user => user)
+    ActivityPriorityOfficialStatusCompromised.create(:priority => self)
     self.status_changed_at = Time.now
     self.official_status = -1
     self.status = 'inactive'
  #   self.change = nil    
     self.save(:validate => false)
- #   deactivate_endorsements
-  end  
+    #deactivate_endorsements
+  end
+
+  def deactivate_ads_and_refund
+    self.ads.active.each do |ad|
+      ad.finish!
+      user = ad.user
+      refund = ad.cost - ad.spent
+      refund = 1 if refund > 0 and refund < 1
+      refund = refund.abs.to_i
+      if refund
+        user.increment!(:capital_count, refund)
+        ActivityCapitalAdRefunded.create(:user => user, :priority => self, :capital => CapitalAdRefunded.create(:recipient => user, :amount => refund))
+      end
+    end
+  end
 
   def deactivate_endorsements
     for e in endorsements.active
       e.finish!
     end    
   end
-  
+
+  def create_status_update(priority_status_change_log)
+    return ActivityPriorityStatusUpdate.create(priority: self, priority_status_change_log: priority_status_change_log)
+  end
+
   def reactivate!
     self.status = 'published'
     self.change = nil
@@ -399,11 +425,11 @@ class Priority < ActiveRecord::Base
   end  
   
   def official_status_name
-    return tr("failed", "model/priority") if official_status == -2
-    return tr("compromised", "model/priority") if official_status == -1
-    return tr("unknown", "model/priority") if official_status == 0 
-    return tr("in the works", "model/priority") if official_status == 1
-    return tr("successful", "model/priority") if official_status == 2
+    return tr("Failed", "status_messages") if official_status == -2
+    return tr("In Progress", "status_messages") if official_status == -1
+    return tr("Unknown", "status_messages") if official_status == 0
+    return tr("Published", "status_messages") if official_status == 1
+    return tr("Successful", "status_messages") if official_status == 2
   end
   
   def has_change?
@@ -666,14 +692,14 @@ class Priority < ActiveRecord::Base
         time = Time.now-5.years
       end
       if priority_process.stage_sequence_number == 1 and priority_process.process_discussions.count == 0
-        stage_txt = "#{t :waits_for_discussion}"
+        stage_txt = "#{tr("Waiting for discussion","althingi_texts")}"
       else
-        stage_txt = "#{priority_process.stage_sequence_number}. #{t :parliment_stage_sequence_discussion}"
+        stage_txt = "#{priority_process.stage_sequence_number}. #{tr("Discussion stage","althingi_texts")}"
       end
-      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)} #{t :since}"
+      latest_priority_process_txt = "#{stage_txt}, #{distance_of_time_in_words_to_now(time)}"
       Rails.cache.write("latest_priority_process_at_#{self.id}", latest_priority_process_txt, :expires_in => 30.minutes)
     end
-    latest_priority_process_txt
+    latest_priority_process_txt.html_safe if latest_priority_process_txt
   end
 
   def do_abusive

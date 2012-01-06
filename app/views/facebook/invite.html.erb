@@ -1,4 +1,4 @@
-<% if not current_facebook_user %>
+<% if not current_facebook_user_if_on_facebook %>
 <div id="hp_intro"><%= @page_title %></div>
 <%= tr("Click this button to connect to Facebook and find your friends.", "view/facebook/invite")%>
 <p>
@@ -6,7 +6,7 @@
 <% end %>			
 
 
-<% if current_facebook_user %>
+<% if current_facebook_user_if_on_facebook %>
 	<fb:serverfbml width="625px">
 		<script type="text/fbml">
 			<fb:request-form 
@@ -19,6 +19,7 @@
 			 exclude_ids = "<%= current_following_facebook_uids.join(',') %>,<%= @facebook_contacts.join(',') %>"
 			 actiontext="<%= tr("Invite your Facebook friends to join your network at {government_name}", "view/facebook/invite", :government_name => tr(current_government.name,"Name from database")) %>" 
 			 showborder="true"
+             import_external_friends="false"
 			 rows="4"
 			 cols="4"
 			 bypass="cancel"

@@ -1,8 +1,15 @@
 <div id="sidebar">
   <% if Government.current.layout == "better_reykjavik" %>
-	<div class="reykjavik_icon">		
-		<a href="http://www.reykjavik.is"><%= image_tag("new/reykjavik_icon.png", :alt => "www.reykjavik.is") %></a>
-	</div>
+    <% if current_partner %>
+        <div class="reykjavik_icon">
+            <a href="http://betrireykjavik.is"><%= image_tag("new/betrireykjavik_fra_bh.png", :alt => "betrireykjavik.is") %></a>
+        </div>
+    <% else %>
+	    <div class="reykjavik_icon">
+		    <a href="http://www.reykjavik.is"><%= image_tag("new/reykjavik_icon.png", :alt => "www.reykjavik.is") %></a>
+	    </div>
+    <% end %>
+
   <% else %>
     <div class="yrpri_icon">
 		<a href="http://yrpri.org"><%= image_tag("new/yourprioritiesworldwide.png", :alt => "Your Priorities Worldwide") %></a>
@@ -11,7 +18,7 @@
 	<%= render :partial => "shared/partner_large_flag" %>
     <%= render :partial => "shared/search" %>
 
-		<div>
+  <div>
 <ul id="menu1">
 <li class="tab7 mega">
 			<span class="tab_header">
@@ -21,35 +28,35 @@
 			<div class="test">
 				<div class="tab_subhead"><%= link_to tr("About the site", "view/shared/_menu"), :controller => "about" %></div>
 				<div class="tab_sublinks">
-					<%= link_to tr("About", "view/shared/_menu"), :controller => "about" %>
-                    <% if Government.current.layout == "better_reykjavik" -%>    
-                    &middot; <%= link_to tr("Reykjavík city council", "view/shared/_menu"), :controller => "about", :action => "council" %><br/>
-                    <% end %>
-					&middot; <%= link_to tr("FAQ", "view/shared/_menu"), :controller => "about", :action => "faq" %>
-					&middot; <%= link_to tr("Rules", "view/shared/_menu"), :controller => "about", :action => "rules" %>
+					&middot; <%= link_to tr("About", "view/shared/_menu"), :controller => "about" %><br/>
+					 <% if Government.current.layout == "better_reykjavik" -%>    
+					&middot; <%= link_to tr("Reykjavík city council", "view/shared/_menu"), :controller => "about", :action => "council" %><br/>
+					<% end %>
+					&middot; <%= link_to tr("FAQ", "view/shared/_menu"), :controller => "about", :action => "faq" %><br/>
+					&middot; <%= link_to tr("Rules", "view/shared/_menu"), :controller => "about", :action => "rules" %><br/>
 					&middot; <%= link_to tr("Privacy policy", "view/shared/_menu"), :controller => "about", :action => "privacy" %><br/>
-          &middot; <%= link_to tr("Contributors", "view/shared/_menu"), :controller => "about", :action => "contributors" %><br/>
+					&middot; <%= link_to tr("Contributors", "view/shared/_menu"), :controller => "about", :action => "contributors" %><br/>
 					<% cache("pages-#{session[:locale]}-#{@inline_translations_enabled}") do %>
 						<%= Page.all.collect{ |page| link_to(page.link_name, about_url(page.short_name))}.to_sentence(:words_connector => " &middot; ", :two_words_connector => " &middot; ", :last_word_connector => " &middot; ") %>
-					<% end %>
+						<% end %>
 				</div>				
 
         <div class="tab_subhead">
-          <%= link_to tr("Charts and stats", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
+		<%= link_to tr("Charts and stats", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
         </div>
         <div class="tab_sublinks">
-          <% if current_government.is_tags? %>
-            <%= link_to tr("Categories","view/shared/_menu"), :controller => "charts", :action => "issues" %> &middot; 
-          <% end %>
-          <%= link_to tr("Rising agendas", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %>
-                         &middot; <%= link_to tr("Falling agendas", "view/shared/_menu"), :controller => "charts", :action => "losers_24hr" %>
+		<% if current_government.is_tags? %>
+		&middot; <%= link_to tr("Active categories","view/shared/_menu"), :controller => "charts", :action => "issues" %> <br />
+		<% end %>
+		&middot; <%= link_to tr("Rising agendas", "view/shared/_menu"), :controller => "charts", :action => "gainers_24hr" %><br />
+		 &middot; <%= link_to tr("Falling agendas", "view/shared/_menu"), :controller => "charts", :action => "losers_24hr" %>
         </div>
 
         <div class="tab_subhead">
           <%= link_to tr("Widgets for your site", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
         </div>
         <div class="tab_sublinks">
-           <%= link_to tr("Priorities", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %>
+           &middot; <%= link_to tr("Priorities", "view/shared/_menu"), :controller => "widgets", :action => "priorities" %><br />
            &middot; <%= link_to tr("Discussions", "view/shared/_menu"), :controller => "widgets", :action => "discussions" %>
         </div>
 				</div>
@@ -58,6 +65,8 @@
 </ul></div>
 
 <%= render :partial => "priorities/new_button" %>
+<%= render :partial => "shared/social_media_buttons" %>
+<%= render :partial => "shared/rvk_countdown" if Government.current.layout == "better_reykjavik" -%>
 
 <div class="userwrap">
 		<%= render :partial => "shared/user_info" if logged_in? %>
@@ -77,7 +86,6 @@
  
 	<% end %>
 
-
     <% if logged_in? %>
       <%= render :partial => "shared/notifications" %>
     <% else %>
@@ -87,22 +95,28 @@
  </div> 
 
 
+  <div class="gamlabetri">
+<a href="http://betrireykjavik.skuggaborg.is/portal"><img src="/images/new/gamlabr.png" alt="Allar hugmyndirnar af upphaflegu Betri Reykjavík"></a>
+</div>
   <% if logged_in? %>
     <div id="priority_column" class="userwrap">
       <%= render :partial => "shared/your_priorities" %>
     </div>
   <% else %>
+
     <% unless @geoblocked %>
     <div id="intro">
       <%= tr("<p>Getting involved is easy and fun.  Just join and start setting your priorities, like a to do list.  The more people who make your priority their own priority, the higher it <a href=\"/priorities/rising\">rises in the charts</a>. The more people who <a href=\"/signup\">join the network</a>, the more clout we have to make our agenda happen.</p>", "view/layouts/basic") %>
     </div>
 
+
     <% end %>
   <% end %>
+
   <%= render :partial => "shared/fb_activity_feed" %>
 
 <div class="yourpri_logo">		
-		<a href="http://citizens.is"><%= image_tag("new/header.png", :alt => "shortcut") %></a>  
+		<a href="http://ibuar.is"><%= image_tag("new/ibuar-logo.png", :alt => "shortcut") %></a>  
 	</div>
 
 </div>

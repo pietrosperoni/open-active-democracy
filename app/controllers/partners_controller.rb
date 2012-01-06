@@ -107,7 +107,6 @@ class PartnersController < ApplicationController
     @partner = Partner.find(params[:id])    
     respond_to do |format|
       if @partner.update_attributes(params[:partner])
-        ActivityPartnerPictureNew.create(:user => current_user, :partner => @partner)        
         flash[:notice] = tr("Picture uploaded successfully", "controller/partners")
         format.html { redirect_to(:action => :picture) }
       else
@@ -126,5 +125,5 @@ class PartnersController < ApplicationController
       format.html { redirect_to(partners_url) }
     end
   end
-  
+
 end

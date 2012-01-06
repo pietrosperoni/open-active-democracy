@@ -16,13 +16,8 @@ $(function(){
     <tr>
       <%= render :partial => "priorities/rank_week_month", :locals => {:priority => @priority } %>
 
-	    <% if @priority.category and @priority.category.icon -%>
-			<div class="priority_icon_single">
-				<%= image_tag @priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
-			</div>
-	    <% end %>
 
-      <td valign="top" colspan="3">
+      <td valign="top" colspan="3" rowspan="2">
 				<ul>
 					<li class="list_priority_overview">
 				  	<div id="priority_<%= @priority.id %>" class="priority_listing">
@@ -34,16 +29,16 @@ $(function(){
 						<div class="replace_report" style="margin-left:10px !important;"></div>
 					</li>
 
-                    <li class="list_right">
+                    <li class="list_left">
                       <div class="g-plusone" data-size="medium"></div>
                     </li>
 
-					<li class="list_right">
+					<li class="list_left">
 						<div class="tweet"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
 
 					</li>
 
-					<li class="list_right">
+					<li class="list_left">
 						<div class="replace_fblike">
 					
 						</div>	
@@ -52,10 +47,20 @@ $(function(){
 				<div class="clear"></div>
 				<div class="replace_notice"></div>
 			    <% if @priority.status == "inactive" and [-1,-2,2].include?(@priority.official_status) %>
-				<div class="finished_priority"><%= @priority.finished_status_message %></div>
+                    <%= render :partial => "priorities/priority_status_changelogs" %>
 				<% end %>
+				
+      </td>
+      </tr><tr><td colspan="2">
+      
+      	    <% if @priority.category and @priority.category.icon -%>
+			<div class="priority_icon_single">
+				<%= image_tag @priority.category.icon.url(:icon_50), :size => "50x50", :border => 0 %>
+			</div>
+	    <% end %>
+
+
       </td>
     </tr>
-		<tr><td height="10"></td></tr>
 </table>
 <br/>

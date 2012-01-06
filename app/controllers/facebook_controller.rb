@@ -7,7 +7,7 @@ class FacebookController < ApplicationController
     @page_title = tr("Invite your Facebook friends to join {government_name}", "controller/facebook", :government_name => tr(current_government.name,"Name from database"))
     @user = User.find(current_user.id)
     @facebook_contacts = @user.contacts.active.facebook.collect{|c|c.facebook_uid}
-    if current_facebook_user
+    if current_facebook_user_if_on_facebook
       app_users = current_facebook_user.friends
       if app_users.any?
         count = 0

@@ -1,18 +1,17 @@
-<% if Government.current.message_for_news and Government.current.message_for_news!="" -%>
+<% if Government.current.message_for_news and Government.current.message_for_news!="" and not params[:controller].include?("portal") -%>
   <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_for_news.html_safe } %>
 <% end %>
-
 <script type="text/javascript">
 $(function(){
 	$('.rss_move').replaceWith($('.rss_feed'));
-	
+
 });
 </script>
 
 	<ul>
 		<li style="float:left; list-style:none;">
 			<div id="hp_intro" style="border-bottom:none;"><%= @page_title%></div>
-		
+
 		</li>
 		<li style="float:right; list-style:none;">
 			<div class="rss_move"></div>
@@ -28,7 +27,7 @@ $(function(){
 		<% end %>-->
 
 <% if logged_in? and (params[:action].include?("activities") or params[:action].include?("discussions")) %>
-	<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>	
+	<%= render :partial => "bulletins/form", :locals => {:activity => Activity.new, :comment => Comment.new } %>
 <% end %>
 
 <% if params[:action].include?("network") and logged_in? and current_following_ids.empty? %>
@@ -38,16 +37,9 @@ $(function(){
 <% if not @activities %>
 	<%= tr("No activity here yet.", "view/news/activity_list")%>
 <% else %>
-<!--<%= render :partial => "shared/paginate_with_feed", :locals => {:collection => @activities} %>-->
-<div id="activities" class="single">
-<% for activity in @activities %>
-	<% if ['your_activity','your_capital','your_changes'].include?(params[:action]) %>
-		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => "_nouser"} %>
-	<% else %>
-		<%= render :partial => "activities/show", :locals => {:activity => activity, :suffix => ""} %>
-	<% end %>
+    <div id="activities" class="single">
+    <%= render :partial=>"news/activity_list" %>
+    </div>
 <% end %>
-</div>
 
-<%= will_paginate(@activities) %>
-<% end %>
+<%= will_paginate(@activities) if @activities.respond_to?('total_pages') %>

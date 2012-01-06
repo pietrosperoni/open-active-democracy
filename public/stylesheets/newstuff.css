@@ -508,26 +508,76 @@ ul#priority_menu li.tab9 div.tab_body {
 /* Þingferlar */
 	.althingi_process_container 
 {  
-	width: 550px; 
-	margin: 1em 0em !important; 
-	padding: 0 10px 10px 10px !important; 
-	border-bottom: 3px solid #e5e5e5 !important; }
+	width: 600px;
+	margin: 1em 0em !important;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CACACA;
+    -webkit-border-radius: 1em;
+		-moz-border-radius: 1em;
+		border-radius: 1em;
+		behavior:url(../javascripts/PIE.htc);
+		position: relative;
+    float: left;
+    margin: 0 0 10px 10px;
+    padding: 10px;
+    width: 678px;
+	
+}
 
-.althingi_process_container h3 { background: #f5f5f5 !important; margin: 0px; margin-top: 1em; }
+.althingi_process_container h3 
+{
+	margin-top: 10px; 
+	margin-left: 6px; 
+}
 
 .althingi_process_container h2 { display: inline !important; width: 200px !important; clear: left !important; padding: 0.5em; padding-top: 0em; margin: 0px; }
 
-.althingi_process_container p { display: inline; }
+.althingi_process_container p 
+{
+	padding: 3px 0 0 7px;
+	cursor: default !important;
+}
 
-.althingi_process_container a.extlink { display: inline-block; float: right; padding: 0.5em; padding-bottom: 0px; margin-bottom: 0px; }
+.althingi_process_container a.extlink 
+{ 
+}
 
 .althingi_process_container a
 {
 }
 
-.althingi_process_container table { width: 550px !important; border: 1px solid #f5f5f5; border-collapse: separate !important; border-spacing: 0 !important; }
+.althingi_process_container table 
+{ 
+	border: 1px solid #cacaca; 
+	border-collapse: separate !important; 
+	border-spacing: 7px !important; 
 
-.althingi_process_container table tr.even td { background: #f5f5f5; }
+}
+
+.althingi_process_container table tr.even td 
+{ 
+	background: #eef2f4; 
+	border: 1px solid #DDDDDD;
+    -webkit-border-radius: 0.4em;
+		-moz-border-radius: 0.4em;
+		border-radius: 0.4em;
+}
+
+.althingi_process_container table td 
+{ 
+	padding: 4px;
+}
+
+.althingi_process_container table thead td
+{ 
+	font-weight: bold;
+}
+
+.althingi_process_container a.right
+{ 
+	float:right;
+	padding-right: 10px;
+}
 
 /* Hliðarstikan */
 #top_right_column { margin-top: -17px; }
@@ -771,6 +821,9 @@ color:#444444;
 input, textarea, #contacts, #contacts_small, .invite_text, .ac_results, .magnifier_wrap, .change_vote_now, .idleField {
 background-color:#fff;
 border:1px solid #DDDDDD;
+	    -webkit-border-radius: 0.4em;
+		-moz-border-radius: 0.4em;
+		border-radius: 0.4em;
 }
 
 
@@ -878,7 +931,6 @@ border:2px solid #FFCC00 !important;*/
 
 
 .suggest_button:hover, .yellow_button:hover, .grey_button_wide:hover {
-border:1px solid #13499B !important;
 }
 .yellow_button {
 	border: 1px solid #FFCC00 !important;
@@ -999,7 +1051,7 @@ margin-right: 4px !Important;
 */
 .icon {
     left: 0;
-    margin: 19px 0 0 24px;
+    margin: 19px 0 0 26px;
     position: absolute;
     z-index: 0;
 }
@@ -1016,7 +1068,7 @@ font-size:13px !important;
 }
 
 .profile_name {
-font-size:16px !important;
+font-size:13px !important;
 line-height: 1.5em;
 border-bottom: none !important;
 }
@@ -1036,13 +1088,13 @@ margin-top:7px;
 }
 
 .top_level .priority_name, .priority_name_add {
-	width: 330px;
+	width: 320px;
 }
 
 .single .priority_name {
 	font-size: 1.4em !important;	
 	margin-bottom: 8px;
-	width: auto;
+	width: 500px;
 }
 
 
@@ -1056,7 +1108,7 @@ margin-top:7px;
 
 .pagination {
 	margin: -1px 0 5px 10px;
-	float: left;
+/*	float: left; */
 }
 
 .tiny_info, #tiny_info 
@@ -1113,11 +1165,13 @@ margin-top:7px;
 	margin-top: 10px;
 }
 
+/*
 .bellow_translate {
 	margin: 25px 0 8px -15px;
 	border-bottom: solid 1px #CCC;
 	width: 190px;
 }
+*/
 
 #intro p {font-size: 0.8em;}
 
@@ -1223,6 +1277,7 @@ margin-top:7px;
 }
 
 .yourpri_logo {
+	margin-top: 20px;
 	text-align: center;
 }
 
@@ -1234,3 +1289,28 @@ margin-top:7px;
     width: auto;
 }
 
+#infopage h4
+{
+		margin-top: 10px;
+}
+
+#deletepage li
+{
+		margin-left: 15px;
+}
+
+#infopage li
+{
+		margin-left: 5px;
+}
+
+#infopage p
+{
+		margin-top: 5px;
+}
+
+
+.finished_status {
+    font-size: 11px;
+    font-weight: normal;
+}

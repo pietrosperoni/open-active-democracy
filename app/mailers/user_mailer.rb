@@ -6,20 +6,61 @@ class UserMailer < ActionMailer::Base
     @recipient = @user = user
     @government = Government.current
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    if @government.layout.include?("better_reykjavik")
-      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/BR_email.png"))
-    else
-      attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/YourPriorities_large.png"))
-    end
+    attachments.inline['logo.png'] = get_conditional_logo
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
-         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :from => "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
          :subject=>tr("Thank you for registering at {government_name}","email", :government_name => tr(Government.current.name,"Name from database")) do |format|
            format.text { render :text=>convert_to_text(render_to_string("welcome.html")) }
            format.html
          end
   end
-  
+
+  def priority_status_update(priority, status, status_date, status_subject, status_message, user, position)
+    @priority = priority
+    @government = Government.current
+    @status = status
+    @date = status_date
+    @status_subject = status_subject
+    @message = status_message
+    @support_or_endorse_text = position == 1 ? tr("which you support", "email") : tr("which you oppose", "email")
+    attachments.inline['logo.png'] = get_conditional_logo
+
+    @recipient = @user = user
+    recipient = "#{user.real_name.titleize} <#{user.email}>"
+    mail to:       recipient,
+         reply_to: Government.current.admin_email,
+         from:     "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
+         subject:  tr('The status of the priority "{priority}" has been changed', "email", :priority => priority.name) do |format|
+      format.text { render text: convert_to_text(render_to_string("priority_status_update.html")) }
+      format.html
+    end
+  end
+
+  def user_report(user, important, important_to_followers, near_top, frequency)
+    freq_to_word = {
+        2 => tr("Weekly", 'email'),
+        1 => tr("Monthly", 'email')
+    }
+    freq = freq_to_word[frequency]
+    subject = tr("{frequency} status report from {government_name}", 'email', frequency: freq, government_name: Government.current.name)
+    @government = Government.current
+    @important = important
+    @important_to_followers = important_to_followers
+    @near_top = near_top
+    @recipient = @user = user
+    recipient = "#{user.real_name.titleize} <#{user.email}>"
+    attachments.inline['logo.png'] = get_conditional_logo
+    mail to:       recipient,
+         reply_to: Government.current.admin_email,
+         from:     "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
+         subject:  subject do |format|
+      format.text { render text: convert_to_text(render_to_string("user_report.html")) }
+      format.html
+    end
+
+  end
+
   def invitation(user,sender_name,to_name,to_email)
     @sender = @recipient = @user = user
     @government = Government.current
@@ -29,10 +70,10 @@ class UserMailer < ActionMailer::Base
     @recipients = ""
     @recipients += to_name + ' ' if to_name
     @recipients += '<' + to_email + '>'
-    attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    attachments.inline['logo.png'] = get_conditional_logo
     mail :to => @recipients,
          :reply_to => Government.current.admin_email,
-         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :from => "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
          :subject => tr("Invitation from {sender_name} to join {government_name}","email", :sender_name=>sender_name, :government_name => tr(Government.current.name,"Name from database")) do |format|
            format.text { render :text=>convert_to_text(render_to_string("invitation.html")) }
            format.html
@@ -44,10 +85,10 @@ class UserMailer < ActionMailer::Base
     @new_password = new_password
     @government = Government.current
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    attachments.inline['logo.png'] = get_conditional_logo
     mail :to=>recipients,
          :reply_to => Government.current.admin_email,
-         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :from => "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
          :subject => tr("Your new temporary password","email") do |format|
            format.text { render :text=>convert_to_text(render_to_string("new_password.html")) }
            format.html
@@ -62,11 +103,11 @@ class UserMailer < ActionMailer::Base
     @notifiable = notifiable
     Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}  #{@n.inspect} notifiable: #{@notifiable}")
     recipients  = "#{user.real_name.titleize} <#{user.email}>"
-    attachments.inline['logo.png'] = File.read(Rails.root.join("public/images/logos/email.png"))
+    attachments.inline['logo.png'] = get_conditional_logo
     Rails.logger.info("Notification class: #{@n} #{@n.class.to_s}")
     mail :to => recipients,
          :reply_to => Government.current.admin_email,
-         :from => "#{Government.current.name} <#{Government.current.admin_email}>",
+         :from => "#{tr(Government.current.name,"Name from database")} <#{Government.current.admin_email}>",
          :subject => @notification.name do |format|
       format.text { render :text=>convert_to_text(render_to_string("user_mailer/notifications/#{@n.class.to_s.underscore}.html")) }      
       format.html { render "user_mailer/notifications/#{@n.class.to_s.underscore}" }
@@ -76,8 +117,8 @@ class UserMailer < ActionMailer::Base
   def report(user,priorities,questions,documents,treaty_documents)
     @government = Government.current
     @recipients  = "#{user.login} <#{user.email}>"
-    @from        = "#{Government.current.name} <#{Government.current.email}>"
-    headers        "Reply-to" => Government.last.email
+    @from        = "#{tr(Government.current.name,"Name from database")} <#{Government.current.email}>"
+    headers        "Reply-to" => Government.current.email
     @sent_on     = Time.now
     @content_type = "text/html"
     @priorities = priorities
@@ -99,13 +140,24 @@ class UserMailer < ActionMailer::Base
   protected
     def setup_notification(user)
       @recipients  = "#{user.login} <#{user.email}>"
-      @from        = "#{Government.current.name} <#{Government.current.email}>"
+      @from        = "#{tr(Government.current.name,"Name from database")} <#{Government.current.email}>"
       headers        "Reply-to" => Government.current.email
       @sent_on     = Time.now
       @content_type = "text/html"     
       @body[:root_url] = 'http://' + Government.current.base_url_w_partner + '/'
-    end    
+    end
+
   private
+
+    def get_conditional_logo
+      if @government.layout.include?("better_reykjavik")
+        File.read(Rails.root.join("public/images/logos/BR_email.png"))
+      elsif @government.layout.include?("better_iceland")
+        File.read(Rails.root.join("public/images/logos/betraIsland-merki.png"))
+      else
+        File.read(Rails.root.join("public/images/logos/YourPriorities_large.png"))
+      end
+    end
 
     # Returns the text in UTF-8 format with all HTML tags removed
     # From: https://github.com/jefflab/mail_style/tree/master/lib

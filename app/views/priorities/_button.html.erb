@@ -1,6 +1,6 @@
 <% if endorsement and endorsement.status == 'active' %>
   <% if endorsement.is_up? %>
-    <div class="green_button green_button_priority" id="priority_add_<%= priority.id.to_s %>">
+    <div class="green_button green_button_priority" id="priority_remove_endorse<%= priority.id.to_s %>">
       <span class="text"><%= tr("YOU ENDORSED", "view/priorities/_button") %></span>
       <span class="big_x">
       <%= link_to "X", endorsement_path(endorsement, :region => "priority_left"),
@@ -11,7 +11,7 @@
         :title => tr("Remove from my list of priorities", "view/priorities/_button") %></span>
     </div>
   <% else %>
-    <div class="red_button red_button_priority" id="priority_add_<%= priority.id.to_s %>">
+    <div class="red_button red_button_priority" id="priority_remove_oppose<%= priority.id.to_s %>">
       <%= tr("YOU OPPOSED", "view/priorities/_button") %>
       <span class="big_x">
       <%= link_to "X", endorsement_path(endorsement, :region => "priority_left"), 
@@ -23,7 +23,7 @@
     </div>
   <% end %>
 <% else %>
-  <div class="yellow_button endorse" id="priority_add_<%= priority.id.to_s %>">
+  <div class="yellow_button endorse" id="priority_add_endorse_<%= priority.id.to_s %>">
     <%= link_to tr("Endorse", "view/priorities/_button"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => "priority_left", :value => 1),
       :remote=>true, :method => :post,
       'data-disable-with' => escape_t(tr("Endorsing","Ajax")),
@@ -33,7 +33,7 @@
   <div class="endorse_or">
     <%= tr("OR", "view/priorities/_button") %>
   </div>
-  <div class="yellow_button oppose" id="priority_add_<%= priority.id.to_s %>">
+  <div class="yellow_button oppose" id="priority_add_oppose_<%= priority.id.to_s %>">
     <%= link_to tr("Oppose", "view/priorities/_button"), endorse_priority_path(priority, :referral_id => (@user || nil), :region => "priority_left", :value => -1),
       :remote=>true, :method => :post,
       'data-disable-with' => escape_t(tr("Opposing","Ajax")),

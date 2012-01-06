@@ -2,7 +2,7 @@
 
 	<% if current_user.endorsements_count > 25 %>
 		<div style="padding-left:30px; padding-bottom: 3px;">
-			<%= will_paginate(current_user_endorsements, :renderer => 'RemoteLinkRenderer', :params => {:controller => :users, :action => :endorsements}, :class => "ajax_pagination", :inner_window => 2) %>
+			<%= will_paginate(current_user_endorsements, :renderer => 'RemoteLinkRenderer', :previous_label=>tr("Previous","ajax pagination"), :next_label=>tr("Next","ajax pagination"), :class => "ajax_pagination", :inner_window => 2) %>
 		</div>
 	<% end %>
 
@@ -61,7 +61,7 @@
 
 	<% if current_user.endorsements_count > 25 %>
 		<div style="padding: 0px 0px 10px 20px;">
-			<%= will_paginate(current_user_endorsements, :renderer => 'RemoteLinkRenderer', :params => {:controller => :users, :action => :endorsements}, :class => "ajax_pagination", :inner_window => 2) %>
+          <%= will_paginate(current_user_endorsements, :renderer => 'RemoteLinkRenderer', :previous_label=>tr("Previous","ajax pagination"), :next_label=>tr("Next","ajax pagination"), :class => "ajax_pagination", :inner_window => 2) %>
 		</div>
 	<% end %>
 	

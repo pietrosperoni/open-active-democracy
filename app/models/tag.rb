@@ -16,6 +16,8 @@ class Tag < ActiveRecord::Base
 
   scope :item_limit, lambda{|limit| {:limit=>limit}}
 
+  scope :not_in_default_tags, lambda{|default_tags| {:conditions=>["tags.slug NOT IN (?)",default_tags]}}
+
   has_many :activities, :dependent => :destroy
   has_many :taggings
   has_many :priorities, :through => :taggings, :source => :priority, :conditions => "taggings.taggable_type = 'Priority'"
@@ -40,7 +42,6 @@ class Tag < ActiveRecord::Base
   after_create :expire_cache
   after_destroy :expire_cache
 
-  
   def show_url
     if self.partner_id and Government.current.layout != "better_reykjavik"
       Government.current.homepage_url(self.partner) + 'issues/' + self.slug
@@ -186,7 +187,7 @@ class Tag < ActiveRecord::Base
     and taggings.taggable_type = 'Priority'
     and endorsements.status = 'active'
     and endorsements.user_id = users.id
-    and users.is_newsletter_subscribed = true
+    and users.report_frequency != 0
     and users.status in ('active','pending')",id])
   end
   

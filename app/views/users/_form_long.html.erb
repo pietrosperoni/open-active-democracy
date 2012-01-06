@@ -15,6 +15,7 @@
               <td valign="top">
 		            <div class="field_label">
 		              <%= tr("First name", "view/users/_form_long")%>
+                      <span class="red">*</span>
 		            </div>
 		            <div class="field_box">
 		              <%= f.text_field :first_name, :size => 12 %>
@@ -24,6 +25,7 @@
                <td valign="top" style="padding-left: 3px;">
 				          <div class="field_label">
 				            <%= tr("and Last name", "view/users/_form_long")%>
+                            <span class="red">*</span>
 				          </div>
 				          <div class="field_box">
 				            <%= f.text_field :last_name, :size => 15 %>
@@ -39,6 +41,7 @@
         <div class="field">
           <div class="field_label">
             <%= tr("Email address", "view/users/_form_long")%>
+            <span class="red">*</span>
           </div>
           <div class="field_box">
             <%= f.text_field :email %>
@@ -53,6 +56,7 @@
 		<div class="field">
 			<div class="field_label">
 				<%= tr("Post code", "view/users/_form")%>
+                <span class="red">*</span>
 			</div>
 			<div class="field_box">
 				<%= f.text_field :post_code, :size => 5 %>
@@ -63,18 +67,20 @@
 	    <div class="field">
 	      <div class="field_label2">
 	        <%= tr("Age group", "view/users/_form_long")%>
+            <span class="red">*</span>
 	      </div>
 	      <div class="field_box">
-	        <%= f.select :age_group, options_for_select([tr("Select age group"), tr("12 years and younger"),tr("13 to 17 years"),tr("18 to 25 years"),tr("26 to 69 years"),tr("70 years and older")], @user ? @user.age_group : tr("Select age group")) %>
+	        <%= f.select :age_group, options_for_select([tr("Select age group", "model/user"), tr("12 years and younger", "model/user"),tr("13 to 17 years", "model/user"),tr("18 to 25 years", "model/user"),tr("26 to 69 years", "model/user"),tr("70 years and older", "model/user")], @user ? @user.age_group : tr("Select age group", "model/user")) %>
 	      </div>
 	    </div>
 
         <div class="field">
           <div class="field_label">
             <%= tr("Gender", "view/users/_form_long")%>
+            <span class="red">*</span>
           </div>
           <div class="field_box">
-             <%= f.select :my_gender, options_for_select([tr("Select gender"), tr("Male"),tr("Female")], @user ? @user.my_gender : tr("Select gender")) %>
+             <%= f.select :my_gender, options_for_select([tr("Select gender", "model/user"), tr("Male", "model/user"),tr("Female", "model/user")], @user ? @user.my_gender : tr("Select gender", "model/user")) %>
           </div>
         </div><% end %>
        </td>
@@ -83,6 +89,7 @@
         <div class="field">
           <div class="field_label">
             <%= tr("How should you be identified on the site?", "view/users/_form_long")%>
+            <span class="red">*</span>
           </div>
           <div class="field_box">
             <%= f.text_field :login, :maxlength => 40, :size => 30 %>
@@ -97,6 +104,7 @@
               <td valign="top">
 		            <div class="field_label">
 		              <%= tr("Password", "view/users/_form_long")%>
+                      <span class="red">*</span>
 		            </div>
 		            <div class="field_box">
 		              <%= f.password_field :password, :size => 13 %>
@@ -106,6 +114,7 @@
               <td valign="top" style="padding-left: 3px;">
 		            <div class="field_label">
 		              <%= tr("and re-type it", "view/users/_form_long")%>
+                      <span class="red">*</span>
 		            </div>
 		            <div class="field_box">
 		              <%= f.password_field :password_confirmation, :size => 13 %>

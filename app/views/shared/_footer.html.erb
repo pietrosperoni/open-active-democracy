@@ -9,7 +9,7 @@
       <tr>
         <td align="center">
           <br>
-          <%= tr("About <a href=\"/about\">{government_name}</a>, the <a href=\"/about/contributors\">contributors</a>, our <a href=\"/about/rules\">rules</a>, and <a href=\"/about/privacy\">privacy policy</a>. Contact us at <a href=\"mailto:admin@yrpri.org\">admin@yrpri.org</a>", "view/shared/_footer", :government_name => tr(current_government.name,"Name from database")) %>
+          <%= tr("About <a href=\"/about\">{government_name}</a>, the <a href=\"/about/contributors\">contributors</a>, our <a href=\"/about/rules\">rules</a>, and <a href=\"/about/privacy\">privacy policy</a>. Contact us at <a href=\"mailto:{government_email}\">{government_email}</a>", "view/shared/_footer", :government_name => tr(current_government.name,"Name from database"), :government_email => tr(current_government.email,"Name from database")) %>
         </td>
       </tr>
     </table>

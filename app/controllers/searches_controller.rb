@@ -1,16 +1,10 @@
-require 'iconv'
-
-class SearchesController < ApplicationController  
+class SearchesController < ApplicationController
   
   def index
     Rails.logger.info("Category Name #{params[:category_name]} CRC #{params[:category_name].to_crc32}") if params[:cached_issue_list]
     @page_title = tr("Search {government_name} priorities", "controller/searches", :government_name => tr(current_government.name,"Name from database"))
     if params[:q]
-      if Government.current.layout == "better_reykjavik"
-        @query = params[:q].parameterize_full
-      else
-        @query = params[:q]
-      end
+      @query = params[:q]
       @page_title = tr("Search for '{query}'", "controller/searches", :government_name => tr(current_government.name,"Name from database"), :query => @query)
       @facets = ThinkingSphinx.facets @query, :all_facets => true, :with => {:partner_id => Partner.current ? Partner.current.id : 0}, :star => true, :page => params[:page]
       if params[:category_name]

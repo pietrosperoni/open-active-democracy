@@ -13,8 +13,11 @@ class Activity < ActiveRecord::Base
   scope :capital, :conditions => "type like '%Capital%'"
   scope :interesting, :conditions => "type in ('ActivityPriorityMergeProposal','ActivityPriorityAcquisitionProposal') or comments_count > 0"
 
-  scope :top, :conditions => "type in ('ActivityPointNew','ActivityDocumentNew','ActivityPriorityNew','ActivityBulletinNew')"
-  
+  scope :top, :order=>"changed_at DESC", :conditions => "type in ('ActivityPointNew','ActivityDocumentNew','ActivityPriorityNew','ActivityBulletinNew')"
+  scope :top_discussions, :order=>"changed_at DESC", :conditions => "type in ('ActivityBulletinNew')", :limit=>5
+  scope :with_20, :limit=> 20
+
+  scope :feed, lambda{|last| {:conditions=>["changed_at < ? ", last], :order=>"changed_at DESC", :limit=>5}}
   scope :last_three_days, :conditions => "activities.changed_at > '#{Time.now-3.days}'"
   scope :last_seven_days, :conditions => "activities.changed_at > '#{Time.now-7.days}'"
   scope :last_thirty_days, :conditions => "activities.changed_at > '#{Time.now-30.days}'"    
@@ -43,7 +46,8 @@ class Activity < ActiveRecord::Base
   belongs_to :document_revision
   belongs_to :capital
   belongs_to :ad
-  
+
+  belongs_to :priority_status_change_log
   has_many :comments, :order => "comments.created_at asc", :dependent => :destroy
   has_many :published_comments, :class_name => "Comment", :foreign_key => "activity_id", :conditions => "comments.status = 'published'", :order => "comments.created_at asc"
   has_many :commenters, :through => :published_comments, :source => :user, :select => "DISTINCT users.*"
@@ -493,25 +497,25 @@ end
 
 class ActivityIssuePriority1 < Activity
   def name
-    tr("{priority_name} is the new #1 priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the new #1 priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityControversial1 < Activity
   def name
-    tr("{priority_name} is the most controversial priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the most controversial priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityRising1 < Activity
   def name
-    tr("{priority_name} is the fastest rising priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tag.title)
+    tr("{priority_name} is the fastest rising priority in {tag_name}", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"))
   end
 end
 
 class ActivityIssuePriorityOfficial1 < Activity
   def name
-    tr("{priority_name} is the new #1 priority on {official_user_name} {tag_name} agenda", "model/activity", :priority_name => priority.name, :tag_name => tag.title, :official_user_name => Government.current.official_user.name.possessive)    
+    tr("{priority_name} is the new #1 priority on {official_user_name} {tag_name} agenda", "model/activity", :priority_name => priority.name, :tag_name => tr(tag.title,"model/category"), :official_user_name => Government.current.official_user.name.possessive)
   end
 end
 
@@ -640,9 +644,17 @@ end
 class ActivityCapitalPointHelpfulEndorsers < Activity
   def name
     if capital.amount > 0
-      tr("{user_name} earned {capital}{currency_short_name} because endorsers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      if capital.is_undo?
+        tr("{user_name} earned {capital}{currency_short_name} because endorsers didn't find {point_name} unhelpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} earned {capital}{currency_short_name} because endorsers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     elsif capital.amount < 0
-      tr("{user_name} lost {capital}{currency_short_name} because endorsers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      if capital.is_undo?
+        tr("{user_name} lost {capital}{currency_short_name} because endorsers didn't found {point_name} helpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} lost {capital}{currency_short_name} because endorsers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     end
   end
 end
@@ -650,9 +662,17 @@ end
 class ActivityCapitalPointHelpfulOpposers < Activity
   def name
     if capital.amount > 0
-      tr("{user_name} earned {capital}{currency_short_name} because opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      if capital.is_undo?
+        tr("{user_name} earned {capital}{currency_short_name} because opposers didn't find {point_name} unhelpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} earned {capital}{currency_short_name} because opposers found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     elsif capital.amount < 0
-      tr("{user_name} lost {capital}{currency_short_name} because opposers found {point_name} unelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      if capital.is_undo?
+        tr("{user_name} lost {capital}{currency_short_name} because opposers didn't find {point_name} helpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} lost {capital}{currency_short_name} because opposers found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     end
   end
 end
@@ -660,9 +680,18 @@ end
 class ActivityCapitalPointHelpfulUndeclareds < Activity
   def name
     if capital.amount > 0
-      tr("{user_name} earned {capital}{currency_short_name} because undeclareds found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)  
+      if capital.is_undo?
+        tr("{user_name} earned {capital}{currency_short_name} because undeclareds didn't find {point_name} unhelpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      else
+        tr("{user_name} earned {capital}{currency_short_name} because undeclareds found {point_name} helpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     elsif capital.amount < 0
-      tr("{user_name} lost {capital}{currency_short_name} because undeclares found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)    
+      if capital.is_undo?
+        tr("{user_name} lost {capital}{currency_short_name} because undeclareds didn't find {point_name} helpful anymore", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+
+      else
+        tr("{user_name} lost {capital}{currency_short_name} because undeclareds found {point_name} unhelpful", "model/activity", :user_name => user.name, :point_name => point.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+      end
     end
   end
 end
@@ -697,6 +726,12 @@ end
 class ActivityCapitalGovernmentNew < Activity
   def name
     tr("{user_name} earned {capital}{currency_short_name} for founding this nation", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name)
+  end
+end
+
+class ActivityCapitalAdRefunded < Activity
+  def name
+    tr("{user_name} was refunded {capital}{currency_short_name} for an ad for priority {priority_name} because the priority is now in progress", "model/activity", :user_name => user.name, :capital => capital.amount.abs, :currency_short_name => Government.current.currency_short_name, :priority_name => priority.name)
   end
 end
 
@@ -814,13 +849,19 @@ end
 
 class ActivityPriorityOfficialStatusInTheWorks < Activity
   def name
-    tr("{priority_name} is in the works", "model/activity", :priority_name => priority.name)
+    tr("{priority_name} is in progress", "model/activity", :priority_name => priority.name)
   end
 end
 
 class ActivityPriorityOfficialStatusSuccessful < Activity
   def name
     tr("{priority_name} was completed successfully", "model/activity", :priority_name => priority.name)
+  end
+end
+
+class ActivityPriorityStatusUpdate < Activity
+  def name
+    tr("{priority_name}'s status was updated", "model/activity", priority_name: priority.name)
   end
 end
 

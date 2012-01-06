@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
         "\r"    => '\n',
         '"'     => '\\"',
         "'"     => "\\'" }
-  
+ 
   def action_cache_path
     params.merge({:geoblocked=>@geoblocked, :host=>request.host, :country_code=>@country_code,
                   :locale=>session[:locale], :google_translate=>session[:enable_google_translate],
@@ -81,7 +81,14 @@ class ApplicationController < ActionController::Base
     if logged_in? and Government.current.layout == "better_reykjavik" and controller_name!="settings"
       unless current_user.email and current_user.my_gender and current_user.post_code and current_user.age_group
         flash[:notice] = "Please make sure you have registered all relevant information about you for this website."
-        redirect_to :controller=>"settings"
+        if request.format.js?
+          render :update do |page|
+            page.redirect_to :controller => "settings"
+          end
+          return false
+        else
+          redirect_to :controller=>"settings"
+        end
       end
     end
   end
@@ -97,7 +104,7 @@ class ApplicationController < ActionController::Base
     Rails.logger.info("Session expires at #{session[:expires_at]}")
     if session[:expires_at]
       @time_left = (session[:expires_at] - Time.now).to_i
-      if current_user and not current_facebook_user
+      if current_user and not current_facebook_user_if_on_facebook
         unless @time_left > 0
           Rails.logger.info("Resetting session")
           reset_session
@@ -146,8 +153,40 @@ class ApplicationController < ActionController::Base
 
   # Will either fetch the current partner or return nil if there's no subdomain
   def current_partner
-    if request.host.include?("betrireykjavik")
+    if Rails.env.development?
+      if params[:partner_short_name]
+        @current_partner = Partner.find_by_short_name(params[:partner_short_name])
+        Partner.current = @current_partner
+        session[:set_partner_id] = @current_partner.id if @current_partner
+        return @current_partner
+      elsif session[:set_partner_id]
+        return @current_partner = Partner.current = Partner.find(session[:set_partner_id])
+      else
+        return nil
+      end
+    end
+    if request.host.include?("betraisland")
       if request.subdomains.size == 0 or request.host.include?(current_government.domain_name) or request.subdomains.first == 'www'
+        if (controller_name=="home" and action_name=="index") or
+           Rails.env.development? or
+           request.host.include?("betraisland") or
+           self.class.name.downcase.include?("tr8n") or
+           ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name)
+          @current_partner = nil
+          Partner.current = @current_partner
+          Rails.logger.info("No partner")
+          return nil
+        else
+          redirect_to "/welcome"
+        end
+      else
+        @current_partner ||= Partner.find_by_short_name(request.subdomains.first)
+        Partner.current = @current_partner
+        Rails.logger.info("Partner: #{@current_partner.short_name}")
+        return @current_partner
+      end
+    elsif request.host.include?("betrireykjavik")
+      if request.subdomains.size == 0 or request.subdomains.first == 'www'
         if (controller_name=="home" and action_name=="index") or
            Rails.env.development? or
            request.host.include?("betrireykjavik") or
@@ -223,6 +262,12 @@ class ApplicationController < ActionController::Base
       if cookies[:last_selected_language]
         session[:locale] = cookies[:last_selected_language]
         Rails.logger.debug("Set language from cookie")
+      elsif Government.current.layout == "better_reykjavik"
+        session[:locale] = "is"
+        Rails.logger.info("Set language from better reykjavik")
+      elsif Government.current.layout == "better_iceland"
+        session[:locale] = "is"
+        Rails.logger.info("Set language from better iceland")
       elsif @iso_country and not @iso_country.languages.empty?
         session[:locale] =  @iso_country.languages.first.locale
         Rails.logger.debug("Set language from geoip")
@@ -261,6 +306,7 @@ class ApplicationController < ActionController::Base
   def get_layout
     return false if not is_robot? and not current_government
     return "basic" if not Government.current
+    return "hverfapottar_main" if controller_name == "about" and action_name=="show" and params[:id] == 'choose_partner'
     return Government.current.layout
   end
 
@@ -383,10 +429,20 @@ class ApplicationController < ActionController::Base
       @referral = nil
     end    
   end  
-  
+
+  def current_facebook_user_if_on_facebook
+    ret_user = nil
+    begin
+      ret_user = current_facebook_user
+    rescue Mogli::Client::OAuthException
+      return nil
+    end
+    ret_user
+  end
+
   # if they're logged in with our account, AND connected with facebook, but don't have their facebook uid added to their account yet
   def check_facebook 
-    if logged_in? and current_facebook_user
+    if logged_in? and current_facebook_user_if_on_facebook
       unless current_user.facebook_uid
         @user = User.find(current_user.id)
         if not @user.update_with_facebook(current_facebook_user)
@@ -407,7 +463,7 @@ class ApplicationController < ActionController::Base
   end
   
   def no_facebook?
-    return false if logged_in? and current_facebook_user
+    return false if logged_in? and current_facebook_user_if_on_facebook
     return true
   end
   

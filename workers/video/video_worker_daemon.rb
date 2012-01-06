@@ -26,12 +26,12 @@ require 'utils/logger.rb'
 require 'utils/shell.rb'
 
 require File.dirname(__FILE__) + '/../../config/boot'
-require "#{Rails.root.to_s}/config/environment" 
+require File.dirname(__FILE__) + "/../../config/environment"
 
 include Sys
 
 MASTER_TEST_MAX_COUNTER = 500000
-MIN_FREE_SPACE_GB = 10
+MIN_FREE_SPACE_GB = 30
 SLEEP_WAITING_FOR_FREE_SPACE_TIME = 120
 SLEEP_WAITING_FOR_LOAD_TO_GO_DOWN = 120
 SLEEP_WAITING_BETWEEN_RUNS = 5
@@ -44,12 +44,12 @@ require 'speech_video_processing'
 
 f = File.open( File.dirname(__FILE__) + '/config/worker.yml')
 worker_config = YAML.load(f)
-ENV['Rails.env'] = worker_config['rails_env']
+Rails.env = worker_config['rails_env']
 config = YAML::load(File.open(File.dirname(__FILE__) + "/../../config/database.yml"))
 
 class VideoWorker
   def initialize(config)
-    @logger = Logger.new(File.dirname(__FILE__) + "/video_"+ENV['Rails.env']+".log")
+    @logger = Logger.new(File.dirname(__FILE__) + "/../../log/video_"+Rails.env+".log")
     @shell = Shell.new(self)
     @worker_config = config
     @counter = 0
@@ -90,7 +90,7 @@ class VideoWorker
     IO.popen("cat /proc/loadavg") do |pipe|
       pipe.each("\r") do |line|
         results = line
-        $defout.flush
+        pipe.flush
       end
     end
     results.split[0..2].map{|e| e.to_f}
@@ -99,17 +99,17 @@ class VideoWorker
   def run
     info("Starting loop")
     loop do
-      stat = Filesystem.stat(@worker_config["master_path"]+"/")
+      stat = Filesystem.stat(@worker_config["master_path_for_filesystem_stats"]+"/")
       freeGB = (stat.block_size * stat.blocks_available) /1024 / 1024 / 1024
       if @last_report_time+EMAIL_REPORTING_INTERVALS<Time.now.to_i
-        #email_progress_report(freeGB) unless ENV['Rails.env']=="development"
+        #email_progress_report(freeGB) unless Rails.env=="development"
         @last_report_time = Time.now.to_i
       end
       info("Free video space in GB #{freeGB} - Run count: #{@counter}")
       info("Load Average #{load_avg[0]}, #{load_avg[1]}, #{load_avg[2]}")      
       if load_avg[0] < @worker_config["max_load_average"]
         if freeGB > MIN_FREE_SPACE_GB
-          if ENV['Rails.env'] == 'development' && @counter > MASTER_TEST_MAX_COUNTER
+          if Rails.env == 'development' && @counter > MASTER_TEST_MAX_COUNTER
             warn("Reached maximum number of tests - sleeping for an hour")
             sleep(3600)
           else
@@ -138,6 +138,13 @@ class VideoWorker
   end
 
   def poll_for_work
+    ProcessSpeechMasterVideo.find(:all, conditions: "published = 1 AND in_processing = 0 AND url != '' AND renew_screenshots = 1").each do |master_video|
+      master_video.process_speech_videos.each do |speech_video|
+        SpeechVideoProcessing.create_thumbnails(@shell,@logger,speech_video)
+      end
+      master_video.renew_screenshots = false
+      master_video.save
+    end
     unless @worker_config["only_get_masters"] and @worker_config["only_get_masters"]==true
       info "process_discussion"
       run_counter = 0

@@ -45,4 +45,14 @@
   <label for="custom_tag_dropdown_2"><%= tr("Custom tags 2", "view/partners/_form")%></label><br />
   <%= f.text_field :custom_tag_dropdown_2 %><br/>
 </p>
+
+<div class="field">
+    <div class="field_label">
+      <%= tr("Message for new priority", "view/governments/edit") %>
+    </div>
+    <div class="field_box">
+      <%= f.text_area :message_for_new_priority, :rows => 7, :cols=>20 %>
+    </div>
+  </div>
+
 <%= f.check_box :is_daily_summary %> <%= tr("Email me a weekly summary of activity", "view/partners/_form") %><br/>

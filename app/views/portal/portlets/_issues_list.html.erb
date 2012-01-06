@@ -1,22 +1,57 @@
-<% cache(["portlets_issues_list",locale,Partner.current_id,@inline_translations_enabled], :expires_in => 5.minutes) do %>
-<% for issue in Tag.most_priorities.item_limit(portlet.portlet_template.item_limit) %>
-	<div class="priority_listing">
+<% if Government.last.layout=="better_iceland" %>
+    <% cache(["portlets_issues_list", locale, Partner.current_id, @inline_translations_enabled], :expires_in => 5.minutes) do %>
+        <% for issue in Tag.most_priorities.item_limit(portlet.portlet_template.item_limit) %>
+            <div class="priority_listing">
 		<span class="priority_name">
-		<a href="/issues/<%= issue.slug %>"><%= issue.title %></a>
-		</span> <% if issue.attribute_present?("description") %><%= h(issue.description) %><% end %>
-		<div class="priority_action">
-			<a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/portal/portlets", :count => issue.priorities_count) %></a>
-			<% if issue.points_count > 0 %>	
-			&middot; <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/portal/portlets", :count => issue.points_count) %></a>
-			<% end %>
-			<% if issue.documents_count > 0 %>
-			&middot; <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/portal/portlets", :count => issue.documents_count) %></a>
-			<% end %>
-			<% if issue.discussions_count > 0 %>
-			&middot; <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/portal/portlets", :count => issue.discussions_count) %></a>
-			<% end %>
-		</div>
-	</div>
-<% end %>
-<%= link_to "#{tr("More", "view/portal/portlets")}...", "/issues/" %>
+		<a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
+		</span>
+              <% if issue.attribute_present?("description") %><%= h(issue.description) %>
+              <% end %>
+              <div class="priority_action">
+                <a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/portal/portlets", :count => issue.priorities_count) %></a>
+                <% if issue.points_count > 0 %>
+                    &middot;
+                    <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/portal/portlets", :count => issue.points_count) %></a>
+                <% end %>
+                <% if issue.documents_count > 0 %>
+                    &middot;
+                    <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/portal/portlets", :count => issue.documents_count) %></a>
+                <% end %>
+                <% if issue.discussions_count > 0 %>
+                    &middot;
+                    <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/portal/portlets", :count => issue.discussions_count) %></a>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
+        <%= link_to "#{tr("More", "view/portal/portlets")}...", "/issues/" %>
+    <% end %>
+<% else %>
+    <% cache(["portlets_issues_list", locale, Partner.current_id, @inline_translations_enabled], :expires_in => 5.minutes) do %>
+        <% for issue in Tag.most_priorities.item_limit(portlet.portlet_template.item_limit) %>
+            <div class="priority_listing">
+		<span class="priority_name">
+		<a href="/issues/<%= issue.slug %>"><%= tr(issue.title, "model/category") %></a>
+		</span>
+              <% if issue.attribute_present?("description") %><%= h(issue.description) %>
+              <% end %>
+              <div class="priority_action">
+                <a href="/issues/<%= issue.slug %>"><%= tr("{count} priorities", "view/portal/portlets", :count => issue.priorities_count) %></a>
+                <% if issue.points_count > 0 %>
+                    &middot;
+                    <a href="/issues/<%= issue.slug %>/points"><%= tr("{count} points", "view/portal/portlets", :count => issue.points_count) %></a>
+                <% end %>
+                <% if issue.documents_count > 0 %>
+                    &middot;
+                    <a href="/issues/<%= issue.slug %>/documents"><%= tr("{count} documents", "view/portal/portlets", :count => issue.documents_count) %></a>
+                <% end %>
+                <% if issue.discussions_count > 0 %>
+                    &middot;
+                    <a href="/issues/<%= issue.slug %>/discussions"><%= tr("{count} discussions", "view/portal/portlets", :count => issue.discussions_count) %></a>
+                <% end %>
+              </div>
+            </div>
+        <% end %>
+        <%= link_to "#{tr("More", "view/portal/portlets")}...", "/issues/" %>
+    <% end %>
 <% end %>

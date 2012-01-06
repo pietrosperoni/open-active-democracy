@@ -493,11 +493,6 @@ right:0px !Important;
 }
 
 
-.althingi_process_container
-{
-border:1px solid #ddd !Important;
-}
-
 a.next, a.nextPage {
 left:0px !Important;
 top:0px !Important;
@@ -516,8 +511,25 @@ margin-top: 10px;
 #althingi_video_discussions
 {
 margin-top: 10px;
-border:1px solid #ddd !Important;
 padding-left: 5px;
+padding-bottom: 10px;
+	border: 1px solid #DDDDDD;
+    -webkit-border-radius: 1em;
+		-moz-border-radius: 1em;
+		border-radius: 1em;
+		behavior:url(../javascripts/PIE.htc);
+}
+
+#althingi_video_discussions h1
+{
+padding-left: 11px;
+padding-bottom: 8px;
+padding-top: 5px;
+}
+
+.video_search form
+{
+padding-left: 11px;		
 }
 
 h5
@@ -538,6 +550,8 @@ text-transform: capitalize;
 .priority_tags
 {
 padding-bottom: 4px; 	
+margin-left: 2px;
+width: 500px;
 }
 
 h2 {
@@ -547,7 +561,7 @@ width:100% !important;
 }
 
 h3 {
-padding-bottom: 0 !Important;
+padding-bottom: 5px !Important;
 padding-top: 5px !Important;
 }
 
@@ -835,3 +849,8 @@ padding-top:3px;
 .gt_text {margin: 2px 0 0 3px;}
 
 .cb {margin-top: 5px; margin-left: -2px;}
+
+.betrihverfi #content_text 
+{
+background-image: none !important;
+}

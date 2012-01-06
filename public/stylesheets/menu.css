@@ -13,7 +13,8 @@
 #nav {
 	background-color: #fff;
 	margin-top: -10px !important;
-	font-size: 13px;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif !important;
 	z-index: -1;
 }
 
@@ -185,7 +186,7 @@ float:left;display:inline-block;
 }
 ul#menu .tab_body {
 	position: absolute;
-	top: 30px;
+	top: 27px;
 	left: 0px;
 }
 ul#menu1 .tab_body {
@@ -206,7 +207,7 @@ ul#menu1 .tab_body {
 	padding: 14px 14px 5px; !important;
 	width: 190px;
 	right: 20px;
-  top: 3px;
+/*  top: 3px;*/
 	background-color: #FFF;
 	z-index: 500;
 }
@@ -287,7 +288,8 @@ padding: 3px 8px 0 8px;
 }
 
 .tweet {
-	margin: -1px 0 0 10px;
+/*	margin: -1px 0 0 10px;*/
+padding-bottom: 2px;
 }
 
 .priorityin_profile {margin-left: -20px;}

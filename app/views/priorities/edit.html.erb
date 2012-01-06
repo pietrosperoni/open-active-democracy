@@ -14,52 +14,28 @@
 		</div>
 	</div>
 
-	<% if current_government.is_tags? and (current_user.is_tagger? or current_user.is_admin?) %>
-		<div class="field">
-			<div class="field_label">
-				<%= tr("{tags_name} (separated multiple with commas)", "view/priorities/edit", :tags_name => current_government.tags_name)%>
-			</div>
-			<div class="field_box">
-				<%= f.text_field :issue_list, :size => 40, :maxlength => 60 %>
-			</div>
-		</div>
-	<% end %>
+    <% if current_partner and current_partner.required_tags %>
+        <div class="field">
+          <div class="field_label">
+            <%= tr("Priority type", "views/priorities/form") %>
+          </div>
+          <% current_partner.required_tags.split(',').each do |partner_tag| %>
+              <%= f.radio_button :priority_type, partner_tag, checked: @priority.issue_list.include?(partner_tag) %>
+              <span class="Chapter_name"><%= tr(partner_tag, "views/priorities/form") %></span>
+          <% end %>
+        </div>
+    <% end %>
 
   <div class="field">
     <div class="field_label">
       <%= tr("Category", "view/users/_form_long")%>
     </div>
     <div class="field_box">
-       <%= f.select :category, options_for_select_simple(Category.all.collect{|s|[s.name,s.id]}, @priority.category.id) %>
+       <%= f.select :category, options_for_select_simple(Category.all.collect{|s|[s.i18n_name,s.id]}, @priority.category.id) %>
     </div>
   </div>
 
-  <div class="field">
-    <div class="field_label">
-      <%= tr("Finished Status", "view/users/_form_long")%>
-    </div>
-    <div class="field_box">
-       <%= f.select :official_status, options_for_select_simple([[tr("Published","status_messages"),"0"],[tr("In Progress","status_messages"),"-1"],[tr("Successful","status_messages"),"2"],[tr("Failed","status_messages"),"-2"]], @priority.official_status.to_s) %>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="field_box">
-      <%= check_box_tag :send_status_email_to_everybody %> <%= tr("Send status message to all users that support and oppose.", "view/settings/index")%>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="field_label">
-      <%= tr("Status message", "view/governments/edit")%>
-    </div>
-    <div class="field_box">
-        <%= f.text_area :finished_status_message, :rows => 12, :cols=>70 %>
-    </div>
-  </div>    
-
-
-	<p>
+	<br />
 	<%= f.submit tr("Save priority", "view/priorities/edit"), :class => "yellow_button" %>
 	
 <% end %>

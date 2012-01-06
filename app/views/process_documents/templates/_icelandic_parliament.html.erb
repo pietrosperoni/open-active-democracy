@@ -4,8 +4,10 @@
    <%=@document.priority_process.stage_sequence_number%> <%=tr("Discussion Stage", "view/process_documents/templates")%> | 
    <%=@document.external_type %>
 <% end %>
-
 </p>
+<% unless @document.priority_process.process_documents.select { |d| d.external_type == "lög" }.empty? %>
+    <%= link_to "Tilraunavirkni: Samanburður við núverandi lög", { controller: 'uidiff', action: 'new', id: @document.id }, class: 'uidiff_link' %>
+<% end %>
 <br>
 <a href="http://www.facebook.com/share.php?u=http://<%=request.host.downcase != 'localhost' ? request.host.downcase : 'beint.lydraedi.is'%>/process_documents/<%=@document.id%>" onclick="return fbs_click('http://<%=request.host.downcase != 'localhost' ? request.host.downcase : 'beint.lydraedi.is'%>/process_documents/<%=@document.id%>')" target="_blank" class="fb_share_link"><%=tr("Share on Facebook", "view/process_documents/templates")%></a>
 <br><br>
@@ -38,6 +40,7 @@
 	  <% end %>
 
 	  <% if render_it %>
+        <a name="gr_<%=element.id%>"></a>
 	      <div id="process_document_element_number_<%=element.sequence_number%>">
 	         <%= render :partial => "process_document_elements/templates/#{@document.process_document_type.template_name}_element", :locals => {:document=> @document, :element => element} %>
 	      </div>

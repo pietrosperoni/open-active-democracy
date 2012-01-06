@@ -8,7 +8,7 @@ class Partner < ActiveRecord::Base
   
   belongs_to :picture
   
-  has_attached_file :logo, :styles => { :icon_96 => "96x96#", :icon_140 => "140x140#", :icon_214_32 => "214x32#", :icon_107_16 => "107x16#", :icon_53_8 => "53x8#", :icon_180 => "180x180#", :medium  => "450x" }
+  has_attached_file :logo, :styles => { :icon_96 => "96x96#", :icon_140 => "140x140#", :icon_340_74 => "340x74#", :icon_214_32 => "214x32#", :icon_107_16 => "107x16#", :icon_53_8 => "53x8#", :icon_180 => "180x180#", :medium  => "450x" }
     
   validates_attachment_size :logo, :less_than => 5.megabytes
   validates_attachment_content_type :logo, :content_type => ['image/jpeg', 'image/png', 'image/gif']
@@ -84,7 +84,7 @@ class Partner < ActiveRecord::Base
     errors.on("unsubscribe_url")       
   end
 
-  validates_length_of       :short_name,    :within => 2..20, :message => tr("should be between 2 and 20 characters.","")
+  validates_length_of       :short_name,    :within => 2..50, :message => tr("should be between 2 and 50 characters.","")
   validates_uniqueness_of   :short_name, :case_sensitive => false, :message => tr("is already taken.","")
   validates_length_of       :name, :within => 2..30, :message => tr("should be within 3 and 30 characters.","")
 

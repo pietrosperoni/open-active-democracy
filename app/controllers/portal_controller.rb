@@ -95,11 +95,12 @@ class PortalController < ApplicationController
         params.each do |key,value|
           next unless key.index("portlet_id")
           portlet_id = key.split("-")[1].to_i
+          next unless Portlet.exists?(portlet_id)
           portlet = Portlet.find(portlet_id, :include=>:portlet_container)
           dp = PortletPosition.find_by_portlet_id(portlet_id)
           dp.css_column = value.split("|")[0].to_i
           dp.css_position = value.split("|")[1].to_i
-          if portlet.portlet_container.user_id == current_user.id 
+          if portlet.portlet_container.user_id == current_user.id or (current_user and current_user.is_admin?)
             dp.save
           else
             Rails.logger.error("Wrong user trying to save the wrong thing")
@@ -114,8 +115,12 @@ class PortalController < ApplicationController
 
   def default_container
     portlet_container = PortletContainer.filtered.find_by_default_admin(true)
-    portlet_container = PortletContainer.first unless portlet_container
-    unless  portlet_container
+    if portlet_container==nil and current_partner and Government.current.layout == "better_reykjavik"
+      portlet_container = PortletContainer.find(:first, :conditions=>"partner_id IS NOT NULL")
+    else
+      portlet_container = PortletContainer.filtered.first unless portlet_container
+    end
+    unless portlet_container
       if current_user
         portlet_container = PortletContainer.new
         portlet_container.default_admin = true
@@ -141,6 +146,8 @@ class PortalController < ApplicationController
 
   def setup_portal
     @portlet_container = default_container
+    last = params[:last].blank? ? Time.now + 1.second : Time.parse(params[:last])
+    @activities = Activity.active.top.feed(last).filtered.for_all_users.with_20
 #    if not current_user or current_user.is_admin? or not logged_in?
 #      @portlet_container = default_container
 #   else

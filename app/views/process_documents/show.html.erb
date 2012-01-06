@@ -1,6 +1,6 @@
 <%= render :partial => "priorities/header" %>
 <%= render :partial => "priorities/nav" %>
 
-<% cache(@document) do -%>
+ <% cache("documents_show_#{@document.id}-#{session[:locale]}-#{@inline_translations_enabled}-#{current_user and current_user.is_admin?}", :expires_in => 1.hour) do %>
   <%= render :partial => "process_documents/templates/#{@document.process_document_type.template_name}" %>
 <% end %>

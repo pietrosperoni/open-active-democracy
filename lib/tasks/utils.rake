@@ -61,6 +61,12 @@ CODE_TO_SHORTNAME = {"AE"=>"uae", "LY"=>"lybia", "VA"=>"vatican",
                      "MD"=>"moldova", "LA"=>"lao" }
 namespace :utils do
   desc "Create BR categories"
+  task :delete_all_from_process_documents => :environment do
+    ProcessDocumentElement.delete_all
+    ProcessDocument.delete_all
+  end
+
+  desc "Create BR categories"
   task :create_br_categories => :environment do
   end
 
@@ -91,14 +97,21 @@ namespace :utils do
     database = current_config['database']
     user = current_config['username']
     password = current_config['password']
+    host = current_config['host']
     
     path = Rails.root.join("tmp","sqldump")
-    filename = path.join("#{database}_#{Time.new.strftime("%d%m%y_%H%M%S")}.sql.gz")
+    base_filename = "#{database}_#{Time.new.strftime("%d%m%y_%H%M%S")}.sql.gz"
+    filename = path.join(base_filename)
 
     FileUtils.mkdir_p(path)
-    command = "mysqldump --add-drop-table -u #{user} --password=#{password} #{database} | gzip > #{filename}"
+    command = "mysqldump --add-drop-table -u #{user} -h #{host} --password=#{password} #{database} | gzip > #{filename}"
     puts "Excuting #{command}"
     system command
+    if ENV['scpit']
+      command = "scp #{filename} yrpri@88.208.206.52:/home/yrpri/backups/#{base_filename}"
+      puts "Excuting #{command}"
+      system command
+    end
   end
 
   desc "Archive processes"
@@ -106,7 +119,7 @@ namespace :utils do
       if ENV['current_thing_id']
         logg = "#{ENV['current_thing_id']}. log"
         puts "Archiving all processes except for thing: #{logg}"
-        Process.find(:all).each do |c|
+        PriorityProcess.find(:all).each do |c|
           puts c.external_info_3
           unless c.external_info_3.index(logg)
             puts "ARCHIVING"

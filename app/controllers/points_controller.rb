@@ -171,11 +171,8 @@ class PointsController < ApplicationController
         Revision.create_from_point(@point,request.remote_ip,request.env['HTTP_USER_AGENT'])
         session[:goal] = 'point'
         flash[:notice] = tr("Thanks for contributing your point", "controller/points")
-        if current_facebook_user
-          #flash[:user_action_to_publish] = UserPublisher.create_point(current_facebook_user, @point, @priority)
-        end          
         @quality = @point.point_qualities.find_or_create_by_user_id_and_value(current_user.id,true)
-        format.html { redirect_to(top_points_priority_url(@priority)) }
+        format.html { redirect_to(priority_url(@priority)) }
       else
         format.html { render :action => "new" }
       end
@@ -364,7 +361,7 @@ class PointsController < ApplicationController
     def get_qualities
       @qualities = nil
       if logged_in? and @points.any? # pull all their qualities on the points shown
-        @qualities = PointQuality.find(:all, :conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
+        @qualities = PointQuality.all(:conditions => ["point_id in (?) and user_id = ? ", @points.collect {|c| c.id},current_user.id])
       end    
     end    
     

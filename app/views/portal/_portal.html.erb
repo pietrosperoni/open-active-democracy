@@ -1,12 +1,11 @@
-<% if Government.current.message_to_users and Government.current.message_to_users!="" %>
+<% if Government.current.message_to_users and Government.current.message_to_users!="" and not current_partner %>
   <%= render :partial=>"/shared/top_message_box", :locals=> {:message_text => Government.current.message_to_users.html_safe } %>
 <% end %>
 
 <% if Priority.filtered.count == 0 %>
 <br>
 <h2><%=tr("No priorities have been created. Be the first to create a priority for your country!","portal")%></h2>
-<br>
-<%= render :partial => "priorities/new_button" %>
+<%= render :partial => "priorities/new_button_hack" %>
 <br>
 <% else %>
   <% ["1","2"].each do |id_name|%>
@@ -14,4 +13,12 @@
       <%= render(:partial => "column", :locals=>{:column_number=>id_name.to_i}) %>
     </div>
   <% end %>
+<% end %>
+<% unless @activities.blank?%>
+<ul id="endless_scroll_ul" class='list' last="<%=@activities.to_a.last.changed_at%>">
+<%= render :template => 'news/activity_list_simple' %>
+<div id="infinite-scroll">
+</div>
+  <div class="endless_scroll_inner_wrap"></div>
+</ul>
 <% end %>

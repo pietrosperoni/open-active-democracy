@@ -1,21 +1,45 @@
 # Methods added to this helper will be available to all templates in the application.
 
-module ActionView
-  module Helpers
-    module TextHelper
-      def simple_format_with_strip(text)
-        simple_format_without_strip(sanitize(text))
-      end
-      alias_method_chain :simple_format, :strip
-    end
-  end
-end
-
 module ApplicationHelper
 #  include WillPaginate::ViewHelpers 
   include Tr8n::HelperMethods
   include Tr8n::BaseHelper
   include Wf::HelperMethods
+
+  def current_facebook_user_if_on_facebook
+    ret_user = nil
+    begin
+      ret_user = current_facebook_user
+    rescue Mogli::Client::OAuthException
+      return nil
+    end
+    ret_user
+  end
+
+  def my_simple_format(text, html_options={}, options={})
+    text = ''.html_safe if text.nil?
+    start_tag = tag('p', html_options, true)
+    text = sanitize(text) unless options[:sanitize] == false
+    text.gsub!(/\r\n?/, "\n")                    # \r\n and \r -> \n
+    text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")  # 2+ newline  -> paragraph
+    text.gsub!(/([^\n]\n)(?=[^\n])/, '\1<br />') # 1 newline   -> br
+    text.insert 0, start_tag
+    text.html_safe.safe_concat("</p>")
+  end
+
+ def last_weekday_of_the_month_at_noon(now_date,original_now_date=nil)
+   original_now_date = now_date unless original_now_date
+   current_date = now_date.end_of_month
+   while [0,6].include?(current_date.wday)
+     current_date = current_date-1
+   end
+   current_date = current_date.midnight+12.hours
+   if current_date<=original_now_date
+     last_weekday_of_the_month_at_noon(now_date.next_month,original_now_date)
+   else
+     current_date
+   end
+ end
 
  def options_for_select_simple(options,selected=nil)
     out = ""
@@ -158,7 +182,7 @@ module ApplicationHelper
     r = []
     for tag_name in list.split(', ')
       tag = current_tags.detect{|t| t.name.downcase == tag_name.downcase}
-			r << link_to(tr(tag.title,"tags"), tag.show_url) if tag
+			r << link_to(tr(tag.title,"model/category"), tag.show_url) if tag
 		end
 		r.to_sentence.html_safe
   end
@@ -170,7 +194,7 @@ module ApplicationHelper
   def rss_url(url)
     return "" unless url
     s = '<span class="rss_feed"><a href="' + url + '">'
-    s += image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0
+    s += image_tag "feed-icon-14x14.png", :size => "14x14", :border => 0, :alt => 'rss-icon'
     s += '</a></span>'
     return s.html_safe
   end
@@ -226,7 +250,7 @@ module ApplicationHelper
   end
 
   def get_short_star_rating(asset,br=false)
-    "#{sprintf("%.1f",asset.rating)}/5.0 #{br ? "<br>" : ""} <small>(#{asset.ratings.size} #{t(:votes_counted)})</small>"
+    "#{sprintf("%.1f",asset.rating)}/5.0 #{br ? "<br>" : ""} <small>(#{asset.ratings.size} #{tr("votes counted", "vote_texts")})</small>".html_safe
   end
   
 #  def will_paginate_with_i18n(collection, options = {}) 
@@ -237,5 +261,13 @@ module ApplicationHelper
 
   def escape_t(text)
     text.gsub("\"","")
+  end
+
+  def partner_link(short_name)
+    if Rails.env.development?
+      return "http://" + request.host_with_port + "/?partner_short_name=#{short_name}"
+    else
+      return "http://" + short_name + "." + Government.current.domain_name
+    end
   end
 end

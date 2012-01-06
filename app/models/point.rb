@@ -32,7 +32,9 @@ class Point < ActiveRecord::Base
   
   has_many :revisions, :dependent => :destroy
   has_many :activities, :dependent => :destroy, :order => "activities.created_at desc"
-  
+
+  has_one :author_user, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User", :order => "revisions.created_at ASC"
+  has_one :last_author, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User", :order => "revisions.created_at DESC"
   has_many :author_users, :through => :revisions, :select => "distinct users.*", :source => :user, :class_name => "User"
   
   has_many :point_qualities, :order => "created_at desc", :dependent => :destroy
@@ -114,7 +116,7 @@ class Point < ActiveRecord::Base
   end
 
   def do_abusive
-    self.user.do_abusive!(notifications)
+    self.last_author.do_abusive!(notifications)
     self.update_attribute(:flags_count, 0)
   end
 
@@ -136,10 +138,10 @@ class Point < ActiveRecord::Base
     activities.each do |a|
       a.delete!
     end
-    capital_earned = capitals.sum(:amount)
-    if capital_earned != 0
-      self.capitals << CapitalPointHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1)) 
-    end    
+    #capital_earned = capitals.sum(:amount)
+    #if capital_earned != 0
+    #  self.capitals << CapitalPointHelpfulDeleted.new(:recipient => user, :amount => (capital_earned*-1))
+    #end
     priority.save(:validate => false)
     for r in revisions
       r.delete!
@@ -263,52 +265,12 @@ class Point < ActiveRecord::Base
         self.neutral_score += vote
       end
     end
-    
-    # did any particular group find this helpful?
-    if self.opposer_score > 1 and old_opposer_score <= 1
-      capitals << CapitalPointHelpfulOpposers.new(:recipient => user, :amount => 1)  
-    end    
-    if self.endorser_score > 1 and old_endorser_score <= 1
-      capitals << CapitalPointHelpfulEndorsers.new(:recipient => user, :amount => 1)
-    end    
-    if self.neutral_score > 1 and old_neutral_score <= 1
-      capitals << CapitalPointHelpfulUndeclareds.new(:recipient => user, :amount => 1)
-    end        
-    
-    # did people find this actually unhelpful?
-    if self.endorser_score < -0.5 and old_endorser_score >= -0.5
-      endorsement = current_endorsement || Endorsement.find_by_user_id_and_priority_id(self.user_id, self.priority_id)
-      if endorsement and endorsement.is_up?
-        capitals << CapitalPointHelpfulEndorsers.new(:recipient => user, :amount => -1)
-      end
-    end
-    if self.opposer_score < -0.5 and old_opposer_score >= -0.5
-      endorsement = current_endorsement || Endorsement.find_by_user_id_and_priority_id(self.user_id, self.priority_id)
-      if endorsement and endorsement.is_down?
-        capitals << CapitalPointHelpfulOpposers.new(:recipient => user, :amount => -1)
-      end
-    end
-    if self.neutral_score < -0.5 and old_neutral_score >= -0.5
-      endorsement = current_endorsement || Endorsement.find_by_user_id_and_priority_id(self.user_id, self.priority_id)
-      if not endorsement
-        capitals << CapitalPointHelpfulUndeclareds.new(:recipient => user, :amount => -1)
-      end
-    end
-    
-    # did both endorsers & opposers find this helpful or unhelpful?
-    if self.opposer_score > 1 and self.endorser_score > 1 and (old_opposer_score <= 1 or old_endorser_score <= 1)
-      capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => 1)
-    end      
-    if self.opposer_score < -0.5 and self.endorser_score < -0.5 and (old_opposer_score >= -0.5 or old_endorser_score >= -0.5)
-      # charge for a point that both opposers and endorsers found unhelpful
-      capitals << CapitalPointHelpfulEveryone.new(:recipient => user, :amount => -1)        
-    end    
 
     if old_score != self.score and tosave
       self.save(:validate => false)
     end    
   end
-  
+
   def opposers_helpful?
     opposer_score > 0
   end
