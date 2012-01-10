@@ -155,17 +155,26 @@ class ApplicationController < ActionController::Base
   def current_partner
     if Rails.env.development?
       if params[:partner_short_name]
-        @current_partner = Partner.find_by_short_name(params[:partner_short_name])
-        Partner.current = @current_partner
-        session[:set_partner_id] = @current_partner.id if @current_partner
-        return @current_partner
+        if params[:partner_short_name].empty?
+          session.delete(:set_partner_id)
+          Partner.current = @current_partner = nil
+        else
+          @current_partner = Partner.find_by_short_name(params[:partner_short_name])
+          Partner.current = @current_partner
+          session[:set_partner_id] = @current_partner.id
+        end
       elsif session[:set_partner_id]
-        return @current_partner = Partner.current = Partner.find(session[:set_partner_id])
-      else
-        return nil
+        @current_partner = Partner.find(session[:set_partner_id])
+        Partner.current = @current_partner
       end
-    end
-    if request.host.include?("betraisland")
+      if ! @current_partner and
+          ! (controller_name=="home" and action_name=="index") and
+          ! self.class.name.downcase.include?("tr8n") and
+          ! ["endorse","oppose","authorise_google","windows","yahoo"].include?(action_name) and
+        redirect_to "/welcome"
+      end
+      return @current_partner
+    elsif request.host.include?("betraisland")
       if request.subdomains.size == 0 or request.host.include?(current_government.domain_name) or request.subdomains.first == 'www'
         if (controller_name=="home" and action_name=="index") or
            Rails.env.development? or
