@@ -8,6 +8,7 @@ module SimpleCaptcha
     def self.generate_simple_captcha_image(options)
       width, height = options[:image_size].split('x')
       
+      
       image = Magick::Image.new(width.to_i, height.to_i) do
         self.background_color = options[:image_color]
         self.format = 'JPG'

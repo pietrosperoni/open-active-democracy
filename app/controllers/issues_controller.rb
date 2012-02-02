@@ -12,8 +12,11 @@ class IssuesController < ApplicationController
     Partner.all.each do |partner|
       partner.required_tags.split(',').each do |tag|
         partner_tags[tag] = true
-      end
+      end #unless partner.required_tags.blank?
     end
+    
+    #if !partner_tags.blank?
+    #unless partner_tags.blank?
     @partner_tags = partner_tags.keys.collect { |t| Tag.find_by_name(t) }
     if default_tags and default_tags.length>1
       @issues = Tag.filtered.not_in_default_tags(@partner_tags.collect { |t| t.slug }).not_in_default_tags(@categories.collect { |c| c.slug }).not_in_default_tags(default_tags).most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
@@ -30,7 +33,10 @@ class IssuesController < ApplicationController
       }
       format.xml { render :xml => @issues.to_xml(:except => NB_CONFIG['api_exclude_fields']) }
       format.json { render :json => @issues.to_json(:except => NB_CONFIG['api_exclude_fields']) }
-    end    
+    end 
+    
+    #end   
+  
   end
 
   def show
