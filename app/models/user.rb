@@ -3,9 +3,10 @@ class User < ActiveRecord::Base
 
   extend ActiveSupport::Memoizable
   require 'paperclip'
-  include SimpleCaptcha::ModelValidation
+  #include SimpleCaptcha::ModelValidation
 
   #validates_captcha :on => :create, :message => tr("Please reenter human verification number","captcha")
+  #validates_captcha :unless => lambda { Rails.env.test? }
 
   scope :active, :conditions => "users.status in ('pending','active')"
   scope :at_least_one_endorsement, :conditions => "users.endorsements_count > 0"
@@ -112,7 +113,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :first_name, :message => tr("Please specify your first name.", "model/user")
   validates_presence_of     :last_name, :message => tr("Please specify your first name.", "model/user")
   
-  validates_presence_of     :email, :unless => [:has_facebook?, :has_twitter?]
+  #validates_presence_of     :email, :unless => [:has_facebook?, :has_twitter?]
   validates_length_of       :email, :within => 3..100, :allow_nil => true, :allow_blank => true
   validates_uniqueness_of   :email, :case_sensitive => false, :allow_nil => true, :allow_blank => true
   validates_uniqueness_of   :facebook_uid, :allow_nil => true, :allow_blank => true

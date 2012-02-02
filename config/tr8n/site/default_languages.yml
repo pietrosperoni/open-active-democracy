@@ -438,7 +438,7 @@
   native_name: "English (UK)"
   google_key: "en"
   facebook_key: "en-UK"
-  enabled:  false
+  enabled:  true
 "en-US":
   english_name: "English (US)"
   native_name: "English (US)"

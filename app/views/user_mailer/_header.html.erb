@@ -8,7 +8,7 @@
   <tr>
     <td width="130px" align="left">
       <% if defined?(attachments) %>
-          <%= image_tag attachments['logo.png'].url, :alt=>tr("{government_name}", "email", :government_name => tr(@government.name, "Name from database")) %>
+          
       <% else %>
           <% if @government.layout.include?("better_reykjavik") %>
               <h1><%= image_tag "logos/BR_email.png", :alt=>tr("{government_name}", "email", :government_name => tr(@government.name, "Name from database")) %></h1>
