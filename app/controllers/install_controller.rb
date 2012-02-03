@@ -29,6 +29,7 @@ class InstallController < ApplicationController
     @government.short_name = 'single'
     @government.email = @government.admin_email
     @government.layout = "basic"
+    @government.description = "Description missing"
     if @government.save
       ColorScheme.create(:input => "FFFFFF")
       # if running mysql, these tables should be MyISAM, not InnoDB.      
