@@ -22,6 +22,9 @@ module ActionMailer
   end 
 end
 
+#encoding: utf-8
+I18n.default_locale = :en
+
 locales = []
 Dir.glob(Rails.root.to_s + '/config/locales/*.{rb,yml}') do |filename|
 
