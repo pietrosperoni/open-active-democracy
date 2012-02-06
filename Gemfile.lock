@@ -199,6 +199,7 @@ DEPENDENCIES
   auto_html
   capistrano
   ckeditor
+  daemons
   dalli
   delayed_job
   facebooker2
