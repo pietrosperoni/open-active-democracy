@@ -79,8 +79,9 @@ GEM
     cocaine (0.2.1)
     daemons (1.0.10)
     dalli (1.1.4)
-    delayed_job (3.0.1)
+    delayed_job (2.1.4)
       activesupport (~> 3.0)
+      daemons
     erubis (2.6.6)
       abstract (>= 1.0.0)
     ezcrypto (0.7.2)
@@ -201,7 +202,7 @@ DEPENDENCIES
   ckeditor
   daemons
   dalli
-  delayed_job
+  delayed_job (= 2.1.4)
   facebooker2
   geoip
   googlecharts
