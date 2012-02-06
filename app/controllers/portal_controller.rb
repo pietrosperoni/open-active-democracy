@@ -118,7 +118,7 @@ class PortalController < ApplicationController
     if portlet_container==nil and current_partner and Government.current.layout == "better_reykjavik"
       portlet_container = PortletContainer.find(:first, :conditions=>"partner_id IS NOT NULL")
     else
-      portlet_container = PortletContainer.filtered.first unless portlet_container
+      portlet_container = PortletContainer.first unless portlet_container
     end
     unless portlet_container
       if current_user
