@@ -8,13 +8,16 @@ class IssuesController < ApplicationController
     @page_title =  tr("Categories", "controller/issues")
     #if request.format != 'html' or current_government.tags_page == 'list'
     @categories = Category.all.collect { |category| Tag.find_by_name(category.name) }
-    partner_tags = {}
-    Partner.all.each do |partner|
-      partner.required_tags.split(',').each do |tag|
-        partner_tags[tag] = true
+    @partner_tags = []
+    if current_partner.required_tags
+      partner_tags = {}
+      Partner.all.each do |partner|
+        partner.required_tags.split(',').each do |tag|
+          partner_tags[tag] = true
+        end
       end
+      @partner_tags = partner_tags.keys.collect { |t| Tag.find_by_name(t) }
     end
-    @partner_tags = partner_tags.keys.collect { |t| Tag.find_by_name(t) }
     if default_tags and default_tags.length>1
       @issues = Tag.filtered.not_in_default_tags(@partner_tags.collect { |t| t.slug }).not_in_default_tags(@categories.collect { |c| c.slug }).not_in_default_tags(default_tags).most_priorities.paginate(:page => params[:page], :per_page => params[:per_page])
     else

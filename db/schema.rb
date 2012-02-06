@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607232520) do
+ActiveRecord::Schema.define(:version => 20112312175740) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
     t.integer  "partner_id"
-    t.string   "type",                 :limit => 60
-    t.string   "status",               :limit => 8
+    t.string   "type",                          :limit => 60
+    t.string   "status",                        :limit => 8
     t.integer  "priority_id"
     t.datetime "created_at"
-    t.boolean  "is_user_only",                       :default => false
-    t.integer  "comments_count",                     :default => 0
+    t.boolean  "is_user_only",                                :default => false
+    t.integer  "comments_count",                              :default => 0
     t.integer  "activity_id"
     t.integer  "vote_id"
     t.integer  "change_id"
@@ -33,8 +34,9 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.integer  "document_id"
     t.integer  "document_revision_id"
     t.integer  "position"
-    t.integer  "followers_count",                    :default => 0
+    t.integer  "followers_count",                             :default => 0
     t.datetime "changed_at"
+    t.integer  "priority_status_change_log_id"
   end
 
   add_index "activities", ["activity_id"], :name => "activity_activity_id"
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_undo",                          :default => false
   end
 
   add_index "capitals", ["recipient_id"], :name => "capitals_recipient_id_index"
@@ -120,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.string   "icon_content_type", :limit => 30
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.text     "description"
+    t.string   "sub_tags"
   end
 
   create_table "changes", :force => true do |t|
@@ -389,6 +394,20 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
   add_index "followings", ["other_user_id"], :name => "followings_other_user_id_index"
   add_index "followings", ["user_id"], :name => "followings_user_id_index"
 
+  create_table "generated_proposal_elements", :force => true do |t|
+    t.integer  "generated_proposal_id"
+    t.integer  "process_document_element_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "generated_proposals", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "process_document_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "governments", :force => true do |t|
     t.string   "status",                         :limit => 30
     t.string   "short_name",                     :limit => 20
@@ -458,6 +477,14 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.boolean  "google_login_enabled",                          :default => false
     t.string   "default_tags_checkbox"
     t.text     "message_to_users"
+    t.text     "description"
+    t.text     "message_for_ads"
+    t.text     "message_for_issues"
+    t.text     "message_for_network"
+    t.text     "message_for_finished"
+    t.text     "message_for_points"
+    t.text     "message_for_new_priority"
+    t.text     "message_for_news"
   end
 
   add_index "governments", ["domain_name"], :name => "index_governments_on_domain_name"
@@ -565,7 +592,7 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
 
   create_table "partners", :force => true do |t|
     t.string   "name",                       :limit => 60
-    t.string   "short_name",                 :limit => 20
+    t.string   "short_name",                 :limit => 50
     t.integer  "picture_id"
     t.integer  "is_optin",                   :limit => 1,   :default => 0,         :null => false
     t.string   "optin_text",                 :limit => 60
@@ -594,6 +621,8 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.string   "geoblocking_open_countries",                :default => ""
     t.string   "default_locale"
     t.integer  "iso_country_id"
+    t.string   "required_tags"
+    t.text     "message_for_new_priority"
   end
 
   add_index "partners", ["short_name"], :name => "short_name"
@@ -704,6 +733,7 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.integer  "column_count",                 :default => 1
     t.boolean  "caching_disabled",             :default => false
     t.integer  "item_limit"
+    t.string   "tag"
   end
 
   add_index "portlet_templates", ["portlet_template_category_id"], :name => "index_portlet_templates_on_portlet_template_category_id"
@@ -775,6 +805,9 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.integer  "position_endorsed_7days"
     t.integer  "position_endorsed_30days"
     t.text     "finished_status_message"
+    t.integer  "external_session_id"
+    t.string   "finished_status_subject"
+    t.date     "finished_status_date"
   end
 
   add_index "priorities", ["category_id"], :name => "index_priorities_on_category_id"
@@ -820,6 +853,15 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
 
   add_index "priority_processes", ["process_type_id"], :name => "index_priority_processes_on_process_type_id"
 
+  create_table "priority_status_change_logs", :force => true do |t|
+    t.integer  "priority_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "content"
+    t.string   "subject",     :null => false
+    t.date     "date"
+  end
+
   create_table "process_discussions", :force => true do |t|
     t.datetime "meeting_date"
     t.string   "external_id"
@@ -850,8 +892,8 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.integer  "sequence_number"
     t.integer  "process_document_id"
     t.integer  "parent_id"
-    t.binary   "content",             :limit => 2147483647
-    t.binary   "content_text_only",   :limit => 2147483647
+    t.text     "content"
+    t.text     "content_text_only"
     t.string   "content_number"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -908,8 +950,9 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "in_processing", :default => false
-    t.boolean  "published",     :default => false
+    t.boolean  "in_processing",     :default => false
+    t.boolean  "published",         :default => false
+    t.boolean  "renew_screenshots", :default => true
   end
 
   add_index "process_speech_master_videos", ["url"], :name => "index_process_speech_master_videos_on_url", :unique => true
@@ -1011,6 +1054,13 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
   add_index "revisions", ["point_id"], :name => "index_revisions_on_point_id"
   add_index "revisions", ["status"], :name => "index_revisions_on_status"
   add_index "revisions", ["user_id"], :name => "index_revisions_on_user_id"
+
+  create_table "sentences", :force => true do |t|
+    t.integer  "process_document_element_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shown_ads", :force => true do |t|
     t.integer  "ad_id"
@@ -1461,7 +1511,6 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.datetime "updated_at"
     t.boolean  "is_comments_subscribed",      :default => false
     t.boolean  "is_votes_subscribed",         :default => false
-    t.boolean  "is_newsletter_subscribed",    :default => false
     t.boolean  "is_point_changes_subscribed", :default => false
     t.boolean  "is_messages_subscribed",      :default => false
     t.boolean  "is_followers_subscribed",     :default => true
@@ -1550,7 +1599,6 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.string   "referrer",                     :limit => 200
     t.boolean  "is_comments_subscribed",                      :default => true
     t.boolean  "is_votes_subscribed",                         :default => true
-    t.boolean  "is_newsletter_subscribed",                    :default => true
     t.boolean  "is_tagger",                                   :default => false
     t.integer  "endorsements_count",                          :default => 0
     t.integer  "up_endorsements_count",                       :default => 0
@@ -1630,6 +1678,7 @@ ActiveRecord::Schema.define(:version => 20110607232520) do
     t.string   "age_group"
     t.string   "post_code"
     t.string   "my_gender"
+    t.integer  "report_frequency",                            :default => 2
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

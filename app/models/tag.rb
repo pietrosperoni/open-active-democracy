@@ -16,7 +16,7 @@ class Tag < ActiveRecord::Base
 
   scope :item_limit, lambda{|limit| {:limit=>limit}}
 
-  scope :not_in_default_tags, lambda{|default_tags| {:conditions=>["tags.slug NOT IN (?)",default_tags]}}
+  scope :not_in_default_tags, lambda{|default_tags| {:conditions=>["tags.slug NOT IN (?)",(default_tags.empty? ? '' : default_tags)]}}
 
   has_many :activities, :dependent => :destroy
   has_many :taggings
