@@ -463,7 +463,7 @@ ActiveRecord::Schema.define(:version => 20112312175740) do
     t.boolean  "google_login_enabled",                          :default => false
     t.string   "default_tags_checkbox"
     t.text     "message_to_users"
-    t.text     "description"        #,                   :default => "Open democracy site"
+    t.text     "description"
     t.text     "message_for_ads"
     t.text     "message_for_issues"
     t.text     "message_for_network"
