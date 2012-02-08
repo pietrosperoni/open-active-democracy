@@ -29,6 +29,7 @@ class InstallController < ApplicationController
     @government.short_name = 'single'
     @government.email = @government.admin_email
     @government.layout = "basic"
+    @government.description = "Description missing"
     if @government.save
       ColorScheme.create(:input => "FFFFFF")
       # if running mysql, these tables should be MyISAM, not InnoDB.      
@@ -51,8 +52,17 @@ class InstallController < ApplicationController
   end
   
   def create_admin_user
+    #flash[:notice] = "params are #{params}"
+    params[:user].delete :captcha
+    params[:user].delete :captcha_key
+    
+    logger.info "params are #{params}"
+    #logger.info "user info is #{params[:user]}"
+    logger.info "Welcome to method create_admin_user..."
     @user = User.new(params[:user])
+    logger.info "New User!"
     if @user.save
+      logger.info "User saved!"
       cookies.delete :auth_token
       self.current_user = @user
       @user.is_admin = true
