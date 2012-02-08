@@ -42,6 +42,8 @@ cd open-active-democracy
 bundle install
 
 # then fixup database.yml with your local mysql root password
+# also fix newrelic.yml from newrelic.dist
+
 
 rake db:create
 rake db:schema:load
